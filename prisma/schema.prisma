@@ -9,3 +9,269 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          Int      @id @default(autoincrement())
+  userTypeId  Int?     @default(2)
+  surname     String   @db.VarChar(255)
+  otherNames  String   @db.VarChar(255)
+  email       String?  @db.VarChar(255)
+  phoneNumber String   @db.VarChar(255)
+  password    String   @db.VarChar(255)
+  idTypeId    Int
+  idNumber    String   @db.VarChar(255)
+  activated   Int?     @default(0)
+  deleted     Int?     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Usertype UserType? @relation(fields: [userTypeId], references: [id])
+
+  Logs            Logs[]
+  PremiseLocation PremiseLocation[]
+  Inspection      Inspection[]
+}
+
+model UserType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User[]
+}
+
+model Role {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Region {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model District {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  PremiseLocation PremiseLocation[]
+}
+
+model Community {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  PremiseLocation PremiseLocation[]
+}
+
+model SubDistrict {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  PremiseLocation PremiseLocation[]
+}
+
+model Zone {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  PremiseLocation PremiseLocation[]
+}
+
+model Inspection {
+  id                      Int    @id @default(autoincrement())
+  inspectionId            String @db.VarChar(255)
+  respondentName          String @db.VarChar(255)
+  phoneNumber             String @db.VarChar(255)
+  inspectionTypeId        Int
+  premiseTypeId           Int
+  respondentDesignationId Int
+
+  User                  User                  @relation(fields: [userId], references: [id])
+  PremiseLocation       PremiseLocation[]
+  PremiseType           PremiseType           @relation(fields: [premiseTypeId], references: [id])
+  InspectionType        InspectionType        @relation(fields: [inspectionTypeId], references: [id])
+  RespondentDesignation RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId                Int
+  EatingDrinkingPremise EatingDrinkingPremise[]
+}
+
+model EatingDrinkingPremise {
+  id                 Int              @id @default(autoincrement())
+  businessLicence    Int
+  medicalCert        Int
+  StorageCondition   StorageCondition @relation(fields: [storageConditionId], references: [id])
+  Inspection         Inspection       @relation(fields: [inspectionId], references: [id])
+  EateryType         EateryType       @relation(fields: [eateryTypeId], references: [id])
+  deleted            Int?             @default(0)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  inspectionId       Int
+  eateryTypeId       Int
+  storageConditionId Int
+}
+
+//good bad, ....
+model StorageCondition {
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  deleted               Int?                    @default(0)
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  EatingDrinkingPremise EatingDrinkingPremise[]
+}
+
+model PremisePicture {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RespondentDesignation {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
+}
+
+//Baseline inspection, reinspection
+model InspectionType {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
+}
+
+model PremiseLocation {
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(255)
+  deleted       Int?     @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  districtId    Int
+  subDistrictId Int
+  zoneId        Int
+  userId        Int
+  inspectionId  Int
+  communityId   Int
+  community     String   @db.VarChar(255)
+  ghanaPostGps  String   @db.VarChar(255)
+  latitude      String   @db.VarChar(255)
+  longitude     String   @db.VarChar(255)
+
+  Community   Community   @relation(fields: [communityId], references: [id])
+  District    District    @relation(fields: [districtId], references: [id])
+  SubDistrict SubDistrict @relation(fields: [subDistrictId], references: [id])
+  Zone        Zone        @relation(fields: [zoneId], references: [id])
+  User        User        @relation(fields: [userId], references: [id])
+  Inspection  Inspection  @relation(fields: [inspectionId], references: [id])
+}
+
+model PremiseType {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
+}
+
+model EateryType {
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  deleted               Int?                    @default(0)
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  EatingDrinkingPremise EatingDrinkingPremise[]
+}
+
+// model ResidentialPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model HealthPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model SanitaryPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model HospitalityPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model IndustryPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model InstitutionalPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model MarketLorryParkPremise {
+//   id Int @id @default(autoincrement())
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+model Logs {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  activity  String?  @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+}
