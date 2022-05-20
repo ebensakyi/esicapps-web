@@ -107,6 +107,7 @@ model EatingDrinkingPremise {
   eateryTypeId          Int
   storageConditionId    Int
   baselineInformationId Int
+  pantryAvailability    Int
 
   SolidWasteReceptacle   SolidWasteReceptacle @relation(fields: [solidWasteReceptacleId], references: [id])
   solidWasteReceptacleId Int
@@ -123,52 +124,122 @@ model EatingDrinkingPremise {
 }
 
 model PremiseWater {
-  id                           Int @id @default(autoincrement())
-  WaterSource WaterSource
-  WaterCondition WaterCondition
-  WaterSupplyType WaterSupplyType
-  WaterStorageType WaterStorageType
-  storageCondition
-  flowFrequency
-  WaterTreatmentType WaterTreatmentType
+  id                           Int                @id @default(autoincrement())
+  WaterSource                  WaterSource        @relation(fields: [waterSourceId], references: [id])
+  WaterCondition               WaterCondition     @relation(fields: [waterConditionId], references: [id])
+  WaterSupplyType              WaterSupplyType    @relation(fields: [waterSupplyTypeId], references: [id])
+  WaterStorageType             WaterStorageType   @relation(fields: [waterStorageTypeId], references: [id])
+  waterStorageCondition        SafeUnsafe         @relation(fields: [safeUnsafeId], references: [id])
+  WaterTreatmentType           WaterTreatmentType @relation(fields: [waterTreatmentTypeId], references: [id])
   distanceWaterStorageSanitary Int
   waterGeneralRating           Int
+  Frequency                    Frequency          @relation(fields: [frequencyId], references: [id])
 
+  deleted              Int?     @default(0)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  waterSourceId        Int
+  waterConditionId     Int
+  waterSupplyTypeId    Int
+  waterStorageTypeId   Int
+  waterTreatmentTypeId Int
+  frequencyId          Int
+  safeUnsafeId         Int
+}
+
+// intermittent
+// regular
+// others
+
+model Frequency {
+  id        Int      @id @default(autoincrement())
+  name      String
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  PremiseWater PremiseWater[]
+}
+
+model PremiseSanitaryFacility {
+  id                   Int @id @default(autoincrement())
+  toiletAvailability   Int
+  urinalAvailability   Int
+  bathroomAvailability Int
+
+  toiletType                                    ToiletType
+  toiletAdequacy                                AdequacyInadequacy
+  availToiletFaciltyMgt YesNo
+  genderSensivity YesNo
+  disabilityFriendly YesNo
+  numberToiletPots Int
+  excretaDisposalMethod  ExcretaDisposalMethod
+  direct_offset
+  excreta_containment
+  effluent_management
+  mgt_of_anal_cleansing
+  availability_of_approved_handwashing_facility
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExcretaDisposalMethod{
+    id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model AdequacyInadequacy {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model WaterSource {
-  id        Int      @id @default(autoincrement())
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  PremiseWater PremiseWater[]
 }
+
 model WaterCondition {
-  id        Int      @id @default(autoincrement())
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  PremiseWater PremiseWater[]
 }
+
 model WaterSupplyType {
-  id        Int      @id @default(autoincrement())
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  PremiseWater PremiseWater[]
 }
+
 model WaterStorageType {
-  id        Int      @id @default(autoincrement())
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  PremiseWater PremiseWater[]
 }
+
 model WaterTreatmentType {
-  id        Int      @id @default(autoincrement())
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  PremiseWater PremiseWater[]
 }
+
 model PremisePopulation {
   id Int @id @default(autoincrement())
 
@@ -295,6 +366,7 @@ model SafeUnsafe {
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
   EatingDrinkingPremise EatingDrinkingPremise[]
+  PremiseWater          PremiseWater[]
 }
 
 model RespondentDesignation {
