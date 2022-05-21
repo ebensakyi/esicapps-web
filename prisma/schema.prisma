@@ -41,6 +41,8 @@ model Inspection {
   BaselineInformation BaselineInformation[]
 
   EatingDrinkingPremise EatingDrinkingPremise[]
+  HealthPremise         HealthPremise[]
+  ResidentialPremise    ResidentialPremise[]
 }
 
 model BaselineInformation {
@@ -83,12 +85,27 @@ model BaselineInformation {
 model ResidentialPremise {
   id Int @id @default(autoincrement())
 
-  animalsAvailability YesNo @relation(fields: [yesNoId], references: [id])
+  animalsAvailability YesNo      @relation(fields: [yesNoId], references: [id])
+  Inspection          Inspection @relation(fields: [inspectionId], references: [id])
+  deleted             Int?       @default(0)
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  yesNoId             Int
+  inspectionId        Int
+}
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  yesNoId   Int
+model HealthPremise {
+  id                   Int                @id @default(autoincrement())
+  separateWard         YesNo              @relation("separateWard", fields: [separateWardId], references: [id])
+  HealthFacilityType   HealthFacilityType @relation(fields: [healthFacilityTypeId], references: [id])
+  Inspection           Inspection         @relation(fields: [inspectionId], references: [id])
+  deleted              Int?               @default(0)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  inspectionId         Int
+  healthFacilityTypeId Int
+  separateWardId       Int
+  
 }
 
 model AnimalRearing {
@@ -259,9 +276,11 @@ model PremiseSanitaryFacility {
   excretaDisposalMethodId                   Int
   excretaContainmentId                      Int
   effluentManagementId                      Int
+  effluentManagementReport                  YesNo @relation("effluentManagementReport", fields: [effluentManagementReportId], references: [id])
   analCleansingMaterialMgtId                Int
   toiletDisabilityFriendlyId                Int
   urinalDisabilityFriendlyId                Int
+  effluentManagementReportId                Int
 
   facilityCleanlinessId Int
 
@@ -316,17 +335,30 @@ model BusinessLicence {
   fumigationCertificateAvailability YesNo    @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   buildingPermit                    YesNo    @relation("buildingPermit", fields: [buildingPermitId], references: [id])
 
- 
+
+}
+
+model Conclusion {
+  id Int @id @default(autoincrement())
+
+  // nuisance
+  // obnoxious_trade_nearby
+  // actions_taken
+  // officer_comment
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Hygiene {
 
-  id        Int      @id @default(autoincrement())
-  pestSigns YesNo    @relation(fields: [pestSignsId], references: [id])
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  pestSignsId   Int
+  id          Int      @id @default(autoincrement())
+  pestSigns   YesNo    @relation(fields: [pestSignsId], references: [id])
+  deleted     Int?     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  pestSignsId Int
 }
 
 model PremisePicture {
@@ -550,11 +582,13 @@ model YesNo {
   fumigationCertificateAvailability       BusinessLicence[]         @relation("fumigationCertificateAvailability")
   buildingPermit                          BusinessLicence[]         @relation("buildingPermit")
 
-  ResidentialPremise ResidentialPremise[]
-  animalsPermit      AnimalRearing[]      @relation("animalsPermit")
-  vaccinationProof   AnimalRearing[]      @relation("vaccinationProof")
-  PremiseWaste       PremiseWaste[]
-  Hygiene            Hygiene[]
+  ResidentialPremise       ResidentialPremise[]
+  animalsPermit            AnimalRearing[]           @relation("animalsPermit")
+  vaccinationProof         AnimalRearing[]           @relation("vaccinationProof")
+  PremiseWaste             PremiseWaste[]
+  Hygiene                  Hygiene[]
+  effluentManagementReport PremiseSanitaryFacility[] @relation("effluentManagementReport")
+  separateWard            HealthPremise[] @relation("separateWard")
 }
 
 //good bad, ....
@@ -623,14 +657,6 @@ model EateryType {
   EatingDrinkingPremise EatingDrinkingPremise[]
 }
 
-// model HealthPremise {
-//   id Int @id @default(autoincrement())
-
-//   deleted   Int?     @default(0)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
-
 // model SanitaryPremise {
 //   id Int @id @default(autoincrement())
 
@@ -675,7 +701,17 @@ model Logs {
   id        Int      @id @default(autoincrement())
   userId    Int
   activity  String?  @db.VarChar(255)
+  deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   User      User     @relation(fields: [userId], references: [id])
+}
+
+model HealthFacilityType {
+  id            Int             @id @default(autoincrement())
+  name          String          @db.VarChar(255)
+  deleted       Int?            @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  HealthPremise HealthPremise[]
 }
