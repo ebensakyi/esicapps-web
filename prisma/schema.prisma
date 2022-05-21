@@ -185,8 +185,8 @@ model PremiseLocation {
 model PremiseWaste {
   id Int @id @default(autoincrement())
 
-  wasteCollectorRegistrationId YesNo
-  wasteCollectorName String @db.VarChar(255)
+  wasteCollectorRegistrationId YesNo    @relation(fields: [yesNoId], references: [id])
+  wasteCollectorName           String   @db.VarChar(255)
   solidWasteReceptacleId       Int
   wasteWaterDisposal           Int
   greyWaterDisposal            Int
@@ -202,6 +202,7 @@ model PremiseWaste {
   updatedAt                    DateTime @updatedAt
 
   DrainType DrainType @relation(fields: [drainTypeId], references: [id])
+  yesNoId   Int
 }
 
 model PremisePopulation {
@@ -315,17 +316,17 @@ model BusinessLicence {
   fumigationCertificateAvailability YesNo    @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   buildingPermit                    YesNo    @relation("buildingPermit", fields: [buildingPermitId], references: [id])
 
-  YesNo   YesNo? @relation(fields: [yesNoId], references: [id])
-  yesNoId Int?
+ 
 }
 
-model Hygiene{
-  signs_of_pest
+model Hygiene {
+
   id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
+  pestSigns YesNo    @relation(fields: [pestSignsId], references: [id])
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  pestSignsId   Int
 }
 
 model PremisePicture {
@@ -525,7 +526,6 @@ model YesNo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  BusinessLicence                         BusinessLicence[]
   availToiletFaciltyMgt                   PremiseSanitaryFacility[] @relation("availToiletFaciltyMgt")
   toiletGenderSensivity                   PremiseSanitaryFacility[] @relation("toiletGenderSensivity")
   PremiseSanitaryFacility                 PremiseSanitaryFacility[] @relation("urinalGenderSensivity")
@@ -553,6 +553,8 @@ model YesNo {
   ResidentialPremise ResidentialPremise[]
   animalsPermit      AnimalRearing[]      @relation("animalsPermit")
   vaccinationProof   AnimalRearing[]      @relation("vaccinationProof")
+  PremiseWaste       PremiseWaste[]
+  Hygiene            Hygiene[]
 }
 
 //good bad, ....
