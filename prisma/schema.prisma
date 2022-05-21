@@ -83,13 +83,34 @@ model BaselineInformation {
 model ResidentialPremise {
   id Int @id @default(autoincrement())
 
+  animalsAvailability YesNo @relation(fields: [yesNoId], references: [id])
+
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  yesNoId   Int
+}
+
+model AnimalRearing {
+  id Int @id @default(autoincrement())
+
+  animalType       String    @db.VarChar(255)
+  animalsNumber    Int?      @default(0)
+  spaceCondition   Condition @relation(fields: [conditionId], references: [id])
+  animalsPermit    YesNo     @relation("animalsPermit", fields: [animalsPermitId], references: [id])
+  vaccinationProof YesNo     @relation("vaccinationProof", fields: [vaccinationProofId], references: [id])
+
+  deleted            Int?     @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  conditionId        Int
+  vaccinationProofId Int
+  animalsPermitId    Int
 }
 
 model EatingDrinkingPremise {
   id                                Int                   @id @default(autoincrement())
+  inspectionId                      Int                   @unique
   eateryTypeId                      Int
   storageConditionId                Int
   baselineInformationId             Int
@@ -108,7 +129,6 @@ model EatingDrinkingPremise {
   PremisePopulation                 PremisePopulation?    @relation(fields: [premisePopulationId], references: [id])
   SolidWasteReceptacle              SolidWasteReceptacle? @relation(fields: [solidWasteReceptacleId], references: [id])
   SafeUnsafe                        SafeUnsafe?           @relation(fields: [safeUnsafeId], references: [id])
-  inspectionId                      Int                   @unique
 }
 
 model PremiseWater {
@@ -130,7 +150,7 @@ model PremiseWater {
 
   Frequency             Frequency          @relation(fields: [waterFlowFrequencyId], references: [id])
   WaterSource           WaterSource        @relation(fields: [waterSourceId], references: [id])
-  WaterCondition        WaterCondition     @relation(fields: [waterConditionId], references: [id])
+  WaterCondition        Condition          @relation(fields: [waterConditionId], references: [id])
   WaterSupplyType       WaterSupplyType    @relation(fields: [waterSupplyTypeId], references: [id])
   WaterStorageType      WaterStorageType   @relation(fields: [waterStorageTypeId], references: [id])
   waterStorageCondition SafeUnsafe         @relation(fields: [waterStorageConditionId], references: [id])
@@ -165,7 +185,8 @@ model PremiseLocation {
 model PremiseWaste {
   id Int @id @default(autoincrement())
 
-  wasteCollectorRegistrationId Int
+  wasteCollectorRegistrationId YesNo
+  wasteCollectorName String @db.VarChar(255)
   solidWasteReceptacleId       Int
   wasteWaterDisposal           Int
   greyWaterDisposal            Int
@@ -184,9 +205,7 @@ model PremiseWaste {
 }
 
 model PremisePopulation {
-  id Int @id @default(autoincrement())
-
-
+  id                                        Int                     @id @default(autoincrement())
   maleDoctorsNumber                         Int?
   femaleDoctorsNumber                       Int?
   maleNursesNumber                          Int?
@@ -298,6 +317,15 @@ model BusinessLicence {
 
   YesNo   YesNo? @relation(fields: [yesNoId], references: [id])
   yesNoId Int?
+}
+
+model Hygiene{
+  signs_of_pest
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model PremisePicture {
@@ -441,12 +469,13 @@ model WaterSource {
   PremiseWater PremiseWater[]
 }
 
-model WaterCondition {
-  id           Int            @id @default(autoincrement())
-  deleted      Int?           @default(0)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  PremiseWater PremiseWater[]
+model Condition {
+  id            Int             @id @default(autoincrement())
+  deleted       Int?            @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  PremiseWater  PremiseWater[]
+  AnimalRearing AnimalRearing[]
 }
 
 model WaterSupplyType {
@@ -521,6 +550,9 @@ model YesNo {
   fumigationCertificateAvailability       BusinessLicence[]         @relation("fumigationCertificateAvailability")
   buildingPermit                          BusinessLicence[]         @relation("buildingPermit")
 
+  ResidentialPremise ResidentialPremise[]
+  animalsPermit      AnimalRearing[]      @relation("animalsPermit")
+  vaccinationProof   AnimalRearing[]      @relation("vaccinationProof")
 }
 
 //good bad, ....
