@@ -213,6 +213,7 @@ model PremiseWaste {
   binsPicture                  String   @db.VarChar(255)
   sanitationGeneralRating      Int
   drainsCondition              Int
+  pondingEvidence YesNo
   drainTypeId                  Int
   deleted                      Int?     @default(0)
   createdAt                    DateTime @default(now())
@@ -364,6 +365,8 @@ model Hygiene {
   id                   Int      @id @default(autoincrement())
   pestSigns            YesNo    @relation("pestSigns", fields: [pestSignsId], references: [id])
   evidenceStagnation   YesNo    @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
+  disinfection         YesNo
+  disinfestation       YesNo
   pestSignsId          Int
   evidenceStagnationId Int
   deleted              Int?     @default(0)
