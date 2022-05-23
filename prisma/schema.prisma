@@ -798,8 +798,8 @@ model HospitalityFacilityType {
 }
 
 model SlaughterHouse {
-  id                                    Int   @id @default(autoincrement())
-  Sanita
+  id                                    Int                     @id @default(autoincrement())
+  SanitaryPremiseFacility               SanitaryPremiseFacility
   name                                  YesNo
   slaughterRoomsAvailable               YesNo
   condemnationRoomAvailable             YesNo
@@ -820,7 +820,8 @@ model SlaughterHouse {
 }
 
 model Cemetery {
-  id                       Int   @id @default(autoincrement())
+  id                       Int                     @id @default(autoincrement())
+  SanitaryPremiseFacility  SanitaryPremiseFacility
   sextonAvailability       YesNo
   sextonOfficeAvailability YesNo
   layoutCemeteryAdequacy   YesNo
@@ -835,7 +836,8 @@ model Cemetery {
 }
 
 model TransferWasteStation {
-  id                      Int   @id @default(autoincrement())
+  id                      Int                     @id @default(autoincrement())
+  SanitaryPremiseFacility SanitaryPremiseFacility
   transferStationCapacity Int
   wasteSorting            YesNo
   leachateManagement      YesNo
@@ -848,15 +850,15 @@ model TransferWasteStation {
 }
 
 model CommunalContainer {
-  id                      Int   @id @default(autoincrement())
-
-attendantName
-attendantPhoneNumber
-serviceProviderName
-collection_on_schedule
-volume_container
-condition_of_container
-number_of_containers
+  id                      Int                     @id @default(autoincrement())
+  SanitaryPremiseFacility SanitaryPremiseFacility
+  attendantName           String                  @db.VarChar(255)
+  attendantPhoneNumber    String                  @db.VarChar(255)
+  serviceProviderName     String                  @db.VarChar(255)
+  scheduledCollection     YesNo
+  containerVolume         Int
+  containerCondition      GoodBad
+  numberContainers        Int
 
 
   deleted   Int?     @default(0)
