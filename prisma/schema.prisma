@@ -105,7 +105,7 @@ model HealthPremise {
   inspectionId         Int
   healthFacilityTypeId Int
   separateWardId       Int
-  
+
 }
 
 model AnimalRearing {
@@ -252,6 +252,8 @@ model PremisePopulation {
   numberHousehold                           Int?
   numberMales                               Int?
   numberFemales                             Int?
+  numberRooms Int?
+
   deleted                                   Int?                    @default(0)
   createdAt                                 DateTime                @default(now())
   updatedAt                                 DateTime                @updatedAt
@@ -588,7 +590,7 @@ model YesNo {
   PremiseWaste             PremiseWaste[]
   Hygiene                  Hygiene[]
   effluentManagementReport PremiseSanitaryFacility[] @relation("effluentManagementReport")
-  separateWard            HealthPremise[] @relation("separateWard")
+  separateWard             HealthPremise[]           @relation("separateWard")
 }
 
 //good bad, ....
@@ -665,13 +667,36 @@ model EateryType {
 //   updatedAt DateTime @updatedAt
 // }
 
-// model HospitalityPremise {
-//   id Int @id @default(autoincrement())
+model HospitalityPremise {
+  id Int @id @default(autoincrement())
 
-//   deleted   Int?     @default(0)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+  deleted                     Int?                          @default(0)
+  createdAt                   DateTime                      @default(now())
+  updatedAt                   DateTime                      @updatedAt
+  HospitalityServicesProvided HospitalityServicesProvided[]
+}
+
+model HospitalityServicesProvided {
+  id                   Int                @id @default(autoincrement())
+  HospitalityPremise   HospitalityPremise @relation(fields: [hospitalityPremiseId], references: [id])
+  deleted              Int?               @default(0)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  hospitalityPremiseId Int
+}
+
+// lodging
+// catering
+// drinking
+// games
+
+model HospitalityService{
+  id Int @id @default(autoincrement())
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 // model IndustryPremise {
 //   id Int @id @default(autoincrement())
@@ -714,4 +739,12 @@ model HealthFacilityType {
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   HealthPremise HealthPremise[]
+}
+
+model HospitalityFacilityType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
