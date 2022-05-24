@@ -213,6 +213,8 @@ model PremiseWaste {
   binsPicture                  String   @db.VarChar(255)
   sanitationGeneralRating      Int
   drainsCondition              Int
+  receiptsUpToDate                      Int
+
   pondingEvidence              YesNo
   drainTypeId                  Int
   deleted                      Int?     @default(0)
@@ -220,7 +222,6 @@ model PremiseWaste {
   updatedAt                    DateTime @updatedAt
 
   DrainType DrainType @relation(fields: [drainTypeId], references: [id])
-  yesNoId   Int
 }
 
 // educational
@@ -274,7 +275,6 @@ model CorporateInstitution {
   updatedAt DateTime @updatedAt
 }
 
-
 // bank
 // savings_and_loans
 // micro_finance
@@ -282,14 +282,15 @@ model CorporateInstitution {
 // others
 
 model CorporateInstitutionType {
-    id        Int      @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 model PremisePopulation {
-  id                                        Int  @id @default(autoincrement())
+  id                                        Int                     @id @default(autoincrement())
   maleDoctorsNumber                         Int?
   femaleDoctorsNumber                       Int?
   maleNursesNumber                          Int?
@@ -319,11 +320,11 @@ model PremisePopulation {
   numberMales                               Int?
   numberFemales                             Int?
   numberRooms                               Int?
-
-  deleted               Int?                    @default(0)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  EatingDrinkingPremise EatingDrinkingPremise[]
+  staffRoomAvailability                     Int?
+  deleted                                   Int?                    @default(0)
+  createdAt                                 DateTime                @default(now())
+  updatedAt                                 DateTime                @updatedAt
+  EatingDrinkingPremise                     EatingDrinkingPremise[]
 }
 
 model SanitaryPremiseFacility {
