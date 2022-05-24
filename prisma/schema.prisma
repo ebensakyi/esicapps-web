@@ -213,7 +213,7 @@ model PremiseWaste {
   binsPicture                  String   @db.VarChar(255)
   sanitationGeneralRating      Int
   drainsCondition              Int
-  pondingEvidence YesNo
+  pondingEvidence              YesNo
   drainTypeId                  Int
   deleted                      Int?     @default(0)
   createdAt                    DateTime @default(now())
@@ -223,6 +223,71 @@ model PremiseWaste {
   yesNoId   Int
 }
 
+// educational
+// religious
+// corporate
+
+model InstitutionType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// church
+// mosque
+// shrine
+// others
+
+model ReligiousInstitutionType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ReligiousInstitution {
+  id                       Int                      @id @default(autoincrement())
+  ReligiousInstitutionType ReligiousInstitutionType
+  soundProof               YesNo
+  disabilityFriendly       YesNo
+  multipleExit             YesNo
+  ablution_slab            YesNo
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CorporateInstitution {
+  id                       Int                      @id @default(autoincrement())
+  CorporateInstitutionType CorporateInstitutionType
+  soundProof               YesNo
+  disabilityFriendly       YesNo
+  multipleExit             YesNo
+  ablution_slab            YesNo
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+// bank
+// savings_and_loans
+// micro_finance
+// credit_union
+// others
+
+model CorporateInstitutionType {
+    id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 model PremisePopulation {
   id                                        Int  @id @default(autoincrement())
   maleDoctorsNumber                         Int?
