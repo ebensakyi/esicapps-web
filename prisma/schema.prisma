@@ -378,8 +378,7 @@ model SanitaryPremiseFacility {
   facilityCleanliness                     YesNo                    @relation("facilityCleanliness", fields: [facilityCleanlinessId], references: [id])
 
   sanitaryFacilityTypeId Int
-  yesNoId                Int
-  yesNoId                Int
+
 }
 
 model BusinessLicence {
