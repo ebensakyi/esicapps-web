@@ -298,6 +298,8 @@ model PremisePopulation {
   maleAuxiliaryStaffNumber                  Int?
   femaleAuxiliaryStaffNumber                Int?
   roomCapacity                              Int?
+    facilityCapacity                              Int?
+
   maleWorkers                               Int?
   femaleWorkers                             Int?
   medicallyCertifiedWorkers                 Int?
@@ -432,6 +434,9 @@ model Hygiene {
   evidenceStagnation   YesNo    @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
   disinfection         YesNo
   disinfestation       YesNo
+  safeConditionUncooked                      YesNo
+safeConditionCooked YesNo
+
   pestSignsId          Int
   evidenceStagnationId Int
   deleted              Int?     @default(0)
@@ -856,6 +861,14 @@ model HealthFacilityType {
   updatedAt     DateTime        @updatedAt
   HealthPremise HealthPremise[]
 }
+
+// hotel
+// restaurant
+// recreational_facility
+// hostel
+// motel
+// guest_house
+// others
 
 model HospitalityFacilityType {
   id        Int      @id @default(autoincrement())
