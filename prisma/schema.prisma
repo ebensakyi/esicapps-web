@@ -202,24 +202,24 @@ model PremiseLocation {
 model PremiseWaste {
   id Int @id @default(autoincrement())
 
-  wasteCollectorRegistrationId YesNo    @relation(fields: [yesNoId], references: [id])
-  wasteCollectorName           String   @db.VarChar(255)
+  wasteCollectorRegistrationId YesNo  @relation(fields: [yesNoId], references: [id])
+  wasteCollectorName           String @db.VarChar(255)
   solidWasteReceptacleId       Int
   wasteWaterDisposal           Int
   greyWaterDisposal            Int
   wasteStorageReceptacle       Int
   collectionFrequency          Int
   wasteSorting                 Int
-  binsPicture                  String   @db.VarChar(255)
+  binsPicture                  String @db.VarChar(255)
   sanitationGeneralRating      Int
   drainsCondition              Int
-  receiptsUpToDate                      Int
+  receiptsUpToDate             Int
 
-  pondingEvidence              YesNo
-  drainTypeId                  Int
-  deleted                      Int?     @default(0)
-  createdAt                    DateTime @default(now())
-  updatedAt                    DateTime @updatedAt
+  pondingEvidence YesNo
+  drainTypeId     Int
+  deleted         Int?     @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   DrainType DrainType @relation(fields: [drainTypeId], references: [id])
 }
@@ -290,15 +290,16 @@ model CorporateInstitutionType {
 }
 
 model PremisePopulation {
-  id                                        Int                     @id @default(autoincrement())
-  maleDoctorsNumber                         Int?
-  femaleDoctorsNumber                       Int?
-  maleNursesNumber                          Int?
-  femaleNursesNumber                        Int?
-  maleAuxiliaryStaffNumber                  Int?
-  femaleAuxiliaryStaffNumber                Int?
-  roomCapacity                              Int?
-    facilityCapacity                              Int?
+  id                         Int   @id @default(autoincrement())
+  maleDoctorsNumber          Int?
+  femaleDoctorsNumber        Int?
+  maleNursesNumber           Int?
+  femaleNursesNumber         Int?
+  maleAuxiliaryStaffNumber   Int?
+  femaleAuxiliaryStaffNumber Int?
+  roomCapacity               Int?
+  facilityCapacity           Int?
+  separateWardMaleFemale     YesNo
 
   maleWorkers                               Int?
   femaleWorkers                             Int?
@@ -322,6 +323,7 @@ model PremisePopulation {
   numberMales                               Int?
   numberFemales                             Int?
   numberRooms                               Int?
+  numberBeds                                Int?
   staffRoomAvailability                     Int?
   deleted                                   Int?                    @default(0)
   createdAt                                 DateTime                @default(now())
@@ -384,6 +386,28 @@ model SanitaryPremiseFacility {
 
 }
 
+// outpatient
+// inpatient
+// surgical
+// maternity
+// undertaking
+// mortuary
+
+model HealthServices {
+  id        Int      @id @default(autoincrement())
+  name      String
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HealthServicesProvided {
+  id        Int      @id @default(autoincrement())
+  HealthPremise      HealthPremise
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 model BusinessLicence {
   id                                  Int @id @default(autoincrement())
   businessLicenceAvailabilityId       Int
@@ -429,14 +453,14 @@ model Conclusion {
 
 model Hygiene {
 
-  id                   Int      @id @default(autoincrement())
-  pestSigns            YesNo    @relation("pestSigns", fields: [pestSignsId], references: [id])
-  evidenceStagnation   YesNo    @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
-  disinfection         YesNo
-  disinfestation       YesNo
-  safeConditionUncooked                      YesNo
-safeConditionCooked YesNo
-
+  id                    Int   @id @default(autoincrement())
+  pestSigns             YesNo @relation("pestSigns", fields: [pestSignsId], references: [id])
+  evidenceStagnation    YesNo @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
+  disinfection          YesNo
+  disinfestation        YesNo
+  safeConditionUncooked YesNo
+  safeConditionCooked   YesNo
+publicBathRoomCondition GoodBad
   pestSignsId          Int
   evidenceStagnationId Int
   deleted              Int?     @default(0)
