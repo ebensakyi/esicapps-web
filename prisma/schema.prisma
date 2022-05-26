@@ -29,26 +29,37 @@ model User {
 
   Logs            Logs[]
   LocationSection LocationSection[]
+  Inspection      Inspection[]
+  BaselineSection BaselineSection[]
 }
 
 model InspectionForm {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
 }
 
 model Inspection {
   id             Int            @id @default(autoincrement())
   inspectionCode String         @db.VarChar(255)
-  InspectionForm InspectionForm
-  InspectionType InspectionType
-  User           User
+  InspectionForm InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  InspectionType InspectionType @relation(fields: [inspectionTypeId], references: [id])
+  User           User           @relation(fields: [userId], references: [id])
   deleted        Int?           @default(0)
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
+  inspectionFormId  Int
+  inspectionTypeId  Int
+  userId            Int
+  ResidentialForm   ResidentialForm[]
+  LocationSection   LocationSection[]
+  BaselineSection   BaselineSection[]
+  FacilitySection   FacilitySection[]
+  PopulationSection PopulationSection[]
 }
 
 /////////////////////////START INSPECTION FORMS//////////////////////////////////////////////
@@ -163,26 +174,28 @@ model LocationSection {
   latitude      String   @db.VarChar(255)
   longitude     String   @db.VarChar(255)
 
-  Community   Community   @relation(fields: [communityId], references: [id])
-  District    District    @relation(fields: [districtId], references: [id])
-  SubDistrict SubDistrict @relation(fields: [subDistrictId], references: [id])
-  Zone        Zone        @relation(fields: [zoneId], references: [id])
-  User        User        @relation(fields: [userId], references: [id])
-  Inspection  Inspection  @relation(fields: [inspectionId], references: [id])
+  Community         Community        @relation(fields: [communityId], references: [id])
+  District          District         @relation(fields: [districtId], references: [id])
+  SubDistrict       SubDistrict      @relation(fields: [subDistrictId], references: [id])
+  Zone              Zone             @relation(fields: [zoneId], references: [id])
+  User              User             @relation(fields: [userId], references: [id])
+  Inspection        Inspection       @relation(fields: [inspectionId], references: [id])
+  BaselineSection   BaselineSection? @relation(fields: [baselineSectionId], references: [id])
+  baselineSectionId Int?
 }
 
 model BaselineSection {
-  id               Int      @id @default(autoincrement())
-  respondentName   String   @db.VarChar(255)
-  phoneNumber      String   @db.VarChar(255)
-  inspectionTypeId Int
-  premiseTypeId    Int
-  deleted          Int?     @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  userId           Int
-
-  inspectionId Int
+  id                      Int      @id @default(autoincrement())
+  respondentName          String   @db.VarChar(255)
+  phoneNumber             String   @db.VarChar(255)
+  inspectionTypeId        Int
+  premiseTypeId           Int
+  deleted                 Int?     @default(0)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  userId                  Int
+  respondentDesignationId Int
+  inspectionId            Int
 
 
   User                  User                  @relation(fields: [userId], references: [id])
@@ -194,8 +207,8 @@ model BaselineSection {
 
 model FacilitySection {
   id                                        Int      @id @default(autoincrement())
-  inspectionId        Int
-  separateWard                              YesNo
+  inspectionId                              Int
+  separateWard                              YesNo    @relation(fields: [yesNoId], references: [id])
   premiseTypeId                             Int
   respondentDesignationId                   Int
   approvedHandwashingFacilityAvailabilityId Int
@@ -220,6 +233,10 @@ model FacilitySection {
   RespondentDesignation RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
   Inspection            Inspection            @relation(fields: [inspectionId], references: [id])
 
+  yesNoId    Int
+  YesNo      YesNo?       @relation(fields: [yesNoId], references: [id])
+  yesNoId    Int?
+  EateryType EateryType[]
 }
 
 model AnimalRearingSection {
@@ -251,7 +268,7 @@ model PopulationSection {
   femaleAuxiliaryStaffNumber Int?
   roomCapacity               Int?
   facilityCapacity           Int?
-  separateWardMaleFemale     YesNo
+  separateWardMaleFemale     YesNo @relation(fields: [yesNoId], references: [id])
 
   maleWorkers                               Int?
   femaleWorkers                             Int?
@@ -280,7 +297,9 @@ model PopulationSection {
   deleted                                   Int?       @default(0)
   createdAt                                 DateTime   @default(now())
   updatedAt                                 DateTime   @updatedAt
-  Inspection                                Inspection
+  Inspection                                Inspection @relation(fields: [inspectionId], references: [id])
+  yesNoId                                   Int
+  inspectionId                              Int
 }
 
 model LicenceSection {
@@ -342,38 +361,38 @@ model WaterSection {
 model SanitationSection {
   id Int @id @default(autoincrement())
 
-  wasteCollectorRegistrationId YesNo  @relation(fields: [yesNoId], references: [id])
-  wasteCollectorName           String @db.VarChar(255)
-  solidWasteReceptacleId       Int
-  wasteWaterDisposal           Int
-  greyWaterDisposal            Int
-  wasteStorageReceptacle       Int
-  collectionFrequency          Int
-  wasteSorting                 Int
-  binsPicture                  String @db.VarChar(255)
-  sanitationGeneralRating      Int
-  drainsCondition              Int
-  receiptsUpToDate             Int
-
-  pondingEvidence YesNo
-  drainTypeId     Int
-
-
-  DrainType                   DrainType            @relation(fields: [drainTypeId], references: [id])
-  sanitaryFacilityType        SanitaryFacilityType @relation(fields: [sanitaryFacilityTypeId], references: [id])
-  labourersOfficeAvailability YesNo                @relation(fields: [yesNoId], references: [id])
-  storeRoomAvailability       YesNo                @relation(fields: [yesNoId], references: [id])
-  toiletAvailability          Int
-  urinalAvailability          Int
-  bathroomAvailability        Int
-  numberToiletPots            Int
-  numberUrinePots             Int
-  toiletTypeId                Int
-  toiletAdequacyId            Int
-  urinalAdequacyId            Int
-  availToiletFaciltyMgtId     Int
-  toiletGenderSensivityId     Int
-  urinalGenderSensivityId     Int
+  wasteCollectorRegistration    YesNo                @relation("wasteCollectorRegistration", fields: [wasteCollectorRegistrationId], references: [id])
+  wasteCollectorName            String               @db.VarChar(255)
+  solidWasteReceptacleId        Int
+  wasteWaterDisposal            Int
+  greyWaterDisposal             Int
+  wasteStorageReceptacle        Int
+  collectionFrequency           Int
+  wasteSorting                  Int
+  binsPicture                   String               @db.VarChar(255)
+  sanitationGeneralRating       Int
+  drainsCondition               Int
+  receiptsUpToDate              Int
+  wasteCollectorRegistrationId  Int
+  pondingEvidence               YesNo                @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
+  drainTypeId                   Int
+  labourersOfficeAvailabilityId Int
+  storeRoomAvailabilityId       Int
+  DrainType                     DrainType            @relation(fields: [drainTypeId], references: [id])
+  sanitaryFacilityType          SanitaryFacilityType @relation(fields: [sanitaryFacilityTypeId], references: [id])
+  labourersOfficeAvailability   YesNo                @relation(fields: [labourersOfficeAvailabilityId], references: [id])
+  storeRoomAvailability         YesNo                @relation(fields: [storeRoomAvailabilityId], references: [id])
+  toiletAvailability            Int
+  urinalAvailability            Int
+  bathroomAvailability          Int
+  numberToiletPots              Int
+  numberUrinePots               Int
+  toiletTypeId                  Int
+  toiletAdequacyId              Int
+  urinalAdequacyId              Int
+  availToiletFaciltyMgtId       Int
+  toiletGenderSensivityId       Int
+  urinalGenderSensivityId       Int
 
   approvedHandwashingFacilityAvailabilityId Int
   excretaDisposalMethodId                   Int
@@ -410,6 +429,12 @@ model SanitationSection {
   facilityCleanliness                     YesNo                    @relation("facilityCleanliness", fields: [facilityCleanlinessId], references: [id])
 
   sanitaryFacilityTypeId Int
+  pondingEvidenceId      Int
+  SolidWasteReceptacle   SolidWasteReceptacle   @relation(fields: [solidWasteReceptacleId], references: [id])
+  SlaughterHouse         SlaughterHouse[]
+  Cemetery               Cemetery[]
+  TransferWasteStation   TransferWasteStation[]
+  CommunalContainer      CommunalContainer[]
 }
 
 model HygieneSection {
@@ -417,17 +442,19 @@ model HygieneSection {
   id                      Int      @id @default(autoincrement())
   pestSigns               YesNo    @relation("pestSigns", fields: [pestSignsId], references: [id])
   evidenceStagnation      YesNo    @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
-  disinfection            YesNo
-  disinfestation          YesNo
-  safeConditionUncooked   YesNo
-  safeConditionCooked     YesNo
-  publicBathRoomCondition GoodBad
+  disinfection            YesNo    @relation(fields: [yesNoId], references: [id])
+  disinfestation          YesNo    @relation(fields: [yesNoId], references: [id])
+  safeConditionUncooked   YesNo    @relation(fields: [yesNoId], references: [id])
+  safeConditionCooked     YesNo    @relation(fields: [yesNoId], references: [id])
+  publicBathRoomCondition GoodBad  @relation(fields: [goodBadId], references: [id])
   pestSignsId             Int
   evidenceStagnationId    Int
   deleted                 Int?     @default(0)
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 
+
+  goodBadId Int
 }
 
 model ConclusionSection {
@@ -461,37 +488,43 @@ model InstitutionType {
 // others
 
 model ReligiousInstitutionType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+  deleted              Int?                   @default(0)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  ReligiousInstitution ReligiousInstitution[]
 }
 
 model ReligiousInstitution {
   id                       Int                      @id @default(autoincrement())
-  ReligiousInstitutionType ReligiousInstitutionType
-  soundProof               YesNo
-  disabilityFriendly       YesNo
-  multipleExit             YesNo
-  ablution_slab            YesNo
+  ReligiousInstitutionType ReligiousInstitutionType @relation(fields: [religiousInstitutionTypeId], references: [id])
+  soundProof               YesNo                    @relation(fields: [yesNoId], references: [id])
+  disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
+  multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
+  ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted                    Int?     @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  religiousInstitutionTypeId Int
+  yesNoId                    Int
 }
 
 model CorporateInstitution {
   id                       Int                      @id @default(autoincrement())
-  CorporateInstitutionType CorporateInstitutionType
-  soundProof               YesNo
-  disabilityFriendly       YesNo
-  multipleExit             YesNo
-  ablution_slab            YesNo
+  CorporateInstitutionType CorporateInstitutionType @relation(fields: [corporateInstitutionTypeId], references: [id])
+  soundProof               YesNo                    @relation(fields: [yesNoId], references: [id])
+  disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
+  multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
+  ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted                    Int?     @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  corporateInstitutionTypeId Int
+  yesNoId                    Int
+
 }
 
 // bank
@@ -501,11 +534,12 @@ model CorporateInstitution {
 // others
 
 model CorporateInstitutionType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+  deleted              Int?                   @default(0)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  CorporateInstitution CorporateInstitution[]
 }
 
 // outpatient
@@ -798,6 +832,9 @@ model YesNo {
   pestSigns                HygieneSection[]       @relation("pestSigns")
   evidenceStagnation       HygieneSection[]       @relation("evidenceStagnation")
 
+  ResidentialForm ResidentialForm[]
+  FacilitySection FacilitySection[]
+
 }
 
 //good bad, ....
@@ -827,6 +864,7 @@ model RespondentDesignation {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   BaselineSection BaselineSection[]
+  FacilitySection FacilitySection[]
 }
 
 model DrainType {
@@ -840,21 +878,23 @@ model DrainType {
 //Baseline inspection, reinspection
 
 model InspectionType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
 }
 
 // table top etc
 model EateryType {
-  id              Int             @id @default(autoincrement())
-  FacilitySection FacilitySection
-  name            String          @db.VarChar(255)
-  deleted         Int?            @default(0)
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
+  id                Int             @id @default(autoincrement())
+  FacilitySection   FacilitySection @relation(fields: [facilitySectionId], references: [id])
+  name              String          @db.VarChar(255)
+  deleted           Int?            @default(0)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  facilitySectionId Int
 }
 
 /////////////////////START DEFAULT SEEDED DATA ///////////////////////////
@@ -916,71 +956,100 @@ model HospitalityFacilityType {
 
 model SlaughterHouse {
   id                                    Int               @id @default(autoincrement())
-  SanitationSection                     SanitationSection
-  name                                  YesNo
-  slaughterRoomsAvailable               YesNo
-  condemnationRoomAvailable             YesNo
-  hangingExaminationFacilitiesAvailable YesNo
-  holdingPenAvailable                   YesNo
-  isolationPenAvailable                 YesNo
-  chuteAvailable                        YesNo
-  genderFriendlyAvailable               YesNo
-  comfortRoomAvailable                  YesNo
-  wheelBathAvailable                    YesNo
-  footbathAvailable                     YesNo
-  meatInspectorOfficeAvailable          YesNo
-  dressingFloorAvailable                YesNo
+  SanitationSection                     SanitationSection @relation(fields: [sanitationSectionId], references: [id])
+  name                                  YesNo             @relation(fields: [yesNoId], references: [id])
+  slaughterRoomsAvailable               YesNo             @relation(fields: [yesNoId], references: [id])
+  condemnationRoomAvailable             YesNo             @relation(fields: [yesNoId], references: [id])
+  hangingExaminationFacilitiesAvailable YesNo             @relation(fields: [yesNoId], references: [id])
+  holdingPenAvailable                   YesNo             @relation(fields: [yesNoId], references: [id])
+  isolationPenAvailable                 YesNo             @relation(fields: [yesNoId], references: [id])
+  chuteAvailable                        YesNo             @relation(fields: [yesNoId], references: [id])
+  genderFriendlyAvailable               YesNo             @relation(fields: [yesNoId], references: [id])
+  comfortRoomAvailable                  YesNo             @relation(fields: [yesNoId], references: [id])
+  wheelBathAvailable                    YesNo             @relation(fields: [yesNoId], references: [id])
+  footbathAvailable                     YesNo             @relation(fields: [yesNoId], references: [id])
+  meatInspectorOfficeAvailable          YesNo             @relation(fields: [yesNoId], references: [id])
+  dressingFloorAvailable                YesNo             @relation(fields: [yesNoId], references: [id])
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted             Int?     @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  sanitationSectionId Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
 }
 
 model Cemetery {
   id                       Int               @id @default(autoincrement())
-  SanitationSection        SanitationSection
-  sextonAvailability       YesNo
-  sextonOfficeAvailability YesNo
-  layoutCemeteryAdequacy   YesNo
-  cemeteryFenced           YesNo
-  cremationPracticed       YesNo
-  cremationPlatform        YesNo
-  ashesDisposal            YesNo
+  SanitationSection        SanitationSection @relation(fields: [sanitationSectionId], references: [id])
+  sextonAvailability       YesNo             @relation("sextonAvailability",fields: [sextonAvailabilityId], references: [id])
+  sextonOfficeAvailability YesNo             @relation("sextonOfficeAvailability",fields: [sextonOfficeAvailabilityId], references: [id])
+  layoutCemeteryAdequacy   YesNo             @relation(fields: [yesNoId], references: [id])
+  cemeteryFenced           YesNo             @relation(fields: [yesNoId], references: [id])
+  cremationPracticed       YesNo             @relation(fields: [yesNoId], references: [id])
+  cremationPlatform        YesNo             @relation(fields: [yesNoId], references: [id])
+  ashesDisposal            YesNo             @relation(fields: [yesNoId], references: [id])
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted             Int?     @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  sanitationSectionId Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
 }
 
 model TransferWasteStation {
   id                      Int               @id @default(autoincrement())
-  SanitationSection       SanitationSection
+  SanitationSection       SanitationSection @relation(fields: [sanitationSectionId], references: [id])
   transferStationCapacity Int
-  wasteSorting            YesNo
-  leachateManagement      YesNo
-  hazardousManagement     YesNo
+  wasteSorting            YesNo             @relation(fields: [yesNoId], references: [id])
+  leachateManagement      YesNo             @relation(fields: [yesNoId], references: [id])
+  hazardousManagement     YesNo             @relation(fields: [yesNoId], references: [id])
 
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted             Int?     @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  sanitationSectionId Int
+  yesNoId             Int
+  yesNoId             Int
+  yesNoId             Int
 }
 
 model CommunalContainer {
   id                   Int               @id @default(autoincrement())
-  SanitationSection    SanitationSection
+  SanitationSection    SanitationSection @relation(fields: [sanitationSectionId], references: [id])
   attendantName        String            @db.VarChar(255)
   attendantPhoneNumber String            @db.VarChar(255)
   serviceProviderName  String            @db.VarChar(255)
-  scheduledCollection  YesNo
+  scheduledCollection  YesNo             @relation(fields: [yesNoId], references: [id])
   containerVolume      Int
-  containerCondition   GoodBad
+  containerCondition   GoodBad           @relation(fields: [goodBadId], references: [id])
   numberContainers     Int
 
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted             Int?     @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  sanitationSectionId Int
+  yesNoId             Int
+  goodBadId           Int
 }
 
 // slaughter_house
@@ -995,15 +1064,18 @@ model SanitaryFacilityType {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(255)
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  SanitationSection SanitationSection[]
 }
 
 model GoodBad {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  HygieneSection    HygieneSection[]
+  CommunalContainer CommunalContainer[]
 }
