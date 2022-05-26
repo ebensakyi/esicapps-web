@@ -148,7 +148,30 @@ model MarketLorryParkPremise {
 /////////////////////////END INSPECTION FORMS//////////////////////////////////////////////
 
 ///////////////////////////FORM SECTIONS//////////////////////////////
+model LocationSection {
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(255)
+  deleted       Int?     @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  districtId    Int
+  subDistrictId Int
+  zoneId        Int
+  userId        Int
+  inspectionId  Int
+  communityId   Int
+  community     String   @db.VarChar(255)
+  ghanaPostGps  String   @db.VarChar(255)
+  latitude      String   @db.VarChar(255)
+  longitude     String   @db.VarChar(255)
 
+  Community           Community           @relation(fields: [communityId], references: [id])
+  District            District            @relation(fields: [districtId], references: [id])
+  SubDistrict         SubDistrict         @relation(fields: [subDistrictId], references: [id])
+  Zone                Zone                @relation(fields: [zoneId], references: [id])
+  User                User                @relation(fields: [userId], references: [id])
+  BaselineInformation BaselineInformation @relation(fields: [inspectionId], references: [id])
+}
 model BaselineInformationSection {
   id                                        Int      @id @default(autoincrement())
   respondentName                            String   @db.VarChar(255)
@@ -186,6 +209,41 @@ model BaselineInformationSection {
 
 }
 
+model FacilitySection{
+   id                                        Int      @id @default(autoincrement())
+ 
+  premiseTypeId                             Int
+  respondentDesignationId                   Int
+  approvedHandwashingFacilityAvailabilityId Int
+  protectiveClothingId                      Int
+  firstAidAvailabilityId                    Int
+  drainsAvailabilityId                      Int
+  toiletAvailabilityId                      Int
+  urinalAvailabilityId                      Int
+  bathRoomAvailabilityId                    Int
+  deleted                                   Int?     @default(0)
+  createdAt                                 DateTime @default(now())
+  updatedAt                                 DateTime @updatedAt
+ 
+
+  inspectionId Int
+
+  protectiveClothing    YesNo                   @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  firstAidAvailability  YesNo                   @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  drainsAvailability    YesNo                   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  toiletAvailability    YesNo                   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability    YesNo                   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  bathRoomAvailability  YesNo                   @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  User                  User                    @relation(fields: [userId], references: [id])
+  PremiseLocation       PremiseLocation[]
+  PremiseType           PremiseType             @relation(fields: [premiseTypeId], references: [id])
+  InspectionType        InspectionType          @relation(fields: [inspectionTypeId], references: [id])
+  RespondentDesignation RespondentDesignation   @relation(fields: [respondentDesignationId], references: [id])
+  Inspection            Inspection              @relation(fields: [inspectionId], references: [id])
+  EatingDrinkingPremise EatingDrinkingPremise[]
+
+}
+
 model AnimalRearingSection {
   id Int @id @default(autoincrement())
 
@@ -201,31 +259,6 @@ model AnimalRearingSection {
   conditionId        Int
   vaccinationProofId Int
   animalsPermitId    Int
-}
-
-model LocationSection {
-  id            Int      @id @default(autoincrement())
-  name          String   @db.VarChar(255)
-  deleted       Int?     @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  districtId    Int
-  subDistrictId Int
-  zoneId        Int
-  userId        Int
-  inspectionId  Int
-  communityId   Int
-  community     String   @db.VarChar(255)
-  ghanaPostGps  String   @db.VarChar(255)
-  latitude      String   @db.VarChar(255)
-  longitude     String   @db.VarChar(255)
-
-  Community           Community           @relation(fields: [communityId], references: [id])
-  District            District            @relation(fields: [districtId], references: [id])
-  SubDistrict         SubDistrict         @relation(fields: [subDistrictId], references: [id])
-  Zone                Zone                @relation(fields: [zoneId], references: [id])
-  User                User                @relation(fields: [userId], references: [id])
-  BaselineInformation BaselineInformation @relation(fields: [inspectionId], references: [id])
 }
 
 model PopulationSection {
