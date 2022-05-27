@@ -838,6 +838,13 @@ model YesNo {
 
   ResidentialForm ResidentialForm[]
   FacilitySection FacilitySection[]
+ sextonAvailability       Cemetery  []           @relation("sextonAvailability")
+  sextonOfficeAvailability Cemetery  []           @relation("sextonOfficeAvailability")
+  layoutCemeteryAdequacy   Cemetery  []           @relation("layoutCemeteryAdequacy")
+  cemeteryFenced           Cemetery  []           @relation("cemeteryFenced")
+  cremationPracticed       Cemetery   []          @relation("cremationPracticed")
+  cremationPlatform        Cemetery  []           @relation("cremationPlatform")
+  ashesDisposal            Cemetery  []           @relation("ashesDisposal")
 
 }
 
