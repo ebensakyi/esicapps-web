@@ -220,11 +220,6 @@ model FacilitySection {
   bathRoomAvailabilityId                    Int
   separateWardId                            Int
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-
   protectiveClothing   YesNo @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
   firstAidAvailability YesNo @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   drainsAvailability   YesNo @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
@@ -237,6 +232,9 @@ model FacilitySection {
 
 
   EateryType EateryType[]
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 }
 
 model AnimalRearingSection {
@@ -453,10 +451,10 @@ model HygieneSection {
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 
-  disinfectionId Int
-  disinfestationId Int
+  disinfectionId          Int
+  disinfestationId        Int
   safeConditionUncookedId Int
-  safeConditionCookedId Int
+  safeConditionCookedId   Int
 
   goodBadId Int
 }
@@ -836,16 +834,62 @@ model YesNo {
   pestSigns                HygieneSection[]       @relation("pestSigns")
   evidenceStagnation       HygieneSection[]       @relation("evidenceStagnation")
 
-  ResidentialForm ResidentialForm[]
-  FacilitySection FacilitySection[]
- sextonAvailability       Cemetery  []           @relation("sextonAvailability")
-  sextonOfficeAvailability Cemetery  []           @relation("sextonOfficeAvailability")
-  layoutCemeteryAdequacy   Cemetery  []           @relation("layoutCemeteryAdequacy")
-  cemeteryFenced           Cemetery  []           @relation("cemeteryFenced")
-  cremationPracticed       Cemetery   []          @relation("cremationPracticed")
-  cremationPlatform        Cemetery  []           @relation("cremationPlatform")
-  ashesDisposal            Cemetery  []           @relation("ashesDisposal")
+  ResidentialForm          ResidentialForm[]
+  FacilitySection          FacilitySection[]
+  sextonAvailability       Cemetery[]        @relation("sextonAvailability")
+  sextonOfficeAvailability Cemetery[]        @relation("sextonOfficeAvailability")
+  layoutCemeteryAdequacy   Cemetery[]        @relation("layoutCemeteryAdequacy")
+  cemeteryFenced           Cemetery[]        @relation("cemeteryFenced")
+  cremationPracticed       Cemetery[]        @relation("cremationPracticed")
+  cremationPlatform        Cemetery[]        @relation("cremationPlatform")
+  ashesDisposal            Cemetery[]        @relation("ashesDisposal")
 
+  protectiveClothing   FacilitySection[]      @relation("protectiveClothing")
+  firstAidAvailability FacilitySection[]      @relation("firstAidAvailability")
+  drainsAvailability   FacilitySection[]      @relation("drainsAvailability")
+  toiletAvailability   FacilitySection[]      @relation("toiletAvailability")
+  urinalAvailability   FacilitySection[]      @relation("urinalAvailability")
+  bathRoomAvailability FacilitySection[]      @relation("bathRoomAvailability")
+  PopulationSection    PopulationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  SanitationSection    SanitationSection[]
+  HygieneSection       HygieneSection[]
+  HygieneSection       HygieneSection[]
+  HygieneSection       HygieneSection[]
+  HygieneSection       HygieneSection[]
+  ReligiousInstitution ReligiousInstitution[]
+  ReligiousInstitution ReligiousInstitution[]
+  ReligiousInstitution ReligiousInstitution[]
+  ReligiousInstitution ReligiousInstitution[]
+  CorporateInstitution CorporateInstitution[]
+  CorporateInstitution CorporateInstitution[]
+  CorporateInstitution CorporateInstitution[]
+  CorporateInstitution CorporateInstitution[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  SlaughterHouse       SlaughterHouse[]
+  TransferWasteStation TransferWasteStation[]
+  TransferWasteStation TransferWasteStation[]
+  TransferWasteStation TransferWasteStation[]
+  CommunalContainer    CommunalContainer[]
 }
 
 //good bad, ....
@@ -1005,22 +1049,23 @@ model Cemetery {
   SanitationSection        SanitationSection @relation(fields: [sanitationSectionId], references: [id])
   sextonAvailability       YesNo             @relation("sextonAvailability", fields: [sextonAvailabilityId], references: [id])
   sextonOfficeAvailability YesNo             @relation("sextonOfficeAvailability", fields: [sextonOfficeAvailabilityId], references: [id])
-  layoutCemeteryAdequacy   YesNo             @relation("layoutCemeteryAdequacy",fields: [layoutCemeteryAdequacyId], references: [id])
-  cemeteryFenced           YesNo             @relation("cemeteryFenced",fields: [cemeteryFencedId], references: [id])
-  cremationPracticed       YesNo             @relation("cremationPracticed",fields: [cremationPracticedId], references: [id])
-  cremationPlatform        YesNo             @relation("cremationPlatform",fields: [cremationPlatformId], references: [id])
-  ashesDisposal            YesNo             @relation("ashesDisposal",fields: [ashesDisposalId], references: [id])
+  layoutCemeteryAdequacy   YesNo             @relation("layoutCemeteryAdequacy", fields: [layoutCemeteryAdequacyId], references: [id])
+  cemeteryFenced           YesNo             @relation("cemeteryFenced", fields: [cemeteryFencedId], references: [id])
+  cremationPracticed       YesNo             @relation("cremationPracticed", fields: [cremationPracticedId], references: [id])
+  cremationPlatform        YesNo             @relation("cremationPlatform", fields: [cremationPlatformId], references: [id])
+  ashesDisposal            YesNo             @relation("ashesDisposal", fields: [ashesDisposalId], references: [id])
 
-  deleted                  Int?     @default(0)
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt
-  sanitationSectionId      Int
-  layoutCemeteryAdequacyId Int
-  cemeteryFencedId         Int
-  cremationPracticedId     Int
-  cremationPlatformId      Int
-  ashesDisposalId          Int
-
+  deleted                    Int?     @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  sanitationSectionId        Int
+  layoutCemeteryAdequacyId   Int
+  cemeteryFencedId           Int
+  cremationPracticedId       Int
+  cremationPlatformId        Int
+  ashesDisposalId            Int
+  sextonAvailabilityId       Int
+  sextonOfficeAvailabilityId Int
 }
 
 model TransferWasteStation {
