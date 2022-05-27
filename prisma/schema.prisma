@@ -802,15 +802,15 @@ model YesNo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // availToiletFaciltyMgt                   PremiseSanitaryFacility[] @relation("availToiletFaciltyMgt")
-  // toiletGenderSensivity                   PremiseSanitaryFacility[] @relation("toiletGenderSensivity")
-  // PremiseSanitaryFacility                 PremiseSanitaryFacility[] @relation("urinalGenderSensivity")
-  // urinalGenderSensivity                   PremiseSanitaryFacility[] @relation("toiletDisabilityFriendly")
-  // urinalDisabilityFriendly                PremiseSanitaryFacility[] @relation("urinalDisabilityFriendly")
-  // approvedHandwashingFacilityAvailability PremiseSanitaryFacility[] @relation("approvedHandwashingFacilityAvailability")
-  // facilityCleanliness                     PremiseSanitaryFacility[] @relation("facilityCleanliness")
-  // toiletAdequacy                          PremiseSanitaryFacility[] @relation("toiletAdequacy")
-  // urinalAdequacy                          PremiseSanitaryFacility[] @relation("urinalAdequacy")
+  availToiletFaciltyMgt                   SanitationSection[] @relation("availToiletFaciltyMgt")
+  toiletGenderSensivity                   SanitationSection[] @relation("toiletGenderSensivity")
+  PremiseSanitaryFacility                 SanitationSection[] @relation("urinalGenderSensivity")
+  urinalGenderSensivity                   SanitationSection[] @relation("toiletDisabilityFriendly")
+  urinalDisabilityFriendly                SanitationSection[] @relation("urinalDisabilityFriendly")
+  approvedHandwashingFacilityAvailability SanitationSection[] @relation("approvedHandwashingFacilityAvailability")
+  facilityCleanliness                     SanitationSection[] @relation("facilityCleanliness")
+  toiletAdequacy                          SanitationSection[] @relation("toiletAdequacy")
+  urinalAdequacy                          SanitationSection[] @relation("urinalAdequacy")
   // toiletAvailability                      BaselineInformation[]     @relation("toiletAvailability")
   // urinalAvailability                      BaselineInformation[]     @relation("urinalAvailability")
   // bathRoomAvailability                    BaselineInformation[]     @relation("bathRoomAvailability")
@@ -851,17 +851,7 @@ model YesNo {
   urinalAvailability   FacilitySection[]      @relation("urinalAvailability")
   bathRoomAvailability FacilitySection[]      @relation("bathRoomAvailability")
   PopulationSection    PopulationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
-  SanitationSection    SanitationSection[]
+
   HygieneSection       HygieneSection[]
   HygieneSection       HygieneSection[]
   HygieneSection       HygieneSection[]
