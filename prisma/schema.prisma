@@ -206,9 +206,9 @@ model BaselineSection {
 }
 
 model FacilitySection {
-  id                                        Int      @id @default(autoincrement())
+  id                                        Int   @id @default(autoincrement())
   inspectionId                              Int
-  separateWard                              YesNo    @relation(fields: [yesNoId], references: [id])
+  separateWard                              YesNo @relation(fields: [separateWardId], references: [id])
   premiseTypeId                             Int
   respondentDesignationId                   Int
   approvedHandwashingFacilityAvailabilityId Int
@@ -218,9 +218,11 @@ model FacilitySection {
   toiletAvailabilityId                      Int
   urinalAvailabilityId                      Int
   bathRoomAvailabilityId                    Int
-  deleted                                   Int?     @default(0)
-  createdAt                                 DateTime @default(now())
-  updatedAt                                 DateTime @updatedAt
+  separateWardId                            Int
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
 
   protectiveClothing   YesNo @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
@@ -233,9 +235,7 @@ model FacilitySection {
   RespondentDesignation RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
   Inspection            Inspection            @relation(fields: [inspectionId], references: [id])
 
-  yesNoId    Int
-  YesNo      YesNo?       @relation(fields: [yesNoId], references: [id])
-  yesNoId    Int?
+
   EateryType EateryType[]
 }
 
@@ -442,10 +442,10 @@ model HygieneSection {
   id                      Int      @id @default(autoincrement())
   pestSigns               YesNo    @relation("pestSigns", fields: [pestSignsId], references: [id])
   evidenceStagnation      YesNo    @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
-  disinfection            YesNo    @relation(fields: [yesNoId], references: [id])
-  disinfestation          YesNo    @relation(fields: [yesNoId], references: [id])
-  safeConditionUncooked   YesNo    @relation(fields: [yesNoId], references: [id])
-  safeConditionCooked     YesNo    @relation(fields: [yesNoId], references: [id])
+  disinfection            YesNo    @relation(fields: [disinfectionId], references: [id])
+  disinfestation          YesNo    @relation(fields: [disinfestationId], references: [id])
+  safeConditionUncooked   YesNo    @relation(fields: [safeConditionUncookedId], references: [id])
+  safeConditionCooked     YesNo    @relation(fields: [safeConditionCookedId], references: [id])
   publicBathRoomCondition GoodBad  @relation(fields: [goodBadId], references: [id])
   pestSignsId             Int
   evidenceStagnationId    Int
@@ -453,6 +453,10 @@ model HygieneSection {
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 
+  disinfectionId Int
+  disinfestationId Int
+  safeConditionUncookedId Int
+  safeConditionCookedId Int
 
   goodBadId Int
 }
@@ -957,79 +961,77 @@ model HospitalityFacilityType {
 model SlaughterHouse {
   id                                    Int               @id @default(autoincrement())
   SanitationSection                     SanitationSection @relation(fields: [sanitationSectionId], references: [id])
-  name                                  YesNo             @relation(fields: [yesNoId], references: [id])
-  slaughterRoomsAvailable               YesNo             @relation(fields: [yesNoId], references: [id])
-  condemnationRoomAvailable             YesNo             @relation(fields: [yesNoId], references: [id])
-  hangingExaminationFacilitiesAvailable YesNo             @relation(fields: [yesNoId], references: [id])
-  holdingPenAvailable                   YesNo             @relation(fields: [yesNoId], references: [id])
-  isolationPenAvailable                 YesNo             @relation(fields: [yesNoId], references: [id])
-  chuteAvailable                        YesNo             @relation(fields: [yesNoId], references: [id])
-  genderFriendlyAvailable               YesNo             @relation(fields: [yesNoId], references: [id])
-  comfortRoomAvailable                  YesNo             @relation(fields: [yesNoId], references: [id])
-  wheelBathAvailable                    YesNo             @relation(fields: [yesNoId], references: [id])
-  footbathAvailable                     YesNo             @relation(fields: [yesNoId], references: [id])
-  meatInspectorOfficeAvailable          YesNo             @relation(fields: [yesNoId], references: [id])
-  dressingFloorAvailable                YesNo             @relation(fields: [yesNoId], references: [id])
+  name                                  String            @db.VarChar(255)
+  slaughterRoomsAvailable               YesNo             @relation(fields: [slaughterRoomsAvailableId], references: [id])
+  condemnationRoomAvailable             YesNo             @relation(fields: [condemnationRoomAvailableId], references: [id])
+  hangingExaminationFacilitiesAvailable YesNo             @relation(fields: [hangingExaminationFacilitiesAvailableId], references: [id])
+  holdingPenAvailable                   YesNo             @relation(fields: [holdingPenAvailableId], references: [id])
+  isolationPenAvailable                 YesNo             @relation(fields: [isolationPenAvailableId], references: [id])
+  chuteAvailable                        YesNo             @relation(fields: [chuteAvailableId], references: [id])
+  genderFriendlyAvailable               YesNo             @relation(fields: [genderFriendlyAvailableId], references: [id])
+  comfortRoomAvailable                  YesNo             @relation(fields: [comfortRoomAvailableId], references: [id])
+  wheelBathAvailable                    YesNo             @relation(fields: [wheelBathAvailableId], references: [id])
+  footbathAvailable                     YesNo             @relation(fields: [footbathAvailableId], references: [id])
+  meatInspectorOfficeAvailable          YesNo             @relation(fields: [meatInspectorOfficeAvailableId], references: [id])
+  dressingFloorAvailable                YesNo             @relation(fields: [dressingFloorAvailableId], references: [id])
 
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  sanitationSectionId Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
+  deleted                                 Int?     @default(0)
+  createdAt                               DateTime @default(now())
+  updatedAt                               DateTime @updatedAt
+  sanitationSectionId                     Int
+  slaughterRoomsAvailableId               Int
+  condemnationRoomAvailableId             Int
+  hangingExaminationFacilitiesAvailableId Int
+  holdingPenAvailableId                   Int
+  isolationPenAvailableId                 Int
+  chuteAvailableId                        Int
+  genderFriendlyAvailableId               Int
+  comfortRoomAvailableId                  Int
+  wheelBathAvailableId                    Int
+  footbathAvailableId                     Int
+  meatInspectorOfficeAvailableId          Int
+  dressingFloorAvailableId                Int
 }
 
 model Cemetery {
   id                       Int               @id @default(autoincrement())
   SanitationSection        SanitationSection @relation(fields: [sanitationSectionId], references: [id])
-  sextonAvailability       YesNo             @relation("sextonAvailability",fields: [sextonAvailabilityId], references: [id])
-  sextonOfficeAvailability YesNo             @relation("sextonOfficeAvailability",fields: [sextonOfficeAvailabilityId], references: [id])
-  layoutCemeteryAdequacy   YesNo             @relation(fields: [yesNoId], references: [id])
-  cemeteryFenced           YesNo             @relation(fields: [yesNoId], references: [id])
-  cremationPracticed       YesNo             @relation(fields: [yesNoId], references: [id])
-  cremationPlatform        YesNo             @relation(fields: [yesNoId], references: [id])
-  ashesDisposal            YesNo             @relation(fields: [yesNoId], references: [id])
+  sextonAvailability       YesNo             @relation("sextonAvailability", fields: [sextonAvailabilityId], references: [id])
+  sextonOfficeAvailability YesNo             @relation("sextonOfficeAvailability", fields: [sextonOfficeAvailabilityId], references: [id])
+  layoutCemeteryAdequacy   YesNo             @relation(fields: [layoutCemeteryAdequacyId], references: [id])
+  cemeteryFenced           YesNo             @relation(fields: [cemeteryFencedId], references: [id])
+  cremationPracticed       YesNo             @relation(fields: [cremationPracticedId], references: [id])
+  cremationPlatform        YesNo             @relation(fields: [cremationPlatformId], references: [id])
+  ashesDisposal            YesNo             @relation(fields: [ashesDisposalId], references: [id])
 
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  sanitationSectionId Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
+  deleted                  Int?     @default(0)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  sanitationSectionId      Int
+  layoutCemeteryAdequacyId Int
+  cemeteryFencedId         Int
+  cremationPracticedId     Int
+  cremationPlatformId      Int
+  ashesDisposalId          Int
+
 }
 
 model TransferWasteStation {
   id                      Int               @id @default(autoincrement())
   SanitationSection       SanitationSection @relation(fields: [sanitationSectionId], references: [id])
   transferStationCapacity Int
-  wasteSorting            YesNo             @relation(fields: [yesNoId], references: [id])
-  leachateManagement      YesNo             @relation(fields: [yesNoId], references: [id])
-  hazardousManagement     YesNo             @relation(fields: [yesNoId], references: [id])
+  wasteSorting            YesNo             @relation(fields: [wasteSortingId], references: [id])
+  leachateManagement      YesNo             @relation(fields: [leachateManagementId], references: [id])
+  hazardousManagement     YesNo             @relation(fields: [hazardousManagementId], references: [id])
 
 
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  sanitationSectionId Int
-  yesNoId             Int
-  yesNoId             Int
-  yesNoId             Int
+  deleted               Int?     @default(0)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  sanitationSectionId   Int
+  wasteSortingId        Int
+  leachateManagementId  Int
+  hazardousManagementId Int
 }
 
 model CommunalContainer {
