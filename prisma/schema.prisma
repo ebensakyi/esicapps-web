@@ -516,7 +516,7 @@ model ReligiousInstitution {
 model CorporateInstitution {
   id                       Int                      @id @default(autoincrement())
   CorporateInstitutionType CorporateInstitutionType @relation(fields: [corporateInstitutionTypeId], references: [id])
-  soundProof               YesNo                    @relation(fields: [yesNoId], references: [id])
+  soundProof               YesNo                    @relation(fields: [soundProof], references: [id])
   disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
   multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
   ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
@@ -863,6 +863,12 @@ model YesNo {
   disabilityFriendly ReligiousInstitution[] @relation("disabilityFriendly")
   multipleExit       ReligiousInstitution[] @relation("multipleExit")
   ablutionSlab      ReligiousInstitution[] @relation("ablutionSlab")
+
+
+ soundProof               YesNo                    @relation(fields: [yesNoId], references: [id])
+  disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
+  multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
+  ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
 
 
   CorporateInstitution CorporateInstitution[]
