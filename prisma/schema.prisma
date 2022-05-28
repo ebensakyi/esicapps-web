@@ -817,14 +817,14 @@ model YesNo {
   // protectiveClothing                      BaselineInformation[]     @relation("protectiveClothing")
   // firstAidAvailability                    BaselineInformation[]     @relation("firstAidAvailability")
   // drainsAvailability                      BaselineInformation[]     @relation("drainsAvailability")
-  businessLicenceAvailability       LicenceSection[] @relation("businessLicenceAvailability")
-  medicalCertificateAvailability    LicenceSection[] @relation("medicalCertificateAvailability")
-  operatingLicenceAvailability      LicenceSection[] @relation("operatingLicenceAvailability")
-  propertyRateAvailability          LicenceSection[] @relation("propertyRateAvailability")
-  structurePermitAvailability       LicenceSection[] @relation("structurePermitAvailability")
-  habitationCertificateAvailability LicenceSection[] @relation("habitationCertificateAvailability")
-  fumigationCertificateAvailability LicenceSection[] @relation("fumigationCertificateAvailability")
-  buildingPermit                    LicenceSection[] @relation("buildingPermit")
+  businessLicenceAvailability             LicenceSection[]    @relation("businessLicenceAvailability")
+  medicalCertificateAvailability          LicenceSection[]    @relation("medicalCertificateAvailability")
+  operatingLicenceAvailability            LicenceSection[]    @relation("operatingLicenceAvailability")
+  propertyRateAvailability                LicenceSection[]    @relation("propertyRateAvailability")
+  structurePermitAvailability             LicenceSection[]    @relation("structurePermitAvailability")
+  habitationCertificateAvailability       LicenceSection[]    @relation("habitationCertificateAvailability")
+  fumigationCertificateAvailability       LicenceSection[]    @relation("fumigationCertificateAvailability")
+  buildingPermit                          LicenceSection[]    @relation("buildingPermit")
 
   animalsPermit            AnimalRearingSection[] @relation("animalsPermit")
   vaccinationProof         AnimalRearingSection[] @relation("vaccinationProof")
@@ -844,18 +844,23 @@ model YesNo {
   cremationPlatform        Cemetery[]        @relation("cremationPlatform")
   ashesDisposal            Cemetery[]        @relation("ashesDisposal")
 
-  protectiveClothing   FacilitySection[]      @relation("protectiveClothing")
-  firstAidAvailability FacilitySection[]      @relation("firstAidAvailability")
-  drainsAvailability   FacilitySection[]      @relation("drainsAvailability")
-  toiletAvailability   FacilitySection[]      @relation("toiletAvailability")
-  urinalAvailability   FacilitySection[]      @relation("urinalAvailability")
-  bathRoomAvailability FacilitySection[]      @relation("bathRoomAvailability")
+  protectiveClothing   FacilitySection[]   @relation("protectiveClothing")
+  firstAidAvailability FacilitySection[]   @relation("firstAidAvailability")
+  drainsAvailability   FacilitySection[]   @relation("drainsAvailability")
+  toiletAvailability   FacilitySection[]   @relation("toiletAvailability")
+  urinalAvailability   FacilitySection[]   @relation("urinalAvailability")
+  bathRoomAvailability FacilitySection[]   @relation("bathRoomAvailability")
   PopulationSection    PopulationSection[]
 
-  HygieneSection       HygieneSection[]
-  HygieneSection       HygieneSection[]
-  HygieneSection       HygieneSection[]
-  HygieneSection       HygieneSection[]
+
+
+  pestSigns             HygieneSection[] @relation("pestSigns")
+  evidenceStagnation    HygieneSection[] @relation("evidenceStagnation")
+  disinfection          HygieneSection[] @relation("disinfection")
+  disinfestation        HygieneSection[] @relation("disinfestationId")
+  safeConditionUncooked HygieneSection[] @relation("safeConditionUncookedId")
+  safeConditionCooked   HygieneSection[] @relation("safeConditionCookedId")
+
   ReligiousInstitution ReligiousInstitution[]
   ReligiousInstitution ReligiousInstitution[]
   ReligiousInstitution ReligiousInstitution[]
