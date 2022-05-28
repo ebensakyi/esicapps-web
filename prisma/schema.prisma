@@ -501,10 +501,10 @@ model ReligiousInstitutionType {
 model ReligiousInstitution {
   id                       Int                      @id @default(autoincrement())
   ReligiousInstitutionType ReligiousInstitutionType @relation(fields: [religiousInstitutionTypeId], references: [id])
-  soundProof               YesNo                    @relation(fields: [yesNoId], references: [id])
-  disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
-  multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
-  ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
+  soundProof               YesNo                    @relation(fields: [soundProofId], references: [id])
+  disabilityFriendly       YesNo                    @relation(fields: [disabilityFriendlyId], references: [id])
+  multipleExit             YesNo                    @relation(fields: [multipleExitId], references: [id])
+  ablutionSlab             YesNo                    @relation(fields: [ablutionSlabId], references: [id])
 
   deleted                    Int?     @default(0)
   createdAt                  DateTime @default(now())
@@ -831,8 +831,6 @@ model YesNo {
   SanitationSection        SanitationSection[]
   effluentManagementReport SanitationSection[]    @relation("effluentManagementReport")
   separateWard             FacilitySection[]      @relation("separateWard")
-  pestSigns                HygieneSection[]       @relation("pestSigns")
-  evidenceStagnation       HygieneSection[]       @relation("evidenceStagnation")
 
   ResidentialForm          ResidentialForm[]
   FacilitySection          FacilitySection[]
@@ -861,10 +859,12 @@ model YesNo {
   safeConditionUncooked HygieneSection[] @relation("safeConditionUncookedId")
   safeConditionCooked   HygieneSection[] @relation("safeConditionCookedId")
 
-  ReligiousInstitution ReligiousInstitution[]
-  ReligiousInstitution ReligiousInstitution[]
-  ReligiousInstitution ReligiousInstitution[]
-  ReligiousInstitution ReligiousInstitution[]
+  soundProof         ReligiousInstitution[] @relation("soundProof")
+  disabilityFriendly ReligiousInstitution[] @relation("disabilityFriendly")
+  multipleExit       ReligiousInstitution[] @relation("multipleExit")
+  ablutionSlab      ReligiousInstitution[] @relation("ablutionSlab")
+
+
   CorporateInstitution CorporateInstitution[]
   CorporateInstitution CorporateInstitution[]
   CorporateInstitution CorporateInstitution[]
