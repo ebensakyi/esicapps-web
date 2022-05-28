@@ -488,61 +488,11 @@ model InstitutionType {
 // mosque
 // shrine
 // others
-
-model ReligiousInstitutionType {
-  id                   Int                    @id @default(autoincrement())
-  name                 String                 @db.VarChar(255)
-  deleted              Int?                   @default(0)
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  ReligiousInstitution ReligiousInstitution[]
-}
-
-model ReligiousInstitution {
-  id                       Int                      @id @default(autoincrement())
-  ReligiousInstitutionType ReligiousInstitutionType @relation(fields: [religiousInstitutionTypeId], references: [id])
-  soundProof               YesNo                    @relation(fields: [soundProofId], references: [id])
-  disabilityFriendly       YesNo                    @relation(fields: [disabilityFriendlyId], references: [id])
-  multipleExit             YesNo                    @relation(fields: [multipleExitId], references: [id])
-  ablutionSlab             YesNo                    @relation(fields: [ablutionSlabId], references: [id])
-
-  deleted                    Int?     @default(0)
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
-  religiousInstitutionTypeId Int
-  yesNoId                    Int
-}
-
-model CorporateInstitution {
-  id                       Int                      @id @default(autoincrement())
-  CorporateInstitutionType CorporateInstitutionType @relation(fields: [corporateInstitutionTypeId], references: [id])
-  soundProof               YesNo                    @relation(fields: [soundProof], references: [id])
-  disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
-  multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
-  ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
-
-  deleted                    Int?     @default(0)
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
-  corporateInstitutionTypeId Int
-  yesNoId                    Int
-
-}
-
 // bank
 // savings_and_loans
 // micro_finance
 // credit_union
 // others
-
-model CorporateInstitutionType {
-  id                   Int                    @id @default(autoincrement())
-  name                 String                 @db.VarChar(255)
-  deleted              Int?                   @default(0)
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  CorporateInstitution CorporateInstitution[]
-}
 
 // outpatient
 // inpatient
@@ -550,6 +500,22 @@ model CorporateInstitutionType {
 // maternity
 // undertaking
 // mortuary
+model Institution {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+   soundProof               YesNo                    @relation(fields: [soundProofId], references: [id])
+  disabilityFriendly       YesNo                    @relation(fields: [disabilityFriendlyId], references: [id])
+  multipleExit             YesNo                    @relation(fields: [multipleExitId], references: [id])
+  ablutionSlab             YesNo                    @relation(fields: [ablutionSlabId], references: [id])
+
+  deleted              Int?                   @default(0)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+ InstitutionType InstitutionType
+}
+
+
+
 
 model HealthServices {
   id        Int      @id @default(autoincrement())
@@ -859,22 +825,13 @@ model YesNo {
   safeConditionUncooked HygieneSection[] @relation("safeConditionUncookedId")
   safeConditionCooked   HygieneSection[] @relation("safeConditionCookedId")
 
-  soundProof         ReligiousInstitution[] @relation("soundProof")
-  disabilityFriendly ReligiousInstitution[] @relation("disabilityFriendly")
-  multipleExit       ReligiousInstitution[] @relation("multipleExit")
-  ablutionSlab      ReligiousInstitution[] @relation("ablutionSlab")
+  soundProof         Institution[] @relation("soundProof")
+  disabilityFriendly Institution[] @relation("disabilityFriendly")
+  multipleExit       Institution[] @relation("multipleExit")
+  ablutionSlab      Institution[] @relation("ablutionSlab")
 
 
- soundProof               YesNo                    @relation(fields: [yesNoId], references: [id])
-  disabilityFriendly       YesNo                    @relation(fields: [yesNoId], references: [id])
-  multipleExit             YesNo                    @relation(fields: [yesNoId], references: [id])
-  ablution_slab            YesNo                    @relation(fields: [yesNoId], references: [id])
 
-
-  CorporateInstitution CorporateInstitution[]
-  CorporateInstitution CorporateInstitution[]
-  CorporateInstitution CorporateInstitution[]
-  CorporateInstitution CorporateInstitution[]
   SlaughterHouse       SlaughterHouse[]
   SlaughterHouse       SlaughterHouse[]
   SlaughterHouse       SlaughterHouse[]
