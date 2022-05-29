@@ -1,4 +1,4 @@
-export const region = [
+export const analCleansingMaterialMgt = [
   {
     name: "Closed container",
   },
