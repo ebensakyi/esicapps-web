@@ -462,6 +462,8 @@ model HygieneSection {
   goodBadId Int
 
 
+
+
 }
 
 model ConclusionSection {
@@ -827,9 +829,9 @@ model YesNo {
   pestSigns             HygieneSection[] @relation("pestSigns")
   evidenceStagnation    HygieneSection[] @relation("evidenceStagnation")
   disinfection          HygieneSection[] @relation("disinfection")
-  disinfestation        HygieneSection[] @relation("disinfestationId")
-  safeConditionUncooked HygieneSection[] @relation("safeConditionUncookedId")
-  safeConditionCooked   HygieneSection[] @relation("safeConditionCookedId")
+  disinfestation        HygieneSection[] @relation("disinfestation")
+  safeConditionUncooked HygieneSection[] @relation("safeConditionUncooked")
+  safeConditionCooked   HygieneSection[] @relation("safeConditionCooked")
 
   soundProof         Institution[] @relation("soundProof")
   disabilityFriendly Institution[] @relation("disabilityFriendly")
@@ -856,6 +858,8 @@ model YesNo {
   CommunalContainer                     CommunalContainer[]
   labourersOfficeAvailability           SanitationSection[]    @relation("labourersOfficeAvailability")
   storeRoomAvailability                 SanitationSection[]    @relation("storeRoomAvailability")
+  wasteCollectorRegistration            SanitationSection[]    @relation("wasteCollectorRegistration")
+  pondingEvidence                       SanitationSection[]    @relation("pondingEvidence")
 
 }
 
@@ -998,7 +1002,7 @@ model SlaughterHouse {
   meatInspectorOfficeAvailableId          Int
   dressingFloorAvailableId                Int
 
-  slaughterRoomsAvailable               YesNo @relation("slaughterRoomsAvailableId", fields: [slaughterRoomsAvailableId], references: [id])
+  slaughterRoomsAvailable               YesNo @relation("slaughterRoomsAvailable", fields: [slaughterRoomsAvailableId], references: [id])
   condemnationRoomAvailable             YesNo @relation("condemnationRoomAvailable", fields: [condemnationRoomAvailableId], references: [id])
   hangingExaminationFacilitiesAvailable YesNo @relation("hangingExaminationFacilitiesAvailable", fields: [hangingExaminationFacilitiesAvailableId], references: [id])
   holdingPenAvailable                   YesNo @relation("holdingPenAvailable", fields: [holdingPenAvailableId], references: [id])
@@ -1011,9 +1015,6 @@ model SlaughterHouse {
   meatInspectorOfficeAvailable          YesNo @relation("meatInspectorOfficeAvailable", fields: [meatInspectorOfficeAvailableId], references: [id])
   dressingFloorAvailable                YesNo @relation("dressingFloorAvailable", fields: [dressingFloorAvailableId], references: [id])
 
-  YesNo   YesNo? @relation(fields: [yesNoId], references: [id])
-  yesNoId Int?
-  YesNo   YesNo? @relation(fields: [yesNoId], references: [id])
 }
 
 model Cemetery {
