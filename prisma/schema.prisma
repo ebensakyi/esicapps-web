@@ -52,34 +52,34 @@ model Inspection {
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
-  inspectionFormId  Int
-  inspectionTypeId  Int
-  userId            Int
-  ResidentialForm   ResidentialForm[]
-  LocationSection   LocationSection[]
-  BaselineSection   BaselineSection[]
-  FacilitySection   FacilitySection[]
-  PopulationSection PopulationSection[]
-  LicenceSection    LicenceSection[]
-  WaterSection      WaterSection[]
-  SanitationSection SanitationSection[]
-  HygieneSection    HygieneSection[]
-  ConclusionSection ConclusionSection[]
+  inspectionFormId            Int
+  inspectionTypeId            Int
+  userId                      Int
+  LocationSection             LocationSection[]
+  BaselineSection             BaselineSection[]
+  FacilitySection             FacilitySection[]
+  PopulationSection           PopulationSection[]
+  LicenceSection              LicenceSection[]
+  WaterSection                WaterSection[]
+  SanitationSection           SanitationSection[]
+  HygieneSection              HygieneSection[]
+  ConclusionSection           ConclusionSection[]
+  HospitalityServicesProvided HospitalityServicesProvided[]
 }
 
 /////////////////////////START INSPECTION FORMS//////////////////////////////////////////////
 
-model ResidentialForm {
-  id Int @id @default(autoincrement())
+// model ResidentialForm {
+//   id Int @id @default(autoincrement())
 
-  animalsAvailability YesNo      @relation(fields: [yesNoId], references: [id])
-  Inspection          Inspection @relation(fields: [inspectionId], references: [id])
-  deleted             Int?       @default(0)
-  createdAt           DateTime   @default(now())
-  updatedAt           DateTime   @updatedAt
-  yesNoId             Int
-  inspectionId        Int
-}
+//   animalsAvailability YesNo      @relation(fields: [yesNoId], references: [id])
+//   Inspection          Inspection @relation(fields: [inspectionId], references: [id])
+//   deleted             Int?       @default(0)
+//   createdAt           DateTime   @default(now())
+//   updatedAt           DateTime   @updatedAt
+//   yesNoId             Int
+//   inspectionId        Int
+// }
 
 // model HealthForm {
 //   id                   Int                @id @default(autoincrement())
@@ -358,7 +358,7 @@ model WaterSection {
 
 
   Frequency             Frequency          @relation(fields: [waterFlowFrequencyId], references: [id])
-  WaterSource           WaterSource        @relation(fields: [waterSourceId], references: [id])
+  WaterSourceType       WaterSourceType    @relation(fields: [waterSourceId], references: [id])
   WaterCondition        Condition          @relation(fields: [waterConditionId], references: [id])
   WaterSupplyType       WaterSupplyType    @relation(fields: [waterSupplyTypeId], references: [id])
   WaterStorageType      WaterStorageType   @relation(fields: [waterStorageTypeId], references: [id])
@@ -726,7 +726,7 @@ model ExcretaDisposalMethod {
   SanitationSection SanitationSection[]
 }
 
-model WaterSource {
+model WaterSourceType {
   id           Int            @id @default(autoincrement())
   deleted      Int?           @default(0)
   createdAt    DateTime       @default(now())
@@ -819,7 +819,6 @@ model YesNo {
   effluentManagementReport SanitationSection[] @relation("effluentManagementReport")
   separateWard             FacilitySection[]   @relation("separateWard")
 
-  ResidentialForm          ResidentialForm[]
   FacilitySection          FacilitySection[]
   sextonAvailability       Cemetery[]        @relation("sextonAvailability")
   sextonOfficeAvailability Cemetery[]        @relation("sextonOfficeAvailability")
@@ -939,11 +938,12 @@ model EateryType {
 /////////////////////START DEFAULT SEEDED DATA ///////////////////////////
 
 model HospitalityServicesProvided {
-  id                   Int      @id @default(autoincrement())
-  deleted              Int?     @default(0)
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-  hospitalityPremiseId Int
+  id           Int        @id @default(autoincrement())
+  Inspection   Inspection @relation(fields: [inspectionId], references: [id])
+  deleted      Int?       @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  inspectionId Int
 }
 
 // lodging
@@ -952,8 +952,8 @@ model HospitalityServicesProvided {
 // games
 
 model HospitalityService {
-  id Int @id @default(autoincrement())
-
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1079,18 +1079,18 @@ model CommunalContainer {
   attendantName        String            @db.VarChar(255)
   attendantPhoneNumber String            @db.VarChar(255)
   serviceProviderName  String            @db.VarChar(255)
-  scheduledCollection  YesNo             @relation(fields: [yesNoId], references: [id])
+  scheduledCollection  YesNo             @relation(fields: [scheduledCollectionId], references: [id])
   containerVolume      Int
   containerCondition   GoodBad           @relation(fields: [goodBadId], references: [id])
   numberContainers     Int
 
 
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  sanitationSectionId Int
-  yesNoId             Int
-  goodBadId           Int
+  deleted               Int?     @default(0)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  sanitationSectionId   Int
+  scheduledCollectionId Int
+  goodBadId             Int
 }
 
 // slaughter_house
