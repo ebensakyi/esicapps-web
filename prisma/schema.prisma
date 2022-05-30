@@ -370,27 +370,27 @@ model WaterSection {
 model SanitationSection {
   id Int @id @default(autoincrement())
 
-  wasteCollectorRegistration    YesNo                @relation("wasteCollectorRegistration", fields: [wasteCollectorRegistrationId], references: [id])
-  wasteCollectorName            String               @db.VarChar(255)
+  wasteCollectorRegistration    YesNo     @relation("wasteCollectorRegistration", fields: [wasteCollectorRegistrationId], references: [id])
+  wasteCollectorName            String    @db.VarChar(255)
   solidWasteReceptacleId        Int
   wasteWaterDisposal            Int
   greyWaterDisposal             Int
   wasteStorageReceptacle        Int
   collectionFrequency           Int
   wasteSorting                  Int
-  binsPicture                   String               @db.VarChar(255)
+  binsPicture                   String    @db.VarChar(255)
   sanitationGeneralRating       Int
   drainsCondition               Int
   receiptsUpToDate              Int
   wasteCollectorRegistrationId  Int
-  pondingEvidence               YesNo                @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
+  pondingEvidence               YesNo     @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
   drainTypeId                   Int
   labourersOfficeAvailabilityId Int
   storeRoomAvailabilityId       Int
-  DrainType                     DrainType            @relation(fields: [drainTypeId], references: [id])
-  sanitaryFacilityType          SanitaryFacilityType @relation(fields: [sanitaryFacilityTypeId], references: [id])
-  labourersOfficeAvailability   YesNo                @relation("labourersOfficeAvailability", fields: [labourersOfficeAvailabilityId], references: [id])
-  storeRoomAvailability         YesNo                @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
+  DrainType                     DrainType @relation(fields: [drainTypeId], references: [id])
+  Facility                      Facility  @relation(fields: [sanitaryFacilityTypeId], references: [id])
+  labourersOfficeAvailability   YesNo     @relation("labourersOfficeAvailability", fields: [labourersOfficeAvailabilityId], references: [id])
+  storeRoomAvailability         YesNo     @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
   toiletAvailability            Int
   urinalAvailability            Int
   bathroomAvailability          Int
@@ -969,28 +969,15 @@ model Logs {
   User      User     @relation(fields: [userId], references: [id])
 }
 
-model HealthFacilityType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// hotel
-// restaurant
-// recreational_facility
-// hostel
-// motel
-// guest_house
-// others
-
-model HospitalityFacilityType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Facility {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  FacilityKind      FacilityKind        @relation(fields: [facilityKindId], references: [id])
+  SanitationSection SanitationSection[]
+  facilityKindId    Int
 }
 
 model SlaughterHouse {
@@ -1093,24 +1080,6 @@ model CommunalContainer {
   goodBadId             Int
 }
 
-// slaughter_house
-// slaughter_slab
-// cemetery
-// transfer_station_waste
-// public_toilet
-// communal_container
-// others
-
-model SanitaryFacilityType {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-
-  deleted           Int?                @default(0)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  SanitationSection SanitationSection[]
-}
-
 model GoodBad {
   id                Int                 @id @default(autoincrement())
   name              String              @db.VarChar(255)
@@ -1119,4 +1088,21 @@ model GoodBad {
   updatedAt         DateTime            @updatedAt
   HygieneSection    HygieneSection[]
   CommunalContainer CommunalContainer[]
+}
+
+model FacilityKind {
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(255)
+  deleted   Int?       @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Facility  Facility[]
+}
+
+model ServiceKind {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
