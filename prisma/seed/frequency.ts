@@ -1,4 +1,4 @@
-export const excretaContainment = [
+export const frequency = [
     {
       name: "Daily",
     },

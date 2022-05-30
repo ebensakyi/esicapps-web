@@ -980,6 +980,16 @@ model Facility {
   facilityKindId    Int
 }
 
+model Service {
+  id             Int          @id @default(autoincrement())
+  name           String       @db.VarChar(255)
+  deleted        Int?         @default(0)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  FacilityKind   FacilityKind @relation(fields: [facilityKindId], references: [id])
+  facilityKindId Int
+}
+
 model SlaughterHouse {
   id                Int               @id @default(autoincrement())
   SanitationSection SanitationSection @relation(fields: [sanitationSectionId], references: [id])
@@ -1097,12 +1107,5 @@ model FacilityKind {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   Facility  Facility[]
-}
-
-model ServiceKind {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  Service   Service[]
 }
