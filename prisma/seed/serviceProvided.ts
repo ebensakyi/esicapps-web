@@ -1,19 +1,40 @@
 export const serviceProvided = [
     {
-      name: "Safe",
+      name: "Outpatient",
     },
     {
-      name: "Unsafe",
+      name: "Inpatient",
+    },
+    {
+      name: "Surgical",
+    },
+    {
+      name: "Mortuary",
+    },
+    {
+      name: "Maternity",
+    },
+    {
+      name: "Undertaking",
+    },
+    
+    {
+      name: "Alternative health care",
+    },
+    {
+      name: "Veterinary",
+    },
+    {
+      name: "Others",
     },
   ];
   
-  Outpatient
-Inpatient
-Surgical
-Maternity
-Undertaking
-Mortuary
+  
 
-Alternative health care
-Veterinary
-Others (Specify)
+
+
+
+
+
+
+
