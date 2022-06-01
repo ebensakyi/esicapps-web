@@ -1,6 +1,6 @@
 export const waterTreatmentType = [
     {
-      name: "",
+      name: "_",
     },
    
   ];
