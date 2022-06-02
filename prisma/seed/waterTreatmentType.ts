@@ -1,7 +1,13 @@
 export const waterTreatmentType = [
     {
-      name: "_",
+      name: "Not Applicable",
     },
-   
+    {
+      name: "Filtration",
+    }, {
+      name: "Boiling",
+    }, {
+      name: "Others",
+    },
   ];
-  
+

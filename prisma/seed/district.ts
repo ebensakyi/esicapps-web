@@ -1,4 +1,4 @@
-export const condition = [
+export const district = [
   {
     name: "Kept",
   },

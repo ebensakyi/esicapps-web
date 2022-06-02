@@ -1,7 +1,9 @@
 export const yesNo = [
     {
-      name: "",
+      name: "Yes",
     },
-   
+    {
+      name: "No",
+    },
   ];
   
