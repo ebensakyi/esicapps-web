@@ -922,15 +922,12 @@ const Header = () => {
                 <a
                   className="nav-link menu-link"
                   href="#sidebarDashboards"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarDashboards"
+                 
                 >
-                  <i className="ri-dashboard-2-line" />{" "}
-                  <span data-key="t-dashboards">Dashboards</span>
+                  <i className="ri-home-2-line" />{" "}
+                  <span data-key="t-dashboards">Dashboard</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarDashboards">
+                {/* <div className="collapse menu-dropdown" id="sidebarDashboards">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
@@ -979,24 +976,21 @@ const Header = () => {
                   >
                     Projects
                   </a>
-                </li>*/}
+                </li>*
                   </ul>
-                </div>
+                </div> */}
               </li>{" "}
               {/* end Dashboard Menu */}
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#sidebarApps"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarApps"
+               
                 >
                   <i className="ri-apps-2-line" />{" "}
                   <span data-key="t-apps">Data</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarApps">
+                {/* <div className="collapse menu-dropdown" id="sidebarApps">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
@@ -1029,7 +1023,7 @@ const Header = () => {
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </li>
               <li className="nav-item">
                 <a
@@ -1461,24 +1455,19 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link menu-link" href="widgets.html">
                   <i className=" ri-shield-user-line" />{" "}
                   <span data-key="t-widgets">Profile</span>
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <a className="nav-link menu-link" href="widgets.html">
                   <i className="ri-honour-line" />{" "}
                   <span data-key="t-widgets">Logs</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link menu-link" href="widgets.html">
-                  <i className="ri-honour-line" />{" "}
-                  <span data-key="t-widgets">Logout</span>
-                </a>
-              </li>
+             
             </ul>
           </div>
           {/* Sidebar */}
