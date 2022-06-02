@@ -5,3 +5,8 @@ export const waterSupplyType = [
    
   ];
   
+  In-Household connection
+Public stand pipe
+Tanker or water vendors
+Yard connection
+Others (specify)

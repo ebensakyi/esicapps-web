@@ -1,7 +1,20 @@
 export const waterStorageType = [
     {
-      name: "",
+      name: "Open container",
     },
-   
+    {
+      name: "Close container",
+    },
+    {
+      name: "Underground reservoir",
+    },
+    {
+      name: "Overhead Reservoir",
+    },
+    {
+      name: "Others",
+    },
   ];
   
+
+
