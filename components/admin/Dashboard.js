@@ -90,7 +90,7 @@ const Dashboard = () => {
                                                 <div className="d-flex align-items-center">
                                                     <div className="flex-grow-1 overflow-hidden">
                                                         <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                                            Total Earnings
+                                                            Residential
                                                         </p>
                                                     </div>
                                                     <div className="flex-shrink-0">
@@ -103,19 +103,31 @@ const Dashboard = () => {
                                                 <div className="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
                                                         <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                                            $
+                                                            {/* $ */}
                                                             <span className="counter-value" data-target="559.25">
-                                                                0
+                                                                1,000
                                                             </span>
-                                                            k
+                                                            {/* k */}
                                                         </h4>
                                                         <a href="#" className="text-decoration-underline">
-                                                            View net earnings
+                                                            Baseline
+                                                        </a>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                500
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Re-inspection
                                                         </a>
                                                     </div>
                                                     <div className="avatar-sm flex-shrink-0">
                                                         <span className="avatar-title bg-soft-success rounded fs-3">
-                                                            <i className="bx bx-dollar-circle text-success" />
+                                                            <i className="bx bx-home-circle text-success" />
                                                         </span>
                                                     </div>
                                                 </div>
@@ -124,7 +136,6 @@ const Dashboard = () => {
                                         </div>
                                         {/* end card */}
                                     </div>
-                                    {/* end col */}
                                     <div className="col-xl-3 col-md-6">
                                         {/* card */}
                                         <div className="card card-animate">
@@ -132,71 +143,256 @@ const Dashboard = () => {
                                                 <div className="d-flex align-items-center">
                                                     <div className="flex-grow-1 overflow-hidden">
                                                         <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                                            Orders
-                                                        </p>
-                                                    </div>
-                                                    <div className="flex-shrink-0">
-                                                        <h5 className="text-danger fs-14 mb-0">
-                                                            <i className="ri-arrow-right-down-line fs-13 align-middle" />
-                                                            -3.57 %
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                                <div className="d-flex align-items-end justify-content-between mt-4">
-                                                    <div>
-                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                                            <span className="counter-value" data-target={36894}>
-                                                                0
-                                                            </span>
-                                                        </h4>
-                                                        <a href="#" className="text-decoration-underline">
-                                                            View all orders
-                                                        </a>
-                                                    </div>
-                                                    <div className="avatar-sm flex-shrink-0">
-                                                        <span className="avatar-title bg-soft-info rounded fs-3">
-                                                            <i className="bx bx-shopping-bag text-info" />
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* end card body */}
-                                        </div>
-                                        {/* end card */}
-                                    </div>
-                                    {/* end col */}
-                                    <div className="col-xl-3 col-md-6">
-                                        {/* card */}
-                                        <div className="card card-animate">
-                                            <div className="card-body">
-                                                <div className="d-flex align-items-center">
-                                                    <div className="flex-grow-1 overflow-hidden">
-                                                        <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                                            Customers
+                                                            Eatery
                                                         </p>
                                                     </div>
                                                     <div className="flex-shrink-0">
                                                         <h5 className="text-success fs-14 mb-0">
                                                             <i className="ri-arrow-right-up-line fs-13 align-middle" />
-                                                            +29.08 %
+                                                            +16.24 %
                                                         </h5>
                                                     </div>
                                                 </div>
                                                 <div className="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
                                                         <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                                            <span className="counter-value" data-target="183.35">
-                                                                0
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                1,000
                                                             </span>
-                                                            M
+                                                            {/* k */}
                                                         </h4>
                                                         <a href="#" className="text-decoration-underline">
-                                                            See details
+                                                            Baseline
+                                                        </a>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                500
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Re-inspection
+                                                        </a>
+                                                    </div>
+                                                    <div className="avatar-sm flex-shrink-0">
+                                                        <span className="avatar-title bg-soft-primary rounded fs-3">
+                                                            <i className="bx bx-bowl-hot text-primary" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* end card body */}
+                                        </div>
+                                        {/* end card */}
+                                    </div>
+                                    <div className="col-xl-3 col-md-6">
+                                        {/* card */}
+                                        <div className="card card-animate">
+                                            <div className="card-body">
+                                                <div className="d-flex align-items-center">
+                                                    <div className="flex-grow-1 overflow-hidden">
+                                                        <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                            Institution
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <h5 className="text-success fs-14 mb-0">
+                                                            <i className="ri-arrow-right-up-line fs-13 align-middle" />
+                                                            +16.24 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                1,000
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Baseline
+                                                        </a>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                500
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Re-inspection
                                                         </a>
                                                     </div>
                                                     <div className="avatar-sm flex-shrink-0">
                                                         <span className="avatar-title bg-soft-warning rounded fs-3">
-                                                            <i className="bx bx-user-circle text-warning" />
+                                                            <i className=" bx bx-buildings text-warning" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* end card body */}
+                                        </div>
+                                        {/* end card */}
+                                    </div>
+                                    <div className="col-xl-3 col-md-6">
+                                        {/* card */}
+                                        <div className="card card-animate">
+                                            <div className="card-body">
+                                                <div className="d-flex align-items-center">
+                                                    <div className="flex-grow-1 overflow-hidden">
+                                                        <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                            Industry
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <h5 className="text-success fs-14 mb-0">
+                                                            <i className="ri-arrow-right-up-line fs-13 align-middle" />
+                                                            +16.24 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                1,000
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Baseline
+                                                        </a>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                500
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Re-inspection
+                                                        </a>
+                                                    </div>
+                                                    <div className="avatar-sm flex-shrink-0">
+                                                        <span className="avatar-title bg-soft-danger rounded fs-3">
+                                                            <i className="bx bx-wrench text-danger" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* end card body */}
+                                        </div>
+                                        {/* end card */}
+                                    </div>
+                                    <div className="col-xl-3 col-md-6">
+                                        {/* card */}
+                                        <div className="card card-animate">
+                                            <div className="card-body">
+                                                <div className="d-flex align-items-center">
+                                                    <div className="flex-grow-1 overflow-hidden">
+                                                        <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                            Healthcare
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <h5 className="text-success fs-14 mb-0">
+                                                            <i className="ri-arrow-right-up-line fs-13 align-middle" />
+                                                            +16.24 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                1,000
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Baseline
+                                                        </a>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                500
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Re-inspection
+                                                        </a>
+                                                    </div>
+                                                    <div className="avatar-sm flex-shrink-0">
+                                                        <span className="avatar-title bg-soft-danger rounded fs-3">
+                                                            <i className="bx bx-wrench text-danger" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* end card body */}
+                                        </div>
+                                        {/* end card */}
+                                    </div>
+                                    <div className="col-xl-3 col-md-6">
+                                        {/* card */}
+                                        <div className="card card-animate">
+                                            <div className="card-body">
+                                                <div className="d-flex align-items-center">
+                                                    <div className="flex-grow-1 overflow-hidden">
+                                                        <p className="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                            Hospitality
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex-shrink-0">
+                                                        <h5 className="text-success fs-14 mb-0">
+                                                            <i className="ri-arrow-right-up-line fs-13 align-middle" />
+                                                            +16.24 %
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                1,000
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Baseline
+                                                        </a>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                            {/* $ */}
+                                                            <span className="counter-value" data-target="559.25">
+                                                                500
+                                                            </span>
+                                                            {/* k */}
+                                                        </h4>
+                                                        <a href="#" className="text-decoration-underline">
+                                                            Re-inspection
+                                                        </a>
+                                                    </div>
+                                                    <div className="avatar-sm flex-shrink-0">
+                                                        <span className="avatar-title bg-soft-danger rounded fs-3">
+                                                            <i className="bx bx-wrench text-danger" />
                                                         </span>
                                                     </div>
                                                 </div>
