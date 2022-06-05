@@ -10,17 +10,19 @@ export default function Document() {
       data-sidebar-size="lg"
     >
       <Head>
+  <link
+          href="/assets/libs/swiper/swiper-bundle.min.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+
         <link
           href="/assets/libs/jsvectormap/css/jsvectormap.min.css"
           rel="stylesheet"
           type="text/css"
         />
 
-        <link
-          href="/assets/libs/swiper/swiper-bundle.min.css"
-          rel="stylesheet"
-          type="text/css"
-        />
+      
 
         <script src="/assets/js/layout.js"></script>
         <link
