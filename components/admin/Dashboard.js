@@ -93,7 +93,7 @@ const Dashboard = () => {
                       className="carousel slide"
                       data-bs-ride="carousel"
                     >
-                      <ol className="carousel-indicators">
+                      {/* <ol className="carousel-indicators">
                         <li
                           data-bs-target="#carouselExampleIndicators"
                           data-bs-slide-to={0}
@@ -110,7 +110,7 @@ const Dashboard = () => {
                           className="active"
                           aria-current="true"
                         />
-                      </ol>
+                      </ol> */}
                       <div className="carousel-inner" role="listbox">
                         <div className="carousel-item active">
                           <div className="row">
