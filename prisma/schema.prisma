@@ -41,6 +41,7 @@ model InspectionForm {
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
   Service    Service[]
+  Facility   Facility[]
 }
 
 model Inspection {
@@ -235,13 +236,22 @@ model FacilitySection {
   RespondentDesignation RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
   Inspection            Inspection            @relation(fields: [inspectionId], references: [id])
 
-
-  EateryType EateryType[]
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  YesNo      YesNo?       @relation(fields: [yesNoId], references: [id])
-  yesNoId    Int?
+  ////////////////////check////////////
+  soundProof           YesNo        @relation("soundProof", fields: [soundProofId], references: [id])
+  disabilityFriendly   YesNo        @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
+  multipleExit         YesNo        @relation("multipleExit", fields: [multipleExitId], references: [id])
+  ablutionSlab         YesNo        @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
+  soundProofId         Int
+  disabilityFriendlyId Int
+  multipleExitId       Int
+  ablutionSlabId       Int
+  /////////////////////end check/////////
+  EateryType           EateryType[]
+  deleted              Int?         @default(0)
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  YesNo                YesNo?       @relation(fields: [yesNoId], references: [id])
+  yesNoId              Int?
 }
 
 model AnimalRearing {
@@ -523,21 +533,14 @@ model InstitutionType {
 // undertaking
 // mortuary
 model Institution {
-  id                   Int             @id @default(autoincrement())
-  name                 String          @db.VarChar(255)
-  soundProof           YesNo           @relation("soundProof", fields: [soundProofId], references: [id])
-  disabilityFriendly   YesNo           @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
-  multipleExit         YesNo           @relation("multipleExit", fields: [multipleExitId], references: [id])
-  ablutionSlab         YesNo           @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
-  soundProofId         Int
-  disabilityFriendlyId Int
-  multipleExitId       Int
-  ablutionSlabId       Int
-  deleted              Int?            @default(0)
-  createdAt            DateTime        @default(now())
-  updatedAt            DateTime        @updatedAt
-  InstitutionType      InstitutionType @relation(fields: [institutionTypeId], references: [id])
-  institutionTypeId    Int
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted           Int?            @default(0)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  InstitutionType   InstitutionType @relation(fields: [institutionTypeId], references: [id])
+  institutionTypeId Int
 }
 
 model HealthServices {
@@ -853,10 +856,10 @@ model YesNo {
   safeConditionUncooked HygieneSection[] @relation("safeConditionUncooked")
   safeConditionCooked   HygieneSection[] @relation("safeConditionCooked")
 
-  soundProof         Institution[] @relation("soundProof")
-  disabilityFriendly Institution[] @relation("disabilityFriendly")
-  multipleExit       Institution[] @relation("multipleExit")
-  ablutionSlab       Institution[] @relation("ablutionSlab")
+  soundProof         FacilitySection[] @relation("soundProof")
+  disabilityFriendly FacilitySection[] @relation("disabilityFriendly")
+  multipleExit       FacilitySection[] @relation("multipleExit")
+  ablutionSlab       FacilitySection[] @relation("ablutionSlab")
 
 
 
@@ -998,10 +1001,12 @@ model Logs {
 model Facility {
   id                Int                 @id @default(autoincrement())
   name              String              @db.VarChar(255)
+  InspectionForm    InspectionForm      @relation(fields: [inspectionFormId], references: [id])
   deleted           Int?                @default(0)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   SanitationSection SanitationSection[]
+  inspectionFormId  Int
 }
 
 model Service {

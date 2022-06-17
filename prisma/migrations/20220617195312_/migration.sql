@@ -94,6 +94,10 @@ CREATE TABLE "FacilitySection" (
     "urinalAvailabilityId" INTEGER NOT NULL,
     "bathRoomAvailabilityId" INTEGER NOT NULL,
     "separateWardId" INTEGER NOT NULL,
+    "soundProofId" INTEGER NOT NULL,
+    "disabilityFriendlyId" INTEGER NOT NULL,
+    "multipleExitId" INTEGER NOT NULL,
+    "ablutionSlabId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -295,10 +299,6 @@ CREATE TABLE "InstitutionType" (
 CREATE TABLE "Institution" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    "soundProofId" INTEGER NOT NULL,
-    "disabilityFriendlyId" INTEGER NOT NULL,
-    "multipleExitId" INTEGER NOT NULL,
-    "ablutionSlabId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -707,6 +707,7 @@ CREATE TABLE "Facility" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
 
     CONSTRAINT "Facility_pkey" PRIMARY KEY ("id")
 );
@@ -874,6 +875,18 @@ ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_urinalAvailability
 
 -- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_soundProofId_fkey" FOREIGN KEY ("soundProofId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_disabilityFriendlyId_fkey" FOREIGN KEY ("disabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_multipleExitId_fkey" FOREIGN KEY ("multipleExitId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_ablutionSlabId_fkey" FOREIGN KEY ("ablutionSlabId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_yesNoId_fkey" FOREIGN KEY ("yesNoId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1050,18 +1063,6 @@ ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_inspectionId_f
 ALTER TABLE "Institution" ADD CONSTRAINT "Institution_institutionTypeId_fkey" FOREIGN KEY ("institutionTypeId") REFERENCES "InstitutionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Institution" ADD CONSTRAINT "Institution_soundProofId_fkey" FOREIGN KEY ("soundProofId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Institution" ADD CONSTRAINT "Institution_disabilityFriendlyId_fkey" FOREIGN KEY ("disabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Institution" ADD CONSTRAINT "Institution_multipleExitId_fkey" FOREIGN KEY ("multipleExitId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Institution" ADD CONSTRAINT "Institution_ablutionSlabId_fkey" FOREIGN KEY ("ablutionSlabId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "IndustryConsumable" ADD CONSTRAINT "IndustryConsumable_consumableTypeId_fkey" FOREIGN KEY ("consumableTypeId") REFERENCES "ConsumableType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -1075,6 +1076,9 @@ ALTER TABLE "HospitalityServicesProvided" ADD CONSTRAINT "HospitalityServicesPro
 
 -- AddForeignKey
 ALTER TABLE "Logs" ADD CONSTRAINT "Logs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Facility" ADD CONSTRAINT "Facility_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Service" ADD CONSTRAINT "Service_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

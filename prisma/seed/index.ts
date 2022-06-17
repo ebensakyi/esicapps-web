@@ -4,6 +4,9 @@ const prisma = new PrismaClient();
 import { userType } from "./userType";
 
 import { region } from "./region";
+import { inspectionForm} from "./inspectionForm";
+import { institution} from "./institution";
+import { institutionType} from "./institutionType";
 
 import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
 import { community } from "./community";
@@ -30,11 +33,26 @@ import { waterSupplyType } from "./waterSupplyType";
 import { waterTreatmentType } from "./waterTreatmentType";
 import { yesNo } from "./yesNo";
 import { zone } from "./zone";
+
+
 async function main() {
+
+  await prisma.inspectionForm.createMany({
+    data: inspectionForm,
+  });
+
+  await prisma.institutionType.createMany({
+    data: institutionType,
+  });
+  await prisma.inspectionType.createMany({
+    data: inspectionType,
+  });
   await prisma.userType.createMany({
     data: userType,
   });
-
+  await prisma.institution.createMany({
+    data: institution,
+  });
   await prisma.region.createMany({
     data: region,
   });
@@ -71,9 +89,7 @@ async function main() {
   await prisma.frequency.createMany({
     data: frequency,
   });
-  await prisma.inspectionType.createMany({
-    data: inspectionType,
-  });
+
   await prisma.safeUnsafe.createMany({
     data: safeUnsafe,
   });

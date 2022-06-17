@@ -77,7 +77,7 @@ export const facility = [
   },
   {
     name: "Chop bar",
-    facilityKindId: 3,
+    inspectionFormId: 3,
   },
   {
     name: "Table top",
