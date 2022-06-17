@@ -40,6 +40,7 @@ model InspectionForm {
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
+  Service    Service[]
 }
 
 model Inspection {
@@ -619,8 +620,10 @@ model Role {
 }
 
 model Region {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255)
+  abbrv String @db.VarChar(10)
+
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -728,6 +731,7 @@ model ExcretaDisposalMethod {
 
 model WaterSourceType {
   id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
   deleted      Int?           @default(0)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -736,6 +740,7 @@ model WaterSourceType {
 
 model Condition {
   id            Int             @id @default(autoincrement())
+  name          String          @db.VarChar(255)
   deleted       Int?            @default(0)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
@@ -745,6 +750,7 @@ model Condition {
 
 model WaterSupplyType {
   id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
   deleted      Int?           @default(0)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -753,6 +759,7 @@ model WaterSupplyType {
 
 model WaterStorageType {
   id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
   deleted      Int?           @default(0)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -761,6 +768,7 @@ model WaterStorageType {
 
 model WaterTreatmentType {
   id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
   deleted      Int?           @default(0)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -907,6 +915,7 @@ model RespondentDesignation {
 
 model DrainType {
   id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
   deleted           Int?                @default(0)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
@@ -959,6 +968,23 @@ model HospitalityService {
   updatedAt DateTime @updatedAt
 }
 
+// model ServiceType {
+//   id        Int      @id @default(autoincrement())
+//   name      String   @db.VarChar(255)
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model Service {
+//   id          Int         @id @default(autoincrement())
+//   name        String      @db.VarChar(255)
+//   ServiceType ServiceType
+//   deleted     Int?        @default(0)
+//   createdAt   DateTime    @default(now())
+//   updatedAt   DateTime    @updatedAt
+// }
+
 model Logs {
   id        Int      @id @default(autoincrement())
   userId    Int
@@ -975,29 +1001,27 @@ model Facility {
   deleted           Int?                @default(0)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
-  FacilityKind      FacilityKind        @relation(fields: [facilityKindId], references: [id])
   SanitationSection SanitationSection[]
-  facilityKindId    Int
 }
 
 model Service {
-  id             Int          @id @default(autoincrement())
-  name           String       @db.VarChar(255)
-  deleted        Int?         @default(0)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  FacilityKind   FacilityKind @relation(fields: [facilityKindId], references: [id])
-  facilityKindId Int
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  inspectionFormId Int
+
 }
 
 model SlaughterHouse {
-  id                Int               @id @default(autoincrement())
-  SanitationSection SanitationSection @relation(fields: [sanitationSectionId], references: [id])
-  name              String            @db.VarChar(255)
-
-  deleted                                 Int?     @default(0)
-  createdAt                               DateTime @default(now())
-  updatedAt                               DateTime @updatedAt
+  id                                      Int               @id @default(autoincrement())
+  SanitationSection                       SanitationSection @relation(fields: [sanitationSectionId], references: [id])
+  name                                    String            @db.VarChar(255)
+  deleted                                 Int?              @default(0)
+  createdAt                               DateTime          @default(now())
+  updatedAt                               DateTime          @updatedAt
   sanitationSectionId                     Int
   slaughterRoomsAvailableId               Int
   condemnationRoomAvailableId             Int
@@ -1100,12 +1124,12 @@ model GoodBad {
   CommunalContainer CommunalContainer[]
 }
 
-model FacilityKind {
-  id        Int        @id @default(autoincrement())
-  name      String     @db.VarChar(255)
-  deleted   Int?       @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Facility  Facility[]
-  Service   Service[]
-}
+// model FacilityKind {
+//   id        Int        @id @default(autoincrement())
+//   name      String     @db.VarChar(255)
+//   deleted   Int?       @default(0)
+//   createdAt DateTime   @default(now())
+//   updatedAt DateTime   @updatedAt
+//   Facility  Facility[]
+//   Service   Service[]
+// }

@@ -9,71 +9,71 @@
 export const facility = [
   {
     name: "Hospital",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Polyclinic",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Clinic",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Maternity unit",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Mortuary",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Alternative health care",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Pharmacy",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Chemical shop",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Funeral home",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Veterinary clinic",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "CHP Compound",
-    facilityKindId: 1,
+    inspectionFormId: 1,
   },
   {
     name: "Hotel",
-    facilityKindId: 2,
+    inspectionFormId: 2,
   },
   {
     name: "Restaurant",
-    facilityKindId: 2,
+    inspectionFormId: 2,
   },
   {
     name: "Recreational facility",
-    facilityKindId: 2,
+    inspectionFormId: 2,
   },
   {
     name: "Hostel",
-    facilityKindId: 2,
+    inspectionFormId: 2,
   },
   {
     name: "Motel",
-    facilityKindId: 2,
+    inspectionFormId: 2,
   },
   {
     name: "Guest House",
-    facilityKindId: 2,
+    inspectionFormId: 2,
   },
   {
     name: "Chop bar",
@@ -81,9 +81,10 @@ export const facility = [
   },
   {
     name: "Table top",
-    facilityKindId: 3,
+    inspectionFormId: 3,
   },
   {
     name: "Others",
+    inspectionFormId:3
   },
 ];
