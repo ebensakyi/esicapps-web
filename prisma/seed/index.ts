@@ -33,6 +33,7 @@ import { waterSupplyType } from "./waterSupplyType";
 import { waterTreatmentType } from "./waterTreatmentType";
 import { yesNo } from "./yesNo";
 import { zone } from "./zone";
+import { goodBad } from "./goodBad";
 
 
 async function main() {
@@ -84,6 +85,10 @@ async function main() {
 
   await prisma.facility.createMany({
     data: facility,
+  });
+
+  await prisma.goodBad.createMany({
+    data: goodBad,
   });
 
   await prisma.frequency.createMany({
