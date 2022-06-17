@@ -172,7 +172,7 @@ model LocationSection {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   districtId    Int
-  subDistrictId Int
+  subdistrictId Int
   zoneId        Int
   userId        Int
   communityId   Int
@@ -183,7 +183,7 @@ model LocationSection {
 
   Community         Community        @relation(fields: [communityId], references: [id])
   District          District         @relation(fields: [districtId], references: [id])
-  SubDistrict       SubDistrict      @relation(fields: [subDistrictId], references: [id])
+  Subdistrict       Subdistrict      @relation(fields: [subdistrictId], references: [id])
   Zone              Zone             @relation(fields: [zoneId], references: [id])
   User              User             @relation(fields: [userId], references: [id])
   Inspection        Inspection       @relation(fields: [inspectionId], references: [id])
@@ -650,7 +650,7 @@ model Community {
   LocationSection LocationSection[]
 }
 
-model SubDistrict {
+model Subdistrict {
   id              Int               @id @default(autoincrement())
   name            String            @db.VarChar(255)
   deleted         Int?              @default(0)

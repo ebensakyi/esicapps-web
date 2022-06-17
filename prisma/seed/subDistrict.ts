@@ -1,4 +1,4 @@
-export const subDistrict = [
+export const subdistrict = [
     {
       name: "",
     },
