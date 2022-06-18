@@ -24,7 +24,7 @@ import { respondentDesignation } from "./respondentDesignation";
 import { safeUnsafe } from "./safeUnsafe";
 import { solidWasteReceptacle } from "./solidWasteReceptacle";
 import { storageCondition } from "./storageCondition";
-import { subDistrict } from "./subDistrict";
+import { subdistrict } from "./subdistrict";
 import { toiletType } from "./toiletType";
 import { waterSourceType } from "./waterSourceType";
 
@@ -111,8 +111,8 @@ async function main() {
   await prisma.storageCondition.createMany({
     data: storageCondition,
   });
-  await prisma.subDistrict.createMany({
-    data: subDistrict,
+  await prisma.subdistrict.createMany({
+    data: subdistrict,
   });
 
   await prisma.toiletType.createMany({

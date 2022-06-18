@@ -5,22 +5,22 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const drainType = await prisma.drainType.create({ data });
+    const facility = await prisma.facility.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { drainType } });
+      .json({ statusCode: 1, message: "Data saved", data: { facility } });
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "drainType prefix should be unique" });
+        .json({ statusCode: 0, message: "facility prefix should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const drainType = await prisma.drainType.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: drainType });
+    const facility = await prisma.facility.findMany({ where: { deleted: 0 } });
+    return res.status(200).json({ statusCode: 1, data: facility });
   } catch (error) {
     console.log("Error: " + error);
   }
