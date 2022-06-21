@@ -20,7 +20,9 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const waterStorageType = await prisma.waterStorageType.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: waterStorageType });
+    // return res.status(200).json({ statusCode: 1, data: waterStorageType });
+    return res.status(200).json(waterStorageType);
+
   } catch (error) {
     console.log("Error: " + error);
   }

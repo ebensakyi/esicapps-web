@@ -20,7 +20,9 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const respondentDesignation = await prisma.respondentDesignation.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: respondentDesignation });
+   // return res.status(200).json({ statusCode: 1, data: respondentDesignation });
+   return res.status(200).json(respondentDesignation);
+
   } catch (error) {
     console.log("Error: " + error);
   }
