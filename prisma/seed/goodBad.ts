@@ -1,9 +1,9 @@
-export const goodBad = [
-    {
-      name: "Good",
-    },
-    {
-      name: "Bad",
-    },
-  ];
+// export const goodBad = [
+//     {
+//       name: "Good",
+//     },
+//     {
+//       name: "Bad",
+//     },
+//   ];
   

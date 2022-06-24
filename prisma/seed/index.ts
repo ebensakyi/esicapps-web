@@ -21,7 +21,6 @@ import { frequency } from "./frequency";
 import { inspectionType } from "./inspectionType";
 import { service } from "./service";
 import { respondentDesignation } from "./respondentDesignation";
-import { safeUnsafe } from "./safeUnsafe";
 import { solidWasteReceptacle } from "./solidWasteReceptacle";
 import { storageCondition } from "./storageCondition";
 import { subdistrict } from "./subdistrict";
@@ -33,7 +32,6 @@ import { waterSupplyType } from "./waterSupplyType";
 import { waterTreatmentType } from "./waterTreatmentType";
 import { yesNo } from "./yesNo";
 import { zone } from "./zone";
-import { goodBad } from "./goodBad";
 import { greyWaterDisposal } from "./greyWaterDisposal";
 import { wasteCollectionType } from "./wasteCollectionType";
 import { nuisance } from "./nuisance";
@@ -91,17 +89,12 @@ async function main() {
     data: facility,
   });
 
-  await prisma.goodBad.createMany({
-    data: goodBad,
-  });
 
   await prisma.frequency.createMany({
     data: frequency,
   });
 
-  await prisma.safeUnsafe.createMany({
-    data: safeUnsafe,
-  });
+
   await prisma.respondentDesignation.createMany({
     data: respondentDesignation,
   });
