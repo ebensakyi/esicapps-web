@@ -5,22 +5,24 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const solidWasteReceptacle = await prisma.solidWasteReceptacle.create({ data });
+    const nuisance = await prisma.nuisance.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { solidWasteReceptacle } });
+      .json({ statusCode: 1, message: "Data saved", data: { nuisance } });
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "solidWasteReceptacle prefix should be unique" });
+        .json({ statusCode: 0, message: "nuisance prefix should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const solidWasteReceptacle = await prisma.solidWasteReceptacle.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: solidWasteReceptacle });
+    const nuisance = await prisma.nuisance.findMany({ where: { deleted: 0 } });
+    //return res.status(200).json({ statusCode: 1, data: nuisance });
+    return res.status(200).json( nuisance);
+
   } catch (error) {
     console.log("Error: " + error);
   }

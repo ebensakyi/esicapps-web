@@ -633,6 +633,17 @@ CREATE TABLE "RespondentDesignation" (
 );
 
 -- CreateTable
+CREATE TABLE "WasteCollectionType" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "WasteCollectionType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "DrainType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -641,6 +652,39 @@ CREATE TABLE "DrainType" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "DrainType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Nuisance" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Nuisance_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Action" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Action_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "GreyWaterDisposal" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "GreyWaterDisposal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

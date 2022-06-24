@@ -20,7 +20,9 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const drainType = await prisma.drainType.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: drainType });
+    //return res.status(200).json({ statusCode: 1, data: drainType });
+    return res.status(200).json(drainType);
+
   } catch (error) {
     console.log("Error: " + error);
   }

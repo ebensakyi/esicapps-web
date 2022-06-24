@@ -5,24 +5,24 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const greyWaterDisposal = await prisma.greyWaterDisposal.create({ data });
+    const wasteCollectionType = await prisma.wasteCollectionType.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { greyWaterDisposal } });
+      .json({ statusCode: 1, message: "Data saved", data: { wasteCollectionType } });
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "greyWaterDisposal prefix should be unique" });
+        .json({ statusCode: 0, message: "wasteCollectionType prefix should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const greyWaterDisposal = await prisma.greyWaterDisposal.findMany({ where: { deleted: 0 } });
-   // return res.status(200).json({ statusCode: 1, data: greyWaterDisposal });
+    const wasteCollectionType = await prisma.wasteCollectionType.findMany({ where: { deleted: 0 } });
+    //return res.status(200).json({ statusCode: 1, data: wasteCollectionType });
+    return res.status(200).json(wasteCollectionType);
 
-    return res.status(200).json(greyWaterDisposal);
   } catch (error) {
     console.log("Error: " + error);
   }
