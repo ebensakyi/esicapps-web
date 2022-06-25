@@ -2,9 +2,10 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    const data = {
-      name: req.body.data.name,
-    };
+    // const data = {
+    //   name: req.body,
+    // };
+    console.log(req.body);
     ///Save facility section, population, water, sanitation, hygiene, conclusion, picture
     // const action = await prisma.action.create({ data });
     // res
@@ -19,7 +20,7 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
-//   try {
+   try {
 //     const action = await prisma.action.findMany({ where: { deleted: 0 } });
 //     //return res.status(200).json({ statusCode: 1, data: action });
 //     return res.status(200).json( action);

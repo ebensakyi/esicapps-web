@@ -433,8 +433,6 @@ model YesNo {
   urinalAvailability   FacilitySection[] @relation("urinalAvailability")
   bathRoomAvailability FacilitySection[] @relation("bathRoomAvailability")
 
-  PopulationSection PopulationSection[]
-
 
 
   pestSigns               HygieneSection[] @relation("pestSigns")
@@ -472,9 +470,9 @@ model YesNo {
   wasteCollectorRegistration            SanitationSection[]    @relation("wasteCollectorRegistration")
   pondingEvidence                       SanitationSection[]    @relation("pondingEvidence")
 
-
   IndustryConsumable IndustryConsumable[]
   WaterSection       WaterSection[]
+
 }
 
 model StorageCondition {
@@ -740,12 +738,11 @@ model FacilitySection {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   districtId    Int
-  subdistrictId Int
-  zoneId        Int
-  userId        Int
-  communityId   Int
+  subdistrictId Int?
+  zoneId        Int?
+  communityId   Int?
   community     String   @db.VarChar(255)
-  ghanaPostGps  String   @db.VarChar(255)
+  ghanaPostGps  String?  @db.VarChar(255)
   latitude      String   @db.VarChar(255)
   longitude     String   @db.VarChar(255)
 
@@ -755,81 +752,83 @@ model FacilitySection {
   respondentDesignationId Int
 
   approvedHandwashingFacilityAvailabilityId Int
-  protectiveClothingId                      Int
-  firstAidAvailabilityId                    Int
+  protectiveClothingId                      Int?
+  firstAidAvailabilityId                    Int?
   drainsAvailabilityId                      Int
   toiletAvailabilityId                      Int
   urinalAvailabilityId                      Int
   bathRoomAvailabilityId                    Int
-  separateWardId                            Int
+  separateWardId                            Int?
 
   ////////////////////check////////////
 
-  soundProofId         Int
-  disabilityFriendlyId Int
-  multipleExitId       Int
-  ablutionSlabId       Int
+  soundProofId         Int?
+  disabilityFriendlyId Int?
+  multipleExitId       Int?
+  ablutionSlabId       Int?
   /////////////////////end check/////////
 
-  businessLicenceAvailabilityId       Int
-  medicalCertAvailabilityId           Int
-  operatingLicenceAvailabilityId      Int
-  propertyRateAvailabilityId          Int
-  structurePermitAvailabilityId       Int
-  habitationCertificateAvailabilityId Int
-  fumigationCertificateAvailabilityId Int
-  medicalCertificateAvailabilityId    Int
+  businessLicenceAvailabilityId       Int?
+  medicalCertAvailabilityId           Int?
+  operatingLicenceAvailabilityId      Int?
+  propertyRateAvailabilityId          Int?
+  structurePermitAvailabilityId       Int?
+  habitationCertificateAvailabilityId Int?
+  fumigationCertificateAvailabilityId Int?
+  medicalCertificateAvailabilityId    Int?
 
 
   buildingPermitId Int
 
   labourersOfficeAvailabilityId Int
-  storeRoomAvailabilityId       Int
+  storeRoomAvailabilityId       Int?
 
-  separateWard          YesNo                 @relation("separateWard", fields: [separateWardId], references: [id])
+  separateWard          YesNo?                 @relation("separateWard", fields: [separateWardId], references: [id])
   EateryType            EateryType[]
   RespondentDesignation RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
-  Community             Community             @relation(fields: [communityId], references: [id])
+  Community             Community?            @relation(fields: [communityId], references: [id])
   District              District              @relation(fields: [districtId], references: [id])
-  Subdistrict           Subdistrict           @relation(fields: [subdistrictId], references: [id])
-  Zone                  Zone                  @relation(fields: [zoneId], references: [id])
-  User                  User                  @relation(fields: [userId], references: [id])
+  Subdistrict           Subdistrict?          @relation(fields: [subdistrictId], references: [id])
+  Zone                  Zone?                 @relation(fields: [zoneId], references: [id])
   Inspection            Inspection            @relation(fields: [inspectionId], references: [id])
 
   labourersOfficeAvailability YesNo @relation("labourersOfficeAvailability", fields: [labourersOfficeAvailabilityId], references: [id])
-  storeRoomAvailability       YesNo @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
+  storeRoomAvailability       YesNo? @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
 
-  protectiveClothing   YesNo @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
-  firstAidAvailability YesNo @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
-  drainsAvailability   YesNo @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability   YesNo @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability   YesNo @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability YesNo @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  protectiveClothing   YesNo? @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  firstAidAvailability YesNo? @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  drainsAvailability   YesNo  @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  toiletAvailability   YesNo  @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability   YesNo  @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  bathRoomAvailability YesNo  @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
 
-  soundProof         YesNo @relation("soundProof", fields: [soundProofId], references: [id])
-  disabilityFriendly YesNo @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
-  multipleExit       YesNo @relation("multipleExit", fields: [multipleExitId], references: [id])
-  ablutionSlab       YesNo @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
+  soundProof         YesNo? @relation("soundProof", fields: [soundProofId], references: [id])
+  disabilityFriendly YesNo? @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
+  multipleExit       YesNo ? @relation("multipleExit", fields: [multipleExitId], references: [id])
+  ablutionSlab       YesNo ? @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
 
+ 
 
-
-  businessLicenceAvailability       YesNo @relation("businessLicenceAvailability", fields: [businessLicenceAvailabilityId], references: [id])
-  medicalCertificateAvailability    YesNo @relation("medicalCertificateAvailability", fields: [medicalCertAvailabilityId], references: [id])
-  operatingLicenceAvailability      YesNo @relation("operatingLicenceAvailability", fields: [operatingLicenceAvailabilityId], references: [id])
-  propertyRateAvailability          YesNo @relation("propertyRateAvailability", fields: [propertyRateAvailabilityId], references: [id])
-  structurePermitAvailability       YesNo @relation("structurePermitAvailability", fields: [structurePermitAvailabilityId], references: [id])
-  habitationCertificateAvailability YesNo @relation("habitationCertificateAvailability", fields: [habitationCertificateAvailabilityId], references: [id])
-  fumigationCertificateAvailability YesNo @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
+  businessLicenceAvailability       YesNo? @relation("businessLicenceAvailability", fields: [businessLicenceAvailabilityId], references: [id])
+  medicalCertificateAvailability    YesNo? @relation("medicalCertificateAvailability", fields: [medicalCertAvailabilityId], references: [id])
+  operatingLicenceAvailability      YesNo? @relation("operatingLicenceAvailability", fields: [operatingLicenceAvailabilityId], references: [id])
+  propertyRateAvailability          YesNo? @relation("propertyRateAvailability", fields: [propertyRateAvailabilityId], references: [id])
+  structurePermitAvailability       YesNo? @relation("structurePermitAvailability", fields: [structurePermitAvailabilityId], references: [id])
+  habitationCertificateAvailability YesNo? @relation("habitationCertificateAvailability", fields: [habitationCertificateAvailabilityId], references: [id])
+  fumigationCertificateAvailability YesNo? @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   buildingPermit                    YesNo @relation("buildingPermit", fields: [buildingPermitId], references: [id])
 
 
+  User    User?  @relation(fields: [userId], references: [id])
+  userId  Int?
+  
 }
 
 ////////////END SECTION ///////////
 
 ////////////POPULATION SECTION ///////////
 model PopulationSection {
-  id                         Int   @id @default(autoincrement())
+  id                         Int  @id @default(autoincrement())
   maleDoctorsNumber          Int?
   femaleDoctorsNumber        Int?
   maleNursesNumber           Int?
@@ -838,7 +837,6 @@ model PopulationSection {
   femaleAuxiliaryStaffNumber Int?
   roomCapacity               Int?
   facilityCapacity           Int?
-  separateWardMaleFemale     YesNo @relation(fields: [yesNoId], references: [id])
 
   maleWorkers                               Int?
   femaleWorkers                             Int?
@@ -868,8 +866,8 @@ model PopulationSection {
   createdAt                                 DateTime   @default(now())
   updatedAt                                 DateTime   @updatedAt
   Inspection                                Inspection @relation(fields: [inspectionId], references: [id])
-  yesNoId                                   Int
-  inspectionId                              Int
+
+  inspectionId Int
 }
 
 ////////////END SECTION ///////////
@@ -878,7 +876,7 @@ model PopulationSection {
 model WaterSection {
   id                           Int        @id @default(autoincrement())
   Inspection                   Inspection @relation(fields: [inspectionId], references: [id])
-  distanceWaterStorageSanitary Int
+  distanceWaterStorageSanitary Int?
   waterGeneralRating           Int
   waterSourceId                Int
   waterConditionId             Int
@@ -900,6 +898,16 @@ model WaterSection {
   waterStorageConditionSafe YesNo              @relation(fields: [waterStorageConditionSafeId], references: [id])
   WaterTreatmentType        WaterTreatmentType @relation(fields: [waterTreatmentTypeId], references: [id])
   inspectionId              Int
+}
+
+
+model PremisesWaterSources{
+    id                           Int        @id @default(autoincrement())
+
+      deleted                      Int?       @default(0)
+  createdAt                    DateTime   @default(now())
+  updatedAt                    DateTime   @updatedAt
+
 }
 
 ////////////END SECTION ///////////
