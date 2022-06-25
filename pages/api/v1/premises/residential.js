@@ -2,12 +2,17 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    // const data = {
-    //   name: req.body,
-    // };
+    const inspectionData = req.body.inspection;
+    const populationData = req.body.population;
+    const facilityData = req.body.facility;
+
     console.log(req.body);
     ///Save facility section, population, water, sanitation, hygiene, conclusion, picture
-    // const action = await prisma.action.create({ data });
+    const inspection = await prisma.inspection.create({ data:inspectionData });
+    const population = await prisma.population.create({ data:populationData });
+    const facility = await prisma.facilitySection.create({ data:facilityData });
+    const facility = await prisma.facilitySection.create({ data:facilityData });
+
     // res
     //   .status(200)
     //   .json({ statusCode: 1, message: "Data saved", data: { action } });
