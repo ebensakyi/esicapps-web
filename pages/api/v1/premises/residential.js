@@ -11,7 +11,7 @@ const post = async (req, res) => {
     const inspection = await prisma.inspection.create({ data:inspectionData });
     const population = await prisma.population.create({ data:populationData });
     const facility = await prisma.facilitySection.create({ data:facilityData });
-    const facility = await prisma.facilitySection.create({ data:facilityData });
+   // const facility = await prisma.facilitySection.create({ data:facilityData });
 
     // res
     //   .status(200)
