@@ -925,7 +925,7 @@ model SanitationSection {
   wasteStorageReceptacle Int
 
 
-  collectionFrequency     Int ****
+  wasteCollectionFrequency     Frequency
   wasteSortingId          Int
   sanitationGeneralRating Int
   drainsConditionId       Int
@@ -981,9 +981,9 @@ model PremisesWashroomFacility {
   numberUrinePots         Int?
   toiletAdequacyId        Int?
   urinalAdequacyId        Int?
-  availToiletFaciltyMgtId Int
-  toiletGenderSensivityId Int
-  urinalGenderSensivityId Int
+  availToiletFaciltyMgtId Int?
+  toiletGenderSensivityId Int?
+  urinalGenderSensivityId Int?
   sanitationSectionId     Int
   excretaContainment      ExcretaContainment @relation(fields: [excretaContainmentId], references: [id])
   excretaContainmentId    Int
