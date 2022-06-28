@@ -36,6 +36,7 @@ import { greyWaterDisposal } from "./greyWaterDisposal";
 import { wasteCollectionType } from "./wasteCollectionType";
 import { nuisance } from "./nuisance";
 import { action } from "./action";
+import { pestSign } from "./pestSign";
 
 
 async function main() {
@@ -148,6 +149,10 @@ async function main() {
 
   await prisma.action.createMany({
     data: action,
+  });
+
+  await prisma.pestSign.createMany({
+    data: pestSign,
   });
 }
 
