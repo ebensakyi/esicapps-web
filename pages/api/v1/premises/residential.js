@@ -22,17 +22,12 @@ const post = async (req, res) => {
       inspectionId
     );
 
-    // const conclusionSection = await saveConclusion(req.body.conclusionSection);
-    // const premisesActionTaken = await savePremisesActionTaken(
-    //   req.body.premisesActionTaken
-    // );
-    // const premisesNuisances = await savePremisesNuisancesObserved(
-    //   req.body.premisesActionTaken
-    // );
+    const conclusionSection = await saveConclusion(
+      req.body.conclusionSection,
+      inspectionId
+    );
 
-    // res
-    //   .status(200)
-    //   .json({ statusCode: 1, message: "Data saved", data: { action } });
+    res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
     if (error.code === "P2002")
       return res
@@ -373,8 +368,6 @@ const savePremisesGreyWaterDisposal = async (data, sanitationSectionId) => {
 
 const saveHygiene = async (data, inspectionId) => {
   try {
-    console.log(data);
-
     let _ = {
       inspectionId: inspectionId,
       pondingEvidenceId: data.pondingEvidenceId,
@@ -383,58 +376,118 @@ const saveHygiene = async (data, inspectionId) => {
       evidenceStagnationId: data.evidenceStagnationId,
     };
 
-    const hygieneSection = await prisma.hygieneSection.create({ data });
+    const hygieneSection = await prisma.hygieneSection.create({ data: _ });
 
     let premisesPestSigns = data.premisesPestSigns;
     let hygieneSectionId = hygieneSection.id;
 
-    //await savePremisesPestSigns(premisesPestSigns, hygieneSectionId);
-    return response;
+    await savePremisesPestSigns(premisesPestSigns, hygieneSectionId);
+    return;
   } catch (error) {
     console.log("saveHygiene Error:", error);
     return;
   }
 };
 
-const savePremisesPestSigns = async (data) => {
+const savePremisesPestSigns = async (data, hygieneSectionId) => {
   try {
-    const response = await prisma.premisesPestSigns.create({ data });
+    let _ = await data.map((id) => {
+      return {
+        hygieneSectionId: hygieneSectionId,
+        pestSignId: id,
+      };
+    });
+
+    const response = await prisma.premisesPestSigns.createMany({ data: _ });
     return response;
   } catch (error) {
+    console.log("savePremisesPestSigns Error:", error);
+
     return;
   }
 };
 
-const saveConclusion = async (data) => {
+const saveConclusion = async (data, inspectionId) => {
   try {
-    const response = await prisma.conclusionSection.create({ data });
-    return response;
+    let _ = {
+      inspectionId,
+      officerComment: data.officerComment,
+      obnoxiousTradeNearbyId: data.obnoxiousTradeNearbyId,
+    };
+
+    const conclusionSection = await prisma.conclusionSection.create({
+      data: _,
+    });
+    let conclusionSectionId = conclusionSection.id;
+    let premisesActionTaken = data.premisesActionTaken;
+    let premisesNuisances = data.premisesNuisances;
+
+    await savePremisesActionTaken(premisesActionTaken, conclusionSectionId);
+    await savePremisesNuisancesObserved(premisesNuisances, conclusionSectionId);
+
+    return;
   } catch (error) {
+    console.log("saveConclusion Error:", error);
+
     return;
   }
 };
-const savePremisesActionTaken = async (data) => {
+const savePremisesActionTaken = async (data, conclusionSectionId) => {
   try {
-    const response = await prisma.premisesActionTaken.create({ data });
+    let _ = await data.map((id) => {
+      return {
+        conclusionSectionId: conclusionSectionId,
+        actionId: id,
+      };
+    });
+    const response = await prisma.premisesActionTaken.createMany({ data: _ });
     return response;
   } catch (error) {
+    console.log("savePremisesActionTaken Error:", error);
+
     return;
   }
 };
-const savePremisesNuisancesObserved = async (data) => {
+const savePremisesNuisancesObserved = async (data, conclusionSectionId) => {
   try {
-    const response = await prisma.premisesNuisancesDetected.create({ data });
+    let _ = await data.map((id) => {
+      return {
+        conclusionSectionId: conclusionSectionId,
+        nuisanceId: id,
+      };
+    });
+    const response = await prisma.premisesNuisanceDetected.createMany({
+      data: _,
+    });
     return response;
   } catch (error) {
+    console.log("savePremisesNuisancesObserved Error:", error);
+
     return;
   }
 };
 
 const get = async (req, res) => {
   try {
-    //     const action = await prisma.action.findMany({ where: { deleted: 0 } });
-    //     //return res.status(200).json({ statusCode: 1, data: action });
-    //     return res.status(200).json( action);
+    const residential = await prisma.inspection.findMany({
+      where: { deleted: 0 },
+      include: {
+        FacilitySection: {
+          include: { District: true },
+        },
+        PopulationSection: true,
+        WaterSection: true,
+        SanitationSection: true,
+        HygieneSection: true,
+        ConclusionSection: true,
+        HospitalityServicesProvided: true,
+        Picture: true,
+        InspectionForm: true,
+        InspectionType: true,
+        submittedBy: true,
+      },
+    });
+    return res.status(200).json(residential);
   } catch (error) {
     console.log("Error: " + error);
   }

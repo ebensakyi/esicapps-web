@@ -381,7 +381,6 @@ model YesNo {
 
 
 
-  pestSigns               HygieneSection[] @relation("pestSigns")
   evidenceStagnation      HygieneSection[] @relation("evidenceStagnation")
   disinfection            HygieneSection[] @relation("disinfection")
   disinfestation          HygieneSection[] @relation("disinfestation")
@@ -465,9 +464,10 @@ model PestSign {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(255)
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  PremisesPestSigns PremisesPestSigns[]
 }
 
 model DrainType {
@@ -1062,9 +1062,9 @@ model PremisesGreyWaterDisposal {
 ////////////////////HYGIENE SECTION ///////////
 model HygieneSection {
 
-  id                                        Int  @id @default(autoincrement())
+  id                                        Int     @id @default(autoincrement())
+  inspectionId                              Int
   publicBathRoomConditionId                 Int?
-  pestSignsId                               Int?
   evidenceStagnationId                      Int?
   disinfestationId                          Int?
   disinfectionId                            Int?
@@ -1072,44 +1072,42 @@ model HygieneSection {
   safeConditionCookedId                     Int?
   pondingEvidenceId                         Int?
   approvedHandwashingFacilityAvailabilityId Int?
+  animalType                                String? @db.VarChar(255)
+  animalsNumber                             Int?    @default(0)
 
+  animalSpaceConditionId                  Int?
+  vaccinationProofId                      Int?
+  animalsPermitId                         Int?
   deleted                                 Int?     @default(0)
   createdAt                               DateTime @default(now())
   updatedAt                               DateTime @updatedAt
   approvedHandwashingFacilityAvailability YesNo?   @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
 
   Inspection              Inspection @relation(fields: [inspectionId], references: [id])
-  pestSigns               YesNo?     @relation("pestSigns", fields: [pestSignsId], references: [id])
   evidenceStagnation      YesNo?     @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
   disinfection            YesNo?     @relation("disinfection", fields: [disinfectionId], references: [id])
   disinfestation          YesNo?     @relation("disinfestation", fields: [disinfestationId], references: [id])
   safeConditionUncooked   YesNo?     @relation("safeConditionUncooked", fields: [safeConditionUncookedId], references: [id])
   safeConditionCooked     YesNo?     @relation("safeConditionCooked", fields: [safeConditionCookedId], references: [id])
   publicBathRoomCondition YesNo?     @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
-  inspectionId            Int
-  pondingEvidence         YesNo?     @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
 
+  pondingEvidence      YesNo?              @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
+  animalSpaceCondition YesNo?              @relation("animalSpaceCondition", fields: [animalSpaceConditionId], references: [id])
+  animalsPermit        YesNo?              @relation("animalsPermit", fields: [animalsPermitId], references: [id])
+  vaccinationProof     YesNo?              @relation("vaccinationProof", fields: [vaccinationProofId], references: [id])
 
-  animalSpaceCondition YesNo?  @relation("animalSpaceCondition", fields: [animalSpaceConditionId], references: [id])
-  animalsPermit        YesNo?  @relation("animalsPermit", fields: [animalsPermitId], references: [id])
-  vaccinationProof     YesNo?  @relation("vaccinationProof", fields: [vaccinationProofId], references: [id])
-  animalType           String? @db.VarChar(255)
-  animalsNumber        Int?    @default(0)
-
-  animalSpaceConditionId Int?
-  vaccinationProofId     Int?
-  animalsPermitId        Int?
-
- 
+  PremisesPestSigns    PremisesPestSigns[]
 }
 
 model PremisesPestSigns {
-  id Int @id @default(autoincrement())
-
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               Int            @id @default(autoincrement())
+  hygieneSectionId Int
+  pestSignId       Int
+  HygieneSection   HygieneSection @relation(fields: [hygieneSectionId], references: [id])
+  PestSign         PestSign       @relation(fields: [pestSignId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 ////////////////////END HYGIENE SECTION ///////////
@@ -1118,7 +1116,7 @@ model ConclusionSection {
   id Int @id @default(autoincrement())
 
 
-  officerComment           Int
+  officerComment            String     @db.VarChar(255)
   obnoxiousTradeNearby     YesNo                      @relation("obnoxiousTradeNearby", fields: [obnoxiousTradeNearbyId], references: [id])
   obnoxiousTradeNearbyId   Int
   deleted                  Int?                       @default(0)
