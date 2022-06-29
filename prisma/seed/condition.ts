@@ -1,8 +1,8 @@
-export const condition = [
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-];
+// export const condition = [
+//   {
+//     name: "Kept",
+//   },
+//   {
+//     name: "Overgrown",
+//   },
+// ];

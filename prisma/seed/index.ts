@@ -10,7 +10,7 @@ import { institutionType} from "./institutionType";
 
 import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
 import { community } from "./community";
-import { condition } from "./condition";
+//import { condition } from "./condition";
 import { district } from "./district";
 import { drainType } from "./drainType";
 import { effluentManagement } from "./effluentManagement";
@@ -67,9 +67,9 @@ async function main() {
   await prisma.community.createMany({
     data: community,
   });
-  await prisma.condition.createMany({
-    data: condition,
-  });
+  // await prisma.condition.createMany({
+  //   data: condition,
+  // });
   await prisma.district.createMany({
     data: district,
   });

@@ -16,11 +16,30 @@ const post = async (req, res) => {
       req.body.sanitationSection,
       inspectionId
     );
+    // const premisesWasteReceptacle = await savePremisesWasteReceptacle(
+    //   req.body.premisesWasteReceptacle
+    // );
+    // const premisesGreyWaterDisposal = await savePremisesGreyWaterDisposal(
+    //   req.body.premisesGreyWaterDisposal
+    // );
+    // const premisesExcretaContainment = await savePremisesExcretaContainment(
+    //   req.body.premisesExcretaContainment
+    // );
+    // const premisesExcretaDisposalMethod =
+    //   await savePremisesExcretaDisposalMethod(
+    //     req.body.premisesExcretaDisposalMethod
+    //   );
+    // const premisesToiletType = await savePremisesToiletType(
+    //   req.body.premisesToiletType
+    // );
+    // const premisesEffluentManagement = await savePremisesEffluentManagement(
+    //   req.body.premisesEffluentManagement
+    // );
 
-    const hygieneSection = await saveHygiene(
-      req.body.hygieneSection,
-      inspectionId
-    );
+    // const hygieneSection = await saveHygiene(req.body.hygiene);
+    // const premisesPestSigns = await savePremisesPestSigns(
+    //   req.body.premisesPestSigns
+    // );
 
     // const conclusionSection = await saveConclusion(req.body.conclusionSection);
     // const premisesActionTaken = await savePremisesActionTaken(
@@ -97,6 +116,7 @@ const saveFacility = async (data, inspectionId) => {
       inspectionId,
     };
 
+    console.log(_);
     const response = await prisma.facilitySection.create({ data: _ });
     return response;
   } catch (error) {
@@ -167,47 +187,27 @@ const saveSanitation = async (data, inspectionId) => {
       approvedWasteStorageReceptacleId: data.approvedWasteStorageReceptacleId,
     };
 
+    let premisesWashroomFacility = {
+      toiletAdequacyId: data.toiletAdequacyId,
+      urinalAdequacyId: data.urinalAdequacyId,
+    };
+
     const sanitationSection = await prisma.sanitationSection.create({
       data: _,
     });
 
     let sanitationSectionId = sanitationSection.id;
 
-    let premisesWashroomFacility = {
-      toiletAdequacyId: data.toiletAdequacyId,
-      urinalAdequacyId: data.urinalAdequacyId,
-      numberToiletPots: data.numberToiletPots,
-      sanitationSectionId: sanitationSectionId,
-    };
-    console.log("premisesWashroomFacility===>", premisesWashroomFacility);
-
-    let premisesWasteReceptacle = data.premisesWasteReceptacle;
-
-    let premisesEffluentManagement = data.premisesEffluentManagement;
-    let premisesToiletType = data.premisesToiletType;
-
-    let premisesExcretaContainment = data.premisesExcretaContainment;
-    let premisesExcretaDisposalMethod = data.premisesExcretaDisposalMethod;
-
-    let premisesGreyWaterDisposal = data.premisesGreyWaterDisposal;
-
     await savePremisesWashroomFacility(
       premisesWashroomFacility,
-      premisesToiletType,
-      premisesEffluentManagement,
-      premisesExcretaContainment,
-      premisesExcretaDisposalMethod
-    );
-
-    await savePremisesWasteReceptacle(
-      premisesWasteReceptacle,
-      sanitationSectionId
-    );
-    await savePremisesGreyWaterDisposal(
-      premisesGreyWaterDisposal,
       sanitationSectionId
     );
 
+    let premisesToiletType = data.premisesToiletType;
+
+    // 	"premisesEffluentManagement":[2,3],
+    //   	"premisesExcretaContainment":[1,2],
+    // 	"premisesExcretaDisposalMethod":[1,3],
     //   	"premisesWasteReceptacle":[1,3],
     // 	"premisesGreyWaterDisposal":[2,3],
     return;
@@ -218,135 +218,14 @@ const saveSanitation = async (data, inspectionId) => {
   }
 };
 
-const savePremisesWashroomFacility = async (
-  data,
-  premisesToiletType,
-  premisesEffluentManagement,
-  premisesExcretaContainment,
-  premisesExcretaDisposalMethod
-) => {
+const savePremisesWashroomFacility = async (data, sanitationSectionId) => {
   try {
-    const premisesWashroomFacility =
-      await prisma.premisesWashroomFacility.create({
-        data: data,
-      });
-
-    let premisesWashroomFacilityId = premisesWashroomFacility.id;
-    await savePremisesToiletType(
-      premisesToiletType,
-      premisesWashroomFacilityId
-    );
-
-    await savePremisesEffluentManagement(
-      premisesEffluentManagement,
-      premisesWashroomFacilityId
-    );
-
-    await savePremisesExcretaContainment(
-      premisesExcretaContainment,
-      premisesWashroomFacilityId
-    );
-
-    await savePremisesExcretaDisposalMethod(
-      premisesExcretaDisposalMethod,
-      premisesWashroomFacilityId
-    );
-
-    return;
-  } catch (error) {
-    console.log("Error savePremisesWashroomFacility: " + error);
-    return;
-  }
-};
-const savePremisesToiletType = async (data, premisesWashroomFacilityId) => {
-  try {
-    if (data == null || data.length == 0) return;
-    let _ = await data.map((tt) => {
-      return {
-        premisesWashroomFacilityId: premisesWashroomFacilityId,
-        toiletTypeId: tt,
-      };
-    });
-    const response = await prisma.premisesToiletType.createMany({ data: _ });
-    return response;
-  } catch (error) {
-    return;
-  }
-};
-const savePremisesEffluentManagement = async (
-  data,
-  premisesWashroomFacilityId
-) => {
-  try {
-    let _ = await data.map((id) => {
-      return {
-        premisesWashroomFacilityId: premisesWashroomFacilityId,
-        effluentManagementId: id,
-      };
-    });
-    const response = await prisma.premisesEffluentManagement.createMany({
-      data: _,
-    });
-    return response;
-  } catch (error) {
-    console.log("savePremisesEffluentManagement Error:", error);
-    return;
-  }
-};
-
-const savePremisesExcretaContainment = async (
-  data,
-  premisesWashroomFacilityId
-) => {
-  try {
-    let _ = await data.map((id) => {
-      return {
-        premisesWashroomFacilityId: premisesWashroomFacilityId,
-        excretaContainmentId: id,
-      };
+    let newPremiseToiletTypes = await premisesToiletType.map((ptt) => {
+      return { waterSectionId: waterSectionId, waterSourceId: pws };
     });
 
-    const response = await prisma.premisesExcretaContainment.createMany({
-      data: _,
-    });
-    return response;
-  } catch (error) {
-    console.log("savePremisesExcretaContainment Error:", error);
-    return;
-  }
-};
-
-const savePremisesExcretaDisposalMethod = async (
-  data,
-  premisesWashroomFacilityId
-) => {
-  try {
-    let _ = await data.map((id) => {
-      return {
-        premisesWashroomFacilityId: premisesWashroomFacilityId,
-        excretaDisposalMethodId: id,
-      };
-    });
-    const response = await prisma.premisesExcretaDisposalMethod.createMany({
-      data: _,
-    });
-    return response;
-  } catch (error) {
-    console.log("savePremisesExcretaDisposalMethod Error:", error);
-
-    return;
-  }
-};
-const savePremisesWasteReceptacle = async (data, sanitationSectionId) => {
-  try {
-    let _ = await data.map((id) => {
-      return {
-        sanitationSectionId: sanitationSectionId,
-        solidWasteReceptacleId: id,
-      };
-    });
-    const response = await prisma.premisesWasteReceptacle.createMany({
-      data: _,
+    const response = await prisma.savePremisesWashroomFacility.create({
+      data: newPremiseToiletTypes,
     });
     return response;
   } catch (error) {
@@ -354,16 +233,14 @@ const savePremisesWasteReceptacle = async (data, sanitationSectionId) => {
   }
 };
 
-const savePremisesGreyWaterDisposal = async (data, sanitationSectionId) => {
+const savePremisesToiletType = async (data, sanitationSectionId) => {
   try {
-    let _ = await data.map((id) => {
-      return {
-        sanitationSectionId: sanitationSectionId,
-        greyWaterDisposalId: id,
-      };
+    let newPremiseToiletTypes = await data.map((ptt) => {
+      return { sanitationSectionId: sanitationSectionId, toiletTypeId: ptt };
     });
-    const response = await prisma.premisesGreyWaterDisposal.createMany({
-      data: _,
+
+    const response = await prisma.premisesToiletType.create({
+      data: newPremiseToiletTypes,
     });
     return response;
   } catch (error) {
@@ -371,27 +248,62 @@ const savePremisesGreyWaterDisposal = async (data, sanitationSectionId) => {
   }
 };
 
-const saveHygiene = async (data, inspectionId) => {
+const savePremisesWasteReceptacle = async (data) => {
   try {
-    console.log(data);
-
-    let _ = {
-      inspectionId: inspectionId,
-      pondingEvidenceId: data.pondingEvidenceId,
-      approvedHandwashingFacilityAvailabilityId:
-        data.approvedHandwashingFacilityAvailabilityId,
-      evidenceStagnationId: data.evidenceStagnationId,
-    };
-
-    const hygieneSection = await prisma.hygieneSection.create({ data });
-
-    let premisesPestSigns = data.premisesPestSigns;
-    let hygieneSectionId = hygieneSection.id;
-
-    //await savePremisesPestSigns(premisesPestSigns, hygieneSectionId);
+    const response = await prisma.premisesWasteReceptacle.create({ data });
     return response;
   } catch (error) {
-    console.log("saveHygiene Error:", error);
+    return;
+  }
+};
+
+const savePremisesGreyWaterDisposal = async (data) => {
+  try {
+    const response = await prisma.premisesWasteReceptacle.create({ data });
+    return response;
+  } catch (error) {
+    return;
+  }
+};
+
+const savePremisesExcretaContainment = async (data) => {
+  try {
+    const response = await prisma.premisesExcretaContainment.create({ data });
+    return response;
+  } catch (error) {
+    return;
+  }
+};
+
+const savePremisesExcretaDisposalMethod = async (data) => {
+  try {
+    const response = await prisma.premisesExcretaDisposalMethod.create({
+      data,
+    });
+    return response;
+  } catch (error) {
+    return;
+  }
+};
+
+
+
+const savePremisesEffluentManagement = async (data) => {
+  try {
+    const response = await prisma.premisesEffluentManagement.create({ data });
+    return response;
+  } catch (error) {
+    return;
+  }
+};
+
+const saveHygiene = async (data) => {
+  try {
+    // pondingEvidenceId: data.pondingEvidenceId,
+
+    const response = await prisma.hygieneSection.create({ data });
+    return response;
+  } catch (error) {
     return;
   }
 };
