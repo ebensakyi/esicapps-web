@@ -34,7 +34,6 @@ model User {
   Usertype UserType @relation(fields: [userTypeId], references: [id])
 
   Logs            Logs[]
-  FacilitySection FacilitySection[]
   submittedBy     Inspection[]      @relation("submittedBy")
   publishedBy     Inspection[]      @relation("publishedBy")
 
@@ -695,7 +694,6 @@ model FacilitySection {
   id           Int    @id @default(autoincrement())
   inspectionId Int
   name         String @db.VarChar(255)
-
   districtId    Int
   subdistrictId Int?
   zoneId        Int?
@@ -704,7 +702,6 @@ model FacilitySection {
   ghanaPostGps  String? @db.VarChar(255)
   latitude      String  @db.VarChar(255)
   longitude     String  @db.VarChar(255)
-
   respondentName          String @db.VarChar(255)
   phoneNumber             String @db.VarChar(255)
   premiseTypeId           Int
@@ -719,14 +716,10 @@ model FacilitySection {
   bathRoomAvailabilityId                    Int?
   separateWardId                            Int?
 
-  ////////////////////check////////////
-
   soundProofId         Int?
   disabilityFriendlyId Int?
   multipleExitId       Int?
   ablutionSlabId       Int?
-  /////////////////////end check/////////
-
   businessLicenceAvailabilityId       Int?
   medicalCertAvailabilityId           Int?
   operatingLicenceAvailabilityId      Int?
@@ -777,9 +770,6 @@ model FacilitySection {
   fumigationCertificateAvailability YesNo? @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   buildingPermit                    YesNo? @relation("buildingPermit", fields: [buildingPermitId], references: [id])
 
-
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
 }
 
 ////////////END SECTION ///////////
