@@ -1,4 +1,4 @@
-export const nonConsumable = [
+export const nonConsumableType = [
   {
     name: "Block factory",
   },
