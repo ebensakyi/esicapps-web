@@ -27,6 +27,12 @@ export const nuisance = [
     name: "Refuse",
   },
   {
+    name: "Expired drugs",
+  },
+  {
+    name: "Prohibited animals",
+  },
+  {
     name: "Insanitary drains and catchpit",
   },
   {

@@ -374,6 +374,7 @@ const saveHygiene = async (data, inspectionId) => {
       approvedHandwashingFacilityAvailabilityId:
         data.approvedHandwashingFacilityAvailabilityId,
       evidenceStagnationId: data.evidenceStagnationId,
+      pantryFacilityAdequacyId: data.pantryFacilityAdequacyId,
     };
 
     const hygieneSection = await prisma.hygieneSection.create({ data: _ });

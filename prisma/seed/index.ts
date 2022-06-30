@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 import { userType } from "./userType";
 
 import { region } from "./region";
-import { inspectionForm} from "./inspectionForm";
-import { institution} from "./institution";
-import { institutionType} from "./institutionType";
+import { inspectionForm } from "./inspectionForm";
+import { institution } from "./institution";
+import { institutionType } from "./institutionType";
 
 import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
 import { community } from "./community";
@@ -37,10 +37,20 @@ import { wasteCollectionType } from "./wasteCollectionType";
 import { nuisance } from "./nuisance";
 import { action } from "./action";
 import { pestSign } from "./pestSign";
+import { temporaryPermanent } from "./temporaryPermanent";
+import { tolietPitPosition } from "./tolietPitPosition";
+import { healthPremisesType } from "./healthPremisesType";
+import { hospitalityPremisesType } from "./hospitalityPremisesType";
+import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
+import { industryCategory } from "./industryCategory";
+import { consumableType } from "./consumableType";
+import { nonConsumableType } from "./nonConsumableType";
+import {derattingFrequency} from "./derattingFrequency";
+import {ownershipType} from "./ownershipType";
+
 
 
 async function main() {
-
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
@@ -90,11 +100,9 @@ async function main() {
     data: facility,
   });
 
-
   await prisma.frequency.createMany({
     data: frequency,
   });
-
 
   await prisma.respondentDesignation.createMany({
     data: respondentDesignation,
@@ -153,6 +161,36 @@ async function main() {
 
   await prisma.pestSign.createMany({
     data: pestSign,
+  });
+  await prisma.temporaryPermanent.createMany({
+    data: temporaryPermanent,
+  });
+  await prisma.tolietPitPosition.createMany({
+    data: tolietPitPosition,
+  });
+  await prisma.healthPremisesType.createMany({
+    data: healthPremisesType,
+  });
+  await prisma.hospitalityPremisesType.createMany({
+    data: hospitalityPremisesType,
+  });
+  await prisma.hazardousWasteDisposal.createMany({
+    data: hazardousWasteDisposal,
+  });
+  await prisma.industryCategory.createMany({
+    data: industryCategory,
+  });
+  await prisma.consumableType.createMany({
+    data: consumableType,
+  });
+  await prisma.nonConsumableType.createMany({
+    data: nonConsumableType,
+  });
+  await prisma.derattingFrequency.createMany({
+    data: derattingFrequency,
+  });
+  await prisma.ownershipType.createMany({
+    data: ownershipType,
   });
 }
 
