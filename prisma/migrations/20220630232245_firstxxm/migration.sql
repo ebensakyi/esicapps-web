@@ -905,11 +905,11 @@ CREATE TABLE "PremisesEffluentManagement" (
 -- CreateTable
 CREATE TABLE "PremisesExcretaDisposalMethod" (
     "id" SERIAL NOT NULL,
-    "premisesWashroomFacilityId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaDisposalMethodId" INTEGER NOT NULL,
+    "premisesWashroomFacilityId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesExcretaDisposalMethod_pkey" PRIMARY KEY ("id")
 );
@@ -967,11 +967,12 @@ CREATE TABLE "HygieneSection" (
     "animalSpaceConditionId" INTEGER,
     "vaccinationProofId" INTEGER,
     "animalsPermitId" INTEGER,
+        "pantryFacilityAdequacyId" INTEGER,
+    "shepClubExistenceId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "pantryFacilityAdequacyId" INTEGER,
-    "shepClubExistenceId" INTEGER,
+
 
     CONSTRAINT "HygieneSection_pkey" PRIMARY KEY ("id")
 );

@@ -45,10 +45,8 @@ import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { industryCategory } from "./industryCategory";
 import { consumableType } from "./consumableType";
 import { nonConsumableType } from "./nonConsumableType";
-import {derattingFrequency} from "./derattingFrequency";
-import {ownershipType} from "./ownershipType";
-
-
+import { derattingFrequency } from "./derattingFrequency";
+import { ownershipType } from "./ownershipType";
 
 async function main() {
   await prisma.inspectionForm.createMany({

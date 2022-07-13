@@ -1016,19 +1016,20 @@ model SanitationSection {
   effluentManagementReportId       Int?
   distanceWaterStorageSanitaryId   Int?
   facilityCleanlinessId            Int?
-  deleted                          Int?     @default(0)
-  createdAt                        DateTime @default(now())
-  updatedAt                        DateTime @updatedAt
-  effluentManagementId             Int?
+ effluentManagementId             Int?
   wasteCollectionFrequencyId       Int
   excretaDisposalMethodId          Int?
   excretaContainmentId             Int?
 
 
-
   //new
   areaSewered              Int?
   facilityConnectedSewerId Int?
+  deleted                          Int?     @default(0)
+  createdAt                        DateTime @default(now())
+  updatedAt                        DateTime @updatedAt
+  
+
 
 
 
