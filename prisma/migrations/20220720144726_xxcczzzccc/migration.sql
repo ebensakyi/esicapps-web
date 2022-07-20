@@ -67,28 +67,6 @@ CREATE TABLE "Institution" (
 );
 
 -- CreateTable
-CREATE TABLE "HealthServices" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "HealthServices_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PremisesHealthServicesProvided" (
-    "id" SERIAL NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "healthServicesId" INTEGER NOT NULL,
-
-    CONSTRAINT "PremisesHealthServicesProvided_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "InstitutionType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -442,61 +420,6 @@ CREATE TABLE "ToiletPitPosition" (
 );
 
 -- CreateTable
-CREATE TABLE "EateryType" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "EateryType_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "EateryPremisesType" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "EateryPremisesType_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "HealthPremisesType" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "HealthPremisesType_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "HospitalityServicesProvided" (
-    "id" SERIAL NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "inspectionId" INTEGER NOT NULL,
-
-    CONSTRAINT "HospitalityServicesProvided_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "HospitalityService" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "HospitalityService_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Logs" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -518,93 +441,6 @@ CREATE TABLE "Facility" (
     "inspectionFormId" INTEGER NOT NULL,
 
     CONSTRAINT "Facility_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Service" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "inspectionFormId" INTEGER NOT NULL,
-
-    CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "SlaughterHouse" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "slaughterRoomsAvailableId" INTEGER NOT NULL,
-    "condemnationRoomAvailableId" INTEGER NOT NULL,
-    "hangingExaminationFacilitiesAvailableId" INTEGER NOT NULL,
-    "holdingPenAvailableId" INTEGER NOT NULL,
-    "isolationPenAvailableId" INTEGER NOT NULL,
-    "chuteAvailableId" INTEGER NOT NULL,
-    "genderFriendlyAvailableId" INTEGER NOT NULL,
-    "comfortRoomAvailableId" INTEGER NOT NULL,
-    "wheelBathAvailableId" INTEGER NOT NULL,
-    "footbathAvailableId" INTEGER NOT NULL,
-    "meatInspectorOfficeAvailableId" INTEGER NOT NULL,
-    "dressingFloorAvailableId" INTEGER NOT NULL,
-    "solidWasteSectionId" INTEGER,
-
-    CONSTRAINT "SlaughterHouse_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Cemetery" (
-    "id" SERIAL NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "layoutCemeteryAdequacyId" INTEGER NOT NULL,
-    "cemeteryFencedId" INTEGER NOT NULL,
-    "cremationPracticedId" INTEGER NOT NULL,
-    "cremationPlatformId" INTEGER NOT NULL,
-    "ashesDisposalId" INTEGER NOT NULL,
-    "sextonAvailabilityId" INTEGER NOT NULL,
-    "sextonOfficeAvailabilityId" INTEGER NOT NULL,
-    "solidWasteSectionId" INTEGER,
-
-    CONSTRAINT "Cemetery_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "TransferWasteStation" (
-    "id" SERIAL NOT NULL,
-    "transferStationCapacity" INTEGER NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "solidWasteSectionId" INTEGER NOT NULL,
-    "wasteSortingId" INTEGER NOT NULL,
-    "leachateManagementId" INTEGER NOT NULL,
-    "hazardousManagementId" INTEGER NOT NULL,
-
-    CONSTRAINT "TransferWasteStation_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "CommunalContainer" (
-    "id" SERIAL NOT NULL,
-    "attendantName" VARCHAR(255) NOT NULL,
-    "attendantPhoneNumber" VARCHAR(255) NOT NULL,
-    "serviceProviderName" VARCHAR(255) NOT NULL,
-    "containerVolume" INTEGER NOT NULL,
-    "numberContainers" INTEGER NOT NULL,
-    "solidWasteSectionId" INTEGER NOT NULL,
-    "scheduledCollectionId" INTEGER NOT NULL,
-    "containerConditionId" INTEGER NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "CommunalContainer_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -654,13 +490,17 @@ CREATE TABLE "FacilitySection" (
     "labourersOfficeAvailabilityId" INTEGER,
     "storeRoomAvailabilityId" INTEGER,
     "facilityCleanlinessId" INTEGER,
+    "animalAvailabilityId" INTEGER,
+    "shepClubExistenceId" INTEGER,
+    "animalType" VARCHAR(255),
+    "disinfestationId" INTEGER,
+    "disinfectionId" INTEGER,
     "eateryTypeId" INTEGER,
     "eateryPremisesTypeId" INTEGER,
     "temporaryPermanentId" INTEGER,
     "smokingAreaId" INTEGER,
     "pantryAvailabilityId" INTEGER,
     "healthPremisesTypeId" INTEGER,
-    "healthServicesProvidedId" INTEGER,
     "industryCategoryId" INTEGER,
     "industryPremisesSubsectionId" INTEGER,
     "institutionTypeId" INTEGER,
@@ -686,7 +526,8 @@ CREATE TABLE "LicencePermitSection" (
     "habitationCertificateAvailabilityId" INTEGER,
     "fumigationCertificateAvailabilityId" INTEGER,
     "medicalCertificateAvailabilityId" INTEGER,
-    "buildingPermitId" INTEGER,
+    "buildingPermitAvailabilityId" INTEGER,
+    "animalsPermitAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -765,6 +606,7 @@ CREATE TABLE "DerattingFrequency" (
 CREATE TABLE "PopulationSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" INTEGER NOT NULL,
+    "animalsNumber" INTEGER DEFAULT 0,
     "maleDoctorsNumber" INTEGER,
     "femaleDoctorsNumber" INTEGER,
     "maleNursesNumber" INTEGER,
@@ -839,43 +681,23 @@ CREATE TABLE "PremisesWaterSources" (
 CREATE TABLE "LiquidWasteSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" INTEGER NOT NULL,
-    "sanitationGeneralRating" INTEGER NOT NULL,
-    "drainsConditionId" INTEGER NOT NULL,
+    "evidenceStagnationId" INTEGER,
+    "pondingEvidenceId" INTEGER,
+    "drainsConditionId" INTEGER,
     "drainTypeId" INTEGER,
     "analCleansingMaterialMgtId" INTEGER,
     "effluentManagementReportId" INTEGER,
-    "facilityCleanlinessId" INTEGER,
     "effluentManagementId" INTEGER,
     "excretaDisposalMethodId" INTEGER,
     "excretaContainmentId" INTEGER,
+    "publicBathRoomConditionId" INTEGER,
     "areaSewered" INTEGER,
     "facilityConnectedSewerId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "yesNoId" INTEGER,
 
     CONSTRAINT "LiquidWasteSection_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "SolidWasteSection" (
-    "id" SERIAL NOT NULL,
-    "inspectionId" INTEGER NOT NULL,
-    "sanitaryFacilityTypeId" INTEGER NOT NULL,
-    "wasteCollectorRegistrationId" INTEGER NOT NULL,
-    "wasteCollectorName" VARCHAR(255),
-    "wasteSortingId" INTEGER NOT NULL,
-    "sanitationGeneralRating" INTEGER NOT NULL,
-    "drainsConditionId" INTEGER NOT NULL,
-    "receiptsUpToDateId" INTEGER,
-    "approvedWasteStorageReceptacleId" INTEGER NOT NULL,
-    "wasteCollectionFrequencyId" INTEGER NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "SolidWasteSection_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -890,18 +712,17 @@ CREATE TABLE "PremisesWashroomFacility" (
     "availToiletFaciltyMgtId" INTEGER,
     "toiletGenderSensivityId" INTEGER,
     "urinalGenderSensivityId" INTEGER,
+    "toiletDisabilityFriendlyId" INTEGER,
+    "urinalDisabilityFriendlyId" INTEGER,
+    "toiletPitPositionId" INTEGER,
     "liquidWasteSectionId" INTEGER,
     "premisesToiletTypeId" INTEGER,
     "premisesEffluentManagementId" INTEGER,
-    "toiletPitPositionId" INTEGER,
     "premisesExcretaDisposalMethodId" INTEGER,
     "premisesExcretaContainmentId" INTEGER,
-    "toiletDisabilityFriendlyId" INTEGER,
-    "urinalDisabilityFriendlyId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "solidWasteSectionId" INTEGER,
 
     CONSTRAINT "PremisesWashroomFacility_pkey" PRIMARY KEY ("id")
 );
@@ -955,6 +776,36 @@ CREATE TABLE "PremisesExcretaContainment" (
 );
 
 -- CreateTable
+CREATE TABLE "PremisesGreyWaterDisposal" (
+    "id" SERIAL NOT NULL,
+    "liquidWasteSectionId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "greyWaterDisposalId" INTEGER NOT NULL,
+
+    CONSTRAINT "PremisesGreyWaterDisposal_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SolidWasteSection" (
+    "id" SERIAL NOT NULL,
+    "inspectionId" INTEGER NOT NULL,
+    "wasteCollectorRegistrationId" INTEGER NOT NULL,
+    "wasteCollectorName" VARCHAR(255),
+    "wasteSortingId" INTEGER NOT NULL,
+    "receiptsUpToDateId" INTEGER,
+    "approvedWasteStorageReceptacleId" INTEGER,
+    "adequateWasteStorageReceptacleId" INTEGER,
+    "wasteCollectionFrequencyId" INTEGER,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "SolidWasteSection_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "PremisesWasteReceptacle" (
     "id" SERIAL NOT NULL,
     "solidWasteReceptacleId" INTEGER NOT NULL,
@@ -967,16 +818,15 @@ CREATE TABLE "PremisesWasteReceptacle" (
 );
 
 -- CreateTable
-CREATE TABLE "PremisesGreyWaterDisposal" (
+CREATE TABLE "PremisesWasteCollection" (
     "id" SERIAL NOT NULL,
-    "liquidWasteSectionId" INTEGER NOT NULL,
+    "wasteCollectionTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "greyWaterDisposalId" INTEGER NOT NULL,
-    "solidWasteSectionId" INTEGER,
+    "solidWasteSectionId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesGreyWaterDisposal_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesWasteCollection_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -984,23 +834,14 @@ CREATE TABLE "HygieneSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" INTEGER NOT NULL,
     "publicBathRoomConditionId" INTEGER,
-    "evidenceStagnationId" INTEGER,
-    "disinfestationId" INTEGER,
-    "disinfectionId" INTEGER,
     "safeConditionUncookedId" INTEGER,
     "safeConditionCookedId" INTEGER,
-    "pondingEvidenceId" INTEGER,
-    "approvedHandwashingFacilityAvailabilityId" INTEGER,
-    "animalType" VARCHAR(255),
-    "animalsNumber" INTEGER DEFAULT 0,
     "animalSpaceConditionId" INTEGER,
     "vaccinationProofId" INTEGER,
-    "animalsPermitId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "pantryFacilityAdequacyId" INTEGER,
-    "shepClubExistenceId" INTEGER,
+    "yesNoId" INTEGER,
 
     CONSTRAINT "HygieneSection_pkey" PRIMARY KEY ("id")
 );
@@ -1106,6 +947,132 @@ CREATE TABLE "NonConsumableType" (
     CONSTRAINT "NonConsumableType_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "SlaughterHouse" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "slaughterRoomsAvailableId" INTEGER NOT NULL,
+    "condemnationRoomAvailableId" INTEGER NOT NULL,
+    "hangingExaminationFacilitiesAvailableId" INTEGER NOT NULL,
+    "holdingPenAvailableId" INTEGER NOT NULL,
+    "isolationPenAvailableId" INTEGER NOT NULL,
+    "chuteAvailableId" INTEGER NOT NULL,
+    "genderFriendlyAvailableId" INTEGER NOT NULL,
+    "comfortRoomAvailableId" INTEGER NOT NULL,
+    "wheelBathAvailableId" INTEGER NOT NULL,
+    "footbathAvailableId" INTEGER NOT NULL,
+    "meatInspectorOfficeAvailableId" INTEGER NOT NULL,
+    "dressingFloorAvailableId" INTEGER NOT NULL,
+    "solidWasteSectionId" INTEGER,
+
+    CONSTRAINT "SlaughterHouse_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Cemetery" (
+    "id" SERIAL NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "layoutCemeteryAdequacyId" INTEGER NOT NULL,
+    "cemeteryFencedId" INTEGER NOT NULL,
+    "cremationPracticedId" INTEGER NOT NULL,
+    "cremationPlatformId" INTEGER NOT NULL,
+    "ashesDisposalId" INTEGER NOT NULL,
+    "sextonAvailabilityId" INTEGER NOT NULL,
+    "sextonOfficeAvailabilityId" INTEGER NOT NULL,
+    "solidWasteSectionId" INTEGER,
+
+    CONSTRAINT "Cemetery_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "TransferWasteStation" (
+    "id" SERIAL NOT NULL,
+    "transferStationCapacity" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "solidWasteSectionId" INTEGER NOT NULL,
+    "wasteSortingId" INTEGER NOT NULL,
+    "leachateManagementId" INTEGER NOT NULL,
+    "hazardousManagementId" INTEGER NOT NULL,
+
+    CONSTRAINT "TransferWasteStation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "CommunalContainer" (
+    "id" SERIAL NOT NULL,
+    "attendantName" VARCHAR(255) NOT NULL,
+    "attendantPhoneNumber" VARCHAR(255) NOT NULL,
+    "serviceProviderName" VARCHAR(255) NOT NULL,
+    "containerVolume" INTEGER NOT NULL,
+    "numberContainers" INTEGER NOT NULL,
+    "solidWasteSectionId" INTEGER NOT NULL,
+    "scheduledCollectionId" INTEGER NOT NULL,
+    "containerConditionId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "CommunalContainer_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PremisesTypes" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PremisesTypes_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PremisesServices" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PremisesServices_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PremisesServicesProvided" (
+    "id" SERIAL NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "premisesServiceId" INTEGER NOT NULL,
+    "inspectionId" INTEGER,
+    "premisesSubtypeSectionId" INTEGER NOT NULL,
+
+    CONSTRAINT "PremisesServicesProvided_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PremisesSubtypeSection" (
+    "id" SERIAL NOT NULL,
+    "premiseTypeId" INTEGER NOT NULL,
+    "ablutionSlabId" INTEGER NOT NULL,
+    "inspectionId" INTEGER NOT NULL,
+    "premisesTypesId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PremisesSubtypeSection_pkey" PRIMARY KEY ("id")
+);
+
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -1131,19 +1098,376 @@ ALTER TABLE "ReligiousInstitutionPremises" ADD CONSTRAINT "ReligiousInstitutionP
 ALTER TABLE "Institution" ADD CONSTRAINT "Institution_institutionTypeId_fkey" FOREIGN KEY ("institutionTypeId") REFERENCES "InstitutionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesHealthServicesProvided" ADD CONSTRAINT "PremisesHealthServicesProvided_healthServicesId_fkey" FOREIGN KEY ("healthServicesId") REFERENCES "HealthServices"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HospitalityServicesProvided" ADD CONSTRAINT "HospitalityServicesProvided_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Logs" ADD CONSTRAINT "Logs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Facility" ADD CONSTRAINT "Facility_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Service" ADD CONSTRAINT "Service_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_publishedById_fkey" FOREIGN KEY ("publishedById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_submittedById_fkey" FOREIGN KEY ("submittedById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionTypeId_fkey" FOREIGN KEY ("inspectionTypeId") REFERENCES "InspectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_institutionTypeId_fkey" FOREIGN KEY ("institutionTypeId") REFERENCES "InstitutionType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_communityId_fkey" FOREIGN KEY ("communityId") REFERENCES "Community"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_subdistrictId_fkey" FOREIGN KEY ("subdistrictId") REFERENCES "Subdistrict"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_zoneId_fkey" FOREIGN KEY ("zoneId") REFERENCES "Zone"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_facilityCleanlinessId_fkey" FOREIGN KEY ("facilityCleanlinessId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_separateWardId_fkey" FOREIGN KEY ("separateWardId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_smokingAreaId_fkey" FOREIGN KEY ("smokingAreaId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_pantryAvailabilityId_fkey" FOREIGN KEY ("pantryAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_labourersOfficeAvailabilityId_fkey" FOREIGN KEY ("labourersOfficeAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_storeRoomAvailabilityId_fkey" FOREIGN KEY ("storeRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_protectiveClothingId_fkey" FOREIGN KEY ("protectiveClothingId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_firstAidAvailabilityId_fkey" FOREIGN KEY ("firstAidAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_toiletAvailabilityId_fkey" FOREIGN KEY ("toiletAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_urinalAvailabilityId_fkey" FOREIGN KEY ("urinalAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_soundProofId_fkey" FOREIGN KEY ("soundProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_disabilityFriendlyId_fkey" FOREIGN KEY ("disabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_multipleExitId_fkey" FOREIGN KEY ("multipleExitId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_animalAvailabilityId_fkey" FOREIGN KEY ("animalAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_shepClubExistenceId_fkey" FOREIGN KEY ("shepClubExistenceId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_approvedHandwashingFacilityAvailabilityId_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_disinfectionId_fkey" FOREIGN KEY ("disinfectionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_disinfestationId_fkey" FOREIGN KEY ("disinfestationId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_yesNoId_fkey" FOREIGN KEY ("yesNoId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_respondentDesignationId_fkey" FOREIGN KEY ("respondentDesignationId") REFERENCES "RespondentDesignation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_ownershipTypeId_fkey" FOREIGN KEY ("ownershipTypeId") REFERENCES "OwnershipType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_industryCategoryId_fkey" FOREIGN KEY ("industryCategoryId") REFERENCES "IndustryCategory"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_temporaryPermanentId_fkey" FOREIGN KEY ("temporaryPermanentId") REFERENCES "TemporaryPermanent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_marketLorryParkPremisesId_fkey" FOREIGN KEY ("marketLorryParkPremisesId") REFERENCES "MarketLorryParkPremises"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_industryPremisesSubsectionId_fkey" FOREIGN KEY ("industryPremisesSubsectionId") REFERENCES "IndustryPremisesSubsection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_animalsPermitAvailabilityId_fkey" FOREIGN KEY ("animalsPermitAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_businessLicenceAvailabilityId_fkey" FOREIGN KEY ("businessLicenceAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_medicalCertAvailabilityId_fkey" FOREIGN KEY ("medicalCertAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_operatingLicenceAvailabilityId_fkey" FOREIGN KEY ("operatingLicenceAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_propertyRateAvailabilityId_fkey" FOREIGN KEY ("propertyRateAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_structurePermitAvailabilityId_fkey" FOREIGN KEY ("structurePermitAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_habitationCertificateAvailabilityId_fkey" FOREIGN KEY ("habitationCertificateAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_fumigationCertificateAvailabilityId_fkey" FOREIGN KEY ("fumigationCertificateAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_buildingPermitAvailabilityId_fkey" FOREIGN KEY ("buildingPermitAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MarketLorryParkPremises" ADD CONSTRAINT "MarketLorryParkPremises_marketLorryParkTypeId_fkey" FOREIGN KEY ("marketLorryParkTypeId") REFERENCES "MarketLorryParkType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MarketLorryParkPremises" ADD CONSTRAINT "MarketLorryParkPremises_derattingFrequencyId_fkey" FOREIGN KEY ("derattingFrequencyId") REFERENCES "DerattingFrequency"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PopulationSection" ADD CONSTRAINT "PopulationSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterFlowFrequencyId_fkey" FOREIGN KEY ("waterFlowFrequencyId") REFERENCES "Frequency"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterSupplyTypeId_fkey" FOREIGN KEY ("waterSupplyTypeId") REFERENCES "WaterSupplyType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterTreatmentTypeId_fkey" FOREIGN KEY ("waterTreatmentTypeId") REFERENCES "WaterTreatmentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterConditionId_fkey" FOREIGN KEY ("waterConditionId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageConditionSafeId_fkey" FOREIGN KEY ("waterStorageConditionSafeId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_distanceWaterStorageSanitaryId_fkey" FOREIGN KEY ("distanceWaterStorageSanitaryId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSourceId_fkey" FOREIGN KEY ("waterSourceId") REFERENCES "WaterSourceType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_analCleansingMaterialMgtId_fkey" FOREIGN KEY ("analCleansingMaterialMgtId") REFERENCES "AnalCleansingMaterialMgt"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_effluentManagementId_fkey" FOREIGN KEY ("effluentManagementId") REFERENCES "EffluentManagement"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_excretaContainmentId_fkey" FOREIGN KEY ("excretaContainmentId") REFERENCES "ExcretaContainment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_excretaDisposalMethodId_fkey" FOREIGN KEY ("excretaDisposalMethodId") REFERENCES "ExcretaDisposalMethod"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_facilityConnectedSewerId_fkey" FOREIGN KEY ("facilityConnectedSewerId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_effluentManagementReportId_fkey" FOREIGN KEY ("effluentManagementReportId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_drainsConditionId_fkey" FOREIGN KEY ("drainsConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_evidenceStagnationId_fkey" FOREIGN KEY ("evidenceStagnationId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_pondingEvidenceId_fkey" FOREIGN KEY ("pondingEvidenceId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_publicBathRoomConditionId_fkey" FOREIGN KEY ("publicBathRoomConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_drainTypeId_fkey" FOREIGN KEY ("drainTypeId") REFERENCES "DrainType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_separateStaffUrinalId_fkey" FOREIGN KEY ("separateStaffUrinalId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_bathroomAdequacyId_fkey" FOREIGN KEY ("bathroomAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletAdequacyId_fkey" FOREIGN KEY ("toiletAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_urinalAdequacyId_fkey" FOREIGN KEY ("urinalAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletDisabilityFriendlyId_fkey" FOREIGN KEY ("toiletDisabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_urinalDisabilityFriendlyId_fkey" FOREIGN KEY ("urinalDisabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_availToiletFaciltyMgtId_fkey" FOREIGN KEY ("availToiletFaciltyMgtId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletGenderSensivityId_fkey" FOREIGN KEY ("toiletGenderSensivityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_urinalGenderSensivityId_fkey" FOREIGN KEY ("urinalGenderSensivityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletPitPositionId_fkey" FOREIGN KEY ("toiletPitPositionId") REFERENCES "ToiletPitPosition"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesToiletTypeId_fkey" FOREIGN KEY ("premisesToiletTypeId") REFERENCES "PremisesToiletType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesEffluentManagementId_fkey" FOREIGN KEY ("premisesEffluentManagementId") REFERENCES "PremisesEffluentManagement"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesExcretaDisposalMethodId_fkey" FOREIGN KEY ("premisesExcretaDisposalMethodId") REFERENCES "PremisesExcretaDisposalMethod"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesExcretaContainmentId_fkey" FOREIGN KEY ("premisesExcretaContainmentId") REFERENCES "PremisesExcretaContainment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesToiletType" ADD CONSTRAINT "PremisesToiletType_toiletTypeId_fkey" FOREIGN KEY ("toiletTypeId") REFERENCES "ToiletType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesEffluentManagement" ADD CONSTRAINT "PremisesEffluentManagement_effluentManagementId_fkey" FOREIGN KEY ("effluentManagementId") REFERENCES "EffluentManagement"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesExcretaDisposalMethod" ADD CONSTRAINT "PremisesExcretaDisposalMethod_excretaDisposalMethodId_fkey" FOREIGN KEY ("excretaDisposalMethodId") REFERENCES "ExcretaDisposalMethod"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesExcretaContainment" ADD CONSTRAINT "PremisesExcretaContainment_excretaContainmentId_fkey" FOREIGN KEY ("excretaContainmentId") REFERENCES "ExcretaContainment"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_greyWaterDisposalId_fkey" FOREIGN KEY ("greyWaterDisposalId") REFERENCES "GreyWaterDisposal"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteCollectionFrequencyId_fkey" FOREIGN KEY ("wasteCollectionFrequencyId") REFERENCES "Frequency"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_adequateWasteStorageReceptacleId_fkey" FOREIGN KEY ("adequateWasteStorageReceptacleId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_approvedWasteStorageReceptacleId_fkey" FOREIGN KEY ("approvedWasteStorageReceptacleId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteCollectorRegistrationId_fkey" FOREIGN KEY ("wasteCollectorRegistrationId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteSortingId_fkey" FOREIGN KEY ("wasteSortingId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_receiptsUpToDateId_fkey" FOREIGN KEY ("receiptsUpToDateId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_solidWasteReceptacleId_fkey" FOREIGN KEY ("solidWasteReceptacleId") REFERENCES "SolidWasteReceptacle"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWasteCollection" ADD CONSTRAINT "PremisesWasteCollection_wasteCollectionTypeId_fkey" FOREIGN KEY ("wasteCollectionTypeId") REFERENCES "WasteCollectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWasteCollection" ADD CONSTRAINT "PremisesWasteCollection_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_safeConditionUncookedId_fkey" FOREIGN KEY ("safeConditionUncookedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_safeConditionCookedId_fkey" FOREIGN KEY ("safeConditionCookedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_animalSpaceConditionId_fkey" FOREIGN KEY ("animalSpaceConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_vaccinationProofId_fkey" FOREIGN KEY ("vaccinationProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_yesNoId_fkey" FOREIGN KEY ("yesNoId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_pestSignId_fkey" FOREIGN KEY ("pestSignId") REFERENCES "PestSign"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_hygieneSectionId_fkey" FOREIGN KEY ("hygieneSectionId") REFERENCES "HygieneSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_obnoxiousTradeNearbyId_fkey" FOREIGN KEY ("obnoxiousTradeNearbyId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_actionId_fkey" FOREIGN KEY ("actionId") REFERENCES "Action"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_nuisanceId_fkey" FOREIGN KEY ("nuisanceId") REFERENCES "Nuisance"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_storageFinishedProductId_fkey" FOREIGN KEY ("storageFinishedProductId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_consumableTypeId_fkey" FOREIGN KEY ("consumableTypeId") REFERENCES "ConsumableType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_nonConsumableTypeId_fkey" FOREIGN KEY ("nonConsumableTypeId") REFERENCES "NonConsumableType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SlaughterHouse" ADD CONSTRAINT "SlaughterHouse_slaughterRoomsAvailableId_fkey" FOREIGN KEY ("slaughterRoomsAvailableId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1227,376 +1551,22 @@ ALTER TABLE "CommunalContainer" ADD CONSTRAINT "CommunalContainer_containerCondi
 ALTER TABLE "CommunalContainer" ADD CONSTRAINT "CommunalContainer_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_publishedById_fkey" FOREIGN KEY ("publishedById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PremisesTypes" ADD CONSTRAINT "PremisesTypes_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_submittedById_fkey" FOREIGN KEY ("submittedById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PremisesServices" ADD CONSTRAINT "PremisesServices_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PremisesServicesProvided" ADD CONSTRAINT "PremisesServicesProvided_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionTypeId_fkey" FOREIGN KEY ("inspectionTypeId") REFERENCES "InspectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PremisesServicesProvided" ADD CONSTRAINT "PremisesServicesProvided_premisesServiceId_fkey" FOREIGN KEY ("premisesServiceId") REFERENCES "PremisesServices"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_healthServicesProvidedId_fkey" FOREIGN KEY ("healthServicesProvidedId") REFERENCES "PremisesHealthServicesProvided"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PremisesServicesProvided" ADD CONSTRAINT "PremisesServicesProvided_premisesSubtypeSectionId_fkey" FOREIGN KEY ("premisesSubtypeSectionId") REFERENCES "PremisesSubtypeSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_institutionTypeId_fkey" FOREIGN KEY ("institutionTypeId") REFERENCES "InstitutionType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PremisesSubtypeSection" ADD CONSTRAINT "PremisesSubtypeSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_communityId_fkey" FOREIGN KEY ("communityId") REFERENCES "Community"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_subdistrictId_fkey" FOREIGN KEY ("subdistrictId") REFERENCES "Subdistrict"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_zoneId_fkey" FOREIGN KEY ("zoneId") REFERENCES "Zone"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_facilityCleanlinessId_fkey" FOREIGN KEY ("facilityCleanlinessId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_separateWardId_fkey" FOREIGN KEY ("separateWardId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_smokingAreaId_fkey" FOREIGN KEY ("smokingAreaId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_pantryAvailabilityId_fkey" FOREIGN KEY ("pantryAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_labourersOfficeAvailabilityId_fkey" FOREIGN KEY ("labourersOfficeAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_storeRoomAvailabilityId_fkey" FOREIGN KEY ("storeRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_protectiveClothingId_fkey" FOREIGN KEY ("protectiveClothingId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_firstAidAvailabilityId_fkey" FOREIGN KEY ("firstAidAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_toiletAvailabilityId_fkey" FOREIGN KEY ("toiletAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_urinalAvailabilityId_fkey" FOREIGN KEY ("urinalAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_soundProofId_fkey" FOREIGN KEY ("soundProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_disabilityFriendlyId_fkey" FOREIGN KEY ("disabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_multipleExitId_fkey" FOREIGN KEY ("multipleExitId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_yesNoId_fkey" FOREIGN KEY ("yesNoId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_respondentDesignationId_fkey" FOREIGN KEY ("respondentDesignationId") REFERENCES "RespondentDesignation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_eateryTypeId_fkey" FOREIGN KEY ("eateryTypeId") REFERENCES "EateryType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_eateryPremisesTypeId_fkey" FOREIGN KEY ("eateryPremisesTypeId") REFERENCES "EateryPremisesType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_healthPremisesTypeId_fkey" FOREIGN KEY ("healthPremisesTypeId") REFERENCES "HealthPremisesType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_ownershipTypeId_fkey" FOREIGN KEY ("ownershipTypeId") REFERENCES "OwnershipType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_industryCategoryId_fkey" FOREIGN KEY ("industryCategoryId") REFERENCES "IndustryCategory"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_temporaryPermanentId_fkey" FOREIGN KEY ("temporaryPermanentId") REFERENCES "TemporaryPermanent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_marketLorryParkPremisesId_fkey" FOREIGN KEY ("marketLorryParkPremisesId") REFERENCES "MarketLorryParkPremises"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_industryPremisesSubsectionId_fkey" FOREIGN KEY ("industryPremisesSubsectionId") REFERENCES "IndustryPremisesSubsection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_businessLicenceAvailabilityId_fkey" FOREIGN KEY ("businessLicenceAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_medicalCertAvailabilityId_fkey" FOREIGN KEY ("medicalCertAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_operatingLicenceAvailabilityId_fkey" FOREIGN KEY ("operatingLicenceAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_propertyRateAvailabilityId_fkey" FOREIGN KEY ("propertyRateAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_structurePermitAvailabilityId_fkey" FOREIGN KEY ("structurePermitAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_habitationCertificateAvailabilityId_fkey" FOREIGN KEY ("habitationCertificateAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_fumigationCertificateAvailabilityId_fkey" FOREIGN KEY ("fumigationCertificateAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_buildingPermitId_fkey" FOREIGN KEY ("buildingPermitId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "MarketLorryParkPremises" ADD CONSTRAINT "MarketLorryParkPremises_marketLorryParkTypeId_fkey" FOREIGN KEY ("marketLorryParkTypeId") REFERENCES "MarketLorryParkType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "MarketLorryParkPremises" ADD CONSTRAINT "MarketLorryParkPremises_derattingFrequencyId_fkey" FOREIGN KEY ("derattingFrequencyId") REFERENCES "DerattingFrequency"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PopulationSection" ADD CONSTRAINT "PopulationSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterFlowFrequencyId_fkey" FOREIGN KEY ("waterFlowFrequencyId") REFERENCES "Frequency"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterSupplyTypeId_fkey" FOREIGN KEY ("waterSupplyTypeId") REFERENCES "WaterSupplyType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterTreatmentTypeId_fkey" FOREIGN KEY ("waterTreatmentTypeId") REFERENCES "WaterTreatmentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterConditionId_fkey" FOREIGN KEY ("waterConditionId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageConditionSafeId_fkey" FOREIGN KEY ("waterStorageConditionSafeId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_distanceWaterStorageSanitaryId_fkey" FOREIGN KEY ("distanceWaterStorageSanitaryId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSourceId_fkey" FOREIGN KEY ("waterSourceId") REFERENCES "WaterSourceType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_analCleansingMaterialMgtId_fkey" FOREIGN KEY ("analCleansingMaterialMgtId") REFERENCES "AnalCleansingMaterialMgt"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_effluentManagementId_fkey" FOREIGN KEY ("effluentManagementId") REFERENCES "EffluentManagement"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_excretaContainmentId_fkey" FOREIGN KEY ("excretaContainmentId") REFERENCES "ExcretaContainment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_excretaDisposalMethodId_fkey" FOREIGN KEY ("excretaDisposalMethodId") REFERENCES "ExcretaDisposalMethod"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_facilityConnectedSewerId_fkey" FOREIGN KEY ("facilityConnectedSewerId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_effluentManagementReportId_fkey" FOREIGN KEY ("effluentManagementReportId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_drainsConditionId_fkey" FOREIGN KEY ("drainsConditionId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_yesNoId_fkey" FOREIGN KEY ("yesNoId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_drainTypeId_fkey" FOREIGN KEY ("drainTypeId") REFERENCES "DrainType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteCollectionFrequencyId_fkey" FOREIGN KEY ("wasteCollectionFrequencyId") REFERENCES "Frequency"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_approvedWasteStorageReceptacleId_fkey" FOREIGN KEY ("approvedWasteStorageReceptacleId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteCollectorRegistrationId_fkey" FOREIGN KEY ("wasteCollectorRegistrationId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteSortingId_fkey" FOREIGN KEY ("wasteSortingId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_receiptsUpToDateId_fkey" FOREIGN KEY ("receiptsUpToDateId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_separateStaffUrinalId_fkey" FOREIGN KEY ("separateStaffUrinalId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_bathroomAdequacyId_fkey" FOREIGN KEY ("bathroomAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletAdequacyId_fkey" FOREIGN KEY ("toiletAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_urinalAdequacyId_fkey" FOREIGN KEY ("urinalAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletDisabilityFriendlyId_fkey" FOREIGN KEY ("toiletDisabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_urinalDisabilityFriendlyId_fkey" FOREIGN KEY ("urinalDisabilityFriendlyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_availToiletFaciltyMgtId_fkey" FOREIGN KEY ("availToiletFaciltyMgtId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletGenderSensivityId_fkey" FOREIGN KEY ("toiletGenderSensivityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_urinalGenderSensivityId_fkey" FOREIGN KEY ("urinalGenderSensivityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_toiletPitPositionId_fkey" FOREIGN KEY ("toiletPitPositionId") REFERENCES "ToiletPitPosition"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesToiletTypeId_fkey" FOREIGN KEY ("premisesToiletTypeId") REFERENCES "PremisesToiletType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesEffluentManagementId_fkey" FOREIGN KEY ("premisesEffluentManagementId") REFERENCES "PremisesEffluentManagement"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesExcretaDisposalMethodId_fkey" FOREIGN KEY ("premisesExcretaDisposalMethodId") REFERENCES "PremisesExcretaDisposalMethod"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWashroomFacility" ADD CONSTRAINT "PremisesWashroomFacility_premisesExcretaContainmentId_fkey" FOREIGN KEY ("premisesExcretaContainmentId") REFERENCES "PremisesExcretaContainment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesToiletType" ADD CONSTRAINT "PremisesToiletType_toiletTypeId_fkey" FOREIGN KEY ("toiletTypeId") REFERENCES "ToiletType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesEffluentManagement" ADD CONSTRAINT "PremisesEffluentManagement_effluentManagementId_fkey" FOREIGN KEY ("effluentManagementId") REFERENCES "EffluentManagement"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesExcretaDisposalMethod" ADD CONSTRAINT "PremisesExcretaDisposalMethod_excretaDisposalMethodId_fkey" FOREIGN KEY ("excretaDisposalMethodId") REFERENCES "ExcretaDisposalMethod"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesExcretaContainment" ADD CONSTRAINT "PremisesExcretaContainment_excretaContainmentId_fkey" FOREIGN KEY ("excretaContainmentId") REFERENCES "ExcretaContainment"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_solidWasteReceptacleId_fkey" FOREIGN KEY ("solidWasteReceptacleId") REFERENCES "SolidWasteReceptacle"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_greyWaterDisposalId_fkey" FOREIGN KEY ("greyWaterDisposalId") REFERENCES "GreyWaterDisposal"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_shepClubExistenceId_fkey" FOREIGN KEY ("shepClubExistenceId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_pantryFacilityAdequacyId_fkey" FOREIGN KEY ("pantryFacilityAdequacyId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_approvedHandwashingFacilityAvailabilityId_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_evidenceStagnationId_fkey" FOREIGN KEY ("evidenceStagnationId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_disinfectionId_fkey" FOREIGN KEY ("disinfectionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_disinfestationId_fkey" FOREIGN KEY ("disinfestationId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_safeConditionUncookedId_fkey" FOREIGN KEY ("safeConditionUncookedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_safeConditionCookedId_fkey" FOREIGN KEY ("safeConditionCookedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_publicBathRoomConditionId_fkey" FOREIGN KEY ("publicBathRoomConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_pondingEvidenceId_fkey" FOREIGN KEY ("pondingEvidenceId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_animalSpaceConditionId_fkey" FOREIGN KEY ("animalSpaceConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_animalsPermitId_fkey" FOREIGN KEY ("animalsPermitId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_vaccinationProofId_fkey" FOREIGN KEY ("vaccinationProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "HygieneSection" ADD CONSTRAINT "HygieneSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_pestSignId_fkey" FOREIGN KEY ("pestSignId") REFERENCES "PestSign"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_hygieneSectionId_fkey" FOREIGN KEY ("hygieneSectionId") REFERENCES "HygieneSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_obnoxiousTradeNearbyId_fkey" FOREIGN KEY ("obnoxiousTradeNearbyId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_actionId_fkey" FOREIGN KEY ("actionId") REFERENCES "Action"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_nuisanceId_fkey" FOREIGN KEY ("nuisanceId") REFERENCES "Nuisance"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_storageFinishedProductId_fkey" FOREIGN KEY ("storageFinishedProductId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_consumableTypeId_fkey" FOREIGN KEY ("consumableTypeId") REFERENCES "ConsumableType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_nonConsumableTypeId_fkey" FOREIGN KEY ("nonConsumableTypeId") REFERENCES "NonConsumableType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PremisesSubtypeSection" ADD CONSTRAINT "PremisesSubtypeSection_premisesTypesId_fkey" FOREIGN KEY ("premisesTypesId") REFERENCES "PremisesTypes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,9 +1,9 @@
 export const inspectionForm = [
   {
-    name: "Eatery",
+    name: "Residential",
   },
   {
-    name: "Residential",
+    name: "Eatery",
   },
   {
     name: "Health",
@@ -11,19 +11,22 @@ export const inspectionForm = [
   {
     name: "Hospitality",
   },
-  {
-    name: "Sanitary",
-  },
+
   {
     name: "Institution",
   },
+
   {
-    name: "Sanitary",
+    name: "Industry",
   },
   {
     name: "Markets & Lorry Parks",
   },
   {
-    name: "Industry",
+    name: "Sanitary",
   },
 ];
+
+
+
+

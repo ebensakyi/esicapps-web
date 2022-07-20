@@ -39,8 +39,14 @@ import { action } from "./action";
 import { pestSign } from "./pestSign";
 import { temporaryPermanent } from "./temporaryPermanent";
 import { toiletPitPosition } from "./toiletPitPosition";
-// import { healthPremisesType } from "./healthPremisesType";
-// import { hospitalityPremisesType } from "./hospitalityPremisesType";
+//  import { healthPremisesType } from "./healthPremisesType";
+//  import { healthPremisesService } from "./healthPremisesService";
+//  import { hospitalityPremisesType } from "./hospitalityPremisesType";
+//  import {hospitalityPremisesService } from "./hospitalityPremisesService";
+
+ import { premisesService } from "./premisesService";
+ import { premisesType } from "./premisesType";
+
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { industryCategory } from "./industryCategory";
 import { consumableType } from "./consumableType";
@@ -106,9 +112,7 @@ async function main() {
     data: respondentDesignation,
   });
 
-  await prisma.service.createMany({
-    data: service,
-  });
+ 
   await prisma.solidWasteReceptacle.createMany({
     data: solidWasteReceptacle,
   });
@@ -169,9 +173,21 @@ async function main() {
   // await prisma.healthPremisesType.createMany({
   //   data: healthPremisesType,
   // });
+  // await prisma.healthPremisesService.createMany({
+  //   data: healthPremisesService,
+  // });
   // await prisma.hospitalityPremisesType.createMany({
   //   data: hospitalityPremisesType,
   // });
+  // await prisma.hospitalityPremisesService.createMany({
+  //   data: hospitalityPremisesService,
+  // });
+  await prisma.premisesServices.createMany({
+    data: premisesService,
+  });
+  await prisma.premisesTypes.createMany({
+    data: premisesType,
+  });
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
   });
@@ -190,6 +206,7 @@ async function main() {
   await prisma.ownershipType.createMany({
     data: ownershipType,
   });
+
 }
 
 main()
