@@ -48,7 +48,7 @@ import { toiletPitPosition } from "./toiletPitPosition";
  import { premisesType } from "./premisesType";
 
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
-import { industryCategory } from "./industryCategory";
+import { premisesCategory } from "./premisesCategory";
 import { consumableType } from "./consumableType";
 import { nonConsumableType } from "./nonConsumableType";
 import { derattingFrequency } from "./derattingFrequency";
@@ -185,14 +185,14 @@ async function main() {
   await prisma.premisesServices.createMany({
     data: premisesService,
   });
-  await prisma.premisesTypes.createMany({
+  await prisma.premisesType.createMany({
     data: premisesType,
   });
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
   });
-  await prisma.industryCategory.createMany({
-    data: industryCategory,
+  await prisma.premisesCategory.createMany({
+    data: premisesCategory,
   });
   await prisma.consumableType.createMany({
     data: consumableType,

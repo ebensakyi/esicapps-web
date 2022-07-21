@@ -152,7 +152,8 @@ export const premisesType = [
   {
     name: "Lorry park",
     inspectionFormId: 7,
-  }, {
+  },
+  {
     name: "Market and lorry park",
     inspectionFormId: 7,
   },

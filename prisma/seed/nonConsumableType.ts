@@ -10,7 +10,7 @@ export const nonConsumableType = [
     name: "Carpentry shop",
   },
   {
-    name: "Fillinig station",
+    name: "Filling station",
   },
   {
     name: "Salon",

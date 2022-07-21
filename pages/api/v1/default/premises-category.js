@@ -5,7 +5,7 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const premisesType = await prisma.premisesType.create({ data });
+    const premisesType = await prisma.premisesCategory.create({ data });
     res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { premisesType } });
@@ -24,7 +24,7 @@ const get = async (req, res) => {
   try {
     //let inspectionFormId = Number(req.query.id);
 
-    const premisesType = await prisma.premisesType.findMany({
+    const premisesType = await prisma.premisesCategory.findMany({
       where: {deleted: 0 },
     });
     return res.status(200).json(premisesType);
