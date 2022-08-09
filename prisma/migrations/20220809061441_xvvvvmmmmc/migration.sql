@@ -960,30 +960,45 @@ CREATE TABLE "IndustryPremisesSubsection" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "productTypeId" INTEGER,
 
     CONSTRAINT "IndustryPremisesSubsection_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "ConsumableType" (
+CREATE TABLE "ProductType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "industryCategoryId" INTEGER NOT NULL,
 
-    CONSTRAINT "ConsumableType_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ProductType_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "NonConsumableType" (
+CREATE TABLE "IndustryCategory" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "NonConsumableType_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "IndustryCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "InstitutionCategory" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "InstitutionCategory_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -996,6 +1011,66 @@ CREATE TABLE "PremisesCategory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "PremisesCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "HealthPremisesType" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "HealthPremisesType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "HospitalityPremisesType" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "HospitalityPremisesType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "EateryPremisesType" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "EateryPremisesType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "HealthPremisesService" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "HealthPremisesService_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "HospitalityPremisesService" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "HospitalityPremisesService_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1482,13 +1557,34 @@ ALTER TABLE "PremisesSubtypeSection" ADD CONSTRAINT "PremisesSubtypeSection_prem
 ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_storageFinishedProductId_fkey" FOREIGN KEY ("storageFinishedProductId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_consumableTypeId_fkey" FOREIGN KEY ("consumableTypeId") REFERENCES "ConsumableType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_productTypeId_fkey" FOREIGN KEY ("productTypeId") REFERENCES "ProductType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_nonConsumableTypeId_fkey" FOREIGN KEY ("nonConsumableTypeId") REFERENCES "NonConsumableType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProductType" ADD CONSTRAINT "ProductType_industryCategoryId_fkey" FOREIGN KEY ("industryCategoryId") REFERENCES "IndustryCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryCategory" ADD CONSTRAINT "IndustryCategory_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InstitutionCategory" ADD CONSTRAINT "InstitutionCategory_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesCategory" ADD CONSTRAINT "PremisesCategory_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesType" ADD CONSTRAINT "HealthPremisesType_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HospitalityPremisesType" ADD CONSTRAINT "HospitalityPremisesType_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EateryPremisesType" ADD CONSTRAINT "EateryPremisesType_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesService" ADD CONSTRAINT "HealthPremisesService_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HospitalityPremisesService" ADD CONSTRAINT "HospitalityPremisesService_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SlaughterHouse" ADD CONSTRAINT "SlaughterHouse_slaughterRoomsAvailableId_fkey" FOREIGN KEY ("slaughterRoomsAvailableId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

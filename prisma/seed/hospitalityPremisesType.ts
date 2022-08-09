@@ -1,29 +1,38 @@
-// export const hospitalityPremisesType = [
-//     {
-//       name: "Hotel",
-//     },
-//     {
-//       name: "Restaurant",
-//     },
-//     {
-//       name: "Recreational facility",
-//     },
-//     {
-//       name: "Hostel",
-//     },
-//     {
-//       name: "Motel",
-//     },
-//     {
-//       name: "Guest House",
-//     },
-//     {
-//       name: "Chop bar",
-//     },
-//     {
-//       name: "Table top",
-//     },
-//     {
-//       name: "Others",
-//     },
-//   ];
+export const hospitalityPremisesType = [
+  {
+    name: "Hotel",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Restaurant",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Recreational facility",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Hostel",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Motel",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Guest House",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Chop bar",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Table top",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Others",
+    inspectionFormId: 4,
+  },
+];

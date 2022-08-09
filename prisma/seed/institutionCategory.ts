@@ -1,4 +1,4 @@
-export const premisesCategory = [
+export const institutionCategory = [
 
 
   {
@@ -12,11 +12,5 @@ export const premisesCategory = [
     name: "Coorperate",
     inspectionFormId: 5,
   },
-  {
-    name: "Consumable",
-    inspectionFormId: 6,
-  }, {
-    name: "Non consumable",
-    inspectionFormId: 6,
-  },
+
 ];

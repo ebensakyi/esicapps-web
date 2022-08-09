@@ -1,36 +1,46 @@
-// export const healthPremisesType = [
-//     {
-//       name: "Hospital",
-//     },
-//     {
-//       name: "Polyclinic",
-//     },
-//     {
-//       name: "Clinic",
-//     },
-//     {
-//       name: "Maternity unit",
-//     },
-//     {
-//       name: "Mortuary",
-//     },
-//     {
-//       name: "Alternative health care",
-//     },
-//     {
-//       name: "Pharmacy",
-//     },
-//     {
-//       name: "Chemical shop",
-//     },
-//     {
-//       name: "Funeral home",
-//     },
-//     {
-//       name: "Veterinary clinic",
-//     },
-//     {
-//       name: "CHP Compound",
-//     },
-   
-//   ];
+export const healthPremisesType = [
+  {
+    name: "Hospital",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Polyclinic",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Clinic",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Maternity unit",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Mortuary",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Alternative health care",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Pharmacy",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Chemical shop",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Funeral home",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Veterinary clinic",
+    inspectionFormId: 3,
+  },
+  {
+    name: "CHP Compound",
+    inspectionFormId: 3,
+  },
+];

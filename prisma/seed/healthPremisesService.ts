@@ -1,23 +1,30 @@
-// export const healthPremisesService = [
-//   {
-//     name: "Outpatient",
-//   },
-//   {
-//     name: "Inpatient",
-//   },
-//   {
-//     name: "Surgical",
-//   },
-//   {
-//     name: "Maternity",
-//   },
-//   {
-//     name: "Undertaking",
-//   },
-//   {
-//     name: "Mortuary",
-//   },
-//   {
-//     name: "Others",
-//   },
-// ];
+export const healthPremisesService = [
+  {
+    name: "Outpatient",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Inpatient",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Surgical",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Maternity",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Undertaking",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Mortuary",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Others",
+    inspectionFormId: 3,
+  },
+];

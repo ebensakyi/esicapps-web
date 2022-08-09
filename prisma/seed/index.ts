@@ -19,7 +19,6 @@ import { excretaDisposalMethod } from "./excretaDisposalMethod";
 import { facility } from "./facility";
 import { frequency } from "./frequency";
 import { inspectionType } from "./inspectionType";
-import { service } from "./service";
 import { respondentDesignation } from "./respondentDesignation";
 import { solidWasteReceptacle } from "./solidWasteReceptacle";
 import { storageCondition } from "./storageCondition";
@@ -39,20 +38,23 @@ import { action } from "./action";
 import { pestSign } from "./pestSign";
 import { temporaryPermanent } from "./temporaryPermanent";
 import { toiletPitPosition } from "./toiletPitPosition";
-//  import { healthPremisesType } from "./healthPremisesType";
-//  import { healthPremisesService } from "./healthPremisesService";
-//  import { hospitalityPremisesType } from "./hospitalityPremisesType";
-//  import {hospitalityPremisesService } from "./hospitalityPremisesService";
+import { healthPremisesType } from "./healthPremisesType";
+import { healthPremisesService } from "./healthPremisesService";
+import { hospitalityPremisesType } from "./hospitalityPremisesType";
+import { hospitalityPremisesService } from "./hospitalityPremisesService";
 
- import { premisesService } from "./premisesService";
- import { premisesType } from "./premisesType";
+import { premisesService } from "./premisesService";
+import { premisesType } from "./premisesType";
 
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
-import { premisesCategory } from "./premisesCategory";
-import { consumableType } from "./consumableType";
-import { nonConsumableType } from "./nonConsumableType";
+import { institutionCategory } from "./institutionCategory";
+import { industryCategory } from "./industryCategory";
+
+// import { consumableType } from "./consumableType";
+// import { nonConsumableType } from "./nonConsumableType";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
+import { productType } from "./productType";
 
 async function main() {
   await prisma.inspectionForm.createMany({
@@ -112,7 +114,6 @@ async function main() {
     data: respondentDesignation,
   });
 
- 
   await prisma.solidWasteReceptacle.createMany({
     data: solidWasteReceptacle,
   });
@@ -170,43 +171,43 @@ async function main() {
   await prisma.toiletPitPosition.createMany({
     data: toiletPitPosition,
   });
-  // await prisma.healthPremisesType.createMany({
-  //   data: healthPremisesType,
-  // });
-  // await prisma.healthPremisesService.createMany({
-  //   data: healthPremisesService,
-  // });
-  // await prisma.hospitalityPremisesType.createMany({
-  //   data: hospitalityPremisesType,
-  // });
-  // await prisma.hospitalityPremisesService.createMany({
-  //   data: hospitalityPremisesService,
-  // });
-  await prisma.premisesServices.createMany({
-    data: premisesService,
+  await prisma.healthPremisesType.createMany({
+    data: healthPremisesType,
   });
+  await prisma.healthPremisesService.createMany({
+    data: healthPremisesService,
+  });
+  await prisma.hospitalityPremisesType.createMany({
+    data: hospitalityPremisesType,
+  });
+  await prisma.hospitalityPremisesService.createMany({
+    data: hospitalityPremisesService,
+  });
+  // await prisma.premisesServices.createMany({
+  //   data: premisesService,
+  // });
   await prisma.premisesType.createMany({
     data: premisesType,
   });
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
   });
-  await prisma.premisesCategory.createMany({
-    data: premisesCategory,
+  await prisma.institutionCategory.createMany({
+    data: institutionCategory,
   });
-  await prisma.consumableType.createMany({
-    data: consumableType,
+  await prisma.industryCategory.createMany({
+    data: industryCategory,
   });
-  await prisma.nonConsumableType.createMany({
-    data: nonConsumableType,
+  await prisma.productType.createMany({
+    data: productType,
   });
+
   await prisma.derattingFrequency.createMany({
     data: derattingFrequency,
   });
   await prisma.ownershipType.createMany({
     data: ownershipType,
   });
-
 }
 
 main()
