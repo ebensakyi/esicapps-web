@@ -119,9 +119,6 @@ model InspectionForm {
   updatedAt                  DateTime                     @updatedAt
   Inspection                 Inspection[]
   Facility                   Facility[]
-  PremisesServices           PremisesServices[]
-  PremisesType               PremisesType[]
-  PremisesCategory           PremisesCategory[]
   IndustryCategory           IndustryCategory[]
   InstitutionCategory        InstitutionCategory[]
   HealthPremisesType         HealthPremisesType[]
@@ -129,6 +126,8 @@ model InspectionForm {
   EateryPremisesType         EateryPremisesType[]
   HealthPremisesService      HealthPremisesService[]
   HospitalityPremisesService HospitalityPremisesService[]
+  MarketPremisesType         MarketPremisesType[]
+  SanitaryPremisesType       SanitaryPremisesType[]
 }
 
 model UserType {
@@ -556,13 +555,12 @@ model Inspection {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  FacilitySection          FacilitySection[]
-  PopulationSection        PopulationSection[]
-  WaterSection             WaterSection[]
-  LiquidWasteSection       LiquidWasteSection[]
-  SolidWasteSection        SolidWasteSection[]
-  LicencePermitSection     LicencePermitSection[]
-  PremisesServicesProvided PremisesServicesProvided[]
+  FacilitySection      FacilitySection[]
+  PopulationSection    PopulationSection[]
+  WaterSection         WaterSection[]
+  LiquidWasteSection   LiquidWasteSection[]
+  SolidWasteSection    SolidWasteSection[]
+  LicencePermitSection LicencePermitSection[]
 
   ConclusionSection ConclusionSection[]
   Picture           Picture[]
@@ -570,8 +568,7 @@ model Inspection {
   InspectionType    InspectionType      @relation(fields: [inspectionTypeId], references: [id])
   submittedBy       User                @relation("submittedBy", fields: [submittedById], references: [id])
 
-  HygieneSection         HygieneSection[]
-  PremisesSubtypeSection PremisesSubtypeSection[]
+  HygieneSection HygieneSection[]
 }
 
 model FacilitySection {
@@ -662,9 +659,6 @@ model FacilitySection {
 
   disinfection   YesNo? @relation("disinfection", fields: [disinfectionId], references: [id])
   disinfestation YesNo? @relation("disinfestation", fields: [disinfestationId], references: [id])
-
-  PremisesCategory   PremisesCategory? @relation(fields: [premisesCategoryId], references: [id])
-  premisesCategoryId Int?
 }
 
 model LicencePermitSection {
@@ -1227,58 +1221,58 @@ model Picture {
 
 ///
 
-model PremisesType {
-  id                     Int                      @id @default(autoincrement())
-  name                   String                   @db.VarChar(255)
-  inspectionFormId       Int
-  deleted                Int?                     @default(0)
-  createdAt              DateTime                 @default(now())
-  updatedAt              DateTime                 @updatedAt
-  InspectionForm         InspectionForm           @relation(fields: [inspectionFormId], references: [id])
-  PremisesSubtypeSection PremisesSubtypeSection[]
-}
+// model PremisesType {
+//   id                     Int                      @id @default(autoincrement())
+//   name                   String                   @db.VarChar(255)
+//   inspectionFormId       Int
+//   deleted                Int?                     @default(0)
+//   createdAt              DateTime                 @default(now())
+//   updatedAt              DateTime                 @updatedAt
+//   InspectionForm         InspectionForm           @relation(fields: [inspectionFormId], references: [id])
+//   PremisesSubtypeSection PremisesSubtypeSection[]
+// }
 
-model PremisesServices {
-  id                       Int                        @id @default(autoincrement())
-  name                     String                     @db.VarChar(255)
-  inspectionFormId         Int
-  deleted                  Int?                       @default(0)
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  PremisesServicesProvided PremisesServicesProvided[]
-  InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
-}
+// model PremisesServices {
+//   id                       Int                        @id @default(autoincrement())
+//   name                     String                     @db.VarChar(255)
+//   inspectionFormId         Int
+//   deleted                  Int?                       @default(0)
+//   createdAt                DateTime                   @default(now())
+//   updatedAt                DateTime                   @updatedAt
+//   PremisesServicesProvided PremisesServicesProvided[]
+//   InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
+// }
 
-model PremisesServicesProvided {
-  id                Int              @id @default(autoincrement())
-  deleted           Int?             @default(0)
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
-  PremisesServices  PremisesServices @relation(fields: [premisesServiceId], references: [id])
-  premisesServiceId Int
+// model PremisesServicesProvided {
+//   id                Int              @id @default(autoincrement())
+//   deleted           Int?             @default(0)
+//   createdAt         DateTime         @default(now())
+//   updatedAt         DateTime         @updatedAt
+//   PremisesServices  PremisesServices @relation(fields: [premisesServiceId], references: [id])
+//   premisesServiceId Int
 
-  Inspection   Inspection? @relation(fields: [inspectionId], references: [id])
-  inspectionId Int?
+//   Inspection   Inspection? @relation(fields: [inspectionId], references: [id])
+//   inspectionId Int?
 
-  PremisesSubtypeSection   PremisesSubtypeSection @relation(fields: [premisesSubtypeSectionId], references: [id])
-  premisesSubtypeSectionId Int
-}
+//   PremisesSubtypeSection   PremisesSubtypeSection @relation(fields: [premisesSubtypeSectionId], references: [id])
+//   premisesSubtypeSectionId Int
+// }
 
-model PremisesSubtypeSection {
-  id             Int  @id @default(autoincrement())
-  premisesTypeId Int
-  ablutionSlabId Int?
-  inspectionId   Int
+// model PremisesSubtypeSection {
+//   id             Int  @id @default(autoincrement())
+//   premisesTypeId Int
+//   ablutionSlabId Int?
+//   inspectionId   Int
 
-  Inspection   Inspection   @relation(fields: [inspectionId], references: [id])
-  PremisesType PremisesType @relation(fields: [premisesTypeId], references: [id])
+//   Inspection   Inspection   @relation(fields: [inspectionId], references: [id])
+//   PremisesType PremisesType @relation(fields: [premisesTypeId], references: [id])
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
 
-  PremisesServicesProvided PremisesServicesProvided[]
-}
+//   PremisesServicesProvided PremisesServicesProvided[]
+// }
 
 //  var selectedAblutionSlab,
 //       selectedPremiseType,
@@ -1347,16 +1341,16 @@ model InstitutionCategory {
   updatedAt        DateTime       @updatedAt
 }
 
-model PremisesCategory {
-  id               Int               @id @default(autoincrement())
-  name             String            @db.VarChar(255)
-  inspectionFormId Int
-  deleted          Int?              @default(0)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  InspectionForm   InspectionForm    @relation(fields: [inspectionFormId], references: [id])
-  FacilitySection  FacilitySection[]
-}
+// model PremisesCategory {
+//   id               Int               @id @default(autoincrement())
+//   name             String            @db.VarChar(255)
+//   inspectionFormId Int
+//   deleted          Int?              @default(0)
+//   createdAt        DateTime          @default(now())
+//   updatedAt        DateTime          @updatedAt
+//   InspectionForm   InspectionForm    @relation(fields: [inspectionFormId], references: [id])
+//   FacilitySection  FacilitySection[]
+// }
 
 model HealthPremisesType {
   id               Int            @id @default(autoincrement())
@@ -1379,6 +1373,26 @@ model HospitalityPremisesType {
 }
 
 model EateryPremisesType {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  inspectionFormId Int
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model MarketPremisesType {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  inspectionFormId Int
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model SanitaryPremisesType {
   id               Int            @id @default(autoincrement())
   name             String         @db.VarChar(255)
   inspectionFormId Int

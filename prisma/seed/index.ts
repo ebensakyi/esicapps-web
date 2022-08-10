@@ -44,14 +44,15 @@ import { hospitalityPremisesType } from "./hospitalityPremisesType";
 import { hospitalityPremisesService } from "./hospitalityPremisesService";
 
 import { premisesService } from "./premisesService";
-import { premisesType } from "./premisesType";
+import { sanitaryPremisesType } from "./sanitaryPremisesType";
+import { marketPremisesType } from "./marketPremisesType";
 
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { institutionCategory } from "./institutionCategory";
 import { industryCategory } from "./industryCategory";
 
 // import { consumableType } from "./consumableType";
-// import { nonConsumableType } from "./nonConsumableType";
+import { eateryPremisesType } from "./eateryPremisesType";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
 import { productType } from "./productType";
@@ -186,8 +187,11 @@ async function main() {
   // await prisma.premisesServices.createMany({
   //   data: premisesService,
   // });
-  await prisma.premisesType.createMany({
-    data: premisesType,
+  await prisma.marketPremisesType.createMany({
+    data: marketPremisesType,
+  });
+  await prisma.sanitaryPremisesType.createMany({
+    data: sanitaryPremisesType,
   });
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
@@ -207,6 +211,9 @@ async function main() {
   });
   await prisma.ownershipType.createMany({
     data: ownershipType,
+  });
+  await prisma.eateryPremisesType.createMany({
+    data: eateryPremisesType,
   });
 }
 

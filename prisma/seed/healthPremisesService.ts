@@ -24,6 +24,14 @@ export const healthPremisesService = [
     inspectionFormId: 3,
   },
   {
+    name: "Alternative health care",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Veterinary",
+    inspectionFormId: 3,
+  },
+  {
     name: "Others",
     inspectionFormId: 3,
   },
