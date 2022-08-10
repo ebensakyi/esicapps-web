@@ -1035,6 +1035,18 @@ CREATE TABLE "HospitalityPremisesService" (
 );
 
 -- CreateTable
+CREATE TABLE "EateryPremisesCategory" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "EateryPremisesCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "SlaughterHouse" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -1525,6 +1537,9 @@ ALTER TABLE "HealthPremisesService" ADD CONSTRAINT "HealthPremisesService_inspec
 
 -- AddForeignKey
 ALTER TABLE "HospitalityPremisesService" ADD CONSTRAINT "HospitalityPremisesService_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EateryPremisesCategory" ADD CONSTRAINT "EateryPremisesCategory_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SlaughterHouse" ADD CONSTRAINT "SlaughterHouse_slaughterRoomsAvailableId_fkey" FOREIGN KEY ("slaughterRoomsAvailableId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

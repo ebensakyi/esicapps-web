@@ -8,7 +8,7 @@ const post = async (req, res) => {
     const institutionCategory = await prisma.institutionCategory.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { institutionCategory } });
+      .json(institutionCategory);
   } catch (error) {
     if (error.code === "P2002")
       return res
@@ -20,7 +20,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const institutionCategory = await prisma.institutionCategory.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: institutionCategory });
+    return res.status(200).json(institutionCategory);
   } catch (error) {
     console.log("Error: " + error);
   }

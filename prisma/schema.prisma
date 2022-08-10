@@ -128,6 +128,7 @@ model InspectionForm {
   HospitalityPremisesService HospitalityPremisesService[]
   MarketPremisesType         MarketPremisesType[]
   SanitaryPremisesType       SanitaryPremisesType[]
+  EateryPremisesCategory     EateryPremisesCategory[]
 }
 
 model UserType {
@@ -1413,6 +1414,16 @@ model HealthPremisesService {
 }
 
 model HospitalityPremisesService {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  inspectionFormId Int
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model EateryPremisesCategory {
   id               Int            @id @default(autoincrement())
   name             String         @db.VarChar(255)
   inspectionFormId Int

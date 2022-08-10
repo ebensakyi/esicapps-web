@@ -51,7 +51,7 @@ import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { institutionCategory } from "./institutionCategory";
 import { industryCategory } from "./industryCategory";
 
-// import { consumableType } from "./consumableType";
+import { eateryPremisesCategory } from "./eateryPremisesCategory";
 import { eateryPremisesType } from "./eateryPremisesType";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
@@ -214,6 +214,9 @@ async function main() {
   });
   await prisma.eateryPremisesType.createMany({
     data: eateryPremisesType,
+  });
+  await prisma.eateryPremisesCategory.createMany({
+    data: eateryPremisesCategory,
   });
 }
 

@@ -5,22 +5,24 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const institutionType = await prisma.institutionType.create({ data });
+    const eateryPremisesCategory = await prisma.eateryPremisesCategory.create({ data });
     res
       .status(200)
-      .json(institutionType);
+      .json({ statusCode: 1, message: "Data saved", data: { eateryPremisesCategory } });
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "institutionType prefix should be unique" });
+        .json({ statusCode: 0, message: "eateryPremisesCategory should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const institutionType = await prisma.institutionType.findMany({ where: { deleted: 0 } });
-    return res.status(200).json(institutionType);
+    const eateryPremisesCategory = await prisma.eateryPremisesCategory.findMany({ where: { deleted: 0 } });
+    //return res.status(200).json({ statusCode: 1, data: action });
+    return res.status(200).json( eateryPremisesCategory);
+
   } catch (error) {
     console.log("Error: " + error);
   }
