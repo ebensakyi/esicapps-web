@@ -18,61 +18,13 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "EducationInstitutionPremises" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "educationalInstitutionTypeId" INTEGER NOT NULL,
-
-    CONSTRAINT "EducationInstitutionPremises_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "CorporateInstitutionPremises" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "corporateInstitutionTypeId" INTEGER NOT NULL,
-
-    CONSTRAINT "CorporateInstitutionPremises_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "ReligiousInstitutionPremises" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "religiousInstitutionTypeId" INTEGER NOT NULL,
-    "ablutionSlabId" INTEGER,
-
-    CONSTRAINT "ReligiousInstitutionPremises_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Institution" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "institutionTypeId" INTEGER NOT NULL,
-
-    CONSTRAINT "Institution_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "InstitutionType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "categoryId" INTEGER,
 
     CONSTRAINT "InstitutionType_pkey" PRIMARY KEY ("id")
 );
@@ -501,14 +453,12 @@ CREATE TABLE "FacilitySection" (
     "smokingAreaId" INTEGER,
     "pantryAvailabilityId" INTEGER,
     "healthPremisesTypeId" INTEGER,
-    "industryCategoryId" INTEGER,
-    "industryPremisesSubsectionId" INTEGER,
-    "institutionTypeId" INTEGER,
     "marketLorryParkPremisesId" INTEGER,
     "ownershipTypeId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "institutionTypeId" INTEGER,
 
     CONSTRAINT "FacilitySection_pkey" PRIMARY KEY ("id")
 );
@@ -897,7 +847,7 @@ CREATE TABLE "Picture" (
 );
 
 -- CreateTable
-CREATE TABLE "IndustryPremisesSubsection" (
+CREATE TABLE "IndustryPremisesSpecific" (
     "id" SERIAL NOT NULL,
     "consumableTypeId" INTEGER,
     "storageFinishedProductId" INTEGER NOT NULL,
@@ -909,21 +859,8 @@ CREATE TABLE "IndustryPremisesSubsection" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "productTypeId" INTEGER,
 
-    CONSTRAINT "IndustryPremisesSubsection_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "ProductType" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "industryCategoryId" INTEGER NOT NULL,
-
-    CONSTRAINT "ProductType_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "IndustryPremisesSpecific_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -936,6 +873,19 @@ CREATE TABLE "IndustryCategory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "IndustryCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "IndustryType" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "categoryId" INTEGER NOT NULL,
+
+    CONSTRAINT "IndustryType_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1131,19 +1081,7 @@ ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") 
 ALTER TABLE "User" ADD CONSTRAINT "User_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "EducationInstitutionPremises" ADD CONSTRAINT "EducationInstitutionPremises_educationalInstitutionTypeId_fkey" FOREIGN KEY ("educationalInstitutionTypeId") REFERENCES "Institution"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "CorporateInstitutionPremises" ADD CONSTRAINT "CorporateInstitutionPremises_corporateInstitutionTypeId_fkey" FOREIGN KEY ("corporateInstitutionTypeId") REFERENCES "Institution"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ReligiousInstitutionPremises" ADD CONSTRAINT "ReligiousInstitutionPremises_religiousInstitutionTypeId_fkey" FOREIGN KEY ("religiousInstitutionTypeId") REFERENCES "Institution"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ReligiousInstitutionPremises" ADD CONSTRAINT "ReligiousInstitutionPremises_ablutionSlabId_fkey" FOREIGN KEY ("ablutionSlabId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Institution" ADD CONSTRAINT "Institution_institutionTypeId_fkey" FOREIGN KEY ("institutionTypeId") REFERENCES "InstitutionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "InstitutionType" ADD CONSTRAINT "InstitutionType_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "InstitutionCategory"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Logs" ADD CONSTRAINT "Logs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1162,9 +1100,6 @@ ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionFormId_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionTypeId_fkey" FOREIGN KEY ("inspectionTypeId") REFERENCES "InspectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_institutionTypeId_fkey" FOREIGN KEY ("institutionTypeId") REFERENCES "InstitutionType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1252,9 +1187,6 @@ ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_temporaryPermanent
 
 -- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_marketLorryParkPremisesId_fkey" FOREIGN KEY ("marketLorryParkPremisesId") REFERENCES "MarketLorryParkPremises"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_industryPremisesSubsectionId_fkey" FOREIGN KEY ("industryPremisesSubsectionId") REFERENCES "IndustryPremisesSubsection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_animalsPermitAvailabilityId_fkey" FOREIGN KEY ("animalsPermitAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1503,16 +1435,16 @@ ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_
 ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_storageFinishedProductId_fkey" FOREIGN KEY ("storageFinishedProductId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "IndustryPremisesSubsection" ADD CONSTRAINT "IndustryPremisesSubsection_productTypeId_fkey" FOREIGN KEY ("productTypeId") REFERENCES "ProductType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ProductType" ADD CONSTRAINT "ProductType_industryCategoryId_fkey" FOREIGN KEY ("industryCategoryId") REFERENCES "IndustryCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "IndustryPremisesSpecific" ADD CONSTRAINT "IndustryPremisesSpecific_storageFinishedProductId_fkey" FOREIGN KEY ("storageFinishedProductId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "IndustryCategory" ADD CONSTRAINT "IndustryCategory_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryType" ADD CONSTRAINT "IndustryType_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryType" ADD CONSTRAINT "IndustryType_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "IndustryCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "InstitutionCategory" ADD CONSTRAINT "InstitutionCategory_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

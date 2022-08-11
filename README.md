@@ -1,1 +1,1 @@
-1. Work on Sanitary form
+1. Add category to types in institution form and others

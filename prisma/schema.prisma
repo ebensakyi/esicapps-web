@@ -48,67 +48,64 @@ model User {
 // religious
 // corporate
 
-model EducationInstitutionPremises {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
+// model EducationInstitutionPremises {
+//   id   Int    @id @default(autoincrement())
+//   name String @db.VarChar(255)
 
-  deleted                      Int?        @default(0)
-  createdAt                    DateTime    @default(now())
-  updatedAt                    DateTime    @updatedAt
-  educationalInstitutionType   Institution @relation(fields: [educationalInstitutionTypeId], references: [id])
-  educationalInstitutionTypeId Int
-}
+//   deleted                      Int?        @default(0)
+//   createdAt                    DateTime    @default(now())
+//   updatedAt                    DateTime    @updatedAt
+//   educationalInstitutionType   Institution @relation(fields: [educationalInstitutionTypeId], references: [id])
+//   educationalInstitutionTypeId Int
+// }
 
-model CorporateInstitutionPremises {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
+// model CorporateInstitutionPremises {
+//   id   Int    @id @default(autoincrement())
+//   name String @db.VarChar(255)
 
-  deleted                  Int?        @default(0)
-  createdAt                DateTime    @default(now())
-  updatedAt                DateTime    @updatedAt
-  corporateInstitutionType Institution @relation(fields: [corporateInstitutionTypeId], references: [id])
+//   deleted                  Int?        @default(0)
+//   createdAt                DateTime    @default(now())
+//   updatedAt                DateTime    @updatedAt
+//   corporateInstitutionType Institution @relation(fields: [corporateInstitutionTypeId], references: [id])
 
-  corporateInstitutionTypeId Int
-}
+//   corporateInstitutionTypeId Int
+// }
 
-model ReligiousInstitutionPremises {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
+// model ReligiousInstitutionPremises {
+//   id   Int    @id @default(autoincrement())
+//   name String @db.VarChar(255)
 
-  deleted                  Int?        @default(0)
-  createdAt                DateTime    @default(now())
-  updatedAt                DateTime    @updatedAt
-  religiousInstitutionType Institution @relation(fields: [religiousInstitutionTypeId], references: [id])
-  ablutionSlab             YesNo?      @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
+//   deleted                  Int?        @default(0)
+//   createdAt                DateTime    @default(now())
+//   updatedAt                DateTime    @updatedAt
+//   religiousInstitutionType Institution @relation(fields: [religiousInstitutionTypeId], references: [id])
+//   ablutionSlab             YesNo?      @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
 
-  religiousInstitutionTypeId Int
-  ablutionSlabId             Int?
-}
+//   religiousInstitutionTypeId Int
+//   ablutionSlabId             Int?
+// }
 
-model Institution {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
+// model Institution {
+//   id   Int    @id @default(autoincrement())
+//   name String @db.VarChar(255)
 
-  deleted                      Int?                           @default(0)
-  createdAt                    DateTime                       @default(now())
-  updatedAt                    DateTime                       @updatedAt
-  InstitutionType              InstitutionType                @relation(fields: [institutionTypeId], references: [id])
-  institutionTypeId            Int
-  EducationInstitutionPremises EducationInstitutionPremises[]
-  CorporateInstitutionPremises CorporateInstitutionPremises[]
-  ReligiousInstitutionPremises ReligiousInstitutionPremises[]
-}
+//   deleted           Int?            @default(0)
+//   createdAt         DateTime        @default(now())
+//   updatedAt         DateTime        @updatedAt
+//   InstitutionType   InstitutionType @relation(fields: [institutionTypeId], references: [id])
+//   institutionTypeId Int
+// }
 
 /////////////////////START DEFAULT SEEDED DATA ///////////////////////////
 
 model InstitutionType {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  Institution     Institution[]
-  FacilitySection FacilitySection[]
+  id                  Int                 @id @default(autoincrement())
+  name                String              @db.VarChar(255)
+  InstitutionCategory InstitutionCategory? @relation(fields: [categoryId], references: [id])
+  deleted             Int?                @default(0)
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  categoryId          Int?
 }
 
 model InspectionForm {
@@ -129,6 +126,7 @@ model InspectionForm {
   MarketPremisesType         MarketPremisesType[]
   SanitaryPremisesType       SanitaryPremisesType[]
   EateryPremisesCategory     EateryPremisesCategory[]
+  IndustryType               IndustryType[]
 }
 
 model UserType {
@@ -359,10 +357,9 @@ model YesNo {
   animalSpaceCondition      HygieneSection[]       @relation("animalSpaceCondition")
   shepClubExistence         FacilitySection[]      @relation("shepClubExistence")
 
-  soundProof         FacilitySection[]              @relation("soundProof")
-  disabilityFriendly FacilitySection[]              @relation("disabilityFriendly")
-  multipleExit       FacilitySection[]              @relation("multipleExit")
-  ablutionSlab       ReligiousInstitutionPremises[] @relation("ablutionSlab")
+  soundProof         FacilitySection[] @relation("soundProof")
+  disabilityFriendly FacilitySection[] @relation("disabilityFriendly")
+  multipleExit       FacilitySection[] @relation("multipleExit")
 
   slaughterRoomsAvailable               SlaughterHouse[]       @relation("slaughterRoomsAvailable")
   condemnationRoomAvailable             SlaughterHouse[]       @relation("condemnationRoomAvailable")
@@ -397,13 +394,13 @@ model YesNo {
   drainsCondition                LiquidWasteSection[] @relation("drainsCondition")
   receiptsUpToDate               SolidWasteSection[]  @relation("receiptsUpToDate")
 
-  obnoxiousTradeNearby       ConclusionSection[]          @relation("obnoxiousTradeNearby")
+  obnoxiousTradeNearby     ConclusionSection[]        @relation("obnoxiousTradeNearby")
   //pantryFacilityAdequacy     FacilitySection[]            @relation("pantryFacilityAdequacy")
-  bathroomAdequacy           PremisesWashroomFacility[]   @relation("bathroomAdequacy")
-  IndustryPremisesSubsection IndustryPremisesSubsection[]
-  separateStaffUrinal        PremisesWashroomFacility[]   @relation("separateStaffUrinal")
-  facilityConnectedSewer     LiquidWasteSection[]         @relation("facilityConnectedSewer")
-  animalAvailability         FacilitySection[]            @relation("animalAvailability")
+  bathroomAdequacy         PremisesWashroomFacility[] @relation("bathroomAdequacy")
+  IndustryPremisesSpecific IndustryPremisesSpecific[]
+  separateStaffUrinal      PremisesWashroomFacility[] @relation("separateStaffUrinal")
+  facilityConnectedSewer   LiquidWasteSection[]       @relation("facilityConnectedSewer")
+  animalAvailability       FacilitySection[]          @relation("animalAvailability")
 
   HygieneSection HygieneSection[]
 }
@@ -614,11 +611,9 @@ model FacilitySection {
   smokingAreaId                             Int?
   pantryAvailabilityId                      Int?
   healthPremisesTypeId                      Int?
-  industryCategoryId                        Int?
-  industryPremisesSubsectionId              Int?
-  institutionTypeId                         Int?
-  marketLorryParkPremisesId                 Int?
-  ownershipTypeId                           Int?
+
+  marketLorryParkPremisesId Int?
+  ownershipTypeId           Int?
 
   deleted             Int?     @default(0)
   createdAt           DateTime @default(now())
@@ -649,17 +644,16 @@ model FacilitySection {
 
   physicalStructure TemporaryPermanent? @relation(fields: [temporaryPermanentId], references: [id])
 
-  IndustryPremisesSubsection IndustryPremisesSubsection? @relation(fields: [industryPremisesSubsectionId], references: [id])
-  InstitutionType            InstitutionType?            @relation(fields: [institutionTypeId], references: [id])
-  OwnershipType              OwnershipType?              @relation(fields: [ownershipTypeId], references: [id])
-  MarketLorryParkPremises    MarketLorryParkPremises?    @relation(fields: [marketLorryParkPremisesId], references: [id])
+  MarketLorryParkPremises MarketLorryParkPremises? @relation(fields: [marketLorryParkPremisesId], references: [id])
 
   shepClubExistence                       YesNo? @relation("shepClubExistence", fields: [shepClubExistenceId], references: [id])
   // pantryFacilityAdequacy                  YesNo? @relation("pantryFacilityAdequacy", fields: [pantryFacilityAdequacyId], references: [id])
   approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
 
-  disinfection   YesNo? @relation("disinfection", fields: [disinfectionId], references: [id])
-  disinfestation YesNo? @relation("disinfestation", fields: [disinfestationId], references: [id])
+  disinfection               YesNo?                    @relation("disinfection", fields: [disinfectionId], references: [id])
+  disinfestation             YesNo?                    @relation("disinfestation", fields: [disinfestationId], references: [id])
+  institutionTypeId          Int?
+
 }
 
 model LicencePermitSection {
@@ -698,7 +692,6 @@ model OwnershipType {
   deleted         Int?              @default(0)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
-  FacilitySection FacilitySection[]
 }
 
 model TemporaryPermanent {
@@ -1281,7 +1274,7 @@ model Picture {
 //       selectedInstitutionType,
 //       selectedSanitaryFacilityType;
 
-model IndustryPremisesSubsection {
+model IndustryPremisesSpecific {
   id                       Int      @id @default(autoincrement())
   consumableTypeId         Int?
   storageFinishedProductId Int
@@ -1295,9 +1288,6 @@ model IndustryPremisesSubsection {
   updatedAt                DateTime @updatedAt
 
   storageFinishedProduct YesNo             @relation(fields: [storageFinishedProductId], references: [id])
-  FacilitySection        FacilitySection[]
-  ProductType            ProductType?      @relation(fields: [productTypeId], references: [id])
-  productTypeId          Int?
 }
 
 // model ProductType {
@@ -1310,16 +1300,16 @@ model IndustryPremisesSubsection {
 //   IndustryPremisesSubsection IndustryPremisesSubsection[]
 // }
 
-model ProductType {
-  id                         Int                          @id @default(autoincrement())
-  name                       String                       @db.VarChar(255)
-  IndustryCategory           IndustryCategory             @relation(fields: [industryCategoryId], references: [id])
-  deleted                    Int?                         @default(0)
-  createdAt                  DateTime                     @default(now())
-  updatedAt                  DateTime                     @updatedAt
-  IndustryPremisesSubsection IndustryPremisesSubsection[]
-  industryCategoryId         Int
-}
+// model ProductType {
+//   id                         Int                          @id @default(autoincrement())
+//   name                       String                       @db.VarChar(255)
+//   IndustryCategory           IndustryCategory             @relation(fields: [industryCategoryId], references: [id])
+//   deleted                    Int?                         @default(0)
+//   createdAt                  DateTime                     @default(now())
+//   updatedAt                  DateTime                     @updatedAt
+//   IndustryPremisesSubsection IndustryPremisesSubsection[]
+//   industryCategoryId         Int
+// }
 
 model IndustryCategory {
   id               Int            @id @default(autoincrement())
@@ -1329,17 +1319,30 @@ model IndustryCategory {
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  ProductType      ProductType[]
+  IndustryType     IndustryType[]
+}
+
+model IndustryType {
+  id               Int              @id @default(autoincrement())
+  name             String           @db.VarChar(255)
+  inspectionFormId Int
+  deleted          Int?             @default(0)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  InspectionForm   InspectionForm   @relation(fields: [inspectionFormId], references: [id])
+  IndustryCategory IndustryCategory @relation(fields: [categoryId], references: [id])
+  categoryId       Int
 }
 
 model InstitutionCategory {
-  id               Int            @id @default(autoincrement())
-  name             String         @db.VarChar(255)
+  id               Int               @id @default(autoincrement())
+  name             String            @db.VarChar(255)
   inspectionFormId Int
-  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  deleted          Int?           @default(0)
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  InspectionForm   InspectionForm    @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?              @default(0)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  InstitutionType  InstitutionType[]
 }
 
 // model PremisesCategory {

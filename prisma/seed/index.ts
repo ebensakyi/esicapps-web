@@ -5,7 +5,6 @@ import { userType } from "./userType";
 
 import { region } from "./region";
 import { inspectionForm } from "./inspectionForm";
-import { institution } from "./institution";
 import { institutionType } from "./institutionType";
 
 import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
@@ -55,25 +54,22 @@ import { eateryPremisesCategory } from "./eateryPremisesCategory";
 import { eateryPremisesType } from "./eateryPremisesType";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
-import { productType } from "./productType";
+// import { productType } from "./productType";
+import { industryType } from "./industryType";
 
 async function main() {
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
 
-  await prisma.institutionType.createMany({
-    data: institutionType,
-  });
+ 
   await prisma.inspectionType.createMany({
     data: inspectionType,
   });
   await prisma.userType.createMany({
     data: userType,
   });
-  await prisma.institution.createMany({
-    data: institution,
-  });
+ 
   await prisma.region.createMany({
     data: region,
   });
@@ -202,8 +198,8 @@ async function main() {
   await prisma.industryCategory.createMany({
     data: industryCategory,
   });
-  await prisma.productType.createMany({
-    data: productType,
+  await prisma.industryType.createMany({
+    data: industryType,
   });
 
   await prisma.derattingFrequency.createMany({
@@ -217,6 +213,11 @@ async function main() {
   });
   await prisma.eateryPremisesCategory.createMany({
     data: eateryPremisesCategory,
+  });
+
+
+  await prisma.institutionType.createMany({
+    data: institutionType,
   });
 }
 
