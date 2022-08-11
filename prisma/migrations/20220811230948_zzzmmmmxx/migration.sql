@@ -1180,9 +1180,6 @@ ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_respondentDesignat
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_ownershipTypeId_fkey" FOREIGN KEY ("ownershipTypeId") REFERENCES "OwnershipType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_temporaryPermanentId_fkey" FOREIGN KEY ("temporaryPermanentId") REFERENCES "TemporaryPermanent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
