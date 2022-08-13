@@ -1,0 +1,1011 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.css" rel="stylesheet" media="screen">
+    <link href="/autocomplete/autocomplete-0.3.0.css" rel="stylesheet" media="screen">
+    <style type="text/css">.leaflet-popup{width:auto!important}.leaflet-popup-content{max-width:500px!important;width:auto}.topbar{background:rgba(255,255,255,.5);border-color:#5f5f61;border-radius:0}.topbar .navbar-header a{color:#fff}.wrapper{padding-left:0;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}.sidebar{z-index:1000;position:fixed;top:50px;left:-50px;width:50px;height:100%;overflow-y:auto;background:#2a3f54;color:#fff;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}.main{width:100%;padding-bottom:20px}nav.subbar{position:relative;width:100%;border-radius:0;background:#fff;margin:50px 0 -50px 0;padding:10px 0 0 0;z-index:2}nav.subbar>ul.nav.nav-tabs{padding:0 5px}nav.subbar>ul.nav.nav-tabs>li.active>a{background:#dedede;border-top:1px solid #a6a6a6;border-left:1px solid #a6a6a6;border-right:1px solid #a6a6a6;border-radius:0}.content{margin-top:70px;padding:0 30px}@media (min-width:768px){.subbar li span{display:inline}}@media (min-width:992px){.wrapper{padding-left:50px}.sidebar{left:0;width:50px}}.nav,.navbar-nav,.navbar,.navbar-default,.navbar-fixed-top,.topbar{background:none;border:none;height:auto}.navbar-btn{background:none;height:auto;min-width:35px;width:200px;color:#020523;font-weight:600}.navbar-text{margin-top:14px;margin-bottom:14px}@media (min-width:768px){.navbar-text{float:left;margin-left:15px;margin-right:15px}}.glass{}.glass::before{}body{background-size:cover}.glass{background-color:#f2eee8}.glass{}hr{margin-bottom:0}#toolbar{width:auto;height:auto;z-index:10000;position:absolute;border-color:transparent!important;background-color: background-color:rgba(255, 255, 255, 0);right:0;top:90px;border-style:solid;border-width:1px;border-color:#1a2732;display:block;margin:3px;margin-left:0;box-shadow:0 2px 5px rgba(0,0,0,0)}#toolbar>img:hover{box-shadow:0 0 3px #997f4c;border-radius:17px}.toolbaricon{margin-left:1%;margin-top:2%;width:50px;cursor:auto;float:none!important}.tool-icon{padding:5px}.detail-box{position:relative;top:-20px;left:85%;min-height:0;max-height:800px;overflow-y:auto;width:200px;padding:15px;z-index:200000}.detail-box>p>i{padding-right:15px}.search-box{position:absolute;top:300px;right:4%;min-height:0;max-height:auto;width:300px;padding:15px;z-index:10000;border-radius:10px}.basemap-box{position:absolute;top:90px;right:4%;min-height:0;max-height:500px;overflow-y:auto;width:auto;padding:15px;z-index:10000;border-radius:10px}.legend-box{position:absolute;bottom:90px;right:10px;min-height:0;max-height:500px;overflow-y:auto;width:200px;padding:15px;z-index:10000;border-radius:10px}.legend-box>p>i{padding-right:15px}.lgd-hd{width:100%;text-align:center;border-bottom:1px solid #fff;margin-bottom:8px}.lgd-hd>h5{font-weight:900;margin:4px;color:#fff}.lgd-hdm{font-weight:800;margin:4px;color:navy}.lgd1,.lgd2,.lgd3,.lgd4,.lgd5,.lgd6,.lgd7,.lgd8,.lgd9{display:none;font-weight:600}.lgd{width:12.5%!important}.active{color:#00f!important}.button-container{display:-webkit-box;display:-ms-flexbox;display:flex;margin:10px auto;width
+        }.button-berry{overflow:hidden;margin:10px;padding:12px 12px;cursor:pointer;font-family:Helvetica;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-transition:all 60ms ease-in-out;transition:all 60ms ease-in-out;text-align:center;white-space:nowrap;text-decoration:none!important;text-transform:none;text-transform:capitalize;color:#fff;border:0 none;border-radius:4px;font-size:13px;font-weight:500;line-height:1.3;-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-flex:0;-ms-flex:0 0 160px;flex:0 0 160px}.button-berry> {font-family:Helvetica}.button-berry:hover{-webkit-transition:all 60ms ease;transition:all 60ms ease;opacity:.85}.button-berry:active{-webkit-transition:all 60ms ease;transition:all 60ms ease;opacity:.75}.button-berry:focus{outline:1px dotted #959595;outline-offset:-4px}.button-berry.-regular{color:#202129;background-color:#f2f2f2}.button-berry.-regular:hover{color:#202129;background-color:#e1e2e2;opacity:1}.button-berry.-regular:active{background-color:#d5d6d6;opacity:1}.button-berry.-dark{color:#fff;background:#161616}.button-berry.-dark:focus{outline:1px dotted #fff;outline-offset:-4px}.button-berry.-green{color:#fff;background:#757b87}.button-berry.-blue{color:#fff;background:#7e7d9c}.button-berry.-salmon{color:#fff;background:#6d5555}.button-berry.-sun{color:#fff;background:#74b62e}.button-berry.-alge{color:#fff;background:#1620a6}.button-berry.-flower{color:#fff;background:#48aaad}.button-berry.-awesome{color:#fff;background:#151e3d}.button-berry.-awesome1{color:#fff;background:#1e456e}.button-berry.-awesome2{color:#fff;background:#bf6ed6}.button-berry.-awesome3{color:#fff;background:#009688}.button-berry i{display:block}.btn-active{box-shadow:0 0 5px 3px rgba(224,18,18,.71);-moz-box-shadow:0 0 5px 3px rgba(224,18,18,.71);-webkit-box-shadow:0 0 5px 3px rgba(224,18,18,.71)}.custom-search-form{margin-top:5px}.reg{height:0;width:15px;border:2px solid red;border:1px 0 0 0;margin-right:10px;float:left;margin-top:7px}.dis{height:0;width:15px;border:1px solid #000;border:1px 0 0 0;margin-right:10px;float:left;margin-top:7px}</style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <script src="js/fancybox/jquery.fancybox.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="js/print/jQuery.print.js"></script>
+    <script src="js/autocomplete/autocomplete-0.3.0.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+</head>
+
+<body>
+    <div class="print-overlay">
+        <div class="left-overlay">
+
+        </div>
+        <div class="left-overlay">
+
+        </div>
+    </div>
+
+    <div style='width:100%;height:100vh;z-index:100;position:absolute;background-color:#acadafbf' class='loadingdiv'>
+        <script data-pagespeed-no-defer>//<![CDATA[
+(function(){for(var g="function"==typeof Object.defineProperties?Object.defineProperty:function(b,c,a){if(a.get||a.set)throw new TypeError("ES3 does not support getters and setters.");b!=Array.prototype&&b!=Object.prototype&&(b[c]=a.value)},h="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this,k=["String","prototype","repeat"],l=0;l<k.length-1;l++){var m=k[l];m in h||(h[m]={});h=h[m]}var n=k[k.length-1],p=h[n],q=p?p:function(b){var c;if(null==this)throw new TypeError("The 'this' value for String.prototype.repeat must not be null or undefined");c=this+"";if(0>b||1342177279<b)throw new RangeError("Invalid count value");b|=0;for(var a="";b;)if(b&1&&(a+=c),b>>>=1)c+=c;return a};q!=p&&null!=q&&g(h,n,{configurable:!0,writable:!0,value:q});var t=this;function u(b,c){var a=b.split("."),d=t;a[0]in d||!d.execScript||d.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===c?d[e]?d=d[e]:d=d[e]={}:d[e]=c};function v(b){var c=b.length;if(0<c){for(var a=Array(c),d=0;d<c;d++)a[d]=b[d];return a}return[]};function w(b){var c=window;if(c.addEventListener)c.addEventListener("load",b,!1);else if(c.attachEvent)c.attachEvent("onload",b);else{var a=c.onload;c.onload=function(){b.call(this);a&&a.call(this)}}};var x;function y(b,c,a,d,e){this.h=b;this.j=c;this.l=a;this.f=e;this.g={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.i=d;this.b={};this.a=[];this.c={}}function z(b,c){var a,d,e=c.getAttribute("data-pagespeed-url-hash");if(a=e&&!(e in b.c))if(0>=c.offsetWidth&&0>=c.offsetHeight)a=!1;else{d=c.getBoundingClientRect();var f=document.body;a=d.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);d=d.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+d;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.g.height&&d<=b.g.width)}a&&(b.a.push(e),b.c[e]=!0)}y.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&z(this,b)};u("pagespeed.CriticalImages.checkImageForCriticality",function(b){x.checkImageForCriticality(b)});u("pagespeed.CriticalImages.checkCriticalImages",function(){A(x)});function A(b){b.b={};for(var c=["IMG","INPUT"],a=[],d=0;d<c.length;++d)a=a.concat(v(document.getElementsByTagName(c[d])));if(a.length&&a[0].getBoundingClientRect){for(d=0;c=a[d];++d)z(b,c);a="oh="+b.l;b.f&&(a+="&n="+b.f);if(c=!!b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),d=1;d<b.a.length;++d){var e=","+encodeURIComponent(b.a[d]);131072>=a.length+e.length&&(a+=e)}b.i&&(e="&rd="+encodeURIComponent(JSON.stringify(B())),131072>=a.length+e.length&&(a+=e),c=!0);C=a;if(c){d=b.h;b=b.j;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(r){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(D){}}f&&(f.open("POST",d+(-1==d.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}}function B(){var b={},c;c=document.getElementsByTagName("IMG");if(!c.length)return{};var a=c[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var d=0;a=c[d];++d){var e=a.getAttribute("data-pagespeed-url-hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].o&&a.height>=b[e].m)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b}var C="";u("pagespeed.CriticalImages.getBeaconData",function(){return C});u("pagespeed.CriticalImages.Run",function(b,c,a,d,e,f){var r=new y(b,c,a,e,f);x=r;d&&w(function(){window.setTimeout(function(){A(r)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','http://esicapps.com/map-view','8Xxa2XQLv9',true,false,'MaNdPDGI7wU');
+//]]></script><img class='' src='/img/loading.gif' alt="" style="top:45%;left:45%;z-index:10000;position:relative;" data-pagespeed-url-hash="503877478" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+    </div>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top topbar no-print">
+
+
+
+
+        <ul class="nav navbar-nav" style="width:98%; margin:0px 1%;">
+
+            <li class="lgd">
+                <div class='button-berry -blue center' id='eatdrinkid'>
+                    <span> <i class="fa fa-coffee" style="font-weight: 400;"></i> &nbsp;
+                        Eating & Drinking </span> <br>
+                    <span style="font-weight: 800; display:block;" style="" id="edid"></span>
+                </div>
+
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -salmon center' id='hospitalityid'>
+                    <span> <i class="fa fa-building" style="font-weight: 600;"> </i> &nbsp; Hospitality </span><br>
+                    <span style="font-weight: 800;" id="hosid"> </span>
+                </div>
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -alge center' id='institutionid'>
+                    <span> <i class="fa fa-graduation-cap" style="font-weight: 600;"></i> &nbsp; Institutional
+                    </span><br>
+                    <span style="font-weight: 800;" id="insid"></span>
+                </div>
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -flower center' id='industryid'>
+                    <span> <i class="fa fa-gears" style="font-weight: 600;"> &nbsp;</i> Industry </span><br>
+                    <span style="font-weight: 800;" id="indusid"> </span>
+                </div>
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -sun center' id='residentialid'>
+                    <span> <i class="fa fa-home" style="font-weight: 600;"> </i> &nbsp; Residential </span><br>
+                    <span style="font-weight: 800;" id="resid"> </span>
+                </div>
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -awesome center' id='sanitationid'>
+                    <span> <i class="fa fa-recycle" style="font-weight: 600;"> </i> &nbsp; Sanitation </span><br>
+                    <span style="font-weight: 800;" id="sanid"> </span>
+                </div>
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -awesome2 center' id='healthid'>
+                    <span> <i class="fa fa-h-square" style="font-weight: 600;"> </i> &nbsp; Health </span><br>
+                    <span style="font-weight: 800;" id="healid"> </span>
+                </div>
+            </li>
+
+            <li class="lgd">
+                <div class='button-berry -awesome3 center' id='marketid'>
+                    <span> <i class="fa fa-shopping-cart" style="font-weight: 600;"> </i> &nbsp; Market </span><br>
+                    <span style="font-weight: 800;" id="marid"></span>
+                </div>
+            </li>
+
+            <!-- <li class="lgd">
+                        <button class="navbar-btn" id="reinspectionid">
+                            Reinspection
+                        </button>
+                    </li>-->
+
+        </ul>
+
+
+
+    </nav>
+
+
+
+    <div class="main" id='map' style="height:100vh;width:100%;position:absolute;">
+
+
+        <div id="toolbar" class="no-print">
+            <div class="tool-icon">
+                <img id="zoomIn" title="Zoom In" src="/img/zin.png" style="width:30px;height:30px;" data-pagespeed-url-hash="1974693090" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+            <div class="tool-icon">
+                <img id="zoomOut" title="Zoom Out" src="/img/zout.png" style="width:30px;height:30px;" data-pagespeed-url-hash="461820191" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+            <div class="tool-icon">
+                <img id="zoomExt" title="Zoom Extent" src="/img/extent.png" style="width:30px;height:30px;" data-pagespeed-url-hash="3528764965" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+            <div class="tool-icon">
+                <img id="refbtn" class="" title="Refresh Map" src="/img/refresh.png" style="width:30px;height:30px;" data-pagespeed-url-hash="1843641930" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+            <div class="tool-icon">
+                <img id='basemap' title="Base Map" src="/img/basemap.png" style="width:30px;height:30px;" data-pagespeed-url-hash="1772808710" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+            <div class="tool-icon">
+                <img id='printmap' title="Print Map" src="/img/print.png" style="width:30px;height:30px;" data-pagespeed-url-hash="3891321364" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+            <div class="tool-icon">
+                <img id='searchmap' title="Search Map" src="/img/search.png" style="width:30px;height:30px;" data-pagespeed-url-hash="989476371" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+        </div>
+
+        <div class="legend-box glass" style="background-color:#F2EEE8;">
+
+            <div class="lgd-hd">
+                <h5 style="color:navy;"> LEGEND </h5>
+            </div>
+            <div class="">
+                <i class="reg" style="font-weight: 600;"> </i> <span> Regional Boundary </span> <br>
+                <i class="dis" style="font-weight: 600;"> </i> <span> District Boundary </span>
+
+            </div>
+            <div class="">
+                <h6 class="lgd-hd lgd-hdm"> Keys </h6>
+                <img src='/img/good.png' style="width:20px;height:20px;margin:5px;margin-top:1px;" alt="" data-pagespeed-url-hash="1090807436" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> Good
+            </div>
+            <div class="">
+                <img src='/img/average.png' style="width:20px;height:20px;margin:5px;" alt="" data-pagespeed-url-hash="3226346568" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> Average
+
+            </div>
+            <div class="">
+                <img src='/img/poor.png' style="width:20px;height:20px;margin:5px;" alt="" data-pagespeed-url-hash="1767382877" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> Poor
+            </div>
+
+
+
+        </div>
+
+
+        <div class="basemap-box glass no-print" style="background-color:rgba(255, 255, 255, 0.4);">
+
+            <div class="" id='satellite'>
+                <img src='/img/here_satelliteday.png' style="width:100px;height:100px;margin:10px;" alt="" data-pagespeed-url-hash="1819372559" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+
+            <div hid class="" id='cartodb'>
+                <img src='/img/cartodb_positron.png' style="width:100px;height:100px;margin:10px;" alt="" data-pagespeed-url-hash="2400160555" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+
+            <div class="btn-active" id='openstreetmap'>
+                <img src='/img/openstreetmap_de.png' style="width:100px;height:100px;margin:10px;" alt="" data-pagespeed-url-hash="2239072628" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+        <!-- /input-group -->
+
+
+
+
+
+
+        <div class='search-box'>
+            <div id='searchtext' style="background: #fff;"> </div>
+        </div>
+
+
+        <!-- /input-group -->
+
+
+
+    </div>
+
+
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+
+                url: '/api/dashboard-submissions-sum-api',
+
+                success: function (data) {
+
+                    $("#edid").text(data.sumOfEatingBaselineDataCollected);
+                    $("#hosid").text(data.sumOfHospitalityBaselineDataCollected);
+                    $("#insid").text(data.sumOfInstitutionalBaselineDataCollected);
+                    $("#indusid").text(data.sumOfIndustryBaselineDataCollected);
+                    $("#resid").text(data.sumOfResidentialBaselineDataCollected);
+                    $("#sanid").text(data.sumOfSanitaryBaselineDataCollected);
+                    $("#healid").text(data.sumOfHealthBaselineDataCollected);
+                    $("#marid").text(data.sumOfMarketBaselineDataCollected);
+
+
+
+                },
+                error: function (error) {
+
+                    console.log("error occured", error)
+                }
+            });
+        });
+
+
+        var shownBefore = false;
+        var markers = L.markerClusterGroup({
+            maxClusterRadius: 120,
+            //disableClusteringAtZoom: 14,
+            showCoverageOnHover: true,
+            chunkedLoading: true
+        });
+
+        function getPoint(url) {
+            $(document).ready(function () {
+                $.LoadingOverlay("show");
+                $.ajax({
+                    type: "GET",
+
+                    url: url,
+
+                    success: function (data) {
+
+                        $.LoadingOverlay("hide");
+                        L.geoJSON(data, {
+                            onEachFeature: onEachFeature,
+                            pointToLayer: function (feature, latlng) {
+                                var imgIcon = L.icon({ iconUrl: definePointIcon(feature.properties.score, feature.properties.form_name), iconSize: [20, 20] });
+
+                                return L.marker(latlng, { icon: imgIcon });
+                            }
+                        }).addTo(markers);
+
+                        map.addLayer(markers);
+                    },
+
+                    error: function (error) {
+                        $.LoadingOverlay("hide");
+
+                        console.log("error occured", error)
+                    }
+                });
+            });
+        }
+
+
+        var eat_selected = 0;
+        var hospitality_selected = 0;
+        var industry_selected = 0;
+        var institution_selected = 0;
+        var residential_selected = 0;
+        var sanitary_selected = 0;
+        var health_selected = 0;
+        var market_selected = 0;
+
+        togglePremises("#eatdrinkid", eat_selected, '/eating-baseline-map');
+        togglePremises("#hospitalityid", hospitality_selected, '/hospitality-baseline-map')
+        togglePremises("#institutionid", institution_selected, '/institution-baseline-map')
+
+
+        togglePremises("#healthid", health_selected, '/health-baseline-map');
+        togglePremises("#marketid", market_selected, '/market-baseline-map')
+        togglePremises("#sanitationid", sanitary_selected, '/sanitary-baseline-map')
+        togglePremises("#industryid", industry_selected, '/industry-baseline-map');
+        togglePremises("#residentialid", residential_selected, '/residential-baseline-map')
+
+
+
+
+
+        function togglePremises(buttonId, premisesSelected, url) {
+            $(buttonId).click(function () {
+
+                if (premisesSelected == 0) {
+                    
+                    map.removeLayer(markers);
+                    markers.clearLayers()
+
+                    getPoint(url);
+                    $(buttonId).addClass("btn-active");
+                    premisesSelected = 1;
+                } else {
+                    $(buttonId).removeClass("btn-active");
+                    premisesSelected = 0;
+
+                    map.removeLayer(markers);
+                    markers.clearLayers()
+                }
+
+            });
+        }
+
+
+
+
+
+
+        function togglelegend(button_id, value_check, legenddiv, maplayer, maplayer2) {
+
+
+            $(button_id).click(function () {
+                if (value_check == 0) {
+                    $(button_id).addClass("btn-active");
+                    value_check = 1;
+                    map.addLayer(maplayer)
+                    if (maplayer2) {
+                        map.addLayer(maplayer2)
+                    }
+                }
+                else {
+                    $(button_id).removeClass("btn-active");
+                    value_check = 0;
+                    map.removeLayer(maplayer)
+                    if (maplayer2) {
+                        map.removeLayer(maplayer2)
+                    }
+                }
+            });
+
+            return value_check
+        }
+
+
+
+
+
+
+
+
+
+
+
+        //Calculate score
+        function scoreCalculation(score) {
+            if (score < 50) {
+                return 'Poor'
+            } else if (score > 49 && score < 70) {
+                return 'Average'
+            } else if (score > 69) {
+                return 'Good'
+            }
+        }
+
+        //Define icore based on form and score
+        function definePointIcon(score, form) {
+            if (scoreCalculation(score) == 'Good' && form == 'Eating_Premises_Baseline') {
+                return '/img/rating_img/eatery_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Eating_Premises_Baseline') {
+                return '/img/rating_img/eatery_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Eating_Premises_Baseline') {
+                return '/img/rating_img/eatery_red.png'
+            }
+            else if (scoreCalculation(score) == 'Good' && form == 'Residential_Premises_Baseline') {
+                return '/img/rating_img/residential_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Residential_Premises_Baseline') {
+                return '/img/rating_img/residential_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Residential_Premises_Baseline') {
+                return '/img/rating_img/residential_red.png'
+            }
+            else if (scoreCalculation(score) == 'Good' && form == 'Market_Premises_Baseline') {
+                return '/img/rating_img/market_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Market_Premises_Baseline') {
+                return '/img/rating_img/market_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Market_Premises_Baseline') {
+                return '/img/rating_img/market_red.png'
+            }
+            else if (scoreCalculation(score) == 'Good' && form == 'Institution_Premises_Baseline') {
+                return '/img/rating_img/school_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Institution_Premises_Baseline') {
+                return '/img/rating_img/school_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Institution_Premises_Baseline') {
+                return '/img/rating_img/school_red.png'
+            }
+            else if (scoreCalculation(score) == 'Good' && form == 'Healthcare_Premises_Baseline') {
+                return '/img/rating_img/health_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Healthcare_Premises_Baseline') {
+                return '/img/rating_img/health_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Healthcare_Premises_Baseline') {
+                return '/img/rating_img/health_red.png'
+            }
+            else if (scoreCalculation(score) == 'Good' && form == 'Industry_Premises_Baseline') {
+                return '/img/rating_img/industry_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Industry_Premises_Baseline') {
+                return '/img/rating_img/industry_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Industry_Premises_Baseline') {
+                return '/img/rating_img/industry_red.png'
+            }
+            else if (scoreCalculation(score) == 'Good' && form == 'Hospitality_Premises_Baseline') {
+                return '/img/rating_img/hospitality_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Hospitality_Premises_Baseline') {
+                return '/img/rating_img/hospitality_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Hospitality_Premises_Baseline') {
+                return '/img/rating_img/hospitality_red.png'
+            } else if (scoreCalculation(score) == 'Good' && form == 'Sanitary_Premises_Baseline') {
+                return '/img/rating_img/sanitation_green.png'
+            }
+            else if (scoreCalculation(score) == 'Average' && form == 'Sanitary_Premises_Baseline') {
+                return '/img/rating_img/sanitation_yellow.png'
+            }
+            else if (scoreCalculation(score) == 'Poor' && form == 'Sanitary_Premises_Baseline') {
+                return '/img/rating_img/sanitation_red.png'
+            }
+            // else {
+            //   return '/img/poor.png'
+            // }
+        }
+
+        var maplegend = 0;
+        var legend1 = 0;
+        var legend2 = 0;
+        var legend3 = 0;
+        var legend4 = 0;
+        var legend5 = 0;
+        var legend6 = 0;
+        var legend7 = 0;
+        var legend8 = 0;
+
+        var legend9 = 0;
+        /* $("#reinspectionid").click(function () {
+             if (legend9 == 0) {
+                 $(".lgd9").css("display", "block");
+                 $("#reinspectionid").addClass("active");
+                 legend9 = 1;
+             }
+             else {
+                 $(".lgd9").css("display", "none");
+                 $("#reinspectionid").removeClass("active");
+                 legend9 = 0;
+             }
+         });*/
+
+
+        //new definitions of variables
+        var regionboundary, districtboundary, constituencyboundary, communityboundary, communitylabelboundary;
+        var regionvalue = 1, districtvalue = 0, constituencyvalue = 0, communityvalue = 0, communitylabelvalue = 1;
+
+
+        var map = L.map('map', {
+            minZoom: 7,
+            maxZoom: 20,
+            zoomControl: false,
+            maxBounds: L.latLngBounds([3.7388, -4.262], [12.1748, 2.200]),
+            measureControl: false,
+        }).setView([5.799, 0.40], 9);
+        var initialbasemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+        function mapstate() {
+            if (map) {
+                map.invalidateSize();
+            }
+        }
+
+
+        $('#zoomIn').on('click', function () {
+            map.zoomIn(1)
+            mapstate()
+        })
+
+        $('#zoomOut').on('click', function () {
+            map.zoomOut(1)
+            mapstate()
+        })
+
+        $('#zoomExt').on('click', function () {
+            map.setView([7.099, -1.000], 8);
+            mapstate()
+        })
+
+        $('#refbtn').on('click', function () {
+            location.reload();
+
+        })
+
+
+
+        function pilotregion(feature) {
+            if (feature.properties.region_name == 'GREATER ACCRA') {
+                return {
+                    fillColor: '#1E456E',
+                    color: 'red',
+                    weight: '5',
+                    dashArray: '',
+                    opacity: '1',
+                    fillopacity: '1',
+                };
+
+            } else {
+                return {
+                    fillColor: 'transparent',
+                    color: '#000',
+                    weight: '1',
+                    dashArray: '',
+                    opacity: '1',
+                    fillopacity: '1',
+                };
+            }
+        }
+
+        function pilotdistrict(feature) {
+            return {
+                //fillColor:'transparent'
+                //fillColor: 'green',
+                color: '#000',
+                weight: '1',
+                dashArray: '0',
+                opacity: '1',
+                fillopacity: '1',
+            };
+        }
+
+
+        function region_onEachFeature(feature, layer) {
+            layer.on({
+                //mouseover: highlightFeature,
+                //mouseout: region_resetHighlight,
+                click: zoomToFeature
+            });
+        }
+
+
+        function zoomToFeature(e) {
+            map.fitBounds(e.target.getBounds());
+        }
+
+        function district_onEachFeature(feature, layer) {
+            layer.bindTooltip(feature.properties.district_name);
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+        }
+        $('.loadingdiv').css("display", "block");
+        regionboundary = GeojsonasyncFalseLoad('/regional-boundary-api/', pilotregion, region_onEachFeature);
+        //regionvalue = togglelegend("#regioncheck", regionvalue, regionboundary, "#regionbound")
+        map.addLayer(regionboundary)
+
+        districtboundary = GeojsonasyncFalseLoad('/district-boundary-api/', pilotdistrict, district_onEachFeature);
+
+        map.addLayer(districtboundary)
+        // districtboundary.openTooltip();
+        //
+        // districtboundary.bindTooltip(function (layer) {
+        //     return string(layer.feature.district_name);
+        // });
+
+        function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+
+
+
+        $('.loadingdiv').css("display", "none");
+
+
+
+        //Dynamic loading of geojsondata asyncoff
+        function GeojsonasyncFalseLoad(dataurl, mapstyle, map_onEachFeature) {
+            var objectvar;
+            // 
+            $.ajax({
+                url: dataurl,
+                async: false,
+                cache: false
+            })
+                .done(function (data) {
+                    objectvar = new L.GeoJSON(data,
+                        {
+                            style: mapstyle,
+                            onEachFeature: map_onEachFeature
+                        }
+                    );
+                    //  $('#loadingdiv').removeClass('hidden');
+                });
+
+            return objectvar
+        }
+        //Dynamic loading of geojsondata asyncoff
+        function GeojsonasyncpointFalseLoad(dataurl, mapstyle, map_onEachFeature, button_id, value_check, legenddiv) {
+            var objectvar;
+            //  $('#loadingdiv').addClass('hidden');
+            $.ajax({
+                url: dataurl,
+                async: true,
+                cache: false
+            })
+                .done(function (data) {
+                    objectvar = new L.GeoJSON(data,
+                        {
+                            pointToLayer: mapstyle,
+                            onEachFeature: map_onEachFeature
+                        }
+                    );
+                    //$('#loadingdiv').removeClass('hidden');
+
+                    maplegend = togglelegend(button_id, value_check, legenddiv, objectvar)
+
+                });
+
+            return maplegend
+        }
+
+
+        function onEachFeature(feature, layer) {
+
+            //console.log(feature.properties.community)
+
+            //var premisesCode = feature.properties.premises_code;
+            // htmlimage = ('<b>Premises code</b>: ' + premisesCode + '<hr>')
+
+            htmlimage = ('<b>Region</b>: ' + totitlefunction(feature.properties.region) + '<hr>')
+            htmlimage += ('<b>District</b>: ' + feature.properties.district + '<hr>')
+            htmlimage += ('<b>Community</b>: ' + feature.properties.community + '<hr>')
+            htmlimage += ('<b>Name of Premises</b>: ' + feature.properties.name_of_premises + '<hr>')
+            //htmlimage += showImage(feature.properties.form_name, feature.properties.picture_of_premises)
+            htmlimage += viewPremises(feature.properties.form_name, feature.properties.id)
+            layer.bindPopup(htmlimage);
+        }
+
+
+
+
+
+        function showImage(formName, pictureName) {
+            var form = getFormType(formName);
+            var url = "https://s3-us-west-2.amazonaws.com/premises-inspection-images/" + form;
+            var path = url + pictureName;
+
+            // return '<img style="height:60px;width:60px" src="' + url + pictureName+'"/>';
+            return `
+            <ul  data-col="4">
+          <img style="height:60px;width:120px" src="${path}"/>
+         
+        </li>
+        </ul>`
+        }
+
+        function viewPremises(formName, id) {
+
+            if (formName == "Eating_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/eating/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Residential_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/residential/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Market_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/market/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Institution_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/institution/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Healthcare_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/health/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Industry_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/industry/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Hospitality_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/hospitality/${id}"> <b>View Details</b></a>`;
+            } else if (formName == "Sanitary_Premises_Baseline") {
+                return `<hr><a  target="_blank"  href="/sanitary/${id}"> <b>View Details</b></a>`;
+            }
+        }
+
+        function getFormType(formName) {
+            if (formName == "Eating_Premises_Baseline") {
+                return "eating/";
+            } else if (formName == "Residential_Premises_Baseline") {
+                return "residential/";
+            } else if (formName == "Market_Premises_Baseline") {
+                return "market/";
+            } else if (formName == "Institution_Premises_Baseline") {
+                return "institution/";
+            } else if (formName == "Healthcare_Premises_Baseline") {
+                return "healthcare/";
+            } else if (formName == "Industry_Premises_Baseline") {
+                return "industry/";
+            } else if (formName == "Hospitality_Premises_Baseline") {
+                return "hospitality/";
+            } else if (formName == "Sanitary_Premises_Baseline") {
+                return "sanitary/";
+            }
+        }
+
+        $('.fancybox').fancybox()
+        function imagechooser(imagefile) {
+            htmlimage = ''
+            if (imagefile != null) {
+
+                htmlimage = '<a class="fancybox" href= "' + imagefile + '" data-fancybox-group="gallery"><img src="' + imagefile + '" alt="" style="width:100px!important; height:100px !important;padding:5px;" class="" /></a>'
+
+            }
+            return htmlimage
+        }
+
+        function viewchooser(catergory, indexvalue) {
+            htmlimage = ''
+            if (catergory == 'eatdrink') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleEatery.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == 'education') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleEducation.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == 'health') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleHealth.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == 'hospitality') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleHospitality.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == 'industry') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleIndustry.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == 'market') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleMarket.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            // else if (catergory == 'reinspection'){
+            //     htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/viewSingleResidentialRow.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            //     }
+            else if (catergory == 'residential') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleResidential.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == 'sanitation') {
+                htmlimage += ('<hr><a  target="_blank"  href="http://esicapps.com/singleSanitation.php?id=' + indexvalue + '"> <b>View Details</b></a>')
+
+            }
+            else if (catergory == '') {
+                htmlimage += ''
+
+            }
+            return htmlimage
+        }
+
+
+        //convert string to tittle
+        function totitlefunction(txt) {
+            var currVal = txt;
+            currVal = currVal.toLowerCase().replace(/\b[a-z]/g, function (txtVal) {
+                return txtVal.toUpperCase();
+            });
+            return currVal;
+        }
+
+
+
+
+
+
+
+
+
+
+        ///End of Defination of Color Styles for Maps
+
+
+        function printPage() {
+            if (this.elementsToHide) {
+                var htmlElementsToHide = document.querySelectorAll(this.elementsToHide);
+
+                for (var i = 0; i < htmlElementsToHide.length; i++) {
+                    htmlElementsToHide[i].className = htmlElementsToHide[i].className + ' _epHidden';
+                }
+            }
+            window.print();
+
+            if (this.elementsToHide) {
+                var htmlElementsToHide = document.querySelectorAll(this.elementsToHide);
+
+                for (var i = 0; i < htmlElementsToHide.length; i++) {
+                    htmlElementsToHide[i].className = htmlElementsToHide[i].className.replace(' _epHidden', '');
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+        $('#printmap').on('click', function () {
+
+            $("#map").print({
+                globalStyles: true,
+                mediaPrint: false,
+                stylesheet: null,
+                noPrintSelector: ".no-print",
+                iframe: true,
+                append: null,
+                prepend: null,
+                manuallyCopyFormValues: true,
+                deferred: $.Deferred(),
+                timeout: 750,
+                title: null,
+                doctype: '<!doctype html>'
+            });
+
+        })
+
+
+
+
+        $('.basemap-box').slideToggle();
+        $('#basemap').on('click', function () {
+            $('.basemap-box').slideToggle();
+        })
+
+
+        $('.search-box').slideToggle();
+        $('#searchmap').on('click', function () {
+            $('.search-box').slideToggle();
+        })
+
+
+        $(".basemap-box > div").on('click', function () {
+            var basename = $(this).attr('id');
+            $('.basemap-box > div').removeClass("btn-active")
+            $(this).addClass("btn-active")
+            if (basename == 'satellite') {
+                initialbasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                });
+            } else if (basename == 'cartodb') {
+                initialbasemap = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                });
+
+            } else if (basename == 'openstreetmap') {
+                initialbasemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                });
+
+            }
+            initialbasemap.addTo(map);
+        })
+
+
+
+
+        var onChange = function (newValue) {
+            getextent('/map/extent/?phrase=' + newValue[0][0]['value'], map)
+            selectmap('/map/highlight/?phrase=' + newValue[0][0]['value'], map, '', highlightstyle)
+        };
+        var config = {
+            onChange: onChange,
+            maxTokenGroups: 1,
+            placeholderHTML: 'search by district',
+            lists: {
+                districts: {
+                    ajaxOpts: {
+                        url: '/map/autocompleteview/?phrase={input}'
+                    },
+
+                }
+            }
+
+        };
+        var widget = new AutoComplete('searchtext', config);
+        // $('#clearBtn').on('click',function(){
+        //   mapstate()
+        //   widget.setValue([]);
+        //   //widget.clear
+        // });
+
+        function getextent(url, map) {
+            $.get(url, function (data) { map.fitBounds([[data[1], data[0]], [data[3], data[2]]]) })
+        }
+        function mapstate() {
+            if (map) {
+                map.invalidateSize();
+            }
+        }
+        //Highlightmap style
+
+        var selectfeaturezone;
+        function selectmap(url, map, typem, mnh) {
+            $.get(url, function (data) {
+                if (selectfeaturezone != undefined) {
+                    map.removeLayer(selectfeaturezone)
+                }
+                if (typem == 'point') {
+                    selectfeaturezone = new L.GeoJSON(data, { pointToLayer: mnh }).addTo(map).bringToFront();
+                }
+                else {
+                    selectfeaturezone = new L.GeoJSON(data, { style: mnh }).addTo(map).bringToBack();
+                }
+            }).done(function () {
+            }).fail(function () {
+            });
+        }
+
+        function highlightstyle() {
+            return {
+                fillColor: 'transparent', weight: 4, opacity: 1, color: 'cyan', dashArray: '', fillOpacity: '1'
+            };
+
+        }
+
+
+        function resetHighlight(e) {
+            districtboundary.resetStyle(e.target);
+        }
+        function highlightFeature(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 5,
+                fillColor: 'transparent',
+                color: 'green',
+                dashArray: '',
+                fillOpacity: 1
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
