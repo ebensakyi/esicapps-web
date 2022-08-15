@@ -5,7 +5,6 @@ import { userType } from "./userType";
 
 import { region } from "./region";
 import { inspectionForm } from "./inspectionForm";
-import { institutionType } from "./institutionType";
 
 import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
 import { community } from "./community";
@@ -37,25 +36,13 @@ import { action } from "./action";
 import { pestSign } from "./pestSign";
 import { temporaryPermanent } from "./temporaryPermanent";
 import { toiletPitPosition } from "./toiletPitPosition";
-import { healthPremisesType } from "./healthPremisesType";
-import { healthPremisesService } from "./healthPremisesService";
-import { hospitalityPremisesType } from "./hospitalityPremisesType";
-import { hospitalityPremisesService } from "./hospitalityPremisesService";
-
 import { premisesService } from "./premisesService";
-import { sanitaryPremisesType } from "./sanitaryPremisesType";
-import { marketPremisesType } from "./marketPremisesType";
-
+import { premisesType } from "./premisesType";
+import { premisesSubtype } from "./premisesSubtype";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
-import { institutionCategory } from "./institutionCategory";
-import { industryCategory } from "./industryCategory";
-
-import { eateryPremisesCategory } from "./eateryPremisesCategory";
-import { eateryPremisesType } from "./eateryPremisesType";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
-// import { productType } from "./productType";
-import { industryType } from "./industryType";
+
 
 async function main() {
   await prisma.inspectionForm.createMany({
@@ -80,9 +67,7 @@ async function main() {
   await prisma.community.createMany({
     data: community,
   });
-  // await prisma.condition.createMany({
-  //   data: condition,
-  // });
+ 
   await prisma.district.createMany({
     data: district,
   });
@@ -168,39 +153,20 @@ async function main() {
   await prisma.toiletPitPosition.createMany({
     data: toiletPitPosition,
   });
-  await prisma.healthPremisesType.createMany({
-    data: healthPremisesType,
+ 
+  await prisma.premisesService.createMany({
+    data: premisesService,
   });
-  await prisma.healthPremisesService.createMany({
-    data: healthPremisesService,
+  await prisma.premisesType.createMany({
+    data: premisesType,
   });
-  await prisma.hospitalityPremisesType.createMany({
-    data: hospitalityPremisesType,
-  });
-  await prisma.hospitalityPremisesService.createMany({
-    data: hospitalityPremisesService,
-  });
-  // await prisma.premisesServices.createMany({
-  //   data: premisesService,
-  // });
-  await prisma.marketPremisesType.createMany({
-    data: marketPremisesType,
-  });
-  await prisma.sanitaryPremisesType.createMany({
-    data: sanitaryPremisesType,
+  await prisma.premisesSubtype.createMany({
+    data: premisesSubtype,
   });
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
   });
-  await prisma.institutionCategory.createMany({
-    data: institutionCategory,
-  });
-  await prisma.industryCategory.createMany({
-    data: industryCategory,
-  });
-  await prisma.industryType.createMany({
-    data: industryType,
-  });
+ 
 
   await prisma.derattingFrequency.createMany({
     data: derattingFrequency,
@@ -208,17 +174,7 @@ async function main() {
   await prisma.ownershipType.createMany({
     data: ownershipType,
   });
-  await prisma.eateryPremisesType.createMany({
-    data: eateryPremisesType,
-  });
-  await prisma.eateryPremisesCategory.createMany({
-    data: eateryPremisesCategory,
-  });
-
-
-  await prisma.institutionType.createMany({
-    data: institutionType,
-  });
+ 
 }
 
 main()

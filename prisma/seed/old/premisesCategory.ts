@@ -1,17 +1,13 @@
 export const premisesType = [
   {
-    name: "Eating premises",
+    name: "Chopbar",
     inspectionFormId: 2,
   },
   {
-    name: "Drinking premises",
+    name: "Table Top",
     inspectionFormId: 2,
   },
-  {
-    name: "Eating and drinking premises",
-    inspectionFormId: 2,
-  },
-  
+
   {
     name: "Hospital",
     inspectionFormId: 3,
@@ -80,42 +76,47 @@ export const premisesType = [
     name: "Guest House",
     inspectionFormId: 4,
   },
- 
   {
-    name: "Religious",
+    name: "Chop bar",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Table top",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Others",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Church",
     inspectionFormId: 5,
-  }, {
-    name: "Educational",
+  },
+  {
+    name: "Mosque",
     inspectionFormId: 5,
   },
   {
-    name: "Coorperate",
+    name: "Shrine",
+    inspectionFormId: 5,
+  },
+  {
+    name: "Bank",
+    inspectionFormId: 5,
+  },
+  {
+    name: "Savings and loans",
+    inspectionFormId: 5,
+  },
+  {
+    name: "Micro finance",
+    inspectionFormId: 5,
+  },
+  {
+    name: "Credit union",
     inspectionFormId: 5,
   },
 
-  {
-    name: "Consumables",
-    inspectionFormId: 6,
-
-  },
-  {
-    name: "Non-consumables",
-    inspectionFormId: 6,
-
-  },
-
-  {
-    name: "Market",
-    inspectionFormId: 7,
-  },
-  {
-    name: "Lorry park",
-    inspectionFormId: 7,
-  },
-  {
-    name: "Market and lorry park",
-    inspectionFormId: 7,
-  },
   {
     name: "Slaughter house",
     inspectionFormId: 8,
@@ -140,6 +141,20 @@ export const premisesType = [
     name: "Communal container",
     inspectionFormId: 8,
   },
- 
- 
+  {
+    name: "Others",
+    inspectionFormId: 8,
+  },
+  {
+    name: "Market",
+    inspectionFormId: 7,
+  },
+  {
+    name: "Lorry park",
+    inspectionFormId: 7,
+  },
+  {
+    name: "Market and lorry park",
+    inspectionFormId: 7,
+  },
 ];

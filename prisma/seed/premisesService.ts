@@ -44,8 +44,5 @@ export const premisesService = [
     inspectionFormId: 4,
   },
 
-  {
-    name: "Others",
-    inspectionFormId: 4,
-  },
+  
 ];
