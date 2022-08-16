@@ -23,10 +23,7 @@ export const premisesService = [
     name: "Mortuary",
     inspectionFormId: 3,
   },
-  {
-    name: "Others",
-    inspectionFormId: 3,
-  },
+
   {
     name: "Lodging",
     inspectionFormId: 4,

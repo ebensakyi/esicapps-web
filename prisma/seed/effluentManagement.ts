@@ -9,9 +9,7 @@ export const effluentManagement = [
     name: "Nearby drain",
   },
   {
-    name: "Ponding",
+    name: "Stagnation",
   },
-  {
-    name: "Others",
-  },
+ 
 ];

@@ -18,8 +18,6 @@ export const greyWaterDisposal = [
         name: "Open space disposal",
       },
     
-      {
-        name: "Others",
-      },
+    
   ];
   

@@ -17,7 +17,5 @@ export const pestSign = [
   {
     name: "Non found",
   },
-  {
-    name: "Others",
-  },
+
 ];

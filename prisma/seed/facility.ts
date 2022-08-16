@@ -83,8 +83,5 @@ export const facility = [
     name: "Table top",
     inspectionFormId: 3,
   },
-  {
-    name: "Others",
-    inspectionFormId:3
-  },
+
 ];

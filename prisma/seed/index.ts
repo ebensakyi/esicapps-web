@@ -8,7 +8,6 @@ import { inspectionForm } from "./inspectionForm";
 
 import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
 import { community } from "./community";
-//import { condition } from "./condition";
 import { district } from "./district";
 import { drainType } from "./drainType";
 import { effluentManagement } from "./effluentManagement";
@@ -92,9 +91,7 @@ async function main() {
     data: frequency,
   });
 
-  await prisma.respondentDesignation.createMany({
-    data: respondentDesignation,
-  });
+ 
 
   await prisma.solidWasteReceptacle.createMany({
     data: solidWasteReceptacle,
@@ -174,7 +171,9 @@ async function main() {
   await prisma.ownershipType.createMany({
     data: ownershipType,
   });
- 
+  await prisma.respondentDesignation.createMany({
+    data: respondentDesignation,
+  });
 }
 
 main()

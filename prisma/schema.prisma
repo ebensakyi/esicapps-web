@@ -107,6 +107,19 @@ model User {
 //   updatedAt           DateTime             @updatedAt
 //   categoryId          Int?
 // }
+model RespondentDesignation {
+  id               Int    @id @default(autoincrement())
+  name             String @db.VarChar(255)
+  inspectionFormId Int
+
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  InspectionForm  InspectionForm    @relation(fields: [inspectionFormId], references: [id])
+  FacilitySection FacilitySection[]
+  // PremisesSubtype   PremisesSubtype?  @relation(fields: [premisesSubtypeId], references: [id])
+  // premisesSubtypeId Int?
+}
 
 model InspectionForm {
   id         Int          @id @default(autoincrement())
@@ -414,19 +427,6 @@ model StorageCondition {
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model RespondentDesignation {
-  id                Int               @id @default(autoincrement())
-  name              String            @db.VarChar(255)
-  deleted           Int?              @default(0)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  InspectionForm    InspectionForm    @relation(fields: [inspectionFormId], references: [id])
-  FacilitySection   FacilitySection[]
-  PremisesSubtype   PremisesSubtype?   @relation(fields: [premisesSubtypeId], references: [id])
-  inspectionFormId  Int
-  premisesSubtypeId Int?
 }
 
 model WasteCollectionType {
@@ -1299,16 +1299,16 @@ model PremisesType {
 }
 
 model PremisesSubtype {
-  id                    Int                     @id @default(autoincrement())
-  name                  String                  @db.VarChar(255)
-  InspectionForm        InspectionForm          @relation(fields: [inspectionFormId], references: [id])
-  PremisesType          PremisesType            @relation(fields: [premisesTypeId], references: [id])
-  deleted               Int?                    @default(0)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  inspectionFormId      Int
-  premisesTypeId        Int
-  RespondentDesignation RespondentDesignation[]
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  PremisesType     PremisesType   @relation(fields: [premisesTypeId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  premisesTypeId   Int
+  // RespondentDesignation RespondentDesignation[]
 }
 
 model PremisesService {

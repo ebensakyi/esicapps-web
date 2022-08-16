@@ -14,8 +14,6 @@ export const analCleansingMaterialMgt = [
   {
     name: "Burned",
   },
-  {
-    name: "Others",
-  },
+ 
 ];
 

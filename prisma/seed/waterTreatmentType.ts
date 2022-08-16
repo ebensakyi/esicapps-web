@@ -6,8 +6,6 @@ export const waterTreatmentType = [
       name: "Filtration",
     }, {
       name: "Boiling",
-    }, {
-      name: "Others",
-    },
+    }
   ];
 

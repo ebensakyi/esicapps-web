@@ -14,7 +14,5 @@ export const waterSupplyType = [
   {
     name: "Not applicable",
   },
-  {
-    name: "Others",
-  },
+
 ];

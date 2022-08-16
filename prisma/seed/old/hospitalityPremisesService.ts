@@ -16,8 +16,5 @@ export const hospitalityPremisesService = [
     inspectionFormId: 4,
   },
 
-  {
-    name: "Others",
-    inspectionFormId: 4,
-  },
+
 ];

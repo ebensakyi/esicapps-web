@@ -23,9 +23,5 @@ export const hospitalityPremisesType = [
     name: "Guest House",
     inspectionFormId: 4,
   },
- 
-  {
-    name: "Others",
-    inspectionFormId: 4,
-  },
+
 ];

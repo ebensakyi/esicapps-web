@@ -24,8 +24,5 @@ export const sanitaryPremisesType = [
     name: "Cemetery",
     inspectionFormId: 8,
   },
-  {
-    name: "Others",
-    inspectionFormId: 8,
-  },
+
 ];

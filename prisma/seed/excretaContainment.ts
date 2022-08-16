@@ -14,7 +14,5 @@ export const excretaContainment = [
   {
     name: "Sewered",
   },
-  {
-    name: "Others",
-  },
+
 ];

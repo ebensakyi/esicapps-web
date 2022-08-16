@@ -11,7 +11,5 @@ export const hazardousWasteDisposal = [
   {
     name: "Added to general waste",
   },
-  {
-    name:"Others"
-  }
+ 
 ];

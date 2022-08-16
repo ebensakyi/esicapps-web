@@ -8,7 +8,5 @@ export const wasteCollectionType = [
   {
     name: "Not serviced",
   },
-  {
-    name: "Others",
-  },
+
 ];

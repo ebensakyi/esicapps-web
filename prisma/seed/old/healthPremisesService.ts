@@ -31,8 +31,5 @@ export const healthPremisesService = [
     name: "Veterinary",
     inspectionFormId: 3,
   },
-  {
-    name: "Others",
-    inspectionFormId: 3,
-  },
+
 ];

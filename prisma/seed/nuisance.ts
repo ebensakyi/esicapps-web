@@ -47,9 +47,7 @@ export const nuisance = [
   {
     name: "Prohibited animals",
   },
-  {
-    name: "Others",
-  },
+
   {
     name: "No nuisance",
   },

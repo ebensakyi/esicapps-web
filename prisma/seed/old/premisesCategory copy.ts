@@ -84,10 +84,7 @@ export const premisesType = [
     name: "Table top",
     inspectionFormId: 4,
   },
-  {
-    name: "Others",
-    inspectionFormId: 4,
-  },
+
   {
     name: "Church",
     inspectionFormId: 5,
@@ -141,10 +138,7 @@ export const premisesType = [
     name: "Communal container",
     inspectionFormId: 8,
   },
-  {
-    name: "Others",
-    inspectionFormId: 8,
-  },
+
   {
     name: "Market",
     inspectionFormId: 7,

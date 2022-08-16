@@ -17,9 +17,7 @@ export const toiletType = [
     {
       name: "Pan Latrine",
     },
-    {
-      name: "Others",
-    },
+
   ];
   
 

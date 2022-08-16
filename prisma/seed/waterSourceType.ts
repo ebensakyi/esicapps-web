@@ -20,7 +20,5 @@ export const waterSourceType = [
   {
     name: "Mechanised Borehole",
   },
-  {
-    name: "Others",
-  },
+
 ];

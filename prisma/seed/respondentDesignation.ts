@@ -15,8 +15,6 @@ export const respondentDesignation = [
     name: "Tenant",
     inspectionFormId: 1,
   },
-
-
   {
     name: "Owner",
     inspectionFormId: 2,
@@ -37,9 +35,6 @@ export const respondentDesignation = [
     name: "Chief executive officer",
     inspectionFormId: 2,
   },
-
-
-
   {
     name: "Administrator",
     inspectionFormId: 3,
@@ -57,7 +52,6 @@ export const respondentDesignation = [
     inspectionFormId: 3,
   },
 
-
   {
     name: "Manager",
     inspectionFormId: 4,
@@ -69,16 +63,15 @@ export const respondentDesignation = [
   {
     name: "Caretaker",
     inspectionFormId: 4,
-  }, {
+  },
+  {
     name: "Chief Executive Officer",
     inspectionFormId: 4,
-  }, {
+  },
+  {
     name: "Administrator",
     inspectionFormId: 4,
   },
-
-
-
   {
     name: "Manager",
     inspectionFormId: 5,
@@ -90,23 +83,23 @@ export const respondentDesignation = [
   {
     name: "Caretaker",
     inspectionFormId: 5,
-  }, {
+  },
+  {
     name: "Chief Executive Officer",
     inspectionFormId: 5,
-  }, {
+  },
+  {
     name: "Headmaster",
     inspectionFormId: 5,
-  },{
+  },
+  {
     name: "Headmistress",
     inspectionFormId: 5,
-  },{
+  },
+  {
     name: "Proprietor",
     inspectionFormId: 5,
   },
-
-
-
-
   {
     name: "Manager",
     inspectionFormId: 6,
@@ -118,15 +111,15 @@ export const respondentDesignation = [
   {
     name: "Caretaker",
     inspectionFormId: 6,
-  }, {
+  },
+  {
     name: "Chief Executive Officer",
     inspectionFormId: 6,
-  }, {
+  },
+  {
     name: "Administrator",
     inspectionFormId: 6,
   },
-
-
   {
     name: "Manager",
     inspectionFormId: 7,
@@ -138,19 +131,20 @@ export const respondentDesignation = [
   {
     name: "Caretaker",
     inspectionFormId: 7,
-  }, {
+  },
+  {
     name: "Station master",
     inspectionFormId: 7,
   },
-  , {
+  
+  {
     name: "Driver",
     inspectionFormId: 7,
-  }, {
+  },
+  {
     name: "Trader",
     inspectionFormId: 7,
-  }, 
-
-
+  },
   {
     name: "Sexton",
     inspectionFormId: 8,
@@ -174,9 +168,9 @@ export const respondentDesignation = [
   {
     name: "Chief executive officer",
     inspectionFormId: 8,
-  }, {
+  },
+  {
     name: "Administrator",
     inspectionFormId: 8,
   },
-
 ];
