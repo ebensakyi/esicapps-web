@@ -47,7 +47,7 @@ export const nuisance = [
   {
     name: "Prohibited animals",
   },
-
+{name:"Add Stagnant Waste Water"},
   {
     name: "No nuisance",
   },

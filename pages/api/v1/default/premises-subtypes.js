@@ -5,17 +5,17 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const premisesType = await prisma.premisesCategory.create({ data });
+    const premisesSubtypes = await prisma.premisesSubtype.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { premisesType } });
+      .json({ statusCode: 1, message: "Data saved", data: { premisesSubtypes } });
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
         .json({
           statusCode: 0,
-          message: "premisesType prefix should be unique",
+          message: "premisesSubtypes prefix should be unique",
         });
   }
 };
@@ -24,10 +24,10 @@ const get = async (req, res) => {
   try {
     //let inspectionFormId = Number(req.query.id);
 
-    const premisesType = await prisma.premisesCategory.findMany({
+    const premisesSubtypes = await prisma.premisesSubtype.findMany({
       where: {deleted: 0 },
     });
-    return res.status(200).json(premisesType);
+    return res.status(200).json(premisesSubtypes);
   } catch (error) {
     console.log("Error: " + error);
   }
