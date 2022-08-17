@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id          Int     @id @default(autoincrement())
-  userTypeId  Int     @default(2)
+  userTypeId  Int
   surname     String  @db.VarChar(255)
   otherNames  String  @db.VarChar(255)
   email       String? @db.VarChar(255)
@@ -35,6 +35,15 @@ model User {
   Logs        Logs[]
   submittedBy Inspection[] @relation("submittedBy")
   publishedBy Inspection[] @relation("publishedBy")
+}
+
+model UserLevel {
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(255)
+  deleted   Int?       @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  UserType  UserType[]
 }
 
 ///////////////////////////XXX//////////////////////////////
@@ -137,12 +146,14 @@ model InspectionForm {
 }
 
 model UserType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User[]
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  deleted     Int?      @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  UserLevel   UserLevel @relation(fields: [userLevelId], references: [id])
+  User        User[]
+  userLevelId Int
 }
 
 model Role {

@@ -1109,46 +1109,33 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="#sidebarSignIn"
+                        href="/admin/user"
                         className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
                       >
                         {" "}
-                        Add
+                        Add/List
                       </a>
                     </li>
                     <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        List
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
                       >
                         {" "}
                         Manage
                       </a>
                     </li>
+                   
                   </ul>
                 </div>
               </li>
@@ -1168,13 +1155,13 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="#sidebarSignIn"
+                        href="/admin/user/user-type"
                         className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
                       >
                         {" "}
                         Add
