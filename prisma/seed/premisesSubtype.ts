@@ -10,12 +10,12 @@ export const premisesSubtype = [
     premisesTypeId: 1,
   },
   {
-    name: "Drinking bar",
+    name: "Chopbar",
     inspectionFormId: 2,
-    premisesTypeId: 2,
+    premisesTypeId: 3,
   },
   {
-    name: "Drinking bar",
+    name: "Table Top",
     inspectionFormId: 2,
     premisesTypeId: 3,
   },

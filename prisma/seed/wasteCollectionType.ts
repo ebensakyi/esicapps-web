@@ -2,9 +2,7 @@ export const wasteCollectionType = [
   {
     name: "Communal container",
   },
-  {
-    name: "Door to door",
-  },
+
   {
     name: "Crude Dumping",
   },

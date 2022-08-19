@@ -6,7 +6,7 @@ export const greyWaterDisposal = [
       name: "Earth drain",
     },
     {
-        name: "Ponding",
+        name: "Stagnation",
       },
       {
         name: "Sewage system",
