@@ -1,4 +1,4 @@
-export const premisesType = [
+export const types = [
   {
     name: "Eating premises",
     inspectionFormId: 2,

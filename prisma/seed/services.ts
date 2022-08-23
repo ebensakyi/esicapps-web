@@ -1,4 +1,4 @@
-export const premisesService = [
+export const services = [
   {
     name: "Outpatient",
     inspectionFormId: 3,

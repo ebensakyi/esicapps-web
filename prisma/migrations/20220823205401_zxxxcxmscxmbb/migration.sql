@@ -853,7 +853,7 @@ CREATE TABLE "IndustryPremisesSpecific" (
 );
 
 -- CreateTable
-CREATE TABLE "PremisesType" (
+CREATE TABLE "Type" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -861,33 +861,33 @@ CREATE TABLE "PremisesType" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesType_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Type_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "PremisesSubtype" (
+CREATE TABLE "Subtype" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
-    "premisesTypeId" INTEGER NOT NULL,
+    "typeId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesSubtype_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Subtype_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "PremisesService" (
+CREATE TABLE "Service" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
-    "premisesTypeId" INTEGER,
+    "typeId" INTEGER,
 
-    CONSTRAINT "PremisesService_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1329,19 +1329,19 @@ ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("i
 ALTER TABLE "IndustryPremisesSpecific" ADD CONSTRAINT "IndustryPremisesSpecific_storageFinishedProductId_fkey" FOREIGN KEY ("storageFinishedProductId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesType" ADD CONSTRAINT "PremisesType_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Type" ADD CONSTRAINT "Type_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesSubtype" ADD CONSTRAINT "PremisesSubtype_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Subtype" ADD CONSTRAINT "Subtype_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesSubtype" ADD CONSTRAINT "PremisesSubtype_premisesTypeId_fkey" FOREIGN KEY ("premisesTypeId") REFERENCES "PremisesType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Subtype" ADD CONSTRAINT "Subtype_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "Type"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesService" ADD CONSTRAINT "PremisesService_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Service" ADD CONSTRAINT "Service_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesService" ADD CONSTRAINT "PremisesService_premisesTypeId_fkey" FOREIGN KEY ("premisesTypeId") REFERENCES "PremisesType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Service" ADD CONSTRAINT "Service_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "Type"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SlaughterHouse" ADD CONSTRAINT "SlaughterHouse_slaughterRoomsAvailableId_fkey" FOREIGN KEY ("slaughterRoomsAvailableId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

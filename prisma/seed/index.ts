@@ -35,9 +35,9 @@ import { action } from "./action";
 import { pestSign } from "./pestSign";
 import { temporaryPermanent } from "./temporaryPermanent";
 import { toiletPitPosition } from "./toiletPitPosition";
-import { premisesService } from "./premisesService";
-import { premisesType } from "./premisesType";
-import { premisesSubtype } from "./premisesSubtype";
+import { services } from "./services";
+import { types } from "./types";
+import { subtypes } from "./subtypes";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
@@ -151,14 +151,14 @@ async function main() {
     data: toiletPitPosition,
   });
  
-  await prisma.premisesService.createMany({
-    data: premisesService,
+  await prisma.service.createMany({
+    data: services,
   });
-  await prisma.premisesType.createMany({
-    data: premisesType,
+  await prisma.type.createMany({
+    data: types,
   });
-  await prisma.premisesSubtype.createMany({
-    data: premisesSubtype,
+  await prisma.subtype.createMany({
+    data: subtypes,
   });
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
