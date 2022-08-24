@@ -1,4 +1,4 @@
-const AddUser = () => {
+const AddUser = ({levels,regions,districts}) => {
 
   return (
 
@@ -9,7 +9,7 @@ const AddUser = () => {
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Add user</h4>
-                <div className="flex-shrink-0">
+                {/* <div className="flex-shrink-0">
                   <div className="form-check form-switch form-switch-right form-switch-md">
                     <label
                       htmlFor="form-grid-showcode"
@@ -23,7 +23,7 @@ const AddUser = () => {
                       id="form-grid-showcode"
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
               {/* end card header */}
               <div className="card-body">
@@ -93,6 +93,21 @@ const AddUser = () => {
                     </div>
                   </div>
                   {/*end col*/}
+                  <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                        Level
+                      </label>
+
+                      <select class="form-select" id="inputGroupSelect02">
+                        <option selected>Choose...</option>
+                        <option value="1">National</option>
+                        <option value="2">Regional</option>
+                        <option value="3">District</option>
+                      </select>
+
+                    </div>
+                  </div>
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">

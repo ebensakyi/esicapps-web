@@ -30,20 +30,24 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  Usertype UserType @relation(fields: [userTypeId], references: [id])
+  Usertype  UserType  @relation(fields: [userTypeId], references: [id])
+  UserLevel UserLevel @relation(fields: [userLevelId], references: [id])
 
   Logs        Logs[]
   submittedBy Inspection[] @relation("submittedBy")
   publishedBy Inspection[] @relation("publishedBy")
+  userLevelId Int
 }
 
 model UserLevel {
-  id        Int        @id @default(autoincrement())
-  name      String     @db.VarChar(255)
-  deleted   Int?       @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  UserType  UserType[]
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User     User[]
+  UserType UserType[]
 }
 
 ///////////////////////////XXX//////////////////////////////
@@ -140,7 +144,7 @@ model InspectionForm {
   Facility   Facility[]
 
   RespondentDesignation RespondentDesignation[]
-  Type                 Type[]
+  Type                  Type[]
   Subtype               Subtype[]
   Service               Service[]
 }

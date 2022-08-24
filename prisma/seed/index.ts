@@ -41,6 +41,7 @@ import { subtypes } from "./subtypes";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
+import { userLevel } from "./userLevel";
 
 
 async function main() {
@@ -173,6 +174,10 @@ async function main() {
   });
   await prisma.respondentDesignation.createMany({
     data: respondentDesignation,
+  });
+
+  await prisma.userLevel.createMany({
+    data: userLevel,
   });
 }
 

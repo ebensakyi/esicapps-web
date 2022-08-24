@@ -11,19 +11,19 @@ const Header = () => {
               <div className="navbar-brand-box horizontal-logo">
                 <a href="index.html" className="logo logo-dark">
                   <span className="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="" height={22} />
+                    <img src="/assets/images/logo-sm.png" alt="" height={22} />
                   </span>
                   <span className="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="" height={17} />
+                    <img src="/assets/images/logo-dark.png" alt="" height={17} />
                   </span>
                 </a>
                 <a href="index.html" className="logo logo-light">
                   <span className="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="" height={22} />
+                    <img src="/assets/images/logo-sm.png" alt="" height={22} />
                   </span>
                   <span className="logo-lg">
                     <img
-                      src="assets/images/logo-light.png"
+                      src="/assets/images/logo-light.png"
                       alt=""
                       height={17}
                     />
@@ -128,7 +128,7 @@ const Header = () => {
                       >
                         <div className="d-flex">
                           <img
-                            src="assets/images/users/avatar-2.jpg"
+                            src="/assets/images/users/avatar-2.jpg"
                             className="me-3 rounded-circle avatar-xs"
                             alt="user-pic"
                           />
@@ -147,7 +147,7 @@ const Header = () => {
                       >
                         <div className="d-flex">
                           <img
-                            src="assets/images/users/avatar-3.jpg"
+                            src="/assets/images/users/avatar-3.jpg"
                             className="me-3 rounded-circle avatar-xs"
                             alt="user-pic"
                           />
@@ -166,7 +166,7 @@ const Header = () => {
                       >
                         <div className="d-flex">
                           <img
-                            src="assets/images/users/avatar-5.jpg"
+                            src="/assets/images/users/avatar-5.jpg"
                             className="me-3 rounded-circle avatar-xs"
                             alt="user-pic"
                           />
@@ -256,7 +256,7 @@ const Header = () => {
                       <div className="col">
                         <a className="dropdown-icon-item" href="#!">
                           <img
-                            src="assets/images/brands/github.png"
+                            src="/assets/images/brands/github.png"
                             alt="Github"
                           />
                           <span>GitHub</span>
@@ -265,7 +265,7 @@ const Header = () => {
                       <div className="col">
                         <a className="dropdown-icon-item" href="#!">
                           <img
-                            src="assets/images/brands/bitbucket.png"
+                            src="/assets/images/brands/bitbucket.png"
                             alt="bitbucket"
                           />
                           <span>Bitbucket</span>
@@ -274,7 +274,7 @@ const Header = () => {
                       <div className="col">
                         <a className="dropdown-icon-item" href="#!">
                           <img
-                            src="assets/images/brands/dribbble.png"
+                            src="/assets/images/brands/dribbble.png"
                             alt="dribbble"
                           />
                           <span>Dribbble</span>
@@ -285,7 +285,7 @@ const Header = () => {
                       <div className="col">
                         <a className="dropdown-icon-item" href="#!">
                           <img
-                            src="assets/images/brands/dropbox.png"
+                            src="/assets/images/brands/dropbox.png"
                             alt="dropbox"
                           />
                           <span>Dropbox</span>
@@ -294,7 +294,7 @@ const Header = () => {
                       <div className="col">
                         <a className="dropdown-icon-item" href="#!">
                           <img
-                            src="assets/images/brands/mail_chimp.png"
+                            src="/assets/images/brands/mail_chimp.png"
                             alt="mail_chimp"
                           />
                           <span>Mail Chimp</span>
@@ -303,7 +303,7 @@ const Header = () => {
                       <div className="col">
                         <a className="dropdown-icon-item" href="#!">
                           <img
-                            src="assets/images/brands/slack.png"
+                            src="/assets/images/brands/slack.png"
                             alt="slack"
                           />
                           <span>Slack</span>
@@ -461,7 +461,7 @@ const Header = () => {
                         <div className="text-reset notification-item d-block dropdown-item position-relative active">
                           <div className="d-flex">
                             <img
-                              src="assets/images/users/avatar-2.jpg"
+                              src="/assets/images/users/avatar-2.jpg"
                               className="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
@@ -542,7 +542,7 @@ const Header = () => {
                         <div className="text-reset notification-item d-block dropdown-item position-relative">
                           <div className="d-flex">
                             <img
-                              src="assets/images/users/avatar-8.jpg"
+                              src="/assets/images/users/avatar-8.jpg"
                               className="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
@@ -605,7 +605,7 @@ const Header = () => {
                         <div className="text-reset notification-item d-block dropdown-item">
                           <div className="d-flex">
                             <img
-                              src="assets/images/users/avatar-3.jpg"
+                              src="/assets/images/users/avatar-3.jpg"
                               className="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
@@ -646,7 +646,7 @@ const Header = () => {
                         <div className="text-reset notification-item d-block dropdown-item">
                           <div className="d-flex">
                             <img
-                              src="assets/images/users/avatar-2.jpg"
+                              src="/assets/images/users/avatar-2.jpg"
                               className="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
@@ -688,7 +688,7 @@ const Header = () => {
                         <div className="text-reset notification-item d-block dropdown-item">
                           <div className="d-flex">
                             <img
-                              src="assets/images/users/avatar-6.jpg"
+                              src="/assets/images/users/avatar-6.jpg"
                               className="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
@@ -730,7 +730,7 @@ const Header = () => {
                         <div className="text-reset notification-item d-block dropdown-item">
                           <div className="d-flex">
                             <img
-                              src="assets/images/users/avatar-8.jpg"
+                              src="/assets/images/users/avatar-8.jpg"
                               className="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
@@ -787,7 +787,7 @@ const Header = () => {
                     >
                       <div className="w-25 w-sm-50 pt-3 mx-auto">
                         <img
-                          src="assets/images/svg/bell.svg"
+                          src="/assets/images/svg/bell.svg"
                           className="img-fluid"
                           alt="user-pic"
                         />
@@ -813,7 +813,7 @@ const Header = () => {
                   <span className="d-flex align-items-center">
                     <img
                       className="rounded-circle header-profile-user"
-                      src="assets/images/users/avatar-1.jpg"
+                      src="/assets/images/users/avatar-1.jpg"
                       alt="Header Avatar"
                     />
                     <span className="text-start ms-xl-2">
@@ -888,19 +888,19 @@ const Header = () => {
           {/* Dark Logo*/}
           <a href="index.html" className="logo logo-dark">
             <span className="logo-sm">
-              <img src="assets/images/logo-sm.png" alt="" height={22} />
+              <img src="/assets/images/logo-sm.png" alt="" height={22} />
             </span>
             <span className="logo-lg">
-              <img src="assets/images/logo-dark.png" alt="" height={17} />
+              <img src="/assets/images/logo-dark.png" alt="" height={17} />
             </span>
           </a>
           {/* Light Logo*/}
           <a href="index.html" className="logo logo-light">
             <span className="logo-sm">
-              <img src="assets/images/logo-sm.png" alt="" height={22} />
+              <img src="/assets/images/logo-sm.png" alt="" height={22} />
             </span>
             <span className="logo-lg">
-              <img src="assets/images/logo-light.png" alt="" height={17} />
+              <img src="/assets/images/logo-light.png" alt="" height={17} />
             </span>
           </a>
           <button
@@ -984,51 +984,102 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarApps"
-               
+                  href="#data"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="sidebarLayouts"
                 >
-                  <i className="ri-apps-2-line" />{" "}
+
+                  <i className="ri-apps-2-line" />
                   <span data-key="t-apps">Data</span>
                 </a>
-                {/* <div className="collapse menu-dropdown" id="sidebarApps">
+                <div className="collapse menu-dropdown" id="data">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="apps-calendar.html"
+                        href="/admin/data/residential"
                         className="nav-link"
                         data-key="t-calendar"
                       >
-                        {" "}
-                        National
+                        Residential
                       </a>
                     </li>
                     <li className="nav-item">
                       <a
-                        href="apps-chat.html"
+                        href="/admin/data/eatery"
                         className="nav-link"
                         data-key="t-chat"
                       >
-                        {" "}
-                        Regional{" "}
+                        Eatery
                       </a>
                     </li>
                     <li className="nav-item">
                       <a
-                        href="apps-mailbox.html"
+                        href="/admin/data/hospitality"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
-                        {" "}
-                        MMDA{" "}
+                        Hospitality
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/admin/data/health"
+                        className="nav-link"
+                        data-key="t-mailbox"
+                      >
+                       
+                        Health
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/admin/data/institution"
+                        className="nav-link"
+                        data-key="t-mailbox"
+                      >
+                      
+                        Institution
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/admin/data/industry"
+                        className="nav-link"
+                        data-key="t-mailbox"
+                      >
+                     
+                        Industry
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/admin/data/market"
+                        className="nav-link"
+                        data-key="t-mailbox"
+                      >
+                     
+                        Market
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/admin/data/sanitary"
+                        className="nav-link"
+                        data-key="t-mailbox"
+                      >
+                     
+                        Sanitary
                       </a>
                     </li>
                   </ul>
-                </div> */}
+                </div>
               </li>
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarLayouts"
+                  href="#report"
                   data-bs-toggle="collapse"
                   role="button"
                   aria-expanded="false"
@@ -1037,7 +1088,7 @@ const Header = () => {
                   <i className="ri-layout-3-line" />{" "}
                   <span data-key="t-layouts">Reports</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarLayouts">
+                <div className="collapse menu-dropdown" id="report">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
@@ -1096,7 +1147,7 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarAuth"
+                  href="#accounts"
                   data-bs-toggle="collapse"
                   role="button"
                   aria-expanded="false"
@@ -1105,7 +1156,7 @@ const Header = () => {
                   <i className="ri-account-circle-line" />{" "}
                   <span data-key="t-authentication">Users</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarAuth">
+                <div className="collapse menu-dropdown" id="accounts">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
@@ -1142,7 +1193,7 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarPages"
+                  href="#roles"
                   data-bs-toggle="collapse"
                   role="button"
                   aria-expanded="false"
@@ -1151,7 +1202,7 @@ const Header = () => {
                   <i className="ri-pages-line" />{" "}
                   <span data-key="t-pages">Roles</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarPages">
+                <div className="collapse menu-dropdown" id="roles">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
@@ -1205,7 +1256,7 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarPages"
+                  href="#messages"
                   data-bs-toggle="collapse"
                   role="button"
                   aria-expanded="false"
@@ -1214,7 +1265,7 @@ const Header = () => {
                   <i className="ri-mail-line" />{" "}
                   <span data-key="t-pages">Email</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarPages">
+                <div className="collapse menu-dropdown" id="messages">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
@@ -1264,7 +1315,7 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarPages"
+                  href="#notifications"
                   data-bs-toggle="collapse"
                   role="button"
                   aria-expanded="false"
@@ -1273,7 +1324,7 @@ const Header = () => {
                   <i className="ri-notification-2-line" />{" "}
                   <span data-key="t-pages">Notifications</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarPages">
+                <div className="collapse menu-dropdown" id="notifications">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
