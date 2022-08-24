@@ -1,4 +1,4 @@
-export const premisesType = [
+export const types = [
   {
     name: "Eating premises",
     inspectionFormId: 2,
@@ -133,7 +133,7 @@ export const premisesType = [
     inspectionFormId: 8,
   },
   {
-    name: "Public toilet/ urinal/ bathhouse",
+    name: "Place of convenience",
     inspectionFormId: 8,
   },
   {
@@ -141,5 +141,8 @@ export const premisesType = [
     inspectionFormId: 8,
   },
  
- 
+  {
+    name: "Abattoir",
+    inspectionFormId: 8,
+  },
 ];

@@ -140,9 +140,9 @@ model InspectionForm {
   Facility   Facility[]
 
   RespondentDesignation RespondentDesignation[]
-  PremisesType          PremisesType[]
-  PremisesSubtype       PremisesSubtype[]
-  PremisesService       PremisesService[]
+  Type                 Type[]
+  Subtype               Subtype[]
+  Service               Service[]
 }
 
 model UserType {
@@ -1297,188 +1297,42 @@ model IndustryPremisesSpecific {
   storageFinishedProduct YesNo @relation(fields: [storageFinishedProductId], references: [id])
 }
 
-model PremisesType {
-  id               Int               @id @default(autoincrement())
-  name             String            @db.VarChar(255)
-  InspectionForm   InspectionForm    @relation(fields: [inspectionFormId], references: [id])
-  deleted          Int?              @default(0)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  inspectionFormId Int
-  PremisesSubtype  PremisesSubtype[]
-  PremisesService  PremisesService[]
-}
-
-model PremisesSubtype {
+model Type {
   id               Int            @id @default(autoincrement())
   name             String         @db.VarChar(255)
   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  PremisesType     PremisesType   @relation(fields: [premisesTypeId], references: [id])
   deleted          Int?           @default(0)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   inspectionFormId Int
-  premisesTypeId   Int
+  Subtype          Subtype[]
+  Service          Service[]
+}
+
+model Subtype {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  Type             Type           @relation(fields: [typeId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  typeId           Int
   // RespondentDesignation RespondentDesignation[]
 }
 
-model PremisesService {
+model Service {
   id               Int            @id @default(autoincrement())
   name             String         @db.VarChar(255)
   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  PremisesType     PremisesType?  @relation(fields: [premisesTypeId], references: [id])
+  Type             Type?          @relation(fields: [typeId], references: [id])
   deleted          Int?           @default(0)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   inspectionFormId Int
-  premisesTypeId   Int?
+  typeId           Int?
 }
-
-// model ProductType {
-//   id   Int    @id @default(autoincrement())
-//   name String @db.VarChar(255)
-
-//   deleted                    Int?                         @default(0)
-//   createdAt                  DateTime                     @default(now())
-//   updatedAt                  DateTime                     @updatedAt
-//   IndustryPremisesSubsection IndustryPremisesSubsection[]
-// }
-
-// model ProductType {
-//   id                         Int                          @id @default(autoincrement())
-//   name                       String                       @db.VarChar(255)
-//   IndustryCategory           IndustryCategory             @relation(fields: [industryCategoryId], references: [id])
-//   deleted                    Int?                         @default(0)
-//   createdAt                  DateTime                     @default(now())
-//   updatedAt                  DateTime                     @updatedAt
-//   IndustryPremisesSubsection IndustryPremisesSubsection[]
-//   industryCategoryId         Int
-// }
-
-// model IndustryCategory {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   IndustryType     IndustryType[]
-// }
-
-// model IndustryType {
-//   id               Int              @id @default(autoincrement())
-//   name             String           @db.VarChar(255)
-//   inspectionFormId Int
-//   deleted          Int?             @default(0)
-//   createdAt        DateTime         @default(now())
-//   updatedAt        DateTime         @updatedAt
-//   InspectionForm   InspectionForm   @relation(fields: [inspectionFormId], references: [id])
-//   IndustryCategory IndustryCategory @relation(fields: [categoryId], references: [id])
-//   categoryId       Int
-// }
-
-// model InstitutionCategory {
-//   id               Int               @id @default(autoincrement())
-//   name             String            @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm    @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?              @default(0)
-//   createdAt        DateTime          @default(now())
-//   updatedAt        DateTime          @updatedAt
-//   InstitutionType  InstitutionType[]
-// }
-
-// // model PremisesCategory {
-// //   id               Int               @id @default(autoincrement())
-// //   name             String            @db.VarChar(255)
-// //   inspectionFormId Int
-// //   deleted          Int?              @default(0)
-// //   createdAt        DateTime          @default(now())
-// //   updatedAt        DateTime          @updatedAt
-// //   InspectionForm   InspectionForm    @relation(fields: [inspectionFormId], references: [id])
-// //   FacilitySection  FacilitySection[]
-// // }
-
-// model HealthPremisesType {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model HospitalityPremisesType {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model EateryPremisesType {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model MarketPremisesType {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model SanitaryPremisesType {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model HealthPremisesService {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model HospitalityPremisesService {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
-
-// model EateryPremisesCategory {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   inspectionFormId Int
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-// }
 
 //////////////////////////ADD THESE TO DIFFERENT SECTION ////////////////////////
 
