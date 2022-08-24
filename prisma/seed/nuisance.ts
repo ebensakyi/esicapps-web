@@ -47,7 +47,34 @@ export const nuisance = [
   {
     name: "Prohibited animals",
   },
-{name:"Stagnant waste water"},
+  { name: "Stagnant waste water" },
+  {
+    name: "Exposed food",
+  },
+  {
+    name: "Exposed Faecal matter",
+  },
+  {
+    name: "Offensive odour",
+  },
+  {
+    name: "Insanitary hen coop",
+  },
+  {
+    name: "Insanitary goat pen",
+  },
+  {
+    name: "Insanitary cattle kraal ",
+  },
+  {
+    name: "Unsafe structure",
+  },
+  {
+    name: "Stagnate wastewater",
+  },
+  {
+    name: "Stray animals",
+  },
   {
     name: "No nuisance",
   },

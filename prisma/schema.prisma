@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id          Int     @id @default(autoincrement())
-  userTypeId  Int
+  userTypeId  Int?
   surname     String  @db.VarChar(255)
   otherNames  String  @db.VarChar(255)
   email       String? @db.VarChar(255)
@@ -30,7 +30,7 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  Usertype  UserType  @relation(fields: [userTypeId], references: [id])
+  Usertype  UserType? @relation(fields: [userTypeId], references: [id])
   UserLevel UserLevel @relation(fields: [userLevelId], references: [id])
 
   Logs        Logs[]
@@ -46,8 +46,15 @@ model UserLevel {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User     User[]
-  UserType UserType[]
+  User User[]
+}
+
+model CemeteryWorkers {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 ///////////////////////////XXX//////////////////////////////
@@ -150,14 +157,12 @@ model InspectionForm {
 }
 
 model UserType {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(255)
-  deleted     Int?      @default(0)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  UserLevel   UserLevel @relation(fields: [userLevelId], references: [id])
-  User        User[]
-  userLevelId Int
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User[]
 }
 
 model Role {

@@ -140,4 +140,33 @@ export const subtypes = [
     inspectionFormId: 5,
     typeId: 23,
   },
+
+
+
+  {
+    name: "Fast food",
+    inspectionFormId: 2,
+    typeId: 1,
+  },
+
+  {
+    name: "Grill",
+    inspectionFormId: 2,
+    typeId: 2,
+  },
+  {
+    name: "Spa",
+    inspectionFormId: 2,
+    typeId: 2,
+  },
+  {
+    name: "Pub",
+    inspectionFormId: 2,
+    typeId: 2,
+  },
+  {
+    name: "Lounge",
+    inspectionFormId: 2,
+    typeId: 2,
+  },
 ];

@@ -42,6 +42,7 @@ import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
 import { userLevel } from "./userLevel";
+import { cemeteryWorkers } from "./cemeteryWorkers";
 
 
 async function main() {
@@ -178,6 +179,10 @@ async function main() {
 
   await prisma.userLevel.createMany({
     data: userLevel,
+  });
+
+  await prisma.cemeteryWorkers.createMany({
+    data: cemeteryWorkers,
   });
 }
 

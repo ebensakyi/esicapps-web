@@ -139,6 +139,15 @@ export const types = [
   {
     name: "Communal container",
     inspectionFormId: 8,
+  }, {
+    name: "Public toilet",
+    inspectionFormId: 8,
+  }, {
+    name: "Public urinal",
+    inspectionFormId: 8,
+  }, {
+    name: "Public bath house",
+    inspectionFormId: 8,
   },
  
   {
