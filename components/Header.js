@@ -1437,7 +1437,7 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarPages"
+                  href="#settings"
                   data-bs-toggle="collapse"
                   role="button"
                   aria-expanded="false"
@@ -1446,23 +1446,19 @@ const Header = () => {
                   <i className="ri-settings-2-line" />{" "}
                   <span data-key="t-pages">Setup</span>
                 </a>
-                <div className="collapse menu-dropdown" id="sidebarPages">
+                <div className="collapse menu-dropdown" id="settings">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="#sidebarSignIn"
+                        href="/admin/primary-data"
                         className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
+                      
                       >
                         {" "}
-                        Regions
+                        Primary data
                       </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -1489,7 +1485,7 @@ const Header = () => {
                         {" "}
                         Manage
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </li>
