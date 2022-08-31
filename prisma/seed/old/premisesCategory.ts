@@ -127,7 +127,7 @@ export const premisesType = [
     inspectionFormId: 8,
   },
   {
-    name: "Transfer station for solid waste",
+    name: "Transfer site",
     inspectionFormId: 8,
   },
   {

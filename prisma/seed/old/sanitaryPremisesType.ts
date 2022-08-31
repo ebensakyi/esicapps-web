@@ -9,7 +9,7 @@ export const sanitaryPremisesType = [
   },
 
   {
-    name: "Transfer station for solid waste",
+    name: "Transfer site",
     inspectionFormId: 8,
   },
   {

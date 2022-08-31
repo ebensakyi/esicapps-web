@@ -129,7 +129,7 @@ export const types = [
     inspectionFormId: 8,
   },
   {
-    name: "Transfer station for solid waste",
+    name: "Transfer site",
     inspectionFormId: 8,
   },
   {
@@ -138,15 +138,6 @@ export const types = [
   },
   {
     name: "Communal container",
-    inspectionFormId: 8,
-  }, {
-    name: "Public toilet",
-    inspectionFormId: 8,
-  }, {
-    name: "Public urinal",
-    inspectionFormId: 8,
-  }, {
-    name: "Public bath house",
     inspectionFormId: 8,
   },
  

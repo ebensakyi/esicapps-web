@@ -169,4 +169,19 @@ export const subtypes = [
     inspectionFormId: 2,
     typeId: 2,
   },
+
+
+  {
+    name: "Public toilet",
+    inspectionFormId: 8,
+    typeId:33
+  },{
+    name: "Bath house",
+    inspectionFormId: 8,
+    typeId:33
+  },{
+    name: "Urinal",
+    inspectionFormId: 8,
+    typeId:33
+  },
 ];

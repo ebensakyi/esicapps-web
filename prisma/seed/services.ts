@@ -40,6 +40,6 @@ export const services = [
     name: "Games",
     inspectionFormId: 4,
   },
-
+ 
   
 ];
