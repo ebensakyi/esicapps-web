@@ -12,4 +12,7 @@ export const wasteCollectionType = [
   {
     name: "Burying",
   },
+  {
+    name: "Tricycle",
+  },
 ];

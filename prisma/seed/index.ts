@@ -22,6 +22,7 @@ import { storageCondition } from "./storageCondition";
 import { subdistrict } from "./subdistrict";
 import { toiletType } from "./toiletType";
 import { waterSourceType } from "./waterSourceType";
+import { drinkingWaterSourceType } from "./drinkingWaterSourceType";
 
 import { waterStorageType } from "./waterStorageType";
 import { waterSupplyType } from "./waterSupplyType";
@@ -111,6 +112,9 @@ async function main() {
   });
   await prisma.waterSourceType.createMany({
     data: waterSourceType,
+  });
+  await prisma.drinkingWaterSourceType.createMany({
+    data: drinkingWaterSourceType,
   });
   await prisma.waterStorageType.createMany({
     data: waterStorageType,

@@ -1,4 +1,4 @@
-export const waterSourceType = [
+export const drinkingWaterSourceType = [
   {
     name: "Pipe-borne",
   },
