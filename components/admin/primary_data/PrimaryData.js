@@ -1,603 +1,407 @@
 const PrimaryData = ({ levels, regions, districts }) => {
-
-    return (
-
-        <>
+  return (
+    <div className="row">
+      <div className="col-xxl-12">
+        <h5 className="mb-3">Vertical Nav Tabs</h5>
+        <div className="card">
+          <div className="card-body">
+            {/* <p className="text-muted">
+              Use <code>flex-column</code> class to create Vertical nav tabs.
+            </p> */}
             <div className="row">
-                <div className="col-xl-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title mb-0">Region -  USE ACCORDIAN OR TAB VIEW</h4>
-                        </div>
-                        {/* end card header */}
-                        <div className="card-body">
-                            {/* <p className="text-muted">
-                                Use <code>data-simplebar</code> attribute and add{" "}
-                                <code>max-height: **px</code> to set default scrollbar.
-                            </p> */}
-                            <div className="mx-n3">
-                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
-                                    <div className="card-body">
-                                        <div className="row gy-4">
-                                            <div className="col-xxl-8 col-md-8">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basiInput"
-                                                    />
-                                                </div>
+              <div className="col-md-3">
+                <div
+                  className="nav flex-column nav-pills text-center"
+                  id="v-pills-tab"
+                  role="tablist"
+                  aria-orientation="vertical"
+                >
+                  <a
+                    className="nav-link mb-2 active"
+                    id="action-tab"
+                    data-bs-toggle="pill"
+                    href="#action"
+                    role="tab"
+                    aria-controls="action"
+                    aria-selected="true"
+                  >
+                    Action
+                  </a>
+                  <a
+                    className="nav-link mb-2"
+                    id="cemetery-workers-tab"
+                    data-bs-toggle="pill"
+                    href="#cemetery-workers"
+                    role="tab"
+                    aria-controls="cemetery-workers"
+                    aria-selected="false"
+                  >
+                    Cemetery workers
+                  </a>
+                  <a
+                    className="nav-link mb-2"
+                    id="community-tab"
+                    data-bs-toggle="pill"
+                    href="#community"
+                    role="tab"
+                    aria-controls="community"
+                    aria-selected="false"
+                  >
+                    Community
+                  </a>
+                  <a
+                    className="nav-link"
+                    id="district-tab"
+                    data-bs-toggle="pill"
+                    href="#district"
+                    role="tab"
+                    aria-controls="district"
+                    aria-selected="false"
+                  >
+                    District
+                  </a>
+                  <a
+                    className="nav-link"
+                    id="drain-type-tab"
+                    data-bs-toggle="pill"
+                    href="#drain-type"
+                    role="tab"
+                    aria-controls="drain-type"
+                    aria-selected="false"
+                  >
+                    Drain type
+                  </a>
+                  <a className="nav-link"
+                    id="drinking-water-tab"
+                    data-bs-toggle="pill"
+                    href="#drinking-water"
+                    role="tab"
+                    aria-controls="drinking-water"
+                    aria-selected="false"
+                  >
+                    Drinking water source
+                  </a>
+                  <a className="nav-link"
+                    id="effluent-mgt-tab"
+                    data-bs-toggle="pill"
+                    href="#effluent-mgt"
+                    role="tab"
+                    aria-controls="effluent-mgt"
+                    aria-selected="false"
+                  >
+                    Effluent management
+                  </a>
 
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        .
-                                                    </label>
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
+                  <a className="nav-link"
+                    id="excreta-containment-tab"
+                    data-bs-toggle="pill"
+                    href="#excreta-containment"
+                    role="tab"
+                    aria-controls="excreta-containment"
+                    aria-selected="false"
+                  >
+                    Excreta containment
+                  </a>
+                  <a className="nav-link"
+                    id="excreta-disposal-method-tab"
+                    data-bs-toggle="pill"
+                    href="#excreta-disposal-method"
+                    role="tab"
+                    aria-controls="excreta-disposal-method"
+                    aria-selected="false"
+                  >
+                    Excreta disposal method
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
 
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <p>
-
-                                    </p>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Bobby Davis</td>
-                                                <td>Nov 14, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Christopher Neal</td>
-                                                <td>Nov 21, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Monkey Karry</td>
-                                                <td>Nov 24, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Aaron James</td>
-                                                <td>Nov 25, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        {/* end card-body */}
-                    </div>
-                    {/* end card */}
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
+                  <a className="nav-link"
+                    id="frequency-tab"
+                    data-bs-toggle="pill"
+                    href="#frequency"
+                    role="tab"
+                    aria-controls="frequency"
+                    aria-selected="false"
+                  >
+                    Frequency
+                  </a>
                 </div>
-                <div className="col-xl-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title mb-0">District</h4>
-                        </div>
-                        {/* end card header */}
-                        <div className="card-body">
-                            {/* <p className="text-muted">
-                                Use <code>data-simplebar</code> attribute and add{" "}
-                                <code>max-height: **px</code> to set default scrollbar.
-                            </p> */}
-                            <div className="mx-n3">
-                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
-                                    <div className="card-body">
-                                        <div className="row gy-4">
-                                            <div className="col-xxl-8 col-md-8">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basiInput"
-                                                    />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        .
-                                                    </label>
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <p>
-
-                                    </p>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Bobby Davis</td>
-                                                <td>Nov 14, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Christopher Neal</td>
-                                                <td>Nov 21, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Monkey Karry</td>
-                                                <td>Nov 24, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Aaron James</td>
-                                                <td>Nov 25, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        {/* end card-body */}
+              </div>
+              {/* end col */}
+              <div className="col-md-9">
+                <div
+                  className="tab-content text-muted mt-4 mt-md-0"
+                  id="v-pills-tabContent"
+                >
+                  <div
+                    className="tab-pane fade show active"
+                    id="v-pills-home"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-home-tab"
+                  >
+                    <div className="d-flex mb-2">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="assets/images/small/img-4.jpg"
+                          alt=""
+                          width={150}
+                          className="rounded"
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <p className="mb-0">
+                          You always want to make sure that your fonts work well
+                          together and try to limit the number of fonts you use
+                          to three or less. Experiment and play around with the
+                          fonts that you already have in the software you’re
+                          working with reputable font websites.
+                        </p>
+                      </div>
                     </div>
-                    {/* end card */}
-                </div>
-                <div className="col-xl-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title mb-0">Action</h4>
-                        </div>
-                        {/* end card header */}
-                        <div className="card-body">
-                            {/* <p className="text-muted">
-                                Use <code>data-simplebar</code> attribute and add{" "}
-                                <code>max-height: **px</code> to set default scrollbar.
-                            </p> */}
-                            <div className="mx-n3">
-                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
-                                    <div className="card-body">
-                                        <div className="row gy-4">
-                                            <div className="col-xxl-8 col-md-8">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basiInput"
-                                                    />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        .
-                                                    </label>
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <p>
-
-                                    </p>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Bobby Davis</td>
-                                                <td>Nov 14, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Christopher Neal</td>
-                                                <td>Nov 21, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Monkey Karry</td>
-                                                <td>Nov 24, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Aaron James</td>
-                                                <td>Nov 25, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        {/* end card-body */}
+                    <p className="mb-0">
+                      This may be the most commonly encountered tip I received
+                      from the designers I spoke with. They highly encourage
+                      that you use different fonts in one design, but do not
+                      over-exaggerate and go overboard.
+                    </p>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="v-pills-profile"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-profile-tab"
+                  >
+                    <div className="d-flex mb-2">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="assets/images/small/img-5.jpg"
+                          alt=""
+                          width={150}
+                          className="rounded"
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <p className="mb-0">
+                          {" "}
+                          I also decreased the transparency in the text so that
+                          the mountains come through the text, bringing the
+                          quote truly to life. Make sure that the placement of
+                          your text is pleasing to look at, and you try to
+                          achieve symmetry for this effect.
+                        </p>
+                      </div>
                     </div>
-                    {/* end card */}
+                    <p className="mb-0">
+                      You've probably heard that opposites attract. The same is
+                      true for fonts. Don't be afraid to combine font styles
+                      that are different but complementary. You can always play
+                      around with the text that is overlaid on an image.
+                    </p>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="v-pills-messages"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-messages-tab"
+                  >
+                    <div className="d-flex mb-2">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="assets/images/small/img-6.jpg"
+                          alt=""
+                          width={150}
+                          className="rounded"
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <p className="mb-0">
+                          In this image, you can see that the line height has
+                          been reduced significantly, and the size was brought
+                          up exponentially. Experiment and play around with the
+                          fonts that you already have in the software you’re
+                          working with reputable font websites.
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mb-0">
+                      They highly encourage that you use different fonts in one
+                      design, but do not over-exaggerate and go overboard This
+                      may be the most commonly encountered tip I received from
+                      the designers I spoke with.
+                    </p>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="v-pills-settings"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-settings-tab"
+                  >
+                    <div className="d-flex mb-2">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="assets/images/small/img-7.jpg"
+                          alt=""
+                          width={150}
+                          className="rounded"
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <p className="mb-0">
+                          When designing, the goal is to draw someone’s
+                          attention and portray to them what you’re trying to
+                          say. You can make a big statement by using little
+                          tricks, like this one. Use contrasting fonts. you can
+                          use a bold sanserif font with a cursive.
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mb-0">
+                      If you’re using multiple elements, make sure that your
+                      principal object is larger than the others, as the eye of
+                      your viewer will automatically be drawn to the larger of
+                      the two objects.
+                    </p>
+                  </div>
                 </div>
+              </div>
+              {/*  end col */}
             </div>
-            <div className="row">
-                <div className="col-xl-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title mb-0">Drain type</h4>
-                        </div>
-                        {/* end card header */}
-                        <div className="card-body">
-                            {/* <p className="text-muted">
-                                Use <code>data-simplebar</code> attribute and add{" "}
-                                <code>max-height: **px</code> to set default scrollbar.
-                            </p> */}
-                            <div className="mx-n3">
-                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
-                                    <div className="card-body">
-                                        <div className="row gy-4">
-                                            <div className="col-xxl-8 col-md-8">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basiInput"
-                                                    />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        .
-                                                    </label>
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <p>
-
-                                    </p>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Bobby Davis</td>
-                                                <td>Nov 14, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Christopher Neal</td>
-                                                <td>Nov 21, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Monkey Karry</td>
-                                                <td>Nov 24, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Aaron James</td>
-                                                <td>Nov 25, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        {/* end card-body */}
-                    </div>
-                    {/* end card */}
-                </div>
-                <div className="col-xl-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title mb-0">Effluent Management</h4>
-                        </div>
-                        {/* end card header */}
-                        <div className="card-body">
-                            {/* <p className="text-muted">
-                                Use <code>data-simplebar</code> attribute and add{" "}
-                                <code>max-height: **px</code> to set default scrollbar.
-                            </p> */}
-                            <div className="mx-n3">
-                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
-                                    <div className="card-body">
-                                        <div className="row gy-4">
-                                            <div className="col-xxl-8 col-md-8">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basiInput"
-                                                    />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        .
-                                                    </label>
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <p>
-
-                                    </p>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Bobby Davis</td>
-                                                <td>Nov 14, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Christopher Neal</td>
-                                                <td>Nov 21, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Monkey Karry</td>
-                                                <td>Nov 24, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Aaron James</td>
-                                                <td>Nov 25, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        {/* end card-body */}
-                    </div>
-                    {/* end card */}
-                </div>
-                <div className="col-xl-4">
-                    <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title mb-0">Excreta Containment</h4>
-                        </div>
-                        {/* end card header */}
-                        <div className="card-body">
-                            {/* <p className="text-muted">
-                                Use <code>data-simplebar</code> attribute and add{" "}
-                                <code>max-height: **px</code> to set default scrollbar.
-                            </p> */}
-                            <div className="mx-n3">
-                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
-                                    <div className="card-body">
-                                        <div className="row gy-4">
-                                            <div className="col-xxl-8 col-md-8">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basiInput"
-                                                    />
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label htmlFor="basiInput" className="form-label">
-                                                        .
-                                                    </label>
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <p>
-
-                                    </p>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Bobby Davis</td>
-                                                <td>Nov 14, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Christopher Neal</td>
-                                                <td>Nov 21, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Monkey Karry</td>
-                                                <td>Nov 24, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Aaron James</td>
-                                                <td>Nov 25, 2021</td>
-                                                <td>
-                                                    <button className="badge bg-danger">Cancelled</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        {/* end card-body */}
-                    </div>
-                    {/* end card */}
-                </div>
-            </div>
-        </>
-
-    )
-}
+            {/*end row*/}
+          </div>
+          {/* end card-body */}
+        </div>
+        {/* end card */}
+      </div>
+    </div>
+  );
+};
 
 export default PrimaryData;
