@@ -123,135 +123,309 @@ const PrimaryData = ({ levels, regions, districts }) => {
                     Frequency
                   </a>
 
+                 
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="grey-water-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#grey-water"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="grey-water"
                     aria-selected="false"
                   >
-                    Frequency
+                                        Grey water disposal
+
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="hazardous-water-disposal-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#hazardous-water-disposal"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="hazardous-water-disposal"
                     aria-selected="false"
                   >
-                    Frequency
+                    Hazardous water disposal
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="inspection-form-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#inspection-form"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="inspection-form"
                     aria-selected="false"
                   >
-                    Frequency
+                    Inspection form
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="inspection-type-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#inspection-type"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="inspection-type"
                     aria-selected="false"
                   >
-                    Frequency
+                    Inspection type
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="nuisance-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#nuisance"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="nuisance"
                     aria-selected="false"
                   >
-                    Frequency
+                    Nuisance
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="ownership-type-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#ownership-type"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="ownership-type"
                     aria-selected="false"
                   >
-                    Frequency
+                    Ownership type
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="pest-sign-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#pest-sign"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="pest-sign"
                     aria-selected="false"
                   >
-                    Frequency
+                    Pest sign
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="plant-condition-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#plant-condition"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="plant-condition"
                     aria-selected="false"
                   >
-                    Frequency
+                    Plant condition
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="region-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#region"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="region"
                     aria-selected="false"
                   >
-                    Frequency
+                    Region
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="respondent-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#respondent"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="respondent"
                     aria-selected="false"
                   >
-                    Frequency
+                    Respondent designation
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="services-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#services"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="services"
                     aria-selected="false"
                   >
-                    Frequency
+                    Services
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="solid-waste-receptacle-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#solid-waste-receptacle"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="solid-waste-receptacle"
                     aria-selected="false"
                   >
-                    Frequency
+                    Solid waste receptacle
+                  </a>
+
+
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
                   </a>
                   <a className="nav-link"
-                    id="frequency-tab"
+                    id="services-tab"
                     data-bs-toggle="pill"
-                    href="#frequency"
+                    href="#services"
                     role="tab"
-                    aria-controls="frequency"
+                    aria-controls="services"
                     aria-selected="false"
                   >
-                    Frequency
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
+                  </a>
+                  <a className="nav-link"
+                    id="services-tab"
+                    data-bs-toggle="pill"
+                    href="#services"
+                    role="tab"
+                    aria-controls="services"
+                    aria-selected="false"
+                  >
+                    Services
                   </a>
                 </div>
               </div>
