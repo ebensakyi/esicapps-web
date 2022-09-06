@@ -37,6 +37,7 @@ model User {
   submittedBy Inspection[] @relation("submittedBy")
   publishedBy Inspection[] @relation("publishedBy")
   userLevelId Int
+  Permission  Permission[]
 }
 
 model UserLevel {
@@ -50,28 +51,64 @@ model UserLevel {
 }
 
 model Permission {
+  id                 Int @id @default(autoincrement())
+  pageActionAccessId Int
+
+  userId           Int
+  deleted          Int?             @default(0)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  User             User             @relation(fields: [userId], references: [id])
+  PageActionAccess PageActionAccess @relation(fields: [pageActionAccessId], references: [id])
+  PageAccess       PageAccess       @relation(fields: [pageAccessId], references: [id])
+  pageAccessId     Int
+  Page             Page?            @relation(fields: [pageId], references: [id])
+  pageId           Int?
+}
+
+model PageAccess {
   id Int @id @default(autoincrement())
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Page       Page         @relation(fields: [pageId], references: [id])
+  pageId     Int
+  Permission Permission[]
+}
+
+model PageActionAccess {
+  id           Int          @id @default(autoincrement())
+  deleted      Int?         @default(0)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  PageAction   PageAction   @relation(fields: [pageActionId], references: [id])
+  Permission   Permission[]
+  pageActionId Int
 }
 
 model Page {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  path      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int    @id @default(autoincrement())
+  name         String @db.VarChar(255)
+  path         String @db.VarChar(255)
+  pageActionId Int
+
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Permission Permission[]
+  PageAction PageAction   @relation(fields: [pageActionId], references: [id])
+  PageAccess PageAccess[]
 }
 
 model PageAction {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  Page             Page[]
+  PageActionAccess PageActionAccess[]
 }
 
 model CemeteryWorkers {
