@@ -248,185 +248,167 @@ const PrimaryData = ({ levels, regions, districts }) => {
 
 
                   <a className="nav-link"
-                    id="services-tab"
+                    id="storage-condition-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#storage-condition"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="storage-condition"
                     aria-selected="false"
                   >
-                    Services
+                    Storage condition
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="sub-types-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#sub-types"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="sub-types"
                     aria-selected="false"
                   >
-                    Services
+                    Premises sub-types
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="structure-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#structure-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="structure-type"
                     aria-selected="false"
                   >
-                    Services
+                    Structure type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="pit-position-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#pit-position"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="pit-position"
                     aria-selected="false"
                   >
-                    Services
+                    Pit position
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="toilet-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#toilet-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="toilet-type"
                     aria-selected="false"
                   >
-                    Services
+                    Toilet type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="premises-types-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#premises-types"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="premises-types"
                     aria-selected="false"
                   >
-                    Services
+                    Premises types
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="user-level-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#user-level"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="user-level"
                     aria-selected="false"
                   >
-                    Services
+                    User Level
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="user-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#user-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="user-type"
                     aria-selected="false"
                   >
-                    Services
+                    User type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="waste-collection-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#waste-collection-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="waste-collection-type"
                     aria-selected="false"
                   >
-                    Services
+                   Waste collection type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="waste-water-containment-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#waste-water-containment"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="waste-water-containment"
                     aria-selected="false"
                   >
-                    Services
+                   Waste water containment
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="water-source-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#water-source-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="water-source-type"
                     aria-selected="false"
                   >
-                    Services
+                    Water Source Type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="water-storage-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#water-storage-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="water-storage-type"
                     aria-selected="false"
                   >
-                    Services
+                    Water storage type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="water-supply-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#water-supply-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="water-supply-type"
                     aria-selected="false"
                   >
-                    Services
+                      Water supply type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="water-treatment-type-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#water-treatment-type"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="water-treatment-type"
                     aria-selected="false"
                   >
-                    Services
+                    Water treatment type
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="yes-no-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#yes-no"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="yes-no"
                     aria-selected="false"
                   >
-                    Services
+                    Yes No
                   </a>
                   <a className="nav-link"
-                    id="services-tab"
+                    id="electoral-area-tab"
                     data-bs-toggle="pill"
-                    href="#services"
+                    href="#electoral-area"
                     role="tab"
-                    aria-controls="services"
+                    aria-controls="electoral-area"
                     aria-selected="false"
                   >
-                    Services
+                    Electoral Area
                   </a>
-                  <a className="nav-link"
-                    id="services-tab"
-                    data-bs-toggle="pill"
-                    href="#services"
-                    role="tab"
-                    aria-controls="services"
-                    aria-selected="false"
-                  >
-                    Services
-                  </a>
-                  <a className="nav-link"
-                    id="services-tab"
-                    data-bs-toggle="pill"
-                    href="#services"
-                    role="tab"
-                    aria-controls="services"
-                    aria-selected="false"
-                  >
-                    Services
-                  </a>
+                 
+                 
                 </div>
               </div>
               {/* end col */}
@@ -437,35 +419,101 @@ const PrimaryData = ({ levels, regions, districts }) => {
                 >
                   <div
                     className="tab-pane fade show active"
-                    id="v-pills-home"
+                    id="action-tab"
                     role="tabpanel"
-                    aria-labelledby="v-pills-home-tab"
+                    aria-labelledby="action-tab-tab"
                   >
                     <div className="d-flex mb-2">
-                      <div className="flex-shrink-0">
-                        <img
-                          src="assets/images/small/img-4.jpg"
-                          alt=""
-                          width={150}
-                          className="rounded"
-                        />
-                      </div>
-                      <div className="flex-grow-1 ms-3">
-                        <p className="mb-0">
-                          You always want to make sure that your fonts work well
-                          together and try to limit the number of fonts you use
-                          to three or less. Experiment and play around with the
-                          fonts that you already have in the software you’re
-                          working with reputable font websites.
-                        </p>
-                      </div>
+                    <div className="card-body">
+                            {/* <p className="text-muted">
+                                Use <code>data-simplebar</code> attribute and add{" "}
+                                <code>max-height: **px</code> to set default scrollbar.
+                            </p> */}
+                            <div className="mx-n3">
+                                <div data-simplebar="" style={{ maxHeight: 500 }} className="px-3">
+                                    <div className="card-body">
+                                        <div className="row gy-4">
+                                            <div className="col-xxl-8 col-md-8">
+                                                <div>
+                                                    <label htmlFor="basiInput" className="form-label">
+                                                        Name
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="basiInput"
+                                                    />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div>
+                                                    <label htmlFor="basiInput" className="form-label">
+                                                        .
+                                                    </label>
+                                                    <div class="text-end">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <p>
+
+                                    </p>
+                                    <table className="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Bobby Davis</td>
+                                                <td>Nov 14, 2021</td>
+                                                <td>
+                                                    <button className="badge bg-danger">Cancelled</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Christopher Neal</td>
+                                                <td>Nov 21, 2021</td>
+                                                <td>
+                                                    <button className="badge bg-danger">Cancelled</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Monkey Karry</td>
+                                                <td>Nov 24, 2021</td>
+                                                <td>
+                                                    <button className="badge bg-danger">Cancelled</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>Aaron James</td>
+                                                <td>Nov 25, 2021</td>
+                                                <td>
+                                                    <button className="badge bg-danger">Cancelled</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p className="mb-0">
-                      This may be the most commonly encountered tip I received
-                      from the designers I spoke with. They highly encourage
-                      that you use different fonts in one design, but do not
-                      over-exaggerate and go overboard.
-                    </p>
+                    
                   </div>
                   <div
                     className="tab-pane fade"
