@@ -1,5 +1,5 @@
 
-import Institution from '../../../components/admin/data/Institution'
+import Residential from '../../../components/data/Residential'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
@@ -14,7 +14,7 @@ export default function user({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Institution data={data} />
+                        <Residential data={data} />
 
                     </div>
                 </div>

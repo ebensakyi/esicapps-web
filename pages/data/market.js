@@ -1,11 +1,11 @@
 
-import Health from '../../../components/admin/data/health'
+import Market from '../../../components/data/Market'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
 
-export default function health({ data }) {
+export default function market({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function health({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Health data={data} />
+                        <Market data={data} />
 
                     </div>
                 </div>

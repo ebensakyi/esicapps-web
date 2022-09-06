@@ -1,11 +1,11 @@
 
-import Hospitality from '../../../components/admin/data/Hospitality'
+import Institution from '../../../components/data/Institution'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
 
-export default function hospitality({ data }) {
+export default function user({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function hospitality({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Hospitality data={data} />
+                        <Institution data={data} />
 
                     </div>
                 </div>

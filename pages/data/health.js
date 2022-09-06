@@ -1,11 +1,11 @@
 
-import Sanitary from '../../../components/admin/data/Sanitary'
+import Health from '../../../components/data/health'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
 
-export default function sanitary({ data }) {
+export default function health({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function sanitary({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Sanitary data={data} />
+                        <Health data={data} />
 
                     </div>
                 </div>

@@ -921,7 +921,7 @@ const Header = () => {
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
-                  href="#sidebarDashboards"
+                  href="/dashboard"
                  
                 >
                   <i className="ri-home-2-line" />{" "}
@@ -998,7 +998,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/admin/data/residential"
+                        href="/data/residential"
                         className="nav-link"
                         data-key="t-calendar"
                       >
@@ -1007,7 +1007,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/eatery"
+                        href="/data/eatery"
                         className="nav-link"
                         data-key="t-chat"
                       >
@@ -1016,7 +1016,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/hospitality"
+                        href="/data/hospitality"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
@@ -1025,7 +1025,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/health"
+                        href="/data/health"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
@@ -1035,7 +1035,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/institution"
+                        href="/data/institution"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
@@ -1045,7 +1045,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/industry"
+                        href="/data/industry"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
@@ -1055,7 +1055,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/market"
+                        href="/data/market"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
@@ -1065,7 +1065,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/admin/data/sanitary"
+                        href="/data/sanitary"
                         className="nav-link"
                         data-key="t-mailbox"
                       >
@@ -1160,7 +1160,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/admin/user"
+                        href="/user"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"
@@ -1206,7 +1206,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/admin/user/user-type"
+                        href="/user/user-type"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"
@@ -1450,7 +1450,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/admin/primary-data"
+                        href="/primary-data"
                         className="nav-link"
                       
                       >

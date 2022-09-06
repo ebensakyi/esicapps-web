@@ -1,6 +1,6 @@
-
-import Residential from '../../../components/admin/data/Residential'
-import Header from '../../../components/Header'
+s
+import Industry from '../../components/data/Industry'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
@@ -14,7 +14,7 @@ export default function user({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Residential data={data} />
+                        <Industry data={data} />
 
                     </div>
                 </div>

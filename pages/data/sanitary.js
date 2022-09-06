@@ -1,11 +1,11 @@
 
-import Market from '../../../components/admin/data/Market'
+import Sanitary from '../../../components/data/Sanitary'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
 
-export default function market({ data }) {
+export default function sanitary({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function market({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Market data={data} />
+                        <Sanitary data={data} />
 
                     </div>
                 </div>

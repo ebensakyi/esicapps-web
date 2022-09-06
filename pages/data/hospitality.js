@@ -1,11 +1,11 @@
 
-import Residential from '../../../components/admin/data/Residential'
+import Hospitality from '../../../components/data/Hospitality'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
 
-export default function user({ data }) {
+export default function hospitality({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function user({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Residential data={data} />
+                        <Hospitality data={data} />
 
                     </div>
                 </div>

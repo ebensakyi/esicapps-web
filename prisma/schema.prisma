@@ -49,6 +49,31 @@ model UserLevel {
   User User[]
 }
 
+model Permission {
+  id Int @id @default(autoincrement())
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Page {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  path      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PageAction {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model CemeteryWorkers {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
@@ -64,7 +89,6 @@ model WasteWaterContainment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 
 ///////////////////////////XXX//////////////////////////////
 
@@ -299,11 +323,11 @@ model WaterSourceType {
 }
 
 model DrinkingWaterSourceType {
-  id                   Int                    @id @default(autoincrement())
-  name                 String                 @db.VarChar(255)
-  deleted              Int?                   @default(0)
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model WaterSupplyType {

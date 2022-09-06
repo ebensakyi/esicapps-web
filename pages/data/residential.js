@@ -1,18 +1,24 @@
 
-import Header from '../../components/Header'
+import Residential from '../../../components/data/Residential'
+import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
-import Dashboard from '../../components/admin/Dashboard';
 
-export default function dashboard({ examTypes, paymentTypes }) {
+
+export default function user({ data }) {
     return (
-        <div >
-
+        <div id="layout-wrapper">
             <Header />
 
-            <Dashboard />
+            <div className="main-content">
+                <div className="page-content">
+                    <div className="container-fluid">
 
-            <Footer />
+                        <Residential data={data} />
+
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

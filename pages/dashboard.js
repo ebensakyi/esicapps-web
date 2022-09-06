@@ -1,24 +1,18 @@
 
-import Industry from '../../../components/admin/data/Industry'
-import Header from '../../../components/Header'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
+import Dashboard from '../../components/Dashboard';
 
-
-export default function user({ data }) {
+export default function dashboard({ examTypes, paymentTypes }) {
     return (
-        <div id="layout-wrapper">
+        <div >
+
             <Header />
 
-            <div className="main-content">
-                <div className="page-content">
-                    <div className="container-fluid">
+            <Dashboard />
 
-                        <Industry data={data} />
-
-                    </div>
-                </div>
-            </div>
+            <Footer />
         </div>
     )
 }
