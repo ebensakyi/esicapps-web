@@ -46,20 +46,22 @@ import { userLevel } from "./userLevel";
 import { cemeteryWorkers } from "./cemeteryWorkers";
 import { wasteWaterContainment } from "./wasteWaterContainment";
 
+import { pages } from "./page";
+import { pageActions } from "./pageAction";
+import { superUser } from "./superAdmin";
 
 async function main() {
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
 
- 
   await prisma.inspectionType.createMany({
     data: inspectionType,
   });
   await prisma.userType.createMany({
     data: userType,
   });
- 
+
   await prisma.region.createMany({
     data: region,
   });
@@ -70,7 +72,7 @@ async function main() {
   await prisma.community.createMany({
     data: community,
   });
- 
+
   await prisma.district.createMany({
     data: district,
   });
@@ -94,8 +96,6 @@ async function main() {
   await prisma.frequency.createMany({
     data: frequency,
   });
-
- 
 
   await prisma.solidWasteReceptacle.createMany({
     data: solidWasteReceptacle,
@@ -157,7 +157,7 @@ async function main() {
   await prisma.toiletPitPosition.createMany({
     data: toiletPitPosition,
   });
- 
+
   await prisma.service.createMany({
     data: services,
   });
@@ -170,7 +170,6 @@ async function main() {
   await prisma.hazardousWasteDisposalMethod.createMany({
     data: hazardousWasteDisposal,
   });
- 
 
   await prisma.derattingFrequency.createMany({
     data: derattingFrequency,
@@ -192,7 +191,17 @@ async function main() {
 
   await prisma.wasteWaterContainment.createMany({
     data: wasteWaterContainment,
-  })
+  });
+
+  await prisma.page.createMany({
+    data: pages,
+  });
+  await prisma.pageAction.createMany({
+    data: pageActions,
+  });
+  await prisma.user.createMany({
+    data: superUser,
+  });
 }
 
 main()

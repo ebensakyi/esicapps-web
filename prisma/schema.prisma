@@ -62,8 +62,6 @@ model Permission {
   PageActionAccess PageActionAccess @relation(fields: [pageActionAccessId], references: [id])
   PageAccess       PageAccess       @relation(fields: [pageAccessId], references: [id])
   pageAccessId     Int
-  Page             Page?            @relation(fields: [pageId], references: [id])
-  pageId           Int?
 }
 
 model PageAccess {
@@ -83,21 +81,19 @@ model PageActionAccess {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   PageAction   PageAction   @relation(fields: [pageActionId], references: [id])
-  Permission   Permission[]
   pageActionId Int
+  Permission   Permission[]
 }
 
 model Page {
-  id           Int    @id @default(autoincrement())
-  name         String @db.VarChar(255)
-  path         String @db.VarChar(255)
-  pageActionId Int
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+  path String @db.VarChar(255)
 
   deleted    Int?         @default(0)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  Permission Permission[]
-  PageAction PageAction   @relation(fields: [pageActionId], references: [id])
+  PageAction PageAction[]
   PageAccess PageAccess[]
 }
 

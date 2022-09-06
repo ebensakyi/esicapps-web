@@ -1,5 +1,5 @@
 
-import AddRole from '../../../components/admin/user/AddUserType'
+import AddPermission from '../../../components/account/AddPermission'
 import ListRole from '../../../components/admin/user/ListUserType'
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
@@ -15,7 +15,7 @@ export default function role({ examTypes, paymentTypes }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <AddRole />
+                        <AddPermission />
                         <ListRole/>
 
                     </div>

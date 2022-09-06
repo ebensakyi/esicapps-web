@@ -1200,13 +1200,13 @@ const Header = () => {
                   aria-controls="sidebarPages"
                 >
                   <i className="ri-pages-line" />{" "}
-                  <span data-key="t-pages">Roles</span>
+                  <span data-key="t-pages">Permissions</span>
                 </a>
                 <div className="collapse menu-dropdown" id="roles">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/user/user-type"
+                        href="/account/permission"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"

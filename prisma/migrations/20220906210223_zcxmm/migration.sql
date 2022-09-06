@@ -30,6 +30,51 @@ CREATE TABLE "UserLevel" (
 );
 
 -- CreateTable
+CREATE TABLE "PageAccess" (
+    "id" SERIAL NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "pageId" INTEGER NOT NULL,
+
+    CONSTRAINT "PageAccess_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PageActionAccess" (
+    "id" SERIAL NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "pageActionId" INTEGER NOT NULL,
+
+    CONSTRAINT "PageActionAccess_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Page" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "path" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Page_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PageAction" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PageAction_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "CemeteryWorkers" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -1010,6 +1055,18 @@ CREATE TABLE "CommunalContainer" (
     CONSTRAINT "CommunalContainer_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "_PageToPageAction" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_PageToPageAction_AB_unique" ON "_PageToPageAction"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_PageToPageAction_B_index" ON "_PageToPageAction"("B");
+
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -1021,6 +1078,12 @@ ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeI
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_userLevelId_fkey" FOREIGN KEY ("userLevelId") REFERENCES "UserLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_pageActionId_fkey" FOREIGN KEY ("pageActionId") REFERENCES "PageAction"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "RespondentDesignation" ADD CONSTRAINT "RespondentDesignation_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1471,3 +1534,9 @@ ALTER TABLE "CommunalContainer" ADD CONSTRAINT "CommunalContainer_scheduledColle
 
 -- AddForeignKey
 ALTER TABLE "CommunalContainer" ADD CONSTRAINT "CommunalContainer_containerConditionId_fkey" FOREIGN KEY ("containerConditionId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_B_fkey" FOREIGN KEY ("B") REFERENCES "PageAction"("id") ON DELETE CASCADE ON UPDATE CASCADE;
