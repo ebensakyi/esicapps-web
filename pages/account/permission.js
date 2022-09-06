@@ -1,7 +1,7 @@
 
-import AddPermission from '../../../components/account/AddPermission'
-import ListRole from '../../../components/admin/user/ListUserType'
-import Header from '../../../components/Header'
+import AddPermission from '../../components/account/AddPremission'
+import ListRole from '../../components/account/ListUserType'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 

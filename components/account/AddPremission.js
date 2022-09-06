@@ -6,7 +6,7 @@ const AddPermission = ({ pages, pageActions }) => {
           <div className="col-lg-12">
             <div className="card">
               <div className="card-header align-items-center d-flex">
-                <h4 className="card-title mb-0 flex-grow-1">Add user</h4>
+                <h4 className="card-title mb-0 flex-grow-1">Add Permissions</h4>
                 {/* <div className="flex-shrink-0">
                     <div className="form-check form-switch form-switch-right form-switch-md">
                       <label
@@ -25,11 +25,11 @@ const AddPermission = ({ pages, pageActions }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                <div className="row gy-4">
+                <div className="row">
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="basiInput" className="form-label">
-                        Surname
+                        Name of permission
                       </label>
                       <input
                         type="text"
@@ -39,100 +39,19 @@ const AddPermission = ({ pages, pageActions }) => {
                     </div>
                   </div>
                   {/*end col*/}
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="labelInput" className="form-label">
-                        Other names
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="labelInput"
-                      />
-                    </div>
-                  </div>
+                  <div class="col-lg-4 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="choices-multiple-remove-button" class="form-label text-muted">With remove button</label>
+                                                        <p class="text-muted">Set <code>data-choices data-choices-removeItem multiple</code> attribute.</p>
+                                                        <select class="form-control" id="choices-multiple-remove-button" data-choices data-choices-removeItem name="choices-multiple-remove-button" multiple>
+                                                            <option value="Choice 1" selected>Choice 1</option>
+                                                            <option value="Choice 2">Choice 2</option>
+                                                            <option value="Choice 3">Choice 3</option>
+                                                            <option value="Choice 4">Choice 4</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                   {/*end col*/}
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="placeholderInput" className="form-label">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="placeholderInput"
-                      />
-                    </div>
-                  </div>
-                  {/*end col*/}
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="valueInput" className="form-label">
-                        Phone number
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="valueInput"
-                      />
-                    </div>
-                  </div>
-                  {/*end col*/}
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="password" className="form-label">
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                      />
-                    </div>
-                  </div>
-                  {/*end col*/}
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Level
-                      </label>
-
-                      <select class="form-select" id="inputGroupSelect02">
-                        <option selected>Choose...</option>
-                        <option value="1">National</option>
-                        <option value="2">Regional</option>
-                        <option value="3">District</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Region
-                      </label>
-
-                      <select class="form-select" id="inputGroupSelect02">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        District
-                      </label>
-
-                      <select class="form-select" id="inputGroupSelect02">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-                  </div>
                 </div>
                 <div className="row gy-4">
                   <div className="flex-shrink-0">
