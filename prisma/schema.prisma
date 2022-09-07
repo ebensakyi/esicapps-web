@@ -30,14 +30,13 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  Usertype  UserType? @relation(fields: [userTypeId], references: [id])
+  UserType  UserType? @relation(fields: [userTypeId], references: [id])
   UserLevel UserLevel @relation(fields: [userLevelId], references: [id])
 
   Logs        Logs[]
   submittedBy Inspection[] @relation("submittedBy")
   publishedBy Inspection[] @relation("publishedBy")
   userLevelId Int
-  Permission  Permission[]
 }
 
 model UserLevel {
@@ -50,39 +49,38 @@ model UserLevel {
   User User[]
 }
 
-model Permission {
-  id                 Int @id @default(autoincrement())
-  pageActionAccessId Int
-
-  userId           Int
-  deleted          Int?             @default(0)
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
-  User             User             @relation(fields: [userId], references: [id])
-  PageActionAccess PageActionAccess @relation(fields: [pageActionAccessId], references: [id])
-  PageAccess       PageAccess       @relation(fields: [pageAccessId], references: [id])
-  pageAccessId     Int
+model UserType {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  User             User[]
+  PageAccess       PageAccess[]
+  PageActionAccess PageActionAccess[]
 }
 
 model PageAccess {
-  id Int @id @default(autoincrement())
-
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  Page       Page         @relation(fields: [pageId], references: [id])
+  id         Int      @id @default(autoincrement())
   pageId     Int
-  Permission Permission[]
+  userTypeId Int
+  deleted    Int?     @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Page       Page     @relation(fields: [pageId], references: [id])
+  UserType   UserType @relation(fields: [userTypeId], references: [id])
 }
 
 model PageActionAccess {
-  id           Int          @id @default(autoincrement())
-  deleted      Int?         @default(0)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  PageAction   PageAction   @relation(fields: [pageActionId], references: [id])
+  id           Int @id @default(autoincrement())
+  userTypeId   Int
   pageActionId Int
-  Permission   Permission[]
+
+  deleted    Int?       @default(0)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  PageAction PageAction @relation(fields: [pageActionId], references: [id])
+  UserType   UserType   @relation(fields: [userTypeId], references: [id])
 }
 
 model Page {
@@ -222,22 +220,13 @@ model InspectionForm {
   Service               Service[]
 }
 
-model UserType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User[]
-}
-
-model Role {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+// model Role {
+//   id        Int      @id @default(autoincrement())
+//   name      String   @db.VarChar(255)
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
 
 model Region {
   id    Int    @id @default(autoincrement())

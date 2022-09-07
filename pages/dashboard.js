@@ -1,8 +1,8 @@
 
-import Header from '../../components/Header'
-//import Footer from '../../components/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
-import Dashboard from '../../components/Dashboard';
+import Dashboard from '../components/Dashboard'
 
 export default function dashboard({ examTypes, paymentTypes }) {
     return (
