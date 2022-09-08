@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const UserType = ({ userLevels, pages }) => {
   const [userTypeName, setUserTypeName] = useState();
@@ -13,6 +14,9 @@ const UserType = ({ userLevels, pages }) => {
       level,
     };
 
+    const response = await axios.post("/api/v1/account/user-type", {
+      data,
+    });
     console.log(data);
   };
   return (
