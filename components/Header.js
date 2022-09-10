@@ -1242,7 +1242,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/account/user-type"
+                        href="/account/permission"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"
@@ -1268,7 +1268,7 @@ const Header = () => {
                         List
                       </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -1281,7 +1281,7 @@ const Header = () => {
                         {" "}
                         Manage
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </li>
