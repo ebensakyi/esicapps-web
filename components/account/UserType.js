@@ -1,10 +1,46 @@
 import { useState } from "react";
 import axios from "axios";
+import Select from "react-select";
 
 const UserType = ({ userLevels, pages }) => {
   const [userTypeName, setUserTypeName] = useState();
   const [page, setPage] = useState([]);
   const [level, setLevel] = useState();
+
+  const handlePageChange = async (selected, selectaction) => {
+    try {
+       const { action } = selectaction;
+    // console.log(`action ${action}`);
+    // console.log(`selected ${selected}`);
+    //console.table(selected[selected.length - 1]);
+
+    // let xxx = selected.map(x =>x.value)
+    // console.log(xxx);
+
+    if (action === "clear") {
+      setPage([]);
+    } else if (action === "select-option") {
+      console.log(`selected ${JSON.stringify(selected[selected.length - 1].value)}`);
+      setPage([...page, selected[selected.length - 1].value]);
+
+     // console.log(page);
+    } else if (action === "remove-value") {
+      console.log("ree==>",JSON.stringify(selected));
+
+      var index = page.indexOf(selected.value);
+      if (index !== -1) {
+       let newPage = page.splice(index, 1);
+        setPage(newPage)
+      }
+      console.log(`remove selected ${JSON.stringify(selected[selected.length - 1])}`);
+
+      //console.log("remove");
+    }
+    } catch (error) {
+      
+    }
+   
+  };
 
   const addUserType = async (e) => {
     e.preventDefault();
@@ -19,6 +55,7 @@ const UserType = ({ userLevels, pages }) => {
     });
     console.log(data);
   };
+
   return (
     <div class="row">
       <div class="col-12">
@@ -31,7 +68,7 @@ const UserType = ({ userLevels, pages }) => {
               {/* end card header */}
               <div className="card-body">
                 <div className="row gy-4">
-                  <div className="col-xxl-4 col-md-6">
+                  <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Level
@@ -51,7 +88,7 @@ const UserType = ({ userLevels, pages }) => {
                       </select>
                     </div>
                   </div>
-                  <div className="col-xxl-4 col-md-6">
+                  <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="basiInput" className="form-label">
                         Name
@@ -65,23 +102,25 @@ const UserType = ({ userLevels, pages }) => {
                     </div>
                   </div>
                   {/*end col*/}
-                  <div className="col-xxl-4 col-md-6">
+                  <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="labelInput" className="form-label">
                         Page
                       </label>
-                      <select
-                        class="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => setPage(Number(e.target.value))}
-                      >
-                        <option selected>Choose...</option>
-                        {pages.map((page) => (
-                          <option key={page.id} value={page.id}>
-                            {page.name}
-                          </option>
-                        ))}
-                      </select>
+
+                      <Select
+                        id="selectWarna"
+                        instanceId="selectWarna"
+                        isMulti
+                        isClearable
+                        isSearchable
+                        name="colors"
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        options={pages}
+                        onChange={handlePageChange}
+                        placeholder="Select pages"
+                      />
                     </div>
                   </div>
 

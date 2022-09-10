@@ -49,19 +49,19 @@ import { wasteWaterContainment } from "./wasteWaterContainment";
 import { pages } from "./page";
 import { pageActions } from "./pageAction";
 import { superUser } from "./superAdmin";
+import { electoralArea } from "./electoralArea";
 
 async function main() {
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
-
+  await prisma.electoralArea.createMany({
+    data: electoralArea,
+  });
   await prisma.inspectionType.createMany({
     data: inspectionType,
   });
-  await prisma.userType.createMany({
-    data: userType,
-  });
-
+ 
   await prisma.region.createMany({
     data: region,
   });
@@ -199,6 +199,11 @@ async function main() {
   await prisma.pageAction.createMany({
     data: pageActions,
   });
+
+  await prisma.userType.createMany({
+    data: userType,
+  });
+
   await prisma.user.createMany({
     data: superUser,
   });

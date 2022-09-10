@@ -40,11 +40,14 @@ export async function getServerSideProps(context) {
     (res) => res.json()
   );
 
-  console.log(userLevels);
+  const _pages = await pages.map((page) => ({
+    label: page.name+" "+page.id,
+    value: page.id,
+  }));
   return {
     props: {
       userLevels,
-      pages,
+      pages: _pages,
     },
   };
 }

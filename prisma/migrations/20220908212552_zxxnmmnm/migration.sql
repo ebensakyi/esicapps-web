@@ -30,12 +30,25 @@ CREATE TABLE "UserLevel" (
 );
 
 -- CreateTable
-CREATE TABLE "PageAccess" (
+CREATE TABLE "UserType" (
     "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userLevelId" INTEGER NOT NULL,
+
+    CONSTRAINT "UserType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PageAccess" (
+    "id" SERIAL NOT NULL,
     "pageId" INTEGER NOT NULL,
+    "userTypeId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "PageAccess_pkey" PRIMARY KEY ("id")
 );
@@ -43,10 +56,11 @@ CREATE TABLE "PageAccess" (
 -- CreateTable
 CREATE TABLE "PageActionAccess" (
     "id" SERIAL NOT NULL,
+    "userTypeId" INTEGER NOT NULL,
+    "pageActionId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "pageActionId" INTEGER NOT NULL,
 
     CONSTRAINT "PageActionAccess_pkey" PRIMARY KEY ("id")
 );
@@ -120,28 +134,6 @@ CREATE TABLE "InspectionForm" (
 );
 
 -- CreateTable
-CREATE TABLE "UserType" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "UserType_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Role" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Role_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Region" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -165,9 +157,21 @@ CREATE TABLE "District" (
 );
 
 -- CreateTable
+CREATE TABLE "ElectoralArea" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ElectoralArea_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Community" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "electoralAreaId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1080,13 +1084,25 @@ ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeI
 ALTER TABLE "User" ADD CONSTRAINT "User_userLevelId_fkey" FOREIGN KEY ("userLevelId") REFERENCES "UserLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "UserType" ADD CONSTRAINT "UserType_userLevelId_fkey" FOREIGN KEY ("userLevelId") REFERENCES "UserLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_pageActionId_fkey" FOREIGN KEY ("pageActionId") REFERENCES "PageAction"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "RespondentDesignation" ADD CONSTRAINT "RespondentDesignation_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Community" ADD CONSTRAINT "Community_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Logs" ADD CONSTRAINT "Logs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

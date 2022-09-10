@@ -1,6 +1,6 @@
 
-import Hospitality from '../../../components/data/Hospitality'
-import Header from '../../../components/Header'
+import Hospitality from '../../components/data/Hospitality'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 

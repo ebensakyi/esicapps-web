@@ -46,18 +46,21 @@ model UserLevel {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User User[]
+  User     User[]
+  UserType UserType[]
 }
 
 model UserType {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
+  UserLevel        UserLevel          @relation(fields: [userLevelId], references: [id])
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   User             User[]
   PageAccess       PageAccess[]
   PageActionAccess PageActionAccess[]
+  userLevelId      Int
 }
 
 model PageAccess {
@@ -249,12 +252,24 @@ model District {
   User            User[]
 }
 
+model ElectoralArea {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(255)
+  deleted   Int?        @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  Community Community[]
+}
+
 model Community {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
+  id              Int    @id @default(autoincrement())
+  name            String @db.VarChar(255)
+  electoralAreaId Int
+
   deleted         Int?              @default(0)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  ElectoralArea   ElectoralArea     @relation(fields: [electoralAreaId], references: [id])
   FacilitySection FacilitySection[]
 }
 

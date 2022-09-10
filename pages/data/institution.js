@@ -1,6 +1,6 @@
 
-import Institution from '../../../components/data/Institution'
-import Header from '../../../components/Header'
+import Institution from '../../components/data/Institution'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 

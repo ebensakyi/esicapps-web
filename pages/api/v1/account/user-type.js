@@ -4,14 +4,16 @@ const post = async (req, res) => {
   try {
 
     console.log(req.body);
-    // const data = {
-    //   name: req.body.data.name,
-    // };
-    // const userType = await prisma.userType.create({ data });
+    const data = {
+      name: req.body.data.userTypeName,
+      userLevelId:req.body.data.level
+    };
+    const userType = await prisma.userType.create({ data });
     // res
     //   .status(200)
     //   .json({ statusCode: 1, message: "Data saved", data: { userType } });
   } catch (error) {
+    console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)

@@ -14,7 +14,11 @@ const Header = () => {
                     <img src="/assets/images/logo-sm.png" alt="" height={22} />
                   </span>
                   <span className="logo-lg">
-                    <img src="/assets/images/logo-dark.png" alt="" height={17} />
+                    <img
+                      src="/assets/images/logo-dark.png"
+                      alt=""
+                      height={17}
+                    />
                   </span>
                 </a>
                 <a href="index.html" className="logo logo-light">
@@ -919,11 +923,7 @@ const Header = () => {
                 <span data-key="t-menu">Menu</span>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="/dashboard"
-                 
-                >
+                <a className="nav-link menu-link" href="/dashboard">
                   <i className="ri-home-2-line" />{" "}
                   <span data-key="t-dashboards">Dashboard</span>
                 </a>
@@ -990,88 +990,66 @@ const Header = () => {
                   aria-expanded="false"
                   aria-controls="sidebarLayouts"
                 >
-
                   <i className="ri-apps-2-line" />
                   <span data-key="t-apps">Data</span>
                 </a>
                 <div className="collapse menu-dropdown" id="data">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <a
-                        href="/data/residential"
-                        className="nav-link"
-                        data-key="t-calendar"
-                      >
-                        Residential
-                      </a>
+                      <Link href="/data/residential">
+                        <a className="nav-link" data-key="t-calendar">
+                          Residential
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/eatery"
-                        className="nav-link"
-                        data-key="t-chat"
-                      >
-                        Eatery
-                      </a>
+                      <Link href="/data/eatery">
+                        <a className="nav-link" data-key="t-chat">
+                          Eatery
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/hospitality"
-                        className="nav-link"
-                        data-key="t-mailbox"
-                      >
-                        Hospitality
-                      </a>
+                      <Link href="/data/hospitality">
+                        <a className="nav-link" data-key="t-mailbox">
+                          Hospitality
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/health"
-                        className="nav-link"
-                        data-key="t-mailbox"
-                      >
-                       
-                        Health
-                      </a>
+                      <Link href="/data/health">
+                        <a className="nav-link" data-key="t-mailbox">
+                          Health
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/institution"
-                        className="nav-link"
-                        data-key="t-mailbox"
-                      >
-                      
-                        Institution
-                      </a>
+                      <Link href="/data/institution">
+                        <a className="nav-link" data-key="t-mailbox">
+                          Institution
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/industry"
-                        className="nav-link"
-                        data-key="t-mailbox"
-                      >
-                     
-                        Industry
-                      </a>
+                      <Link href="/data/industry">
+                        <a className="nav-link" data-key="t-mailbox">
+                          Industry
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/market"
-                        className="nav-link"
-                        data-key="t-mailbox"
-                      >
-                     
-                        Market
-                      </a>
+                      <Link href="/data/market">
+                        <a className="nav-link" data-key="t-mailbox">
+                          Market
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/data/sanitary"
-                        className="nav-link"
-                        data-key="t-mailbox"
-                      >
-                     
-                        Sanitary
-                      </a>
+                      <Link href="/data/sanitary">
+                        <a className="nav-link" data-key="t-mailbox">
+                          Sanitary
+                        </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -1159,6 +1137,7 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="accounts">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
+                      
                       <a
                         href="/user"
                         className="nav-link"
@@ -1186,7 +1165,6 @@ const Header = () => {
                         Manage
                       </a>
                     </li>
-                   
                   </ul>
                 </div>
               </li>
@@ -1449,11 +1427,7 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="settings">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <a
-                        href="/primary-data"
-                        className="nav-link"
-                      
-                      >
+                      <a href="/primary-data" className="nav-link">
                         {" "}
                         Primary data
                       </a>
@@ -1501,7 +1475,6 @@ const Header = () => {
                   <span data-key="t-widgets">Logs</span>
                 </a>
               </li>
-             
             </ul>
           </div>
           {/* Sidebar */}
