@@ -9,36 +9,37 @@ const UserType = ({ userLevels, pages }) => {
 
   const handlePageChange = async (selected, selectaction) => {
     try {
-      const { action } = selectaction;
-      // console.log(`action ${action}`);
-      // console.log(`selected ${selected}`);
-      //console.table(selected[selected.length - 1]);
+       const { action } = selectaction;
+    // console.log(`action ${action}`);
+    // console.log(`selected ${selected}`);
+    //console.table(selected[selected.length - 1]);
 
-      // let xxx = selected.map(x =>x.value)
-      // console.log(xxx);
+    // let xxx = selected.map(x =>x.value)
+    // console.log(xxx);
 
-      if (action === "clear") {
-        setPage([]);
-      } else if (action === "select-option") {
-        console.log(
-          `selected ${JSON.stringify(selected[selected.length - 1].value)}`
-        );
-        setPage([...page, selected[selected.length - 1].value]);
+    if (action === "clear") {
+      setPage([]);
+    } else if (action === "select-option") {
+      console.log(`selected ${JSON.stringify(selected[selected.length - 1].value)}`);
+      setPage([...page, selected[selected.length - 1].value]);
 
-        // console.log(page);
-      } else if (action === "remove-value") {
-        console.log("ree==>", JSON.stringify(selected));
+     // console.log(page);
+    } else if (action === "remove-value") {
+      console.log("ree==>",JSON.stringify(selected));
 
-        // var index = page.indexOf(selected.value);
-        // if (index !== -1) {
-        //  let newPage = page.splice(index, 1);
-        //   setPage(newPage)
-        // }
-        // console.log(`remove selected ${JSON.stringify(selected[selected.length - 1])}`);
+      // var index = page.indexOf(selected.value);
+      // if (index !== -1) {
+      //  let newPage = page.splice(index, 1);
+      //   setPage(newPage)
+      // }
+      // console.log(`remove selected ${JSON.stringify(selected[selected.length - 1])}`);
 
-        //console.log("remove");
-      }
-    } catch (error) {}
+      //console.log("remove");
+    }
+    } catch (error) {
+      
+    }
+   
   };
 
   const addUserType = async (e) => {
@@ -67,7 +68,7 @@ const UserType = ({ userLevels, pages }) => {
               {/* end card header */}
               <div className="card-body">
                 <div className="row gy-4">
-                  {/* <div className="col-xxl-4 col-md-4">
+                  <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Level
@@ -86,8 +87,8 @@ const UserType = ({ userLevels, pages }) => {
                         ))}
                       </select>
                     </div>
-                  </div> */}
-                  <div className="col-xxl-8 col-md-8">
+                  </div>
+                  <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="basiInput" className="form-label">
                         Name
@@ -100,18 +101,54 @@ const UserType = ({ userLevels, pages }) => {
                       />
                     </div>
                   </div>
-
+                  {/*end col*/}
                   <div className="col-xxl-4 col-md-4">
                     <div>
-                      <label htmlFor="basiInput" className="form-label">
-                        Action
+                      <label htmlFor="labelInput" className="form-label">
+                        Page
                       </label>
-                      <button
-                        onClick={(e) => addUserType(e)}
-                        className="btn btn-primary form-control"
-                      >
-                        Add
-                      </button>
+
+                      <Select
+                        id="selectWarna"
+                        instanceId="selectWarna"
+                        isMulti
+                        isClearable
+                        isSearchable
+                        name="colors"
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        options={pages}
+                        onChange={handlePageChange}
+                        placeholder="Select pages"
+                      />
+                    </div>
+                  </div>
+
+                  {/* <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="valueInput" className="form-label">
+                        Page Actions
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="valueInput"
+                      />
+                    </div>
+                  </div> */}
+
+                  <div className="row gy-4">
+                    <div className="flex-shrink-0">
+                      <div class="col-lg-12">
+                        <div class="text-end">
+                          <button
+                            onClick={(e) => addUserType(e)}
+                            class="btn btn-primary"
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

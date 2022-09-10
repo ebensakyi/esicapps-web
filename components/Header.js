@@ -1137,7 +1137,6 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="accounts">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      
                       <a
                         href="/user"
                         className="nav-link"
@@ -1181,6 +1180,65 @@ const Header = () => {
                   <span data-key="t-pages">User Type</span>
                 </a>
                 <div className="collapse menu-dropdown" id="roles">
+                  <ul className="nav nav-sm flex-column">
+                    <li className="nav-item">
+                      <a
+                        href="/account/user-type"
+                        className="nav-link"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
+                      >
+                        {" "}
+                        Add
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="#sidebarSignIn"
+                        className="nav-link"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
+                      >
+                        {" "}
+                        List
+                      </a>
+                    </li>
+                    {/* <li className="nav-item">
+                      <a
+                        href="#sidebarSignIn"
+                        className="nav-link"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
+                      >
+                        {" "}
+                        Manage
+                      </a>
+                    </li> */}
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#permissions"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="sidebarPages"
+                >
+                  <i className="ri-pages-line" />{" "}
+                  <span data-key="t-pages">Permissions</span>
+                </a>
+                <div className="collapse menu-dropdown" id="permissions">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a

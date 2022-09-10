@@ -1,4 +1,4 @@
-const AddPermission = ({ pages, pageActions }) => {
+const AddPermission = ({ userLevels, pages }) => {
   return (
     <div class="row">
       <div class="col-12">
@@ -25,7 +25,27 @@ const AddPermission = ({ pages, pageActions }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                <div className="row">
+              <div className="col-xxl-4 col-md-4">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                        Level
+                      </label>
+
+                      <select
+                        class="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => setLevel(Number(e.target.value))}
+                      >
+                        <option selected>Choose...</option>
+                        {userLevels.map((level) => (
+                          <option key={level.id} value={level.id}>
+                            {level.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                {/* <div className="row">
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="basiInput" className="form-label">
@@ -38,20 +58,38 @@ const AddPermission = ({ pages, pageActions }) => {
                       />
                     </div>
                   </div>
-                  {/*end col*/}
                   <div class="col-lg-4 col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="choices-multiple-remove-button" class="form-label text-muted">With remove button</label>
-                                                        <p class="text-muted">Set <code>data-choices data-choices-removeItem multiple</code> attribute.</p>
-                                                        <select class="form-control" id="choices-multiple-remove-button" data-choices data-choices-removeItem name="choices-multiple-remove-button" multiple>
-                                                            <option value="Choice 1" selected>Choice 1</option>
-                                                            <option value="Choice 2">Choice 2</option>
-                                                            <option value="Choice 3">Choice 3</option>
-                                                            <option value="Choice 4">Choice 4</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                  {/*end col*/}
+                    <div class="mb-3">
+                      <label
+                        for="choices-multiple-remove-button"
+                        class="form-label text-muted"
+                      >
+                        With remove button
+                      </label>
+                      <p class="text-muted">
+                        Set{" "}
+                        <code>
+                          data-choices data-choices-removeItem multiple
+                        </code>{" "}
+                        attribute.
+                      </p>
+                      <select
+                        class="form-control"
+                        id="choices-multiple-remove-button"
+                        data-choices
+                        data-choices-removeItem
+                        name="choices-multiple-remove-button"
+                        multiple
+                      >
+                        <option value="Choice 1" selected>
+                          Choice 1
+                        </option>
+                        <option value="Choice 2">Choice 2</option>
+                        <option value="Choice 3">Choice 3</option>
+                        <option value="Choice 4">Choice 4</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div className="row gy-4">
                   <div className="flex-shrink-0">
@@ -63,7 +101,7 @@ const AddPermission = ({ pages, pageActions }) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
