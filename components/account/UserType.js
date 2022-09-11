@@ -17,7 +17,6 @@ const UserType = ({ userLevels, pages }) => {
     const response = await axios.post("/api/v1/account/user-type", {
       data,
     });
-    console.log(data);
   };
 
   return (

@@ -17,26 +17,26 @@ model User {
   otherNames  String  @db.VarChar(255)
   email       String? @db.VarChar(255)
   phoneNumber String  @db.VarChar(255)
-  password    String  @db.VarChar(255)
+  designation String  @db.VarChar(255)
+
+  password    String @db.VarChar(255)
   // idTypeId    Int?
   // idNumber    String? @db.VarChar(255)
   regionId    Int?
   districtId  Int?
 
+  activated Int?     @default(0)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   Region    Region?   @relation(fields: [regionId], references: [id])
   District  District? @relation(fields: [districtId], references: [id])
-  activated Int?      @default(0)
-  deleted   Int?      @default(0)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-
   UserType  UserType? @relation(fields: [userTypeId], references: [id])
-  UserLevel UserLevel @relation(fields: [userLevelId], references: [id])
 
   Logs        Logs[]
   submittedBy Inspection[] @relation("submittedBy")
   publishedBy Inspection[] @relation("publishedBy")
-  userLevelId Int
 }
 
 model UserLevel {
@@ -46,7 +46,6 @@ model UserLevel {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  User     User[]
   UserType UserType[]
 }
 

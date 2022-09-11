@@ -1,4 +1,37 @@
+import { useState } from "react";
+import axios from "axios";
+
 const User = ({ users }) => {
+  const [userType, setUserType] = useState();
+  const [surname, setSurname] = useState();
+  const [otherNames, setOtherNames] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [designation, setDesignation] = useState();
+  const [region, setRegion] = useState();
+  const [district, setDistrict] = useState();
+  const [electoralArea, setElectoralArea] = useState();
+
+  const addUser = async (e) => {
+    e.preventDefault();
+    let data = {
+      userTypeId: Number(userType),
+      surname,
+      otherNames,
+      email,
+      phoneNumber,
+      designation,
+      regionId: Number(region),
+      districtId: Number(district),
+      electoralAreaId: Number(electoralArea), 
+    };
+
+    console.log(">>>",data);
+
+    const response = await axios.post("/api/v1/account/user", {
+      data,
+    });
+  };
   return (
     <div class="row">
       <div class="col-12">
@@ -25,14 +58,18 @@ const User = ({ users }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-              <div className="row gy-4">
+                <div className="row gy-4">
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         User type
                       </label>
 
-                      <select class="form-select" id="inputGroupSelect02">
+                      <select
+                        class="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => setUserType(e.target.value)}
+                      >
                         <option selected>Choose...</option>
                         <option value="1">National</option>
                         <option value="2">Regional</option>
@@ -41,8 +78,8 @@ const User = ({ users }) => {
                     </div>
                   </div>
                 </div>
-                <hr/>
-               
+                <hr />
+
                 <div className="row gy-4">
                   <div className="col-xxl-3 col-md-6">
                     <div>
@@ -53,6 +90,7 @@ const User = ({ users }) => {
                         type="text"
                         className="form-control"
                         id="basiInput"
+                        onChange={(e) => setSurname(e.target.value)}
                       />
                     </div>
                   </div>
@@ -66,6 +104,7 @@ const User = ({ users }) => {
                         type="text"
                         className="form-control"
                         id="labelInput"
+                        onChange={(e) => setOtherNames(e.target.value)}
                       />
                     </div>
                   </div>
@@ -79,6 +118,7 @@ const User = ({ users }) => {
                         type="email"
                         className="form-control"
                         id="placeholderInput"
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                   </div>
@@ -92,29 +132,35 @@ const User = ({ users }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     </div>
                   </div>
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">
-                       Designation/Position
+                        Designation/Position
                       </label>
                       <input
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        onChange={(e) => setDesignation(e.target.value)}
                       />
                     </div>
                   </div>
-                 
+
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Region
                       </label>
 
-                      <select class="form-select" id="inputGroupSelect02">
+                      <select
+                        class="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => setRegion(e.target.value)}
+                      >
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -128,7 +174,11 @@ const User = ({ users }) => {
                         District
                       </label>
 
-                      <select class="form-select" id="inputGroupSelect02">
+                      <select
+                        class="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => setDistrict(e.target.value)}
+                      >
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -143,7 +193,11 @@ const User = ({ users }) => {
                         Electoral Area
                       </label>
 
-                      <select class="form-select" id="inputGroupSelect02">
+                      <select
+                        class="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => setElectoralArea(e.target.value)}
+                      >
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -152,12 +206,17 @@ const User = ({ users }) => {
                     </div>
                   </div>
                 </div>
-                <br/>
+                <br />
                 <div className="row gy-4">
                   <div className="flex-shrink-0">
                     <div class="col-lg-12">
                       <div class="text-end">
-                        <button type="submit" class="btn btn-primary">
+                        <button
+                          class="btn btn-primary"
+                          onClick={(e) => {
+                            addUser(e);
+                          }}
+                        >
                           Submit
                         </button>
                       </div>
