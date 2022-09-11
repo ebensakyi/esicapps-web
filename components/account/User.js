@@ -1,7 +1,5 @@
-const AddUser = ({levels,regions,districts}) => {
-
+const User = ({ users }) => {
   return (
-
     <div class="row">
       <div class="col-12">
         <div className="row">
@@ -27,6 +25,24 @@ const AddUser = ({levels,regions,districts}) => {
               </div>
               {/* end card header */}
               <div className="card-body">
+              <div className="row gy-4">
+                  <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                        User type
+                      </label>
+
+                      <select class="form-select" id="inputGroupSelect02">
+                        <option selected>Choose...</option>
+                        <option value="1">National</option>
+                        <option value="2">Regional</option>
+                        <option value="3">District</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+               
                 <div className="row gy-4">
                   <div className="col-xxl-3 col-md-6">
                     <div>
@@ -79,35 +95,19 @@ const AddUser = ({levels,regions,districts}) => {
                       />
                     </div>
                   </div>
-                  {/*end col*/}
                   <div className="col-xxl-3 col-md-6">
                     <div>
-                      <label htmlFor="password" className="form-label">
-                        Password
+                      <label htmlFor="valueInput" className="form-label">
+                       Designation/Position
                       </label>
                       <input
-                        type="password"
+                        type="text"
                         className="form-control"
-                        id="password"
+                        id="valueInput"
                       />
                     </div>
                   </div>
-                  {/*end col*/}
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Level
-                      </label>
-
-                      <select class="form-select" id="inputGroupSelect02">
-                        <option selected>Choose...</option>
-                        <option value="1">National</option>
-                        <option value="2">Regional</option>
-                        <option value="3">District</option>
-                      </select>
-
-                    </div>
-                  </div>
+                 
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
@@ -120,7 +120,6 @@ const AddUser = ({levels,regions,districts}) => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                       </select>
-
                     </div>
                   </div>
                   <div className="col-xxl-3 col-md-6">
@@ -135,32 +134,44 @@ const AddUser = ({levels,regions,districts}) => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                       </select>
+                    </div>
+                  </div>
 
+                  <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                        Electoral Area
+                      </label>
+
+                      <select class="form-select" id="inputGroupSelect02">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
                     </div>
                   </div>
                 </div>
+                <br/>
                 <div className="row gy-4">
                   <div className="flex-shrink-0">
-                      <div class="col-lg-12">
-                        <div class="text-end">
-                          <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                    <div class="col-lg-12">
+                      <div class="text-end">
+                        <button type="submit" class="btn btn-primary">
+                          Submit
+                        </button>
+                      </div>
                     </div>
                   </div>
-
                 </div>
-
               </div>
             </div>
           </div>
           {/*end col*/}
         </div>
-
-
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default AddUser;
+export default User;

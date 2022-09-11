@@ -1138,7 +1138,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/user"
+                        href="/account/user"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"
@@ -1147,7 +1147,7 @@ const Header = () => {
                         // data-key="t-signin"
                       >
                         {" "}
-                        Add/List
+                        Add
                       </a>
                     </li>
                     <li className="nav-item">

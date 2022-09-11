@@ -43,9 +43,7 @@ export async function getServerSideProps(context) {
   const pages = await fetch(`${SERVER_BASE_URL}/api/v1/default/pages`).then(
     (res) => res.json()
   );
-  const pageAccess = await fetch(
-    `${SERVER_BASE_URL}/api/v1/account/page-access`
-  ).then((res) => res.json());
+  const pageAccess = await fetch(`${SERVER_BASE_URL}/api/v1/account/permission`).then((res) => res.json());
   const _pages = await pages.map((page) => ({
     label: page.name + " " + page.id,
     value: page.id,
