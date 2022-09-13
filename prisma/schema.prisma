@@ -251,16 +251,19 @@ model District {
   updatedAt       DateTime          @updatedAt
   FacilitySection FacilitySection[]
   User            User[]
+  ElectoralArea   ElectoralArea[]
 }
 
 model ElectoralArea {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(255)
-  deleted   Int?        @default(0)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  Community Community[]
-  User      User[]
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(255)
+  District   District    @relation(fields: [districtId], references: [id])
+  deleted    Int?        @default(0)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  Community  Community[]
+  User       User[]
+  districtId Int
 }
 
 model Community {
