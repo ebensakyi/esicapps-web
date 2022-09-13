@@ -19,24 +19,26 @@ model User {
   phoneNumber String  @db.VarChar(255)
   designation String  @db.VarChar(255)
 
-  password    String @db.VarChar(255)
+  password   String @db.VarChar(255)
   // idTypeId    Int?
   // idNumber    String? @db.VarChar(255)
-  regionId    Int?
-  districtId  Int?
+  regionId   Int?
+  districtId Int?
 
   activated Int?     @default(0)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Region    Region?   @relation(fields: [regionId], references: [id])
-  District  District? @relation(fields: [districtId], references: [id])
-  UserType  UserType? @relation(fields: [userTypeId], references: [id])
+  Region        Region?        @relation(fields: [regionId], references: [id])
+  District      District?      @relation(fields: [districtId], references: [id])
+  UserType      UserType?      @relation(fields: [userTypeId], references: [id])
+  ElectoralArea ElectoralArea? @relation(fields: [electoralAreaId], references: [id])
 
-  Logs        Logs[]
-  submittedBy Inspection[] @relation("submittedBy")
-  publishedBy Inspection[] @relation("publishedBy")
+  Logs            Logs[]
+  submittedBy     Inspection[] @relation("submittedBy")
+  publishedBy     Inspection[] @relation("publishedBy")
+  electoralAreaId Int
 }
 
 model UserLevel {
@@ -258,6 +260,7 @@ model ElectoralArea {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   Community Community[]
+  User      User[]
 }
 
 model Community {

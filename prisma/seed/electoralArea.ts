@@ -1,5 +1,6 @@
 export const electoralArea = [
     {
-      name: "Dansoman Electoral Areal",
+      name: "Dansoman Electoral Area",
+      districtId:1
     }
   ];
