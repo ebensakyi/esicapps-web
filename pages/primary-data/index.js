@@ -1,6 +1,6 @@
 
-import PrimaryData from '../../../components/admin/primary_data/PrimaryData'
-import Header from '../../../components/Header'
+import PrimaryData from '../../components/primary_data/PrimaryData'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
