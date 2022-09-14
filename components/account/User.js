@@ -11,6 +11,7 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
   const [region, setRegion] = useState();
   const [district, setDistrict] = useState();
   const [electoralArea, setElectoralArea] = useState();
+  const [level, setLevel] = useState();
 
   const addUser = async (e) => {
     e.preventDefault();
@@ -68,12 +69,15 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                       <select
                         class="form-select"
                         id="inputGroupSelect02"
-                        onChange={(e) => setUserType(e.target.value)}
+                        onChange={(e) => {
+                          setUserType(e.target.value);
+                          
+                        }}
                       >
                         <option selected>Choose...</option>
-                        <option value="1">National</option>
-                        <option value="2">Regional</option>
-                        <option value="3">District</option>
+                        {userTypes.map((userType) => (
+                          <option value={userType.id}>{userType.name}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -150,6 +154,7 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                     </div>
                   </div>
 
+                  {us}
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
@@ -183,7 +188,9 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                       >
                         <option selected>Choose...</option>
                         {districts.map((district) => (
-                          <option key={district.id} value={district.id}>{district.name}</option>
+                          <option key={district.id} value={district.id}>
+                            {district.name}
+                          </option>
                         ))}
                       </select>
                     </div>

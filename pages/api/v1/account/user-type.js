@@ -2,11 +2,10 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-
     console.log(req.body);
     const data = {
       name: req.body.data.userTypeName,
-      userLevelId:req.body.data.level
+      userLevelId: req.body.data.level,
     };
     const userType = await prisma.userType.create({ data });
     // res
@@ -23,10 +22,12 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const userType = await prisma.userType.findMany({ where: { deleted: 0 } });
+    const userType = await prisma.userType.findMany({
+      where: { deleted: 0 },
+      include:{UserLevel:true} ,
+    });
     //return res.status(200).json({ statusCode: 1, data: userType });
-    return res.status(200).json( userType);
-
+    return res.status(200).json(userType);
   } catch (error) {
     console.log("Error: " + error);
   }
