@@ -5,22 +5,24 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const district = await prisma.district.create({ data });
+    const electoralArea = await prisma.electoralArea.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { district } });
+      .json( electoralArea);
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "district prefix should be unique" });
+        .json({ statusCode: 0, message: "electoralArea prefix should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const district = await prisma.district.findMany({ where: { deleted: 0 } });
-    return res.status(200).json(district);
+    const electoralArea = await prisma.electoralArea.findMany({ where: { deleted: 0 } });
+   // return res.status(200).json({ statusCode: 1, data: region });
+    return res.status(200).json(electoralArea);
+
   } catch (error) {
     console.log("Error: " + error);
   }

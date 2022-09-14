@@ -55,9 +55,7 @@ async function main() {
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
-  await prisma.electoralArea.createMany({
-    data: electoralArea,
-  });
+ 
   await prisma.inspectionType.createMany({
     data: inspectionType,
   });
@@ -69,9 +67,7 @@ async function main() {
   await prisma.analCleansingMaterialMgt.createMany({
     data: analCleansingMaterialMgt,
   });
-  await prisma.community.createMany({
-    data: community,
-  });
+
 
   await prisma.district.createMany({
     data: district,
@@ -203,7 +199,13 @@ async function main() {
   await prisma.userType.createMany({
     data: userType,
   });
+  await prisma.electoralArea.createMany({
+    data: electoralArea,
+  });
 
+  await prisma.community.createMany({
+    data: community,
+  });
   // await prisma.user.createMany({
   //   data: superUser,
   // });

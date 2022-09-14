@@ -1,5 +1,9 @@
 export const region = [
   {
+    name: "Greater Accra",
+    abbrv: "GAR",
+  },
+  {
     name: "Ashanti",
     abbrv: "ASR",
   },
@@ -24,10 +28,7 @@ export const region = [
     abbrv: "ETR",
   },
 
-  {
-    name: "Greater Accra",
-    abbrv: "GAR",
-  },
+
   {
     name: "Western",
     abbrv: "WTR",

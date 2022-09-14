@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
-export default function user({ users }) {
+export default function user({ users, districts, regions, electoralAreas }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,12 @@ export default function user({ users }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <User users={users} />
+            <User
+              users={users}
+              electoralAreas={electoralAreas}
+              districts={districts}
+              regions={regions}
+            />
           </div>
         </div>
       </div>
@@ -33,10 +38,21 @@ export async function getServerSideProps(context) {
   const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user`).then(
     (res) => res.json()
   );
+  const regions = await fetch(`${SERVER_BASE_URL}/api/v1/default/region`).then(
+    (res) => res.json()
+  );
+  const districts = await fetch(`${SERVER_BASE_URL}/api/v1/default/district`).then((res) => res.json());
+  console.log("District ",districts);
+  const electoralAreas = await fetch(
+    `${SERVER_BASE_URL}/api/v1/default/electoral-area`
+  ).then((res) => res.json());
 
   return {
     props: {
       users,
+      regions,
+      districts,
+      electoralAreas,
     },
   };
 }

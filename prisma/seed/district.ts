@@ -1,855 +1,368 @@
 export const district = [
   {
-    name: "Kept",
+    name: "Ablekuma Central",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
+    name: "Ablekuma North",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ablekuma West",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
+    name: "Accra",
+    abbrv: "AMA",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ada East",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
+    name: "Ada West",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Adenta",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
-  },
-  {
-    name: "Kept",
-  },
-  {
-    name: "Overgrown",
+    name: "Ashaiman",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ayawaso Central",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Ayawaso East",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ayawaso North",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Ayawaso West",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ga Central",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Ga East",
+    abbrv: "",
+    regionId: 1,
   },
+
   {
-    name: "Kept",
+    name: "Ga North",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Ga South",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ga West",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Korle-Klottey",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Kpone-Katamanso",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Krowor",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "La-Dade-Kotopon",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "La-Nkwantanang-Madina",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Ledzokuku",
+    abbrv: "",
+    regionId: 1,
   },
   {
     name: "Overgrown",
-  },
-  {
-    name: "Kept",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Ningo-Prampram",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Okaikwei North",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
+    name: "Shai-Osudoku",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Tema Metropolitan",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Tema West",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Overgrown",
+    name: "Weija Gbawe",
+    abbrv: "",
+    regionId: 1,
   },
   {
-    name: "Kept",
+    name: "Adansi Asokwa",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Adansi North",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Adansi South",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Afigya-Kwabre North",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Afigya-Kwabre South",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Ahafo-Ano North",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Ahafo-Ano South East",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Ahafo-Ano South West",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Akrofuom",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Amansie Central",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Amansie West",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Amansie South",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Asante-Akim Central",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Asante-Akim North",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Asante-Akim South",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Asokore-Mampong",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Asokwa",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Atwima-Kwanwoma",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Atwima-Mponua",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
-  }, {
-    name: "Kept",
+    name: "Atwima-Nwabiagya",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Atwima-Nwabiagya North",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Bekwai",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Bosome Freho",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Bosomtwe",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Ejisu",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Ejura/Sekyedumase",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Juaben",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Kumasi",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Kwabre East",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Kwadaso",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Mampong",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Obuasi East",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Obuasi",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Offinso",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Offinso North",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Oforikrom",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Old Tafo",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Sekyere Afram Plains",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Sekyere Central",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Sekyere East",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Sekyere Kumawu",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Kept",
+    name: "Sekyere South",
+    abbrv: "",
+    regionId: 2,
   },
   {
-    name: "Overgrown",
+    name: "Suame",
+    abbrv: "",
+    regionId: 2,
   },
 ];

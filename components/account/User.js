@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const User = ({ users }) => {
+const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
   const [userType, setUserType] = useState();
   const [surname, setSurname] = useState();
   const [otherNames, setOtherNames] = useState();
@@ -23,10 +23,10 @@ const User = ({ users }) => {
       designation,
       regionId: Number(region),
       districtId: Number(district),
-      electoralAreaId: Number(electoralArea), 
+      electoralAreaId: Number(electoralArea),
     };
 
-    console.log(">>>",data);
+    console.log(">>>", data);
 
     const response = await axios.post("/api/v1/account/user", {
       data,
@@ -162,9 +162,11 @@ const User = ({ users }) => {
                         onChange={(e) => setRegion(e.target.value)}
                       >
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {regions.map((region) => (
+                          <option value={region.id} key={region.id}>
+                            {region.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -180,9 +182,9 @@ const User = ({ users }) => {
                         onChange={(e) => setDistrict(e.target.value)}
                       >
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {districts.map((district) => (
+                          <option key={district.id} value={district.id}>{district.name}</option>
+                        ))}
                       </select>
                     </div>
                   </div>

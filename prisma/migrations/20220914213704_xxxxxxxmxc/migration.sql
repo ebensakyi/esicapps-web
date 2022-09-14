@@ -150,9 +150,11 @@ CREATE TABLE "Region" (
 CREATE TABLE "District" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "abbrv" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "regionId" INTEGER NOT NULL,
 
     CONSTRAINT "District_pkey" PRIMARY KEY ("id")
 );
@@ -164,6 +166,7 @@ CREATE TABLE "ElectoralArea" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "districtId" INTEGER NOT NULL,
 
     CONSTRAINT "ElectoralArea_pkey" PRIMARY KEY ("id")
 );
@@ -1101,6 +1104,12 @@ ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userTypeId_fkey"
 
 -- AddForeignKey
 ALTER TABLE "RespondentDesignation" ADD CONSTRAINT "RespondentDesignation_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "District" ADD CONSTRAINT "District_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ElectoralArea" ADD CONSTRAINT "ElectoralArea_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Community" ADD CONSTRAINT "Community_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
