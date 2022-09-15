@@ -1,23 +1,50 @@
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const PrimaryData = ({ regions, districts }) => {
   const [regionName, setRegionName] = useState();
+  const [regionAbbrv, setRegionAbbrv] = useState();
+  const [regionId, setRegionId] = useState();
 
+  const router = useRouter();
 
   const addRegion = async (e) => {
-    e.preventDefault();
-    let data = {
-      name: regionName
-    };
+    try {
+      e.preventDefault();
+      let data = {
+        name: regionName,
+        abbrv: regionAbbrv,
+      };
 
-    console.log(">>><<<<", data);
+      const response = await axios.post("/api/v1/primary-data/region", {
+        data,
+      });
 
-    const response = await axios.post("/api/v1/primary-data/region", {
-      data,
-    });
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  const addDistrict = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: regionName,
+        regionId,
+        abbrv: regionAbbrv,
+      };
+
+      const response = await axios.post("/api/v1/primary-data/district", {
+        data,
+      });
+
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="row">
@@ -63,7 +90,7 @@ const PrimaryData = ({ regions, districts }) => {
                             <div className="card-body">
                               <h6 className="card-title">Add region</h6>
                               <div className="row gy-4">
-                                <div className="col-xxl-8 col-md-8">
+                                <div className="col-xxl-4 col-md-8">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -75,7 +102,27 @@ const PrimaryData = ({ regions, districts }) => {
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      onChange={(e) => setRegionName(e.target.value)}
+                                      onChange={(e) =>
+                                        setRegionName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Abbreviation
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      onChange={(e) =>
+                                        setRegionAbbrv(e.target.value)
+                                      }
                                     />
                                   </div>
                                 </div>
@@ -89,7 +136,9 @@ const PrimaryData = ({ regions, districts }) => {
                                     </label>
                                     <div class="text-end">
                                       <button
-                                        onClick={(e) => { addRegion(e) }}
+                                        onClick={(e) => {
+                                          addRegion(e);
+                                        }}
                                         class="btn btn-primary"
                                       >
                                         Submit
@@ -103,53 +152,148 @@ const PrimaryData = ({ regions, districts }) => {
                               <table className="table table-striped">
                                 <thead>
                                   <tr>
-                                    <th scope="col">Id</th>
+                                    {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
+                                    <th scope="col">Abbrv</th>
+
                                     <th scope="col">Date</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Bobby Davis</td>
-                                    <td>Nov 14, 2021</td>
-                                    <td>
-                                      <button className="badge bg-danger">
-                                        Cancelled
+                                  {regions.map((region) => (
+                                    <tr>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{region.name}</td>
+                                      <td>{region.abbrv}</td>
+                                      <td>{region.createdAt}</td>
+                                      <td>
+                                        <button className="badge bg-danger">
+                                          Cancelled
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample1"
+                    >
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_mmda"
+                        aria-expanded="true"
+                        aria-controls="accor_borderedExamplecollapse1"
+                      >
+                        MMDAs
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_mmda"
+                      className="accordion-collapse collapse show"
+                      aria-labelledby="accordionborderedExample1"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add MMDA</h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      onChange={(e) =>
+                                        setDistrictName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Abbreviation
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      onChange={(e) =>
+                                        setDistrictAbbrv(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div class="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addDistrict(e);
+                                        }}
+                                        class="btn btn-primary"
+                                      >
+                                        Submit
                                       </button>
-                                    </td>
-                                  </tr>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
                                   <tr>
-                                    <th scope="row">2</th>
-                                    <td>Christopher Neal</td>
-                                    <td>Nov 21, 2021</td>
-                                    <td>
-                                      <button className="badge bg-danger">
-                                        Cancelled
-                                      </button>
-                                    </td>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Abbrv</th>
+
+                                    <th scope="col">Region</th>
+                                    <th scope="col">Action</th>
                                   </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Monkey Karry</td>
-                                    <td>Nov 24, 2021</td>
-                                    <td>
-                                      <button className="badge bg-danger">
-                                        Cancelled
-                                      </button>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">4</th>
-                                    <td>Aaron James</td>
-                                    <td>Nov 25, 2021</td>
-                                    <td>
-                                      <button className="badge bg-danger">
-                                        Cancelled
-                                      </button>
-                                    </td>
-                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {districts.map((district) => (
+                                    <tr>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{district.name}</td>
+                                      <td>{district.abbrv}</td>
+                                      <td>{district.Region.name}</td>
+                                      <td>
+                                        <button className="badge bg-danger">
+                                          Cancelled
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
                                 </tbody>
                               </table>
                             </div>

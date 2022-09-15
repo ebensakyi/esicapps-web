@@ -8,6 +8,7 @@ const post = async (req, res) => {
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { region } });
   } catch (error) {
+    console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)

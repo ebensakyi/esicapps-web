@@ -19,7 +19,10 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const district = await prisma.district.findMany({ where: { deleted: 0 } });
+    const district = await prisma.district.findMany({
+      where: { deleted: 0 },
+      include: { Region: true },
+    });
     return res.status(200).json(district);
   } catch (error) {
     console.log("Error: " + error);
