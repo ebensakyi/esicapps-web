@@ -2,10 +2,8 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    const data = {
-      name: req.body.data.name,
-    };
-    const region = await prisma.region.create({ data });
+   
+    const region = await prisma.region.create(req.body);
     res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { region } });

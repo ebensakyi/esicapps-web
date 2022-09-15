@@ -1,8 +1,28 @@
-const PrimaryData = ({ levels, regions, districts }) => {
+import { useState } from "react";
+import axios from "axios";
+
+const PrimaryData = ({ regions, districts }) => {
+  const [regionName, setRegionName] = useState();
+
+
+  const addRegion = async (e) => {
+    e.preventDefault();
+    let data = {
+      name: regionName
+    };
+
+    console.log(">>><<<<", data);
+
+    const response = await axios.post("/api/v1/primary-data/region", {
+      data,
+    });
+  };
+
+
   return (
     <div className="row">
       <div className="col-xxl-12">
-        <h5 className="mb-3">Vertical Nav Tabs</h5>
+        <h5 className="mb-3">Primary Data</h5>
         <div className="card">
           <div className="card-body">
             {/* <p className="text-muted">
@@ -55,6 +75,7 @@ const PrimaryData = ({ levels, regions, districts }) => {
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
+                                      onChange={(e) => setRegionName(e.target.value)}
                                     />
                                   </div>
                                 </div>
@@ -68,7 +89,7 @@ const PrimaryData = ({ levels, regions, districts }) => {
                                     </label>
                                     <div class="text-end">
                                       <button
-                                        type="submit"
+                                        onClick={(e) => { addRegion(e) }}
                                         class="btn btn-primary"
                                       >
                                         Submit
