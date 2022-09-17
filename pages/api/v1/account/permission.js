@@ -37,12 +37,10 @@ const _delete = async (req, res) => {
 const get = async (req, res) => {
   try {
 
-    console.log(req.query);
     if (req.query.userType) {
      const pageAccess = await prisma.pageAccess.findMany({
         where: { deleted: 0, userTypeId: Number(req.query.userType) },
       });
-      console.log(">>>>>> " + pageAccess);
       return res.status(200).json(pageAccess);
     }
     const pageAccess = await prisma.pageAccess.findMany({
