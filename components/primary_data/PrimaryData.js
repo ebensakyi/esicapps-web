@@ -315,7 +315,7 @@ const PrimaryData = ({ regions, districts }) => {
                         aria-expanded="false"
                         aria-controls="accor_borderedExamplecollapse2"
                       >
-                        What is Digital Marketing?
+                         Electoral Area
                       </button>
                     </h2>
                     <div
@@ -325,11 +325,100 @@ const PrimaryData = ({ regions, districts }) => {
                       data-bs-parent="#accordionBordered"
                     >
                       <div className="accordion-body">
-                        Nullam quis ante. Etiam sit amet orci eget eros faucibus
-                        tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
-                        Donec sodales sagittis magna. Sed consequat, leo eget
-                        bibendum sodales, augue velit cursus nunc, quis gravida
-                        magna mi a libero. Fusce vulputate eleifend sapien.
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add Electoral Area</h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      onChange={(e) =>
+                                        setDistrictName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                     Select District
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      onChange={(e) =>
+                                        setDistrictAbbrv(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div class="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addDistrict(e);
+                                        }}
+                                        class="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Abbrv</th>
+
+                                    <th scope="col">Region</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {districts.map((district) => (
+                                    <tr>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{district.name}</td>
+                                      <td>{district.abbrv}</td>
+                                      <td>{district.Region.name}</td>
+                                      <td>
+                                        <button className="badge bg-danger">
+                                          Cancelled
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -346,7 +435,7 @@ const PrimaryData = ({ regions, districts }) => {
                         aria-expanded="false"
                         aria-controls="accor_borderedExamplecollapse3"
                       >
-                        Where does it come from ?
+                        Electoral Area
                       </button>
                     </h2>
                     <div
