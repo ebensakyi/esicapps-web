@@ -2,7 +2,6 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
     const data = {
       name: req.body.data.name,
       districtId :  req.body.data.districtId,

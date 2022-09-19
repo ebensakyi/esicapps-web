@@ -20,7 +20,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const aclm = await prisma.analCleansingMaterialMgt.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: aclm });
+    return res.status(200).json(aclm);
   } catch (error) {
     console.log("Error: " + error);
   }

@@ -4,7 +4,10 @@ const post = async (req, res) => {
   try {
     const data = {
       name: req.body.data.name,
+      electoralAreaId: req.body.data.electoralAreaId,
     };
+    console.log(req.body);
+
     const community = await prisma.community.create({ data });
     res
       .status(200)
@@ -19,8 +22,11 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const community = await prisma.community.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: community });
+    const community = await prisma.community.findMany({
+      where: { deleted: 0 },
+      include: {ElectoralArea: true}
+    });
+    return res.status(200).json(community);
   } catch (error) {
     console.log("Error: " + error);
   }
