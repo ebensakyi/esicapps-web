@@ -2,10 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const PrimaryData = ({ regions, districts }) => {
+const PrimaryData = ({ regions, districts, electoralAreas }) => {
   const [regionName, setRegionName] = useState();
+  const [electoralAreaName, setElectoralAreaName] = useState();
+
   const [regionAbbrv, setRegionAbbrv] = useState();
   const [regionId, setRegionId] = useState();
+  const [districtId, setDistrictId] = useState();
 
   const router = useRouter();
 
@@ -45,7 +48,23 @@ const PrimaryData = ({ regions, districts }) => {
       console.log(error);
     }
   };
+ const addElectoralArea = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: electoralAreaName,
+        districtId,
+      };
 
+      const response = await axios.post("/api/v1/primary-data/electoral-area", {
+        data,
+      });
+
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="row">
       <div className="col-xxl-12">
@@ -315,7 +334,7 @@ const PrimaryData = ({ regions, districts }) => {
                         aria-expanded="false"
                         aria-controls="accor_borderedExamplecollapse2"
                       >
-                         Electoral Area
+                        Electoral Area
                       </button>
                     </h2>
                     <div
@@ -342,28 +361,33 @@ const PrimaryData = ({ regions, districts }) => {
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
+                                      value={electoralAreaName}
                                       onChange={(e) =>
-                                        setDistrictName(e.target.value)
+                                        setElectoralAreaName(e.target.value)
                                       }
                                     />
                                   </div>
                                 </div>
                                 <div className="col-xxl-4 col-md-8">
                                   <div>
-                                    <label
-                                      htmlFor="basiInput"
-                                      className="form-label"
-                                    >
-                                     Select District
+
+                                    <label htmlFor="readonlyInput" className="form-label">
+                                      Select District
                                     </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="basiInput"
-                                      onChange={(e) =>
-                                        setDistrictAbbrv(e.target.value)
-                                      }
-                                    />
+
+                                    <select
+                                      class="form-select"
+                                      id="inputGroupSelect02"
+                                      value={districtId}
+                                      onChange={(e) => setDistrictId(Number(e.target.value))}
+                                    >
+                                      <option selected>Choose...</option>
+                                      {districts.map((d) => (
+                                        <option key={d.id} value={d.id}>
+                                          {d.name}
+                                        </option>
+                                      ))}
+                                    </select>
                                   </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -377,7 +401,7 @@ const PrimaryData = ({ regions, districts }) => {
                                     <div class="text-end">
                                       <button
                                         onClick={(e) => {
-                                          addDistrict(e);
+                                          addElectoralArea(e);
                                         }}
                                         class="btn btn-primary"
                                       >
@@ -394,22 +418,24 @@ const PrimaryData = ({ regions, districts }) => {
                                   <tr>
                                     {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
-                                    <th scope="col">Abbrv</th>
+                                    <th scope="col">District</th>
 
                                     <th scope="col">Region</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {districts.map((district) => (
+                                  {electoralAreas.map((ea) => (
                                     <tr>
                                       {/* <th scope="row">{region.id}</th> */}
-                                      <td>{district.name}</td>
-                                      <td>{district.abbrv}</td>
-                                      <td>{district.Region.name}</td>
+                                      <td>{ea.name}</td>
+                                      <td>{ea.abbrv}</td>
+                                      <td>{ea.District.name}</td>
+
+                                      <td>{ea.District.Region.name}</td>
                                       <td>
-                                        <button className="badge bg-danger">
-                                          Cancelled
+                                        <button className="badge bg-success">
+                                          Edit
                                         </button>
                                       </td>
                                     </tr>

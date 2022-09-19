@@ -5,7 +5,7 @@ import Header from '../../components/Header'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function primary_data({ regions, districts }) {
+export default function primary_data({ regions, districts,electoralAreas }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function primary_data({ regions, districts }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <PrimaryData regions={regions} districts={districts} />
+                        <PrimaryData regions={regions} districts={districts} electoralAreas={electoralAreas}/>
 
                     </div>
                 </div>
@@ -42,10 +42,15 @@ export async function getServerSideProps(context) {
     const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district`).then(
         (res) => res.json()
     );
+
+    const electoralAreas = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/electoral-area`).then(
+        (res) => res.json()
+    );
     return {
         props: {
             regions,
-            districts
+            districts,
+            electoralAreas
         },
     };
 

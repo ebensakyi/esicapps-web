@@ -2,9 +2,12 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
+    console.log(req.body);
     const data = {
       name: req.body.data.name,
+      districtId :  req.body.data.districtId,
     };
+    console.log(data);
     const electoralArea = await prisma.electoralArea.create({ data });
     res
       .status(200)
@@ -19,7 +22,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const electoralArea = await prisma.electoralArea.findMany({ where: { deleted: 0 } });
+    const electoralArea = await prisma.electoralArea.findMany({ where: { deleted: 0 },   include: { District:{include: {Region:true}} }, });
    // return res.status(200).json({ statusCode: 1, data: region });
     return res.status(200).json(electoralArea);
 

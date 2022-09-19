@@ -8,7 +8,7 @@ const post = async (req, res) => {
     const drinkingWaterSourceType = await prisma.drinkingWaterSourceType.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { drinkingWaterSourceType } });
+      .json({ statusCode: 1, message: "Data saved ", data: { drinkingWaterSourceType } });
   } catch (error) {
     if (error.code === "P2002")
       return res
