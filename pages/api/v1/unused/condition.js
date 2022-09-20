@@ -20,7 +20,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const condition = await prisma.condition.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: condition });
+    return res.status(200).json(condition);
   } catch (error) {
     console.log("Error: " + error);
   }

@@ -6,10 +6,12 @@ const post = async (req, res) => {
       name: req.body.data.name,
     };
     const drinkingWaterSourceType = await prisma.drinkingWaterSourceType.create({ data });
+    console.log("drinkingWaterSourceType==> ",drinkingWaterSourceType);
     res
       .status(200)
       .json({ statusCode: 1, message: "Data saved ", data: { drinkingWaterSourceType } });
   } catch (error) {
+    console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)
@@ -20,7 +22,6 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const drinkingWaterSourceType = await prisma.drinkingWaterSourceType.findMany({ where: { deleted: 0 } });
-   // return res.status(200).json({ statusCode: 1, data: drinkingWaterSourceType });
    return res.status(200).json(drinkingWaterSourceType);
 
   } catch (error) {

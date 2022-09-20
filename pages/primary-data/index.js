@@ -10,6 +10,11 @@ export default function primary_data({
   electoralAreas,
   actions,
   analCleansings,
+  cemeteryWorkers,
+  drainTypes,
+  drinkingWaterSources,
+  effluentManagements,
+  excretaContainments
 }) {
   return (
     <div id="layout-wrapper">
@@ -25,6 +30,11 @@ export default function primary_data({
               communities={communities}
               actions={actions}
               analCleansings={analCleansings}
+              cemeteryWorkers={cemeteryWorkers}
+              drainTypes={drainTypes}
+              drinkingWaterSources={drinkingWaterSources}
+              effluentManagements ={effluentManagements}
+              excretaContainments={excretaContainments}
             />
           </div>
         </div>
@@ -67,6 +77,26 @@ export async function getServerSideProps(context) {
   const analCleansings = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/anal-cleansing-material`
   ).then((res) => res.json());
+
+  const cemeteryWorkers = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/cemetery-workers`
+  ).then((res) => res.json());
+
+  const drainTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/drain-type`
+  ).then((res) => res.json());
+
+  const drinkingWaterSources = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/drinking-water-source-type`
+  ).then((res) => res.json());
+
+  const effluentManagements = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/effluent-management`
+  ).then((res) => res.json());
+
+  const excretaContainments = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/excreta-containment`
+  ).then((res) => res.json());
   return {
     props: {
       regions,
@@ -75,6 +105,11 @@ export async function getServerSideProps(context) {
       communities,
       actions,
       analCleansings,
+      cemeteryWorkers,
+      drainTypes,
+      drinkingWaterSources,
+      effluentManagements,
+      excretaContainments
     },
   };
 }
