@@ -35,12 +35,12 @@ export async function getServerSideProps(context) {
   //     };
   //   }
   const userTypes = await fetch(
-    `${SERVER_BASE_URL}/api/v1/default/user-type`
+    `${SERVER_BASE_URL}/api/v1/primary-data/user-type`
   ).then((res) => res.json());
 
   console.log(userTypes);
 
-  const pages = await fetch(`${SERVER_BASE_URL}/api/v1/default/pages`).then(
+  const pages = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/pages`).then(
     (res) => res.json()
   );
   const pageAccess = await fetch(`${SERVER_BASE_URL}/api/v1/account/permission`).then((res) => res.json());

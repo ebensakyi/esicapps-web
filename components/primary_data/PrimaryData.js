@@ -86,6 +86,8 @@ const PrimaryData = ({
 
   const [pestsSignName, setPestsSignName] = useState();
 
+  const [nuisanceId, setNuisanceId] = useState();
+
   const router = useRouter();
 
   const addRegion = async (e) => {
@@ -421,6 +423,27 @@ const PrimaryData = ({
       };
 
       const response = await axios.post("/api/v1/primary-data/nuisance", {
+        data,
+      });
+
+      setNuisanceName("");
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateNuisance = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: nuisanceName,
+        id: nuisanceId,
+      };
+
+
+      console.log(data);
+      const response = await axios.put("/api/v1/primary-data/nuisance", {
         data,
       });
 
@@ -2536,7 +2559,6 @@ const PrimaryData = ({
                       </div>
                     </div>
                   </div>
-                
                 </div>
               </div>
               <div className="col-md-6">
@@ -2546,7 +2568,6 @@ const PrimaryData = ({
                   className="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
                   id="accordionBordered"
                 >
-                 
                   <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
@@ -4167,6 +4188,7 @@ const PrimaryData = ({
                                     <div class="text-end">
                                       <button
                                         onClick={(e) => {
+                                          if (nuisanceId) updateNuisance(e);
                                           addNuisance(e);
                                         }}
                                         class="btn btn-primary"
@@ -4195,7 +4217,13 @@ const PrimaryData = ({
                                       <td>{cw.name}</td>
 
                                       <td>
-                                        <button className="badge bg-success">
+                                        <button
+                                          className="badge bg-success"
+                                          onClick={(e) => {
+                                            setNuisanceName(cw.name);
+                                            setNuisanceId(cw.id);
+                                          }}
+                                        >
                                           Edit
                                         </button>
                                       </td>

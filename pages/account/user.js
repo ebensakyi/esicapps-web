@@ -39,14 +39,14 @@ export async function getServerSideProps(context) {
   const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user`).then(
     (res) => res.json()
   );
-  const regions = await fetch(`${SERVER_BASE_URL}/api/v1/default/region`).then(
+  const regions = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/region`).then(
     (res) => res.json()
   );
-  const districts = await fetch(`${SERVER_BASE_URL}/api/v1/default/district`).then((res) => res.json());
+  const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district`).then((res) => res.json());
   const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-type`).then(
     (res) => res.json()
   );  const electoralAreas = await fetch(
-    `${SERVER_BASE_URL}/api/v1/default/electoral-area`
+    `${SERVER_BASE_URL}/api/v1/primary-data/electoral-area`
   ).then((res) => res.json());
 
   return {

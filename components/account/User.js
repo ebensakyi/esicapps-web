@@ -154,7 +154,6 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                     </div>
                   </div>
 
-                  {us}
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
