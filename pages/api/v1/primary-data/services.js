@@ -20,10 +20,13 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     // let inspectionFormId = Number(req.query.id)
-    const service = await prisma.service.findMany({ where: { deleted: 0 } });
+    const service = await prisma.service.findMany({
+      where: { deleted: 0 },
+     
+    });
     return res.status(200).json(service);
   } catch (error) {
-    console.log("Error: " + error)
+    console.log("Error: " + error);
   }
 };
 

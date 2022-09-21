@@ -237,6 +237,10 @@ export async function getServerSideProps(context) {
   const waterTreatmentTypes = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/water-treatment-type`
   ).then((res) => res.json());
+
+  const greyWaterDisposals = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/grey-water-disposal`
+  ).then((res) => res.json());
   return {
     props: {
       inspectionForms,
@@ -255,7 +259,7 @@ export async function getServerSideProps(context) {
       facilities,
       frequencies,
       greyWaterDisposals,
-
+      pestSigns,
       hazardousWasteDisposals,
       inspectionTypes,
       nuisances,

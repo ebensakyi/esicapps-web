@@ -20,7 +20,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const inspectionType = await prisma.inspectionType.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: inspectionType });
+    return res.status(200).json(inspectionType);
   } catch (error) {
     console.log("Error: " + error);
   }
