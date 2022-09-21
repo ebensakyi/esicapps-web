@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import { SERVER_BASE_URL } from "../../config";
 
 export default function primary_data({
+    inspectionForms,
   regions,
   districts,
   communities,
@@ -14,7 +15,11 @@ export default function primary_data({
   drainTypes,
   drinkingWaterSources,
   effluentManagements,
-  excretaContainments
+  excretaContainments,
+  excretaDisposals,
+  facilities,
+  frequencies,
+  greyWaterDisposals,
 }) {
   return (
     <div id="layout-wrapper">
@@ -24,6 +29,7 @@ export default function primary_data({
         <div className="page-content">
           <div className="container-fluid">
             <PrimaryData
+            inspectionForms ={inspectionForms}
               regions={regions}
               districts={districts}
               electoralAreas={electoralAreas}
@@ -33,8 +39,12 @@ export default function primary_data({
               cemeteryWorkers={cemeteryWorkers}
               drainTypes={drainTypes}
               drinkingWaterSources={drinkingWaterSources}
-              effluentManagements ={effluentManagements}
+              effluentManagements={effluentManagements}
               excretaContainments={excretaContainments}
+              excretaDisposals={excretaDisposals}
+              facilities={facilities}
+              frequencies={frequencies}
+              greyWaterDisposals={greyWaterDisposals}
             />
           </div>
         </div>
@@ -54,6 +64,9 @@ export async function getServerSideProps(context) {
   //         },
   //     }
   // }
+  const inspectionForms = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/inspection-form`
+  ).then((res) => res.json());
   const regions = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/region`
   ).then((res) => res.json());
@@ -97,8 +110,27 @@ export async function getServerSideProps(context) {
   const excretaContainments = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/excreta-containment`
   ).then((res) => res.json());
+
+  const excretaDisposals = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/excreta-containment`
+  ).then((res) => res.json());
+
+  const facilities = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/facility`
+  ).then((res) => res.json());
+
+  const frequencies = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/frequency`
+  ).then((res) => res.json());
+
+  const greyWaterDisposals = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/grey-water-disposal`
+  ).then((res) => res.json());
+
+
   return {
     props: {
+        inspectionForms,
       regions,
       districts,
       electoralAreas,
@@ -109,7 +141,11 @@ export async function getServerSideProps(context) {
       drainTypes,
       drinkingWaterSources,
       effluentManagements,
-      excretaContainments
+      excretaContainments,
+      excretaDisposals,
+      facilities,
+      frequencies,
+      greyWaterDisposals,
     },
   };
 }

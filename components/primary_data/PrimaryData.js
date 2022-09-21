@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const PrimaryData = ({
+    inspectionForms,
   regions,
   districts,
   electoralAreas,
@@ -38,6 +39,9 @@ const PrimaryData = ({
   const [drinkingWaterSourceName, setDrinkingWaterSourceName] = useState()
   const [effluentManagementName, setEffluentManagementName] = useState()
   const [excretaContainmentName, setExcretaContainmentName] = useState()
+  const [excretaDisposalName, setExcretaDisposalName] = useState()
+  const [facilityName, setFacilityName] = useState()
+  const [inspectionFormId, setInspectionFormId] = useState()
 
   const router = useRouter();
 
@@ -243,7 +247,49 @@ const PrimaryData = ({
         }
       );
 
-      setEffluentManagementName("")
+      setExcretaContainmentName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addExcretaDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: excretaDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/excreta-disposal",
+        {
+          data,
+        }
+      );
+
+      setExcretaDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addFacility = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: facilityName,
+        inspectionFormId
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/facility",
+        {
+          data,
+        }
+      );
+
+      setFacilityName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
@@ -265,7 +311,7 @@ const PrimaryData = ({
                   className="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
                   id="accordionBordered"
                 >
-                  <div className="accordion-item">
+                  <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
                       id="accordionborderedExample1"
@@ -275,7 +321,7 @@ const PrimaryData = ({
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#accor_region"
-                        aria-expanded="true"
+                        aria-expanded="false"
                         aria-controls="accor_borderedExamplecollapse1"
                       >
                         Region
@@ -385,7 +431,7 @@ const PrimaryData = ({
                       </div>
                     </div>
                   </div>
-                  <div className="accordion-item">
+                  <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
                       id="accordionborderedExample1"
@@ -395,7 +441,7 @@ const PrimaryData = ({
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#accor_mmda"
-                        aria-expanded="true"
+                        aria-expanded="false"
                         aria-controls="accor_borderedExamplecollapse1"
                       >
                         MMDAs
@@ -1532,15 +1578,15 @@ const PrimaryData = ({
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#accor_xxxxx"
+                        data-bs-target="#accor_excreta_disposal"
                         aria-expanded="false"
-                        aria-controls="accor_xxxxx"
+                        aria-controls="accor_excreta_disposal"
                       >
-                        XXXXXXXXXXXXXXXXX
+                        Excreta Disposal
                       </button>
                     </h2>
                     <div
-                      id="accor_xxxxx"
+                      id="accor_excreta_disposal"
                       className="accordion-collapse collapse"
                       aria-labelledby="accordionborderedExample3"
                       data-bs-parent="#accordionBordered"
@@ -1563,9 +1609,9 @@ const PrimaryData = ({
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      value={cemeteryWorkerName}
+                                      value={excretaDisposalName}
                                       onChange={(e) =>
-                                        setCemeteryWorkerName(e.target.value)
+                                        setExcretaDisposalName(e.target.value)
                                       }
                                     />
                                   </div>
@@ -1582,7 +1628,7 @@ const PrimaryData = ({
                                     <div class="text-end">
                                       <button
                                         onClick={(e) => {
-                                          addCemeteryWorker(e);
+                                          addExcretaDisposal(e);
                                         }}
                                         class="btn btn-primary"
                                       >
@@ -1604,7 +1650,7 @@ const PrimaryData = ({
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {cemeteryWorkers.map((cw) => (
+                                  {excretaDisposals.map((cw) => (
                                     <tr>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
@@ -1635,15 +1681,15 @@ const PrimaryData = ({
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#accor_xxxxx"
+                        data-bs-target="#accor_facility"
                         aria-expanded="false"
-                        aria-controls="accor_xxxxx"
+                        aria-controls="accor_facility"
                       >
-                        XXXXXXXXXXXXXXXXX
+                        Facility
                       </button>
                     </h2>
                     <div
-                      id="accor_xxxxx"
+                      id="accor_facility"
                       className="accordion-collapse collapse"
                       aria-labelledby="accordionborderedExample3"
                       data-bs-parent="#accordionBordered"
@@ -1666,14 +1712,39 @@ const PrimaryData = ({
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      value={cemeteryWorkerName}
+                                      value={facilityName}
                                       onChange={(e) =>
-                                        setCemeteryWorkerName(e.target.value)
+                                        setFacilityName(e.target.value)
                                       }
                                     />
                                   </div>
                                 </div>
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="readonlyInput"
+                                      className="form-label"
+                                    >
+                                      Select Inspection Form
+                                    </label>
 
+                                    <select
+                                      class="form-select"
+                                      id="inputGroupSelect02"
+                                      value={inspectionFormId}
+                                      onChange={(e) =>
+                                        setInspectionFormId(Number(e.target.value))
+                                      }
+                                    >
+                                      <option selected>Choose...</option>
+                                      {inspectionForms.map((r) => (
+                                        <option key={r.id} value={r.id}>
+                                          {r.name}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                </div>
                                 <div class="col-lg-4">
                                   <div>
                                     <label
@@ -1685,7 +1756,7 @@ const PrimaryData = ({
                                     <div class="text-end">
                                       <button
                                         onClick={(e) => {
-                                          addCemeteryWorker(e);
+                                          addFacility(e);
                                         }}
                                         class="btn btn-primary"
                                       >
@@ -1707,10 +1778,11 @@ const PrimaryData = ({
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {cemeteryWorkers.map((cw) => (
+                                  {facilities.map((cw) => (
                                     <tr>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
+                                      <td>{cw.InspectionForm.name}</td>
 
                                       <td>
                                         <button className="badge bg-success">
