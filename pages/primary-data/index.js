@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import { SERVER_BASE_URL } from "../../config";
 
 export default function primary_data({
-    inspectionForms,
+  inspectionForms,
   regions,
   districts,
   communities,
@@ -20,6 +20,26 @@ export default function primary_data({
   facilities,
   frequencies,
   greyWaterDisposals,
+  hazardousWasteDisposals,
+  inspectionTypes,
+  nuisances,
+  ownershipTypes,
+  pestSigns,
+  respondentDesignations,
+  services,
+  structureTypes,
+  subtypes,
+  toiletPitPositions,
+  toiletTypes,
+  types,
+  wasteCollectionTypes,
+  wasteStorageReceptacles,
+  wasteWaterContainments,
+  waterSourceTypes,
+  waterStorageTypes,
+  waterSupplyTypes,
+  waterTreatmentTypes,
+
 }) {
   return (
     <div id="layout-wrapper">
@@ -29,7 +49,7 @@ export default function primary_data({
         <div className="page-content">
           <div className="container-fluid">
             <PrimaryData
-            inspectionForms ={inspectionForms}
+              inspectionForms={inspectionForms}
               regions={regions}
               districts={districts}
               electoralAreas={electoralAreas}
@@ -45,6 +65,25 @@ export default function primary_data({
               facilities={facilities}
               frequencies={frequencies}
               greyWaterDisposals={greyWaterDisposals}
+              hazardousWasteDisposals={hazardousWasteDisposals}
+              inspectionTypes={inspectionTypes}
+              nuisances={nuisances}
+              ownershipTypes={ownershipTypes}
+              pestSigns={pestSigns}
+              respondentDesignations={respondentDesignations}
+              services={services}
+              structureTypes={structureTypes}
+              subtypes={subtypes}
+              toiletTypes={toiletTypes}
+              toiletPitPositions={toiletPitPositions}
+              types={types}
+              wasteCollectionTypes={wasteCollectionTypes}
+              wasteStorageReceptacles={wasteStorageReceptacles}
+              wasteWaterContainments={wasteWaterContainments}
+              waterSourceTypes={waterSourceTypes}
+              waterStorageTypes={waterStorageTypes}
+              waterSupplyTypes={waterSupplyTypes}
+              waterTreatmentTypes={waterTreatmentTypes}
             />
           </div>
         </div>
@@ -123,14 +162,84 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/primary-data/frequency`
   ).then((res) => res.json());
 
-  const greyWaterDisposals = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/grey-water-disposal`
+  const hazardousWasteDisposals = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/hazardous-waste-disposal`
   ).then((res) => res.json());
 
+  const inspectionTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/inspection-type`
+  ).then((res) => res.json());
 
+  const nuisances = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/nuisance`
+  ).then((res) => res.json());
+
+  const ownershipTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/ownership-type`
+  ).then((res) => res.json());
+
+  const pestSigns = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/pest-sign`
+  ).then((res) => res.json());
+
+  const respondentDesignations = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/respondent-designation`
+  ).then((res) => res.json());
+
+  const services = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/services`
+  ).then((res) => res.json());
+
+  const structureTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/structure-type`
+  ).then((res) => res.json());
+
+  const subtypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/subtypes`
+  ).then((res) => res.json());
+
+  const toiletPitPositions = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/toilet-pit-position`
+  ).then((res) => res.json());
+
+  const toiletTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/toilet-type`
+  ).then((res) => res.json());
+
+  const types = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/types`
+  ).then((res) => res.json());
+
+  const wasteCollectionTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/waste-collection-type`
+  ).then((res) => res.json());
+
+  const wasteStorageReceptacles = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/waste-storage-receptacle`
+  ).then((res) => res.json());
+
+  const wasteWaterContainments = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/waste-water-containment`
+  ).then((res) => res.json());
+
+  const waterSourceTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/water-source-type`
+  ).then((res) => res.json());
+
+  const waterStorageTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/water-storage-type`
+  ).then((res) => res.json());
+
+  const waterSupplyTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/water-supply-type`
+  ).then((res) => res.json());
+
+  const waterTreatmentTypes = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/water-treatment-type`
+  ).then((res) => res.json());
   return {
     props: {
-        inspectionForms,
+      inspectionForms,
       regions,
       districts,
       electoralAreas,
@@ -146,6 +255,26 @@ export async function getServerSideProps(context) {
       facilities,
       frequencies,
       greyWaterDisposals,
+
+      hazardousWasteDisposals,
+      inspectionTypes,
+      nuisances,
+      ownershipTypes,
+      ownershipTypes,
+      respondentDesignations,
+      services,
+      structureTypes,
+      subtypes,
+      toiletPitPositions,
+      toiletTypes,
+      types,
+      wasteCollectionTypes,
+      wasteStorageReceptacles,
+      wasteWaterContainments,
+      waterSourceTypes,
+      waterStorageTypes,
+      waterSupplyTypes,
+      waterTreatmentTypes,
     },
   };
 }

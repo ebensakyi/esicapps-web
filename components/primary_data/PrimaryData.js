@@ -20,6 +20,24 @@ const PrimaryData = ({
   frequencies,
   greyWaterDisposals,
   hazardousWasteDisposals,
+  inspectionTypes,
+  nuisances,
+  ownershipTypes,
+  pestSigns,
+  respondentDesignations,
+  services,
+  structureTypes,
+  subtypes,
+  toiletPitPositions,
+  toiletTypes,
+  types,
+  wasteCollectionTypes,
+  wasteStorageReceptacles,
+  wasteWaterContainments,
+  waterSourceTypes,
+  waterStorageTypes,
+  waterSupplyTypes,
+  waterTreatmentTypes,
 
 }) => {
   const [regionName, setRegionName] = useState();
@@ -42,6 +60,31 @@ const PrimaryData = ({
   const [excretaDisposalName, setExcretaDisposalName] = useState()
   const [facilityName, setFacilityName] = useState()
   const [inspectionFormId, setInspectionFormId] = useState()
+  const [frequencyName, setFrequencyName] = useState()
+  const [greyWaterDisposalName, setGreyWaterDisposalName] = useState()
+
+  const [hazardousWasteDisposalName, setHazardousWasteDisposalName] = useState()
+  const [inspectionTypeName, setInspectionTypeName] = useState()
+  const [nuisanceName, setNuisanceName] = useState()
+  const [ownershipTypeName, setOwnershipTypeName] = useState()
+  const [respondentDesignationName, setRespondentDesignationName] = useState()
+  const [serviceName, setServiceName] = useState()
+  const [structureTypeName, setStructureTypeName] = useState()
+  const [subtypeName, setSubtypeName] = useState()
+  const [toiletPitPositionName, setToiletPitPositionName] = useState()
+  const [toiletTypeName, setToiletTypeName] = useState()
+  const [typeName, setTypeName] = useState()
+  const [wasteCollectionTypeName, setWasteCollectionTypeName] = useState()
+  const [wasteStorageReceptacleName, setWasteStorageReceptacleName] = useState()
+  const [wasteWaterContainmentName, setWasteWaterContainmentName] = useState()
+  const [waterSourceTypeName, setWaterSourceTypeName] = useState()
+  const [waterStorageTypeName, setWaterStorageTypeName] = useState()
+  const [waterSupplyTypeName, setWaterSupplyTypeName] = useState()
+  const [waterTreatmentTypeName, setWaterTreatmentTypeName] = useState()
+
+  const [pestsSignName, setPestsSignName] = useState()
+
+
 
   const router = useRouter();
 
@@ -290,6 +333,389 @@ const PrimaryData = ({
       );
 
       setFacilityName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addFrequency = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: frequencyName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/frequency",
+        {
+          data,
+        }
+      );
+
+      setFrequencyName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addHazardousWasteDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: hazardousWasteDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/hazardous-waste-disposal",
+        {
+          data,
+        }
+      );
+
+      setHazardousWasteDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addInspectionType = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: inspectionTypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/inspection-type",
+        {
+          data,
+        }
+      );
+
+      setInspectionTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addNuisance = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: nuisanceName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/nuisance",
+        {
+          data,
+        }
+      );
+
+      setNuisanceName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addOwnershipType = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: ownershipTypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/ownership-type",
+        {
+          data,
+        }
+      );
+
+      setOwnershipTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addRespondentDesignation = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: respondentDesignationName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/respondent-designation",
+        {
+          data,
+        }
+      );
+
+      setRespondentDesignationName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addService = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: serviceName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/services",
+        {
+          data,
+        }
+      );
+
+      setServiceName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addStructureType = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: structureTypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/structure-type",
+        {
+          data,
+        }
+      );
+
+      setStructureTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addSubtype = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: subtypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/subtypes",
+        {
+          data,
+        }
+      );
+
+      setSubtypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addToiletPitPosition = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: toiletPitPositionName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/toilet-pit-position",
+        {
+          data,
+        }
+      );
+
+      setToiletPitPositionName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addToiletType = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: toiletTypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/toilet-type",
+        {
+          data,
+        }
+      );
+
+      setToiletTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addTypeName = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: typeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/types",
+        {
+          data,
+        }
+      );
+
+      setTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addGreyWaterDisposal = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: greyWaterDisposalName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setGreyWaterDisposalName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
@@ -1810,15 +2236,15 @@ const PrimaryData = ({
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#accor_xxxxx"
+                        data-bs-target="#accor_frequency"
                         aria-expanded="false"
-                        aria-controls="accor_xxxxx"
+                        aria-controls="accor_frequency"
                       >
-                        XXXXXXXXXXXXXXXXX
+                        Frequency
                       </button>
                     </h2>
                     <div
-                      id="accor_xxxxx"
+                      id="accor_frequency"
                       className="accordion-collapse collapse"
                       aria-labelledby="accordionborderedExample3"
                       data-bs-parent="#accordionBordered"
@@ -1841,9 +2267,9 @@ const PrimaryData = ({
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      value={cemeteryWorkerName}
+                                      value={frequencyName}
                                       onChange={(e) =>
-                                        setCemeteryWorkerName(e.target.value)
+                                        setFrequencyName(e.target.value)
                                       }
                                     />
                                   </div>
@@ -1860,7 +2286,7 @@ const PrimaryData = ({
                                     <div class="text-end">
                                       <button
                                         onClick={(e) => {
-                                          addCemeteryWorker(e);
+                                          addFrequency(e);
                                         }}
                                         class="btn btn-primary"
                                       >
@@ -1882,7 +2308,7 @@ const PrimaryData = ({
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {cemeteryWorkers.map((cw) => (
+                                  {frequencies.map((cw) => (
                                     <tr>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
@@ -1913,15 +2339,15 @@ const PrimaryData = ({
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#accor_xxxxx"
+                        data-bs-target="#accor_grey_water_disposal"
                         aria-expanded="false"
-                        aria-controls="accor_xxxxx"
+                        aria-controls="accor_grey_water_disposal"
                       >
-                        XXXXXXXXXXXXXXXXX
+                        Grey water disposal
                       </button>
                     </h2>
                     <div
-                      id="accor_xxxxx"
+                      id="accor_grey_water_disposal"
                       className="accordion-collapse collapse"
                       aria-labelledby="accordionborderedExample3"
                       data-bs-parent="#accordionBordered"
@@ -1944,9 +2370,9 @@ const PrimaryData = ({
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      value={cemeteryWorkerName}
+                                      value={greyWaterDisposalName}
                                       onChange={(e) =>
-                                        setCemeteryWorkerName(e.target.value)
+                                        setGreyWaterDisposalName(e.target.value)
                                       }
                                     />
                                   </div>
@@ -1963,7 +2389,7 @@ const PrimaryData = ({
                                     <div class="text-end">
                                       <button
                                         onClick={(e) => {
-                                          addCemeteryWorker(e);
+                                          addGreyWaterDisposal(e);
                                         }}
                                         class="btn btn-primary"
                                       >
@@ -1985,7 +2411,7 @@ const PrimaryData = ({
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {cemeteryWorkers.map((cw) => (
+                                  {greyWaterDisposals.map((cw) => (
                                     <tr>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
