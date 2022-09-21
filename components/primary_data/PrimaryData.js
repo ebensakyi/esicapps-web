@@ -601,111 +601,111 @@ const PrimaryData = ({
       console.log(error);
     }
   };
-  const addGreyWaterDisposal = async (e) => {
+  const addWasteCollectionType = async (e) => {
     try {
       e.preventDefault();
       let data = {
-        name: greyWaterDisposalName,
+        name: wasteCollectionTypeName,
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/waste-collection-type",
         {
           data,
         }
       );
 
-      setGreyWaterDisposalName("")
+      setWasteCollectionTypeName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-  const addGreyWaterDisposal = async (e) => {
+  const addWasteStorageReceptacle = async (e) => {
     try {
       e.preventDefault();
       let data = {
-        name: greyWaterDisposalName,
+        name: wasteStorageReceptacleName,
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/waste-storage-receptacle",
         {
           data,
         }
       );
 
-      setGreyWaterDisposalName("")
+      setWasteStorageReceptacleName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-  const addGreyWaterDisposal = async (e) => {
+  const addWasteWaterContainment = async (e) => {
     try {
       e.preventDefault();
       let data = {
-        name: greyWaterDisposalName,
+        name: wasteWaterContainmentName,
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/waste-water-containment",
         {
           data,
         }
       );
 
-      setGreyWaterDisposalName("")
+      setWasteWaterContainmentName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-  const addGreyWaterDisposal = async (e) => {
+  const addWaterSource = async (e) => {
     try {
       e.preventDefault();
       let data = {
-        name: greyWaterDisposalName,
+        name: waterSourceTypeName,
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/water-source-type",
         {
           data,
         }
       );
 
-      setGreyWaterDisposalName("")
+      setWaterSourceTypeName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-  const addGreyWaterDisposal = async (e) => {
+  const addWaterStorage = async (e) => {
     try {
       e.preventDefault();
       let data = {
-        name: greyWaterDisposalName,
+        name: waterStorageTypeName,
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/water-storage-type",
         {
           data,
         }
       );
 
-      setGreyWaterDisposalName("")
+      setWaterStorageTypeName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-  const addGreyWaterDisposal = async (e) => {
+  const addWaterSupply = async (e) => {
     try {
       e.preventDefault();
       let data = {
-        name: greyWaterDisposalName,
+        name: waterSupplyTypeName,
       };
 
       const response = await axios.post(
@@ -715,7 +715,49 @@ const PrimaryData = ({
         }
       );
 
-      setGreyWaterDisposalName("")
+      setWaterSupplyTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addWaterTreatment = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: waterTreatmentTypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setWaterSupplyTypeName("")
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addPestsSign = async (e) => {
+    try {
+      e.preventDefault();
+      let data = {
+        name: waterSupplyTypeName,
+      };
+
+      const response = await axios.post(
+        "/api/v1/primary-data/grey-water-disposal",
+        {
+          data,
+        }
+      );
+
+      setWaterSupplyTypeName("")
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
