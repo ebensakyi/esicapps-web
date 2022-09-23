@@ -33,10 +33,10 @@ export async function getServerSideProps(context) {
   //     };
   //   }
   const userLevels = await fetch(
-    `${SERVER_BASE_URL}/api/v1/default/user-level`
+    `${SERVER_BASE_URL}/api/v1/primary-data/user-level`
   ).then((res) => res.json());
 
-  const pages = await fetch(`${SERVER_BASE_URL}/api/v1/default/pages`).then(
+  const pages = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/pages`).then(
     (res) => res.json()
   );
 
