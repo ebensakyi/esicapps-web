@@ -1,6 +1,6 @@
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
-var hash = bcrypt.hashSync("B4c0//", salt);
+var hash = bcrypt.hashSync("Kofi@2318", salt);
 
 export const superUser = [
   {
@@ -10,7 +10,8 @@ export const superUser = [
     email: "ebensakyi@gmail.com",
     phoneNumber: "0543212322",
     password: hash,
-    userLevelId: 1,
+    electoralAreaId: 1,
+    designation: "Super Admin"
   },
   
 ];

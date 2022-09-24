@@ -203,9 +203,9 @@ async function main() {
   await prisma.community.createMany({
     data: community,
   });
-  // await prisma.user.createMany({
-  //   data: superUser,
-  // });
+  await prisma.user.createMany({
+    data: superUser,
+  });
 }
 
 main()

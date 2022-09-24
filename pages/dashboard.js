@@ -1,19 +1,27 @@
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-//import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../config";
 import Dashboard from '../components/Dashboard'
 
 export default function dashboard() {
     return (
-        <div >
-
-            <Header />
-
-            <Dashboard />
-
-            <Footer />
+        <div id="layout-wrapper">
+        <Header />
+  
+        <div className="main-content">
+          <div className="page-content">
+            <div className="container-fluid">
+              <Dashboard
+                // users={users}
+              
+                // regions={regions}
+                // userTypes={userTypes}
+              />
+            </div>
+          </div>
         </div>
+      </div>
     )
 }
 

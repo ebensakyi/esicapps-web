@@ -2,10 +2,7 @@ import Link from "next/link";
 
 const Dashboard = () => {
   return (
-    <div className="main-content">
-      <div className="page-content">
-        <div className="container-fluid">
-          {/* start page title */}
+   <>
           <div className="row">
             <div className="col-12">
               <div className="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -681,23 +678,7 @@ const Dashboard = () => {
             {/* end col */}
             {/* end col */}
           </div>
-        </div>
-        {/* container-fluid */}
-      </div>
-      {/* End Page-content */}
-      <footer className="footer">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-6">© 2022 ESICApps</div>
-            <div className="col-sm-6">
-              {/* <div className="text-sm-end d-none d-sm-block">
-                Design &amp; Develop by FortressTech
-              </div> */}
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+      </>
   );
 };
 

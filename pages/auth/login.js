@@ -1,15 +1,26 @@
-// import PrimaryData from "../../../components/admin/primary_data/PrimaryData";
 // import Header from "../../../components/Header";
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import axios from "axios";
 
 export default function login() {
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [password, setPassword] = useState();
+
   const router = useRouter();
 
   const login = async (e) => {
     e.preventDefault();
-    router.push("/");
+    let data = {
+      phoneNumber,
+      password,
+    };
+    const response = await axios.post(`/api/v1/auth/login`, data);
+
+    // router.replace(router.asPath)
+    // router.push("/");
   };
   return (
     <html
@@ -96,14 +107,15 @@ export default function login() {
                       <div className="p-2 mt-4">
                         <form action="/">
                           <div className="mb-3">
-                            <label for="username" className="form-label">
-                              Username
+                            <label for="phone" className="form-label">
+                              Phone
                             </label>
                             <input
                               type="text"
                               className="form-control"
-                              id="username"
-                              placeholder="Enter username"
+                              id="phone"
+                              placeholder="Enter phone number"
+                              onChange={(e) =>setPhoneNumber(e.target.value)}
                             />
                           </div>
 
@@ -125,6 +137,7 @@ export default function login() {
                                 className="form-control pe-5"
                                 placeholder="Enter password"
                                 id="password-input"
+                                onChange={(e) =>setPassword(e.target.value)}
                               />
                               <button
                                 className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
