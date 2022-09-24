@@ -18,6 +18,8 @@ export default function login() {
       password,
     };
     const response = await axios.post(`/api/v1/auth/login`, data);
+    if (response.data!=""||null) return router.push("/dashboard");
+    console.log(response);
 
     // router.replace(router.asPath)
     // router.push("/");
@@ -115,7 +117,7 @@ export default function login() {
                               className="form-control"
                               id="phone"
                               placeholder="Enter phone number"
-                              onChange={(e) =>setPhoneNumber(e.target.value)}
+                              onChange={(e) => setPhoneNumber(e.target.value)}
                             />
                           </div>
 
@@ -137,7 +139,7 @@ export default function login() {
                                 className="form-control pe-5"
                                 placeholder="Enter password"
                                 id="password-input"
-                                onChange={(e) =>setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                               />
                               <button
                                 className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"

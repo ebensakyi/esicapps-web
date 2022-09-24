@@ -23,7 +23,7 @@ const post = async (req, res) => {
     if (!user)
       return res
         .status(200)
-        .json({ statusCode: 0, message: "Wrong user credentials" });
+        .json();
 
     let isValid = await bcrypt.compare(password, user.password);
 
@@ -36,37 +36,13 @@ const post = async (req, res) => {
       let userType = Number(user.userTypeId);
      // await setUserCookie(token, req, res);
 
-      if (userType == 4) {
-        let data = {
-          logType: 2, log: "Login", logLocation: "checkerApiController.js",
-          userId: userId
-        };
+
+      
+     
 
 
-        const ul = await prisma.logs.create({ data });
-
-        return res.status(200).json({
-          statusCode: 1,
-          data: { userType },
-          message: "Logged in",
-        });
-      } else if (userType == 1 || userType == 2 || userType == 3) {
-
-        let data = {
-          logType: 2, log: "Login", logLocation: "checkerApiController.js",
-          userId: userId
-        };
-
-
-        const ul = await prisma.logs.create({ data });
-
-
-
-        return res.status(200).json({
-          statusCode: 1, message: "Logged in",
-          data: { userType },
-        });
-      }
+        return res.status(200).json(user);
+      
     } else {
       return res
         .status(200)
