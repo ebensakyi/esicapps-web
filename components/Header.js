@@ -873,7 +873,7 @@ const Header = () => {
                     <i className="mdi mdi-lock text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle">Lock screen</span>
                   </a>
-                  <a className="dropdown-item" href="auth-logout-basic.html">
+                  <a className="dropdown-item" href="/auth/login">
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle" data-key="t-logout">
                       Logout

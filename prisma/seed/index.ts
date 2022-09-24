@@ -19,7 +19,6 @@ import { inspectionType } from "./inspectionType";
 import { respondentDesignation } from "./respondentDesignation";
 import { solidWasteReceptacle } from "./solidWasteReceptacle";
 import { storageCondition } from "./storageCondition";
-import { subdistrict } from "./subdistrict";
 import { toiletType } from "./toiletType";
 import { waterSourceType } from "./waterSourceType";
 import { drinkingWaterSourceType } from "./drinkingWaterSourceType";
@@ -99,9 +98,7 @@ async function main() {
   await prisma.storageCondition.createMany({
     data: storageCondition,
   });
-  await prisma.subdistrict.createMany({
-    data: subdistrict,
-  });
+
 
   await prisma.toiletType.createMany({
     data: toiletType,

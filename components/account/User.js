@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
+const User = ({ users, userTypes, regions }) => {
   const [userType, setUserType] = useState();
   const [surname, setSurname] = useState();
   const [otherNames, setOtherNames] = useState();
@@ -9,6 +9,8 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [designation, setDesignation] = useState();
   const [region, setRegion] = useState();
+  const [districts, setDistricts] = useState([]);
+  const [electoralAreas, setElectoralAreas] = useState([]);
   const [district, setDistrict] = useState();
   const [electoralArea, setElectoralArea] = useState();
   const [level, setLevel] = useState();
@@ -27,12 +29,33 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
       electoralAreaId: Number(electoralArea),
     };
 
-    console.log(">>>", data);
 
-    const response = await axios.post("/api/v1/account/user", {
+    const response = await axios.post("/api/v1/auth/register", {
       data,
     });
   };
+
+  const getDistrictsByRegion = async (e, regionId) => {
+    try {
+      e.preventDefault();
+      const response = await axios.get("/api/v1/primary-data/district?regionId=" + regionId);
+      setDistricts(response.data)
+
+    } catch (error) {
+
+    }
+
+  }
+
+  const getElectoralByDistrict = async (e, districtId) => {
+    try {
+      e.preventDefault();
+      const response = await axios.get("/api/v1/primary-data/electoral-area?districtId=" + districtId);
+      setElectoralAreas(response.data)
+    } catch (error) {
+
+    }
+  }
   return (
     <div class="row">
       <div class="col-12">
@@ -71,7 +94,7 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                         id="inputGroupSelect02"
                         onChange={(e) => {
                           setUserType(e.target.value);
-                          
+
                         }}
                       >
                         <option selected>Choose...</option>
@@ -163,7 +186,10 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                       <select
                         class="form-select"
                         id="inputGroupSelect02"
-                        onChange={(e) => setRegion(e.target.value)}
+                        onChange={async (e) => {
+                          setRegion(e.target.value)
+                          getDistrictsByRegion(e, e.target.value)
+                        }}
                       >
                         <option selected>Choose...</option>
                         {regions.map((region) => (
@@ -183,7 +209,10 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                       <select
                         class="form-select"
                         id="inputGroupSelect02"
-                        onChange={(e) => setDistrict(e.target.value)}
+                        onChange={(e) => {
+                          setDistrict(e.target.value)
+                          getElectoralByDistrict(e, e.target.value)
+                        }}
                       >
                         <option selected>Choose...</option>
                         {districts.map((district) => (
@@ -207,9 +236,11 @@ const User = ({ users, userTypes, regions, districts, electoralAreas }) => {
                         onChange={(e) => setElectoralArea(e.target.value)}
                       >
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {electoralAreas.map((ea) => (
+                          <option key={ea.id} value={ea.id}>
+                            {ea.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>

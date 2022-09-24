@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  id          Int     @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   userTypeId  Int?
-  surname     String  @db.VarChar(255)
-  otherNames  String  @db.VarChar(255)
-  email       String? @db.VarChar(255)
-  phoneNumber String  @db.VarChar(255)
-  designation String  @db.VarChar(255)
+  surname     String @db.VarChar(255)
+  otherNames  String @db.VarChar(255)
+  email       String @unique @db.VarChar(255)
+  phoneNumber String @unique @db.VarChar(255)
+  designation String @db.VarChar(255)
 
   password   String @db.VarChar(255)
   // idTypeId    Int?
@@ -282,14 +282,14 @@ model Community {
   FacilitySection FacilitySection[]
 }
 
-model Subdistrict {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  FacilitySection FacilitySection[]
-}
+// model Subdistrict {
+//   id              Int               @id @default(autoincrement())
+//   name            String            @db.VarChar(255)
+//   deleted         Int?              @default(0)
+//   createdAt       DateTime          @default(now())
+//   updatedAt       DateTime          @updatedAt
+//   FacilitySection FacilitySection[]
+// }
 
 model Zone {
   id              Int               @id @default(autoincrement())
@@ -730,7 +730,7 @@ model FacilitySection {
   RespondentDesignation       RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
   Community                   Community?            @relation(fields: [communityId], references: [id])
   District                    District              @relation(fields: [districtId], references: [id])
-  Subdistrict                 Subdistrict?          @relation(fields: [subdistrictId], references: [id])
+  // Subdistrict                 Subdistrict?          @relation(fields: [subdistrictId], references: [id])
   Zone                        Zone?                 @relation(fields: [zoneId], references: [id])
   Inspection                  Inspection            @relation(fields: [inspectionId], references: [id])
   labourersOfficeAvailability YesNo?                @relation("labourersOfficeAvailability", fields: [labourersOfficeAvailabilityId], references: [id])

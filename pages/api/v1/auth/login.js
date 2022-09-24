@@ -1,4 +1,5 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import bcrypt from "bcryptjs";
 
 const post = async (req, res) => {
   try {

@@ -3,15 +3,18 @@ import prisma from "../../../../prisma/MyPrismaClient";
 const post = async (req, res) => {
   try {
 
-    console.log(req.body);
-    // const data = {
-    //   name: req.body.data.userName,
-    //   userLevelId:req.body.data.level
-    // };
-
-    let body = {...req.body.data,password:""}
-    const user = await prisma.user.create({ data:body });
-    res
+    const data = {
+      userTypeId: req.body.userTypeId,
+      surname: req.body.surname,
+      otherNames: req.body.otherNames,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      password: req.body.password,
+      regionId: req.body.regionId,
+      districtId: req.body.districtId
+    };
+    const user = await prisma.user.create({ data :data});
+    return res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { user } });
   } catch (error) {
@@ -26,9 +29,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const user = await prisma.user.findMany({ where: { deleted: 0 } });
-    //return res.status(200).json({ statusCode: 1, data: user });
     return res.status(200).json( user);
-
   } catch (error) {
     console.log("Error: " + error);
   }

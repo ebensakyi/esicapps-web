@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
-export default function user({ users,userTypes, districts, regions, electoralAreas }) {
+export default function user({ users,userTypes, regions }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -13,8 +13,7 @@ export default function user({ users,userTypes, districts, regions, electoralAre
           <div className="container-fluid">
             <User
               users={users}
-              electoralAreas={electoralAreas}
-              districts={districts}
+            
               regions={regions}
               userTypes={userTypes}
             />
@@ -42,20 +41,22 @@ export async function getServerSideProps(context) {
   const regions = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/region`).then(
     (res) => res.json()
   );
-  const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district`).then((res) => res.json());
+
   const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-type`).then(
     (res) => res.json()
-  );  const electoralAreas = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/electoral-area`
-  ).then((res) => res.json());
+  );  
+  
+  // const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district`).then((res) => res.json());
+  //  const electoralAreas = await fetch(
+  //   `${SERVER_BASE_URL}/api/v1/primary-data/electoral-area`
+  // ).then((res) => res.json());
 
   return {
     props: {
       users,
       userTypes,
       regions,
-      districts,
-      electoralAreas,
+
     },
   };
 }

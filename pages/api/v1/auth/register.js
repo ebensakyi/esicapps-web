@@ -1,21 +1,22 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import bcrypt from "bcryptjs";
+import { nanoid } from "nanoid";
 
 const post = async (req, res) => {
   try {
-    const data = {
-      userTypeId: req.body.userTypeId,
-      surname: req.body.surname,
-      otherNames: req.body.otherNames,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      password: req.body.password,
-      regionId: req.body.regionId,
-      districtId: req.body.districtId
-    };
-    const user = await prisma.user.create({ data :data});
-    return res
+    const salt = bcrypt.genSaltSync(10);
+
+    let password =  nanoid(8)
+    let hashedPassword =  bcrypt.hashSync(password, salt)
+
+    console.log("Hashed password: ", password);
+
+
+    let body = { ...req.body.data, password: hashedPassword };
+    const user = await prisma.user.create({ data: body });
+    res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { user } });
+      .json(user);
   } catch (error) {
     console.log(error);
     if (error.code === "P2002")
@@ -28,7 +29,8 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const user = await prisma.user.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: user });
+    //return res.status(200).json({ statusCode: 1, data: user });
+    return res.status(200).json(user);
   } catch (error) {
     console.log("Error: " + error);
   }
