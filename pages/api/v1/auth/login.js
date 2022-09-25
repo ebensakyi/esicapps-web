@@ -23,7 +23,7 @@ const post = async (req, res) => {
     if (!user)
       return res
         .status(200)
-        .json({statusCode:0});
+        .json({statusCode:0, message: 'User account not found'});
 
     let isValid = await bcrypt.compare(password, user.password);
 

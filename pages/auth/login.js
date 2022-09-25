@@ -20,11 +20,12 @@ export default function login() {
       password,
     };
     const response = await axios.post(`/api/v1/auth/login`, data);
-        console.log(response);
+    console.log(response);
 
-    if (response.data.statusCode == 0) return toast.error(response.data.message);
+    if (response.data.statusCode == 0)
+      return toast.error(response.data.message);
 
-     return router.push("/dashboard");
+    return router.push("/dashboard");
 
     // router.replace(router.asPath)
     // router.push("/");
@@ -69,17 +70,7 @@ export default function login() {
         <div className="auth-page-wrapper pt-5">
           <div className="auth-one-bg-position auth-one-bg" id="auth-particles">
             <div className="bg-overlay"></div>
-            <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+            
             <div className="shape">
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +101,17 @@ export default function login() {
                   </div>
                 </div>
               </div>
-
+              <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
               <div className="row justify-content-center">
                 <div className="col-md-8 col-lg-6 col-xl-5">
                   <div className="card mt-4">
