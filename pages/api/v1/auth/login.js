@@ -23,7 +23,7 @@ const post = async (req, res) => {
     if (!user)
       return res
         .status(200)
-        .json();
+        .json({statusCode:0});
 
     let isValid = await bcrypt.compare(password, user.password);
 
@@ -41,7 +41,7 @@ const post = async (req, res) => {
      
 
 
-        return res.status(200).json(user);
+        return res.status(200).json({ statusCode: 1, data:user});
       
     } else {
       return res
