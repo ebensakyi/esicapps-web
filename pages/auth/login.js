@@ -18,8 +18,10 @@ export default function login() {
       password,
     };
     const response = await axios.post(`/api/v1/auth/login`, data);
-    if (response.data!=""||null) return router.push("/dashboard");
-    console.log(response);
+        console.log(response);
+
+    if (response.data.status == 0) return 
+     return router.push("/dashboard");
 
     // router.replace(router.asPath)
     // router.push("/");
