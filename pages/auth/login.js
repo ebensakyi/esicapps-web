@@ -6,7 +6,6 @@ import { nanoid } from "nanoid";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import axios from "axios";
 
 export default function login() {
   const [phoneNumber, setPhoneNumber] = useState();
