@@ -25,7 +25,7 @@ export default function login() {
     if (response.data.statusCode == 0)
       return toast.error(response.data.message);
 
-    return router.push("/dashboard");
+    return router.replace("/dashboard");
 
     // router.replace(router.asPath)
     // router.push("/");

@@ -49,6 +49,7 @@ import { pages } from "./page";
 import { pageActions } from "./pageAction";
 import { superUser } from "./superAdmin";
 import { electoralArea } from "./electoralArea";
+import { animalType } from "./animalType";
 
 async function main() {
   await prisma.inspectionForm.createMany({
@@ -205,6 +206,9 @@ async function main() {
   });
   await prisma.user.createMany({
     data: superUser,
+  });
+  await prisma.animalType.createMany({
+    data: animalType,
   });
 }
 

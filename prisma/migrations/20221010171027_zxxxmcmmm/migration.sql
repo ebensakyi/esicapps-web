@@ -272,6 +272,17 @@ CREATE TABLE "WaterSourceType" (
 );
 
 -- CreateTable
+CREATE TABLE "AnimalType" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "AnimalType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "DrinkingWaterSourceType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
