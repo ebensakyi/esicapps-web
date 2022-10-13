@@ -1,9 +1,9 @@
 export const nuisance = [
   {
-    name: "Excretment",
+    name: "Exposed Excretment",
   },
   {
-    name: "Unsanitary  bathroom",
+    name: "Insanitary  bathroom",
   },
   {
     name: "Growth of weeds",
@@ -18,13 +18,16 @@ export const nuisance = [
     name: "Noise",
   },
   {
+    name: "No toilet",
+  },
+  {
     name: "Dust",
   },
   {
     name: "Overcrowdinng",
   },
   {
-    name: "Refuse",
+    name: "Accumulation of Refuse",
   },
   {
     name: "Expired drugs",
@@ -33,7 +36,10 @@ export const nuisance = [
     name: "Prohibited animals",
   },
   {
-    name: "Insanitary drains and catchpit",
+    name: "Insanitary drains",
+  },
+  {
+    name: "Insanitary catchpit",
   },
   {
     name: "Dirty walls of premises",
@@ -44,36 +50,27 @@ export const nuisance = [
   {
     name: "Construction waste",
   },
-  {
-    name: "Prohibited animals",
-  },
+
   { name: "Stagnant waste water" },
   {
     name: "Exposed food",
   },
-  {
-    name: "Exposed Faecal matter",
-  },
+
   {
     name: "Offensive odour",
   },
   {
-    name: "Insanitary hen coop",
+    name: "Insanitary Animal Space",
   },
-  {
-    name: "Insanitary goat pen",
-  },
-  {
-    name: "Insanitary cattle kraal ",
-  },
+
   {
     name: "Unsafe structure",
   },
   {
-    name: "Stagnate wastewater",
+    name: "Dumping and Burning",
   },
   {
-    name: "Stray animals",
+    name: "No Permit",
   },
   {
     name: "No nuisance",

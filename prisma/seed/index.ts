@@ -50,6 +50,7 @@ import { pageActions } from "./pageAction";
 import { superUser } from "./superAdmin";
 import { electoralArea } from "./electoralArea";
 import { animalType } from "./animalType";
+import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
 
 async function main() {
   await prisma.inspectionForm.createMany({
@@ -209,6 +210,10 @@ async function main() {
   });
   await prisma.animalType.createMany({
     data: animalType,
+  });
+
+  await prisma.unservicedWasteDisposal.createMany({
+    data: unservicedWasteDisposal,
   });
 }
 

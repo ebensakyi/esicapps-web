@@ -4,15 +4,10 @@ export const wasteCollectionType = [
   },
 
   {
-    name: "Crude Dumping",
+    name: "Door to door",
   },
   {
-    name: "Burning",
+    name: "Not serviced",
   },
-  {
-    name: "Burying",
-  },
-  {
-    name: "Tricycle",
-  },
+ 
 ];
