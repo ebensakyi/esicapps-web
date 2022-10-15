@@ -51,8 +51,13 @@ import { superUser } from "./superAdmin";
 import { electoralArea } from "./electoralArea";
 import { animalType } from "./animalType";
 import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
+import { dataVersion } from "./dataVersion";
 
 async function main() {
+  await prisma.dataVersion.createMany({
+    data: dataVersion,
+  });
+
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
