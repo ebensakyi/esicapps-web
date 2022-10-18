@@ -399,6 +399,14 @@ model DrinkingWaterSourceType {
   updatedAt DateTime @updatedAt
 }
 
+model ToiletDischarge {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model WaterSupplyType {
   id           Int            @id @default(autoincrement())
   name         String         @db.VarChar(255)
@@ -817,6 +825,14 @@ model LicencePermitSection {
   fumigationCertificateAvailability YesNo?     @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   buildingPermitAvailability        YesNo?     @relation("buildingPermitAvailability", fields: [buildingPermitAvailabilityId], references: [id])
   Inspection                        Inspection @relation(fields: [inspectionId], references: [id])
+}
+
+model SewerSystem {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model OwnershipType {
@@ -1559,4 +1575,13 @@ model CommunalContainer {
   SolidWasteSection     SolidWasteSection @relation(fields: [solidWasteSectionId], references: [id])
   scheduledCollection   YesNo             @relation("scheduledCollection", fields: [scheduledCollectionId], references: [id])
   containerCondition    YesNo             @relation("containerCondition", fields: [containerConditionId], references: [id])
+}
+
+model UnsafeToiletCondition {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

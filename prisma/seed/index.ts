@@ -53,6 +53,11 @@ import { animalType } from "./animalType";
 import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
 import { dataVersion } from "./dataVersion";
 import { unsafeWaterStorage } from "./unsafeWaterStorage";
+import { toiletDischarge } from "./toiletDischarge";
+import { sewerSystem } from "./sewerSystem";
+import { unsafeToiletCondition } from "./unsafeToiletCondition";
+
+
 
 async function main() {
   await prisma.dataVersion.createMany({
@@ -225,6 +230,19 @@ async function main() {
   await prisma.unsafeWaterStorage.createMany({
     data: unsafeWaterStorage,
   });
+
+  await prisma.toiletDischarge.createMany({
+    data: toiletDischarge,
+  });
+
+  await prisma.sewerSystem.createMany({
+    data: sewerSystem,
+  });
+
+  await prisma.unsafeToiletCondition.createMany({
+    data: unsafeToiletCondition,
+  });
+
 }
 
 main()

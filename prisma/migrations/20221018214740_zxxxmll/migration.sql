@@ -316,6 +316,17 @@ CREATE TABLE "DrinkingWaterSourceType" (
 );
 
 -- CreateTable
+CREATE TABLE "ToiletDischarge" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ToiletDischarge_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "WaterSupplyType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -602,6 +613,17 @@ CREATE TABLE "LicencePermitSection" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "LicencePermitSection_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SewerSystem" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "SewerSystem_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1094,6 +1116,17 @@ CREATE TABLE "CommunalContainer" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "CommunalContainer_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UnsafeToiletCondition" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "UnsafeToiletCondition_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
