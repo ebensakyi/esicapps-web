@@ -264,30 +264,29 @@ model District {
   User            User[]
   ElectoralArea   ElectoralArea[]
   regionId        Int
+  Community       Community[]
 }
 
 model ElectoralArea {
-  id         Int         @id @default(autoincrement())
-  name       String      @db.VarChar(255)
-  District   District    @relation(fields: [districtId], references: [id])
-  deleted    Int?        @default(0)
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  Community  Community[]
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  District   District @relation(fields: [districtId], references: [id])
+  deleted    Int?     @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   User       User[]
   districtId Int
 }
 
 model Community {
-  id              Int    @id @default(autoincrement())
-  name            String @db.VarChar(255)
-  electoralAreaId Int
+  id         Int    @id @default(autoincrement())
+  name       String @db.VarChar(255)
+  districtId Int
 
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  ElectoralArea   ElectoralArea     @relation(fields: [electoralAreaId], references: [id])
-  FacilitySection FacilitySection[]
+  District  District @relation(fields: [districtId], references: [id])
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // model Subdistrict {
@@ -377,6 +376,14 @@ model WaterSourceType {
 }
 
 model AnimalType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UnsafeWaterStorage {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
@@ -752,7 +759,6 @@ model FacilitySection {
   pantryAvailability  YesNo?   @relation("pantryAvailability", fields: [pantryAvailabilityId], references: [id])
 
   RespondentDesignation       RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
-  Community                   Community?            @relation(fields: [communityId], references: [id])
   District                    District              @relation(fields: [districtId], references: [id])
   // Subdistrict                 Subdistrict?          @relation(fields: [subdistrictId], references: [id])
   Zone                        Zone?                 @relation(fields: [zoneId], references: [id])

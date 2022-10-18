@@ -52,6 +52,7 @@ import { electoralArea } from "./electoralArea";
 import { animalType } from "./animalType";
 import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
 import { dataVersion } from "./dataVersion";
+import { unsafeWaterStorage } from "./unsafeWaterStorage";
 
 async function main() {
   await prisma.dataVersion.createMany({
@@ -219,6 +220,10 @@ async function main() {
 
   await prisma.unservicedWasteDisposal.createMany({
     data: unservicedWasteDisposal,
+  });
+
+  await prisma.unsafeWaterStorage.createMany({
+    data: unsafeWaterStorage,
   });
 }
 

@@ -186,7 +186,7 @@ CREATE TABLE "ElectoralArea" (
 CREATE TABLE "Community" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    "electoralAreaId" INTEGER NOT NULL,
+    "districtId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -291,6 +291,17 @@ CREATE TABLE "AnimalType" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "AnimalType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UnsafeWaterStorage" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "UnsafeWaterStorage_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1140,7 +1151,7 @@ ALTER TABLE "District" ADD CONSTRAINT "District_regionId_fkey" FOREIGN KEY ("reg
 ALTER TABLE "ElectoralArea" ADD CONSTRAINT "ElectoralArea_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Community" ADD CONSTRAINT "Community_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Community" ADD CONSTRAINT "Community_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Logs" ADD CONSTRAINT "Logs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1174,9 +1185,6 @@ ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_pantryAvailability
 
 -- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_respondentDesignationId_fkey" FOREIGN KEY ("respondentDesignationId") REFERENCES "RespondentDesignation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_communityId_fkey" FOREIGN KEY ("communityId") REFERENCES "Community"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "FacilitySection" ADD CONSTRAINT "FacilitySection_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
