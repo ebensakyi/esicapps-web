@@ -40,6 +40,18 @@ export const services = [
     name: "Games",
     inspectionFormId: 4,
   },
- 
+  {
+    name: "Fertility",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Laboratory",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Sales Of Medicine",
+    inspectionFormId: 3,
+  },
   
 ];
+

@@ -16,7 +16,7 @@ export const greyWaterDisposal = [
       },
       {
         name: "Open space disposal",
-      },{name: "Holding Tanks"}
+      },{name: "Holding Tanks"},{name: "Catch pit"}
     
     
   ];
