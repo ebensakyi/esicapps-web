@@ -58,14 +58,14 @@ export const types = [
   },
   {
     name: "Hotel",
+    inspectionFormId: 4, 
+  },
+  {
+    name: "Movie House",
     inspectionFormId: 4,
   },
   {
-    name: "Restaurant",
-    inspectionFormId: 4,
-  },
-  {
-    name: "Recreational facility",
+    name: "Event Centre",
     inspectionFormId: 4,
   },
   {

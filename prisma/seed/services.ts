@@ -24,20 +24,33 @@ export const services = [
     inspectionFormId: 3,
   },
 
-  {
+   {
     name: "Lodging",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Casino",
     inspectionFormId: 4,
   },
   {
     name: "Catering",
     inspectionFormId: 4,
   },
+
   {
-    name: "Drinking",
+    name: "Swimming",
     inspectionFormId: 4,
   },
   {
-    name: "Games",
+    name: "Gym",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Spa",
+    inspectionFormId: 4,
+  },
+  {
+    name: "Cinema",
     inspectionFormId: 4,
   },
   {
