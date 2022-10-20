@@ -57,6 +57,7 @@ import { toiletDischarge } from "./toiletDischarge";
 import { sewerSystem } from "./sewerSystem";
 import { unsafeToiletCondition } from "./unsafeToiletCondition";
 import { badDrainCondition } from "./badDrainCondition";
+import { easeYourselfWhere } from "./easeYourselfWhere";
 
 
 
@@ -246,6 +247,10 @@ async function main() {
 
   await prisma.badDrainCondition.createMany({
     data: badDrainCondition,
+  });
+
+  await prisma.easeYourselfWhere.createMany({
+    data: easeYourselfWhere,
   });
 
 }
