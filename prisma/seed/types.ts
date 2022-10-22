@@ -57,6 +57,10 @@ export const types = [
     inspectionFormId: 3,
   },
   {
+    name: "Health Laboratory",
+    inspectionFormId: 3,
+  },
+  {
     name: "Hotel",
     inspectionFormId: 4, 
   },

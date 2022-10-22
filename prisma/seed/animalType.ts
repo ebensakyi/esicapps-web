@@ -28,5 +28,8 @@ export const animalType = [
   },
   {
     name: "Grasscutter",
-  }
+  },
+  { 
+    name: "Other" 
+  },
 ];

@@ -1,6 +1,6 @@
 export const waterSupplyType = [
   {
-    name: "In-Household connection",
+    name: "In-house connection",
   },
   {
     name: "Public stand pipe",

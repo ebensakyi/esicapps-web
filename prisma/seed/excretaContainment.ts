@@ -11,8 +11,6 @@ export const excretaContainment = [
   {
     name: "Bio-digester",
   },
-  {
-    name: "Sewered",
-  },
+
 
 ];

@@ -11,9 +11,7 @@ export const excretaDisposalMethod = [
     {
       name: "Composting",
     },
-    {
-      name: "Sewer",
-    },
+   
    
   ];
   

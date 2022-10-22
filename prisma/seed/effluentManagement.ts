@@ -11,5 +11,11 @@ export const effluentManagement = [
   {
     name: "Stagnation",
   },
- 
+  {
+    name: "Water Body",
+  }, {
+    name: "Open Space",
+  },
+
+   
 ];
