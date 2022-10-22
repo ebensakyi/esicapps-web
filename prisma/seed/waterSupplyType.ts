@@ -6,7 +6,7 @@ export const waterSupplyType = [
     name: "Public stand pipe",
   },
   {
-    name: "Tanker or water vendors",
+    name: "Tanker service",
   },
   {
     name: "Yard connection",

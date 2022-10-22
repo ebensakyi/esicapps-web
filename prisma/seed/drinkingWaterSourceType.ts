@@ -6,7 +6,7 @@ export const drinkingWaterSourceType = [
     name: "Hand dug well with pump",
   },
   {
-    name: "Unprotected /open hand dug well",
+    name: "Unprotected hand dug well",
   },
   {
     name: "Rain Water",
