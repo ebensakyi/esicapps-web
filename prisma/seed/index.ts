@@ -59,6 +59,7 @@ import { unsafeToiletCondition } from "./unsafeToiletCondition";
 import { badDrainCondition } from "./badDrainCondition";
 import { easeYourselfWhere } from "./easeYourselfWhere";
 import {sanitaryInsanitary} from "./sanitaryInsanitary";
+import {safeUnsafe} from "./safeUnsafe";
 
 
 
@@ -255,6 +256,10 @@ async function main() {
   });
   await prisma.sanitaryInsanitary.createMany({
     data: sanitaryInsanitary,
+  });
+
+  await prisma.safeUnsafe.createMany({
+    data: safeUnsafe,
   });
 }
 
