@@ -1,4 +1,4 @@
-export const frequency = [
+export const wasteFrequency = [
     {
       name: "Daily",
     },
