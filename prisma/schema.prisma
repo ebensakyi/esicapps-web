@@ -445,21 +445,35 @@ model SolidWasteReceptacle {
 }
 
 model SanitaryInsanitary {
-   id        Int      @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }
 
 model SafeUnsafe {
-   id        Int      @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
 
+model WaterFlowFrequency {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WasteCollectionFrequency {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model YesNo {
@@ -1603,7 +1617,6 @@ model UnsafeToiletCondition {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 
 model BadDrainCondition {
   id   Int    @id @default(autoincrement())

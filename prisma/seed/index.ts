@@ -14,7 +14,9 @@ import { effluentManagement } from "./effluentManagement";
 import { excretaContainment } from "./excretaContainment";
 import { excretaDisposalMethod } from "./excretaDisposalMethod";
 import { facility } from "./facility";
-import { frequency } from "./frequency";
+import { waterFrequency } from "./waterFlowFrequency";
+import { wasteFrequency } from "./wasteCollectionFrequency";
+
 import { inspectionType } from "./inspectionType";
 import { respondentDesignation } from "./respondentDesignation";
 import { solidWasteReceptacle } from "./solidWasteReceptacle";
@@ -105,10 +107,12 @@ async function main() {
     data: facility,
   });
 
-  await prisma.frequency.createMany({
-    data: frequency,
+  await prisma.waterFlowFrequency.createMany({
+    data: waterFrequency,
   });
-
+  await prisma.wasteCollectionFrequency.createMany({
+    data: wasteFrequency,
+  });
   await prisma.solidWasteReceptacle.createMany({
     data: solidWasteReceptacle,
   });
