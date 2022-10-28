@@ -107,6 +107,11 @@ export const types = [
     inspectionFormId: 6,
 
   },
+  {
+    name: "Other Industry Services",
+    inspectionFormId: 6,
+
+  },
 
   {
     name: "Market",

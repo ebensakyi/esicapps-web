@@ -69,18 +69,13 @@ export const subtypes = [
 
 
 
-
-
-
-
-
   {
-    name: "Beverage Company",
+    name: "Beverage Producers",
     inspectionFormId: 6,
     typeId: 24,
   },
   {
-    name: "Water Company",
+    name: "Packaged Water Producers",
     inspectionFormId: 6,
     typeId: 24,
   },
@@ -100,56 +95,131 @@ export const subtypes = [
     typeId: 24,
   },
   {
-    name: "Corn Mill",
+    name: "Meat Shop",
     inspectionFormId: 6,
     typeId: 24,
   },
+
+
   {
     name: "Block factory",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Fitting shop",
+    name: "Construction Company",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Carpentry shop",
+    name: "Oil and Gas Company",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Filling  station",
+    name: "Metal Company",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Salon",
+    name: "Recycling Company",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Washing bay",
+    name: "Animal Farms",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Welders",
+    name: "Shoe Factory",
     inspectionFormId: 6,
     typeId: 25,
   },
   {
-    name: "Cosmetic shop",
-    inspectionFormId: 6,
-    typeId: 25,
-  },
-  {
-    name: "Taloring",
+    name: "Weave Company",
     inspectionFormId: 6,
     typeId: 25,
   },
 
+  
+
+
+
+
+
+
+
+
+
+ 
+
+
+ 
+
+
+  {
+    name: "Bulk Water Suppliers",
+    inspectionFormId: 6,
+    typeId: 26,
+  },
+  {
+    name: "Corn/Fufu Mill",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Fitting shop",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Carpentry shop",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Filling station",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Electric/Electronic Repairers",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Salon",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Washing Bay",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Fitting shop",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Fuel station",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Welding",
+    inspectionFormId: 6,
+    typeId: 26,
+  },  {
+    name: "Cosmetic shop",
+    inspectionFormId: 6,
+    typeId: 26,
+  },{
+    name: "Tailoring",
+    inspectionFormId: 6,
+    typeId: 26,
+  },{
+    name: "Game Centre",
+    inspectionFormId: 6,
+    typeId: 26,
+  },{
+    name: "Cinema Hall",
+    inspectionFormId: 6,
+    typeId: 26,
+  },
 
 
 
