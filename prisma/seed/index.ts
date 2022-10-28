@@ -61,9 +61,9 @@ import { sewerSystem } from "./sewerSystem";
 import { unsafeToiletCondition } from "./unsafeToiletCondition";
 import { badDrainCondition } from "./badDrainCondition";
 import { easeYourselfWhere } from "./easeYourselfWhere";
-import {sanitaryInsanitary} from "./sanitaryInsanitary";
-import {safeUnsafe} from "./safeUnsafe";
-
+import { sanitaryInsanitary } from "./sanitaryInsanitary";
+import { safeUnsafe } from "./safeUnsafe";
+import { disinfectionFrequency } from "./disinfectionFrequency";
 
 
 async function main() {
@@ -74,11 +74,11 @@ async function main() {
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
- 
+
   await prisma.inspectionType.createMany({
     data: inspectionType,
   });
- 
+
   await prisma.region.createMany({
     data: region,
   });
@@ -86,7 +86,6 @@ async function main() {
   await prisma.analCleansingMaterialMgt.createMany({
     data: analCleansingMaterialMgt,
   });
-
 
   await prisma.district.createMany({
     data: district,
@@ -120,7 +119,6 @@ async function main() {
   await prisma.storageCondition.createMany({
     data: storageCondition,
   });
-
 
   await prisma.toiletType.createMany({
     data: toiletType,
@@ -265,6 +263,14 @@ async function main() {
 
   await prisma.safeUnsafe.createMany({
     data: safeUnsafe,
+  });
+
+  await prisma.ownershipType.createMany({
+    data: ownershipType,
+  });
+
+  await prisma.disinfectionFrequency.createMany({
+    data: disinfectionFrequency,
   });
 }
 

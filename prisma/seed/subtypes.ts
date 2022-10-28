@@ -10,6 +10,32 @@ export const subtypes = [
     typeId: 1,
   },
   {
+    name: "Fast food",
+    inspectionFormId: 2,
+    typeId: 1,
+  },
+  {
+    name: "Restaurant",
+    inspectionFormId: 2,
+    typeId: 1,
+  },
+
+  {
+    name: "Pub",
+    inspectionFormId: 2,
+    typeId: 2,
+  },
+  {
+    name: "Lounge",
+    inspectionFormId: 2,
+    typeId: 2,
+  },
+
+
+ 
+
+
+  {
     name: "Chopbar",
     inspectionFormId: 2,
     typeId: 3,
@@ -19,6 +45,34 @@ export const subtypes = [
     inspectionFormId: 2,
     typeId: 3,
   },
+  {
+    name: "Fast food",
+    inspectionFormId: 2,
+    typeId: 3,
+  },
+  {
+    name: "Restaurant",
+    inspectionFormId: 2,
+    typeId: 3,
+  },
+
+  {
+    name: "Pub",
+    inspectionFormId: 2,
+    typeId: 3,
+  },
+  {
+    name: "Lounge",
+    inspectionFormId: 2,
+    typeId: 3,
+  },
+
+
+
+
+
+
+
 
   {
     name: "Beverage Company",
@@ -122,53 +176,18 @@ export const subtypes = [
     typeId: 21,
   },
   {
-    name: "Bank",
+    name: "Financial Institution",
  inspectionFormId: 5,
     typeId: 23,  },
   {
-    name: "Savings and Loans",
+    name: "Companies",
     inspectionFormId: 5,
     typeId: 23,
   },
-  {
-    name: "Micro Finance",
-    inspectionFormId: 5,
-    typeId: 23,
-  },
-  {
-    name: "Credit Union",
-    inspectionFormId: 5,
-    typeId: 23,
-  },
+ 
 
 
-
-  {
-    name: "Fast food",
-    inspectionFormId: 2,
-    typeId: 1,
-  },
-
-  {
-    name: "Grill",
-    inspectionFormId: 2,
-    typeId: 2,
-  },
-  {
-    name: "Spa",
-    inspectionFormId: 2,
-    typeId: 2,
-  },
-  {
-    name: "Pub",
-    inspectionFormId: 2,
-    typeId: 2,
-  },
-  {
-    name: "Lounge",
-    inspectionFormId: 2,
-    typeId: 2,
-  },
+ 
 
 
   {
