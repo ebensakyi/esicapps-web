@@ -926,6 +926,13 @@ model DerattingFrequency {
   updatedAt               DateTime                  @updatedAt
   MarketLorryParkPremises MarketLorryParkPremises[]
 }
+model CleaningFrequency {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  deleted                 Int?                      @default(0)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+}
 
 ////////////END SECTION ///////////
 
