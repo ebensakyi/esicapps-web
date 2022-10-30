@@ -750,6 +750,17 @@ CREATE TABLE "CleaningFrequency" (
 );
 
 -- CreateTable
+CREATE TABLE "DesiltingFrequency" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "DesiltingFrequency_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "PopulationSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" INTEGER NOT NULL,

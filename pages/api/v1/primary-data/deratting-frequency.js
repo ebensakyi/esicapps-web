@@ -5,7 +5,7 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const frequency = await prisma.derratingFrequency.create({ data });
+    const frequency = await prisma.derattingFrequency.create({ data });
     res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { frequency } });
@@ -19,7 +19,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const frequency = await prisma.derratingFrequency.findMany({ where: { deleted: 0 } });
+    const frequency = await prisma.derattingFrequency.findMany({ where: { deleted: 0 } });
    // return res.status(200).json({ statusCode: 1, data: frequency });
 
     return res.status(200).json(frequency);

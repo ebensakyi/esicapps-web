@@ -65,6 +65,7 @@ import { sanitaryInsanitary } from "./sanitaryInsanitary";
 import { safeUnsafe } from "./safeUnsafe";
 import { disinfectionFrequency } from "./disinfectionFrequency";
 import {cleaningFrequency} from "./cleaningFrequency";
+import {desiltingFrequency} from "./desiltingFrequency";
 
 
 async function main() {
@@ -276,6 +277,10 @@ async function main() {
 
   await prisma.cleaningFrequency.createMany({
     data: cleaningFrequency,
+  });
+
+  await prisma.desiltingFrequency.createMany({
+    data: desiltingFrequency,
   });
 }
 
