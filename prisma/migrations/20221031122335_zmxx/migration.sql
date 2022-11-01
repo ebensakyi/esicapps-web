@@ -761,6 +761,17 @@ CREATE TABLE "DesiltingFrequency" (
 );
 
 -- CreateTable
+CREATE TABLE "ContainerVolume" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ContainerVolume_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "PopulationSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" INTEGER NOT NULL,

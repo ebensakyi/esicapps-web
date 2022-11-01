@@ -136,7 +136,6 @@ export const respondentDesignation = [
     name: "Station master",
     inspectionFormId: 7,
   },
-  
   {
     name: "Driver",
     inspectionFormId: 7,
@@ -172,5 +171,20 @@ export const respondentDesignation = [
   {
     name: "Administrator",
     inspectionFormId: 8,
+  },
+
+  {
+    name: "Station Chairman",
+    inspectionFormId: 7,
+  },
+  {
+    name: "Market Queen",
+    inspectionFormId: 7,
+  }, {
+    name: "Market Supervisor",
+    inspectionFormId: 7,
+  }, {
+    name: "Market Secretary",
+    inspectionFormId: 7,
   },
 ];

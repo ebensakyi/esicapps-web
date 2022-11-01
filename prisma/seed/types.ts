@@ -142,7 +142,7 @@ export const types = [
     inspectionFormId: 8,
   },
   {
-    name: "Place of convenience",
+    name: "Public Toilet",
     inspectionFormId: 8,
   },
   {
@@ -153,5 +153,13 @@ export const types = [
   {
     name: "Abattoir",
     inspectionFormId: 8,
-  },
+  }, {
+    name: "Bath House",
+    inspectionFormId: 8,
+  }, {
+    name: "Urinal",
+    inspectionFormId: 8,
+  }
 ];
+
+

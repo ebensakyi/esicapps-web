@@ -64,9 +64,9 @@ import { easeYourselfWhere } from "./easeYourselfWhere";
 import { sanitaryInsanitary } from "./sanitaryInsanitary";
 import { safeUnsafe } from "./safeUnsafe";
 import { disinfectionFrequency } from "./disinfectionFrequency";
-import {cleaningFrequency} from "./cleaningFrequency";
-import {desiltingFrequency} from "./desiltingFrequency";
-
+import { cleaningFrequency } from "./cleaningFrequency";
+import { desiltingFrequency } from "./desiltingFrequency";
+import {containerVolume} from "./containerVolume";
 
 async function main() {
   await prisma.dataVersion.createMany({
@@ -267,9 +267,6 @@ async function main() {
     data: safeUnsafe,
   });
 
-  await prisma.ownershipType.createMany({
-    data: ownershipType,
-  });
 
   await prisma.disinfectionFrequency.createMany({
     data: disinfectionFrequency,
@@ -281,6 +278,10 @@ async function main() {
 
   await prisma.desiltingFrequency.createMany({
     data: desiltingFrequency,
+  });
+
+  await prisma.containerVolume.createMany({
+    data: containerVolume,
   });
 }
 
