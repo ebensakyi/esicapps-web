@@ -24,7 +24,7 @@ const get = async (req, res) => {
   try {
     const community = await prisma.community.findMany({
       where: { deleted: 0 },
-      include: {District: true}
+     // include: {District: true}
     });
     return res.status(200).json(community);
   } catch (error) {

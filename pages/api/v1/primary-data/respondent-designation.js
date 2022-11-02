@@ -10,11 +10,7 @@ const post = async (req, res) => {
     });
     res
       .status(200)
-      .json({
-        statusCode: 1,
-        message: "Data saved",
-        data: { respondentDesignation },
-      });
+      .json( respondentDesignation );
   } catch (error) {
     if (error.code === "P2002")
       return res
@@ -30,7 +26,7 @@ const get = async (req, res) => {
   try {
     const respondentDesignation = await prisma.respondentDesignation.findMany({
       where: { deleted: 0 },
-      include: { InspectionForm: true },
+      //include: { InspectionForm: true },
     });
 
     // return res.status(200).json({ statusCode: 1, data: respondentDesignation });
