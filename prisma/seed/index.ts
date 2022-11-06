@@ -67,6 +67,7 @@ import { disinfectionFrequency } from "./disinfectionFrequency";
 import { cleaningFrequency } from "./cleaningFrequency";
 import { desiltingFrequency } from "./desiltingFrequency";
 import {containerVolume} from "./containerVolume";
+import {toiletHouseholdNumber} from "./toiletHouseholdNumber";
 
 async function main() {
   await prisma.dataVersion.createMany({
@@ -282,6 +283,10 @@ async function main() {
 
   await prisma.containerVolume.createMany({
     data: containerVolume,
+  });
+
+  await prisma.toiletHouseholdNumber.createMany({
+    data: toiletHouseholdNumber,
   });
 }
 
