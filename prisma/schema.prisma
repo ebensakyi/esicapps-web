@@ -1290,43 +1290,43 @@ model WaterSection {
 }
 
 model LiquidWasteSection {
-  id                              Int      @id @default(autoincrement())
-  inspectionId                    Int
-  numberToiletSeats               Int?
-  numberUrinalSeats               Int?
-  toiletAdequacyId                Int?
-  urinalAdequacyId                Int?
-  bathroomAdequacyId              Int?
-  separateStaffUrinalId           Int?
-  availToiletFaciltyMgtId         Int?
-  toiletGenderSensivityId         Int?
-  urinalGenderSensivityId         Int?
+  id                         Int      @id @default(autoincrement())
+  inspectionId               Int
+  numberToiletSeats          Int?
+  numberUrinalSeats          Int?
+  toiletAdequacyId           Int?
+  urinalAdequacyId           Int?
+  bathroomAdequacyId         Int?
+  separateStaffUrinalId      Int?
+  availToiletFaciltyMgtId    Int?
+  toiletGenderSensivityId    Int?
+  urinalGenderSensivityId    Int?
   // premisesEffluentManagementId    Int?
-  toiletPitPositionId             Int?
+  toiletPitPositionId        Int?
   // premisesExcretaDisposalMethodId Int?
   // premisesExcretaContainmentId    Int?
-  toiletDisabilityFriendlyId      Int?
-  urinalDisabilityFriendlyId      Int?
-  stagnationEvidenceId            Int?
-  drainsConditionId               Int?
-  analCleansingMaterialMgtId      Int?
-  effluentManagementReportId      Int?
-  publicBathRoomConditionId       Int?
-  areaSeweredId                   Int?
-  facilityConnectedSewerId        Int?
-  numberUrinalCubicle           Int?
-  urinalCubicleConditionId        Int?
-  toiletConditionId               Int?
-  toiletDischargeId               Int?
-  containmentEmptiedId            Int?
-  sewerSystemId                   Int?
-  wasteWaterContainmentId         Int?
-  easeYourselfWhereId             Int?
-  desiltingFrequencyId            Int?
-  rating                          Int?
-  deleted                         Int?     @default(0)
-  createdAt                       DateTime @default(now())
-  updatedAt                       DateTime @updatedAt
+  toiletDisabilityFriendlyId Int?
+  urinalDisabilityFriendlyId Int?
+  stagnationEvidenceId       Int?
+  drainsConditionId          Int?
+  analCleansingMaterialMgtId Int?
+  effluentManagementReportId Int?
+  publicBathRoomConditionId  Int?
+  areaSeweredId              Int?
+  facilityConnectedSewerId   Int?
+  numberUrinalCubicle        Int?
+  urinalCubicleConditionId   Int?
+  toiletConditionId          Int?
+  toiletDischargeId          Int?
+  containmentEmptiedId       Int?
+  sewerSystemId              Int?
+  wasteWaterContainmentId    Int?
+  easeYourselfWhereId        Int?
+  desiltingFrequencyId       Int?
+  rating                     Int?
+  deleted                    Int?     @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
 
   Inspection               Inspection @relation(fields: [inspectionId], references: [id])
   facilityConnectedSewer   YesNo?     @relation("facilityConnectedSewer", fields: [facilityConnectedSewerId], references: [id])
@@ -1334,40 +1334,33 @@ model LiquidWasteSection {
   drainsCondition          YesNo?     @relation("drainsCondition", fields: [drainsConditionId], references: [id])
   availToiletFaciltyMgt    YesNo?     @relation("availToiletFaciltyMgt", fields: [availToiletFaciltyMgtId], references: [id])
 
+  bathroomAdequacy         YesNo? @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
+  separateStaffUrinal      YesNo? @relation("separateStaffUrinal", fields: [separateStaffUrinalId], references: [id])
+  toiletGenderSensivity    YesNo? @relation("toiletGenderSensivity", fields: [toiletGenderSensivityId], references: [id])
+  urinalGenderSensivity    YesNo? @relation("urinalGenderSensivity", fields: [urinalGenderSensivityId], references: [id])
+  toiletPitPosition        YesNo? @relation("toiletPitPosition", fields: [toiletPitPositionId], references: [id])
+  toiletDisabilityFriendly YesNo? @relation("toiletDisabilityFriendly", fields: [toiletDisabilityFriendlyId], references: [id])
+  urinalDisabilityFriendly YesNo? @relation("urinalDisabilityFriendly", fields: [urinalDisabilityFriendlyId], references: [id])
+  stagnationEvidence       YesNo? @relation("stagnationEvidence", fields: [stagnationEvidenceId], references: [id])
+  analCleansingMaterialMgt YesNo? @relation("analCleansingMaterialMgt", fields: [analCleansingMaterialMgtId], references: [id])
+  publicBathRoomCondition  YesNo? @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
+  areaSewered              YesNo? @relation("areaSewered", fields: [areaSeweredId], references: [id])
+  urinalCubicleCondition   YesNo? @relation("urinalCubicleConditionId", fields: [urinalCubicleConditionId], references: [id])
+  toiletCondition          YesNo? @relation("toiletCondition", fields: [toiletConditionId], references: [id])
+  toiletDischarge          YesNo? @relation("toiletDischarge", fields: [toiletDischargeId], references: [id])
+  containmentEmptied       YesNo? @relation("containmentEmptied", fields: [containmentEmptiedId], references: [id])
+  sewerSystem              YesNo? @relation("sewerSystem", fields: [sewerSystemId], references: [id])
+  wasteWaterContainment    YesNo? @relation("wasteWaterContainment", fields: [wasteWaterContainmentId], references: [id])
+  
+  EaseYourselfWhere EaseYourselfWhere ?    @relation(fields: [easeYourselfWhereId], references: [id])
 
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  separateStaffUrinal    YesNo?     @relation("separateStaffUrinal", fields: [separateStaffUrinalId], references: [id])
-  toiletGenderSensivity    YesNo?     @relation("toiletGenderSensivity", fields: [toiletGenderSensivityId], references: [id])
-  urinalGenderSensivity    YesNo?     @relation("urinalGenderSensivity", fields: [urinalGenderSensivityId], references: [id])
-  toiletPitPosition    YesNo?     @relation("toiletPitPosition", fields: [toiletPitPositionId], references: [id])
-  toiletDisabilityFriendly    YesNo?     @relation("toiletDisabilityFriendly", fields: [toiletDisabilityFriendlyId], references: [id])
-  urinalDisabilityFriendly    YesNo?     @relation("urinalDisabilityFriendly", fields: [urinalDisabilityFriendlyId], references: [id])
-  stagnationEvidence    YesNo?     @relation("stagnationEvidence", fields: [stagnationEvidenceId], references: [id])
-  analCleansingMaterialMgt    YesNo?     @relation("analCleansingMaterialMgt", fields: [analCleansingMaterialMgtId], references: [id])
-  publicBathRoomCondition    YesNo?     @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
-  areaSewered    YesNo?     @relation("areaSewered", fields: [areaSeweredId], references: [id])
-  urinalCubicleCondition    YesNo?     @relation("urinalCubicleConditionId", fields: [urinalCubicleConditionId], references: [id])
-  toiletCondition    YesNo?     @relation("toiletCondition", fields: [toiletConditionId], references: [id])
-  toiletDischarge    YesNo?     @relation("toiletDischarge", fields: [toiletDischargeId], references: [id])
-  containmentEmptied    YesNo?     @relation("containmentEmptied", fields: [containmentEmptiedId], references: [id])
-  sewerSystem    YesNo?     @relation("sewerSystem", fields: [sewerSystemId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-  bathroomAdequacy    YesNo?     @relation("bathroomAdequacy", fields: [bathroomAdequacyId], references: [id])
-
+  DesiltingFrequency DesiltingFrequency ?    @relation(fields: [desiltingFrequencyId], references: [id])
   // EffluentManagement    EffluentManagement?    @relation(fields: [effluentManagementId], references: [id])
   // ExcretaContainment    ExcretaContainment?    @relation(fields: [excretaContainmentId], references: [id])
   // ExcretaDisposalMethod ExcretaDisposalMethod? @relation(fields: [excretaDisposalMethodId], references: [id])
 
   // PremisesGreyWaterDisposal PremisesGreyWaterDisposal[]
   evidenceStagnation YesNo? @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
-  pondingEvidence    YesNo? @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
 
   publicBathRoomCondition YesNo? @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
 }
