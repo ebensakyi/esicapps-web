@@ -1323,6 +1323,7 @@ model LiquidWasteSection {
   wasteWaterContainmentId    Int?
   easeYourselfWhereId        Int?
   desiltingFrequencyId       Int?
+  evidenceStagnationId       Int?
   rating                     Int?
   deleted                    Int?     @default(0)
   createdAt                  DateTime @default(now())
@@ -1351,18 +1352,12 @@ model LiquidWasteSection {
   containmentEmptied       YesNo? @relation("containmentEmptied", fields: [containmentEmptiedId], references: [id])
   sewerSystem              YesNo? @relation("sewerSystem", fields: [sewerSystemId], references: [id])
   wasteWaterContainment    YesNo? @relation("wasteWaterContainment", fields: [wasteWaterContainmentId], references: [id])
-  
-  EaseYourselfWhere EaseYourselfWhere ?    @relation(fields: [easeYourselfWhereId], references: [id])
 
-  DesiltingFrequency DesiltingFrequency ?    @relation(fields: [desiltingFrequencyId], references: [id])
-  // EffluentManagement    EffluentManagement?    @relation(fields: [effluentManagementId], references: [id])
-  // ExcretaContainment    ExcretaContainment?    @relation(fields: [excretaContainmentId], references: [id])
-  // ExcretaDisposalMethod ExcretaDisposalMethod? @relation(fields: [excretaDisposalMethodId], references: [id])
+  EaseYourselfWhere EaseYourselfWhere? @relation(fields: [easeYourselfWhereId], references: [id])
 
-  // PremisesGreyWaterDisposal PremisesGreyWaterDisposal[]
+  DesiltingFrequency DesiltingFrequency? @relation(fields: [desiltingFrequencyId], references: [id])
+
   evidenceStagnation YesNo? @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
-
-  publicBathRoomCondition YesNo? @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
 }
 
 model SolidWasteSection {
