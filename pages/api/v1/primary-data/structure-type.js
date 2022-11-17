@@ -5,10 +5,10 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const temporaryPermanent = await prisma.temporaryPermanent.create({ data });
+    const structureTypes = await prisma.structureType.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { temporaryPermanent } });
+      .json({ statusCode: 1, message: "Data saved", data: { structureTypes } });
   } catch (error) {
     if (error.code === "P2002")
       return res
@@ -19,8 +19,8 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const temporaryPermanent = await prisma.temporaryPermanent.findMany({ where: { deleted: 0 } });
-    return res.status(200).json(temporaryPermanent);
+    const structureTypes = await prisma.structureType.findMany({ where: { deleted: 0 } });
+    return res.status(200).json(structureTypes);
 
   } catch (error) {
     console.log("Error: " + error);

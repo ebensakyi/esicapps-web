@@ -10,51 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Inspection {
-  id               Int      @id @default(autoincrement())
-  inspectionCode   String   @db.VarChar(255)
-  inspectionFormId Int
-  inspectionTypeId Int
-  isPublished      Int      @default(0)
-  publishedById    Int?
-  submittedById    Int
-  publishedBy      User?    @relation("publishedBy", fields: [publishedById], references: [id])
-  deleted          Int?     @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  FacilitySection      FacilitySection[]
-  PopulationSection    PopulationSection[]
-  WaterSection         WaterSection[]
-  LiquidWasteSection   LiquidWasteSection[]
-  SolidWasteSection    SolidWasteSection[]
-  LicencePermitSection LicencePermitSection[]
-
-  ConclusionSection ConclusionSection[]
-  Picture           Picture[]
-  InspectionForm    InspectionForm      @relation(fields: [inspectionFormId], references: [id])
-  InspectionType    InspectionType      @relation(fields: [inspectionTypeId], references: [id])
-  submittedBy       User                @relation("submittedBy", fields: [submittedById], references: [id])
-
-  HygieneSection HygieneSection[]
-}
-
-model InspectionForm {
-  id         Int          @id @default(autoincrement())
-  name       String       @db.VarChar(255)
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  Inspection Inspection[]
-  Facility   Facility[]
-
-  RespondentDesignation RespondentDesignation[]
-  Type                  Type[]
-  Subtype               Subtype[]
-  Service               Service[]
-  Nuisance              Nuisance[]
-}
-
 model DataVersion {
   id        Int      @id @default(autoincrement())
   version   Int
@@ -162,401 +117,12 @@ model PageAction {
   PageActionAccess PageActionAccess[]
 }
 
-model Action {
-  id                  Int                   @id @default(autoincrement())
-  name                String                @db.VarChar(255)
-  deleted             Int?                  @default(0)
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  PremisesActionTaken PremisesActionTaken[]
-}
-
-model AnimalType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model BadDrainCondition {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model CemeteryWorkers {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model CleaningFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Community {
-  id         Int    @id @default(autoincrement())
-  name       String @db.VarChar(255)
-  districtId Int
-
-  District  District @relation(fields: [districtId], references: [id])
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ContainerVolume {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model DerattingFrequency {
-  id                      Int                       @id @default(autoincrement())
-  name                    String                    @db.VarChar(255)
-  deleted                 Int?                      @default(0)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  MarketLorryParkPremises MarketLorryParkPremises[]
-}
-
-model DesiltingFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model DisinfectionFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model DrainType {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  LiquidWasteSection LiquidWasteSection[]
-}
-
-model DrinkingWaterSourceType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model EaseYourselfWhere {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model EffluentManagement {
-  id                         Int                          @id @default(autoincrement())
-  name                       String                       @db.VarChar(255)
-  deleted                    Int?                         @default(0)
-  createdAt                  DateTime                     @default(now())
-  updatedAt                  DateTime                     @updatedAt
-  LiquidWasteSection         LiquidWasteSection[]
-  PremisesEffluentManagement PremisesEffluentManagement[]
-}
-
-model ExcretaContainment {
-  id                         Int                          @id @default(autoincrement())
-  name                       String                       @db.VarChar(255)
-  deleted                    Int?                         @default(0)
-  createdAt                  DateTime                     @default(now())
-  updatedAt                  DateTime                     @updatedAt
-  LiquidWasteSection         LiquidWasteSection[]
-  PremisesExcretaContainment PremisesExcretaContainment[]
-}
-
-model ExcretaDisposalMethod {
-  id                            Int                             @id @default(autoincrement())
-  name                          String                          @db.VarChar(255)
-  deleted                       Int?                            @default(0)
-  createdAt                     DateTime                        @default(now())
-  updatedAt                     DateTime                        @updatedAt
-  LiquidWasteSection            LiquidWasteSection[]
-  PremisesExcretaDisposalMethod PremisesExcretaDisposalMethod[]
-}
-
-model GreyWaterDisposal {
-  id                        Int                         @id @default(autoincrement())
-  name                      String                      @db.VarChar(255)
-  deleted                   Int?                        @default(0)
-  createdAt                 DateTime                    @default(now())
-  updatedAt                 DateTime                    @updatedAt
-  PremisesGreyWaterDisposal PremisesGreyWaterDisposal[]
-}
-
-model HazardousWasteDisposalMethod {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Nuisance {
-  id                       Int                        @id @default(autoincrement())
-  name                     String                     @db.VarChar(255)
-  deleted                  Int?                       @default(0)
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
-  PremisesNuisanceDetected PremisesNuisanceDetected[]
-  inspectionFormId         Int
-}
-
-model OwnershipType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model PestSign {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-
-  deleted           Int?                @default(0)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  PremisesPestSigns PremisesPestSigns[]
-}
-
-model Region {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(255)
-  abbrv String @db.VarChar(10)
-
-  deleted   Int?       @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  User      User[]
-  District  District[]
-}
-
-model District {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  abbrv           String            @db.VarChar(255)
-  Region          Region            @relation(fields: [regionId], references: [id])
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  FacilitySection FacilitySection[]
-  User            User[]
-  ElectoralArea   ElectoralArea[]
-  regionId        Int
-  Community       Community[]
-}
-
-model ElectoralArea {
-  id         Int      @id @default(autoincrement())
-  name       String   @db.VarChar(255)
-  District   District @relation(fields: [districtId], references: [id])
-  deleted    Int?     @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  User       User[]
-  districtId Int
-}
-
-model RespondentDesignation {
-  id               Int    @id @default(autoincrement())
-  name             String @db.VarChar(255)
-  inspectionFormId Int
-
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  InspectionForm  InspectionForm    @relation(fields: [inspectionFormId], references: [id])
-  FacilitySection FacilitySection[]
-  // PremisesSubtype   PremisesSubtype?  @relation(fields: [premisesSubtypeId], references: [id])
-  // premisesSubtypeId Int?
-}
-
-model SafeUnsafe {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model SanitaryInsanitary {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Service {
-  id               Int            @id @default(autoincrement())
-  name             String         @db.VarChar(255)
-  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  Type             Type?          @relation(fields: [typeId], references: [id])
-  deleted          Int?           @default(0)
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  inspectionFormId Int
-  typeId           Int?
-}
-
-model SewerSystem {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model StructureType {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  FacilitySection FacilitySection[]
-}
-
-model Type {
-  id               Int            @id @default(autoincrement())
-  name             String         @db.VarChar(255)
-  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  deleted          Int?           @default(0)
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  inspectionFormId Int
-  Subtype          Subtype[]
-  Service          Service[]
-}
-
-model Subtype {
-  id               Int            @id @default(autoincrement())
-  name             String         @db.VarChar(255)
-  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  Type             Type           @relation(fields: [typeId], references: [id])
-  deleted          Int?           @default(0)
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  inspectionFormId Int
-  typeId           Int
-  // RespondentDesignation RespondentDesignation[]
-}
-
-model ToiletPitPosition {
-  id                       Int                        @id @default(autoincrement())
-  name                     String                     @db.VarChar(255)
-  deleted                  Int?                       @default(0)
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  PremisesWashroomFacility PremisesWashroomFacility[]
-}
-
-model ToiletHouseholdNumber {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ToiletDischarge {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ToiletType {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  PremisesToiletType PremisesToiletType[]
-}
-
-model UnsafeToiletCondition {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(255)
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model UnsafeWaterStorage {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model UnservicedWasteDisposal {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model WasteCollectionFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model WasteCollectionType {
-  id                      Int                       @id @default(autoincrement())
-  name                    String                    @db.VarChar(255)
-  deleted                 Int?                      @default(0)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  PremisesWasteCollection PremisesWasteCollection[]
-}
-
-model SolidWasteReceptacle {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  PremisesWasteReceptacle PremisesWasteReceptacle[]
 }
 
 model WasteWaterContainment {
@@ -566,52 +132,6 @@ model WasteWaterContainment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
-model WaterFlowFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model WaterSourceType {
-  id                   Int                    @id @default(autoincrement())
-  name                 String                 @db.VarChar(255)
-  deleted              Int?                   @default(0)
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  PremisesWaterSources PremisesWaterSources[]
-}
-
-model WaterStorageType {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.VarChar(255)
-  deleted      Int?           @default(0)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  WaterSection WaterSection[]
-}
-
-model WaterSupplyType {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.VarChar(255)
-  deleted      Int?           @default(0)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  WaterSection WaterSection[]
-}
-
-model WaterTreatmentType {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.VarChar(255)
-  deleted      Int?           @default(0)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  WaterSection WaterSection[]
-}
-
-/////////////
 
 ///////////////////////////XXX//////////////////////////////
 
@@ -683,6 +203,35 @@ model WaterTreatmentType {
 //   updatedAt           DateTime             @updatedAt
 //   categoryId          Int?
 // }
+model RespondentDesignation {
+  id               Int    @id @default(autoincrement())
+  name             String @db.VarChar(255)
+  inspectionFormId Int
+
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  InspectionForm  InspectionForm    @relation(fields: [inspectionFormId], references: [id])
+  FacilitySection FacilitySection[]
+  // PremisesSubtype   PremisesSubtype?  @relation(fields: [premisesSubtypeId], references: [id])
+  // premisesSubtypeId Int?
+}
+
+model InspectionForm {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
+  Facility   Facility[]
+
+  RespondentDesignation RespondentDesignation[]
+  Type                  Type[]
+  Subtype               Subtype[]
+  Service               Service[]
+  Nuisance              Nuisance[]
+}
 
 // model Role {
 //   id        Int      @id @default(autoincrement())
@@ -691,6 +240,55 @@ model WaterTreatmentType {
 //   createdAt DateTime @default(now())
 //   updatedAt DateTime @updatedAt
 // }
+
+model Region {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255)
+  abbrv String @db.VarChar(10)
+
+  deleted   Int?       @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  User      User[]
+  District  District[]
+}
+
+model District {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  abbrv           String            @db.VarChar(255)
+  Region          Region            @relation(fields: [regionId], references: [id])
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  FacilitySection FacilitySection[]
+  User            User[]
+  ElectoralArea   ElectoralArea[]
+  regionId        Int
+  Community       Community[]
+}
+
+model ElectoralArea {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  District   District @relation(fields: [districtId], references: [id])
+  deleted    Int?     @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User[]
+  districtId Int
+}
+
+model Community {
+  id         Int    @id @default(autoincrement())
+  name       String @db.VarChar(255)
+  districtId Int
+
+  District  District @relation(fields: [districtId], references: [id])
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 // model Subdistrict {
 //   id              Int               @id @default(autoincrement())
@@ -707,27 +305,186 @@ model Zone {
   deleted         Int?              @default(0)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  FacilitySection FacilitySection[]
 }
 
-// model Frequency {
-//   id        Int      @id @default(autoincrement())
-//   name      String
-//   deleted   Int?     @default(0)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+model Frequency {
+  id        Int      @id @default(autoincrement())
+  name      String
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   SolidWasteSection SolidWasteSection[]
-//   WaterSection      WaterSection[]
-// }
+  SolidWasteSection SolidWasteSection[]
+  WaterSection      WaterSection[]
+}
 
-// model AnalCleansingMaterialMgt {
-//   id                 Int                  @id @default(autoincrement())
-//   name               String               @db.VarChar(255)
-//   deleted            Int?                 @default(0)
-//   createdAt          DateTime             @default(now())
-//   updatedAt          DateTime             @updatedAt
-//   LiquidWasteSection LiquidWasteSection[]
-// }
+model DisinfectionFrequency {
+  id        Int      @id @default(autoincrement())
+  name      String
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model ToiletType {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  PremisesToiletType PremisesToiletType[]
+}
+
+model AnalCleansingMaterialMgt {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  LiquidWasteSection LiquidWasteSection[]
+}
+
+model EffluentManagement {
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  deleted                    Int?                         @default(0)
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  LiquidWasteSection         LiquidWasteSection[]
+  PremisesEffluentManagement PremisesEffluentManagement[]
+}
+
+model ExcretaContainment {
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  deleted                    Int?                         @default(0)
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  LiquidWasteSection         LiquidWasteSection[]
+  PremisesExcretaContainment PremisesExcretaContainment[]
+}
+
+model ExcretaDisposalMethod {
+  id                            Int                             @id @default(autoincrement())
+  name                          String                          @db.VarChar(255)
+  deleted                       Int?                            @default(0)
+  createdAt                     DateTime                        @default(now())
+  updatedAt                     DateTime                        @updatedAt
+  LiquidWasteSection            LiquidWasteSection[]
+  PremisesExcretaDisposalMethod PremisesExcretaDisposalMethod[]
+}
+
+model WaterSourceType {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+  deleted              Int?                   @default(0)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  PremisesWaterSources PremisesWaterSources[]
+}
+
+model AnimalType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UnsafeWaterStorage {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DrinkingWaterSourceType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ToiletDischarge {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WaterSupplyType {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  WaterSection WaterSection[]
+}
+
+model WaterStorageType {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  WaterSection WaterSection[]
+}
+
+model WaterTreatmentType {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  WaterSection WaterSection[]
+}
+
+model SolidWasteReceptacle {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  PremisesWasteReceptacle PremisesWasteReceptacle[]
+}
+
+model SanitaryInsanitary {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SafeUnsafe {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WaterFlowFrequency {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WasteCollectionFrequency {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 model YesNo {
   id        Int      @id @default(autoincrement())
@@ -741,7 +498,8 @@ model YesNo {
   urinalGenderSensivity                   PremisesWashroomFacility[] @relation("urinalGenderSensivity")
   toiletDisabilityFriendly                PremisesWashroomFacility[] @relation("toiletDisabilityFriendly")
   urinalDisabilityFriendly                PremisesWashroomFacility[] @relation("urinalDisabilityFriendly")
- 
+  approvedHandwashingFacilityAvailability FacilitySection[]          @relation("approvedHandwashingFacilityAvailability")
+  facilityCleanliness                     FacilitySection[]          @relation("facilityCleanliness")
   toiletAdequacy                          PremisesWashroomFacility[] @relation("toiletAdequacy")
   urinalAdequacy                          PremisesWashroomFacility[] @relation("urinalAdequacy")
 
@@ -835,14 +593,86 @@ model YesNo {
 }
 
 //new
+model HazardousWasteDisposalMethod {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-// model StorageCondition {
-//   id        Int      @id @default(autoincrement())
-//   name      String   @db.VarChar(255)
-//   deleted   Int?     @default(0)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+model StorageCondition {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WasteCollectionType {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  deleted                 Int?                      @default(0)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  PremisesWasteCollection PremisesWasteCollection[]
+}
+
+model PestSign {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  PremisesPestSigns PremisesPestSigns[]
+}
+
+model DrainType {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  LiquidWasteSection LiquidWasteSection[]
+}
+
+model Nuisance {
+  id                       Int                        @id @default(autoincrement())
+  name                     String                     @db.VarChar(255)
+  deleted                  Int?                       @default(0)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
+  PremisesNuisanceDetected PremisesNuisanceDetected[]
+  inspectionFormId         Int
+}
+
+model Action {
+  id                  Int                   @id @default(autoincrement())
+  name                String                @db.VarChar(255)
+  deleted             Int?                  @default(0)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  PremisesActionTaken PremisesActionTaken[]
+}
+
+model GreyWaterDisposal {
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  deleted                   Int?                        @default(0)
+  createdAt                 DateTime                    @default(now())
+  updatedAt                 DateTime                    @updatedAt
+  PremisesGreyWaterDisposal PremisesGreyWaterDisposal[]
+}
+
+model UnservicedWasteDisposal {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 //Baseline inspection, reinspection
 
@@ -853,6 +683,15 @@ model InspectionType {
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
+}
+
+model ToiletPitPosition {
+  id                       Int                        @id @default(autoincrement())
+  name                     String                     @db.VarChar(255)
+  deleted                  Int?                       @default(0)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  PremisesWashroomFacility PremisesWashroomFacility[]
 }
 
 /////////////////////START DEFAULT SEEDED DATA ///////////////////////////
@@ -867,15 +706,15 @@ model Logs {
   User      User     @relation(fields: [userId], references: [id])
 }
 
-// model Facility {
-//   id               Int            @id @default(autoincrement())
-//   name             String         @db.VarChar(255)
-//   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-//   deleted          Int?           @default(0)
-//   createdAt        DateTime       @default(now())
-//   updatedAt        DateTime       @updatedAt
-//   inspectionFormId Int
-// }
+model Facility {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+}
 
 // model Service {
 //   id               Int            @id @default(autoincrement())
@@ -888,356 +727,118 @@ model Logs {
 // }
 
 ///////////FACILITY SECTION/////////////////
+model Inspection {
+  id               Int      @id @default(autoincrement())
+  inspectionCode   String   @db.VarChar(255)
+  inspectionFormId Int
+  inspectionTypeId Int
+  isPublished      Int      @default(0)
+  publishedById    Int?
+  submittedById    Int
+  publishedBy      User?    @relation("publishedBy", fields: [publishedById], references: [id])
+  deleted          Int?     @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
-model BasicInfoSection {
-  id                      Int     @id @default(autoincrement())
-  inspectionId            String  @db.VarChar(255)
-  districtId              Int
-  zoneId                  Int?
-  communityId             Int?
-  community               String  @db.VarChar(255)
-  ghanaPostGps            String? @db.VarChar(255)
-  latitude                String  @db.VarChar(255)
-  longitude               String  @db.VarChar(255)
-  respondentName          String  @db.VarChar(255)
-  phoneNumber             String  @db.VarChar(255)
-  // premiseTypeId                             Int
-  respondentDesignationId Int
+  FacilitySection      FacilitySection[]
+  PopulationSection    PopulationSection[]
+  WaterSection         WaterSection[]
+  LiquidWasteSection   LiquidWasteSection[]
+  SolidWasteSection    SolidWasteSection[]
+  LicencePermitSection LicencePermitSection[]
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  ConclusionSection ConclusionSection[]
+  Picture           Picture[]
+  InspectionForm    InspectionForm      @relation(fields: [inspectionFormId], references: [id])
+  InspectionType    InspectionType      @relation(fields: [inspectionTypeId], references: [id])
+  submittedBy       User                @relation("submittedBy", fields: [submittedById], references: [id])
+
+  HygieneSection HygieneSection[]
 }
 
-model ResidentialPremisesInfoSection {
-  id                   Int    @id @default(autoincrement())
-  inspectionId         String @db.VarChar(255)
-  drainsAvailabilityId Int
-  toiletAvailabilityId Int?
-  urinalAvailabilityId Int?
-
-  bathRoomAvailabilityId                    Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-  animalAvailabilityId                      Int?
-  householdNumber                           String @db.VarChar(255)
-  maleOccupantNumber                        Int?
-  femaleOccupantNumber                      Int?
-  otherAnimal                               Int?
-  animalNumber                              Int?
-  animalSpaceConditionId                    Int?
-  vaccinationProofId                        Int?
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  firstAidAvailability                    YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
-  drainsAvailability                      YesNo?              @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo?              @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo?              @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo?              @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  animalSpaceCondition                    SanitaryInsanitary? @relation("animalSpaceConditionId", fields: [animalSpaceConditionId], references: [id])
-  animalAvailability                      YesNo?              @relation("animalAvailability", fields: [animalAvailabilityId], references: [id])
-}
-
-model EateryPremisesInfoSection {
-  id                      Int    @id @default(autoincrement())
-  inspectionId            String @db.VarChar(255)
-  facilityName            String @db.VarChar(255)
-  physicalStructureTypeId Int?
-  drainsAvailabilityId    Int?
-  toiletAvailabilityId    Int?
-  urinalAvailabilityId    Int?
-  eateryPremisesTypeId    Int?
-  eateryPremisesSubTypeId Int?
-  firstAidAvailabilityId  Int?
-
-  designatedSmokingAreaId                   Int?
-  kitchenAvailabilityId                     Int?
+model FacilitySection {
+  id                                        Int     @id @default(autoincrement())
+  inspectionId                              Int
+  name                                      String  @db.VarChar(255)
+  districtId                                Int
+  subdistrictId                             Int?
+  zoneId                                    Int?
+  communityId                               Int?
+  community                                 String  @db.VarChar(255)
+  ghanaPostGps                              String? @db.VarChar(255)
+  latitude                                  String  @db.VarChar(255)
+  longitude                                 String  @db.VarChar(255)
+  respondentName                            String  @db.VarChar(255)
+  phoneNumber                               String  @db.VarChar(255)
+  premiseTypeId                             Int
+  respondentDesignationId                   Int
+  approvedHandwashingFacilityAvailabilityId Int
   protectiveClothingId                      Int?
-  numberFoodHandling                        Int?
-  numberFoodHandlingMedical                 Int?
-  uncookedFoodStorageCondtionSafeId         Int?
-  cookedFoodStorageCondtionSafeId           Int?
-  disinfestationId                          Int?
-  disinfestationFrequencyId                 Int?
-  disinfectionId                            Int?
-  disinfectionFrequencyId                   Int?
-  bathRoomAvailabilityId                    Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  firstAidAvailability                    YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
-  drainsAvailability                      YesNo?              @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo?              @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo?              @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo?              @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  animalSpaceCondition                    SanitaryInsanitary? @relation("animalSpaceConditionId", fields: [animalSpaceConditionId], references: [id])
-  animalAvailability                      YesNo?              @relation("animalAvailability", fields: [animalAvailabilityId], references: [id])
-}
-
-model HealthPremisesInfoSection {
-  id                        Int    @id @default(autoincrement())
-  inspectionId              String @db.VarChar(255)
-  facilityName              String @db.VarChar(255)
-  healthPremisesTypeId      Int?
-  drainsAvailabilityId      Int?
-  toiletAvailabilityId      Int?
-  urinalAvailabilityId      Int?
-  ownershipTypeId           Int?
-  bathRoomAvailabilityId    Int?
-  ehoAvailabilityId         Int?
-  numberWards               Int?
-  separateWardId            Int?
-  numberBeds                Int?
-  placentaPitAvailabilityId Int?
-  incineratorAvailabilityId Int?
-
-  approvedHandwashingFacilityAvailabilityId Int?
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  drainsAvailability                      YesNo? @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo? @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo? @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo? @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-}
-
-model HospitalityPremisesInfoSection {
-  id                                        Int    @id @default(autoincrement())
-  inspectionId                              String @db.VarChar(255)
-  facilityName                              String @db.VarChar(255)
-  physicalStructureTypeId                   Int?
+  firstAidAvailabilityId                    Int?
   drainsAvailabilityId                      Int?
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
-  hospitalityPremisesTypeId                 Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-  cookedFoodStorageCondtionSafeId           Int?
-  uncookedFoodStorageCondtionSafeId         Int?
-  designatedSmokingAreaId                   Int?
-  protectiveClothingUsedId                  Int?
-  firstAidAvailabilityId                    Int?
-
-  kitchenAvailabilityId     Int?
-  protectiveClothingId      Int?
-  numberMaleWorkers         Int?
-  numberFemaleWorkers       Int?
-  numberFoodHandlingMedical Int?
-  numberFoodHandling        Int?
-  numberRooms               Int?
-  facilityCapacity          Int?
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  drainsAvailability                      YesNo? @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo? @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo? @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo? @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-}
-
-model SanitaryPremisesInfoSection {
-  id                                        Int      @id @default(autoincrement())
-  inspectionId                              String   @db.VarChar(255)
-  facilityName                              String   @db.VarChar(255)
-  physicalStructureTypeId                   Int?
-  sanitaryPremisesTypeId                    Int?
-  sanitaryPremisesSubtypeId                 Int?
-  toiletAvailabilityId                      Int?
-  urinalAvailabilityId                      Int?
   bathRoomAvailabilityId                    Int?
-  drainsAvailabilityId                      Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-  firstAidAvailabilityId                    Int?
-  ownershipTypeId                           Int?
-  storeRoomAvailabilityId                   Int?
-  staffChangingRoomId                       Int?
-  sanitaryFacilityMgtId                     Int?
-  disinfectionFrequencyId                   Int?
-  disinfestationQuarterlyId                 Int?
-  protectiveClothingId                      Int?
-  slaughterRoomAvailabilityId               Int?
-  condemnationRoomAvailabilityId            Int?
-  cloakRoomAvailabilityId                   Int?
-  comfortRoomAvailabilityId                 Int?
-  wheelbathAvailabilityId                   Int?
-  footbathAvailabilityId                    Int?
-  wasteSortingId                            Int?
-  leachateMgtId                             Int?
-  safeHazardousWasteMgtId                   Int?
-  sextonManagementId                        Int?
-  sextonOfficeId                            Int?
-  properLayoutId                            Int?
-  fencedId                                  Int?
-  cremationPracticedId                      Int?
-  workersOfficeAvailabilityId               Int?
-  cemeteryWorkersId                         Int?
-  containerSanitaryId                       Int?
-  transferStationCapacity                   Int?
-  numberContainer                           Int?
-  containerAttendantName                    Int?
-  containerAttendantPhoneNumber             Int?
-  containerServiceProviderName              Int?
-  scheduleLiftingId                         Int?
-  sanitaryContainerId                       Int?
-  numberWorkers                             Int?
-  cremationPlatformId                       Int?
-  sanitaryAshesDisposalId                   Int?
-  deleted                                   Int?     @default(0)
-  createdAt                                 DateTime @default(now())
-  updatedAt                                 DateTime @updatedAt
-
-  drainsAvailability                      YesNo? @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo? @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo? @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo? @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-}
-
-model MarketPremisesInfoSection {
-  id                                        Int    @id @default(autoincrement())
-  inspectionId                              String @db.VarChar(255)
-  facilityName                              String @db.VarChar(255)
-  marketPremisesTypeId                      Int?
-  physicalStructureTypeId                   Int?
-  toiletAvailabilityId                      Int?
-  urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
-  drainsAvailabilityId                      Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-  firstAidAvailabilityId                    Int?
-  ownershipTypeId                           Int?
-  numberStores                              Int?
-  numberSheds                               Int?
-  numberStalls                              Int?
-  numberTraders                             Int?
-  numberMeatShops                           Int?
-  numberColdStores                          Int?
-  numberMills                               Int?
-  numberChopbars                            Int?
-  generalSanitaryConditionId                Int?
-  derattingFrequencyId                      Int?
-  cleanupFrequencyId                        Int?
-  numberLorrySheds                          Int?
-  numberVehicles                            Int?
-  numberDrivers                             Int?
-  numberFoodVendors                         Int?
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  drainsAvailability                      YesNo? @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo? @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo? @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo? @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-}
-
-model InstitutionPremisesInfoSection {
-  id                                        Int    @id @default(autoincrement())
-  inspectionId                              String @db.VarChar(255)
-  facilityName                              String @db.VarChar(255)
-  institutionPremisesTypeId                 Int?
-  institutionPremisesSubtypeId              Int?
-  toiletAvailabilityId                      Int?
-  urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
-  drainsAvailabilityId                      Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-  firstAidAvailabilityId                    Int?
-  numberTeachingStaff                       Int?
-  numberNonTeachingStaff                    Int?
-  numberMaleStudents                        Int?
-  numberFemaleStudents                      Int?
-  kitchenAvailabilityId                     Int?
-  uncookedFoodStorageCondtionSafeId         Int?
-  cookedFoodStorageCondtionSafeId           Int?
-  kitchenConditionId                        Int?
-  protectiveClothingId                      Int?
-  numberFoodHandling                        Int?
-  numberFoodHandlingMedicalId               Int?
-  numberClassRoomsId                        Int?
-  shepClubExistenceId                       Int?
-  numberOtherRooms                          Int?
-  animalSpaceConditionId                    Int?
-  animalSpaceAvailabilityId                 Int?
-  shrinePremisesConditionId                 Int?
-  slaughterRoomAvailabilityId               Int?
-  slaughterAreaConditionId                  Int?
+  separateWardId                            Int?
   soundProofId                              Int?
-  ablutionSlabId                            Int?
-  ablutionSlabConditionId                   Int?
-  facilityCapacity                          Int?
-  multipleExitId                            Int?
   disabilityFriendlyId                      Int?
-  emergencyExitId                           Int?
-  emergencyAssemblyPointId                  Int?
-  overcrowdingId                            Int?
-  adequateLighteningId                      Int?
-  adequateVentilationId                     Int?
-  numberCompoundFoodVendor                  Int?
-  numberFoodVendorMedicallyCertified        Int?
-  fireExtinguisherId                        Int?
-  numberFireExtinguisher                    Int?
-  buildingStructureConditionId              Int?
-
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  drainsAvailability                      YesNo? @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo? @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo? @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo? @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-}
-
-model IndustryPremisesInfoSection {
-  id                                        Int    @id @default(autoincrement())
-  inspectionId                              String @db.VarChar(255)
-  facilityName                              String @db.VarChar(255)
-  industryPremisesTypeId                    Int?
-  industryPremisesSubtypeId                 Int?
-  physicalStructureTypeId                   Int?
-  otherIndustryFacility                     Int?
-  protectiveClothingId                      Int?
-  productionRoomConditionId                 Int?
-  flyScreenNetAvailabilityId                Int?
+  multipleExitId                            Int?
+  labourersOfficeAvailabilityId             Int?
   storeRoomAvailabilityId                   Int?
-  medicalCertificateAvailabilityId          Int?
-  toiletAvailabilityId                      Int?
-  urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
-  drainsAvailabilityId                      Int?
-  approvedHandwashingFacilityAvailabilityId Int?
-  firstAidAvailabilityId                    Int?
-  staffChangingRoomId                       Int?
-  manufacturedServices                      Int?
-  majorByProducts                           Int?
-  numberWorkers                             Int?
-  byProductsStorageAreaCondId               Int?
+  facilityCleanlinessId                     Int?
+  animalAvailabilityId                      Int?
+  // pantryFacilityAdequacyId                  Int?
+  shepClubExistenceId                       Int?
+  animalType                                String? @db.VarChar(255)
+  disinfestationId                          Int?
+  disinfectionId                            Int?
+  eateryTypeId                              Int?
+  eateryPremisesTypeId                      Int?
+  temporaryPermanentId                      Int?
+  smokingAreaId                             Int?
+  pantryAvailabilityId                      Int?
+  healthPremisesTypeId                      Int?
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  marketLorryParkPremisesId Int?
+  ownershipTypeId           Int?
 
-  drainsAvailability                      YesNo? @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                      YesNo? @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo? @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability                    YesNo? @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
-  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailabilityId", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+  deleted             Int?     @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  facilityCleanliness YesNo?   @relation("facilityCleanliness", fields: [facilityCleanlinessId], references: [id])
+  separateWard        YesNo?   @relation("separateWard", fields: [separateWardId], references: [id])
+  smokingArea         YesNo?   @relation("smokingArea", fields: [smokingAreaId], references: [id])
+  pantryAvailability  YesNo?   @relation("pantryAvailability", fields: [pantryAvailabilityId], references: [id])
+
+  RespondentDesignation       RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
+  District                    District              @relation(fields: [districtId], references: [id])
+  // Subdistrict                 Subdistrict?          @relation(fields: [subdistrictId], references: [id])
+  Zone                        Zone?                 @relation(fields: [zoneId], references: [id])
+  Inspection                  Inspection            @relation(fields: [inspectionId], references: [id])
+  labourersOfficeAvailability YesNo?                @relation("labourersOfficeAvailability", fields: [labourersOfficeAvailabilityId], references: [id])
+  storeRoomAvailability       YesNo?                @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
+  protectiveClothing          YesNo?                @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  firstAidAvailability        YesNo?                @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  drainsAvailability          YesNo?                @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  toiletAvailability          YesNo?                @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability          YesNo?                @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  bathRoomAvailability        YesNo?                @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  soundProof                  YesNo?                @relation("soundProof", fields: [soundProofId], references: [id])
+  disabilityFriendly          YesNo?                @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
+  multipleExit                YesNo?                @relation("multipleExit", fields: [multipleExitId], references: [id])
+  animalAvailability          YesNo?                @relation("animalAvailability", fields: [animalAvailabilityId], references: [id])
+
+  physicalStructure TemporaryPermanent? @relation(fields: [temporaryPermanentId], references: [id])
+
+  MarketLorryParkPremises MarketLorryParkPremises? @relation(fields: [marketLorryParkPremisesId], references: [id])
+
+  shepClubExistence                       YesNo? @relation("shepClubExistence", fields: [shepClubExistenceId], references: [id])
+  // pantryFacilityAdequacy                  YesNo? @relation("pantryFacilityAdequacy", fields: [pantryFacilityAdequacyId], references: [id])
+  approvedHandwashingFacilityAvailability YesNo? @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+
+  disinfection      YesNo? @relation("disinfection", fields: [disinfectionId], references: [id])
+  disinfestation    YesNo? @relation("disinfestation", fields: [disinfestationId], references: [id])
+  institutionTypeId Int?
 }
 
 model LicencePermitSection {
@@ -1270,6 +871,31 @@ model LicencePermitSection {
   Inspection                        Inspection @relation(fields: [inspectionId], references: [id])
 }
 
+model SewerSystem {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OwnershipType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TemporaryPermanent {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  deleted         Int?              @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  FacilitySection FacilitySection[]
+}
+
 model MarketLorryParkPremises {
   id Int @id @default(autoincrement())
 
@@ -1279,6 +905,7 @@ model MarketLorryParkPremises {
   updatedAt             DateTime            @updatedAt
   MarketLorryParkType   MarketLorryParkType @relation(fields: [marketLorryParkTypeId], references: [id])
   DerattingFrequency    DerattingFrequency? @relation(fields: [derattingFrequencyId], references: [id])
+  FacilitySection       FacilitySection[]
   marketLorryParkTypeId Int
 }
 
@@ -1291,6 +918,35 @@ model MarketLorryParkType {
   MarketLorryParkPremises MarketLorryParkPremises[]
 }
 
+model DerattingFrequency {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  deleted                 Int?                      @default(0)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  MarketLorryParkPremises MarketLorryParkPremises[]
+}
+model CleaningFrequency {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  deleted                 Int?                      @default(0)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+}
+model DesiltingFrequency {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  deleted                 Int?                      @default(0)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+}
+model ContainerVolume {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  deleted                 Int?                      @default(0)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+}
 ////////////END SECTION ///////////
 
 ////////////POPULATION SECTION ///////////
@@ -1683,4 +1339,341 @@ model Picture {
   updatedAt   DateTime   @updatedAt
 
   inspectionId Int
+}
+
+//////////////////////////////////////////////////TODO////////////////////////////////
+
+// model PremisesHospitalityServicesProvided {
+//   id                           Int                        @id @default(autoincrement())
+//   Inspection                   Inspection                 @relation(fields: [inspectionId], references: [id])
+//   deleted                      Int?                       @default(0)
+//   createdAt                    DateTime                   @default(now())
+//   updatedAt                    DateTime                   @updatedAt
+//   inspectionId                 Int
+//   HospitalityPremisesService   HospitalityPremisesService @relation(fields: [hospitalityPremisesServiceId], references: [id])
+//   hospitalityPremisesServiceId Int
+// }
+
+// lodging
+// catering
+// drinking
+// games
+
+// model HospitalityPremisesService {
+//   id                                  Int                                   @id @default(autoincrement())
+//   name                                String                                @db.VarChar(255)
+//   deleted                             Int?                                  @default(0)
+//   createdAt                           DateTime                              @default(now())
+//   updatedAt                           DateTime                              @updatedAt
+//   PremisesHospitalityServicesProvided PremisesHospitalityServicesProvided[]
+//   PremisesSubtypeSection              PremisesSubtypeSection[]
+// }
+
+// model HospitalityPremisesType {
+//   id        Int      @id @default(autoincrement())
+//   name      String   @db.VarChar(255)
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// table top etc
+// model EateryType {
+//   id              Int               @id @default(autoincrement())
+//   name            String            @db.VarChar(255)
+//   deleted         Int?              @default(0)
+//   createdAt       DateTime          @default(now())
+//   updatedAt       DateTime          @updatedAt
+//   FacilitySection FacilitySection[]
+// }
+
+// model EateryPremisesType {
+//   id              Int               @id @default(autoincrement())
+//   name            String            @db.VarChar(255)
+//   deleted         Int?              @default(0)
+//   createdAt       DateTime          @default(now())
+//   updatedAt       DateTime          @updatedAt
+//   FacilitySection FacilitySection[]
+// }
+
+// model HealthPremisesType {
+//   id              Int               @id @default(autoincrement())
+//   name            String            @db.VarChar(255)
+//   deleted         Int?              @default(0)
+//   createdAt       DateTime          @default(now())
+//   updatedAt       DateTime          @updatedAt
+//   FacilitySection FacilitySection[]
+// }
+
+// model HealthPremisesService {
+//   id                             Int                              @id @default(autoincrement())
+//   name                           String                           @db.VarChar(255)
+//   deleted                        Int?                             @default(0)
+//   createdAt                      DateTime                         @default(now())
+//   updatedAt                      DateTime                         @updatedAt
+//   PremisesHealthServicesProvided PremisesHealthServicesProvided[]
+// }
+
+// model PremisesHealthServicesProvided {
+//   id                      Int                   @id @default(autoincrement())
+//   deleted                 Int?                  @default(0)
+//   createdAt               DateTime              @default(now())
+//   updatedAt               DateTime              @updatedAt
+//   HealthPremisesService   HealthPremisesService @relation(fields: [healthPremisesServiceId], references: [id])
+//   FacilitySection         FacilitySection[]
+//   healthPremisesServiceId Int
+//   Inspection              Inspection?           @relation(fields: [inspectionId], references: [id])
+//   inspectionId            Int?
+// }
+
+///
+
+// model PremisesType {
+//   id                     Int                      @id @default(autoincrement())
+//   name                   String                   @db.VarChar(255)
+//   inspectionFormId       Int
+//   deleted                Int?                     @default(0)
+//   createdAt              DateTime                 @default(now())
+//   updatedAt              DateTime                 @updatedAt
+//   InspectionForm         InspectionForm           @relation(fields: [inspectionFormId], references: [id])
+//   PremisesSubtypeSection PremisesSubtypeSection[]
+// }
+
+// model PremisesServices {
+//   id                       Int                        @id @default(autoincrement())
+//   name                     String                     @db.VarChar(255)
+//   inspectionFormId         Int
+//   deleted                  Int?                       @default(0)
+//   createdAt                DateTime                   @default(now())
+//   updatedAt                DateTime                   @updatedAt
+//   PremisesServicesProvided PremisesServicesProvided[]
+//   InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
+// }
+
+// model PremisesServicesProvided {
+//   id                Int              @id @default(autoincrement())
+//   deleted           Int?             @default(0)
+//   createdAt         DateTime         @default(now())
+//   updatedAt         DateTime         @updatedAt
+//   PremisesServices  PremisesServices @relation(fields: [premisesServiceId], references: [id])
+//   premisesServiceId Int
+
+//   Inspection   Inspection? @relation(fields: [inspectionId], references: [id])
+//   inspectionId Int?
+
+//   PremisesSubtypeSection   PremisesSubtypeSection @relation(fields: [premisesSubtypeSectionId], references: [id])
+//   premisesSubtypeSectionId Int
+// }
+
+// model PremisesSubtypeSection {
+//   id             Int  @id @default(autoincrement())
+//   premisesTypeId Int
+//   ablutionSlabId Int?
+//   inspectionId   Int
+
+//   Inspection   Inspection   @relation(fields: [inspectionId], references: [id])
+//   PremisesType PremisesType @relation(fields: [premisesTypeId], references: [id])
+
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   PremisesServicesProvided PremisesServicesProvided[]
+// }
+
+//  var selectedAblutionSlab,
+//       selectedPremiseType,
+//       selectedEateryType,
+//       selectedInstitutionType,
+//       selectedSanitaryFacilityType;
+
+model IndustryPremisesSpecific {
+  id                       Int      @id @default(autoincrement())
+  consumableTypeId         Int?
+  storageFinishedProductId Int
+  nonConsumableTypeId      Int
+  productsManufactured     String   @db.VarChar(255)
+  mainRawMaterial          String   @db.VarChar(255)
+  sourceRawMaterial        String   @db.VarChar(255)
+  majorByproduct           String   @db.VarChar(255)
+  deleted                  Int?     @default(0)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  storageFinishedProduct YesNo @relation(fields: [storageFinishedProductId], references: [id])
+}
+
+model Type {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  Subtype          Subtype[]
+  Service          Service[]
+}
+
+model Subtype {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  Type             Type           @relation(fields: [typeId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  typeId           Int
+  // RespondentDesignation RespondentDesignation[]
+}
+
+model Service {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  Type             Type?          @relation(fields: [typeId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  typeId           Int?
+}
+
+//////////////////////////ADD THESE TO DIFFERENT SECTION ////////////////////////
+
+model SlaughterHouse {
+  id                                      Int      @id @default(autoincrement())
+  name                                    String   @db.VarChar(255)
+  deleted                                 Int?     @default(0)
+  createdAt                               DateTime @default(now())
+  updatedAt                               DateTime @updatedAt
+  slaughterRoomsAvailableId               Int
+  condemnationRoomAvailableId             Int
+  hangingExaminationFacilitiesAvailableId Int
+  holdingPenAvailableId                   Int
+  isolationPenAvailableId                 Int
+  chuteAvailableId                        Int
+  genderFriendlyAvailableId               Int
+  comfortRoomAvailableId                  Int
+  wheelBathAvailableId                    Int
+  footbathAvailableId                     Int
+  meatInspectorOfficeAvailableId          Int
+  dressingFloorAvailableId                Int
+
+  slaughterRoomsAvailable               YesNo @relation("slaughterRoomsAvailable", fields: [slaughterRoomsAvailableId], references: [id])
+  condemnationRoomAvailable             YesNo @relation("condemnationRoomAvailable", fields: [condemnationRoomAvailableId], references: [id])
+  hangingExaminationFacilitiesAvailable YesNo @relation("hangingExaminationFacilitiesAvailable", fields: [hangingExaminationFacilitiesAvailableId], references: [id])
+  holdingPenAvailable                   YesNo @relation("holdingPenAvailable", fields: [holdingPenAvailableId], references: [id])
+  isolationPenAvailable                 YesNo @relation("isolationPenAvailable", fields: [isolationPenAvailableId], references: [id])
+  chuteAvailable                        YesNo @relation("chuteAvailable", fields: [chuteAvailableId], references: [id])
+  genderFriendlyAvailable               YesNo @relation("genderFriendlyAvailable", fields: [genderFriendlyAvailableId], references: [id])
+  comfortRoomAvailable                  YesNo @relation("comfortRoomAvailable", fields: [comfortRoomAvailableId], references: [id])
+  wheelBathAvailable                    YesNo @relation("wheelBathAvailable", fields: [wheelBathAvailableId], references: [id])
+  footbathAvailable                     YesNo @relation("footbathAvailable", fields: [footbathAvailableId], references: [id])
+  meatInspectorOfficeAvailable          YesNo @relation("meatInspectorOfficeAvailable", fields: [meatInspectorOfficeAvailableId], references: [id])
+  dressingFloorAvailable                YesNo @relation("dressingFloorAvailable", fields: [dressingFloorAvailableId], references: [id])
+
+  SolidWasteSection   SolidWasteSection? @relation(fields: [solidWasteSectionId], references: [id])
+  solidWasteSectionId Int?
+}
+
+model Cemetery {
+  id Int @id @default(autoincrement())
+
+  deleted                    Int?     @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  layoutCemeteryAdequacyId   Int
+  cemeteryFencedId           Int
+  cremationPracticedId       Int
+  cremationPlatformId        Int
+  ashesDisposalId            Int
+  sextonAvailabilityId       Int
+  sextonOfficeAvailabilityId Int
+
+  sextonAvailability       YesNo @relation("sextonAvailability", fields: [sextonAvailabilityId], references: [id])
+  sextonOfficeAvailability YesNo @relation("sextonOfficeAvailability", fields: [sextonOfficeAvailabilityId], references: [id])
+  layoutCemeteryAdequacy   YesNo @relation("layoutCemeteryAdequacy", fields: [layoutCemeteryAdequacyId], references: [id])
+  cemeteryFenced           YesNo @relation("cemeteryFenced", fields: [cemeteryFencedId], references: [id])
+  cremationPracticed       YesNo @relation("cremationPracticed", fields: [cremationPracticedId], references: [id])
+  cremationPlatform        YesNo @relation("cremationPlatform", fields: [cremationPlatformId], references: [id])
+  ashesDisposal            YesNo @relation("ashesDisposal", fields: [ashesDisposalId], references: [id])
+
+  SolidWasteSection   SolidWasteSection? @relation(fields: [solidWasteSectionId], references: [id])
+  solidWasteSectionId Int?
+}
+
+model TransferWasteStation {
+  id                      Int @id @default(autoincrement())
+  transferStationCapacity Int
+
+  deleted               Int?     @default(0)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  solidWasteSectionId   Int
+  wasteSortingId        Int
+  leachateManagementId  Int
+  hazardousManagementId Int
+
+  //wasteSorting        YesNo             @relation("wasteSorting", fields: [wasteSortingId], references: [id])
+  leachateManagement  YesNo             @relation("leachateManagement", fields: [leachateManagementId], references: [id])
+  hazardousManagement YesNo             @relation("hazardousManagement", fields: [hazardousManagementId], references: [id])
+  SolidWasteSection   SolidWasteSection @relation(fields: [solidWasteSectionId], references: [id])
+}
+
+model CommunalContainer {
+  id                   Int    @id @default(autoincrement())
+  attendantName        String @db.VarChar(255)
+  attendantPhoneNumber String @db.VarChar(255)
+  serviceProviderName  String @db.VarChar(255)
+  containerVolume      Int
+  numberContainers     Int
+
+  solidWasteSectionId   Int
+  scheduledCollectionId Int
+  containerConditionId  Int
+  deleted               Int?              @default(0)
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  SolidWasteSection     SolidWasteSection @relation(fields: [solidWasteSectionId], references: [id])
+  scheduledCollection   YesNo             @relation("scheduledCollection", fields: [scheduledCollectionId], references: [id])
+  containerCondition    YesNo             @relation("containerCondition", fields: [containerConditionId], references: [id])
+}
+
+model UnsafeToiletCondition {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BadDrainCondition {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EaseYourselfWhere {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model ToiletHouseholdNumber{
+ id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
