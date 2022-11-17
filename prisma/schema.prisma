@@ -702,11 +702,11 @@ model WaterTreatmentType {
 // }
 
 model Zone {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  deleted         Int?              @default(0)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // model Frequency {
@@ -736,14 +736,14 @@ model YesNo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  availToiletFaciltyMgt                   PremisesWashroomFacility[] @relation("availToiletFaciltyMgt")
-  toiletGenderSensivity                   PremisesWashroomFacility[] @relation("toiletGenderSensivity")
-  urinalGenderSensivity                   PremisesWashroomFacility[] @relation("urinalGenderSensivity")
-  toiletDisabilityFriendly                PremisesWashroomFacility[] @relation("toiletDisabilityFriendly")
-  urinalDisabilityFriendly                PremisesWashroomFacility[] @relation("urinalDisabilityFriendly")
- 
-  toiletAdequacy                          PremisesWashroomFacility[] @relation("toiletAdequacy")
-  urinalAdequacy                          PremisesWashroomFacility[] @relation("urinalAdequacy")
+  availToiletFaciltyMgt    PremisesWashroomFacility[] @relation("availToiletFaciltyMgt")
+  toiletGenderSensivity    PremisesWashroomFacility[] @relation("toiletGenderSensivity")
+  urinalGenderSensivity    PremisesWashroomFacility[] @relation("urinalGenderSensivity")
+  toiletDisabilityFriendly PremisesWashroomFacility[] @relation("toiletDisabilityFriendly")
+  urinalDisabilityFriendly PremisesWashroomFacility[] @relation("urinalDisabilityFriendly")
+
+  toiletAdequacy PremisesWashroomFacility[] @relation("toiletAdequacy")
+  urinalAdequacy PremisesWashroomFacility[] @relation("urinalAdequacy")
 
   businessLicenceAvailability       LicencePermitSection[] @relation("businessLicenceAvailability")
   medicalCertificateAvailability    LicencePermitSection[] @relation("medicalCertificateAvailability")
@@ -1241,18 +1241,22 @@ model IndustryPremisesInfoSection {
 }
 
 model LicencePermitSection {
-  id                                  Int  @id @default(autoincrement())
-  inspectionId                        Int
-  businessLicenceAvailabilityId       Int?
-  medicalCertAvailabilityId           Int?
-  operatingLicenceAvailabilityId      Int?
-  propertyRateAvailabilityId          Int?
-  structurePermitAvailabilityId       Int?
-  habitationCertificateAvailabilityId Int?
-  fumigationCertificateAvailabilityId Int?
-  medicalCertificateAvailabilityId    Int?
-  buildingPermitAvailabilityId        Int?
-  animalsPermitAvailabilityId         Int?
+  id                                   Int    @id @default(autoincrement())
+  inspectionId                         String @db.VarChar(255)
+  buildingPermitAvailabilityId         Int
+  businessLicenceAvailabilityId        Int?
+  medicalCertAvailabilityId            Int?
+  operatingLicenceAvailabilityId       Int?
+  propertyRateAvailabilityId           Int?
+  structurePermitAvailabilityId        Int?
+  habitationCertificateAvailabilityId  Int?
+  fumigationCertificateAvailabilityId  Int?
+  medicalCertificateAvailabilityId     Int?
+  gtaOperatingLicenceAvailabilityId    Int?
+  animalsPermitAvailabilityId          Int?
+  suitabilityCertificateAvailabilityId Int?
+  waterAnalysisReportId                Int?
+  regGeneralCertAvailabilityId         Int?
 
   deleted                   Int?     @default(0)
   createdAt                 DateTime @default(now())
@@ -1277,82 +1281,23 @@ model MarketLorryParkPremises {
   deleted               Int?                @default(0)
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
-  MarketLorryParkType   MarketLorryParkType @relation(fields: [marketLorryParkTypeId], references: [id])
   DerattingFrequency    DerattingFrequency? @relation(fields: [derattingFrequencyId], references: [id])
   marketLorryParkTypeId Int
 }
 
-model MarketLorryParkType {
-  id                      Int                       @id @default(autoincrement())
-  name                    String                    @db.VarChar(255)
-  deleted                 Int?                      @default(0)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  MarketLorryParkPremises MarketLorryParkPremises[]
-}
 
-////////////END SECTION ///////////
-
-////////////POPULATION SECTION ///////////
-model PopulationSection {
-  id           Int @id @default(autoincrement())
-  inspectionId Int
-
-  animalsNumber Int? @default(0)
-
-  maleDoctorsNumber                         Int?
-  femaleDoctorsNumber                       Int?
-  maleNursesNumber                          Int?
-  femaleNursesNumber                        Int?
-  maleAuxiliaryStaffNumber                  Int?
-  femaleAuxiliaryStaffNumber                Int?
-  roomCapacity                              Int?
-  facilityCapacity                          Int?
-  numberStores                              Int?
-  numberStalls                              Int?
-  numberSheds                               Int?
-  numberVehicles                            Int?
-  maleWorkers                               Int?
-  femaleWorkers                             Int?
-  medicallyCertifiedWorkers                 Int?
-  numberMaleTeachers                        Int?
-  numberFemaleTeachers                      Int?
-  numberMaleNonTeachingStaff                Int?
-  numberFemaleNonTeachingStaff              Int?
-  numberMaleStudents                        Int?
-  numberFemaleStudents                      Int?
-  numberFemaleSchoolCooks                   Int?
-  numberCooksMedicallyCertified             Int?
-  numberFoodVendorsCompound                 Int?
-  numberFoodVendorsMedicallyCertified       Int?
-  numberPreschoolTeachersMedicallyCertified Int?
-
-  numberHousehold       Int?
-  numberMales           Int?
-  numberFemales         Int?
-  numberRooms           Int?
-  numberBeds            Int?
-  staffRoomAvailability Int?
-  deleted               Int?       @default(0)
-  createdAt             DateTime   @default(now())
-  updatedAt             DateTime   @updatedAt
-  Inspection            Inspection @relation(fields: [inspectionId], references: [id])
-}
-
-////////////END SECTION ///////////
 
 ////////////////////WATER SECTION ///////////
 model WaterSection {
   id           Int @id @default(autoincrement())
   inspectionId Int
 
-  waterConditionId               Int
-  waterSupplyTypeId              Int
+  waterSourceConditionId               Int
+  waterStorageConditionId              Int
   waterStorageTypeId             Int
   waterTreatmentTypeId           Int
   waterFlowFrequencyId           Int
-  waterStorageConditionSafeId    Int
-  distanceWaterStorageSanitaryId Int?
+  safeDistanceWaterStorageSanitaryId Int?
 
   waterGeneralRating Int
 
@@ -1552,19 +1497,16 @@ model SolidWasteSection {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  adequateWasteStorageReceptacle YesNo?                    @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
-  approvedWasteStorageReceptacle YesNo?                    @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
-  wasteCollectionFrequency       Frequency?                @relation(fields: [wasteCollectionFrequencyId], references: [id])
-  wasteCollectorRegistration     YesNo?                    @relation("wasteCollectorRegistration", fields: [wasteCollectorRegistrationId], references: [id])
-  Inspection                     Inspection                @relation(fields: [inspectionId], references: [id])
-  wasteSorting                   YesNo                     @relation("wasteSorting", fields: [wasteSortingId], references: [id])
-  receiptsUpToDate               YesNo?                    @relation("receiptsUpToDate", fields: [receiptsUpToDateId], references: [id])
-  SlaughterHouse                 SlaughterHouse[]
-  Cemetery                       Cemetery[]
-  TransferWasteStation           TransferWasteStation[]
-  CommunalContainer              CommunalContainer[]
-  PremisesWasteReceptacle        PremisesWasteReceptacle[]
-  PremisesWasteCollection        PremisesWasteCollection[]
+  adequateWasteStorageReceptacle YesNo?     @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
+  approvedWasteStorageReceptacle YesNo?     @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
+  wasteCollectionFrequency       Frequency? @relation(fields: [wasteCollectionFrequencyId], references: [id])
+  wasteCollectorRegistration     YesNo?     @relation("wasteCollectorRegistration", fields: [wasteCollectorRegistrationId], references: [id])
+  Inspection                     Inspection @relation(fields: [inspectionId], references: [id])
+  wasteSorting                   YesNo      @relation("wasteSorting", fields: [wasteSortingId], references: [id])
+  receiptsUpToDate               YesNo?     @relation("receiptsUpToDate", fields: [receiptsUpToDateId], references: [id])
+
+  PremisesWasteReceptacle PremisesWasteReceptacle[]
+  PremisesWasteCollection PremisesWasteCollection[]
 }
 
 model PremisesWasteReceptacle {
