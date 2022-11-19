@@ -4,7 +4,7 @@
 //import { SERVER_BASE_URL } from "../../config";
 import { useRouter } from "next/router";
 
-export default function login() {
+export default function Login() {
   const router = useRouter();
 
   const login = async (e) => {
@@ -96,7 +96,7 @@ export default function login() {
                       <div className="p-2 mt-4">
                         <form action="/">
                           <div className="mb-3">
-                            <label for="username" className="form-label">
+                            <label htmlFor="username" className="form-label">
                               Username
                             </label>
                             <input
@@ -116,7 +116,7 @@ export default function login() {
                                 Forgot password?
                               </a>
                             </div>
-                            <label className="form-label" for="password-input">
+                            <label className="form-label" htmlFor="password-input">
                               Password
                             </label>
                             <div className="position-relative auth-pass-inputgroup mb-3">
@@ -145,7 +145,7 @@ export default function login() {
                             />
                             <label
                               className="form-check-label"
-                              for="auth-remember-check"
+                              htmlFor="auth-remember-check"
                             >
                               Remember me
                             </label>

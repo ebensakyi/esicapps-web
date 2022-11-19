@@ -1,7 +1,7 @@
 
-import AddUser from '../../../components/admin/user/AddUser'
-import ListUser from '../../../components/admin/user/ListUser'
-import Header from '../../../components/Header'
+import User from '../../components/account/User'
+import ListUser from '../../components/account/ListUser'
+import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
 
@@ -15,7 +15,7 @@ export default function user({ examTypes, paymentTypes }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <AddUser />
+                        <User />
                         <ListUser/>
 
                     </div>

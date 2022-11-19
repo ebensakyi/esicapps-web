@@ -57,8 +57,8 @@ const User = ({ users, userTypes, regions }) => {
     }
   }
   return (
-    <div class="row">
-      <div class="col-12">
+    <div className="row">
+      <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
             <div className="card">
@@ -90,7 +90,7 @@ const User = ({ users, userTypes, regions }) => {
                       </label>
 
                       <select
-                        class="form-select"
+                        className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
                           setUserType(e.target.value);
@@ -99,7 +99,7 @@ const User = ({ users, userTypes, regions }) => {
                       >
                         <option selected>Choose...</option>
                         {userTypes.map((userType) => (
-                          <option value={userType.id}>{userType.name}</option>
+                          <option key={userType.id} value={userType.id}>{userType.name}</option>
                         ))}
                       </select>
                     </div>
@@ -184,7 +184,7 @@ const User = ({ users, userTypes, regions }) => {
                       </label>
 
                       <select
-                        class="form-select"
+                        className="form-select"
                         id="inputGroupSelect02"
                         onChange={async (e) => {
                           setRegion(e.target.value)
@@ -207,7 +207,7 @@ const User = ({ users, userTypes, regions }) => {
                       </label>
 
                       <select
-                        class="form-select"
+                        className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
                           setDistrict(e.target.value)
@@ -231,7 +231,7 @@ const User = ({ users, userTypes, regions }) => {
                       </label>
 
                       <select
-                        class="form-select"
+                        className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => setElectoralArea(e.target.value)}
                       >
@@ -248,10 +248,10 @@ const User = ({ users, userTypes, regions }) => {
                 <br />
                 <div className="row gy-4">
                   <div className="flex-shrink-0">
-                    <div class="col-lg-12">
-                      <div class="text-end">
+                    <div className="col-lg-12">
+                      <div className="text-end">
                         <button
-                          class="btn btn-primary"
+                          className="btn btn-primary"
                           onClick={(e) => {
                             addUser(e);
                           }}

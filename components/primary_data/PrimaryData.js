@@ -764,7 +764,7 @@ const PrimaryData = ({
         <div className="card">
           <div className="card-body">
             {/* <p className="text-muted">
-              Use <code>flex-column</code> class to create Vertical nav tabs.
+              Use <code>flex-column</code> className to create Vertical nav tabs.
             </p> */}
             <div className="row">
               <div className="col-md-6">
@@ -838,7 +838,7 @@ const PrimaryData = ({
                                     />
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -846,12 +846,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addRegion(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -874,7 +874,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {regions.map((region) => (
-                                    <tr>
+                                    <tr key={region.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{region.name}</td>
                                       <td>{region.abbrv}</td>
@@ -969,7 +969,7 @@ const PrimaryData = ({
                                     </label>
 
                                     <select
-                                      class="form-select"
+                                      className="form-select"
                                       id="inputGroupSelect02"
                                       value={regionId}
                                       onChange={(e) =>
@@ -985,7 +985,7 @@ const PrimaryData = ({
                                     </select>
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -993,12 +993,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addDistrict(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1021,7 +1021,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {districts.map((district) => (
-                                    <tr>
+                                    <tr key={district.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{district.name}</td>
                                       <td>{district.abbrv}</td>
@@ -1098,7 +1098,7 @@ const PrimaryData = ({
                                     </label>
 
                                     <select
-                                      class="form-select"
+                                      className="form-select"
                                       id="inputGroupSelect02"
                                       value={districtId}
                                       onChange={(e) =>
@@ -1114,7 +1114,7 @@ const PrimaryData = ({
                                     </select>
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1122,12 +1122,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addElectoralArea(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1150,7 +1150,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {electoralAreas.map((ea) => (
-                                    <tr>
+                                    <tr key={ea.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{ea.name}</td>
                                       <td>{ea.abbrv}</td>
@@ -1229,7 +1229,7 @@ const PrimaryData = ({
                                     </label>
 
                                     <select
-                                      class="form-select"
+                                      className="form-select"
                                       id="inputGroupSelect02"
                                       value={electoralAreaId}
                                       onChange={(e) =>
@@ -1247,7 +1247,7 @@ const PrimaryData = ({
                                     </select>
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1255,12 +1255,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addCommunity(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1282,7 +1282,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {communities.map((c) => (
-                                    <tr>
+                                    <tr key={c.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{c.name}</td>
                                       <td>{c.ElectoralArea.name}</td>
@@ -1353,7 +1353,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1361,12 +1361,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addAction(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1387,7 +1387,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {actions.map((a) => (
-                                    <tr>
+                                    <tr key={a.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{a.name}</td>
 
@@ -1455,7 +1455,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1463,12 +1463,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addAnalCleansing(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1489,7 +1489,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {analCleansings.map((a) => (
-                                    <tr>
+                                    <tr key={a.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{a.name}</td>
 
@@ -1557,7 +1557,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1565,12 +1565,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addCemeteryWorker(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1591,7 +1591,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {cemeteryWorkers.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -1659,7 +1659,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1667,12 +1667,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addDrainType(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1693,7 +1693,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {drainTypes.map((d) => (
-                                    <tr>
+                                    <tr key={d.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{d.name}</td>
 
@@ -1763,7 +1763,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1771,12 +1771,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addDrinkingWaterSource(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1797,7 +1797,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {drinkingWaterSources.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -1867,7 +1867,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1875,12 +1875,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addEffluentManagement(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -1901,7 +1901,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {effluentManagements.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -1971,7 +1971,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -1979,12 +1979,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addExcretaContainment(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2005,7 +2005,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {excretaContainments.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2072,7 +2072,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2080,12 +2080,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addExcretaDisposal(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2106,7 +2106,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {excretaDisposals.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2182,7 +2182,7 @@ const PrimaryData = ({
                                     </label>
 
                                     <select
-                                      class="form-select"
+                                      className="form-select"
                                       id="inputGroupSelect02"
                                       value={inspectionFormId}
                                       onChange={(e) =>
@@ -2200,7 +2200,7 @@ const PrimaryData = ({
                                     </select>
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2208,12 +2208,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addFacility(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2234,7 +2234,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {facilities.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
                                       <td>{cw.InspectionForm.name}</td>
@@ -2302,7 +2302,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2310,12 +2310,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addFrequency(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2336,7 +2336,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {frequencies.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2403,7 +2403,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2411,12 +2411,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addGreyWaterDisposal(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2437,7 +2437,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {greyWaterDisposals.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2506,7 +2506,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2514,12 +2514,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addHazardousWasteDisposal(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2540,7 +2540,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {hazardousWasteDisposals.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2616,7 +2616,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2624,12 +2624,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addOwnershipType(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2650,7 +2650,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {ownershipTypes.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2717,7 +2717,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2725,12 +2725,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addPestsSign(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2751,7 +2751,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {pestSigns.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -2820,7 +2820,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2828,12 +2828,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addRespondentDesignation(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2855,7 +2855,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {respondentDesignations.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
                                       <td>{cw.InspectionForm.name}</td>
@@ -2923,7 +2923,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -2931,12 +2931,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addService(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -2957,7 +2957,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {services.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
                                       <td>
@@ -3023,7 +3023,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3031,12 +3031,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addStructureType(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3057,7 +3057,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {structureTypes.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -3133,7 +3133,7 @@ const PrimaryData = ({
                                       Type
                                     </label>
                                     <select
-                                      class="form-select"
+                                      className="form-select"
                                       id="inputGroupSelect02"
                                       value={regionId}
                                       onChange={(e) =>
@@ -3149,7 +3149,7 @@ const PrimaryData = ({
                                     </select>
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3157,12 +3157,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addSubtype(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3185,7 +3185,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {subtypes.map((s) => (
-                                    <tr>
+                                    <tr key={s.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{s.name}</td>
                                       {/* <td>{region.abbrv}</td> */}
@@ -3253,7 +3253,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3261,12 +3261,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addToiletPitPosition(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3286,10 +3286,10 @@ const PrimaryData = ({
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {toiletPitPositions.map((district) => (
-                                    <tr>
+                                  {toiletPitPositions.map((a) => (
+                                    <tr key={a.id}>
                                       {/* <th scope="row">{region.id}</th> */}
-                                      <td>{district.name}</td>
+                                      <td>{a.name}</td>
 
                                       <td>
                                         <button className="badge bg-danger">
@@ -3354,7 +3354,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3362,12 +3362,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addToiletType(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3388,7 +3388,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {toiletTypes.map((ea) => (
-                                    <tr>
+                                    <tr key={ea.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{ea.name}</td>
 
@@ -3459,7 +3459,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3467,12 +3467,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addWasteCollectionType(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3492,7 +3492,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {wasteCollectionTypes.map((c) => (
-                                    <tr>
+                                    <tr key={c.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{c.name}</td>
 
@@ -3564,7 +3564,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3572,12 +3572,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addWasteStorageReceptacle(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3598,7 +3598,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {wasteStorageReceptacles.map((a) => (
-                                    <tr>
+                                    <tr key={a.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{a.name}</td>
 
@@ -3668,7 +3668,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3676,12 +3676,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addWasteWaterContainment(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3702,7 +3702,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {wasteWaterContainments.map((a) => (
-                                    <tr>
+                                    <tr key={a.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{a.name}</td>
 
@@ -3770,7 +3770,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3778,12 +3778,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addWaterSource(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3804,7 +3804,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {waterSourceTypes.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -3872,7 +3872,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3880,12 +3880,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addWaterStorage(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -3906,7 +3906,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {waterStorageTypes.map((d) => (
-                                    <tr>
+                                    <tr key={d.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{d.name}</td>
 
@@ -3974,7 +3974,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -3982,12 +3982,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addWaterSupply(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -4008,7 +4008,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {waterSupplyTypes.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -4076,7 +4076,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -4084,12 +4084,12 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           addInspectionType(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -4110,7 +4110,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {inspectionTypes.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
@@ -4177,7 +4177,7 @@ const PrimaryData = ({
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div className="col-lg-4">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -4185,13 +4185,13 @@ const PrimaryData = ({
                                     >
                                       .
                                     </label>
-                                    <div class="text-end">
+                                    <div className="text-end">
                                       <button
                                         onClick={(e) => {
                                           if (nuisanceId) updateNuisance(e);
                                           addNuisance(e);
                                         }}
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                       >
                                         Submit
                                       </button>
@@ -4212,7 +4212,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {nuisances.map((cw) => (
-                                    <tr>
+                                    <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 

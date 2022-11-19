@@ -1,4 +1,4 @@
-s
+
 import Industry from '../../components/data/Industry'
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'

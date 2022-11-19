@@ -219,7 +219,7 @@ const Header = () => {
                           type="text"
                           className="form-control"
                           placeholder="Search ..."
-                          aria-label="Recipient's username"
+                          aria-label="Recipient`s username"
                         />
                         <button className="btn btn-primary" type="submit">
                           <i className="mdi mdi-magnify" />
@@ -478,7 +478,7 @@ const Header = () => {
                               <div className="fs-13 text-muted">
                                 <p className="mb-1">
                                   Answered to your comment on the cash flow
-                                  forecast's graph 🔔.
+                                  forecast`s graph 🔔.
                                 </p>
                               </div>
                               <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
@@ -663,7 +663,7 @@ const Header = () => {
                               <div className="fs-13 text-muted">
                                 <p className="mb-1">
                                   Answered to your comment on the cash flow
-                                  forecast's graph 🔔.
+                                  forecast`s graph 🔔.
                                 </p>
                               </div>
                               <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
@@ -697,11 +697,11 @@ const Header = () => {
                               alt="user-pic"
                             />
                             <div className="flex-1">
-                              <a href="#!" className="stretched-link">
+                              {/* <a href="#!" className="stretched-link"> */}
                                 <h6 className="mt-0 mb-1 fs-13 fw-semibold">
                                   Kenneth Brown
                                 </h6>
-                              </a>
+                              {/* </a> */}
                               <div className="fs-13 text-muted">
                                 <p className="mb-1">
                                   Mentionned you in his comment on 📃 invoice

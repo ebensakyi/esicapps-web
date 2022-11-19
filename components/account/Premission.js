@@ -42,8 +42,8 @@ console.log("page access",pageAccess);
     });
   };
   return (
-    <div class="row">
-      <div class="col-12">
+    <div className="row">
+      <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
             <div className="card">
@@ -74,7 +74,7 @@ console.log("page access",pageAccess);
                     </label>
 
                     <select
-                      class="form-select"
+                      className="form-select"
                       id="inputGroupSelect02"
                       onChange={(e) => {
                         onUserTypeChange(e);
@@ -97,7 +97,7 @@ console.log("page access",pageAccess);
         </div>
       </div>
 
-      <div class="col-12">
+      <div className="col-12">
         <div className="row">
           <div className="col-lg-6">
             <div className="card">
@@ -109,8 +109,8 @@ console.log("page access",pageAccess);
               <div className="card-body">
                 <div className="row">
                   <div className="col-xxl-12 col-md-12">
-                    <div class="table-responsive">
-                      <table class="table table-striped table-nowrap align-middle mb-0">
+                    <div className="table-responsive">
+                      <table className="table table-striped table-nowrap align-middle mb-0">
                         <thead>
                           <tr>
                             {/* <th scope="col">ID</th> */}
@@ -123,7 +123,7 @@ console.log("page access",pageAccess);
                           {/* <td class="fw-medium">01</td> */}
                           {pages.map((page) => {
                             return (
-                              <tr>
+                              <tr key={page.id}>
                                 <td>{page.name}</td>
                                 <td>{page.path}</td>
                                 <td>

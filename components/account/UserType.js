@@ -20,8 +20,8 @@ const UserType = ({ userLevels, pages }) => {
   };
 
   return (
-    <div class="row">
-      <div class="col-12">
+    <div className="row">
+      <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
             <div className="card">
@@ -38,7 +38,7 @@ const UserType = ({ userLevels, pages }) => {
                       </label>
 
                       <select
-                        class="form-select"
+                        className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => setLevel(Number(e.target.value))}
                       >
@@ -84,7 +84,7 @@ const UserType = ({ userLevels, pages }) => {
           </div>
         </div>
       </div>
-      <div class="col-12">
+      <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
             <div className="card">
@@ -93,7 +93,7 @@ const UserType = ({ userLevels, pages }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                <div class="col-12">
+                <div className="col-12">
                   <div className="row">
                     <table className="table table-striped">
                       <thead>

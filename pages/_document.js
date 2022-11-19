@@ -24,7 +24,7 @@ export default function Document() {
 
       
 
-        <script src="/assets/js/layout.js"></script>
+        <script async src="/assets/js/layout.js"></script>
         <link
           href="/assets/css/bootstrap.min.css"
           rel="stylesheet"
@@ -47,7 +47,7 @@ export default function Document() {
         <>
           {/*start back-to-top*/}
           <button
-            onclick="topFunction()"
+            onClick="topFunction()"
             className="btn btn-danger btn-icon"
             id="back-to-top"
           >
@@ -771,22 +771,22 @@ export default function Document() {
         </>
         <NextScript />
 
-        <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="/assets/libs/node-waves/waves.min.js"></script>
-        <script src="/assets/libs/feather-icons/feather.min.js"></script>
-        <script src="/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-        <script src="/assets/js/plugins.js"></script>
+        <script async src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script async src="/assets/libs/simplebar/simplebar.min.js"></script>
+        <script async src="/assets/libs/node-waves/waves.min.js"></script>
+        <script async src="/assets/libs/feather-icons/feather.min.js"></script>
+        <script async src="/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+        <script async src="/assets/js/plugins.js"></script>
 
-        <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
+        <script async src="/assets/libs/apexcharts/apexcharts.min.js"></script>
 
-        <script src="/assets/libs/jsvectormap/js/jsvectormap.min.js"></script>
-        <script src="/assets/libs/jsvectormap/maps/world-merc.js"></script>
+        <script async src="/assets/libs/jsvectormap/js/jsvectormap.min.js"></script>
+        <script async src="/assets/libs/jsvectormap/maps/world-merc.js"></script>
 
-        <script src="/assets/libs/swiper/swiper-bundle.min.js"></script>
+        <script async src="/assets/libs/swiper/swiper-bundle.min.js"></script>
 
 
-        <script src="/assets/js/app.js"></script>
+        <script asyncsrc="/assets/js/app.js"></script>
       </body>
     </Html>
   );
