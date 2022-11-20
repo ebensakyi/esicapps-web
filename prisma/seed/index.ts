@@ -6,7 +6,6 @@ import { userType } from "./userType";
 import { region } from "./region";
 import { inspectionForm } from "./inspectionForm";
 
-import { analCleansingMaterialMgt } from "./analCleansingMaterialMgt";
 import { community } from "./community";
 import { district } from "./district";
 import { drainType } from "./drainType";
@@ -36,7 +35,7 @@ import { nuisance } from "./nuisance";
 
 import { action } from "./action";
 import { pestSign } from "./pestSign";
-import { temporaryPermanent } from "./temporaryPermanent";
+import { structureType } from "./structureType";
 import { toiletPitPosition } from "./toiletPitPosition";
 import { services } from "./services";
 import { types } from "./types";
@@ -86,9 +85,7 @@ async function main() {
     data: region,
   });
 
-  await prisma.analCleansingMaterialMgt.createMany({
-    data: analCleansingMaterialMgt,
-  });
+
 
   await prisma.district.createMany({
     data: district,
@@ -106,9 +103,7 @@ async function main() {
     data: excretaDisposalMethod,
   });
 
-  await prisma.facility.createMany({
-    data: facility,
-  });
+
 
   await prisma.waterFlowFrequency.createMany({
     data: waterFrequency,
@@ -119,9 +114,9 @@ async function main() {
   await prisma.solidWasteReceptacle.createMany({
     data: solidWasteReceptacle,
   });
-  await prisma.storageCondition.createMany({
-    data: storageCondition,
-  });
+  // await prisma.storageCondition.createMany({
+  //   data: storageCondition,
+  // });
 
   await prisma.toiletType.createMany({
     data: toiletType,
@@ -167,8 +162,8 @@ async function main() {
   await prisma.pestSign.createMany({
     data: pestSign,
   });
-  await prisma.temporaryPermanent.createMany({
-    data: temporaryPermanent,
+  await prisma.structureType.createMany({
+    data: structureType,
   });
   await prisma.toiletPitPosition.createMany({
     data: toiletPitPosition,

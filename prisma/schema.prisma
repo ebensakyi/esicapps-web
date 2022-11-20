@@ -284,14 +284,14 @@ model EffluentManagement {
   PremisesEffluentManagement PremisesEffluentManagement[]
 }
 
-model ExcretaContainmentMethod {
+model ExcretaContainment {
   id                               Int                                @id @default(autoincrement())
   name                             String                             @db.VarChar(255)
   deleted                          Int?                               @default(0)
   createdAt                        DateTime                           @default(now())
   updatedAt                        DateTime                           @updatedAt
   LiquidWasteSection               LiquidWasteSection[]
-  PremisesExcretaContainmentMethod PremisesExcretaContainmentMethod[]
+  PremisesExcretaContainment PremisesExcretaContainment[]
 }
 
 model ExcretaDisposalMethod {
@@ -1324,14 +1324,14 @@ model LiquidWasteSection {
   drainTypeId                Int?
   EffluentManagement         EffluentManagement?       @relation(fields: [effluentManagementId], references: [id])
   effluentManagementId       Int?
-  ExcretaContainmentMethod   ExcretaContainmentMethod? @relation(fields: [excretaContainmentMethodId], references: [id])
-  excretaContainmentMethodId Int?
+  ExcretaContainment   ExcretaContainment? @relation(fields: [excretaContainmentId], references: [id])
+  excretaContainmentId Int?
   ExcretaDisposalMethod      ExcretaDisposalMethod?    @relation(fields: [excretaDisposalMethodId], references: [id])
   excretaDisposalMethodId    Int?
 
   PremisesEffluentManagement       PremisesEffluentManagement[]
   PremisesExcretaDisposalMethod    PremisesExcretaDisposalMethod[]
-  PremisesExcretaContainmentMethod PremisesExcretaContainmentMethod[]
+  PremisesExcretaContainment PremisesExcretaContainment[]
   PremisesGreyWaterDisposal        PremisesGreyWaterDisposal[]
   PremisesDrainType                PremisesDrainType[]
 
@@ -1499,16 +1499,16 @@ model PremisesExcretaDisposalMethod {
   LiquidWasteSection      LiquidWasteSection    @relation(fields: [liquidWasteSectionId], references: [id])
 }
 
-model PremisesExcretaContainmentMethod {
+model PremisesExcretaContainment {
   id                   Int    @id @default(autoincrement())
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId Int?
 
-  ExcretaContainmentMethod   ExcretaContainmentMethod @relation(fields: [excretaContainmentMethodId], references: [id])
+  ExcretaContainment   ExcretaContainment @relation(fields: [excretaContainmentId], references: [id])
   deleted                    Int?                     @default(0)
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
-  excretaContainmentMethodId Int
+  excretaContainmentId Int
   LiquidWasteSection         LiquidWasteSection?      @relation(fields: [liquidWasteSectionId], references: [id])
 }
 

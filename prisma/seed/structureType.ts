@@ -1,4 +1,4 @@
-export const temporaryPermanent = [
+export const structureType = [
   {
     name: "Permanent",
   },
