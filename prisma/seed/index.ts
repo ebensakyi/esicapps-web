@@ -12,7 +12,6 @@ import { drainType } from "./drainType";
 import { effluentManagement } from "./effluentManagement";
 import { excretaContainment } from "./excretaContainment";
 import { excretaDisposalMethod } from "./excretaDisposalMethod";
-import { facility } from "./facility";
 import { waterFrequency } from "./waterFlowFrequency";
 import { wasteFrequency } from "./wasteCollectionFrequency";
 
