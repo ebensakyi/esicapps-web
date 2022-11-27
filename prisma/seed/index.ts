@@ -6,7 +6,7 @@ import { userType } from "./userType";
 import { region } from "./region";
 import { inspectionForm } from "./inspectionForm";
 
-import { community } from "./community";
+// import { community } from "./community";
 import { district } from "./district";
 import { drainType } from "./drainType";
 import { effluentManagement } from "./effluentManagement";
@@ -217,9 +217,9 @@ async function main() {
     data: electoralArea,
   });
 
-  await prisma.community.createMany({
-    data: community,
-  });
+  // await prisma.community.createMany({
+  //   data: community,
+  // });
   await prisma.user.createMany({
     data: superUser,
   });
