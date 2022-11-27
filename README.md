@@ -1,2 +1,2 @@
-1. Complete user creation
-2. Request for  electoral areas under districts and communities under electoral area
+1. login
+2. Add user logs to all tables
