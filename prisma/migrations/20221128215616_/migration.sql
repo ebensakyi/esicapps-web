@@ -333,9 +333,20 @@ CREATE TABLE "Nuisance" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "inspectionFormId" INTEGER NOT NULL,
 
     CONSTRAINT "Nuisance_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "InspectionFormNuisances" (
+    "id" SERIAL NOT NULL,
+    "nuisanceId" INTEGER NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "InspectionFormNuisances_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1457,7 +1468,10 @@ ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userTypeId_fkey"
 ALTER TABLE "Community" ADD CONSTRAINT "Community_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Nuisance" ADD CONSTRAINT "Nuisance_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "InspectionFormNuisances" ADD CONSTRAINT "InspectionFormNuisances_nuisanceId_fkey" FOREIGN KEY ("nuisanceId") REFERENCES "Nuisance"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InspectionFormNuisances" ADD CONSTRAINT "InspectionFormNuisances_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "District" ADD CONSTRAINT "District_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -47,7 +47,6 @@ model InspectionForm {
   Type                    Type[]
   Subtype                 Subtype[]
   Service                 Service[]
-  Nuisance                Nuisance[]
   InspectionFormNuisances InspectionFormNuisances[]
 }
 
@@ -329,9 +328,7 @@ model Nuisance {
   deleted                  Int?                       @default(0)
   createdAt                DateTime                   @default(now())
   updatedAt                DateTime                   @updatedAt
-  InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
   PremisesNuisanceDetected PremisesNuisanceDetected[]
-  inspectionFormId         Int
   InspectionFormNuisances  InspectionFormNuisances[]
 }
 

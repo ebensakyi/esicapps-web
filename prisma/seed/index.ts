@@ -18,7 +18,6 @@ import { wasteFrequency } from "./wasteCollectionFrequency";
 import { inspectionType } from "./inspectionType";
 import { respondentDesignation } from "./respondentDesignation";
 import { solidWasteReceptacle } from "./solidWasteReceptacle";
-import { storageCondition } from "./storageCondition";
 import { toiletType } from "./toiletType";
 import { waterSourceType } from "./waterSourceType";
 import { drinkingWaterSourceType } from "./drinkingWaterSourceType";
@@ -66,6 +65,7 @@ import { cleaningFrequency } from "./cleaningFrequency";
 import { desiltingFrequency } from "./desiltingFrequency";
 import {containerVolume} from "./containerVolume";
 import {toiletHouseholdNumber} from "./toiletHouseholdNumber";
+import {inspectionFormNuisances} from "./inspectionFormNuisances";
 
 async function main() {
   await prisma.dataVersion.createMany({
@@ -152,6 +152,10 @@ async function main() {
 
   await prisma.nuisance.createMany({
     data: nuisance,
+  });
+
+  await prisma.inspectionFormNuisances.createMany({
+    data: inspectionFormNuisances,
   });
 
   await prisma.action.createMany({
