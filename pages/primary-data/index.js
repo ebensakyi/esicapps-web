@@ -8,17 +8,14 @@ export default function primary_data({
   regions,
   districts,
   communities,
-  electoralAreas,
+  // electoralAreas,
   actions,
-  analCleansings,
   cemeteryWorkers,
   drainTypes,
   drinkingWaterSources,
   effluentManagements,
   excretaContainments,
   excretaDisposals,
-  facilities,
-  frequencies,
   greyWaterDisposals,
   hazardousWasteDisposals,
   inspectionTypes,
@@ -52,18 +49,15 @@ export default function primary_data({
               inspectionForms={inspectionForms}
               regions={regions}
               districts={districts}
-              electoralAreas={electoralAreas}
+              // electoralAreas={electoralAreas}
               communities={communities}
               actions={actions}
-              analCleansings={analCleansings}
               cemeteryWorkers={cemeteryWorkers}
               drainTypes={drainTypes}
               drinkingWaterSources={drinkingWaterSources}
               effluentManagements={effluentManagements}
               excretaContainments={excretaContainments}
               excretaDisposals={excretaDisposals}
-              facilities={facilities}
-              frequencies={frequencies}
               greyWaterDisposals={greyWaterDisposals}
               hazardousWasteDisposals={hazardousWasteDisposals}
               inspectionTypes={inspectionTypes}
@@ -114,9 +108,9 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/primary-data/district`
   ).then((res) => res.json());
 
-  const electoralAreas = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/electoral-area`
-  ).then((res) => res.json());
+  // const electoralAreas = await fetch(
+  //   `${SERVER_BASE_URL}/api/v1/primary-data/electoral-area`
+  // ).then((res) => res.json());
 
   const communities = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/community`
@@ -126,9 +120,6 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/primary-data/action`
   ).then((res) => res.json());
 
-  const analCleansings = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/anal-cleansing-material`
-  ).then((res) => res.json());
 
   const cemeteryWorkers = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/cemetery-workers`
@@ -154,13 +145,13 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/primary-data/excreta-containment`
   ).then((res) => res.json());
 
-  const facilities = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/facility`
-  ).then((res) => res.json());
+  // const facilities = await fetch(
+  //   `${SERVER_BASE_URL}/api/v1/primary-data/facility`
+  // ).then((res) => res.json());
 
-  const frequencies = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/frequency`
-  ).then((res) => res.json());
+  // const frequencies = await fetch(
+  //   `${SERVER_BASE_URL}/api/v1/primary-data/frequency`
+  // ).then((res) => res.json());
 
   const hazardousWasteDisposals = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/hazardous-waste-disposal`
@@ -246,18 +237,15 @@ export async function getServerSideProps(context) {
       inspectionForms,
       regions,
       districts,
-      electoralAreas,
+      // electoralAreas,
       communities,
       actions,
-      analCleansings,
       cemeteryWorkers,
       drainTypes,
       drinkingWaterSources,
       effluentManagements,
       excretaContainments,
       excretaDisposals,
-      facilities,
-      frequencies,
       greyWaterDisposals,
       pestSigns,
       hazardousWasteDisposals,

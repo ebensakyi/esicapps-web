@@ -6,18 +6,15 @@ const PrimaryData = ({
   inspectionForms,
   regions,
   districts,
-  electoralAreas,
+  // electoralAreas,
   communities,
   actions,
-  analCleansings,
   cemeteryWorkers,
   drainTypes,
   drinkingWaterSources,
   effluentManagements,
   excretaContainments,
   excretaDisposals,
-  facilities,
-  frequencies,
   greyWaterDisposals,
   hazardousWasteDisposals,
   inspectionTypes,
@@ -41,7 +38,7 @@ const PrimaryData = ({
 }) => {
   const [regionName, setRegionName] = useState();
   const [districtName, setDistrictName] = useState();
-  const [electoralAreaName, setElectoralAreaName] = useState();
+  // const [electoralAreaName, setElectoralAreaName] = useState();
   const [communityName, setCommunityName] = useState();
 
   const [regionAbbrv, setRegionAbbrv] = useState();
@@ -58,9 +55,9 @@ const PrimaryData = ({
   const [effluentManagementName, setEffluentManagementName] = useState();
   const [excretaContainmentName, setExcretaContainmentName] = useState();
   const [excretaDisposalName, setExcretaDisposalName] = useState();
-  const [facilityName, setFacilityName] = useState();
+  // const [facilityName, setFacilityName] = useState();
   const [inspectionFormId, setInspectionFormId] = useState();
-  const [frequencyName, setFrequencyName] = useState();
+  // const [frequencyName, setFrequencyName] = useState();
   const [greyWaterDisposalName, setGreyWaterDisposalName] = useState();
 
   const [hazardousWasteDisposalName, setHazardousWasteDisposalName] =
@@ -126,23 +123,23 @@ const PrimaryData = ({
       console.log(error);
     }
   };
-  const addElectoralArea = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: electoralAreaName,
-        districtId,
-      };
+  // const addElectoralArea = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     let data = {
+  //       name: electoralAreaName,
+  //       districtId,
+  //     };
 
-      const response = await axios.post("/api/v1/primary-data/electoral-area", {
-        data,
-      });
+  //     const response = await axios.post("/api/v1/primary-data/electoral-area", {
+  //       data,
+  //     });
 
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     router.replace(router.asPath);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const addCommunity = async (e) => {
     try {
@@ -317,42 +314,42 @@ const PrimaryData = ({
       console.log(error);
     }
   };
-  const addFacility = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: facilityName,
-        inspectionFormId,
-      };
+  // const addFacility = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     let data = {
+  //       name: facilityName,
+  //       inspectionFormId,
+  //     };
 
-      const response = await axios.post("/api/v1/primary-data/facility", {
-        data,
-      });
+  //     const response = await axios.post("/api/v1/primary-data/facility", {
+  //       data,
+  //     });
 
-      setFacilityName("");
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setFacilityName("");
+  //     router.replace(router.asPath);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const addFrequency = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: frequencyName,
-      };
+  // const addFrequency = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     let data = {
+  //       name: frequencyName,
+  //     };
 
-      const response = await axios.post("/api/v1/primary-data/frequency", {
-        data,
-      });
+  //     const response = await axios.post("/api/v1/primary-data/frequency", {
+  //       data,
+  //     });
 
-      setFrequencyName("");
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setFrequencyName("");
+  //     router.replace(router.asPath);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const addGreyWaterDisposal = async (e) => {
     try {
@@ -1041,7 +1038,7 @@ const PrimaryData = ({
                       </div>
                     </div>
                   </div>
-                  <div className="accordion-item mt-2">
+                  {/* <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
                       id="accordionborderedExample2"
@@ -1140,7 +1137,6 @@ const PrimaryData = ({
                               <table className="table table-striped">
                                 <thead>
                                   <tr>
-                                    {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
                                     <th scope="col">District</th>
 
@@ -1151,7 +1147,6 @@ const PrimaryData = ({
                                 <tbody>
                                   {electoralAreas.map((ea) => (
                                     <tr key={ea.id}>
-                                      {/* <th scope="row">{region.id}</th> */}
                                       <td>{ea.name}</td>
                                       <td>{ea.abbrv}</td>
                                       <td>{ea.District.name}</td>
@@ -1171,7 +1166,7 @@ const PrimaryData = ({
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
@@ -1212,7 +1207,7 @@ const PrimaryData = ({
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      value={electoralAreaName}
+                                      value={communityName}
                                       onChange={(e) =>
                                         setCommunityName(e.target.value)
                                       }
@@ -1477,32 +1472,7 @@ const PrimaryData = ({
                                 </div>
                               </div>
                             </div>
-                            <div className="card-footer">
-                              <table className="table table-striped">
-                                <thead>
-                                  <tr>
-                                    {/* <th scope="col">Id</th> */}
-                                    <th scope="col">Name</th>
-
-                                    <th scope="col">Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {analCleansings.map((a) => (
-                                    <tr key={a.id}>
-                                      {/* <th scope="row">{region.id}</th> */}
-                                      <td>{a.name}</td>
-
-                                      <td>
-                                        <button className="badge bg-success">
-                                          Edit
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
+                            {/*  */}
                           </div>
                         </div>
                       </div>
@@ -2125,7 +2095,7 @@ const PrimaryData = ({
                       </div>
                     </div>
                   </div>
-                  <div className="accordion-item mt-2">
+                  {/* <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
                       id="accordionborderedExample3"
@@ -2226,7 +2196,6 @@ const PrimaryData = ({
                               <table className="table table-striped">
                                 <thead>
                                   <tr>
-                                    {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
 
                                     <th scope="col">Action</th>
@@ -2235,7 +2204,6 @@ const PrimaryData = ({
                                 <tbody>
                                   {facilities.map((cw) => (
                                     <tr key={cw.id}>
-                                      {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
                                       <td>{cw.InspectionForm.name}</td>
 
@@ -2253,8 +2221,8 @@ const PrimaryData = ({
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="accordion-item mt-2">
+                  </div> */}
+                  {/* <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
                       id="accordionborderedExample3"
@@ -2328,7 +2296,6 @@ const PrimaryData = ({
                               <table className="table table-striped">
                                 <thead>
                                   <tr>
-                                    {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
 
                                     <th scope="col">Action</th>
@@ -2337,7 +2304,6 @@ const PrimaryData = ({
                                 <tbody>
                                   {frequencies.map((cw) => (
                                     <tr key={cw.id}>
-                                      {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
                                       <td>
@@ -2354,7 +2320,7 @@ const PrimaryData = ({
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
