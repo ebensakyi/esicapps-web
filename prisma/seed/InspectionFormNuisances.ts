@@ -34,8 +34,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 1 },
   { nuisanceId: 34, inspectionFormId: 1 },
   { nuisanceId: 35, inspectionFormId: 1 },
-  { nuisanceId: 36, inspectionFormId: 1 },
-  { nuisanceId: 37, inspectionFormId: 1 },
+
 
   { nuisanceId: 1, inspectionFormId: 2 },
   { nuisanceId: 2, inspectionFormId: 2 },
@@ -72,8 +71,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 2 },
   { nuisanceId: 34, inspectionFormId: 2 },
   { nuisanceId: 35, inspectionFormId: 2 },
-  { nuisanceId: 36, inspectionFormId: 2 },
-  { nuisanceId: 37, inspectionFormId: 2 },
+
 
 
   { nuisanceId: 1, inspectionFormId: 3 },
@@ -111,8 +109,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 3 },
   { nuisanceId: 34, inspectionFormId: 3 },
   { nuisanceId: 35, inspectionFormId: 3 },
-  { nuisanceId: 36, inspectionFormId: 3 },
-  { nuisanceId: 37, inspectionFormId: 3 },
+
 
 
   { nuisanceId: 1, inspectionFormId: 4 },
@@ -150,8 +147,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 4 },
   { nuisanceId: 34, inspectionFormId: 4 },
   { nuisanceId: 35, inspectionFormId: 4 },
-  { nuisanceId: 36, inspectionFormId: 4 },
-  { nuisanceId: 37, inspectionFormId: 4 },
+
 
   { nuisanceId: 1, inspectionFormId: 5 },
   { nuisanceId: 2, inspectionFormId: 5 },
@@ -188,8 +184,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 5 },
   { nuisanceId: 34, inspectionFormId: 5 },
   { nuisanceId: 35, inspectionFormId: 5 },
-  { nuisanceId: 36, inspectionFormId: 5 },
-  { nuisanceId: 37, inspectionFormId: 5 },
+
 
 
   { nuisanceId: 1, inspectionFormId: 6 },
@@ -227,8 +222,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 6 },
   { nuisanceId: 34, inspectionFormId: 6 },
   { nuisanceId: 35, inspectionFormId: 6 },
-  { nuisanceId: 36, inspectionFormId: 6 },
-  { nuisanceId: 37, inspectionFormId: 6 },
+
 
 
   { nuisanceId: 1, inspectionFormId: 7 },
@@ -266,8 +260,7 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 7 },
   { nuisanceId: 34, inspectionFormId: 7 },
   { nuisanceId: 35, inspectionFormId: 7 },
-  { nuisanceId: 36, inspectionFormId: 7 },
-  { nuisanceId: 37, inspectionFormId: 7 },
+
 
 
     { nuisanceId: 1, inspectionFormId: 8 },
@@ -305,6 +298,5 @@ export const inspectionFormNuisances = [
   { nuisanceId: 33, inspectionFormId: 8 },
   { nuisanceId: 34, inspectionFormId: 8 },
   { nuisanceId: 35, inspectionFormId: 8 },
-  { nuisanceId: 36, inspectionFormId: 8 },
-  { nuisanceId: 37, inspectionFormId: 8 },
+
 ];

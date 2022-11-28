@@ -22,20 +22,23 @@ export const nuisance = [
   { id: 11, name: "Prohibited animals" },
   { id: 12, name: "Insanitary drains" },
   { id: 13, name: "Insanitary catchpit" },
+
   { id: 14, name: "Dirty walls of premises" },
   { id: 15, name: "Rats and other vermin" },
   { id: 16, name: "Construction waste" },
-
   { id: 17, name: "Stagnant waste water" },
   { id: 18, name: "Exposed Faecal matter" },
 
   { id: 19, name: "Offensive odour" },
   { id: 20, name: "Insanitary Animal Space" },
-
   { id: 21, name: "Unsafe structure" },
   { id: 22, name: "Stray animals" },
   { id: 23, name: "Dumping and Burning" },
   { id: 24, name: "Insanitary bathroom" },
+
+
+
+
   { id: 25, name: "Expired Medicine" },
   { id: 26, name: "Exposed food" },
 
@@ -44,10 +47,11 @@ export const nuisance = [
 
   { id: 29, name: "Defective Placenta Pit" },
   { id: 30, name: "Lack Of Placenta Pit" },
-  { id: 31, name: "Accumulation of Refuse" },
-  { id: 32, name: "Defective Containment" },
-  { id: 33, name: "Broken Pipe" },
-  { id: 34, name: "Defective Tomb" },
-  { id: 35, name: "Improper Tomb Layout" },
-  { id: 37, name: "Exposed Anal Cleansing Material" },
+
+
+  { id: 31, name: "Defective Containment" },
+  { id: 32, name: "Broken Pipe" },
+  { id: 33, name: "Defective Tomb" },
+  { id: 34, name: "Improper Tomb Layout" },
+  { id: 35, name: "Exposed Anal Cleansing Material" },
 ];
