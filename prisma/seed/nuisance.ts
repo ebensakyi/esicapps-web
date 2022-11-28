@@ -1,111 +1,53 @@
 export const nuisance = [
   {
+    id: 1,
     name: "Exposed Excretment",
   },
   {
+    id: 2,
     name: "Unsanitary bathroom",
   },
   {
+    id: 3,
     name: "Growth of weeds",
   },
-  {
-    name: "Detrimental accumulation of articles",
-  },
-  {
-    name: "Insanitary Latrine",
-  },
-  {
-    name: "Noise",
-  },
-  {
-    name: "No toilet",
-  },
-  {
-    name: "Dust",
-  },
-  {
-    name: "Overcrowding",
-  },
-  {
-    name: "Accumulation of Refuse",
-  },
+  { id: 4, name: "Detrimental accumulation of articles" },
+  { id: 5, name: "Insanitary Latrine" },
+  { id: 6, name: "Noise" },
+  { id: 7, name: "No toilet" },
+  { id: 8, name: "Dust" },
+  { id: 9, name: "Overcrowding" },
+  { id: 10, name: "Accumulation of Refuse" },
 
-  {
-    name: "Prohibited animals",
-  },
-  {
-    name: "Insanitary drains",
-  },
-  {
-    name: "Insanitary catchpit",
-  },
-  {
-    name: "Dirty walls of premises",
-  },
-  {
-    name: "Rats and other vermin",
-  },
-  {
-    name: "Construction waste",
-  },
+  { id: 11, name: "Prohibited animals" },
+  { id: 12, name: "Insanitary drains" },
+  { id: 13, name: "Insanitary catchpit" },
+  { id: 14, name: "Dirty walls of premises" },
+  { id: 15, name: "Rats and other vermin" },
+  { id: 16, name: "Construction waste" },
 
-  {
-     name: "Stagnant waste water",
-   },
-  {
-    name: "Exposed Faecal matter",
-  },
+  { id: 17, name: "Stagnant waste water" },
+  { id: 18, name: "Exposed Faecal matter" },
 
-  {
-    name: "Offensive odour",
-  },
-  {
-    name: "Insanitary Animal Space",
-  },
+  { id: 19, name: "Offensive odour" },
+  { id: 20, name: "Insanitary Animal Space" },
 
-  {
-    name: "Unsafe structure",
-  },
-  {
-    name: "Stray animals",
-  },
-  {
-    name: "Dumping and Burning",
-  },
-  {name: "Insanitary bathroom"},
-  {name: "Expired Medicine"},
-  {name: "Exposed food"},
+  { id: 21, name: "Unsafe structure" },
+  { id: 22, name: "Stray animals" },
+  { id: 23, name: "Dumping and Burning" },
+  { id: 24, name: "Insanitary bathroom" },
+  { id: 25, name: "Expired Medicine" },
+  { id: 26, name: "Exposed food" },
 
-  {
-    name: "No Permit",
-  },
-  {name: "Insanitary kitchen"},
+  { id: 27, name: "No Permit" },
+  { id: 28, name: "Insanitary kitchen" },
 
-  {
-    name: "Defective Placenta Pit",
-  },
-  {
-    name: "Lack Of Placenta Pit",
-  },
-  {
-    name: "Accumulation of Refuse",
-  },
-  {
-    name: "Defective Containment",
-  },
-  {
-    name: "Broken Pipe",
-  },
-  {
-    name: "Defective Tomb",
-  },
-  {
-    name: "Improper Tomb Layout",
-  },
-  {
-    name: "Exposed Anal Cleansing Material",
-  },
- 
+  { id: 29, name: "Defective Placenta Pit" },
+  { id: 30, name: "Lack Of Placenta Pit" },
+  { id: 31, name: "Accumulation of Refuse" },
+  { id: 32, name: "Defective Containment" },
+  { id: 33, name: "Broken Pipe" },
+  { id: 34, name: "Defective Tomb" },
+  { id: 35, name: "Improper Tomb Layout" },
+  { id: 37, name: "Exposed Anal Cleansing Material" },
 ];
-
-
