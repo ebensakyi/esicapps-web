@@ -1220,7 +1220,7 @@ const PrimaryData = ({
                                       htmlFor="readonlyInput"
                                       className="form-label"
                                     >
-                                      Select Electoral Area
+                                      Select District
                                     </label>
 
                                     <select
@@ -1234,7 +1234,7 @@ const PrimaryData = ({
                                       }
                                     >
                                       <option selected>Choose...</option>
-                                      {electoralAreas.map((ea) => (
+                                      {districts.map((ea) => (
                                         <option key={ea.id} value={ea.id}>
                                           {ea.name}
                                         </option>
@@ -1280,7 +1280,7 @@ const PrimaryData = ({
                                     <tr key={c.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{c.name}</td>
-                                      <td>{c.ElectoralArea.name}</td>
+                                      {/* <td>{c.District.name}</td> */}
                                       {/* <td>{c.District.name}</td>
 
                                       <td>{c.District.Region.name}</td> */}
@@ -2824,7 +2824,7 @@ const PrimaryData = ({
                                     <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
-                                      <td>{cw.InspectionForm.name}</td>
+                                      {/* <td>{cw.InspectionForm.name}</td> */}
 
                                       <td>
                                         <button className="badge bg-success">
@@ -3415,7 +3415,7 @@ const PrimaryData = ({
                                       type="text"
                                       className="form-control"
                                       id="basiInput"
-                                      value={electoralAreaName}
+                                      value={wasteCollectionTypeName}
                                       onChange={(e) =>
                                         setWasteCollectionTypeName(
                                           e.target.value

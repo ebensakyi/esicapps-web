@@ -6,7 +6,6 @@ const post = async (req, res) => {
       name: req.body.data.name,
       districtId: req.body.data.districtId,
     };
-    console.log(req.body);
 
     const community = await prisma.community.create({ data });
     res
