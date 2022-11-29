@@ -19,10 +19,14 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const nuisance = await prisma.inspectionFormNuisances.findMany({ where: { deleted: 0 } });
+    const nuisance = await prisma.inspectionFormNuisances.findMany({
+      where: { deleted: 0 },
+      include: {
+        Nuisance: true } ,
+    
+    });
     //return res.status(200).json({ statusCode: 1, data: nuisance });
-    return res.status(200).json( nuisance);
-
+    return res.status(200).json(nuisance);
   } catch (error) {
     console.log("Error: " + error);
   }

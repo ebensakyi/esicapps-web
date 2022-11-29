@@ -1,14 +1,10 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { inspect } from "util";
 
 const post = async (req, res) => {
   try {
-
-
-
-   // await clearUserCookie(req, res);
-
     let phoneNumber = req.body.phoneNumber;
     let password = req.body.password;
     //let hash = await bcrypt.hashSync(password, salt);
@@ -16,48 +12,35 @@ const post = async (req, res) => {
     console.log(req.body);
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
-      include: {District: true}
+      include: { District: true },
     });
 
-    console.log("user>> ",user);
-
-    if (!user)
+    if (!user) {
       return res
-        .status(200)
-        .json({statusCode:0, message: 'User account not found'});
+        .status(400)
+        .json({ statusCode: 0, message: "User account not found" });
+    }
 
     let isValid = await bcrypt.compare(password, user.password);
+    inspect(isValid);
 
     if (isValid) {
       const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
 
-
-
-      let userId = user.id;
-      let userType = Number(user.userTypeId);
-     // await setUserCookie(token, req, res);
-
-
-      
-     console.log("UUR",user);
-
-
-        return res.status(200).json(user);
-      
+      return res.status(200).json({ statusCode: 1, data: user });
     } else {
       return res
-        .status(200)
+        .status(404)
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
   } catch (error) {
     console.log("Server error", error);
     if (error.code === "P2002")
       return res
-        .status(200)
+        .status(500)
         .json({ statusCode: 0, message: "A server error occurred" });
   }
 };
-
 
 const get = async (req, res) => {
   try {
