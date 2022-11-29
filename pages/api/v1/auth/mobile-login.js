@@ -27,7 +27,7 @@ const post = async (req, res) => {
     if (isValid) {
       const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
 
-      return res.status(200).json({ statusCode: 1, data: user });
+      return res.status(200).json(user);
     } else {
       return res
         .status(404)
