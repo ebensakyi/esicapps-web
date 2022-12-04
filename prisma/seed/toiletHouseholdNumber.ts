@@ -3,10 +3,10 @@ export const toiletHouseholdNumber = [
     name: "Sole Household Usage",
   },
   {
-    name: "One other Households ",
+    name: "One other household ",
   },
   {
-    name: "Two Other Househols",
+    name: "Two other households",
   },
-  { name: "More than Three other Households" },
+  { name: "More than 3 other households" },
 ];

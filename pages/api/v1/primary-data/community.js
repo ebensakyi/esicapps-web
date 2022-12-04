@@ -21,10 +21,20 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const community = await prisma.community.findMany({
-      where: { deleted: 0 },
-     // include: {District: true}
-    });
+    let districtId = Number(req.query.districtId);
+    let community;
+    if (districtId) {
+      community = await prisma.community.findMany({
+        where: { deleted: 0, districtId: districtId },
+        // include: {District: true}
+      });
+    } else {
+      community = await prisma.community.findMany({
+        where: { deleted: 0 },
+        // include: {District: true}
+      });
+    }
+
     return res.status(200).json(community);
   } catch (error) {
     console.log("Error: " + error);
