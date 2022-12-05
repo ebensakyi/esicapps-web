@@ -2,27 +2,28 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    const data = {
-      inspectionId: req.body.inspectionId,
-      userId: Number(req.body.userId),
-      communityId: Number(req.body.communityId),
-      community: req.body.community == "null" ? "" : req.body.community,
-      ghanaPostGps: req.body.ghanaPostGps,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-      accuracy: req.body.accuracy,
-      respondentName: req.body.respondentName,
-      respondentPhoneNumber: req.body.respondentPhoneNumber,
-      respondentDesignationId: Number(req.body.respondentDesignationId),
-    };
 
-   // console.log(req.body.inspectionId);
-    console.log(data);
+    console.log(req.body);
 
-    const response = await prisma.basicInfoSection.create({ data });
+    // const data = {
+    //   inspectionId: req.body.inspectionId,
+    //   userId: Number(req.body.userId),
+    //   communityId: Number(req.body.communityId),
+    //   community: req.body.community == "null" ? "" : req.body.community,
+    //   ghanaPostGps: req.body.ghanaPostGps,
+    //   latitude: req.body.latitude,
+    //   longitude: req.body.longitude,
+    //   accuracy: req.body.accuracy,
+    //   respondentName: req.body.respondentName,
+    //   respondentPhoneNumber: req.body.respondentPhoneNumber,
+    //   respondentDesignationId: Number(req.body.respondentDesignationId),
+    // };
 
-    console.log(response);
-    res.status(200).json({ statusCode: 1, message: "Data saved" });
+
+    // const response = await prisma.basicInfoSection.create({ data });
+
+    // console.log(response);
+    // res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
     console.log("Error: " + error);
     if (error.code === "P2002")
