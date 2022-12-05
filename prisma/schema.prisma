@@ -83,10 +83,12 @@ model User {
   UserType      UserType?      @relation(fields: [userTypeId], references: [id])
   ElectoralArea ElectoralArea? @relation(fields: [electoralAreaId], references: [id])
 
-  Logs            Logs[]
-  submittedBy     Inspection[] @relation("submittedBy")
-  publishedBy     Inspection[] @relation("publishedBy")
-  electoralAreaId Int
+  Logs                 Logs[]
+  submittedBy          Inspection[]           @relation("submittedBy")
+  publishedBy          Inspection[]           @relation("publishedBy")
+  electoralAreaId      Int
+  LicencePermitSection LicencePermitSection[]
+  BasicInfoSection     BasicInfoSection[]
 }
 
 model UserLevel {
@@ -804,7 +806,7 @@ model Service {
 model BasicInfoSection {
   id           Int    @id @default(autoincrement())
   inspectionId String @db.VarChar(255)
-  userId       Int
+  userId    Int
 
   zoneId       Int?
   communityId  Int?
@@ -822,6 +824,7 @@ model BasicInfoSection {
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model ResidentialPremisesInfoSection {
@@ -1196,8 +1199,10 @@ model IndustryPremisesInfoSection {
 }
 
 model LicencePermitSection {
-  id                                   Int    @id @default(autoincrement())
-  inspectionId                         String @db.VarChar(255)
+  id           Int    @id @default(autoincrement())
+  inspectionId String @db.VarChar(255)
+  userId       Int
+
   buildingPermitAvailabilityId         Int
   businessLicenceAvailabilityId        Int?
   medicalCertAvailabilityId            Int?
@@ -1227,6 +1232,7 @@ model LicencePermitSection {
   fumigationCertificateAvailability YesNo?     @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   buildingPermitAvailability        YesNo?     @relation("buildingPermitAvailability", fields: [buildingPermitAvailabilityId], references: [id])
   Inspection                        Inspection @relation(fields: [inspectionId], references: [id])
+  User                              User       @relation(fields: [userId], references: [id])
 }
 
 model WaterSection {
