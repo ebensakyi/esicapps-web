@@ -333,7 +333,7 @@ model Nuisance {
 }
 
 model InspectionFormNuisances {
-  id Int @id @default(autoincrement())
+  id               Int @id @default(autoincrement())
   nuisanceId       Int
   inspectionFormId Int
 
@@ -341,8 +341,8 @@ model InspectionFormNuisances {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Nuisance         Nuisance       @relation(fields: [nuisanceId], references: [id])
-  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  Nuisance       Nuisance       @relation(fields: [nuisanceId], references: [id])
+  InspectionForm InspectionForm @relation(fields: [inspectionFormId], references: [id])
 }
 
 model OwnershipType {
@@ -802,18 +802,20 @@ model Service {
 /////////////////////////////////////START SECTIONS ////////////////////////////////
 
 model BasicInfoSection {
-  id                      Int                   @id @default(autoincrement())
-  inspectionId            String                @db.VarChar(255)
-  districtId              Int
-  zoneId                  Int?
-  communityId             Int?
-  community               String                @db.VarChar(255)
-  ghanaPostGps            String?               @db.VarChar(255)
-  latitude                String                @db.VarChar(255)
-  longitude               String                @db.VarChar(255)
+  id           Int    @id @default(autoincrement())
+  inspectionId String @db.VarChar(255)
+  userId       Int
+
+  zoneId       Int?
+  communityId  Int?
+  community    String  @db.VarChar(255)
+  ghanaPostGps String? @db.VarChar(255)
+  latitude     String  @db.VarChar(255)
+  longitude    String  @db.VarChar(255)
+  accuracy     String  @db.VarChar(255)
+
   respondentName          String                @db.VarChar(255)
-  phoneNumber             String                @db.VarChar(255)
-  // premiseTypeId                             Int
+  respondentPhoneNumber   String                @db.VarChar(255)
   respondentDesignationId Int
   RespondentDesignation   RespondentDesignation @relation(fields: [respondentDesignationId], references: [id])
 
