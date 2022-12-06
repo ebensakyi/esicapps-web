@@ -97,6 +97,8 @@ model User {
   Inspection           Inspection[]
   WaterSection         WaterSection[]
   SolidWasteSection    SolidWasteSection[]
+  LiquidWasteSection   LiquidWasteSection[]
+  ConclusionSection    ConclusionSection[]
 }
 
 model UserLevel {
@@ -1272,21 +1274,20 @@ model WaterSection {
 }
 
 model LiquidWasteSection {
-  id                         Int      @id @default(autoincrement())
-  inspectionId               String   @db.VarChar(255)
-  numberToiletSeats          Int?
-  numberUrinalSeats          Int?
-  toiletAdequacyId           Int?
-  urinalAdequacyId           Int?
-  bathroomAdequacyId         Int?
-  separateStaffUrinalId      Int?
-  availToiletFaciltyMgtId    Int?
-  toiletGenderSensivityId    Int?
-  urinalGenderSensivityId    Int?
-  // premisesEffluentManagementId    Int?
-  toiletPitPositionId        Int?
-  // premisesExcretaDisposalMethodId Int?
-  // premisesExcretaContainmentId    Int?
+  id                      Int    @id @default(autoincrement())
+  inspectionId            String @db.VarChar(255)
+  userId                  Int
+  numberToiletSeats       Int?
+  numberUrinalSeats       Int?
+  toiletAdequacyId        Int?
+  urinalAdequacyId        Int?
+  bathroomAdequacyId      Int?
+  separateStaffUrinalId   Int?
+  availToiletFaciltyMgtId Int?
+  toiletGenderSensivityId Int?
+  urinalGenderSensivityId Int?
+  toiletPitPositionId     Int?
+
   toiletDisabilityFriendlyId Int?
   urinalDisabilityFriendlyId Int?
   stagnationEvidenceId       Int?
@@ -1352,6 +1353,7 @@ model LiquidWasteSection {
   PremisesExcretaContainment    PremisesExcretaContainment[]
   PremisesGreyWaterDisposal     PremisesGreyWaterDisposal[]
   PremisesDrainType             PremisesDrainType[]
+  User                          User                            @relation(fields: [userId], references: [id])
 
   PremisesToiletType PremisesToiletType[]
 }
@@ -1359,7 +1361,7 @@ model LiquidWasteSection {
 model SolidWasteSection {
   id           Int    @id @default(autoincrement())
   inspectionId String @db.VarChar(255)
-  userId                           Int
+  userId       Int
 
   wasteServiceProviderRegistrationId Int?
   wasteCollectorName                 String?
@@ -1392,13 +1394,14 @@ model SolidWasteSection {
 }
 
 model ConclusionSection {
-  id                         Int                        @id @default(autoincrement())
-  inspectionId               String                     @db.VarChar(255)
+  id           Int    @id @default(autoincrement())
+  inspectionId String @db.VarChar(255)
+  userId       Int
+
   obnoxiousTradeExistId      Int?
   officerComment             String                     @db.VarChar(255)
   obnoxiousTradeExist        YesNo?                     @relation("obnoxiousTradeExist", fields: [obnoxiousTradeExistId], references: [id])
   obnoxiousTrade             String                     @db.VarChar(255)
-  followUpDate               String                     @db.VarChar(255)
   generalSanitaryConditionId Int?
   deleted                    Int?                       @default(0)
   createdAt                  DateTime                   @default(now())
@@ -1408,6 +1411,7 @@ model ConclusionSection {
   Inspection Inspection @relation(fields: [inspectionId], references: [id])
 
   PremisesActionTaken PremisesActionTaken[]
+  User                User                  @relation(fields: [userId], references: [id])
 }
 
 ////////////END SECTION ///////////

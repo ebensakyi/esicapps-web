@@ -1086,6 +1086,7 @@ CREATE TABLE "WaterSection" (
 CREATE TABLE "LiquidWasteSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "numberToiletSeats" INTEGER,
     "numberUrinalSeats" INTEGER,
     "toiletAdequacyId" INTEGER,
@@ -1155,10 +1156,10 @@ CREATE TABLE "SolidWasteSection" (
 CREATE TABLE "ConclusionSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "obnoxiousTradeExistId" INTEGER,
     "officerComment" VARCHAR(255) NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
-    "followUpDate" VARCHAR(255) NOT NULL,
     "generalSanitaryConditionId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1908,6 +1909,9 @@ ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_excretaConta
 ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_excretaDisposalMethodId_fkey" FOREIGN KEY ("excretaDisposalMethodId") REFERENCES "ExcretaDisposalMethod"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_adequateWasteStorageReceptacleId_fkey" FOREIGN KEY ("adequateWasteStorageReceptacleId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -1936,6 +1940,9 @@ ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_obnoxiousTrade
 
 -- AddForeignKey
 ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSourceId_fkey" FOREIGN KEY ("waterSourceId") REFERENCES "WaterSourceType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
