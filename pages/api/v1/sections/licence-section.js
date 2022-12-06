@@ -1,42 +1,76 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
-  try {
-
-    console.log(req.body);
-
+ // try {
     const data = {
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
-      animalsPermitAvailabilityId: req.body.animalsPermitAvailabilityId == "null" ? null :  Number(req.body.animalsPermitAvailabilityId),
-      propertyRateAvailabilityId: req.body.propertyRateAvailabilityId == "null" ? null :  Number(req.body.propertyRateAvailabilityId),
-      buildingPermitAvailabilityId: req.body.buildingPermitAvailabilityId == "null" ? null :  Number(req.body.buildingPermitAvailabilityId),
-      businessLicenceAvailabilityId: req.body.businessLicenceAvailabilityId == "null" ? null :  Number(req.body.businessLicenceAvailabilityId),
-      habitationCertificateAvailabilityId: req.body.habitationCertificateAvailabilityId == "null" ? null :  Number(req.body.habitationCertificateAvailabilityId),
-      operatingLicenceAvailabilityId: req.body.operatingLicenceAvailabilityId == "null" ? null:  Number(req.body.operatingLicenceAvailabilityId),
-      structurePermitAvailabilityId: req.body.structurePermitAvailabilityId == "null" ? null :  Number(req.body.structurePermitAvailabilityId),
-      fumigationCertificateAvailabilityId: req.body.fumigationCertificateAvailabilityId == "null" ? null:  Number(req.body.fumigationCertificateAvailabilityId),
-      medicalCertificateAvailabilityId: req.body.medicalCertificateAvailabilityId == "null" ? null :  Number(req.body.medicalCertificateAvailabilityId),
-      gtaOperatingLicenceAvailabilityId: req.body.gtaOperatingLicenceAvailabilityId == "null" ? null:  Number(req.body.gtaOperatingLicenceAvailabilityId),
-      suitabilityCertificateAvailabilityId: req.body.suitabilityCertificateAvailabilityId == "null" ? null :  Number(req.body.suitabilityCertificateAvailabilityId),
-      waterAnalysisReportId: req.body.waterAnalysisReportId == "null" ? null :  Number(req.body.waterAnalysisReportId),
-      regGeneralCertAvailabilityId: req.body.regGeneralCertAvailabilityId == "null" ? null :  Number(req.body.regGeneralCertAvailabilityId),
-
+      animalsPermitAvailabilityId:
+        req.body.animalsPermitAvailabilityId == "null"
+          ? null
+          : Number(req.body.animalsPermitAvailabilityId),
+      propertyRateAvailabilityId:
+        req.body.propertyRateAvailabilityId == "null"
+          ? null
+          : Number(req.body.propertyRateAvailabilityId),
+      buildingPermitAvailabilityId:
+        req.body.buildingPermitAvailabilityId == "null"
+          ? null
+          : Number(req.body.buildingPermitAvailabilityId),
+      businessLicenceAvailabilityId:
+        req.body.businessLicenceAvailabilityId == "null"
+          ? null
+          : Number(req.body.businessLicenceAvailabilityId),
+      habitationCertificateAvailabilityId:
+        req.body.habitationCertificateAvailabilityId == "null"
+          ? null
+          : Number(req.body.habitationCertificateAvailabilityId),
+      operatingLicenceAvailabilityId:
+        req.body.operatingLicenceAvailabilityId == "null"
+          ? null
+          : Number(req.body.operatingLicenceAvailabilityId),
+      structurePermitAvailabilityId:
+        req.body.structurePermitAvailabilityId == "null"
+          ? null
+          : Number(req.body.structurePermitAvailabilityId),
+      fumigationCertificateAvailabilityId:
+        req.body.fumigationCertificateAvailabilityId == "null"
+          ? null
+          : Number(req.body.fumigationCertificateAvailabilityId),
+      medicalCertificateAvailabilityId:
+        req.body.medicalCertificateAvailabilityId == "null"
+          ? null
+          : Number(req.body.medicalCertificateAvailabilityId),
+      gtaOperatingLicenceAvailabilityId:
+        req.body.gtaOperatingLicenceAvailabilityId == "null"
+          ? null
+          : Number(req.body.gtaOperatingLicenceAvailabilityId),
+      suitabilityCertificateAvailabilityId:
+        req.body.suitabilityCertificateAvailabilityId == "null"
+          ? null
+          : Number(req.body.suitabilityCertificateAvailabilityId),
+      waterAnalysisReportId:
+        req.body.waterAnalysisReportId == "null"
+          ? null
+          : Number(req.body.waterAnalysisReportId),
+      regGeneralCertAvailabilityId:
+        req.body.regGeneralCertAvailabilityId == "null"
+          ? null
+          : Number(req.body.regGeneralCertAvailabilityId),
     };
 
     console.log(data);
 
-  const response = await prisma.licencePermitSection.create({ data });
+   const response = await prisma.licencePermitSection.create({ data });
 
-    // console.log(response);
-     res.status(200).json({ statusCode: 1, message: "Data saved" });
-  } catch (error) {
-    console.log("Error: " + error);
-    if (error.code === "P2002")
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  }
+  //   res.status(200).json({ statusCode: 1, message: "Data saved" });
+  // } catch (error) {
+  //   console.log("Error: " + error);
+  //   if (error.code === "P2002")
+  //     return res
+  //       .status(400)
+  //       .json({ statusCode: 0, message: "dataVersion s should be unique" });
+  // }
 };
 
 const get = async (req, res) => {

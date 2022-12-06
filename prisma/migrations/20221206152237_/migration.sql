@@ -1,15 +1,20 @@
 -- CreateTable
 CREATE TABLE "Inspection" (
     "id" VARCHAR(255) NOT NULL,
-    "inspectionCode" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "prevInspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
     "inspectionTypeId" INTEGER NOT NULL,
     "isPublished" INTEGER NOT NULL DEFAULT 0,
     "publishedById" INTEGER,
-    "submittedById" INTEGER NOT NULL,
+    "followUpDate" VARCHAR(255) NOT NULL,
+    "doFollowUp" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "startedAt" TIMESTAMP(3) NOT NULL,
+    "completedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Inspection_pkey" PRIMARY KEY ("id")
 );
@@ -1039,6 +1044,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
 CREATE TABLE "LicencePermitSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "buildingPermitAvailabilityId" INTEGER NOT NULL,
     "businessLicenceAvailabilityId" INTEGER,
     "medicalCertAvailabilityId" INTEGER,
@@ -1436,7 +1442,7 @@ ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionFormId_fkey" FOREI
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionTypeId_fkey" FOREIGN KEY ("inspectionTypeId") REFERENCES "InspectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_submittedById_fkey" FOREIGN KEY ("submittedById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1503,6 +1509,12 @@ ALTER TABLE "Service" ADD CONSTRAINT "Service_typeId_fkey" FOREIGN KEY ("typeId"
 
 -- AddForeignKey
 ALTER TABLE "BasicInfoSection" ADD CONSTRAINT "BasicInfoSection_respondentDesignationId_fkey" FOREIGN KEY ("respondentDesignationId") REFERENCES "RespondentDesignation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BasicInfoSection" ADD CONSTRAINT "BasicInfoSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BasicInfoSection" ADD CONSTRAINT "BasicInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_vaccinationProofId_fkey" FOREIGN KEY ("vaccinationProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1785,6 +1797,9 @@ ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_building
 
 -- AddForeignKey
 ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

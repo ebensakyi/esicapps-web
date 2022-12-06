@@ -5,22 +5,28 @@ const post = async (req, res) => {
     const data = {
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
-      communityId:
-        req.body.communityId == "null" ? null : Number(req.body.communityId),
-      community: req.body.community == "null" ? null : req.body.community,
-      ghanaPostGps: req.body.ghanaPostGps,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-      accuracy: req.body.accuracy,
-      respondentName: req.body.respondentName,
-      respondentPhoneNumber: req.body.respondentPhoneNumber,
-      respondentDesignationId: Number(req.body.respondentDesignationId),
+      inspectionFormId:
+        req.body.inspectionFormId == "null"
+          ? null
+          : Number(req.body.inspectionFormId),
+      prevInspectionId:
+        req.body.prevInspectionId == "null"
+          ? null
+          : Number(req.body.prevInspectionId),
+      inspectionTypeId:
+        req.body.inspectionTypeId == "null"
+          ? null
+          : Number(req.body.inspectionTypeId),
+      followUpDate:
+        req.body.followUpDate == "null" ? null : req.body.followUpDate,
+      doFollowUp: Number(req.body.doFollowUp),
+      startedAt: req.body.startedAt,
+      completedAt: req.body.completedAt,
     };
 
-    // console.log(req.body.inspectionId);
     console.log(data);
 
-    const response = await prisma.basicInfoSection.create({ data });
+    const response = await prisma.inspection.create({ data });
 
     console.log(response);
     res.status(200).json({ statusCode: 1, message: "Data saved" });
