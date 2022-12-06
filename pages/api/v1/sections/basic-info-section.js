@@ -18,11 +18,9 @@ const post = async (req, res) => {
     };
 
     // console.log(req.body.inspectionId);
-    console.log(data);
 
     const response = await prisma.basicInfoSection.create({ data });
 
-    console.log(response);
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
     console.log("Error: " + error);

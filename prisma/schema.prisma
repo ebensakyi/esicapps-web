@@ -11,9 +11,8 @@ datasource db {
 }
 
 model Inspection {
-  id               String @id @db.VarChar(255)
-  inspectionId     String @db.VarChar(255)
-  prevInspectionId String @db.VarChar(255)
+  id               String  @id @db.VarChar(255)
+  prevInspectionId String? @db.VarChar(255)
   userId           Int
 
   inspectionFormId Int
@@ -424,11 +423,12 @@ model RespondentDesignation {
 }
 
 model SafeUnsafe {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  deleted      Int?           @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  WaterSection WaterSection[]
 }
 
 model SanitaryInsanitary {
@@ -817,7 +817,7 @@ model BasicInfoSection {
 
   zoneId       Int?
   communityId  Int?
-  community    String  @db.VarChar(255)
+  community    String? @db.VarChar(255)
   ghanaPostGps String? @db.VarChar(255)
   latitude     String  @db.VarChar(255)
   longitude    String  @db.VarChar(255)
@@ -1254,7 +1254,7 @@ model WaterSection {
   waterFlowFrequencyId               Int
   safeDistanceWaterStorageSanitaryId Int?
 
-  waterGeneralRating Int
+  rating Int
 
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
@@ -1270,13 +1270,14 @@ model WaterSection {
   PremisesWaterSources         PremisesWaterSources[]
   WaterSupplyType              WaterSupplyType?               @relation(fields: [waterSupplyTypeId], references: [id])
   waterSupplyTypeId            Int?
-  waterSourceCondition         SanitaryInsanitary             @relation(fields: [sanitaryInsanitaryId], references: [id])
+  waterSourceCondition         SafeUnsafe                     @relation(fields: [waterSourceConditionId], references: [id])
   PremisesWaterTreatmentType   PremisesWaterTreatmentType[]
   PremisesWaterSupply          PremisesWaterSupply[]
   PremisesWaterStorage         PremisesWaterStorage[]
   PremisesDrinkingWaterSources PremisesDrinkingWaterSources[]
 
-  sanitaryInsanitaryId Int
+  SanitaryInsanitary   SanitaryInsanitary? @relation(fields: [sanitaryInsanitaryId], references: [id])
+  sanitaryInsanitaryId Int?
 }
 
 model LiquidWasteSection {
@@ -1379,6 +1380,7 @@ model SolidWasteSection {
   wasteContainerVolumeId             Int?
   wasteProviderAccredittedId         Int?
   containerNumber                    Int?
+  rating                      Int?
   deleted                            Int?     @default(0)
   createdAt                          DateTime @default(now())
   updatedAt                          DateTime @updatedAt
