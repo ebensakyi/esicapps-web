@@ -95,6 +95,8 @@ model User {
   LicencePermitSection LicencePermitSection[]
   BasicInfoSection     BasicInfoSection[]
   Inspection           Inspection[]
+  WaterSection         WaterSection[]
+  SolidWasteSection    SolidWasteSection[]
 }
 
 model UserLevel {
@@ -441,7 +443,6 @@ model SanitaryInsanitary {
   urinalCubicleCondition         LiquidWasteSection[]             @relation("urinalCubicleCondition")
   toiletCondition                LiquidWasteSection[]             @relation("toiletCondition")
   ResidentialPremisesInfoSection ResidentialPremisesInfoSection[]
-  WaterSection                   WaterSection[]
   sanitaryContainer              SanitaryPremisesInfoSection[]    @relation("sanitaryContainer")
   sanitaryAshesDisposal          SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
 }
@@ -612,7 +613,6 @@ model WaterStorageType {
   deleted              Int?                   @default(0)
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
-  WaterSection         WaterSection[]
   PremisesWaterStorage PremisesWaterStorage[]
 }
 
@@ -622,7 +622,6 @@ model WaterSupplyType {
   deleted             Int?                  @default(0)
   createdAt           DateTime              @default(now())
   updatedAt           DateTime              @updatedAt
-  WaterSection        WaterSection[]
   PremisesWaterSupply PremisesWaterSupply[]
 }
 
@@ -632,7 +631,6 @@ model WaterTreatmentType {
   deleted                    Int?                         @default(0)
   createdAt                  DateTime                     @default(now())
   updatedAt                  DateTime                     @updatedAt
-  WaterSection               WaterSection[]
   PremisesWaterTreatmentType PremisesWaterTreatmentType[]
 }
 
@@ -1244,13 +1242,11 @@ model LicencePermitSection {
 }
 
 model WaterSection {
-  id           Int    @id @default(autoincrement())
-  inspectionId String @db.VarChar(255)
-
+  id                                 Int    @id @default(autoincrement())
+  inspectionId                       String @db.VarChar(255)
+  userId                             Int
   waterSourceConditionId             Int
   waterStorageConditionId            Int
-  waterStorageTypeId                 Int
-  waterTreatmentTypeId               Int
   waterFlowFrequencyId               Int
   safeDistanceWaterStorageSanitaryId Int?
 
@@ -1260,24 +1256,19 @@ model WaterSection {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Inspection                       Inspection         @relation(fields: [inspectionId], references: [id])
-  WaterFlowFrequency               WaterFlowFrequency @relation(fields: [waterFlowFrequencyId], references: [id])
-  waterStorageType                 WaterStorageType   @relation(fields: [waterStorageTypeId], references: [id])
-  WaterTreatmentType               WaterTreatmentType @relation(fields: [waterTreatmentTypeId], references: [id])
-  waterStorageConditionSafe        YesNo              @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
-  safeDistanceWaterStorageSanitary YesNo?             @relation("safeDistanceWaterStorageSanitary", fields: [safeDistanceWaterStorageSanitaryId], references: [id])
+  Inspection         Inspection         @relation(fields: [inspectionId], references: [id])
+  WaterFlowFrequency WaterFlowFrequency @relation(fields: [waterFlowFrequencyId], references: [id])
+
+  waterStorageConditionSafe        YesNo      @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
+  safeDistanceWaterStorageSanitary YesNo?     @relation("safeDistanceWaterStorageSanitary", fields: [safeDistanceWaterStorageSanitaryId], references: [id])
+  waterSourceCondition             SafeUnsafe @relation(fields: [waterSourceConditionId], references: [id])
 
   PremisesWaterSources         PremisesWaterSources[]
-  WaterSupplyType              WaterSupplyType?               @relation(fields: [waterSupplyTypeId], references: [id])
-  waterSupplyTypeId            Int?
-  waterSourceCondition         SafeUnsafe                     @relation(fields: [waterSourceConditionId], references: [id])
   PremisesWaterTreatmentType   PremisesWaterTreatmentType[]
   PremisesWaterSupply          PremisesWaterSupply[]
   PremisesWaterStorage         PremisesWaterStorage[]
   PremisesDrinkingWaterSources PremisesDrinkingWaterSources[]
-
-  SanitaryInsanitary   SanitaryInsanitary? @relation(fields: [sanitaryInsanitaryId], references: [id])
-  sanitaryInsanitaryId Int?
+  User                         User                           @relation(fields: [userId], references: [id])
 }
 
 model LiquidWasteSection {
@@ -1366,10 +1357,12 @@ model LiquidWasteSection {
 }
 
 model SolidWasteSection {
-  id                                 Int      @id @default(autoincrement())
-  inspectionId                       String   @db.VarChar(255)
+  id           Int    @id @default(autoincrement())
+  inspectionId String @db.VarChar(255)
+  userId                           Int
+
   wasteServiceProviderRegistrationId Int?
-  wasteCollectorName                 Int?
+  wasteCollectorName                 String?
   wasteSortingAvailabilityId         Int?
   wasteCollectionFrequencyId         Int?
   approvedWasteStorageReceptacleId   Int?
@@ -1380,22 +1373,22 @@ model SolidWasteSection {
   wasteContainerVolumeId             Int?
   wasteProviderAccredittedId         Int?
   containerNumber                    Int?
-  rating                      Int?
+  rating                             Int?
   deleted                            Int?     @default(0)
   createdAt                          DateTime @default(now())
   updatedAt                          DateTime @updatedAt
 
-  adequateWasteStorageReceptacle   YesNo?                    @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
-  approvedWasteStorageReceptacle   YesNo?                    @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
-  wasteCollectionFrequency         WasteCollectionFrequency? @relation(fields: [wasteCollectionFrequencyId], references: [id])
-  Inspection                       Inspection                @relation(fields: [inspectionId], references: [id])
-  wasteSortingAvailability         YesNo?                    @relation("wasteSortingAvailability", fields: [wasteSortingAvailabilityId], references: [id])
-  wastePaymentEvidence             YesNo?                    @relation("wastePaymentEvidence", fields: [wastePaymentEvidenceId], references: [id])
-  wasteServiceProviderRegistration YesNo?                    @relation("wasteServiceProviderRegistration", fields: [wasteServiceProviderRegistrationId], references: [id])
+  adequateWasteStorageReceptacle   YesNo?                           @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
+  approvedWasteStorageReceptacle   YesNo?                           @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
+  wasteCollectionFrequency         WasteCollectionFrequency?        @relation(fields: [wasteCollectionFrequencyId], references: [id])
+  Inspection                       Inspection                       @relation(fields: [inspectionId], references: [id])
+  wasteSortingAvailability         YesNo?                           @relation("wasteSortingAvailability", fields: [wasteSortingAvailabilityId], references: [id])
+  wastePaymentEvidence             YesNo?                           @relation("wastePaymentEvidence", fields: [wastePaymentEvidenceId], references: [id])
+  wasteServiceProviderRegistration YesNo?                           @relation("wasteServiceProviderRegistration", fields: [wasteServiceProviderRegistrationId], references: [id])
   PremisesWasteReceptacle          PremisesWasteReceptacle[]
   PremisesWasteCollection          PremisesWasteCollection[]
-
-  PremisesHazardousWasteDisposal PremisesHazardousWasteDisposal[]
+  User                             User                             @relation(fields: [userId], references: [id])
+  PremisesHazardousWasteDisposal   PremisesHazardousWasteDisposal[]
 }
 
 model ConclusionSection {

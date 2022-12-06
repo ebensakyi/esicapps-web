@@ -1069,18 +1069,15 @@ CREATE TABLE "LicencePermitSection" (
 CREATE TABLE "WaterSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "waterSourceConditionId" INTEGER NOT NULL,
     "waterStorageConditionId" INTEGER NOT NULL,
-    "waterStorageTypeId" INTEGER NOT NULL,
-    "waterTreatmentTypeId" INTEGER NOT NULL,
     "waterFlowFrequencyId" INTEGER NOT NULL,
     "safeDistanceWaterStorageSanitaryId" INTEGER,
     "rating" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "waterSupplyTypeId" INTEGER,
-    "sanitaryInsanitaryId" INTEGER,
 
     CONSTRAINT "WaterSection_pkey" PRIMARY KEY ("id")
 );
@@ -1133,8 +1130,9 @@ CREATE TABLE "LiquidWasteSection" (
 CREATE TABLE "SolidWasteSection" (
     "id" SERIAL NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "wasteServiceProviderRegistrationId" INTEGER,
-    "wasteCollectorName" INTEGER,
+    "wasteCollectorName" TEXT,
     "wasteSortingAvailabilityId" INTEGER,
     "wasteCollectionFrequencyId" INTEGER,
     "approvedWasteStorageReceptacleId" INTEGER,
@@ -1808,25 +1806,16 @@ ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_inspectionId_fkey" FOREI
 ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterFlowFrequencyId_fkey" FOREIGN KEY ("waterFlowFrequencyId") REFERENCES "WaterFlowFrequency"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterTreatmentTypeId_fkey" FOREIGN KEY ("waterTreatmentTypeId") REFERENCES "WaterTreatmentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageConditionId_fkey" FOREIGN KEY ("waterStorageConditionId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_safeDistanceWaterStorageSanitaryId_fkey" FOREIGN KEY ("safeDistanceWaterStorageSanitaryId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterSupplyTypeId_fkey" FOREIGN KEY ("waterSupplyTypeId") REFERENCES "WaterSupplyType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterSourceConditionId_fkey" FOREIGN KEY ("waterSourceConditionId") REFERENCES "SafeUnsafe"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_sanitaryInsanitaryId_fkey" FOREIGN KEY ("sanitaryInsanitaryId") REFERENCES "SanitaryInsanitary"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1938,6 +1927,9 @@ ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wastePaymentEv
 
 -- AddForeignKey
 ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteServiceProviderRegistrationId_fkey" FOREIGN KEY ("wasteServiceProviderRegistrationId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_obnoxiousTradeExistId_fkey" FOREIGN KEY ("obnoxiousTradeExistId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
