@@ -1,6 +1,6 @@
 
-import User from '../../components/account/User'
-import ListUser from '../../components/account/ListUser'
+import MMDAUser from '../../components/user/MMDAUser'
+import ListMMDAUser from '../../components/ListMMDAUser'
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 //import { SERVER_BASE_URL } from "../../config";
@@ -15,8 +15,8 @@ export default function user({ examTypes, paymentTypes }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <User />
-                        <ListUser/>
+                        <MMDAUser />
+                        <ListMMDAUser/>
 
                     </div>
                 </div>

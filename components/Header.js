@@ -1138,7 +1138,7 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/account/user"
+                        href="/user/national"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"
@@ -1147,7 +1147,35 @@ const Header = () => {
                         // data-key="t-signin"
                       >
                         {" "}
-                        Add
+                        Add National User
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/user/regional"
+                        className="nav-link"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
+                      >
+                        {" "}
+                        Add Regional User
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a
+                        href="/user/mmda"
+                        className="nav-link"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
+                      >
+                        {" "}
+                        Add MMDA User
                       </a>
                     </li>
                     <li className="nav-item">

@@ -1,19 +1,18 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { inspect } from "util";
+import {clearUserCookie, setUserCookie } from "../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
   try {
     // await clearUserCookie(req, res);
 
-    let phoneNumber = req.body.phoneNumber;
+    let email = req.body.email;
     let password = req.body.password;
     //let hash = await bcrypt.hashSync(password, salt);
 
-    console.log(req.body);
     let user = await prisma.user.findFirst({
-      where: { phoneNumber, deleted: 0 },
+      where: { email, deleted: 0 },
       include: { District: true },
     });
 
@@ -25,10 +24,14 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(password, user.password);
-    inspect(isValid)
 
     if (isValid) {
       const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
+
+      let userId = user.id;
+      let userType = user.userTypeId;
+      await setUserCookie(token, req, res);
+
 
       return res.status(200).json({ statusCode: 1, data: user });
     } else {

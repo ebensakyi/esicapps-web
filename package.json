@@ -16,6 +16,8 @@
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "js-cookie": "^3.0.1",
+    "cookie": "^0.5.0",
+
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
     "nanoid": "^4.0.0",
