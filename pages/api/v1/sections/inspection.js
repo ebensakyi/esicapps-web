@@ -25,8 +25,8 @@ const post = async (req, res) => {
     startedAt: new Date(req.body.startedAt),
     completedAt:  new Date(req.body.completedAt),
   };
-  let startedAt  = new Date(req.body.startedAt);
 
+  console.log(data);
   const response = await prisma.inspection.create({ data });
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });

@@ -729,7 +729,7 @@ CREATE TABLE "Service" (
 
 -- CreateTable
 CREATE TABLE "BasicInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
     "zoneId" INTEGER,
@@ -751,7 +751,7 @@ CREATE TABLE "BasicInfoSection" (
 
 -- CreateTable
 CREATE TABLE "ResidentialPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainsAvailabilityId" INTEGER NOT NULL,
     "toiletAvailabilityId" INTEGER,
@@ -776,7 +776,7 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "EateryPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "physicalStructureTypeId" INTEGER,
@@ -808,7 +808,7 @@ CREATE TABLE "EateryPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "HealthPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "healthPremisesTypeId" INTEGER,
@@ -833,7 +833,7 @@ CREATE TABLE "HealthPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "HospitalityPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "physicalStructureTypeId" INTEGER,
@@ -865,7 +865,7 @@ CREATE TABLE "HospitalityPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "SanitaryPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "physicalStructureTypeId" INTEGER,
@@ -918,7 +918,7 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "MarketPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "marketPremisesTypeId" INTEGER,
@@ -954,7 +954,7 @@ CREATE TABLE "MarketPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "InstitutionPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "institutionPremisesTypeId" INTEGER,
@@ -1009,7 +1009,7 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "IndustryPremisesInfoSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
     "industryPremisesTypeId" INTEGER,
@@ -1041,7 +1041,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "LicencePermitSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
     "buildingPermitAvailabilityId" INTEGER NOT NULL,
@@ -1067,7 +1067,7 @@ CREATE TABLE "LicencePermitSection" (
 
 -- CreateTable
 CREATE TABLE "WaterSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
     "waterSourceConditionId" INTEGER NOT NULL,
@@ -1084,7 +1084,7 @@ CREATE TABLE "WaterSection" (
 
 -- CreateTable
 CREATE TABLE "LiquidWasteSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
     "numberToiletSeats" INTEGER,
@@ -1129,7 +1129,7 @@ CREATE TABLE "LiquidWasteSection" (
 
 -- CreateTable
 CREATE TABLE "SolidWasteSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
     "wasteServiceProviderRegistrationId" INTEGER,
@@ -1154,7 +1154,7 @@ CREATE TABLE "SolidWasteSection" (
 
 -- CreateTable
 CREATE TABLE "ConclusionSection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
     "obnoxiousTradeExistId" INTEGER,
@@ -1170,232 +1170,249 @@ CREATE TABLE "ConclusionSection" (
 
 -- CreateTable
 CREATE TABLE "PremisesWaterSources" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "waterSectionId" INTEGER NOT NULL,
+    "waterSectionId" VARCHAR(255) NOT NULL,
     "waterSourceId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterSources_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesWaterTreatmentType" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "waterSectionId" INTEGER NOT NULL,
+    "waterSectionId" VARCHAR(255) NOT NULL,
     "waterTreatmentTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterTreatmentType_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesWaterSupply" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "waterSectionId" INTEGER NOT NULL,
+    "waterSectionId" VARCHAR(255) NOT NULL,
     "waterSupplyTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterSupply_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesWaterStorage" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "waterSectionId" INTEGER NOT NULL,
+    "waterSectionId" VARCHAR(255) NOT NULL,
     "waterStorageTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterStorage_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesDrinkingWaterSources" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "waterSectionId" INTEGER NOT NULL,
+    "waterSectionId" VARCHAR(255) NOT NULL,
     "drinkingWaterSourceId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesDrinkingWaterSources_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesToiletType" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "liquidWasteSectionId" INTEGER NOT NULL,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "toiletTypeId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesToiletType_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesEffluentManagement" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "effluentManagementId" INTEGER NOT NULL,
-    "liquidWasteSectionId" INTEGER NOT NULL,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesEffluentManagement_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesExcretaDisposalMethod" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "liquidWasteSectionId" INTEGER NOT NULL,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaDisposalMethodId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesExcretaDisposalMethod_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesExcretaContainment" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "liquidWasteSectionId" INTEGER,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaContainmentId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesExcretaContainment_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesGreyWaterDisposal" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "liquidWasteSectionId" INTEGER NOT NULL,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "greyWaterDisposalId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesGreyWaterDisposal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesWasteReceptacle" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "solidWasteReceptacleId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "solidWasteSectionId" INTEGER NOT NULL,
+    "solidWasteSectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWasteReceptacle_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesWasteCollection" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "wasteCollectionTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "solidWasteSectionId" INTEGER NOT NULL,
+    "solidWasteSectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWasteCollection_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesPestSigns" (
-    "id" SERIAL NOT NULL,
-    "hygieneSectionId" INTEGER NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "pestSignId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesPestSigns_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesAnimal" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "animalTypeId" INTEGER NOT NULL,
-    "residentialPremisesInfoSectionId" INTEGER NOT NULL,
+    "residentialPremisesInfoSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesAnimal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesDrainType" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainTypeId" INTEGER NOT NULL,
-    "liquidWasteSectionId" INTEGER NOT NULL,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesDrainType_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesHazardousWasteDisposal" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "hazardousWasteDisposalMethodId" INTEGER NOT NULL,
-    "solidWasteSectionId" INTEGER NOT NULL,
+    "solidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesHazardousWasteDisposal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesActionTaken" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "actionId" INTEGER NOT NULL,
-    "conclusionSectionId" INTEGER NOT NULL,
+    "conclusionSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesActionTaken_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "PremisesNuisanceDetected" (
-    "id" SERIAL NOT NULL,
+    "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "conclusionSectionId" INTEGER NOT NULL,
+    "conclusionSectionId" VARCHAR(255) NOT NULL,
     "nuisanceId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesNuisanceDetected_pkey" PRIMARY KEY ("id")
 );
@@ -1954,10 +1971,16 @@ ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSou
 ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesWaterSources" ADD CONSTRAINT "PremisesWaterSources_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesWaterTreatmentType" ADD CONSTRAINT "PremisesWaterTreatmentType_waterTreatmentTypeId_fkey" FOREIGN KEY ("waterTreatmentTypeId") REFERENCES "WaterTreatmentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesWaterTreatmentType" ADD CONSTRAINT "PremisesWaterTreatmentType_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWaterTreatmentType" ADD CONSTRAINT "PremisesWaterTreatmentType_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesWaterSupply" ADD CONSTRAINT "PremisesWaterSupply_waterSupplyTypeId_fkey" FOREIGN KEY ("waterSupplyTypeId") REFERENCES "WaterSupplyType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1966,10 +1989,16 @@ ALTER TABLE "PremisesWaterSupply" ADD CONSTRAINT "PremisesWaterSupply_waterSuppl
 ALTER TABLE "PremisesWaterSupply" ADD CONSTRAINT "PremisesWaterSupply_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesWaterSupply" ADD CONSTRAINT "PremisesWaterSupply_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesWaterStorage" ADD CONSTRAINT "PremisesWaterStorage_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesWaterStorage" ADD CONSTRAINT "PremisesWaterStorage_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWaterStorage" ADD CONSTRAINT "PremisesWaterStorage_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesDrinkingWaterSources" ADD CONSTRAINT "PremisesDrinkingWaterSources_drinkingWaterSourceId_fkey" FOREIGN KEY ("drinkingWaterSourceId") REFERENCES "DrinkingWaterSourceType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1978,10 +2007,16 @@ ALTER TABLE "PremisesDrinkingWaterSources" ADD CONSTRAINT "PremisesDrinkingWater
 ALTER TABLE "PremisesDrinkingWaterSources" ADD CONSTRAINT "PremisesDrinkingWaterSources_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesDrinkingWaterSources" ADD CONSTRAINT "PremisesDrinkingWaterSources_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesToiletType" ADD CONSTRAINT "PremisesToiletType_toiletTypeId_fkey" FOREIGN KEY ("toiletTypeId") REFERENCES "ToiletType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesToiletType" ADD CONSTRAINT "PremisesToiletType_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesToiletType" ADD CONSTRAINT "PremisesToiletType_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesEffluentManagement" ADD CONSTRAINT "PremisesEffluentManagement_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1990,16 +2025,25 @@ ALTER TABLE "PremisesEffluentManagement" ADD CONSTRAINT "PremisesEffluentManagem
 ALTER TABLE "PremisesEffluentManagement" ADD CONSTRAINT "PremisesEffluentManagement_effluentManagementId_fkey" FOREIGN KEY ("effluentManagementId") REFERENCES "EffluentManagement"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesEffluentManagement" ADD CONSTRAINT "PremisesEffluentManagement_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesExcretaDisposalMethod" ADD CONSTRAINT "PremisesExcretaDisposalMethod_excretaDisposalMethodId_fkey" FOREIGN KEY ("excretaDisposalMethodId") REFERENCES "ExcretaDisposalMethod"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesExcretaDisposalMethod" ADD CONSTRAINT "PremisesExcretaDisposalMethod_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesExcretaDisposalMethod" ADD CONSTRAINT "PremisesExcretaDisposalMethod_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesExcretaContainment" ADD CONSTRAINT "PremisesExcretaContainment_excretaContainmentId_fkey" FOREIGN KEY ("excretaContainmentId") REFERENCES "ExcretaContainment"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesExcretaContainment" ADD CONSTRAINT "PremisesExcretaContainment_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PremisesExcretaContainment" ADD CONSTRAINT "PremisesExcretaContainment_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesExcretaContainment" ADD CONSTRAINT "PremisesExcretaContainment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2008,10 +2052,16 @@ ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposa
 ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_greyWaterDisposalId_fkey" FOREIGN KEY ("greyWaterDisposalId") REFERENCES "GreyWaterDisposal"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesGreyWaterDisposal" ADD CONSTRAINT "PremisesGreyWaterDisposal_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_solidWasteReceptacleId_fkey" FOREIGN KEY ("solidWasteReceptacleId") REFERENCES "SolidWasteReceptacle"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesWasteReceptacle" ADD CONSTRAINT "PremisesWasteReceptacle_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesWasteCollection" ADD CONSTRAINT "PremisesWasteCollection_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2020,7 +2070,13 @@ ALTER TABLE "PremisesWasteCollection" ADD CONSTRAINT "PremisesWasteCollection_so
 ALTER TABLE "PremisesWasteCollection" ADD CONSTRAINT "PremisesWasteCollection_wasteCollectionTypeId_fkey" FOREIGN KEY ("wasteCollectionTypeId") REFERENCES "WasteCollectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesWasteCollection" ADD CONSTRAINT "PremisesWasteCollection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_pestSignId_fkey" FOREIGN KEY ("pestSignId") REFERENCES "PestSign"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_animalTypeId_fkey" FOREIGN KEY ("animalTypeId") REFERENCES "AnimalType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2029,10 +2085,16 @@ ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_animalTypeId_fkey" F
 ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_residentialPremisesInfoSectionId_fkey" FOREIGN KEY ("residentialPremisesInfoSectionId") REFERENCES "ResidentialPremisesInfoSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesDrainType" ADD CONSTRAINT "PremisesDrainType_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesDrainType" ADD CONSTRAINT "PremisesDrainType_drainTypeId_fkey" FOREIGN KEY ("drainTypeId") REFERENCES "DrainType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesDrainType" ADD CONSTRAINT "PremisesDrainType_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesHazardousWasteDisposal" ADD CONSTRAINT "PremisesHazardousWasteDisposal_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2041,16 +2103,25 @@ ALTER TABLE "PremisesHazardousWasteDisposal" ADD CONSTRAINT "PremisesHazardousWa
 ALTER TABLE "PremisesHazardousWasteDisposal" ADD CONSTRAINT "PremisesHazardousWasteDisposal_hazardousWasteDisposalMetho_fkey" FOREIGN KEY ("hazardousWasteDisposalMethodId") REFERENCES "HazardousWasteDisposalMethod"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesHazardousWasteDisposal" ADD CONSTRAINT "PremisesHazardousWasteDisposal_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_actionId_fkey" FOREIGN KEY ("actionId") REFERENCES "Action"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_nuisanceId_fkey" FOREIGN KEY ("nuisanceId") REFERENCES "Nuisance"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

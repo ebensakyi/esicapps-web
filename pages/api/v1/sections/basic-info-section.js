@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
-  try {
+ // try {
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
@@ -18,18 +18,18 @@ const post = async (req, res) => {
       respondentDesignationId: Number(req.body.respondentDesignationId),
     };
 
-    // console.log(req.body.inspectionId);
+    console.log(data);
 
     const response = await prisma.basicInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
-  } catch (error) {
-    console.log("Error: " + error);
-    if (error.code === "P2002")
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  }
+  // } catch (error) {
+  //   console.log("Error: " + error);
+  //   if (error.code === "P2002")
+  //     return res
+  //       .status(400)
+  //       .json({ statusCode: 0, message: "dataVersion s should be unique" });
+  // }
 };
 
 const get = async (req, res) => {
