@@ -1,7 +1,11 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import bcrypt from "bcryptjs";
 
 const post = async (req, res) => {
   try {
+    let password = "ESICAPPS_DISTRICT";
+    const salt = bcrypt.genSaltSync(10);
+    let hashedPassword = await bcrypt.hashSync(password, salt);
 
     const data = {
       userTypeId: req.body.userTypeId,
@@ -9,11 +13,12 @@ const post = async (req, res) => {
       otherNames: req.body.otherNames,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
-      password: req.body.password,
+      password: hashedPassword,
       regionId: req.body.regionId,
       districtId: req.body.districtId,
       designation: req.body.designation
     };
+
     const user = await prisma.user.create({ data :data});
     return res
       .status(200)
@@ -22,8 +27,8 @@ const post = async (req, res) => {
     console.log(error);
     if (error.code === "P2002")
       return res
-        .status(200)
-        .json({ statusCode: 0, message: "user prefix should be unique" });
+        .status(400)
+        .json({ statusCode: 0, message: "Email and Phone Number should be unique" });
   }
 };
 

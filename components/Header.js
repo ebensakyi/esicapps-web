@@ -1166,7 +1166,7 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <a
-                        href="/user/mmda"
+                        href="/user/district"
                         className="nav-link"
                         // data-bs-toggle="collapse"
                         // role="button"

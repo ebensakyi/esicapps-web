@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DistrictUser = ({ users, userTypes, regions }) => {
   const [userType, setUserType] = useState();
@@ -17,57 +19,69 @@ const DistrictUser = ({ users, userTypes, regions }) => {
   const [level, setLevel] = useState();
 
   const addUser = async (e) => {
-    e.preventDefault();
-    let data = {
-      userTypeId: Number(userType),
-      surname,
-      otherNames,
-      email,
-      phoneNumber,
-      designation,
-      regionId: Number(region),
-      districtId: Number(district),
-    };
+    try {
+      e.preventDefault();
+      let data = {
+        userTypeId: Number(userType),
+        surname,
+        otherNames,
+        email,
+        phoneNumber,
+        designation,
+        regionId: Number(region),
+        districtId: Number(district),
+      };
 
+      const response = await axios.post("/api/v1/user/district", data);
 
-    const response = await axios.post("/api/v1/auth/register", {
-      data,
-    });
+      return toast.success(response.data.message);
+    } catch (error) {
+      return toast.error(error.response.data.message);
+    }
   };
 
   const getDistrictsByRegion = async (e, regionId) => {
     try {
       e.preventDefault();
-      const response = await axios.get("/api/v1/primary-data/district?regionId=" + regionId);
-      setDistricts(response.data)
-
-    } catch (error) {
-
-    }
-
-  }
+      const response = await axios.get(
+        "/api/v1/primary-data/district?regionId=" + regionId
+      );
+      setDistricts(response.data);
+    } catch (error) {}
+  };
 
   const getDistrictByRegion = async (e, regionId) => {
     try {
       e.preventDefault();
-      const response = await axios.get("/api/v1/primary-data/district?regionId=" + regionId);
-      setDistricts(response.data)
-    } catch (error) {
-
-    }
-  }
+      const response = await axios.get(
+        "/api/v1/primary-data/district?regionId=" + regionId
+      );
+      setDistricts(response.data);
+    } catch (error) {}
+  };
 
   const getElectoralByDistrict = async (e, districtId) => {
     try {
       e.preventDefault();
-      const response = await axios.get("/api/v1/primary-data/electoral-area?districtId=" + districtId);
-      setElectoralAreas(response.data)
-    } catch (error) {
-
-    }
-  }
+      const response = await axios.get(
+        "/api/v1/primary-data/electoral-area?districtId=" + districtId
+      );
+      setElectoralAreas(response.data);
+    } catch (error) {}
+  };
   return (
     <div className="row">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
@@ -92,7 +106,6 @@ const DistrictUser = ({ users, userTypes, regions }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                
                 <hr />
 
                 <div className="row gy-4">
@@ -175,12 +188,13 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                         id="inputGroupSelect02"
                         onChange={(e) => {
                           setUserType(e.target.value);
-
                         }}
                       >
                         <option selected>Choose...</option>
                         {userTypes.map((userType) => (
-                          <option key={userType.id} value={userType.id}>{userType.name}</option>
+                          <option key={userType.id} value={userType.id}>
+                            {userType.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -195,8 +209,8 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={async (e) => {
-                          setRegion(e.target.value)
-                          getDistrictsByRegion(e, e.target.value)
+                          setRegion(e.target.value);
+                          getDistrictsByRegion(e, e.target.value);
                         }}
                       >
                         <option selected>Choose...</option>
@@ -218,7 +232,7 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
-                          setDistrict(e.target.value)
+                          setDistrict(e.target.value);
                         }}
                       >
                         <option selected>Choose...</option>
