@@ -106,7 +106,6 @@ const DistrictUser = ({ users, userTypes, regions }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                <hr />
 
                 <div className="row gy-4">
                   <div className="col-xxl-3 col-md-6">

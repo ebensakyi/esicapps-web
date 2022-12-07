@@ -1,7 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { inspect } from "util";
 
 const post = async (req, res) => {
   try {
@@ -22,13 +21,14 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(password, user.password);
-    inspect(isValid);
+    console.log(isValid);
 
     if (isValid) {
       const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
 
       return res.status(200).json(user);
     } else {
+      console.log();
       return res
         .status(404)
         .json({ statusCode: 0, message: "Wrong user credentials" });
