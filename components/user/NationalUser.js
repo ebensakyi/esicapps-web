@@ -13,7 +13,6 @@ const NationalUser = ({ users, userTypes, regions }) => {
   const [electoralAreas, setElectoralAreas] = useState([]);
   const [district, setDistrict] = useState();
   const [electoralArea, setElectoralArea] = useState();
-  const [role, setRole] = useState();
 
   const addUser = async (e) => {
     e.preventDefault();
@@ -23,16 +22,13 @@ const NationalUser = ({ users, userTypes, regions }) => {
       otherNames,
       email,
       phoneNumber,
-      designation,
-      regionId: Number(region),
-      districtId: Number(district),
-      electoralAreaId: Number(electoralArea),
+      designation
     };
 
 
-    const response = await axios.post("/api/v1/auth/register", {
+    const response = await axios.post("/api/v1/user/national", 
       data,
-    });
+    );
   };
 
   const getDistrictsByRegion = async (e, regionId) => {
@@ -153,7 +149,7 @@ const NationalUser = ({ users, userTypes, regions }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                       Role
@@ -172,9 +168,9 @@ const NationalUser = ({ users, userTypes, regions }) => {
                           <option key={role.id} value={role.id}>{role.name}</option>
                         ))}
                       </select>
-                    </div>
-                  </div>
-                  {/* <div className="col-xxl-3 col-md-6">
+                    </div> 
+                  </div>*/}
+                  <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         User type
@@ -194,7 +190,7 @@ const NationalUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div> */}
+                  </div>
                 <hr />
                   {/* <div className="col-xxl-3 col-md-6">
                     <div>

@@ -1,4 +1,4 @@
-const ListMMDAUser = () => {
+const ListDistrictUser = () => {
 
   return (
     <div className="row">
@@ -9,4 +9,4 @@ const ListMMDAUser = () => {
 }
 
 
-export default ListMMDAUser;
+export default ListDistrictUser;

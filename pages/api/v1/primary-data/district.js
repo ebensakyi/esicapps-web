@@ -26,6 +26,7 @@ const get = async (req, res) => {
         include: { Region: true },
       });
 
+
       return res.status(200).json(district);
     }
 

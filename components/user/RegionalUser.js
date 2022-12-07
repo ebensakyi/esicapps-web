@@ -13,7 +13,6 @@ const RegionalUser = ({ users, userTypes, regions }) => {
   const [electoralAreas, setElectoralAreas] = useState([]);
   const [district, setDistrict] = useState();
   const [electoralArea, setElectoralArea] = useState();
-  const [level, setLevel] = useState();
 
   const addUser = async (e) => {
     e.preventDefault();
@@ -24,15 +23,13 @@ const RegionalUser = ({ users, userTypes, regions }) => {
       email,
       phoneNumber,
       designation,
-      regionId: Number(region),
-      districtId: Number(district),
-      electoralAreaId: Number(electoralArea),
+      region
     };
 
 
-    const response = await axios.post("/api/v1/auth/register", {
+    const response = await axios.post("/api/v1/user/regional", 
       data,
-    });
+    );
   };
 
   const getDistrictsByRegion = async (e, regionId) => {
@@ -82,30 +79,7 @@ const RegionalUser = ({ users, userTypes, regions }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                <div className="row gy-4">
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        User type
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => {
-                          setUserType(e.target.value);
-
-                        }}
-                      >
-                        <option selected>Choose...</option>
-                        {userTypes.map((userType) => (
-                          <option key={userType.id} value={userType.id}>{userType.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <hr />
+               
 
                 <div className="row gy-4">
                   <div className="col-xxl-3 col-md-6">
@@ -176,8 +150,50 @@ const RegionalUser = ({ users, userTypes, regions }) => {
                       />
                     </div>
                   </div>
-
                   <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                      Regional
+                      </label>
+
+                      <select
+                        className="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => {
+                          setRegion(e.target.value);
+
+                        }}
+                      >
+                        <option selected>Choose...</option>
+                        {regions.map((region) => (
+                          <option key={region.id} value={region.id}>{region.name}</option>
+                        ))}
+                      </select>
+                    </div> 
+                  </div>
+                  <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                        User type
+                      </label>
+
+                      <select
+                        className="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => {
+                          setUserType(e.target.value);
+
+                        }}
+                      >
+                        <option selected>Choose...</option>
+                        {userTypes.map((userType) => (
+                          <option key={userType.id} value={userType.id}>{userType.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                <hr />
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Region
@@ -199,8 +215,8 @@ const RegionalUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
+                  </div> */}
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         District
@@ -222,9 +238,9 @@ const RegionalUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Electoral Area
@@ -243,7 +259,9 @@ const RegionalUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
+                  </div> */}
+
+                  
                 </div>
                 <br />
                 <div className="row gy-4">

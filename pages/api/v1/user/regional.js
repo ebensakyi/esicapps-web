@@ -1,19 +1,25 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import bcrypt from "bcryptjs";
 
 const post = async (req, res) => {
   try {
+    let password = "ESICAPPS_REGIONAL";
+    const salt = bcrypt.genSaltSync(10);
 
+    let hashedPassword = await bcrypt.hashSync(password, salt);
     const data = {
-      userTypeId: req.body.userTypeId,
+      userTypeId: Number(req.body.userTypeId),
       surname: req.body.surname,
       otherNames: req.body.otherNames,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
-      password: req.body.password,
-      regionId: req.body.regionId,
-      districtId: req.body.districtId
+      password: hashedPassword,
+      regionId:  Number(req.body.region),
+      designation: req.body.designation
     };
-    const user = await prisma.user.create({ data :data});
+
+    console.log(data);
+    const user = await prisma.user.create({ data});
     return res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { user } });

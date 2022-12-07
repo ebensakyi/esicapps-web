@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
         (res) => res.json()
     );
 
-    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then(
+    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/national`).then(
         (res) => res.json()
     );
 
@@ -49,7 +49,6 @@ export async function getServerSideProps(context) {
         (res) => res.json()
     );
     
-    console.log(regions);
 
     return {
         props: {

@@ -41,7 +41,6 @@ import { subtypes } from "./subtypes";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
-import { userLevel } from "./userLevel";
 import { cemeteryWorkers } from "./cemeteryWorkers";
 import { wasteWaterContainment } from "./wasteWaterContainment";
 
@@ -63,9 +62,9 @@ import { safeUnsafe } from "./safeUnsafe";
 import { disinfectionFrequency } from "./disinfectionFrequency";
 import { cleaningFrequency } from "./cleaningFrequency";
 import { desiltingFrequency } from "./desiltingFrequency";
-import {containerVolume} from "./containerVolume";
-import {toiletHouseholdNumber} from "./toiletHouseholdNumber";
-import {inspectionFormNuisances} from "./inspectionFormNuisances";
+import { containerVolume } from "./containerVolume";
+import { toiletHouseholdNumber } from "./toiletHouseholdNumber";
+import { inspectionFormNuisances } from "./inspectionFormNuisances";
 
 async function main() {
   await prisma.dataVersion.createMany({
@@ -84,8 +83,6 @@ async function main() {
     data: region,
   });
 
-
-
   await prisma.district.createMany({
     data: district,
   });
@@ -101,8 +98,6 @@ async function main() {
   await prisma.excretaDisposalMethod.createMany({
     data: excretaDisposalMethod,
   });
-
-
 
   await prisma.waterFlowFrequency.createMany({
     data: waterFrequency,
@@ -195,10 +190,6 @@ async function main() {
     data: respondentDesignation,
   });
 
-  await prisma.userLevel.createMany({
-    data: userLevel,
-  });
-
   await prisma.cemeteryWorkers.createMany({
     data: cemeteryWorkers,
   });
@@ -265,7 +256,6 @@ async function main() {
   await prisma.safeUnsafe.createMany({
     data: safeUnsafe,
   });
-
 
   await prisma.disinfectionFrequency.createMany({
     data: disinfectionFrequency,

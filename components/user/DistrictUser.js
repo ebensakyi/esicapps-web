@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const MMDAUser = ({ users, userTypes, regions }) => {
+const DistrictUser = ({ users, userTypes, regions }) => {
   const [userType, setUserType] = useState();
   const [surname, setSurname] = useState();
   const [otherNames, setOtherNames] = useState();
@@ -9,10 +9,11 @@ const MMDAUser = ({ users, userTypes, regions }) => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [designation, setDesignation] = useState();
   const [region, setRegion] = useState();
-  const [districts, setDistricts] = useState([]);
   const [electoralAreas, setElectoralAreas] = useState([]);
+  const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState();
-  const [electoralArea, setElectoralArea] = useState();
+
+  // const [electoralArea, setElectoralArea] = useState();
   const [level, setLevel] = useState();
 
   const addUser = async (e) => {
@@ -26,7 +27,6 @@ const MMDAUser = ({ users, userTypes, regions }) => {
       designation,
       regionId: Number(region),
       districtId: Number(district),
-      electoralAreaId: Number(electoralArea),
     };
 
 
@@ -45,6 +45,16 @@ const MMDAUser = ({ users, userTypes, regions }) => {
 
     }
 
+  }
+
+  const getDistrictByRegion = async (e, regionId) => {
+    try {
+      e.preventDefault();
+      const response = await axios.get("/api/v1/primary-data/district?regionId=" + regionId);
+      setDistricts(response.data)
+    } catch (error) {
+
+    }
   }
 
   const getElectoralByDistrict = async (e, districtId) => {
@@ -82,29 +92,7 @@ const MMDAUser = ({ users, userTypes, regions }) => {
               </div>
               {/* end card header */}
               <div className="card-body">
-                <div className="row gy-4">
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        User type
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => {
-                          setUserType(e.target.value);
-
-                        }}
-                      >
-                        <option selected>Choose...</option>
-                        {userTypes.map((userType) => (
-                          <option key={userType.id} value={userType.id}>{userType.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                
                 <hr />
 
                 <div className="row gy-4">
@@ -176,7 +164,27 @@ const MMDAUser = ({ users, userTypes, regions }) => {
                       />
                     </div>
                   </div>
+                  <div className="col-xxl-3 col-md-6">
+                    <div>
+                      <label htmlFor="readonlyInput" className="form-label">
+                        User type
+                      </label>
 
+                      <select
+                        className="form-select"
+                        id="inputGroupSelect02"
+                        onChange={(e) => {
+                          setUserType(e.target.value);
+
+                        }}
+                      >
+                        <option selected>Choose...</option>
+                        {userTypes.map((userType) => (
+                          <option key={userType.id} value={userType.id}>{userType.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
@@ -211,7 +219,6 @@ const MMDAUser = ({ users, userTypes, regions }) => {
                         id="inputGroupSelect02"
                         onChange={(e) => {
                           setDistrict(e.target.value)
-                          getElectoralByDistrict(e, e.target.value)
                         }}
                       >
                         <option selected>Choose...</option>
@@ -224,7 +231,7 @@ const MMDAUser = ({ users, userTypes, regions }) => {
                     </div>
                   </div>
 
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Electoral Area
@@ -243,7 +250,7 @@ const MMDAUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <br />
                 <div className="row gy-4">
@@ -272,4 +279,4 @@ const MMDAUser = ({ users, userTypes, regions }) => {
   );
 };
 
-export default MMDAUser;
+export default DistrictUser;

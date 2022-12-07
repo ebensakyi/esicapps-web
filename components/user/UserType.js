@@ -1,10 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import Select from "react-select";
 
-const UserType = ({ userLevels, pages }) => {
+const UserType = ({  pages }) => {
   const [userTypeName, setUserTypeName] = useState();
-  const [level, setLevel] = useState();
+  // const [level, setLevel] = useState();
 
  
   const addUserType = async (e) => {
@@ -31,7 +30,7 @@ const UserType = ({ userLevels, pages }) => {
               {/* end card header */}
               <div className="card-body">
                 <div className="row gy-4">
-                  <div className="col-xxl-4 col-md-4">
+                  {/* <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Level
@@ -50,7 +49,7 @@ const UserType = ({ userLevels, pages }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="basiInput" className="form-label">

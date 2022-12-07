@@ -66,7 +66,7 @@ model DataVersion {
 
 model User {
   id          Int    @id @default(autoincrement())
-  userTypeId  Int?
+  userTypeId  Int
   surname     String @db.VarChar(255)
   otherNames  String @db.VarChar(255)
   email       String @unique @db.VarChar(255)
@@ -74,10 +74,10 @@ model User {
   designation String @db.VarChar(255)
 
   password   String @db.VarChar(255)
-  // idTypeId    Int?
-  // idNumber    String? @db.VarChar(255)
+  
   regionId   Int?
   districtId Int?
+  electoralAreaId      Int?
 
   activated Int?     @default(0)
   deleted   Int?     @default(0)
@@ -91,7 +91,6 @@ model User {
 
   Logs                 Logs[]
   publishedBy          Inspection[]           @relation("publishedBy")
-  electoralAreaId      Int
   LicencePermitSection LicencePermitSection[]
   BasicInfoSection     BasicInfoSection[]
   Inspection           Inspection[]
@@ -101,27 +100,32 @@ model User {
   ConclusionSection    ConclusionSection[]
 }
 
-model UserLevel {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// model UserLevel {
+//   id        Int      @id @default(autoincrement())
+//   name      String   @db.VarChar(255)
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
 
-  UserType UserType[]
-}
+//   UserType UserType[]
+// }
+// model Role {
+//   id        Int      @id @default(autoincrement())
+//   name      String   @db.VarChar(255)
+//   deleted   Int?     @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
 
+// }
 model UserType {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
-  UserLevel        UserLevel          @relation(fields: [userLevelId], references: [id])
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   User             User[]
   PageAccess       PageAccess[]
   PageActionAccess PageActionAccess[]
-  userLevelId      Int
 }
 
 model PageAccess {
