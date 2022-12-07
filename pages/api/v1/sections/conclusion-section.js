@@ -5,6 +5,8 @@ const post = async (req, res) => {
 
 
     const data = {
+      id: req.body.id,
+
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       officerComment:

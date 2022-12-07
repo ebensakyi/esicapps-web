@@ -4,9 +4,10 @@ const post = async (req, res) => {
   try {
  
 
-    console.log(req.body);
 
     const data = {
+      id: req.body.id,
+
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       numberToiletSeats: req.body.numberToiletSeats == "null" ? null : Number(req.body.numberToiletSeats),
@@ -37,7 +38,6 @@ const post = async (req, res) => {
 
     };
 
-  console.log(data);
 
  const response = await prisma.liquidWasteSection.create({ data });
 

@@ -3,6 +3,7 @@ import prisma from "../../../../prisma/MyPrismaClient";
 const post = async (req, res) => {
   try {
     const data = {
+      id: req.body.id,
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       communityId:

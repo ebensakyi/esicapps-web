@@ -5,6 +5,8 @@ const post = async (req, res) => {
  
 
     const data = {
+      id: req.body.id,
+
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       wasteServiceProviderRegistrationId: req.body.wasteServiceProviderRegistrationId == "null" ? null : Number(req.body.wasteServiceProviderRegistrationId),
