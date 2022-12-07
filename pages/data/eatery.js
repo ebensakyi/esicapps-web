@@ -1,11 +1,11 @@
 
-import Residential from '../../components/data/Residential'
+import Eatery from '../../components/data/Eatery';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
-//import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../../config";
 
 
-export default function user({ data }) {
+export default function eatery({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function user({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Residential data={data} />
+                        <Eatery data={data} />
 
                     </div>
                 </div>
@@ -24,29 +24,26 @@ export default function user({ data }) {
 }
 
 
-// export async function getServerSideProps(context) {
-//     const { token } = context.req.cookies;
+export async function getServerSideProps(context) {
+    const { token } = context.req.cookies;
 
-//     if (!token) {
-//         return {
-//             redirect: {
-//                 destination: '/auth/login',
-//                 permanent: true,
-//             },
-//         }
-//     }
-//     const examTypes = await fetch(`${SERVER_BASE_URL}/api/exam-type`).then(
-//         (res) => res.json()
-//     );
+    if (!token) {
+        return {
+            redirect: {
+                destination: '/auth/login',
+                permanent: true,
+            },
+        }
+    }
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/eatery`).then(
+        (res) => res.json()
+    );
 
-//     const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(
-//         (res) => res.json()
-//     );
-//     return {
-//         props: {
-//             examTypes,
-//             paymentTypes
-//         },
-//     };
+   
+    return {
+        props: {
+            data,
+        },
+    };
 
-// }
+}

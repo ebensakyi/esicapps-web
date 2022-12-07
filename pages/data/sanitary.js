@@ -1,8 +1,8 @@
 
-import Sanitary from '../../components/data/Sanitary'
+import Residential from '../../components/data/Sanitary'
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
-//import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../../config";
 
 
 export default function sanitary({ data }) {
@@ -24,29 +24,26 @@ export default function sanitary({ data }) {
 }
 
 
-// export async function getServerSideProps(context) {
-//     const { token } = context.req.cookies;
+export async function getServerSideProps(context) {
+    const { token } = context.req.cookies;
 
-//     if (!token) {
-//         return {
-//             redirect: {
-//                 destination: '/auth/login',
-//                 permanent: true,
-//             },
-//         }
-//     }
-//     const examTypes = await fetch(`${SERVER_BASE_URL}/api/exam-type`).then(
-//         (res) => res.json()
-//     );
+    if (!token) {
+        return {
+            redirect: {
+                destination: '/auth/login',
+                permanent: true,
+            },
+        }
+    }
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/sanitary`).then(
+        (res) => res.json()
+    );
 
-//     const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(
-//         (res) => res.json()
-//     );
-//     return {
-//         props: {
-//             examTypes,
-//             paymentTypes
-//         },
-//     };
+   
+    return {
+        props: {
+            data,
+        },
+    };
 
-// }
+}
