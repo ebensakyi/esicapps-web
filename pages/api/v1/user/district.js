@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 const post = async (req, res) => {
   try {
-    let password = "ESICAPPS_DISTRICT";
+    let password = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     let hashedPassword = await bcrypt.hashSync(password, salt);
 
@@ -19,7 +19,7 @@ const post = async (req, res) => {
       designation: req.body.designation
     };
 
-    const user = await prisma.user.create({ data :data});
+    const user = await prisma.user.create({ data });
     return res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { user } });
@@ -34,7 +34,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const user = await prisma.user.findMany({ where: { deleted: 0 } });
+    const user = await prisma.user.findMany({ where: { deleted: 0} });
     return res.status(200).json( user);
   } catch (error) {
     console.log("Error: " + error);

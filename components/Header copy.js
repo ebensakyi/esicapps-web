@@ -46,10 +46,158 @@ const Header = () => {
                 </span>
               </button>
               {/* App Search*/}
-             
+              <form className="app-search d-none d-md-block">
+                <div className="position-relative">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search..."
+                    autoComplete="off"
+                    id="search-options"
+                    defaultValue=""
+                  />
+                  <span className="mdi mdi-magnify search-widget-icon" />
+                  <span
+                    className="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
+                    id="search-close-options"
+                  />
+                </div>
+                <div
+                  className="dropdown-menu dropdown-menu-lg"
+                  id="search-dropdown"
+                >
+                  <div data-simplebar="" style={{ maxHeight: 320 }}>
+                    {/* item*/}
+                    <div className="dropdown-header">
+                      <h6 className="text-overflow text-muted mb-0 text-uppercase">
+                        Recent Searches
+                      </h6>
+                    </div>
+                    <div className="dropdown-item bg-transparent text-wrap">
+                      <a
+                        href="index.html"
+                        className="btn btn-soft-secondary btn-sm btn-rounded"
+                      >
+                        how to setup <i className="mdi mdi-magnify ms-1" />
+                      </a>
+                      <a
+                        href="index.html"
+                        className="btn btn-soft-secondary btn-sm btn-rounded"
+                      >
+                        buttons
+                        <i className="mdi mdi-magnify ms-1" />
+                      </a>
+                    </div>
+                    {/* item*/}
+                    <div className="dropdown-header mt-2">
+                      <h6 className="text-overflow text-muted mb-1 text-uppercase">
+                        Pages
+                      </h6>
+                    </div>
+                    {/* item*/}
+                    <a
+                      href="javascript:void(0);"
+                      className="dropdown-item notify-item"
+                    >
+                      <i className="ri-bubble-chart-line align-middle fs-18 text-muted me-2" />
+                      <span>Analytics Dashboard</span>
+                    </a>
+                    {/* item*/}
+                    <a
+                      href="javascript:void(0);"
+                      className="dropdown-item notify-item"
+                    >
+                      <i className="ri-lifebuoy-line align-middle fs-18 text-muted me-2" />
+                      <span>Help Center</span>
+                    </a>
+                    {/* item*/}
+                    <a
+                      href="javascript:void(0);"
+                      className="dropdown-item notify-item"
+                    >
+                      <i className="ri-user-settings-line align-middle fs-18 text-muted me-2" />
+                      <span>My account settings</span>
+                    </a>
+                    {/* item*/}
+                    <div className="dropdown-header mt-2">
+                      <h6 className="text-overflow text-muted mb-2 text-uppercase">
+                        Members
+                      </h6>
+                    </div>
+                    <div className="notification-list">
+                      {/* item */}
+                      <a
+                        href="javascript:void(0);"
+                        className="dropdown-item notify-item py-2"
+                      >
+                        <div className="d-flex">
+                          <img
+                            src="/assets/images/users/avatar-2.jpg"
+                            className="me-3 rounded-circle avatar-xs"
+                            alt="user-pic"
+                          />
+                          <div className="flex-1">
+                            <h6 className="m-0">Angela Bernier</h6>
+                            <span className="fs-11 mb-0 text-muted">
+                              Manager
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                      {/* item */}
+                      <a
+                        href="javascript:void(0);"
+                        className="dropdown-item notify-item py-2"
+                      >
+                        <div className="d-flex">
+                          <img
+                            src="/assets/images/users/avatar-3.jpg"
+                            className="me-3 rounded-circle avatar-xs"
+                            alt="user-pic"
+                          />
+                          <div className="flex-1">
+                            <h6 className="m-0">David Grasso</h6>
+                            <span className="fs-11 mb-0 text-muted">
+                              Web Designer
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                      {/* item */}
+                      <a
+                        href="javascript:void(0);"
+                        className="dropdown-item notify-item py-2"
+                      >
+                        <div className="d-flex">
+                          <img
+                            src="/assets/images/users/avatar-5.jpg"
+                            className="me-3 rounded-circle avatar-xs"
+                            alt="user-pic"
+                          />
+                          <div className="flex-1">
+                            <h6 className="m-0">Mike Bunch</h6>
+                            <span className="fs-11 mb-0 text-muted">
+                              React Developer
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="text-center pt-3 pb-1">
+                    <a
+                      href="pages-search-results.html"
+                      className="btn btn-primary btn-sm"
+                    >
+                      View All Results
+                      <i className="ri-arrow-right-line ms-1" />
+                    </a>
+                  </div>
+                </div>
+              </form>
             </div>
             <div className="d-flex align-items-center">
-              {/* <div className="dropdown d-md-none topbar-head-dropdown header-item">
+              <div className="dropdown d-md-none topbar-head-dropdown header-item">
                 <button
                   type="button"
                   className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
@@ -80,10 +228,97 @@ const Header = () => {
                     </div>
                   </form>
                 </div>
-              </div> */}
+              </div>
 
-            
-              {/* <div className="ms-1 header-item d-none d-sm-flex">
+              <div className="dropdown topbar-head-dropdown ms-1 header-item">
+                <button
+                  type="button"
+                  className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i className="bx bx-category-alt fs-22" />
+                </button>
+                <div className="dropdown-menu dropdown-menu-lg p-0 dropdown-menu-end">
+                  <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
+                    <div className="row align-items-center">
+                      <div className="col">
+                        <h6 className="m-0 fw-semibold fs-15"> Web Apps </h6>
+                      </div>
+                      <div className="col-auto">
+                        <a href="#!" className="btn btn-sm btn-soft-info">
+                          {" "}
+                          View All Apps
+                          <i className="ri-arrow-right-s-line align-middle" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-2">
+                    <div className="row g-0">
+                      <div className="col">
+                        <a className="dropdown-icon-item" href="#!">
+                          <img
+                            src="/assets/images/brands/github.png"
+                            alt="Github"
+                          />
+                          <span>GitHub</span>
+                        </a>
+                      </div>
+                      <div className="col">
+                        <a className="dropdown-icon-item" href="#!">
+                          <img
+                            src="/assets/images/brands/bitbucket.png"
+                            alt="bitbucket"
+                          />
+                          <span>Bitbucket</span>
+                        </a>
+                      </div>
+                      <div className="col">
+                        <a className="dropdown-icon-item" href="#!">
+                          <img
+                            src="/assets/images/brands/dribbble.png"
+                            alt="dribbble"
+                          />
+                          <span>Dribbble</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div className="row g-0">
+                      <div className="col">
+                        <a className="dropdown-icon-item" href="#!">
+                          <img
+                            src="/assets/images/brands/dropbox.png"
+                            alt="dropbox"
+                          />
+                          <span>Dropbox</span>
+                        </a>
+                      </div>
+                      <div className="col">
+                        <a className="dropdown-icon-item" href="#!">
+                          <img
+                            src="/assets/images/brands/mail_chimp.png"
+                            alt="mail_chimp"
+                          />
+                          <span>Mail Chimp</span>
+                        </a>
+                      </div>
+                      <div className="col">
+                        <a className="dropdown-icon-item" href="#!">
+                          <img
+                            src="/assets/images/brands/slack.png"
+                            alt="slack"
+                          />
+                          <span>Slack</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="ms-1 header-item d-none d-sm-flex">
                 <button
                   type="button"
                   className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
@@ -91,15 +326,15 @@ const Header = () => {
                 >
                   <i className="bx bx-fullscreen fs-22" />
                 </button>
-              </div> */}
-              {/* <div className="ms-1 header-item d-none d-sm-flex">
+              </div>
+              <div className="ms-1 header-item d-none d-sm-flex">
                 <button
                   type="button"
                   className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode"
                 >
                   <i className="bx bx-moon fs-22" />
                 </button>
-              </div> */}
+              </div>
               <div className="dropdown topbar-head-dropdown ms-1 header-item">
                 <button
                   type="button"

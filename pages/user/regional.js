@@ -6,7 +6,7 @@ import Header from '../../components/Header'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function user({ regions, userTypes }) {
+export default function user({ regions, userTypes,users }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -16,7 +16,7 @@ export default function user({ regions, userTypes }) {
                     <div className="container-fluid">
 
                         <RegionalUser regions = {regions} userTypes = {userTypes}/>
-                        <ListRegionalUser/>
+                        <ListRegionalUser users={users}/>
 
                     </div>
                 </div>
@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
         (res) => res.json()
     );
 
-    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/national`).then(
+    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/regional`).then(
         (res) => res.json()
     );
 

@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 const post = async (req, res) => {
   try {
-    let password = "ESICAPPS_NATIONAL";
+    let password = req.body.password;
     const salt = bcrypt.genSaltSync(10);
 
     let hashedPassword = await bcrypt.hashSync(password, salt);
@@ -33,7 +33,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const user = await prisma.user.findMany({ where: { deleted: 0 } });
+    const user = await prisma.user.findMany({ where: { deleted: 0  } });
     return res.status(200).json(user);
   } catch (error) {
     console.log("Error: " + error);
