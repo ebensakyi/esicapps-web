@@ -5,7 +5,7 @@ var hash2 = bcrypt.hashSync("esicapps@national", salt);
 var hash3 = bcrypt.hashSync("esicapps@regional", salt);
 var hash4 = bcrypt.hashSync("esicapps@mmda", salt);
 
-export const superUser = [
+export const users = [
   {
     userTypeId: 1,
     surname: "Sakyi",
@@ -38,9 +38,42 @@ export const superUser = [
   {
     userTypeId: 1,
     surname: "District",
-    otherNames: "User",
-    email: "districtuser@gmail.com",
+    otherNames: "User1",
+    email: "districtuser1@gmail.com",
     phoneNumber: "0543333333",
+    password: hash4,
+    regionId: 1,
+    districtId:1,
+    designation: "Super Admin"
+  },
+  {
+    userTypeId: 1,
+    surname: "District",
+    otherNames: "User2",
+    email: "districtuser2@gmail.com",
+    phoneNumber: "0544444444",
+    password: hash4,
+    regionId: 1,
+    districtId:1,
+    designation: "Super Admin"
+  },
+  {
+    userTypeId: 1,
+    surname: "District",
+    otherNames: "User3",
+    email: "districtuser3@gmail.com",
+    phoneNumber: "0545555555",
+    password: hash4,
+    regionId: 1,
+    districtId:1,
+    designation: "Super Admin"
+  },
+  {
+    userTypeId: 1,
+    surname: "District",
+    otherNames: "User4",
+    email: "districtuser4@gmail.com",
+    phoneNumber: "0546666666",
     password: hash4,
     regionId: 1,
     districtId:1,

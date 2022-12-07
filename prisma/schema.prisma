@@ -225,10 +225,11 @@ model Community {
   name       String @db.VarChar(255)
   districtId Int
 
-  District  District @relation(fields: [districtId], references: [id])
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  District         District           @relation(fields: [districtId], references: [id])
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  BasicInfoSection BasicInfoSection[]
 }
 
 model ContainerVolume {
@@ -841,6 +842,7 @@ model BasicInfoSection {
   updatedAt  DateTime   @updatedAt
   User       User       @relation(fields: [userId], references: [id])
   Inspection Inspection @relation(fields: [inspectionId], references: [id])
+  Community  Community?  @relation(fields: [communityId], references: [id])
 }
 
 model ResidentialPremisesInfoSection {

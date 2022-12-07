@@ -53,7 +53,7 @@ CREATE TABLE "User" (
     "regionId" INTEGER,
     "districtId" INTEGER,
     "electoralAreaId" INTEGER,
-    "activated" INTEGER DEFAULT 0,
+    "activated" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1514,6 +1514,9 @@ ALTER TABLE "BasicInfoSection" ADD CONSTRAINT "BasicInfoSection_userId_fkey" FOR
 
 -- AddForeignKey
 ALTER TABLE "BasicInfoSection" ADD CONSTRAINT "BasicInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BasicInfoSection" ADD CONSTRAINT "BasicInfoSection_communityId_fkey" FOREIGN KEY ("communityId") REFERENCES "Community"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_vaccinationProofId_fkey" FOREIGN KEY ("vaccinationProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;

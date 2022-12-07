@@ -49,7 +49,7 @@ import { wasteWaterContainment } from "./wasteWaterContainment";
 
 import { pages } from "./page";
 import { pageActions } from "./pageAction";
-import { superUser } from "./superAdmin";
+import { users } from "./users";
 import { electoralArea } from "./electoralArea";
 import { animalType } from "./animalType";
 import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
@@ -221,7 +221,7 @@ async function main() {
   //   data: community,
   // });
   await prisma.user.createMany({
-    data: superUser,
+    data: users,
   });
   await prisma.animalType.createMany({
     data: animalType,
