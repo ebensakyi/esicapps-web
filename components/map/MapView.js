@@ -31,7 +31,7 @@ const MapView = ({}) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 class="mb-3">MAP</h5>
+            <h5 className="mb-3">MAP</h5>
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <div className="card-body">

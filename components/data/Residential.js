@@ -32,8 +32,8 @@ const Residential = ({ data }) => {
               <tbody>
                 {data.map((dt) => {
                   return (
-                    <tr>
-                      {" "}
+                    <tr key={dt.id}>
+                    {" "}
                       <td>{dt.Inspection.createdAt}</td>
                       <td>{dt.Inspection.completedAt}</td>
                       <td>

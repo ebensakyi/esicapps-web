@@ -77,7 +77,7 @@ const Notification = ({ users, regions, districts, messages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 class="mb-3">NOTIFICATION</h5>
+            <h5 className="mb-3">NOTIFICATION</h5>
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Broadcast</h4>
@@ -428,7 +428,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                     <tbody>
                       {messages.map((msg) => {
                         return (
-                          <tr>
+                          <tr key={msg.id}>
                             <td>{msg.SendingType.name}</td>
                             <td>{msg.MessageType.name}</td>
 

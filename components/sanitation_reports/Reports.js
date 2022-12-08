@@ -31,7 +31,8 @@ const Reports = ({ data }) => {
                 <tbody>
                   {data.map((dt) => {
                     return (
-                      <tr>
+                      <tr key={dt.id}>
+
                         {" "}
                         <td>{dt.createdAt}</td>
                         <td>{dt.name}</td>

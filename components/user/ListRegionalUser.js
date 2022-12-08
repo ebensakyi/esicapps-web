@@ -27,8 +27,8 @@ const ListRegionalUser = ({ users }) => {
               <tbody>
                 {users.map((user) => {
                   return (
-                    <tr>
-                      <td>{user.surname}</td>
+                    <tr key={user.id}>
+                    <td>{user.surname}</td>
                       <td>{user.otherNames}</td>
                       <td>{user.email}</td>
 
