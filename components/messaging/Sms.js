@@ -22,6 +22,7 @@ const Sms = ({ users, regions, districts, messages }) => {
         districtRecipient: Number(districtRecipient),
         regionRecipient: Number(regionRecipient),
         sendingType:1,
+        recipient: null
 
       };
 

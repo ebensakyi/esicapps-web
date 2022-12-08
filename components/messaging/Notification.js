@@ -19,9 +19,10 @@ const Notification = ({ users, regions, districts, messages }) => {
       let data = {
         title,
         message,
-        sendingType:1,
+        sendingType: 1,
         districtRecipient: Number(districtRecipient),
         regionRecipient: Number(regionRecipient),
+        recipient: null,
       };
 
       const response = await axios.post("/api/v1/messaging/notification", data);
@@ -41,8 +42,9 @@ const Notification = ({ users, regions, districts, messages }) => {
         recipient: Number(recipient),
         title,
         message,
-        sendingType:2,
-
+        sendingType: 2,
+        regionRecipient: null,
+        districtRecipient: null,
       };
 
       const response = await axios.post("/api/v1/messaging/notification", data);
@@ -155,7 +157,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                           id="inputGroupSelect02"
                           onChange={(e) => {
                             setDistrictRecipient(e.target.value);
-                            setRegionRecipient(null)
+                            setRegionRecipient(null);
                           }}
                         >
                           <option selected>Choose...</option>
@@ -182,7 +184,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                           id="inputGroupSelect02"
                           onChange={async (e) => {
                             setRegionRecipient(e.target.value);
-                            setDistrictRecipient(null)
+                            setDistrictRecipient(null);
                           }}
                         >
                           <option selected>Choose...</option>
