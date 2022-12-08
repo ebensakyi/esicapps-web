@@ -150,10 +150,10 @@ model Messaging {
   Sender    User  @relation("sender", fields: [sender], references: [id])
   Recipient User? @relation("recipient", fields: [recipient], references: [id])
 
-  Region        Region?     @relation(fields: [regionRecipient], references: [id])
-  District      District?   @relation(fields: [districtRecipient], references: [id])
-  SendingType   SendingType? @relation(fields: [sendingType], references: [id])
-  MessageType   MessageType? @relation(fields: [messageType], references: [id])
+  Region      Region?      @relation(fields: [regionRecipient], references: [id])
+  District    District?    @relation(fields: [districtRecipient], references: [id])
+  SendingType SendingType? @relation(fields: [sendingType], references: [id])
+  MessageType MessageType? @relation(fields: [messageType], references: [id])
 }
 
 model SendingType {
@@ -1780,6 +1780,20 @@ model Picture {
   updatedAt   DateTime   @updatedAt
 
   inspectionId String @db.VarChar(255)
+}
+
+model SanitationReport {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(255)
+  phoneNumber String @db.VarChar(255)
+  image       String @db.VarChar(255)
+  gps         String @db.VarChar(255)
+  region      String @db.VarChar(255)
+  district    String @db.VarChar(255)
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 ////////////END SECTION ///////////

@@ -1472,6 +1472,22 @@ CREATE TABLE "Picture" (
 );
 
 -- CreateTable
+CREATE TABLE "SanitationReport" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "phoneNumber" VARCHAR(255) NOT NULL,
+    "image" VARCHAR(255) NOT NULL,
+    "gps" VARCHAR(255) NOT NULL,
+    "region" VARCHAR(255) NOT NULL,
+    "district" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "SanitationReport_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_PageToPageAction" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL

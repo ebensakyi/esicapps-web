@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import { SERVER_BASE_URL } from "../config";
 import Dashboard from '../components/Dashboard'
 
-export default function dashboard() {
+export default function dashboard({data}) {
     return (
         <div id="layout-wrapper">
         <Header />
@@ -13,7 +13,7 @@ export default function dashboard() {
           <div className="page-content">
             <div className="container-fluid">
               <Dashboard
-                // users={users}
+              data={data}
               
                 // regions={regions}
                 // userTypes={userTypes}
@@ -26,29 +26,28 @@ export default function dashboard() {
 }
 
 
-// export async function getServerSideProps(context) {
-//     const { token } = context.req.cookies;
+export async function getServerSideProps(context) {
+    const { token } = context.req.cookies;
 
-//     if (!token) {
-//         return {
-//             redirect: {
-//                 destination: '/auth/login',
-//                 permanent: true,
-//             },
-//         }
-//     }
-//     const examTypes = await fetch(`${SERVER_BASE_URL}/api/exam-type`).then(
-//         (res) => res.json()
-//     );
+    if (!token) {
+        return {
+            redirect: {
+                destination: '/auth/login',
+                permanent: true,
+            },
+        }
+    }
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/dashboard`).then(
+        (res) => res.json()
+    );
+console.log(data);
+    // const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(
+    //     (res) => res.json()
+    // );
+    return {
+        props: {
+          data
+        },
+    };
 
-//     const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(
-//         (res) => res.json()
-//     );
-//     return {
-//         props: {
-//             examTypes,
-//             paymentTypes
-//         },
-//     };
-
-// }
+}

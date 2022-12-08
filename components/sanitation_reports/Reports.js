@@ -4,7 +4,7 @@ const Reports = ({ data }) => {
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">HEALTH PREMISES</h5>
+              <h5 className="card-title mb-0">SANITATION REPORTS</h5>
             </div>
             <div className="card-body">
               <table
@@ -17,8 +17,8 @@ const Reports = ({ data }) => {
                     <th>Submission Date</th>
   
                     <th>Reporter</th>
-  
-                    <th>GhanaPost GPS</th>
+                    <th>Phone</th>
+                    <th>GPS</th>
                     <th>Region</th>
                     <th>District</th>
                     <th>Community</th>
@@ -33,15 +33,15 @@ const Reports = ({ data }) => {
                     return (
                       <tr>
                         {" "}
-                        <td>{dt.Inspection.createdAt}</td>
-                        <td>{dt.Inspection.completedAt}</td>
+                        <td>{dt.createdAt}</td>
+                        <td>{dt.name}</td>
                         <td>
-                          {dt.User.otherNames} {dt.User.surname}
+                          {dt.phoneNumber} 
                         </td>
-                        <td>{dt.ghanaPostGps}</td>
-                        <td>{dt.Community.District.Region.name}</td>
-                        <td>{dt.Community.District.name}</td>
-                        <td>{dt.Community.name}</td>
+                        <td>{dt.gps}</td>
+                        <td>{dt.region}</td>
+                        <td>{dt.district}</td>
+                        <td>{dt.community}</td>
                         <td>
                           {dt.Inspection.isPublished == 0 ? (
                             <span className="badge bg-danger">Unpublished</span>

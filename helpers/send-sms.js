@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-exports.send = (phone, message) => {
+export const send = (phone, message) => {
   var options = {
     method: "GET",
     url: "https://api.widepaycash.com/v1.1/sms/send-quick/",
