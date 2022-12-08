@@ -2,11 +2,14 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   // try {
+
+  console.log(req.body);
   const data = {
     id: req.body.id,
     userId: Number(req.body.userId),
     message: req.body.message,
-    receiver: req.body.receiver,
+    title: req.body.title,
+    
   };
 
   console.log(data);

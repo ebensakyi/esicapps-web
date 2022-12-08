@@ -1,9 +1,8 @@
 const post = async (req, res) => {
-  console.log(req.body);
 
   try {
     const user = await prisma.user.update({
-      where: { userId: Number(req.body.userId) },
+      where: { id: Number(req.body.userId) },
       data: { fcmId: req.body.fcmId },
     });
     return res.status(200).json();
