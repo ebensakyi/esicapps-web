@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import Sms from "../../components/messaging/sms";
+import Sms from "../../components/messaging/Sms";
 
 export default function sms({ regions, districts, messages, users }) {
   return (

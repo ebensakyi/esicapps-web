@@ -1,4 +1,4 @@
-import Permission from "../../components/account/Premission";
+import Permission from "../../components/user/Premission";
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
@@ -38,7 +38,6 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/primary-data/user-type`
   ).then((res) => res.json());
 
-  console.log(userTypes);
 
   const pages = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/pages`).then(
     (res) => res.json()

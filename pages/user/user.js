@@ -1,4 +1,4 @@
-import User from "../../components/account/User";
+import User from "../../components/user/User";
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

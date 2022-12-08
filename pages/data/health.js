@@ -2,6 +2,7 @@
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
+import Health from '../../components/data/Health'
 
 
 export default function health({ data }) {

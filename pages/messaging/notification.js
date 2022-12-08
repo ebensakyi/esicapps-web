@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import Notification from "../../components/messaging/notification";
+import Notification from "../../components/messaging/Notification";
 
 export default function notification({ regions, districts, messages, users }) {
   return (
