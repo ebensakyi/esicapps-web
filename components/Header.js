@@ -46,7 +46,6 @@ const Header = () => {
                 </span>
               </button>
               {/* App Search*/}
-             
             </div>
             <div className="d-flex align-items-center">
               {/* <div className="dropdown d-md-none topbar-head-dropdown header-item">
@@ -82,7 +81,6 @@ const Header = () => {
                 </div>
               </div> */}
 
-            
               {/* <div className="ms-1 header-item d-none d-sm-flex">
                 <button
                   type="button"
@@ -463,9 +461,9 @@ const Header = () => {
                             />
                             <div className="flex-1">
                               {/* <a href="#!" className="stretched-link"> */}
-                                <h6 className="mt-0 mb-1 fs-13 fw-semibold">
-                                  Kenneth Brown
-                                </h6>
+                              <h6 className="mt-0 mb-1 fs-13 fw-semibold">
+                                Kenneth Brown
+                              </h6>
                               {/* </a> */}
                               <div className="fs-13 text-muted">
                                 <p className="mb-1">
@@ -902,46 +900,50 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="accounts">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <a
-                        href="/user/national"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Add National User
-                      </a>
+                      <Link href="/user/national">
+                        <a
+                          className="nav-link"
+                          // data-bs-toggle="collapse"
+                          // role="button"
+                          // aria-expanded="false"
+                          // aria-controls="sidebarSignIn"
+                          // data-key="t-signin"
+                        >
+                          {" "}
+                          Add National User
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/user/regional"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Add Regional User
-                      </a>
+                      <Link href="/user/regional">
+                        <a
+                          className="nav-link"
+                          // data-bs-toggle="collapse"
+                          // role="button"
+                          // aria-expanded="false"
+                          // aria-controls="sidebarSignIn"
+                          // data-key="t-signin"
+                        >
+                          {" "}
+                          Add Regional User
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="/user/district"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Add MMDA User
-                      </a>
+                      <Link href="/user/district">
+                        <a
+                          href="/user/district"
+                          className="nav-link"
+                          // data-bs-toggle="collapse"
+                          // role="button"
+                          // aria-expanded="false"
+                          // aria-controls="sidebarSignIn"
+                          // data-key="t-signin"
+                        >
+                          {" "}
+                          Add MMDA User
+                        </a>
+                      </Link>
                     </li>
                     {/* <li className="nav-item">
                       <a
@@ -1019,70 +1021,11 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#permissions"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarPages"
-                >
-                  <i className="ri-pages-line" />{" "}
-                  <span data-key="t-pages">Permissions</span>
-                </a>
-                <div className="collapse menu-dropdown" id="permissions">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <a
-                        href="/account/permission"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Add
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        List
-                      </a>
-                    </li>
-                    {/* <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Manage
-                      </a>
-                    </li> */}
-                  </ul>
-                </div>
-              </li>
               <li className="menu-title">
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-components">MESSAGES</span>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#messages"
@@ -1140,7 +1083,7 @@ const Header = () => {
                     </li>
                   </ul>
                 </div>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
@@ -1154,22 +1097,24 @@ const Header = () => {
                   <span data-key="t-pages">Notifications</span>
                 </a>
                 <div className="collapse menu-dropdown" id="notifications">
+                  
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Compose
-                      </a>
+                      <Link href="/messaging/notification">
+                        <a
+                          className="nav-link"
+                          // data-bs-toggle="collapse"
+                          // role="button"
+                          // aria-expanded="false"
+                          // aria-controls="sidebarSignIn"
+                          // data-key="t-signin"
+                        >
+                          {" "}
+                          Compose
+                        </a>
+                      </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -1196,7 +1141,7 @@ const Header = () => {
                         {" "}
                         Manage
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </li>
@@ -1218,11 +1163,11 @@ const Header = () => {
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
+                        // data-bs-toggle="collapse"
+                        // role="button"
+                        // aria-expanded="false"
+                        // aria-controls="sidebarSignIn"
+                        // data-key="t-signin"
                       >
                         {" "}
                         Compose
@@ -1283,7 +1228,7 @@ const Header = () => {
                         Primary data
                       </a>
                     </li>
-                    {/* <li className="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -1294,10 +1239,10 @@ const Header = () => {
                         data-key="t-signin"
                       >
                         {" "}
-                        MMDAs
+                        Permission
                       </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -1310,7 +1255,7 @@ const Header = () => {
                         {" "}
                         Manage
                       </a>
-                    </li> */}
+                    </li>  */}
                   </ul>
                 </div>
               </li>

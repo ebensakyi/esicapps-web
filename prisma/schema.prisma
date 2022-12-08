@@ -65,7 +65,9 @@ model DataVersion {
 }
 
 model User {
-  id          Int    @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
+  fcmId String? @db.VarChar(255)
+
   userTypeId  Int
   surname     String @db.VarChar(255)
   otherNames  String @db.VarChar(255)
@@ -116,6 +118,7 @@ model User {
   PremisesHazardousWasteDisposal PremisesHazardousWasteDisposal[]
   PremisesActionTaken            PremisesActionTaken[]
   PremisesNuisanceDetected       PremisesNuisanceDetected[]
+  Messaging                      Messaging[]
 }
 
 model UserLevel {
@@ -128,14 +131,22 @@ model UserLevel {
   UserType UserType[]
 }
 
-// model Role {
-//   id        Int      @id @default(autoincrement())
-//   name      String   @db.VarChar(255)
-//   deleted   Int?     @default(0)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+model Messaging {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  message     String @db.VarChar(2550)
+  receiver    String @db.VarChar(255)
+  messageType Int? //sms, notification
+  sendingType Int? //Single message, Broadcast message
 
-// }
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User @relation(fields: [sender], references: [id])
+  sender Int
+}
+
 model UserType {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(255)
@@ -1475,7 +1486,7 @@ model PremisesWaterSources {
 }
 
 model PremisesWaterTreatmentType {
-  id            String @db.VarChar(255)    @id 
+  id                   String @id @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   waterSectionId       String @db.VarChar(255)
   waterTreatmentTypeId Int
@@ -1491,7 +1502,7 @@ model PremisesWaterTreatmentType {
 }
 
 model PremisesWaterSupply {
-  id            String @db.VarChar(255)    @id 
+  id                String @id @db.VarChar(255)
   inspectionId      String @db.VarChar(255)
   waterSectionId    String @db.VarChar(255)
   waterSupplyTypeId Int
@@ -1507,7 +1518,7 @@ model PremisesWaterSupply {
 }
 
 model PremisesWaterStorage {
-  id            String @db.VarChar(255)    @id 
+  id                 String @id @db.VarChar(255)
   inspectionId       String @db.VarChar(255)
   waterSectionId     String @db.VarChar(255)
   waterStorageTypeId Int
@@ -1523,7 +1534,7 @@ model PremisesWaterStorage {
 }
 
 model PremisesDrinkingWaterSources {
-  id            String @db.VarChar(255)    @id 
+  id                    String @id @db.VarChar(255)
   inspectionId          String @db.VarChar(255)
   waterSectionId        String @db.VarChar(255)
   drinkingWaterSourceId Int
@@ -1539,13 +1550,13 @@ model PremisesDrinkingWaterSources {
 }
 
 model PremisesToiletType {
-  id            String @db.VarChar(255)    @id 
+  id                   String             @id @db.VarChar(255)
   inspectionId         String             @db.VarChar(255)
   ToiletType           ToiletType         @relation(fields: [toiletTypeId], references: [id])
   deleted              Int?               @default(0)
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
-  liquidWasteSectionId String @db.VarChar(255)
+  liquidWasteSectionId String             @db.VarChar(255)
   toiletTypeId         Int
   LiquidWasteSection   LiquidWasteSection @relation(fields: [liquidWasteSectionId], references: [id])
   User                 User               @relation(fields: [userId], references: [id])
@@ -1553,10 +1564,10 @@ model PremisesToiletType {
 }
 
 model PremisesEffluentManagement {
-  id            String @db.VarChar(255)    @id 
+  id                   String             @id @db.VarChar(255)
   inspectionId         String             @db.VarChar(255)
   effluentManagementId Int
-  liquidWasteSectionId String @db.VarChar(255)
+  liquidWasteSectionId String             @db.VarChar(255)
   deleted              Int?               @default(0)
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
@@ -1567,7 +1578,7 @@ model PremisesEffluentManagement {
 }
 
 model PremisesExcretaDisposalMethod {
-  id            String @db.VarChar(255)    @id 
+  id                   String @id @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
 
@@ -1582,7 +1593,7 @@ model PremisesExcretaDisposalMethod {
 }
 
 model PremisesExcretaContainment {
-  id            String @db.VarChar(255)    @id 
+  id                   String @id @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
 
@@ -1597,9 +1608,9 @@ model PremisesExcretaContainment {
 }
 
 model PremisesGreyWaterDisposal {
-  id            String @db.VarChar(255)    @id 
+  id                   String             @id @db.VarChar(255)
   inspectionId         String             @db.VarChar(255)
-  liquidWasteSectionId String @db.VarChar(255)
+  liquidWasteSectionId String             @db.VarChar(255)
   LiquidWasteSection   LiquidWasteSection @relation(fields: [liquidWasteSectionId], references: [id])
   GreyWaterDisposal    GreyWaterDisposal  @relation(fields: [greyWaterDisposalId], references: [id])
   deleted              Int?               @default(0)
@@ -1611,7 +1622,7 @@ model PremisesGreyWaterDisposal {
 }
 
 model PremisesWasteReceptacle {
-  id            String @db.VarChar(255)    @id 
+  id                   String               @id @db.VarChar(255)
   inspectionId         String               @db.VarChar(255)
   SolidWasteSection    SolidWasteSection    @relation(fields: [solidWasteSectionId], references: [id])
   SolidWasteReceptacle SolidWasteReceptacle @relation(fields: [solidWasteReceptacleId], references: [id])
@@ -1620,14 +1631,14 @@ model PremisesWasteReceptacle {
   deleted                Int?     @default(0)
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
-  solidWasteSectionId    String @db.VarChar(255)
+  solidWasteSectionId    String   @db.VarChar(255)
 
   User   User @relation(fields: [userId], references: [id])
   userId Int
 }
 
 model PremisesWasteCollection {
-  id            String @db.VarChar(255)    @id 
+  id                  String              @id @db.VarChar(255)
   SolidWasteSection   SolidWasteSection   @relation(fields: [solidWasteSectionId], references: [id])
   WasteCollectionType WasteCollectionType @relation(fields: [wasteCollectionTypeId], references: [id])
 
@@ -1635,24 +1646,24 @@ model PremisesWasteCollection {
   deleted               Int?     @default(0)
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
-  solidWasteSectionId   String @db.VarChar(255)
+  solidWasteSectionId   String   @db.VarChar(255)
   User                  User     @relation(fields: [userId], references: [id])
   userId                Int
 }
 
 model PremisesPestSigns {
-  id            String @db.VarChar(255)    @id 
-  pestSignId       Int
-  PestSign         PestSign @relation(fields: [pestSignId], references: [id])
-  deleted          Int?     @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  User             User     @relation(fields: [userId], references: [id])
-  userId           Int
+  id         String   @id @db.VarChar(255)
+  pestSignId Int
+  PestSign   PestSign @relation(fields: [pestSignId], references: [id])
+  deleted    Int?     @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User     @relation(fields: [userId], references: [id])
+  userId     Int
 }
 
 model PremisesAnimal {
-  id            String @db.VarChar(255)    @id 
+  id                               String @id @db.VarChar(255)
   inspectionId                     String @db.VarChar(255)
   animalTypeId                     Int
   residentialPremisesInfoSectionId String @db.VarChar(255)
@@ -1667,7 +1678,7 @@ model PremisesAnimal {
 }
 
 model PremisesDrainType {
-  id            String @db.VarChar(255)    @id 
+  id                   String @id @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   drainTypeId          Int
   liquidWasteSectionId String @db.VarChar(255)
@@ -1682,7 +1693,7 @@ model PremisesDrainType {
 }
 
 model PremisesHazardousWasteDisposal {
-  id            String @db.VarChar(255)    @id 
+  id                             String @id @db.VarChar(255)
   inspectionId                   String @db.VarChar(255)
   hazardousWasteDisposalMethodId Int
   solidWasteSectionId            String @db.VarChar(255)
@@ -1698,7 +1709,7 @@ model PremisesHazardousWasteDisposal {
 }
 
 model PremisesActionTaken {
-  id            String @db.VarChar(255)    @id 
+  id                  String @id @db.VarChar(255)
   inspectionId        String @db.VarChar(255)
   actionId            Int
   conclusionSectionId String @db.VarChar(255)
@@ -1714,13 +1725,13 @@ model PremisesActionTaken {
 }
 
 model PremisesNuisanceDetected {
-  id            String @db.VarChar(255)    @id 
+  id                  String            @id @db.VarChar(255)
   inspectionId        String            @db.VarChar(255)
   ConclusionSection   ConclusionSection @relation(fields: [conclusionSectionId], references: [id])
   deleted             Int?              @default(0)
   createdAt           DateTime          @default(now())
   updatedAt           DateTime          @updatedAt
-  conclusionSectionId String @db.VarChar(255)
+  conclusionSectionId String            @db.VarChar(255)
   Nuisance            Nuisance          @relation(fields: [nuisanceId], references: [id])
   User                User              @relation(fields: [userId], references: [id])
 

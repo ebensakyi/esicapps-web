@@ -43,6 +43,7 @@ CREATE TABLE "DataVersion" (
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
+    "fcmId" VARCHAR(255),
     "userTypeId" INTEGER NOT NULL,
     "surname" VARCHAR(255) NOT NULL,
     "otherNames" VARCHAR(255) NOT NULL,
