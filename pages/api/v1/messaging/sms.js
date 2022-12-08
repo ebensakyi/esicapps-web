@@ -20,7 +20,7 @@ const post = async (req, res) => {
     regionRecipient: Number(req.body.regionRecipient),
     districtRecipient:Number(req.body.districtRecipient),
     sender: 1,
-    messageType: 1,
+    messageType: 2,
     sendingType: Number(req.body.sendingType),
   };
 

@@ -74,6 +74,24 @@ CREATE TABLE "UserLevel" (
 );
 
 -- CreateTable
+CREATE TABLE "Messaging" (
+    "id" SERIAL NOT NULL,
+    "title" VARCHAR(255) NOT NULL,
+    "message" VARCHAR(2550) NOT NULL,
+    "recipient" INTEGER,
+    "messageType" INTEGER,
+    "sendingType" INTEGER,
+    "sender" INTEGER NOT NULL,
+    "regionRecipient" INTEGER,
+    "districtRecipient" INTEGER,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Messaging_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "UserType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -1472,6 +1490,18 @@ ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeI
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sender") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_recipient_fkey" FOREIGN KEY ("recipient") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_regionRecipient_fkey" FOREIGN KEY ("regionRecipient") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_districtRecipient_fkey" FOREIGN KEY ("districtRecipient") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "UserType" ADD CONSTRAINT "UserType_userLevelId_fkey" FOREIGN KEY ("userLevelId") REFERENCES "UserLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

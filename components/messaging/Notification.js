@@ -5,34 +5,52 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Notification = ({ users, regions, districts, messages }) => {
   const [group, setGroup] = useState();
-  const [region, setRegion] = useState();
+  const [regionRecipient, setRegionRecipient] = useState(null);
   const [title, setTitle] = useState();
-  const [district, setDistrict] = useState();
+  const [districtRecipient, setDistrictRecipient] = useState(null);
+  const [recipient, setRecipient] = useState(null);
 
   const [message, setMessage] = useState();
 
- 
   const sendBroadcastMessage = async (e) => {
     try {
-      console.log("sendBroadcastMessage");
+      // console.log("sendBroadcastMessage");
       e.preventDefault();
       let data = {
-        group: Number(group),
-        recieverGroup: Number(recieverGroup),
         title,
         message,
-        phoneNumber,
-        designation,
-        regionId: Number(region),
-        districtId: Number(district),
+        sendingType:1,
+        districtRecipient: Number(districtRecipient),
+        regionRecipient: Number(regionRecipient),
       };
-      console.log(data)
 
       const response = await axios.post("/api/v1/messaging/notification", data);
 
-     // return toast.success(response.data.message);
+      // return toast.success(response.data.message);
     } catch (error) {
-     // return toast.error(error.response.data.message);
+      console.log(error);
+      // return toast.error(error.response.data.message);
+    }
+  };
+
+  const sendSingleMessage = async (e) => {
+    try {
+      // console.log("sendBroadcastMessage");
+      e.preventDefault();
+      let data = {
+        recipient: Number(recipient),
+        title,
+        message,
+        sendingType:2,
+
+      };
+
+      const response = await axios.post("/api/v1/messaging/notification", data);
+
+      // return toast.success(response.data.message);
+    } catch (error) {
+      console.log(error);
+      // return toast.error(error.response.data.message);
     }
   };
 
@@ -52,7 +70,7 @@ const Notification = ({ users, regions, districts, messages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 class="mb-3">Messaging</h5>
+            <h5 class="mb-3">NOTIFICATION</h5>
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Broadcast</h4>
@@ -84,7 +102,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
-                        // onChange={(e) => setPhoneNumber(e.target.value)}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                   </div>
@@ -93,12 +111,12 @@ const Notification = ({ users, regions, districts, messages }) => {
                       <label htmlFor="valueInput" className="form-label">
                         Message
                       </label>
-
-                      <textarea
-                        class="form-control"
-                        id="exampleFormControlTextarea5"
-                        rows="3"
-                      ></textarea>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="valueInput"
+                        onChange={(e) => setMessage(e.target.value)}
+                      />
                     </div>
                   </div>
 
@@ -136,7 +154,8 @@ const Notification = ({ users, regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={(e) => {
-                            setDistrict(e.target.value);
+                            setDistrictRecipient(e.target.value);
+                            setRegionRecipient(null)
                           }}
                         >
                           <option selected>Choose...</option>
@@ -162,7 +181,8 @@ const Notification = ({ users, regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={async (e) => {
-                            setRegion(e.target.value);
+                            setRegionRecipient(e.target.value);
+                            setDistrictRecipient(null)
                           }}
                         >
                           <option selected>Choose...</option>
@@ -229,7 +249,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                         <button
                           className="btn btn-primary"
                           onClick={(e) => {
-                            sendBroadcastMessage(e.target.value);
+                            sendBroadcastMessage(e);
                           }}
                         >
                           Send
@@ -272,7 +292,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
-                        // onChange={(e) => setPhoneNumber(e.target.value)}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                   </div>
@@ -282,11 +302,12 @@ const Notification = ({ users, regions, districts, messages }) => {
                         Message
                       </label>
 
-                      <textarea
-                        class="form-control"
-                        id="exampleFormControlTextarea5"
-                        rows="3"
-                      ></textarea>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="valueInput"
+                        onChange={(e) => setMessage(e.target.value)}
+                      />
                     </div>
                   </div>
                   <div className="col-xxl-3 col-md-6">
@@ -298,9 +319,9 @@ const Notification = ({ users, regions, districts, messages }) => {
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
-                        // onChange={(e) => {
-                        //   setUserType(e.target.value);
-                        // }}
+                        onChange={(e) => {
+                          setRecipient(e.target.value);
+                        }}
                       >
                         <option selected>Choose...</option>
                         {users.map((u) => (
@@ -364,7 +385,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                         <button
                           className="btn btn-primary"
                           onClick={(e) => {
-                            sendSingleMessage(e.target.value);
+                            sendSingleMessage(e);
                           }}
                         >
                           Send

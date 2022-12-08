@@ -3,13 +3,7 @@ import Header from "../../components/Header";
 import { SERVER_BASE_URL } from "../../config";
 import Notification from "../../components/messaging/notification";
 
-export default function notification({
-  notifications,
-  regions,
-  districts,
-  messages,
-  users
-}) {
+export default function notification({ regions, districts, messages, users }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -18,8 +12,7 @@ export default function notification({
         <div className="page-content">
           <div className="container-fluid">
             <Notification
-            users = {users}
-              notifications={notifications}
+              users={users}
               messages={messages}
               regions={regions}
               districts={districts}
@@ -46,8 +39,8 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/messaging/notification`
   ).then((res) => res.json());
 
-  const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then(
-    (res) => res.json()
+  const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
+    res.json()
   );
 
   const regions = await fetch(

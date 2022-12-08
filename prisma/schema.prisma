@@ -118,7 +118,9 @@ model User {
   PremisesHazardousWasteDisposal PremisesHazardousWasteDisposal[]
   PremisesActionTaken            PremisesActionTaken[]
   PremisesNuisanceDetected       PremisesNuisanceDetected[]
-  Messaging                      Messaging[]
+
+  sender    Messaging[] @relation("sender")
+  recipient Messaging[] @relation("recipient")
 }
 
 model UserLevel {
@@ -132,19 +134,26 @@ model UserLevel {
 }
 
 model Messaging {
-  id          Int    @id @default(autoincrement())
-  title       String @db.VarChar(255)
-  message     String @db.VarChar(2550)
-  receiver    String @db.VarChar(255)
-  messageType Int? //sms, notification
-  sendingType Int? //Single message, Broadcast message
+  id                Int      @id @default(autoincrement())
+  title             String   @db.VarChar(255)
+  message           String   @db.VarChar(2550)
+  recipient         Int?
+  messageType       Int? //sms, notification
+  sendingType       Int? //Single message, Broadcast message
+  sender            Int
+  regionRecipient   Int?
+  districtRecipient Int?
+  deleted           Int?     @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  Sender    User @relation("sender", fields: [sender], references: [id])
+  Recipient User? @relation("recipient", fields: [recipient], references: [id])
 
-  User   User @relation(fields: [sender], references: [id])
-  sender Int
+  Region   Region?   @relation(fields: [regionRecipient], references: [id])
+  District District? @relation(fields: [districtRecipient], references: [id])
+
+
 }
 
 model UserType {
@@ -420,11 +429,12 @@ model Region {
   name  String @db.VarChar(255)
   abbrv String @db.VarChar(10)
 
-  deleted   Int?       @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  deleted   Int?        @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
   User      User[]
   District  District[]
+  Messaging Messaging[]
 }
 
 model District {
@@ -439,6 +449,7 @@ model District {
   ElectoralArea ElectoralArea[]
   regionId      Int
   Community     Community[]
+  Messaging     Messaging[]
 }
 
 model ElectoralArea {
