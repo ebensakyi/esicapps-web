@@ -2,8 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from 'next/router'
 
 const Notification = ({ users, regions, districts, messages }) => {
+  const router = useRouter()
+
   const [group, setGroup] = useState();
   const [regionRecipient, setRegionRecipient] = useState(null);
   const [title, setTitle] = useState();
@@ -19,18 +22,19 @@ const Notification = ({ users, regions, districts, messages }) => {
       let data = {
         title,
         message,
-        sendingType: 1,
-        districtRecipient: Number(districtRecipient),
-        regionRecipient: Number(regionRecipient),
+        sendingType: 2,
+        districtRecipient: districtRecipient,
+        regionRecipient: regionRecipient,
         recipient: null,
       };
 
       const response = await axios.post("/api/v1/messaging/notification", data);
+      router.replace(router.asPath)
 
-      // return toast.success(response.data.message);
+      return toast.success("Message sent");
     } catch (error) {
       console.log(error);
-      // return toast.error(error.response.data.message);
+      return toast.error("An error occurred");
     }
   };
 
@@ -39,20 +43,21 @@ const Notification = ({ users, regions, districts, messages }) => {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
       let data = {
-        recipient: Number(recipient),
+        recipient: recipient,
         title,
         message,
-        sendingType: 2,
+        sendingType: 1,
         regionRecipient: null,
         districtRecipient: null,
       };
+      router.replace(router.asPath)
 
       const response = await axios.post("/api/v1/messaging/notification", data);
 
-      // return toast.success(response.data.message);
+      return toast.success("Message sent");
     } catch (error) {
       console.log(error);
-      // return toast.error(error.response.data.message);
+      return toast.error("An error occurred");
     }
   };
 
@@ -412,11 +417,11 @@ const Notification = ({ users, regions, districts, messages }) => {
                     <thead>
                       <tr>
                         <th>Sending Type</th>
-
+                        <th>Msg Type</th>
                         <th>Title</th>
                         <th>Message</th>
 
-                        <th>Sent to</th>
+                        <th>Recipient</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -424,11 +429,17 @@ const Notification = ({ users, regions, districts, messages }) => {
                       {messages.map((msg) => {
                         return (
                           <tr>
-                            <td>{msg.sendingType}</td>
+                            <td>{msg.SendingType.name}</td>
+                            <td>{msg.MessageType.name}</td>
+
                             <td>{msg.title}</td>
                             <td>{msg.message}</td>
 
-                            <td>{msg.receiver}</td>
+                            <td>
+                              {msg.District != null ? msg.District.name : ""}
+                              {msg.Region != null ? msg.Region.name : ""}
+                              {msg.Recipient != null ?msg.Recipient.otherNames +" "+ msg.Recipient.surname : ""}
+                            </td>
                             {/* <td>
                         {user.activated == 0 ? (
                           <span className="badge text-bg-warning">

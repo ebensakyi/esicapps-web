@@ -2,8 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from 'next/router'
 
 const Sms = ({ users, regions, districts, messages }) => {
+  const router = useRouter()
+
   const [group, setGroup] = useState();
   const [regionRecipient, setRegionRecipient] = useState(null);
   const [title, setTitle] = useState();
@@ -19,19 +22,19 @@ const Sms = ({ users, regions, districts, messages }) => {
       let data = {
         title,
         message,
-        districtRecipient: Number(districtRecipient),
-        regionRecipient: Number(regionRecipient),
-        sendingType:1,
-        recipient: null
-
+        sendingType: 2,
+        districtRecipient: districtRecipient,
+        regionRecipient: regionRecipient,
+        recipient: null,
       };
 
-      const response = await axios.post("/api/v1/messaging/sms", data);
+      const response = await axios.post("/api/v1/messaging/notification", data);
+      router.replace(router.asPath)
 
-      // return toast.success(response.data.message);
+      return toast.success("Message sent");
     } catch (error) {
       console.log(error);
-      // return toast.error(error.response.data.message);
+      return toast.error("An error occurred");
     }
   };
 
@@ -40,20 +43,21 @@ const Sms = ({ users, regions, districts, messages }) => {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
       let data = {
-        recipient: Number(recipient),
+        recipient: recipient,
         title,
         message,
-        sendingType:2,
+        sendingType: 1,
         regionRecipient: null,
-        districtRecipient: null
+        districtRecipient: null,
       };
+      router.replace(router.asPath)
 
-      const response = await axios.post("/api/v1/messaging/sms", data);
+      const response = await axios.post("/api/v1/messaging/notification", data);
 
-      // return toast.success(response.data.message);
+      return toast.success("Message sent");
     } catch (error) {
       console.log(error);
-      // return toast.error(error.response.data.message);
+      return toast.error("An error occurred");
     }
   };
 
@@ -73,7 +77,7 @@ const Sms = ({ users, regions, districts, messages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 class="mb-3">SMS</h5>
+            <h5 class="mb-3">NOTIFICATION</h5>
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Broadcast</h4>
@@ -158,7 +162,7 @@ const Sms = ({ users, regions, districts, messages }) => {
                           id="inputGroupSelect02"
                           onChange={(e) => {
                             setDistrictRecipient(e.target.value);
-                            setRegionRecipient(null)
+                            setRegionRecipient(null);
                           }}
                         >
                           <option selected>Choose...</option>
@@ -185,7 +189,7 @@ const Sms = ({ users, regions, districts, messages }) => {
                           id="inputGroupSelect02"
                           onChange={async (e) => {
                             setRegionRecipient(e.target.value);
-                            setDistrictRecipient(null)
+                            setDistrictRecipient(null);
                           }}
                         >
                           <option selected>Choose...</option>
@@ -413,11 +417,11 @@ const Sms = ({ users, regions, districts, messages }) => {
                     <thead>
                       <tr>
                         <th>Sending Type</th>
-
+                        <th>Msg Type</th>
                         <th>Title</th>
                         <th>Message</th>
 
-                        <th>Sent to</th>
+                        <th>Recipient</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -425,11 +429,17 @@ const Sms = ({ users, regions, districts, messages }) => {
                       {messages.map((msg) => {
                         return (
                           <tr>
-                            <td>{msg.sendingType}</td>
+                            <td>{msg.SendingType.name}</td>
+                            <td>{msg.MessageType.name}</td>
+
                             <td>{msg.title}</td>
                             <td>{msg.message}</td>
 
-                            <td>{msg.receiver}</td>
+                            <td>
+                              {msg.District != null ? msg.District.name : ""}
+                              {msg.Region != null ? msg.Region.name : ""}
+                              {msg.Recipient != null ?msg.Recipient.otherNames +" "+ msg.Recipient.surname : ""}
+                            </td>
                             {/* <td>
                         {user.activated == 0 ? (
                           <span className="badge text-bg-warning">

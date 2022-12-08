@@ -147,13 +147,33 @@ model Messaging {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
-  Sender    User @relation("sender", fields: [sender], references: [id])
+  Sender    User  @relation("sender", fields: [sender], references: [id])
   Recipient User? @relation("recipient", fields: [recipient], references: [id])
 
-  Region   Region?   @relation(fields: [regionRecipient], references: [id])
-  District District? @relation(fields: [districtRecipient], references: [id])
+  Region        Region?     @relation(fields: [regionRecipient], references: [id])
+  District      District?   @relation(fields: [districtRecipient], references: [id])
+  SendingType   SendingType? @relation(fields: [sendingType], references: [id])
+  MessageType   MessageType? @relation(fields: [messageType], references: [id])
+}
 
+model SendingType {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
 
+  deleted   Int?        @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  Messaging Messaging[]
+}
+
+model MessageType {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  deleted   Int?        @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  Messaging Messaging[]
 }
 
 model UserType {

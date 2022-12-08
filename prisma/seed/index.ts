@@ -69,6 +69,9 @@ import { containerVolume } from "./containerVolume";
 import { toiletHouseholdNumber } from "./toiletHouseholdNumber";
 import { inspectionFormNuisances } from "./inspectionFormNuisances";
 
+import {messageType} from "./messageType";
+import {sendingType} from "./sendingType";
+
 async function main() {
   await prisma.dataVersion.createMany({
     data: dataVersion,
@@ -282,7 +285,12 @@ async function main() {
     data: toiletHouseholdNumber,
   });
 
-
+  await prisma.messageType.createMany({
+    data: messageType,
+  });
+  await prisma.sendingType.createMany({
+    data: sendingType,
+  });
 }
 
 main()

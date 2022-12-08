@@ -1,10 +1,11 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
+import send from "../../../../helpers/send-sms"
 
 const post = async (req, res) => {
   try {
-    const salt = bcrypt.genSaltSync(10);
+    const salt =await bcrypt.genSaltSync(10);
 
     let password =  nanoid(8)
     let hashedPassword =  bcrypt.hashSync(password, salt)
@@ -13,6 +14,9 @@ const post = async (req, res) => {
 
     let body = { ...req.body.data, password: hashedPassword };
     const user = await prisma.user.create({ data: body });
+
+
+   await send("233543212322","password")
     res
       .status(200)
       .json(user);
