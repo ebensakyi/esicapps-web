@@ -1,4 +1,5 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+var GeoJSON = require('geojson');
 
 const post = async (req, res) => {
   try {
@@ -15,6 +16,11 @@ const get = async (req, res) => {
         User: true,
       },
     });
+   // GeoJSON.parse(data, {Point: ['lat', 'lng']});
+
+    var x = GeoJSON.parse(JSON.parse(data), {
+      GeoJSON: 'geom'
+  });
 
     console.log(data);
     //return res.status(200).json({ statusCode: 1, data: dataVersion });

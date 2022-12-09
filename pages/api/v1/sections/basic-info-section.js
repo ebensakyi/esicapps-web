@@ -2,10 +2,22 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
  // try {
+
+  var point = {
+    type: 'Point',
+    coordinates: [longitude, latitude],
+    crs: {
+        type: 'name',
+        properties: {
+            name: 'EPSG:4326'
+        }
+    }
+};
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
+      geom: point,
       communityId:
         req.body.communityId == "null" ? null : Number(req.body.communityId),
       community: req.body.community == "null" ? null : req.body.community,
@@ -17,6 +29,7 @@ const post = async (req, res) => {
       respondentPhoneNumber: req.body.respondentPhoneNumber,
       respondentDesignationId: Number(req.body.respondentDesignationId),
     };
+
 
     console.log(data);
 

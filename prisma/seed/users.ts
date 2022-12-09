@@ -79,5 +79,70 @@ export const users = [
     districtId:1,
     designation: "Super Admin"
   },
+  // {
+  //   userTypeId: 7,
+  //   surname: "District",
+  //   otherNames: "User5",
+  //   email: "districtuser4@gmail.com",
+  //   phoneNumber: "054777777",
+  //   password: hash4,
+  //   regionId: 1,
+  //   districtId:1,
+  //   designation: "Super Admin"
+  // },
+  // {
+  //   userTypeId: 7,
+  //   surname: "District",
+  //   otherNames: "User6",
+  //   email: "districtuser4@gmail.com",
+  //   phoneNumber: "05468888888",
+  //   password: hash4,
+  //   regionId: 1,
+  //   districtId:1,
+  //   designation: "Super Admin"
+  // },
+  // {
+  //   userTypeId: 7,
+  //   surname: "District",
+  //   otherNames: "User7",
+  //   email: "districtuser4@gmail.com",
+  //   phoneNumber: "0549999999",
+  //   password: hash4,
+  //   regionId: 1,
+  //   districtId:1,
+  //   designation: "Super Admin"
+  // },
+  // {
+  //   userTypeId: 7,
+  //   surname: "District",
+  //   otherNames: "User8",
+  //   email: "districtuser4@gmail.com",
+  //   phoneNumber: "0540000000",
+  //   password: hash4,
+  //   regionId: 1,
+  //   districtId:4,
+  //   designation: "Super Admin"
+  // },
+  // {
+  //   userTypeId: 7,
+  //   surname: "District",
+  //   otherNames: "User9",
+  //   email: "districtuser4@gmail.com",
+  //   phoneNumber: "0541111000",
+  //   password: hash4,
+  //   regionId: 1,
+  //   districtId:3,
+  //   designation: "Super Admin"
+  // },{
+  //   userTypeId: 7,
+  //   surname: "District",
+  //   otherNames: "User10",
+  //   email: "districtuser4@gmail.com",
+  //   phoneNumber: "0542222000",
+  //   password: hash4,
+  //   regionId: 1,
+  //   districtId:2,
+  //   designation: "Super Admin"
+  // },
   
 ];

@@ -1,3 +1,4 @@
+import { sendFCM } from "../../../../helpers/send-fcm";
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
@@ -12,9 +13,8 @@ const post = async (req, res) => {
   //     title: req.body.title,
 
   //   };
-
-  console.log(req.body);
-
+  let title = req.body.title;
+  let message = req.body.message;
   let recipient =
     req.body.recipient == null ? null : Number(req.body.recipient);
   let regionRecipient =
@@ -26,8 +26,8 @@ const post = async (req, res) => {
 
   const data = {
     recipient: recipient,
-    message: req.body.message,
-    title: req.body.title,
+    message: message,
+    title: title,
     regionRecipient: regionRecipient,
     districtRecipient: districtRecipient,
     sender: req.body.sendingType,
@@ -35,9 +35,39 @@ const post = async (req, res) => {
     sendingType: Number(req.body.sendingType),
   };
 
-  console.log(data);
-
   const response = await prisma.messaging.create({ data });
+
+  if (recipient != null) {
+    const response = await prisma.user.findMany({
+      where: { deleted: 0, id: recipient },
+    });
+
+    for (let i = 0; i < response.length; i++) {
+      console.log(response[i].fcmId);
+      await sendFCM(title, message, response[i].fcmId);
+    }
+  }
+  if (regionRecipient != null) {
+    console.log("regionRecipient");
+
+    const response = await prisma.user.findMany({
+      where: { deleted: 0, regionId: regionRecipient },
+    });
+    for (let i = 0; i < response.length; i++) {
+      console.log(response.phoneNumber);
+    }
+  }
+  if (districtRecipient != null) {
+    console.log("districtRecipient: ", districtRecipient);
+
+    const response = await prisma.user.findMany({
+      where: { deleted: 0, districtId: districtRecipient },
+    });
+
+    for (let i = 0; i < response.length; i++) {
+      console.log(response.phoneNumber);
+    }
+  }
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
   // } catch (error) {
@@ -62,7 +92,6 @@ const get = async (req, res) => {
       },
     });
 
-    console.log(messaging);
     return res.status(200).json(messaging);
   } catch (error) {
     console.log("Error: " + error);

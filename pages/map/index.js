@@ -1,8 +1,11 @@
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import MapView from "../../components/map/MapView"
+import dynamic from 'next/dynamic'
 
+const MapView = dynamic(() => import('../../components/map/MapView'), {
+  ssr: false,
+});
 export default function map({ regions, districts, messages, users }) {
   return (
     <div id="layout-wrapper">
@@ -11,12 +14,7 @@ export default function map({ regions, districts, messages, users }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <MapView
-            //   users={users}
-            //   messages={messages}
-            //   regions={regions}
-            //   districts={districts}
-            />
+            <MapView/>
           </div>
         </div>
       </div>

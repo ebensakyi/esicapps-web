@@ -2,29 +2,36 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { useRouter } from "next/router";
-// import L from 'leaflet';
-//            import 'leaflet/dist/leaflet.css';
+import { useRouter } from "next/router";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+
+
+export function ChangeView({ coords }) {
+  const map = useMap();
+  map.setView(coords, 12);
+  return null;
+}
+
 const MapView = ({}) => {
- // useEffect(() => {
-//     let current_lat = 28.625789;
-//     let current_long = 77.0547899;
-//     let current_zoom = 16;
-//     let center_lat = current_lat;
-//     let center_long = current_long;
-//     let center_zoom = current_zoom;
+  const [geoData, setGeoData] = useState({  lat: -4.262,lng: 3.7388, });
 
-//     // The <div id="map"> must be added to the dom before calling L.map('map')
-//     let map = L.map("map", {
-//       center: [center_lat, center_long],
-//       zoom: center_zoom,
-//     });
+  const center = [geoData.lat, geoData.lng];
 
-//     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-//       attribution:
-//         '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//     }).addTo(map);
-//   });
+
+
+//   var map = L.map('map', {
+//     minZoom: 7,
+//     maxZoom: 20,
+//     zoomControl: false,
+//     maxBounds: L.latLngBounds([3.7388, -4.262], [12.1748, 2.200]),
+//     measureControl: false,
+// }).setView([5.799, 0.40], 9);
+// var initialbasemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(map);
+
 
   return (
     <div className="row">
@@ -35,7 +42,20 @@ const MapView = ({}) => {
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <div className="card-body">
-                  {/* <div id="map" className="leaflet-map"></div> */}
+                  <MapContainer
+                    center={center}
+                    zoom={12}
+                    style={{ height: "100vh" }}
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {geoData.lat && geoData.lng && (
+                      <Marker position={[geoData.lat, geoData.lng]} />
+                    )}
+                    <ChangeView coords={center} />
+                  </MapContainer>
                 </div>
               </div>
             </div>
