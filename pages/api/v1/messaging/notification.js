@@ -42,10 +42,10 @@ const post = async (req, res) => {
       where: { deleted: 0, id: recipient },
     });
 
-    for (let i = 0; i < response.length; i++) {
-      console.log(response[i].fcmId);
-      await sendFCM(title, message, response[i].fcmId);
-    }
+    console.log(response);
+    
+      await sendFCM(title, message, response[0].fcmId);
+    
   }
   if (regionRecipient != null) {
     console.log("regionRecipient");
