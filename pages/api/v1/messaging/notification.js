@@ -83,6 +83,9 @@ const get = async (req, res) => {
   try {
     const messaging = await prisma.messaging.findMany({
       where: { deleted: 0, messageType: 1 },
+      orderBy: {
+        createdAt: "desc",
+      },
       include: {
         SendingType: true,
         MessageType: true,

@@ -10,7 +10,6 @@ const post = async (req, res) => {
 
   let password =await nanoid(8);
 
-  console.log(password);
   let hashedPassword = bcrypt.hashSync(password, salt);
 
   const data = {
