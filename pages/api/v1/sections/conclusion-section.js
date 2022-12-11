@@ -2,31 +2,31 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-
-
     const data = {
       id: req.body.id,
 
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       officerComment:
-        req.body.officerComment == "null"
-          ? null
-          :req.body.officerComment,
-          obnoxiousTradeExistId:
+        req.body.officerComment == "null" ? null : req.body.officerComment,
+
+      obnoxiousTradeExistId:
         req.body.obnoxiousTradeExistId == "null"
           ? null
           : Number(req.body.obnoxiousTradeExistId),
-          obnoxiousTrade:
-        req.body.obnoxiousTrade == "null"
+
+      obnoxiousTrade:
+        req.body.obnoxiousTrade == "null" ? null : req.body.obnoxiousTrade,
+
+      isNuisanceObservedId:
+        req.body.isNuisanceObservedId == "null"
           ? null
-          : req.body.obnoxiousTrade,
-          generalSanitaryConditionId:
+          : Number(req.body.isNuisanceObservedId),
+      generalSanitaryConditionId:
         req.body.generalSanitaryConditionId == "null"
           ? null
           : Number(req.body.generalSanitaryConditionId),
     };
-
 
     const response = await prisma.conclusionSection.create({ data });
 
