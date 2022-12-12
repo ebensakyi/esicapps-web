@@ -6,14 +6,14 @@ import { nanoid } from "nanoid";
 const post = async (req, res) => {
   try {
     let phoneNumber = req.body.phoneNumber;
-    console.log(phoneNumber);
+    // console.log(phoneNumber);
     let password = nanoid(8);
-    const salt = await bcrypt.genSaltSync(10);
+    const salt = bcrypt.genSaltSync(10);
     let hashedPassword = bcrypt.hashSync(password, salt);
 
-    console.log(hashedPassword);
     let user = await prisma.user.findFirst({
-      where: { deleted: 0 },
+      where: { phoneNumber, deleted: 0 },
+      include: { District: true },
     });
     console.log(user);
     if (!user) {
@@ -22,22 +22,30 @@ const post = async (req, res) => {
         .json({ statusCode: 0, message: "Wrong user account" });
     }
 
-    // if (user) {
-    //   await prisma.user.update({
-    //     where: { phoneNumber },
-    //     data: { password: hashedPassword, passwordChanged: 0 },
-    //   });
+    if (user) {
+      await prisma.user.update({
+        where: { phoneNumber },
+        data: { password: hashedPassword, passwordChanged: 0 },
+      });
 
-    //   await prisma.user.passwordResetRequest.create({
-    //     data: { tempPassword: password },
-    //   });
+      let pr = await prisma.passwordResetRequest.findFirst({
+        where: { userId: user.id },
+      });
 
-    //   return res.status(200).json(user);
-    // } else {
-    //   return res
-    //     .status(400)
-    //     .json({ statusCode: 0, message: "Wrong user credentials" });
-    // }
+      await prisma.passwordResetRequest.delete({
+        where: { id: pr.id },
+      });
+
+      await prisma.passwordResetRequest.create({
+        data: { tempPassword: password, userId: Number(user.id) },
+      });
+
+      return res.status(200).json(user);
+    } else {
+      return res
+        .status(400)
+        .json({ statusCode: 0, message: "Wrong user credentials" });
+    }
   } catch (error) {
     console.log("Server error", error);
     if (error.code === "P2002")
