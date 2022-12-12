@@ -41,6 +41,18 @@ CREATE TABLE "DataVersion" (
 );
 
 -- CreateTable
+CREATE TABLE "PasswordResetRequest" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "tempPassword" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PasswordResetRequest_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "fcmId" VARCHAR(255),
@@ -54,6 +66,8 @@ CREATE TABLE "User" (
     "regionId" INTEGER,
     "districtId" INTEGER,
     "electoralAreaId" INTEGER,
+    "loginTimes" INTEGER DEFAULT 0,
+    "passwordChanged" INTEGER DEFAULT 0,
     "activated" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1202,6 +1216,7 @@ CREATE TABLE "ConclusionSection" (
     "officerComment" VARCHAR(255) NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "generalSanitaryConditionId" INTEGER,
+    "isNuisanceObservedId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1516,6 +1531,9 @@ ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionTypeId_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PasswordResetRequest" ADD CONSTRAINT "PasswordResetRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;

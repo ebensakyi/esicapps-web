@@ -1,39 +1,43 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { nanoid } from "nanoid";
 
 const post = async (req, res) => {
   try {
     let phoneNumber = req.body.phoneNumber;
-    let password = req.body.password;
-    //let hash = await bcrypt.hashSync(password, salt);
+    console.log(phoneNumber);
+    let password = nanoid(8);
+    const salt = await bcrypt.genSaltSync(10);
+    let hashedPassword = bcrypt.hashSync(password, salt);
 
+    console.log(hashedPassword);
     let user = await prisma.user.findFirst({
-      where: { phoneNumber, deleted: 0 },
-      include: { District: true },
+      where: { deleted: 0 },
     });
-
-    let loginTimes = user.loginTimes;
+    console.log(user);
     if (!user) {
       return res
         .status(400)
-        .json({ statusCode: 0, message: "User account not found" });
+        .json({ statusCode: 0, message: "Wrong user account" });
     }
 
-    let isValid = await bcrypt.compare(password, user.password);
+    // if (user) {
+    //   await prisma.user.update({
+    //     where: { phoneNumber },
+    //     data: { password: hashedPassword, passwordChanged: 0 },
+    //   });
 
-    if (isValid) {
-      const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { loginTimes: loginTimes + 1 },
-      });
-      return res.status(200).json(user);
-    } else {
-      return res
-        .status(404)
-        .json({ statusCode: 0, message: "Wrong user credentials" });
-    }
+    //   await prisma.user.passwordResetRequest.create({
+    //     data: { tempPassword: password },
+    //   });
+
+    //   return res.status(200).json(user);
+    // } else {
+    //   return res
+    //     .status(400)
+    //     .json({ statusCode: 0, message: "Wrong user credentials" });
+    // }
   } catch (error) {
     console.log("Server error", error);
     if (error.code === "P2002")

@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
     let phoneNumber = req.body.phoneNumber;
     let newPassword = req.body.newPassword;
     let oldPassword = req.body.oldPassword;
@@ -28,7 +27,7 @@ const post = async (req, res) => {
       let hashedPassword = bcrypt.hashSync(newPassword, salt);
       await prisma.user.update({
         where: { phoneNumber },
-        data: { password: hashedPassword },
+        data: { password: hashedPassword, passwordChanged: 1 },
       });
 
       //const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);

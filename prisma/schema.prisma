@@ -64,6 +64,16 @@ model DataVersion {
   updatedAt DateTime @updatedAt
 }
 
+model PasswordResetRequest {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  tempPassword String   @db.VarChar(255)
+  deleted      Int?     @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User     @relation(fields: [userId], references: [id])
+}
+
 model User {
   id    Int     @id @default(autoincrement())
   fcmId String? @db.VarChar(255)
@@ -80,6 +90,8 @@ model User {
   regionId        Int?
   districtId      Int?
   electoralAreaId Int?
+  loginTimes      Int? @default(0)
+  passwordChanged Int? @default(0)
 
   activated Int?     @default(1)
   deleted   Int?     @default(0)
@@ -119,8 +131,9 @@ model User {
   PremisesActionTaken            PremisesActionTaken[]
   PremisesNuisanceDetected       PremisesNuisanceDetected[]
 
-  sender    Messaging[] @relation("sender")
-  recipient Messaging[] @relation("recipient")
+  sender               Messaging[]            @relation("sender")
+  recipient            Messaging[]            @relation("recipient")
+  PasswordResetRequest PasswordResetRequest[]
 }
 
 model UserLevel {

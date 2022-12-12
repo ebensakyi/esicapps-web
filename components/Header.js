@@ -745,6 +745,12 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="settings">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
+                      <a href="/user/password-reset-request" className="nav-link">
+                        {" "}
+                        Password Reset Request
+                      </a>
+                    </li>
+                    <li className="nav-item">
                       <a href="/primary-data" className="nav-link">
                         {" "}
                         Primary data
