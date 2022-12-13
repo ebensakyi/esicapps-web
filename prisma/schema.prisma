@@ -851,7 +851,7 @@ model BasicInfoSection {
   latitude                String                @db.VarChar(255)
   longitude               String                @db.VarChar(255)
   accuracy                String                @db.VarChar(255)
-  geom                    String?               @db.VarChar(255)
+  geom                    Json?              
   respondentName          String                @db.VarChar(255)
   respondentPhoneNumber   String                @db.VarChar(255)
   respondentDesignationId Int

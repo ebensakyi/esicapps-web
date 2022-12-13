@@ -14,6 +14,8 @@ const post = async (req, res) => {
     });
 
     let loginTimes = user.loginTimes;
+
+    console.log(loginTimes);
     if (!user) {
       return res
         .status(400)
