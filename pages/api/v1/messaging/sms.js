@@ -28,9 +28,7 @@ const post = async (req, res) => {
   };
 
   const response = await prisma.messaging.create({ data });
-
   if (recipient != null || recipient != "") {
-    console.log("HERE");
     const res = await prisma.user.findMany({
       where: { deleted: 0, id: recipient },
     });
@@ -38,7 +36,6 @@ const post = async (req, res) => {
     for (let i = 0; i < res.length; i++) {
       let phoneNumber = await append_233(res[i].phoneNumber);
       await send(phoneNumber, req.body.message);
-      console.log(phoneNumber);
     }
   }
   if (regionRecipient != null || regionRecipient != "") {
