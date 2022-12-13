@@ -2,7 +2,7 @@ import { sendFCM } from "../../../../helpers/send-fcm";
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
-  // try {
+ try {
 
   //   console.log(req.body);
   //   const single = {
@@ -37,17 +37,16 @@ const post = async (req, res) => {
 
   const response = await prisma.messaging.create({ data });
 
-  if (recipient != null) {
+  if (recipient != null || recipient != "") {
     const response = await prisma.user.findMany({
       where: { deleted: 0, id: recipient },
     });
 
-    console.log(response);
     
       await sendFCM(title, message, response[0].fcmId);
     
   }
-  if (regionRecipient != null) {
+  if (regionRecipient != null || regionRecipient != "") {
     console.log("regionRecipient");
 
     const response = await prisma.user.findMany({
@@ -57,7 +56,7 @@ const post = async (req, res) => {
       console.log(response.phoneNumber);
     }
   }
-  if (districtRecipient != null) {
+  if (districtRecipient != null || districtRecipient != "") {
     console.log("districtRecipient: ", districtRecipient);
 
     const response = await prisma.user.findMany({
@@ -70,13 +69,13 @@ const post = async (req, res) => {
   }
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
-  // } catch (error) {
-  //   console.log("Error: " + error);
-  //   if (error.code === "P2002")
-  //     return res
-  //       .status(400)
-  //       .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  // }
+  } catch (error) {
+    console.log("Error: " + error);
+    if (error.code === "P2002")
+      return res
+        .status(400)
+        .json({ statusCode: 0, message: "dataVersion s should be unique" });
+  }
 };
 
 const get = async (req, res) => {

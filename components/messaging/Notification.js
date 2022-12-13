@@ -30,7 +30,11 @@ const Notification = ({ users, regions, districts, messages }) => {
 
       const response = await axios.post("/api/v1/messaging/notification", data);
       router.replace(router.asPath)
-
+      setRegionRecipient("")
+      setDistrictRecipient("")
+      setRecipient("")
+      setMessage("")
+      setTitle("")
       return toast.success("Message sent");
     } catch (error) {
       console.log(error);
@@ -53,7 +57,11 @@ const Notification = ({ users, regions, districts, messages }) => {
       router.replace(router.asPath)
 
       const response = await axios.post("/api/v1/messaging/notification", data);
-
+      setRegionRecipient("")
+      setDistrictRecipient("")
+      setRecipient("")
+      setMessage("")
+      setTitle("")
       return toast.success("Message sent");
     } catch (error) {
       console.log(error);

@@ -863,10 +863,10 @@ const PrimaryData = ({
                                   <tr>
                                     {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
-                                    <th scope="col">Abbrv</th>
+                                    {/* <th scope="col">Abbrv</th> */}
 
                                     <th scope="col">Date</th>
-                                    <th scope="col">Action</th>
+                                    {/* <th scope="col">Action</th> */}
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -874,13 +874,13 @@ const PrimaryData = ({
                                     <tr key={region.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{region.name}</td>
-                                      <td>{region.abbrv}</td>
+                                      {/* <td>{region.abbrv}</td> */}
                                       <td>{region.createdAt}</td>
-                                      <td>
+                                      {/* <td>
                                         <button className="badge bg-danger">
                                           Cancelled
                                         </button>
-                                      </td>
+                                      </td> */}
                                     </tr>
                                   ))}
                                 </tbody>
@@ -938,7 +938,7 @@ const PrimaryData = ({
                                     />
                                   </div>
                                 </div>
-                                <div className="col-xxl-4 col-md-8">
+                                {/* <div className="col-xxl-4 col-md-8">
                                   <div>
                                     <label
                                       htmlFor="basiInput"
@@ -955,7 +955,7 @@ const PrimaryData = ({
                                       }
                                     />
                                   </div>
-                                </div>
+                                </div> */}
                                 <div className="col-xxl-4 col-md-8">
                                   <div>
                                     <label
@@ -1010,10 +1010,10 @@ const PrimaryData = ({
                                   <tr>
                                     {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
-                                    <th scope="col">Abbrv</th>
+                                    {/* <th scope="col">Abbrv</th> */}
 
                                     <th scope="col">Region</th>
-                                    <th scope="col">Action</th>
+                                    {/* <th scope="col">Action</th> */}
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -1021,13 +1021,13 @@ const PrimaryData = ({
                                     <tr key={district.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{district.name}</td>
-                                      <td>{district.abbrv}</td>
+                                      {/* <td>{district.abbrv}</td> */}
                                       <td>{district.Region.name}</td>
-                                      <td>
+                                      {/* <td>
                                         <button className="badge bg-danger">
                                           Cancelled
                                         </button>
-                                      </td>
+                                      </td> */}
                                     </tr>
                                   ))}
                                 </tbody>

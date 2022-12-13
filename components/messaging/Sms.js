@@ -29,11 +29,11 @@ const Sms = ({ users, regions, districts, messages }) => {
       };
 
       const response = await axios.post("/api/v1/messaging/sms", data);
-      setRegionRecipient(null)
-      setDistrictRecipient(null)
-      setRecipient(null)
-      setMessage(null)
-      setTitle(null)
+      setRegionRecipient("")
+      setDistrictRecipient("")
+      setRecipient("")
+      setMessage("")
+      setTitle("")
       router.replace(router.asPath)
 
       return toast.success("Message sent");
@@ -57,11 +57,11 @@ const Sms = ({ users, regions, districts, messages }) => {
       };
 
       const response = await axios.post("/api/v1/messaging/sms", data);
-      setRegionRecipient(null)
-      setDistrictRecipient(null)
-      setRecipient(null)
-      setMessage(null)
-      setTitle(null)
+      setRegionRecipient("")
+      setDistrictRecipient("")
+      setRecipient("")
+      setMessage("")
+      setTitle("")
       router.replace(router.asPath)
 
       return toast.success("Message sent");

@@ -402,12 +402,12 @@ const Header = () => {
                   >
                     <i className="ri-map-2-line" />{" "}
                     <span data-key="t-landing">Map</span>
-                    <span
+                    {/* <span
                       className="badge badge-pill bg-success"
                       data-key="t-new"
                     >
                       New
-                    </span>
+                    </span> */}
                   </a>
                   </Link>
                  
@@ -794,7 +794,7 @@ const Header = () => {
                 </a>
               </li> */}
               <li className="nav-item">
-                <a className="nav-link menu-link" href="widgets.html">
+                <a className="nav-link menu-link" href="/auth/logs">
                   <i className="ri-honour-line" />{" "}
                   <span data-key="t-widgets">Logs</span>
                 </a>
