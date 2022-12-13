@@ -794,6 +794,7 @@ CREATE TABLE "BasicInfoSection" (
     "latitude" VARCHAR(255) NOT NULL,
     "longitude" VARCHAR(255) NOT NULL,
     "accuracy" VARCHAR(255) NOT NULL,
+    "geom" VARCHAR(255),
     "respondentName" VARCHAR(255) NOT NULL,
     "respondentPhoneNumber" VARCHAR(255) NOT NULL,
     "respondentDesignationId" INTEGER NOT NULL,

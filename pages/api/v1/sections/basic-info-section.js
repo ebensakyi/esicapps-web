@@ -3,6 +3,9 @@ import prisma from "../../../../prisma/MyPrismaClient";
 const post = async (req, res) => {
  // try {
 
+ let latitude= req.body.latitude
+  let longitude= req.body.longitude
+
   var point = {
     type: 'Point',
     coordinates: [longitude, latitude],
