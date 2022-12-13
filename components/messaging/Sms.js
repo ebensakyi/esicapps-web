@@ -28,7 +28,12 @@ const Sms = ({ users, regions, districts, messages }) => {
         recipient: null,
       };
 
-      const response = await axios.post("/api/v1/messaging/notification", data);
+      const response = await axios.post("/api/v1/messaging/sms", data);
+      setRegionRecipient(null)
+      setDistrictRecipient(null)
+      setRecipient(null)
+      setMessage(null)
+      setTitle(null)
       router.replace(router.asPath)
 
       return toast.success("Message sent");
@@ -50,9 +55,14 @@ const Sms = ({ users, regions, districts, messages }) => {
         regionRecipient: null,
         districtRecipient: null,
       };
-      router.replace(router.asPath)
 
-      const response = await axios.post("/api/v1/messaging/notification", data);
+      const response = await axios.post("/api/v1/messaging/sms", data);
+      setRegionRecipient(null)
+      setDistrictRecipient(null)
+      setRecipient(null)
+      setMessage(null)
+      setTitle(null)
+      router.replace(router.asPath)
 
       return toast.success("Message sent");
     } catch (error) {
@@ -333,7 +343,7 @@ const Sms = ({ users, regions, districts, messages }) => {
                         <option selected>Choose...</option>
                         {users.map((u) => (
                           <option key={u.id} value={u.id}>
-                            {u.otherNames} {u.surname}
+                            {u.otherNames} {u.surname} - {u.phoneNumber}
                           </option>
                         ))}
                       </select>

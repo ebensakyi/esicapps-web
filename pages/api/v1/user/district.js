@@ -26,7 +26,7 @@ const post = async (req, res) => {
 
   const user = await prisma.user.create({ data });
 
-  await send("233543212322", "Testing");
+ // await send("233543212322", "Testing");
   return res
     .status(200)
     .json({ statusCode: 1, message: "Data saved", data: { user } });
