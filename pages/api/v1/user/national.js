@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 const post = async (req, res) => {
   try {
-    let password = req.body.password;
+    let password ="esicapps@national" //req.body.password;
     const salt = bcrypt.genSaltSync(10);
 
     let hashedPassword = await bcrypt.hashSync(password, salt);

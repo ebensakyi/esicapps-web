@@ -2,8 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from 'next/router'
 
 const DistrictUser = ({ users, userTypes, regions }) => {
+  const router = useRouter()
+
   const [userType, setUserType] = useState();
   const [surname, setSurname] = useState();
   const [otherNames, setOtherNames] = useState();
@@ -33,6 +36,7 @@ const DistrictUser = ({ users, userTypes, regions }) => {
       };
 
       const response = await axios.post("/api/v1/user/district", data);
+      router.replace(router.asPath)
 
       return toast.success(response.data.message);
     } catch (error) {

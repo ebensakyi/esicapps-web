@@ -5,10 +5,10 @@ import { send } from "../../../../helpers/send-sms";
 import { nanoid } from "nanoid";
 
 const post = async (req, res) => {
-  //try {
+  try {
   const salt = await bcrypt.genSaltSync(10);
 
-  let password =await nanoid(8);
+  let password = "esicapps@mmda" //await nanoid(8);
 
   let hashedPassword = bcrypt.hashSync(password, salt);
 
@@ -30,13 +30,13 @@ const post = async (req, res) => {
   return res
     .status(200)
     .json({ statusCode: 1, message: "Data saved", data: { user } });
-  // } catch (error) {
-  //   console.log(error);
-  //   if (error.code === "P2002")
-  //     return res
-  //       .status(400)
-  //       .json({ statusCode: 0, message: "Email and Phone Number should be unique" });
-  // }
+  } catch (error) {
+    console.log(error);
+    if (error.code === "P2002")
+      return res
+        .status(400)
+        .json({ statusCode: 0, message: "Email and Phone Number should be unique" });
+  }
 };
 
 const get = async (req, res) => {
