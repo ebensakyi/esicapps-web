@@ -120,6 +120,14 @@ model User {
   Region                         Region?                          @relation(fields: [regionId], references: [id])
   UserType                       UserType                         @relation(fields: [userTypeId], references: [id])
   WaterSection                   WaterSection[]
+  EateryPremisesInfoSection      EateryPremisesInfoSection[]
+  HealthPremisesInfoSection      HealthPremisesInfoSection[]
+  HospitalityPremisesInfoSection HospitalityPremisesInfoSection[]
+  SanitaryPremisesInfoSection    SanitaryPremisesInfoSection[]
+  MarketPremisesInfoSection      MarketPremisesInfoSection[]
+  InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
+  IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
+  ResidentialPremisesInfoSection ResidentialPremisesInfoSection[]
 }
 
 model UserLevel {
@@ -851,7 +859,7 @@ model BasicInfoSection {
   latitude                String                @db.VarChar(255)
   longitude               String                @db.VarChar(255)
   accuracy                String                @db.VarChar(255)
-  geom                    Json?              
+  geom                    Json?
   respondentName          String                @db.VarChar(255)
   respondentPhoneNumber   String                @db.VarChar(255)
   respondentDesignationId Int
@@ -867,6 +875,7 @@ model BasicInfoSection {
 model ResidentialPremisesInfoSection {
   id                                        String              @id @db.VarChar(255)
   inspectionId                              String              @db.VarChar(255)
+  User                                      User                @relation(fields: [userId], references: [id])
   drainsAvailabilityId                      Int
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
@@ -876,7 +885,7 @@ model ResidentialPremisesInfoSection {
   householdNumber                           String              @db.VarChar(255)
   maleOccupantNumber                        Int?
   femaleOccupantNumber                      Int?
-  otherAnimal                               Int?
+  otherAnimal                               String?    @db.VarChar(255)
   animalNumber                              Int?
   animalSpaceConditionId                    Int?
   vaccinationProofId                        Int?
@@ -894,11 +903,13 @@ model ResidentialPremisesInfoSection {
   toiletAvailability                        YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?              @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   vaccinationProof                          YesNo?              @relation("vaccinationProof", fields: [vaccinationProofId], references: [id])
+  userId                                    Int
 }
 
 model EateryPremisesInfoSection {
   id                                        String   @id @db.VarChar(255)
   inspectionId                              String   @db.VarChar(255)
+  User                                      User     @relation(fields: [userId], references: [id])
   facilityName                              String   @db.VarChar(255)
   physicalStructureTypeId                   Int?
   drainsAvailabilityId                      Int?
@@ -931,6 +942,7 @@ model EateryPremisesInfoSection {
   firstAidAvailability                      YesNo?   @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  userId                                    Int
 }
 
 model HealthPremisesInfoSection {
@@ -962,6 +974,8 @@ model HealthPremisesInfoSection {
   separateWard                              YesNo?         @relation("separateWard", fields: [separateWardId], references: [id])
   toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User                                      User           @relation(fields: [userId], references: [id])
+  userId                                    Int
 }
 
 model HospitalityPremisesInfoSection {
@@ -1000,6 +1014,8 @@ model HospitalityPremisesInfoSection {
   toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   uncookedFoodStorageCondtionSafe           YesNo?         @relation("uncookedFoodStorageCondtionSafe", fields: [uncookedFoodStorageCondtionSafeId], references: [id])
   urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User                                      User           @relation(fields: [userId], references: [id])
+  userId                                    Int
 }
 
 model SanitaryPremisesInfoSection {
@@ -1084,6 +1100,8 @@ model SanitaryPremisesInfoSection {
   wasteSorting                              YesNo?                 @relation("wasteSorting", fields: [wasteSortingId], references: [id])
   wheelbathAvailability                     YesNo?                 @relation("wheelbathAvailability", fields: [wheelbathAvailabilityId], references: [id])
   workersOfficeAvailability                 YesNo?                 @relation("workersOfficeAvailability", fields: [workersOfficeAvailabilityId], references: [id])
+  User                                      User                   @relation(fields: [userId], references: [id])
+  userId                                    Int
 }
 
 model MarketPremisesInfoSection {
@@ -1122,6 +1140,8 @@ model MarketPremisesInfoSection {
   drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User                                      User     @relation(fields: [userId], references: [id])
+  userId                                    Int
 }
 
 model InstitutionPremisesInfoSection {
@@ -1179,6 +1199,8 @@ model InstitutionPremisesInfoSection {
   drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User                                      User     @relation(fields: [userId], references: [id])
+  userId                                    Int
 }
 
 model IndustryPremisesInfoSection {
@@ -1213,6 +1235,8 @@ model IndustryPremisesInfoSection {
   drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User                                      User     @relation(fields: [userId], references: [id])
+  userId                                    Int
 }
 
 model LicencePermitSection {
