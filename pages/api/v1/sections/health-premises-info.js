@@ -66,7 +66,7 @@ const post = async (req, res) => {
       
     };
 
-    const response = await prisma.residentialPremisesInfoSection.create({
+    const response = await prisma.healthPremisesInfoSection.create({
       data,
     });
 
