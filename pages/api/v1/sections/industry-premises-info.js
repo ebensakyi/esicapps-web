@@ -92,11 +92,7 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.majorByProducts),
 
-      firstAidAvailabilityId:
-        req.body.firstAidAvailabilityId == "null"
-          ? null
-          : Number(req.body.firstAidAvailabilityId),
-
+    
       numberWorkers:
         req.body.numberWorkers == "null"
           ? null
