@@ -8,24 +8,28 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Login() {
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const router = useRouter();
 
   const login = async (e) => {
-    e.preventDefault();
+    try {
+       e.preventDefault();
     let data = {
-      phoneNumber,
+      email,
       password,
     };
     const response = await axios.post(`/api/v1/auth/login`, data);
-    console.log(response);
 
     if (response.data.statusCode == 0)
       return toast.error(response.data.message);
 
     return router.replace("/dashboard");
+    } catch (error) {
+      
+    }
+   
 
     // router.replace(router.asPath)
     // router.push("/");
@@ -131,14 +135,14 @@ const  getYear=() =>{
                         <form action="/">
                           <div className="mb-3">
                             <label htmlFor="phone" className="form-label">
-                              Phone
+                              Email
                             </label>
                             <input
                               type="text"
                               className="form-control"
                               id="phone"
-                              placeholder="Enter phone number"
-                              onChange={(e) => setPhoneNumber(e.target.value)}
+                              placeholder="Enter email"
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
 
