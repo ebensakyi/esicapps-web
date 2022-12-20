@@ -30,6 +30,11 @@ export default function Login() {
     // router.replace(router.asPath)
     // router.push("/");
   };
+
+
+const  getYear=() =>{
+    return new Date().getFullYear();
+}
   return (
     <html
       lang="en"
@@ -253,12 +258,13 @@ export default function Login() {
                   <div className="text-center">
                     <p className="mb-0 text-muted">
                       &copy;
-                      <script>
-                        document.write(new Date().getFullYear())
-                      </script>{" "}
-                      ESICApps. Crafted with{" "}
+                     {
+                        `${getYear()} `
+                     }
+                     ESICApps
+                      {/* . Crafted with{" "}
                       <i className="mdi mdi-heart text-danger"></i> by Expedient
-                      Systems
+                      Systems */}
                     </p>
                   </div>
                 </div>
