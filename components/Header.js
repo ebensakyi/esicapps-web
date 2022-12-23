@@ -289,7 +289,265 @@ const Header = () => {
                 </a>
                 <div className="collapse menu-dropdown" id="data">
                   <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
+                    <li class="nav-item">
+                      <a
+                        href="#Residential"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="Residential"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Residential
+                      </a>
+                      <div class="collapse menu-dropdown" id="Residential">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/residential?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/residential?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+
+                    <li class="nav-item">
+                      <a
+                        href="#eatery"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="eatery"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Eatery
+                      </a>
+                      <div class="collapse menu-dropdown" id="eatery">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/eatery?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/eatery?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+
+                    <li class="nav-item">
+                      <a
+                        href="#hospitality"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="hospitality"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Hospitality
+                      </a>
+                      <div class="collapse menu-dropdown" id="hospitality">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/hospitality?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/hospitality?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#health"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="health"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Health
+                      </a>
+                      <div class="collapse menu-dropdown" id="health">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/health?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/health?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#institution"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="institution"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Institution
+                      </a>
+                      <div class="collapse menu-dropdown" id="institution">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/institution?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/institution?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#industry"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="industry"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Industry
+                      </a>
+                      <div class="collapse menu-dropdown" id="industry">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/industry?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/industry?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#market"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="market"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Market
+                      </a>
+                      <div class="collapse menu-dropdown" id="market">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/market?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/market?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#sanitary"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="sanitary"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Sanitary
+                      </a>
+                      <div class="collapse menu-dropdown" id="sanitary">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <Link href="/data/sanitary?published=1">
+                              <a className="nav-link" data-key="t-calendar">
+                                Published
+                              </a>
+                            </Link>
+                          </li>
+                          <li class="nav-item">
+                            <Link href="/data/sanitary?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    {/* <li className="nav-item">
                       <Link href="/data/residential">
                         <a className="nav-link" data-key="t-calendar">
                           Residential
@@ -344,7 +602,7 @@ const Header = () => {
                           Sanitary
                         </a>
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </li>
@@ -396,26 +654,21 @@ const Header = () => {
                 </div>
                 <li className="nav-item">
                   <Link href="/map">
-                     <a
-                    className="nav-link menu-link"
-                 
-                  >
-                    <i className="ri-map-2-line" />{" "}
-                    <span data-key="t-landing">Map</span>
-                    {/* <span
+                    <a className="nav-link menu-link">
+                      <i className="ri-map-2-line" />{" "}
+                      <span data-key="t-landing">Map</span>
+                      {/* <span
                       className="badge badge-pill bg-success"
                       data-key="t-new"
                     >
                       New
                     </span> */}
-                  </a>
+                    </a>
                   </Link>
-                 
                 </li>
 
                 <li className="nav-item">
                   <Link href="/sanitation-reports">
-  
                     <a className="nav-link menu-link">
                       <i className="ri-bar-chart-box-line" />{" "}
                       <span data-key="t-landing">Sanitation Reports</span>
@@ -708,7 +961,7 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="sidebarPages">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                    <Link href="/messaging/sms">
+                      <Link href="/messaging/sms">
                         <a
                           className="nav-link"
                           // data-bs-toggle="collapse"
@@ -722,7 +975,6 @@ const Header = () => {
                         </a>
                       </Link>
                     </li>
-                   
                   </ul>
                 </div>
               </li>
@@ -745,7 +997,10 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="settings">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <a href="/auth/password-reset-request" className="nav-link">
+                      <a
+                        href="/auth/password-reset-request"
+                        className="nav-link"
+                      >
                         {" "}
                         Password Reset Request
                       </a>

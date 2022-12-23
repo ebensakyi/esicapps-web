@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Residential = ({ data }) => {
   return (
     <div className="row">
@@ -33,7 +35,7 @@ const Residential = ({ data }) => {
                 {data.map((dt) => {
                   return (
                     <tr key={dt.id}>
-                    {" "}
+                      {" "}
                       <td>{dt.Inspection.createdAt}</td>
                       <td>{dt.Inspection.completedAt}</td>
                       <td>
@@ -61,12 +63,20 @@ const Residential = ({ data }) => {
                             <i className="ri-more-fill align-middle" />
                           </button>
                           <ul className="dropdown-menu dropdown-menu-end">
-                            <li>
-                              <a href="#!" className="dropdown-item">
+                            <Link
+                              href={{
+                                pathname: `/data/residential_view`,
+                                query: {
+                                  id: dt.Inspection.id,
+                                },
+                              }}
+                            >
+                              <a className="dropdown-item">
                                 <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
                                 View
                               </a>
-                            </li>
+                            </Link>
+                            <li></li>
                             {/* <li>
                               <a className="dropdown-item edit-item-btn">
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}

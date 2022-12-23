@@ -1,5 +1,5 @@
 
-import Residential from '../../components/data/Residential'
+import ResidentialView from '../../components/data/ResidentialView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
@@ -14,7 +14,7 @@ export default function residential({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Residential data={data} />
+                        <ResidentialView data={data} />
 
                     </div>
                 </div>
@@ -26,9 +26,8 @@ export default function residential({ data }) {
 
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
-    const  {published}  =context.query;
+    const  {id}  =context.query;
 
-    console.log(published);
 
     if (!token) {
         return {
@@ -38,7 +37,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/residential?published=${published}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/residential-view?id=${id}`).then(
         (res) => res.json()
     );
 

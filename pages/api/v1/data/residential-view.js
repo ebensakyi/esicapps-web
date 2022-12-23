@@ -7,18 +7,19 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let published = Number(req.query.published);
-    console.log(req.query);
+    let inspectionId = req.query.id;
+
     const data = await prisma.basicInfoSection.findMany({
       where: {
         deleted: 0,
         Inspection: {
-          isPublished: published,
-          inspectionFormId: 1,
+          id: inspectionId,
         },
       },
       include: {
-        Inspection: true,
+        Inspection: {
+          include: { LicencePermitSection: true },
+        },
         Community: { include: { District: { include: { Region: true } } } },
         User: true,
       },

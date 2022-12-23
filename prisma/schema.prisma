@@ -22,17 +22,17 @@ model Inspection {
   updatedAt            DateTime               @updatedAt
   startedAt            DateTime
   completedAt          DateTime
-  BasicInfoSection     BasicInfoSection[]
-  ConclusionSection    ConclusionSection[]
+  BasicInfoSection     BasicInfoSection?
+  ConclusionSection    ConclusionSection?
   InspectionForm       InspectionForm         @relation(fields: [inspectionFormId], references: [id])
   InspectionType       InspectionType         @relation(fields: [inspectionTypeId], references: [id])
   publishedBy          User?                  @relation("publishedBy", fields: [publishedById], references: [id])
   User                 User                   @relation(fields: [userId], references: [id])
-  LicencePermitSection LicencePermitSection[]
-  LiquidWasteSection   LiquidWasteSection[]
+  LicencePermitSection LicencePermitSection?
+  LiquidWasteSection   LiquidWasteSection?
   Picture              Picture[]
-  SolidWasteSection    SolidWasteSection[]
-  WaterSection         WaterSection[]
+  SolidWasteSection    SolidWasteSection?
+  WaterSection         WaterSection?
 }
 
 model InspectionForm {
@@ -49,13 +49,6 @@ model InspectionForm {
   Type                    Type[]
 }
 
-model DataVersion {
-  id        Int      @id @default(autoincrement())
-  version   Int
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
 
 model PasswordResetRequest {
   id           Int      @id @default(autoincrement())
@@ -850,7 +843,7 @@ model Service {
 
 model BasicInfoSection {
   id                      String                @id @db.VarChar(255)
-  inspectionId            String                @db.VarChar(255)
+  inspectionId            String                @db.VarChar(255) @unique
   userId                  Int
   zoneId                  Int?
   communityId             Int?
@@ -1241,7 +1234,7 @@ model IndustryPremisesInfoSection {
 
 model LicencePermitSection {
   id                                   String     @id @db.VarChar(255)
-  inspectionId                         String     @db.VarChar(255)
+  inspectionId                         String     @db.VarChar(255) @unique
   userId                               Int
   buildingPermitAvailabilityId         Int
   businessLicenceAvailabilityId        Int?
@@ -1275,7 +1268,7 @@ model LicencePermitSection {
 
 model WaterSection {
   id                                 String                         @id @db.VarChar(255)
-  inspectionId                       String                         @db.VarChar(255)
+  inspectionId                       String                         @db.VarChar(255) @unique
   userId                             Int
   waterSourceConditionId             Int
   waterStorageConditionId            Int
@@ -1300,7 +1293,7 @@ model WaterSection {
 
 model LiquidWasteSection {
   id                            String                          @id @db.VarChar(255)
-  inspectionId                  String                          @db.VarChar(255)
+  inspectionId                  String                          @db.VarChar(255) @unique
   userId                        Int
   numberToiletSeats             Int?
   numberUrinalSeats             Int?
@@ -1379,7 +1372,7 @@ model LiquidWasteSection {
 
 model SolidWasteSection {
   id                                 String                           @id @db.VarChar(255)
-  inspectionId                       String                           @db.VarChar(255)
+  inspectionId                       String                           @db.VarChar(255) @unique
   userId                             Int
   wasteServiceProviderRegistrationId Int?
   wasteCollectorName                 String?
@@ -1412,7 +1405,7 @@ model SolidWasteSection {
 
 model ConclusionSection {
   id                         String                     @id @db.VarChar(255)
-  inspectionId               String                     @db.VarChar(255)
+  inspectionId               String                     @db.VarChar(255) @unique
   userId                     Int
   obnoxiousTradeExistId      Int?
   officerComment             String                     @db.VarChar(255)
