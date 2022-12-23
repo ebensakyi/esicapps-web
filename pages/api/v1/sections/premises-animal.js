@@ -13,7 +13,7 @@ const post = async (req, res) => {
           ? null
           : req.body.residentialPremisesInfoSectionId,
 
-          animalId: req.body.animalId == "null" ? null : Number(req.body.animalId),
+          animalTypeId: req.body.animalId == "null" ? null : Number(req.body.animalId),
     };
 
     const response = await prisma.premisesAnimal.create({ data });

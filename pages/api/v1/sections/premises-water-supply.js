@@ -11,13 +11,13 @@ const post = async (req, res) => {
       waterSectionId:
         req.body.waterSectionId == "null" ? null : req.body.waterSectionId,
 
-        waterTreatmentTypeId:
-        req.body.waterTreatmentTypeId == "null"
+        waterSupplyTypeId:
+        req.body.waterSupplyId == "null"
           ? null
-          : Number(req.body.waterTreatmentTypeId),
+          : Number(req.body.waterSupplyId),
     };
 
-    const response = await prisma.premisesWaterTreatmentType.create({ data });
+    const response = await prisma.premisesWaterSupply.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
@@ -31,7 +31,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const response = await prisma.premisesWaterTreatmentType.findMany({
+    const response = await prisma.premisesWaterSupply.findMany({
       where: { deleted: 0 },
     });
     return res.status(200).json(response);

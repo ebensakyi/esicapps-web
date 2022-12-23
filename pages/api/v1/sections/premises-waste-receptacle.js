@@ -8,16 +8,12 @@ const post = async (req, res) => {
 
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
-      solidWasteReceptacleId:
-        req.body.solidWasteReceptacleId == "null" ? null : req.body.solidWasteReceptacleId,
+      solidWasteReceptacleId: Number(req.body.solidWasteReceptacleId),
 
-        solidWasteSectionId:
-        req.body.solidWasteSectionId == "null"
-          ? null
-          : Number(req.body.solidWasteSectionId),
+      solidWasteSectionId: req.body.solidWasteSectionId,
     };
 
-    const response = await prisma.premisesWasteCollection.create({ data });
+    const response = await prisma.premisesWasteReceptacle.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
@@ -31,7 +27,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const response = await prisma.premisesWasteCollection.findMany({
+    const response = await prisma.premisesWasteReceptacle.findMany({
       where: { deleted: 0 },
     });
     return res.status(200).json(response);
