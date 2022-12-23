@@ -32,10 +32,10 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.staffChangingRoomId),
 
-      sanitaryOwnershipId:
-        req.body.sanitaryOwnershipId == "null"
+          ownershipTypeId:
+        req.body.ownershipTypeId == "null"
           ? null
-          : Number(req.body.sanitaryOwnershipId),
+          : Number(req.body.ownershipTypeId),
 
       sanitaryFacilityMgtId:
         req.body.sanitaryFacilityMgtId == "null"
@@ -72,15 +72,15 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.condemnationRoomAvailabilityId),
 
-      genderFriendlyCloakRoomAvailabilityId:
-        req.body.genderFriendlyCloakRoomAvailabilityId == "null"
+          cloakRoomAvailabilityId:
+        req.body.cloakRoomAvailabilityId == "null"
           ? null
-          : Number(req.body.genderFriendlyCloakRoomAvailabilityId),
+          : Number(req.body.cloakRoomAvailabilityId),
       comfortRoomAvailabilityId:
         req.body.comfortRoomAvailabilityId == "null"
           ? null
           : Number(req.body.comfortRoomAvailabilityId),
-      numbwheelbathAvailabilityIderMills:
+          wheelbathAvailabilityId:
         req.body.wheelbathAvailabilityId == "null"
           ? null
           : Number(req.body.wheelbathAvailabilityId),
@@ -119,18 +119,16 @@ const post = async (req, res) => {
 
       cremationPracticedId: req.body.cremationPracticedId == "null" ? null : Number(req.body.cremationPracticedId),
       workersOfficeAvailabilityId: req.body.workersOfficeAvailabilityId == "null" ? null : Number(req.body.workersOfficeAvailabilityId),
-      cemeteryWorkersId: req.body.cemeteryWorkersId == "null" ? null : Number(req.body.cemeteryWorkersId),
-      containerSanitaryId: req.body.containerSanitaryId == "null" ? null : Number(req.body.containerSanitaryId),
+      sanitaryContainerId: req.body.sanitaryContainerId == "null" ? null : Number(req.body.sanitaryContainerId),
       transferStationCapacity: req.body.transferStationCapacity == "null" ? null : Number(req.body.transferStationCapacity),
       numberContainer: req.body.numberContainer == "null" ? null : Number(req.body.numberContainer),
-      communalContainerAttendant: req.body.communalContainerAttendant == "null" ? null : Number(req.body.communalContainerAttendant),
-      phoneNumberCommunalContainerAttendant: req.body.phoneNumberCommunalContainerAttendant ,
-      communalContainerServiceProviderCapacity: req.body.communalContainerServiceProviderCapacity == "null" ? null : Number(req.body.communalContainerServiceProviderCapacity),
+      containerAttendantName: req.body.containerAttendantName == "null" ? null : Number(req.body.containerAttendantName),
+      containerAttendantPhoneNumber: req.body.containerAttendantPhoneNumber== "null" ? null :  eq.body.containerAttendantPhoneNumber,
 
     };
 
     // console.log(data);
-    const response = await prisma.eateryPremisesInfoSection.create({ data });
+    const response = await prisma.sanitaryPremisesInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {

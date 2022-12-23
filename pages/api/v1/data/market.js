@@ -16,7 +16,6 @@ const get = async (req, res) => {
       },
     });
 
-    console.log(data);
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
     return res.status(200).json(data);
   } catch (error) {

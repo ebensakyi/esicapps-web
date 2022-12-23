@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-var GeoJSON = require('geojson');
+var GeoJSON = require("geojson");
 
 const post = async (req, res) => {
   try {
@@ -8,19 +8,37 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const data = await prisma.basicInfoSection.findMany({
-      where: { deleted: 0 },
-      include: {
-        Inspection: true,
-        Community: { include: { District: {include: {Region: true}} } },
-        User: true,
-      },
-    });
-   // GeoJSON.parse(data, {Point: ['lat', 'lng']});
+    // const data = await prisma.basicInfoSection.findMany({
+    //   where: {
+    //     deleted: 0,
 
-    var x = GeoJSON.parse(JSON.parse(data), {
-      GeoJSON: 'geom'
-  });
+    //   },
+    //   include: {
+    //     Inspection: true,
+    //     Community: { include: { District: { include: { Region: true } } } },
+    //     User: true,
+    //   },
+    // });
+
+    const data = await prisma.inspection.findMany({
+      where: {
+        isPublished: 0,
+        inspectionFormId:1
+      },
+      include: {
+        BasicInfoSection: {
+          include: {
+            Community: true,
+          },
+        },
+      },
+      // include: {
+      //   BasicInfoSection: {  Community: { include: { District: { include: { Region: true } } } },},
+
+      //   User: true,
+      // },
+    });
+    // GeoJSON.parse(data, {Point: ['lat', 'lng']});
 
     console.log(data);
     //return res.status(200).json({ statusCode: 1, data: dataVersion });

@@ -8,12 +8,13 @@ const post = async (req, res) => {
 
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
-      residentialPremisesInfoSectionId:
-        req.body.residentialPremisesInfoSectionId == "null"
+      liquidWasteSectionId:
+        req.body.liquidWasteSectionId == "null"
           ? null
-          : req.body.residentialPremisesInfoSectionId,
+          : req.body.liquidWasteSectionId,
 
-          animalId: req.body.animalId == "null" ? null : Number(req.body.animalId),
+      drainTypeId:
+        req.body.drainTypeId == "null" ? null : Number(req.body.drainTypeId),
     };
 
     const response = await prisma.premisesDrainType.create({ data });
