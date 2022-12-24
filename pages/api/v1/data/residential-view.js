@@ -39,9 +39,43 @@ const get = async (req, res) => {
             RespondentDesignation: true,
           },
         },
-        LicencePermitSection: true,
+      
+        LicencePermitSection: {
+          include: {
+            animalsPermitAvailability:true,
+            buildingPermitAvailability:true,
+
+            businessLicenceAvailability:true,
+            fumigationCertificateAvailability:true,
+            habitationCertificateAvailability:true,
+            medicalCertificateAvailability:true,
+            operatingLicenceAvailability:true,
+            propertyRateAvailability:true,
+            structurePermitAvailability:true,
+            gtaOperatingLicenceAvailability:true,
+            waterAnalysisReport: true,
+            regGeneralCertAvailability: true,
+            suitabilityCertificateAvailability: true,
+            pharmacyCertAvailability: true,
+
+          }
+        },
         ResidentialPremisesInfoSection: {
-          include: { PremisesAnimal: true, animalAvailability: true },
+          include: {
+            PremisesAnimal: {
+              include: {
+                AnimalType:true
+              }
+            },
+            animalAvailability: true,
+            toiletAvailability: true,
+            urinalAvailability: true,
+            vaccinationProof: true,
+            drainsAvailability:true,
+            approvedHandwashingFacilityAvailability: true,
+            bathRoomAvailability: true,
+            animalSpaceCondition: true,
+          },
         },
 
         WaterSection: true,
