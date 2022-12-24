@@ -45,7 +45,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -56,7 +55,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.BasicInfoSection.Community.District.name}
                         readonly="readonly"
                       />
@@ -67,7 +65,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.BasicInfoSection.Community.name}
                         readonly="readonly"
                       />
@@ -78,7 +75,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.BasicInfoSection.ghanaPostGps}
                         readonly="readonly"
                       />
@@ -89,7 +85,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.BasicInfoSection.respondentName}
                         readonly="readonly"
                       />
@@ -100,7 +95,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.BasicInfoSection.RespondentDesignation.name}
                         readonly="readonly"
                       />
@@ -113,7 +107,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.BasicInfoSection.respondentPhoneNumber}
                         readonly="readonly"
                       />
@@ -158,7 +151,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.toiletAvailability
                             .name
@@ -174,7 +166,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.urinalAvailability
                             .name
@@ -190,7 +181,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection
                             .bathRoomAvailability.name
@@ -204,7 +194,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.drainsAvailability
                             .name
@@ -220,7 +209,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.animalAvailability
                             .name
@@ -234,7 +222,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.householdNumber
                         }
@@ -249,7 +236,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.maleOccupantNumber
                         }
@@ -264,7 +250,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection
                             .femaleOccupantNumber
@@ -278,7 +263,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={
                           data.ResidentialPremisesInfoSection.animalAvailability
                             .name
@@ -292,7 +276,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.ResidentialPremisesInfoSection.animalNumber}
                         readonly="readonly"
                       />
@@ -303,36 +286,41 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value={data.ResidentialPremisesInfoSection.PremisesAnimal.map(
-                          (x) => " "+x.AnimalType.name
+                          (x) => " " + x.AnimalType.name
                         )}
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Animal vaccination proof</label>
+                      <label for="invoicenoInput">
+                        Animal vaccination proof
+                      </label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.ResidentialPremisesInfoSection.vaccinationProof.name}
+                        value={
+                          data.ResidentialPremisesInfoSection.vaccinationProof
+                            .name
+                        }
                         readonly="readonly"
                       />
                     </div>
                   </div>
                   <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Animal space condition</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.ResidentialPremisesInfoSection.animalSpaceCondition.name}
-                        readonly="readonly"
-                      />
-                    </div>
+                    <label for="invoicenoInput">Animal space condition</label>
+                    <input
+                      type="text"
+                      className="form-control bg-light border-0"
+                      id="invoicenoInput"
+                      value={
+                        data.ResidentialPremisesInfoSection.animalSpaceCondition
+                          .name
+                      }
+                      readonly="readonly"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -363,162 +351,278 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Animal permit</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.animalsPermitAvailability.name}
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Building permit</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
- value={data.LicencePermitSection.buildingPermitAvailability.name}                  
-       readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Certificate of habitation</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.habitationCertificateAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Property rate payment</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.propertyRateAvailability.value}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Suitability Certificate</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.suitabilityCertificateAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
+                    {data.LicencePermitSection.animalsPermitAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Animal permit</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection.animalsPermitAvailability
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.buildingPermitAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Building permit</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection.buildingPermitAvailability
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection
+                      .habitationCertificateAvailability != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Certificate of habitation
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .habitationCertificateAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.propertyRateAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Property rate payment
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection.propertyRateAvailability
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection
+                      .suitabilityCertificateAvailability != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Suitability Certificate
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .suitabilityCertificateAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.structurePermitAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Structure permit</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .structurePermitAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Structure permit</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.structurePermitAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Fumigation certificate</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.fumigationCertificateAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Business operating permit</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.businessLicenceAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Temporal structure permit</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.structurePermitAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Water analysis report</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.waterAnalysisReport.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Registrar General operating certificate</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.regGeneralCertAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Medical certificate</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.medicalCertificateAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Ghana Tourism Authority operating license</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.gtaOperatingLicenceAvailability.name}                  
-                        readonly="readonly"
-                      />
-                    </div>
+                    {data.LicencePermitSection
+                      .fumigationCertificateAvailability != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Fumigation certificate
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .fumigationCertificateAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.businessLicenceAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Business operating permit
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .businessLicenceAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.structurePermitAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Temporal structure permit
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .structurePermitAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.waterAnalysisReport != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Water analysis report
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection.waterAnalysisReport.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.regGeneralCertAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Registrar General operating certificate
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection.regGeneralCertAvailability
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection.medicalCertificateAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Medical certificate</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .medicalCertificateAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LicencePermitSection
+                      .gtaOperatingLicenceAvailability != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Ghana Tourism Authority operating license
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection
+                              .gtaOperatingLicenceAvailability.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">HEFRA/PHARMACY COUNCIL operating license</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value={data.LicencePermitSection.pharmacyCertAvailability.value}                  
-                        readonly="readonly"
-                      />
-                    </div>
+                    {data.LicencePermitSection.pharmacyCertAvailability !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          HEFRA/PHARMACY COUNCIL operating license
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LicencePermitSection.pharmacyCertAvailability
+                              .value
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
@@ -550,57 +654,96 @@ const ResidentialView = ({ data }) => {
                 <div className="card-body">
                   <div className="row gy-3">
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Water source</label>
+                      {data.WaterSection.PremisesWaterSources.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.WaterSourceType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Water supply</label>
+                      {data.WaterSection.PremisesWaterSupply.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.WaterSupplyType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Water source condition</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.WaterSection.waterSourceCondition.name}
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Water storage</label>
+                      {data.WaterSection.PremisesWaterStorage.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.WaterStorageType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">
+                        Safe Water storage receptacle condition
+                      </label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.WaterSection.waterStorageConditionSafe.name}
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
+                      <label for="invoicenoInput">Water treatment type</label>
+                      {data.WaterSection.PremisesWaterTreatmentType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.WaterTreatmentType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Drinking water source</label>
+                      {data.WaterSection.PremisesDrinkingWaterSources.map(
+                        (x) => (
+                          <input
+                            type="text"
+                            className="form-control bg-light border-0"
+                            id="invoicenoInput"
+                            value={x.DrinkingWaterSourceType.name}
+                            readonly="readonly"
+                          />
+                        )
+                      )}
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Water flow frequency</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.WaterSection.WaterFlowFrequency.name}
                         readonly="readonly"
                       />
                     </div>
@@ -628,6 +771,8 @@ const ResidentialView = ({ data }) => {
                     className="link-primary text-decoration-underline"
                   >
                     Continue Shopping
+
+
                   </a>
                 </div> */}
               </div>
@@ -635,56 +780,273 @@ const ResidentialView = ({ data }) => {
                 <div className="card-body">
                   <div className="row gy-3">
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Number Toilet Seats</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
+                        value={data.LiquidWasteSection.numberToiletSeats}
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Number Urinal Seats</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value={data.LiquidWasteSection.numberUrinalSeats}
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Toilet Adequacy</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value={data.LiquidWasteSection.toiletAdequacy.name}
+
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Urinal Adequacy</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Bathroom Adequacy</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Separate Staff Urinal</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Toilet Facilty Mgt availabilty</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Toilet Gender Sensivity</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Urinal Gender Sensivity</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Toilet Pit Position</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Toilet Disability Friendly</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Urinal Disability Friendly</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Drains Condition</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Stagnation Evidence</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Anal Cleansing Material</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Effluent Management Report</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Is Area Sewered</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Facility Connected Sewer</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Number Urinal Cubicle</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Urinal Cubicle Condition</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Toilet Condition</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Toilet Discharge</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Containment Emptied</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Sewer System</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Waste Water Containment</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Ease Yourself Where</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Desilting Frequency</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -725,7 +1087,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -736,7 +1097,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -747,7 +1107,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -758,7 +1117,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -769,7 +1127,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -810,7 +1167,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -821,7 +1177,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -832,7 +1187,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -843,7 +1197,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
@@ -854,7 +1207,6 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />

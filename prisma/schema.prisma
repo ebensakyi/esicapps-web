@@ -1293,9 +1293,9 @@ model WaterSection {
   id                                 String                         @id @db.VarChar(255)
   inspectionId                       String                         @unique @db.VarChar(255)
   userId                             Int
-  waterSourceConditionId             Int
-  waterStorageConditionId            Int
-  waterFlowFrequencyId               Int
+  waterSourceConditionId             Int?
+  waterStorageConditionId            Int?
+  waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
   rating                             Int
   deleted                            Int?                           @default(0)
@@ -1309,9 +1309,9 @@ model WaterSection {
   Inspection                         Inspection                     @relation(fields: [inspectionId], references: [id])
   safeDistanceWaterStorageSanitary   YesNo?                         @relation("safeDistanceWaterStorageSanitary", fields: [safeDistanceWaterStorageSanitaryId], references: [id])
   User                               User                           @relation(fields: [userId], references: [id])
-  WaterFlowFrequency                 WaterFlowFrequency             @relation(fields: [waterFlowFrequencyId], references: [id])
-  waterSourceCondition               SafeUnsafe                     @relation(fields: [waterSourceConditionId], references: [id])
-  waterStorageConditionSafe          YesNo                          @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
+  WaterFlowFrequency                 WaterFlowFrequency?            @relation(fields: [waterFlowFrequencyId], references: [id])
+  waterSourceCondition               SafeUnsafe?                    @relation(fields: [waterSourceConditionId], references: [id])
+  waterStorageConditionSafe          YesNo?                         @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
 }
 
 model LiquidWasteSection {

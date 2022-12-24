@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
- try {
+  try {
     const data = {
       id: req.body.id,
 
@@ -59,10 +59,13 @@ const post = async (req, res) => {
         req.body.regGeneralCertAvailabilityId == "null"
           ? null
           : Number(req.body.regGeneralCertAvailabilityId),
+      pharmacyCertAvailabilityId:
+        req.body.pharmacyCertAvailabilityId == "null"
+          ? null
+          : Number(req.body.pharmacyCertAvailabilityId),
     };
 
-
-   const response = await prisma.licencePermitSection.create({ data });
+    const response = await prisma.licencePermitSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {

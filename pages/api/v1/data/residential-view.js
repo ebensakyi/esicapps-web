@@ -39,47 +39,100 @@ const get = async (req, res) => {
             RespondentDesignation: true,
           },
         },
-      
+
         LicencePermitSection: {
           include: {
-            animalsPermitAvailability:true,
-            buildingPermitAvailability:true,
+            animalsPermitAvailability: true,
+            buildingPermitAvailability: true,
 
-            businessLicenceAvailability:true,
-            fumigationCertificateAvailability:true,
-            habitationCertificateAvailability:true,
-            medicalCertificateAvailability:true,
-            operatingLicenceAvailability:true,
-            propertyRateAvailability:true,
-            structurePermitAvailability:true,
-            gtaOperatingLicenceAvailability:true,
+            businessLicenceAvailability: true,
+            fumigationCertificateAvailability: true,
+            habitationCertificateAvailability: true,
+            medicalCertificateAvailability: true,
+            operatingLicenceAvailability: true,
+            propertyRateAvailability: true,
+            structurePermitAvailability: true,
+            gtaOperatingLicenceAvailability: true,
             waterAnalysisReport: true,
             regGeneralCertAvailability: true,
             suitabilityCertificateAvailability: true,
             pharmacyCertAvailability: true,
-
-          }
+          },
         },
         ResidentialPremisesInfoSection: {
           include: {
             PremisesAnimal: {
               include: {
-                AnimalType:true
-              }
+                AnimalType: true,
+              },
             },
             animalAvailability: true,
             toiletAvailability: true,
             urinalAvailability: true,
             vaccinationProof: true,
-            drainsAvailability:true,
+            drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathRoomAvailability: true,
             animalSpaceCondition: true,
           },
         },
 
-        WaterSection: true,
-        LiquidWasteSection: true,
+        WaterSection: {
+          include: {
+            WaterFlowFrequency: true,
+            waterSourceCondition: true,
+            waterStorageConditionSafe: true,
+            safeDistanceWaterStorageSanitary: true,
+            PremisesDrinkingWaterSources: {
+              include: { DrinkingWaterSourceType: true },
+            },
+            PremisesWaterSources: {
+              include: { WaterSourceType: true },
+            },
+            PremisesWaterStorage: {
+              include: { WaterStorageType: true },
+            },
+            PremisesWaterSupply: {
+              include: { WaterSupplyType: true },
+            },
+            PremisesWaterTreatmentType: {
+              include: { WaterTreatmentType: true },
+            },
+          },
+        },
+        LiquidWasteSection: {
+          include: {
+            toiletAdequacy: true,
+            analCleansingMaterialMgt: true,
+            areaSewered: true,
+            availToiletFaciltyMgt: true,
+            bathroomAdequacy: true,
+            containmentEmptied: true,
+            DesiltingFrequency: true,
+            DrainType: true,
+            drainsCondition: true,
+            EaseYourselfWhere: true,
+            EffluentManagement: true,
+            effluentManagementReport: true,
+            ExcretaContainment: true,
+            ExcretaDisposalMethod: true,
+            facilityConnectedSewer: true,
+            publicBathRoomCondition: true,
+            separateStaffUrinal: true,
+            sewerSystem: true,
+            stagnationEvidence: true,
+            toiletCondition: true,
+            toiletDisabilityFriendly: true,
+            toiletDischarge: true,
+            toiletGenderSensivity: true,
+            toiletPitPosition: true,
+            urinalAdequacy: true,
+            urinalCubicleCondition: true,
+            urinalDisabilityFriendly: true,
+            urinalGenderSensivity: true,
+            wasteWaterContainment: true,
+          },
+        },
         SolidWasteSection: true,
         ConclusionSection: true,
 
