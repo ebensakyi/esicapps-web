@@ -1,4 +1,5 @@
 const ResidentialView = ({ data }) => {
+  console.log(data);
   return (
     <>
       <div className="row">
@@ -38,58 +39,79 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Region</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">District</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.BasicInfoSection.Community.District.name}
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Community</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.BasicInfoSection.Community.name}
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">GhanaPost GPS</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.BasicInfoSection.ghanaPostGps}
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Name of respondent</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
-                        value="#VL25000355"
+                        value={data.BasicInfoSection.respondentName}
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Respondent designation</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value={data.BasicInfoSection.RespondentDesignation.name}
+                        readonly="readonly"
+                      />
+                    </div> <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Respondent phone number</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value={data.BasicInfoSection.respondentPhoneNumber}
                         readonly="readonly"
                       />
                     </div>
@@ -126,55 +148,110 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Toilet facility availabilty</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Urinal facility availabilty</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Bathroom facility availabilty</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Drains availabilty</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Handwashing facility availabilty</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Number of household</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Number of male occupants</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Number of female occupants</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Animal availabilty</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        placeholder="Invoice No"
+                        value={data.ResidentialPremisesInfoSection}
+                        readonly="readonly"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Animals</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
@@ -215,55 +292,55 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
@@ -303,55 +380,55 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
@@ -391,55 +468,55 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
@@ -479,55 +556,55 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
@@ -567,55 +644,55 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"
                         readonly="readonly"
                       />
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Invoice No</label>
                       <input
                         type="text"
-                        class="form-control bg-light border-0"
+                        className="form-control bg-light border-0"
                         id="invoicenoInput"
                         placeholder="Invoice No"
                         value="#VL25000355"

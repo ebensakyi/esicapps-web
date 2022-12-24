@@ -9,19 +9,47 @@ const get = async (req, res) => {
   try {
     let inspectionId = req.query.id;
 
-    const data = await prisma.basicInfoSection.findMany({
+    // const data = await prisma.basicInfoSection.findMany({
+    //   where: {
+    //     deleted: 0,
+    //     Inspection: {
+    //       id: inspectionId,
+    //     },
+    //   },
+    //   include: {
+    //     Inspection: {
+    //       include: { LicencePermitSection: true },
+    //     },
+    //     Community: { include: { District: { include: { Region: true } } } },
+    //     User: true,
+    //   },
+
+    // });
+
+    const data = await prisma.inspection.findFirst({
       where: {
         deleted: 0,
-        Inspection: {
-          id: inspectionId,
-        },
+
+        id: inspectionId,
       },
       include: {
-        Inspection: {
-          include: { LicencePermitSection: true },
+        BasicInfoSection: {
+          include: {
+            Community: { include: { District: { include: { Region: true } } } },
+            RespondentDesignation: true,
+          },
         },
-        Community: { include: { District: { include: { Region: true } } } },
-        User: true,
+        LicencePermitSection: true,
+        ResidentialPremisesInfoSection: {
+          include: { PremisesAnimal: true, animalAvailability: true },
+        },
+
+        WaterSection: true,
+        LiquidWasteSection: true,
+        SolidWasteSection: true,
+        ConclusionSection: true,
+
+        // User: true,
       },
     });
 

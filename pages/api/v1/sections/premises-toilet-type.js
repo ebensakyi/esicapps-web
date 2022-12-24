@@ -9,12 +9,12 @@ const post = async (req, res) => {
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       toiletTypeId:
-        req.body.toiletTypeId == "null" ? null : req.body.toiletTypeId,
+        req.body.toiletTypeId == "null" ? null : Number(req.body.toiletTypeId),
 
       liquidWasteSectionId:
         req.body.liquidWasteSectionId == "null"
           ? null
-          : Number(req.body.liquidWasteSectionId),
+          : req.body.liquidWasteSectionId,
     };
 
     const response = await prisma.premisesToiletType.create({ data });

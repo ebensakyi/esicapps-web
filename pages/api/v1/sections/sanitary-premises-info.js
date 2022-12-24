@@ -123,7 +123,7 @@ const post = async (req, res) => {
       transferStationCapacity: req.body.transferStationCapacity == "null" ? null : Number(req.body.transferStationCapacity),
       numberContainer: req.body.numberContainer == "null" ? null : Number(req.body.numberContainer),
       containerAttendantName: req.body.containerAttendantName == "null" ? null : Number(req.body.containerAttendantName),
-      containerAttendantPhoneNumber: req.body.containerAttendantPhoneNumber== "null" ? null :  eq.body.containerAttendantPhoneNumber,
+      containerAttendantPhoneNumber: req.body.containerAttendantPhoneNumber== "null" ? null :  req.body.containerAttendantPhoneNumber== ""?null: req.body.containerAttendantPhoneNumber,
 
     };
 

@@ -53,7 +53,6 @@ import { users } from "./users";
 import { electoralArea } from "./electoralArea";
 import { animalType } from "./animalType";
 import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
-import { dataVersion } from "./dataVersion";
 import { unsafeWaterStorage } from "./unsafeWaterStorage";
 import { toiletDischarge } from "./toiletDischarge";
 import { sewerSystem } from "./sewerSystem";
@@ -73,9 +72,6 @@ import {messageType} from "./messageType";
 import {sendingType} from "./sendingType";
 
 async function main() {
-  await prisma.dataVersion.createMany({
-    data: dataVersion,
-  });
 
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
