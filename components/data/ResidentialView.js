@@ -799,258 +799,482 @@ const ResidentialView = ({ data }) => {
                         readonly="readonly"
                       />
                     </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Adequacy</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={data.LiquidWasteSection.toiletAdequacy.name}
-
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Urinal Adequacy</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Bathroom Adequacy</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Separate Staff Urinal</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Facilty Mgt availabilty</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Gender Sensivity</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Urinal Gender Sensivity</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Pit Position</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Disability Friendly</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Urinal Disability Friendly</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Drains Condition</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Stagnation Evidence</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Anal Cleansing Material</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Effluent Management Report</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Is Area Sewered</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Facility Connected Sewer</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                    {data.LiquidWasteSection.toiletAdequacy != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Toilet Adequacy</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.toiletAdequacy.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.urinalAdequacy != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Urinal Adequacy</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.urinalAdequacy.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.bathroomAdequacy != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Bathroom Adequacy</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.bathroomAdequacy.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.separateStaffUrinal != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Separate Staff Urinal
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.separateStaffUrinal.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Toilet Facilty Mgt availabilty
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.availToiletFaciltyMgt.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.toiletGenderSensivity != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Toilet Gender Sensivity
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.toiletGenderSensivity.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.urinalGenderSensivity != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Urinal Gender Sensivity
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.urinalGenderSensivity.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.toiletPitPosition != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Toilet Pit Position</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.toiletPitPosition.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.toiletDisabilityFriendly !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Toilet Disability Friendly
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.toiletDisabilityFriendly
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.urinalDisabilityFriendly !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Urinal Disability Friendly
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.urinalDisabilityFriendly
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.drainsCondition != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Drains Condition</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.drainsCondition.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.stagnationEvidence != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Stagnation Evidence</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.stagnationEvidence.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.analCleansingMaterialMgt !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Anal Cleansing Material
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.analCleansingMaterialMgt
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.effluentManagementReport !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Effluent Management Report
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.effluentManagementReport
+                              .name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.areaSewered != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Is Area Sewered</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.areaSewered.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.areaSewered != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Facility Connected Sewer
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.facilityConnectedSewer.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Number Urinal Cubicle</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value="#VL25000355"
+                        value={data.LiquidWasteSection.numberUrinalCubicle}
                         readonly="readonly"
                       />
                     </div>
+                    {data.LiquidWasteSection.urinalCubicleCondition != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Urinal Cubicle Condition
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.urinalCubicleCondition.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.toiletCondition != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Toilet Condition</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.toiletCondition.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.toiletDischarge != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Toilet Discharge</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.toiletDischarge.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.containmentEmptied != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Containment Emptied</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.containmentEmptied.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.sewerSystem != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Sewer System</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.sewerSystem.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.wasteWaterContainment != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Waste Water Containment
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.wasteWaterContainment.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.EaseYourselfWhere != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Ease Yourself Where</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.LiquidWasteSection.EaseYourselfWhere.name}
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.DesiltingFrequency != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">Desilting Frequency</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.LiquidWasteSection.DesiltingFrequency.name
+                          }
+                          readonly="readonly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Urinal Cubicle Condition</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                      <label for="invoicenoInput">Drain Type</label>
+                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.DrainType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Condition</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                      <label for="invoicenoInput">Drain Type</label>
+                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.DrainType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Toilet Discharge</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                      <label for="invoicenoInput">Drain Type</label>
+                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.DrainType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Containment Emptied</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                      <label for="invoicenoInput">Drain Type</label>
+                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.DrainType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Sewer System</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                      <label for="invoicenoInput">Drain Type</label>
+                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.DrainType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Waste Water Containment</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Ease Yourself Where</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Desilting Frequency</label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value="#VL25000355"
-                        readonly="readonly"
-                      />
-                    </div>
+                      <label for="invoicenoInput">Drain Type</label>
+                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.DrainType.name}
+                          readonly="readonly"
+                        />
+                      ))}
+                    </div>{" "}
                   </div>
                 </div>
               </div>

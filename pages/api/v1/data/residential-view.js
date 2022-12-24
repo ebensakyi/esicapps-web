@@ -109,7 +109,11 @@ const get = async (req, res) => {
             bathroomAdequacy: true,
             containmentEmptied: true,
             DesiltingFrequency: true,
-            DrainType: true,
+            PremisesDrainType: {
+              include: {
+                DrainType: true,
+              },
+            },
             drainsCondition: true,
             EaseYourselfWhere: true,
             EffluentManagement: true,
