@@ -1123,9 +1123,9 @@ CREATE TABLE "WaterSection" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
-    "waterSourceConditionId" INTEGER NOT NULL,
-    "waterStorageConditionId" INTEGER NOT NULL,
-    "waterFlowFrequencyId" INTEGER NOT NULL,
+    "waterSourceConditionId" INTEGER,
+    "waterStorageConditionId" INTEGER,
+    "waterFlowFrequencyId" INTEGER,
     "safeDistanceWaterStorageSanitaryId" INTEGER,
     "rating" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -1191,7 +1191,7 @@ CREATE TABLE "SolidWasteSection" (
     "wasteCollectionFrequencyId" INTEGER,
     "approvedWasteStorageReceptacleId" INTEGER,
     "adequateWasteStorageReceptacleId" INTEGER,
-    "wasteCollectionServiceTypeId" INTEGER,
+    "wasteCollectionTypeId" INTEGER,
     "unservicedWasteDisposalId" INTEGER,
     "wastePaymentEvidenceId" INTEGER,
     "wasteContainerVolumeId" INTEGER,
@@ -2017,13 +2017,13 @@ ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_safeDistanceWaterStorage
 ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterFlowFrequencyId_fkey" FOREIGN KEY ("waterFlowFrequencyId") REFERENCES "WaterFlowFrequency"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterFlowFrequencyId_fkey" FOREIGN KEY ("waterFlowFrequencyId") REFERENCES "WaterFlowFrequency"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterSourceConditionId_fkey" FOREIGN KEY ("waterSourceConditionId") REFERENCES "SafeUnsafe"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterSourceConditionId_fkey" FOREIGN KEY ("waterSourceConditionId") REFERENCES "SafeUnsafe"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageConditionId_fkey" FOREIGN KEY ("waterStorageConditionId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "WaterSection" ADD CONSTRAINT "WaterSection_waterStorageConditionId_fkey" FOREIGN KEY ("waterStorageConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_analCleansingMaterialMgtId_fkey" FOREIGN KEY ("analCleansingMaterialMgtId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2141,6 +2141,18 @@ ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteServicePr
 
 -- AddForeignKey
 ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteSortingAvailabilityId_fkey" FOREIGN KEY ("wasteSortingAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteProviderAccredittedId_fkey" FOREIGN KEY ("wasteProviderAccredittedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteCollectionTypeId_fkey" FOREIGN KEY ("wasteCollectionTypeId") REFERENCES "WasteCollectionType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_unservicedWasteDisposalId_fkey" FOREIGN KEY ("unservicedWasteDisposalId") REFERENCES "UnservicedWasteDisposal"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_wasteContainerVolumeId_fkey" FOREIGN KEY ("wasteContainerVolumeId") REFERENCES "ContainerVolume"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -166,10 +166,10 @@ const get = async (req, res) => {
             wasteCollectionFrequency: true,
             approvedWasteStorageReceptacle: true,
             adequateWasteStorageReceptacle: true,
-            wasteCollectionServiceType: true,
-            unservicedWasteDisposal: true,
+            WasteCollectionType: true,
+            UnservicedWasteDisposal: true,
             wastePaymentEvidence: true,
-            wasteContainerVolume: true,
+            ContainerVolume: true,
             wasteProviderAccreditted: true,
             PremisesHazardousWasteDisposal: {
               include: { HazardousWasteDisposal: true },
