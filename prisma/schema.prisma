@@ -287,11 +287,12 @@ model Community {
 }
 
 model ContainerVolume {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  SolidWasteSection SolidWasteSection[]
 }
 
 model DerattingFrequency {
@@ -602,11 +603,12 @@ model UnsafeWaterStorage {
 }
 
 model UnservicedWasteDisposal {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  SolidWasteSection SolidWasteSection[]
 }
 
 model WasteCollectionFrequency {
@@ -625,6 +627,7 @@ model WasteCollectionType {
   createdAt               DateTime                  @default(now())
   updatedAt               DateTime                  @updatedAt
   PremisesWasteCollection PremisesWasteCollection[]
+  SolidWasteSection       SolidWasteSection[]
 }
 
 model SolidWasteReceptacle {
@@ -816,6 +819,7 @@ model YesNo {
   regGeneralCertAvailability                         LicencePermitSection[]           @relation("regGeneralCertAvailability")
   suitabilityCertificateAvailability                 LicencePermitSection[]           @relation("suitabilityCertificateAvailability")
   pharmacyCertAvailability                           LicencePermitSection[]           @relation("pharmacyCertAvailability")
+  wasteProviderAccreditted                           SolidWasteSection[]              @relation("wasteProviderAccreditted")
 }
 
 model InspectionType {
@@ -1403,7 +1407,7 @@ model SolidWasteSection {
   wasteCollectionFrequencyId         Int?
   approvedWasteStorageReceptacleId   Int?
   adequateWasteStorageReceptacleId   Int?
-  wasteCollectionServiceTypeId       Int?
+  wasteCollectionTypeId              Int?
   unservicedWasteDisposalId          Int?
   wastePaymentEvidenceId             Int?
   wasteContainerVolumeId             Int?
@@ -1424,6 +1428,11 @@ model SolidWasteSection {
   wastePaymentEvidence               YesNo?                           @relation("wastePaymentEvidence", fields: [wastePaymentEvidenceId], references: [id])
   wasteServiceProviderRegistration   YesNo?                           @relation("wasteServiceProviderRegistration", fields: [wasteServiceProviderRegistrationId], references: [id])
   wasteSortingAvailability           YesNo?                           @relation("wasteSortingAvailability", fields: [wasteSortingAvailabilityId], references: [id])
+  wasteProviderAccreditted           YesNo?                           @relation("wasteProviderAccreditted", fields: [wasteProviderAccredittedId], references: [id])
+
+  WasteCollectionType     WasteCollectionType?     @relation(fields: [wasteCollectionTypeId], references: [id])
+  UnservicedWasteDisposal UnservicedWasteDisposal? @relation(fields: [unservicedWasteDisposalId], references: [id])
+  ContainerVolume         ContainerVolume?         @relation(fields: [wasteContainerVolumeId], references: [id])
 }
 
 model ConclusionSection {

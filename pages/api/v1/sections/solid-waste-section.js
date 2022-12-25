@@ -15,7 +15,7 @@ const post = async (req, res) => {
       wasteCollectionFrequencyId: req.body.wasteCollectionFrequencyId == "null" ? null : Number(req.body.wasteCollectionFrequencyId),
       approvedWasteStorageReceptacleId: req.body.approvedWasteStorageReceptacleId == "null" ? null : Number(req.body.approvedWasteStorageReceptacleId),
       adequateWasteStorageReceptacleId: req.body.adequateWasteStorageReceptacleId == "null" ? null : Number(req.body.adequateWasteStorageReceptacleId),
-      wasteCollectionServiceTypeId: req.body.wasteCollectionServiceTypeId == "null" ? null : Number(req.body.wasteCollectionServiceTypeId),
+      wasteCollectionTypeId: req.body.wasteCollectionTypeId == "null" ? null : Number(req.body.wasteCollectionTypeId),
       unservicedWasteDisposalId: req.body.unservicedWasteDisposalId == "null" ? null : Number(req.body.unservicedWasteDisposalId),
       wastePaymentEvidenceId: req.body.wastePaymentEvidenceId == "null" ? null : Number(req.body.wastePaymentEvidenceId),
       wasteContainerVolumeId: req.body.wasteContainerVolumeId == "null" ? null : Number(req.body.wasteContainerVolumeId),

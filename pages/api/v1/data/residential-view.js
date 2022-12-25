@@ -116,10 +116,32 @@ const get = async (req, res) => {
             },
             drainsCondition: true,
             EaseYourselfWhere: true,
-            EffluentManagement: true,
+            PremisesEffluentManagement: {
+              include: {
+                EffluentManagement: true,
+              },
+            },
+            PremisesExcretaDisposalMethod: {
+              include: {
+                ExcretaDisposalMethod: true,
+              },
+            },
             effluentManagementReport: true,
-            ExcretaContainment: true,
-            ExcretaDisposalMethod: true,
+            PremisesExcretaContainment: {
+              include: {
+                ExcretaContainment: true,
+              },
+            },
+            PremisesGreyWaterDisposal: {
+              include: {
+                GreyWaterDisposal: true,
+              },
+            },
+            PremisesToiletType: {
+              include: {
+                ToiletType: true,
+              },
+            },
             facilityConnectedSewer: true,
             publicBathRoomCondition: true,
             separateStaffUrinal: true,
@@ -137,7 +159,29 @@ const get = async (req, res) => {
             wasteWaterContainment: true,
           },
         },
-        SolidWasteSection: true,
+        SolidWasteSection: {
+          include: {
+            wasteServiceProviderRegistration: true,
+            wasteSortingAvailability: true,
+            wasteCollectionFrequency: true,
+            approvedWasteStorageReceptacle: true,
+            adequateWasteStorageReceptacle: true,
+            wasteCollectionServiceType: true,
+            unservicedWasteDisposal: true,
+            wastePaymentEvidence: true,
+            wasteContainerVolume: true,
+            wasteProviderAccreditted: true,
+            PremisesHazardousWasteDisposal: {
+              include: { HazardousWasteDisposal: true },
+            },
+            PremisesWasteCollection: {
+              include: { WasteCollection: true },
+            },
+            PremisesWasteReceptacle: {
+              include: { WasteReceptacle: true },
+            },
+          },
+        },
         ConclusionSection: true,
 
         // User: true,

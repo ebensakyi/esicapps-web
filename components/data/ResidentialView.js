@@ -1216,61 +1216,76 @@ const ResidentialView = ({ data }) => {
                       ))}
                     </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.DrainType.name}
-                          readonly="readonly"
-                        />
-                      ))}
+                      <label for="invoicenoInput">Effluent Management</label>
+                      {data.LiquidWasteSection.PremisesEffluentManagement.map(
+                        (x) => (
+                          <input
+                            type="text"
+                            className="form-control bg-light border-0"
+                            id="invoicenoInput"
+                            value={x.EffluentManagement.name}
+                            readonly="readonly"
+                          />
+                        )
+                      )}
                     </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.DrainType.name}
-                          readonly="readonly"
-                        />
-                      ))}
+                      <label for="invoicenoInput">Excreta Containment</label>
+                      {data.LiquidWasteSection.PremisesExcretaContainment.map(
+                        (x) => (
+                          <input
+                            type="text"
+                            className="form-control bg-light border-0"
+                            id="invoicenoInput"
+                            value={x.ExcretaContainment.name}
+                            readonly="readonly"
+                          />
+                        )
+                      )}
+                    </div>{" "}
+                    {data.LiquidWasteSection.PremisesExcretaDisposalMethod
+                      .length != 0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label for="invoicenoInput">
+                          Excreta Disposal Method
+                        </label>
+                        {data.LiquidWasteSection.PremisesExcretaDisposalMethod.map(
+                          (x) => (
+                            <input
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.ExcretaDisposalMethod.name}
+                              readonly="readonly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Grey Water Disposal</label>
+                      {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
+                        (x) => (
+                          <input
+                            type="text"
+                            className="form-control bg-light border-0"
+                            id="invoicenoInput"
+                            value={x.GreyWaterDisposal.name}
+                            readonly="readonly"
+                          />
+                        )
+                      )}
                     </div>{" "}
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                      <label for="invoicenoInput">Toilet Type</label>
+                      {data.LiquidWasteSection.PremisesToiletType.map((x) => (
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={x.DrainType.name}
-                          readonly="readonly"
-                        />
-                      ))}
-                    </div>{" "}
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.DrainType.name}
-                          readonly="readonly"
-                        />
-                      ))}
-                    </div>{" "}
-                    <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.DrainType.name}
+                          value={x.ToiletType.name}
                           readonly="readonly"
                         />
                       ))}
@@ -1299,6 +1314,19 @@ const ResidentialView = ({ data }) => {
                     className="link-primary text-decoration-underline"
                   >
                     Continue Shopping
+
+                    wasteServiceProviderRegistrationId Int?
+  wasteCollectorName                 String?
+  wasteSortingAvailabilityId         Int?
+  wasteCollectionFrequencyId         Int?
+  approvedWasteStorageReceptacleId   Int?
+  adequateWasteStorageReceptacleId   Int?
+  wasteCollectionServiceTypeId       Int?
+  unservicedWasteDisposalId          Int?
+  wastePaymentEvidenceId             Int?
+  wasteContainerVolumeId             Int?
+  wasteProviderAccredittedId         Int?
+  containerNumber                    Int?
                   </a>
                 </div> */}
               </div>
@@ -1306,32 +1334,43 @@ const ResidentialView = ({ data }) => {
                 <div className="card-body">
                   <div className="row gy-3">
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">
+                        Waste Service Provider Registration
+                      </label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value="#VL25000355"
+                        value={
+                          data.SolidWasteSection
+                            .wasteServiceProviderRegistrationId.name
+                        }
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Waste Collector Name</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value="#VL25000355"
+                        value={
+                          data.SolidWasteSection
+                            .wasteCollectorName
+                        }
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Waste Sorting Availability</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value="#VL25000355"
+                        value={
+                          data.SolidWasteSection
+                            .wasteSortingAvailability
+                        }
                         readonly="readonly"
                       />
                     </div>
