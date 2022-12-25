@@ -1369,13 +1369,13 @@ const ResidentialView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data.SolidWasteSection
-                            .wasteSortingAvailability
+                            .wasteSortingAvailability.name
                         }
                         readonly="readonly"
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Approved Waste Storage Receptacle</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
@@ -1385,7 +1385,52 @@ const ResidentialView = ({ data }) => {
                       />
                     </div>
                     <div className="col-lg-3 col-sm-6">
-                      <label for="invoicenoInput">Invoice No</label>
+                      <label for="invoicenoInput">Adequate Waste Storage Receptacle</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>  <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Waste Collection Type</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>  <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Unserviced Waste Disposal</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div> <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Waste Payment Evidence</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>  <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Container Volume</label>
+                      <input
+                        type="text"
+                        className="form-control bg-light border-0"
+                        id="invoicenoInput"
+                        value="#VL25000355"
+                        readonly="readonly"
+                      />
+                    </div>  <div className="col-lg-3 col-sm-6">
+                      <label for="invoicenoInput">Waste Provider Accreditted</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
