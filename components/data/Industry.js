@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Industry = ({ data }) => {
     return (
       <div className="row">
@@ -61,12 +63,19 @@ const Industry = ({ data }) => {
                               <i className="ri-more-fill align-middle" />
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
-                              <li>
-                                <a href="#!" className="dropdown-item">
-                                  <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                  View
-                                </a>
-                              </li>
+                            <Link
+                              href={{
+                                pathname: `/data/industry_view`,
+                                query: {
+                                  id: dt.Inspection.id,
+                                },
+                              }}
+                            >
+                              <a className="dropdown-item">
+                                <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
+                                View
+                              </a>
+                            </Link>
                               {/* <li>
                                 <a className="dropdown-item edit-item-btn">
                                   <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}

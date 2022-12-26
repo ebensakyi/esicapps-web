@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Eatery = ({ data }) => {
     return (
       <div className="row">
