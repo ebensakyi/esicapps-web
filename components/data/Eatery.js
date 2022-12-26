@@ -7,6 +7,7 @@ const Eatery = ({ data }) => {
               <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>
             </div>
             <div className="card-body">
+           
               <table
                 id="fixed-header"
                 className="table table-bordered dt-responsive nowrap table-striped align-middle"
@@ -61,12 +62,19 @@ const Eatery = ({ data }) => {
                               <i className="ri-more-fill align-middle" />
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
-                              <li>
-                                <a href="#!" className="dropdown-item">
-                                  <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                  View
-                                </a>
-                              </li>
+                            <Link
+                              href={{
+                                pathname: `/data/eatery_view`,
+                                query: {
+                                  id: dt.Inspection.id,
+                                },
+                              }}
+                            >
+                              <a className="dropdown-item">
+                                <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
+                                View
+                              </a>
+                            </Link>
                               {/* <li>
                                 <a className="dropdown-item edit-item-btn">
                                   <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}

@@ -59,23 +59,23 @@ const get = async (req, res) => {
             pharmacyCertAvailability: true,
           },
         },
-        ResidentialPremisesInfoSection: {
-          include: {
-            PremisesAnimal: {
-              include: {
-                AnimalType: true,
-              },
-            },
-            animalAvailability: true,
-            toiletAvailability: true,
-            urinalAvailability: true,
-            vaccinationProof: true,
-            drainsAvailability: true,
-            approvedHandwashingFacilityAvailability: true,
-            bathRoomAvailability: true,
-            animalSpaceCondition: true,
-          },
-        },
+        // ResidentialPremisesInfoSection: {
+        //   include: {
+        //     PremisesAnimal: {
+        //       include: {
+        //         AnimalType: true,
+        //       },
+        //     },
+        //     animalAvailability: true,
+        //     toiletAvailability: true,
+        //     urinalAvailability: true,
+        //     vaccinationProof: true,
+        //     drainsAvailability: true,
+        //     approvedHandwashingFacilityAvailability: true,
+        //     bathRoomAvailability: true,
+        //     animalSpaceCondition: true,
+        //   },
+        // },
 
         WaterSection: {
           include: {

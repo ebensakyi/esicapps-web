@@ -1,5 +1,4 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-var GeoJSON = require("geojson");
 
 const post = async (req, res) => {
   try {
@@ -8,40 +7,24 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    // const data = await prisma.basicInfoSection.findMany({
-    //   where: {
-    //     deleted: 0,
-
-    //   },
-    //   include: {
-    //     Inspection: true,
-    //     Community: { include: { District: { include: { Region: true } } } },
-    //     User: true,
-    //   },
-    // });
-
-    const data = await prisma.inspection.findMany({
+    let published = Number(req.query.published);
+    const data = await prisma.basicInfoSection.findMany({
       where: {
-        isPublished: 0,
-        inspectionFormId:1
-      },
-      include: {
-        BasicInfoSection: {
-          include: {
-            Community: true,
-          },
+        deleted: 0,
+        Inspection: {
+          isPublished: published,
+          inspectionFormId: 2,
         },
       },
-      // include: {
-      //   BasicInfoSection: {  Community: { include: { District: { include: { Region: true } } } },},
-
-      //   User: true,
-      // },
+      include: {
+        Inspection: true,
+        Community: { include: { District: { include: { Region: true } } } },
+        User: true,
+      },
     });
-    // GeoJSON.parse(data, {Point: ['lat', 'lng']});
 
     console.log(data);
-    //return res.status(200).json({ statusCode: 1, data: dataVersion });
+
     return res.status(200).json(data);
   } catch (error) {
     console.log("Error: " + error);

@@ -26,6 +26,7 @@ export default function eatery({ data }) {
 
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
+    const  {published}  =context.query;
 
     if (!token) {
         return {
@@ -35,7 +36,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/eatery`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/eatery?published=${published}`).then(
         (res) => res.json()
     );
 
