@@ -182,7 +182,18 @@ const get = async (req, res) => {
             },
           },
         },
-        ConclusionSection: true,
+        ConclusionSection: {
+          include: {
+            generalSanitaryCondition: true,
+            obnoxiousTradeExist: true,
+            PremisesNuisanceDetected: {
+              include: { Nuisance: true },
+            },
+            PremisesActionTaken: {
+              include: { Action: true },
+            },
+          },
+        },
 
         // User: true,
       },
