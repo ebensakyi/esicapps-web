@@ -1,11 +1,10 @@
-const ResidentialView = ({ data }) => {
-  console.log(data);
+const EateryView = ({ data }) => {
   return (
     <>
       <div className="row">
         <div className="col-12">
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 className="mb-sm-0">RESIDENTIAL</h4>
+            <h4 className="mb-sm-0">EATERY</h4>
             <div className="page-title-right">
               {/* <ol className="breadcrumb m-0">
                 <li className="breadcrumb-item">
@@ -121,7 +120,7 @@ const ResidentialView = ({ data }) => {
           </div>
         </div>
       </div>
-      
+{/*       
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -130,18 +129,11 @@ const ResidentialView = ({ data }) => {
                 <div className="col-sm">
                   <div>
                     <h5 className="fs-14 mb-0">
-                      RESIDENTIAL INFORMATION SECTION
+                      EATERY INFORMATION SECTION
                     </h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
+               
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -331,10 +323,9 @@ const ResidentialView = ({ data }) => {
                 </div>
               </div>
             </div>
-            {/* end col */}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="row">
         <div className="col-lg-12">
@@ -1615,4 +1606,4 @@ const ResidentialView = ({ data }) => {
   );
 };
 
-export default ResidentialView;
+export default EateryView;

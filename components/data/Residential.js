@@ -16,8 +16,8 @@ const Residential = ({ data }) => {
             >
               <thead>
                 <tr>
-                  <th>Inspection Date</th>
                   <th>Submission Date</th>
+                  <th>Inspection Date</th>
 
                   <th>Inspection Officer</th>
 
