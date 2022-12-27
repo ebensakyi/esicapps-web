@@ -82,12 +82,12 @@ const Industry = ({ data }) => {
                                   Edit
                                 </a>
                               </li> */}
-                              <li>
+                              {/* <li>
                                 <a className="dropdown-item edit-item-btn">
                                   <i className=" ri-send-plane-line align-bottom me-2 text-muted" />{" "}
                                   Publish
                                 </a>
-                              </li>
+                              </li> */}
                               {/* <li>
                                 <a className="dropdown-item remove-item-btn">
                                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}

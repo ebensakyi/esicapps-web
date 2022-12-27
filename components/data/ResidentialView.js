@@ -1,5 +1,30 @@
+import axios from "axios";
+
 const ResidentialView = ({ data }) => {
-  console.log(data);
+  const publish = async (id) => {
+    try {
+      console.log(id);
+
+      // let data = {
+      //   id: Number(userType),
+      //   surname,
+      //   otherNames,
+      //   email,
+      //   phoneNumber,
+      //   designation,
+      //   regionId: Number(region),
+      //   districtId: Number(district),
+      //   electoralAreaId: Number(electoralArea),
+      // };
+
+      const response = await axios.post(`/api/v1/data/residential-view`, {
+        id: id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="row">
@@ -121,7 +146,7 @@ const ResidentialView = ({ data }) => {
           </div>
         </div>
       </div>
-      
+
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -1528,14 +1553,6 @@ const ResidentialView = ({ data }) => {
                     <h5 className="fs-14 mb-0">ACTIONS & CONCLUSION SECTION</h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -1590,24 +1607,32 @@ const ResidentialView = ({ data }) => {
                     </div>
                     <div className="col-lg-3 col-sm-6">
                       <label for="invoicenoInput">Action Taken</label>
-                      {data.ConclusionSection.PremisesActionTaken.map(
-                        (x) => (
-                          <input
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.Action.name}
-                            readonly="readonly"
-                          />
-                        )
-                      )}
-                 
+                      {data.ConclusionSection.PremisesActionTaken.map((x) => (
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={x.Action.name}
+                          readonly="readonly"
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* end col */}
+            <div className="col-sm-auto">
+              <button
+                className="btn btn-success"
+                onClick={(e) => {
+                  e.preventDefault();
+
+                  publish(data.id);
+                }}
+              >
+                Publish
+              </button>
+            </div>
           </div>
         </div>
       </div>
