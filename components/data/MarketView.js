@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const ResidentialView = ({ data }) => {
+const MarketView = ({ data }) => {
   const router = useRouter();
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/residential-view`, {
+      const response = await axios.post(`/api/v1/data/market-view`, {
         id: id,
       });
 
@@ -23,11 +23,11 @@ const ResidentialView = ({ data }) => {
       <div className="row">
         <div className="col-12">
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 className="mb-sm-0">RESIDENTIAL</h4>
+            <h4 className="mb-sm-0">MARKET</h4>
             <div className="page-title-right">
               <ol className="breadcrumb m-0">
                 <li className="breadcrumb-item">
-                  <a href="javascript: void(0);">Residential list</a>
+                  <a href="javascript: void(0);">Market list</a>
                 </li>
                 <li className="breadcrumb-item active">Single inspection</li>
               </ol>
@@ -150,7 +150,7 @@ const ResidentialView = ({ data }) => {
                 <div className="col-sm">
                   <div>
                     <h5 className="fs-14 mb-0">
-                      RESIDENTIAL INFORMATION SECTION
+                      MARKET INFORMATION SECTION
                     </h5>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ResidentialPremisesInfoSection.toiletAvailability !=
+                    {data.MarketPremisesInfoSection.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -177,7 +177,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .toiletAvailability.name
                           }
                           readOnly="readOnly"
@@ -186,7 +186,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.urinalAvailability !=
+                    {data.MarketPremisesInfoSection.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -197,7 +197,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .urinalAvailability.name
                           }
                           readOnly="readOnly"
@@ -206,7 +206,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.bathRoomAvailability !=
+                    {data.MarketPremisesInfoSection.bathRoomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -217,7 +217,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .bathRoomAvailability.name
                           }
                           readOnly="readOnly"
@@ -226,7 +226,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.drainsAvailability !=
+                    {data.MarketPremisesInfoSection.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -237,7 +237,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .drainsAvailability.name
                           }
                           readOnly="readOnly"
@@ -246,8 +246,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityResidential !=
+                    {data.MarketPremisesInfoSection
+                      .approvedHandwashingFacilityAvailabilityMarket !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -258,8 +258,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityResidential
+                            data.MarketPremisesInfoSection
+                              .approvedHandwashingFacilityAvailabilityMarket
                               .name
                           }
                           readOnly="readOnly"
@@ -268,7 +268,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.householdNumber !=
+                    {data.MarketPremisesInfoSection.householdNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -279,7 +279,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection.householdNumber
+                            data.MarketPremisesInfoSection.householdNumber
                           }
                           readOnly="readOnly"
                         />
@@ -287,7 +287,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.maleOccupantNumber !=
+                    {data.MarketPremisesInfoSection.maleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -298,7 +298,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .maleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -307,7 +307,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.femaleOccupantNumber !=
+                    {data.MarketPremisesInfoSection.femaleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -318,7 +318,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .femaleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -327,7 +327,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.animalAvailability !=
+                    {data.MarketPremisesInfoSection.animalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -338,7 +338,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.MarketPremisesInfoSection
                               .animalAvailability.name
                           }
                           readOnly="readOnly"
@@ -347,7 +347,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.animalNumber !=
+                    {data.MarketPremisesInfoSection.animalNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
@@ -356,7 +356,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection.animalNumber
+                            data.MarketPremisesInfoSection.animalNumber
                           }
                           readOnly="readOnly"
                         />
@@ -365,11 +365,11 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection.PremisesAnimal
+                    {data.MarketPremisesInfoSection.PremisesAnimal
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
-                        {data.ResidentialPremisesInfoSection.PremisesAnimal.map(
+                        {data.MarketPremisesInfoSection.PremisesAnimal.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -386,7 +386,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection.vaccinationProof !=
+                    {data.MarketPremisesInfoSection.vaccinationProof !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -397,7 +397,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection.vaccinationProof
+                            data.MarketPremisesInfoSection.vaccinationProof
                               .name
                           }
                           readOnly="readOnly"
@@ -407,7 +407,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
                   </div>
-                  {data.ResidentialPremisesInfoSection.animalSpaceCondition !=
+                  {data.MarketPremisesInfoSection.animalSpaceCondition !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -418,7 +418,7 @@ const ResidentialView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.ResidentialPremisesInfoSection
+                          data.MarketPremisesInfoSection
                             .animalSpaceCondition.name
                         }
                         readOnly="readOnly"
@@ -1842,4 +1842,4 @@ const ResidentialView = ({ data }) => {
   );
 };
 
-export default ResidentialView;
+export default MarketView;

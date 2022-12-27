@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const ResidentialView = ({ data }) => {
+const HospitalityView = ({ data }) => {
   const router = useRouter();
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/residential-view`, {
+      const response = await axios.post(`/api/v1/data/hospitality-view`, {
         id: id,
       });
 
@@ -23,11 +23,11 @@ const ResidentialView = ({ data }) => {
       <div className="row">
         <div className="col-12">
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 className="mb-sm-0">RESIDENTIAL</h4>
+            <h4 className="mb-sm-0">HOSPITALITY</h4>
             <div className="page-title-right">
               <ol className="breadcrumb m-0">
                 <li className="breadcrumb-item">
-                  <a href="javascript: void(0);">Residential list</a>
+                  <a href="javascript: void(0);">Hospitality list</a>
                 </li>
                 <li className="breadcrumb-item active">Single inspection</li>
               </ol>
@@ -150,7 +150,7 @@ const ResidentialView = ({ data }) => {
                 <div className="col-sm">
                   <div>
                     <h5 className="fs-14 mb-0">
-                      RESIDENTIAL INFORMATION SECTION
+                      HOSPITALITY INFORMATION SECTION
                     </h5>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ResidentialPremisesInfoSection.toiletAvailability !=
+                    {data.HospitalityPremisesInfoSection.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -177,7 +177,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .toiletAvailability.name
                           }
                           readOnly="readOnly"
@@ -186,7 +186,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.urinalAvailability !=
+                    {data.HospitalityPremisesInfoSection.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -197,7 +197,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .urinalAvailability.name
                           }
                           readOnly="readOnly"
@@ -206,7 +206,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.bathRoomAvailability !=
+                    {data.HospitalityPremisesInfoSection.bathRoomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -217,7 +217,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .bathRoomAvailability.name
                           }
                           readOnly="readOnly"
@@ -226,7 +226,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.drainsAvailability !=
+                    {data.HospitalityPremisesInfoSection.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -237,7 +237,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .drainsAvailability.name
                           }
                           readOnly="readOnly"
@@ -246,8 +246,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityResidential !=
+                    {data.HospitalityPremisesInfoSection
+                      .approvedHandwashingFacilityAvailabilityHospitality !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -258,8 +258,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityResidential
+                            data.HospitalityPremisesInfoSection
+                              .approvedHandwashingFacilityAvailabilityHospitality
                               .name
                           }
                           readOnly="readOnly"
@@ -268,7 +268,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.householdNumber !=
+                    {data.HospitalityPremisesInfoSection.householdNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -279,7 +279,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection.householdNumber
+                            data.HospitalityPremisesInfoSection.householdNumber
                           }
                           readOnly="readOnly"
                         />
@@ -287,7 +287,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.maleOccupantNumber !=
+                    {data.HospitalityPremisesInfoSection.maleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -298,7 +298,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .maleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -307,7 +307,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.femaleOccupantNumber !=
+                    {data.HospitalityPremisesInfoSection.femaleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -318,7 +318,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .femaleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -327,7 +327,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.animalAvailability !=
+                    {data.HospitalityPremisesInfoSection.animalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -338,7 +338,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection
+                            data.HospitalityPremisesInfoSection
                               .animalAvailability.name
                           }
                           readOnly="readOnly"
@@ -347,7 +347,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.animalNumber !=
+                    {data.HospitalityPremisesInfoSection.animalNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
@@ -356,7 +356,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection.animalNumber
+                            data.HospitalityPremisesInfoSection.animalNumber
                           }
                           readOnly="readOnly"
                         />
@@ -365,11 +365,11 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection.PremisesAnimal
+                    {data.HospitalityPremisesInfoSection.PremisesAnimal
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
-                        {data.ResidentialPremisesInfoSection.PremisesAnimal.map(
+                        {data.HospitalityPremisesInfoSection.PremisesAnimal.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -386,7 +386,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection.vaccinationProof !=
+                    {data.HospitalityPremisesInfoSection.vaccinationProof !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -397,7 +397,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ResidentialPremisesInfoSection.vaccinationProof
+                            data.HospitalityPremisesInfoSection.vaccinationProof
                               .name
                           }
                           readOnly="readOnly"
@@ -407,7 +407,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
                   </div>
-                  {data.ResidentialPremisesInfoSection.animalSpaceCondition !=
+                  {data.HospitalityPremisesInfoSection.animalSpaceCondition !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -418,7 +418,7 @@ const ResidentialView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.ResidentialPremisesInfoSection
+                          data.HospitalityPremisesInfoSection
                             .animalSpaceCondition.name
                         }
                         readOnly="readOnly"
@@ -1842,4 +1842,4 @@ const ResidentialView = ({ data }) => {
   );
 };
 
-export default ResidentialView;
+export default HospitalityView;
