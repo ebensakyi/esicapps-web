@@ -289,10 +289,10 @@ const Header = () => {
                 </a>
                 <div className="collapse menu-dropdown" id="data">
                   <ul className="nav nav-sm flex-column">
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#Residential"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -302,16 +302,16 @@ const Header = () => {
                         {" "}
                         Residential
                       </a>
-                      <div class="collapse menu-dropdown" id="Residential">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="Residential">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/residential?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/residential?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -322,10 +322,10 @@ const Header = () => {
                       </div>
                     </li>
 
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#eatery"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -335,16 +335,16 @@ const Header = () => {
                         {" "}
                         Eatery
                       </a>
-                      <div class="collapse menu-dropdown" id="eatery">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="eatery">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/eatery?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/eatery?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -355,10 +355,10 @@ const Header = () => {
                       </div>
                     </li>
 
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#hospitality"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -368,16 +368,16 @@ const Header = () => {
                         {" "}
                         Hospitality
                       </a>
-                      <div class="collapse menu-dropdown" id="hospitality">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="hospitality">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/hospitality?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/hospitality?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -387,10 +387,10 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#health"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -400,16 +400,16 @@ const Header = () => {
                         {" "}
                         Health
                       </a>
-                      <div class="collapse menu-dropdown" id="health">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="health">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/health?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/health?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -419,10 +419,10 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#institution"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -432,16 +432,16 @@ const Header = () => {
                         {" "}
                         Institution
                       </a>
-                      <div class="collapse menu-dropdown" id="institution">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="institution">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/institution?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/institution?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -451,10 +451,10 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#industry"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -464,16 +464,16 @@ const Header = () => {
                         {" "}
                         Industry
                       </a>
-                      <div class="collapse menu-dropdown" id="industry">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="industry">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/industry?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/industry?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -483,10 +483,10 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#market"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -496,16 +496,16 @@ const Header = () => {
                         {" "}
                         Market
                       </a>
-                      <div class="collapse menu-dropdown" id="market">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="market">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/market?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/market?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
@@ -515,10 +515,10 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#sanitary"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -528,16 +528,16 @@ const Header = () => {
                         {" "}
                         Sanitary
                       </a>
-                      <div class="collapse menu-dropdown" id="sanitary">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="sanitary">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <Link href="/data/sanitary?published=1">
                               <a className="nav-link" data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link href="/data/sanitary?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
