@@ -11,3 +11,8 @@ npx prisma generate
 sudo npm run build
 pm2 delete dashboard.esicapps.org
 pm2 start npm --name dashboard.esicapps.org -- run start
+
+
+
+
+1. Check for null

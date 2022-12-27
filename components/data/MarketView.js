@@ -142,7 +142,7 @@ const MarketView = ({ data }) => {
         </div>
       </div>
 
-      <div className="row">
+      {/* <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
             <div className="col-xl-12">
@@ -154,14 +154,7 @@ const MarketView = ({ data }) => {
                     </h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
+             
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -430,10 +423,9 @@ const MarketView = ({ data }) => {
                 </div>
               </div>
             </div>
-            {/* end col */}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="row">
         <div className="col-lg-12">

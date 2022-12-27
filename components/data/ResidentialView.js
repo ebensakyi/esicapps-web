@@ -6,12 +6,13 @@ const ResidentialView = ({ data }) => {
 
   const publish = async (id) => {
     try {
+      console.log("cclecked");
       const response = await axios.post(`/api/v1/data/residential-view`, {
         id: id,
       });
-
-      if (response.statusCode == 200) {
-        router.push("/users");
+console.log(response);
+      if (response.status == 200) {
+        router.push("/data/residential?published=0");
       }
     } catch (error) {
       console.log(error);
@@ -1458,36 +1459,45 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Grey Water Disposal
-                      </label>
-                      {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
-                        (x) => (
+                    {data.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
+                    0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Grey Water Disposal
+                        </label>
+                        {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.GreyWaterDisposal.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.PremisesToiletType.length != 0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Toilet Type</label>
+                        {data.LiquidWasteSection.PremisesToiletType.map((x) => (
                           <input
                             key={x.id}
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={x.GreyWaterDisposal.name}
+                            value={x.ToiletType.name}
                             readOnly="readOnly"
                           />
-                        )
-                      )}
-                    </div>{" "}
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">Toilet Type</label>
-                      {data.LiquidWasteSection.PremisesToiletType.map((x) => (
-                        <input
-                          key={x.id}
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.ToiletType.name}
-                          readOnly="readOnly"
-                        />
-                      ))}
-                    </div>{" "}
+                        ))}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1531,77 +1541,100 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Service Provider Registration
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection
-                            .wasteServiceProviderRegistration.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Collector Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={data.SolidWasteSection.wasteCollectorName}
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Sorting Availability
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection.wasteSortingAvailability.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Approved Waste Storage Receptacle
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection.approvedWasteStorageReceptacle
-                            .name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Adequate Waste Storage Receptacle
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection.adequateWasteStorageReceptacle
-                            .name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
+                    {data.SolidWasteSection.wasteServiceProviderRegistration !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Service Provider Registration
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection
+                              .wasteServiceProviderRegistration.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.wasteCollectorName != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Collector Name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.SolidWasteSection.wasteCollectorName}
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.wasteSortingAvailability != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Sorting Availability
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection.wasteSortingAvailability.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.approvedWasteStorageReceptacle !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Approved Waste Storage Receptacle
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection
+                              .approvedWasteStorageReceptacle.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.adequateWasteStorageReceptacle !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Adequate Waste Storage Receptacle
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection
+                              .adequateWasteStorageReceptacle.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     {data.SolidWasteSection.PremisesWasteCollection.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">

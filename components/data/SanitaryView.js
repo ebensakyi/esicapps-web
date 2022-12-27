@@ -141,7 +141,7 @@ const SanitaryView = ({ data }) => {
           </div>
         </div>
       </div>
-
+{/* 
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -154,14 +154,7 @@ const SanitaryView = ({ data }) => {
                     </h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
+               
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -430,10 +423,9 @@ const SanitaryView = ({ data }) => {
                 </div>
               </div>
             </div>
-            {/* end col */}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="row">
         <div className="col-lg-12">
@@ -1531,6 +1523,7 @@ const SanitaryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
+                  {data.SolidWasteSection.wasteServiceProviderRegistration != null ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Waste Service Provider Registration
@@ -1545,7 +1538,8 @@ const SanitaryView = ({ data }) => {
                         }
                         readOnly="readOnly"
                       />
-                    </div>
+                    </div>:<></>}
+                    {data.SolidWasteSection.wasteCollectorName != null ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Waste Collector Name
@@ -1557,7 +1551,8 @@ const SanitaryView = ({ data }) => {
                         value={data.SolidWasteSection.wasteCollectorName}
                         readOnly="readOnly"
                       />
-                    </div>
+                    </div>:<></>}
+                    {data.SolidWasteSection.wasteSortingAvailability != null ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Waste Sorting Availability
@@ -1571,7 +1566,9 @@ const SanitaryView = ({ data }) => {
                         }
                         readOnly="readOnly"
                       />
-                    </div>
+                    </div>:<></>}
+                    {data.SolidWasteSection.approvedWasteStorageReceptacle != null ?
+
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Approved Waste Storage Receptacle
@@ -1586,7 +1583,10 @@ const SanitaryView = ({ data }) => {
                         }
                         readOnly="readOnly"
                       />
-                    </div>
+                    </div>:<></>}
+
+                    {data.SolidWasteSection.adequateWasteStorageReceptacle != null ?
+
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Adequate Waste Storage Receptacle
@@ -1601,7 +1601,7 @@ const SanitaryView = ({ data }) => {
                         }
                         readOnly="readOnly"
                       />
-                    </div>
+                    </div>:<></>}
                     {data.SolidWasteSection.PremisesWasteCollection.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">

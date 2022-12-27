@@ -10,9 +10,11 @@ const post = async (req, res) => {
       id: req.body.id,
     }})
 
-    return res.status(200).json(data);
+     res.status(200).json();
 
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const get = async (req, res) => {
