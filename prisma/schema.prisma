@@ -1235,8 +1235,8 @@ model IndustryPremisesInfoSection {
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
   staffChangingRoomId                       Int?
-  manufacturedServices                      Int?
-  majorByProducts                           Int?
+  manufacturedServices                      String  @db.VarChar(255)
+  majorByProducts                           String   @db.VarChar(255)
   numberWorkers                             Int?
   byProductsStorageAreaCondId               Int?
   deleted                                   Int?       @default(0)

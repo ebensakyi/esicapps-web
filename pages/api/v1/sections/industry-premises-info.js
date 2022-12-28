@@ -3,6 +3,7 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
+    console.log(req.body);
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
@@ -10,50 +11,50 @@ const post = async (req, res) => {
       facilityName: req.body.facilityName,
       industryPremisesTypeId:
         req.body.industryPremisesTypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.industryPremisesTypeId),
       industryPremisesSubtypeId:
         req.body.industryPremisesSubtypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.industryPremisesSubtypeId),
       physicalStructureTypeId:
         req.body.physicalStructureTypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.physicalStructureTypeId),
 
       otherIndustryFacility:
         req.body.otherIndustryFacility == "null"
-          ? ""
+          ? null
           : Number(req.body.otherIndustryFacility),
 
       protectiveClothingId:
         req.body.protectiveClothingId == "null"
-          ? ""
+          ? null
           : Number(req.body.protectiveClothingId),
 
       productionRoomConditionId:
         req.body.productionRoomConditionId == "null"
-          ? ""
+          ? null
           : Number(req.body.productionRoomConditionId),
 
       flyScreenNetAvailabilityId:
         req.body.flyScreenNetAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.flyScreenNetAvailabilityId),
 
       storeRoomAvailabilityId:
         req.body.storeRoomAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.storeRoomAvailabilityId),
 
       medicalCertificateAvailabilityId:
         req.body.medicalCertificateAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.medicalCertificateAvailabilityId),
 
       toiletAvailabilityId:
         req.body.toiletAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.toiletAvailabilityId),
 
       urinalAvailabilityId:
@@ -75,24 +76,17 @@ const post = async (req, res) => {
 
       firstAidAvailabilityId:
         req.body.firstAidAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.firstAidAvailabilityId),
 
       staffChangingRoomId:
         req.body.staffChangingRoomId == "null"
           ? null
           : Number(req.body.staffChangingRoomId),
-      manufacturedServices:
-        req.body.manufacturedServices == "null"
-          ? null
-          : Number(req.body.manufacturedServices),
+      manufacturedServices: req.body.manufacturedServices,
 
-      majorByProducts:
-        req.body.majorByProducts == "null"
-          ? null
-          : Number(req.body.majorByProducts),
+      majorByProducts: req.body.majorByProducts,
 
-    
       numberWorkers:
         req.body.numberWorkers == "null"
           ? null
@@ -128,4 +122,3 @@ export default (req, res) => {
     ? get(req, res)
     : res.status(404).send("");
 };
-
