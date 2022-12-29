@@ -112,7 +112,7 @@ const post = async (req, res) => {
     };
 
     // console.log(data);
-    const response = await prisma.eateryPremisesInfoSection.create({ data });
+    const response = await prisma.marketPremisesInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {

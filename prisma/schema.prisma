@@ -869,6 +869,7 @@ model BasicInfoSection {
   respondentName          String                 @db.VarChar(255)
   respondentPhoneNumber   String                 @db.VarChar(255)
   respondentDesignationId Int
+  imagePath               String ?                @db.VarChar(255)
   deleted                 Int?                   @default(0)
   createdAt               DateTime               @default(now())
   updatedAt               DateTime               @updatedAt
@@ -1235,8 +1236,8 @@ model IndustryPremisesInfoSection {
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
   staffChangingRoomId                       Int?
-  manufacturedServices                      String  @db.VarChar(255)
-  majorByProducts                           String   @db.VarChar(255)
+  manufacturedServices                      String     @db.VarChar(255)
+  majorByProducts                           String     @db.VarChar(255)
   numberWorkers                             Int?
   byProductsStorageAreaCondId               Int?
   deleted                                   Int?       @default(0)
@@ -1295,63 +1296,68 @@ model LicencePermitSection {
 }
 
 model WaterSection {
-  id                                 String                         @id @db.VarChar(255)
-  inspectionId                       String                         @unique @db.VarChar(255)
+  id                                 String @id @db.VarChar(255)
+  inspectionId                       String @unique @db.VarChar(255)
   userId                             Int
   waterSourceConditionId             Int?
   waterStorageConditionId            Int?
   waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
-  rating                             Int
-  deleted                            Int?                           @default(0)
-  createdAt                          DateTime                       @default(now())
-  updatedAt                          DateTime                       @updatedAt
-  PremisesDrinkingWaterSources       PremisesDrinkingWaterSources[]
-  PremisesWaterSources               PremisesWaterSources[]
-  PremisesWaterStorage               PremisesWaterStorage[]
-  PremisesWaterSupply                PremisesWaterSupply[]
-  PremisesWaterTreatmentType         PremisesWaterTreatmentType[]
-  Inspection                         Inspection                     @relation(fields: [inspectionId], references: [id])
-  safeDistanceWaterStorageSanitary   YesNo?                         @relation("safeDistanceWaterStorageSanitary", fields: [safeDistanceWaterStorageSanitaryId], references: [id])
-  User                               User                           @relation(fields: [userId], references: [id])
-  WaterFlowFrequency                 WaterFlowFrequency?            @relation(fields: [waterFlowFrequencyId], references: [id])
-  waterSourceCondition               SafeUnsafe?                    @relation(fields: [waterSourceConditionId], references: [id])
-  waterStorageConditionSafe          YesNo?                         @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
+  imagePath                          String? @db.VarChar(255)
+
+  rating                           Int
+  deleted                          Int?                           @default(0)
+  createdAt                        DateTime                       @default(now())
+  updatedAt                        DateTime                       @updatedAt
+  PremisesDrinkingWaterSources     PremisesDrinkingWaterSources[]
+  PremisesWaterSources             PremisesWaterSources[]
+  PremisesWaterStorage             PremisesWaterStorage[]
+  PremisesWaterSupply              PremisesWaterSupply[]
+  PremisesWaterTreatmentType       PremisesWaterTreatmentType[]
+  Inspection                       Inspection                     @relation(fields: [inspectionId], references: [id])
+  safeDistanceWaterStorageSanitary YesNo?                         @relation("safeDistanceWaterStorageSanitary", fields: [safeDistanceWaterStorageSanitaryId], references: [id])
+  User                             User                           @relation(fields: [userId], references: [id])
+  WaterFlowFrequency               WaterFlowFrequency?            @relation(fields: [waterFlowFrequencyId], references: [id])
+  waterSourceCondition             SafeUnsafe?                    @relation(fields: [waterSourceConditionId], references: [id])
+  waterStorageConditionSafe        YesNo?                         @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
 }
 
 model LiquidWasteSection {
-  id                            String                          @id @db.VarChar(255)
-  inspectionId                  String                          @unique @db.VarChar(255)
-  userId                        Int
-  numberToiletSeats             Int?
-  numberUrinalSeats             Int?
-  toiletAdequacyId              Int?
-  urinalAdequacyId              Int?
-  bathroomAdequacyId            Int?
-  separateStaffUrinalId         Int?
-  availToiletFaciltyMgtId       Int?
-  toiletGenderSensivityId       Int?
-  urinalGenderSensivityId       Int?
-  toiletPitPositionId           Int?
-  toiletDisabilityFriendlyId    Int?
-  urinalDisabilityFriendlyId    Int?
-  stagnationEvidenceId          Int?
-  drainsConditionId             Int?
-  analCleansingMaterialMgtId    Int?
-  effluentManagementReportId    Int?
-  publicBathRoomConditionId     Int?
-  areaSeweredId                 Int?
-  facilityConnectedSewerId      Int?
-  numberUrinalCubicle           Int?
-  urinalCubicleConditionId      Int?
-  toiletConditionId             Int?
-  toiletDischargeId             Int?
-  containmentEmptiedId          Int?
-  sewerSystemId                 Int?
-  wasteWaterContainmentId       Int?
-  easeYourselfWhereId           Int?
-  desiltingFrequencyId          Int?
-  rating                        Int?
+  id                         String @id @db.VarChar(255)
+  inspectionId               String @unique @db.VarChar(255)
+  userId                     Int
+  numberToiletSeats          Int?
+  numberUrinalSeats          Int?
+  toiletAdequacyId           Int?
+  urinalAdequacyId           Int?
+  bathroomAdequacyId         Int?
+  separateStaffUrinalId      Int?
+  availToiletFaciltyMgtId    Int?
+  toiletGenderSensivityId    Int?
+  urinalGenderSensivityId    Int?
+  toiletPitPositionId        Int?
+  toiletDisabilityFriendlyId Int?
+  urinalDisabilityFriendlyId Int?
+  stagnationEvidenceId       Int?
+  drainsConditionId          Int?
+  analCleansingMaterialMgtId Int?
+  effluentManagementReportId Int?
+  publicBathRoomConditionId  Int?
+  areaSeweredId              Int?
+  facilityConnectedSewerId   Int?
+  numberUrinalCubicle        Int?
+  urinalCubicleConditionId   Int?
+  toiletConditionId          Int?
+  toiletDischargeId          Int?
+  containmentEmptiedId       Int?
+  sewerSystemId              Int?
+  wasteWaterContainmentId    Int?
+  easeYourselfWhereId        Int?
+  desiltingFrequencyId       Int?
+  rating                     Int?
+  imagePath1                  String? @db.VarChar(255)
+  imagePath2                  String? @db.VarChar(255)
+
   deleted                       Int?                            @default(0)
   createdAt                     DateTime                        @default(now())
   updatedAt                     DateTime                        @updatedAt
@@ -1399,8 +1405,8 @@ model LiquidWasteSection {
 }
 
 model SolidWasteSection {
-  id                                 String                           @id @db.VarChar(255)
-  inspectionId                       String                           @unique @db.VarChar(255)
+  id                                 String  @id @db.VarChar(255)
+  inspectionId                       String  @unique @db.VarChar(255)
   userId                             Int
   wasteServiceProviderRegistrationId Int?
   wasteCollectorName                 String?
@@ -1415,21 +1421,23 @@ model SolidWasteSection {
   wasteProviderAccredittedId         Int?
   containerNumber                    Int?
   rating                             Int?
-  deleted                            Int?                             @default(0)
-  createdAt                          DateTime                         @default(now())
-  updatedAt                          DateTime                         @updatedAt
-  PremisesHazardousWasteDisposal     PremisesHazardousWasteDisposal[]
-  PremisesWasteCollection            PremisesWasteCollection[]
-  PremisesWasteReceptacle            PremisesWasteReceptacle[]
-  adequateWasteStorageReceptacle     YesNo?                           @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
-  approvedWasteStorageReceptacle     YesNo?                           @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
-  Inspection                         Inspection                       @relation(fields: [inspectionId], references: [id])
-  User                               User                             @relation(fields: [userId], references: [id])
-  wasteCollectionFrequency           WasteCollectionFrequency?        @relation(fields: [wasteCollectionFrequencyId], references: [id])
-  wastePaymentEvidence               YesNo?                           @relation("wastePaymentEvidence", fields: [wastePaymentEvidenceId], references: [id])
-  wasteServiceProviderRegistration   YesNo?                           @relation("wasteServiceProviderRegistration", fields: [wasteServiceProviderRegistrationId], references: [id])
-  wasteSortingAvailability           YesNo?                           @relation("wasteSortingAvailability", fields: [wasteSortingAvailabilityId], references: [id])
-  wasteProviderAccreditted           YesNo?                           @relation("wasteProviderAccreditted", fields: [wasteProviderAccredittedId], references: [id])
+  imagePath                          String?  @db.VarChar(255)
+
+  deleted                          Int?                             @default(0)
+  createdAt                        DateTime                         @default(now())
+  updatedAt                        DateTime                         @updatedAt
+  PremisesHazardousWasteDisposal   PremisesHazardousWasteDisposal[]
+  PremisesWasteCollection          PremisesWasteCollection[]
+  PremisesWasteReceptacle          PremisesWasteReceptacle[]
+  adequateWasteStorageReceptacle   YesNo?                           @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
+  approvedWasteStorageReceptacle   YesNo?                           @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
+  Inspection                       Inspection                       @relation(fields: [inspectionId], references: [id])
+  User                             User                             @relation(fields: [userId], references: [id])
+  wasteCollectionFrequency         WasteCollectionFrequency?        @relation(fields: [wasteCollectionFrequencyId], references: [id])
+  wastePaymentEvidence             YesNo?                           @relation("wastePaymentEvidence", fields: [wastePaymentEvidenceId], references: [id])
+  wasteServiceProviderRegistration YesNo?                           @relation("wasteServiceProviderRegistration", fields: [wasteServiceProviderRegistrationId], references: [id])
+  wasteSortingAvailability         YesNo?                           @relation("wasteSortingAvailability", fields: [wasteSortingAvailabilityId], references: [id])
+  wasteProviderAccreditted         YesNo?                           @relation("wasteProviderAccreditted", fields: [wasteProviderAccredittedId], references: [id])
 
   WasteCollectionType     WasteCollectionType?     @relation(fields: [wasteCollectionTypeId], references: [id])
   UnservicedWasteDisposal UnservicedWasteDisposal? @relation(fields: [unservicedWasteDisposalId], references: [id])

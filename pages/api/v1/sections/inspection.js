@@ -14,7 +14,7 @@ const post = async (req, res) => {
     prevInspectionId:
       req.body.prevInspectionId == "null"
         ? ""
-        : Number(req.body.prevInspectionId),
+        : req.body.prevInspectionId,
     inspectionTypeId:
       req.body.inspectionTypeId == "null"
         ? null
