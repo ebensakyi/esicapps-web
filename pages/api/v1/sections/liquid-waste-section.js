@@ -35,7 +35,7 @@ const post = async (req, res) => {
       desiltingFrequencyId: req.body.desiltingFrequencyId == "null" ? null : Number(req.body.desiltingFrequencyId),
       stagnationEvidenceId: req.body.stagnationEvidenceId == "null" ? null : Number(req.body.stagnationEvidenceId),
       rating: req.body.rating == "null" ? null : Number(req.body.rating),
-
+      toiletHouseholdNumberId: req.body.toiletHouseholdNumberId == "null" ?null : Number(req.body.toiletHouseholdNumberId),
     };
 
 

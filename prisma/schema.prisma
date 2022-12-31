@@ -567,6 +567,7 @@ model ToiletHouseholdNumber {
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  YesNo     YesNo[]
 }
 
 model ToiletDischarge {
@@ -821,6 +822,9 @@ model YesNo {
   pharmacyCertAvailability                           LicencePermitSection[]           @relation("pharmacyCertAvailability")
   wasteProviderAccreditted                           SolidWasteSection[]              @relation("wasteProviderAccreditted")
   generalSanitaryCondition                           ConclusionSection[]              @relation("generalSanitaryCondition")
+
+  ToiletHouseholdNumber   ToiletHouseholdNumber @relation(fields: [toiletHouseholdNumberId], references: [id])
+  toiletHouseholdNumberId Int
 }
 
 model InspectionType {
@@ -869,7 +873,7 @@ model BasicInfoSection {
   respondentName          String                 @db.VarChar(255)
   respondentPhoneNumber   String                 @db.VarChar(255)
   respondentDesignationId Int
-  imagePath               String ?                @db.VarChar(255)
+  imagePath               String?                @db.VarChar(255)
   deleted                 Int?                   @default(0)
   createdAt               DateTime               @default(now())
   updatedAt               DateTime               @updatedAt
@@ -1296,8 +1300,8 @@ model LicencePermitSection {
 }
 
 model WaterSection {
-  id                                 String @id @db.VarChar(255)
-  inspectionId                       String @unique @db.VarChar(255)
+  id                                 String  @id @db.VarChar(255)
+  inspectionId                       String  @unique @db.VarChar(255)
   userId                             Int
   waterSourceConditionId             Int?
   waterStorageConditionId            Int?
@@ -1323,8 +1327,8 @@ model WaterSection {
 }
 
 model LiquidWasteSection {
-  id                         String @id @db.VarChar(255)
-  inspectionId               String @unique @db.VarChar(255)
+  id                         String  @id @db.VarChar(255)
+  inspectionId               String  @unique @db.VarChar(255)
   userId                     Int
   numberToiletSeats          Int?
   numberUrinalSeats          Int?
@@ -1355,8 +1359,8 @@ model LiquidWasteSection {
   easeYourselfWhereId        Int?
   desiltingFrequencyId       Int?
   rating                     Int?
-  imagePath1                  String? @db.VarChar(255)
-  imagePath2                  String? @db.VarChar(255)
+  imagePath1                 String? @db.VarChar(255)
+  imagePath2                 String? @db.VarChar(255)
 
   deleted                       Int?                            @default(0)
   createdAt                     DateTime                        @default(now())
@@ -1421,7 +1425,7 @@ model SolidWasteSection {
   wasteProviderAccredittedId         Int?
   containerNumber                    Int?
   rating                             Int?
-  imagePath                          String?  @db.VarChar(255)
+  imagePath                          String? @db.VarChar(255)
 
   deleted                          Int?                             @default(0)
   createdAt                        DateTime                         @default(now())
