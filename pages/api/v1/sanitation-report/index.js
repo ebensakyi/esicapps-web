@@ -2,7 +2,8 @@ import formidable from "formidable";
 import nextConnect from "next-connect";
 import fs from "fs";
 import { nanoid } from "nanoid";
-import AWS from 'aws-sdk';
+import AWS from "aws-sdk";
+import moment from "moment";
 
 import prisma from "../../../../prisma/MyPrismaClient";
 
@@ -15,7 +16,6 @@ export const config = {
 const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
-
     form.parse(req, async function (err, fields, files) {
       // console.log("FORM==>", files);
       //  console.log("fields==>", fields);
@@ -42,7 +42,6 @@ const post = async (req, res) => {
   }
 };
 
-
 const saveFile = async (file) => {
   const imageFile = await file.nuisancePicture;
 
@@ -54,45 +53,45 @@ const saveFile = async (file) => {
   fs.writeFileSync(`./public/uploads/${fileName}`, data);
   // fs.unlinkSync(imageFile.filepath);
 
-   await uploadFile(fileName)
-
+  let fileUrl = await uploadFile(fileName);
+  if (fileUrl) {
+    fs.unlinkSync(imageFile.filepath);
+  }
   // return fileName;
 };
 
+const uploadFile = async (fileName) => {
+  // try {
 
-const uploadFile = async ( fileName) => {
-  console.log("FILENAME ", fileName);
-  try {
-      //let fileName = "/public/upload/zui_92NCU3HbHJApjQF2R.png"
-      AWS.config.update({
+  var now	= moment();
+  let prefix = now.format('YYYYMM');
 
-          accessKeyId: process.env.AWS_ACCESS_KEY,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-      });
+  console.log(prefix);
+  console.log(process.env.AWS_ACCESS_KEY);
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  });
 
+  var s3 = new AWS.S3();
 
-      var s3 = new AWS.S3();
+  var filePath = `./public/uploads/${fileName}`;
 
-      var filePath = `./public/upload/${fileName}`;
+  var params = {
+    Bucket: "sanitation-reporter-images",
+    Body: fs.createReadStream(filePath),
+    Key: prefix + "/" + fileName,
+  };
 
-      var params = {
-          Bucket: 'sanitation-reporter-images',
-          Body: fs.createReadStream(filePath),
-          Key: "userId" + "/" + fileName
-      };
+  let stored = await s3.upload(params).promise();
+  console.log("STORE ", stored);
 
-      let stored = await s3.upload(params).promise()
-      console.log("STORE ", stored);
-
-      return stored.Location
-
-
-  } catch (error) {
-      console.log("UploadFile Error ", error);
-      return error
-  }
-
-}
+  return stored.Location;
+  // } catch (error) {
+  //   console.log("UploadFile Error ", error);
+  //   return error;
+  // }
+};
 
 const get = async (req, res) => {
   try {
@@ -105,9 +104,6 @@ const get = async (req, res) => {
     console.log("Error: " + error);
   }
 };
-
-
-
 
 export default (req, res) => {
   req.method === "POST"
