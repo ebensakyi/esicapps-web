@@ -9,7 +9,7 @@ datasource db {
 
 model Inspection {
   id                             String                          @id @db.VarChar(255)
-  prevInspectionId               String?                         @db.VarChar(255)
+  prevInspectionId               String?                         @unique @db.VarChar(255)
   userId                         Int
   inspectionFormId               Int
   inspectionTypeId               Int
@@ -41,6 +41,10 @@ model Inspection {
   MarketPremisesInfoSection      MarketPremisesInfoSection?
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection?
   IndustryPremisesInfoSection    IndustryPremisesInfoSection?
+
+  prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
+
+  currentInspection Inspection? @relation("CurrentPreviousInspection")
 }
 
 model InspectionForm {
@@ -449,18 +453,19 @@ model Region {
 }
 
 model District {
-  id            Int             @id @default(autoincrement())
-  name          String          @db.VarChar(255)
-  abbrv         String          @db.VarChar(255)
-  deleted       Int?            @default(0)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  regionId      Int
-  Community     Community[]
-  Region        Region          @relation(fields: [regionId], references: [id])
-  ElectoralArea ElectoralArea[]
-  Messaging     Messaging[]
-  User          User[]
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  abbrv            String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  regionId         Int
+  Community        Community[]
+  Region           Region             @relation(fields: [regionId], references: [id])
+  ElectoralArea    ElectoralArea[]
+  Messaging        Messaging[]
+  User             User[]
+  SanitationReport SanitationReport[]
 }
 
 model ElectoralArea {
@@ -856,15 +861,16 @@ model Service {
 }
 
 model BasicInfoSection {
-  id                      String                 @id @db.VarChar(255)
-  inspectionId            String                 @unique @db.VarChar(255)
-  userId                  Int
-  zoneId                  Int?
-  communityId             Int?
-  community               String?                @db.VarChar(255)
-  ghanaPostGps            String?                @db.VarChar(255)
-  latitude                String                 @db.VarChar(255)
-  longitude               String                 @db.VarChar(255)
+  id           String  @id @db.VarChar(255)
+  inspectionId String  @unique @db.VarChar(255)
+  userId       Int
+  zoneId       Int?
+  communityId  Int?
+  community    String? @db.VarChar(255)
+  ghanaPostGps String? @db.VarChar(255)
+  latitude     Decimal @db.Decimal(11, 8)
+  longitude    Decimal @db.Decimal(11, 8)
+
   accuracy                String                 @db.VarChar(255)
   geom                    Json?
   respondentName          String                 @db.VarChar(255)
@@ -1403,7 +1409,7 @@ model LiquidWasteSection {
   PremisesExcretaDisposalMethod PremisesExcretaDisposalMethod[]
   PremisesGreyWaterDisposal     PremisesGreyWaterDisposal[]
   PremisesToiletType            PremisesToiletType[]
-  ToiletHouseholdNumber         ToiletHouseholdNumber ?          @relation(fields: [toiletHouseholdNumberId], references: [id])
+  ToiletHouseholdNumber         ToiletHouseholdNumber?          @relation(fields: [toiletHouseholdNumberId], references: [id])
   toiletHouseholdNumberId       Int
 }
 
@@ -1729,24 +1735,31 @@ model Picture {
 }
 
 model SanitationReport {
-  id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
-  phoneNumber String   @db.VarChar(255)
-  image       String   @db.VarChar(255)
-  gps         String   @db.VarChar(255)
-  region      String   @db.VarChar(255)
-  district    String   @db.VarChar(255)
-  deleted     Int?     @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          Int     @id @default(autoincrement())
+  fullName    String  @db.VarChar(255)
+  phoneNumber String? @db.VarChar(255)
+  email       String? @db.VarChar(255)
+  image       String  @db.VarChar(255)
+
+  ReportType ReportType @relation(fields: [reportTypeId], references: [id])
+
+  description String @db.VarChar(255)
+
+  latitude     Decimal  @db.Decimal(11, 8)
+  longitude    Decimal  @db.Decimal(11, 8)
+  deleted      Int?     @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  District     District @relation(fields: [districtId], references: [id])
+  districtId   Int
+  reportTypeId Int
 }
 
-
-
 model ReportType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  SanitationReport SanitationReport[]
 }
