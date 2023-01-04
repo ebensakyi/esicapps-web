@@ -5,22 +5,23 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
-    const subdistrict = await prisma.subdistrict.create({ data });
+    const reportType = await prisma.reportType.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { subdistrict } });
+      .json({ statusCode: 1, message: "Data saved", data: { reportType } });
   } catch (error) {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "subdistrict prefix should be unique" });
+        .json({ statusCode: 0, message: "reportType should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const subdistrict = await prisma.subdistrict.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: subdistrict });
+    const reportType = await prisma.reportType.findMany({ where: { deleted: 0 } });
+    return res.status(200).json( reportType);
+
   } catch (error) {
     console.log("Error: " + error);
   }

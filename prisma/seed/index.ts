@@ -70,6 +70,7 @@ import { inspectionFormNuisances } from "./inspectionFormNuisances";
 
 import {messageType} from "./messageType";
 import {sendingType} from "./sendingType";
+import {reportType} from "./reportType";
 
 async function main() {
 
@@ -288,9 +289,9 @@ async function main() {
   await prisma.community.createMany({
     data: community,
   });
- // await prisma.community.createMany({
-  //   data: community,
-  // });
+ await prisma.reportType.createMany({
+    data: reportType,
+  });
 }
 
 main()

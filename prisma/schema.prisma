@@ -562,12 +562,12 @@ model ToiletPitPosition {
 }
 
 model ToiletHouseholdNumber {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  YesNo     YesNo[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  LiquidWasteSection LiquidWasteSection[]
 }
 
 model ToiletDischarge {
@@ -822,9 +822,6 @@ model YesNo {
   pharmacyCertAvailability                           LicencePermitSection[]           @relation("pharmacyCertAvailability")
   wasteProviderAccreditted                           SolidWasteSection[]              @relation("wasteProviderAccreditted")
   generalSanitaryCondition                           ConclusionSection[]              @relation("generalSanitaryCondition")
-
-  ToiletHouseholdNumber   ToiletHouseholdNumber @relation(fields: [toiletHouseholdNumberId], references: [id])
-  toiletHouseholdNumberId Int
 }
 
 model InspectionType {
@@ -1406,6 +1403,8 @@ model LiquidWasteSection {
   PremisesExcretaDisposalMethod PremisesExcretaDisposalMethod[]
   PremisesGreyWaterDisposal     PremisesGreyWaterDisposal[]
   PremisesToiletType            PremisesToiletType[]
+  ToiletHouseholdNumber         ToiletHouseholdNumber ?          @relation(fields: [toiletHouseholdNumberId], references: [id])
+  toiletHouseholdNumberId       Int
 }
 
 model SolidWasteSection {
@@ -1740,4 +1739,14 @@ model SanitationReport {
   deleted     Int?     @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+
+
+model ReportType {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
