@@ -18,7 +18,7 @@ const post = async (req, res) => {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, files) {
       // console.log("FORM==>", files);
-      //  console.log("fields==>", fields);
+        console.log("fields==>", fields);
 
       let image = await saveFile(files);
       const data = {
@@ -35,7 +35,7 @@ const post = async (req, res) => {
       const sanitationReport = await prisma.sanitationReport.create({ data });
 
       //Move to payment
-      return res.status(200).json({});
+      return res.status(200).json();
     });
   } catch (error) {
     console.log(error);

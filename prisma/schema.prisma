@@ -1736,7 +1736,7 @@ model Picture {
 
 model SanitationReport {
   id          Int     @id @default(autoincrement())
-  fullName    String?  @db.VarChar(255)
+  fullName    String? @db.VarChar(255)
   phoneNumber String? @db.VarChar(255)
   email       String? @db.VarChar(255)
   image       String  @db.VarChar(255)
@@ -1745,8 +1745,8 @@ model SanitationReport {
 
   description String @db.VarChar(255)
 
-  latitude     Decimal  @db.Decimal(11, 8)
-  longitude    Decimal  @db.Decimal(11, 8)
+  latitude     Decimal? @db.Decimal(11, 8)
+  longitude    Decimal? @db.Decimal(11, 8)
   deleted      Int?     @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
