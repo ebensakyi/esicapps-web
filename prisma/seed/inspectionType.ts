@@ -4,5 +4,7 @@ export const inspectionType = [
   },
   {
     name: "Reinspection",
+  }, {
+    name: "Followup",
   },
 ];

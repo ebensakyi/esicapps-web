@@ -2,7 +2,7 @@ import prisma from "../../../../prisma/MyPrismaClient";
 import moment from "moment";
 
 const post = async (req, res) => {
-  try {
+ // try {
 
   const data = {
     id: req.body.inspectionId,
@@ -13,7 +13,7 @@ const post = async (req, res) => {
         : Number(req.body.inspectionFormId),
     prevInspectionId:
       req.body.prevInspectionId == "null"
-        ? ""
+        ? null
         : req.body.prevInspectionId,
     inspectionTypeId:
       req.body.inspectionTypeId == "null"
@@ -30,13 +30,13 @@ const post = async (req, res) => {
   const response = await prisma.inspection.create({ data });
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
-    } catch (error) {
-      console.log("Error: " + error);
-      if (error.code === "P2002")
-        return res
-          .status(400)
-          .json({ statusCode: 0, message: "dataVersion s should be unique" });
-    }
+    // } catch (error) {
+    //   console.log("Error: " + error);
+    //   if (error.code === "P2002")
+    //     return res
+    //       .status(400)
+    //       .json({ statusCode: 0, message: "dataVersion s should be unique" });
+    // }
 };
 
 
