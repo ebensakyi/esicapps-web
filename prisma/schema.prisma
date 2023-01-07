@@ -44,7 +44,7 @@ model Inspection {
 
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
-  currentInspection Inspection? @relation("CurrentPreviousInspection")
+  currentInspection  Inspection? @relation("CurrentPreviousInspection")
 }
 
 model InspectionForm {
