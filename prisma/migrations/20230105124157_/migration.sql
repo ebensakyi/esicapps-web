@@ -1493,18 +1493,19 @@ CREATE TABLE "Picture" (
 -- CreateTable
 CREATE TABLE "SanitationReport" (
     "id" SERIAL NOT NULL,
+    "fcmId" VARCHAR(255),
     "fullName" VARCHAR(255),
     "phoneNumber" VARCHAR(255),
     "email" VARCHAR(255),
     "image" VARCHAR(255) NOT NULL,
-    "description" VARCHAR(255) NOT NULL,
-    "latitude" DECIMAL(11,8) NOT NULL,
-    "longitude" DECIMAL(11,8) NOT NULL,
+    "districtId" INTEGER,
+    "reportTypeId" INTEGER,
+    "description" VARCHAR(255),
+    "latitude" DECIMAL(11,8),
+    "longitude" DECIMAL(11,8),
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "districtId" INTEGER NOT NULL,
-    "reportTypeId" INTEGER NOT NULL,
 
     CONSTRAINT "SanitationReport_pkey" PRIMARY KEY ("id")
 );
@@ -2358,10 +2359,10 @@ ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_
 ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;

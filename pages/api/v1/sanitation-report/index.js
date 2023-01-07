@@ -18,13 +18,14 @@ const post = async (req, res) => {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, files) {
       // console.log("FORM==>", files);
-        console.log("fields==>", fields);
 
-      let image = await saveFile(files);
+     let image = await saveFile(files);
       const data = {
+        fcmId: fields.fcmId,
         fullName: fields.fullName,
         email: fields.email,
         phoneNumber: fields.phoneNumber,
+        description: fields.description,
         districtId: Number(fields.district),
         latitude: Number(fields.latitude),
         longitude: Number(fields.longitude),
@@ -32,13 +33,16 @@ const post = async (req, res) => {
         image: image,
       };
 
-      const sanitationReport = await prisma.sanitationReport.create({ data });
+      console.log(data);
+
+     const sanitationReport = await prisma.sanitationReport.create({ data });
 
       //Move to payment
       return res.status(200).json();
     });
   } catch (error) {
     console.log(error);
+    return res.status(400).json();
   }
 };
 
@@ -54,20 +58,20 @@ const saveFile = async (file) => {
   // fs.unlinkSync(imageFile.filepath);
 
   let fileUrl = await uploadFile(fileName);
-  if (fileUrl) {
-    fs.unlinkSync(imageFile.filepath);
-  }
-  // return fileName;
+ // if (fileUrl) {
+  console.log(imageFile.filepath);
+    fs.unlinkSync(`./public/uploads/${fileName}`);
+ // }
+return fileName;
 };
 
 const uploadFile = async (fileName) => {
-  // try {
+   try {
 
   var now	= moment();
   let prefix = now.format('YYYYMM');
 
-  console.log(prefix);
-  console.log(process.env.AWS_ACCESS_KEY);
+ 
   AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -84,13 +88,13 @@ const uploadFile = async (fileName) => {
   };
 
   let stored = await s3.upload(params).promise();
-  console.log("STORE ", stored);
+  console.log("STORE ", stored.Location);
 
   return stored.Location;
-  // } catch (error) {
-  //   console.log("UploadFile Error ", error);
-  //   return error;
-  // }
+  } catch (error) {
+    console.log("UploadFile Error ", error);
+    return error;
+  }
 };
 
 const get = async (req, res) => {
