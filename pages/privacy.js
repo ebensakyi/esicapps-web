@@ -54,7 +54,7 @@ export default function Privacy() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="text-center mt-sm-5 mb-4 text-white-50">
-                    <div>
+                    {/* <div>
                       <a href="index.html" className="d-inline-block auth-logo">
                         <img
                           src="assets/images/logo-light.png"
@@ -62,7 +62,7 @@ export default function Privacy() {
                           height="20"
                         />
                       </a>
-                    </div>
+                    </div> */}
                     <p className="mt-3 fs-15 fw-medium">ESICApps</p>
                   </div>
                 </div>
@@ -72,8 +72,7 @@ export default function Privacy() {
 
                 <p>
                   Our app, ESICApps, values the privacy and security of our
-                  users. This Personal and Sensitive User Data Policy (the
-                  "Policy") explains how we collect, use, and protect the
+                  users. This Personal and Sensitive User Data Policy explains how we collect, use, and protect the
                   personal and sensitive data of our users.
                 </p>
 
