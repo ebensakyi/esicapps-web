@@ -42,7 +42,7 @@ export async function getServerSideProps(context) {
         (res) => res.json()
     );
 
-    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/district`).then(
+    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/district?token=${token}`).then(
         (res) => res.json()
     );
 

@@ -36,12 +36,12 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/user/user-type?token=${token}`
   ).then((res) => res.json());
 
-  const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/national`).then(
+  const users = await fetch(`${SERVER_BASE_URL}/api/v1/user/national?token=${token}`).then(
     (res) => res.json()
   );
 
   const regions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/region`
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
   ).then((res) => res.json());
 
   return {

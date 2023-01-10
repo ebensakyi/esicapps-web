@@ -1,5 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -33,8 +34,23 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const user = await prisma.user.findMany({ where: { deleted: 0  } });
-    return res.status(200).json( user);
+    let data = await verifyToken(req.query.token);
+
+    if (data.user.regionId == null) {
+      const user = await prisma.user.findMany({
+        where: {
+          deleted: 0,
+
+          id: { not: data.user.id },
+        },
+      });
+      return res.status(200).json(user);
+    } else {
+      const user = await prisma.user.findMany({
+        where: { deleted: 0, regionId: data.user.regionId },
+      });
+      return res.status(200).json(user);
+    }
   } catch (error) {
     console.log("Error: " + error);
   }
