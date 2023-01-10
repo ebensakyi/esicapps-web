@@ -46,6 +46,7 @@ const post = async (req, res) => {
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ statusCode: 0, message: "A server error occurred" });
   }
 };

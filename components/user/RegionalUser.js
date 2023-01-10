@@ -163,7 +163,7 @@ const RegionalUser = ({ users, userTypes, regions }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Regional
@@ -184,7 +184,7 @@ const RegionalUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
