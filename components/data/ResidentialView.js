@@ -6,11 +6,9 @@ const ResidentialView = ({ data }) => {
 
   const publish = async (id) => {
     try {
-      console.log("cclecked");
       const response = await axios.post(`/api/v1/data/residential-view`, {
         id: id,
       });
-console.log(response);
       if (response.status == 200) {
         router.push("/data/residential?published=0");
       }

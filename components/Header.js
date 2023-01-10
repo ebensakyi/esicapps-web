@@ -2,9 +2,10 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 
 const Header = () => {
-  let cookie = Cookies.get("token") 
+  let lv = Cookies.get("lvut1").split("??")[1];
+  let ut = Cookies.get("lvut2").split("??")[0];
 
-  console.log("COOKIE ",cookie);
+  // console.log("COOKIE ",lv,ut);
 
   return (
     <div>
@@ -53,57 +54,6 @@ const Header = () => {
               {/* App Search*/}
             </div>
             <div className="d-flex align-items-center">
-              {/* <div className="dropdown d-md-none topbar-head-dropdown header-item">
-                <button
-                  type="button"
-                  className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                  id="page-header-search-dropdown"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="bx bx-search fs-22" />
-                </button>
-                <div
-                  className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                  aria-labelledby="page-header-search-dropdown"
-                >
-                  <form className="p-3">
-                    <div className="form-group m-0">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search ..."
-                          aria-label="Recipient`s username"
-                        />
-                        <button className="btn btn-primary" type="submit">
-                          <i className="mdi mdi-magnify" />
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div> */}
-
-              {/* <div className="ms-1 header-item d-none d-sm-flex">
-                <button
-                  type="button"
-                  className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                  data-toggle="fullscreen"
-                >
-                  <i className="bx bx-fullscreen fs-22" />
-                </button>
-              </div> */}
-              {/* <div className="ms-1 header-item d-none d-sm-flex">
-                <button
-                  type="button"
-                  className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode"
-                >
-                  <i className="bx bx-moon fs-22" />
-                </button>
-              </div> */}
-
               <div className="dropdown ms-sm-3 header-item topbar-user">
                 <button
                   type="button"
@@ -140,38 +90,7 @@ const Header = () => {
                     <i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1" />
                     <span className="align-middle">Messages</span>
                   </a>
-                  {/* <a className="dropdown-item" href="apps-tasks-kanban.html">
-                    <i className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1" />
-                    <span className="align-middle">Taskboard</span>
-                  </a>
-                  <a className="dropdown-item" href="pages-faqs.html">
-                    <i className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1" />{" "}
-                    <span className="align-middle">Help</span>
-                  </a>
-                  <div className="dropdown-divider" />
-                  <a className="dropdown-item" href="pages-profile.html">
-                    <i className="mdi mdi-wallet text-muted fs-16 align-middle me-1" />{" "}
-                    <span className="align-middle">
-                      Balance : <b>$5971.67</b>
-                    </span>
-                  </a> */}
-                  {/* <a
-                    className="dropdown-item"
-                    href="pages-profile-settings.html"
-                  >
-                    <span className="badge bg-soft-success text-success mt-1 float-end">
-                      New
-                    </span>
-                    <i className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1" />{" "}
-                    <span className="align-middle">Settings</span>
-                  </a>
-                  <a
-                    className="dropdown-item"
-                    href="auth-lockscreen-basic.html"
-                  >
-                    <i className="mdi mdi-lock text-muted fs-16 align-middle me-1" />{" "}
-                    <span className="align-middle">Lock screen</span>
-                  </a> */}
+
                   <a className="dropdown-item" href="/auth/login">
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle" data-key="t-logout">
@@ -226,58 +145,6 @@ const Header = () => {
                   <i className="ri-home-2-line" />{" "}
                   <span data-key="t-dashboards">Dashboard</span>
                 </a>
-                {/* <div className="collapse menu-dropdown" id="sidebarDashboards">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <a
-                        href="dashboard-analytics.html"
-                        className="nav-link"
-                        data-key="t-analytics"
-                      >
-                        National{" "}
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="dashboard-crm.html"
-                        className="nav-link"
-                        data-key="t-crm"
-                      >
-                        {" "}
-                        Regional{" "}
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="index.html"
-                        className="nav-link"
-                        data-key="t-ecommerce"
-                      >
-                        {" "}
-                        MMDA{" "}
-                      </a>
-                    </li>
-                    {/* <li className="nav-item">
-                  <a
-                    href="dashboard-crypto.html"
-                    className="nav-link"
-                    data-key="t-crypto"
-                  >
-                    {" "}
-                    Crypto
-                  </a>
-                </li> 
-                <li className="nav-item">
-                  <a
-                    href="dashboard-projects.html"
-                    className="nav-link"
-                    data-key="t-projects"
-                  >
-                    Projects
-                  </a>
-                </li>*
-                  </ul>
-                </div> */}
               </li>{" "}
               {/* end Dashboard Menu */}
               <li className="nav-item">
@@ -552,62 +419,6 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    {/* <li className="nav-item">
-                      <Link href="/data/residential">
-                        <a className="nav-link" data-key="t-calendar">
-                          Residential
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/eatery">
-                        <a className="nav-link" data-key="t-chat">
-                          Eatery
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/hospitality">
-                        <a className="nav-link" data-key="t-mailbox">
-                          Hospitality
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/health">
-                        <a className="nav-link" data-key="t-mailbox">
-                          Health
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/institution">
-                        <a className="nav-link" data-key="t-mailbox">
-                          Institution
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/industry">
-                        <a className="nav-link" data-key="t-mailbox">
-                          Industry
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/market">
-                        <a className="nav-link" data-key="t-mailbox">
-                          Market
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/data/sanitary">
-                        <a className="nav-link" data-key="t-mailbox">
-                          Sanitary
-                        </a>
-                      </Link>
-                    </li> */}
                   </ul>
                 </div>
               </li>
@@ -705,273 +516,144 @@ const Header = () => {
                   <span data-key="t-authentication">Users</span>
                 </a>
                 <div className="collapse menu-dropdown" id="accounts">
-                  <ul className="nav nav-sm flex-column">
-                    {}
-                    <li className="nav-item">
+                  {ut == 1 ? (
+                 
+                      <ul className="nav nav-sm flex-column">
+                        <li className="nav-item">
+                          <Link href="/user/national">
+                            <a className="nav-link"> Add National User</a>
+                          </Link>
+                        </li>
 
-                      <Link href="/user/national">
-                        <a
-                          className="nav-link"
-                          // data-bs-toggle="collapse"
-                          // role="button"
-                          // aria-expanded="false"
-                          // aria-controls="sidebarSignIn"
-                          // data-key="t-signin"
-                        >
-                          {" "}
-                          Add National User
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/user/regional">
-                        <a
-                          className="nav-link"
-                          // data-bs-toggle="collapse"
-                          // role="button"
-                          // aria-expanded="false"
-                          // aria-controls="sidebarSignIn"
-                          // data-key="t-signin"
-                        >
-                          {" "}
-                          Add Regional User
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/user/district">
-                        <a
-                          href="/user/district"
-                          className="nav-link"
-                          // data-bs-toggle="collapse"
-                          // role="button"
-                          // aria-expanded="false"
-                          // aria-controls="sidebarSignIn"
-                          // data-key="t-signin"
-                        >
-                          {" "}
-                          Add MMDA User
-                        </a>
-                      </Link>
-                    </li>
-                    {/* <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Manage
-                      </a>
-                    </li> */}
-                  </ul>
+                        <li className="nav-item">
+                          <Link href="/user/regional">
+                            <a className="nav-link"> Add Regional User</a>
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link href="/user/district">
+                            <a href="/user/district" className="nav-link">
+                              {" "}
+                              Add MMDA User
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                 
+                  ) : (
+                    <></>
+                  )}
+                  {ut == 3 ? (
+                      <ul className="nav nav-sm flex-column">
+                        {/* <li className="nav-item">
+                          <Link href="/user/national">
+                            <a className="nav-link"> Add National User</a>
+                          </Link>
+                        </li> */}
+
+                        <li className="nav-item">
+                          <Link href="/user/regional">
+                            <a className="nav-link"> Add Regional User</a>
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link href="/user/district">
+                            <a href="/user/district" className="nav-link">
+                              {" "}
+                              Add MMDA User
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                  ) : (
+                    <></>
+                  )}
+                  {ut == 5 ? (
+                  
+                      <ul className="nav nav-sm flex-column">
+                        {/* <li className="nav-item">
+                          <Link href="/user/national">
+                            <a className="nav-link"> Add National User</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link href="/user/regional">
+                            <a className="nav-link"> Add Regional User</a>
+                          </Link>
+                        </li> */}
+
+                        <li className="nav-item">
+                          <Link href="/user/district">
+                            <a href="/user/district" className="nav-link">
+                              {" "}
+                              Add MMDA User
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                  
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </li>
-              {/* <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#roles"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarPages"
-                >
-                  <i className="ri-pages-line" />{" "}
-                  <span data-key="t-pages">User Type</span>
-                </a>
-                <div className="collapse menu-dropdown" id="roles">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <a
-                        href="/account/user-type"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Add
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        List
-                      </a>
-                    </li>
-                    
-                  </ul>
-                </div>
-              </li> */}
-              <li className="menu-title">
-                <i className="ri-more-fill" />{" "}
-                <span data-key="t-components">MESSAGES</span>
-              </li>
-              {/* <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#messages"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarPages"
-                >
-                  <i className="ri-mail-line" />{" "}
-                  <span data-key="t-pages">Email</span>
-                </a>
-                <div className="collapse menu-dropdown" id="messages">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Compose
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Inbox
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Manage
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li> */}
-              <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#notifications"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarPages"
-                >
-                  <i className="ri-notification-2-line" />{" "}
-                  <span data-key="t-pages">Notifications</span>
-                </a>
-                <div className="collapse menu-dropdown" id="notifications">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <Link href="/messaging/notification">
-                        <a
-                          className="nav-link"
-                          // data-bs-toggle="collapse"
-                          // role="button"
-                          // aria-expanded="false"
-                          // aria-controls="sidebarSignIn"
-                          // data-key="t-signin"
-                        >
-                          {" "}
-                          Compose
-                        </a>
-                      </Link>
-                    </li>
-                    {/* <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Inbox
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Manage
-                      </a>
-                    </li> */}
-                  </ul>
-                </div>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#sidebarPages"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarPages"
-                >
-                  <i className="ri-message-2-line" />{" "}
-                  <span data-key="t-pages">SMS</span>
-                </a>
-                <div className="collapse menu-dropdown" id="sidebarPages">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <Link href="/messaging/sms">
-                        <a
-                          className="nav-link"
-                          // data-bs-toggle="collapse"
-                          // role="button"
-                          // aria-expanded="false"
-                          // aria-controls="sidebarSignIn"
-                          // data-key="t-signin"
-                        >
-                          {" "}
-                          Compose
-                        </a>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
+              {ut == 1 ? (
+                <>
+                  <li className="menu-title">
+                    <i className="ri-more-fill" />{" "}
+                    <span data-key="t-components">MESSAGES</span>
+                  </li>
+
+                  <li className="nav-item">
+                    <a
+                      className="nav-link menu-link"
+                      href="#notifications"
+                      data-bs-toggle="collapse"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="sidebarPages"
+                    >
+                      <i className="ri-notification-2-line" />{" "}
+                      <span data-key="t-pages">Notifications</span>
+                    </a>
+                    <div className="collapse menu-dropdown" id="notifications">
+                      <ul className="nav nav-sm flex-column">
+                        <li className="nav-item">
+                          <Link href="/messaging/notification">
+                            <a className="nav-link"> Compose</a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link menu-link"
+                      href="#sidebarPages"
+                      data-bs-toggle="collapse"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="sidebarPages"
+                    >
+                      <i className="ri-message-2-line" />{" "}
+                      <span data-key="t-pages">SMS</span>
+                    </a>
+                    <div className="collapse menu-dropdown" id="sidebarPages">
+                      <ul className="nav nav-sm flex-column">
+                        <li className="nav-item">
+                          <Link href="/messaging/sms">
+                            <a className="nav-link"> Compose</a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </>
+              ) : (
+                <></>
+              )}
               <li className="menu-title">
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-components">SETTINGS</span>

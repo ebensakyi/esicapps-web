@@ -1,5 +1,4 @@
 const ListNationalUser = ({ users }) => {
-  console.log(users);
   return (
     <div className="row">
       <div className="col-12">

@@ -44,35 +44,35 @@ const DistrictUser = ({ users, userTypes, regions }) => {
     }
   };
 
-  const getDistrictsByRegion = async (e, regionId) => {
-    try {
-      e.preventDefault();
-      const response = await axios.get(
-        "/api/v1/primary-data/district?regionId=" + regionId
-      );
-      setDistricts(response.data);
-    } catch (error) {}
-  };
+  // const getDistrictsByRegion = async (e, regionId) => {
+  //   try {
+  //     e.preventDefault();
+  //     const response = await axios.get(
+  //       "/api/v1/primary-data/district?regionId=" + regionId
+  //     );
+  //     setDistricts(response.data);
+  //   } catch (error) {}
+  // };
 
-  const getDistrictByRegion = async (e, regionId) => {
-    try {
-      e.preventDefault();
-      const response = await axios.get(
-        "/api/v1/primary-data/district?regionId=" + regionId
-      );
-      setDistricts(response.data);
-    } catch (error) {}
-  };
+  // const getDistrictByRegion = async (e, regionId) => {
+  //   try {
+  //     e.preventDefault();
+  //     const response = await axios.get(
+  //       "/api/v1/primary-data/district?regionId=" + regionId
+  //     );
+  //     setDistricts(response.data);
+  //   } catch (error) {}
+  // };
 
-  const getElectoralByDistrict = async (e, districtId) => {
-    try {
-      e.preventDefault();
-      const response = await axios.get(
-        "/api/v1/primary-data/electoral-area?districtId=" + districtId
-      );
-      setElectoralAreas(response.data);
-    } catch (error) {}
-  };
+  // const getElectoralByDistrict = async (e, districtId) => {
+  //   try {
+  //     e.preventDefault();
+  //     const response = await axios.get(
+  //       "/api/v1/primary-data/electoral-area?districtId=" + districtId
+  //     );
+  //     setElectoralAreas(response.data);
+  //   } catch (error) {}
+  // };
   return (
     <div className="row">
       <ToastContainer
@@ -195,6 +195,7 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                       >
                         <option selected>Choose...</option>
                         {userTypes.map((userType) => (
+
                           <option key={userType.id} value={userType.id}>
                             {userType.name}
                           </option>
@@ -202,7 +203,7 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                       </select>
                     </div>
                   </div>
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Region
@@ -224,8 +225,8 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
+                  </div> */}
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         District
@@ -246,7 +247,7 @@ const DistrictUser = ({ users, userTypes, regions }) => {
                         ))}
                       </select>
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* <div className="col-xxl-3 col-md-6">
                     <div>

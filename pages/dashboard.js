@@ -40,7 +40,6 @@ export async function getServerSideProps(context) {
     const data = await fetch(`${SERVER_BASE_URL}/api/v1/dashboard`).then(
         (res) => res.json()
     );
-console.log(data);
     // const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(
     //     (res) => res.json()
     // );

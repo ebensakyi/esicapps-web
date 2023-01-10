@@ -15,30 +15,34 @@ export default function Login() {
 
   const login = async (e) => {
     try {
-       e.preventDefault();
-    let data = {
-      email,
-      password,
-    };
-    const response = await axios.post(`/api/v1/auth/login`, data);
+      e.preventDefault();
+      let data = {
+        email,
+        password,
+      };
+      const response = await axios.post(`/api/v1/auth/login`, data);
 
-    if (response.data.statusCode == 0)
-      return toast.error(response.data.message);
-
-    return router.replace("/dashboard");
-    } catch (error) {
-      
-    }
-   
+      if (response.status != 200) {
+        return toast.error(response.data.message);
+      }
+      if (response.status == 200) {
+        Cookies.set("lvut1", nanoid(50) + "??" + response.data.level, {
+          expires: 3 * 60 * 60,
+        });
+        Cookies.set("lvut2", response.data.userType + "??" + nanoid(50), {
+          expires: 3 * 60 * 60,
+        });
+        return router.replace("/dashboard");
+      }
+    } catch (error) {}
 
     // router.replace(router.asPath)
     // router.push("/");
   };
 
-
-const  getYear=() =>{
+  const getYear = () => {
     return new Date().getFullYear();
-}
+  };
   return (
     <html
       lang="en"
@@ -79,7 +83,7 @@ const  getYear=() =>{
         <div className="auth-page-wrapper pt-5">
           <div className="auth-one-bg-position auth-one-bg" id="auth-particles">
             <div className="bg-overlay"></div>
-            
+
             <div className="shape">
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,16 +115,16 @@ const  getYear=() =>{
                 </div>
               </div>
               <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
               <div className="row justify-content-center">
                 <div className="col-md-8 col-lg-6 col-xl-5">
                   <div className="card mt-4">
@@ -155,7 +159,10 @@ const  getYear=() =>{
                                 Forgot password?
                               </a>
                             </div>
-                            <label className="form-label" htmlFor="password-input">
+                            <label
+                              className="form-label"
+                              htmlFor="password-input"
+                            >
                               Password
                             </label>
                             <div className="position-relative auth-pass-inputgroup mb-3">
@@ -262,10 +269,8 @@ const  getYear=() =>{
                   <div className="text-center">
                     <p className="mb-0 text-muted">
                       &copy;
-                     {
-                        `${getYear()} `
-                     }
-                     ESICApps
+                      {`${getYear()} `}
+                      ESICApps
                       {/* . Crafted with{" "}
                       <i className="mdi mdi-heart text-danger"></i> by Expedient
                       Systems */}

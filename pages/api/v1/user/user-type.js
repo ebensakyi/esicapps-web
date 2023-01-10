@@ -23,14 +23,18 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-  console.log(req.query.token);
+  // console.log(req.query.token);
 
-    let userId = await verifyToken(req.query.token);
-    console.log(userId);
+    let data = await verifyToken(req.query.token);
+    let userLevel = data.user.UserType.userLevelId
+    console.log(userLevel);
 
 
     const userType = await prisma.userType.findMany({
-      where: { deleted: 0 },
+      where: { deleted: 0,  userLevelId: {
+        gte: userLevel,
+      },
+},
     });
     //return res.status(200).json({ statusCode: 1, data: userType });
     return res.status(200).json(userType);

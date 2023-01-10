@@ -8,7 +8,7 @@ import {
 
 const post = async (req, res) => {
   try {
-    // await clearUserCookie(req, res);
+ await clearUserCookie(req, res);
 
     let email = req.body.email;
     let password = req.body.password;
@@ -20,7 +20,6 @@ const post = async (req, res) => {
       include: { UserType: true },
     });
 
-    console.log(user);
 
     if (!user) {
       return res
@@ -36,13 +35,14 @@ const post = async (req, res) => {
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
 
       // let userId = user.id;
-      // let userType = user.userTypeId;
+      let userType = user.userTypeId;
+      let level = user.UserType.userLevelId;
       await setUserCookie(token, req, res);
 
-      return res.status(200).json({ statusCode: 1, data: user });
+      return res.status(200).json({userType,level });
     } else {
       return res
-        .status(200)
+        .status(400)
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
   } catch (error) {
