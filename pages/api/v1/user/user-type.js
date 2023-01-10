@@ -27,7 +27,7 @@ const get = async (req, res) => {
 
     let data = await verifyToken(req.query.token);
     let userLevel = data.user.UserType.userLevelId
-    console.log(userLevel);
+   // console.log(userLevel);
 
 
     const userType = await prisma.userType.findMany({
