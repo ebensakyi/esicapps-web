@@ -1410,7 +1410,7 @@ model LiquidWasteSection {
   PremisesGreyWaterDisposal     PremisesGreyWaterDisposal[]
   PremisesToiletType            PremisesToiletType[]
   ToiletHouseholdNumber         ToiletHouseholdNumber?          @relation(fields: [toiletHouseholdNumberId], references: [id])
-  toiletHouseholdNumberId       Int
+  toiletHouseholdNumberId       Int?
 }
 
 model SolidWasteSection {

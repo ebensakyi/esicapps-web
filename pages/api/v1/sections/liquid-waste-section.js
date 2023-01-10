@@ -38,6 +38,7 @@ const post = async (req, res) => {
       toiletHouseholdNumberId: req.body.toiletHouseholdNumberId == "null" ?null : Number(req.body.toiletHouseholdNumberId),
     };
 
+    console.log(data)
 
  const response = await prisma.liquidWasteSection.create({ data });
 
