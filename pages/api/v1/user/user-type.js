@@ -1,4 +1,5 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import {verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -22,6 +23,12 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+  console.log(req.query.token);
+
+    let userId = await verifyToken(req.query.token);
+    console.log(userId);
+
+
     const userType = await prisma.userType.findMany({
       where: { deleted: 0 },
     });

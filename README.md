@@ -3,7 +3,7 @@
 
 
 cd ~/
-git clone https://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@github.com/ebensakyi/esicapps-web.git
+git clone https://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@github.com/ebensakyi/esicapps-web.git
 cd ~/esicapps-web
 sudo cp * /var/www/html/dashboard.esicapps.org
 sudo npm i
@@ -19,3 +19,7 @@ pm2 start npm --name dashboard.esicapps.org -- run start
 
 
 Kofi@2318.com
+
+
+
+cd ~/ && sudo rm -r  esicapps-web && git clone https://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@github.com/ebensakyi/esicapps-web.git && cd ~/esicapps-web && sudo cp -r * /var/www/html/dashboard.esicapps.org && cd  /var/www/html/dashboard.esicapps.org && sudo npm i && sudo npx prisma generate && sudo npm run build && pm2 delete dashboard.esicapps.org && pm2 start npm --name dashboard.esicapps.org -- run start

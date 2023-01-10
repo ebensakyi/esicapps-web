@@ -1,6 +1,11 @@
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const Header = () => {
+  let cookie = Cookies.get("token") 
+
+  console.log("COOKIE ",cookie);
+
   return (
     <div>
       <header id="page-topbar">
@@ -701,7 +706,9 @@ const Header = () => {
                 </a>
                 <div className="collapse menu-dropdown" id="accounts">
                   <ul className="nav nav-sm flex-column">
+                    {}
                     <li className="nav-item">
+
                       <Link href="/user/national">
                         <a
                           className="nav-link"
@@ -764,7 +771,7 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#roles"
@@ -806,23 +813,10 @@ const Header = () => {
                         List
                       </a>
                     </li>
-                    {/* <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        // data-bs-toggle="collapse"
-                        // role="button"
-                        // aria-expanded="false"
-                        // aria-controls="sidebarSignIn"
-                        // data-key="t-signin"
-                      >
-                        {" "}
-                        Manage
-                      </a>
-                    </li> */}
+                    
                   </ul>
                 </div>
-              </li>
+              </li> */}
               <li className="menu-title">
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-components">MESSAGES</span>
