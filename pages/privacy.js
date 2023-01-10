@@ -104,7 +104,7 @@ export default function Privacy() {
                 </p>
                 <ul>
                   <li>
-                    To provide and improve the app's functionality and user
+                    To provide and improve the app`s functionality and user
                     experience.
                   </li>
                   <li>
@@ -125,7 +125,7 @@ export default function Privacy() {
                 <h2>Data Sharing and Disclosure</h2>
                 <p>
                   We do not share or sell any personal or sensitive data to
-                  third parties without the user's explicit consent, except in
+                  third parties without the user`s explicit consent, except in
                   the following cases:
                 </p>
                 <ul>
@@ -167,7 +167,7 @@ export default function Privacy() {
 
                 <h2>Data Retention</h2>
                 <p>
-                  We retain user's personal and sensitive data for as long as
+                  We retain user`s personal and sensitive data for as long as
                   needed for the purpose for which it was collected and in
                   accordance with legal requirements. Users can request for
                   deletion of their data by contacting us
