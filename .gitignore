@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/template
 
 # next.js
 /.next/
