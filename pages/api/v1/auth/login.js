@@ -38,8 +38,8 @@ const post = async (req, res) => {
       let userType = user.userTypeId;
       let level = user.UserType.userLevelId;
       await setUserCookie(token, req, res);
-
-      return res.status(200).json({userType,level });
+// console.log(user);
+      return res.status(200).json({userType,level,user });
     } else {
       return res
         .status(400)

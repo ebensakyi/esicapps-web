@@ -4,7 +4,8 @@ import Cookies from "js-cookie";
 const Header = () => {
   let lv = Cookies.get("lvut1").split("??")[1];
   let ut = Cookies.get("lvut2").split("??")[0];
-
+  let fullName = Cookies.get("fullName")
+  let designation = Cookies.get("designation")
   // console.log("COOKIE ",lv,ut);
 
   return (
@@ -71,7 +72,7 @@ const Header = () => {
                     />
                     <span className="text-start ms-xl-2">
                       <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                        ESICApps User
+                       {fullName}
                       </span>
                       <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">
                         Administrator
@@ -81,15 +82,15 @@ const Header = () => {
                 </button>
                 <div className="dropdown-menu dropdown-menu-end">
                   {/* item*/}
-                  <h6 className="dropdown-header">Welcome Admin!</h6>
+                  <h6 className="dropdown-header"> {fullName}</h6>
                   <a className="dropdown-item" href="#">
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle">Profile</span>
                   </a>
-                  <a className="dropdown-item" href="#">
+                  {/* <a className="dropdown-item" href="#">
                     <i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1" />
                     <span className="align-middle">Messages</span>
-                  </a>
+                  </a> */}
 
                   <a className="dropdown-item" href="/auth/login">
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />{" "}

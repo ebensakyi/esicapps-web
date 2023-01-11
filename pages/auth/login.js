@@ -32,9 +32,21 @@ export default function Login() {
         Cookies.set("lvut2", response.data.userType + "??" + nanoid(50), {
           expires: 3 * 60 * 60,
         });
+
+        Cookies.set("fullName", response.data.user.surname + " " + response.data.user.otherNames, {
+          expires: 3 * 60 * 60,
+        });
+        // Cookies.set("userType",  response.data.UserType.name, {
+        //   expires: 3 * 60 * 60,
+        // });
+        Cookies.set("designation",  response.data.designation, {
+          expires: 3 * 60 * 60,
+        });
         return router.replace("/dashboard");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
 
     // router.replace(router.asPath)
     // router.push("/");
