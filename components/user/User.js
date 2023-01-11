@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const User = ({ users, userTypes, regions, districts }) => {
   const router = useRouter();
@@ -17,6 +18,9 @@ const User = ({ users, userTypes, regions, districts }) => {
   const [electoralAreas, setElectoralAreas] = useState([]);
   const [district, setDistrict] = useState();
   const [electoralArea, setElectoralArea] = useState();
+
+  let ut = Cookies.get("lvut2").split("??")[0];
+  console.log("UT ", ut);
 
   const addUser = async (e) => {
     try {
@@ -207,53 +211,60 @@ const User = ({ users, userTypes, regions, districts }) => {
                       </select>
                     </div>
                   </div>
+                  {ut == 1 ? (
+                    <div className="col-xxl-3 col-md-6">
+                      <div>
+                        <label htmlFor="readonlyInput" className="form-label">
+                          Region
+                        </label>
 
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Region
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={async (e) => {
-                          setRegion(e.target.value);
-                          getDistrictsByRegion(e, e.target.value);
-                        }}
-                      >
-                        <option selected>Choose...</option>
-                        {regions.map((region) => (
-                          <option value={region.id} key={region.id}>
-                            {region.name}
-                          </option>
-                        ))}
-                      </select>
+                        <select
+                          className="form-select"
+                          id="inputGroupSelect02"
+                          onChange={async (e) => {
+                            setRegion(e.target.value);
+                            getDistrictsByRegion(e, e.target.value);
+                          }}
+                        >
+                          <option selected>Choose...</option>
+                          {regions.map((region) => (
+                            <option value={region.id} key={region.id}>
+                              {region.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        District
-                      </label>
+                  ) : (
+                    <></>
+                  )}
+                  {ut == 1 || ut == 3 ? (
+                    <div className="col-xxl-3 col-md-6">
+                      <div>
+                        <label htmlFor="readonlyInput" className="form-label">
+                          District
+                        </label>
 
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => {
-                          setDistrict(e.target.value);
-                          getElectoralByDistrict(e, e.target.value);
-                        }}
-                      >
-                        <option selected>Choose...</option>
-                        {districts.map((district) => (
-                          <option key={district.id} value={district.id}>
-                            {district.name}
-                          </option>
-                        ))}
-                      </select>
+                        <select
+                          className="form-select"
+                          id="inputGroupSelect02"
+                          onChange={(e) => {
+                            setDistrict(e.target.value);
+                            getElectoralByDistrict(e, e.target.value);
+                          }}
+                        >
+                          <option selected>Choose...</option>
+                          {districts.map((district) => (
+                            <option key={district.id} value={district.id}>
+                              {district.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <></>
+                  )}
                   <hr />
                   {/* <div className="col-xxl-3 col-md-6">
                     <div>

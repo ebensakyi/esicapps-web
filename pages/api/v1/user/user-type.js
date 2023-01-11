@@ -26,7 +26,6 @@ const get = async (req, res) => {
   // console.log(req.query.token);
 
     let data = await verifyToken(req.query.token);  
-     console.log("data-->",data);
 
     let userLevel = data.user.UserType.userLevelId
 

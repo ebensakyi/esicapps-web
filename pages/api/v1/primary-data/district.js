@@ -1,4 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import { getUserCookie } from "../../../../helpers/cookies-manager";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -19,13 +21,29 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    if (req.query.regionId) {
+    let data, regionId, userLevel;
+    if (req.query.token) {
+      data = await verifyToken(req.query.token);
 
+      regionId = data.regionId;
+      userLevel = data.user.UserType.userLevelId;
+    }
+
+    // console.log(">>>>>>>s", data.regionId);
+
+    if (userLevel == 1) {
+      const district = await prisma.district.findMany({
+        where: { deleted: 0, regionId: Number(regionId) },
+        include: { Region: true },
+      });
+
+      return res.status(200).json(district);
+    }
+    if (req.query.regionId) {
       const district = await prisma.district.findMany({
         where: { deleted: 0, regionId: Number(req.query.regionId) },
         include: { Region: true },
       });
-
 
       return res.status(200).json(district);
     }
@@ -44,10 +62,10 @@ export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
     : req.method === "PUT"
-      ? console.log("PUT")
-      : req.method === "DELETE"
-        ? console.log("DELETE")
-        : req.method === "GET"
-          ? get(req, res)
-          : res.status(404).send("");
+    ? console.log("PUT")
+    : req.method === "DELETE"
+    ? console.log("DELETE")
+    : req.method === "GET"
+    ? get(req, res)
+    : res.status(404).send("");
 };

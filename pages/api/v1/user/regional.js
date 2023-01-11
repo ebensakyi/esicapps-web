@@ -40,7 +40,6 @@ const get = async (req, res) => {
   try {
     let data = await verifyToken(req.query.token);
 
-    console.log(data.user);
 
     if (data.user.regionId == null) {
       const user = await prisma.user.findMany({
