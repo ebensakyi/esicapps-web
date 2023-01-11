@@ -1,4 +1,6 @@
 const ListUser = ({ users }) => {
+console.log(users);
+
   return (
     <div className="row">
       <div className="col-12">
@@ -21,7 +23,7 @@ const ListUser = ({ users }) => {
                   <th>Other Names</th>
                   <th>Email</th>
                   <th>Designation</th>
-
+                  <th>Region</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -36,6 +38,7 @@ const ListUser = ({ users }) => {
                       <td>{user.email}</td>
 
                       <td>{user.designation}</td>
+                      <td>{user.Region==null?"":user.Region.name}</td>
                       <td>{user.activated == 0 ? "OFF" : "ON"}</td>
 
                       <td>

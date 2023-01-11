@@ -20,7 +20,6 @@ const User = ({ users, userTypes, regions, districts }) => {
   const [electoralArea, setElectoralArea] = useState();
 
   let ut = Cookies.get("lvut2").split("??")[0];
-  console.log("UT ", ut);
 
   const addUser = async (e) => {
     try {

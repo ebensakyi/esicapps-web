@@ -35,6 +35,7 @@ const get = async (req, res) => {
   try {
     const user = await prisma.user.findMany({
       where: { deleted: 0 },
+      include: { Region: true },
       orderBy: {
         id: "desc",
       },
