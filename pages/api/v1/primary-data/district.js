@@ -33,7 +33,7 @@ const get = async (req, res) => {
 
     if (userLevel == 1) {
       const district = await prisma.district.findMany({
-        where: { deleted: 0, regionId: Number(regionId) },
+        where: { deleted: 0 },
         include: { Region: true },
       });
 

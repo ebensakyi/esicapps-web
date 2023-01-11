@@ -36,10 +36,10 @@ export default function Login() {
         Cookies.set("fullName", response.data.user.surname + " " + response.data.user.otherNames, {
           expires: 3 * 60 * 60,
         });
-        // Cookies.set("userType",  response.data.UserType.name, {
-        //   expires: 3 * 60 * 60,
-        // });
-        Cookies.set("designation",  response.data.designation, {
+        Cookies.set("userType",  response.data.user.UserType.name, {
+          expires: 3 * 60 * 60,
+        });
+        Cookies.set("designation",  response.data.user.designation, {
           expires: 3 * 60 * 60,
         });
         return router.replace("/dashboard");

@@ -6,6 +6,8 @@ const Header = () => {
   let ut = Cookies.get("lvut2").split("??")[0];
   let fullName = Cookies.get("fullName")
   let designation = Cookies.get("designation")
+  let userType = Cookies.get("userType")
+
   // console.log("COOKIE ",lv,ut);
 
   return (
@@ -75,7 +77,7 @@ const Header = () => {
                        {fullName}
                       </span>
                       <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">
-                        Administrator
+                        {userType}
                       </span>
                     </span>
                   </span>

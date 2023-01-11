@@ -10,22 +10,51 @@ const post = async (req, res) => {
     let hashedPassword = await bcrypt.hashSync(password, salt);
 
     let userCookie = await getUserCookie(req, res);
+    let data = {};
+    if (userCookie.user.userTypeId == 1) {
+      data = {
+        userTypeId: Number(req.body.userTypeId),
+        surname: req.body.surname,
+        otherNames: req.body.otherNames,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: hashedPassword,
+        designation: req.body.designation,
+        regionId: Number(req.body.region),
+        districtId: Number(req.body.district),
+      };
 
-    console.log("UserCCookie ",userCookie);
-    const data = {
-      userTypeId: Number(req.body.userTypeId),
-      surname: req.body.surname,
-      otherNames: req.body.otherNames,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      password: hashedPassword,
-      designation: req.body.designation,
-      regionId: req.body.regionId,
-      districtId: userCookie.user.districtId,
+      console.log(req.body);
+    }
+    if (userCookie.user.userTypeId == 3) {
+      data = {
+        userTypeId: Number(req.body.userTypeId),
+        surname: req.body.surname,
+        otherNames: req.body.otherNames,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: hashedPassword,
+        designation: req.body.designation,
+        regionId: userCookie.user.regionId,
+        districtId: req.body.district,
+      };
+    }
 
-    };
+    if (userCookie.user.userTypeId == 5) {
+      data = {
+        userTypeId: Number(req.body.userTypeId),
+        surname: req.body.surname,
+        otherNames: req.body.otherNames,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: hashedPassword,
+        designation: req.body.designation,
+        regionId: req.body.region,
+        districtId: userCookie.user.districtId,
+      };
+    }
 
-console.log(data);
+    console.log(data);
 
     const user = await prisma.user.create({ data });
     return res
@@ -44,8 +73,8 @@ const get = async (req, res) => {
   try {
     const user = await prisma.user.findMany({
       where: { deleted: 0 },
-      include: { Region: true },
-      include: { District: true },
+      include: { Region: true ,
+      District: true,  UserType:true },
       orderBy: {
         id: "desc",
       },

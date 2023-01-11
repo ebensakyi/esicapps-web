@@ -31,6 +31,8 @@ const User = ({ users, userTypes, regions, districts }) => {
         email,
         phoneNumber,
         designation,
+        region,
+        district,
       };
 
       const response = await axios.post("/api/v1/user", data);

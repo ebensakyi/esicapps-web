@@ -1,5 +1,5 @@
 const ListUser = ({ users }) => {
-console.log(users);
+  console.log(users);
 
   return (
     <div className="row">
@@ -16,12 +16,13 @@ console.log(users);
             >
               <thead>
                 <tr>
-                  <th>ID</th>
+                  {/* <th>ID</th> */}
 
                   <th>Surname</th>
 
                   <th>Other Names</th>
                   <th>Email</th>
+                  <th>User Type</th>
                   <th>Designation</th>
                   <th>Region</th>
                   <th>District</th>
@@ -33,14 +34,14 @@ console.log(users);
                 {users.map((user) => {
                   return (
                     <tr key={user.id}>
-                      <td>{user.id}</td>
+                      {/* <td>{user.id}</td> */}
                       <td>{user.surname}</td>
                       <td>{user.otherNames}</td>
                       <td>{user.email}</td>
-
+                      <td>{user.UserType.name}</td>
                       <td>{user.designation}</td>
-                      <td>{user.Region==null?"":user.Region.name}</td>
-                      <td>{user.District==null?"":user.District.name}</td>
+                      <td>{user.Region == null ? "" : user.Region.name}</td>
+                      <td>{user.District == null ? "" : user.District.name}</td>
                       <td>{user.activated == 0 ? "OFF" : "ON"}</td>
 
                       <td>
