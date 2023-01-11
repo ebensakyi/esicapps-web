@@ -1,5 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
+import { getUserCookie } from "../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
   try {
@@ -8,6 +9,9 @@ const post = async (req, res) => {
 
     let hashedPassword = await bcrypt.hashSync(password, salt);
 
+    let userCookie = await getUserCookie(req, res);
+
+    console.log("UserCCookie ",userCookie);
     const data = {
       userTypeId: Number(req.body.userTypeId),
       surname: req.body.surname,
@@ -16,7 +20,12 @@ const post = async (req, res) => {
       phoneNumber: req.body.phoneNumber,
       password: hashedPassword,
       designation: req.body.designation,
+      regionId: req.body.regionId,
+      districtId: userCookie.user.districtId,
+
     };
+
+console.log(data);
 
     const user = await prisma.user.create({ data });
     return res
@@ -27,7 +36,7 @@ const post = async (req, res) => {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "user prefix should be unique" });
+        .json({ statusCode: 0, message: "Data should be unique" });
   }
 };
 
@@ -36,6 +45,7 @@ const get = async (req, res) => {
     const user = await prisma.user.findMany({
       where: { deleted: 0 },
       include: { Region: true },
+      include: { District: true },
       orderBy: {
         id: "desc",
       },

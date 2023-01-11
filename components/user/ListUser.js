@@ -24,6 +24,7 @@ console.log(users);
                   <th>Email</th>
                   <th>Designation</th>
                   <th>Region</th>
+                  <th>District</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -39,6 +40,7 @@ console.log(users);
 
                       <td>{user.designation}</td>
                       <td>{user.Region==null?"":user.Region.name}</td>
+                      <td>{user.District==null?"":user.District.name}</td>
                       <td>{user.activated == 0 ? "OFF" : "ON"}</td>
 
                       <td>
