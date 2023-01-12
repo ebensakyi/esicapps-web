@@ -595,7 +595,7 @@ const Header = () => {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a href="/community-data" className="nav-link">
+                      <a href="/primary-data/community" className="nav-link">
                         {" "}
                         Community data
                       </a>
@@ -631,21 +631,26 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
-                <Link href="/account/user">
-                  <a className="nav-link menu-link">
-                    <i className=" ri-shield-user-line" />{" "}
-                    <span data-key="t-widgets">Users</span>
-                  </a>
-                </Link>
-              </li>
-              
-              <li className="nav-item">
-                <a className="nav-link menu-link" href="/auth/logs">
-                  <i className="ri-honour-line" />{" "}
-                  <span data-key="t-widgets">Logs</span>
-                </a>
-              </li>
+              {ut == 1 || ut == 3 || ut == 5 ? (
+                <>
+                  <li className="nav-item">
+                    <Link href="/account/user">
+                      <a className="nav-link menu-link">
+                        <i className=" ri-shield-user-line" />{" "}
+                        <span data-key="t-widgets">Users</span>
+                      </a>
+                    </Link>
+                  </li>{" "}
+                  <li className="nav-item">
+                    <a className="nav-link menu-link" href="/auth/logs">
+                      <i className="ri-honour-line" />{" "}
+                      <span data-key="t-widgets">Logs</span>
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <></>
+              )}
             </ul>
           </div>
           {/* Sidebar */}

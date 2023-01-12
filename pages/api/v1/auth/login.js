@@ -8,7 +8,7 @@ import {
 
 const post = async (req, res) => {
   try {
- await clearUserCookie(req, res);
+    await clearUserCookie(req, res);
 
     let email = req.body.email;
     let password = req.body.password;
@@ -20,26 +20,29 @@ const post = async (req, res) => {
       include: { UserType: true },
     });
 
-
     if (!user) {
       return res
         .status(404)
         .json({ statusCode: 0, message: "User account not found" });
     }
 
+    if(user.userTypeId==7){
+      return res
+      .status(404)
+      .json({ statusCode: 0, message: "User a field user" });
+    }
+
     let isValid = await bcrypt.compare(password, user.password);
 
     if (isValid) {
-
-
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
 
       // let userId = user.id;
       let userType = user.userTypeId;
       let level = user.UserType.userLevelId;
       await setUserCookie(token, req, res);
-// console.log(user);
-      return res.status(200).json({userType,level,user });
+      // console.log(user);
+      return res.status(200).json({ userType, level, user });
     } else {
       return res
         .status(404)

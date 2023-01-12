@@ -1,6 +1,6 @@
 export const userType = [
   {
-    name: "National Administrator",
+    name: "Super Administrator",
     userLevelId: 1,
   },
   {

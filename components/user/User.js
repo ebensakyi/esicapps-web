@@ -9,11 +9,11 @@ const User = ({ users, userTypes, regions, districts }) => {
   const router = useRouter();
 
   const [userType, setUserType] = useState();
-  const [surname, setSurname] = useState();
-  const [otherNames, setOtherNames] = useState();
-  const [email, setEmail] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [designation, setDesignation] = useState();
+  const [surname, setSurname] = useState(null);
+  const [otherNames, setOtherNames] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [designation, setDesignation] = useState(null);
   const [region, setRegion] = useState(null);
   const [electoralAreas, setElectoralAreas] = useState([]);
   const [district, setDistrict] = useState(null);
@@ -26,6 +26,31 @@ const User = ({ users, userTypes, regions, districts }) => {
   const addUser = async (e) => {
     try {
       e.preventDefault();
+
+      if (surname == null) {
+        return toast.error("Surname cannot be empty");
+      }
+      if (otherNames == null) {
+        return toast.error("Other Names cannot be empty");
+      }
+      if (email == null) {
+        return toast.error("Email cannot be empty");
+      }
+      if (phoneNumber == null) {
+        return toast.error("PhoneNumber cannot be empty");
+      }
+      if (designation == null) {
+        return toast.error("Designation cannot be empty");
+      }
+      if (userType == null) {
+        return toast.error("User type cannot be empty");
+      }
+      if (showRegion && (region == null || region == "")) {
+        return toast.error("Region cannot be empty");
+      }
+      if (showDistrict && (district == null || district == "")) {
+        return toast.error("District cannot be empty");
+      }
       let data = {
         userTypeId: Number(userType),
         surname,
@@ -36,12 +61,14 @@ const User = ({ users, userTypes, regions, districts }) => {
         region,
         district,
       };
+      console.log(">>>>>>> data: " + JSON.stringify(data));
 
       const response = await axios.post("/api/v1/account/user", data);
       router.replace(router.asPath);
 
       return toast.success(response.data.message);
     } catch (error) {
+      console.log(error);
       return toast.error(error.response.data.message);
     }
   };
@@ -205,10 +232,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                           let selectedUserType = e.target.value;
 
                           setUserType(selectedUserType);
-                          console.log("e.target.value ", e.target.value);
 
-                          console.log("loggedInUserType ", loggedInUserType);
-                          console.log("userType ", userType);
                           if (
                             (selectedUserType == 1 || selectedUserType == 2) &&
                             loggedInUserType == 1
@@ -225,24 +249,50 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setShowRegion(true);
 
                             setDistrict(null);
+                          }
+                          if (
+                            (selectedUserType == 5 || selectedUserType == 6) &&
+                            loggedInUserType == 1
+                          ) {
+                            setShowRegion(false);
+                            setShowDistrict(true);
+
                             setRegion(null);
                           }
+
+                          if (selectedUserType == 7 && loggedInUserType == 1) {
+                            setShowRegion(false);
+                            setShowDistrict(true);
+
+                            setRegion(null);
+                          }
+
                           if (
                             (selectedUserType == 3 || selectedUserType == 4) &&
                             loggedInUserType == 3
                           ) {
                             setShowRegion(false);
+                            setShowDistrict(false);
 
                             setDistrict(null);
                             setRegion(null);
                           }
                           if (
-                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            (selectedUserType == 5 ||
+                              selectedUserType == 6 ||
+                              selectedUserType == 7) &&
                             loggedInUserType == 3
                           ) {
                             setShowRegion(false);
+                            setShowDistrict(true);
 
-                            setDistrict(null);
+                            setRegion(null);
+                          }
+                          if (
+                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            loggedInUserType == 5
+                          ) {
+                            setShowRegion(false);
                             setRegion(null);
                           }
                           if (
@@ -251,16 +301,14 @@ const User = ({ users, userTypes, regions, districts }) => {
                           ) {
                             setShowRegion(false);
 
-                            setDistrict(null);
                             setRegion(null);
                           }
+
                           if (
-                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            (selectedUserType == 5 || selectedUserType == 4) &&
                             loggedInUserType == 5
                           ) {
                             setShowRegion(false);
-
-                            setDistrict(null);
                             setRegion(null);
                           }
                         }}
@@ -268,7 +316,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         <option selected>Choose...</option>
                         {userTypes.map((userType) => (
                           <option key={userType.id} value={userType.id}>
-                            {userType.id} {userType.name}
+                            {userType.name}
                           </option>
                         ))}
                       </select>
