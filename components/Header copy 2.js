@@ -506,7 +506,102 @@ const Header = () => {
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-pages">Accounts</span>
               </li> */}
-            
+              <li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#accounts"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="sidebarAuth"
+                >
+                  <i className="ri-account-circle-line" />{" "}
+                  <span data-key="t-authentication">Users</span>
+                </a>
+                <div className="collapse menu-dropdown" id="accounts">
+                  {ut == 1 ? (
+                 
+                      <ul className="nav nav-sm flex-column">
+                        <li className="nav-item">
+                          <Link href="/user/national">
+                            <a className="nav-link"> Add National User</a>
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link href="/user/regional">
+                            <a className="nav-link"> Add Regional User</a>
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link href="/user/district">
+                            <a href="/user/district" className="nav-link">
+                              {" "}
+                              Add MMDA User
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                 
+                  ) : (
+                    <></>
+                  )}
+                  {ut == 3 ? (
+                      <ul className="nav nav-sm flex-column">
+                        {/* <li className="nav-item">
+                          <Link href="/user/national">
+                            <a className="nav-link"> Add National User</a>
+                          </Link>
+                        </li> */}
+
+                        <li className="nav-item">
+                          <Link href="/user/regional">
+                            <a className="nav-link"> Add Regional User</a>
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link href="/user/district">
+                            <a href="/user/district" className="nav-link">
+                              {" "}
+                              Add MMDA User
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                  ) : (
+                    <></>
+                  )}
+                  {ut == 5 ? (
+                  
+                      <ul className="nav nav-sm flex-column">
+                        {/* <li className="nav-item">
+                          <Link href="/user/national">
+                            <a className="nav-link"> Add National User</a>
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link href="/user/regional">
+                            <a className="nav-link"> Add Regional User</a>
+                          </Link>
+                        </li> */}
+
+                        <li className="nav-item">
+                          <Link href="/user/district">
+                            <a href="/user/district" className="nav-link">
+                              {" "}
+                              Add MMDA User
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                  
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </li>
               {ut == 1 ? (
                 <>
                   <li className="menu-title">
@@ -626,17 +721,12 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
-              <Link href="/account/user">
-              <a className="nav-link menu-link">
-                 <i className=" ri-shield-user-line" />{" "}
-                  <span data-key="t-widgets">Users</span>
-              </a>
-                 
-                  </Link>
-
-            
-              </li>
+              {/* <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className=" ri-shield-user-line" />{" "}
+                  <span data-key="t-widgets">Profile</span>
+                </a>
+              </li> */}
               <li className="nav-item">
                 <a className="nav-link menu-link" href="/auth/logs">
                   <i className="ri-honour-line" />{" "}

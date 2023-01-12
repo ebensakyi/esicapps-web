@@ -14,9 +14,9 @@ const User = ({ users, userTypes, regions, districts }) => {
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [designation, setDesignation] = useState();
-  const [region, setRegion] = useState();
+  const [region, setRegion] = useState(null);
   const [electoralAreas, setElectoralAreas] = useState([]);
-  const [district, setDistrict] = useState();
+  const [district, setDistrict] = useState(null);
   const [electoralArea, setElectoralArea] = useState();
 
   let ut = Cookies.get("lvut2").split("??")[0];
@@ -35,7 +35,7 @@ const User = ({ users, userTypes, regions, districts }) => {
         district,
       };
 
-      const response = await axios.post("/api/v1/user", data);
+      const response = await axios.post("/api/v1/account/user", data);
       router.replace(router.asPath);
 
       return toast.success(response.data.message);

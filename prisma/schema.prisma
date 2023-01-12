@@ -44,7 +44,7 @@ model Inspection {
 
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
-  currentInspection  Inspection? @relation("CurrentPreviousInspection")
+  currentInspection Inspection? @relation("CurrentPreviousInspection")
 }
 
 model InspectionForm {
@@ -71,15 +71,17 @@ model PasswordResetRequest {
 }
 
 model User {
-  id                             Int                              @id @default(autoincrement())
-  fcmId                          String?                          @db.VarChar(255)
-  userTypeId                     Int
-  surname                        String                           @db.VarChar(255)
-  otherNames                     String                           @db.VarChar(255)
-  email                          String                           @unique @db.VarChar(255)
-  phoneNumber                    String                           @unique @db.VarChar(255)
-  designation                    String                           @db.VarChar(255)
-  password                       String                           @db.VarChar(255)
+  id           Int     @id @default(autoincrement())
+  fcmId        String? @db.VarChar(255)
+  userTypeId   Int
+  surname      String  @db.VarChar(255)
+  otherNames   String  @db.VarChar(255)
+  email        String  @unique @db.VarChar(255)
+  phoneNumber  String  @unique @db.VarChar(255)
+  designation  String  @db.VarChar(255)
+  password     String  @db.VarChar(255)
+  tempPassword String?  @db.VarChar(255)
+
   regionId                       Int?
   districtId                     Int?
   electoralAreaId                Int?
@@ -1735,8 +1737,8 @@ model Picture {
 }
 
 model SanitationReport {
-  id    Int     @id @default(autoincrement())
-  fcmId String? @db.VarChar(255)
+  id           Int     @id @default(autoincrement())
+  fcmId        String? @db.VarChar(255)
   fullName     String? @db.VarChar(255)
   phoneNumber  String? @db.VarChar(255)
   email        String? @db.VarChar(255)

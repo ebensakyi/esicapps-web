@@ -1,9 +1,9 @@
 
-import DistrictUser from '../../components/user/DistrictUser'
-import ListDistrictUser from '../../components/user/ListDistrictUser'
-import Header from '../../components/Header'
+import DistrictUser from '../../../components/user/DistrictUser'
+import ListDistrictUser from '../../../components/user/ListDistrictUser'
+import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
-import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../../../config";
 
 
 export default function user({ regions, userTypes, districts,users }) {

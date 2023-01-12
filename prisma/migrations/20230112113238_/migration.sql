@@ -52,6 +52,7 @@ CREATE TABLE "User" (
     "phoneNumber" VARCHAR(255) NOT NULL,
     "designation" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
+    "tempPassword" VARCHAR(255),
     "regionId" INTEGER,
     "districtId" INTEGER,
     "electoralAreaId" INTEGER,
@@ -1180,7 +1181,7 @@ CREATE TABLE "LiquidWasteSection" (
     "effluentManagementId" INTEGER,
     "excretaContainmentId" INTEGER,
     "excretaDisposalMethodId" INTEGER,
-    "toiletHouseholdNumberId" INTEGER NOT NULL,
+    "toiletHouseholdNumberId" INTEGER,
 
     CONSTRAINT "LiquidWasteSection_pkey" PRIMARY KEY ("id")
 );
@@ -2146,7 +2147,7 @@ ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_userId_fkey"
 ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_wasteWaterContainmentId_fkey" FOREIGN KEY ("wasteWaterContainmentId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_toiletHouseholdNumberId_fkey" FOREIGN KEY ("toiletHouseholdNumberId") REFERENCES "ToiletHouseholdNumber"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "LiquidWasteSection" ADD CONSTRAINT "LiquidWasteSection_toiletHouseholdNumberId_fkey" FOREIGN KEY ("toiletHouseholdNumberId") REFERENCES "ToiletHouseholdNumber"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SolidWasteSection" ADD CONSTRAINT "SolidWasteSection_adequateWasteStorageReceptacleId_fkey" FOREIGN KEY ("adequateWasteStorageReceptacleId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;

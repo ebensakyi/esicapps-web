@@ -23,7 +23,7 @@ const post = async (req, res) => {
 
     if (!user) {
       return res
-        .status(200)
+        .status(404)
         .json({ statusCode: 0, message: "User account not found" });
     }
 
@@ -42,7 +42,7 @@ const post = async (req, res) => {
       return res.status(200).json({userType,level,user });
     } else {
       return res
-        .status(400)
+        .status(404)
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
   } catch (error) {

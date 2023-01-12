@@ -1,7 +1,7 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
-import { send } from "../../../../helpers/send-sms";
-import { verifyToken } from "../../../../helpers/token-verifier";
+import { send } from "../../../../../helpers/send-sms";
+import { verifyToken } from "../../../../../helpers/token-verifier";
 
 import { nanoid } from "nanoid";
 

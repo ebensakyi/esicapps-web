@@ -22,6 +22,7 @@ export default function Login() {
       };
       const response = await axios.post(`/api/v1/auth/login`, data);
 
+
       if (response.status != 200) {
         return toast.error(response.data.message);
       }
@@ -45,7 +46,8 @@ export default function Login() {
         return router.replace("/dashboard");
       }
     } catch (error) {
-      console.log(error);
+      return toast.error('User account  not found');
+
     }
 
     // router.replace(router.asPath)

@@ -1,17 +1,20 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import { getUserCookie } from "../../../../helpers/cookies-manager";
+import { verifyToken } from "../../../../helpers/token-verifier";
+import { nanoid } from "nanoid";
 
 const post = async (req, res) => {
   try {
-    let password = "esicapps@national"; //req.body.password;
+    let password = await nanoid(8); //req.body.password;
     const salt = bcrypt.genSaltSync(10);
 
     let hashedPassword = await bcrypt.hashSync(password, salt);
-
     let userCookie = await getUserCookie(req, res);
+
     let data = {};
     if (userCookie.user.userTypeId == 1) {
+      console.log("dis", req.body.district);
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -19,13 +22,15 @@ const post = async (req, res) => {
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         password: hashedPassword,
+        tempPassword: password,
         designation: req.body.designation,
         regionId: Number(req.body.region),
-        districtId: Number(req.body.district),
+        districtId:
+          req.body.district == null ? null : Number(req.body.district),
       };
-
-      console.log(req.body);
+      console.log(data);
     }
+    // console.log(userCookie)
     if (userCookie.user.userTypeId == 3) {
       data = {
         userTypeId: Number(req.body.userTypeId),
@@ -35,9 +40,11 @@ const post = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         password: hashedPassword,
         designation: req.body.designation,
-        regionId: userCookie.user.regionId,
-        districtId: req.body.district,
+        regionId: Number(userCookie.user.regionId),
+        districtId: Number(req.body.district),
       };
+
+      console.log("R DATA ", data);
     }
 
     if (userCookie.user.userTypeId == 5) {
@@ -49,12 +56,10 @@ const post = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         password: hashedPassword,
         designation: req.body.designation,
-        regionId: req.body.region,
-        districtId: userCookie.user.districtId,
+        regionId: Number(req.body.region),
+        districtId: Number(userCookie.user.districtId),
       };
     }
-
-    console.log(data);
 
     const user = await prisma.user.create({ data });
     return res
@@ -71,15 +76,50 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const user = await prisma.user.findMany({
-      where: { deleted: 0 },
-      include: { Region: true ,
-      District: true,  UserType:true },
-      orderBy: {
-        id: "desc",
-      },
-    });
-    return res.status(200).json(user);
+    let user;
+    let data = await verifyToken(req.query.token);
+
+    let userLevel = data.user.UserType.userLevelId;
+    console.log("userLevel ", userLevel);
+    let region = data.user.regionId;
+    let district = data.user.districtId;
+
+    if (userLevel == 1) {
+      console.log("here 1");
+      user = await prisma.user.findMany({
+        where: { deleted: 0 },
+        include: { Region: true, District: true, UserType: true },
+        orderBy: {
+          id: "desc",
+        },
+      });
+      return res.status(200).json(user);
+    }
+    if (userLevel == 2) {
+      console.log("here 2");
+
+      user = await prisma.user.findMany({
+        where: { deleted: 0, regionId: Number(region) },
+        include: { Region: true, District: true, UserType: true },
+        orderBy: {
+          id: "desc",
+        },
+      });
+      return res.status(200).json(user);
+    }
+
+    if (userLevel == 3) {
+      console.log("here 3");
+
+      user = await prisma.user.findMany({
+        where: { deleted: 0, districtId: Number(district) },
+        include: { Region: true, District: true, UserType: true },
+        orderBy: {
+          id: "desc",
+        },
+      });
+      return res.status(200).json(user);
+    }
   } catch (error) {
     console.log("Error: " + error);
   }

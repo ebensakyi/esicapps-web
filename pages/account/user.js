@@ -38,11 +38,11 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/user/user-type?token=${token}`).then(
+    const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-type?token=${token}`).then(
         (res) => res.json()
     );
 
-    const users = await fetch(`${SERVER_BASE_URL}/api/v1/user?token=${token}`).then(
+    const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?token=${token}`).then(
         (res) => res.json()
     );
 
