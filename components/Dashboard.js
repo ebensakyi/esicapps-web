@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut, Pie, Bar } from "react-chartjs-2";
 
@@ -6,7 +8,10 @@ import { Doughnut, Pie, Bar } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = ({ data }) => {
-  const baselinePieChartData = {
+  let baselinePieChartData,actionsTakenBarchartData
+  useEffect(() => {
+
+   baselinePieChartData = {
     labels: [
       "Residential",
       "Eatery",
@@ -51,8 +56,8 @@ const Dashboard = ({ data }) => {
 
   const labels = ['Hygiene education', 'Notice served', 'Criminal Summons'];
 
- const actionsTakenBarchartData = {
-  labels,
+  actionsTakenBarchartData = {
+  labels:['Hygiene education', 'Notice served', 'Criminal Summons'],
   datasets: [
     {
       label: 'Dataset 1',
@@ -65,7 +70,7 @@ const Dashboard = ({ data }) => {
     //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
     // },
   ],
-};
+};});
 
   return (
     <>
