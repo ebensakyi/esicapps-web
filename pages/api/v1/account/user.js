@@ -24,14 +24,15 @@ const post = async (req, res) => {
         password: hashedPassword,
         tempPassword: password,
         designation: req.body.designation,
-        regionId: Number(req.body.region),
+        regionId: req.body.region == null ? null : Number(req.body.region),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
       };
       console.log(data);
     }
-    // console.log(userCookie)
     if (userCookie.user.userTypeId == 3) {
+      console.log("userCookie: ", userCookie);
+      console.log(Number(userCookie.user.regionId));
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -40,8 +41,10 @@ const post = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         password: hashedPassword,
         designation: req.body.designation,
-        regionId: Number(userCookie.user.regionId),
-        districtId: Number(req.body.district),
+        regionId:
+          req.body.region == null ? null : Number(userCookie.user.regionId),
+        districtId:
+          req.body.district == null ? null : Number(req.body.district),
       };
 
       console.log("R DATA ", data);
@@ -56,8 +59,9 @@ const post = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         password: hashedPassword,
         designation: req.body.designation,
-        regionId: Number(req.body.region),
-        districtId: Number(userCookie.user.districtId),
+        regionId: req.body.region == null ? null : Number(req.body.region),
+        districtId:
+          req.body.district == null ? null : Number(req.body.district),
       };
     }
 

@@ -18,8 +18,10 @@ const User = ({ users, userTypes, regions, districts }) => {
   const [electoralAreas, setElectoralAreas] = useState([]);
   const [district, setDistrict] = useState(null);
   const [electoralArea, setElectoralArea] = useState();
+  const [showRegion, setShowRegion] = useState(false);
+  const [showDistrict, setShowDistrict] = useState(false);
 
-  let ut = Cookies.get("lvut2").split("??")[0];
+  let loggedInUserType = Cookies.get("lvut2").split("??")[0];
 
   const addUser = async (e) => {
     try {
@@ -200,19 +202,79 @@ const User = ({ users, userTypes, regions, districts }) => {
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
-                          setUserType(e.target.value);
+                          let selectedUserType = e.target.value;
+
+                          setUserType(selectedUserType);
+                          console.log("e.target.value ", e.target.value);
+
+                          console.log("loggedInUserType ", loggedInUserType);
+                          console.log("userType ", userType);
+                          if (
+                            (selectedUserType == 1 || selectedUserType == 2) &&
+                            loggedInUserType == 1
+                          ) {
+                            setShowRegion(false);
+                            setShowDistrict(false);
+                            setDistrict(null);
+                            setRegion(null);
+                          }
+                          if (
+                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            loggedInUserType == 1
+                          ) {
+                            setShowRegion(true);
+
+                            setDistrict(null);
+                            setRegion(null);
+                          }
+                          if (
+                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            loggedInUserType == 3
+                          ) {
+                            setShowRegion(false);
+
+                            setDistrict(null);
+                            setRegion(null);
+                          }
+                          if (
+                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            loggedInUserType == 3
+                          ) {
+                            setShowRegion(false);
+
+                            setDistrict(null);
+                            setRegion(null);
+                          }
+                          if (
+                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            loggedInUserType == 5
+                          ) {
+                            setShowRegion(false);
+
+                            setDistrict(null);
+                            setRegion(null);
+                          }
+                          if (
+                            (selectedUserType == 3 || selectedUserType == 4) &&
+                            loggedInUserType == 5
+                          ) {
+                            setShowRegion(false);
+
+                            setDistrict(null);
+                            setRegion(null);
+                          }
                         }}
                       >
                         <option selected>Choose...</option>
                         {userTypes.map((userType) => (
                           <option key={userType.id} value={userType.id}>
-                            {userType.name}
+                            {userType.id} {userType.name}
                           </option>
                         ))}
                       </select>
                     </div>
                   </div>
-                  {ut == 1 ? (
+                  {loggedInUserType == 1 && showRegion ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -239,7 +301,8 @@ const User = ({ users, userTypes, regions, districts }) => {
                   ) : (
                     <></>
                   )}
-                  {ut == 1 || ut == 3 ? (
+                  {(loggedInUserType == 1 && showDistrict) ||
+                  (loggedInUserType == 3 && showDistrict) ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">

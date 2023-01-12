@@ -4,9 +4,9 @@ import Cookies from "js-cookie";
 const Header = () => {
   let lv = Cookies.get("lvut1").split("??")[1];
   let ut = Cookies.get("lvut2").split("??")[0];
-  let fullName = Cookies.get("fullName")
-  let designation = Cookies.get("designation")
-  let userType = Cookies.get("userType")
+  let fullName = Cookies.get("fullName");
+  let designation = Cookies.get("designation");
+  let userType = Cookies.get("userType");
 
   // console.log("COOKIE ",lv,ut);
 
@@ -74,7 +74,7 @@ const Header = () => {
                     />
                     <span className="text-start ms-xl-2">
                       <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                       {fullName}
+                        {fullName}
                       </span>
                       <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">
                         {userType}
@@ -506,7 +506,6 @@ const Header = () => {
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-pages">Accounts</span>
               </li> */}
-            
               {ut == 1 ? (
                 <>
                   <li className="menu-title">
@@ -596,6 +595,12 @@ const Header = () => {
                       </a>
                     </li>
                     <li className="nav-item">
+                      <a href="/community-data" className="nav-link">
+                        {" "}
+                        Community data
+                      </a>
+                    </li>
+                    <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -627,16 +632,14 @@ const Header = () => {
                 </div>
               </li>
               <li className="nav-item">
-              <Link href="/account/user">
-              <a className="nav-link menu-link">
-                 <i className=" ri-shield-user-line" />{" "}
-                  <span data-key="t-widgets">Users</span>
-              </a>
-                 
-                  </Link>
-
-            
+                <Link href="/account/user">
+                  <a className="nav-link menu-link">
+                    <i className=" ri-shield-user-line" />{" "}
+                    <span data-key="t-widgets">Users</span>
+                  </a>
+                </Link>
               </li>
+              
               <li className="nav-item">
                 <a className="nav-link menu-link" href="/auth/logs">
                   <i className="ri-honour-line" />{" "}
