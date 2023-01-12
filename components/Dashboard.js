@@ -1,6 +1,72 @@
 import Link from "next/link";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut, Pie, Bar } from "react-chartjs-2";
+
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = ({ data }) => {
+  const baselinePieChartData = {
+    labels: [
+      "Residential",
+      "Eatery",
+      "Health",
+      "Hospitality",
+      "Markert",
+      "Industry",
+      "Institution",
+      "Sanitary",
+    ],
+    datasets: [
+      {
+        label: "# of submissions",
+        data: [12, 19, 3, 5, 2, 3, 10, 11],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgb(252, 241, 121)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgb(252, 241, 121)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
+
+
+  const labels = ['Hygiene education', 'Notice served', 'Criminal Summons'];
+
+ const actionsTakenBarchartData = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [200,260,400],
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+    // {
+    //   label: 'Dataset 2',
+    //   data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+    //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    // },
+  ],
+};
+
   return (
     <>
       <div className="row">
@@ -75,7 +141,6 @@ const Dashboard = ({ data }) => {
               {/*end col*/}
             </div>
             {/*end row*/}
-
             <div className="row">
               <div className="col-xxl-3"></div>
               {/* end col */}
@@ -667,6 +732,169 @@ const Dashboard = ({ data }) => {
                   </a>
                 </div>
               </>
+            </div>{" "}
+            <div className="row">
+              <div className="col-xl-4">
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Baseline Submissions
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <div className="dropdown card-header-dropdown">
+                        <a
+                          className="text-reset dropdown-btn"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <span className="text-muted">
+                            Report<i className="mdi mdi-chevron-down ms-1"></i>
+                          </span>
+                        </a>
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <a className="dropdown-item" href="#">
+                            Download Report
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Export
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Import
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                     <div className="card-body">
+                    <Pie data={baselinePieChartData} />
+                  </div>{" "}
+                 
+                 
+                </div>
+              </div>{" "}
+              <div className="col-xl-4">
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Reinspection Submissions
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <div className="dropdown card-header-dropdown">
+                        <a
+                          className="text-reset dropdown-btn"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <span className="text-muted">
+                            Report<i className="mdi mdi-chevron-down ms-1"></i>
+                          </span>
+                        </a>
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <a className="dropdown-item" href="#">
+                            Download Report
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Export
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Import
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                     <div className="card-body">
+                    <Pie data={baselinePieChartData} />
+                  </div>{" "}
+                 
+                 
+                </div>
+              </div>{" "}
+              <div className="col-xl-4">
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Follow-up Submissions
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <div className="dropdown card-header-dropdown">
+                        <a
+                          className="text-reset dropdown-btn"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <span className="text-muted">
+                            Report<i className="mdi mdi-chevron-down ms-1"></i>
+                          </span>
+                        </a>
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <a className="dropdown-item" href="#">
+                            Download Report
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Export
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Import
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                     <div className="card-body">
+                    <Pie data={baselinePieChartData} />
+                  </div>{" "}
+                 
+                 
+                </div>
+              </div>
+
+              <div className="col-xl-4">
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Follow-up Submissions
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <div className="dropdown card-header-dropdown">
+                        <a
+                          className="text-reset dropdown-btn"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <span className="text-muted">
+                            Report<i className="mdi mdi-chevron-down ms-1"></i>
+                          </span>
+                        </a>
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <a className="dropdown-item" href="#">
+                            Download Report
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Export
+                          </a>
+                          <a className="dropdown-item" href="#">
+                            Import
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                     <div className="card-body">
+                    <Bar data={actionsTakenBarchartData} />
+                  </div>{" "}
+                 
+                 
+                </div>
+              </div>{" "}
             </div>
           </div>{" "}
           {/* end .h-100*/}
