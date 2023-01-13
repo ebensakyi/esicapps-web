@@ -1,8 +1,10 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 const Community = ({ data }) => {
   const router = useRouter();
+  const [searchText, setSearchText] = useState();
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -32,7 +34,7 @@ const Community = ({ data }) => {
   const autoHandleSearch = (searchText) => {
     let currentUrl = router.pathname;
     router.push({
-      pathname: "/admin/shortlist",
+      pathname: router.pathname,
       query: `&searchText=${searchText}`,
     });
   };
@@ -44,7 +46,7 @@ const Community = ({ data }) => {
             <h5 className="card-title mb-0">COMMUNITIES</h5>
           </div>
           <div className="card-body">
-          <div className="col-md-4" style={{ textAlign: "end" }}>
+            {/* <div className="col-md-4" style={{ textAlign: "end" }}>
               <div className="form-group">
                 <div className="mb-6 position-relative">
                   <input
@@ -59,7 +61,26 @@ const Community = ({ data }) => {
                   />
                 </div>
               </div>
+            </div> */}
+
+            <div class="col-sm">
+              <div class="d-flex justify-content-sm-end">
+                <div class="search-box ms-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="searchResultList"
+                    onChange={(e) => {
+                      setSearchText(e.target.value);
+                      autoHandleSearch(e.target.value);
+                    }}
+                    placeholder="Search..."
+                  />
+                  <i class="ri-search-line search-icon"></i>
+                </div>
+              </div>
             </div>
+            <br />
             <table
               id="fixed-header"
               className="table table-bordered dt-responsive nowrap table-striped align-middle"
@@ -134,17 +155,16 @@ const Community = ({ data }) => {
               initialPage={data.curPage - 1}
               pageCount={data.maxPage}
               onPageChange={handlePagination}
-           
-            breakClassName={'page-item'}
-            breakLinkClassName={'page-link'}
-            containerClassName={'pagination'}
-            pageClassName={'page-item'}
-            pageLinkClassName={'page-link'}
-            previousClassName={'page-item'}
-            previousLinkClassName={'page-link'}
-            nextClassName={'page-item'}
-            nextLinkClassName={'page-link'}
-            activeClassName={'active'}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              containerClassName={"pagination"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              activeClassName={"active"}
             />
           </div>
         </div>
