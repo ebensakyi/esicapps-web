@@ -46,7 +46,7 @@ const post = async (req, res) => {
     });
     for (let i = 0; i < response.length; i++) {
       console.log(response.phoneNumber);
-      await sendFCM(title, message, response[0].fcmId);
+      await sendFCM(title, message, response[i].fcmId);
 
     }
   }
@@ -59,7 +59,7 @@ const post = async (req, res) => {
 
     for (let i = 0; i < response.length; i++) {
       console.log(response.phoneNumber);
-      await sendFCM(title, message, response[0].fcmId);
+      await sendFCM(title, message, response[i].fcmId);
 
     }
   }
