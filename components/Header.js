@@ -160,7 +160,7 @@ const Header = () => {
                   aria-controls="sidebarLayouts"
                 >
                   <i className="ri-apps-2-line" />
-                  <span data-key="t-apps">Data</span>
+                  <span data-key="t-apps">Submitted Data</span>
                 </a>
                 <div className="collapse menu-dropdown" id="data">
                   <ul className="nav nav-sm flex-column">
@@ -600,7 +600,7 @@ const Header = () => {
                         Community data
                       </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
                         className="nav-link"
@@ -613,7 +613,7 @@ const Header = () => {
                         {" "}
                         Permission
                       </a>
-                    </li>
+                    </li> */}
                     {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"

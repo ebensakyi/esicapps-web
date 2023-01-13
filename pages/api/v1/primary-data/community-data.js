@@ -21,14 +21,31 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    let curPage = req.query.page;
+
+    let perPage = 10;
+    let skip = Number((curPage - 1) * perPage);
+    let count = await prisma.community.count({ where: { deleted: 0 } });
+
     let community = await prisma.community.findMany({
-      where: { deleted: 0, },  orderBy: {
+      where: { deleted: 0 },
+      skip: skip,
+      take: perPage,
+      orderBy: {
         name: "asc",
       },
-      include: { District: {include:{ Region: true}} },
+
+      include: { District: { include: { Region: true } } },
     });
 
-    return res.status(200).json(community);
+    return res.status(200).json({
+      statusCode: 1,
+      community,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });
+
+    // return res.status(200).json(community);
   } catch (error) {
     console.log("Error: " + error);
   }

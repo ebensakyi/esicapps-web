@@ -22,6 +22,8 @@ export default function community({ data }) {
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
+  const page = context.query.page || 1
+  const searchText = context.query.searchText || ""
   if (!token) {
     return {
       redirect: {
@@ -30,7 +32,13 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data`).then(
+  // const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data`).then(
+  //   (res) => res.json()
+  // );
+
+
+
+  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data?token=${token}&page=${page}&searchText=${searchText}`).then(
     (res) => res.json()
   );
 
