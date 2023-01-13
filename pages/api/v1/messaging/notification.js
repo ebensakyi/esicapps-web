@@ -2,17 +2,9 @@ import { sendFCM } from "../../../../helpers/send-fcm";
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
- try {
+// try {
 
-  //   console.log(req.body);
-  //   const single = {
-  //     recipient: Number(req.body.recipient),
-  //     messageType: 1,
-  //     sendingType: 1,
-  //     message: req.body.message,
-  //     title: req.body.title,
-
-  //   };
+ console.log(req.body);
   let title = req.body.title;
   let message = req.body.message;
   let recipient =
@@ -37,7 +29,7 @@ const post = async (req, res) => {
 
   const response = await prisma.messaging.create({ data });
 
-  if (recipient != null || recipient != "") {
+  if (recipient != null && recipient != "") {
     const response = await prisma.user.findMany({
       where: { deleted: 0, id: recipient },
     });
@@ -46,7 +38,7 @@ const post = async (req, res) => {
       await sendFCM(title, message, response[0].fcmId);
     
   }
-  if (regionRecipient != null || regionRecipient != "") {
+  if (regionRecipient != null && regionRecipient != "") {
     console.log("regionRecipient");
 
     const response = await prisma.user.findMany({
@@ -54,28 +46,32 @@ const post = async (req, res) => {
     });
     for (let i = 0; i < response.length; i++) {
       console.log(response.phoneNumber);
+      await sendFCM(title, message, response[0].fcmId);
+
     }
   }
-  if (districtRecipient != null || districtRecipient != "") {
+  if (districtRecipient != null && districtRecipient != "") {
     console.log("districtRecipient: ", districtRecipient);
 
     const response = await prisma.user.findMany({
-      where: { deleted: 0, districtId: districtRecipient },
+      where: { deleted: 0, districtId: Number(districtRecipient) },
     });
 
     for (let i = 0; i < response.length; i++) {
       console.log(response.phoneNumber);
+      await sendFCM(title, message, response[0].fcmId);
+
     }
   }
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
-  } catch (error) {
-    console.log("Error: " + error);
-    if (error.code === "P2002")
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  }
+  // } catch (error) {
+  //   console.log("Error: " + error);
+  //   if (error.code === "P2002")
+  //     return res
+  //       .status(400)
+  //       .json({ statusCode: 0, message: "Should be unique" });
+  // }
 };
 
 const get = async (req, res) => {

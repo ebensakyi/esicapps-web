@@ -33,6 +33,7 @@ const Community = ({ data }) => {
 
   const autoHandleSearch = (searchText) => {
     let currentUrl = router.pathname;
+    console.log(currentUrl);
     router.push({
       pathname: router.pathname,
       query: `&searchText=${searchText}`,

@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/messaging/notification`
   ).then((res) => res.json());
 
-  const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
+  const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?token=${token}`).then((res) =>
     res.json()
   );
 

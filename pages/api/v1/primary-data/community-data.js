@@ -19,31 +19,34 @@ const post = async (req, res) => {
   }
 };
 
+const getSearchParams = (searchText) => {
+  if (searchText != "" && searchText != null) {
+    return { where: { deleted: 0, name: { search: searchText } } };
+  }
+  return { where: { deleted: 0 } };
+};
+
 const get = async (req, res) => {
   try {
     let curPage = req.query.page;
-    let { searchText } = req.query;
+    let  searchText  = req.query.searchText.trim();
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage);
-    let count = await prisma.community.count({ where: { deleted: 0 } });
+    let count = await prisma.community.count({ where: getSearchParams(searchText).where });
 
     let community = await prisma.community.findMany({
-      where: { deleted: 0 },
+      where: getSearchParams(searchText).where,
       skip: skip,
       take: perPage,
       orderBy: {
-       // name: "asc",
-        _relevance: {
-          fields: ['name'],
-          search: searchText,
-          sort: 'asc',
-        },
+        name: "asc",
+      
       },
-
       include: { District: { include: { Region: true } } },
     });
 
+    console.log(community.length);
     return res.status(200).json({
       statusCode: 1,
       community,
