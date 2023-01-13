@@ -22,6 +22,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let curPage = req.query.page;
+    let { searchText } = req.query;
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage);
@@ -32,7 +33,12 @@ const get = async (req, res) => {
       skip: skip,
       take: perPage,
       orderBy: {
-        name: "asc",
+       // name: "asc",
+        _relevance: {
+          fields: ['name'],
+          search: searchText,
+          sort: 'asc',
+        },
       },
 
       include: { District: { include: { Region: true } } },
