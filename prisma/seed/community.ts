@@ -1,8 +1,5 @@
 export const community = [
-  {
-    districtId: 29,
-    name: "GBAWE",
-  },
+
   {
     districtId: 29,
     name: "OLD BARRIER",
@@ -1908,10 +1905,7 @@ export const community = [
     districtId: 28,
     name: "COMMUNITY 13",
   },
-  {
-    districtId: 28,
-    name: "COMMUNITY 14",
-  },
+
   {
     districtId: 28,
     name: "COMMUNITY 14",
@@ -1933,10 +1927,7 @@ export const community = [
     districtId: 28,
     name: "COMMUNITY 17",
   },
-  {
-    districtId: 28,
-    name: "COMMUNITY 17",
-  },
+
   {
     districtId: 28,
     name: "COMMUNITY 17 ADINKRA ST",
@@ -2601,34 +2592,22 @@ export const community = [
     districtId: 29,
     name: "GBAWE",
   },
-  {
-    districtId: 29,
-    name: "GBAWE C.P",
-  },
+
   {
     districtId: 29,
     name: "GBAWE CP",
   },
-  {
-    districtId: 29,
-    name: "GBAWE CPP",
-  },
+
   {
     districtId: 29,
     name: "GBAWE TOP BASE",
   },
-  {
-    districtId: 29,
-    name: "GBAWE TOPBASE",
-  },
+
   {
     districtId: 29,
     name: "GBAWE ZERO",
   },
-  {
-    districtId: 29,
-    name: "GBAWE- CP",
-  },
+
   {
     districtId: 13,
     name: "GBAWE-GONSE BASIC SCHOOL",
