@@ -1,5 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import { getUserCookie } from "../../../../helpers/cookies-manager";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const post = async (req, res) => {
         .json({ message: "You don't have permission to save community" });
     }
     if (req.body.data.id) {
-     await prisma.community.update({
+      await prisma.community.update({
         where: {
           id: req.body.data.id,
         },
@@ -41,16 +42,24 @@ const post = async (req, res) => {
   }
 };
 
-const getSearchParams = (searchText) => {
+const getSearchParams = async (req, searchText) => {
+  let data = await verifyToken(req.query.token);
+
+  let district =
+    data.user.districtId == null || isNaN(data.user.districtId)
+      ? undefined
+      : Number(data.user.districtId);
+      console.log(district);
   if (searchText != "" && searchText != null) {
     return {
       where: {
         deleted: 0,
+        districtId: district,
         name: { search: searchText.replace(/[\s\n\t]/g, "_") },
       },
     };
   }
-  return { where: { deleted: 0 } };
+  return { where: { deleted: 0, districtId: district } };
 };
 
 const get = async (req, res) => {
@@ -61,11 +70,11 @@ const get = async (req, res) => {
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage);
     let count = await prisma.community.count({
-      where: getSearchParams(searchText).where,
+      where: getSearchParams(req, searchText).where,
     });
 
     let community = await prisma.community.findMany({
-      where: getSearchParams(searchText).where,
+      where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
       orderBy: {
@@ -87,7 +96,6 @@ const get = async (req, res) => {
   }
 };
 const Delete = async (req, res) => {
-
   await prisma.community.update({
     where: {
       id: Number(req.body.id),
@@ -97,15 +105,14 @@ const Delete = async (req, res) => {
     },
   });
   return res.status(200).json();
-
-}
+};
 export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
     : req.method === "PUT"
-    ?  put(req, res)
+    ? put(req, res)
     : req.method === "DELETE"
-    ?  Delete(req, res)
+    ? Delete(req, res)
     : req.method === "GET"
     ? get(req, res)
     : res.status(404).send("");
