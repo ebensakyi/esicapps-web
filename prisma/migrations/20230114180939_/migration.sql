@@ -1498,6 +1498,7 @@ CREATE TABLE "SanitationReport" (
     "fullName" VARCHAR(255),
     "phoneNumber" VARCHAR(255),
     "email" VARCHAR(255),
+    "community" VARCHAR(255),
     "image" VARCHAR(255) NOT NULL,
     "districtId" INTEGER,
     "reportTypeId" INTEGER,
@@ -1536,6 +1537,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Community_districtId_name_key" ON "Community"("districtId", "name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "BasicInfoSection_inspectionId_key" ON "BasicInfoSection"("inspectionId");

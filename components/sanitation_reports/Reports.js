@@ -1,4 +1,5 @@
 const Reports = ({ data }) => {
+  console.log(data);
     return (
       <div className="row">
         <div className="col-lg-12">
@@ -18,13 +19,14 @@ const Reports = ({ data }) => {
   
                     <th>Reporter</th>
                     <th>Phone</th>
+                    <th>Email</th>
                     <th>GPS</th>
                     <th>Region</th>
                     <th>District</th>
                     <th>Community</th>
                     {/* <th>Respondent</th>
                     <th>Designation</th> */}
-                    <th>Status</th>
+                    {/* <th>Status</th> */}
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -35,21 +37,24 @@ const Reports = ({ data }) => {
 
                         {" "}
                         <td>{dt.createdAt}</td>
-                        <td>{dt.name}</td>
+                        <td>{dt.fullName}</td>
                         <td>
                           {dt.phoneNumber} 
                         </td>
-                        <td>{dt.gps}</td>
-                        <td>{dt.region}</td>
-                        <td>{dt.district}</td>
-                        <td>{dt.community}</td>
                         <td>
+                          {dt.email} 
+                        </td>
+                        <td>{dt.gps}</td>
+                        <td>{dt.District.Region.name}</td>
+                        <td>{dt.District.name}</td>
+                        <td>{dt.community}</td>
+                        {/* <td>
                           {dt.Inspection.isPublished == 0 ? (
                             <span className="badge bg-danger">Unpublished</span>
                           ) : (
                             <span className="badge bg-success">Published</span>
                           )}{" "}
-                        </td>
+                        </td> */}
                         <td>
                           <div className="dropdown d-inline-block">
                             <button

@@ -1,7 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
-
 }
 
 datasource db {
@@ -82,7 +81,7 @@ model User {
   phoneNumber  String  @unique @db.VarChar(255)
   designation  String  @db.VarChar(255)
   password     String  @db.VarChar(255)
-  tempPassword String?  @db.VarChar(255)
+  tempPassword String? @db.VarChar(255)
 
   regionId                       Int?
   districtId                     Int?
@@ -292,8 +291,8 @@ model Community {
   updatedAt        DateTime           @updatedAt
   BasicInfoSection BasicInfoSection[]
   District         District           @relation(fields: [districtId], references: [id])
-    @@unique([districtId, name], name: "communityIdentifier")
 
+  @@unique([districtId, name], name: "communityIdentifier")
 }
 
 model ContainerVolume {
@@ -1741,12 +1740,13 @@ model Picture {
 }
 
 model SanitationReport {
-  id           Int     @id @default(autoincrement())
-  fcmId        String? @db.VarChar(255)
-  fullName     String? @db.VarChar(255)
-  phoneNumber  String? @db.VarChar(255)
-  email        String? @db.VarChar(255)
-  image        String  @db.VarChar(255)
+  id          Int     @id @default(autoincrement())
+  fcmId       String? @db.VarChar(255)
+  fullName    String? @db.VarChar(255)
+  phoneNumber String? @db.VarChar(255)
+  email       String? @db.VarChar(255)
+  community   String? @db.VarChar(255)
+  image        String @db.VarChar(255)
   districtId   Int?
   reportTypeId Int?
 

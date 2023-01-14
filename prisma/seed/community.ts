@@ -43,10 +43,7 @@ export const community = [
     districtId: 4,
     name: "AAYALOLO ROAD",
   },
-  {
-    districtId: 4,
-    name: "AAYLOLO",
-  },
+ 
   {
     districtId: 17,
     name: "ABAMAN",
@@ -191,10 +188,7 @@ export const community = [
     districtId: 4,
     name: "ABORJWE",
   },
-  {
-    districtId: 4,
-    name: "ABORTWE",
-  },
+
   {
     districtId: 1,
     name: "ABOSSEY OKAI",
@@ -299,10 +293,7 @@ export const community = [
     districtId: 2,
     name: "ADAMAAME",
   },
-  {
-    districtId: 2,
-    name: "ADAMAME",
-  },
+  
   {
     districtId: 16,
     name: "ADAMNANA",
@@ -323,10 +314,7 @@ export const community = [
     districtId: 4,
     name: "ADENDENTAN",
   },
-  {
-    districtId: 4,
-    name: "ADENKPO",
-  },
+
   {
     districtId: 4,
     name: "ADENKPOR",
@@ -395,10 +383,7 @@ export const community = [
     districtId: 13,
     name: "ADU GYEMFI DOWN",
   },
-  {
-    districtId: 13,
-    name: "ADU GYEMFI SIDE",
-  },
+
   {
     districtId: 17,
     name: "ADUSA",
@@ -415,10 +400,7 @@ export const community = [
     districtId: 4,
     name: "ADWENBU",
   },
-  {
-    districtId: 17,
-    name: "ADZEN KOTOKO",
-  },
+
   {
     districtId: 17,
     name: "ADZEN KOTOKU",
@@ -495,10 +477,7 @@ export const community = [
     districtId: 13,
     name: "AGAPE STATION",
   },
-  {
-    districtId: 13,
-    name: "AGAPE TARAZZO",
-  },
+ 
   {
     districtId: 13,
     name: "AGAPE TARRAZO",
@@ -543,10 +522,7 @@ export const community = [
     districtId: 13,
     name: "AGBEVE",
   },
-  {
-    districtId: 23,
-    name: "AGBLEZA",
-  },
+ 
   {
     districtId: 23,
     name: "AGBLEZAA",
@@ -559,10 +535,7 @@ export const community = [
     districtId: 14,
     name: "AGBOGBA",
   },
-  {
-    districtId: 14,
-    name: "AGBOGBA2",
-  },
+
   {
     districtId: 4,
     name: "AGBOGBLOSHIE",
@@ -625,12 +598,10 @@ export const community = [
   },
   {
     districtId: 3,
-    name: "AKOKORFOTO",
+    name: "AKOKO FOTO",
   },
-  {
-    districtId: 3,
-    name: "AKORKOFOTO",
-  },
+  
+ 
   {
     districtId: 22,
     name: "AKOSOMBO JUNCTION",
@@ -643,10 +614,7 @@ export const community = [
     districtId: 17,
     name: "AKOTOSHIE",
   },
-  {
-    districtId: 14,
-    name: "AKPOMANG",
-  },
+
   {
     districtId: 14,
     name: "AKPORMANG",
@@ -717,7 +685,7 @@ export const community = [
   },
   {
     districtId: 9,
-    name: "ALAJO T JUNCTIO",
+    name: "ALAJO T JUNCTION",
   },
   {
     districtId: 18,
@@ -803,10 +771,7 @@ export const community = [
     districtId: 16,
     name: "AMANFRO TOP TOWN",
   },
-  {
-    districtId: 16,
-    name: "AMANFRO TOPTOWN",
-  },
+  
   {
     districtId: 16,
     name: "AMANFRO WASHING BAY",
@@ -891,14 +856,7 @@ export const community = [
     districtId: 4,
     name: "ANTE AKU",
   },
-  {
-    districtId: 13,
-    name: "ANTE AKU",
-  },
-  {
-    districtId: 13,
-    name: "ANTIE AKU",
-  },
+
   {
     districtId: 13,
     name: "ANTIEKU",
@@ -959,10 +917,7 @@ export const community = [
     districtId: 13,
     name: "APATASE",
   },
-  {
-    districtId: 13,
-    name: "APATASI",
-  },
+ 
   {
     districtId: 16,
     name: "APEDWA",
@@ -987,10 +942,7 @@ export const community = [
     districtId: 12,
     name: "APOSTLE REVELATION SOCIETY",
   },
-  {
-    districtId: 13,
-    name: "APOSTLE SAFE STREET",
-  },
+
   {
     districtId: 13,
     name: "APOSTLE SARFO STREET",
@@ -1059,10 +1011,7 @@ export const community = [
     districtId: 14,
     name: "ASHAGMAN ELETORAL AREA",
   },
-  {
-    districtId: 16,
-    name: "ASHALADZA",
-  },
+
   {
     districtId: 16,
     name: "ASHALAJA",
@@ -1079,34 +1028,22 @@ export const community = [
     districtId: 14,
     name: "ASHONGMAN ESTATE",
   },
-  {
-    districtId: 14,
-    name: "ASHONGMAN ESTATE ELETORAL AREA",
-  },
-  {
-    districtId: 14,
-    name: "ASHONGMAN ESTATES",
-  },
+
+
   {
     districtId: 14,
     name: "ASHONGMAN MANGOLANE",
   },
   {
     districtId: 14,
-    name: "ASHONGMANG",
+    name: "ASHONGMAN",
   },
-  {
-    districtId: 14,
-    name: "ASHONGMANG MAGOLINE",
-  },
+ 
   {
     districtId: 14,
     name: "ASHONGMANG MANGOLANE",
   },
-  {
-    districtId: 14,
-    name: "ASHONMAN ESTATE",
-  },
+  
   {
     districtId: 14,
     name: "ASHONMAN ESTATE ELECTORAL AREA",
@@ -1211,10 +1148,7 @@ export const community = [
     districtId: 13,
     name: "AUNTIE AKU STATION",
   },
-  {
-    districtId: 4,
-    name: "AVENOE",
-  },
+
   {
     districtId: 4,
     name: "AVENOR",
@@ -1255,18 +1189,12 @@ export const community = [
     districtId: 13,
     name: "AWOSHIE ENO F.I.D 12",
   },
-  {
-    districtId: 13,
-    name: "AWOSHIE LAST",
-  },
+
   {
     districtId: 13,
     name: "AWOSHIE LAST STOP",
   },
-  {
-    districtId: 29,
-    name: "AWOSHIE ONYINANSI",
-  },
+ 
   {
     districtId: 13,
     name: "AWOSHIE ONYINASE",
@@ -1307,10 +1235,7 @@ export const community = [
     districtId: 9,
     name: "AWUKU DARKO",
   },
-  {
-    districtId: 4,
-    name: "AYAALOLO",
-  },
+  
   {
     districtId: 4,
     name: "AYALOLO",
@@ -1371,14 +1296,8 @@ export const community = [
     districtId: 13,
     name: "AYIGBE-TOWN",
   },
-  {
-    districtId: 17,
-    name: "AYIGBE-TOWN",
-  },
-  {
-    districtId: 29,
-    name: "AYIGBE-TOWN",
-  },
+
+ 
   {
     districtId: 1,
     name: "AYIGBEY TOWN",
@@ -1387,10 +1306,7 @@ export const community = [
     districtId: 17,
     name: "AYIKAI DOBLO",
   },
-  {
-    districtId: 17,
-    name: "AYIKAI-DOBLO",
-  },
+
   {
     districtId: 22,
     name: "AYIMENSAH",
@@ -1411,10 +1327,7 @@ export const community = [
     districtId: 2,
     name: "BAAH YARD",
   },
-  {
-    districtId: 28,
-    name: "BAATSONA",
-  },
+
   {
     districtId: 23,
     name: "BAATSONAA",
@@ -1455,10 +1368,7 @@ export const community = [
     districtId: 27,
     name: "BANKUMAN",
   },
-  {
-    districtId: 4,
-    name: "BARBA",
-  },
+ 
   {
     districtId: 4,
     name: "BARBAR",
@@ -1511,10 +1421,7 @@ export const community = [
     districtId: 9,
     name: "BLACK STAR STREET",
   },
-  {
-    districtId: 1,
-    name: "BLACKSMITH",
-  },
+ 
   {
     districtId: 4,
     name: "BLOCK FACTORY",
@@ -1539,10 +1446,7 @@ export const community = [
     districtId: 13,
     name: "BLUE GATE",
   },
-  {
-    districtId: 13,
-    name: "BLUE KATE",
-  },
+ 
   {
     districtId: 13,
     name: "BLUE KIOSK",
@@ -1679,18 +1583,12 @@ export const community = [
     districtId: 20,
     name: "BUADE",
   },
-  {
-    districtId: 4,
-    name: "BUBIASHIE",
-  },
+  
   {
     districtId: 4,
     name: "BUBII",
   },
-  {
-    districtId: 4,
-    name: "BUBUASHI",
-  },
+  
   {
     districtId: 4,
     name: "BUBUASHIE",
@@ -1751,10 +1649,7 @@ export const community = [
     districtId: 4,
     name: "CAMARA",
   },
-  {
-    districtId: 4,
-    name: "CAMARA I.B.E",
-  },
+ 
   {
     districtId: 4,
     name: "CAMARA IBE",
@@ -1767,22 +1662,13 @@ export const community = [
     districtId: 23,
     name: "CAMP 2",
   },
-  {
-    districtId: 23,
-    name: "CAMP2",
-  },
+ 
   {
     districtId: 15,
     name: "CANADA",
   },
-  {
-    districtId: 15,
-    name: "CANANDA",
-  },
-  {
-    districtId: 3,
-    name: "CAPIATL O2",
-  },
+ 
+
   {
     districtId: 3,
     name: "CAPITAL O2",
@@ -1827,17 +1713,14 @@ export const community = [
     districtId: 13,
     name: "CHANTAL (NII AYI ABABIO STREET)",
   },
-  {
-    districtId: 13,
-    name: "CHANTAL (NII AYI STREET",
-  },
+
   {
     districtId: 13,
     name: "CHANTAN",
   },
   {
     districtId: 13,
-    name: "CHANTAN (NII ABABIO STREET )",
+    name: "CHANTAN (NII ABABIO STREET)",
   },
   {
     districtId: 13,
@@ -1867,38 +1750,17 @@ export const community = [
     districtId: 13,
     name: "CHANTAN(TABORA #5)",
   },
-  {
-    districtId: 13,
-    name: "CHANTAN(TABORA#5)",
-  },
+
   {
     districtId: 13,
     name: "CHARLES BOTCHWAY STREET",
   },
-  {
-    districtId: 4,
-    name: "CHEMU",
-  },
-  {
-    districtId: 4,
-    name: "CHEMU NAA",
-  },
-  {
-    districtId: 4,
-    name: "CHEMUA NA",
-  },
-  {
-    districtId: 4,
-    name: "CHEMUA NAA",
-  },
+ 
   {
     districtId: 4,
     name: "CHEMUENA",
   },
-  {
-    districtId: 4,
-    name: "CHEMUNAA",
-  },
+ 
   {
     districtId: 3,
     name: "CHILDREN HOSPITAL",
@@ -1907,10 +1769,7 @@ export const community = [
     districtId: 4,
     name: "CHILDREN'S HOSPITAL AREA",
   },
-  {
-    districtId: 16,
-    name: "CHINES",
-  },
+
   {
     districtId: 16,
     name: "CHINESE",
@@ -1939,10 +1798,7 @@ export const community = [
     districtId: 4,
     name: "CHORKOR CHEMUENA",
   },
-  {
-    districtId: 4,
-    name: "CHORKOR CHEMUNAA",
-  },
+
   {
     districtId: 2,
     name: "CHRIST EBENEZER AREA",
@@ -1967,10 +1823,7 @@ export const community = [
     districtId: 4,
     name: "CIRCLE",
   },
-  {
-    districtId: 4,
-    name: "CIRCLE RAILWAY",
-  },
+
   {
     districtId: 4,
     name: "CIRCLE RAILWAYS",
@@ -1979,18 +1832,12 @@ export const community = [
     districtId: 2,
     name: "CIRCLE STATION",
   },
-  {
-    districtId: 2,
-    name: "CIRCLE STATION AREA",
-  },
+
   {
     districtId: 2,
     name: "CIRCLE STATION DOWN",
   },
-  {
-    districtId: 4,
-    name: "CIRLE",
-  },
+
   {
     districtId: 13,
     name: "CITY GATE ABEASE",
@@ -2003,10 +1850,7 @@ export const community = [
     districtId: 9,
     name: "CLOSE TO GLOBAL CHURCH",
   },
-  {
-    districtId: 4,
-    name: "CLUB CONNER",
-  },
+
   {
     districtId: 4,
     name: "CLUB CORNER",
@@ -2055,10 +1899,7 @@ export const community = [
     districtId: 13,
     name: "COMMISSION FAMILY CHAPEL MAP ID 192",
   },
-  {
-    districtId: 4,
-    name: "COMMMERCIAL BANK AREA",
-  },
+ 
   {
     districtId: 27,
     name: "COMMUNITY 12",
@@ -2087,10 +1928,7 @@ export const community = [
     districtId: 28,
     name: "COMMUNITY 16",
   },
-  {
-    districtId: 28,
-    name: "COMMUNITY 16",
-  },
+
   {
     districtId: 28,
     name: "COMMUNITY 17",
@@ -2121,7 +1959,7 @@ export const community = [
   },
   {
     districtId: 27,
-    name: "COMMUNITY FOUR",
+    name: "COMMUNITY 4",
   },
   {
     districtId: 1,
@@ -4424,4 +4262,4 @@ export const community = [
     districtId: 13,
     name: "NAGAHRA LANE",
   },
-];
+ ];
