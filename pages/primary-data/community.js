@@ -32,9 +32,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  // const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data`).then(
-  //   (res) => res.json()
-  // );
+ 
 
 
 

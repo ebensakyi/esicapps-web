@@ -292,6 +292,8 @@ model Community {
   updatedAt        DateTime           @updatedAt
   BasicInfoSection BasicInfoSection[]
   District         District           @relation(fields: [districtId], references: [id])
+    @@unique([districtId, name], name: "communityIdentifier")
+
 }
 
 model ContainerVolume {

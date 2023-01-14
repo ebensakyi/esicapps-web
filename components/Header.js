@@ -597,7 +597,7 @@ const Header = () => {
                     <li className="nav-item">
                       <a href="/primary-data/community" className="nav-link">
                         {" "}
-                        Community data
+                        Communities
                       </a>
                     </li>
                     {/* <li className="nav-item">

@@ -1,7 +1,8 @@
 //import '../styles/globals.css'
-import { useEffect,useState } from "react";
-function MyApp({ Component, pageProps }) {
+import { useEffect, useState } from "react";
+import NextNProgress from "nextjs-progressbar";
 
+function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
     setShowChild(true);
@@ -13,7 +14,12 @@ function MyApp({ Component, pageProps }) {
   if (typeof window === "undefined") {
     return <></>;
   } else {
-    return <Component {...pageProps} />;
+    return (
+      <>
+        <NextNProgress height={6} color="#f2ae02" />
+        <Component {...pageProps} />
+      </>
+    );
   }
 }
 

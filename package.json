@@ -29,6 +29,7 @@
     "nanoid": "^4.0.0",
     "next": "12.1.6",
     "next-connect": "^0.13.0",
+    "nextjs-progressbar": "^0.0.16",
     "react": "18.1.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.1.0",

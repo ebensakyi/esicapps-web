@@ -14,7 +14,6 @@ const post = async (req, res) => {
 
     let data = {};
     if (userCookie.user.userTypeId == 1) {
-      console.log("dis", req.body.district);
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -31,8 +30,7 @@ const post = async (req, res) => {
       console.log(data);
     }
     if (userCookie.user.userTypeId == 3) {
-      console.log("userCookie: ", userCookie);
-      console.log(Number(userCookie.user.regionId));
+      
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -84,12 +82,10 @@ const get = async (req, res) => {
     let data = await verifyToken(req.query.token);
 
     let userLevel = data.user.UserType.userLevelId;
-    console.log("userLevel ", userLevel);
     let region = data.user.regionId;
     let district = data.user.districtId;
 
     if (userLevel == 1) {
-      console.log("here 1");
       user = await prisma.user.findMany({
         where: { deleted: 0 },
         include: { Region: true, District: true, UserType: true },
@@ -113,7 +109,6 @@ const get = async (req, res) => {
     }
 
     if (userLevel == 3) {
-      console.log("here 3");
 
       user = await prisma.user.findMany({
         where: { deleted: 0, districtId: Number(district) },
