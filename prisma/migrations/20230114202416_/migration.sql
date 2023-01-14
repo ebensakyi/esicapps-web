@@ -1505,6 +1505,7 @@ CREATE TABLE "SanitationReport" (
     "description" VARCHAR(255),
     "latitude" DECIMAL(11,8),
     "longitude" DECIMAL(11,8),
+    "status" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

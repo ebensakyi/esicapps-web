@@ -89,7 +89,7 @@ const Reports = ({ data }) => {
                           </button>
                           <ul className="dropdown-menu dropdown-menu-end">
                             <li>
-                              <a href="#!" className="dropdown-item">
+                              <a href="https://www.google.com/maps/@5.551167,-0.2713955,15z" target="_blank" className="dropdown-item">
                                 <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
                                 View Location
                               </a>
