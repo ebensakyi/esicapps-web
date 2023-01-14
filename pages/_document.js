@@ -14,6 +14,7 @@ export default function Document() {
     >
       <Head>
       
+      <link rel="stylesheet" href="/assets/libs/glightbox/css/glightbox.min.css"/>
 
         <link
           href="/assets/libs/swiper/swiper-bundle.min.css"
@@ -75,6 +76,13 @@ export default function Document() {
         ></script>
 
         <script async src="/assets/libs/swiper/swiper-bundle.min.js"></script>
+
+
+    <script src="/assets/libs/glightbox/js/glightbox.min.js"></script>
+
+    <script src="/assets/libs/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <script src="/assets/js/pages/gallery.init.js"></script>
 
       
         <script async src="/assets/js/app.js"></script>

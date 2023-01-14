@@ -35,6 +35,8 @@ const post = async (req, res) => {
         image: image,
       };
 
+      console.log(data);
+
       const sanitationReport = await prisma.sanitationReport.create({ data });
 
       //Move to payment
@@ -50,9 +52,12 @@ const saveFile = async (file) => {
   const imageFile = await file.nuisancePicture;
 
   console.log(file.nuisancePicture.originalFilename);
+  var now = moment();
+
+  let prefix = now.format("YYYYMM");
 
   const ext = await imageFile.originalFilename.split(".").pop();
-  const fileName = nanoid() + "." + ext;
+  const fileName = prefix + "" + nanoid() + "." + ext;
   const data = fs.readFileSync(imageFile.filepath);
   fs.writeFileSync(`./public/uploads/${fileName}`, data);
   // fs.unlinkSync(imageFile.filepath);
@@ -66,9 +71,8 @@ const saveFile = async (file) => {
 };
 
 const uploadFile = async (fileName) => {
+  console.log("file  name",fileName);
   try {
-    var now = moment();
-    let prefix = now.format("YYYYMM");
 
     AWS.config.update({
       accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -82,7 +86,8 @@ const uploadFile = async (fileName) => {
     var params = {
       Bucket: "sanitation-reporter-images",
       Body: fs.createReadStream(filePath),
-      Key: prefix + "/" + fileName,
+      // Key: prefix + "/" + fileName,
+      Key: fileName,
     };
 
     let stored = await s3.upload(params).promise();
