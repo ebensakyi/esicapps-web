@@ -8,6 +8,8 @@ const post = async (req, res) => {
     let newPassword = req.body.newPassword;
     let oldPassword = req.body.oldPassword;
 
+    console.log(req.body);
+
     //let hash = await bcrypt.hashSync(password, salt);
 
     let user = await prisma.user.findFirst({
@@ -21,6 +23,7 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(oldPassword, user.password);
+    console.log(isValid);
 
     if (isValid) {
       const salt = await bcrypt.genSaltSync(10);

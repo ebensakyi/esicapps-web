@@ -15,7 +15,6 @@ const post = async (req, res) => {
 
     let loginTimes = user.loginTimes;
 
-    console.log(loginTimes);
     if (!user) {
       return res
         .status(400)
@@ -37,7 +36,7 @@ const post = async (req, res) => {
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
   } catch (error) {
-    console.log("Server error", error);
+    console.log("Server errorr: ", error);
     if (error.code === "P2002")
       return res
         .status(500)
