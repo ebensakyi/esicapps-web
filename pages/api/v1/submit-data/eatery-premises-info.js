@@ -3,7 +3,7 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("req.body.bathRoomAvailabilityId: ",req.body.bathroomAvailabilityId);
 
     const data = {
       id: req.body.id,
@@ -41,9 +41,9 @@ const post = async (req, res) => {
           : Number(req.body.urinalAvailabilityId),
 
       bathRoomAvailabilityId:
-        req.body.bathRoomAvailabilityId == "null"
+        req.body.bathroomAvailabilityId == "null"
           ? null
-          : Number(req.body.bathRoomAvailabilityId),
+          : Number(req.body.bathroomAvailabilityId),
 
       approvedHandwashingFacilityAvailabilityId:
         req.body.approvedHandwashingFacilityAvailabilityId == "null"
@@ -102,7 +102,7 @@ const post = async (req, res) => {
           : Number(req.body.disinfectionFrequencyId),
     };
 
-    // console.log(data);
+   console.log(data);
    const response = await prisma.eateryPremisesInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });

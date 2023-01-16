@@ -66,7 +66,7 @@ const Eatery = ({ data }) => {
                             <ul className="dropdown-menu dropdown-menu-end">
                             <Link
                               href={{
-                                pathname: `/data/eatery_view`,
+                                pathname: `/submitted-data/eatery_view`,
                                 query: {
                                   id: dt.Inspection.id,
                                 },

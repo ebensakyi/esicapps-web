@@ -1478,6 +1478,7 @@ const EateryView = ({ data }) => {
                         )
                       )}
                     </div>{" "}
+                    {data.LiquidWasteSection.PremisesToiletType != null ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Toilet Type</label>
                       {data.LiquidWasteSection.PremisesToiletType.map((x) => (
@@ -1490,7 +1491,7 @@ const EateryView = ({ data }) => {
                           readOnly="readOnly"
                         />
                       ))}
-                    </div>{" "}
+                    </div>:<></>}
                   </div>
                 </div>
               </div>
@@ -1509,27 +1510,7 @@ const EateryView = ({ data }) => {
                     <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-
-                    wasteServiceProviderRegistrationId Int?
-  wasteCollectorName                 String?
-  wasteSortingAvailabilityId         Int?
-  wasteCollectionFrequencyId         Int?
-  approvedWasteStorageReceptacleId   Int?
-  adequateWasteStorageReceptacleId   Int?
-  wasteCollectionServiceTypeId       Int?
-  unservicedWasteDisposalId          Int?
-  wastePaymentEvidenceId             Int?
-  wasteContainerVolumeId             Int?
-  wasteProviderAccredittedId         Int?
-  containerNumber                    Int?
-                  </a>
-                </div> */}
+               
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -1544,7 +1525,8 @@ const EateryView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data.SolidWasteSection
-                            .wasteServiceProviderRegistration.name
+                            .wasteServiceProviderRegistration!=null? data.SolidWasteSection
+                            .wasteServiceProviderRegistration.name  :""
                         }
                         readOnly="readOnly"
                       />
