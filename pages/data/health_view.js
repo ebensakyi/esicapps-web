@@ -1,5 +1,5 @@
 
-import HealthView from '../../components/data/HealthView';
+import HealthView from '../../components/submitted-data/HealthView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

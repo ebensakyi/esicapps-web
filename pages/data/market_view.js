@@ -1,5 +1,5 @@
 
-import MarketView from '../../components/data/MarketView';
+import MarketView from '../../components/submitted-data/MarketView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

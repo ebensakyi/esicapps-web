@@ -1,5 +1,5 @@
 
-import ResidentialView from '../../components/data/ResidentialView';
+import ResidentialView from '../../components/submitted-data/ResidentialView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

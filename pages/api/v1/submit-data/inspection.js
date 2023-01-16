@@ -20,7 +20,7 @@ const post = async (req, res) => {
         ? null
         : Number(req.body.inspectionTypeId),
     followUpDate:
-      req.body.followUpDate == "null" ? null : req.body.followUpDate,
+      req.body.followUpDate ==null ? "" : req.body.followUpDate,
     doFollowUp: Number(req.body.doFollowUp),
     startedAt: new Date(req.body.startedAt),
     completedAt:  new Date(req.body.completedAt),

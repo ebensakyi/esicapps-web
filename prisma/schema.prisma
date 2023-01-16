@@ -16,7 +16,7 @@ model Inspection {
   inspectionTypeId               Int
   isPublished                    Int                             @default(0)
   publishedById                  Int?
-  followUpDate                   String                          @db.VarChar(255)
+  followUpDate                   String?                          @db.VarChar(255)
   doFollowUp                     Int?
   deleted                        Int?                            @default(0)
   createdAt                      DateTime                        @default(now())

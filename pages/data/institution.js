@@ -1,5 +1,5 @@
 
-import Institution from '../../components/data/Institution';
+import Institution from '../../components/submitted-data/Institution';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

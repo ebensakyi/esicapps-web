@@ -1,5 +1,5 @@
 
-import HospitalityView from '../../components/data/HospitalityView';
+import HospitalityView from '../../components/submitted-data/HospitalityView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

@@ -1,5 +1,5 @@
 
-import Residential from '../../components/data/Residential'
+import Residential from '../../components/submitted-data/Residential'
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

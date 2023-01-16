@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import Community from "../../components/primary_data/Community";
+import Community from "../../components/primary-data/Community";
 
 export default function community({ data }) {
   return (

@@ -1,5 +1,5 @@
 
-import EateryView from '../../components/data/EateryView';
+import EateryView from '../../components/submitted-data/EateryView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";

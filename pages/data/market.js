@@ -1,5 +1,5 @@
 
-import Market from '../../components/data/Market';
+import Market from '../../components/submitted-data/Market';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
