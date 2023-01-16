@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/institution?published=${published}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/institution?published=${published}`).then(
         (res) => res.json()
     );
 

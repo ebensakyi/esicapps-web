@@ -1818,7 +1818,7 @@ const ResidentialView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )}{" "}
+                    )}
                     {data.ConclusionSection.officerComment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Office Comment</label>

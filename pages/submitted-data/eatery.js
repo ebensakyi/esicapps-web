@@ -1,11 +1,11 @@
 
-import Hospitality from '../../components/submitted-data/Hospitality';
+import Eatery from '../../components/submitted-data/Eatery';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function hospitality({ data }) {
+export default function eatery({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function hospitality({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Hospitality data={data} />
+                        <Eatery data={data} />
 
                     </div>
                 </div>
@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/hospitality?published=${published}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/eatery?published=${published}`).then(
         (res) => res.json()
     );
 

@@ -1,11 +1,11 @@
 
-import EateryView from '../../components/submitted-data/EateryView';
+import IndustryView from '../../components/submitted-data/IndustryView';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function eatery({ data }) {
+export default function industry({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function eatery({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <EateryView data={data} />
+                        <IndustryView data={data} />
 
                     </div>
                 </div>
@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/residential-view?id=${id}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/residential-view?id=${id}`).then(
         (res) => res.json()
     );
 

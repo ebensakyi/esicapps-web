@@ -1,11 +1,12 @@
 
+import Residential from '../../components/submitted-data/Residential'
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import Health from '../../components/submitted-data/Health'
+import { inspect } from 'util';
 
 
-export default function health({ data }) {
+export default function residential({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +15,7 @@ export default function health({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Health data={data} />
+                        <Residential data={data} />
 
                     </div>
                 </div>
@@ -27,6 +28,9 @@ export default function health({ data }) {
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
     const  {published}  =context.query;
+
+    console.log(published);
+
     if (!token) {
         return {
             redirect: {
@@ -35,10 +39,11 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/health?published=${published}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/residential?published=${published}`).then(
         (res) => res.json()
     );
 
+    inspect(data)
    
     return {
         props: {

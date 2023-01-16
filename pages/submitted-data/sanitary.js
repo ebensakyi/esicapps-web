@@ -1,11 +1,11 @@
 
-import HealthView from '../../components/submitted-data/HealthView';
+import Sanitary from '../../components/submitted-data/Sanitary'
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function health({ data }) {
+export default function sanitary({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function health({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <HealthView data={data} />
+                        <Sanitary data={data} />
 
                     </div>
                 </div>
@@ -26,8 +26,7 @@ export default function health({ data }) {
 
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
-    const  {id}  =context.query;
-
+    const  {published}  =context.query;
 
     if (!token) {
         return {
@@ -37,7 +36,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/residential-view?id=${id}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/sanitary?published=${published}`).then(
         (res) => res.json()
     );
 

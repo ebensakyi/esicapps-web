@@ -1,11 +1,11 @@
 
-import IndustryView from '../../components/submitted-data/IndustryView';
+import Hospitality from '../../components/submitted-data/Hospitality';
 import Header from '../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function industry({ data }) {
+export default function hospitality({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function industry({ data }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <IndustryView data={data} />
+                        <Hospitality data={data} />
 
                     </div>
                 </div>
@@ -26,8 +26,7 @@ export default function industry({ data }) {
 
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
-    const  {id}  =context.query;
-
+    const  {published}  =context.query;
 
     if (!token) {
         return {
@@ -37,7 +36,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/data/residential-view?id=${id}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/hospitality?published=${published}`).then(
         (res) => res.json()
     );
 
