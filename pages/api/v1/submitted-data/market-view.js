@@ -2,7 +2,26 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-  } catch (error) {}
+    let inspection = await prisma.inspection.findFirst({
+      where: {
+        id: req.body.id,
+      },
+    });
+    let isPublished = inspection.isPublished;
+
+    await prisma.inspection.update({
+      data: {
+        isPublished: Math.abs(isPublished - 1),
+      },
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    res.status(200).json();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const get = async (req, res) => {
