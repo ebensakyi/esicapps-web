@@ -6,11 +6,11 @@ const ResidentialView = ({ data }) => {
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/residential-view`, {
+      const response = await axios.post(`/api/v1/submitted-data/residential-view`, {
         id: id,
       });
       if (response.status == 200) {
-        router.push("/data/residential?published=0");
+        router.push("/submitted-data/residential?published=0");
       }
     } catch (error) {
       console.log(error);
@@ -56,14 +56,17 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div className="col-lg-3 col-sm-6">
+                  <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Region</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection.Community.District.Region.name
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.District.Region
+                                .name
+                            : ""
                         }
                         readOnly="readOnly"
                       />
@@ -74,7 +77,11 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.Community.District.name}
+                        value={
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.District.name
+                            : ""
+                        }
                         readOnly="readOnly"
                       />
                     </div>
@@ -84,7 +91,11 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.Community.name}
+                        value={
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.name
+                            : ""
+                        }
                         readOnly="readOnly"
                       />
                     </div>

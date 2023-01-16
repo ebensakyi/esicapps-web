@@ -6,12 +6,12 @@ const IndustryView = ({ data }) => {
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/industry-view`, {
+      const response = await axios.post(`/api/v1/submitted-data/industry-view`, {
         id: id,
       });
 
       if (response.statusCode == 200) {
-        router.push("/users");
+        router.push("/submitted-data/industry?published=0");
       }
     } catch (error) {
       console.log(error);

@@ -6,12 +6,12 @@ const HospitalityView = ({ data }) => {
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/hospitality-view`, {
+      const response = await axios.post(`/api/v1/submitted-data/hospitality-view`, {
         id: id,
       });
 
       if (response.statusCode == 200) {
-        router.push("/users");
+        router.push("/submitted-data/hospitality?published=0");
       }
     } catch (error) {
       console.log(error);

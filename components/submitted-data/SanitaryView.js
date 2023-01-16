@@ -6,12 +6,12 @@ const SanitaryView = ({ data }) => {
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/sanitary-view`, {
+      const response = await axios.post(`/api/v1/submitted-data/sanitary-view`, {
         id: id,
       });
 
       if (response.statusCode == 200) {
-        router.push("/users");
+        router.push("/submitted-data/sanitary?published=0");
       }
     } catch (error) {
       console.log(error);

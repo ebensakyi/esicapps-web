@@ -6,12 +6,12 @@ const HealthView = ({ data }) => {
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/data/health-view`, {
+      const response = await axios.post(`/api/v1/submitted-data/health-view`, {
         id: id,
       });
 
       if (response.statusCode == 200) {
-        router.push("/users");
+        router.push("/submitted-data/health?published=0");
       }
     } catch (error) {
       console.log(error);
