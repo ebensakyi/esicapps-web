@@ -43,9 +43,9 @@ const Eatery = ({ data }) => {
                           {dt.User.otherNames} {dt.User.surname}
                         </td>
                         <td>{dt.ghanaPostGps}</td>
-                        <td>{dt.Community.District.Region.name}</td>
-                        <td>{dt.Community.District.name}</td>
-                        <td>{dt.Community.name}</td>
+                        <td>{dt.Community!=null?dt.Community.District.Region.name:""}</td>
+                      <td>{dt.Community!=null?dt.Community.District.name:""}</td>
+                      <td>{dt.Community!=null?dt.Community.name:""}{dt.community}</td>
                         <td>
                           {dt.Inspection.isPublished == 0 ? (
                             <span className="badge bg-danger">Unpublished</span>

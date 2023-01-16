@@ -42,9 +42,18 @@ const Residential = ({ data }) => {
                         {dt.User.otherNames} {dt.User.surname}
                       </td>
                       <td>{dt.ghanaPostGps}</td>
-                      <td>{dt.Community.District.Region.name}</td>
-                      <td>{dt.Community.District.name}</td>
-                      <td>{dt.Community.name}</td>
+                      <td>
+                        {dt.Community != null
+                          ? dt.Community.District.Region.name
+                          : ""}
+                      </td>
+                      <td>
+                        {dt.Community != null ? dt.Community.District.name : ""}
+                      </td>
+                      <td>
+                        {dt.Community != null ? dt.Community.name : ""}
+                        {dt.community}
+                      </td>
                       <td>
                         {dt.Inspection.isPublished == 0 ? (
                           <span className="badge bg-danger">Unpublished</span>
@@ -65,7 +74,7 @@ const Residential = ({ data }) => {
                           <ul className="dropdown-menu dropdown-menu-end">
                             <Link
                               href={{
-                                pathname: `/data/residential_view`,
+                                pathname: `/submitted-data/residential_view`,
                                 query: {
                                   id: dt.Inspection.id,
                                 },
