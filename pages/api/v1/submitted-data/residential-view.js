@@ -2,16 +2,23 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
-    await prisma.inspection.update({ data: {
-      isPublished: 1
-    },
-    where: {
-      id: req.body.id,
-    }})
+    let inspection = await prisma.inspection.findFirst({
+      where: {
+        id: req.body.id,
+      },
+    });
+    let isPublished = inspection.isPublished;
 
-     res.status(200).json();
+    await prisma.inspection.update({
+      data: {
+        isPublished: Math.abs(isPublished - 1),
+      },
+      where: {
+        id: req.body.id,
+      },
+    });
 
+    res.status(200).json();
   } catch (error) {
     console.log(error);
   }
@@ -20,7 +27,6 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let inspectionId = req.query.id;
-
 
     const data = await prisma.inspection.findFirst({
       where: {
@@ -195,7 +201,6 @@ const get = async (req, res) => {
       },
     });
 
-
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
     return res.status(200).json(data);
   } catch (error) {
@@ -207,7 +212,7 @@ export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
     : req.method === "PUT"
-    ?console.log("PUT")
+    ? console.log("PUT")
     : req.method === "DELETE"
     ? console.log("DELETE")
     : req.method === "GET"

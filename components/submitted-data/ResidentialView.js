@@ -3,12 +3,14 @@ import { useRouter } from "next/router";
 
 const ResidentialView = ({ data }) => {
   const router = useRouter();
-
   const publish = async (id) => {
     try {
-      const response = await axios.post(`/api/v1/submitted-data/residential-view`, {
-        id: id,
-      });
+      const response = await axios.post(
+        `/api/v1/submitted-data/residential-view`,
+        {
+          id: id,
+        }
+      );
       if (response.status == 200) {
         router.push("/submitted-data/residential?published=0");
       }
@@ -56,7 +58,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                  <div className="col-lg-3 col-sm-6">
+                    <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Region</label>
                       <input
                         type="text"
@@ -1866,16 +1868,29 @@ const ResidentialView = ({ data }) => {
               </div>
             </div>
             <div className="col-sm-auto">
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
+              {data.isPublished == 0 ? (
+                <button
+                  className="btn btn-success"
+                  onClick={(e) => {
+                    e.preventDefault();
 
-                  publish(data.id);
-                }}
-              >
-                Publish
-              </button>
+                    publish(data.id);
+                  }}
+                >
+                  Publish
+                </button>
+              ) : (
+                <button
+                  className="btn btn-danger"
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    publish(data.id);
+                  }}
+                >
+                  Unpublish
+                </button>
+              )}
             </div>
           </div>
         </div>
