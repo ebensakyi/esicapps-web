@@ -9,7 +9,7 @@ const post = async (req, res) => {
   try {
     const salt = await bcrypt.genSaltSync(10);
 
-    let password = "esicapps@mmda"; //await nanoid(8);
+    let password =await nanoid(8);
 
     let hashedPassword = bcrypt.hashSync(password, salt);
 
