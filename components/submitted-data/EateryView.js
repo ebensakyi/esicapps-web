@@ -64,7 +64,10 @@ const EateryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection.Community.District.Region.name
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.District.Region
+                                .name
+                            : ""
                         }
                         readOnly="readOnly"
                       />
@@ -75,7 +78,11 @@ const EateryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.Community.District.name}
+                        value={
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.District.name
+                            : ""
+                        }
                         readOnly="readOnly"
                       />
                     </div>
@@ -85,7 +92,11 @@ const EateryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.Community.name}
+                        value={
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.name
+                            : ""
+                        }
                         readOnly="readOnly"
                       />
                     </div>
@@ -141,7 +152,7 @@ const EateryView = ({ data }) => {
           </div>
         </div>
       </div>
-{/* 
+      {/* 
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">

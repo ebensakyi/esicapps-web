@@ -57,14 +57,17 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div className="col-lg-3 col-sm-6">
+                  <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Region</label>
                       <input
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection.Community.District.Region.name
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.District.Region
+                                .name
+                            : ""
                         }
                         readOnly="readOnly"
                       />
@@ -75,7 +78,11 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.Community.District.name}
+                        value={
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.District.name
+                            : ""
+                        }
                         readOnly="readOnly"
                       />
                     </div>
@@ -85,7 +92,11 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.Community.name}
+                        value={
+                          data.BasicInfoSection.Community != null
+                            ? data.BasicInfoSection.Community.name
+                            : ""
+                        }
                         readOnly="readOnly"
                       />
                     </div>
