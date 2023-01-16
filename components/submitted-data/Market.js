@@ -74,7 +74,7 @@ const Market = ({ data }) => {
                           <ul className="dropdown-menu dropdown-menu-end">
                             <Link
                               href={{
-                                pathname: `/data/market_view`,
+                                pathname: `/submitted-data/market_view`,
                                 query: {
                                   id: dt.Inspection.id,
                                 },

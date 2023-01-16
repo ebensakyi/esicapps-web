@@ -1544,7 +1544,8 @@ const HealthView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data.SolidWasteSection
-                            .wasteServiceProviderRegistration.name
+                            .wasteServiceProviderRegistration!=null? data.SolidWasteSection
+                            .wasteServiceProviderRegistration.name  :""
                         }
                         readOnly="readOnly"
                       />

@@ -11,7 +11,7 @@ const post = async (req, res) => {
       solidWasteSectionId:
         req.body.solidWasteSectionId == "null" ? null : req.body.solidWasteSectionId,
 
-        hazardousWasteDisposalId:
+        hazardousWasteDisposalMethodId:
         req.body.hazardousWasteDisposalId == "null"
           ? null
           : Number(req.body.hazardousWasteDisposalId),

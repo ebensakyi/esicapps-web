@@ -65,7 +65,7 @@ const Health = ({ data }) => {
                             <ul className="dropdown-menu dropdown-menu-end">
                             <Link
                               href={{
-                                pathname: `/data/health_view`,
+                                pathname: `/submitted-data/health_view`,
                                 query: {
                                   id: dt.Inspection.id,
                                 },

@@ -10,20 +10,20 @@ const post = async (req, res) => {
       facilityName: req.body.facilityName,
       healthPremisesTypeId:
         req.body.healthPremisesTypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.healthPremisesTypeId),
       separateWardId:
         req.body.separateWardId == "null"
-          ? ""
+          ? null
           : Number(req.body.separateWardId),
 
       toiletAvailabilityId:
         req.body.toiletAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.toiletAvailabilityId),
       ownershipTypeId:
         req.body.ownershipTypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.ownershipTypeId),
       urinalAvailabilityId:
         req.body.urinalAvailabilityId == "null"

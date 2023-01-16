@@ -1527,27 +1527,7 @@ const ResidentialView = ({ data }) => {
                     <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-
-                    wasteServiceProviderRegistrationId Int?
-  wasteCollectorName                 String?
-  wasteSortingAvailabilityId         Int?
-  wasteCollectionFrequencyId         Int?
-  approvedWasteStorageReceptacleId   Int?
-  adequateWasteStorageReceptacleId   Int?
-  wasteCollectionServiceTypeId       Int?
-  unservicedWasteDisposalId          Int?
-  wastePaymentEvidenceId             Int?
-  wasteContainerVolumeId             Int?
-  wasteProviderAccredittedId         Int?
-  containerNumber                    Int?
-                  </a>
-                </div> */}
+               
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -1564,7 +1544,8 @@ const ResidentialView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.SolidWasteSection
-                              .wasteServiceProviderRegistration.name
+                              .wasteServiceProviderRegistration!=null? data.SolidWasteSection
+                              .wasteServiceProviderRegistration.name  :""
                           }
                           readOnly="readOnly"
                         />

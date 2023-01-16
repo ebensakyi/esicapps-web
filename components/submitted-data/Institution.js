@@ -74,7 +74,7 @@ const Institution = ({ data }) => {
                           <ul className="dropdown-menu dropdown-menu-end">
                             <Link
                               href={{
-                                pathname: `/data/institution_view`,
+                                pathname: `/submitted-data/institution_view`,
                                 query: {
                                   id: dt.Inspection.id,
                                 },
