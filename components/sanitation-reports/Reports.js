@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 const Reports = ({ data }) => {
-  console.log(data);
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -89,7 +88,7 @@ const Reports = ({ data }) => {
                           </button>
                           <ul className="dropdown-menu dropdown-menu-end">
                             <li>
-                              <a href={`https://www.google.com/maps/@${dt.latitude},${dt.longitude},15z`} target="_blank" className="dropdown-item">
+                              <a href={`https://www.google.com/maps/@${dt.latitude},${dt.longitude},15z`} target="_blank" rel="noreferrer" className="dropdown-item">
                                 <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
                                 View Location
                               </a>

@@ -160,12 +160,12 @@ const Community = ({ data }) => {
               </div>
             </div> */}
 
-            <div class="col-sm">
-              <div class="d-flex justify-content-sm-end">
-                <div class="search-box ms-2">
+            <div className="col-sm">
+              <div className="d-flex justify-content-sm-end">
+                <div className="search-box ms-2">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="searchResultList"
                     onChange={(e) => {
                       setSearchText(e.target.value);
@@ -173,7 +173,7 @@ const Community = ({ data }) => {
                     }}
                     placeholder="Search..."
                   />
-                  <i class="ri-search-line search-icon"></i>
+                  <i className="ri-search-line search-icon"></i>
                 </div>
               </div>
             </div>
