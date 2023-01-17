@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import PrimaryData from "../../components/PrimaryData";
+import PrimaryData from "../../components/primary-data/PrimaryData";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
 
