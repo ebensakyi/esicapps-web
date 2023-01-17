@@ -1751,7 +1751,7 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesNuisanceDetected != null ? (
+                    {data.ConclusionSection.PremisesNuisanceDetected.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed

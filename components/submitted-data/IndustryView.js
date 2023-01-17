@@ -1405,6 +1405,7 @@ const IndustryView = ({ data }) => {
                         />
                       ))}
                     </div>{" "}
+                    {data.LiquidWasteSection.PremisesEffluentManagement.length!=0?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
@@ -1421,7 +1422,7 @@ const IndustryView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div>:<></>}
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
@@ -1461,6 +1462,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                     {data.LiquidWasteSection.PremisesGreyWaterDisposal.length !=0?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Grey Water Disposal
@@ -1477,7 +1479,9 @@ const IndustryView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div>:<></>}
+                    {data.LiquidWasteSection.PremisesToiletType.length !=0?
+
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Toilet Type</label>
                       {data.LiquidWasteSection.PremisesToiletType.map((x) => (
@@ -1490,7 +1494,7 @@ const IndustryView = ({ data }) => {
                           readOnly="readOnly"
                         />
                       ))}
-                    </div>{" "}
+                    </div>:<></>}
                   </div>
                 </div>
               </div>
@@ -1751,7 +1755,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesNuisanceDetected != null ? (
+                    {data.ConclusionSection.PremisesNuisanceDetected.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed

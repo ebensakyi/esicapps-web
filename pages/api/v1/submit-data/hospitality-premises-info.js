@@ -3,6 +3,8 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
+
+    console.log(req.body);
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
@@ -10,16 +12,16 @@ const post = async (req, res) => {
       facilityName: req.body.facilityName,
       hospitalityPremisesTypeId:
         req.body.hospitalityPremisesTypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.hospitalityPremisesTypeId),
       physicalStructureTypeId:
         req.body.physicalStructureTypeId == "null"
-          ? ""
+          ? null
           : Number(req.body.physicalStructureTypeId),
 
       toiletAvailabilityId:
         req.body.toiletAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.toiletAvailabilityId),
 
       urinalAvailabilityId:
@@ -41,7 +43,7 @@ const post = async (req, res) => {
 
       cookedFoodStorageCondtionSafeId:
         req.body.cookedFoodStorageCondtionSafeId == "null"
-          ? ""
+          ? null
           : Number(req.body.cookedFoodStorageCondtionSafeId),
 
       uncookedFoodStorageCondtionSafeId:

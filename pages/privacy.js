@@ -68,7 +68,7 @@ export default function Privacy() {
                 </div>
               </div>
               <div>
-                <h1>Personal and Sensitive User Data Policy</h1>
+                <h1>PRIVACY POLICY</h1>
 
                 <p>
                   Our app, ESICApps, values the privacy and security of our

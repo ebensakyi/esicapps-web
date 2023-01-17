@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import Reports from "../../components/sanitation_reports/Reports";
+import Reports from "../../components/sanitation-reports/Reports";
 
 export default function sanitation_reports({ data }) {
   return (
