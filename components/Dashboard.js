@@ -201,9 +201,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.residential.baseline}
                                     >
-                                      {data.residential.baseline}
+                                      {/* {data.residential.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -219,9 +219,11 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={
+                                        data.residential.reinspection
+                                      }
                                     >
-                                      {data.residential.reinspection}
+                                      {/* {data.residential.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -266,9 +268,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.eatery.baseline}
                                     >
-                                      {data.eatery.baseline}
+                                      {/* {data.eatery.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -284,9 +286,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.eatery.reinspection}
                                     >
-                                      {data.eatery.reinspection}
+                                      {/* {data.eatery.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -331,9 +333,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.institution.baseline}
                                     >
-                                      {data.institution.baseline}
+                                      {/* {data.institution.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -349,9 +351,11 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={
+                                        data.institution.reinspection
+                                      }
                                     >
-                                      {data.institution.reinspection}
+                                      {/* {data.institution.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -396,9 +400,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.industry.baseline}
                                     >
-                                      {data.industry.baseline}
+                                      {/* {data.industry.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -414,9 +418,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.industry.reinspection}
                                     >
-                                      {data.industry.reinspection}
+                                      {/* {data.industry.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -465,9 +469,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.health.baseline}
                                     >
-                                      {data.health.baseline}
+                                      {/* {data.health.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -483,9 +487,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.health.reinspection}
                                     >
-                                      {data.health.reinspection}
+                                      {/* {data.health.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -530,9 +534,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.hospitality.baseline}
                                     >
-                                      {data.hospitality.baseline}
+                                      {/* {data.hospitality.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -548,9 +552,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.hospitality.baseline}
                                     >
-                                      {data.hospitality.baseline}
+                                      {/* {data.hospitality.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -595,9 +599,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.market.baseline}
                                     >
-                                      {data.market.baseline}
+                                      {/* {data.market.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -613,9 +617,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.market.reinspection}
                                     >
-                                      {data.market.reinspection}
+                                      {/* {data.market.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -660,9 +664,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.sanitary.baseline}
                                     >
-                                      {data.sanitary.baseline}
+                                      {/* {data.sanitary.baseline} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -678,9 +682,9 @@ const Dashboard = ({ data }) => {
                                     {/* $ */}
                                     <span
                                       className="counter-value"
-                                      data-target="559.25"
+                                      data-target={data.sanitary.reinspection}
                                     >
-                                      {data.sanitary.reinspection}
+                                      {/* {data.sanitary.reinspection} */}
                                     </span>
                                     {/* k */}
                                   </h4>
@@ -898,7 +902,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                      Water Source Type 
+                      Water Source Type
                     </h4>
                   </div>
 
@@ -911,8 +915,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Condition Of Water Source
-
+                      Condition Of Water Source
                     </h4>
                   </div>
 
@@ -925,8 +928,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Water Storage Condition
-
+                      Water Storage Condition
                     </h4>
                   </div>
 
@@ -947,7 +949,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Toilet Availability
+                      Toilet Availability
                     </h4>
                   </div>
 
@@ -960,8 +962,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Type Of Toilets
-
+                      Type Of Toilets
                     </h4>
                   </div>
 
@@ -974,8 +975,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Adequacy Of Toilet
-
+                      Adequacy Of Toilet
                     </h4>
                   </div>
 
@@ -996,7 +996,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Registered With A Waste Collector
+                      Registered With A Waste Collector
                     </h4>
                   </div>
 
@@ -1009,8 +1009,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Registered With A Waste Collector
-
+                      Registered With A Waste Collector
                     </h4>
                   </div>
 
@@ -1023,8 +1022,7 @@ const Dashboard = ({ data }) => {
                 <div className="card card-height-100">
                   <div className="card-header align-items-center d-flex">
                     <h4 className="card-title mb-0 flex-grow-1">
-                    Registered With A Waste Collector
-
+                      Registered With A Waste Collector
                     </h4>
                   </div>
 
