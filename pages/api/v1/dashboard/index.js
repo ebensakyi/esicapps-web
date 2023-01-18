@@ -68,7 +68,23 @@ const get = async (req, res) => {
       sanitary: { baseline: sanitary, reinspection: sanitaryR },
     };
 
-    // console.log(data);
+  //   const summary = await prisma.$queryRaw`
+  //   SELECT j.id, COUNT(a.id) AS applicationCount,  
+  //   COUNT( IF(a.shortlisted = 0,shortlisted,NULL)) AS rejectedApplicationCount,
+  //   COUNT( IF(a.shortlisted = 1,shortlisted,NULL)) AS shortlistedApplicationCount,
+  //   COUNT( IF(a.shortlisted = -1,shortlisted,NULL)) AS unworkedApplicationCount,
+  //   j.name FROM job AS j LEFT join application AS a on j.id = a.jobId  
+  //   WHERE a.currentRecruitmentId = ${recruitment}
+  //   GROUP BY j.name
+  //   ORDER BY j.id
+  // `
+
+
+// const inspectionSummary  = await prisma.$queryRaw`SELECT * FROM "public"."inspection"`;
+
+   
+// console.log(inspectionSummary);
+  
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
     return res.status(200).json(data);
   } catch (error) {
