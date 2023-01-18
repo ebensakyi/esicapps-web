@@ -7,7 +7,7 @@ CREATE TABLE "Inspection" (
     "inspectionTypeId" INTEGER NOT NULL,
     "isPublished" INTEGER NOT NULL DEFAULT 0,
     "publishedById" INTEGER,
-    "followUpDate" VARCHAR(255) NOT NULL,
+    "followUpDate" VARCHAR(255),
     "doFollowUp" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -783,7 +783,7 @@ CREATE TABLE "BasicInfoSection" (
     "ghanaPostGps" VARCHAR(255),
     "latitude" DECIMAL(11,8) NOT NULL,
     "longitude" DECIMAL(11,8) NOT NULL,
-    "accuracy" VARCHAR(255) NOT NULL,
+    "accuracy" VARCHAR(255),
     "geom" JSONB,
     "respondentName" VARCHAR(255) NOT NULL,
     "respondentPhoneNumber" VARCHAR(255) NOT NULL,
@@ -1476,19 +1476,6 @@ CREATE TABLE "PremisesNuisanceDetected" (
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesNuisanceDetected_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Picture" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "description" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "inspectionId" VARCHAR(255) NOT NULL,
-
-    CONSTRAINT "Picture_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -2360,9 +2347,6 @@ ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_
 
 -- AddForeignKey
 ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Picture" ADD CONSTRAINT "Picture_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;

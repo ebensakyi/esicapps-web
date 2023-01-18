@@ -70,8 +70,8 @@ export const users = [
   },
   {
     userTypeId: 1,
-    surname: "District",
-    otherNames: "User4",
+    surname: "Doe",
+    otherNames: "John",
     email: "districtuser4@gmail.com",
     phoneNumber: "0546666666",
     password: hash4,

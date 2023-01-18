@@ -31,7 +31,6 @@ model Inspection {
   User                           User                            @relation(fields: [userId], references: [id])
   LicencePermitSection           LicencePermitSection?
   LiquidWasteSection             LiquidWasteSection?
-  Picture                        Picture[]
   SolidWasteSection              SolidWasteSection?
   WaterSection                   WaterSection?
   ResidentialPremisesInfoSection ResidentialPremisesInfoSection?
@@ -1728,16 +1727,6 @@ model PremisesNuisanceDetected {
   User                User              @relation(fields: [userId], references: [id])
 }
 
-model Picture {
-  id           Int        @id @default(autoincrement())
-  name         String     @db.VarChar(255)
-  description  String     @db.VarChar(255)
-  deleted      Int?       @default(0)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  inspectionId String     @db.VarChar(255)
-  Inspection   Inspection @relation(fields: [inspectionId], references: [id])
-}
 
 model SanitationReport {
   id           Int     @id @default(autoincrement())
