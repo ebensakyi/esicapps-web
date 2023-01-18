@@ -79,11 +79,12 @@ const get = async (req, res) => {
     //   ORDER BY j.id
     // `
 
-    // const inspectionSummary  = await prisma.$queryRaw`SELECT * FROM "public"."inspection"`;
+    const inspectionSummary  = await prisma.$queryRaw`SELECT "Inspection"."id" , COUNT("Inspection"."id") AS inspectionCount FROM "Inspection" 
+     LEFT JOIN "InspectionForm"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id" GROUP BY "InspectionForm"."name"`;
 
-    // console.log(inspectionSummary);
+    console.log(inspectionSummary);
 
-    // const x = await prisma.inspection.findMany({
+    // const x = await prisma.Inspection.findMany({
     //   include: {
     //     _count: {
     //       select: {

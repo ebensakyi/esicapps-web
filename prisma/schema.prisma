@@ -25,8 +25,8 @@ model Inspection {
   completedAt                    DateTime
   BasicInfoSection               BasicInfoSection?
   ConclusionSection              ConclusionSection?
-  InspectionForm                 InspectionForm                  @relation(fields: [inspectionFormId], references: [id])
-  InspectionType                 InspectionType                  @relation(fields: [inspectionTypeId], references: [id])
+  InspectionForm                 InspectionForm ?                 @relation(fields: [inspectionFormId], references: [id])
+  InspectionType                 InspectionType ?                 @relation(fields: [inspectionTypeId], references: [id])
   publishedBy                    User?                           @relation("publishedBy", fields: [publishedById], references: [id])
   User                           User                            @relation(fields: [userId], references: [id])
   LicencePermitSection           LicencePermitSection?
