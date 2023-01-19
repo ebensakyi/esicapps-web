@@ -306,6 +306,8 @@ Inspection                  </h4>
                   <ul className="list-inline main-chart text-center mb-0">
                     <li className="list-inline-item chart-border-left me-0 border-0">
                       <h4 className="text-primary">
+                      <span class="badge badge-soft-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span>
+
                        {data.baselineCount}
                         <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                           Baseline
