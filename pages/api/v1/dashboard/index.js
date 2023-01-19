@@ -7,66 +7,54 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const residential = await prisma.inspection.count({
-      where: { inspectionFormId: 1, inspectionTypeId: 1 },
-    });
-    const eatery = await prisma.inspection.count({
-      where: { inspectionFormId: 2, inspectionTypeId: 1 },
-    });
-    const health = await prisma.inspection.count({
-      where: { inspectionFormId: 3, inspectionTypeId: 1 },
-    });
-    const hospitality = await prisma.inspection.count({
-      where: { inspectionFormId: 4, inspectionTypeId: 1 },
-    });
-    const industry = await prisma.inspection.count({
-      where: { inspectionFormId: 6, inspectionTypeId: 1 },
-    });
-    const institution = await prisma.inspection.count({
-      where: { inspectionFormId: 5, inspectionTypeId: 1 },
-    });
-    const sanitary = await prisma.inspection.count({
-      where: { inspectionFormId: 8, inspectionTypeId: 1 },
-    });
-    const market = await prisma.inspection.count({
-      where: { inspectionFormId: 7, inspectionTypeId: 1 },
-    });
+    const allInspectionSummary =
+      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
+    FROM "InspectionForm" 
+    LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+    GROUP BY "InspectionForm"."name" `;
 
-    const residentialR = await prisma.inspection.count({
-      where: { inspectionFormId: 1, inspectionTypeId: 2 },
+    const baselineInspectionSummary =
+      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
+FROM "InspectionForm" 
+LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+WHERE "Inspection"."inspectionTypeId"=1
+GROUP BY "InspectionForm"."name" `;
+
+    const reinspectionInspectionSummary =
+      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
+FROM "InspectionForm" 
+LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+WHERE "Inspection"."inspectionTypeId"=2
+GROUP BY "InspectionForm"."name" `;
+
+    const followupInspectionSummary =
+      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
+FROM "InspectionForm" 
+LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+WHERE "Inspection"."inspectionTypeId"=3
+GROUP BY "InspectionForm"."name" `;
+
+    const baselineCount = await prisma.inspection.count({
+      where: { inspectionTypeId: 1 },
     });
-    const eateryR = await prisma.inspection.count({
-      where: { inspectionFormId: 2, inspectionTypeId: 2 },
+    const reInspectionCount = await prisma.inspection.count({
+      where: { inspectionTypeId: 2 },
     });
-    const healthR = await prisma.inspection.count({
-      where: { inspectionFormId: 3, inspectionTypeId: 2 },
-    });
-    const hospitalityR = await prisma.inspection.count({
-      where: { inspectionFormId: 4, inspectionTypeId: 2 },
-    });
-    const industryR = await prisma.inspection.count({
-      where: { inspectionFormId: 6, inspectionTypeId: 2 },
-    });
-    const institutionR = await prisma.inspection.count({
-      where: { inspectionFormId: 5, inspectionTypeId: 2 },
-    });
-    const sanitaryR = await prisma.inspection.count({
-      where: { inspectionFormId: 8, inspectionTypeId: 2 },
-    });
-    const marketR = await prisma.inspection.count({
-      where: { inspectionFormId: 7, inspectionTypeId: 2 },
+    const followUpCount = await prisma.inspection.count({
+      where: { inspectionTypeId: 3 },
     });
 
     let data = {
-      residential: { baseline: residential, reinspection: residentialR },
-      eatery: { baseline: eatery, reinspection: eateryR },
-      health: { baseline: health, reinspection: healthR },
-      hospitality: { baseline: hospitality, reinspection: hospitalityR },
-      market: { baseline: market, reinspection: marketR },
-      industry: { baseline: industry, reinspection: industryR },
-      institution: { baseline: institution, reinspection: institutionR },
-      sanitary: { baseline: sanitary, reinspection: sanitaryR },
+      allInspectionSummary: toJson(allInspectionSummary),
+      baselineInspectionSummary:toJson(baselineInspectionSummary),
+      reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),
+      followupInspectionSummary: toJson(followupInspectionSummary),
+      baselineCount,
+      reInspectionCount,
+      followUpCount,
     };
+
+    console.log(data.baselineCount);
 
     //   const summary = await prisma.$queryRaw`
     //   SELECT j.id, COUNT(a.id) AS applicationCount,
@@ -78,11 +66,6 @@ const get = async (req, res) => {
     //   GROUP BY j.name
     //   ORDER BY j.id
     // `
-
-    const inspectionSummary  = await prisma.$queryRaw`SELECT "Inspection"."id" , COUNT("Inspection"."id") AS inspectionCount FROM "Inspection" 
-     LEFT JOIN "InspectionForm"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id" GROUP BY "InspectionForm"."name"`;
-
-    console.log(inspectionSummary);
 
     // const x = await prisma.Inspection.findMany({
     //   include: {
@@ -102,7 +85,11 @@ const get = async (req, res) => {
     console.log("Error: " + error);
   }
 };
-
+function toJson(data) {
+  return JSON.parse(JSON.stringify(data, (_, v) =>
+    typeof v === "bigint" ? `${v}n` : v
+  ).replace(/"(-?\d+)n"/g, (_, a) => a));
+}
 export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
