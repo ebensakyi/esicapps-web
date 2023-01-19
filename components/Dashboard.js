@@ -509,15 +509,16 @@ Inspection                  </h4>
                        
                         <tr className="text-muted">
                           <th scope="col">Form</th>
-                          <th scope="col" style={{ width: "20%" }}>
-                           Submissions
-                          </th>
-                          <th scope="col">Sales Representative</th>
+                         
+                          <th scope="col">Baseline</th>
                           <th scope="col" style={{ width: "16%" }}>
-                            Status
+                            Reinspection
                           </th>
                           <th scope="col" style={{ width: "12%" }}>
-                            Deal Value
+                            Follow Up
+                          </th> 
+                          <th scope="col" style={{ width: "20%" }}>
+                           Total
                           </th>
                         </tr>
                       </thead>
@@ -525,7 +526,11 @@ Inspection                  </h4>
                         return(
                           <tr>
                            <td>{a.name}</td>
-                           <td><span className="badge badge-soft-success p-2">{a.inspectionCount}</span></td>
+                           <td><span className="badge badge-soft-success p-2">{a.baselineCount}</span></td>
+                           <td><span className="badge badge-soft-success p-2">{a.reinspectionCount}</span></td>
+                           <td><span className="badge badge-soft-success p-2">{a.followupCount}</span></td> 
+                                                     <td><span className="badge badge-soft-success p-2">{a.inspectionCount}</span></td>
+
                            </tr>)
                         })}
                        
