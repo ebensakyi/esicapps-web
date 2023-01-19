@@ -8,10 +8,19 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const allInspectionSummary =
-      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
-    FROM "InspectionForm" 
-    LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    GROUP BY "InspectionForm"."name" `;
+      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
+        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
+        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
+
+
+
+    
+      FROM "InspectionForm" 
+    LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+    LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+
+    GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"`;
 
     const baselineInspectionSummary =
       await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
@@ -54,7 +63,7 @@ GROUP BY "InspectionForm"."name" `;
       followUpCount,
     };
 
-    console.log(data.baselineCount);
+    console.log(allInspectionSummary);
 
     //   const summary = await prisma.$queryRaw`
     //   SELECT j.id, COUNT(a.id) AS applicationCount,
