@@ -1,18 +1,33 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import faker from "@faker-js/faker";
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut, Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  BarElement,
+  Tooltip,
+  Legend,
+  CategoryScale,  LinearScale,
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+} from "chart.js";
+import { Doughnut, Pie, Bar } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend,CategoryScale,  LinearScale,  BarElement,
+  );
 
 const Dashboard = ({ data }) => {
-  console.log(data);
-  let baselinePieChartData,reinspectionPieChartData, actionsTakenBarchartData;
+  let baselinePieChartData,
+    reinspectionPieChartData,
+    followupPieChartData,
+    actionsTakenBarchartData,
+    waterSourceBarchartData,
+    waterSourceConditionBarchartData,
+    waterStorageConditionBarchartData;
   //  useEffect(() => {
 
   baselinePieChartData = {
-    labels:data.baselineFormsArray,
+    labels: data.baselineFormsArray,
     datasets: [
       {
         label: "# of submissions",
@@ -43,11 +58,42 @@ const Dashboard = ({ data }) => {
   };
 
   reinspectionPieChartData = {
-    labels:data.reinspectionFormArray,
+    labels: data.reinspectionFormArray,
     datasets: [
       {
         label: "# of submissions",
         data: data.reinspectionCountArray,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgb(252, 241, 121)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgb(252, 241, 121)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  followupPieChartData = {
+    labels: data.followUpFormArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.followUpCountArray,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -93,6 +139,87 @@ const Dashboard = ({ data }) => {
       },
     ],
   };
+
+  waterSourceBarchartData = {
+    labels: data.water.waterSourceTypeLabelArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.water.waterSourceTypeCountArray,
+        backgroundColor: [
+          "rgb(252, 241, 121)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  waterSourceConditionBarchartData = {
+    labels: data.water.waterSourceConditionLabelArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.water.waterSourceConditionCountArray,
+        backgroundColor: [
+          "rgb(252, 241, 121)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  waterStorageConditionBarchartData = {
+    labels: data.water.waterStorageConditionLabelArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.water.waterStorageConditionCountArray,
+        backgroundColor: [
+          "rgb(252, 241, 121)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  //   const labels = ['', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+  //  const barChartData = {
+  //   labels,
+  //   datasets: [
+  //     {
+  //       label: 'Dataset 1',
+  //       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+  //       backgroundColor: 'rgba(255, 99, 132, 0.5)',
+  //     },
+  //     {
+  //       label: 'Dataset 2',
+  //       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+  //       backgroundColor: 'rgba(53, 162, 235, 0.5)',
+  //     },
+  //   ],
+  // };
 
   //});
 
@@ -281,8 +408,8 @@ const Dashboard = ({ data }) => {
         <div className="col-xxl-4">
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
-             
-              <h4 className="card-title mb-0 flex-grow-1"> INSPECTION </h4> <div className="avatar-sm flex-shrink-0">
+              <h4 className="card-title mb-0 flex-grow-1"> INSPECTION </h4>{" "}
+              <div className="avatar-sm flex-shrink-0">
                 <span className="avatar-title bg-soft-success rounded fs-3">
                   <i className="bx bx-home-circle text-success" />
                 </span>
@@ -326,7 +453,8 @@ const Dashboard = ({ data }) => {
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {data.baselineCount}<br/>
+                    {data.baselineCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Baseline
                     </span>
@@ -334,7 +462,8 @@ const Dashboard = ({ data }) => {
                 </li>
                 <li className="list-inline-item chart-border-left me-0">
                   <h4>
-                    {data.reInspectionCount}<br/>
+                    {data.reInspectionCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Reinspection
                     </span>
@@ -342,7 +471,8 @@ const Dashboard = ({ data }) => {
                 </li>
                 <li className="list-inline-item chart-border-left me-0">
                   <h4>
-                    {data.followUpCount}<br/>
+                    {data.followUpCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Follow up
                     </span>
@@ -361,8 +491,10 @@ const Dashboard = ({ data }) => {
         <div className="col-xxl-3">
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
-             
-              <h4 className="card-title mb-0 flex-grow-1"> PUBLISHING REPORT </h4> 
+              <h4 className="card-title mb-0 flex-grow-1">
+                {" "}
+                PUBLISHING REPORT{" "}
+              </h4>
               <div className="avatar-sm flex-shrink-0">
                 <span className="avatar-title bg-soft-danger rounded fs-3">
                   <i className="bx bx-chart text-danger" />
@@ -405,20 +537,22 @@ const Dashboard = ({ data }) => {
             {/* end card header */}
             <div className="card-body px-0">
               <ul className="list-inline main-chart text-center mb-0">
-              <li className="list-inline-item chart-border-left me-0 border-0">
+                <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {data.publishedCount}<br/>
+                    {data.publishedCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                    Published
+                      Published
                     </span>
                   </h4>
                 </li>
-                
+
                 <li className="list-inline-item chart-border-left me-0">
                   <h4>
-                    {data.unPublishedCount}<br/>
+                    {data.unPublishedCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                     Unpublished
+                      Unpublished
                     </span>
                   </h4>
                 </li>
@@ -435,8 +569,10 @@ const Dashboard = ({ data }) => {
         <div className="col-xxl-3">
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
-             
-              <h4 className="card-title mb-0 flex-grow-1"> SANITATION REPORT </h4> 
+              <h4 className="card-title mb-0 flex-grow-1">
+                {" "}
+                SANITATION REPORT{" "}
+              </h4>
               <div className="avatar-sm flex-shrink-0">
                 <span className="avatar-title bg-soft-primary rounded fs-3">
                   <i className="bx bx-trash-alt text-primary" />
@@ -481,7 +617,8 @@ const Dashboard = ({ data }) => {
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {data.baselineCount}<br/>
+                    {data.baselineCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Total Reports
                     </span>
@@ -517,8 +654,7 @@ const Dashboard = ({ data }) => {
         <div className="col-xxl-2">
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
-             
-              <h4 className="card-title mb-0 flex-grow-1"> USERS </h4> 
+              <h4 className="card-title mb-0 flex-grow-1"> USERS </h4>
               <div className="avatar-sm flex-shrink-0">
                 <span className="avatar-title bg-soft-warning rounded fs-3">
                   <i className="bx bx-user text-warning" />
@@ -563,9 +699,10 @@ const Dashboard = ({ data }) => {
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {data.usersCount}<br/>
+                    {data.usersCount}
+                    <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Total  Active Users
+                      Total Active Users
                     </span>
                   </h4>
                 </li>
@@ -595,7 +732,6 @@ const Dashboard = ({ data }) => {
             </div>
           </div>
         </div>
-        
       </div>
       {/* end row */}
       <div className="row">
@@ -682,7 +818,8 @@ const Dashboard = ({ data }) => {
                             <span className="badge badge-soft-danger p-2">
                               {a.followupCount}
                             </span>
-                          </td> <td>
+                          </td>{" "}
+                          <td>
                             <span className="badge badge-soft-success p-2">
                               {a.publishedCount}
                             </span>
@@ -694,10 +831,9 @@ const Dashboard = ({ data }) => {
                           </td>
                           <td>
                             {/* <span className="badge badge-soft-primary p-2"> */}
-                              {a.inspectionCount}
+                            {a.inspectionCount}
                             {/* </span> */}
                           </td>
-                         
                         </tr>
                       );
                     })}
@@ -714,9 +850,128 @@ const Dashboard = ({ data }) => {
         </div>
         {/* end col */}
         <div className="col-xl-5">
+          <div className="card">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                INSPECTION SUMMARY
+              </h4>
+              {/* <div className="flex-shrink-0">
+                    <div className="dropdown card-header-dropdown">
+                      <a
+                        className="text-reset dropdown-btn"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span className="text-muted">
+                          02 Nov 2021 to 31 Dec 2021
+                          <i className="mdi mdi-chevron-down ms-1" />
+                        </span>
+                      </a>
+                      <div className="dropdown-menu dropdown-menu-end">
+                        <a className="dropdown-item" href="#">
+                          Today
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Week
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Month
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Current Year
+                        </a>
+                      </div>
+                    </div>
+                  </div> */}
+            </div>
+            {/* end card header */}
+            <div className="card-body">
+              <div className="table-responsive table-card">
+                <table className="table  table-hover table-nowrap align-middle mb-0  table-bordered table-nowrap align-middle mb-0">
+                  <thead className="table-light">
+                    <tr className="text-muted">
+                      <th scope="col">Form</th>
+
+                      <th scope="col">Baseline</th>
+                      <th scope="col" style={{ width: "16%" }}>
+                        Reinspection
+                      </th>
+                      <th scope="col" style={{ width: "12%" }}>
+                        Follow Up
+                      </th>
+                      <th scope="col" style={{ width: "12%" }}>
+                        Published
+                      </th>
+                      <th scope="col" style={{ width: "12%" }}>
+                        UnPublished
+                      </th>
+                      <th scope="col" style={{ width: "20%" }}>
+                        Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {" "}
+                    {data.allInspectionSummary.map((a) => {
+                      return (
+                        <tr>
+                          <td>{a.name}</td>
+                          <td>
+                            <span className="badge badge-soft-success p-2">
+                              {a.baselineCount}
+                            </span>
+                          </td>
+                          <td>
+                            <span className="badge badge-soft-warning p-2">
+                              {a.reinspectionCount}
+                            </span>
+                          </td>
+                          <td>
+                            <span className="badge badge-soft-danger p-2">
+                              {a.followupCount}
+                            </span>
+                          </td>{" "}
+                          <td>
+                            <span className="badge badge-soft-success p-2">
+                              {a.publishedCount}
+                            </span>
+                          </td>
+                          <td>
+                            <span className="badge badge-soft-primary p-2">
+                              {a.unPublishedCount}
+                            </span>
+                          </td>
+                          <td>
+                            {/* <span className="badge badge-soft-primary p-2"> */}
+                            {a.inspectionCount}
+                            {/* </span> */}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                  {/* end tbody */}
+                </table>
+                {/* end table */}
+              </div>
+              {/* end table responsive */}
+            </div>
+            {/* end card body */}
+          </div>
+          {/* end card */}
+        </div>
+        {/* end col */}
+      </div>
+      {/* end row */}
+      <div className="row">
+        <div className="col-xl-4">
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">PUBLISHING SUMMARY</h4>
+              <h4 className="card-title mb-0 flex-grow-1">
+                Baseline Submissions
+              </h4>
               <div className="flex-shrink-0">
                 <div className="dropdown card-header-dropdown">
                   <a
@@ -727,478 +982,242 @@ const Dashboard = ({ data }) => {
                     aria-expanded="false"
                   >
                     <span className="text-muted">
-                      <i className="ri-settings-4-line align-middle me-1 fs-15" />
-                      Settings
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
                     </span>
                   </a>
                   <div className="dropdown-menu dropdown-menu-end">
                     <a className="dropdown-item" href="#">
-                      Edit
+                      Download Report
                     </a>
                     <a className="dropdown-item" href="#">
-                      Remove
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            {/* end card header */}
-            <div className="card-body p-0">
-              <div className="align-items-center p-3 justify-content-between d-flex">
-                <div className="flex-shrink-0">
-                  <div className="text-muted">
-                    <span className="fw-semibold">4</span> of{" "}
-                    <span className="fw-semibold">10</span> remaining
-                  </div>
-                </div>
-                <button type="button" className="btn btn-sm btn-success">
-                  <i className="ri-add-line align-middle me-1" /> Add Task
-                </button>
-              </div>
-              {/* end card header */}
-              <div data-simplebar="" style={{ maxHeight: 219 }}>
-                <ul className="list-group list-group-flush border-dashed px-3">
-                  <li className="list-group-item ps-0">
-                    <div className="d-flex align-items-start">
-                      <div className="form-check ps-0 flex-sharink-0">
-                        <input
-                          type="checkbox"
-                          className="form-check-input ms-0"
-                          id="task_one"
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <label
-                          className="form-check-label mb-0 ps-2"
-                          htmlFor="task_one"
-                        >
-                          Review and make sure nothing slips through cracks
-                        </label>
-                      </div>
-                      <div className="flex-shrink-0 ms-2">
-                        <p className="text-muted fs-12 mb-0">15 Sep, 2021</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="list-group-item ps-0">
-                    <div className="d-flex align-items-start">
-                      <div className="form-check ps-0 flex-sharink-0">
-                        <input
-                          type="checkbox"
-                          className="form-check-input ms-0"
-                          id="task_two"
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <label
-                          className="form-check-label mb-0 ps-2"
-                          htmlFor="task_two"
-                        >
-                          Send meeting invites for sales upcampaign
-                        </label>
-                      </div>
-                      <div className="flex-shrink-0 ms-2">
-                        <p className="text-muted fs-12 mb-0">20 Sep, 2021</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="list-group-item ps-0">
-                    <div className="d-flex align-items-start">
-                      <div className="form-check flex-sharink-0 ps-0">
-                        <input
-                          type="checkbox"
-                          className="form-check-input ms-0"
-                          id="task_three"
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <label
-                          className="form-check-label mb-0 ps-2"
-                          htmlFor="task_three"
-                        >
-                          Weekly closed sales won checking with sales team
-                        </label>
-                      </div>
-                      <div className="flex-shrink-0 ms-2">
-                        <p className="text-muted fs-12 mb-0">24 Sep, 2021</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="list-group-item ps-0">
-                    <div className="d-flex align-items-start">
-                      <div className="form-check ps-0 flex-sharink-0">
-                        <input
-                          type="checkbox"
-                          className="form-check-input ms-0"
-                          id="task_four"
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <label
-                          className="form-check-label mb-0 ps-2"
-                          htmlFor="task_four"
-                        >
-                          Add notes that can be viewed from the individual view
-                        </label>
-                      </div>
-                      <div className="flex-shrink-0 ms-2">
-                        <p className="text-muted fs-12 mb-0">27 Sep, 2021</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="list-group-item ps-0">
-                    <div className="d-flex align-items-start">
-                      <div className="form-check ps-0 flex-sharink-0">
-                        <input
-                          type="checkbox"
-                          className="form-check-input ms-0"
-                          id="task_five"
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <label
-                          className="form-check-label mb-0 ps-2"
-                          htmlFor="task_five"
-                        >
-                          Move stuff to another page
-                        </label>
-                      </div>
-                      <div className="flex-shrink-0 ms-2">
-                        <p className="text-muted fs-12 mb-0">27 Sep, 2021</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="list-group-item ps-0">
-                    <div className="d-flex align-items-start">
-                      <div className="form-check ps-0 flex-sharink-0">
-                        <input
-                          type="checkbox"
-                          className="form-check-input ms-0"
-                          id="task_six"
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <label
-                          className="form-check-label mb-0 ps-2"
-                          htmlFor="task_six"
-                        >
-                          Styling wireframe design and documentation for velzon
-                          admin
-                        </label>
-                      </div>
-                      <div className="flex-shrink-0 ms-2">
-                        <p className="text-muted fs-12 mb-0">27 Sep, 2021</p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                {/* end ul */}
-              </div>
-              <div className="p-3 pt-2">
-                <a
-                  href="javascript:void(0);"
-                  className="text-muted text-decoration-underline"
-                >
-                  Show more...
-                </a>
-              </div>
-            </div>
-            {/* end card body */}
+            <div className="card-body">
+              <Pie data={baselinePieChartData} />
+            </div>{" "}
           </div>
-          {/* end card */}
+        </div>{" "}
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Reinspection Submissions
+              </h4>
+              <div className="flex-shrink-0">
+                <div className="dropdown card-header-dropdown">
+                  <a
+                    className="text-reset dropdown-btn"
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="text-muted">
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
+                    </span>
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#">
+                      Download Report
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <Pie data={reinspectionPieChartData} />
+            </div>{" "}
+          </div>
+        </div>{" "}
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Follow-up Submissions
+              </h4>
+              <div className="flex-shrink-0">
+                <div className="dropdown card-header-dropdown">
+                  <a
+                    className="text-reset dropdown-btn"
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="text-muted">
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
+                    </span>
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#">
+                      Download Report
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <Pie data={followupPieChartData} />
+            </div>{" "}
+          </div>
         </div>
-        {/* end col */}
       </div>
-      {/* end row */}
       <div className="row">
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Baseline Submissions
-                    </h4>
-                    <div className="flex-shrink-0">
-                      <div className="dropdown card-header-dropdown">
-                        <a
-                          className="text-reset dropdown-btn"
-                          href="#"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <span className="text-muted">
-                            Report<i className="mdi mdi-chevron-down ms-1"></i>
-                          </span>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-end">
-                          <a className="dropdown-item" href="#">
-                            Download Report
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            Export
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            Import
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <Pie data={baselinePieChartData} />
-                  </div>{" "}
-                </div>
-              </div>{" "}
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Reinspection Submissions
-                    </h4>
-                    <div className="flex-shrink-0">
-                      <div className="dropdown card-header-dropdown">
-                        <a
-                          className="text-reset dropdown-btn"
-                          href="#"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <span className="text-muted">
-                            Report<i className="mdi mdi-chevron-down ms-1"></i>
-                          </span>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-end">
-                          <a className="dropdown-item" href="#">
-                            Download Report
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            Export
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            Import
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <Pie data={baselinePieChartData} />
-                  </div>{" "}
-                </div>
-              </div>{" "}
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Follow-up Submissions
-                    </h4>
-                    <div className="flex-shrink-0">
-                      <div className="dropdown card-header-dropdown">
-                        <a
-                          className="text-reset dropdown-btn"
-                          href="#"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <span className="text-muted">
-                            Report<i className="mdi mdi-chevron-down ms-1"></i>
-                          </span>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-end">
-                          <a className="dropdown-item" href="#">
-                            Download Report
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            Export
-                          </a>
-                          <a className="dropdown-item" href="#">
-                            Import
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <Pie data={baselinePieChartData} />
-                  </div>{" "}
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Actions taken
-                    </h4>
-                  </div>
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>{" "}
-                </div>
-              </div>{" "}
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">XXXXXX</h4>
-                  </div>
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>{" "}
-                </div>
-              </div>{" "}
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">XXXXX</h4>
-                  </div>
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>{" "}
-                </div>
-              </div>{" "}
-            </div>
-            <div className="row">
-              <div className="flex-grow-1">
-                <h4 className="fs-16 mb-1">WATER</h4>
-                {/* <p className="text-muted mb-0">
+        <div className="flex-grow-1">
+          <h4 className="fs-16 mb-1">WATER</h4>
+          {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Water Source Type
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Condition Of Water Source
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Water Storage Condition
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
             </div>
-            <div className="row">
-              <div className="flex-grow-1">
-                <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
-                {/* <p className="text-muted mb-0">
+
+            <div className="card-body">
+              <Pie data={waterSourceBarchartData} />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Condition Of Water Source
+              </h4>
+            </div>
+
+            <div className="card-body">
+              <Pie data={waterSourceConditionBarchartData} />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Water Storage Condition
+              </h4>
+            </div>
+
+            <div className="card-body">
+              <Bar data={waterStorageConditionBarchartData} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="flex-grow-1">
+          <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
+          {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Toilet Availability
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Type Of Toilets
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Adequacy Of Toilet
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Toilet Availability
+              </h4>
             </div>
-            <div className="row">
-              <div className="flex-grow-1">
-                <h4 className="fs-16 mb-1">SOLID WASTE</h4>
-                {/* <p className="text-muted mb-0">
+
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">Type Of Toilets</h4>
+            </div>
+
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Adequacy Of Toilet
+              </h4>
+            </div>
+
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="flex-grow-1">
+          <h4 className="fs-16 mb-1">SOLID WASTE</h4>
+          {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Registered With A Waste Collector
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Registered With A Waste Collector
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4">
-                <div className="card card-height-100">
-                  <div className="card-header align-items-center d-flex">
-                    <h4 className="card-title mb-0 flex-grow-1">
-                      Registered With A Waste Collector
-                    </h4>
-                  </div>
-
-                  <div className="card-body">
-                    <Pie data={actionsTakenBarchartData} />
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Registered With A Waste Collector
+              </h4>
             </div>
+
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Registered With A Waste Collector
+              </h4>
+            </div>
+
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="card card-height-100">
+            <div className="card-header align-items-center d-flex">
+              <h4 className="card-title mb-0 flex-grow-1">
+                Registered With A Waste Collector
+              </h4>
+            </div>
+
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>
+          </div>
+        </div>
+      </div>
       {/* end row */}
     </>
   );

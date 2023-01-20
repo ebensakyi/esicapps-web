@@ -45,23 +45,67 @@ WHERE "Inspection"."inspectionTypeId"=1
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
-    console.log(baselineInspectionSummary);
-
     const reinspectionInspectionSummary =
       await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
-            COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "baselineCount"
+            COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
 WHERE "Inspection"."inspectionTypeId"=2
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
-    //     const followupInspectionSummary =
-    //       await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount"
-    // FROM "InspectionForm"
-    // LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    // WHERE "Inspection"."inspectionTypeId"=3
-    // GROUP BY "InspectionForm"."name" `;
+    const followupInspectionSummary =
+      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
+                      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
+
+    FROM "InspectionForm"
+    LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+    WHERE "Inspection"."inspectionTypeId"=3
+    GROUP BY "InspectionForm"."name" `;
+
+    const waterSourceTypeSummary =
+      await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "sourceCount"
+
+    FROM "WaterSection"
+    LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
+    LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
+    WHERE"WaterSourceType"."id" IS NOT NULL
+    GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
+
+    let waterSourceTypeCountArray = waterSourceTypeSummary.map((i) =>
+      toJson(i.sourceCount)
+    );
+    let waterSourceTypeLabelArray = waterSourceTypeSummary.map((n) =>
+      toJson(n.name)
+    );
+
+    const sanitaryWaterSourceCondition = await prisma.waterSection.count({
+      where: { waterSourceConditionId: 1 },
+    });
+
+    const insanitaryWaterSourceCondition = await prisma.waterSection.count({
+      where: { waterSourceConditionId: 2 },
+    });
+
+    let waterSourceConditionCountArray = [
+      sanitaryWaterSourceCondition,
+      insanitaryWaterSourceCondition,
+    ];
+    let waterSourceConditionLabelArray = ["Sanitary", "Insanitary"];
+
+    const sanitaryWaterStorageCondition = await prisma.waterSection.count({
+      where: { waterStorageConditionId: 1 },
+    });
+
+    const insanitaryWaterStorageCondition = await prisma.waterSection.count({
+      where: { "waterStorageConditionId": 2 },
+    });
+
+    let waterStorageConditionCountArray = [
+      sanitaryWaterStorageCondition,
+      insanitaryWaterStorageCondition,
+    ];
+    let waterStorageConditionLabelArray = ["Sanitary", "Insanitary"];
 
     const baselineCount = await prisma.inspection.count({
       where: { inspectionTypeId: 1 },
@@ -85,6 +129,13 @@ ORDER BY "InspectionForm"."name"`;
       where: { deleted: 0 },
     });
 
+    const safeWaterSourceCount = await prisma.waterSection.count({
+      where: { deleted: 0, waterSourceConditionId: 1 },
+    });
+    const unsafeWaterSourceCount = await prisma.waterSection.count({
+      where: { deleted: 0, waterSourceConditionId: 2 },
+    });
+
     let baselineCountArray = baselineInspectionSummary.map((i) =>
       toJson(i.baselineCount)
     );
@@ -93,14 +144,18 @@ ORDER BY "InspectionForm"."name"`;
     );
 
     let reinspectionCountArray = reinspectionInspectionSummary.map((i) =>
-      toJson(i.baselineCount)
+      toJson(i.reinspectionCount)
     );
     let reinspectionFormArray = reinspectionInspectionSummary.map((n) =>
       toJson(n.name)
     );
 
-    console.log(baselineCountArray);
-    console.log(baselineFormsArray);
+    let followUpCountArray = followupInspectionSummary.map((i) =>
+      toJson(i.followupCount)
+    );
+    let followUpFormArray = followupInspectionSummary.map((n) =>
+      toJson(n.name)
+    );
 
     let data = {
       allInspectionSummary: toJson(allInspectionSummary),
@@ -108,6 +163,16 @@ ORDER BY "InspectionForm"."name"`;
       baselineFormsArray,
       reinspectionCountArray,
       reinspectionFormArray,
+      followUpCountArray,
+      followUpFormArray,
+      water: {
+        waterSourceTypeCountArray,
+        waterSourceTypeLabelArray,
+        waterSourceConditionCountArray,
+        waterSourceConditionLabelArray,
+        waterStorageConditionCountArray,
+        waterStorageConditionLabelArray
+      },
       // baselineInspectionSummary:toJson(baselineInspectionSummary),
       // reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),
       // followupInspectionSummary: toJson(followupInspectionSummary),
@@ -117,7 +182,11 @@ ORDER BY "InspectionForm"."name"`;
       publishedCount,
       unPublishedCount,
       usersCount,
+      safeWaterSourceCount,
+      unsafeWaterSourceCount,
     };
+
+    console.log(data);
 
     // console.log(publishingSummary
     //   );
