@@ -29,3 +29,7 @@ sudo rm -r  /var/www/html/dashboard.esicapps.org/* && cd ~/ && sudo rm -r  esica
 work on all publishing with  residential as template
 
 N@Fnso)A.N(T*cxod6nu)k3-)s8mRfDi
+
+
+1. Work on dashboard
+2. save  reinspection
