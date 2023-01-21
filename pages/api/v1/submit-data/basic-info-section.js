@@ -60,6 +60,8 @@ const get = async (req, res) => {
   }
 };
 
+
+
 export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
