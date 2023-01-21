@@ -16,7 +16,7 @@ model Inspection {
   inspectionTypeId               Int
   isPublished                    Int                             @default(0)
   publishedById                  Int?
-  followUpDate                   String?                          @db.VarChar(255)
+  followUpDate                   String?                         @db.VarChar(255)
   doFollowUp                     Int?
   deleted                        Int?                            @default(0)
   createdAt                      DateTime                        @default(now())
@@ -25,8 +25,8 @@ model Inspection {
   completedAt                    DateTime
   BasicInfoSection               BasicInfoSection?
   ConclusionSection              ConclusionSection?
-  InspectionForm                 InspectionForm ?                 @relation(fields: [inspectionFormId], references: [id])
-  InspectionType                 InspectionType ?                 @relation(fields: [inspectionTypeId], references: [id])
+  InspectionForm                 InspectionForm?                 @relation(fields: [inspectionFormId], references: [id])
+  InspectionType                 InspectionType?                 @relation(fields: [inspectionTypeId], references: [id])
   publishedBy                    User?                           @relation("publishedBy", fields: [publishedById], references: [id])
   User                           User                            @relation(fields: [userId], references: [id])
   LicencePermitSection           LicencePermitSection?
@@ -44,7 +44,8 @@ model Inspection {
 
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
-  currentInspection Inspection? @relation("CurrentPreviousInspection")
+  currentInspection  Inspection?          @relation("CurrentPreviousInspection")
+  InspectionPictures InspectionPictures[]
 }
 
 model InspectionForm {
@@ -133,6 +134,7 @@ model User {
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   ResidentialPremisesInfoSection ResidentialPremisesInfoSection[]
+  InspectionPictures             InspectionPictures[]
 }
 
 model UserLevel {
@@ -163,6 +165,23 @@ model Messaging {
   Region            Region?      @relation(fields: [regionRecipient], references: [id])
   Sender            User         @relation("sender", fields: [sender], references: [id])
   SendingType       SendingType? @relation(fields: [sendingType], references: [id])
+}
+
+model InspectionPictures {
+  id                  Int     @id @default(autoincrement())
+  basicInfoPicture    String? @db.VarChar(255)
+  waterPicture        String? @db.VarChar(255)
+  liquidWastePicture1 String? @db.VarChar(255)
+  liquidWastePicture2 String? @db.VarChar(255)
+  solidWastePicture   String? @db.VarChar(255)
+  User                User?   @relation(fields: [userId], references: [id])
+
+  Inspection   Inspection? @relation(fields: [inspectionId], references: [id])
+  deleted      Int?        @default(0)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  inspectionId String      @db.VarChar(255)
+  userId       Int
 }
 
 model SendingType {
@@ -875,12 +894,11 @@ model BasicInfoSection {
   latitude     Decimal @db.Decimal(11, 8)
   longitude    Decimal @db.Decimal(11, 8)
 
-  accuracy                String ?                @db.VarChar(255)
+  accuracy                String?                @db.VarChar(255)
   geom                    Json?
   respondentName          String                 @db.VarChar(255)
   respondentPhoneNumber   String                 @db.VarChar(255)
   respondentDesignationId Int
-  imagePath               String?                @db.VarChar(255)
   deleted                 Int?                   @default(0)
   createdAt               DateTime               @default(now())
   updatedAt               DateTime               @updatedAt
@@ -1307,14 +1325,13 @@ model LicencePermitSection {
 }
 
 model WaterSection {
-  id                                 String  @id @db.VarChar(255)
-  inspectionId                       String  @unique @db.VarChar(255)
+  id                                 String @id @db.VarChar(255)
+  inspectionId                       String @unique @db.VarChar(255)
   userId                             Int
   waterSourceConditionId             Int?
   waterStorageConditionId            Int?
   waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
-  imagePath                          String? @db.VarChar(255)
 
   rating                           Int
   deleted                          Int?                           @default(0)
@@ -1334,8 +1351,8 @@ model WaterSection {
 }
 
 model LiquidWasteSection {
-  id                         String  @id @db.VarChar(255)
-  inspectionId               String  @unique @db.VarChar(255)
+  id                         String @id @db.VarChar(255)
+  inspectionId               String @unique @db.VarChar(255)
   userId                     Int
   numberToiletSeats          Int?
   numberUrinalSeats          Int?
@@ -1366,8 +1383,6 @@ model LiquidWasteSection {
   easeYourselfWhereId        Int?
   desiltingFrequencyId       Int?
   rating                     Int?
-  imagePath1                 String? @db.VarChar(255)
-  imagePath2                 String? @db.VarChar(255)
 
   deleted                       Int?                            @default(0)
   createdAt                     DateTime                        @default(now())
@@ -1434,7 +1449,6 @@ model SolidWasteSection {
   wasteProviderAccredittedId         Int?
   containerNumber                    Int?
   rating                             Int?
-  imagePath                          String? @db.VarChar(255)
 
   deleted                          Int?                             @default(0)
   createdAt                        DateTime                         @default(now())
@@ -1726,7 +1740,6 @@ model PremisesNuisanceDetected {
   Nuisance            Nuisance          @relation(fields: [nuisanceId], references: [id])
   User                User              @relation(fields: [userId], references: [id])
 }
-
 
 model SanitationReport {
   id           Int     @id @default(autoincrement())
