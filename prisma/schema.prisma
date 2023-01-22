@@ -134,7 +134,6 @@ model User {
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   ResidentialPremisesInfoSection ResidentialPremisesInfoSection[]
-  InspectionPictures             InspectionPictures[]
 }
 
 model UserLevel {
@@ -174,14 +173,12 @@ model InspectionPictures {
   liquidWastePicture1 String? @db.VarChar(255)
   liquidWastePicture2 String? @db.VarChar(255)
   solidWastePicture   String? @db.VarChar(255)
-  User                User   @relation(fields: [userId], references: [id])
 
   Inspection   Inspection @relation(fields: [inspectionId], references: [id])
   deleted      Int?       @default(0)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   inspectionId String     @db.VarChar(255)
-  userId       Int
 }
 
 model SendingType {

@@ -19,7 +19,6 @@ const post = async (req, res) => {
       console.log("FORM fields==>", fields);
 
       let key = fields.imagekey;
-      console.log("key ", key);
 
       if (key == "basicInfoPicture") {
         let imageFile = file.basicInfoPicture;
@@ -28,7 +27,6 @@ const post = async (req, res) => {
         const data = {
           inspectionId: fields.inspectionId,
           basicInfoPicture: image,
-          userId: fields.userId,
         };
         const ip = await prisma.inspectionPictures.create({ data });
       }
@@ -38,7 +36,6 @@ const post = async (req, res) => {
         let image = await saveFile(imageFile);
         const data = {
           inspectionId: fields.inspectionId,
-          userId: fields.userId,
           solidWastePicture: image,
         };
         const ip = await prisma.inspectionPictures.create({ data });
@@ -50,7 +47,6 @@ const post = async (req, res) => {
         const data = {
           inspectionId: fields.inspectionId,
           waterPicture: image,
-          userId: fields.userId,
         };
         const ip = await prisma.inspectionPictures.create({ data });
       }
@@ -61,7 +57,6 @@ const post = async (req, res) => {
         const data = {
           inspectionId: fields.inspectionId,
           liquidWastePicture2: image,
-          userId: fields.userId,
         };
         const ip = await prisma.inspectionPictures.create({ data });
       }
