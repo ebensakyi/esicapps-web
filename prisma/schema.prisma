@@ -168,19 +168,19 @@ model Messaging {
 }
 
 model InspectionPictures {
-  id                  Int     @id @default(autoincrement())
+  id                  Int    @id @default(autoincrement())
   basicInfoPicture    String? @db.VarChar(255)
   waterPicture        String? @db.VarChar(255)
   liquidWastePicture1 String? @db.VarChar(255)
   liquidWastePicture2 String? @db.VarChar(255)
   solidWastePicture   String? @db.VarChar(255)
-  User                User?   @relation(fields: [userId], references: [id])
+  User                User   @relation(fields: [userId], references: [id])
 
-  Inspection   Inspection? @relation(fields: [inspectionId], references: [id])
-  deleted      Int?        @default(0)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  inspectionId String      @db.VarChar(255)
+  Inspection   Inspection @relation(fields: [inspectionId], references: [id])
+  deleted      Int?       @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  inspectionId String     @db.VarChar(255)
   userId       Int
 }
 
@@ -1325,8 +1325,8 @@ model LicencePermitSection {
 }
 
 model WaterSection {
-  id                                 String @id @db.VarChar(255)
-  inspectionId                       String @unique @db.VarChar(255)
+  id                                 String  @id @db.VarChar(255)
+  inspectionId                       String  @unique @db.VarChar(255)
   userId                             Int
   waterSourceConditionId             Int?
   waterStorageConditionId            Int?
@@ -1351,8 +1351,8 @@ model WaterSection {
 }
 
 model LiquidWasteSection {
-  id                         String @id @db.VarChar(255)
-  inspectionId               String @unique @db.VarChar(255)
+  id                         String  @id @db.VarChar(255)
+  inspectionId               String  @unique @db.VarChar(255)
   userId                     Int
   numberToiletSeats          Int?
   numberUrinalSeats          Int?
@@ -1383,6 +1383,7 @@ model LiquidWasteSection {
   easeYourselfWhereId        Int?
   desiltingFrequencyId       Int?
   rating                     Int?
+
 
   deleted                       Int?                            @default(0)
   createdAt                     DateTime                        @default(now())
