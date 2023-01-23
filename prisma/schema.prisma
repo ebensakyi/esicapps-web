@@ -167,7 +167,7 @@ model Messaging {
 }
 
 model InspectionPictures {
-  id                  Int    @id @default(autoincrement())
+  id                  Int     @id @default(autoincrement())
   basicInfoPicture    String? @db.VarChar(255)
   waterPicture        String? @db.VarChar(255)
   liquidWastePicture1 String? @db.VarChar(255)
@@ -1322,8 +1322,8 @@ model LicencePermitSection {
 }
 
 model WaterSection {
-  id                                 String  @id @db.VarChar(255)
-  inspectionId                       String  @unique @db.VarChar(255)
+  id                                 String @id @db.VarChar(255)
+  inspectionId                       String @unique @db.VarChar(255)
   userId                             Int
   waterSourceConditionId             Int?
   waterStorageConditionId            Int?
@@ -1348,8 +1348,8 @@ model WaterSection {
 }
 
 model LiquidWasteSection {
-  id                         String  @id @db.VarChar(255)
-  inspectionId               String  @unique @db.VarChar(255)
+  id                         String @id @db.VarChar(255)
+  inspectionId               String @unique @db.VarChar(255)
   userId                     Int
   numberToiletSeats          Int?
   numberUrinalSeats          Int?
@@ -1380,7 +1380,6 @@ model LiquidWasteSection {
   easeYourselfWhereId        Int?
   desiltingFrequencyId       Int?
   rating                     Int?
-
 
   deleted                       Int?                            @default(0)
   createdAt                     DateTime                        @default(now())
@@ -1769,4 +1768,17 @@ model ReportType {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   SanitationReport SanitationReport[]
+}
+
+model UserGuides {
+  id        Int    @id @default(autoincrement())
+  title     String @db.VarChar(255)
+  fileType  String @db.VarChar(255)
+  action String @db.VarChar(255) //download,stream
+  link String @db.VarChar(255) //youtube,web link
+  description String @db.Text
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
