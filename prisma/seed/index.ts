@@ -71,6 +71,7 @@ import { inspectionFormNuisances } from "./inspectionFormNuisances";
 import {messageType} from "./messageType";
 import {sendingType} from "./sendingType";
 import {reportType} from "./reportType";
+import { userGuides } from "./userGuides";
 
 async function main() {
 
@@ -291,6 +292,10 @@ async function main() {
   });
  await prisma.reportType.createMany({
     data: reportType,
+  });
+
+  await prisma.userGuides.createMany({
+    data: userGuides,
   });
 }
 

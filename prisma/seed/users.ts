@@ -4,6 +4,7 @@ var hash1 = bcrypt.hashSync("Kofi@2318", salt);
 var hash2 = bcrypt.hashSync("esicapps@national", salt);
 var hash3 = bcrypt.hashSync("esicapps@regional", salt);
 var hash4 = bcrypt.hashSync("esicapps@mmda", salt);
+var hash5 = bcrypt.hashSync("admin", salt);
 
 export const users = [
   {
@@ -13,6 +14,16 @@ export const users = [
     email: "ebensakyi@gmail.com",
     phoneNumber: "0543212322",
     password: hash1,
+   
+    designation: "Super Admin"
+  },
+  {
+    userTypeId: 1,
+    surname: "Oppong",
+    otherNames: "Ebenezer",
+    email: "oe@gmail.com",
+    phoneNumber: "054000000000",
+    password: hash5,
    
     designation: "Super Admin"
   },
