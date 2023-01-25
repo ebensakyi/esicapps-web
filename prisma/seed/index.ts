@@ -72,6 +72,7 @@ import {messageType} from "./messageType";
 import {sendingType} from "./sendingType";
 import {reportType} from "./reportType";
 import { userGuides } from "./userGuides";
+import { formSectionImage } from "./formSectionImage";
 
 async function main() {
 
@@ -296,6 +297,10 @@ async function main() {
 
   await prisma.userGuides.createMany({
     data: userGuides,
+  });
+
+  await prisma.formSectionImage.createMany({
+    data: formSectionImage,
   });
 }
 

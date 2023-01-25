@@ -46,6 +46,7 @@ model Inspection {
 
   currentInspection  Inspection?          @relation("CurrentPreviousInspection")
   InspectionPictures InspectionPictures[]
+  InspectionImages   InspectionImages[]
 }
 
 model InspectionForm {
@@ -134,6 +135,8 @@ model User {
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   ResidentialPremisesInfoSection ResidentialPremisesInfoSection[]
+  PremisesUnsafeWaterStorage     PremisesUnsafeWaterStorage[]
+  PremisesDrainBadCondition      PremisesDrainBadCondition[]
 }
 
 model UserLevel {
@@ -274,11 +277,12 @@ model AnimalType {
 }
 
 model BadDrainCondition {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  deleted                   Int?                        @default(0)
+  createdAt                 DateTime                    @default(now())
+  updatedAt                 DateTime                    @updatedAt
+  PremisesDrainBadCondition PremisesDrainBadCondition[]
 }
 
 model CemeteryWorkers {
@@ -621,11 +625,12 @@ model UnsafeToiletCondition {
 }
 
 model UnsafeWaterStorage {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  deleted                    Int?                         @default(0)
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  PremisesUnsafeWaterStorage PremisesUnsafeWaterStorage[]
 }
 
 model UnservicedWasteDisposal {
@@ -692,12 +697,13 @@ model WaterSourceType {
 }
 
 model WaterStorageType {
-  id                   Int                    @id @default(autoincrement())
-  name                 String                 @db.VarChar(255)
-  deleted              Int?                   @default(0)
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  PremisesWaterStorage PremisesWaterStorage[]
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  deleted                    Int?                         @default(0)
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  PremisesWaterStorage       PremisesWaterStorage[]
+  PremisesUnsafeWaterStorage PremisesUnsafeWaterStorage[]
 }
 
 model WaterSupplyType {
@@ -1345,6 +1351,7 @@ model WaterSection {
   WaterFlowFrequency               WaterFlowFrequency?            @relation(fields: [waterFlowFrequencyId], references: [id])
   waterSourceCondition             SafeUnsafe?                    @relation(fields: [waterSourceConditionId], references: [id])
   waterStorageConditionSafe        YesNo?                         @relation("waterStorageConditionSafe", fields: [waterStorageConditionId], references: [id])
+  PremisesUnsafeWaterStorage       PremisesUnsafeWaterStorage[]
 }
 
 model LiquidWasteSection {
@@ -1427,6 +1434,7 @@ model LiquidWasteSection {
   PremisesToiletType            PremisesToiletType[]
   ToiletHouseholdNumber         ToiletHouseholdNumber?          @relation(fields: [toiletHouseholdNumberId], references: [id])
   toiletHouseholdNumberId       Int?
+  PremisesDrainBadCondition     PremisesDrainBadCondition[]
 }
 
 model SolidWasteSection {
@@ -1544,6 +1552,22 @@ model PremisesWaterStorage {
   User               User             @relation(fields: [userId], references: [id])
   WaterSection       WaterSection     @relation(fields: [waterSectionId], references: [id])
   WaterStorageType   WaterStorageType @relation(fields: [waterStorageTypeId], references: [id])
+}
+
+model PremisesUnsafeWaterStorage {
+  id                   String             @id @db.VarChar(255)
+  inspectionId         String             @db.VarChar(255)
+  waterSectionId       String             @db.VarChar(255)
+  deleted              Int?               @default(0)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  userId               Int
+  User                 User               @relation(fields: [userId], references: [id])
+  WaterSection         WaterSection       @relation(fields: [waterSectionId], references: [id])
+  UnsafeWaterStorage   UnsafeWaterStorage @relation(fields: [unsafeWaterStorageId], references: [id])
+  WaterStorageType     WaterStorageType?  @relation(fields: [waterStorageTypeId], references: [id])
+  waterStorageTypeId   Int?
+  unsafeWaterStorageId Int
 }
 
 model PremisesDrinkingWaterSources {
@@ -1696,6 +1720,20 @@ model PremisesDrainType {
   User                 User               @relation(fields: [userId], references: [id])
 }
 
+model PremisesDrainBadCondition {
+  id                   String             @id @db.VarChar(255)
+  inspectionId         String             @db.VarChar(255)
+  liquidWasteSectionId String             @db.VarChar(255)
+  deleted              Int?               @default(0)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  userId               Int
+  BadDrainCondition    BadDrainCondition  @relation(fields: [badDrainConditionId], references: [id])
+  LiquidWasteSection   LiquidWasteSection @relation(fields: [liquidWasteSectionId], references: [id])
+  User                 User               @relation(fields: [userId], references: [id])
+  badDrainConditionId  Int
+}
+
 model PremisesHazardousWasteDisposal {
   id                             String                       @id @db.VarChar(255)
   inspectionId                   String                       @db.VarChar(255)
@@ -1771,14 +1809,36 @@ model ReportType {
 }
 
 model UserGuides {
-  id        Int    @id @default(autoincrement())
-  title     String @db.VarChar(255)
-  fileType  String @db.VarChar(255)
-  action String @db.VarChar(255) //download,stream
-  link String @db.VarChar(255) //youtube,web link
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  fileType    String @db.VarChar(255)
+  action      String @db.VarChar(255) //download,stream
+  link        String @db.VarChar(255) //youtube,web link
   description String @db.Text
 
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model FormSectionImage {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  InspectionImages InspectionImages[]
+}
+
+model InspectionImages {
+  id        Int    @id @default(autoincrement())
+  imagePath String @db.VarChar(255)
+
+  deleted            Int?             @default(0)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  Inspection         Inspection       @relation(fields: [inspectionId], references: [id])
+  inspectionId       String           @db.VarChar(255)
+  FormSectionImage   FormSectionImage @relation(fields: [formSectionImageId], references: [id])
+  formSectionImageId Int
 }

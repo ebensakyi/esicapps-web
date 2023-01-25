@@ -1297,6 +1297,21 @@ CREATE TABLE "PremisesWaterStorage" (
 );
 
 -- CreateTable
+CREATE TABLE "PremisesUnsafeWaterStorage" (
+    "id" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "waterSectionId" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "waterStorageTypeId" INTEGER,
+    "unsafeWaterStorageId" INTEGER NOT NULL,
+
+    CONSTRAINT "PremisesUnsafeWaterStorage_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "PremisesDrinkingWaterSources" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
@@ -1535,6 +1550,30 @@ CREATE TABLE "UserGuides" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "UserGuides_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "FormSectionImage" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "FormSectionImage_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "InspectionImages" (
+    "id" SERIAL NOT NULL,
+    "imagePath" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "formSectionImageId" INTEGER NOT NULL,
+
+    CONSTRAINT "InspectionImages_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -2255,6 +2294,18 @@ ALTER TABLE "PremisesWaterStorage" ADD CONSTRAINT "PremisesWaterStorage_waterSec
 ALTER TABLE "PremisesWaterStorage" ADD CONSTRAINT "PremisesWaterStorage_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "PremisesUnsafeWaterStorage" ADD CONSTRAINT "PremisesUnsafeWaterStorage_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesUnsafeWaterStorage" ADD CONSTRAINT "PremisesUnsafeWaterStorage_waterSectionId_fkey" FOREIGN KEY ("waterSectionId") REFERENCES "WaterSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesUnsafeWaterStorage" ADD CONSTRAINT "PremisesUnsafeWaterStorage_unsafeWaterStorageId_fkey" FOREIGN KEY ("unsafeWaterStorageId") REFERENCES "UnsafeWaterStorage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesUnsafeWaterStorage" ADD CONSTRAINT "PremisesUnsafeWaterStorage_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "PremisesDrinkingWaterSources" ADD CONSTRAINT "PremisesDrinkingWaterSources_drinkingWaterSourceId_fkey" FOREIGN KEY ("drinkingWaterSourceId") REFERENCES "DrinkingWaterSourceType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2382,6 +2433,12 @@ ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey"
 
 -- AddForeignKey
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InspectionImages" ADD CONSTRAINT "InspectionImages_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InspectionImages" ADD CONSTRAINT "InspectionImages_formSectionImageId_fkey" FOREIGN KEY ("formSectionImageId") REFERENCES "FormSectionImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -21,7 +21,7 @@ const Logs = ({ logs }) => {
                     <th>Designation</th>
   
                     <th>Activities</th>
-                    <th>View</th>
+                    {/* <th>View</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@ const Logs = ({ logs }) => {
                           {log.activity}
                         </td>
   
-                        <td>
+                        {/* <td>
                           <div className="dropdown d-inline-block">
                             <button
                               className="btn btn-soft-secondary btn-sm dropdown"
@@ -57,7 +57,7 @@ const Logs = ({ logs }) => {
                               
                             </ul>
                           </div>
-                        </td>
+                        </td> */}
                       </tr>
                     );
                   })}
