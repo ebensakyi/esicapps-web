@@ -276,7 +276,7 @@ model AnimalType {
   PremisesAnimal PremisesAnimal[]
 }
 
-model BadDrainCondition {
+model DrainBadCondition {
   id                        Int                         @id @default(autoincrement())
   name                      String                      @db.VarChar(255)
   deleted                   Int?                        @default(0)
@@ -1728,10 +1728,10 @@ model PremisesDrainBadCondition {
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
   userId               Int
-  BadDrainCondition    BadDrainCondition  @relation(fields: [badDrainConditionId], references: [id])
+  DrainBadCondition    DrainBadCondition  @relation(fields: [drainBadConditionId], references: [id])
   LiquidWasteSection   LiquidWasteSection @relation(fields: [liquidWasteSectionId], references: [id])
   User                 User               @relation(fields: [userId], references: [id])
-  badDrainConditionId  Int
+  drainBadConditionId  Int
 }
 
 model PremisesHazardousWasteDisposal {

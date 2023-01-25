@@ -7,9 +7,9 @@ const post = async (req, res) => {
 
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
-      badDrainConditionId: Number(req.body.badDrainConditionId),
+      drainBadConditionId: Number(req.body.drainBadConditionId),
 
-      liquidSectionId: req.body.liquidSectionId,
+      liquidWasteSectionId: req.body.liquidWasteSectionId,
     };
 
     const response = await prisma.premisesUnsafeWaterStorage.create({ data });
