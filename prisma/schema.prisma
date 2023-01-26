@@ -137,6 +137,11 @@ model User {
   ResidentialPremisesInfoSection ResidentialPremisesInfoSection[]
   PremisesUnsafeWaterStorage     PremisesUnsafeWaterStorage[]
   PremisesDrainBadCondition      PremisesDrainBadCondition[]
+
+  addedByUserId Int?  @unique
+  addedBy       User? @relation("AddedByUser", fields: [addedByUserId], references: [id])
+
+  addedUser User? @relation("AddedByUser")
 }
 
 model UserLevel {

@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { getUserCookie } from "../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../helpers/token-verifier";
 import { nanoid } from "nanoid";
+import { logActivity } from "../../../../helpers/Log";
 
 const post = async (req, res) => {
   try {
@@ -14,6 +15,10 @@ const post = async (req, res) => {
 
     let data = {};
     if (userCookie.user.userTypeId == 1) {
+      await logActivity(
+        `Added national user ${req.body.surname} ${req.body.otherNames} `,
+        Number(userCookie.user.id)
+      );
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -26,11 +31,16 @@ const post = async (req, res) => {
         regionId: req.body.region == null ? null : Number(req.body.region),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
+        addedByUserId: Number(userCookie.user.id),
       };
+
       console.log(data);
     }
     if (userCookie.user.userTypeId == 3) {
-      
+      await logActivity(
+        `Added regional user ${req.body.surname} ${req.body.otherNames} `,
+        Number(userCookie.user.id)
+      );
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -43,12 +53,17 @@ const post = async (req, res) => {
           req.body.region == null ? null : Number(userCookie.user.regionId),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
+        addedByUserId: Number(userCookie.user.id),
       };
 
       console.log("R DATA ", data);
     }
 
     if (userCookie.user.userTypeId == 5) {
+      await logActivity(
+        `Added mmda user ${req.body.surname} ${req.body.otherNames} `,
+        Number(userCookie.user.id)
+      );
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -60,6 +75,7 @@ const post = async (req, res) => {
         regionId: req.body.region == null ? null : Number(req.body.region),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
+        addedByUserId: Number(userCookie.user.id),
       };
     }
 
@@ -109,7 +125,6 @@ const get = async (req, res) => {
     }
 
     if (userLevel == 3) {
-
       user = await prisma.user.findMany({
         where: { deleted: 0, districtId: Number(district) },
         include: { Region: true, District: true, UserType: true },

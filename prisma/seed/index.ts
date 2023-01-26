@@ -57,7 +57,7 @@ import { unsafeWaterStorage } from "./unsafeWaterStorage";
 import { toiletDischarge } from "./toiletDischarge";
 import { sewerSystem } from "./sewerSystem";
 import { unsafeToiletCondition } from "./unsafeToiletCondition";
-import { badDrainCondition } from "./badDrainCondition";
+import { drainBadCondition } from "./drainBadCondition";
 import { easeYourselfWhere } from "./easeYourselfWhere";
 import { sanitaryInsanitary } from "./sanitaryInsanitary";
 import { safeUnsafe } from "./safeUnsafe";
@@ -247,8 +247,8 @@ async function main() {
     data: unsafeToiletCondition,
   });
 
-  await prisma.badDrainCondition.createMany({
-    data: badDrainCondition,
+  await prisma.drainBadCondition.createMany({
+    data: drainBadCondition,
   });
 
   await prisma.easeYourselfWhere.createMany({

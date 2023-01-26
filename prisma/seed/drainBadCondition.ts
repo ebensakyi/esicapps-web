@@ -1,4 +1,4 @@
-export const badDrainCondition = [
+export const drainBadCondition = [
   {
     name: "Silted",
   },

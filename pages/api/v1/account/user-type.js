@@ -3,7 +3,6 @@ import {verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
     const data = {
       name: req.body.data.userTypeName,
       // userLevelId: req.body.data.level,

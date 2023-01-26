@@ -25,7 +25,7 @@ export const users = [
     phoneNumber: "054000000000",
     password: hash5,
    
-    designation: "Super Admin"
+    designation: "Super Admin",addedByUserId:1
   },
   {
     userTypeId: 1,
@@ -34,7 +34,7 @@ export const users = [
     email: "nationaluser@gmail.com",
     phoneNumber: "0541111111",
     password: hash2,
-    designation: "Admin"
+    designation: "Admin",addedByUserId:1
   },
   {
     userTypeId: 1,
@@ -44,13 +44,13 @@ export const users = [
     phoneNumber: "0542222222",
     password: hash3,
     regionId: 1,
-    designation: "Super Admin"
+    designation: "Super Admin",addedByUserId:1
   },
   {
     userTypeId: 1,
     surname: "District",
     otherNames: "User1",
-    email: "districtuser1@gmail.com",
+    email: "districtuser1@gmail.com",addedByUserId:1,
     phoneNumber: "0543333333",
     password: hash4,
     regionId: 1,
@@ -61,7 +61,7 @@ export const users = [
     userTypeId: 1,
     surname: "District",
     otherNames: "User2",
-    email: "districtuser2@gmail.com",
+    email: "districtuser2@gmail.com",addedByUserId:1,
     phoneNumber: "0544444444",
     password: hash4,
     regionId: 1,
@@ -77,7 +77,7 @@ export const users = [
     password: hash4,
     regionId: 1,
     districtId:1,
-    designation: "Super Admin"
+    designation: "Super Admin",addedByUserId:1
   },
   {
     userTypeId: 1,
@@ -88,7 +88,7 @@ export const users = [
     password: hash4,
     regionId: 1,
     districtId:1,
-    designation: "Super Admin"
+    designation: "Super Admin",addedByUserId:1
   },
   // {
   //   userTypeId: 7,

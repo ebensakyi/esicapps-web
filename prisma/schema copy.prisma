@@ -1650,7 +1650,7 @@ model UnsafeToiletCondition {
   updatedAt DateTime @updatedAt
 }
 
-model BadDrainCondition {
+model DrainBadCondition {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(255)
 

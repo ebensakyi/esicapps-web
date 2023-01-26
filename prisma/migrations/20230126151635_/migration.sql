@@ -62,6 +62,7 @@ CREATE TABLE "User" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "addedByUserId" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -215,14 +216,14 @@ CREATE TABLE "AnimalType" (
 );
 
 -- CreateTable
-CREATE TABLE "BadDrainCondition" (
+CREATE TABLE "DrainBadCondition" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "BadDrainCondition_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "DrainBadCondition_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1463,6 +1464,20 @@ CREATE TABLE "PremisesDrainType" (
 );
 
 -- CreateTable
+CREATE TABLE "PremisesDrainBadCondition" (
+    "id" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "liquidWasteSectionId" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "drainBadConditionId" INTEGER NOT NULL,
+
+    CONSTRAINT "PremisesDrainBadCondition_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "PremisesHazardousWasteDisposal" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
@@ -1592,6 +1607,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_addedByUserId_key" ON "User"("addedByUserId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Community_districtId_name_key" ON "Community"("districtId", "name");
 
 -- CreateIndex
@@ -1671,6 +1689,9 @@ ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") 
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_addedByUserId_fkey" FOREIGN KEY ("addedByUserId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_districtRecipient_fkey" FOREIGN KEY ("districtRecipient") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2400,6 +2421,15 @@ ALTER TABLE "PremisesDrainType" ADD CONSTRAINT "PremisesDrainType_liquidWasteSec
 
 -- AddForeignKey
 ALTER TABLE "PremisesDrainType" ADD CONSTRAINT "PremisesDrainType_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesDrainBadCondition" ADD CONSTRAINT "PremisesDrainBadCondition_drainBadConditionId_fkey" FOREIGN KEY ("drainBadConditionId") REFERENCES "DrainBadCondition"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesDrainBadCondition" ADD CONSTRAINT "PremisesDrainBadCondition_liquidWasteSectionId_fkey" FOREIGN KEY ("liquidWasteSectionId") REFERENCES "LiquidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesDrainBadCondition" ADD CONSTRAINT "PremisesDrainBadCondition_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesHazardousWasteDisposal" ADD CONSTRAINT "PremisesHazardousWasteDisposal_hazardousWasteDisposalMetho_fkey" FOREIGN KEY ("hazardousWasteDisposalMethodId") REFERENCES "HazardousWasteDisposalMethod"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
