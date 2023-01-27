@@ -108,22 +108,6 @@ CREATE TABLE "Messaging" (
 );
 
 -- CreateTable
-CREATE TABLE "InspectionPictures" (
-    "id" SERIAL NOT NULL,
-    "basicInfoPicture" VARCHAR(255),
-    "waterPicture" VARCHAR(255),
-    "liquidWastePicture1" VARCHAR(255),
-    "liquidWastePicture2" VARCHAR(255),
-    "solidWastePicture" VARCHAR(255),
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "inspectionId" VARCHAR(255) NOT NULL,
-
-    CONSTRAINT "InspectionPictures_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "SendingType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -1590,16 +1574,16 @@ CREATE TABLE "FormSectionImage" (
 );
 
 -- CreateTable
-CREATE TABLE "InspectionImages" (
+CREATE TABLE "InspectionPictures" (
     "id" SERIAL NOT NULL,
     "imagePath" VARCHAR(255) NOT NULL,
+    "formSectionImageId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
-    "formSectionImageId" INTEGER NOT NULL,
 
-    CONSTRAINT "InspectionImages_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "InspectionPictures_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1721,9 +1705,6 @@ ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sen
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "UserType" ADD CONSTRAINT "UserType_userLevelId_fkey" FOREIGN KEY ("userLevelId") REFERENCES "UserLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2476,10 +2457,10 @@ ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey"
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "InspectionImages" ADD CONSTRAINT "InspectionImages_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "InspectionImages" ADD CONSTRAINT "InspectionImages_formSectionImageId_fkey" FOREIGN KEY ("formSectionImageId") REFERENCES "FormSectionImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_formSectionImageId_fkey" FOREIGN KEY ("formSectionImageId") REFERENCES "FormSectionImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;
