@@ -471,20 +471,15 @@ const Header = () => {
                     </li>
                   </ul>
                 </div>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link href="/map">
                     <a className="nav-link menu-link">
                       <i className="ri-map-2-line" />{" "}
                       <span data-key="t-landing">Map</span>
-                      {/* <span
-                      className="badge badge-pill bg-success"
-                      data-key="t-new"
-                    >
-                      New
-                    </span> */}
+                     
                     </a>
                   </Link>
-                </li>
+                </li> */}
 
                 <li className="nav-item">
                   <Link href="/sanitation-reports">

@@ -31,10 +31,7 @@ const post = async (req, res) => {
         regionId: req.body.region == null ? null : Number(req.body.region),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
-        addedByUserId: Number(userCookie.user.id),
       };
-
-      console.log(data);
     }
     if (userCookie.user.userTypeId == 3) {
       await logActivity(
@@ -53,7 +50,6 @@ const post = async (req, res) => {
           req.body.region == null ? null : Number(userCookie.user.regionId),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
-        addedByUserId: Number(userCookie.user.id),
       };
 
       console.log("R DATA ", data);
@@ -75,11 +71,15 @@ const post = async (req, res) => {
         regionId: req.body.region == null ? null : Number(req.body.region),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
-        addedByUserId: Number(userCookie.user.id),
       };
     }
 
     const user = await prisma.user.create({ data });
+
+    await prisma.userAddedByUser.create({
+      data: { addeeId: user.id, adderId: Number(userCookie.user.id) },
+    });
+
     return res
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { user } });

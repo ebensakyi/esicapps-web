@@ -45,8 +45,7 @@ model Inspection {
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
   currentInspection  Inspection?          @relation("CurrentPreviousInspection")
-  InspectionPictures InspectionPictures[]
-  InspectionImages   InspectionImages[]
+  InspectionPictures   InspectionPictures[]
 }
 
 model InspectionForm {
@@ -138,10 +137,25 @@ model User {
   PremisesUnsafeWaterStorage     PremisesUnsafeWaterStorage[]
   PremisesDrainBadCondition      PremisesDrainBadCondition[]
 
-  addedByUserId Int?  @unique
-  addedBy       User? @relation("AddedByUser", fields: [addedByUserId], references: [id])
+  // addedByUserId Int?  @unique
+  // addedBy       User? @relation("AddedByUser", fields: [addedByUserId], references: [id])
 
-  addedUser User? @relation("AddedByUser")
+  // addedUser User? @relation("AddedByUser")
+
+  adder UserAddedByUser[] @relation("adder")
+  addee UserAddedByUser[] @relation("addee")
+}
+
+model UserAddedByUser {
+  id Int @id @default(autoincrement())
+
+  adder     User?    @relation("adder", fields: [adderId], references: [id])
+  addee     User?    @relation("addee", fields: [addeeId], references: [id])
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  adderId   Int?
+  addeeId   Int?
 }
 
 model UserLevel {
@@ -174,20 +188,6 @@ model Messaging {
   SendingType       SendingType? @relation(fields: [sendingType], references: [id])
 }
 
-model InspectionPictures {
-  id                  Int     @id @default(autoincrement())
-  basicInfoPicture    String? @db.VarChar(255)
-  waterPicture        String? @db.VarChar(255)
-  liquidWastePicture1 String? @db.VarChar(255)
-  liquidWastePicture2 String? @db.VarChar(255)
-  solidWastePicture   String? @db.VarChar(255)
-
-  Inspection   Inspection @relation(fields: [inspectionId], references: [id])
-  deleted      Int?       @default(0)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  inspectionId String     @db.VarChar(255)
-}
 
 model SendingType {
   id        Int         @id @default(autoincrement())
@@ -1832,12 +1832,13 @@ model FormSectionImage {
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
-  InspectionImages InspectionImages[]
+  InspectionPictures InspectionPictures[]
 }
 
-model InspectionImages {
+model InspectionPictures {
   id        Int    @id @default(autoincrement())
   imagePath String @db.VarChar(255)
+  formSectionImageId Int
 
   deleted            Int?             @default(0)
   createdAt          DateTime         @default(now())
@@ -1845,5 +1846,4 @@ model InspectionImages {
   Inspection         Inspection       @relation(fields: [inspectionId], references: [id])
   inspectionId       String           @db.VarChar(255)
   FormSectionImage   FormSectionImage @relation(fields: [formSectionImageId], references: [id])
-  formSectionImageId Int
 }

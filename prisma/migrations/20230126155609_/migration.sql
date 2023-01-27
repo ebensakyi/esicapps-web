@@ -62,9 +62,20 @@ CREATE TABLE "User" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "addedByUserId" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UserAddedByUser" (
+    "id" SERIAL NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "adderId" INTEGER,
+    "addeeId" INTEGER,
+
+    CONSTRAINT "UserAddedByUser_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1607,9 +1618,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_addedByUserId_key" ON "User"("addedByUserId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Community_districtId_name_key" ON "Community"("districtId", "name");
 
 -- CreateIndex
@@ -1691,7 +1699,10 @@ ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") 
 ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_addedByUserId_fkey" FOREIGN KEY ("addedByUserId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "UserAddedByUser" ADD CONSTRAINT "UserAddedByUser_adderId_fkey" FOREIGN KEY ("adderId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserAddedByUser" ADD CONSTRAINT "UserAddedByUser_addeeId_fkey" FOREIGN KEY ("addeeId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_districtRecipient_fkey" FOREIGN KEY ("districtRecipient") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;

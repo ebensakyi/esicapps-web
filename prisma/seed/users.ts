@@ -14,8 +14,8 @@ export const users = [
     email: "ebensakyi@gmail.com",
     phoneNumber: "0543212322",
     password: hash1,
-   
-    designation: "Super Admin"
+
+    designation: "Super Admin",
   },
   {
     userTypeId: 1,
@@ -24,8 +24,8 @@ export const users = [
     email: "oe@gmail.com",
     phoneNumber: "054000000000",
     password: hash5,
-   
-    designation: "Super Admin",addedByUserId:1
+
+    designation: "Super Admin",
   },
   {
     userTypeId: 1,
@@ -34,7 +34,7 @@ export const users = [
     email: "nationaluser@gmail.com",
     phoneNumber: "0541111111",
     password: hash2,
-    designation: "Admin",addedByUserId:1
+    designation: "Admin",
   },
   {
     userTypeId: 1,
@@ -44,29 +44,29 @@ export const users = [
     phoneNumber: "0542222222",
     password: hash3,
     regionId: 1,
-    designation: "Super Admin",addedByUserId:1
+    designation: "Super Admin",
   },
   {
     userTypeId: 1,
     surname: "District",
     otherNames: "User1",
-    email: "districtuser1@gmail.com",addedByUserId:1,
+    email: "districtuser1@gmail.com",
     phoneNumber: "0543333333",
     password: hash4,
     regionId: 1,
-    districtId:1,
-    designation: "Super Admin"
+    districtId: 1,
+    designation: "Super Admin",
   },
   {
     userTypeId: 1,
     surname: "District",
     otherNames: "User2",
-    email: "districtuser2@gmail.com",addedByUserId:1,
+    email: "districtuser2@gmail.com",
     phoneNumber: "0544444444",
     password: hash4,
     regionId: 1,
-    districtId:1,
-    designation: "Super Admin"
+    districtId: 1,
+    designation: "Super Admin",
   },
   {
     userTypeId: 1,
@@ -76,8 +76,8 @@ export const users = [
     phoneNumber: "0545555555",
     password: hash4,
     regionId: 1,
-    districtId:1,
-    designation: "Super Admin",addedByUserId:1
+    districtId: 1,
+    designation: "Super Admin",
   },
   {
     userTypeId: 1,
@@ -87,8 +87,8 @@ export const users = [
     phoneNumber: "0546666666",
     password: hash4,
     regionId: 1,
-    districtId:1,
-    designation: "Super Admin",addedByUserId:1
+    districtId: 1,
+    designation: "Super Admin",
   },
   // {
   //   userTypeId: 7,
@@ -155,5 +155,4 @@ export const users = [
   //   districtId:2,
   //   designation: "Super Admin"
   // },
-  
 ];

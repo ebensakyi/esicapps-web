@@ -18,59 +18,19 @@ const post = async (req, res) => {
       console.log("FORM files==>", file);
       console.log("FORM fields==>", fields);
 
-      let key = fields.imagekey;
+      // let imageFile = file.imageFile;
+      let image = await saveFile(file);
 
-      if (key == "basicInfoPicture") {
-        let imageFile = file.basicInfoPicture;
-        let image = await saveFile(imageFile);
+      const data = {
+        inspectionId: fields.inspectionId,
+        basicInfoPicture: image,
+        formSectionImageId:
+          fields.formSectionImageId == "null"
+            ? 1
+            : Number(fields.formSectionImageId),
+      };
+      const ip = await prisma.inspectionPictures.create({ data });
 
-        const data = {
-          inspectionId: fields.inspectionId,
-          basicInfoPicture: image,
-        };
-        const ip = await prisma.inspectionPictures.create({ data });
-      }
-
-      if (key == "solidWastePicture") {
-        let imageFile = file.solidWastePicture;
-        let image = await saveFile(imageFile);
-        const data = {
-          inspectionId: fields.inspectionId,
-          solidWastePicture: image,
-        };
-        const ip = await prisma.inspectionPictures.create({ data });
-      }
-
-      if (key == "waterPicture") {
-        let imageFile = file.waterPicture;
-        let image = await saveFile(imageFile);
-        const data = {
-          inspectionId: fields.inspectionId,
-          waterPicture: image,
-        };
-        const ip = await prisma.inspectionPictures.create({ data });
-      }
-
-      if (key == "liquidWastePicture2") {
-        let imageFile = file.liquidWastePicture2;
-        let image = await saveFile(imageFile);
-        const data = {
-          inspectionId: fields.inspectionId,
-          liquidWastePicture2: image,
-        };
-        const ip = await prisma.inspectionPictures.create({ data });
-      }
-
-      if (key == "liquidWastePicture1") {
-        let imageFile = file.liquidWastePicture1;
-        let image = await saveFile(imageFile);
-        const data = {
-          inspectionId: fields.inspectionId,
-          liquidWastePicture1: image,
-          userId: fields.userId,
-        };
-        const ip = await prisma.inspectionPictures.create({ data });
-      }
       //   const data = {
       //     inspectionId: fields.inspectionId,
       //     _key:fields.key,
@@ -89,8 +49,8 @@ const post = async (req, res) => {
   }
 };
 
-const saveFile = async (imageFile) => {
-  console.log(">>>>> ", imageFile);
+const saveFile = async (file) => {
+  const imageFile = await file.imageFile;
 
   var now = moment();
 
