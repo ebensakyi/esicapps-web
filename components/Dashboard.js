@@ -916,7 +916,7 @@ const Dashboard = ({ data }) => {
                     {" "}
                     {data.allInspectionSummary.map((a) => {
                       return (
-                        <tr map={a.id}>
+                        <tr key={a.id}>
                           <td>{a.name}</td>
                           <td>
                             <span className="badge badge-soft-success p-2">
