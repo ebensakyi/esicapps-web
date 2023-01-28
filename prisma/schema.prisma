@@ -9,8 +9,10 @@ datasource db {
 }
 
 model Inspection {
-  id                             String                          @id @db.VarChar(255)
-  prevInspectionId               String?                         @unique @db.VarChar(255)
+  id               String  @id @db.VarChar(255)
+  prevInspectionId String? @unique @db.VarChar(255)
+  premisesCode     String? @db.VarChar(255)
+
   userId                         Int
   inspectionFormId               Int
   inspectionTypeId               Int
@@ -45,12 +47,13 @@ model Inspection {
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
   currentInspection  Inspection?          @relation("CurrentPreviousInspection")
-  InspectionPictures   InspectionPictures[]
+  InspectionPictures InspectionPictures[]
 }
 
 model InspectionForm {
   id         Int          @id @default(autoincrement())
   name       String       @db.VarChar(255)
+  code       String       @db.VarChar(2)
   deleted    Int?         @default(0)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
@@ -82,6 +85,7 @@ model User {
   designation  String  @db.VarChar(255)
   password     String  @db.VarChar(255)
   tempPassword String? @db.VarChar(255)
+  imagePath    String? @db.VarChar(255)
 
   regionId                       Int?
   districtId                     Int?
@@ -187,7 +191,6 @@ model Messaging {
   Sender            User         @relation("sender", fields: [sender], references: [id])
   SendingType       SendingType? @relation(fields: [sendingType], references: [id])
 }
-
 
 model SendingType {
   id        Int         @id @default(autoincrement())
@@ -472,7 +475,8 @@ model PestSign {
 model Region {
   id        Int         @id @default(autoincrement())
   name      String      @db.VarChar(255)
-  abbrv     String      @db.VarChar(10)
+  abbrv     String      @unique @db.VarChar(10)
+  code      String      @unique @db.VarChar(2)
   deleted   Int?        @default(0)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
@@ -484,7 +488,7 @@ model Region {
 model District {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
-  abbrv            String             @db.VarChar(255)
+  abbrv            String             @unique @db.VarChar(255)
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
@@ -1827,23 +1831,23 @@ model UserGuides {
 }
 
 model FormSectionImage {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(255)
-  deleted          Int?               @default(0)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
   InspectionPictures InspectionPictures[]
 }
 
 model InspectionPictures {
-  id        Int    @id @default(autoincrement())
-  imagePath String @db.VarChar(255)
+  id                 Int    @id @default(autoincrement())
+  imagePath          String @db.VarChar(255)
   formSectionImageId Int
 
-  deleted            Int?             @default(0)
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
-  Inspection         Inspection       @relation(fields: [inspectionId], references: [id])
-  inspectionId       String           @db.VarChar(255)
-  FormSectionImage   FormSectionImage @relation(fields: [formSectionImageId], references: [id])
+  deleted          Int?             @default(0)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  Inspection       Inspection       @relation(fields: [inspectionId], references: [id])
+  inspectionId     String           @db.VarChar(255)
+  FormSectionImage FormSectionImage @relation(fields: [formSectionImageId], references: [id])
 }

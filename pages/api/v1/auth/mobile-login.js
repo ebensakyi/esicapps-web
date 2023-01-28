@@ -10,7 +10,7 @@ const post = async (req, res) => {
 
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
-      include: { District: true },
+      include: { District: { include: { Region: true } } },
     });
 
     let loginTimes = user.loginTimes;

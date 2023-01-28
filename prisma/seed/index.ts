@@ -301,7 +301,7 @@ async function main() {
 
   await prisma.formSectionImage.createMany({
     data: formSectionImage,
-  });
+  })
 }
 
 main()

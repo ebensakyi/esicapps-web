@@ -1,10 +1,10 @@
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
 var hash1 = bcrypt.hashSync("Kofi@2318", salt);
-var hash2 = bcrypt.hashSync("esicapps@national", salt);
-var hash3 = bcrypt.hashSync("esicapps@regional", salt);
-var hash4 = bcrypt.hashSync("esicapps@mmda", salt);
-var hash5 = bcrypt.hashSync("admin", salt);
+var hash2 = bcrypt.hashSync("12345678", salt);
+var hash3 = bcrypt.hashSync("12345678", salt);
+var hash4 = bcrypt.hashSync("12345678", salt);
+var hash5 = bcrypt.hashSync("12345678", salt);
 
 export const users = [
   {
@@ -15,7 +15,7 @@ export const users = [
     phoneNumber: "0543212322",
     password: hash1,
 
-    designation: "Super Admin",
+    designation: "Enterprise Admin",
   },
   {
     userTypeId: 1,
@@ -25,17 +25,9 @@ export const users = [
     phoneNumber: "054000000000",
     password: hash5,
 
-    designation: "Super Admin",
+    designation: "Enterprise Admin",
   },
-  {
-    userTypeId: 1,
-    surname: "National",
-    otherNames: "User",
-    email: "nationaluser@gmail.com",
-    phoneNumber: "0541111111",
-    password: hash2,
-    designation: "Admin",
-  },
+ 
   {
     userTypeId: 1,
     surname: "Regional",
@@ -46,39 +38,8 @@ export const users = [
     regionId: 1,
     designation: "Super Admin",
   },
-  {
-    userTypeId: 1,
-    surname: "District",
-    otherNames: "User1",
-    email: "districtuser1@gmail.com",
-    phoneNumber: "0543333333",
-    password: hash4,
-    regionId: 1,
-    districtId: 1,
-    designation: "Super Admin",
-  },
-  {
-    userTypeId: 1,
-    surname: "District",
-    otherNames: "User2",
-    email: "districtuser2@gmail.com",
-    phoneNumber: "0544444444",
-    password: hash4,
-    regionId: 1,
-    districtId: 1,
-    designation: "Super Admin",
-  },
-  {
-    userTypeId: 1,
-    surname: "District",
-    otherNames: "User3",
-    email: "districtuser3@gmail.com",
-    phoneNumber: "0545555555",
-    password: hash4,
-    regionId: 1,
-    districtId: 1,
-    designation: "Super Admin",
-  },
+  
+ 
   {
     userTypeId: 1,
     surname: "Doe",
