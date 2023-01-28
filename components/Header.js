@@ -595,6 +595,12 @@ const Header = () => {
                         Communities
                       </a>
                     </li>
+                    <li className="nav-item">
+                      <a href="/primary-data/assign-data" className="nav-link">
+                        {" "}
+                        Assign Data
+                      </a>
+                    </li>
                     {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"

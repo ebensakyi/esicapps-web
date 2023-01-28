@@ -8,18 +8,18 @@ const post = async (req, res) => {
     let password = req.body.password;
     //let hash = await bcrypt.hashSync(password, salt);
 
+    console.log(req.body);
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
       include: { District: { include: { Region: true } } },
     });
-
-    let loginTimes = user.loginTimes;
 
     if (!user) {
       return res
         .status(400)
         .json({ statusCode: 0, message: "User account not found" });
     }
+    let loginTimes = user.loginTimes;
 
     let isValid = await bcrypt.compare(password, user.password);
 
