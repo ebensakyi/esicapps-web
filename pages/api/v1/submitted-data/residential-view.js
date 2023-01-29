@@ -202,7 +202,7 @@ const get = async (req, res) => {
           },
         },
 
-        // User: true,
+      InspectionPictures: true,
       },
     });
 

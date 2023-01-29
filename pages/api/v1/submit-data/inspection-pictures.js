@@ -15,15 +15,14 @@ const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
-      console.log("FORM files==>", file);
-      console.log("FORM fields==>", fields);
+    
 
       // let imageFile = file.imageFile;
       let image = await saveFile(file);
 
       const data = {
         inspectionId: fields.inspectionId,
-        basicInfoPicture: image,
+        imagePath: image,
         formSectionImageId:
           fields.formSectionImageId == "null"
             ? 1

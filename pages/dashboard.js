@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/dashboard`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/dashboard?token=${token}`).then(
         (res) => res.json()
     );
     // const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(

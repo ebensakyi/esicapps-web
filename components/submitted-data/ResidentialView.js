@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const ResidentialView = ({ data }) => {
+  console.log(data);
   const router = useRouter();
   const publish = async (id) => {
     try {
@@ -1844,6 +1845,33 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="row mb-3">
+            <div className="col-xl-12">
+              <div className="row align-items-center gy-3 mb-3">
+                <div className="col-sm">
+                  <div>
+                    <h5 className="fs-14 mb-0">PICTURES</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="card product">
+                <div className="card-body">
+                  <div className="row gy-3">
+                  {data.InspectionPictures.map((x) => (
+                     <h5 className="fs-14 mb-0">{x.imagePath}</h5>
+                          
+                        ))}
                   </div>
                 </div>
               </div>
