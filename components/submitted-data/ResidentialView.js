@@ -1528,7 +1528,6 @@ const ResidentialView = ({ data }) => {
                     <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
                   </div>
                 </div>
-               
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -1545,8 +1544,10 @@ const ResidentialView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.SolidWasteSection
-                              .wasteServiceProviderRegistration!=null? data.SolidWasteSection
-                              .wasteServiceProviderRegistration.name  :""
+                              .wasteServiceProviderRegistration != null
+                              ? data.SolidWasteSection
+                                  .wasteServiceProviderRegistration.name
+                              : ""
                           }
                           readOnly="readOnly"
                         />
@@ -1849,7 +1850,6 @@ const ResidentialView = ({ data }) => {
                 </div>
               </div>
             </div>
-           
           </div>
         </div>
       </div>
@@ -1865,15 +1865,48 @@ const ResidentialView = ({ data }) => {
                   </div>
                 </div>
               </div>
-              <div className="card product">
-                <div className="card-body">
-                  <div className="row gy-3">
-                  {data.InspectionPictures.map((x) => (
-                     <h5 className="fs-14 mb-0">{x.imagePath}</h5>
-                          
-                        ))}
-                  </div>
-                </div>
+              <div className="row gallery-wrapper">
+                {data.InspectionPictures.map(ip=>{
+                  console.log(ip.imagePath);
+                   <div
+                   className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                   data-category="designing development"
+                 >
+                   <div className="gallery-box card">
+                     <div className="gallery-container">
+                       <a
+                         className="image-popup"
+                         href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                         title=""
+                       >
+                         <img
+                           className="gallery-img img-fluid mx-auto"
+                           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                           alt=""
+                         />
+                         <div className="gallery-overlay">
+                           <h5 className="overlay-caption">
+                             Glasses and laptop from above
+                           </h5>
+                         </div>
+                       </a>
+                     </div>
+ 
+                     <div className="box-content">
+                       <div className="d-flex align-items-center mt-1">
+                         <div className="flex-grow-1 text-muted">
+                         
+                           <a href="" className="text-body text-truncate">
+                            {ip.formSectionImageId}
+                           </a>
+                         </div>
+                        
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                })}
+               
               </div>
             </div>
             <div className="col-sm-auto">

@@ -1850,4 +1850,6 @@ model InspectionPictures {
   Inspection       Inspection       @relation(fields: [inspectionId], references: [id])
   inspectionId     String           @db.VarChar(255)
   FormSectionImage FormSectionImage @relation(fields: [formSectionImageId], references: [id])
+
+  @@unique([formSectionImageId, inspectionId], name: "inspectionFormSectionImage")
 }

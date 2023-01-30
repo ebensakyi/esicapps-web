@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import * as moment from 'moment';
 const Residential = ({ data }) => {
   return (
     <div className="row">
@@ -16,8 +16,10 @@ const Residential = ({ data }) => {
             >
               <thead>
                 <tr>
-                  <th>Submission Date</th>
-                  <th>Inspection Date</th>
+               
+                <th>Inspection ID</th>
+                  <th>Premises Code</th>
+                  {/* <th>Inspection Date</th> */}
 
                   <th>Inspection Officer</th>
 
@@ -26,7 +28,7 @@ const Residential = ({ data }) => {
                   <th>District</th>
                   <th>Community</th>
                   {/* <th>Respondent</th>
-                  <th>Designation</th> */}
+                  <th>Designation</th> */} <th>Submission Date</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -36,8 +38,12 @@ const Residential = ({ data }) => {
                   return (
                     <tr key={dt.id}>
                       {" "}
-                      <td>{dt.Inspection.createdAt}</td>
-                      <td>{dt.Inspection.completedAt}</td>
+                      <td>{dt.Inspection.id}</td>
+                      <td>{dt.Inspection.premisesCode}</td>
+
+                  
+                      {/* <td>{dt.Inspection.createdAt}</td>
+                      <td>{dt.Inspection.completedAt}</td> */}
                       <td>
                         {dt.User.otherNames} {dt.User.surname}
                       </td>
@@ -53,7 +59,7 @@ const Residential = ({ data }) => {
                       <td>
                         {dt.Community != null ? dt.Community.name : ""}
                         {dt.community}
-                      </td>
+                      </td>    <td>{moment(dt.Inspection.createdAt).format("MMM Do YYYY, h:mm:ss a")}</td>
                       <td>
                         {dt.Inspection.isPublished == 0 ? (
                           <span className="badge bg-danger">Unpublished</span>
