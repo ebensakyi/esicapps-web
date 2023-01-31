@@ -1,4 +1,4 @@
-import prisma from "../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
@@ -20,14 +20,15 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    console.log(req.query);
-
-    const count = await prisma.assignData.count({
-      where: { assignedToId: Number(req.query.userId) },
-    });
-    if (count == 0) {
-      return res.status(200).json(count);
+    if (req.query.userId) {
+      const count = await prisma.assignData.count({
+        where: { assignedToId: Number(req.query.userId) },
+      });
+      if (count == 0) {
+        return res.status(200).json(count);
+      }
     }
+
     const data = await prisma.assignData.findMany({ where: { deleted: 0 } });
     return res.status(200).json(data);
   } catch (error) {

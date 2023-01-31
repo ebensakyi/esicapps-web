@@ -596,7 +596,7 @@ const Header = () => {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a href="/primary-data/assign-data" className="nav-link">
+                      <a href="/setup/assign-data" className="nav-link">
                         {" "}
                         Assign Data
                       </a>
