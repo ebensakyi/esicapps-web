@@ -1591,6 +1591,20 @@ CREATE TABLE "InspectionPictures" (
 );
 
 -- CreateTable
+CREATE TABLE "AssignData" (
+    "id" SERIAL NOT NULL,
+    "imagePath" VARCHAR(255) NOT NULL,
+    "formSectionImageId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "assignedToId" INTEGER NOT NULL,
+    "assignedFromId" INTEGER NOT NULL,
+
+    CONSTRAINT "AssignData_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_PageToPageAction" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -1658,6 +1672,9 @@ CREATE UNIQUE INDEX "SolidWasteSection_inspectionId_key" ON "SolidWasteSection"(
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ConclusionSection_inspectionId_key" ON "ConclusionSection"("inspectionId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "InspectionPictures_formSectionImageId_inspectionId_key" ON "InspectionPictures"("formSectionImageId", "inspectionId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_PageToPageAction_AB_unique" ON "_PageToPageAction"("A", "B");
@@ -2474,6 +2491,12 @@ ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_inspectionId
 
 -- AddForeignKey
 ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_formSectionImageId_fkey" FOREIGN KEY ("formSectionImageId") REFERENCES "FormSectionImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedToId_fkey" FOREIGN KEY ("assignedToId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedFromId_fkey" FOREIGN KEY ("assignedFromId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;

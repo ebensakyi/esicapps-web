@@ -146,8 +146,10 @@ model User {
 
   // addedUser User? @relation("AddedByUser")
 
-  adder UserAddedByUser[] @relation("adder")
-  addee UserAddedByUser[] @relation("addee")
+  adder        UserAddedByUser[] @relation("adder")
+  addee        UserAddedByUser[] @relation("addee")
+  assignedTo   AssignData[]      @relation("assignedTo")
+  assignedFrom AssignData[]      @relation("assignedFrom")
 }
 
 model UserAddedByUser {
@@ -1852,4 +1854,20 @@ model InspectionPictures {
   FormSectionImage FormSectionImage @relation(fields: [formSectionImageId], references: [id])
 
   @@unique([formSectionImageId, inspectionId], name: "inspectionFormSectionImage")
+}
+
+model AssignData {
+  id                 Int    @id @default(autoincrement())
+  imagePath          String @db.VarChar(255)
+  formSectionImageId Int
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assignedTo   User @relation("assignedTo", fields: [assignedToId], references: [id])
+  assignedToId Int
+
+  assignedFrom   User @relation("assignedFrom", fields: [assignedFromId], references: [id])
+  assignedFromId Int
 }
