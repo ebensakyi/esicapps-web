@@ -255,7 +255,7 @@ const AssignData = ({ districts,assignments }) => {
                       {" "}
                       <td>{moment(dt.createdAt).format("MMM Do YYYY, h:mm:ss a")}</td>
                       <td>{dt.assignedFrom.surname} {dt.assignedFrom.otherNames}</td>
-                      <td>{dt.assignedTo.surname} {dt.assignedFrom.otherNames}</td>
+                      <td>{dt.assignedTo.surname} {dt.assignedTo.otherNames}</td>
                       <td>{dt.deleted==0?"Active":"Inactive"}</td>
                       <td>
                         <div className="dropdown d-inline-block">

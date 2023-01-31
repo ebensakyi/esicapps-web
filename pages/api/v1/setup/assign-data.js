@@ -25,19 +25,23 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     if (req.query.userId) {
-      const count = await prisma.assignData.count({
-        where: { assignedToId: Number(req.query.userId) },
+      // const count = await prisma.assignData.count({
+      //   where: { assignedToId: Number(req.query.userId) },
+      // });
+
+      const data = await prisma.assignData.findFirst({
+        where: { assignedToId: Number(req.query.userId), deleted: 0 },
       });
-      if (count == 0) {
-        return res.status(200).json(count);
-      }
+
+      return res.status(200).json(data);
     }
+
 
     const data = await prisma.assignData.findMany({
       where: { deleted: 0 },
-      include: { assignedFrom: true , assignedTo: true },
+      include: { assignedFrom: true, assignedTo: true },
     });
-    return res.status(200).json(data);
+    return res.status(200).json(data || []);
   } catch (error) {
     console.log("Error: " + error);
   }
