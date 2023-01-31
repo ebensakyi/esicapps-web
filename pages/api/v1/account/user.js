@@ -95,6 +95,18 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let user;
+
+    if (req.query.districtId) {
+      user = await prisma.user.findMany({
+        where: { deleted: 0, districtId: Number(req.query.districtId) },
+
+        orderBy: {
+          id: "desc",
+        },
+      });
+      return res.status(200).json(user);
+    }
+
     let data = await verifyToken(req.query.token);
 
     let userLevel = data.user.UserType.userLevelId;

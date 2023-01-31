@@ -7,8 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 const AssignData = ({ districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [assignedFrom, setAssignedFrom] = useState(null);
-  const [assignedTo, setAssignedTo] = useState(null);
+  const [assignedFromUser, setAssignedFromUser] = useState(null);
+  const [assignedFromUsers, setAssignedFromUsers] = useState([]);
+
+  const [assignedToUsers, setAssignedToUsers] = useState([]);
+  const [assignedToUser, setAssignedToUser] = useState(null);
+
+  const [assignedFromDistrict, setAssignedFromDistrict] = useState();
+  const [assignedToDistrict, setAssignedToDistrict] = useState();
 
   const handleSearch = () => {
     let currentUrl = router.pathname;
@@ -33,6 +39,28 @@ const AssignData = ({ districts }) => {
     });
   };
 
+  const getAssignedFromUsersByDistricts = async (e) => {
+    try {
+      e.preventDefault();
+
+      let districtId = e.target.value;
+      const response = await axios.get(
+        "/api/v1/account/user?districtId=" + districtId
+      );
+
+      setAssignedFromUsers(response.data);
+    } catch (error) {}
+  };
+
+  const getAssignedToUsersByDistricts = async (e, districtId) => {
+    try {
+      e.preventDefault();
+      const response = await axios.get(
+        "/api/v1/primary-data/district?districtId=" + districtId
+      );
+      setAssignedToUsers(response.data);
+    } catch (error) {}
+  };
   const assignData = async (e) => {
     try {
       e.preventDefault();
@@ -92,15 +120,17 @@ const AssignData = ({ districts }) => {
             <div className="card-body">
               {/* <h6 className="card-title">Add Community</h6> */}
               <div className="row gy-4">
-                <div className="col-xxl-3 col-md-8">
+                <div className="col-xxl-3 col-md-12">
                   <label htmlFor="basiInput" className="form-label">
-                    Name Of Data Owner
+                    District Of Data Owner
                   </label>
                   <select
                     className="form-select"
                     id="inputGroupSelect02"
+                    //value={assignedFromDistrict}
                     onChange={(e) => {
-                      setDataOwnerDistrict(e.target.value);
+                      setAssignedFromDistrict(e.target.validity);
+                      getAssignedFromUsersByDistricts(e);
                     }}
                   >
                     <option selected>Choose district of data owner</option>
@@ -111,28 +141,38 @@ const AssignData = ({ districts }) => {
                     ))}
                   </select>
                 </div>
-                <div className="col-xxl-3 col-md-8">
+                <div className="col-xxl-3 col-md-12">
                   <label htmlFor="basiInput" className="form-label">
                     Name Of Data Owner
                   </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="basiInput"
-                    value={assignedFrom}
-                    onChange={(e) => setAssignedFrom(e.target.value)}
-                  />
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    //value={assignedFromUser}
+                    onChange={(e) => {
+                      setAssignedFromUser(e.target.value);
+                    }}
+                  >
+                    <option selected>Choose district of data owner</option>
+                    {assignedFromUsers.map((u) => (
+                      <option key={u.id} value={u.id}>
+                        {u.surname} {u.otherNames}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
-                <div className="col-xxl-3 col-md-6">
+                <div className="col-xxl-3 col-md-12">
                   <label htmlFor="basiInput" className="form-label">
                     District Of Data Receiver
                   </label>
                   <select
                     className="form-select"
                     id="inputGroupSelect02"
+                    value={assignedToDistrict}
                     onChange={(e) => {
-                      setDataReceiverDistrict(e.target.value);
+                      setAssignedToDistrict(e.target.value);
+                      getAssignedFromUsersByDistricts(e);
                     }}
                   >
                     <option selected>Choose district of data receiver</option>
@@ -143,17 +183,26 @@ const AssignData = ({ districts }) => {
                     ))}
                   </select>
                 </div>
-                <div className="col-xxl-3 col-md-8">
+                <div className="col-xxl-3 col-md-12">
                   <label htmlFor="basiInput" className="form-label">
                     Name Of Data Receiver
                   </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="basiInput"
-                    value={assignedTo}
-                    onChange={(e) => setAssignedTo(e.target.value)}
-                  />
+
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    //value={assignedToUser}
+                    onChange={(e) => {
+                      setAssignedToUser(e.target.value);
+                    }}
+                  >
+                    <option selected>Choose district of data owner</option>
+                    {assignedToUsers.map((u) => (
+                      <option key={u.id} value={u.id}>
+                        {u.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="col-lg-12 ">
