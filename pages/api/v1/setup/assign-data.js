@@ -2,10 +2,13 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
+    console.log(req.body);
     const data = {
-      assignedToId: Number(req.body.data.assignedTo),
-      assignedFromId: Number(req.body.data.assignedTo),
+      assignedToId: Number(req.body.data.assignedToUser),
+      assignedFromId: Number(req.body.data.assignedFromUser),
     };
+
+    console.log(data);
     const action = await prisma.assignData.create({ data });
     res
       .status(200)

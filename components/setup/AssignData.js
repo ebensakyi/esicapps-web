@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 const AssignData = ({ districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [assignedFromUser, setAssignedFromUser] = useState(null);
   const [assignedFromUsers, setAssignedFromUsers] = useState([]);
 
   const [assignedToUsers, setAssignedToUsers] = useState([]);
   const [assignedToUser, setAssignedToUser] = useState(null);
+  const [assignedFromUser, setAssignedFromUser] = useState(null);
 
   const [assignedFromDistrict, setAssignedFromDistrict] = useState();
   const [assignedToDistrict, setAssignedToDistrict] = useState();
@@ -52,32 +52,35 @@ const AssignData = ({ districts }) => {
     } catch (error) {}
   };
 
-  const getAssignedToUsersByDistricts = async (e, districtId) => {
+  const getAssignedToUsersByDistricts = async (e) => {
     try {
       e.preventDefault();
+      let districtId = e.target.value;
+
       const response = await axios.get(
-        "/api/v1/primary-data/district?districtId=" + districtId
+        "/api/v1/account/user?districtId=" + districtId
       );
       setAssignedToUsers(response.data);
-    } catch (error) {}
+    } catch (error) {
+     
+    }
   };
   const assignData = async (e) => {
     try {
       e.preventDefault();
-      if (communityName == "" || communityName == null) {
+      if (assignedFromUser == null || assignedToUser == null) {
         return toast.error("Enter community name");
       }
       let data = {
-        name: communityName,
-        id: communityId,
-        // electoralAreaId,
+        assignedFromUser,
+        assignedToUser
       };
-      const response = await axios.post("/api/v1/primary-data/community-data", {
+      const response = await axios.post("/api/v1/setup/assign-data", 
         data,
-      });
+      );
       toast.success(response.data.message);
-      setCommunityName("");
-      setCommunityId(null);
+      setAssignedFromUser(null);
+      setAssignedToUser(null);
 
       router.replace(router.asPath);
     } catch (error) {
@@ -87,17 +90,7 @@ const AssignData = ({ districts }) => {
     }
   };
 
-  const deleteCommunity = async (e, id) => {
-    e.preventDefault();
-    console.log(id);
-
-    try {
-      await axios.delete("/api/v1/primary-data/community-data", {
-        data: { id },
-      });
-      router.replace(router.asPath);
-    } catch (error) {}
-  };
+ 
   return (
     <div className="row">
       <ToastContainer
@@ -129,11 +122,11 @@ const AssignData = ({ districts }) => {
                     id="inputGroupSelect02"
                     //value={assignedFromDistrict}
                     onChange={(e) => {
-                      setAssignedFromDistrict(e.target.validity);
+                      setAssignedFromDistrict(e.target.value);
                       getAssignedFromUsersByDistricts(e);
                     }}
                   >
-                    <option selected>Choose district of data owner</option>
+                    <option selected>Select district of data owner</option>
                     {districts.map((district) => (
                       <option key={district.id} value={district.id}>
                         {district.name}
@@ -153,7 +146,7 @@ const AssignData = ({ districts }) => {
                       setAssignedFromUser(e.target.value);
                     }}
                   >
-                    <option selected>Choose district of data owner</option>
+                    <option selected>Select name of data owner</option>
                     {assignedFromUsers.map((u) => (
                       <option key={u.id} value={u.id}>
                         {u.surname} {u.otherNames}
@@ -169,13 +162,14 @@ const AssignData = ({ districts }) => {
                   <select
                     className="form-select"
                     id="inputGroupSelect02"
-                    value={assignedToDistrict}
+                   // value={assignedToDistrict}
                     onChange={(e) => {
                       setAssignedToDistrict(e.target.value);
-                      getAssignedFromUsersByDistricts(e);
+                      getAssignedToUsersByDistricts(e);
+                     
                     }}
                   >
-                    <option selected>Choose district of data receiver</option>
+                    <option selected>Select district of data receiver</option>
                     {districts.map((district) => (
                       <option key={district.id} value={district.id}>
                         {district.name}
@@ -196,10 +190,10 @@ const AssignData = ({ districts }) => {
                       setAssignedToUser(e.target.value);
                     }}
                   >
-                    <option selected>Choose district of data owner</option>
+                    <option selected>Select name of data receiver</option>
                     {assignedToUsers.map((u) => (
                       <option key={u.id} value={u.id}>
-                        {u.name}
+                        {u.surname} {u.otherNames}
                       </option>
                     ))}
                   </select>
