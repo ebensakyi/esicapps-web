@@ -1593,8 +1593,6 @@ CREATE TABLE "InspectionPictures" (
 -- CreateTable
 CREATE TABLE "AssignData" (
     "id" SERIAL NOT NULL,
-    "imagePath" VARCHAR(255) NOT NULL,
-    "formSectionImageId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

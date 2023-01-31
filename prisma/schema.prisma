@@ -1858,9 +1858,6 @@ model InspectionPictures {
 
 model AssignData {
   id                 Int    @id @default(autoincrement())
-  imagePath          String @db.VarChar(255)
-  formSectionImageId Int
-
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

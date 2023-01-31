@@ -36,6 +36,9 @@ export async function getServerSideProps(context) {
   const assignments = await fetch(
     `${SERVER_BASE_URL}/api/v1/setup/assign-data`
   ).then((res) => res.json());
+
+
+  console.log(assignments);
   return {
     props: {
       districts,

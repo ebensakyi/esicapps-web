@@ -1,10 +1,13 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
+import * as moment from 'moment';
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AssignData = ({ districts }) => {
+
+const AssignData = ({ districts,assignments }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [assignedFromUsers, setAssignedFromUsers] = useState([]);
@@ -81,6 +84,7 @@ const AssignData = ({ districts }) => {
       toast.success(response.data.message);
       setAssignedFromUser(null);
       setAssignedToUser(null);
+      router.replace(router.asPath);
 
       router.replace(router.asPath);
     } catch (error) {
@@ -226,7 +230,79 @@ const AssignData = ({ districts }) => {
             <div className="card-header">
               <h5 className="card-title mb-0">DATA ASSIGNMENTS</h5>
             </div>
-            <div className="card-body"></div>
+            <div className="card-body">
+            <table
+              id="fixed-header"
+              className="table table-bordered dt-responsive nowrap table-striped align-middle"
+              style={{ width: "100%" }}
+            >
+              <thead>
+                <tr>
+                  <th> Date</th>
+                  <th>Assigned From</th>
+
+                  <th>Assigned To</th>
+
+                
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assignments.map((dt) => {
+                  return (
+                    <tr key={dt.id}>
+                      {" "}
+                      <td>{moment(dt.createdAt).format("MMM Do YYYY, h:mm:ss a")}</td>
+                      <td>{dt.assignedFrom.surname} {dt.assignedFrom.otherNames}</td>
+                      <td>{dt.assignedTo.surname} {dt.assignedFrom.otherNames}</td>
+                      <td>{dt.deleted==0?"Active":"Inactive"}</td>
+                      <td>
+                        <div className="dropdown d-inline-block">
+                          <button
+                            className="btn btn-soft-secondary btn-sm dropdown"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="ri-more-fill align-middle" />
+                          </button>
+                          <ul className="dropdown-menu dropdown-menu-end">
+                            {/* <li>
+                              <a href="#!" className="dropdown-item">
+                                <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
+                                View
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item edit-item-btn">
+                                <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
+                                Edit
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item edit-item-btn">
+                                <i className=" ri-send-plane-line align-bottom me-2 text-muted" />{" "}
+                                Publish
+                              </a>
+                            </li> */}
+                            <li>
+                              <a  href="#!" className="dropdown-item remove-item-btn">
+                                <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                Delete
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                     
+                     
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            </div>
           </div>{" "}
         </div>
       </div>

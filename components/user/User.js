@@ -61,7 +61,6 @@ const User = ({ users, userTypes, regions, districts }) => {
         region,
         district,
       };
-      console.log(">>>>>>> data: " + JSON.stringify(data));
 
       const response = await axios.post("/api/v1/account/user", data);
       router.replace(router.asPath);

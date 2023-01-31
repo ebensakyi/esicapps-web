@@ -4,8 +4,8 @@ const post = async (req, res) => {
   try {
     console.log(req.body);
     const data = {
-      assignedToId: Number(req.body.data.assignedToUser),
-      assignedFromId: Number(req.body.data.assignedFromUser),
+      assignedToId: Number(req.body.assignedToUser),
+      assignedFromId: Number(req.body.assignedFromUser),
     };
 
     console.log(data);
@@ -14,6 +14,7 @@ const post = async (req, res) => {
       .status(200)
       .json({ statusCode: 1, message: "Data saved", data: { action } });
   } catch (error) {
+    console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)
@@ -32,7 +33,10 @@ const get = async (req, res) => {
       }
     }
 
-    const data = await prisma.assignData.findMany({ where: { deleted: 0 } });
+    const data = await prisma.assignData.findMany({
+      where: { deleted: 0 },
+      include: { assignedFrom: true , assignedTo: true },
+    });
     return res.status(200).json(data);
   } catch (error) {
     console.log("Error: " + error);
