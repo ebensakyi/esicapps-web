@@ -2,7 +2,7 @@ import { sendFCM } from "../../../../helpers/send-fcm";
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
-// try {
+  // try {
 
   let title = req.body.title;
   let message = req.body.message;
@@ -33,24 +33,18 @@ const post = async (req, res) => {
       where: { deleted: 0, id: recipient },
     });
 
-    
-      await sendFCM(title, message, response[0].fcmId);
-    
+    await sendFCM(title, message, response[0].fcmId);
   }
   if (regionRecipient != null && regionRecipient != "") {
-    console.log("regionRecipient");
 
     const response = await prisma.user.findMany({
       where: { deleted: 0, regionId: regionRecipient },
     });
     for (let i = 0; i < response.length; i++) {
-      console.log(response.phoneNumber);
       await sendFCM(title, message, response[i].fcmId);
-
     }
   }
   if (districtRecipient != null && districtRecipient != "") {
-    console.log("districtRecipient: ", districtRecipient);
 
     const response = await prisma.user.findMany({
       where: { deleted: 0, districtId: Number(districtRecipient) },
@@ -59,11 +53,10 @@ const post = async (req, res) => {
     for (let i = 0; i < response.length; i++) {
       console.log(response.phoneNumber);
       await sendFCM(title, message, response[i].fcmId);
-
     }
   }
 
-  res.status(200).json({ statusCode: 1, message: "Data saved" });
+ return res.status(200).json({ statusCode: 1, message: "Data saved" });
   // } catch (error) {
   //   console.log("Error: " + error);
   //   if (error.code === "P2002")
@@ -74,10 +67,26 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
+
   try {
-    let userId = req.query.userId
+    let userId = Number(req.query.userId);
+    let userDetails = await prisma.user.findFirst({
+      where: { id: userId },
+    });
+    if (!userDetails) {
+      return res.status(200).json([]);
+    }
+    let districtId = userDetails.districtId;
+    let regionId = userDetails.regionId;
+
+    
+
     const messaging = await prisma.messaging.findMany({
-      where: { deleted: 0, messageType: 1 },
+      where: {
+        deleted: 0,
+        messageType:1
+      },
+
       orderBy: {
         createdAt: "desc",
       },
@@ -89,8 +98,71 @@ const get = async (req, res) => {
         Recipient: true,
       },
     });
+    if (!messaging) {
+      return res.status(200).json([]);
+    }
 
-    return res.status(200).json(messaging);
+    console.log(messaging);
+
+    let messages = [];
+
+  await  messaging.map((msg) => {
+      let sendingType = msg.sendingType;
+      let recipient = msg.recipient;
+      let regionRecipient = msg.regionRecipient;
+      let districtRecipient = msg.districtRecipient;
+      if (
+        (sendingType == 1 && recipient == userId) 
+      ) {
+        console.log("sendingType ",sendingType);
+        console.log("recipient ",recipient);
+        console.log("userId ",userId);
+
+        messages.push(msg);
+      }
+
+      if (
+        (sendingType == 2 && regionRecipient == regionId) 
+      ) {
+      
+        messages.push(msg);
+      }
+
+      if (
+        (sendingType == 2 && districtRecipient == districtId) 
+      ) {
+      
+        messages.push(msg);
+      }
+
+      // if (
+      //   (regionRecipient == null && districtRecipient == null) 
+      // ) {
+      
+      //   messages.push(msg);
+      // }
+
+      // if (
+      //   (sendingType == 1 && recipient == userId) ||
+      //   (sendingType == 2 && regionRecipient == regionId) ||
+      //   (sendingType == 2 && districtRecipient == districtId) ||
+      //   (regionRecipient == null && districtRecipient == null)
+      // ) {
+      //   console.log("sendingType ",sendingType);
+      //   console.log("recipient ",recipient);
+      //   console.log("userId ",userId);
+
+      //   messages.push(msg);
+      // }
+    });
+    return res.status(200).json(messages);
+
+    // console.log("sendingType", sendingType);
+    // console.log("recipient", recipient);
+    // console.log("regionRecipient", regionRecipient);
+    // console.log("districtRecipient", districtRecipient);
+
+    // return res.status(200).json([]);
   } catch (error) {
     console.log("Error: " + error);
   }

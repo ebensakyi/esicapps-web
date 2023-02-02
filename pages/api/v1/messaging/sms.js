@@ -23,7 +23,7 @@ const post = async (req, res) => {
     regionRecipient: regionRecipient,
     districtRecipient: districtRecipient,
     sender: req.body.sendingType,
-    messageType: 1,
+    messageType: 2,
     sendingType: Number(req.body.sendingType),
   };
 
@@ -45,7 +45,6 @@ const post = async (req, res) => {
     for (let i = 0; i < res.length; i++) {
       await send(res[i].phoneNumber, req.body.message);
 
-      console.log(res.phoneNumber);
     }
   }
   if (districtRecipient != null || districtRecipient != "") {
