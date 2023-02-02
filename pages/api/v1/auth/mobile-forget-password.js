@@ -15,7 +15,6 @@ const post = async (req, res) => {
     where: { phoneNumber, deleted: 0 },
     include: { District: true },
   });
-  console.log(user);
   if (!user) {
     return res
       .status(400)
@@ -31,6 +30,7 @@ const post = async (req, res) => {
     let pr = await prisma.passwordResetRequest.findFirst({
       where: { userId: user.id },
     });
+    console.log('PR ',pr);
 
     if (pr != null) {
       await prisma.passwordResetRequest.delete({

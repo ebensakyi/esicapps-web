@@ -4,7 +4,6 @@ import prisma from "../../../../prisma/MyPrismaClient";
 const post = async (req, res) => {
 // try {
 
- console.log(req.body);
   let title = req.body.title;
   let message = req.body.message;
   let recipient =
@@ -76,6 +75,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    let userId = req.query.userId
     const messaging = await prisma.messaging.findMany({
       where: { deleted: 0, messageType: 1 },
       orderBy: {

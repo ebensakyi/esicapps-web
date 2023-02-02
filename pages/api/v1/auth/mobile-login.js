@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const post = async (req, res) => {
-  try {
+// try {
     let phoneNumber = req.body.phoneNumber;
     let password = req.body.password;
     //let hash = await bcrypt.hashSync(password, salt);
@@ -14,17 +14,28 @@ const post = async (req, res) => {
       include: { District: { include: { Region: true } } },
     });
 
+    console.log("user ",user);
+
     if (!user) {
       return res
         .status(400)
         .json({ statusCode: 0, message: "User account not found" });
     }
+
+
+    if (user.districtId==null || user.districtId=="") {
+      return res
+        .status(401)
+        .json({ statusCode: 10, message: "User cannot access mobile app" });
+    }
     let loginTimes = user.loginTimes;
 
+
     let isValid = await bcrypt.compare(password, user.password);
+    console.log(isValid);
 
     if (isValid) {
-      const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
+      // const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
       await prisma.user.update({
         where: { id: user.id },
         data: { loginTimes: loginTimes + 1 },
@@ -35,13 +46,13 @@ const post = async (req, res) => {
         .status(404)
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
-  } catch (error) {
-    console.log("Server errorr: ", error);
-    if (error.code === "P2002")
-      return res
-        .status(500)
-        .json({ statusCode: 0, message: "A server error occurred" });
-  }
+  // } catch (error) {
+  //   console.log("Server errorr: ", error);
+  //   if (error.code === "P2002")
+  //     return res
+  //       .status(500)
+  //       .json({ statusCode: 0, message: "A server error occurred" });
+  // }
 };
 
 const get = async (req, res) => {

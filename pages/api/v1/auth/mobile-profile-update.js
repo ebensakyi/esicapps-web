@@ -15,7 +15,7 @@ const post = async (req, res) => {
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
     });
-
+    console.log("XXU ", user);
     if (!user) {
       return res
         .status(400)
@@ -23,16 +23,17 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(oldPassword, user.password);
-    console.log(isValid);
+    console.log("isValid ", isValid);
 
     if (isValid) {
       const salt = await bcrypt.genSaltSync(10);
       let hashedPassword = bcrypt.hashSync(newPassword, salt);
-      await prisma.user.update({
+      let x = await prisma.user.update({
         where: { phoneNumber },
         data: { password: hashedPassword, passwordChanged: 1 },
       });
 
+      console.log("upd>>> ", x);
       //const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
 
       return res.status(200).json(user);
