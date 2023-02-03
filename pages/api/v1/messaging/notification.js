@@ -33,7 +33,9 @@ const post = async (req, res) => {
       where: { deleted: 0, id: recipient },
     });
 
-    await sendFCM(title, message, response[0].fcmId);
+let x =    await sendFCM(title, message, response[0].fcmId);
+
+console.log(x);
   }
   if (regionRecipient != null && regionRecipient != "") {
     const response = await prisma.user.findMany({

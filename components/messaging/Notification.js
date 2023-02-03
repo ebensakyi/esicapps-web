@@ -29,7 +29,8 @@ const Notification = ({ users, regions, districts, messages }) => {
       };
 
       const response = await axios.post("/api/v1/messaging/notification", data);
-      router.replace(router.asPath)
+     router.push('/messaging/notification')
+
       setRegionRecipient("")
       setDistrictRecipient("")
       setRecipient("")
@@ -54,14 +55,16 @@ const Notification = ({ users, regions, districts, messages }) => {
         regionRecipient: null,
         districtRecipient: null,
       };
-      router.replace(router.asPath)
 
       const response = await axios.post("/api/v1/messaging/notification", data);
       setRegionRecipient("")
       setDistrictRecipient("")
       setRecipient("")
       setMessage("")
-      setTitle("")
+      setTitle("")   
+        //  router.replace(router.asPath)
+      router.push('/messaging/notification')
+
       return toast.success("Message sent");
     } catch (error) {
       console.log(error);
@@ -117,7 +120,7 @@ const Notification = ({ users, regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
-                        onChange={(e) => setTitle(e.target.value)}
+                      onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                   </div>
