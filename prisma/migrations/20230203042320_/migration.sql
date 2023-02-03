@@ -1555,8 +1555,8 @@ CREATE TABLE "ReportType" (
 CREATE TABLE "UserGuides" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
-    "fileType" VARCHAR(255) NOT NULL,
-    "action" VARCHAR(255) NOT NULL,
+    "fileType" INTEGER NOT NULL,
+    "action" INTEGER NOT NULL,
     "link" VARCHAR(255) NOT NULL,
     "description" TEXT NOT NULL,
     "deleted" INTEGER DEFAULT 0,

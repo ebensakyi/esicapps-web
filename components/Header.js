@@ -601,6 +601,12 @@ const Header = () => {
                         Assign Data
                       </a>
                     </li>
+                    <li className="nav-item">
+                      <a href="/setup/user-guides" className="nav-link">
+                        {" "}
+                       User Guide
+                      </a>
+                    </li>
                     {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
