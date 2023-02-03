@@ -129,6 +129,10 @@ ORDER BY "InspectionForm"."name"`;
       where: { deleted: 0 },
     });
 
+    const sanitationReportCount = await prisma.sanitationReport.count({
+      where: { deleted: 0 },
+    });
+
     const safeWaterSourceCount = await prisma.waterSection.count({
       where: { deleted: 0, waterSourceConditionId: 1 },
     });
@@ -184,6 +188,7 @@ ORDER BY "InspectionForm"."name"`;
       usersCount,
       safeWaterSourceCount,
       unsafeWaterSourceCount,
+      sanitationReportCount
     };
 
     console.log(data);

@@ -6,6 +6,8 @@ const post = async (req, res) => {
     const data = {
       id: req.body.inspectionId,
       userId: Number(req.body.userId),
+      premisesCode:
+      req.body.premisesCode,
       inspectionFormId:
         req.body.inspectionFormId == "null"
           ? null

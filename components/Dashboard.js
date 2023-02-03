@@ -617,7 +617,7 @@ const Dashboard = ({ data }) => {
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {data.baselineCount}
+                    {data.sanitationReportCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Total Reports

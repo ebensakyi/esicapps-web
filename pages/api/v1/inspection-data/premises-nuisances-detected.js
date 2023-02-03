@@ -2,19 +2,18 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
     const data = {
       id: req.body.id,
 
       inspectionId: req.body.inspectionId,
       userId: Number(req.body.userId),
       nuisanceId:
-        req.body.nuisanceId == "null" ? null : req.body.nuisanceId,
+        Number(req.body.nuisanceId) ,
 
         conclusionSectionId:
         req.body.conclusionSectionId == "null"
           ? null
-          : Number(req.body.conclusionSectionId),
+          : req.body.conclusionSectionId,
     };
 
     const response = await prisma.premisesNuisanceDetected.create({ data });
