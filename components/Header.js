@@ -602,10 +602,13 @@ const Header = () => {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a href="/setup/user-guides" className="nav-link">
+                      <Link href="/setup/user-guides">
+                        <a  className="nav-link">
                         {" "}
                        User Guide
                       </a>
+                      </Link>
+                      
                     </li>
                     {/* <li className="nav-item">
                       <a
