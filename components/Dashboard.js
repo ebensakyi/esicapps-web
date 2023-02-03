@@ -228,7 +228,7 @@ const Dashboard = ({ data }) => {
       <div className="row">
         <div className="col-12">
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-            <div className="page-title-right">
+            {/* <div className="page-title-right">
               <select>
                 <option value="">Select Level</option>
                 <option value="">National</option>
@@ -241,7 +241,7 @@ const Dashboard = ({ data }) => {
                 <option value="">Region</option>
                 <option value="">District</option>
               </select>
-            </div>
+            </div> */}
             {/* <h4 className="mb-sm-0">CRM</h4> */}
             <div className="page-title-right">
               <ol className="breadcrumb m-0">

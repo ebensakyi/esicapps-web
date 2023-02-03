@@ -425,7 +425,7 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#report"
@@ -471,31 +471,21 @@ const Header = () => {
                     </li>
                   </ul>
                 </div>
-                {/* <li className="nav-item">
-                  <Link href="/map">
-                    <a className="nav-link menu-link">
-                      <i className="ri-map-2-line" />{" "}
-                      <span data-key="t-landing">Map</span>
-                     
-                    </a>
-                  </Link>
-                </li> */}
-
-                <li className="nav-item">
-                  <Link href="/sanitation-reports">
-                    <a className="nav-link menu-link">
-                      <i className="ri-bar-chart-box-line" />{" "}
-                      <span data-key="t-landing">Sanitation Reports</span>
-                      {/* <span
+              </li> */}
+              <li className="nav-item">
+                <Link href="/sanitation-reports">
+                  <a className="nav-link menu-link">
+                    <i className="ri-bar-chart-box-line" />{" "}
+                    <span data-key="t-landing">Sanitation Reports</span>
+                    {/* <span
                         className="badge badge-pill bg-success"
                         data-key="t-new"
                       >
                         New
                       </span> */}
-                    </a>
-                  </Link>
-                </li>
-              </li>{" "}
+                  </a>
+                </Link>
+              </li>
               {/* end Dashboard Menu */}
               {/* <li className="menu-title">
                 <i className="ri-more-fill" />{" "}
@@ -603,12 +593,8 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <Link href="/setup/user-guides">
-                        <a  className="nav-link">
-                        {" "}
-                       User Guide
-                      </a>
+                        <a className="nav-link"> User Guide</a>
                       </Link>
-                      
                     </li>
                     {/* <li className="nav-item">
                       <a
