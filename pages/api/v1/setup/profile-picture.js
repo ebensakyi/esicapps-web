@@ -15,22 +15,18 @@ const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
-    
-console.log("fields.inspectionId ",fields.inspectionId);
-console.log("fields.formSectionImageId ",fields.formSectionImageId);
-
       // let imageFile = file.imageFile;
       let image = await saveFile(file);
 
       const data = {
-        inspectionId: fields.inspectionId,
+      
         imagePath: image,
-        formSectionImageId:
-          fields.formSectionImageId == "null"
-            ? 1
-            : Number(fields.formSectionImageId),
+       
       };
-      const ip = await prisma.inspectionPictures.create({ data });
+      const ui = await prisma.user.update({
+        data,
+        where: { id: Number(fields.userId) },
+      });
 
       //   const data = {
       //     inspectionId: fields.inspectionId,
@@ -46,7 +42,7 @@ console.log("fields.formSectionImageId ",fields.formSectionImageId);
     });
   } catch (error) {
     console.log(error);
-    return res.status(200).json();
+    return res.status(400).json();
   }
 };
 
@@ -79,7 +75,7 @@ const uploadFile = async (fileName) => {
     var filePath = `./public/uploads/${fileName}`;
 
     var params = {
-      Bucket: "esicapps-images",
+      Bucket: "esicapps-profile-images",
       Body: fs.createReadStream(filePath),
       // Key: prefix + "/" + fileName,
       Key: fileName,

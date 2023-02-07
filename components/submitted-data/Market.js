@@ -16,8 +16,10 @@ const Market = ({ data }) => {
             >
               <thead>
                 <tr>
-                  <th>Inspection Date</th>
-                  <th>Submission Date</th>
+               
+                <th>Inspection ID</th>
+                  <th>Premises Code</th>
+                  {/* <th>Inspection Date</th> */}
 
                   <th>Inspection Officer</th>
 
@@ -26,7 +28,7 @@ const Market = ({ data }) => {
                   <th>District</th>
                   <th>Community</th>
                   {/* <th>Respondent</th>
-                    <th>Designation</th> */}
+                  <th>Designation</th> */} <th>Submission Date</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -35,9 +37,10 @@ const Market = ({ data }) => {
                 {data.map((dt) => {
                   return (
                     <tr key={dt.id}>
-                      {" "}
-                      <td>{dt.Inspection.createdAt}</td>
-                      <td>{dt.Inspection.completedAt}</td>
+                    {" "}
+                    <td>{dt.Inspection.id}</td>
+                    <td>{dt.Inspection.premisesCode}</td>
+
                       <td>
                         {dt.User.otherNames} {dt.User.surname}
                       </td>

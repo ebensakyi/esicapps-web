@@ -1845,12 +1845,12 @@ model InspectionPictures {
   id                 Int    @id @default(autoincrement())
   imagePath          String @db.VarChar(255)
   formSectionImageId Int
+  inspectionId     String           @db.VarChar(255)
 
   deleted          Int?             @default(0)
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
   Inspection       Inspection       @relation(fields: [inspectionId], references: [id])
-  inspectionId     String           @db.VarChar(255)
   FormSectionImage FormSectionImage @relation(fields: [formSectionImageId], references: [id])
 
   @@unique([formSectionImageId, inspectionId], name: "inspectionFormSectionImage")

@@ -16,11 +16,13 @@ const post = async (req, res) => {
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-    console.log("Error: " + error);
-    if (error.code === "P2002")
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: " should be unique" });
+    // console.log("Error: " + error);
+    // if (error.code === "P2002")
+    //   return res
+    //     .status(400)
+    //     .json({ statusCode: 0, message: " should be unique" });
+    res.status(200).json({ statusCode: 1, message: "Data skipped" });
+
   }
 };
 
