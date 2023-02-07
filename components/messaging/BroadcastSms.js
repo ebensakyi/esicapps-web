@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
-const Sms = ({ users, regions, districts, messages }) => {
+const BroadcastSms = ({ users, regions, districts, messages }) => {
   const router = useRouter();
 
   const [group, setGroup] = useState(null);
@@ -25,7 +25,7 @@ const Sms = ({ users, regions, districts, messages }) => {
       };
       console.log("rec ", recipient);
 
-      const response = await axios.post("/api/v1/messaging/sms", data);
+      const response = await axios.post("/api/v1/messaging/sms/broadcast", data);
 
       setRecipient("");
       setMessage("");
@@ -39,32 +39,32 @@ const Sms = ({ users, regions, districts, messages }) => {
     }
   };
 
-  const sendSingleMessage = async (e) => {
-    try {
-      // console.log("sendBroadcastMessage");
-      e.preventDefault();
-      let data = {
-        recipient: recipient,
-        title,
-        message,
-        sendingType: 1,
-        regionRecipient: null,
-        districtRecipient: null,
-      };
+  // const sendSingleMessage = async (e) => {
+  //   try {
+  //     // console.log("sendBroadcastMessage");
+  //     e.preventDefault();
+  //     let data = {
+  //       recipient: recipient,
+  //       title,
+  //       message,
+  //       sendingType: 1,
+  //       regionRecipient: null,
+  //       districtRecipient: null,
+  //     };
 
-      const response = await axios.post("/api/v1/messaging/sms", data);
+  //     const response = await axios.post("/api/v1/messaging/sms", data);
 
-      setRecipient("");
-      setMessage("");
-      setTitle("");
-      router.replace(router.asPath);
+  //     setRecipient("");
+  //     setMessage("");
+  //     setTitle("");
+  //     router.replace(router.asPath);
 
-      return toast.success("Message sent");
-    } catch (error) {
-      console.log(error);
-      return toast.error("An error occurred");
-    }
-  };
+  //     return toast.success("Message sent");
+  //   } catch (error) {
+  //     console.log(error);
+  //     return toast.error("An error occurred");
+  //   }
+  // };
 
   return (
     <div className="row">
@@ -82,7 +82,7 @@ const Sms = ({ users, regions, districts, messages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 className="mb-3">SMS</h5>
+            <h5 className="mb-3">Broadcast SMS</h5>
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Broadcast</h4>
@@ -274,141 +274,7 @@ const Sms = ({ users, regions, districts, messages }) => {
               </div>
             </div>
 
-            <div className="card">
-              <div className="card-header align-items-center d-flex">
-                <h4 className="card-title mb-0 flex-grow-1">Single</h4>
-                {/* <div className="flex-shrink-0">
-                  <div className="form-check form-switch form-switch-right form-switch-md">
-                    <label
-                      htmlFor="form-grid-showcode"
-                      className="form-label text-muted"
-                    >
-                      Show Code
-                    </label>
-                    <input
-                      className="form-check-input code-switcher"
-                      type="checkbox"
-                      id="form-grid-showcode"
-                    />
-                  </div>
-                </div> */}
-              </div>
-              {/* end card header */}
-              <div className="card-body">
-                <div className="row gy-4">
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="valueInput" className="form-label">
-                        Title
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="valueInput"
-                        onChange={(e) => setTitle(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="valueInput" className="form-label">
-                        Message
-                      </label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="valueInput"
-                        onChange={(e) => setMessage(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        User
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => {
-                          setRecipient(e.target.value);
-                        }}
-                      >
-                        <option selected>Choose...</option>
-                        {users.map((u) => (
-                          <option key={u.id} value={u.id}>
-                            {u.otherNames} {u.surname} - {u.phoneNumber}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        District
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => {
-                          setDistrict(e.target.value);
-                        }}
-                      >
-                        <option selected>Choose...</option>
-                        {districts.map((district) => (
-                          <option key={district.id} value={district.id}>
-                            {district.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div> */}
-
-                  {/* <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Electoral Area
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => setElectoralArea(e.target.value)}
-                      >
-                        <option selected>Choose...</option>
-                        {electoralAreas.map((ea) => (
-                          <option key={ea.id} value={ea.id}>
-                            {ea.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div> */}
-                </div>
-                <br />
-                <div className="row gy-4">
-                  <div className="flex-shrink-0">
-                    <div className="col-lg-12">
-                      <div className="text-end">
-                        <button
-                          className="btn btn-primary"
-                          onClick={(e) => {
-                            sendSingleMessage(e);
-                          }}
-                        >
-                          Send
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
@@ -502,4 +368,4 @@ const Sms = ({ users, regions, districts, messages }) => {
   );
 };
 
-export default Sms;
+export default BroadcastSms;

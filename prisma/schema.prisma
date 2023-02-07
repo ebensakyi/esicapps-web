@@ -103,7 +103,6 @@ model User {
   LicencePermitSection           LicencePermitSection[]
   LiquidWasteSection             LiquidWasteSection[]
   Logs                           Logs[]
-  recipient                      Messaging[]                      @relation("recipient")
   sender                         Messaging[]                      @relation("sender")
   PasswordResetRequest           PasswordResetRequest[]
   PremisesActionTaken            PremisesActionTaken[]
@@ -177,19 +176,15 @@ model Messaging {
   id                Int          @id @default(autoincrement())
   title             String       @db.VarChar(255)
   message           String       @db.VarChar(2550)
-  recipient         Int?
+  recipient         String?
   messageType       Int?
   sendingType       Int?
   sender            Int
-  regionRecipient   Int?
-  districtRecipient Int?
+  
   deleted           Int?         @default(0)
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
-  District          District?    @relation(fields: [districtRecipient], references: [id])
   MessageType       MessageType? @relation(fields: [messageType], references: [id])
-  Recipient         User?        @relation("recipient", fields: [recipient], references: [id])
-  Region            Region?      @relation(fields: [regionRecipient], references: [id])
   Sender            User         @relation("sender", fields: [sender], references: [id])
   SendingType       SendingType? @relation(fields: [sendingType], references: [id])
 }
@@ -483,7 +478,6 @@ model Region {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   District  District[]
-  Messaging Messaging[]
   User      User[]
 }
 
@@ -498,7 +492,6 @@ model District {
   Community        Community[]
   Region           Region             @relation(fields: [regionId], references: [id])
   ElectoralArea    ElectoralArea[]
-  Messaging        Messaging[]
   User             User[]
   SanitationReport SanitationReport[]
 }
