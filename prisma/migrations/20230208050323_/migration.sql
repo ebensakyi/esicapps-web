@@ -99,6 +99,8 @@ CREATE TABLE "Messaging" (
     "title" VARCHAR(255) NOT NULL,
     "message" VARCHAR(2550) NOT NULL,
     "recipient" TEXT,
+    "recipientTag" INTEGER,
+    "recipientId" INTEGER,
     "messageType" INTEGER,
     "sendingType" INTEGER,
     "sender" INTEGER NOT NULL,

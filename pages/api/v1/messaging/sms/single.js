@@ -5,57 +5,49 @@ import { append_233 } from "../../../../../helpers/append-233";
 const post = async (req, res) => {
   // try {
 
-  console.log(req.body);
 
   let recipient =
-    req.body.recipient == null ? null : Number(req.body.recipient);
-  let regionRecipient =
-    req.body.regionRecipient == null ? null : Number(req.body.regionRecipient);
-  let districtRecipient =
-    req.body.districtRecipient == null
-      ? null
-      : Number(req.body.districtRecipient);
+    req.body.recipient 
 
   const data = {
     recipient: recipient,
     message: req.body.message,
     title: req.body.title,
-    regionRecipient: regionRecipient,
-    districtRecipient: districtRecipient,
+   
     sender: req.body.sendingType,
     messageType: 2,
     sendingType: Number(req.body.sendingType),
   };
 
   const response = await prisma.messaging.create({ data });
-  if (recipient != null || recipient != "") {
-    const res = await prisma.user.findMany({
-      where: { deleted: 0, id: recipient },
-    });
+  // if (recipient != null || recipient != "") {
+  //   const res = await prisma.user.findMany({
+  //     where: { deleted: 0, id: recipient },
+  //   });
 
-    for (let i = 0; i < res.length; i++) {
-      let phoneNumber = await append_233(res[i].phoneNumber);
-      await send(phoneNumber, req.body.message);
-    }
-  }
-  if (regionRecipient != null || regionRecipient != "") {
-    const res = await prisma.user.findMany({
-      where: { deleted: 0, regionId: regionRecipient },
-    });
-    for (let i = 0; i < res.length; i++) {
-      await send(res[i].phoneNumber, req.body.message);
+  //   for (let i = 0; i < res.length; i++) {
+  //     let phoneNumber = await append_233(res[i].phoneNumber);
+  //     await send(phoneNumber, req.body.message);
+  //   }
+  // }
+  // if (regionRecipient != null || regionRecipient != "") {
+  //   const res = await prisma.user.findMany({
+  //     where: { deleted: 0, regionId: regionRecipient },
+  //   });
+  //   for (let i = 0; i < res.length; i++) {
+  //     await send(res[i].phoneNumber, req.body.message);
 
-    }
-  }
-  if (districtRecipient != null || districtRecipient != "") {
-    const res = await prisma.user.findMany({
-      where: { deleted: 0, districtId: districtRecipient },
-    });
-    for (let i = 0; i < res.length; i++) {
-      console.log(res.phoneNumber);
-      await send(res[i].phoneNumber, req.body.message);
-    }
-  }
+  //   }
+  // }
+  // if (districtRecipient != null || districtRecipient != "") {
+  //   const res = await prisma.user.findMany({
+  //     where: { deleted: 0, districtId: districtRecipient },
+  //   });
+  //   for (let i = 0; i < res.length; i++) {
+  //     console.log(res.phoneNumber);
+  //     await send(res[i].phoneNumber, req.body.message);
+  //   }
+  // }
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
   // } catch (error) {

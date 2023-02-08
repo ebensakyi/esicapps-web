@@ -124,7 +124,7 @@ const SingleNotification = ({ users, messages }) => {
                       >
                         <option selected>Choose...</option>
                         {users.map((u) => (
-                          <option key={u.id} value={u.id}>
+                          <option key={u.id} value= {u.otherNames +" "+u.surname }>
                             {u.otherNames} {u.surname}
                           </option>
                         ))}
@@ -228,9 +228,8 @@ const SingleNotification = ({ users, messages }) => {
                             <td>{msg.message}</td>
 
                             <td>
-                              {msg.District != null ? msg.District.name : ""}
-                              {msg.Region != null ? msg.Region.name : ""}
-                              {msg.Recipient != null ?msg.Recipient.otherNames +" "+ msg.Recipient.surname : ""}
+                            
+                              {msg.recipient}
                             </td>
                             {/* <td>
                         {user.activated == 0 ? (
