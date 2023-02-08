@@ -1,5 +1,7 @@
 import prisma from "../../../../../prisma/MyPrismaClient";
 import { send } from "../../../../../helpers/send-sms";
+import { sendSMS } from "../../../../../helpers/send-hubtel-sms";
+
 import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
 
@@ -35,7 +37,7 @@ const post = async (req, res) => {
 
   //   for (let i = 0; i < res.length; i++) {
   let phoneNumber = await append_233(user.phoneNumber);
-  await send(phoneNumber, req.body.message);
+  await sendSMS(phoneNumber, req.body.message);
   //   }
   // }
   // if (regionRecipient != null || regionRecipient != "") {

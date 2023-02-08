@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
-import {send} from "../../../../helpers/send-sms"
+import {sendSMS} from "../../../../helpers/send-hubtel-sms"
 
 const post = async (req, res) => {
   try {
@@ -15,8 +15,11 @@ const post = async (req, res) => {
     let body = { ...req.body.data, password: hashedPassword };
     const user = await prisma.user.create({ data: body });
 
+    let phoneNumber = await append_233(user.phoneNumber);
 
-   await send("233543212322","password")
+  //  await sendSMS("233543212322","password")
+   await sendSMS(phoneNumber, req.body.message);
+
     res
       .status(200)
       .json(user);

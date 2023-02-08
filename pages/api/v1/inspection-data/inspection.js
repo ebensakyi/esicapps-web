@@ -6,8 +6,7 @@ const post = async (req, res) => {
     const data = {
       id: req.body.inspectionId,
       userId: Number(req.body.userId),
-      premisesCode:
-      req.body.premisesCode,
+      premisesCode: req.body.premisesCode,
       inspectionFormId:
         req.body.inspectionFormId == "null"
           ? null
@@ -37,15 +36,14 @@ const post = async (req, res) => {
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
     res.status(200).json({ statusCode: 1, message: "Data skipped" });
-
   }
 };
 
 const get = async (req, res) => {
   try {
-    let assignedFromId = Number(req.query.assignedFrom);
+    let userId = Number(req.query.userId);
     const response = await prisma.inspection.create({
-      where: { userId: assignedFromId },
+      where: { userId: userId, deleted: 0 },
     });
 
     return res.status(200).json(response);

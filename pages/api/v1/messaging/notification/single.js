@@ -11,23 +11,32 @@ const post = async (req, res) => {
 
   let recipientId = req.body.recipient.split("$")[0];
   let recipient = req.body.recipient.split("$")[1];
+  let title = req.body.title;
+  let message = req.body.message;
+
   const data = {
     recipient: recipient,
-    message: req.body.message,
-    title: req.body.title,
+    message,
+    title,
     recipientTag: Number(req.body.group),
     recipientId: Number(recipientId),
 
-    sender: Number(userCookie.user.id),    messageType: 1,
+    sender: Number(userCookie.user.id),
+    messageType: 1,
     sendingType: 1,
   };
 
-  const response = await prisma.messaging.create({ data });
-  console.log(response);
+  const response = await prisma.messaging.create({
+    data,
+  });
 
- // let x =    await sendFCM(title, message, response[0].fcmId);
+  const user = await prisma.user.findFirst({
+    where: { id: response.recipientId },
+  });
+  console.log(user);
 
-  
+  let x = await sendFCM(title, message, user.fcmId);
+
   // if (recipient != null || recipient != "") {
   //   const res = await prisma.user.findMany({
   //     where: { deleted: 0, id: recipient },
@@ -74,7 +83,6 @@ const get = async (req, res) => {
       include: {
         SendingType: true,
         MessageType: true,
-      
       },
     });
 

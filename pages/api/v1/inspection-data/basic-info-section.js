@@ -52,11 +52,11 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const dataVersion = await prisma.dataVersion.findMany({
-      where: { deleted: 0 },
+    const data = await prisma.basicInfoSection.findMany({
+      where: { deleted: 0,userId: Number(req.query.userId) },
     });
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
-    return res.status(200).json(dataVersion);
+    return res.status(200).json(data);
   } catch (error) {
     console.log("Error: " + error);
   }
