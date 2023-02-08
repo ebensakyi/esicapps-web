@@ -23,14 +23,19 @@ const post = async (req, res) => {
   };
 
   const response = await prisma.messaging.create({ data });
+  const user = await prisma.user.findFirst({
+    where: { id: response.recipientId },
+  });
+
+  console.log(user);
   // if (recipient != null || recipient != "") {
   //   const res = await prisma.user.findMany({
   //     where: { deleted: 0, id: recipient },
   //   });
 
   //   for (let i = 0; i < res.length; i++) {
-  //     let phoneNumber = await append_233(res[i].phoneNumber);
-  //     await send(phoneNumber, req.body.message);
+  let phoneNumber = await append_233(user.phoneNumber);
+  await send(phoneNumber, req.body.message);
   //   }
   // }
   // if (regionRecipient != null || regionRecipient != "") {
