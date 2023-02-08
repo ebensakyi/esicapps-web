@@ -4,61 +4,40 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
-const SingleSms = ({ users, regions, districts, messages }) => {
+const SingleSMS = ({ users, messages }) => {
   const router = useRouter();
 
-  const [group, setGroup] = useState(null);
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState(null);
   const [recipient, setRecipient] = useState(null);
-  const [message, setMessage] = useState();
 
-  const sendBroadcastMessage = async (e) => {
-    try {
-    console.log("sendBroadcastMessage",  recipient);
-      e.preventDefault();
-      let data = {
-        title,
-        message,
-        sendingType: 2,
-
-        recipient,
-      };
-      console.log("rec ", recipient);
-
-      const response = await axios.post("/api/v1/messaging/sms", data);
-
-      setRecipient("");
-      setMessage("");
-      setTitle("");
-      router.replace(router.asPath);
-
-      return toast.success("Message sent");
-    } catch (error) {
-      console.log(error);
-      return toast.error("An error occurred");
-    }
-  };
+  const [message, setMessage] = useState(null);
 
   const sendSingleMessage = async (e) => {
     try {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
+      if (title == null) return toast.error("Title cannot be empty");
+      if (message == null) return toast.error("Message cannot be empty");
+      if (recipient == null) return toast.error("Recipient cannot be empty");
+
       let data = {
         recipient: recipient,
         title,
         message,
-        sendingType: 1,
-        group:3,
-        regionRecipient: null,
-        districtRecipient: null,
+        sendingType: 2,
+
+        group: 3,
       };
 
-      const response = await axios.post("/api/v1/messaging/sms/single", data);
-
-      setRecipient("");
-      setMessage("");
-      setTitle("");
+      const response = await axios.post(
+        "/api/v1/messaging/sms/single",
+        data
+      );
+      setRecipient(null);
+      setMessage(null);
+      setTitle(null);
       router.replace(router.asPath);
+      //router.push("/messaging/sms/single");
 
       return toast.success("Message sent");
     } catch (error) {
@@ -83,8 +62,7 @@ const SingleSms = ({ users, regions, districts, messages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 className="mb-3">Single SMS</h5>
-           
+            <h5 className="mb-3">SMS</h5>
 
             <div className="card">
               <div className="card-header align-items-center d-flex">
@@ -117,6 +95,7 @@ const SingleSms = ({ users, regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        value={title}
                         onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
@@ -131,6 +110,7 @@ const SingleSms = ({ users, regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        value={message}
                         onChange={(e) => setMessage(e.target.value)}
                       />
                     </div>
@@ -144,14 +124,18 @@ const SingleSms = ({ users, regions, districts, messages }) => {
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
+                        value={recipient}
                         onChange={(e) => {
                           setRecipient(e.target.value);
                         }}
                       >
                         <option selected>Choose...</option>
                         {users.map((u) => (
-                          <option key={u.id} value={u.id+"-"+ u.otherNames +" "+u.surname}>
-                            {u.otherNames} {u.surname} - {u.phoneNumber}
+                          <option
+                            key={u.id}
+                            value={u.id + "-" + u.otherNames + " " + u.surname}
+                          >
+                            {u.otherNames} {u.surname}
                           </option>
                         ))}
                       </select>
@@ -253,10 +237,7 @@ const SingleSms = ({ users, regions, districts, messages }) => {
                             <td>{msg.title}</td>
                             <td>{msg.message}</td>
 
-                            <td>
-                            
-                              {msg.recipient}
-                            </td>
+                            <td>{msg.recipient}</td>
                             {/* <td>
                         {user.activated == 0 ? (
                           <span className="badge text-bg-warning">
@@ -309,4 +290,4 @@ const SingleSms = ({ users, regions, districts, messages }) => {
   );
 };
 
-export default SingleSms;
+export default SingleSMS;

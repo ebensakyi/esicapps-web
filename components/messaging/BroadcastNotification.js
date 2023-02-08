@@ -7,11 +7,11 @@ import { useRouter } from 'next/router'
 const BroadcastNotification = ({ regions, districts, messages }) => {
   const router = useRouter()
 
-  const [group, setGroup] = useState();
-  const [title, setTitle] = useState();
+  const [group, setGroup] = useState(null);
+  const [title, setTitle] = useState(null);
   const [recipient, setRecipient] = useState(null);
 
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState(null);
 
   const sendBroadcastMessage = async (e) => {
     try {
@@ -24,13 +24,18 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
         group,
         recipient,
       };
+      if (title == null) return toast.error("Title cannot be empty");
+      if (message == null) return toast.error("Message cannot be empty");
+      if (recipient == null) return toast.error("Recipient cannot be empty");
 
       const response = await axios.post("/api/v1/messaging/notification/broadcast", data);
      router.push('/messaging/notification/broadcast')
 
-      setRecipient("")
-      setMessage("")
-      setTitle("")
+      setRecipient(null)
+      setMessage(null)
+      setTitle(null)
+      router.replace(router.asPath);
+
       return toast.success("Message sent");
     } catch (error) {
       console.log(error);
@@ -89,6 +94,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         className="form-control"
                         id="valueInput"
                       onChange={(e) => setTitle(e.target.value)}
+                      value={title}
                       />
                     </div>
                   </div>
@@ -102,6 +108,8 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         className="form-control"
                         id="valueInput"
                         onChange={(e) => setMessage(e.target.value)}
+                        value={message}
+                        
                       />
                     </div>
                   </div>
@@ -118,6 +126,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         onChange={(e) => {
                           setGroup(e.target.value);
                         }}
+                        value={recipient}
                       >
                         <option selected>Choose...</option>
                         <option key={1} value="1">
@@ -142,6 +151,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                           onChange={(e) => {
                             setRecipient(e.target.value);
                           }}
+                          value={recipient}
                         >
                           <option selected>Choose...</option>
                           {districts.map((d) => (

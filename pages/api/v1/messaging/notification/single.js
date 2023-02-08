@@ -1,25 +1,32 @@
 import prisma from "../../../../../prisma/MyPrismaClient";
 import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
+import { sendFCM } from "../../../../../helpers/send-fcm";
 
 const post = async (req, res) => {
   // try {
 
-  console.log(req.body);
 
-  let recipient = req.body.recipient;
-
+  let recipientId = req.body.recipient.split("-")[0];
+  let recipient = req.body.recipient.split("-")[1];
   const data = {
     recipient: recipient,
     message: req.body.message,
     title: req.body.title,
+    recipientTag: Number(req.body.group),
+    recipientId: Number(recipientId),
 
     sender: req.body.sendingType,
-    messageType: 2,
+    messageType: 1,
     sendingType: Number(req.body.sendingType),
   };
 
   const response = await prisma.messaging.create({ data });
+  console.log(response);
+
+ // let x =    await sendFCM(title, message, response[0].fcmId);
+
+  
   // if (recipient != null || recipient != "") {
   //   const res = await prisma.user.findMany({
   //     where: { deleted: 0, id: recipient },

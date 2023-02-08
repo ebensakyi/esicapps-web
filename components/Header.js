@@ -522,7 +522,7 @@ const Header = () => {
                         </li>
                         <li className="nav-item">
                           <Link href="/messaging/notification/single">
-                            <a className="nav-link"> Single SMS</a>
+                            <a className="nav-link"> Single Notification</a>
                           </Link>
                         </li>
                         </li>

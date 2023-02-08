@@ -7,15 +7,19 @@ import { useRouter } from "next/router";
 const SingleNotification = ({ users, messages }) => {
   const router = useRouter();
 
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState(null);
   const [recipient, setRecipient] = useState(null);
 
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState(null);
 
   const sendSingleMessage = async (e) => {
     try {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
+      if (title == null) return toast.error("Title cannot be empty");
+      if (message == null) return toast.error("Message cannot be empty");
+      if (recipient == null) return toast.error("Recipient cannot be empty");
+
       let data = {
         recipient: recipient,
         title,
@@ -29,11 +33,11 @@ const SingleNotification = ({ users, messages }) => {
         "/api/v1/messaging/notification/single",
         data
       );
-      setRecipient("");
-      setMessage("");
-      setTitle("");
-      //  router.replace(router.asPath)
-      router.push("/messaging/notification/single");
+      setRecipient(null);
+      setMessage(null);
+      setTitle(null);
+      router.replace(router.asPath);
+      //router.push("/messaging/notification/single");
 
       return toast.success("Message sent");
     } catch (error) {
@@ -91,6 +95,7 @@ const SingleNotification = ({ users, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        value={title}
                         onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
@@ -105,6 +110,7 @@ const SingleNotification = ({ users, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        value={message}
                         onChange={(e) => setMessage(e.target.value)}
                       />
                     </div>
@@ -118,6 +124,7 @@ const SingleNotification = ({ users, messages }) => {
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
+                        value={recipient}
                         onChange={(e) => {
                           setRecipient(e.target.value);
                         }}

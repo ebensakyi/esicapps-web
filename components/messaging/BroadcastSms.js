@@ -2,36 +2,39 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
-const BroadcastSms = ({ users, regions, districts, messages }) => {
-  const router = useRouter();
+const BroadcastSms = ({ regions, districts, messages }) => {
+  const router = useRouter()
 
   const [group, setGroup] = useState(null);
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState(null);
   const [recipient, setRecipient] = useState(null);
-  const [message, setMessage] = useState();
+
+  const [message, setMessage] = useState(null);
 
   const sendBroadcastMessage = async (e) => {
     try {
+      // console.log("sendBroadcastMessage");
       e.preventDefault();
       let data = {
         title,
         message,
         sendingType: 2,
         group,
-
         recipient,
       };
-      console.log("rec ", recipient);
+      if (title == null) return toast.error("Title cannot be empty");
+      if (message == null) return toast.error("Message cannot be empty");
+      if (recipient == null) return toast.error("Recipient cannot be empty");
 
       const response = await axios.post("/api/v1/messaging/sms/broadcast", data);
+     router.push('/messaging/sms/broadcast')
 
-      setRecipient("");
-      setMessage("");
-      setTitle("");
-      // router.replace(router.asPath);
-      router.push('/messaging/sms/broadcast')
+      setRecipient(null)
+      setMessage(null)
+      setTitle(null)
+      router.replace(router.asPath);
 
       return toast.success("Message sent");
     } catch (error) {
@@ -40,32 +43,7 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
     }
   };
 
-  // const sendSingleMessage = async (e) => {
-  //   try {
-  //     // console.log("sendBroadcastMessage");
-  //     e.preventDefault();
-  //     let data = {
-  //       recipient: recipient,
-  //       title,
-  //       message,
-  //       sendingType: 1,
-  //       regionRecipient: null,
-  //       districtRecipient: null,
-  //     };
-
-  //     const response = await axios.post("/api/v1/messaging/sms", data);
-
-  //     setRecipient("");
-  //     setMessage("");
-  //     setTitle("");
-  //     router.replace(router.asPath);
-
-  //     return toast.success("Message sent");
-  //   } catch (error) {
-  //     console.log(error);
-  //     return toast.error("An error occurred");
-  //   }
-  // };
+ 
 
   return (
     <div className="row">
@@ -83,7 +61,7 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 className="mb-3">Broadcast SMS</h5>
+            <h5 className="mb-3">SMS</h5>
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Broadcast</h4>
@@ -115,7 +93,8 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
-                        onChange={(e) => setTitle(e.target.value)}
+                      onChange={(e) => setTitle(e.target.value)}
+                      value={title}
                       />
                     </div>
                   </div>
@@ -129,6 +108,8 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                         className="form-control"
                         id="valueInput"
                         onChange={(e) => setMessage(e.target.value)}
+                        value={message}
+                        
                       />
                     </div>
                   </div>
@@ -145,6 +126,7 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                         onChange={(e) => {
                           setGroup(e.target.value);
                         }}
+                        value={recipient}
                       >
                         <option selected>Choose...</option>
                         <option key={1} value="1">
@@ -168,8 +150,8 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                           id="inputGroupSelect02"
                           onChange={(e) => {
                             setRecipient(e.target.value);
-                            // setRegionRecipient(null);
                           }}
+                          value={recipient}
                         >
                           <option selected>Choose...</option>
                           {districts.map((d) => (
@@ -194,13 +176,11 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={async (e) => {
-                            setRecipient(e.target);
-                            // setDistrictRecipient(null);
+                            setRecipient(e.target.value);
                           }}
                         >
                           <option selected>Choose...</option>
                           {regions.map((region) => (
-                            
                             <option value={region.id+"-"+region.name} key={region.id}>
                               {region.name}
                             </option>
@@ -275,7 +255,7 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
               </div>
             </div>
 
-          
+           
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
@@ -309,8 +289,8 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                             <td>{msg.message}</td>
 
                             <td>
-                             
-                              {msg.recipient }
+                              
+                              { msg.recipient}
                             </td>
                             {/* <td>
                         {user.activated == 0 ? (
