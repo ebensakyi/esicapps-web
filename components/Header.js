@@ -513,9 +513,18 @@ const Header = () => {
                     <div className="collapse menu-dropdown" id="notifications">
                       <ul className="nav nav-sm flex-column">
                         <li className="nav-item">
-                          <Link href="/messaging/notification">
-                            <a className="nav-link"> Compose</a>
+                         
+
+                          <li className="nav-item">
+                          <Link href="/messaging/notification/broadcast">
+                            <a className="nav-link"> Broadcast</a>
                           </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link href="/messaging/notification/single">
+                            <a className="nav-link"> Single SMS</a>
+                          </Link>
+                        </li>
                         </li>
                       </ul>
                     </div>

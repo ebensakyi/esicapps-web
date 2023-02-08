@@ -1,7 +1,7 @@
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 //import Footer from '../../components/Footer'
-import { SERVER_BASE_URL } from "../../config";
-import BroadcastNotification from "../../components/messaging/BroadcastNotification";
+import { SERVER_BASE_URL } from "../../../config";
+import BroadcastNotification from "../../../components/messaging/BroadcastNotification";
 
 export default function broadcast_notification({ regions, districts, messages, users }) {
   return (

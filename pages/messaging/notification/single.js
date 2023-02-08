@@ -1,6 +1,6 @@
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 //import Footer from '../../components/Footer'
-import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../../../config";
 import SingleNotification from "../../../components/messaging/SingleNotification";
 
 export default function single_notification({ regions, districts, messages, users }) {
