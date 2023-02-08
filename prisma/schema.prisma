@@ -21,6 +21,7 @@ model Inspection {
   followUpDate                   String?                         @db.VarChar(255)
   doFollowUp                     Int?
   deleted                        Int?                            @default(0)
+  isReinspected                  Int?                            @default(0)
   createdAt                      DateTime                        @default(now())
   updatedAt                      DateTime                        @updatedAt
   startedAt                      DateTime
@@ -59,9 +60,10 @@ model InspectionForm {
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
 
-  Service Service[]
-  Subtype Subtype[]
-  Type    Type[]
+  Service  Service[]
+  Subtype  Subtype[]
+  Type     Type[]
+  Nuisance Nuisance[]
 }
 
 model PasswordResetRequest {
@@ -173,20 +175,20 @@ model UserLevel {
 }
 
 model Messaging {
-  id                Int          @id @default(autoincrement())
-  title             String       @db.VarChar(255)
-  message           String       @db.VarChar(2550)
-  recipient         String?
-  messageType       Int?
-  sendingType       Int?
-  sender            Int
-  
-  deleted           Int?         @default(0)
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
-  MessageType       MessageType? @relation(fields: [messageType], references: [id])
-  Sender            User         @relation("sender", fields: [sender], references: [id])
-  SendingType       SendingType? @relation(fields: [sendingType], references: [id])
+  id          Int     @id @default(autoincrement())
+  title       String  @db.VarChar(255)
+  message     String  @db.VarChar(2550)
+  recipient   String?
+  messageType Int?
+  sendingType Int?
+  sender      Int
+
+  deleted     Int?         @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  MessageType MessageType? @relation(fields: [messageType], references: [id])
+  Sender      User         @relation("sender", fields: [sender], references: [id])
+  SendingType SendingType? @relation(fields: [sendingType], references: [id])
 }
 
 model SendingType {
@@ -431,24 +433,26 @@ model HazardousWasteDisposalMethod {
 }
 
 model Nuisance {
-  id                       Int                        @id @default(autoincrement())
-  name                     String                     @db.VarChar(255)
+  id               Int    @id @default(autoincrement())
+  name             String @db.VarChar(255)
+  inspectionFormId Int
+
   deleted                  Int?                       @default(0)
   createdAt                DateTime                   @default(now())
   updatedAt                DateTime                   @updatedAt
-  InspectionFormNuisances  InspectionFormNuisances[]
   PremisesNuisanceDetected PremisesNuisanceDetected[]
+  InspectionForm           InspectionForm             @relation(fields: [inspectionFormId], references: [id])
 }
 
-model InspectionFormNuisances {
-  id               Int      @id @default(autoincrement())
-  nuisanceId       Int
-  inspectionFormId Int
-  deleted          Int?     @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  Nuisance         Nuisance @relation(fields: [nuisanceId], references: [id])
-}
+// model InspectionFormNuisances {
+//   id               Int      @id @default(autoincrement())
+//   nuisanceId       Int
+//   inspectionFormId Int
+//   deleted          Int?     @default(0)
+//   createdAt        DateTime @default(now())
+//   updatedAt        DateTime @updatedAt
+//   Nuisance         Nuisance @relation(fields: [nuisanceId], references: [id])
+// }
 
 model OwnershipType {
   id                        Int                           @id @default(autoincrement())
@@ -470,13 +474,13 @@ model PestSign {
 }
 
 model Region {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(255)
-  abbrv     String      @unique @db.VarChar(10)
-  code      String      @unique @db.VarChar(2)
-  deleted   Int?        @default(0)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(255)
+  abbrv     String     @unique @db.VarChar(10)
+  code      String     @unique @db.VarChar(2)
+  deleted   Int?       @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   District  District[]
   User      User[]
 }
@@ -1838,7 +1842,7 @@ model InspectionPictures {
   id                 Int    @id @default(autoincrement())
   imagePath          String @db.VarChar(255)
   formSectionImageId Int
-  inspectionId     String           @db.VarChar(255)
+  inspectionId       String @db.VarChar(255)
 
   deleted          Int?             @default(0)
   createdAt        DateTime         @default(now())

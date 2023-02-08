@@ -156,9 +156,6 @@ async function main() {
     data: nuisance,
   });
 
-  await prisma.inspectionFormNuisances.createMany({
-    data: inspectionFormNuisances,
-  });
 
   await prisma.action.createMany({
     data: action,

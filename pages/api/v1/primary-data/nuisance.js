@@ -4,6 +4,7 @@ const post = async (req, res) => {
   try {
     const data = {
       name: req.body.data.name,
+      inspectionFormId: req.body.data.inspectionFormId
     };
     const nuisance = await prisma.nuisance.create({ data });
     res

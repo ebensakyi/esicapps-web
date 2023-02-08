@@ -26,7 +26,7 @@ const post = async (req, res) => {
 
   const response = await prisma.messaging.create({ data });
 
-  
+
   // if (recipient != null || recipient != "") {
   //   const res = await prisma.user.findMany({
   //     where: { deleted: 0, id: recipient },
@@ -72,9 +72,7 @@ const get = async (req, res) => {
       include: {
         SendingType: true,
         MessageType: true,
-        Region: true,
-        District: true,
-        Recipient: true,
+    
       },
     });
 

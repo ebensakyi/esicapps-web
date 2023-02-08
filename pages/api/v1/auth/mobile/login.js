@@ -8,7 +8,6 @@ const post = async (req, res) => {
     let password = req.body.password;
     //let hash = await bcrypt.hashSync(password, salt);
 
-    console.log(req.body);
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
       include: { District: { include: { Region: true } } },

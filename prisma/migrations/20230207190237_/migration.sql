@@ -11,6 +11,7 @@ CREATE TABLE "Inspection" (
     "followUpDate" VARCHAR(255),
     "doFollowUp" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "isReinspected" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
@@ -97,12 +98,10 @@ CREATE TABLE "Messaging" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
     "message" VARCHAR(2550) NOT NULL,
-    "recipient" INTEGER,
+    "recipient" TEXT,
     "messageType" INTEGER,
     "sendingType" INTEGER,
     "sender" INTEGER NOT NULL,
-    "regionRecipient" INTEGER,
-    "districtRecipient" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -394,23 +393,12 @@ CREATE TABLE "HazardousWasteDisposalMethod" (
 CREATE TABLE "Nuisance" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Nuisance_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "InspectionFormNuisances" (
-    "id" SERIAL NOT NULL,
-    "nuisanceId" INTEGER NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "InspectionFormNuisances_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Nuisance_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1582,10 +1570,10 @@ CREATE TABLE "InspectionPictures" (
     "id" SERIAL NOT NULL,
     "imagePath" VARCHAR(255) NOT NULL,
     "formSectionImageId" INTEGER NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "inspectionId" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "InspectionPictures_pkey" PRIMARY KEY ("id")
 );
@@ -1717,16 +1705,7 @@ ALTER TABLE "UserAddedByUser" ADD CONSTRAINT "UserAddedByUser_adderId_fkey" FORE
 ALTER TABLE "UserAddedByUser" ADD CONSTRAINT "UserAddedByUser_addeeId_fkey" FOREIGN KEY ("addeeId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_districtRecipient_fkey" FOREIGN KEY ("districtRecipient") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_messageType_fkey" FOREIGN KEY ("messageType") REFERENCES "MessageType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_recipient_fkey" FOREIGN KEY ("recipient") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_regionRecipient_fkey" FOREIGN KEY ("regionRecipient") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sender") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1753,7 +1732,7 @@ ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userTypeId_fkey"
 ALTER TABLE "Community" ADD CONSTRAINT "Community_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "InspectionFormNuisances" ADD CONSTRAINT "InspectionFormNuisances_nuisanceId_fkey" FOREIGN KEY ("nuisanceId") REFERENCES "Nuisance"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Nuisance" ADD CONSTRAINT "Nuisance_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "District" ADD CONSTRAINT "District_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
