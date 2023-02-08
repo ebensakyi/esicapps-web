@@ -124,7 +124,6 @@ const get = async (req, res) => {
       return res.status(200).json(user);
     }
     if (userLevel == 2) {
-      console.log("here 2");
 
       user = await prisma.user.findMany({
         where: { deleted: 0, regionId: Number(region) },

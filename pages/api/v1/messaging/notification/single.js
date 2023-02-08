@@ -2,13 +2,15 @@ import prisma from "../../../../../prisma/MyPrismaClient";
 import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
 import { sendFCM } from "../../../../../helpers/send-fcm";
+import { getUserCookie } from "../../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
   // try {
 
+  let userCookie = await getUserCookie(req, res);
 
-  let recipientId = req.body.recipient.split("-")[0];
-  let recipient = req.body.recipient.split("-")[1];
+  let recipientId = req.body.recipient.split("$")[0];
+  let recipient = req.body.recipient.split("$")[1];
   const data = {
     recipient: recipient,
     message: req.body.message,
@@ -16,9 +18,8 @@ const post = async (req, res) => {
     recipientTag: Number(req.body.group),
     recipientId: Number(recipientId),
 
-    sender: req.body.sendingType,
-    messageType: 1,
-    sendingType: Number(req.body.sendingType),
+    sender: Number(userCookie.user.id),    messageType: 1,
+    sendingType: 1,
   };
 
   const response = await prisma.messaging.create({ data });

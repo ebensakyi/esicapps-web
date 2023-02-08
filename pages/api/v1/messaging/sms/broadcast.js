@@ -8,8 +8,8 @@ const post = async (req, res) => {
 
   let userCookie = await getUserCookie(req, res);
 
-  let recipientId = req.body.recipient.split("-")[0];
-  let recipient = req.body.recipient.split("-")[1];
+  let recipientId = req.body.recipient.split("$")[0];
+  let recipient = req.body.recipient.split("$")[1];
 
   const data = {
     recipient: recipient,

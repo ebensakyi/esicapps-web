@@ -11,6 +11,9 @@ const get = async (req, res) => {
         MessageType: true,
        
       },
+      orderBy: {
+        id: "desc",
+      },
     });
 
     return res.status(200).json(messaging);

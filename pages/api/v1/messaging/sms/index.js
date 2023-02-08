@@ -10,6 +10,8 @@ const get = async (req, res) => {
         SendingType: true,
         MessageType: true,
        
+      }, orderBy: {
+        id: "desc",
       },
     });
 

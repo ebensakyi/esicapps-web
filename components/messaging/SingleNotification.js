@@ -7,18 +7,18 @@ import { useRouter } from "next/router";
 const SingleNotification = ({ users, messages }) => {
   const router = useRouter();
 
-  const [title, setTitle] = useState(null);
-  const [recipient, setRecipient] = useState(null);
+  const [title, setTitle] = useState("");
+  const [recipient, setRecipient] = useState("");
 
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
 
   const sendSingleMessage = async (e) => {
     try {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
-      if (title == null) return toast.error("Title cannot be empty");
-      if (message == null) return toast.error("Message cannot be empty");
-      if (recipient == null) return toast.error("Recipient cannot be empty");
+      if (title == "") return toast.error("Title cannot be empty");
+      if (message == "") return toast.error("Message cannot be empty");
+      if (recipient == "") return toast.error("Recipient cannot be empty");
 
       let data = {
         recipient: recipient,
@@ -33,9 +33,9 @@ const SingleNotification = ({ users, messages }) => {
         "/api/v1/messaging/notification/single",
         data
       );
-      setRecipient(null);
-      setMessage(null);
-      setTitle(null);
+      setRecipient("");
+      setMessage("");
+      setTitle("");
       router.replace(router.asPath);
       //router.push("/messaging/notification/single");
 
@@ -133,7 +133,7 @@ const SingleNotification = ({ users, messages }) => {
                         {users.map((u) => (
                           <option
                             key={u.id}
-                            value={u.id + "-" + u.otherNames + " " + u.surname}
+                            value={u.id + "$" + u.otherNames + " " + u.surname}
                           >
                             {u.otherNames} {u.surname}
                           </option>
