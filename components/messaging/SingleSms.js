@@ -48,6 +48,7 @@ const SingleSms = ({ users, regions, districts, messages }) => {
         title,
         message,
         sendingType: 1,
+        group:3,
         regionRecipient: null,
         districtRecipient: null,
       };
@@ -149,7 +150,7 @@ const SingleSms = ({ users, regions, districts, messages }) => {
                       >
                         <option selected>Choose...</option>
                         {users.map((u) => (
-                          <option key={u.id} value={u.id}>
+                          <option key={u.id} value={u.id+"-"+ u.otherNames +" "+u.surname}>
                             {u.otherNames} {u.surname} - {u.phoneNumber}
                           </option>
                         ))}

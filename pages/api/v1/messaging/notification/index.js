@@ -5,7 +5,7 @@ import prisma from "../../../../../prisma/MyPrismaClient";
 const get = async (req, res) => {
   try {
     const messaging = await prisma.messaging.findMany({
-      where: { deleted: 0, messageType: 2 },
+      where: { deleted: 0, messageType: 1 },
       include: {
         SendingType: true,
         MessageType: true,

@@ -21,16 +21,13 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
         title,
         message,
         sendingType: 2,
-        districtRecipient: districtRecipient,
-        regionRecipient: regionRecipient,
-        recipient: null,
+        group,
+        recipient,
       };
 
       const response = await axios.post("/api/v1/messaging/notification/broadcast", data);
      router.push('/messaging/notification/broadcast')
 
-      setRegionRecipient("")
-      setDistrictRecipient("")
       setRecipient("")
       setMessage("")
       setTitle("")
@@ -148,7 +145,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         >
                           <option selected>Choose...</option>
                           {districts.map((d) => (
-                            <option key={d.id} value={d.name}>
+                            <option key={d.id} value={d.id+"-"+d.name}>
                               {d.name}
                             </option>
                           ))}
@@ -174,7 +171,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         >
                           <option selected>Choose...</option>
                           {regions.map((region) => (
-                            <option value= {region.name} key={region.id}>
+                            <option value={region.id+"-"+region.name} key={region.id}>
                               {region.name}
                             </option>
                           ))}

@@ -2,17 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const SingleNotification = ({ users, messages }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [title, setTitle] = useState();
   const [recipient, setRecipient] = useState(null);
 
   const [message, setMessage] = useState();
-
-  
 
   const sendSingleMessage = async (e) => {
     try {
@@ -23,17 +21,19 @@ const SingleNotification = ({ users, messages }) => {
         title,
         message,
         sendingType: 1,
-       
+
+        group: 3,
       };
 
-      const response = await axios.post("/api/v1/messaging/notification/single", data);
-      setRegionRecipient("")
-      setDistrictRecipient("")
-      setRecipient("")
-      setMessage("")
-      setTitle("")   
-        //  router.replace(router.asPath)
-      router.push('/messaging/notification')
+      const response = await axios.post(
+        "/api/v1/messaging/notification/single",
+        data
+      );
+      setRecipient("");
+      setMessage("");
+      setTitle("");
+      //  router.replace(router.asPath)
+      router.push("/messaging/notification/single");
 
       return toast.success("Message sent");
     } catch (error) {
@@ -59,7 +59,7 @@ const SingleNotification = ({ users, messages }) => {
         <div className="row">
           <div className="col-lg-12">
             <h5 className="mb-3">NOTIFICATION</h5>
-           
+
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Single</h4>
@@ -124,7 +124,10 @@ const SingleNotification = ({ users, messages }) => {
                       >
                         <option selected>Choose...</option>
                         {users.map((u) => (
-                          <option key={u.id} value= {u.otherNames +" "+u.surname }>
+                          <option
+                            key={u.id}
+                            value={u.id + "-" + u.otherNames + " " + u.surname}
+                          >
                             {u.otherNames} {u.surname}
                           </option>
                         ))}
@@ -227,10 +230,7 @@ const SingleNotification = ({ users, messages }) => {
                             <td>{msg.title}</td>
                             <td>{msg.message}</td>
 
-                            <td>
-                            
-                              {msg.recipient}
-                            </td>
+                            <td>{msg.recipient}</td>
                             {/* <td>
                         {user.activated == 0 ? (
                           <span className="badge text-bg-warning">

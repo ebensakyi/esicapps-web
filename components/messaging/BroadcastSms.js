@@ -14,12 +14,12 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
 
   const sendBroadcastMessage = async (e) => {
     try {
-    console.log("sendBroadcastMessage",  recipient);
       e.preventDefault();
       let data = {
         title,
         message,
         sendingType: 2,
+        group,
 
         recipient,
       };
@@ -30,7 +30,8 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
       setRecipient("");
       setMessage("");
       setTitle("");
-      router.replace(router.asPath);
+      // router.replace(router.asPath);
+      router.push('/messaging/sms/broadcast')
 
       return toast.success("Message sent");
     } catch (error) {

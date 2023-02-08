@@ -1,24 +1,26 @@
 import prisma from "../../../../../prisma/MyPrismaClient";
 import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
+import { getUserCookie } from "../../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
   // try {
 
+  let userCookie = await getUserCookie(req, res);
+
   console.log(req.body);
 
-  let recipient =
-    req.body.recipient ;
-  let group = req.body.group
-    
+  let recipientId = req.body.recipient.split("-")[0];
+  let recipient = req.body.recipient.split("-")[1];
 
   const data = {
     recipient: recipient,
     message: req.body.message,
     title: req.body.title,
-   
-    sender: req.body.sendingType,
-    messageType: 2,
+    recipientTag: Number(req.body.group),
+    recipientId: Number(recipientId),
+    sender: Number(userCookie.user.id),
+    messageType: 1,
     sendingType: Number(req.body.sendingType),
   };
 
@@ -65,15 +67,16 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const messaging = await prisma.messaging.findMany({
-      where: { deleted: 0, messageType: 2 },
+      where: { deleted: 0, messageType: 1 },
       include: {
         SendingType: true,
         MessageType: true,
-        Region: true,
-        District: true,
+       
         Recipient: true,
       },
     });
+console.log(messaging);
+    
 
     return res.status(200).json(messaging);
   } catch (error) {

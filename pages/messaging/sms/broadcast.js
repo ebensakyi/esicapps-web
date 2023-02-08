@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
     };
   }
   const messages = await fetch(
-    `${SERVER_BASE_URL}/api/v1/messaging/notification`
+    `${SERVER_BASE_URL}/api/v1/messaging/sms`
   ).then((res) => res.json());
 
   const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?token=${token}`).then((res) =>
