@@ -15,7 +15,7 @@ const post = async (req, res) => {
     title: req.body.title,
    
     sender: req.body.sendingType,
-    messageType: 2,
+    messageType: 1,
     sendingType: Number(req.body.sendingType),
   };
 

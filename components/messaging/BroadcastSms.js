@@ -173,7 +173,7 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                         >
                           <option selected>Choose...</option>
                           {districts.map((d) => (
-                            <option key={d.id} value={d.name}>
+                            <option key={d.id} value={d.id+"-"+d.name}>
                               {d.name}
                             </option>
                           ))}
@@ -201,7 +201,7 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                           <option selected>Choose...</option>
                           {regions.map((region) => (
                             
-                            <option value={region.name} key={region.id}>
+                            <option value={region.id+"-"+region.name} key={region.id}>
                               {region.name}
                             </option>
                           ))}
@@ -309,13 +309,8 @@ const BroadcastSms = ({ users, regions, districts, messages }) => {
                             <td>{msg.message}</td>
 
                             <td>
-                              {msg.District != null ? msg.District.name : ""}
-                              {msg.Region != null ? msg.Region.name : ""}
-                              {msg.Recipient != null
-                                ? msg.Recipient.otherNames +
-                                  " " +
-                                  msg.Recipient.surname
-                                : ""}
+                             
+                              {msg.recipient }
                             </td>
                             {/* <td>
                         {user.activated == 0 ? (

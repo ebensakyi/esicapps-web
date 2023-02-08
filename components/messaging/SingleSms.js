@@ -254,13 +254,8 @@ const SingleSms = ({ users, regions, districts, messages }) => {
                             <td>{msg.message}</td>
 
                             <td>
-                              {msg.District != null ? msg.District.name : ""}
-                              {msg.Region != null ? msg.Region.name : ""}
-                              {msg.Recipient != null
-                                ? msg.Recipient.otherNames +
-                                  " " +
-                                  msg.Recipient.surname
-                                : ""}
+                            
+                              {msg.recipient}
                             </td>
                             {/* <td>
                         {user.activated == 0 ? (
