@@ -42,12 +42,15 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
-    const response = await prisma.inspection.create({
+    const response = await prisma.inspection.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
+    console.log("response",response);
     return res.status(200).json(response);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default (req, res) => {

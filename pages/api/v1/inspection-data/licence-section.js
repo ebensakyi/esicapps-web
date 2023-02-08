@@ -79,17 +79,21 @@ const post = async (req, res) => {
   }
 };
 
-const get = async (req, res) => {
-  try {
-    const dataVersion = await prisma.dataVersion.findMany({
-      where: { deleted: 0 },
-    });
-    //return res.status(200).json({ statusCode: 1, data: dataVersion });
-    return res.status(200).json(dataVersion);
-  } catch (error) {
-    console.log("Error: " + error);
-  }
-};
+    const get = async (req, res) => {
+      try {
+        let userId = Number(req.query.userId);
+        const response = await prisma.licencePermitSection.findMany({
+          where: { userId: userId, deleted: 0 },
+        });
+    
+        console.log("response",response);
+        return res.status(200).json(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+ 
+
 
 export default (req, res) => {
   req.method === "POST"
