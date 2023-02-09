@@ -1,5 +1,4 @@
 const ListUser = ({ users }) => {
-  console.log(users);
 
   return (
     <div className="row">
@@ -22,6 +21,7 @@ const ListUser = ({ users }) => {
 
                   <th>Other Names</th>
                   <th>Email</th>
+                  <th>OTP</th>
                   <th>User Type</th>
                   <th>Designation</th>
                   <th>Region</th>
@@ -38,6 +38,7 @@ const ListUser = ({ users }) => {
                       <td>{user.surname}</td>
                       <td>{user.otherNames}</td>
                       <td>{user.email}</td>
+                      <td>{user.tempPassword}</td>
                       <td>{user.UserType.name}</td>
                       <td>{user.designation}</td>
                       <td>{user.Region == null ? "" : user.Region.name}</td>
