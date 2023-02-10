@@ -82,6 +82,22 @@ const post = async (req, res) => {
   }
 };
 
+
+const get = async (req, res) => {
+  try {
+    let userId = Number(req.query.userId);
+    if(!userId) return res.status(200).json()
+
+    
+    const response = await prisma.healthPremisesInfoSection.findMany({
+      where: { userId: userId, deleted: 0 },
+    });
+
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 export default (req, res) => {
   req.method === "POST"
     ? post(req, res)

@@ -932,7 +932,7 @@ model ResidentialPremisesInfoSection {
   bathRoomAvailabilityId                    Int?
   approvedHandwashingFacilityAvailabilityId Int?
   animalAvailabilityId                      Int?
-  householdNumber                           String              @db.VarChar(255)
+  householdNumber                           Int?            
   maleOccupantNumber                        Int?
   femaleOccupantNumber                      Int?
   otherAnimal                               String?             @db.VarChar(255)
@@ -1266,7 +1266,7 @@ model IndustryPremisesInfoSection {
   industryPremisesTypeId                    Int?
   industryPremisesSubtypeId                 Int?
   physicalStructureTypeId                   Int?
-  otherIndustryFacility                     Int?
+  otherIndustryFacility                      String?     @db.VarChar(255)
   protectiveClothingId                      Int?
   productionRoomConditionId                 Int?
   flyScreenNetAvailabilityId                Int?

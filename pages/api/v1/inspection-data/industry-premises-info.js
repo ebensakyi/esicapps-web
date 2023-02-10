@@ -23,9 +23,7 @@ const post = async (req, res) => {
           : Number(req.body.physicalStructureTypeId),
 
       otherIndustryFacility:
-        req.body.otherIndustryFacility == "null"
-          ? null
-          : Number(req.body.otherIndustryFacility),
+        req.body.otherIndustryFacility ,
 
       protectiveClothingId:
         req.body.protectiveClothingId == "null"
@@ -110,6 +108,23 @@ const post = async (req, res) => {
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
     res.status(200).json({ statusCode: 1, message: "Data skipped" });
 
+  }
+};
+
+
+const get = async (req, res) => {
+  try {
+    let userId = Number(req.query.userId);
+    if(!userId) return res.status(200).json()
+
+    
+    const response = await prisma.industryPremisesInfoSection.findMany({
+      where: { userId: userId, deleted: 0 },
+    });
+
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
   }
 };
 

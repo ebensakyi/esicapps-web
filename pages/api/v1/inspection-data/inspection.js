@@ -42,6 +42,9 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
+    if(!userId) return res.status(200).json()
+
+    
     const response = await prisma.inspection.findMany({
       where: { userId: userId, deleted: 0 },
     });

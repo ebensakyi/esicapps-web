@@ -22,7 +22,7 @@ export const users = [
     surname: "Oppong",
     otherNames: "Ebenezer",
     email: "oe@gmail.com",
-    phoneNumber: "054000000000",
+    phoneNumber: "0242260004",
     password: hash5,
 
     designation: "Enterprise Admin",
