@@ -180,7 +180,7 @@ model Messaging {
   message      String  @db.VarChar(2550)
   recipient    String?
   recipientTag Int?
-  recipientId      Int?
+  recipientId  Int?
 
   messageType Int?
   sendingType Int?
@@ -932,7 +932,7 @@ model ResidentialPremisesInfoSection {
   bathRoomAvailabilityId                    Int?
   approvedHandwashingFacilityAvailabilityId Int?
   animalAvailabilityId                      Int?
-  householdNumber                           Int?            
+  householdNumber                           Int?
   maleOccupantNumber                        Int?
   femaleOccupantNumber                      Int?
   otherAnimal                               String?             @db.VarChar(255)
@@ -1266,7 +1266,7 @@ model IndustryPremisesInfoSection {
   industryPremisesTypeId                    Int?
   industryPremisesSubtypeId                 Int?
   physicalStructureTypeId                   Int?
-  otherIndustryFacility                      String?     @db.VarChar(255)
+  otherIndustryFacility                     String?    @db.VarChar(255)
   protectiveClothingId                      Int?
   productionRoomConditionId                 Int?
   flyScreenNetAvailabilityId                Int?
