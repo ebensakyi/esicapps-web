@@ -5,9 +5,9 @@ export const sendSMS = (phone, message) => {
         method: 'GET',
         url: 'https://smsc.hubtel.com/v1/messages/send',
         params: {
-          clientsecret: 'okkczbvb',
-          clientid: 'dhohvyyx',
-          from: '233543212322',
+          clientsecret: 'hqjzitrg',
+          clientid: 'ngsnegro',
+          from: 'ESICAppsSMS',
           to: phone,
           content: message
         }
