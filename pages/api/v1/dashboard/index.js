@@ -191,7 +191,6 @@ ORDER BY "InspectionForm"."name"`;
       sanitationReportCount
     };
 
-    console.log(data);
 
     // console.log(publishingSummary
     //   );

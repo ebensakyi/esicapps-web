@@ -4,40 +4,48 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const National = ({ inspectionForm, regions, districts }) => {
+const Mmda = ({ inspectionForm,regions,districts }) => {
   const router = useRouter();
   const [level, setLevel] = useState();
-  const [form, setForm] = useState(null);
-  const [region, setRegion] = useState(null);
-  const [district, setDistrict] = useState(null);
-  const [report, setReport] = useState(null);
-  const [submissionSummary, setSubmissionSummary] = useState(null);
-  const [submissionSummaryVisibility, setSubmissionSummaryVisibility] = useState(false);
+   const [form, setForm] = useState(null);
+   const [region, setRegion] = useState(null);
+   const [district, setDistrict] = useState(null);
+   const [report, setReport] = useState(null);
 
-  //   const [communityId, setCommunityId] = useState(null);
+//   const [communityId, setCommunityId] = useState(null);
 
-  const getSubmissionSummary = async (e) => {
-    try {
-      // console.log("sendBroadcastMessage");
-      e.preventDefault();
-      let data = {
-        level,
-      };
-    
-      const response = await axios.post(
-        "/api/v1/report/national/submission-summaries",
-        data
-      );
-console.log("response",response);
-     
-     // router.replace(router.asPath);
+//   const handlePagination = (page) => {
+//     const path = router.pathname;
+//     const query = router.query;
+//     query.page = page.selected + 1;
+//     router.push({
+//       pathname: path,
+//       query: query,
+//     });
+//   };
 
-      return toast.success("Message sent");
-    } catch (error) {
-      console.log(error);
-      return toast.error("An error occurred");
-    }
-  };
+//   const handleSearch = () => {
+//     let currentUrl = router.pathname;
+//     router.push({
+//       pathname: currentUrl,
+//       query: `&searchText=${searchText}`,
+//     });
+//     // const path = router.pathname;
+//     // const query = router.query;
+//     // query.page = page.selected + 1;
+//     // router.push({
+//     //   pathname: path,
+//     //   query: query,
+//     // });
+//   };
+
+//   const autoHandleSearch = (searchText) => {
+//     let currentUrl = router.pathname;
+//     router.push({
+//       pathname: currentUrl,
+//       query: `&searchText=${searchText}`,
+//     });
+//   };
 
   const addCommunity = async (e) => {
     try {
@@ -65,6 +73,17 @@ console.log("response",response);
     }
   };
 
+//   const deleteCommunity = async (e, id) => {
+//     e.preventDefault();
+//     console.log(id);
+
+//     try {
+//       await axios.delete("/api/v1/primary-data/community-data", {
+//         data: { id },
+//       });
+//       router.replace(router.asPath);
+//     } catch (error) {}
+//   };
   return (
     <div className="row">
       <ToastContainer
@@ -86,9 +105,7 @@ console.log("response",response);
             </div>
             <div className="card-body">
               {/* <h6 className="card-title">Add Community</h6> */}
-              <div className="row gy-4">
-                {" "}
-                <div className="col-xxl-2 col-md-8">
+              <div className="row gy-4"> <div className="col-xxl-2 col-md-8">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       Report Type
@@ -128,7 +145,8 @@ console.log("response",response);
                     </select>
                   </div>
                 </div>
-                {/* <div className="col-xxl-2 col-md-8">
+
+                <div className="col-xxl-2 col-md-8">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       Form
@@ -146,7 +164,7 @@ console.log("response",response);
                     </select>{" "}
                   </div>
                 </div>
-                */}
+               
                 <div className="col-xxl-2 col-md-8">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
@@ -166,52 +184,44 @@ console.log("response",response);
                     </select>{" "}
                   </div>
                 </div>
-                {level == 2 ? (
-                  <div className="col-xxl-2 col-md-8">
-                    <div>
-                      <label htmlFor="basiInput" className="form-label">
-                        Regions
-                      </label>
-                      <select
-                        class="form-select mb-3"
-                        aria-label="Default select example"
-                      >
-                        <option selected>Select region</option>
-                        <option value="0">All</option>
-                        {regions.map((region) => {
-                          return (
-                            <option value={region.id}>{region.name}</option>
-                          );
-                        })}
-                      </select>{" "}
-                    </div>
+                {level == 2 ? 
+                <div className="col-xxl-2 col-md-8">
+                  <div>
+                    <label htmlFor="basiInput" className="form-label">
+                      Regions
+                    </label>
+                    <select
+                      class="form-select mb-3"
+                      aria-label="Default select example"
+                    >
+                      <option selected>Select region</option>
+                      <option value="0">All</option>
+                      {regions.map(region=>{
+                        return <option value={region.id}>{region.name}</option>
+                      })}
+                     
+                    </select>{" "}
                   </div>
-                ) : (
-                  <></>
-                )}
-                {level == 3 ? (
-                  <div className="col-xxl-2 col-md-8">
-                    <div>
-                      <label htmlFor="basiInput" className="form-label">
-                        Districts
-                      </label>
-                      <select
-                        class="form-select mb-3"
-                        aria-label="Default select example"
-                      >
-                        <option selected>Select district</option>
-                        <option value="0">All</option>
-                        {districts.map((district) => {
-                          return (
-                            <option value={district.id}>{district.name}</option>
-                          );
-                        })}
-                      </select>{" "}
-                    </div>
+                </div>:<></>}
+                {level == 3 ? 
+                <div className="col-xxl-2 col-md-8">
+                  <div>
+                    <label htmlFor="basiInput" className="form-label">
+                      Districts
+                    </label>
+                    <select
+                      class="form-select mb-3"
+                      aria-label="Default select example"
+                    >
+                      <option selected>Select district</option>
+                      <option value="0">All</option>
+                      {districts.map(district=>{
+                        return <option value={district.id}>{district.name}</option>
+                      })}
+                     
+                    </select>{" "}
                   </div>
-                ) : (
-                  <></>
-                )}
+                </div> :<></>}
                 <div className="col-xxl-4 col-md-8">
                   <div>
                     {/* <label htmlFor="basiInput" className="form-label">
@@ -220,10 +230,7 @@ console.log("response",response);
                     <br />
                     <button
                       onClick={(e) => {
-                        console.log(report);
-                        if (report == 1) {
-                          getSubmissionSummary(e);
-                        }
+                        addCommunity(e);
                       }}
                       className="btn btn-primary"
                     >
@@ -238,10 +245,13 @@ console.log("response",response);
 
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">SUBMISSION SUMMARY</h5>
+            <h5 className="card-title mb-0">NATIONAL SUBMISSION  SUMMARY</h5>
           </div>
           <div className="card-body">
-            <div className="col-sm"></div>
+           
+            <div className="col-sm">
+              
+            </div>
             <br />
             <table
               id="fixed-header"
@@ -251,11 +261,8 @@ console.log("response",response);
               <thead>
                 <tr>
                   <th>Form</th>
-                  <th>Baseline</th>
-                  <th>ReInspection</th>
-                  <th>Follow Up</th>
-                  <th>Total</th>
-
+                  <th>Submissions</th>
+                
                 </tr>
               </thead>
               <tbody>
@@ -310,15 +317,17 @@ console.log("response",response);
                 })} */}
               </tbody>
             </table>
+           
           </div>
         </div>
 
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">ACTION TAKEN SUMMARY</h5>
+            <h5 className="card-title mb-0">REGIONAL SUBMISSION  SUMMARY</h5>
           </div>
           <div className="card-body">
-            <div className="col-sm"></div>
+           
+         
             <br />
             <table
               id="fixed-header"
@@ -327,80 +336,7 @@ console.log("response",response);
             >
               <thead>
                 <tr>
-                  <th>Form</th>
-                  <th>Notice Served</th>
-                  <th>Hygiene Education</th>
-                  <th>Criminal Summons</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* {data.community.map((dt) => {
-                  return (
-                    <tr key={dt.id}>
-                      {" "}
-                      <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
-                      <td>
-                        <div className="dropdown d-inline-block">
-                          <button
-                            className="btn btn-soft-secondary btn-sm dropdown"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="ri-more-fill align-middle" />
-                          </button>
-                          <ul className="dropdown-menu dropdown-menu-end">
-                         
-                            <li>
-                              <button
-                                className="dropdown-item edit-item-btn"
-                                onClick={(e) => {
-                                  setCommunityId(dt.id);
-                                  setCommunityName(dt.name);
-                                }}
-                              >
-                                <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
-                                Edit
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="dropdown-item delete-item-btn"
-                                onClick={(e) => {
-                                  deleteCommunity(e, dt.id);
-                                }}
-                              >
-                                <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </button>
-                            </li>
-                     
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })} */}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-header">
-            <h5 className="card-title mb-0">WATER SOURCES SUMMARY</h5>
-          </div>
-          <div className="card-body">
-            <br />
-            <table
-              id="fixed-header"
-              className="table table-bordered dt-responsive nowrap table-striped align-middle"
-              style={{ width: "100%" }}
-            >
-              <thead>
-                <tr>
+                  <th>Region</th>
                   <th>Form</th>
 
                   <th>Submissions</th>
@@ -458,6 +394,7 @@ console.log("response",response);
                 })} */}
               </tbody>
             </table>
+           
           </div>
         </div>
       </div>
@@ -465,4 +402,4 @@ console.log("response",response);
   );
 };
 
-export default National;
+export default Mmda;

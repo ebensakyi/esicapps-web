@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import { SERVER_BASE_URL } from "../../config";
 import National from "../../components/report/National";
 
-export default function national({ data }) {
+export default function national({ inspectionForm, regions, districts }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,11 @@ export default function national({ data }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <National data={data} />
+            <National
+              inspectionForm={inspectionForm}
+              regions={regions}
+              districts={districts}
+            />
           </div>
         </div>
       </div>
@@ -22,8 +26,8 @@ export default function national({ data }) {
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
-  const page = context.query.page || 1
-  const searchText = context.query.searchText || ""
+  const page = context.query.page || 1;
+  const searchText = context.query.searchText || "";
   if (!token) {
     return {
       redirect: {
@@ -32,28 +36,30 @@ export async function getServerSideProps(context) {
       },
     };
   }
- 
+
+  const data = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/community-data?token=${token}&page=${page}&searchText=${searchText}`
+  ).then((res) => res.json());
+
+  const inspectionForm = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/inspection-form`
+  ).then((res) => res.json());
+
+  const regions = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/region`
+  ).then((res) => res.json());
+  const districts = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/district`
+  ).then((res) => res.json());
 
 
-
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data?token=${token}&page=${page}&searchText=${searchText}`).then(
-    (res) => res.json()
-  );
-
-  //   const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
-  //     res.json()
-  //   );
-
-  //   const regions = await fetch(
-  //     `${SERVER_BASE_URL}/api/v1/primary-data/region`
-  //   ).then((res) => res.json());
-  //   const districts = await fetch(
-  //     `${SERVER_BASE_URL}/api/v1/primary-data/district`
-  //   ).then((res) => res.json());
 
   return {
     props: {
       data,
+      inspectionForm,
+      regions,
+      districts,
     },
   };
 }
