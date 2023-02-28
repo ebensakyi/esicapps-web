@@ -49,6 +49,7 @@ model Inspection {
 
   currentInspection  Inspection?          @relation("CurrentPreviousInspection")
   InspectionPictures InspectionPictures[]
+  FollowUpInspection FollowUpInspection[]
 }
 
 model InspectionForm {
@@ -544,6 +545,7 @@ model SanitaryInsanitary {
   animalSpaceCondition   ResidentialPremisesInfoSection[] @relation("animalSpaceCondition")
   sanitaryAshesDisposal  SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
   sanitaryContainer      SanitaryPremisesInfoSection[]    @relation("sanitaryContainer")
+  FollowUpInspection     FollowUpInspection[]             @relation("generalSanitaryCondition")
 }
 
 model SewerSystem {
@@ -864,6 +866,8 @@ model YesNo {
   pharmacyCertAvailability                           LicencePermitSection[]           @relation("pharmacyCertAvailability")
   wasteProviderAccreditted                           SolidWasteSection[]              @relation("wasteProviderAccreditted")
   generalSanitaryCondition                           ConclusionSection[]              @relation("generalSanitaryCondition")
+  obnoxiousTradeExistFollowUp                        FollowUpInspection[]             @relation("obnoxiousTradeExistFollowUp")
+  isNuisanceObserved                                 FollowUpInspection[]             @relation("isNuisanceObserved")
 }
 
 model InspectionType {
@@ -1867,4 +1871,26 @@ model AssignData {
 
   assignedFrom   User @relation("assignedFrom", fields: [assignedFromId], references: [id])
   assignedFromId Int
+}
+
+model FollowUpInspection {
+  id               String  @id @db.VarChar(255)
+  obnoxiousTradeExistFollowUpId Int
+  obnoxiousTrade                String @db.VarChar(255)
+  officerComment                String @db.VarChar(255)
+  inspectionId                  String @db.VarChar(255)
+
+  generalSanitaryConditionId Int?
+  isNuisanceObservedId       Int?
+  deleted                    Int?     @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  Inspection Inspection @relation(fields: [inspectionId], references: [id])
+
+  obnoxiousTradeExistFollowUp YesNo @relation("obnoxiousTradeExistFollowUp", fields: [obnoxiousTradeExistFollowUpId], references: [id])
+
+  isNuisanceObserved YesNo? @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
+
+  generalSanitaryCondition SanitaryInsanitary? @relation("generalSanitaryCondition", fields: [generalSanitaryConditionId], references: [id])
 }

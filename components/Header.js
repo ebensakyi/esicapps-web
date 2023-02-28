@@ -425,7 +425,7 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#report"
@@ -440,38 +440,29 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="report">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <a
-                        href="layouts-horizontal.html"
-                        target="_blank"
-                        className="nav-link"
-                        data-key="t-horizontal"
-                      >
-                        National
-                      </a>
+                      <Link href="/report/national">
+                        <a className="nav-link" data-key="t-calendar">
+                          National
+                        </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a
-                        href="layouts-detached.html"
-                        target="_blank"
-                        className="nav-link"
-                        data-key="t-detached"
-                      >
-                        Regional
-                      </a>
-                    </li>
+                      <Link href="/report/regional">
+                        <a className="nav-link" data-key="t-calendar">
+                          Regional
+                        </a>
+                      </Link>
+                    </li>{" "}
                     <li className="nav-item">
-                      <a
-                        href="layouts-two-column.html"
-                        target="_blank"
-                        className="nav-link"
-                        data-key="t-two-column"
-                      >
-                        MMDAs
-                      </a>
+                      <Link href="/report/mmda">
+                        <a className="nav-link" data-key="t-calendar">
+                          MMDAs
+                        </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
-              </li> */}
+              </li>
               <li className="nav-item">
                 <Link href="/sanitation-reports">
                   <a className="nav-link menu-link">
@@ -513,18 +504,16 @@ const Header = () => {
                     <div className="collapse menu-dropdown" id="notifications">
                       <ul className="nav nav-sm flex-column">
                         <li className="nav-item">
-                         
-
                           <li className="nav-item">
-                          <Link href="/messaging/notification/broadcast">
-                            <a className="nav-link"> Broadcast</a>
-                          </Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link href="/messaging/notification/single">
-                            <a className="nav-link"> Single Notification</a>
-                          </Link>
-                        </li>
+                            <Link href="/messaging/notification/broadcast">
+                              <a className="nav-link"> Broadcast</a>
+                            </Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link href="/messaging/notification/single">
+                              <a className="nav-link"> Single Notification</a>
+                            </Link>
+                          </li>
                         </li>
                       </ul>
                     </div>
