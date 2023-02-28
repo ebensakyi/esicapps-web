@@ -22,9 +22,9 @@ const post = async (req, res) => {
 const getActionTaken = async (req, res) => {
   const _summary =
     await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
-COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
-    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
-    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
+COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) AS "baselineCount",
+    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) AS "reinspectionCount",
+    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) AS "followupCount"
 
 
 
@@ -35,6 +35,7 @@ LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"
 GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
 ORDER BY "InspectionForm"."name"
 `;
+
   let summary = JSON.stringify(_summary, (_, v) =>
     typeof v === "bigint" ? v.toString() : v
   );
@@ -60,7 +61,6 @@ COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTy
 FROM "InspectionForm" 
 LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
 LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
-
 GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
 ORDER BY "InspectionForm"."name"
 `;
