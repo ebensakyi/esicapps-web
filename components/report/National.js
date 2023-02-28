@@ -10,9 +10,12 @@ const National = ({ inspectionForm, regions, districts }) => {
   const [form, setForm] = useState(null);
   const [region, setRegion] = useState(null);
   const [district, setDistrict] = useState(null);
-  const [report, setReport] = useState(null);
-  const [submissionSummary, setSubmissionSummary] = useState(null);
-  const [submissionSummaryVisibility, setSubmissionSummaryVisibility] = useState(false);
+  const [reportType, setReportType] = useState(null);
+  const [submissionSummary, setSubmissionSummary] = useState([]);
+  const [submissionSummaryVisibility, setSubmissionSummaryVisibility] =
+    useState(false);
+  const [actionTaken, setActionTaken] = useState([]);
+  const [actionTakenVisibility, setActionTakenVisibility] = useState(false);
 
   //   const [communityId, setCommunityId] = useState(null);
 
@@ -22,15 +25,21 @@ const National = ({ inspectionForm, regions, districts }) => {
       e.preventDefault();
       let data = {
         level,
+        reportType,
       };
-    
+
       const response = await axios.post(
         "/api/v1/report/national/submission-summaries",
         data
       );
-console.log("response",response);
-     
-     // router.replace(router.asPath);
+      console.log("response", response);
+      if (response.status == 200) {
+        console.log(response.data.data.submissionSummary);
+        setSubmissionSummaryVisibility(true);
+        setSubmissionSummary(response.data.data.submissionSummary);
+      }
+
+      // router.replace(router.asPath);
 
       return toast.success("Message sent");
     } catch (error) {
@@ -39,29 +48,33 @@ console.log("response",response);
     }
   };
 
-  const addCommunity = async (e) => {
+  const getActionTaken = async (e) => {
     try {
+      // console.log("sendBroadcastMessage");
       e.preventDefault();
-      if (communityName == "" || communityName == null) {
-        return toast.error("Enter community name");
-      }
       let data = {
-        name: communityName,
-        id: communityId,
-        // electoralAreaId,
+        level,
+        reportType,
       };
-      const response = await axios.post("/api/v1/primary-data/community-data", {
-        data,
-      });
-      toast.success(response.data.message);
-      setCommunityName("");
-      setCommunityId(null);
 
-      router.replace(router.asPath);
-    } catch (error) {
-      if (error.response.status == 401) {
-        toast.error(error.response.data.message);
+      const response = await axios.post(
+        "/api/v1/report/national/submission-summaries",
+        data
+      );
+      console.log("response", response);
+      if (response.status == 200) {
+        console.log(response.data.data.submissionSummary);
+        setSubmissionSummaryVisibility(false);
+        setActionTakenVisibility(true);
+        setActionTaken(response.data.data.actionTaken);
       }
+
+      // router.replace(router.asPath);
+
+      return toast.success("Message sent");
+    } catch (error) {
+      console.log(error);
+      return toast.error("An error occurred");
     }
   };
 
@@ -101,7 +114,7 @@ console.log("response",response);
                       data-placeholder="Select City"
                       name="choices-single-groups"
                       onChange={(e) => {
-                        setReport(e.target.value);
+                        setReportType(e.target.value);
                       }}
                     >
                       <option value="">Choose a report</option>
@@ -220,8 +233,8 @@ console.log("response",response);
                     <br />
                     <button
                       onClick={(e) => {
-                        console.log(report);
-                        if (report == 1) {
+                        console.log(reportType);
+                        if (reportType == 1) {
                           getSubmissionSummary(e);
                         }
                       }}
@@ -235,83 +248,46 @@ console.log("response",response);
             </div>
           </div>
         </div>
-
-        <div className="card">
-          <div className="card-header">
-            <h5 className="card-title mb-0">SUBMISSION SUMMARY</h5>
+        {submissionSummaryVisibility ? (
+          <div className="card">
+            <div className="card-header">
+              <h5 className="card-title mb-0">SUBMISSION SUMMARY</h5>
+            </div>
+            <div className="card-body">
+              <div className="col-sm"></div>
+              <br />
+              <table
+                id="fixed-header"
+                className="table table-bordered dt-responsive nowrap table-striped align-middle"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th>Form</th>
+                    <th>Baseline</th>
+                    <th>ReInspection</th>
+                    <th>Follow Up</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {submissionSummary.map((dt) => {
+                    return (
+                      <tr key={dt.id}>
+                        {" "}
+                        <td>{dt.name}</td>
+                        <td>{dt.baselineCount}</td>
+                        <td>{dt.reinspectionCount}</td>
+                        <td>{dt.followupCount}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div className="card-body">
-            <div className="col-sm"></div>
-            <br />
-            <table
-              id="fixed-header"
-              className="table table-bordered dt-responsive nowrap table-striped align-middle"
-              style={{ width: "100%" }}
-            >
-              <thead>
-                <tr>
-                  <th>Form</th>
-                  <th>Baseline</th>
-                  <th>ReInspection</th>
-                  <th>Follow Up</th>
-                  <th>Total</th>
-
-                </tr>
-              </thead>
-              <tbody>
-                {/* {data.community.map((dt) => {
-                  return (
-                    <tr key={dt.id}>
-                      {" "}
-                      <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
-                      <td>
-                        <div className="dropdown d-inline-block">
-                          <button
-                            className="btn btn-soft-secondary btn-sm dropdown"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="ri-more-fill align-middle" />
-                          </button>
-                          <ul className="dropdown-menu dropdown-menu-end">
-                         
-                            <li>
-                              <button
-                                className="dropdown-item edit-item-btn"
-                                onClick={(e) => {
-                                  setCommunityId(dt.id);
-                                  setCommunityName(dt.name);
-                                }}
-                              >
-                                <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
-                                Edit
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="dropdown-item delete-item-btn"
-                                onClick={(e) => {
-                                  deleteCommunity(e, dt.id);
-                                }}
-                              >
-                                <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </button>
-                            </li>
-                     
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })} */}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        ) : (
+          <></>
+        )}
 
         <div className="card">
           <div className="card-header">

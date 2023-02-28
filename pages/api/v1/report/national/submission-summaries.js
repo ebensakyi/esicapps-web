@@ -2,11 +2,29 @@ import prisma from "../../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    const allInspectionSummary =
-      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
- COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
-        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
-        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
+    console.log(req.body);
+    if (req.body.reportType == '1') {
+      await getSubmissionSummary(req, res);
+    }
+
+    if (req.body.reportType == '2') {
+      await getActionTaken(req, res);
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.code === "P2002")
+      return res
+        .status(200)
+        .json({ statusCode: 0, message: "action prefix should be unique" });
+  }
+};
+
+const getActionTaken = async (req, res) => {
+  const _summary =
+    await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
+    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
+    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
 
 
 
@@ -17,20 +35,45 @@ LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"
 GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
 ORDER BY "InspectionForm"."name"
 `;
-console.log(allInspectionSummary);
-let submissionSummary  = JSON.stringify(allInspectionSummary, (_, v) => typeof v === 'bigint' ? v.toString() : v)
-console.log(submissionSummary);
+  let summary = JSON.stringify(_summary, (_, v) =>
+    typeof v === "bigint" ? v.toString() : v
+  );
+  let submissionSummary = JSON.parse(summary);
 
-    res
-      .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: {submissionSummary } });
-  } catch (error) {
-    console.log(error);
-    if (error.code === "P2002")
-      return res
-        .status(200)
-        .json({ statusCode: 0, message: "action prefix should be unique" });
-  }
+  res.status(200).json({
+    statusCode: 1,
+    message: "Data saved",
+    data: { submissionSummary },
+  });
+};
+
+
+const getSubmissionSummary = async (req, res) => {
+  const _allInspectionSummary =
+    await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
+    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
+    COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
+
+
+
+FROM "InspectionForm" 
+LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+
+GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
+ORDER BY "InspectionForm"."name"
+`;
+  let allInspectionSummary = JSON.stringify(_allInspectionSummary, (_, v) =>
+    typeof v === "bigint" ? v.toString() : v
+  );
+  let submissionSummary = JSON.parse(allInspectionSummary);
+
+  res.status(200).json({
+    statusCode: 1,
+    message: "Data saved",
+    data: { submissionSummary },
+  });
 };
 
 const get = async (req, res) => {
