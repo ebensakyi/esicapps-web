@@ -177,7 +177,7 @@ model UserLevel {
 
 model Messaging {
   id           Int     @id @default(autoincrement())
-  title        String  @db.VarChar(255)
+  title        String?  @db.VarChar(255)
   message      String  @db.VarChar(2550)
   recipient    String?
   recipientTag Int?

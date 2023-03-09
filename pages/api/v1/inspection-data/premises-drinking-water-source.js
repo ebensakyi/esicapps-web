@@ -26,7 +26,7 @@ const post = async (req, res) => {
     //   return res
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
-    res.status(200).json({ statusCode: 1, message: "Data skipped" });
+    res.status(500).json({ statusCode: 0, message: "Data skipped" });
 
   }
 };

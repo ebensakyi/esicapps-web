@@ -46,12 +46,13 @@ console.log("fields.formSectionImageId ",fields.formSectionImageId);
     });
   } catch (error) {
     console.log(error);
-    return res.status(200).json();
+    return res.status(500).json();
   }
 };
 
 const saveFile = async (file) => {
-  const imageFile = await file.imageFile;
+  try {
+     const imageFile = await file.imageFile;
 
   var now = moment();
 
@@ -65,6 +66,10 @@ const saveFile = async (file) => {
   let fileUrl = await uploadFile(fileName);
   fs.unlinkSync(`./public/uploads/${fileName}`);
   return fileName;
+  } catch (error) {
+    
+  }
+ 
 };
 
 const uploadFile = async (fileName) => {

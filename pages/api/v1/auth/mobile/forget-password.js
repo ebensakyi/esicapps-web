@@ -1,13 +1,17 @@
 import prisma from "../../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { nanoid } from "nanoid";
+import { generateCode } from "../../../../../helpers/generate-code";
 
 const post = async (req, res) => {
  try {
+  
+
   let phoneNumber = req.body.phoneNumber;
   // console.log(phoneNumber);
-  let password = nanoid(8);
+  let password = await generateCode(8);
+
+
   const salt = bcrypt.genSaltSync(10);
   let hashedPassword = bcrypt.hashSync(password, salt);
 
@@ -30,7 +34,6 @@ const post = async (req, res) => {
     let pr = await prisma.passwordResetRequest.findFirst({
       where: { userId: user.id },
     });
-    console.log('PR ',pr);
 
     if (pr != null) {
       await prisma.passwordResetRequest.delete({
