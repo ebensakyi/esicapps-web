@@ -12,6 +12,7 @@ CREATE TABLE "Inspection" (
     "doFollowUp" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "isReinspected" INTEGER DEFAULT 0,
+    "isFollowedUp" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
@@ -96,7 +97,7 @@ CREATE TABLE "UserLevel" (
 -- CreateTable
 CREATE TABLE "Messaging" (
     "id" SERIAL NOT NULL,
-    "title" VARCHAR(255) NOT NULL,
+    "title" VARCHAR(255),
     "message" VARCHAR(2550) NOT NULL,
     "recipient" TEXT,
     "recipientTag" INTEGER,
@@ -779,6 +780,8 @@ CREATE TABLE "Service" (
 );
 
 -- CreateTable
+CREATE EXTENSION postgis;
+
 CREATE TABLE "BasicInfoSection" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
@@ -789,6 +792,7 @@ CREATE TABLE "BasicInfoSection" (
     "ghanaPostGps" VARCHAR(255),
     "latitude" DECIMAL(11,8) NOT NULL,
     "longitude" DECIMAL(11,8) NOT NULL,
+    "coords" geometry(Point, 4326),
     "accuracy" VARCHAR(255),
     "geom" JSONB,
     "respondentName" VARCHAR(255) NOT NULL,
@@ -811,7 +815,7 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
     "bathRoomAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "animalAvailabilityId" INTEGER,
-    "householdNumber" VARCHAR(255) NOT NULL,
+    "householdNumber" INTEGER,
     "maleOccupantNumber" INTEGER,
     "femaleOccupantNumber" INTEGER,
     "otherAnimal" VARCHAR(255),
@@ -1073,7 +1077,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "industryPremisesTypeId" INTEGER,
     "industryPremisesSubtypeId" INTEGER,
     "physicalStructureTypeId" INTEGER,
-    "otherIndustryFacility" INTEGER,
+    "otherIndustryFacility" VARCHAR(255),
     "protectiveClothingId" INTEGER,
     "productionRoomConditionId" INTEGER,
     "flyScreenNetAvailabilityId" INTEGER,
@@ -1593,6 +1597,22 @@ CREATE TABLE "AssignData" (
 );
 
 -- CreateTable
+CREATE TABLE "FollowUpInspection" (
+    "id" VARCHAR(255) NOT NULL,
+    "obnoxiousTradeExistFollowUpId" INTEGER NOT NULL,
+    "obnoxiousTrade" VARCHAR(255) NOT NULL,
+    "officerComment" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "generalSanitaryConditionId" INTEGER,
+    "isNuisanceObservedId" INTEGER,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "FollowUpInspection_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_PageToPageAction" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -1621,6 +1641,9 @@ CREATE UNIQUE INDEX "District_abbrv_key" ON "District"("abbrv");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "BasicInfoSection_inspectionId_key" ON "BasicInfoSection"("inspectionId");
+
+-- CreateIndex
+CREATE INDEX "location_idx" ON "BasicInfoSection" USING GIST ("coords");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ResidentialPremisesInfoSection_inspectionId_key" ON "ResidentialPremisesInfoSection"("inspectionId");
@@ -2476,6 +2499,18 @@ ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedToId_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedFromId_fkey" FOREIGN KEY ("assignedFromId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_obnoxiousTradeExistFollowUpId_fkey" FOREIGN KEY ("obnoxiousTradeExistFollowUpId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_isNuisanceObservedId_fkey" FOREIGN KEY ("isNuisanceObservedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_generalSanitaryConditionId_fkey" FOREIGN KEY ("generalSanitaryConditionId") REFERENCES "SanitaryInsanitary"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;

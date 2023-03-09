@@ -17,9 +17,10 @@ const Residential = ({ data }) => {
               <thead>
                 <tr>
                
-                <th>Inspection ID</th>
+                {/* <th>Inspection ID</th> */}
                   <th>Premises Code</th>
-                  {/* <th>Inspection Date</th> */}
+               <th>Inspection Start Date</th> 
+               <th>Inspection End Date</th> 
 
                   <th>Inspection Officer</th>
 
@@ -38,12 +39,13 @@ const Residential = ({ data }) => {
                   return (
                     <tr key={dt.id}>
                       {" "}
-                      <td>{dt.Inspection.id}</td>
+                      {/* <td>{dt.Inspection.id}</td> */}
                       <td>{dt.Inspection.premisesCode}</td>
 
                   
-                      {/* <td>{dt.Inspection.createdAt}</td>
-                      <td>{dt.Inspection.completedAt}</td> */}
+                      <td>{moment(dt.Inspection.startedAt).format("MMM Do YYYY, h:mm:ss a")}</td>
+                      <td>{moment(dt.Inspection.completedAt).format("MMM Do YYYY, h:mm:ss a")}</td>
+
                       <td>
                         {dt.User.otherNames} {dt.User.surname}
                       </td>

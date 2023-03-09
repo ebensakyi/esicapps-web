@@ -4,7 +4,7 @@ import moment from "moment";
 const post = async (req, res) => {
   try {
     const data = {
-      id: req.body.inspectionId,
+      id: req.body.id,
       userId: Number(req.body.userId),
       premisesCode: req.body.premisesCode,
       inspectionFormId:
@@ -26,11 +26,13 @@ const post = async (req, res) => {
       completedAt: new Date(req.body.completedAt),
     };
 
+    console.log(data);
+
     const response = await prisma.inspection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-    // console.log("Error: " + error);
+   console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)

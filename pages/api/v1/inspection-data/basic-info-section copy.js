@@ -32,8 +32,40 @@ const post = async (req, res) => {
       respondentPhoneNumber: req.body.respondentPhoneNumber,
       respondentDesignationId: Number(req.body.respondentDesignationId),
     };
-    
+    // let table = "public.BasicInfoSection";
+    // let id  = req.body.id
+    // await prisma.$executeRawUnsafe`INSERT INTO ${table} 
+    // ("id", 
+    // "inspectionId",
+    // "userId",
+    // "geom",
+    // "coords",
+    // "communityId",
+    // "community",
+    // "ghanaPostGps",
+    // "latitude",
+    // "longitude",
+    // "accuracy",
+    // "respondentName",
+    // "respondentPhoneNumber",
+    // "respondentDesignationId") 
+    // VALUES (
+    //   '${id}', 
+    //  ${req.body.inspectionId},
+    //  ${req.body.userId},
+    //  ${point},
+    //  ${point},
+    //  ${req.body.communityId},
+    //  ${req.body.community},
+    //  ${req.body.ghanaPostGps},
+    //  ${req.body.latitude},
+    //  ${req.body.longitude},
+    //  ${req.body.accuracy},
+    //  ${req.body.respondentName},
+    //  ${req.body.respondentPhoneNumber},
+    //  ${req.body.respondentDesignationId}) ;`;
 
+  console.log(data);
 
  const response = await prisma.basicInfoSection.create({ data });
 

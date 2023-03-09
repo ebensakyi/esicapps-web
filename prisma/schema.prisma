@@ -1,6 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch","postgresqlExtensions"]
+
 }
 
 datasource db {
@@ -13,15 +14,17 @@ model Inspection {
   prevInspectionId String? @unique @db.VarChar(255)
   premisesCode     String? @db.VarChar(255)
 
-  userId                         Int
-  inspectionFormId               Int
-  inspectionTypeId               Int
-  isPublished                    Int                             @default(0)
-  publishedById                  Int?
-  followUpDate                   String?                         @db.VarChar(255)
-  doFollowUp                     Int?
-  deleted                        Int?                            @default(0)
-  isReinspected                  Int?                            @default(0)
+  userId           Int
+  inspectionFormId Int
+  inspectionTypeId Int
+  isPublished      Int     @default(0)
+  publishedById    Int?
+  followUpDate     String? @db.VarChar(255)
+  doFollowUp       Int?
+  deleted          Int?    @default(0)
+  isReinspected    Int?    @default(0)
+  isFollowedUp     Int?    @default(0)
+
   createdAt                      DateTime                        @default(now())
   updatedAt                      DateTime                        @updatedAt
   startedAt                      DateTime
@@ -177,7 +180,7 @@ model UserLevel {
 
 model Messaging {
   id           Int     @id @default(autoincrement())
-  title        String?  @db.VarChar(255)
+  title        String? @db.VarChar(255)
   message      String  @db.VarChar(2550)
   recipient    String?
   recipientTag Int?
@@ -902,28 +905,32 @@ model Service {
 }
 
 model BasicInfoSection {
-  id           String  @id @db.VarChar(255)
-  inspectionId String  @unique @db.VarChar(255)
-  userId       Int
-  zoneId       Int?
-  communityId  Int?
-  community    String? @db.VarChar(255)
-  ghanaPostGps String? @db.VarChar(255)
-  latitude     Decimal @db.Decimal(11, 8)
-  longitude    Decimal @db.Decimal(11, 8)
-
-  accuracy                String?                @db.VarChar(255)
+  id                      String                                @id @db.VarChar(255)
+  inspectionId            String                                @unique @db.VarChar(255)
+  userId                  Int
+  zoneId                  Int?
+  communityId             Int?
+  community               String?                               @db.VarChar(255)
+  ghanaPostGps            String?                               @db.VarChar(255)
+  latitude                Decimal                               @db.Decimal(11, 8)
+  longitude               Decimal                               @db.Decimal(11, 8)
+  // the geometry column itself
+  coords                  Unsupported("geometry(Point, 4326)")?
+  accuracy                String?                               @db.VarChar(255)
   geom                    Json?
-  respondentName          String                 @db.VarChar(255)
-  respondentPhoneNumber   String                 @db.VarChar(255)
+  respondentName          String                                @db.VarChar(255)
+  respondentPhoneNumber   String                                @db.VarChar(255)
   respondentDesignationId Int
-  deleted                 Int?                   @default(0)
-  createdAt               DateTime               @default(now())
-  updatedAt               DateTime               @updatedAt
-  Community               Community?             @relation(fields: [communityId], references: [id])
-  Inspection              Inspection             @relation(fields: [inspectionId], references: [id])
-  RespondentDesignation   RespondentDesignation? @relation(fields: [respondentDesignationId], references: [id])
-  User                    User                   @relation(fields: [userId], references: [id])
+  deleted                 Int?                                  @default(0)
+  createdAt               DateTime                              @default(now())
+  updatedAt               DateTime                              @updatedAt
+  Community               Community?                            @relation(fields: [communityId], references: [id])
+  Inspection              Inspection                            @relation(fields: [inspectionId], references: [id])
+  RespondentDesignation   RespondentDesignation?                @relation(fields: [respondentDesignationId], references: [id])
+  User                    User                                  @relation(fields: [userId], references: [id])
+
+  // the index for that column
+  @@index([coords], name: "location_idx", type: Gist)
 }
 
 model ResidentialPremisesInfoSection {
@@ -1874,7 +1881,7 @@ model AssignData {
 }
 
 model FollowUpInspection {
-  id               String  @id @db.VarChar(255)
+  id                            String @id @db.VarChar(255)
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String @db.VarChar(255)
   officerComment                String @db.VarChar(255)
