@@ -16,8 +16,7 @@ const post = async (req, res) => {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
     
-console.log("fields.inspectionId ",fields.inspectionId);
-console.log("fields.formSectionImageId ",fields.formSectionImageId);
+
 
       // let imageFile = file.imageFile;
       let image = await saveFile(file);
@@ -41,7 +40,6 @@ console.log("fields.formSectionImageId ",fields.formSectionImageId);
       //     // solidWastePicture: solidWastePicture,
       //   };
 
-      //Move to payment
       return res.status(200).json();
     });
   } catch (error) {

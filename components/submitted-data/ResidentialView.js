@@ -179,7 +179,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ResidentialPremisesInfoSection.toiletAvailability !=
+                    {data.ResidentialPremisesInfoSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -199,7 +199,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.urinalAvailability !=
+                    {data.ResidentialPremisesInfoSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -219,7 +219,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.bathRoomAvailability !=
+                    {data.ResidentialPremisesInfoSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -239,7 +239,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.drainsAvailability !=
+                    {data.ResidentialPremisesInfoSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -260,7 +260,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
                     {data.ResidentialPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityResidential !=
+                      !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -281,7 +281,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.householdNumber !=
+                    {data.ResidentialPremisesInfoSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">

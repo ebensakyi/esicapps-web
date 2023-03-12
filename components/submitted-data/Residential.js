@@ -59,8 +59,8 @@ const Residential = ({ data }) => {
                         {dt.Community != null ? dt.Community.District.name : ""}
                       </td>
                       <td>
-                        {dt.Community != null ? dt.Community.name : ""}
-                        {dt.community}
+                        {dt.Community != null ? dt.Community.name : dt.community}
+                        {/* {dt.community} */}
                       </td>    <td>{moment(dt.Inspection.createdAt).format("MMM Do YYYY, h:mm:ss a")}</td>
                       <td>
                         {dt.Inspection.isPublished == 0 ? (
