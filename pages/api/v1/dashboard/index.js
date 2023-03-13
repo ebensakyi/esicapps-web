@@ -181,6 +181,58 @@ ORDER BY "InspectionForm"."name"`;
       toJson(n.name)
     );
 
+
+    const toiletAvailabilityCount1 = await prisma.residentialPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount2 = await prisma.eateryPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount3 = await prisma.healthPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount4 = await prisma.hospitalityPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount5 = await prisma.sanitaryPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount6 = await prisma.marketPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount7 = await prisma.institutionPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletAvailabilityCount8 = await prisma.industryPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 1 },
+    });
+    const toiletInavailabilityCount1 = await prisma.residentialPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount2 = await prisma.eateryPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount3 = await prisma.healthPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount4 = await prisma.hospitalityPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount5 = await prisma.sanitaryPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount6 = await prisma.marketPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount7 = await prisma.institutionPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+    const toiletInavailabilityCount8 = await prisma.industryPremisesInfoSection.count({
+      where: { toiletAvailabilityId: 2 },
+    });
+
+
+
     let data = {
       allInspectionSummary: toJson(allInspectionSummary),
       baselineCountArray,
