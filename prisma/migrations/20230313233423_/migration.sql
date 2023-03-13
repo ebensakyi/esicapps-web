@@ -780,8 +780,6 @@ CREATE TABLE "Service" (
 );
 
 -- CreateTable
-CREATE EXTENSION postgis;
-
 CREATE TABLE "BasicInfoSection" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
@@ -792,7 +790,6 @@ CREATE TABLE "BasicInfoSection" (
     "ghanaPostGps" VARCHAR(255),
     "latitude" DECIMAL(11,8) NOT NULL,
     "longitude" DECIMAL(11,8) NOT NULL,
-    "coords" geometry(Point, 4326),
     "accuracy" VARCHAR(255),
     "geom" JSONB,
     "respondentName" VARCHAR(255) NOT NULL,
@@ -1599,10 +1596,14 @@ CREATE TABLE "AssignData" (
 -- CreateTable
 CREATE TABLE "FollowUpInspection" (
     "id" VARCHAR(255) NOT NULL,
+    "prevInspectionId" VARCHAR(255),
+    "premisesCode" VARCHAR(255),
+    "userId" INTEGER NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "inspectionTypeId" INTEGER NOT NULL,
     "obnoxiousTradeExistFollowUpId" INTEGER NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "officerComment" VARCHAR(255) NOT NULL,
-    "inspectionId" VARCHAR(255) NOT NULL,
     "generalSanitaryConditionId" INTEGER,
     "isNuisanceObservedId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
@@ -1641,9 +1642,6 @@ CREATE UNIQUE INDEX "District_abbrv_key" ON "District"("abbrv");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "BasicInfoSection_inspectionId_key" ON "BasicInfoSection"("inspectionId");
-
--- CreateIndex
-CREATE INDEX "location_idx" ON "BasicInfoSection" USING GIST ("coords");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ResidentialPremisesInfoSection_inspectionId_key" ON "ResidentialPremisesInfoSection"("inspectionId");
@@ -1686,6 +1684,9 @@ CREATE UNIQUE INDEX "ConclusionSection_inspectionId_key" ON "ConclusionSection"(
 
 -- CreateIndex
 CREATE UNIQUE INDEX "InspectionPictures_formSectionImageId_inspectionId_key" ON "InspectionPictures"("formSectionImageId", "inspectionId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "FollowUpInspection_prevInspectionId_key" ON "FollowUpInspection"("prevInspectionId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_PageToPageAction_AB_unique" ON "_PageToPageAction"("A", "B");
@@ -2501,7 +2502,7 @@ ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedToId_fkey" FOREIGN K
 ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedFromId_fkey" FOREIGN KEY ("assignedFromId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_prevInspectionId_fkey" FOREIGN KEY ("prevInspectionId") REFERENCES "Inspection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_obnoxiousTradeExistFollowUpId_fkey" FOREIGN KEY ("obnoxiousTradeExistFollowUpId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

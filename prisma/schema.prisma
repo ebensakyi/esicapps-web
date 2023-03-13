@@ -1,7 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch","postgresqlExtensions"]
-
+  previewFeatures = ["fullTextSearch", "postgresqlExtensions"]
 }
 
 datasource db {
@@ -914,8 +913,6 @@ model BasicInfoSection {
   ghanaPostGps            String?                               @db.VarChar(255)
   latitude                Decimal                               @db.Decimal(11, 8)
   longitude               Decimal                               @db.Decimal(11, 8)
-  // the geometry column itself
-  coords                  Unsupported("geometry(Point, 4326)")?
   accuracy                String?                               @db.VarChar(255)
   geom                    Json?
   respondentName          String                                @db.VarChar(255)
@@ -930,7 +927,6 @@ model BasicInfoSection {
   User                    User                                  @relation(fields: [userId], references: [id])
 
   // the index for that column
-  @@index([coords], name: "location_idx", type: Gist)
 }
 
 model ResidentialPremisesInfoSection {
@@ -1881,11 +1877,18 @@ model AssignData {
 }
 
 model FollowUpInspection {
-  id                            String @id @db.VarChar(255)
+  id String @id @db.VarChar(255)
+
+  prevInspectionId String? @unique @db.VarChar(255)
+  premisesCode     String? @db.VarChar(255)
+
+  userId           Int
+  inspectionFormId Int
+  inspectionTypeId Int
+
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String @db.VarChar(255)
   officerComment                String @db.VarChar(255)
-  inspectionId                  String @db.VarChar(255)
 
   generalSanitaryConditionId Int?
   isNuisanceObservedId       Int?
@@ -1893,7 +1896,7 @@ model FollowUpInspection {
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
 
-  Inspection Inspection @relation(fields: [inspectionId], references: [id])
+  Inspection Inspection? @relation(fields: [prevInspectionId], references: [id])
 
   obnoxiousTradeExistFollowUp YesNo @relation("obnoxiousTradeExistFollowUp", fields: [obnoxiousTradeExistFollowUpId], references: [id])
 
