@@ -9,22 +9,17 @@ const Residential = ({ data }) => {
             <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
           </div>
           <div className="card-body">
-            <table
-              id="fixed-header"
-              className="table table-bordered dt-responsive nowrap table-striped align-middle"
-              style={{ width: "100%" }}
-            >
+          <table id="buttons-datatables" className="display table table-bordered"  style={{ width: "100%" }}>
+
               <thead>
                 <tr>
-               
-                {/* <th>Inspection ID</th> */}
                   <th>Premises Code</th>
                <th>Inspection Start Date</th> 
                <th>Inspection End Date</th> 
-
                   <th>Inspection Officer</th>
-
                   <th>GhanaPost GPS</th>
+                  <th>GPS Accuracy</th>
+
                   <th>Region</th>
                   <th>District</th>
                   <th>Community</th>
@@ -50,6 +45,7 @@ const Residential = ({ data }) => {
                         {dt.User.otherNames} {dt.User.surname}
                       </td>
                       <td>{dt.ghanaPostGps}</td>
+                      <td>{dt.accuracy}</td>
                       <td>
                         {dt.Community != null
                           ? dt.Community.District.Region.name

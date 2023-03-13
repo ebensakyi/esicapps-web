@@ -181,57 +181,156 @@ ORDER BY "InspectionForm"."name"`;
       toJson(n.name)
     );
 
+    const toiletAvailabilityCount1 =
+      await prisma.residentialPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount2 =
+      await prisma.eateryPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount3 =
+      await prisma.healthPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount4 =
+      await prisma.hospitalityPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount5 =
+      await prisma.sanitaryPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount6 =
+      await prisma.marketPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount7 =
+      await prisma.institutionPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletAvailabilityCount8 =
+      await prisma.industryPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 1 },
+      });
+    const toiletInavailabilityCount1 =
+      await prisma.residentialPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount2 =
+      await prisma.eateryPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount3 =
+      await prisma.healthPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount4 =
+      await prisma.hospitalityPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount5 =
+      await prisma.sanitaryPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount6 =
+      await prisma.marketPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount7 =
+      await prisma.institutionPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
+    const toiletInavailabilityCount8 =
+      await prisma.industryPremisesInfoSection.count({
+        where: { toiletAvailabilityId: 2 },
+      });
 
-    const toiletAvailabilityCount1 = await prisma.residentialPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+    let toiletAvailabilityCount =
+      toiletAvailabilityCount1 +
+      toiletAvailabilityCount2 +
+      toiletAvailabilityCount3 +
+      toiletAvailabilityCount4 +
+      toiletAvailabilityCount5 +
+      toiletAvailabilityCount6 +
+      toiletAvailabilityCount7 +
+      toiletAvailabilityCount8;
+
+    let toiletInavailabilityCount =
+      toiletInavailabilityCount1 +
+      toiletInavailabilityCount2 +
+      toiletInavailabilityCount3 +
+      toiletInavailabilityCount4 +
+      toiletInavailabilityCount5 +
+      toiletInavailabilityCount6 +
+      toiletInavailabilityCount7 +
+      toiletInavailabilityCount8;
+
+    let toiletAvailabilityArray = [
+      toiletAvailabilityCount,
+      toiletInavailabilityCount,
+    ];
+
+
+
+    const toiletAdequacy =
+    await prisma.liquidWasteSection.count({
+      where: { toiletAdequacyId: 1 },
     });
-    const toiletAvailabilityCount2 = await prisma.eateryPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+
+    const toiletInadequacy =
+    await prisma.liquidWasteSection.count({
+      where: { toiletAdequacyId: 2 },
     });
-    const toiletAvailabilityCount3 = await prisma.healthPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+
+    const toiletConditionSafe =
+    await prisma.liquidWasteSection.count({
+      where: { toiletConditionId: 1 },
     });
-    const toiletAvailabilityCount4 = await prisma.hospitalityPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+
+    const toiletConditionUnsafe =
+    await prisma.liquidWasteSection.count({
+      where: { toiletConditionId: 2 },
     });
-    const toiletAvailabilityCount5 = await prisma.sanitaryPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+
+    const wasteCollectorRegistered =
+    await prisma.solidWasteSection.count({
+      where: { wasteServiceProviderRegistrationId: 1 },
     });
-    const toiletAvailabilityCount6 = await prisma.marketPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+
+    const wasteCollectorNotRegistered =
+    await prisma.solidWasteSection.count({
+      where: { wasteServiceProviderRegistrationId: 2 },
     });
-    const toiletAvailabilityCount7 = await prisma.institutionPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
+
+    const wasteSorted =
+    await prisma.solidWasteSection.count({
+      where: { wasteSortingAvailabilityId: 1 },
     });
-    const toiletAvailabilityCount8 = await prisma.industryPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 1 },
-    });
-    const toiletInavailabilityCount1 = await prisma.residentialPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount2 = await prisma.eateryPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount3 = await prisma.healthPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount4 = await prisma.hospitalityPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount5 = await prisma.sanitaryPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount6 = await prisma.marketPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount7 = await prisma.institutionPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
-    });
-    const toiletInavailabilityCount8 = await prisma.industryPremisesInfoSection.count({
-      where: { toiletAvailabilityId: 2 },
+
+    const wasteNotSorted=
+    await prisma.solidWasteSection.count({
+      where: { wasteSortingAvailabilityId: 2 },
     });
 
 
+    const wasteReceptacleApproved =
+    await prisma.solidWasteSection.count({
+      where: { approvedWasteStorageReceptacleId: 1 },
+    });
+
+    const wasteReceptacleUnapproved=
+    await prisma.solidWasteSection.count({
+      where: { approvedWasteStorageReceptacleId: 2 },
+    });
+
+
+    let wasteCollectorArray  = [wasteCollectorRegistered,wasteCollectorNotRegistered];
+    let wasteSortingArray  = [wasteSorted,wasteNotSorted];
+    let wasteReceptacleArray  = [wasteReceptacleApproved,wasteReceptacleUnapproved];
+
+    let toiletAdequacyArray  = [toiletAdequacy,toiletInadequacy];
+    let toiletConditionArray = [toiletConditionSafe,toiletConditionUnsafe]
 
     let data = {
       allInspectionSummary: toJson(allInspectionSummary),
@@ -249,6 +348,16 @@ ORDER BY "InspectionForm"."name"`;
         waterStorageConditionCountArray,
         waterStorageConditionLabelArray,
       },
+      lw: {
+        toiletAvailabilityArray,
+        toiletAdequacyArray,
+        toiletConditionArray
+      },
+      sw:{
+        wasteCollectorArray,
+        wasteSortingArray,
+        wasteReceptacleArray
+      },
       // baselineInspectionSummary:toJson(baselineInspectionSummary),
       // reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),
       // followupInspectionSummary: toJson(followupInspectionSummary),
@@ -262,7 +371,7 @@ ORDER BY "InspectionForm"."name"`;
       unsafeWaterSourceCount,
       sanitationReportCount,
       actionTakenCount,
-      actionTakenLabel
+      actionTakenLabel,
     };
 
     // console.log(publishingSummary

@@ -26,7 +26,12 @@ const Dashboard = ({ data }) => {
     waterSourceConditionBarchartData,
     waterStorageConditionBarchartData,
     toiletAvailabilityBarchartData,
-    toiletTypesBarchartData,toiletAdequacyBarchartData;
+    toiletConditionBarchartData,
+    toiletAdequacyBarchartData,
+    wasteCollectorBarchartData,
+    wasteSortingBarchartData,
+    approvedWasteReceptacleBarchartData;
+    ;
   //  useEffect(() => {
 
   baselinePieChartData = {
@@ -211,20 +216,35 @@ const Dashboard = ({ data }) => {
 
 
    toiletAvailabilityBarchartData = {
-    labels: data.lw.waterStorageConditionLabelArray,
+    labels: ["Available","Not Available"],
     datasets: [
       {
         label: "# of submissions",
-        data: data.lw.waterStorageConditionCountArray,
+        data: data.lw.toiletAvailabilityArray,
         backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "green",
+          "red",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
+          "white",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+toiletAdequacyBarchartData = {
+    labels: ["Adequate","Inadequate"],
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.lw.toiletAdequacyArray,
+        backgroundColor: [
+          "green",
+          "red",
+        ],
+        borderColor: [
+          "white",
         ],
         borderWidth: 1,
       },
@@ -232,21 +252,37 @@ const Dashboard = ({ data }) => {
   };
 
 
-   toiletTypesBarchartData = {
-    labels: data.lw.waterStorageConditionLabelArray,
+   
+  toiletConditionBarchartData = {
+    labels: ["Safe","Unsafe"],
     datasets: [
       {
         label: "# of submissions",
-        data: data.lw.waterStorageConditionCountArray,
+        data: data.lw.toiletConditionArray,
         backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "green",
+          "red",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
+          "white",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  wasteCollectorBarchartData = {
+    labels: ["Registered With Waste Collector","Not Registered With Waste Collector"],
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.sw.wasteCollectorArray,
+        backgroundColor: [
+          "green",
+          "red",
+        ],
+        borderColor: [
+          "white",
         ],
         borderWidth: 1,
       },
@@ -254,21 +290,35 @@ const Dashboard = ({ data }) => {
   };
 
 
-   toiletAdequacyBarchartData = {
-    labels: data.lw.waterStorageConditionLabelArray,
+  wasteSortingBarchartData = {
+    labels: ["Waste Sorted","Waste Not Sorted"],
     datasets: [
       {
         label: "# of submissions",
-        data: data.lw.waterStorageConditionCountArray,
+        data: data.sw.wasteSortingArray,
         backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "green",
+          "red",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
+          "white",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  approvedWasteReceptacleBarchartData = {
+    labels: ["Approved","Unapproved"],
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.sw.wasteReceptacleArray,
+        backgroundColor: [
+          "green","red"
+        ],
+        borderColor: [
+          "white",
         ],
         borderWidth: 1,
       },
@@ -1145,11 +1195,11 @@ const Dashboard = ({ data }) => {
         <div className="col-xl-4">
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">Type Of Toilets</h4>
+              <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
             </div>
 
             <div className="card-body">
-              <Pie data={toiletTypesBarchartData} />
+              <Pie data={toiletConditionBarchartData} />
             </div>
           </div>
         </div>
@@ -1183,7 +1233,7 @@ const Dashboard = ({ data }) => {
             </div>
 
             <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              <Pie data={wasteCollectorBarchartData} />
             </div>
           </div>
         </div>
@@ -1191,12 +1241,12 @@ const Dashboard = ({ data }) => {
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
               <h4 className="card-title mb-0 flex-grow-1">
-                Registered With A Waste Collector
+                Waste Sorting
               </h4>
             </div>
 
             <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              <Pie data={wasteSortingBarchartData} />
             </div>
           </div>
         </div>
@@ -1204,12 +1254,12 @@ const Dashboard = ({ data }) => {
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
               <h4 className="card-title mb-0 flex-grow-1">
-                Registered With A Waste Collector
+                Approved Waste Storage Receptacle
               </h4>
             </div>
 
             <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              <Pie data={approvedWasteReceptacleBarchartData} />
             </div>
           </div>
         </div>
