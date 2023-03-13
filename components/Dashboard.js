@@ -17,13 +17,16 @@ ChartJS.register(ArcElement, Tooltip, Legend,CategoryScale,  LinearScale,  BarEl
   );
 
 const Dashboard = ({ data }) => {
+  console.log(data.actionTakenCount);
   let baselinePieChartData,
     reinspectionPieChartData,
     followupPieChartData,
     actionsTakenBarchartData,
     waterSourceBarchartData,
     waterSourceConditionBarchartData,
-    waterStorageConditionBarchartData;
+    waterStorageConditionBarchartData,
+    toiletAvailabilityBarchartData,
+    toiletTypesBarchartData,toiletAdequacyBarchartData;
   //  useEffect(() => {
 
   baselinePieChartData = {
@@ -124,7 +127,7 @@ const Dashboard = ({ data }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: [120, 190, 30],
+        data: data.actionTakenCount,
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -201,7 +204,77 @@ const Dashboard = ({ data }) => {
         borderWidth: 1,
       },
     ],
+
   };
+
+
+
+
+   toiletAvailabilityBarchartData = {
+    labels: data.lw.waterStorageConditionLabelArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.lw.waterStorageConditionCountArray,
+        backgroundColor: [
+          "rgb(252, 241, 121)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
+   toiletTypesBarchartData = {
+    labels: data.lw.waterStorageConditionLabelArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.lw.waterStorageConditionCountArray,
+        backgroundColor: [
+          "rgb(252, 241, 121)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
+   toiletAdequacyBarchartData = {
+    labels: data.lw.waterStorageConditionLabelArray,
+    datasets: [
+      {
+        label: "# of submissions",
+        data: data.lw.waterStorageConditionCountArray,
+        backgroundColor: [
+          "rgb(252, 241, 121)",
+          "rgb(64, 80, 137)",
+          "rgb(56, 162, 134)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
 
   //   const labels = ['', 'February', 'March', 'April', 'May', 'June', 'July'];
 
@@ -850,120 +923,43 @@ const Dashboard = ({ data }) => {
         </div>
         {/* end col */}
         <div className="col-xl-5">
-          <div className="card">
+          <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
               <h4 className="card-title mb-0 flex-grow-1">
-                INSPECTION SUMMARY
+                Actions Taken
               </h4>
-              {/* <div className="flex-shrink-0">
-                    <div className="dropdown card-header-dropdown">
-                      <a
-                        className="text-reset dropdown-btn"
-                        href="#"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <span className="text-muted">
-                          02 Nov 2021 to 31 Dec 2021
-                          <i className="mdi mdi-chevron-down ms-1" />
-                        </span>
-                      </a>
-                      <div className="dropdown-menu dropdown-menu-end">
-                        <a className="dropdown-item" href="#">
-                          Today
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Last Week
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Last Month
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          Current Year
-                        </a>
-                      </div>
-                    </div>
-                  </div> */}
-            </div>
-            {/* end card header */}
-            <div className="card-body">
-              <div className="table-responsive table-card">
-                <table className="table  table-hover table-nowrap align-middle mb-0  table-bordered table-nowrap align-middle mb-0">
-                  <thead className="table-light">
-                    <tr className="text-muted">
-                      <th scope="col">Form</th>
-
-                      <th scope="col">Baseline</th>
-                      <th scope="col" style={{ width: "16%" }}>
-                        Reinspection
-                      </th>
-                      <th scope="col" style={{ width: "12%" }}>
-                        Follow Up
-                      </th>
-                      <th scope="col" style={{ width: "12%" }}>
-                        Published
-                      </th>
-                      <th scope="col" style={{ width: "12%" }}>
-                        UnPublished
-                      </th>
-                      <th scope="col" style={{ width: "20%" }}>
-                        Total
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {" "}
-                    {data.allInspectionSummary.map((a) => {
-                      return (
-                        <tr key={a.id}>
-                          <td>{a.name}</td>
-                          <td>
-                            <span className="badge badge-soft-success p-2">
-                              {a.baselineCount}
-                            </span>
-                          </td>
-                          <td>
-                            <span className="badge badge-soft-warning p-2">
-                              {a.reinspectionCount}
-                            </span>
-                          </td>
-                          <td>
-                            <span className="badge badge-soft-danger p-2">
-                              {a.followupCount}
-                            </span>
-                          </td>{" "}
-                          <td>
-                            <span className="badge badge-soft-success p-2">
-                              {a.publishedCount}
-                            </span>
-                          </td>
-                          <td>
-                            <span className="badge badge-soft-primary p-2">
-                              {a.unPublishedCount}
-                            </span>
-                          </td>
-                          <td>
-                            {/* <span className="badge badge-soft-primary p-2"> */}
-                            {a.inspectionCount}
-                            {/* </span> */}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                  {/* end tbody */}
-                </table>
-                {/* end table */}
+              <div className="flex-shrink-0">
+                <div className="dropdown card-header-dropdown">
+                  <a
+                    className="text-reset dropdown-btn"
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="text-muted">
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
+                    </span>
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#">
+                      Download Report
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
+                    </a>
+                  </div>
+                </div>
               </div>
-              {/* end table responsive */}
             </div>
-            {/* end card body */}
-          </div>
-          {/* end card */}
-        </div>
-        {/* end col */}
-      </div>
+            <div className="card-body">
+              <Pie data={actionsTakenBarchartData} />
+            </div>{" "}
+          </div>  </div>
+        </div>{" "}
       {/* end row */}
       <div className="row">
         <div className="col-xl-4">
@@ -1142,7 +1138,7 @@ const Dashboard = ({ data }) => {
             </div>
 
             <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              <Pie data={toiletAvailabilityBarchartData} />
             </div>
           </div>
         </div>
@@ -1153,7 +1149,7 @@ const Dashboard = ({ data }) => {
             </div>
 
             <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              <Pie data={toiletTypesBarchartData} />
             </div>
           </div>
         </div>
@@ -1166,7 +1162,7 @@ const Dashboard = ({ data }) => {
             </div>
 
             <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              <Pie data={toiletAdequacyBarchartData} />
             </div>
           </div>
         </div>

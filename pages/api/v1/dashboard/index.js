@@ -72,6 +72,26 @@ ORDER BY "InspectionForm"."name"`;
     WHERE"WaterSourceType"."id" IS NOT NULL
     GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
 
+    const healthEducActionTakenCount = await prisma.premisesActionTaken.count({
+      where: { actionId: 1 },
+    });
+    const noticeServedActionTakenCount = await prisma.premisesActionTaken.count(
+      { where: { actionId: 2 } }
+    );
+    const criminalSummonsActionTakenCount =
+      await prisma.premisesActionTaken.count({ where: { actionId: 3 } });
+
+    const actionTakenLabel = [
+      "Health Education",
+      "Notice Served",
+      "Criminal Summoons",
+    ];
+    const actionTakenCount = [
+      healthEducActionTakenCount,
+      noticeServedActionTakenCount,
+      criminalSummonsActionTakenCount,
+    ];
+
     let waterSourceTypeCountArray = waterSourceTypeSummary.map((i) =>
       toJson(i.sourceCount)
     );
@@ -98,7 +118,7 @@ ORDER BY "InspectionForm"."name"`;
     });
 
     const insanitaryWaterStorageCondition = await prisma.waterSection.count({
-      where: { "waterStorageConditionId": 2 },
+      where: { waterStorageConditionId: 2 },
     });
 
     let waterStorageConditionCountArray = [
@@ -175,7 +195,7 @@ ORDER BY "InspectionForm"."name"`;
         waterSourceConditionCountArray,
         waterSourceConditionLabelArray,
         waterStorageConditionCountArray,
-        waterStorageConditionLabelArray
+        waterStorageConditionLabelArray,
       },
       // baselineInspectionSummary:toJson(baselineInspectionSummary),
       // reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),
@@ -188,9 +208,10 @@ ORDER BY "InspectionForm"."name"`;
       usersCount,
       safeWaterSourceCount,
       unsafeWaterSourceCount,
-      sanitationReportCount
+      sanitationReportCount,
+      actionTakenCount,
+      actionTakenLabel
     };
-
 
     // console.log(publishingSummary
     //   );
