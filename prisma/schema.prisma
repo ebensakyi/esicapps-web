@@ -23,6 +23,7 @@ model Inspection {
   deleted          Int?    @default(0)
   isReinspected    Int?    @default(0)
   isFollowedUp     Int?    @default(0)
+  totalRating     Int?    @default(0)
 
   createdAt                      DateTime                        @default(now())
   updatedAt                      DateTime                        @updatedAt

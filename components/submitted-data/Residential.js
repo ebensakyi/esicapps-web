@@ -5,8 +5,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import * as moment from 'moment';
+import * as moment from "moment";
 const Residential = ({ data }) => {
+  console.log(data);
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState(null);
@@ -22,6 +23,35 @@ const Residential = ({ data }) => {
     });
   };
 
+  const handleExportToExcel = async () => {
+    try {
+      const response = await axios.post(
+        `/api/v1/submitted-data/residential-excel`
+      );
+      if (response.status == 200) {
+        router.push(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRating = (rating) => {
+    try {
+      if (rating >= 4) {
+        return <span className="badge bg-success">Good</span>;
+      } else if (rating < 4 && rating >= 3) {
+        return <span className="badge bg-warning">Average</span>;
+      } else if (rating < 3) {
+        return <span className="badge bg-danger">Poor</span>;
+      }else{
+        return <span className="badge bg-primary">Default</span>;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -30,28 +60,37 @@ const Residential = ({ data }) => {
             <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
           </div>
           <div className="card-body">
-          <table
+            <div>
+              <button
+                type="button"
+                className="btn btn-success btn-label waves-effect right waves-light rounded-pill"
+                onClick={handleExportToExcel}
+              >
+                <i class="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                Export To Excel
+              </button>
+            </div>
+            <br />
+            <table
               id="fixed-header"
               className="table table-bordered dt-responsive nowrap table-striped align-middle"
               style={{ width: "100%" }}
             >
-
               <thead>
                 <tr>
-                {/* <th>Rating </th> */}
-
+                  <th>Rating </th>
                   <th>Premises Code</th>
-               <th> Start Date</th> 
-               <th> End Date</th> 
+                  <th> Start Date</th>
+                  <th> End Date</th>
                   <th>Inspection Officer</th>
                   <th>GhanaPost GPS</th>
                   <th>GPS Accuracy</th>
-
                   <th>Region</th>
                   <th>District</th>
                   <th>Community</th>
                   {/* <th>Respondent</th>
-                  <th>Designation</th> */} <th>Submission Date</th>
+                  <th>Designation</th> */}{" "}
+                  <th>Submission Date</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -61,13 +100,18 @@ const Residential = ({ data }) => {
                   return (
                     <tr key={dt.id}>
                       {" "}
-                      {/* <td>{dt.Inspection.id}</td> */}
+                      <td>{handleRating(dt.Inspection.totalRating)}</td>
                       <td>{dt.Inspection.premisesCode}</td>
-
-                  
-                      <td>{moment(dt.Inspection.startedAt).format("MMM Do YYYY, h:mm:ss a")}</td>
-                      <td>{moment(dt.Inspection.completedAt).format("MMM Do YYYY, h:mm:ss a")}</td>
-
+                      <td>
+                        {moment(dt.Inspection.startedAt).format(
+                          "MMM Do YYYY, h:mm:ss a"
+                        )}
+                      </td>
+                      <td>
+                        {moment(dt.Inspection.completedAt).format(
+                          "MMM Do YYYY, h:mm:ss a"
+                        )}
+                      </td>
                       <td>
                         {dt.User.otherNames} {dt.User.surname}
                       </td>
@@ -82,9 +126,16 @@ const Residential = ({ data }) => {
                         {dt.Community != null ? dt.Community.District.name : ""}
                       </td>
                       <td>
-                        {dt.Community != null ? dt.Community.name : dt.community}
+                        {dt.Community != null
+                          ? dt.Community.name
+                          : dt.community}
                         {/* {dt.community} */}
-                      </td>    <td>{moment(dt.Inspection.createdAt).format("MMM Do YYYY, h:mm:ss a")}</td>
+                      </td>{" "}
+                      <td>
+                        {moment(dt.Inspection.createdAt).format(
+                          "MMM Do YYYY, h:mm:ss a"
+                        )}
+                      </td>
                       <td>
                         {dt.Inspection.isPublished == 0 ? (
                           <span className="badge bg-danger">Unpublished</span>
@@ -93,17 +144,7 @@ const Residential = ({ data }) => {
                         )}{" "}
                       </td>
                       <td>
-                        <div className="dropdown d-inline-block">
-                          <button
-                            className="btn btn-soft-secondary btn-sm dropdown"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="ri-more-fill align-middle" />
-                          </button>
-                          <ul className="dropdown-menu dropdown-menu-end">
-                            <Link
+                      <Link
                               href={{
                                 pathname: `/submitted-data/residential_view`,
                                 query: {
@@ -116,27 +157,6 @@ const Residential = ({ data }) => {
                                 View
                               </a>
                             </Link>
-                            <li></li>
-                            {/* <li>
-                              <a className="dropdown-item edit-item-btn">
-                                <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
-                                Edit
-                              </a>
-                            </li> */}
-                            {/* <li>
-                              <a className="dropdown-item edit-item-btn">
-                                <i className=" ri-send-plane-line align-bottom me-2 text-muted" />{" "}
-                                Publish
-                              </a>
-                            </li> */}
-                            {/* <li>
-                              <a className="dropdown-item remove-item-btn">
-                                <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </a>
-                            </li> */}
-                          </ul>
-                        </div>
                       </td>
                     </tr>
                   );

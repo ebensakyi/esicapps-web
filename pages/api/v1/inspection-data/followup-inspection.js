@@ -2,19 +2,18 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-
-
     const data = {
       id: req.body.id,
 
       prevInspectionId: req.body.prevInspectionId,
+      inspectionFormId: Number(req.body.inspectionFormId),
       premisesCode: req.body.premisesCode,
-      inspectionTypeId:3,
+      inspectionTypeId: 3,
       userId: Number(req.body.userId),
       officerComment:
         req.body.officerComment == "null" ? null : req.body.officerComment,
 
-        obnoxiousTradeExistFollowUpId:
+      obnoxiousTradeExistFollowUpId:
         req.body.obnoxiousTradeExistId == "null"
           ? null
           : Number(req.body.obnoxiousTradeExistId),
@@ -38,13 +37,12 @@ const post = async (req, res) => {
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-    // console.log("Error: " + error);
+    console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
     res.status(500).json({ statusCode: 1, message: "Data skipped" });
-
   }
 };
 
@@ -55,7 +53,7 @@ const get = async (req, res) => {
       where: { userId: userId, deleted: 0 },
     });
 
-    console.log("response",response);
+    console.log("response", response);
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);

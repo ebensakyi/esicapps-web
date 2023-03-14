@@ -30,7 +30,7 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.approvedHandwashingFacilityAvailabilityId),
       householdNumber:
-        req.body.householdNumber ,
+        Number(req.body.householdNumber) ,
       maleOccupantNumber:
         req.body.maleOccupantNumber == "null"
           ? null
@@ -60,11 +60,13 @@ const post = async (req, res) => {
           : Number(req.body.vaccinationProofId),
     };
 
+    console.log(data);
+
     const response = await prisma.residentialPremisesInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-    // console.log("Error: " + error);
+     console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)

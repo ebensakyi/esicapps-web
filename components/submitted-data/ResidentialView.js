@@ -167,14 +167,7 @@ const ResidentialView = ({ data }) => {
                     </h5>
                   </div>
                 </div>
-                {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
+                
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -266,7 +259,7 @@ const ResidentialView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.ResidentialPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityResidential
+                              .approvedHandwashingFacilityAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -350,7 +343,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection != null ? (
+                    {data.ResidentialPremisesInfoSection.animalNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
                         <input
@@ -367,7 +360,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection != null ? (
+                    {data.ResidentialPremisesInfoSection.PremisesAnimal.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
                         {data.ResidentialPremisesInfoSection.PremisesAnimal.map(
@@ -387,7 +380,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection != null ? (
+                    {data.ResidentialPremisesInfoSection.vaccinationProof != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Animal vaccination proof
@@ -407,7 +400,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
                   </div>
-                  {data.ResidentialPremisesInfoSection != null ? (
+                  {data.ResidentialPremisesInfoSection.animalSpaceCondition != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Animal space condition
