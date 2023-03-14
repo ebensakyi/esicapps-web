@@ -438,7 +438,7 @@ const MarketView = ({ data }) => {
         </div>
       </div> */}
 
-      <div className="row">
+<div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
             <div className="col-xl-12">
@@ -478,8 +478,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.buildingPermitAvailability !=
-                    null ? (
+                    {data.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Building permit</label>
                         <input
@@ -496,8 +495,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
-                      .habitationCertificateAvailability != null ? (
+                    {data.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Certificate of habitation
@@ -516,8 +514,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.propertyRateAvailability !=
-                    null ? (
+                    {data.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Property rate payment
@@ -764,7 +761,7 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.WaterSection.PremisesWaterSources.length != 0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
                         {data.WaterSection.PremisesWaterSources.map((x) => (
@@ -781,7 +778,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.PremisesWaterSupply.length != 0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
                         {data.WaterSection.PremisesWaterSupply.map((x) => (
@@ -798,7 +795,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.waterSourceCondition != null ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water source condition
@@ -815,7 +812,7 @@ const MarketView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.WaterSection.PremisesWaterStorage.length != 0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
                         {data.WaterSection.PremisesWaterStorage.map((x) => (
@@ -832,7 +829,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.waterStorageConditionSafe != null ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Safe Water storage receptacle condition
@@ -850,8 +847,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.PremisesWaterTreatmentType.length !=
-                    0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
@@ -872,8 +868,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.PremisesDrinkingWaterSources.length !=
-                    0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
@@ -958,7 +953,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.numberUrinalSeats != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Urinal Seats
@@ -1018,7 +1013,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.separateStaffUrinal != null ? (
+                    {/* {data.LiquidWasteSection.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Separate Staff Urinal
@@ -1035,7 +1030,7 @@ const MarketView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1232,7 +1227,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.areaSewered != null ? (
+                    {data.LiquidWasteSection.facilityConnectedSewer != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility Connected Sewer
@@ -1461,36 +1456,45 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Grey Water Disposal
-                      </label>
-                      {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
-                        (x) => (
+                    {data.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
+                    0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Grey Water Disposal
+                        </label>
+                        {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.GreyWaterDisposal.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection.PremisesToiletType.length != 0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Toilet Type</label>
+                        {data.LiquidWasteSection.PremisesToiletType.map((x) => (
                           <input
                             key={x.id}
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={x.GreyWaterDisposal.name}
+                            value={x.ToiletType.name}
                             readOnly="readOnly"
                           />
-                        )
-                      )}
-                    </div>{" "}
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">Toilet Type</label>
-                      {data.LiquidWasteSection.PremisesToiletType.map((x) => (
-                        <input
-                          key={x.id}
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.ToiletType.name}
-                          readOnly="readOnly"
-                        />
-                      ))}
-                    </div>{" "}
+                        ))}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1509,83 +1513,107 @@ const MarketView = ({ data }) => {
                     <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
                   </div>
                 </div>
-               
               </div>
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Service Provider Registration
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection
-                            .wasteServiceProviderRegistration!=null? data.SolidWasteSection
-                            .wasteServiceProviderRegistration.name  :""
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Collector Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={data.SolidWasteSection.wasteCollectorName}
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Sorting Availability
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection.wasteSortingAvailability.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Approved Waste Storage Receptacle
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection.approvedWasteStorageReceptacle
-                            .name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Adequate Waste Storage Receptacle
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.SolidWasteSection.adequateWasteStorageReceptacle
-                            .name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
+                    {data.SolidWasteSection.wasteServiceProviderRegistration !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Service Provider Registration
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection
+                              .wasteServiceProviderRegistration != null
+                              ? data.SolidWasteSection
+                                  .wasteServiceProviderRegistration.name
+                              : ""
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.wasteCollectorName != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Collector Name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data.SolidWasteSection.wasteCollectorName}
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.wasteSortingAvailability != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Sorting Availability
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection.wasteSortingAvailability.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.approvedWasteStorageReceptacle !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Approved Waste Storage Receptacle
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection
+                              .approvedWasteStorageReceptacle.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data.SolidWasteSection.adequateWasteStorageReceptacle !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Adequate Waste Storage Receptacle
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.SolidWasteSection
+                              .adequateWasteStorageReceptacle.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     {data.SolidWasteSection.PremisesWasteCollection.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
@@ -1751,7 +1779,8 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesNuisanceDetected != null ? (
+                    {data.ConclusionSection.PremisesNuisanceDetected.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed
@@ -1771,7 +1800,7 @@ const MarketView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )}{" "}
+                    )}
                     {data.ConclusionSection.officerComment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Office Comment</label>
@@ -1807,17 +1836,98 @@ const MarketView = ({ data }) => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-auto">
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
+          </div>
+        </div>
+      </div>
+      {/* {data.InspectionPictures.map((ip) => {
+     return <figure class="figure">
+        <img
+          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
+          class="figure-img img-fluid rounded"
+          alt="..."
+        />
+        <figcaption class="figure-caption">
+          A caption for the above image.
+        </figcaption>
+      </figure>
+         })} */}
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="row mb-3">
+            <div className="col-xl-12">
+              <div className="row align-items-center gy-3 mb-3">
+                <div className="col-sm">
+                  <div>
+                    <h5 className="fs-14 mb-0">PICTURES</h5>
+                  </div>
+                </div>
+              </div>
 
-                  publish(data.id);
-                }}
-              >
-                Publish
-              </button>
+              <div className="row gallery-wrapper">
+                {data.InspectionPictures.map((ip) => {
+                return  <div
+                    className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                    data-category="designing development"
+                  >
+                    <div className="gallery-box card">
+                      <div className="gallery-container">
+                        <a
+                         className="image-popup"
+                         href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                         title=""
+                       >
+
+                        <img
+                          className="gallery-img img-fluid mx-auto"
+                          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                          alt=""
+                        />
+                        <div className="gallery-overlay">
+                          <h5 className="overlay-caption">
+                           {ip.FormSectionImage.name}
+                          </h5>
+                        </div>
+                        </a>
+                      </div>
+
+                      <div className="box-content">
+                        <div className="d-flex align-items-center mt-1">
+                          <div className="flex-grow-1 text-muted">
+                            <a href="" className="text-body text-truncate">
+                            {ip.FormSectionImage.name}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>;
+                })}
+              </div>
+            </div>
+            <div className="col-sm-auto">
+              {data.isPublished == 0 ? (
+                <button
+                  className="btn btn-success"
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    publish(data.id);
+                  }}
+                >
+                  Publish
+                </button>
+              ) : (
+                <button
+                  className="btn btn-danger"
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    publish(data.id);
+                  }}
+                >
+                  Unpublish
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -1825,5 +1935,7 @@ const MarketView = ({ data }) => {
     </>
   );
 };
+
+
 
 export default MarketView;
