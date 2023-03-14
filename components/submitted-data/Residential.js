@@ -1,6 +1,27 @@
+import ReactPaginate from "react-paginate";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import * as moment from 'moment';
 const Residential = ({ data }) => {
+  const router = useRouter();
+  const [searchText, setSearchText] = useState();
+  const [communityName, setCommunityName] = useState(null);
+  const [communityId, setCommunityId] = useState(null);
+
+  const handlePagination = (page) => {
+    const path = router.pathname;
+    const query = router.query;
+    query.page = page.selected + 1;
+    router.push({
+      pathname: path,
+      query: query,
+    });
+  };
+
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -9,15 +30,19 @@ const Residential = ({ data }) => {
             <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
           </div>
           <div className="card-body">
-          <table >
+          <table
+              id="fixed-header"
+              className="table table-bordered dt-responsive nowrap table-striped align-middle"
+              style={{ width: "100%" }}
+            >
 
               <thead>
                 <tr>
-                <th>Rating </th>
+                {/* <th>Rating </th> */}
 
                   <th>Premises Code</th>
-               <th>Inspection Start Date</th> 
-               <th>Inspection End Date</th> 
+               <th> Start Date</th> 
+               <th> End Date</th> 
                   <th>Inspection Officer</th>
                   <th>GhanaPost GPS</th>
                   <th>GPS Accuracy</th>
@@ -32,7 +57,7 @@ const Residential = ({ data }) => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((dt) => {
+                {data.inspection.map((dt) => {
                   return (
                     <tr key={dt.id}>
                       {" "}
@@ -118,6 +143,26 @@ const Residential = ({ data }) => {
                 })}
               </tbody>
             </table>
+            <ReactPaginate
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              breakLabel={"..."}
+              initialPage={data.curPage - 1}
+              pageCount={data.maxPage}
+              onPageChange={handlePagination}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              containerClassName={"pagination"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              activeClassName={"active"}
+            />
           </div>
         </div>
       </div>

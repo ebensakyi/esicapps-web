@@ -179,8 +179,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ResidentialPremisesInfoSection !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet facility availabilty
@@ -199,8 +198,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal facility availabilty
@@ -219,8 +217,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom facility availabilty
@@ -239,8 +236,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drains availabilty
@@ -259,9 +255,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection
-                      !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Handwashing facility availabilty
@@ -281,8 +275,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of household
@@ -300,8 +293,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.maleOccupantNumber !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of male occupants
@@ -320,8 +312,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.femaleOccupantNumber !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of female occupants
@@ -340,8 +331,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.animalAvailability !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Animal availabilty
@@ -360,8 +350,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ResidentialPremisesInfoSection.animalNumber !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
                         <input
@@ -378,8 +367,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection.PremisesAnimal
-                      .length != 0 ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
                         {data.ResidentialPremisesInfoSection.PremisesAnimal.map(
@@ -399,8 +387,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.ResidentialPremisesInfoSection.vaccinationProof !=
-                    null ? (
+                    {data.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Animal vaccination proof
@@ -420,8 +407,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
                   </div>
-                  {data.ResidentialPremisesInfoSection.animalSpaceCondition !=
-                  null ? (
+                  {data.ResidentialPremisesInfoSection != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Animal space condition
@@ -488,8 +474,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.buildingPermitAvailability !=
-                    null ? (
+                    {data.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Building permit</label>
                         <input
@@ -506,8 +491,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
-                      .habitationCertificateAvailability != null ? (
+                    {data.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Certificate of habitation
@@ -526,8 +510,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.propertyRateAvailability !=
-                    null ? (
+                    {data.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Property rate payment
@@ -774,7 +757,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.WaterSection.PremisesWaterSources.length != 0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
                         {data.WaterSection.PremisesWaterSources.map((x) => (
@@ -791,7 +774,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.PremisesWaterSupply.length != 0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
                         {data.WaterSection.PremisesWaterSupply.map((x) => (
@@ -808,7 +791,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.waterSourceCondition != null ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water source condition
@@ -825,7 +808,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.WaterSection.PremisesWaterStorage.length != 0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
                         {data.WaterSection.PremisesWaterStorage.map((x) => (
@@ -842,7 +825,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.waterStorageConditionSafe != null ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Safe Water storage receptacle condition
@@ -860,8 +843,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.PremisesWaterTreatmentType.length !=
-                    0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
@@ -882,8 +864,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.PremisesDrinkingWaterSources.length !=
-                    0 ? (
+                    {data.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
@@ -968,7 +949,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.numberUrinalSeats != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Urinal Seats
@@ -1028,7 +1009,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.separateStaffUrinal != null ? (
+                    {/* {data.LiquidWasteSection.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Separate Staff Urinal
@@ -1045,7 +1026,7 @@ const ResidentialView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1242,7 +1223,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.areaSewered != null ? (
+                    {data.LiquidWasteSection.facilityConnectedSewer != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility Connected Sewer
@@ -1794,7 +1775,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesNuisanceDetected != null ? (
+                    {data.ConclusionSection.PremisesNuisanceDetected.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed
@@ -1853,7 +1835,18 @@ const ResidentialView = ({ data }) => {
           </div>
         </div>
       </div>
-
+      {/* {data.InspectionPictures.map((ip) => {
+     return <figure class="figure">
+        <img
+          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
+          class="figure-img img-fluid rounded"
+          alt="..."
+        />
+        <figcaption class="figure-caption">
+          A caption for the above image.
+        </figcaption>
+      </figure>
+         })} */}
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -1865,48 +1858,46 @@ const ResidentialView = ({ data }) => {
                   </div>
                 </div>
               </div>
+
               <div className="row gallery-wrapper">
-                {data.InspectionPictures.map(ip=>{
-                  console.log(ip.imagePath);
-                   <div
-                   className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
-                   data-category="designing development"
-                 >
-                   <div className="gallery-box card">
-                     <div className="gallery-container">
-                       <a
+                {data.InspectionPictures.map((ip) => {
+                return  <div
+                    className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                    data-category="designing development"
+                  >
+                    <div className="gallery-box card">
+                      <div className="gallery-container">
+                        <a
                          className="image-popup"
                          href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
                          title=""
                        >
-                         <img
-                           className="gallery-img img-fluid mx-auto"
-                           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                           alt=""
-                         />
-                         <div className="gallery-overlay">
-                           <h5 className="overlay-caption">
-                             Glasses and laptop from above
-                           </h5>
-                         </div>
-                       </a>
-                     </div>
- 
-                     <div className="box-content">
-                       <div className="d-flex align-items-center mt-1">
-                         <div className="flex-grow-1 text-muted">
-                         
-                           <a href="" className="text-body text-truncate">
-                            {ip.formSectionImageId}
-                           </a>
-                         </div>
-                        
-                       </div>
-                     </div>
-                   </div>
-                 </div>
+
+                        <img
+                          className="gallery-img img-fluid mx-auto"
+                          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                          alt=""
+                        />
+                        <div className="gallery-overlay">
+                          <h5 className="overlay-caption">
+                           {ip.FormSectionImage.name}
+                          </h5>
+                        </div>
+                        </a>
+                      </div>
+
+                      <div className="box-content">
+                        <div className="d-flex align-items-center mt-1">
+                          <div className="flex-grow-1 text-muted">
+                            <a href="" className="text-body text-truncate">
+                            {ip.FormSectionImage.name}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>;
                 })}
-               
               </div>
             </div>
             <div className="col-sm-auto">

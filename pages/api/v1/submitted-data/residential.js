@@ -28,6 +28,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    let published = Number(req.query.published);
     let curPage = req.query.page;
     //let searchText = req.query.searchText.trim();
 
@@ -41,7 +42,14 @@ const get = async (req, res) => {
     });
 
     let inspection = await prisma.basicInfoSection.findMany({
-     // where: getSearchParams(req, searchText).where,
+      where: {
+        deleted: 0,
+        Inspection: {
+          isPublished: published,
+          inspectionFormId: 1,
+        },
+      },
+      // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
       orderBy: {
@@ -53,6 +61,8 @@ const get = async (req, res) => {
         User: true,
       },
     });
+
+
 
     return res.status(200).json({
       inspection,

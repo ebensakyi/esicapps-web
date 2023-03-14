@@ -35,6 +35,8 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/submitted-data/residential-view?id=${id}`
   ).then((res) => res.json());
 
+  console.log(data);
+
   return {
     props: {
       data,
