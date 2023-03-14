@@ -29,8 +29,9 @@ export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
     const  {published}  =context.query;
 
-    console.log(published);
 
+    const page = context.query.page || 1
+    const searchText = context.query.searchText || ""
     if (!token) {
         return {
             redirect: {
@@ -39,7 +40,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/residential?published=${published}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/residential?published=${published}&page=${page}&searchText=${searchText}`).then(
         (res) => res.json()
     );
 

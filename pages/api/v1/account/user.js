@@ -4,10 +4,14 @@ import { getUserCookie } from "../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../helpers/token-verifier";
 import { nanoid } from "nanoid";
 import { logActivity } from "../../../../helpers/Log";
+import {sendSMS} from "../../../../helpers/send-hubtel-sms"
+import { generateCode } from "../../../../helpers/generate-code";
 
 const post = async (req, res) => {
   try {
-    let password = await nanoid(8); //req.body.password;
+   // let password = await nanoid(8); //req.body.password;
+    let password = await generateCode(8);
+
     const salt = bcrypt.genSaltSync(10);
 
     let hashedPassword = await bcrypt.hashSync(password, salt);
@@ -52,7 +56,6 @@ const post = async (req, res) => {
           req.body.district == null ? null : Number(req.body.district),
       };
 
-      console.log("R DATA ", data);
     }
 
     if (userCookie.user.userTypeId == 5) {
@@ -75,6 +78,14 @@ const post = async (req, res) => {
     }
 
     const user = await prisma.user.create({ data });
+    if(Number(req.body.userTypeId)==7){
+          await sendSMS(req.body.phoneNumber, `The temporal password for ESICApps Mobile App is ${password}`);
+
+    }else{
+      await sendSMS(req.body.phoneNumber, `The password for ESICApps Web App is ${password}`);
+
+    }
+
 
     await prisma.userAddedByUser.create({
       data: { addeeId: user.id, adderId: Number(userCookie.user.id) },
@@ -87,8 +98,8 @@ const post = async (req, res) => {
     console.log(error);
     if (error.code === "P2002")
       return res
-        .status(200)
-        .json({ statusCode: 0, message: "Data should be unique" });
+        .status(500)
+        .json({ statusCode: 0, message: "Phone number and Email should be unique" });
   }
 };
 

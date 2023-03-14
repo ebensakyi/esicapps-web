@@ -17,7 +17,6 @@ ChartJS.register(ArcElement, Tooltip, Legend,CategoryScale,  LinearScale,  BarEl
   );
 
 const Dashboard = ({ data }) => {
-  console.log(data.actionTakenCount);
   let baselinePieChartData,
     reinspectionPieChartData,
     followupPieChartData,

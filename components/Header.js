@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Cookies from "js-cookie";
-
+import { useState } from "react";
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   let lv = Cookies.get("lvut1").split("??")[1];
   let ut = Cookies.get("lvut2").split("??")[0];
   let fullName = Cookies.get("fullName");
@@ -47,6 +49,15 @@ const Header = () => {
                 type="button"
                 className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                 id="topnav-hamburger-icon"
+                // onClick={(e) => {
+                //   setIsOpen(true);
+                //   if (isOpen) {
+                //     document.body.classList.remove("vertical-sidebar-enable");
+                //   } else {
+                //     document.body.classList.add("vertical-sidebar-enable");
+                //   }
+          
+                // }}
               >
                 <span className="hamburger-icon">
                   <span />

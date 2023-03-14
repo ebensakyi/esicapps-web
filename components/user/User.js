@@ -65,6 +65,12 @@ const User = ({ users, userTypes, regions, districts }) => {
       const response = await axios.post("/api/v1/account/user", data);
       router.replace(router.asPath);
 
+      setSurname("");
+      setOtherNames("");
+      setEmail("");
+      setPhoneNumber("")
+      setDesignation("")
+      setUserType(null)
       return toast.success(response.data.message);
     } catch (error) {
       console.log(error);
@@ -138,6 +144,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         type="text"
                         className="form-control"
                         id="basiInput"
+                        value={surname}
                         onChange={(e) => setSurname(e.target.value)}
                       />
                     </div>
@@ -152,6 +159,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         type="text"
                         className="form-control"
                         id="labelInput"
+                        value={otherNames}
                         onChange={(e) => setOtherNames(e.target.value)}
                       />
                     </div>
@@ -166,6 +174,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         type="email"
                         className="form-control"
                         id="placeholderInput"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
@@ -179,6 +188,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                       <input
                         type="text"
                         className="form-control"
+                        value={phoneNumber}
                         id="valueInput"
                         onChange={(e) => setPhoneNumber(e.target.value)}
                       />
@@ -193,6 +203,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
+                        value={designation}
                         onChange={(e) => setDesignation(e.target.value)}
                       />
                     </div>
@@ -311,6 +322,8 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setRegion(null);
                           }
                         }}
+                        value={userType}
+
                       >
                         <option selected>Choose...</option>
                         {userTypes.map((userType) => (
@@ -331,6 +344,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         <select
                           className="form-select"
                           id="inputGroupSelect02"
+                          value={region}
                           onChange={async (e) => {
                             setRegion(e.target.value);
                             getDistrictsByRegion(e, e.target.value);
@@ -359,6 +373,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         <select
                           className="form-select"
                           id="inputGroupSelect02"
+                          value={district}
                           onChange={(e) => {
                             setDistrict(e.target.value);
                             getElectoralByDistrict(e, e.target.value);

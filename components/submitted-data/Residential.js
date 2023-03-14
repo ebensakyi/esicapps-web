@@ -9,7 +9,7 @@ const Residential = ({ data }) => {
             <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
           </div>
           <div className="card-body">
-          <table id="buttons-datatables" className="display table table-bordered"  style={{ width: "100%" }}>
+          <table >
 
               <thead>
                 <tr>

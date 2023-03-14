@@ -21,6 +21,7 @@ const ListUser = ({ users }) => {
 
                   <th>Other Names</th>
                   <th>Email</th>
+                  <th>Phone</th>
                   <th>OTP</th>
                   <th>User Type</th>
                   <th>Designation</th>
@@ -38,6 +39,7 @@ const ListUser = ({ users }) => {
                       <td>{user.surname}</td>
                       <td>{user.otherNames}</td>
                       <td>{user.email}</td>
+                      <td>{user.phoneNumber}</td>
                       <td>{user.tempPassword}</td>
                       <td>{user.UserType.name}</td>
                       <td>{user.designation}</td>

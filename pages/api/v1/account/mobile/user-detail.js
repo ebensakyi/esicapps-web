@@ -2,7 +2,7 @@ const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
     let user = await prisma.user.findFirst({
-      where: { id:userId, deleted: 0 },
+      where: { id: userId, deleted: 0 },
       include: { District: { include: { Region: true } } },
     });
 
