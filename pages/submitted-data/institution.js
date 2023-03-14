@@ -28,6 +28,9 @@ export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
     const  {published}  =context.query;
 
+
+    const page = context.query.page || 1
+    const searchText = context.query.searchText || ""
     if (!token) {
         return {
             redirect: {
@@ -36,7 +39,8 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/institution?published=${published}`).then(
+
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/data?published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=5`).then(
         (res) => res.json()
     );
 

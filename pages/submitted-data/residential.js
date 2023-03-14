@@ -40,11 +40,11 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/residential?published=${published}&page=${page}&searchText=${searchText}`).then(
+
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/residential?published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=1`).then(
         (res) => res.json()
     );
 
-    inspect(data)
    
     return {
         props: {
