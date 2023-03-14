@@ -25,7 +25,8 @@ const Institution = ({ data }) => {
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/institution-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 5, fileName: "institution.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -34,6 +35,7 @@ const Institution = ({ data }) => {
       console.log(error);
     }
   };
+
 
   const handleRating = (rating) => {
     try {

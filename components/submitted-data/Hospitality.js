@@ -25,7 +25,8 @@ const Hospitality = ({ data }) => {
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/hospitality-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 4, fileName: "hospitality.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);

@@ -25,7 +25,8 @@ const Industry = ({ data }) => {
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/health-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 6, fileName: "industry.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);

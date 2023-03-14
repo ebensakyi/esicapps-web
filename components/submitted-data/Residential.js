@@ -26,7 +26,8 @@ const Residential = ({ data }) => {
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/residential-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 1, fileName: "residential.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -44,7 +45,7 @@ const Residential = ({ data }) => {
         return <span className="badge bg-warning">Average</span>;
       } else if (rating < 3) {
         return <span className="badge bg-danger">Poor</span>;
-      }else{
+      } else {
         return <span className="badge bg-primary">Default</span>;
       }
     } catch (error) {
@@ -144,19 +145,19 @@ const Residential = ({ data }) => {
                         )}{" "}
                       </td>
                       <td>
-                      <Link
-                              href={{
-                                pathname: `/submitted-data/residential_view`,
-                                query: {
-                                  id: dt.Inspection.id,
-                                },
-                              }}
-                            >
-                              <a className="dropdown-item">
-                                <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                View
-                              </a>
-                            </Link>
+                        <Link
+                          href={{
+                            pathname: `/submitted-data/residential_view`,
+                            query: {
+                              id: dt.Inspection.id,
+                            },
+                          }}
+                        >
+                          <a className="dropdown-item">
+                            <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
+                            View
+                          </a>
+                        </Link>
                       </td>
                     </tr>
                   );

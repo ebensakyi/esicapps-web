@@ -25,7 +25,8 @@ const Eatery = ({ data }) => {
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/eatery-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 2, fileName: "residential.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -34,7 +35,6 @@ const Eatery = ({ data }) => {
       console.log(error);
     }
   };
-
   const handleRating = (rating) => {
     try {
       if (rating >= 4) {

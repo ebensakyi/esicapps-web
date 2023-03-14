@@ -22,10 +22,12 @@ const Market = ({ data }) => {
     });
   };
 
+
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/market-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 7, fileName: "market.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -34,6 +36,7 @@ const Market = ({ data }) => {
       console.log(error);
     }
   };
+
 
   const handleRating = (rating) => {
     try {

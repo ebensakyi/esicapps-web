@@ -21,11 +21,11 @@ const Health = ({ data }) => {
       query: query,
     });
   };
-
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/health-excel`
+        `/api/v1/submitted-data/export-to-excel`,
+        { inspectionFormId: 3, fileName: "health.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -34,7 +34,6 @@ const Health = ({ data }) => {
       console.log(error);
     }
   };
-
   const handleRating = (rating) => {
     try {
       if (rating >= 4) {
