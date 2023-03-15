@@ -157,7 +157,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                     >
                       <option selected>Select form</option>
                       {inspectionForm.map(form=>{
-                        return <option value={form.id}>{form.name}</option>
+                        return <option key={form.id}  value={form.id}>{form.name}</option>
                       })}
                      
                      
@@ -197,7 +197,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       <option selected>Select region</option>
                       <option value="0">All</option>
                       {regions.map(region=>{
-                        return <option value={region.id}>{region.name}</option>
+                        return <option key={region.id}  value={region.id}>{region.name}</option>
                       })}
                      
                     </select>{" "}
@@ -216,7 +216,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       <option selected>Select district</option>
                       <option value="0">All</option>
                       {districts.map(district=>{
-                        return <option value={district.id}>{district.name}</option>
+                        return <option key={district.id}  value={district.id}>{district.name}</option>
                       })}
                      
                     </select>{" "}
