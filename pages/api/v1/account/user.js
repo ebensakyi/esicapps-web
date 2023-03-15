@@ -4,12 +4,12 @@ import { getUserCookie } from "../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../helpers/token-verifier";
 import { nanoid } from "nanoid";
 import { logActivity } from "../../../../helpers/Log";
-import {sendSMS} from "../../../../helpers/send-hubtel-sms"
+import { sendSMS } from "../../../../helpers/send-hubtel-sms";
 import { generateCode } from "../../../../helpers/generate-code";
 
 const post = async (req, res) => {
   try {
-   // let password = await nanoid(8); //req.body.password;
+    // let password = await nanoid(8); //req.body.password;
     let password = await generateCode(8);
 
     const salt = bcrypt.genSaltSync(10);
@@ -17,10 +17,24 @@ const post = async (req, res) => {
     let hashedPassword = await bcrypt.hashSync(password, salt);
     let userCookie = await getUserCookie(req, res);
 
+    let regionId;
     let data = {};
     if (userCookie.user.userTypeId == 1) {
+      if(req.body.region==null){
+         let districtData = await prisma.district.findFirst({
+        where: {
+          id: Number(req.body.district),
+        },
+      });
+       regionId =
+        districtData == null ? null : Number(districtData.regionId);
+      }else{
+        regionId = Number(req.body.region)
+      }
+     
+     
       await logActivity(
-        `Added national user ${req.body.surname} ${req.body.otherNames} `,
+        `Added user ${req.body.surname} ${req.body.otherNames} `,
         Number(userCookie.user.id)
       );
       data = {
@@ -32,16 +46,49 @@ const post = async (req, res) => {
         password: hashedPassword,
         tempPassword: password,
         designation: req.body.designation,
-        regionId: req.body.region == null ? null : Number(req.body.region),
+        regionId: regionId,
         districtId:
           req.body.district == null ? null : Number(req.body.district),
       };
     }
     if (userCookie.user.userTypeId == 3) {
+      let regionId  = Number(userCookie.user.regionId)
+      // let districtData = await prisma.district.findFirst({
+      //   where: {
+      //     id: Number(req.body.district),
+      //   },
+      // });
+      //   districtData == null ? null : Number(districtData.regionId);
       await logActivity(
-        `Added regional user ${req.body.surname} ${req.body.otherNames} `,
+        `Added user ${req.body.surname} ${req.body.otherNames} `,
         Number(userCookie.user.id)
       );
+      data = {
+        userTypeId: Number(req.body.userTypeId),
+        surname: req.body.surname,
+        otherNames: req.body.otherNames,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: hashedPassword,
+        designation: req.body.designation,
+        regionId: regionId,
+        districtId:
+          req.body.district == null ? null : Number(req.body.district),
+      };
+    }
+
+    if (userCookie.user.userTypeId == 5) {
+      await logActivity(
+        `Added user ${req.body.surname} ${req.body.otherNames} `,
+        Number(userCookie.user.id)
+      );
+
+      let districtData = await prisma.district.findFirst({
+        where: {
+          id: Number(req.body.district),
+        },
+      });
+      console.log("districtData districtData", districtData);
       data = {
         userTypeId: Number(req.body.userTypeId),
         surname: req.body.surname,
@@ -51,41 +98,26 @@ const post = async (req, res) => {
         password: hashedPassword,
         designation: req.body.designation,
         regionId:
-          req.body.region == null ? null : Number(userCookie.user.regionId),
-        districtId:
-          req.body.district == null ? null : Number(req.body.district),
-      };
-
-    }
-
-    if (userCookie.user.userTypeId == 5) {
-      await logActivity(
-        `Added mmda user ${req.body.surname} ${req.body.otherNames} `,
-        Number(userCookie.user.id)
-      );
-      data = {
-        userTypeId: Number(req.body.userTypeId),
-        surname: req.body.surname,
-        otherNames: req.body.otherNames,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        password: hashedPassword,
-        designation: req.body.designation,
-        regionId: req.body.region == null ? null : Number(req.body.region),
+          Number(districtData.regionId) == null
+            ? null
+            : Number(districtData.regionId),
         districtId:
           req.body.district == null ? null : Number(req.body.district),
       };
     }
 
     const user = await prisma.user.create({ data });
-    if(Number(req.body.userTypeId)==7){
-          await sendSMS(req.body.phoneNumber, `The temporal password for ESICApps Mobile App is ${password}`);
-
-    }else{
-      await sendSMS(req.body.phoneNumber, `The password for ESICApps Web App is ${password}`);
-
-    }
-
+    // if (Number(req.body.userTypeId) == 7) {
+    //   await sendSMS(
+    //     req.body.phoneNumber,
+    //     `The temporal password for ESICApps Mobile App is ${password}`
+    //   );
+    // } else {
+    //   await sendSMS(
+    //     req.body.phoneNumber,
+    //     `The password for ESICApps Web App is ${password}`
+    //   );
+    // }
 
     await prisma.userAddedByUser.create({
       data: { addeeId: user.id, adderId: Number(userCookie.user.id) },
@@ -99,7 +131,10 @@ const post = async (req, res) => {
     if (error.code === "P2002")
       return res
         .status(500)
-        .json({ statusCode: 0, message: "Phone number and Email should be unique" });
+        .json({
+          statusCode: 0,
+          message: "Phone number and Email should be unique",
+        });
   }
 };
 
@@ -135,7 +170,7 @@ const get = async (req, res) => {
       return res.status(200).json(user);
     }
     if (userLevel == 2) {
-
+      console.log("HERRREEE");
       user = await prisma.user.findMany({
         where: { deleted: 0, regionId: Number(region) },
         include: { Region: true, District: true, UserType: true },
