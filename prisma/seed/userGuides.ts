@@ -10,14 +10,14 @@ export const userGuides = [
     title: "Download a pdf file",
     fileType: 2,
     action: 2,
-    link: "https://help.adobe.com/archive/en_US/acrobat/8/standard/acrobat_8_help.pdf",
+    link: "https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf",
     description: "Please use the link below to download a user guide",
   },
   {
     title: "Open a web page",
     fileType: 3,
     action:3,
-    link: "https://support.apple.com/guide/pages/welcome/mac",
+    link: "https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf",
     description: "Please use the link below to browse a user guide",
   },
  
