@@ -1865,7 +1865,7 @@ const HealthView = ({ data }) => {
 
               <div className="row gallery-wrapper">
                 {data.InspectionPictures.map((ip) => {
-                return  <div
+                return  <div   key={ip.id}
                     className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
                     data-category="designing development"
                   >

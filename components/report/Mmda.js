@@ -157,7 +157,7 @@ const Mmda = ({ inspectionForm,regions,districts }) => {
                     >
                       <option selected>Select form</option>
                       {inspectionForm.map(form=>{
-                        return <option value={form.id}>{form.name}</option>
+                        return <option key={form.id} value={form.id}>{form.name}</option>
                       })}
                      
                      
