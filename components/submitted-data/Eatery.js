@@ -26,7 +26,7 @@ const Eatery = ({ data }) => {
     try {
       const response = await axios.post(
         `/api/v1/submitted-data/export-to-excel`,
-        { inspectionFormId: 2, fileName: "residential.xlsx" }
+        { inspectionFormId: 2, fileName: "eatery.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);

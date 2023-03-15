@@ -10,6 +10,7 @@ import { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
@@ -22,7 +23,6 @@ export default function Login() {
       };
       const response = await axios.post(`/api/v1/auth/login`, data);
 
-
       if (response.status != 200) {
         return toast.error(response.data.message);
       }
@@ -34,20 +34,23 @@ export default function Login() {
           expires: 3 * 60 * 60,
         });
 
-        Cookies.set("fullName", response.data.user.surname + " " + response.data.user.otherNames, {
+        Cookies.set(
+          "fullName",
+          response.data.user.surname + " " + response.data.user.otherNames,
+          {
+            expires: 3 * 60 * 60,
+          }
+        );
+        Cookies.set("userType", response.data.user.UserType.name, {
           expires: 3 * 60 * 60,
         });
-        Cookies.set("userType",  response.data.user.UserType.name, {
-          expires: 3 * 60 * 60,
-        });
-        Cookies.set("designation",  response.data.user.designation, {
+        Cookies.set("designation", response.data.user.designation, {
           expires: 3 * 60 * 60,
         });
         return router.replace("/dashboard");
       }
     } catch (error) {
-      return toast.error('User account  not found');
-
+      return toast.error("User account  not found");
     }
 
     // router.replace(router.asPath)
@@ -56,6 +59,9 @@ export default function Login() {
 
   const getYear = () => {
     return new Date().getFullYear();
+  };
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
   return (
     <html
@@ -116,7 +122,10 @@ export default function Login() {
                 <div className="col-lg-12">
                   <div className="text-center mt-sm-5 mb-4 text-white-50">
                     <div>
-                      <a href="index.html" className="d-inline-block auth-logo">
+                      <a
+                        href="/auth/login"
+                        className="d-inline-block auth-logo"
+                      >
                         <img
                           src="assets/images/logo-light.png"
                           alt=""
@@ -152,27 +161,27 @@ export default function Login() {
                       <div className="p-2 mt-4">
                         <form action="/">
                           <div className="mb-3">
-                            <label htmlFor="phone" className="form-label">
+                            <label htmlFor="email" className="form-label">
                               Email
                             </label>
                             <input
-                              type="text"
+                              type="email"
                               className="form-control"
-                              id="phone"
+                              id="email"
                               placeholder="Enter email"
                               onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
 
                           <div className="mb-3">
-                            <div className="float-end">
+                            {/* <div className="float-end">
                               <a
                                 href="auth-pass-reset-basic.html"
                                 className="text-muted"
                               >
                                 Forgot password?
                               </a>
-                            </div>
+                            </div> */}
                             <label
                               className="form-label"
                               htmlFor="password-input"
@@ -181,7 +190,7 @@ export default function Login() {
                             </label>
                             <div className="position-relative auth-pass-inputgroup mb-3">
                               <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 className="form-control pe-5"
                                 placeholder="Enter password"
                                 id="password-input"
@@ -191,13 +200,14 @@ export default function Login() {
                                 className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
                                 type="button"
                                 id="password-addon"
+                                onClick={() => handlePasswordVisibility()}
                               >
                                 <i className="ri-eye-fill align-middle"></i>
                               </button>
                             </div>
                           </div>
 
-                          <div className="form-check">
+                          {/* <div className="form-check">
                             <input
                               className="form-check-input"
                               type="checkbox"
@@ -210,7 +220,7 @@ export default function Login() {
                             >
                               Remember me
                             </label>
-                          </div>
+                          </div> */}
 
                           <div className="mt-4">
                             <button

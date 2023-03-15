@@ -202,6 +202,57 @@ const get = async (req, res) => {
       },
     });
 
+    console.log([
+      {
+        name: "Residential",
+        basicCount: residentialBasicCount,
+        reInspectionCount: residentialReInspectionCount,
+        followUpCount: residentialFollowUpCount,
+      },
+      {
+        name: "Eatery",
+        basicCount: eateryBasicCount,
+        reInspectionCount: eateryReInspectionCount,
+        followUpCount: eateryFollowUpCount,
+      },
+      {
+        name: "Health",
+        basicCount: healthBasicCount,
+        reInspectionCount: healthReInspectionCount,
+        followUpCount: healthFollowUpCount,
+      },
+      {
+        name: "Hospitality",
+        basicCount: hospitalityBasicCount,
+        reInspectionCount: hospitalityReInspectionCount,
+        followUpCount: hospitalityFollowUpCount,
+      },
+      {
+        name: "Institution",
+        basicCount: institutionBasicCount,
+        reInspectionCount: institutionReInspectionCount,
+        followUpCount: institutionFollowUpCount,
+      },
+      {
+        name: "Industry",
+        basicCount: industryBasicCount,
+        reInspectionCount: industryReInspectionCount,
+        followUpCount: industryFollowUpCount,
+      },
+      {
+        name: "Market",
+        basicCount: marketBasicCount,
+        reInspectionCount: marketReInspectionCount,
+        followUpCount: marketFollowUpCount,
+      },
+      {
+        name: "Sanitary",
+        basicCount: sanitationBasicCount,
+        reInspectionCount: sanitationReInspectionCount,
+        followUpCount: sanitationFollowUpCount,
+      },
+    ]);
+
     return res.status(200).json([
       {
         name: "Residential",

@@ -3,9 +3,21 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
+    const user = await prisma.user.findFirst({
+      where: { id: Number(req.body.userId) },
+    });
+    const district = user.districtId;
+    const districtData = await prisma.district.findFirst({
+      where: { id: Number(district) },
+    });
+    let region = Number(districtData.regionId)
+
+
     const data = {
       id: req.body.id,
       userId: Number(req.body.userId),
+      districtId: district,
+      regionId: region,
       premisesCode: req.body.premisesCode,
       inspectionFormId:
         req.body.inspectionFormId == "null"
@@ -26,13 +38,12 @@ const post = async (req, res) => {
       completedAt: new Date(req.body.completedAt),
     };
 
-    console.log(data);
 
-    const response = await prisma.inspection.create({ data });
+   const response = await prisma.inspection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-   console.log("Error: " + error);
+    console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)
@@ -44,14 +55,12 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
-    if(!userId) return res.status(200).json()
+    if (!userId) return res.status(200).json();
 
-    
     const response = await prisma.inspection.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
-    console.log("response",response);
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);

@@ -12,6 +12,8 @@ model Inspection {
   id               String  @id @db.VarChar(255)
   prevInspectionId String? @unique @db.VarChar(255)
   premisesCode     String? @db.VarChar(255)
+  districtId       Int
+  regionId           Int
 
   userId           Int
   inspectionFormId Int
@@ -23,7 +25,7 @@ model Inspection {
   deleted          Int?    @default(0)
   isReinspected    Int?    @default(0)
   isFollowedUp     Int?    @default(0)
-  totalRating     Int?    @default(0)
+  totalRating      Int?    @default(0)
 
   createdAt                      DateTime                        @default(now())
   updatedAt                      DateTime                        @updatedAt
@@ -47,6 +49,8 @@ model Inspection {
   MarketPremisesInfoSection      MarketPremisesInfoSection?
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection?
   IndustryPremisesInfoSection    IndustryPremisesInfoSection?
+  District                       District                        @relation(fields: [districtId], references: [id])
+  Region                         Region                          @relation(fields: [regionId], references: [id])
 
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
@@ -481,15 +485,16 @@ model PestSign {
 }
 
 model Region {
-  id        Int        @id @default(autoincrement())
-  name      String     @db.VarChar(255)
-  abbrv     String     @unique @db.VarChar(10)
-  code      String     @unique @db.VarChar(2)
-  deleted   Int?       @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  District  District[]
-  User      User[]
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  abbrv      String       @unique @db.VarChar(10)
+  code       String       @unique @db.VarChar(2)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  District   District[]
+  User       User[]
+  Inspection Inspection[]
 }
 
 model District {
@@ -505,6 +510,7 @@ model District {
   ElectoralArea    ElectoralArea[]
   User             User[]
   SanitationReport SanitationReport[]
+  Inspection       Inspection[]
 }
 
 model ElectoralArea {
@@ -905,27 +911,27 @@ model Service {
 }
 
 model BasicInfoSection {
-  id                      String                                @id @db.VarChar(255)
-  inspectionId            String                                @unique @db.VarChar(255)
+  id                      String                 @id @db.VarChar(255)
+  inspectionId            String                 @unique @db.VarChar(255)
   userId                  Int
   zoneId                  Int?
   communityId             Int?
-  community               String?                               @db.VarChar(255)
-  ghanaPostGps            String?                               @db.VarChar(255)
-  latitude                Decimal                               @db.Decimal(11, 8)
-  longitude               Decimal                               @db.Decimal(11, 8)
-  accuracy                String?                               @db.VarChar(255)
+  community               String?                @db.VarChar(255)
+  ghanaPostGps            String?                @db.VarChar(255)
+  latitude                Decimal                @db.Decimal(11, 8)
+  longitude               Decimal                @db.Decimal(11, 8)
+  accuracy                String?                @db.VarChar(255)
   geom                    Json?
-  respondentName          String                                @db.VarChar(255)
-  respondentPhoneNumber   String                                @db.VarChar(255)
+  respondentName          String                 @db.VarChar(255)
+  respondentPhoneNumber   String                 @db.VarChar(255)
   respondentDesignationId Int
-  deleted                 Int?                                  @default(0)
-  createdAt               DateTime                              @default(now())
-  updatedAt               DateTime                              @updatedAt
-  Community               Community?                            @relation(fields: [communityId], references: [id])
-  Inspection              Inspection                            @relation(fields: [inspectionId], references: [id])
-  RespondentDesignation   RespondentDesignation?                @relation(fields: [respondentDesignationId], references: [id])
-  User                    User                                  @relation(fields: [userId], references: [id])
+  deleted                 Int?                   @default(0)
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+  Community               Community?             @relation(fields: [communityId], references: [id])
+  Inspection              Inspection             @relation(fields: [inspectionId], references: [id])
+  RespondentDesignation   RespondentDesignation? @relation(fields: [respondentDesignationId], references: [id])
+  User                    User                   @relation(fields: [userId], references: [id])
 
   // the index for that column
 }
