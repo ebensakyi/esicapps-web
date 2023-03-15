@@ -9,18 +9,17 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-  
-let mainWhere = await generateWhereMainObject(req,res)
+    let mainWhere = await generateWhereMainObject(req, res);
 
-console.log(mainWhere);
+    console.log(mainWhere);
 
-    let published = Number(req.query.published);
-    let inspectionFormId  =  Number(req.query.inspectionFormId);
+
+    let inspectionFormId = Number(req.query.inspectionFormId);
+
     let curPage = req.query.page;
     //let searchText = req.query.searchText.trim();
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage);
     let count = await prisma.inspection.count({
       //where: getSearchParams(req, searchText).where,
       where: {
@@ -29,8 +28,6 @@ console.log(mainWhere);
     });
 
     let inspection = await prisma.basicInfoSection.findMany(mainWhere);
-
-
 
     return res.status(200).json({
       inspection,
@@ -44,23 +41,56 @@ console.log(mainWhere);
   }
 };
 
-const generateWhereMainObject = async(req,res)=>{
+const generateWhereMainObject = async (req, res) => {
   let region;
-    let district;
-    let whereObject
-    let data = await verifyToken(req.query.token);
+  let district;
+  let whereObject;
 
-    let userLevel = data.user.UserType.userLevelId;
+  console.log(req.query.token);
+  let published = Number(req.query.published);
+  let inspectionFormId = Number(req.query.inspectionFormId);
+  let curPage = req.query.page;
 
-    if(userLevel==1){
+  let perPage = 10;
+  let skip = Number((curPage - 1) * perPage);
 
-    }
-    if(userLevel==2){
-       region = data.user.regionId;
+  let data = await verifyToken(req.query.token);
 
-     return {
+  let userLevel = data.user.UserType.userLevelId;
+
+  if (userLevel == 1) {
+  }
+  if (userLevel == 2) {
+    region = data.user.regionId;
+
+    return {
       where: {
-        regionId: region,
+       
+        deleted: 0,
+        Inspection: { 
+          regionId: region,
+          isPublished: published,
+          inspectionFormId: inspectionFormId,
+        },
+      },
+      // where: getSearchParams(req, searchText).where,
+      skip: skip,
+      take: perPage,
+      orderBy: {
+        createdAt: "asc",
+      },
+      include: {
+        Inspection: true,
+        Community: { include: { District: { include: { Region: true } } } },
+        User: true,
+      },
+    };
+  }
+  if (userLevel == 3) {
+    district = data.user.districtId;
+    return {
+      where: {
+        districtId: district,
         deleted: 0,
         Inspection: {
           isPublished: published,
@@ -78,36 +108,9 @@ const generateWhereMainObject = async(req,res)=>{
         Community: { include: { District: { include: { Region: true } } } },
         User: true,
       },
-    }
-
-    }
-    if(userLevel==3){
-           district = data.user.districtId;
-           return {
-            where: {
-              districtId: district,
-              deleted: 0,
-              Inspection: {
-                isPublished: published,
-                inspectionFormId: inspectionFormId,
-              },
-            },
-            // where: getSearchParams(req, searchText).where,
-            skip: skip,
-            take: perPage,
-            orderBy: {
-              createdAt: "asc",
-            },
-            include: {
-              Inspection: true,
-              Community: { include: { District: { include: { Region: true } } } },
-              User: true,
-            },
-          }
-      
-    }
-
-}
+    };
+  }
+};
 
 export default (req, res) => {
   req.method === "POST"

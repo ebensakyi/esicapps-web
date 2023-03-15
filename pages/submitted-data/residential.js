@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
         }
     }
 
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/data?published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=1`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/data?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=1`).then(
         (res) => res.json()
     );
 
