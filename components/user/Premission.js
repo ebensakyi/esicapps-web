@@ -6,7 +6,6 @@ const Permission = ({ userTypes, pages, pageAccess }) => {
   const [userType, setUserType] = useState();
   const router = useRouter();
 
-console.log("page access",pageAccess);
   const onUserTypeChange = async (e) => {
     e.preventDefault();
    
@@ -120,7 +119,7 @@ console.log("page access",pageAccess);
                           </tr>
                         </thead>
                         <tbody>
-                          {/* <td class="fw-medium">01</td> */}
+                          {/* <td className="fw-medium">01</td> */}
                           {pages.map((page) => {
                             return (
                               <tr key={page.id}>
@@ -165,8 +164,8 @@ console.log("page access",pageAccess);
               <div className="card-body">
                 <div className="row">
                   <div className="col-xxl-12 col-md-12">
-                    <div class="table-responsive">
-                      <table class="table table-striped table-nowrap align-middle mb-0">
+                    <div className="table-responsive">
+                      <table className="table table-striped table-nowrap align-middle mb-0">
                         <thead>
                           <tr>
                             <th scope="col">User type</th>

@@ -64,7 +64,7 @@ const Health = ({ data }) => {
                 className="btn btn-success btn-label waves-effect right waves-light rounded-pill"
                 onClick={handleExportToExcel}
               >
-                <i class="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                 Export To Excel
               </button>
             </div>

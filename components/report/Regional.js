@@ -111,7 +111,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       Report Type
                     </label>
                     <select
-                      class="form-control"
+                      className="form-control"
                       id="choices-single-groups"
                       data-choices
                       data-choices-groups
@@ -152,7 +152,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       Form
                     </label>
                     <select
-                      class="form-select mb-3"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                     >
                       <option selected>Select form</option>
@@ -171,7 +171,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       Level
                     </label>
                     <select
-                      class="form-select mb-3"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                       onChange={(e) => {
                         setLevel(e.target.value);
@@ -191,7 +191,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       Regions
                     </label>
                     <select
-                      class="form-select mb-3"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                     >
                       <option selected>Select region</option>
@@ -210,7 +210,7 @@ const Regional = ({ inspectionForm,regions,districts }) => {
                       Districts
                     </label>
                     <select
-                      class="form-select mb-3"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                     >
                       <option selected>Select district</option>

@@ -1840,13 +1840,13 @@ const IndustryView = ({ data }) => {
         </div>
       </div>
       {/* {data.InspectionPictures.map((ip) => {
-     return <figure class="figure">
+     return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
-          class="figure-img img-fluid rounded"
+          className="figure-img img-fluid rounded"
           alt="..."
         />
-        <figcaption class="figure-caption">
+        <figcaption className="figure-caption">
           A caption for the above image.
         </figcaption>
       </figure>
