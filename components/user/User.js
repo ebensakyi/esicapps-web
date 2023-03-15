@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,8 +20,13 @@ const User = ({ users, userTypes, regions, districts }) => {
   const [electoralArea, setElectoralArea] = useState();
   const [showRegion, setShowRegion] = useState(false);
   const [showDistrict, setShowDistrict] = useState(false);
+  const [districtsArr, setDistricts] = useState(null);
 
   let loggedInUserType = Cookies.get("lvut2").split("??")[0];
+
+  useEffect(() => {
+    setDistricts(districts);
+  }, []);
 
   const addUser = async (e) => {
     try {
@@ -68,9 +73,9 @@ const User = ({ users, userTypes, regions, districts }) => {
       setSurname("");
       setOtherNames("");
       setEmail("");
-      setPhoneNumber("")
-      setDesignation("")
-      setUserType(null)
+      setPhoneNumber("");
+      setDesignation("");
+      setUserType(null);
       return toast.success(response.data.message);
     } catch (error) {
       console.log(error);
@@ -84,19 +89,20 @@ const User = ({ users, userTypes, regions, districts }) => {
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
+      console.log(response);
       setDistricts(response.data);
     } catch (error) {}
   };
 
-  const getElectoralByDistrict = async (e, districtId) => {
-    try {
-      e.preventDefault();
-      const response = await axios.get(
-        "/api/v1/primary-data/electoral-area?districtId=" + districtId
-      );
-      setElectoralAreas(response.data);
-    } catch (error) {}
-  };
+  // const getElectoralByDistrict = async (e, districtId) => {
+  //   try {
+  //     e.preventDefault();
+  //     const response = await axios.get(
+  //       "/api/v1/primary-data/electoral-area?districtId=" + districtId
+  //     );
+  //     setElectoralAreas(response.data);
+  //   } catch (error) {}
+  // };
   return (
     <div className="row">
       <ToastContainer
@@ -241,6 +247,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                         onChange={(e) => {
                           let selectedUserType = e.target.value;
 
+                          console.log(selectedUserType);
                           setUserType(selectedUserType);
 
                           if (
@@ -261,21 +268,23 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setDistrict(null);
                           }
                           if (
-                            (selectedUserType == 5 || selectedUserType == 6) &&
+                            (selectedUserType == 5 ||
+                              selectedUserType == 6 ||
+                              selectedUserType == 7) &&
                             loggedInUserType == 1
                           ) {
-                            setShowRegion(false);
+                            setShowRegion(true);
                             setShowDistrict(true);
 
-                            setRegion(null);
+                            // setRegion(null);
                           }
 
-                          if (selectedUserType == 7 && loggedInUserType == 1) {
-                            setShowRegion(false);
-                            setShowDistrict(true);
+                          // if (selectedUserType == 7 && loggedInUserType == 1) {
+                          //   setShowRegion(false);
+                          //   setShowDistrict(true);
 
-                            setRegion(null);
-                          }
+                          //   setRegion(null);
+                          // }
 
                           if (
                             (selectedUserType == 3 || selectedUserType == 4) &&
@@ -323,9 +332,8 @@ const User = ({ users, userTypes, regions, districts }) => {
                           }
                         }}
                         value={userType}
-
                       >
-                        <option selected>Choose...</option>
+                        <option>Choose...</option>
                         {userTypes.map((userType) => (
                           <option key={userType.id} value={userType.id}>
                             {userType.name}
@@ -350,7 +358,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                             getDistrictsByRegion(e, e.target.value);
                           }}
                         >
-                          <option selected>Choose...</option>
+                          <option>Choose...</option>
                           {regions.map((region) => (
                             <option value={region.id} key={region.id}>
                               {region.name}
@@ -376,11 +384,11 @@ const User = ({ users, userTypes, regions, districts }) => {
                           value={district}
                           onChange={(e) => {
                             setDistrict(e.target.value);
-                            getElectoralByDistrict(e, e.target.value);
+                            // getElectoralByDistrict(e, e.target.value);
                           }}
                         >
-                          <option selected>Choose...</option>
-                          {districts.map((district) => (
+                          <option>Choose...</option>
+                          {districtsArr.map((district) => (
                             <option key={district.id} value={district.id}>
                               {district.name}
                             </option>

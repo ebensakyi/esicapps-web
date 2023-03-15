@@ -21,32 +21,15 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-console.log("get here");
-
     let data, regionId, userLevel;
     if (req.query.token) {
       data = await verifyToken(req.query.token);
 
-      regionId = data.user.regionId;
+      regionId = data.regionId;
       userLevel = data.user.UserType.userLevelId;
-
-      
     }
 
-
-    if (req.query.token && !req.query.regionId) {
-      data = await verifyToken(req.query.token);
-
-      regionId = data.user.regionId;
-      userLevel = data.user.UserType.userLevelId;
-
-      const district = await prisma.district.findMany({
-        where: { deleted: 0, regionId: Number(regionId) },
-        include: { Region: true },
-      });
-
-      return res.status(200).json(district);
-    }
+    // console.log(">>>>>>>s", data.regionId);
 
     if (userLevel == 1) {
       const district = await prisma.district.findMany({
@@ -64,6 +47,16 @@ console.log("get here");
 
       return res.status(200).json(district);
     }
+    
+    if (!req.query.regionId) {
+      const district = await prisma.district.findMany({
+        where: { deleted: 0, regionId: Number(regionId) },
+        include: { Region: true },
+      });
+
+      return res.status(200).json(district);
+    }
+    
 
     const district = await prisma.district.findMany({
       where: { deleted: 0 },

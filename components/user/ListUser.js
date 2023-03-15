@@ -1,4 +1,8 @@
+import axios from "axios";
+import { useRouter } from "next/router";
+
 const ListUser = ({ users }) => {
+  const router = useRouter();
 
   return (
     <div className="row">
@@ -7,7 +11,8 @@ const ListUser = ({ users }) => {
           <div className="card-header">
             <h5 className="card-title mb-0">Users</h5>
           </div>
-          <div className="card-body">
+
+          <div className="card-body" style={{"overflow":"auto","max-height": "400px"}}>
             <table
               id="fixed-header"
               className="table table-bordered dt-responsive nowrap table-striped align-middle"
@@ -45,7 +50,13 @@ const ListUser = ({ users }) => {
                       <td>{user.designation}</td>
                       <td>{user.Region == null ? "" : user.Region.name}</td>
                       <td>{user.District == null ? "" : user.District.name}</td>
-                      <td>{user.activated == 0 ? "OFF" : "ON"}</td>
+                      <td>
+                        {user.deleted == 0 ? (
+                          <span className="badge bg-success">Active</span>
+                        ) : (
+                          <span className="badge bg-danger">Inactive</span>
+                        )}
+                      </td>
 
                       <td>
                         <div className="dropdown d-inline-block">
@@ -58,7 +69,7 @@ const ListUser = ({ users }) => {
                             <i className="ri-more-fill align-middle" />
                           </button>
                           <ul className="dropdown-menu dropdown-menu-end">
-                            <li>
+                            {/* <li>
                               <a href="#!" className="dropdown-item">
                                 <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
                                 View
@@ -75,12 +86,25 @@ const ListUser = ({ users }) => {
                                 <i className=" ri-send-plane-line align-bottom me-2 text-muted" />{" "}
                                 Publish
                               </a>
-                            </li>
+                            </li> */}
                             <li>
-                              <a className="dropdown-item remove-item-btn">
+                              <button
+                                className="dropdown-item remove-item-btn"
+                                onClick={async(e) => {
+                                  e.preventDefault();
+                                  const response = await axios.put(
+                                    "/api/v1/account/user",{
+                                      id:user.id
+                                    }
+                                  );
+                                  router.replace(router.asPath);
+
+
+                                }}
+                              >
                                 <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </a>
+                                Change Status
+                              </button>
                             </li>
                           </ul>
                         </div>
