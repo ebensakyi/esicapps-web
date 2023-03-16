@@ -46,7 +46,6 @@ const get = async (req, res) => {
       await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
-      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3 ) as "followupCount",
 
 COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
 COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
@@ -94,14 +93,14 @@ WHERE "Inspection"."inspectionTypeId"=2 AND "Inspection"."districtId" = ${distri
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
-    const followupInspectionSummary =
-      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
-                      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
+  
+    //   await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
+    //                   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
 
-    FROM "InspectionForm"
-    LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    WHERE "Inspection"."inspectionTypeId"=3 AND "Inspection"."districtId" = ${district}
-    GROUP BY "InspectionForm"."name" `;
+    // FROM "InspectionForm"
+    // LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+    // WHERE "Inspection"."inspectionTypeId"=3 AND "Inspection"."districtId" = ${district}
+    // GROUP BY "InspectionForm"."name" `;
 
     const waterSourceTypeSummary =
       await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "sourceCount"
@@ -273,12 +272,59 @@ ORDER BY "InspectionForm"."name"`;
       toJson(n.name)
     );
 
-    let followUpCountArray = followupInspectionSummary.map((i) =>
-      toJson(i.followupCount)
-    );
-    let followUpFormArray = followupInspectionSummary.map((n) =>
-      toJson(n.name)
-    );
+    const fupRes = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:1
+      },
+    });
+    const fupEatery = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:2
+      },
+    });
+    const fupHealth = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:3
+      },
+    });
+    const fupHosp = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:4
+      },
+    }); const fupInstitution = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:5
+      },
+    });
+    const fupIndustry = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:6
+      },
+    });
+   
+    const fupMarket = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:7
+      },
+    });
+    const fupSanitation = await prisma.followUpInspection.count({
+      where: {
+        deleted: 0,
+        inspectionFormId:8
+      },
+    });
+
+    let followUpCountArray = [fupRes,fupEatery,fupHealth,fupHosp,fupInstitution,fupIndustry,fupMarket,fupSanitation]
+    // let followUpFormArray = followupInspectionSummary.map((n) =>
+    //   toJson(n.name)
+    // );
 
     const toiletAvailabilityCount1 =
       await prisma.residentialPremisesInfoSection.count({
@@ -560,7 +606,7 @@ ORDER BY "InspectionForm"."name"`;
       reinspectionCountArray,
       reinspectionFormArray,
       followUpCountArray,
-      followUpFormArray,
+     // followUpFormArray,
       water: {
         waterSourceTypeCountArray,
         waterSourceTypeLabelArray,

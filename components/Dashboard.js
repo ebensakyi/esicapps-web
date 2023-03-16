@@ -96,7 +96,7 @@ const Dashboard = ({ data }) => {
   };
 
   followupPieChartData = {
-    labels: data.followUpFormArray,
+    labels: ["Residential","Eatery","Health","Hospitality","Institution","Industry","Markets & Lorry Parks","Sanitary"],
     datasets: [
       {
         label: "# of submissions",
@@ -906,9 +906,9 @@ toiletAdequacyBarchartData = {
                       <th scope="col" style={{ width: "16%" }}>
                         Reinspection
                       </th>
-                      <th scope="col" style={{ width: "12%" }}>
+                      {/* <th scope="col" style={{ width: "12%" }}>
                         Follow Up
-                      </th>
+                      </th> */}
                       <th scope="col" style={{ width: "12%" }}>
                         Published
                       </th>
@@ -936,11 +936,11 @@ toiletAdequacyBarchartData = {
                               {a.reinspectionCount}
                             </span>
                           </td>
-                          <td>
+                          {/* <td>
                             <span className="badge badge-soft-danger p-2">
                               {a.followupCount}
                             </span>
-                          </td>{" "}
+                          </td>{" "} */}
                           <td>
                             <span className="badge badge-soft-success p-2">
                               {a.publishedCount}
