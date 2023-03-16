@@ -3,6 +3,8 @@ CREATE TABLE "Inspection" (
     "id" VARCHAR(255) NOT NULL,
     "prevInspectionId" VARCHAR(255),
     "premisesCode" VARCHAR(255),
+    "districtId" INTEGER NOT NULL,
+    "regionId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
     "inspectionTypeId" INTEGER NOT NULL,
@@ -13,6 +15,7 @@ CREATE TABLE "Inspection" (
     "deleted" INTEGER DEFAULT 0,
     "isReinspected" INTEGER DEFAULT 0,
     "isFollowedUp" INTEGER DEFAULT 0,
+    "totalRating" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
@@ -1705,6 +1708,12 @@ ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_publishedById_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_prevInspectionId_fkey" FOREIGN KEY ("prevInspectionId") REFERENCES "Inspection"("id") ON DELETE SET NULL ON UPDATE CASCADE;

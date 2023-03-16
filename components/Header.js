@@ -436,7 +436,7 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#report"
@@ -473,7 +473,7 @@ const Header = () => {
                     </li>
                   </ul>
                 </div>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link href="/sanitation-reports">
                   <a className="nav-link menu-link">

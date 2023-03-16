@@ -1,9 +1,9 @@
 export const region = [
-  {
-    name: "Ahafo",
-    abbrv: "AFR",
-    code: "01",
-  },
+  // {
+  //   name: "Ahafo",
+  //   abbrv: "AFR",
+  //   code: "01",
+  // },
   {
     name: "Ashanti",
     abbrv: "ASR",
@@ -29,11 +29,11 @@ export const region = [
 //     abbrv: "ETR",
 //     code: "06",
 //   },
-//   {
-//     name: "Greater Accra",
-//     abbrv: "GAR",
-//     code: "07",
-//   },
+  {
+    name: "Greater Accra",
+    abbrv: "GAR",
+    code: "07",
+  },
 //   {
 //     name: "North East",
 //     abbrv: "NER",
