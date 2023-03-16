@@ -15,7 +15,7 @@ CREATE TABLE "Inspection" (
     "deleted" INTEGER DEFAULT 0,
     "isReinspected" INTEGER DEFAULT 0,
     "isFollowedUp" INTEGER DEFAULT 0,
-    "totalRating" INTEGER DEFAULT 0,
+    "totalRating" DECIMAL(4,2) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
