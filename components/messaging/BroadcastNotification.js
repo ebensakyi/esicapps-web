@@ -275,7 +275,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         <th>Message</th>
 
                         <th>Recipient</th>
-                        <th>Action</th>
+                        {/* <th>Action</th> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -302,7 +302,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         )}
                       </td> */}
 
-                            <td>
+                            {/* <td>
                               <div className="dropdown d-inline-block">
                                 <button
                                   className="btn btn-soft-secondary btn-sm dropdown"
@@ -319,15 +319,10 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                                       Resend
                                     </a>
                                   </li>
-                                  {/* <li>
-                              <a className="dropdown-item remove-item-btn">
-                                <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </a>
-                            </li> */}
+                               
                                 </ul>
                               </div>
-                            </td>
+                            </td> */}
                           </tr>
                         );
                       })}
