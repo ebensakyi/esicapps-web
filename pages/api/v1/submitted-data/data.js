@@ -11,7 +11,6 @@ const get = async (req, res) => {
   try {
     let mainWhere = await generateWhereMainObject(req, res);
 
-    console.log(mainWhere);
 
 
     let inspectionFormId = Number(req.query.inspectionFormId);
@@ -59,6 +58,28 @@ const generateWhereMainObject = async (req, res) => {
   let userLevel = data.user.UserType.userLevelId;
 
   if (userLevel == 1) {
+    return {
+      where: {
+       
+        deleted: 0,
+        Inspection: { 
+        
+          isPublished: published,
+          inspectionFormId: inspectionFormId,
+        },
+      },
+      // where: getSearchParams(req, searchText).where,
+      skip: skip,
+      take: perPage,
+      orderBy: {
+        createdAt: "asc",
+      },
+      include: {
+        Inspection: true,
+        Community: { include: { District: { include: { Region: true } } } },
+        User: true,
+      },
+    };
   }
   if (userLevel == 2) {
     region = data.user.regionId;
