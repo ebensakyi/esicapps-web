@@ -47,6 +47,7 @@ export default function Login() {
         Cookies.set("designation", response.data.user.designation, {
           expires: 3 * 60 * 60,
         });
+        console.log("LOLs");
         return router.replace("/dashboard");
       }
     } catch (error) {

@@ -1,32 +1,51 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
   } catch (error) {}
 };
 
+const whereClauseRaw = (data) => {
+  let district = data.user.districtId;
+  let region = data.user.regionId;
+
+  console.log(district);
+  console.log(region);
+
+  if (district) {
+    return `AND "districtId"=${district}`;
+  }
+  if (region) {
+    return `AND "regionId"=${region}`;
+  }
+  return
+};
+
+const whereClause = (data) => {
+  let district = data.user.districtId;
+  let region = data.user.regionId;
+  if (district) {
+  }
+};
+
 const get = async (req, res) => {
+  let data = await verifyToken(req.query.token);
+  console.log(data);
+
+  let whereClauseRawObj = whereClauseRaw(data);
+
+  console.log(whereClauseRawObj);
+
   try {
-    // const allInspectionSummary =
-    //   await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
-    //     COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
-    //     COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
-    //     COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
-
-    //   FROM "InspectionForm"
-    // LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    // LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
-
-    // GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"`;
-
     const allInspectionSummary =
-      await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
-        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
-        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
-        COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount",
+    await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
+      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
+      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3 ) as "followupCount",
 
-  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1) as "publishedCount",
-  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0) as "unPublishedCount"
+COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
+COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
 
 FROM "InspectionForm" 
 LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
@@ -36,12 +55,29 @@ GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
 ORDER BY "InspectionForm"."name"
 `;
 
+//     const allInspectionSummary =
+//       await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+//         COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ${whereClauseRawObj}) as "baselineCount",
+//         COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ${whereClauseRawObj}) as "reinspectionCount",
+//         COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3 ${whereClauseRawObj}) as "followupCount",
+
+//   COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ${whereClauseRawObj}) as "publishedCount",
+//   COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ${whereClauseRawObj}) as "unPublishedCount"
+
+// FROM "InspectionForm" 
+// LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+// LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+
+// GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
+// ORDER BY "InspectionForm"."name"
+// `;
+
     const baselineInspectionSummary =
       await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=1
+WHERE "Inspection"."inspectionTypeId"=1  ${whereClauseRawObj}
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -50,7 +86,7 @@ ORDER BY "InspectionForm"."name"`;
             COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=2
+WHERE "Inspection"."inspectionTypeId"=2  ${whereClauseRawObj}
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -60,7 +96,7 @@ ORDER BY "InspectionForm"."name"`;
 
     FROM "InspectionForm"
     LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    WHERE "Inspection"."inspectionTypeId"=3
+    WHERE "Inspection"."inspectionTypeId"=3  ${whereClauseRawObj}
     GROUP BY "InspectionForm"."name" `;
 
     const waterSourceTypeSummary =
@@ -69,7 +105,7 @@ ORDER BY "InspectionForm"."name"`;
     FROM "WaterSection"
     LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
     LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
-    WHERE"WaterSourceType"."id" IS NOT NULL
+    WHERE"WaterSourceType"."id" IS NOT NULL AND ${whereClauseRawObj}
     GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
 
     const healthEducActionTakenCount = await prisma.premisesActionTaken.count({
@@ -271,66 +307,58 @@ ORDER BY "InspectionForm"."name"`;
       toiletInavailabilityCount,
     ];
 
-
-
-    const toiletAdequacy =
-    await prisma.liquidWasteSection.count({
+    const toiletAdequacy = await prisma.liquidWasteSection.count({
       where: { toiletAdequacyId: 1 },
     });
 
-    const toiletInadequacy =
-    await prisma.liquidWasteSection.count({
+    const toiletInadequacy = await prisma.liquidWasteSection.count({
       where: { toiletAdequacyId: 2 },
     });
 
-    const toiletConditionSafe =
-    await prisma.liquidWasteSection.count({
+    const toiletConditionSafe = await prisma.liquidWasteSection.count({
       where: { toiletConditionId: 1 },
     });
 
-    const toiletConditionUnsafe =
-    await prisma.liquidWasteSection.count({
+    const toiletConditionUnsafe = await prisma.liquidWasteSection.count({
       where: { toiletConditionId: 2 },
     });
 
-    const wasteCollectorRegistered =
-    await prisma.solidWasteSection.count({
+    const wasteCollectorRegistered = await prisma.solidWasteSection.count({
       where: { wasteServiceProviderRegistrationId: 1 },
     });
 
-    const wasteCollectorNotRegistered =
-    await prisma.solidWasteSection.count({
+    const wasteCollectorNotRegistered = await prisma.solidWasteSection.count({
       where: { wasteServiceProviderRegistrationId: 2 },
     });
 
-    const wasteSorted =
-    await prisma.solidWasteSection.count({
+    const wasteSorted = await prisma.solidWasteSection.count({
       where: { wasteSortingAvailabilityId: 1 },
     });
 
-    const wasteNotSorted=
-    await prisma.solidWasteSection.count({
+    const wasteNotSorted = await prisma.solidWasteSection.count({
       where: { wasteSortingAvailabilityId: 2 },
     });
 
-
-    const wasteReceptacleApproved =
-    await prisma.solidWasteSection.count({
+    const wasteReceptacleApproved = await prisma.solidWasteSection.count({
       where: { approvedWasteStorageReceptacleId: 1 },
     });
 
-    const wasteReceptacleUnapproved=
-    await prisma.solidWasteSection.count({
+    const wasteReceptacleUnapproved = await prisma.solidWasteSection.count({
       where: { approvedWasteStorageReceptacleId: 2 },
     });
 
+    let wasteCollectorArray = [
+      wasteCollectorRegistered,
+      wasteCollectorNotRegistered,
+    ];
+    let wasteSortingArray = [wasteSorted, wasteNotSorted];
+    let wasteReceptacleArray = [
+      wasteReceptacleApproved,
+      wasteReceptacleUnapproved,
+    ];
 
-    let wasteCollectorArray  = [wasteCollectorRegistered,wasteCollectorNotRegistered];
-    let wasteSortingArray  = [wasteSorted,wasteNotSorted];
-    let wasteReceptacleArray  = [wasteReceptacleApproved,wasteReceptacleUnapproved];
-
-    let toiletAdequacyArray  = [toiletAdequacy,toiletInadequacy];
-    let toiletConditionArray = [toiletConditionSafe,toiletConditionUnsafe]
+    let toiletAdequacyArray = [toiletAdequacy, toiletInadequacy];
+    let toiletConditionArray = [toiletConditionSafe, toiletConditionUnsafe];
 
     let data = {
       allInspectionSummary: toJson(allInspectionSummary),
@@ -351,12 +379,12 @@ ORDER BY "InspectionForm"."name"`;
       lw: {
         toiletAvailabilityArray,
         toiletAdequacyArray,
-        toiletConditionArray
+        toiletConditionArray,
       },
-      sw:{
+      sw: {
         wasteCollectorArray,
         wasteSortingArray,
-        wasteReceptacleArray
+        wasteReceptacleArray,
       },
       // baselineInspectionSummary:toJson(baselineInspectionSummary),
       // reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),

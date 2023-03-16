@@ -20,7 +20,6 @@ const post = async (req, res) => {
       include: { UserType: true },
     });
 
-    console.log(user);
 
     if (!user) {
       return res
@@ -36,7 +35,6 @@ const post = async (req, res) => {
 
     let isValid = await bcrypt.compare(password, user.password);
 
-    console.log(isValid);
 
     if (isValid) {
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
@@ -45,7 +43,6 @@ const post = async (req, res) => {
       let userType = user.userTypeId;
       let level = user.UserType.userLevelId;
       await setUserCookie(token, req, res);
-      // console.log(user);
       return res.status(200).json({ userType, level, user });
     } else {
       return res
