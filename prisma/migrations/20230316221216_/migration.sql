@@ -811,7 +811,6 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainsAvailabilityId" INTEGER NOT NULL,
     "toiletAvailabilityId" INTEGER,
-    "urinalAvailabilityId" INTEGER,
     "bathRoomAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "animalAvailabilityId" INTEGER,
@@ -1225,7 +1224,6 @@ CREATE TABLE "ConclusionSection" (
     "obnoxiousTradeExistId" INTEGER,
     "officerComment" VARCHAR(255) NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
-    "generalSanitaryConditionId" INTEGER,
     "isNuisanceObservedId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1827,9 +1825,6 @@ ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremises
 ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_toiletAvailabilityId_fkey" FOREIGN KEY ("toiletAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_urinalAvailabilityId_fkey" FOREIGN KEY ("urinalAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_vaccinationProofId_fkey" FOREIGN KEY ("vaccinationProofId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2305,9 +2300,6 @@ ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_inspectionId_f
 
 -- AddForeignKey
 ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_obnoxiousTradeExistId_fkey" FOREIGN KEY ("obnoxiousTradeExistId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_generalSanitaryConditionId_fkey" FOREIGN KEY ("generalSanitaryConditionId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ConclusionSection" ADD CONSTRAINT "ConclusionSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

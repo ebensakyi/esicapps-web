@@ -6,6 +6,7 @@ export const waterFrequency = [
     {
       name: "Intermittent",
     }
+    
   ];
   
 

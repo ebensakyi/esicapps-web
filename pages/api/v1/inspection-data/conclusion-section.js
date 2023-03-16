@@ -22,10 +22,7 @@ const post = async (req, res) => {
         req.body.isNuisanceObservedId == "null"
           ? null
           : Number(req.body.isNuisanceObservedId),
-      generalSanitaryConditionId:
-        req.body.generalSanitaryConditionId == "null"
-          ? null
-          : Number(req.body.generalSanitaryConditionId),
+     
     };
 
     const response = await prisma.conclusionSection.create({ data });

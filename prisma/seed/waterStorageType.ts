@@ -11,7 +11,9 @@ export const waterStorageType = [
     {
       name: "Overhead Reservoir",
     },
-
+    {
+      name: "Not applicable",
+    },
   ];
   
 

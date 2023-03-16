@@ -831,7 +831,6 @@ model YesNo {
   bathRoomAvailabilityResidential                    ResidentialPremisesInfoSection[] @relation("bathRoomAvailability")
   drainsAvailabilityResidential                      ResidentialPremisesInfoSection[] @relation("drainsAvailability")
   toiletAvailabilityResidential                      ResidentialPremisesInfoSection[] @relation("toiletAvailability")
-  urinalAvailabilityResidential                      ResidentialPremisesInfoSection[] @relation("urinalAvailability")
   vaccinationProof                                   ResidentialPremisesInfoSection[] @relation("vaccinationProof")
   approvedHandwashingFacilityAvailability            SanitaryPremisesInfoSection[]    @relation("approvedHandwashingFacilityAvailability")
   bathRoomAvailability                               SanitaryPremisesInfoSection[]    @relation("bathRoomAvailability")
@@ -874,7 +873,6 @@ model YesNo {
   suitabilityCertificateAvailability                 LicencePermitSection[]           @relation("suitabilityCertificateAvailability")
   pharmacyCertAvailability                           LicencePermitSection[]           @relation("pharmacyCertAvailability")
   wasteProviderAccreditted                           SolidWasteSection[]              @relation("wasteProviderAccreditted")
-  generalSanitaryCondition                           ConclusionSection[]              @relation("generalSanitaryCondition")
   obnoxiousTradeExistFollowUp                        FollowUpInspection[]             @relation("obnoxiousTradeExistFollowUp")
   isNuisanceObserved                                 FollowUpInspection[]             @relation("isNuisanceObserved")
 }
@@ -942,7 +940,6 @@ model ResidentialPremisesInfoSection {
   User                                      User                @relation(fields: [userId], references: [id])
   drainsAvailabilityId                      Int
   toiletAvailabilityId                      Int?
-  urinalAvailabilityId                      Int?
   bathRoomAvailabilityId                    Int?
   approvedHandwashingFacilityAvailabilityId Int?
   animalAvailabilityId                      Int?
@@ -963,7 +960,6 @@ model ResidentialPremisesInfoSection {
   bathRoomAvailability                      YesNo?              @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
   drainsAvailability                        YesNo               @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                        YesNo?              @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   vaccinationProof                          YesNo?              @relation("vaccinationProof", fields: [vaccinationProofId], references: [id])
   Inspection                                Inspection          @relation(fields: [inspectionId], references: [id])
   userId                                    Int
@@ -1508,14 +1504,12 @@ model ConclusionSection {
   obnoxiousTradeExistId      Int?
   officerComment             String     @db.VarChar(255)
   obnoxiousTrade             String     @db.VarChar(255)
-  generalSanitaryConditionId Int?
   isNuisanceObservedId       Int?
   deleted                    Int?       @default(0)
   createdAt                  DateTime   @default(now())
   updatedAt                  DateTime   @updatedAt
   Inspection                 Inspection @relation(fields: [inspectionId], references: [id])
   obnoxiousTradeExist        YesNo?     @relation("obnoxiousTradeExist", fields: [obnoxiousTradeExistId], references: [id])
-  generalSanitaryCondition   YesNo?     @relation("generalSanitaryCondition", fields: [generalSanitaryConditionId], references: [id])
 
   User                     User                       @relation(fields: [userId], references: [id])
   PremisesActionTaken      PremisesActionTaken[]

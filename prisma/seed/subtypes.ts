@@ -14,42 +14,7 @@ export const subtypes = [
     inspectionFormId: 2,
     typeId: 1,
   },
-  {
-    name: "Restaurant",
-    inspectionFormId: 2,
-    typeId: 1,
-  },
-
-  {
-    name: "Pub",
-    inspectionFormId: 2,
-    typeId: 2,
-  },
-  {
-    name: "Lounge",
-    inspectionFormId: 2,
-    typeId: 2,
-  },
-
-
  
-
-
-  {
-    name: "Chopbar",
-    inspectionFormId: 2,
-    typeId: 3,
-  },
-  {
-    name: "Table Top",
-    inspectionFormId: 2,
-    typeId: 3,
-  },
-  {
-    name: "Fast food",
-    inspectionFormId: 2,
-    typeId: 3,
-  },
   {
     name: "Restaurant",
     inspectionFormId: 2,

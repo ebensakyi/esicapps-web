@@ -159,7 +159,11 @@ export const types = [
   }, {
     name: "Urinal",
     inspectionFormId: 8,
-  }
+  },
+  {
+    name: "Herbal Shop",
+    inspectionFormId: 3,
+  },
 ];
 
 

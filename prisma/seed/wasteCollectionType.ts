@@ -9,5 +9,7 @@ export const wasteCollectionType = [
   {
     name: "Not serviced",
   },
- 
+  {
+    name: "Communal Dump Site",
+  },
 ];

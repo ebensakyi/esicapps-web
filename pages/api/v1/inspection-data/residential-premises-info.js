@@ -16,10 +16,10 @@ const post = async (req, res) => {
         req.body.toiletAvailabilityId == "null"
           ? ""
           : Number(req.body.toiletAvailabilityId),
-      urinalAvailabilityId:
-        req.body.urinalAvailabilityId == "null"
-          ? null
-          : Number(req.body.urinalAvailabilityId),
+      // urinalAvailabilityId:
+      //   req.body.urinalAvailabilityId == "null"
+      //     ? null
+      //     : Number(req.body.urinalAvailabilityId),
 
       bathRoomAvailabilityId:
         req.body.bathRoomAvailabilityId == "null"
