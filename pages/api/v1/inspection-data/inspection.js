@@ -16,6 +16,7 @@ const post = async (req, res) => {
     const data = {
       id: req.body.id,
       userId: Number(req.body.userId),
+      totalRating: Number(req.body.totalRating),
       districtId: district,
       regionId: region,
       premisesCode: req.body.premisesCode,
