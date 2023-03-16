@@ -926,7 +926,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.LiquidWasteSection.numberToiletSeats != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Toilet Seats
@@ -958,7 +958,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletAdequacy != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Adequacy</label>
                         <input
@@ -972,7 +972,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalAdequacy != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Urinal Adequacy</label>
                         <input
@@ -986,7 +986,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.bathroomAdequacy != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom Adequacy
@@ -1020,7 +1020,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                    {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Facilty Mgt availabilty
@@ -1038,7 +1038,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletGenderSensivity != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Gender Sensivity
@@ -1056,7 +1056,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalGenderSensivity != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Gender Sensivity
@@ -1074,7 +1074,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletPitPosition != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Pit Position
@@ -1090,7 +1090,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDisabilityFriendly !=
+                    {data.LiquidWasteSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1110,7 +1110,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalDisabilityFriendly !=
+                    {data.LiquidWasteSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1130,7 +1130,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.drainsCondition != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drains Condition</label>
                         <input
@@ -1144,7 +1144,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.stagnationEvidence != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Stagnation Evidence
@@ -1162,7 +1162,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.analCleansingMaterialMgt !=
+                    {data.LiquidWasteSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1182,7 +1182,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.effluentManagementReport !=
+                    {data.LiquidWasteSection !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1202,7 +1202,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.areaSewered != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Is Area Sewered</label>
                         <input
@@ -1216,7 +1216,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.facilityConnectedSewer != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility Connected Sewer
@@ -1234,6 +1234,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                     {data.LiquidWasteSection != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Number Urinal Cubicle
@@ -1245,8 +1246,10 @@ const ResidentialView = ({ data }) => {
                         value={data.LiquidWasteSection.numberUrinalCubicle}
                         readOnly="readOnly"
                       />
-                    </div>
-                    {data.LiquidWasteSection.urinalCubicleCondition != null ? (
+                    </div> ) : (
+                      <></>
+                    )}
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Cubicle Condition
@@ -1264,7 +1267,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletCondition != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Condition</label>
                         <input
@@ -1278,7 +1281,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDischarge != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Discharge</label>
                         <input
@@ -1292,7 +1295,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.containmentEmptied != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Containment Emptied
@@ -1310,7 +1313,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.sewerSystem != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Sewer System</label>
                         <input
@@ -1324,7 +1327,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.wasteWaterContainment != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Water Containment
@@ -1342,7 +1345,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.EaseYourselfWhere != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ease Yourself Where
@@ -1358,7 +1361,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.DesiltingFrequency != null ? (
+                    {data.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Desilting Frequency
@@ -1376,6 +1379,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                     {data.LiquidWasteSection != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
                       {data.LiquidWasteSection.PremisesDrainType.map((x) => (
@@ -1388,7 +1392,10 @@ const ResidentialView = ({ data }) => {
                           readOnly="readOnly"
                         />
                       ))}
-                    </div>{" "}
+                    </div>  ) : (
+                      <></>
+                    )}
+                       {data.LiquidWasteSection != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
@@ -1405,7 +1412,9 @@ const ResidentialView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div> ) : (
+                      <></>
+                    )}
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
@@ -1829,13 +1838,13 @@ const ResidentialView = ({ data }) => {
         </div>
       </div>
       {/* {data.InspectionPictures.map((ip) => {
-     return <figure class="figure">
+     return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
-          class="figure-img img-fluid rounded"
+          className="figure-img img-fluid rounded"
           alt="..."
         />
-        <figcaption class="figure-caption">
+        <figcaption className="figure-caption">
           A caption for the above image.
         </figcaption>
       </figure>
@@ -1854,7 +1863,7 @@ const ResidentialView = ({ data }) => {
 
               <div className="row gallery-wrapper">
                 {data.InspectionPictures.map((ip) => {
-                return  <div
+                return  <div   key={ip.id}
                     className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
                     data-category="designing development"
                   >
