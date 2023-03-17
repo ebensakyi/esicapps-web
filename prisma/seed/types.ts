@@ -1,169 +1,51 @@
 export const types = [
   {
+    id: 1,
     name: "Eating premises",
     inspectionFormId: 2,
   },
-  {
-    name: "Drinking premises",
-    inspectionFormId: 2,
-  },
-  {
-    name: "Eating and drinking premises",
-    inspectionFormId: 2,
-  },
-  
-  {
-    name: "Hospital",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Polyclinic",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Clinic",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Maternity unit",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Mortuary",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Alternative health care",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Pharmacy",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Chemical shop",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Funeral home",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Veterinary clinic",
-    inspectionFormId: 3,
-  },
-  {
-    name: "CHP Compound",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Health Laboratory",
-    inspectionFormId: 3,
-  },
-  {
-    name: "Hotel",
-    inspectionFormId: 4, 
-  },
-  {
-    name: "Movie House",
-    inspectionFormId: 4,
-  },
-  {
-    name: "Event Centre",
-    inspectionFormId: 4,
-  },
-  {
-    name: "Hostel",
-    inspectionFormId: 4,
-  },
-  {
-    name: "Motel",
-    inspectionFormId: 4,
-  },
-  {
-    name: "Guest House",
-    inspectionFormId: 4,
-  },
- 
-  {
-    name: "Religious",
-    inspectionFormId: 5,
-  }, {
-    name: "Educational",
-    inspectionFormId: 5,
-  },
-  {
-    name: "Coorperate",
-    inspectionFormId: 5,
-  },
+  { id: 2, name: "Drinking premises", inspectionFormId: 2 },
+  { id: 3, name: "Eating and drinking premises", inspectionFormId: 2 },
 
-  {
-    name: "Consumables",
-    inspectionFormId: 6,
+  { id: 4, name: "Hospital", inspectionFormId: 3 },
+  { id: 5, name: "Polyclinic", inspectionFormId: 3 },
+  { id: 6, name: "Clinic", inspectionFormId: 3 },
+  { id: 7, name: "Maternity unit", inspectionFormId: 3 },
+  { id: 8, name: "Mortuary", inspectionFormId: 3 },
+  { id: 9, name: "Alternative health care", inspectionFormId: 3 },
+  { id: 10, name: "Pharmacy", inspectionFormId: 3 },
+  { id: 11, name: "Chemical shop", inspectionFormId: 3 },
+  { id: 12, name: "Funeral home", inspectionFormId: 3 },
+  { id: 13, name: "Veterinary clinic", inspectionFormId: 3 },
+  { id: 14, name: "CHP Compound", inspectionFormId: 3 },
+  { id: 15, name: "Health Laboratory", inspectionFormId: 3 },
+  { id: 16, name: "Hotel", inspectionFormId: 4 },
+  { id: 17, name: "Movie House", inspectionFormId: 4 },
+  { id: 18, name: "Event Centre", inspectionFormId: 4 },
+  { id: 19, name: "Hostel", inspectionFormId: 4 },
+  { id: 20, name: "Motel", inspectionFormId: 4 },
+  { id: 21, name: "Guest House", inspectionFormId: 4 },
 
-  },
-  {
-    name: "Non-consumables",
-    inspectionFormId: 6,
+  { id: 22, name: "Religious", inspectionFormId: 5 },
+  { id: 23, name: "Educational", inspectionFormId: 5 },
+  { id: 24, name: "Coorperate", inspectionFormId: 5 },
 
-  },
-  {
-    name: "Other Industry Services",
-    inspectionFormId: 6,
+  { id: 25, name: "Consumables", inspectionFormId: 6 },
+  { id: 26, name: "Non-consumables", inspectionFormId: 6 },
+  { id: 27, name: "Other  Services", inspectionFormId: 6 },
 
-  },
+  { id: 28, name: "Market", inspectionFormId: 7 },
+  { id: 29, name: "Lorry park", inspectionFormId: 7 },
+  { id: 30, name: "Market and lorry park", inspectionFormId: 7 },
+  { id: 31, name: "Slaughter house", inspectionFormId: 8 },
+  { id: 32, name: "Slaughter slab", inspectionFormId: 8 },
+  { id: 33, name: "Cemetery", inspectionFormId: 8 },
+  { id: 34, name: "Transfer station", inspectionFormId: 8 },
+  { id: 35, name: "Public Toilet", inspectionFormId: 8 },
+  { id: 36, name: "Communal container", inspectionFormId: 8 },
 
-  {
-    name: "Market",
-    inspectionFormId: 7,
-  },
-  {
-    name: "Lorry park",
-    inspectionFormId: 7,
-  },
-  {
-    name: "Market and lorry park",
-    inspectionFormId: 7,
-  },
-  {
-    name: "Slaughter house",
-    inspectionFormId: 8,
-  },
-  {
-    name: "Slaughter slab",
-    inspectionFormId: 8,
-  },
-  {
-    name: "Cemetery",
-    inspectionFormId: 8,
-  },
-  {
-    name: "Transfer site",
-    inspectionFormId: 8,
-  },
-  {
-    name: "Public Toilet",
-    inspectionFormId: 8,
-  },
-  {
-    name: "Communal container",
-    inspectionFormId: 8,
-  },
- 
-  {
-    name: "Abattoir",
-    inspectionFormId: 8,
-  }, {
-    name: "Bath House",
-    inspectionFormId: 8,
-  }, {
-    name: "Urinal",
-    inspectionFormId: 8,
-  },
-  {
-    name: "Herbal Shop",
-    inspectionFormId: 3,
-  },
+  { id: 37, name: "Abattoir", inspectionFormId: 8 },
+  { id: 38, name: "Bath House", inspectionFormId: 8 },
+  { id: 39, name: "Urinal", inspectionFormId: 8 },
+  { id: 40, name: "Herbal Shop", inspectionFormId: 3 },
 ];
-
-

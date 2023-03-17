@@ -187,4 +187,18 @@ export const respondentDesignation = [
     name: "Market Secretary",
     inspectionFormId: 7,
   },
+
+  {
+    name: "Pastor",
+    inspectionFormId: 5,
+  },
+  {
+    name: "Imam",
+    inspectionFormId: 5,
+  },
+  {
+    name: "Church Member",
+    inspectionFormId: 5,
+  },
+  
 ];
