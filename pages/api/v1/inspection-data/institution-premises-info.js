@@ -190,6 +190,11 @@ const post = async (req, res) => {
         req.body.buildingStructureConditionId == "null"
           ? null
           : Number(req.body.buildingStructureConditionId),
+
+      physicalStructureTypeId:
+        req.body.physicalStructureTypeId == "null"
+          ? null
+          : Number(req.body.physicalStructureTypeId),
     };
     const response = await prisma.institutionPremisesInfoSection.create({
       data,
@@ -203,7 +208,6 @@ const post = async (req, res) => {
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
     res.status(500).json({ statusCode: 0, message: "Data skipped" });
-
   }
 };
 

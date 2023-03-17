@@ -18,6 +18,9 @@ export const waterSourceType = [
     name: "Tanker service",
   },
   {
+    name: "Borehole",
+  },
+  {
     name: "Mechanised Borehole",
   },
   {
