@@ -879,9 +879,12 @@ model YesNo {
   wasteProviderAccreditted                           SolidWasteSection[]              @relation("wasteProviderAccreditted")
   obnoxiousTradeExistFollowUp                        FollowUpInspection[]             @relation("obnoxiousTradeExistFollowUp")
   isNuisanceObserved                                 FollowUpInspection[]             @relation("isNuisanceObserved")
-  InstitutionPremisesInfoSection                     InstitutionPremisesInfoSection[] @relation("kitchenAvailability")
-  EateryPremisesInfoSection                          EateryPremisesInfoSection[]      @relation("kitchenAvailability")
+  kitchenAvailabilityInstitution                     InstitutionPremisesInfoSection[] @relation("kitchenAvailability")
+  foodVendorAvailability                             InstitutionPremisesInfoSection[] @relation("foodVendorAvailability")
 
+  kitchenAvailabilityEatery EateryPremisesInfoSection[] @relation("kitchenAvailability")
+
+  kitchenAvailabilityHospitality HospitalityPremisesInfoSection[] @relation("kitchenAvailability")
 }
 
 model InspectionType {
@@ -1087,7 +1090,9 @@ model HospitalityPremisesInfoSection {
   urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   User                                      User           @relation(fields: [userId], references: [id])
   Inspection                                Inspection     @relation(fields: [inspectionId], references: [id])
-  userId                                    Int
+  kitchenAvailability                       YesNo?         @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
+
+  userId Int
 }
 
 model SanitaryPremisesInfoSection {
@@ -1278,13 +1283,13 @@ model InstitutionPremisesInfoSection {
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   foodVendorAvailability                    YesNo?   @relation("foodVendorAvailability", fields: [foodVendorAvailabilityId], references: [id])
+  kitchenAvailability                       YesNo?   @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
 
   physicalStructureType StructureType? @relation(fields: [physicalStructureTypeId], references: [id])
 
   User       User       @relation(fields: [userId], references: [id])
   userId     Int
   Inspection Inspection @relation(fields: [inspectionId], references: [id])
- 
 }
 
 model IndustryPremisesInfoSection {

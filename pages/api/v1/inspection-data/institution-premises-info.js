@@ -195,6 +195,10 @@ const post = async (req, res) => {
         req.body.physicalStructureTypeId == "null"
           ? null
           : Number(req.body.physicalStructureTypeId),
+      foodVendorAvailabilityId:
+        req.body.foodVendorAvailabilityId == "null"
+          ? null
+          : Number(req.body.foodVendorAvailabilityId),
     };
     const response = await prisma.institutionPremisesInfoSection.create({
       data,
