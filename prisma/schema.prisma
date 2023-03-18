@@ -593,6 +593,8 @@ model Type {
   Service                 Service[]
   Subtype                 Subtype[]
   InspectionForm          InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
+
+  @@unique([inspectionFormId, name], name: "inspectionFormName")
 }
 
 model Subtype {
@@ -606,6 +608,8 @@ model Subtype {
   eateryPremisesSubType EateryPremisesInfoSection[] @relation("eateryPremisesSubType")
   InspectionForm        InspectionForm              @relation(fields: [inspectionFormId], references: [id])
   Type                  Type                        @relation(fields: [typeId], references: [id])
+    @@unique([typeId, name], name: "typeName")
+
 }
 
 model ToiletPitPosition {

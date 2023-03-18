@@ -1060,6 +1060,8 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
     "fireExtinguisherId" INTEGER,
     "numberFireExtinguisher" INTEGER,
     "buildingStructureConditionId" INTEGER,
+    "physicalStructureTypeId" INTEGER,
+    "foodVendorAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1642,6 +1644,12 @@ CREATE UNIQUE INDEX "Region_code_key" ON "Region"("code");
 CREATE UNIQUE INDEX "District_abbrv_key" ON "District"("abbrv");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Type_inspectionFormId_name_key" ON "Type"("inspectionFormId", "name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Subtype_typeId_name_key" ON "Subtype"("typeId", "name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "BasicInfoSection_inspectionId_key" ON "BasicInfoSection"("inspectionId");
 
 -- CreateIndex
@@ -1858,7 +1866,13 @@ ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSectio
 ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_urinalAvailabilityId_fkey" FOREIGN KEY ("urinalAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_kitchenAvailabilityId_fkey" FOREIGN KEY ("kitchenAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_physicalStructureTypeId_fkey" FOREIGN KEY ("physicalStructureTypeId") REFERENCES "StructureType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_approvedHandwashingFacilityAvail_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1925,6 +1939,9 @@ ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremises
 
 -- AddForeignKey
 ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_kitchenAvailabilityId_fkey" FOREIGN KEY ("kitchenAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_approvedHandwashingFacilityAva_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2056,6 +2073,9 @@ ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSectio
 ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSection_physicalStructureTypeId_fkey" FOREIGN KEY ("physicalStructureTypeId") REFERENCES "StructureType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_approvedHandwashingFacility_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2069,6 +2089,15 @@ ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremises
 
 -- AddForeignKey
 ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_urinalAvailabilityId_fkey" FOREIGN KEY ("urinalAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_foodVendorAvailabilityId_fkey" FOREIGN KEY ("foodVendorAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_kitchenAvailabilityId_fkey" FOREIGN KEY ("kitchenAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_physicalStructureTypeId_fkey" FOREIGN KEY ("physicalStructureTypeId") REFERENCES "StructureType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2096,6 +2125,9 @@ ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSe
 
 -- AddForeignKey
 ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_physicalStructureTypeId_fkey" FOREIGN KEY ("physicalStructureTypeId") REFERENCES "StructureType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "LicencePermitSection" ADD CONSTRAINT "LicencePermitSection_animalsPermitAvailabilityId_fkey" FOREIGN KEY ("animalsPermitAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
