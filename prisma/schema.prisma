@@ -173,14 +173,14 @@ model UserAddedByUser {
   addeeId   Int?
 }
 
-model UserLevel {
-  id        Int        @id @default(autoincrement())
-  name      String     @db.VarChar(255)
-  deleted   Int?       @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  UserType  UserType[]
-}
+// model UserLevel {
+//   id        Int        @id @default(autoincrement())
+//   name      String     @db.VarChar(255)
+//   deleted   Int?       @default(0)
+//   createdAt DateTime   @default(now())
+//   updatedAt DateTime   @updatedAt
+//   UserType  UserType[]
+// }
 
 model Messaging {
   id           Int     @id @default(autoincrement())
@@ -227,54 +227,52 @@ model UserType {
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
-  PageAccess       PageAccess[]
-  PageActionAccess PageActionAccess[]
+ 
   User             User[]
-  UserLevel        UserLevel          @relation(fields: [userLevelId], references: [id])
 }
 
-model PageAccess {
-  id         Int      @id @default(autoincrement())
-  pageId     Int
-  userTypeId Int
-  deleted    Int?     @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  Page       Page     @relation(fields: [pageId], references: [id])
-  UserType   UserType @relation(fields: [userTypeId], references: [id])
-}
+// model PageAccess {
+//   id         Int      @id @default(autoincrement())
+//   pageId     Int
+//   userTypeId Int
+//   deleted    Int?     @default(0)
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+//   Page       Page     @relation(fields: [pageId], references: [id])
+//   UserType   UserType @relation(fields: [userTypeId], references: [id])
+// }
 
-model PageActionAccess {
-  id           Int        @id @default(autoincrement())
-  userTypeId   Int
-  pageActionId Int
-  deleted      Int?       @default(0)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  PageAction   PageAction @relation(fields: [pageActionId], references: [id])
-  UserType     UserType   @relation(fields: [userTypeId], references: [id])
-}
+// model PageActionAccess {
+//   id           Int        @id @default(autoincrement())
+//   userTypeId   Int
+//   pageActionId Int
+//   deleted      Int?       @default(0)
+//   createdAt    DateTime   @default(now())
+//   updatedAt    DateTime   @updatedAt
+//   PageAction   PageAction @relation(fields: [pageActionId], references: [id])
+//   UserType     UserType   @relation(fields: [userTypeId], references: [id])
+// }
 
-model Page {
-  id         Int          @id @default(autoincrement())
-  name       String       @db.VarChar(255)
-  path       String       @db.VarChar(255)
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  PageAccess PageAccess[]
-  PageAction PageAction[] @relation("PageToPageAction")
-}
+// model Page {
+//   id         Int          @id @default(autoincrement())
+//   name       String       @db.VarChar(255)
+//   path       String       @db.VarChar(255)
+//   deleted    Int?         @default(0)
+//   createdAt  DateTime     @default(now())
+//   updatedAt  DateTime     @updatedAt
+//   PageAccess PageAccess[]
+//   PageAction PageAction[] @relation("PageToPageAction")
+// }
 
-model PageAction {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(255)
-  deleted          Int?               @default(0)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  PageActionAccess PageActionAccess[]
-  Page             Page[]             @relation("PageToPageAction")
-}
+// model PageAction {
+//   id               Int                @id @default(autoincrement())
+//   name             String             @db.VarChar(255)
+//   deleted          Int?               @default(0)
+//   createdAt        DateTime           @default(now())
+//   updatedAt        DateTime           @updatedAt
+//   PageActionAccess PageActionAccess[]
+//   Page             Page[]             @relation("PageToPageAction")
+// }
 
 model Action {
   id                  Int                   @id @default(autoincrement())

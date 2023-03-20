@@ -30,26 +30,7 @@ const UserType = ({  pages }) => {
               {/* end card header */}
               <div className="card-body">
                 <div className="row gy-4">
-                  {/* <div className="col-xxl-4 col-md-4">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Level
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => setLevel(Number(e.target.value))}
-                      >
-                        <option selected>Choose...</option>
-                        {userLevels.map((level) => (
-                          <option key={level.id} value={level.id}>
-                            {level.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div> */}
+                
                   <div className="col-xxl-4 col-md-4">
                     <div>
                       <label htmlFor="basiInput" className="form-label">

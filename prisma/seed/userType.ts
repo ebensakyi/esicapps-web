@@ -1,30 +1,27 @@
 export const userType = [
   {
+    id:1,
     name: "Super Administrator",
-    userLevelId: 1,
   },
-  {
+  { id:2,
     name: "National Supervisor",
-    userLevelId: 1,
   },
-  {
+  { id:3,
     name: "Regional Administrator",
-    userLevelId: 2,
   },
-  {
+  { id:4,
     name: "Regional Supervisor",
-    userLevelId: 2,
   },
-  {
+  { id:5,
     name: "MMDA Administrator",
-    userLevelId: 3,
   },
-  {
+  { id:6,
     name: "MMDA Supervisor",
-    userLevelId: 3,
   },
-  {
+  { id:7,
     name: "MMDA Field Inspector",
-    userLevelId: 3,
+  },
+  { id:8,
+    name: "Development Partner",
   },
 ];

@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import { SERVER_BASE_URL } from "../config";
 import Dashboard from '../components/Dashboard'
 
-export default function dashboard({data}) {
+export default function dashboard({data,regions}) {
     return (
         <div id="layout-wrapper">
         <Header />
@@ -15,7 +15,7 @@ export default function dashboard({data}) {
               <Dashboard
               data={data}
               
-                // regions={regions}
+              regions={regions}
                 // userTypes={userTypes}
               />
             </div>
@@ -29,7 +29,6 @@ export default function dashboard({data}) {
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
 
-    console.log(token);
 
     if (!token) {
         return {
@@ -42,12 +41,12 @@ export async function getServerSideProps(context) {
     const data = await fetch(`${SERVER_BASE_URL}/api/v1/dashboard?token=${token}`).then(
         (res) => res.json()
     );
-    // const paymentTypes = await fetch(`${SERVER_BASE_URL}/api/payment-type`).then(
-    //     (res) => res.json()
-    // );
+    const regions = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/region`).then(
+        (res) => res.json()
+    );
     return {
         props: {
-          data
+          data,regions
         },
     };
 

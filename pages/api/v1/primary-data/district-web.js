@@ -21,17 +21,17 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let data, regionId, userLevel;
+    let data, regionId, userType;
     if (req.query.token) {
       data = await verifyToken(req.query.token);
 
       regionId = data.regionId;
-      userLevel = data.user.UserType.userLevelId;
+      userType = data.user.UserType.id;
     }
 
     // console.log(">>>>>>>s", data.regionId);
 
-    if (userLevel == 1) {
+    if (userType == 1) {
       const district = await prisma.district.findMany({
         where: { deleted: 0 },
         include: { Region: true },

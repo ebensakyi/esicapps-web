@@ -6,7 +6,6 @@ const post = async (req, res) => {
   try {
     const data = {
       name: req.body.data.name,
-      userLevelId:req.body.data.level,
     };
     const containerVolume = await prisma.containerVolume.create({ data });
     res

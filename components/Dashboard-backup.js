@@ -25,32 +25,19 @@ ChartJS.register(
   BarElement
 );
 
-const Dashboard = ({ regions }) => {
+const Dashboard = ({ data, regions }) => {
   let loggedInUserType = Cookies.get("lvut2").split("??")[0];
 
-  const [dashboardData, setDashboardData] = useState({});
+  const [dashboardData, setDashboardData] = useState();
 
   const [level, setLevel] = useState();
   const [region, setRegion] = useState();
   const [district, setDistrict] = useState();
   const [districts, setDistricts] = useState([]);
 
-  const getDashboard = async () => {
-    if (loggedInUserType == 1) {
-      const response = await axios.get("/api/v1/national");
-    }
-    if (loggedInUserType == 2) {
-      const response = await axios.get("/api/v1/regional");
-    }
-    if (loggedInUserType == 3) {
-      const response = await axios.get("/api/v1/district");
-    }
-  };
-
   const getDistrictsByRegion = async (e, regionId) => {
     try {
       e.preventDefault();
-
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
@@ -59,45 +46,10 @@ const Dashboard = ({ regions }) => {
     } catch (error) {}
   };
 
-  const filter = async (e) => {
+  const filter = async(e)=>{
     e.preventDefault();
-    let url;
-
-
-    if (loggedInUserType == 1) {
-      if (level == 1) {
-        url = "/api/v1/dashboard/national?filterBy=1";
-      }
-      if (level == 2) {
-        url = `/api/v1/dashboard/national?filterBy=2&id=${region}`;
-      }
-      if (level == 3) {
-        url = `/api/v1/dashboard/national?filterBy=3&id=${district}`;
-      }
-    }
-    if (loggedInUserType == 2) {
-      if (level == 1) {
-        url = `/api/v1/dashboard/region?filterBy=2&id=${region}`;
-      }
-      if (level == 2) {
-        url = `/api/v1/dashboard/region?filterBy=2&id=${region}`;
-      }
-      if (level == 3) {
-        url = `/api/v1/dashboard/region?filterBy=3&id=${region}`;
-      }
-    }
-    if (loggedInUserType == 3) {
-      url = "/api/v1/dashboard/national?filterBy=1";
-    }
-
-    const response = await axios.get(url);
-    console.log("filter");
-  };
-
-  useEffect(() => {
-   
-  });
-
+console.log("filter");
+  }
 
   let baselinePieChartData,
     reinspectionPieChartData,
@@ -115,11 +67,11 @@ const Dashboard = ({ regions }) => {
   //  useEffect(() => {
 
   baselinePieChartData = {
-    labels: dashboardData.baselineFormsArray,
+    labels: data.baselineFormsArray,
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.baselineCountArray,
+        data: data.baselineCountArray,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -146,11 +98,11 @@ const Dashboard = ({ regions }) => {
   };
 
   reinspectionPieChartData = {
-    labels: dashboardData.reinspectionFormArray,
+    labels: data.reinspectionFormArray,
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.reinspectionCountArray,
+        data: data.reinspectionCountArray,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -190,7 +142,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.followUpCountArray,
+        data: data.followUpCountArray,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -221,7 +173,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.actionTakenCount,
+        data: data.actionTakenCount,
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -238,11 +190,11 @@ const Dashboard = ({ regions }) => {
   };
 
   waterSourceBarchartData = {
-    labels: dashboardData.water?.waterSourceTypeLabelArray,
+    labels: data.water.waterSourceTypeLabelArray,
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.water?.waterSourceTypeCountArray,
+        data: data.water.waterSourceTypeCountArray,
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -259,11 +211,11 @@ const Dashboard = ({ regions }) => {
   };
 
   waterSourceConditionBarchartData = {
-    labels: dashboardData.water?.waterSourceConditionLabelArray,
+    labels: data.water.waterSourceConditionLabelArray,
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.water?.waterSourceConditionCountArray,
+        data: data.water.waterSourceConditionCountArray,
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -280,11 +232,11 @@ const Dashboard = ({ regions }) => {
   };
 
   waterStorageConditionBarchartData = {
-    labels: dashboardData.water?.waterStorageConditionLabelArray,
+    labels: data.water.waterStorageConditionLabelArray,
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.water?.waterStorageConditionCountArray,
+        data: data.water.waterStorageConditionCountArray,
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -305,7 +257,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.lw?.toiletAvailabilityArray,
+        data: data.lw.toiletAvailabilityArray,
         backgroundColor: ["green", "red"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -318,7 +270,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.lw?.toiletAdequacyArray,
+        data: data.lw.toiletAdequacyArray,
         backgroundColor: ["green", "red"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -331,7 +283,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.lw?.toiletConditionArray,
+        data: data.lw.toiletConditionArray,
         backgroundColor: ["green", "red"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -347,7 +299,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.sw?.wasteCollectorArray,
+        data: data.sw.wasteCollectorArray,
         backgroundColor: ["green", "red"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -360,7 +312,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.sw?.wasteSortingArray,
+        data: data.sw.wasteSortingArray,
         backgroundColor: ["green", "red"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -373,7 +325,7 @@ const Dashboard = ({ regions }) => {
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.sw?.wasteReceptacleArray,
+        data: data.sw.wasteReceptacleArray,
         backgroundColor: ["green", "red"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -405,82 +357,233 @@ const Dashboard = ({ regions }) => {
     <>
       <div className="row">
         <div className="col-12">
-          <div className="row">
-            <div className="col-lg-3">
-              {" "}
-              <select
-                className="form-select"
-                onChange={(e) => setLevel(e.target.value)}
-              >
-                <option value="">Filter by</option>
-                <option value="1">National</option>
-                <option value="2">Region</option>
-                <option value="3">District</option>
-              </select>
-            </div>
-            {level == "2" ? (
-              <div className="col-lg-3">
+          <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div className="row">
+              <div className="col-md-4">
                 {" "}
                 <select
                   className="form-select"
+                  onChange={(e) => setLevel(e.target.value)}
+                >
+                  <option value="">Select Level</option>
+                  <option value="1">National</option>
+                  <option value="2">Region</option>
+                  <option value="3">District</option>
+                </select>
+              </div>
+              {level == "2" ? (
+                <div className="col-md-4">
+                  {" "}
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    value={region}
+                    onChange={async (e) => {
+                      setRegion(e.target.value);
+                      getDistrictsByRegion(e, e.target.value);
+                    }}
+                  >
+                    <option>Choose...</option>
+                    {regions.map((region) => (
+                      <option value={region.id} key={region.id}>
+                        {region.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              <div className="col-md-4">
+                <select
+                  className="form-select"
                   id="inputGroupSelect02"
-                  value={region}
-                  onChange={async (e) => {
-                    setRegion(e.target.value);
-                    getDistrictsByRegion(e, e.target.value);
+                  value={district}
+                  onChange={(e) => {
+                    setDistrict(e.target.value);
+                    // getElectoralByDistrict(e, e.target.value);
                   }}
                 >
                   <option>Choose...</option>
-                  {regions.map((region) => (
-                    <option value={region.id} key={region.id}>
-                      {region.name}
+                  {districts.map((district) => (
+                    <option key={district.id} value={district.id}>
+                      {district.name}
                     </option>
                   ))}
                 </select>
               </div>
-            ) : (
-              <></>
-            )}
-            <div className="col-lg-3">
-              <select
-                className="form-select"
-                id="inputGroupSelect02"
-                value={district}
-                onChange={(e) => {
-                  setDistrict(e.target.value);
-                  // getElectoralByDistrict(e, e.target.value);
-                }}
-              >
-                <option>Choose...</option>
-                {districts.map((district) => (
-                  <option key={district.id} value={district.id}>
-                    {district.name}
-                  </option>
-                ))}
-              </select>
+              <div className="col-md-4">
+                        <button
+                          className="btn btn-primary"
+                          onClick={(e) => {
+                            filter(e);
+                          }}
+                        >
+                          Submit
+                        </button>
+              </div>
             </div>
-            <div className="col-lg-3">
-              <button
-                className="btn btn-primary"
-                onClick={(e) => {
-                  filter(e);
-                }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-          {/* <h4 className="mb-sm-0">CRM</h4> */}
-          {/* <div className="page-title-right">
+            {/* <h4 className="mb-sm-0">CRM</h4> */}
+            {/* <div className="page-title-right">
               <ol className="breadcrumb m-0">
                 <li className="breadcrumb-item">
                   <a href="javascript: void(0);">Dashboards</a>
                 </li>
               </ol>
             </div> */}
+          </div>
         </div>
       </div>
-      <br />
+      {/* end page title */}
+      {/* <div className="row">
+            <div className="col-xl-12">
+              <div className="card crm-widget">
+                <div className="card-body p-0">
+                  <div className="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
+                    <div className="col">
+                      <div className="py-4 px-3">
+                        <h5 className="text-muted text-uppercase fs-13">
+                          Total Submitted{" "}
+                          <i className="ri-arrow-up-circle-line text-success fs-18 float-end align-middle" />
+                        </h5>
+                        <div className="card-body px-0">
+                  <ul className="list-inline main-chart text-center mb-0">
+                    <li className="list-inline-item chart-border-left me-0 border-0">
+                      <h4 className="text-primary">
+                        $584k{" "}
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Revenue
+                        </span>
+                      </h4>
+                    </li>
+                    <li className="list-inline-item chart-border-left me-0">
+                      <h4>
+                        $497k
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Expenses
+                        </span>
+                      </h4>
+                    </li>
+                    <li className="list-inline-item chart-border-left me-0">
+                      <h4>
+                        <span data-plugin="counterup">3.6</span>%
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Profit Ratio
+                        </span>
+                      </h4>
+                    </li>
+                  </ul>
+                  <div
+                    id="revenue-expenses-charts"
+                    data-colors='["--vz-success", "--vz-danger"]'
+                    className="apex-charts"
+                    dir="ltr"
+                  />
+                </div>
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="mt-3 mt-md-0 py-4 px-3">
+                        <h5 className="text-muted text-uppercase fs-13">
+                         Total Baseline{" "}
+                          <i className="ri-arrow-up-circle-line text-success fs-18 float-end align-middle" />
+                        </h5>
+                        <div className="d-flex align-items-center">
+                          <div className="flex-shrink-0">
+                            <i className="ri-exchange-dollar-line display-6 text-muted" />
+                          </div>
+                          <div className="flex-grow-1 ms-3">
+                            <h2 className="mb-0">
+                              $
+                              <span className="counter-value" data-target="489.4">
+                                0
+                              </span>
+                              k
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="mt-3 mt-md-0 py-4 px-3">
+                        <h5 className="text-muted text-uppercase fs-13">
+                          Total Reinspection{" "}
+                          <i className="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle" />
+                        </h5>
+                        <div className="d-flex align-items-center">
+                          <div className="flex-shrink-0">
+                            <i className="ri-pulse-line display-6 text-muted" />
+                          </div>
+                          <div className="flex-grow-1 ms-3">
+                            <h2 className="mb-0">
+                              <span className="counter-value" data-target="32.89">
+                               1000000000
+                              </span>
+                              %
+                            </h2>
+                          </div>
+                          <br/>
+                          <div className="flex-grow-1 ms-3">
+                            <h2 className="mb-0">
+                              <span className="counter-value" data-target="32.89">
+                                100000000
+                              </span>
+                              %
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="mt-3 mt-lg-0 py-4 px-3">
+                        <h5 className="text-muted text-uppercase fs-13">
+                          Daily Average Income{" "}
+                          <i className="ri-arrow-up-circle-line text-success fs-18 float-end align-middle" />
+                        </h5>
+                        <div className="d-flex align-items-center">
+                          <div className="flex-shrink-0">
+                            <i className="ri-trophy-line display-6 text-muted" />
+                          </div>
+                          <div className="flex-grow-1 ms-3">
+                            <h2 className="mb-0">
+                              $
+                              <span
+                                className="counter-value"
+                                data-target="1596.5"
+                              >
+                                0
+                              </span>
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="mt-3 mt-lg-0 py-4 px-3">
+                        <h5 className="text-muted text-uppercase fs-13">
+                          Annual Deals{" "}
+                          <i className="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle" />
+                        </h5>
+                        <div className="d-flex align-items-center">
+                          <div className="flex-shrink-0">
+                            <i className="ri-service-line display-6 text-muted" />
+                          </div>
+                          <div className="flex-grow-1 ms-3">
+                            <h2 className="mb-0">
+                              <span className="counter-value" data-target={2659}>
+                                0
+                              </span>
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+      {/* end row */}
       <div className="row">
         <div className="col-xxl-4">
           <div className="card card-height-100">
@@ -491,13 +594,46 @@ const Dashboard = ({ regions }) => {
                   <i className="bx bx-home-circle text-success" />
                 </span>
               </div>
+              {/* <div className="flex-shrink-0">
+                    <div className="dropdown card-header-dropdown">
+                      <a
+                        className="text-reset dropdown-btn"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span className="fw-semibold text-uppercase fs-12">
+                          Sort by:{" "}
+                        </span>
+                        <span className="text-muted">
+                          Current Year
+                          <i className="mdi mdi-chevron-down ms-1" />
+                        </span>
+                      </a>
+                      <div className="dropdown-menu dropdown-menu-end">
+                        <a className="dropdown-item" href="#">
+                          Today
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Week
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Month
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Current Year
+                        </a>
+                      </div>
+                    </div>
+                  </div> */}
             </div>
             {/* end card header */}
             <div className="card-body px-0">
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {dashboardData.baselineCount}
+                    {data.baselineCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Baseline
@@ -506,7 +642,7 @@ const Dashboard = ({ regions }) => {
                 </li>
                 <li className="list-inline-item chart-border-left me-0">
                   <h4>
-                    {dashboardData.reInspectionCount}
+                    {data.reInspectionCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Reinspection
@@ -515,7 +651,7 @@ const Dashboard = ({ regions }) => {
                 </li>
                 <li className="list-inline-item chart-border-left me-0">
                   <h4>
-                    {dashboardData.followUpCount}
+                    {data.followUpCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Follow up
@@ -544,13 +680,46 @@ const Dashboard = ({ regions }) => {
                   <i className="bx bx-chart text-danger" />
                 </span>
               </div>
+              {/* <div className="flex-shrink-0">
+                    <div className="dropdown card-header-dropdown">
+                      <a
+                        className="text-reset dropdown-btn"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span className="fw-semibold text-uppercase fs-12">
+                          Sort by:{" "}
+                        </span>
+                        <span className="text-muted">
+                          Current Year
+                          <i className="mdi mdi-chevron-down ms-1" />
+                        </span>
+                      </a>
+                      <div className="dropdown-menu dropdown-menu-end">
+                        <a className="dropdown-item" href="#">
+                          Today
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Week
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Month
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Current Year
+                        </a>
+                      </div>
+                    </div>
+                  </div> */}
             </div>
             {/* end card header */}
             <div className="card-body px-0">
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {dashboardData.publishedCount}
+                    {data.publishedCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Published
@@ -560,7 +729,7 @@ const Dashboard = ({ regions }) => {
 
                 <li className="list-inline-item chart-border-left me-0">
                   <h4>
-                    {dashboardData.unPublishedCount}
+                    {data.unPublishedCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Unpublished
@@ -589,19 +758,68 @@ const Dashboard = ({ regions }) => {
                   <i className="bx bx-trash-alt text-primary" />
                 </span>
               </div>
+              {/* <div className="flex-shrink-0">
+                    <div className="dropdown card-header-dropdown">
+                      <a
+                        className="text-reset dropdown-btn"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span className="fw-semibold text-uppercase fs-12">
+                          Sort by:{" "}
+                        </span>
+                        <span className="text-muted">
+                          Current Year
+                          <i className="mdi mdi-chevron-down ms-1" />
+                        </span>
+                      </a>
+                      <div className="dropdown-menu dropdown-menu-end">
+                        <a className="dropdown-item" href="#">
+                          Today
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Week
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Month
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Current Year
+                        </a>
+                      </div>
+                    </div>
+                  </div> */}
             </div>
             {/* end card header */}
             <div className="card-body px-0">
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {dashboardData.sanitationReportCount}
+                    {data.sanitationReportCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Total Reports
                     </span>
                   </h4>
                 </li>
+                {/* <li className="list-inline-item chart-border-left me-0">
+                  <h4>
+                    {data.reInspectionCount}<br/>
+                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                      Reinspection
+                    </span>
+                  </h4>
+                </li>
+                <li className="list-inline-item chart-border-left me-0">
+                  <h4>
+                    {data.followUpCount}<br/>
+                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                      Follow up
+                    </span>
+                  </h4>
+                </li> */}
               </ul>
               <div
                 id="revenue-expenses-charts"
@@ -622,19 +840,68 @@ const Dashboard = ({ regions }) => {
                   <i className="bx bx-user text-warning" />
                 </span>
               </div>
+              {/* <div className="flex-shrink-0">
+                    <div className="dropdown card-header-dropdown">
+                      <a
+                        className="text-reset dropdown-btn"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span className="fw-semibold text-uppercase fs-12">
+                          Sort by:{" "}
+                        </span>
+                        <span className="text-muted">
+                          Current Year
+                          <i className="mdi mdi-chevron-down ms-1" />
+                        </span>
+                      </a>
+                      <div className="dropdown-menu dropdown-menu-end">
+                        <a className="dropdown-item" href="#">
+                          Today
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Week
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Month
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Current Year
+                        </a>
+                      </div>
+                    </div>
+                  </div> */}
             </div>
             {/* end card header */}
             <div className="card-body px-0">
               <ul className="list-inline main-chart text-center mb-0">
                 <li className="list-inline-item chart-border-left me-0 border-0">
                   <h4 className="text-primary">
-                    {dashboardData.usersCount}
+                    {data.usersCount}
                     <br />
                     <span className="text-muted d-inline-block fs-13 align-middle ms-2">
                       Total Active Users
                     </span>
                   </h4>
                 </li>
+                {/* <li className="list-inline-item chart-border-left me-0">
+                  <h4>
+                    {data.reInspectionCount}<br/>
+                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                      Reinspection
+                    </span>
+                  </h4>
+                </li>
+                <li className="list-inline-item chart-border-left me-0">
+                  <h4>
+                    {data.followUpCount}<br/>
+                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                      Follow up
+                    </span>
+                  </h4>
+                </li> */}
               </ul>
               <div
                 id="revenue-expenses-charts"
@@ -654,6 +921,36 @@ const Dashboard = ({ regions }) => {
               <h4 className="card-title mb-0 flex-grow-1">
                 INSPECTION SUMMARY
               </h4>
+              {/* <div className="flex-shrink-0">
+                    <div className="dropdown card-header-dropdown">
+                      <a
+                        className="text-reset dropdown-btn"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span className="text-muted">
+                          02 Nov 2021 to 31 Dec 2021
+                          <i className="mdi mdi-chevron-down ms-1" />
+                        </span>
+                      </a>
+                      <div className="dropdown-menu dropdown-menu-end">
+                        <a className="dropdown-item" href="#">
+                          Today
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Week
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Last Month
+                        </a>
+                        <a className="dropdown-item" href="#">
+                          Current Year
+                        </a>
+                      </div>
+                    </div>
+                  </div> */}
             </div>
             {/* end card header */}
             <div className="card-body">
@@ -683,7 +980,7 @@ const Dashboard = ({ regions }) => {
                   </thead>
                   <tbody>
                     {" "}
-                    {dashboardData.allInspectionSummary?.map((a) => {
+                    {data.allInspectionSummary.map((a) => {
                       return (
                         <tr key={a.id}>
                           <td>{a.name}</td>

@@ -153,11 +153,11 @@ const get = async (req, res) => {
 
     let data = await verifyToken(req.query.token);
 
-    let userLevel = data.user.UserType.userLevelId;
+    let userType = data.user.UserType.id;
     let region = data.user.regionId;
     let district = data.user.districtId;
 
-    if (userLevel == 1) {
+    if (userType == 1) {
       user = await prisma.user.findMany({
         // where: { deleted: 0 },
         include: { Region: true, District: true, UserType: true },
@@ -167,7 +167,7 @@ const get = async (req, res) => {
       });
       return res.status(200).json(user);
     }
-    if (userLevel == 2) {
+    if (userType == 2) {
       user = await prisma.user.findMany({
         where: { regionId: Number(region) },
         include: { Region: true, District: true, UserType: true },
@@ -178,7 +178,7 @@ const get = async (req, res) => {
       return res.status(200).json(user);
     }
 
-    if (userLevel == 3) {
+    if (userType == 3) {
       user = await prisma.user.findMany({
         where: {  districtId: Number(district) },
         include: { Region: true, District: true, UserType: true },
