@@ -32,8 +32,8 @@ const whereClause = (data) => {
 
 const get = async (req, res) => {
 
-  console.log("req.cookies",req.cookies);
-  let data = await verifyToken(req.query.token);
+  console.log("req.cookies",req.query.id);
+  let data = await verifyToken(req.cookies.token);
   let district = data.user.districtId ==null? undefined:data.user.districtId;
   let region = data.user.regionId;
 

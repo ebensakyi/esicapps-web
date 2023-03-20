@@ -30,20 +30,20 @@ const Dashboard = ({ regions }) => {
 
   const [dashboardData, setDashboardData] = useState({});
 
-  const [level, setLevel] = useState();
-  const [region, setRegion] = useState();
-  const [district, setDistrict] = useState();
+  const [filterBy, setFilterBy] = useState();
+  const [region, setRegion] = useState(undefined);
+  const [district, setDistrict] = useState(undefined);
   const [districts, setDistricts] = useState([]);
 
   const getDashboard = async () => {
     if (loggedInUserType == 1) {
-      const response = await axios.get("/api/v1/national");
+      const response = await axios.get("/api/v1/dashboard/regional");
     }
     if (loggedInUserType == 2) {
-      const response = await axios.get("/api/v1/regional");
+      const response = await axios.get("/api/v1/dashboard/district");
     }
     if (loggedInUserType == 3) {
-      const response = await axios.get("/api/v1/district");
+      const response = await axios.get("/api/v1/dashboard/district");
     }
   };
 
@@ -63,31 +63,28 @@ const Dashboard = ({ regions }) => {
     e.preventDefault();
     let url;
 
+    console.log(filterBy);
+    console.log("region", region);
+    console.log("district", district);
 
-    if (loggedInUserType == 1) {
-      if (level == 1) {
+    if (loggedInUserType == 1 || loggedInUserType == 2) {
+      if (filterBy == 1) {
         url = "/api/v1/dashboard/national?filterBy=1";
       }
-      if (level == 2) {
-        url = `/api/v1/dashboard/national?filterBy=2&id=${region}`;
+      if (filterBy == 2) {
+        url = `/api/v1/dashboard/regional?regionId=${region}`;
       }
-      if (level == 3) {
-        url = `/api/v1/dashboard/national?filterBy=3&id=${district}`;
+      if (filterBy == 3) {
+        url = `/api/v1/dashboard/district?districtId=${district}`;
       }
     }
-    if (loggedInUserType == 2) {
-      if (level == 1) {
-        url = `/api/v1/dashboard/region?filterBy=2&id=${region}`;
-      }
-      if (level == 2) {
-        url = `/api/v1/dashboard/region?filterBy=2&id=${region}`;
-      }
-      if (level == 3) {
-        url = `/api/v1/dashboard/region?filterBy=3&id=${region}`;
+    if (loggedInUserType == 3 || loggedInUserType == 4) {
+      if (filterBy == 3) {
+        url = `/api/v1/dashboard/district?districtId=${district}`;
       }
     }
     if (loggedInUserType == 3) {
-      url = "/api/v1/dashboard/national?filterBy=1";
+      url = "/api/v1/dashboard/district?filterBy=1";
     }
 
     const response = await axios.get(url);
@@ -95,9 +92,13 @@ const Dashboard = ({ regions }) => {
   };
 
   useEffect(() => {
-   
-  });
-
+    async function fetchData() {
+      // You can await here
+      const response = await getDashboard();
+      // ...
+    }
+    fetchData();
+  }, []);
 
   let baselinePieChartData,
     reinspectionPieChartData,
@@ -410,7 +411,8 @@ const Dashboard = ({ regions }) => {
               {" "}
               <select
                 className="form-select"
-                onChange={(e) => setLevel(e.target.value)}
+                value={filterBy}
+                onChange={(e) => setFilterBy(e.target.value)}
               >
                 <option value="">Filter by</option>
                 <option value="1">National</option>
@@ -418,7 +420,7 @@ const Dashboard = ({ regions }) => {
                 <option value="3">District</option>
               </select>
             </div>
-            {level == "2" ? (
+            {filterBy == "2"||filterBy == "3"? (
               <div className="col-lg-3">
                 {" "}
                 <select
@@ -427,6 +429,7 @@ const Dashboard = ({ regions }) => {
                   value={region}
                   onChange={async (e) => {
                     setRegion(e.target.value);
+                    setDistrict(undefined);
                     getDistrictsByRegion(e, e.target.value);
                   }}
                 >
@@ -441,24 +444,29 @@ const Dashboard = ({ regions }) => {
             ) : (
               <></>
             )}
-            <div className="col-lg-3">
-              <select
-                className="form-select"
-                id="inputGroupSelect02"
-                value={district}
-                onChange={(e) => {
-                  setDistrict(e.target.value);
-                  // getElectoralByDistrict(e, e.target.value);
-                }}
-              >
-                <option>Choose...</option>
-                {districts.map((district) => (
-                  <option key={district.id} value={district.id}>
-                    {district.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {filterBy == "3" && region != undefined ? (
+              <div className="col-lg-3">
+                <select
+                  className="form-select"
+                  id="inputGroupSelect02"
+                  value={district}
+                  onChange={(e) => {
+                    setDistrict(e.target.value);
+                    // getElectoralByDistrict(e, e.target.value);
+                    console.log("district ", district);
+                  }}
+                >
+                  <option>Choose...</option>
+                  {districts.map((district) => (
+                    <option key={district.id} value={district.id}>
+                      {district.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="col-lg-3">
               <button
                 className="btn btn-primary"

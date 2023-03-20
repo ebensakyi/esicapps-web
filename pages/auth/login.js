@@ -27,7 +27,8 @@ export default function Login() {
         return toast.error(response.data.message);
       }
       if (response.status == 200) {
-        Cookies.set("ut", nanoid(50) + "??" + response.data.level, {
+        console.log(response.data);
+        Cookies.set("ut", nanoid(50) + "??" + response.data.userType, {
           expires: 3 * 60 * 60,
         });
        
