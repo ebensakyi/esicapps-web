@@ -202,12 +202,7 @@ async function main() {
     data: wasteWaterContainment,
   });
 
-  await prisma.page.createMany({
-    data: pages,
-  });
-  await prisma.pageAction.createMany({
-    data: pageActions,
-  });
+  
 
   await prisma.userType.createMany({
     data: userType,

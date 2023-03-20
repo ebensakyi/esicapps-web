@@ -27,12 +27,10 @@ export default function Login() {
         return toast.error(response.data.message);
       }
       if (response.status == 200) {
-        Cookies.set("lvut1", nanoid(50) + "??" + response.data.level, {
+        Cookies.set("ut", nanoid(50) + "??" + response.data.level, {
           expires: 3 * 60 * 60,
         });
-        Cookies.set("lvut2", response.data.userType + "??" + nanoid(50), {
-          expires: 3 * 60 * 60,
-        });
+       
 
         Cookies.set(
           "fullName",

@@ -87,17 +87,6 @@ CREATE TABLE "UserAddedByUser" (
 );
 
 -- CreateTable
-CREATE TABLE "UserLevel" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "UserLevel_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Messaging" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255),
@@ -141,59 +130,11 @@ CREATE TABLE "MessageType" (
 CREATE TABLE "UserType" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    "userLevelId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "UserType_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PageAccess" (
-    "id" SERIAL NOT NULL,
-    "pageId" INTEGER NOT NULL,
-    "userTypeId" INTEGER NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "PageAccess_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PageActionAccess" (
-    "id" SERIAL NOT NULL,
-    "userTypeId" INTEGER NOT NULL,
-    "pageActionId" INTEGER NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "PageActionAccess_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Page" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "path" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Page_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PageAction" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "PageAction_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1616,12 +1557,6 @@ CREATE TABLE "FollowUpInspection" (
     CONSTRAINT "FollowUpInspection_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "_PageToPageAction" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "Inspection_prevInspectionId_key" ON "Inspection"("prevInspectionId");
 
@@ -1697,12 +1632,6 @@ CREATE UNIQUE INDEX "InspectionPictures_formSectionImageId_inspectionId_key" ON 
 -- CreateIndex
 CREATE UNIQUE INDEX "FollowUpInspection_prevInspectionId_key" ON "FollowUpInspection"("prevInspectionId");
 
--- CreateIndex
-CREATE UNIQUE INDEX "_PageToPageAction_AB_unique" ON "_PageToPageAction"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_PageToPageAction_B_index" ON "_PageToPageAction"("B");
-
 -- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -1753,21 +1682,6 @@ ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sen
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "UserType" ADD CONSTRAINT "UserType_userLevelId_fkey" FOREIGN KEY ("userLevelId") REFERENCES "UserLevel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_pageActionId_fkey" FOREIGN KEY ("pageActionId") REFERENCES "PageAction"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Community" ADD CONSTRAINT "Community_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2545,9 +2459,3 @@ ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_isNuisanceOb
 
 -- AddForeignKey
 ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_generalSanitaryConditionId_fkey" FOREIGN KEY ("generalSanitaryConditionId") REFERENCES "SanitaryInsanitary"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_B_fkey" FOREIGN KEY ("B") REFERENCES "PageAction"("id") ON DELETE CASCADE ON UPDATE CASCADE;

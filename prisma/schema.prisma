@@ -223,7 +223,6 @@ model MessageType {
 model UserType {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
-  userLevelId      Int
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt

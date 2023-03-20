@@ -4,8 +4,7 @@ import { useState } from "react";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  let lv = Cookies.get("lvut1").split("??")[1];
-  let ut = Cookies.get("lvut2").split("??")[0];
+  let ut = Cookies.get("ut").split("??")[1];
   let fullName = Cookies.get("fullName");
   let designation = Cookies.get("designation");
   let userType = Cookies.get("userType");
