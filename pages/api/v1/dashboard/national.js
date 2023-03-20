@@ -6,41 +6,11 @@ const post = async (req, res) => {
   } catch (error) {}
 };
 
-const whereClauseRaw = (data) => {
-  let district = data.user.districtId;
-  let region = data.user.regionId;
-
-  if (district) {
-    return `AND "districtId"=${district}`;
-  }
-  if (region) {
-    return `AND "regionId"=${region}`;
-  }
-  return;
-};
-
-const whereClause = (data) => {
-  let district = data.user.districtId;
-  let region = data.user.regionId;
-  if (district) {
-    return ` districtId:${district}`;
-  }
-  if (region) {
-    return ` regionId:${region}`;
-  }
-};
 
 const get = async (req, res) => {
 
-  console.log("req.cookies",req.query.id);
   let data = await verifyToken(req.cookies.token);
-  let district = data.user.districtId ==null? undefined:data.user.districtId;
-  let region = data.user.regionId;
-
-  // let whereClauseRawObj = whereClauseRaw(data);
-  // let whereClauseObj = whereClause(data);
-
-  // console.log(whereClauseObj);
+  
 
   try {
    
@@ -82,7 +52,7 @@ ORDER BY "InspectionForm"."name"
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=1 AND "Inspection"."districtId" = ${district}
+WHERE "Inspection"."inspectionTypeId"=1 
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -91,7 +61,7 @@ ORDER BY "InspectionForm"."name"`;
             COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=2 AND "Inspection"."districtId" = ${district}
+WHERE "Inspection"."inspectionTypeId"=2 
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -101,7 +71,7 @@ ORDER BY "InspectionForm"."name"`;
 
     // FROM "InspectionForm"
     // LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    // WHERE "Inspection"."inspectionTypeId"=3 AND "Inspection"."districtId" = ${district}
+    // WHERE "Inspection"."inspectionTypeId"=3 
     // GROUP BY "InspectionForm"."name" `;
 
     const waterSourceTypeSummary =
@@ -112,28 +82,20 @@ ORDER BY "InspectionForm"."name"`;
     LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
     LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
 
-    WHERE  "Inspection"."districtId" = ${district} AND "WaterSourceType"."id" IS NOT NULL
+    WHERE  "WaterSourceType"."id" IS NOT NULL
     GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
 
     const healthEducActionTakenCount = await prisma.premisesActionTaken.count({
       where: {
         actionId: 1,
-        ConclusionSection: {
-          Inspection: {
-            districtId: district,
-          },
-        },
+        
       },
     });
     const noticeServedActionTakenCount = await prisma.premisesActionTaken.count(
       {
         where: {
           actionId: 2,
-          ConclusionSection: {
-            Inspection: {
-              districtId: district,
-            },
-          },
+         
         },
       }
     );
@@ -141,11 +103,7 @@ ORDER BY "InspectionForm"."name"`;
       await prisma.premisesActionTaken.count({
         where: {
           actionId: 3,
-          ConclusionSection: {
-            Inspection: {
-              districtId: district,
-            },
-          },
+          
         },
       });
 
@@ -168,21 +126,11 @@ ORDER BY "InspectionForm"."name"`;
     );
 
     const sanitaryWaterSourceCondition = await prisma.waterSection.count({
-      where: {
-        waterSourceConditionId: 1,
-        Inspection: {
-          districtId: district,
-        },
-      },
+      
     });
 
     const insanitaryWaterSourceCondition = await prisma.waterSection.count({
-      where: {
-        waterSourceConditionId: 2,
-        Inspection: {
-          districtId: district,
-        },
-      },
+      
     });
 
     let waterSourceConditionCountArray = [
@@ -194,18 +142,14 @@ ORDER BY "InspectionForm"."name"`;
     const sanitaryWaterStorageCondition = await prisma.waterSection.count({
       where: {
         waterStorageConditionId: 1,
-        Inspection: {
-          districtId: district,
-        },
+        
       },
     });
 
     const insanitaryWaterStorageCondition = await prisma.waterSection.count({
       where: {
         waterStorageConditionId: 2,
-        Inspection: {
-          districtId: district,
-        },
+       
       },
     });
 
@@ -216,25 +160,25 @@ ORDER BY "InspectionForm"."name"`;
     let waterStorageConditionLabelArray = ["Sanitary", "Insanitary"];
 
     const baselineCount = await prisma.inspection.count({
-      where: { inspectionTypeId: 1, districtId: district },
+      where: { inspectionTypeId: 1 },
     });
     const reInspectionCount = await prisma.inspection.count({
-      where: { inspectionTypeId: 2, districtId: district },
+      where: { inspectionTypeId: 2 },
     });
     const followUpCount = await prisma.inspection.count({
-      where: { inspectionTypeId: 3, districtId: district },
+      where: { inspectionTypeId: 3 },
     });
 
     const publishedCount = await prisma.inspection.count({
-      where: { isPublished: 1, districtId: district },
+      where: { isPublished: 1 },
     });
 
     const unPublishedCount = await prisma.inspection.count({
-      where: { isPublished: 0, districtId: district },
+      where: { isPublished: 0},
     });
 
     const usersCount = await prisma.user.count({
-      where: { deleted: 0, districtId: district },
+      where: { deleted: 0 },
     });
 
     const sanitationReportCount = await prisma.sanitationReport.count({
@@ -245,18 +189,14 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         deleted: 0,
         waterSourceConditionId: 1,
-        Inspection: {
-          districtId: district,
-        },
+       
       },
     });
     const unsafeWaterSourceCount = await prisma.waterSection.count({
       where: {
         deleted: 0,
         waterSourceConditionId: 2,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
@@ -332,144 +272,112 @@ ORDER BY "InspectionForm"."name"`;
       await prisma.residentialPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount2 =
       await prisma.eateryPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount3 =
       await prisma.healthPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount4 =
       await prisma.hospitalityPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount5 =
       await prisma.sanitaryPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount6 =
       await prisma.marketPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount7 =
       await prisma.institutionPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletAvailabilityCount8 =
       await prisma.industryPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 1,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount1 =
       await prisma.residentialPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount2 =
       await prisma.eateryPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount3 =
       await prisma.healthPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount4 =
       await prisma.hospitalityPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount5 =
       await prisma.sanitaryPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount6 =
       await prisma.marketPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount7 =
       await prisma.institutionPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
     const toiletInavailabilityCount8 =
       await prisma.industryPremisesInfoSection.count({
         where: {
           toiletAvailabilityId: 2,
-          Inspection: {
-            districtId: district,
-          },
+         
         },
       });
 
@@ -501,90 +409,70 @@ ORDER BY "InspectionForm"."name"`;
     const toiletAdequacy = await prisma.liquidWasteSection.count({
       where: {
         toiletAdequacyId: 1,
-        Inspection: {
-          districtId: district,
-        },
+       
       },
     });
 
     const toiletInadequacy = await prisma.liquidWasteSection.count({
       where: {
         toiletAdequacyId: 2,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const toiletConditionSafe = await prisma.liquidWasteSection.count({
       where: {
         toiletConditionId: 1,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const toiletConditionUnsafe = await prisma.liquidWasteSection.count({
       where: {
         toiletConditionId: 2,
-        Inspection: {
-          districtId: district,
-        },
+       
       },
     });
 
     const wasteCollectorRegistered = await prisma.solidWasteSection.count({
       where: {
         wasteServiceProviderRegistrationId: 1,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const wasteCollectorNotRegistered = await prisma.solidWasteSection.count({
       where: {
         wasteServiceProviderRegistrationId: 2,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const wasteSorted = await prisma.solidWasteSection.count({
       where: {
         wasteSortingAvailabilityId: 1,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const wasteNotSorted = await prisma.solidWasteSection.count({
       where: {
         wasteSortingAvailabilityId: 2,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const wasteReceptacleApproved = await prisma.solidWasteSection.count({
       where: {
         approvedWasteStorageReceptacleId: 1,
-        Inspection: {
-          districtId: district,
-        },
+      
       },
     });
 
     const wasteReceptacleUnapproved = await prisma.solidWasteSection.count({
       where: {
         approvedWasteStorageReceptacleId: 2,
-        Inspection: {
-          districtId: district,
-        },
+       
       },
     });
 
@@ -627,9 +515,7 @@ ORDER BY "InspectionForm"."name"`;
         wasteSortingArray,
         wasteReceptacleArray,
       },
-      // baselineInspectionSummary:toJson(baselineInspectionSummary),
-      // reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),
-      // followupInspectionSummary: toJson(followupInspectionSummary),
+    
       baselineCount,
       reInspectionCount,
       followUpCount,
@@ -644,7 +530,6 @@ ORDER BY "InspectionForm"."name"`;
     };
 
 
-    //return res.status(200).json({ statusCode: 1, data: dataVersion });
     return res.status(200).json(data);
   } catch (error) {
     console.log("Error: " + error);

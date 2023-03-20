@@ -6,36 +6,13 @@ const post = async (req, res) => {
   } catch (error) {}
 };
 
-const whereClauseRaw = (data) => {
-  let district = data.user.districtId;
-  let region = data.user.regionId;
-
-  if (district) {
-    return `AND "districtId"=${district}`;
-  }
-  if (region) {
-    return `AND "regionId"=${region}`;
-  }
-  return;
-};
-
-const whereClause = (data) => {
-  let district = data.user.districtId;
-  let region = data.user.regionId;
-  if (district) {
-    return ` districtId:${district}`;
-  }
-  if (region) {
-    return ` regionId:${region}`;
-  }
-};
 
 const get = async (req, res) => {
-  console.log(req.query.id);
   let data = await verifyToken(req.cookies.token);
 
-  let district = data.user.districtId ==null? undefined:data.user.districtId;
-  let region = data.user.regionId;
+  console.log(req.query.regionId);
+
+  let regionId = Number(req.query.regionId)||undefined;
 
   // let whereClauseRawObj = whereClauseRaw(data);
   // let whereClauseObj = whereClause(data);
@@ -82,7 +59,7 @@ ORDER BY "InspectionForm"."name"
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=1 AND "Inspection"."districtId" = ${district}
+WHERE "Inspection"."inspectionTypeId"=1 AND "Inspection"."regionId" = ${regionId}
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -91,7 +68,7 @@ ORDER BY "InspectionForm"."name"`;
             COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=2 AND "Inspection"."districtId" = ${district}
+WHERE "Inspection"."inspectionTypeId"=2 AND "Inspection"."regionId" = ${regionId}
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -101,7 +78,7 @@ ORDER BY "InspectionForm"."name"`;
 
     // FROM "InspectionForm"
     // LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    // WHERE "Inspection"."inspectionTypeId"=3 AND "Inspection"."districtId" = ${district}
+    // WHERE "Inspection"."inspectionTypeId"=3 AND "Inspection"."regionId" = ${regionId}
     // GROUP BY "InspectionForm"."name" `;
 
     const waterSourceTypeSummary =
@@ -112,7 +89,7 @@ ORDER BY "InspectionForm"."name"`;
     LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
     LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
 
-    WHERE  "Inspection"."districtId" = ${district} AND "WaterSourceType"."id" IS NOT NULL
+    WHERE  "Inspection"."regionId" = ${regionId} AND "WaterSourceType"."id" IS NOT NULL
     GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
 
     const healthEducActionTakenCount = await prisma.premisesActionTaken.count({
@@ -120,7 +97,7 @@ ORDER BY "InspectionForm"."name"`;
         actionId: 1,
         ConclusionSection: {
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       },
@@ -131,7 +108,7 @@ ORDER BY "InspectionForm"."name"`;
           actionId: 2,
           ConclusionSection: {
             Inspection: {
-              districtId: district,
+              regionId: regionId,
             },
           },
         },
@@ -143,7 +120,7 @@ ORDER BY "InspectionForm"."name"`;
           actionId: 3,
           ConclusionSection: {
             Inspection: {
-              districtId: district,
+              regionId: regionId,
             },
           },
         },
@@ -171,7 +148,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         waterSourceConditionId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -180,7 +157,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         waterSourceConditionId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -195,7 +172,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         waterStorageConditionId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -204,7 +181,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         waterStorageConditionId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -216,25 +193,25 @@ ORDER BY "InspectionForm"."name"`;
     let waterStorageConditionLabelArray = ["Sanitary", "Insanitary"];
 
     const baselineCount = await prisma.inspection.count({
-      where: { inspectionTypeId: 1, districtId: district },
+      where: { inspectionTypeId: 1, regionId: regionId },
     });
     const reInspectionCount = await prisma.inspection.count({
-      where: { inspectionTypeId: 2, districtId: district },
+      where: { inspectionTypeId: 2, regionId: regionId },
     });
     const followUpCount = await prisma.inspection.count({
-      where: { inspectionTypeId: 3, districtId: district },
+      where: { inspectionTypeId: 3, regionId: regionId },
     });
 
     const publishedCount = await prisma.inspection.count({
-      where: { isPublished: 1, districtId: district },
+      where: { isPublished: 1, regionId: regionId },
     });
 
     const unPublishedCount = await prisma.inspection.count({
-      where: { isPublished: 0, districtId: district },
+      where: { isPublished: 0, regionId: regionId },
     });
 
     const usersCount = await prisma.user.count({
-      where: { deleted: 0, districtId: district },
+      where: { deleted: 0, regionId: regionId },
     });
 
     const sanitationReportCount = await prisma.sanitationReport.count({
@@ -246,7 +223,7 @@ ORDER BY "InspectionForm"."name"`;
         deleted: 0,
         waterSourceConditionId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -255,7 +232,7 @@ ORDER BY "InspectionForm"."name"`;
         deleted: 0,
         waterSourceConditionId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -333,7 +310,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -342,7 +319,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -351,7 +328,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -360,7 +337,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -369,7 +346,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -378,7 +355,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -387,7 +364,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -396,7 +373,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 1,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -405,7 +382,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -414,7 +391,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -423,7 +400,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -432,7 +409,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -441,7 +418,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -450,7 +427,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -459,7 +436,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -468,7 +445,7 @@ ORDER BY "InspectionForm"."name"`;
         where: {
           toiletAvailabilityId: 2,
           Inspection: {
-            districtId: district,
+            regionId: regionId,
           },
         },
       });
@@ -502,7 +479,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         toiletAdequacyId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -511,7 +488,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         toiletAdequacyId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -520,7 +497,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         toiletConditionId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -529,7 +506,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         toiletConditionId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -538,7 +515,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         wasteServiceProviderRegistrationId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -547,7 +524,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         wasteServiceProviderRegistrationId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -556,7 +533,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         wasteSortingAvailabilityId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -565,7 +542,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         wasteSortingAvailabilityId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -574,7 +551,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         approvedWasteStorageReceptacleId: 1,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -583,7 +560,7 @@ ORDER BY "InspectionForm"."name"`;
       where: {
         approvedWasteStorageReceptacleId: 2,
         Inspection: {
-          districtId: district,
+          regionId: regionId,
         },
       },
     });
@@ -601,6 +578,45 @@ ORDER BY "InspectionForm"."name"`;
     let toiletAdequacyArray = [toiletAdequacy, toiletInadequacy];
     let toiletConditionArray = [toiletConditionSafe, toiletConditionUnsafe];
 
+    // let data = {
+    //   allInspectionSummary: toJson(allInspectionSummary),
+    //   baselineCountArray,
+    //   baselineFormsArray,
+    //   reinspectionCountArray,
+    //   reinspectionFormArray,
+    //   followUpCountArray,
+    //   water: {
+    //     waterSourceTypeCountArray,
+    //     waterSourceTypeLabelArray,
+    //     waterSourceConditionCountArray,
+    //     waterSourceConditionLabelArray,
+    //     waterStorageConditionCountArray,
+    //     waterStorageConditionLabelArray,
+    //   },
+    //   lw: {
+    //     toiletAvailabilityArray,
+    //     toiletAdequacyArray,
+    //     toiletConditionArray,
+    //   },
+    //   sw: {
+    //     wasteCollectorArray,
+    //     wasteSortingArray,
+    //     wasteReceptacleArray,
+    //   },
+     
+    //   baselineCount,
+    //   reInspectionCount,
+    //   followUpCount,
+    //   publishedCount,
+    //   unPublishedCount,
+    //   usersCount,
+    //   safeWaterSourceCount,
+    //   unsafeWaterSourceCount,
+    //   sanitationReportCount,
+    //   actionTakenCount,
+    //   actionTakenLabel,
+    // };
+
     let data = {
       allInspectionSummary: toJson(allInspectionSummary),
       baselineCountArray,
@@ -608,7 +624,6 @@ ORDER BY "InspectionForm"."name"`;
       reinspectionCountArray,
       reinspectionFormArray,
       followUpCountArray,
-     // followUpFormArray,
       water: {
         waterSourceTypeCountArray,
         waterSourceTypeLabelArray,
@@ -627,24 +642,22 @@ ORDER BY "InspectionForm"."name"`;
         wasteSortingArray,
         wasteReceptacleArray,
       },
-      // baselineInspectionSummary:toJson(baselineInspectionSummary),
-      // reinspectionInspectionSummary:toJson(reinspectionInspectionSummary),
-      // followupInspectionSummary: toJson(followupInspectionSummary),
-      baselineCount,
-      reInspectionCount,
-      followUpCount,
-      publishedCount,
-      unPublishedCount,
-      usersCount,
-      safeWaterSourceCount,
-      unsafeWaterSourceCount,
-      sanitationReportCount,
-      actionTakenCount,
-      actionTakenLabel,
+     
+      baselineCount:51,
+      reInspectionCount:881,
+      followUpCount:19,
+      publishedCount:13,
+      unPublishedCount:19,
+      usersCount:156,
+      safeWaterSourceCount:19,
+      unsafeWaterSourceCount:190,
+      sanitationReportCount:214,
+      actionTakenCount:817,
+      actionTakenLabel:818,
     };
 
 
-    //return res.status(200).json({ statusCode: 1, data: dataVersion });
+
     return res.status(200).json(data);
   } catch (error) {
     console.log("Error: " + error);

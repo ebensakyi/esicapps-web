@@ -2,6 +2,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import LoadingOverlay from "react-loading-overlay";
+
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -27,6 +29,7 @@ ChartJS.register(
 
 const Dashboard = ({ regions }) => {
   let loggedInUserType = Cookies.get("ut").split("??")[1];
+  const [showLoading, setShowLoading] = useState(false);
 
   const [dashboardData, setDashboardData] = useState({});
 
@@ -36,14 +39,21 @@ const Dashboard = ({ regions }) => {
   const [districts, setDistricts] = useState([]);
 
   const getDashboard = async () => {
+    setShowLoading(false);
     if (loggedInUserType == 1) {
       const response = await axios.get("/api/v1/dashboard/regional");
+      setShowLoading(false);
+
     }
     if (loggedInUserType == 2) {
       const response = await axios.get("/api/v1/dashboard/district");
+      setShowLoading(false);
+
     }
     if (loggedInUserType == 3) {
       const response = await axios.get("/api/v1/dashboard/district");
+      setShowLoading(false);
+
     }
   };
 
@@ -60,8 +70,10 @@ const Dashboard = ({ regions }) => {
   };
 
   const filter = async (e) => {
-    e.preventDefault();
+    try {
+        e.preventDefault();
     let url;
+    setShowLoading(true);
 
     console.log(filterBy);
     console.log("region", region);
@@ -88,7 +100,13 @@ const Dashboard = ({ regions }) => {
     }
 
     const response = await axios.get(url);
-    console.log("filter");
+    setShowLoading(false);
+
+    setDashboardData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  
   };
 
   useEffect(() => {
@@ -403,7 +421,12 @@ const Dashboard = ({ regions }) => {
   //});
 
   return (
-    <>
+   
+    <> <LoadingOverlay
+    active={showLoading}
+    spinner
+    text="Loading dashboard. Please wait..."
+><>
       <div className="row">
         <div className="col-12">
           <div className="row">
@@ -488,6 +511,7 @@ const Dashboard = ({ regions }) => {
             </div> */}
         </div>
       </div>
+    
       <br />
       <div className="row">
         <div className="col-xxl-4">
@@ -654,6 +678,7 @@ const Dashboard = ({ regions }) => {
           </div>
         </div>
       </div>
+      </>  </LoadingOverlay>
       {/* end row */}
       <div className="row">
         <div className="col-xl-7">
@@ -1031,6 +1056,7 @@ const Dashboard = ({ regions }) => {
       </div>
       {/* end row */}
     </>
+    
   );
 };
 
