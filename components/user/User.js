@@ -22,7 +22,7 @@ const User = ({ users, userTypes, regions, districts }) => {
   const [showDistrict, setShowDistrict] = useState(false);
   const [districtsArr, setDistricts] = useState(null);
 
-  let loggedInUserType = Cookies.get("u").split("??")[0];
+  let loggedInUserType = Cookies.get("ut").split("??")[1];
 
   useEffect(() => {
     setDistricts(districts);

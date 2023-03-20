@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 const Dashboard = ({ data, regions }) => {
-  let loggedInUserType = Cookies.get("ut").split("??")[0];
+  let loggedInUserType = Cookies.get("ut").split("??")[1];
 
   const [dashboardData, setDashboardData] = useState();
 
