@@ -6,7 +6,6 @@ const post = async (req, res) => {
   try {
     const data = {
       name: req.body.data.name,
-      userLevelId:req.body.data.level,
     };
     const userType = await prisma.userType.create({ data });
     res
@@ -24,7 +23,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {   
 
-    const userType = await prisma.UserType.findMany({ where: { deleted: 0 } });
+    const userType = await prisma.userType.findMany({ where: { deleted: 0 } });
     return res.status(200).json({ statusCode: 1, data: userType });
   } catch (error) {
     console.log("Error: " + error);

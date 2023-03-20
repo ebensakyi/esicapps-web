@@ -55,9 +55,9 @@ const generateWhereMainObject = async (req, res) => {
 
   let data = await verifyToken(req.query.token);
 
-  let userLevel = data.user.UserType.userLevelId;
+  let userType = data.user.UserType.id;
 
-  if (userLevel == 1) {
+  if (userType == 1) {
     return {
       where: {
        
@@ -81,7 +81,7 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userLevel == 2) {
+  if (userType == 2) {
     region = data.user.regionId;
 
     return {
@@ -107,7 +107,7 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userLevel == 3) {
+  if (userType == 3) {
     district = data.user.districtId;
     return {
       where: {
