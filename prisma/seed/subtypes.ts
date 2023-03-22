@@ -40,7 +40,6 @@ export const subtypes = [
   },
   { id: 29, name: "Salon", inspectionFormId: 6, typeId: 27 },
   { id: 30, name: "Washing Bay", inspectionFormId: 6, typeId: 27 },
-  { id: 32, name: "Fuel station", inspectionFormId: 6, typeId: 27 },
   { id: 33, name: "Welding", inspectionFormId: 6, typeId: 27 },
   { id: 34, name: "Cosmetic shop", inspectionFormId: 6, typeId: 27 },
   { id: 35, name: "Tailoring", inspectionFormId: 6, typeId: 27 },

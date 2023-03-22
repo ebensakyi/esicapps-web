@@ -39,74 +39,85 @@ const Dashboard = ({ regions }) => {
   const [districts, setDistricts] = useState([]);
 
   const getDashboard = async () => {
-    setShowLoading(false);
-    if (loggedInUserType == 1) {
+    try {
+      setShowLoading(false);
+    console.log("loggedInUserType ",loggedInUserType);
+
+    if(loggedInUserType==3||loggedInUserType==4){
+      let regionId
+      getDistrictsByRegion(regionId)
+    }
+
+    if (loggedInUserType == 1 || loggedInUserType == 2) {
+      const response = await axios.get("/api/v1/dashboard/national");
+      setDashboardData(response.data);
+
+      setShowLoading(false);
+    }
+    if (loggedInUserType == 3 || loggedInUserType == 4) {
       const response = await axios.get("/api/v1/dashboard/regional");
-      setShowLoading(false);
+      setDashboardData(response.data);
 
+      setShowLoading(false);
     }
-    if (loggedInUserType == 2) {
+    if (loggedInUserType == 5 || loggedInUserType == 6) {
       const response = await axios.get("/api/v1/dashboard/district");
-      setShowLoading(false);
+      setDashboardData(response.data);
 
-    }
-    if (loggedInUserType == 3) {
-      const response = await axios.get("/api/v1/dashboard/district");
       setShowLoading(false);
-
     }
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
 
-  const getDistrictsByRegion = async (e, regionId) => {
+  const getDistrictsByRegion = async (regionId) => {
     try {
-      e.preventDefault();
 
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
       console.log(response);
       setDistricts(response.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const filter = async (e) => {
     try {
-        e.preventDefault();
-    let url;
-    setShowLoading(true);
+      e.preventDefault();
+      let url;
+      setShowLoading(true);
 
-    console.log(filterBy);
-    console.log("region", region);
-    console.log("district", district);
+      if (loggedInUserType == 1 || loggedInUserType == 2) {
+        if (filterBy == 1) {
+          url = "/api/v1/dashboard/national?filterBy=1";
+        }
+        if (filterBy == 2) {
+          url = `/api/v1/dashboard/regional?regionId=${region}`;
+        }
+        if (filterBy == 3) {
+          url = `/api/v1/dashboard/district?districtId=${district}`;
+        }
+      }
+      if (loggedInUserType == 3 || loggedInUserType == 4) {
+        if (filterBy == 3) {
+          url = `/api/v1/dashboard/district?districtId=${district}`;
+        }
+      }
+      if (loggedInUserType == 3) {
+        url = "/api/v1/dashboard/district?filterBy=1";
+      }
 
-    if (loggedInUserType == 1 || loggedInUserType == 2) {
-      if (filterBy == 1) {
-        url = "/api/v1/dashboard/national?filterBy=1";
-      }
-      if (filterBy == 2) {
-        url = `/api/v1/dashboard/regional?regionId=${region}`;
-      }
-      if (filterBy == 3) {
-        url = `/api/v1/dashboard/district?districtId=${district}`;
-      }
-    }
-    if (loggedInUserType == 3 || loggedInUserType == 4) {
-      if (filterBy == 3) {
-        url = `/api/v1/dashboard/district?districtId=${district}`;
-      }
-    }
-    if (loggedInUserType == 3) {
-      url = "/api/v1/dashboard/district?filterBy=1";
-    }
+      const response = await axios.get(url);
+      setShowLoading(false);
 
-    const response = await axios.get(url);
-    setShowLoading(false);
-
-    setDashboardData(response.data);
+      setDashboardData(response.data);
     } catch (error) {
       console.log(error);
     }
-  
   };
 
   useEffect(() => {
@@ -116,6 +127,7 @@ const Dashboard = ({ regions }) => {
       // ...
     }
     fetchData();
+    
   }, []);
 
   let baselinePieChartData,
@@ -421,264 +433,301 @@ const Dashboard = ({ regions }) => {
   //});
 
   return (
-   
-    <> <LoadingOverlay
-    active={showLoading}
-    spinner
-    text="Loading dashboard. Please wait..."
-><>
-      <div className="row">
-        <div className="col-12">
+    <>
+      {" "}
+      <LoadingOverlay
+        active={showLoading}
+        spinner
+        text="Loading dashboard. Please wait..."
+      >
+        <>
           <div className="row">
-            <div className="col-lg-3">
-              {" "}
-              <select
-                className="form-select"
-                value={filterBy}
-                onChange={(e) => setFilterBy(e.target.value)}
-              >
-                <option value="">Filter by</option>
-                <option value="1">National</option>
-                <option value="2">Region</option>
-                <option value="3">District</option>
-              </select>
-            </div>
-            {filterBy == "2"||filterBy == "3"? (
-              <div className="col-lg-3">
-                {" "}
-                <select
-                  className="form-select"
-                  id="inputGroupSelect02"
-                  value={region}
-                  onChange={async (e) => {
-                    setRegion(e.target.value);
-                    setDistrict(undefined);
-                    getDistrictsByRegion(e, e.target.value);
-                  }}
-                >
-                  <option>Choose...</option>
-                  {regions.map((region) => (
-                    <option value={region.id} key={region.id}>
-                      {region.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <></>
-            )}
-            {filterBy == "3" && region != undefined ? (
-              <div className="col-lg-3">
-                <select
-                  className="form-select"
-                  id="inputGroupSelect02"
-                  value={district}
-                  onChange={(e) => {
-                    setDistrict(e.target.value);
-                    // getElectoralByDistrict(e, e.target.value);
-                    console.log("district ", district);
-                  }}
-                >
-                  <option>Choose...</option>
-                  {districts.map((district) => (
-                    <option key={district.id} value={district.id}>
-                      {district.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <></>
-            )}
-            <div className="col-lg-3">
-              <button
-                className="btn btn-primary"
-                onClick={(e) => {
-                  filter(e);
-                }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-          {/* <h4 className="mb-sm-0">CRM</h4> */}
-          {/* <div className="page-title-right">
-              <ol className="breadcrumb m-0">
-                <li className="breadcrumb-item">
-                  <a href="javascript: void(0);">Dashboards</a>
-                </li>
-              </ol>
-            </div> */}
-        </div>
-      </div>
-    
-      <br />
-      <div className="row">
-        <div className="col-xxl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1"> INSPECTION </h4>{" "}
-              <div className="avatar-sm flex-shrink-0">
-                <span className="avatar-title bg-soft-success rounded fs-3">
-                  <i className="bx bx-home-circle text-success" />
-                </span>
-              </div>
-            </div>
-            {/* end card header */}
-            <div className="card-body px-0">
-              <ul className="list-inline main-chart text-center mb-0">
-                <li className="list-inline-item chart-border-left me-0 border-0">
-                  <h4 className="text-primary">
-                    {dashboardData.baselineCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Baseline
-                    </span>
-                  </h4>
-                </li>
-                <li className="list-inline-item chart-border-left me-0">
-                  <h4>
-                    {dashboardData.reInspectionCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Reinspection
-                    </span>
-                  </h4>
-                </li>
-                <li className="list-inline-item chart-border-left me-0">
-                  <h4>
-                    {dashboardData.followUpCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Follow up
-                    </span>
-                  </h4>
-                </li>
-              </ul>
-              <div
-                id="revenue-expenses-charts"
-                data-colors='["--vz-success", "--vz-danger"]'
-                className="apex-charts"
-                dir="ltr"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="col-xxl-3">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                {" "}
-                PUBLISHING REPORT{" "}
-              </h4>
-              <div className="avatar-sm flex-shrink-0">
-                <span className="avatar-title bg-soft-danger rounded fs-3">
-                  <i className="bx bx-chart text-danger" />
-                </span>
-              </div>
-            </div>
-            {/* end card header */}
-            <div className="card-body px-0">
-              <ul className="list-inline main-chart text-center mb-0">
-                <li className="list-inline-item chart-border-left me-0 border-0">
-                  <h4 className="text-primary">
-                    {dashboardData.publishedCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Published
-                    </span>
-                  </h4>
-                </li>
+            <div className="col-12">
+              {loggedInUserType == 1 || loggedInUserType == 1 ? (
+                <div className="row">
+                  <div className="col-lg-3">
+                    {" "}
+                    <select
+                      className="form-select"
+                      value={filterBy}
+                      onChange={(e) => setFilterBy(e.target.value)}
+                    >
+                      <option value="">Filter by</option>
+                      <option value="1">National</option>
+                      <option value="2">Region</option>
+                      <option value="3">District</option>
+                    </select>
+                  </div>
+                  {filterBy == "2" || filterBy == "3" ? (
+                    <div className="col-lg-3">
+                      {" "}
+                      <select
+                        className="form-select"
+                        id="inputGroupSelect02"
+                        value={region}
+                        onChange={async (e) => {
+                          e.preventDefault()
+                          setRegion(e.target.value);
+                          setDistrict(undefined);
+                          getDistrictsByRegion(e.target.value);
+                        }}
+                      >
+                        <option>Choose...</option>
+                        {regions.map((region) => (
+                          <option value={region.id} key={region.id}>
+                            {region.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {filterBy == "3" && region != undefined ? (
+                    <div className="col-lg-3">
+                      <select
+                        className="form-select"
+                        id="inputGroupSelect02"
+                        value={district}
+                        onChange={(e) => {
+                          setDistrict(e.target.value);
+                          // getElectoralByDistrict(e, e.target.value);
+                          console.log("district ", district);
+                        }}
+                      >
+                        <option>Choose...</option>
+                        {districts.map((district) => (
+                          <option key={district.id} value={district.id}>
+                            {district.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="col-lg-3">
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        filter(e);
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
 
-                <li className="list-inline-item chart-border-left me-0">
-                  <h4>
-                    {dashboardData.unPublishedCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Unpublished
-                    </span>
-                  </h4>
-                </li>
-              </ul>
-              <div
-                id="revenue-expenses-charts"
-                data-colors='["--vz-success", "--vz-danger"]'
-                className="apex-charts"
-                dir="ltr"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="col-xxl-3">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                {" "}
-                SANITATION REPORT{" "}
-              </h4>
-              <div className="avatar-sm flex-shrink-0">
-                <span className="avatar-title bg-soft-primary rounded fs-3">
-                  <i className="bx bx-trash-alt text-primary" />
-                </span>
-              </div>
-            </div>
-            {/* end card header */}
-            <div className="card-body px-0">
-              <ul className="list-inline main-chart text-center mb-0">
-                <li className="list-inline-item chart-border-left me-0 border-0">
-                  <h4 className="text-primary">
-                    {dashboardData.sanitationReportCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Total Reports
-                    </span>
-                  </h4>
-                </li>
-              </ul>
-              <div
-                id="revenue-expenses-charts"
-                data-colors='["--vz-success", "--vz-danger"]'
-                className="apex-charts"
-                dir="ltr"
-              />
-            </div>
-          </div>
-        </div>
+              {loggedInUserType == 3 ? (
+                <div className="row">
+                  <div className="col-lg-3">
+                    <select
+                      className="form-select"
+                      id="inputGroupSelect02"
+                      value={district}
+                      onChange={(e) => {
+                        setDistrict(e.target.value);
+                        // getElectoralByDistrict(e, e.target.value);
+                        console.log("district ", district);
+                      }}
+                    >
+                      <option>Choose district</option>
+                      {districts.map((district) => (
+                        <option key={district.id} value={district.id}>
+                          {district.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-        <div className="col-xxl-2">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1"> USERS </h4>
-              <div className="avatar-sm flex-shrink-0">
-                <span className="avatar-title bg-soft-warning rounded fs-3">
-                  <i className="bx bx-user text-warning" />
-                </span>
-              </div>
-            </div>
-            {/* end card header */}
-            <div className="card-body px-0">
-              <ul className="list-inline main-chart text-center mb-0">
-                <li className="list-inline-item chart-border-left me-0 border-0">
-                  <h4 className="text-primary">
-                    {dashboardData.usersCount}
-                    <br />
-                    <span className="text-muted d-inline-block fs-13 align-middle ms-2">
-                      Total Active Users
-                    </span>
-                  </h4>
-                </li>
-              </ul>
-              <div
-                id="revenue-expenses-charts"
-                data-colors='["--vz-success", "--vz-danger"]'
-                className="apex-charts"
-                dir="ltr"
-              />
+                  <div className="col-lg-3">
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        filter(e);
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
-        </div>
-      </div>
-      </>  </LoadingOverlay>
+
+          <br />
+          <div className="row">
+            <div className="col-xxl-4">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1"> INSPECTION </h4>{" "}
+                  <div className="avatar-sm flex-shrink-0">
+                    <span className="avatar-title bg-soft-success rounded fs-3">
+                      <i className="bx bx-home-circle text-success" />
+                    </span>
+                  </div>
+                </div>
+                {/* end card header */}
+                <div className="card-body px-0">
+                  <ul className="list-inline main-chart text-center mb-0">
+                    <li className="list-inline-item chart-border-left me-0 border-0">
+                      <h4 className="text-primary">
+                        {dashboardData.baselineCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Baseline
+                        </span>
+                      </h4>
+                    </li>
+                    <li className="list-inline-item chart-border-left me-0">
+                      <h4>
+                        {dashboardData.reInspectionCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Reinspection
+                        </span>
+                      </h4>
+                    </li>
+                    <li className="list-inline-item chart-border-left me-0">
+                      <h4>
+                        {dashboardData.followUpCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Follow up
+                        </span>
+                      </h4>
+                    </li>
+                  </ul>
+                  <div
+                    id="revenue-expenses-charts"
+                    data-colors='["--vz-success", "--vz-danger"]'
+                    className="apex-charts"
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-xxl-3">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1">
+                    {" "}
+                    PUBLISHING REPORT{" "}
+                  </h4>
+                  <div className="avatar-sm flex-shrink-0">
+                    <span className="avatar-title bg-soft-danger rounded fs-3">
+                      <i className="bx bx-chart text-danger" />
+                    </span>
+                  </div>
+                </div>
+                {/* end card header */}
+                <div className="card-body px-0">
+                  <ul className="list-inline main-chart text-center mb-0">
+                    <li className="list-inline-item chart-border-left me-0 border-0">
+                      <h4 className="text-primary">
+                        {dashboardData.publishedCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Published
+                        </span>
+                      </h4>
+                    </li>
+
+                    <li className="list-inline-item chart-border-left me-0">
+                      <h4>
+                        {dashboardData.unPublishedCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Unpublished
+                        </span>
+                      </h4>
+                    </li>
+                  </ul>
+                  <div
+                    id="revenue-expenses-charts"
+                    data-colors='["--vz-success", "--vz-danger"]'
+                    className="apex-charts"
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-xxl-3">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1">
+                    {" "}
+                    SANITATION REPORT{" "}
+                  </h4>
+                  <div className="avatar-sm flex-shrink-0">
+                    <span className="avatar-title bg-soft-primary rounded fs-3">
+                      <i className="bx bx-trash-alt text-primary" />
+                    </span>
+                  </div>
+                </div>
+                {/* end card header */}
+                <div className="card-body px-0">
+                  <ul className="list-inline main-chart text-center mb-0">
+                    <li className="list-inline-item chart-border-left me-0 border-0">
+                      <h4 className="text-primary">
+                        {dashboardData.sanitationReportCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Total Reports
+                        </span>
+                      </h4>
+                    </li>
+                  </ul>
+                  <div
+                    id="revenue-expenses-charts"
+                    data-colors='["--vz-success", "--vz-danger"]'
+                    className="apex-charts"
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-xxl-2">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1"> USERS </h4>
+                  <div className="avatar-sm flex-shrink-0">
+                    <span className="avatar-title bg-soft-warning rounded fs-3">
+                      <i className="bx bx-user text-warning" />
+                    </span>
+                  </div>
+                </div>
+                {/* end card header */}
+                <div className="card-body px-0">
+                  <ul className="list-inline main-chart text-center mb-0">
+                    <li className="list-inline-item chart-border-left me-0 border-0">
+                      <h4 className="text-primary">
+                        {dashboardData.usersCount}
+                        <br />
+                        <span className="text-muted d-inline-block fs-13 align-middle ms-2">
+                          Total Active Users
+                        </span>
+                      </h4>
+                    </li>
+                  </ul>
+                  <div
+                    id="revenue-expenses-charts"
+                    data-colors='["--vz-success", "--vz-danger"]'
+                    className="apex-charts"
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </>{" "}
+      </LoadingOverlay>
       {/* end row */}
       <div className="row">
         <div className="col-xl-7">
@@ -1056,7 +1105,6 @@ const Dashboard = ({ regions }) => {
       </div>
       {/* end row */}
     </>
-    
   );
 };
 

@@ -6,21 +6,27 @@ const post = async (req, res) => {
   } catch (error) {}
 };
 
-
 const get = async (req, res) => {
   let data = await verifyToken(req.cookies.token);
+  let regionId; 
 
-  console.log(req.query.regionId);
+  let userType = data.user.UserType.id;
 
-  let regionId = Number(req.query.regionId)||undefined;
+  if (userType == 3 || userType == 4) {
+    regionId = data.user.regionId;
+    console.log("regionId ", regionId);
 
-  // let whereClauseRawObj = whereClauseRaw(data);
-  // let whereClauseObj = whereClause(data);
+  }
+  // if(user==du) use  his district
+  if (req.query.regionId) {
+    regionId = Number(req.query.regionId);
+    console.log("regionId2 ", regionId);
 
-  // console.log(whereClauseObj);
+  }
+
+ 
 
   try {
-   
     const allInspectionSummary =
       await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
@@ -72,7 +78,6 @@ WHERE "Inspection"."inspectionTypeId"=2 AND "Inspection"."regionId" = ${regionId
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
-  
     //   await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
     //                   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
 
@@ -254,53 +259,63 @@ ORDER BY "InspectionForm"."name"`;
     const fupRes = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:1
+        inspectionFormId: 1,
       },
     });
     const fupEatery = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:2
+        inspectionFormId: 2,
       },
     });
     const fupHealth = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:3
+        inspectionFormId: 3,
       },
     });
     const fupHosp = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:4
+        inspectionFormId: 4,
       },
-    }); const fupInstitution = await prisma.followUpInspection.count({
+    });
+    const fupInstitution = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:5
+        inspectionFormId: 5,
       },
     });
     const fupIndustry = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:6
+        inspectionFormId: 6,
       },
     });
-   
+
     const fupMarket = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:7
+        inspectionFormId: 7,
       },
     });
     const fupSanitation = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
-        inspectionFormId:8
+        inspectionFormId: 8,
       },
     });
 
-    let followUpCountArray = [fupRes,fupEatery,fupHealth,fupHosp,fupInstitution,fupIndustry,fupMarket,fupSanitation]
+    let followUpCountArray = [
+      fupRes,
+      fupEatery,
+      fupHealth,
+      fupHosp,
+      fupInstitution,
+      fupIndustry,
+      fupMarket,
+      fupSanitation,
+    ];
     // let followUpFormArray = followupInspectionSummary.map((n) =>
     //   toJson(n.name)
     // );
@@ -603,7 +618,7 @@ ORDER BY "InspectionForm"."name"`;
     //     wasteSortingArray,
     //     wasteReceptacleArray,
     //   },
-     
+
     //   baselineCount,
     //   reInspectionCount,
     //   followUpCount,
@@ -642,21 +657,19 @@ ORDER BY "InspectionForm"."name"`;
         wasteSortingArray,
         wasteReceptacleArray,
       },
-     
-      baselineCount:51,
-      reInspectionCount:881,
-      followUpCount:19,
-      publishedCount:13,
-      unPublishedCount:19,
-      usersCount:156,
-      safeWaterSourceCount:19,
-      unsafeWaterSourceCount:190,
-      sanitationReportCount:214,
-      actionTakenCount:817,
-      actionTakenLabel:818,
+
+      baselineCount: 51,
+      reInspectionCount: 881,
+      followUpCount: 19,
+      publishedCount: 13,
+      unPublishedCount: 19,
+      usersCount: 156,
+      safeWaterSourceCount: 19,
+      unsafeWaterSourceCount: 190,
+      sanitationReportCount: 214,
+      actionTakenCount: 817,
+      actionTakenLabel: 818,
     };
-
-
 
     return res.status(200).json(data);
   } catch (error) {
