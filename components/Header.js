@@ -55,7 +55,7 @@ const Header = () => {
                 //   } else {
                 //     document.body.classList.add("vertical-sidebar-enable");
                 //   }
-          
+
                 // }}
               >
                 <span className="hamburger-icon">
@@ -583,7 +583,7 @@ const Header = () => {
                         className="nav-link"
                       >
                         {" "}
-                        Password Reset Request
+                        Password Reset
                       </a>
                     </li>
                     <li className="nav-item">
@@ -592,11 +592,43 @@ const Header = () => {
                         Primary data
                       </a>
                     </li>
-                    <li className="nav-item">
-                      <a href="/primary-data/community" className="nav-link">
+                   
+                    <li class="nav-item">
+                      <a
+                        href="#sidebarProfile"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="sidebarProfile"
+                        data-key="t-profile"
+                      >
                         {" "}
                         Communities
                       </a>
+                      <div class="collapse menu-dropdown" id="sidebarProfile">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <a
+                              href="/primary-data/community/upload"
+                              class="nav-link"
+                              data-key="t-simple-page"
+                            >
+                             Upload
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a
+                              href="/primary-data/community/add"
+                              class="nav-link"
+                              data-key="t-settings"
+                            >
+                              {" "}
+                              Add{" "}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </li>
                     <li className="nav-item">
                       <a href="/setup/assign-data" className="nav-link">

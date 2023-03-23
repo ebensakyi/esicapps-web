@@ -1,7 +1,7 @@
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 //import Footer from '../../components/Footer'
-import { SERVER_BASE_URL } from "../../config";
-import Community from "../../components/primary-data/Community";
+import { SERVER_BASE_URL } from "../../../config";
+import AddCommunity from "../../../components/primary-data/AddCommunity";
 
 export default function community({ data }) {
   return (
@@ -11,7 +11,7 @@ export default function community({ data }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <Community data={data} />
+            <AddCommunity data={data} />
           </div>
         </div>
       </div>

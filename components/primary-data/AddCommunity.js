@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const Community = ({ data }) => {
+const AddCommunity = ({ data }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState(null);
@@ -281,4 +281,4 @@ const Community = ({ data }) => {
   );
 };
 
-export default Community;
+export default AddCommunity;
