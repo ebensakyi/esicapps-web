@@ -1,14 +1,17 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UploadCommunity = ({ data }) => {
+const UploadCommunity = ({ data,districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [communityName, setCommunityName] = useState(null);
-  const [communityId, setCommunityId] = useState(null);
+  const [district, setDistrict] = useState(null);
+
+  const [communityFile, setCommunityFile] = useState(null);
+  const [communityFileUrl, setCommunityFileUrl] = useState(null);
+  const form = useRef(null);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -43,29 +46,43 @@ const UploadCommunity = ({ data }) => {
     });
   };
 
-  const addCommunity = async (e) => {
+  const submit = async (e) => {
     try {
       e.preventDefault();
-      if (communityName == "" || communityName == null) {
-        return toast.error("Enter community name");
-      }
-      let data = {
-        name: communityName,
-        id: communityId,
-        // electoralAreaId,
-      };
-      const response = await axios.post("/api/v1/primary-data/community-data", {
-        data,
-      });
-      toast.success(response.data.message);
-      setCommunityName("");
-      setCommunityId(null);
 
+    let body = new FormData(form.current);
+    body.append("communityFile", communityFile);
+    body.append("districtId", district);
+
+
+    const response = await axios({
+      url: "/api/v1/csv-upload/community-upload",
+      method: "POST",
+      headers: {
+        authorization: "A",
+        "Content-Type": "application/json",
+      },
+      data: body,
+    });
+     
+     
       router.replace(router.asPath);
     } catch (error) {
-      if (error.response.status == 401) {
-        toast.error(error.response.data.message);
-      }
+console.log(error);
+        toast.error(error);
+      
+    }
+  };
+
+  const uploadCommunity = (event) => {
+   
+
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+
+      setCommunityFile(i);
+      setCommunityFileUrl(URL.createObjectURL(i));
     }
   };
 
@@ -96,22 +113,44 @@ const UploadCommunity = ({ data }) => {
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">ADD COMMUNITY</h5>
+              <h5 className="card-title mb-0">UPLOAD COMMUNITY</h5>
             </div>
             <div className="card-body">
               {/* <h6 className="card-title">Add Community</h6> */}
-              <div className="row gy-4">
+              <form ref={form}>
+                 <div className="row gy-4">
+                 <div className="col-xxl-4 col-md-8">
+                 <label htmlFor="basiInput" className="form-label">
+                      Select district
+                    </label>
+                 <select
+                        className="form-select"
+                        id="inputGroupSelect02"
+                        value={district}
+                        onChange={(e) => {
+                          setDistrict(e.target.value);
+                          // getElectoralByDistrict(e, e.target.value);
+                          console.log("district ", district);
+                        }}
+                      >
+                        <option>Choose...</option>
+                        {districts.map((district) => (
+                          <option key={district.id} value={district.id}>
+                            {district.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                 <div className="col-xxl-4 col-md-8">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
-                      Name
+                      Upload CSV(With name column)
                     </label>
                     <input
-                      type="text"
+                      type="file"
                       className="form-control"
                       id="basiInput"
-                      value={communityName}
-                      onChange={(e) => setCommunityName(e.target.value)}
+                      onChange={uploadCommunity}
                     />
                   </div>
                 </div>
@@ -123,17 +162,19 @@ const UploadCommunity = ({ data }) => {
                     </label>
                     <div className="text-end">
                       <button
-                        onClick={(e) => {
-                          addCommunity(e);
+                         onClick={(e) => {
+                          submit(e);
                         }}
                         className="btn btn-primary"
                       >
-                        Submit
+                        Upload
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
+              </form>
+             
             </div>
           </div>
         </div>

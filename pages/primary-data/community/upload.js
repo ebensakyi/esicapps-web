@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 import { SERVER_BASE_URL } from "../../../config";
 import UploadCommunity from "../../../components/primary-data/UploadCommunity";
 
-export default function community({ data }) {
+export default function community({ data,districts }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,7 @@ export default function community({ data }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <UploadCommunity data={data} />
+            <UploadCommunity data={data} districts={districts}/>
           </div>
         </div>
       </div>
@@ -39,6 +39,9 @@ export async function getServerSideProps(context) {
   const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data?token=${token}&page=${page}&searchText=${searchText}`).then(
     (res) => res.json()
   );
+  const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`).then(
+    (res) => res.json()
+);
 
   //   const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
   //     res.json()
@@ -53,7 +56,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      data,
+      data,districts
     },
   };
 }
