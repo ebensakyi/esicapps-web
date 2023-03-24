@@ -23,4 +23,7 @@ export const drinkingWaterSourceType = [
   {
     name: "Packaged water",
   },
+  {
+    name: "Borehole",
+  },
 ];

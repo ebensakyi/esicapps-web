@@ -14,12 +14,12 @@ export const solidWasteReceptacle = [
       {
         name: "Sacks",
       },
- 
+      {
+        name: "Metal container",
+      },
   ];
   
 
   
-
-
 
 

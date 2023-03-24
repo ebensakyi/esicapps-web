@@ -2,6 +2,9 @@ export const disinfectionFrequency = [
   {
     name: "Daily",
   },
+  {
+    name: "Weekly",
+  },
     {
       name: "Quarterly",
     },

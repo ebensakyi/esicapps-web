@@ -1024,7 +1024,6 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "productionRoomConditionId" INTEGER,
     "flyScreenNetAvailabilityId" INTEGER,
     "storeRoomAvailabilityId" INTEGER,
-    "medicalCertificateAvailabilityId" INTEGER,
     "toiletAvailabilityId" INTEGER,
     "urinalAvailabilityId" INTEGER,
     "bathRoomAvailabilityId" INTEGER,

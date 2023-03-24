@@ -1,5 +1,11 @@
 export const desiltingFrequency = [
   {
+    name: "Daily",
+  },
+  {
+    name: "Weekly",
+  },
+  {
     name: "Monthly",
   },
     {
