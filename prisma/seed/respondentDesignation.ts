@@ -200,5 +200,9 @@ export const respondentDesignation = [
     name: "Church Member",
     inspectionFormId: 5,
   },
+  {
+    name: "Priest",
+    inspectionFormId: 5,
+  },
   
 ];

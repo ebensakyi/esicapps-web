@@ -196,12 +196,25 @@ CREATE TABLE "CleaningFrequency" (
 CREATE TABLE "Community" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    "districtId" INTEGER NOT NULL,
+    "electoralAreaId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "districtId" INTEGER,
 
     CONSTRAINT "Community_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ElectoralArea" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "districtId" INTEGER NOT NULL,
+
+    CONSTRAINT "ElectoralArea_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -394,18 +407,6 @@ CREATE TABLE "District" (
     "regionId" INTEGER NOT NULL,
 
     CONSTRAINT "District_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "ElectoralArea" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "districtId" INTEGER NOT NULL,
-
-    CONSTRAINT "ElectoralArea_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -883,7 +884,7 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
     "disinfectionFrequencyId" INTEGER,
     "disinfestationQuarterlyId" INTEGER,
     "protectiveClothingId" INTEGER,
-    "slaughterRoomAvailabilityId" INTEGER,
+    "slaughterAreaAvailabilityId" INTEGER,
     "condemnationRoomAvailabilityId" INTEGER,
     "cloakRoomAvailabilityId" INTEGER,
     "comfortRoomAvailabilityId" INTEGER,
@@ -1566,7 +1567,10 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Community_districtId_name_key" ON "Community"("districtId", "name");
+CREATE UNIQUE INDEX "Community_electoralAreaId_name_key" ON "Community"("electoralAreaId", "name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ElectoralArea_name_key" ON "ElectoralArea"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Region_abbrv_key" ON "Region"("abbrv");
@@ -1683,16 +1687,19 @@ ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sen
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Community" ADD CONSTRAINT "Community_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Community" ADD CONSTRAINT "Community_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Community" ADD CONSTRAINT "Community_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ElectoralArea" ADD CONSTRAINT "ElectoralArea_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Nuisance" ADD CONSTRAINT "Nuisance_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "District" ADD CONSTRAINT "District_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ElectoralArea" ADD CONSTRAINT "ElectoralArea_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Type" ADD CONSTRAINT "Type_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1935,7 +1942,7 @@ ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSe
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_sextonOfficeId_fkey" FOREIGN KEY ("sextonOfficeId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_slaughterRoomAvailabilityId_fkey" FOREIGN KEY ("slaughterRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_slaughterAreaAvailabilityId_fkey" FOREIGN KEY ("slaughterAreaAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_staffChangingRoomId_fkey" FOREIGN KEY ("staffChangingRoomId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -221,13 +221,13 @@ model MessageType {
 }
 
 model UserType {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  User User[]
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+ 
+  User             User[]
 }
 
 // model PageAccess {
@@ -317,33 +317,28 @@ model CleaningFrequency {
 }
 
 model Community {
-  id              Int    @id @default(autoincrement())
-  name            String @db.VarChar(255)
-  electoralAreaId Int?
-
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  districtId       Int
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   BasicInfoSection BasicInfoSection[]
-  ElectoralArea    ElectoralArea?     @relation(fields: [electoralAreaId], references: [id])
-  District         District?          @relation(fields: [districtId], references: [id])
-  districtId       Int?
+  District         District           @relation(fields: [districtId], references: [id])
 
-  @@unique([electoralAreaId, name], name: "electoralAreaIdIdentifier")
+  @@unique([districtId, name], name: "communityIdentifier")
 }
 
 model ElectoralArea {
-  id         Int         @id @default(autoincrement())
-  name       String      @unique @db.VarChar(255)
-  deleted    Int?        @default(0)
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  deleted    Int?     @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   districtId Int
-  District   District    @relation(fields: [districtId], references: [id])
+  District   District @relation(fields: [districtId], references: [id])
   User       User[]
-  Community  Community[]
 }
-
 model ContainerVolume {
   id                Int                 @id @default(autoincrement())
   name              String              @db.VarChar(255)
@@ -525,6 +520,7 @@ model District {
   Inspection       Inspection[]
 }
 
+
 model RespondentDesignation {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
@@ -609,8 +605,8 @@ model Subtype {
   eateryPremisesSubType EateryPremisesInfoSection[] @relation("eateryPremisesSubType")
   InspectionForm        InspectionForm              @relation(fields: [inspectionFormId], references: [id])
   Type                  Type                        @relation(fields: [typeId], references: [id])
+    @@unique([typeId, name], name: "typeName")
 
-  @@unique([typeId, name], name: "typeName")
 }
 
 model ToiletPitPosition {
@@ -861,7 +857,7 @@ model YesNo {
   scheduleLifting                                    SanitaryPremisesInfoSection[]    @relation("scheduleLifting")
   sextonManagement                                   SanitaryPremisesInfoSection[]    @relation("sextonManagement")
   sextonOffice                                       SanitaryPremisesInfoSection[]    @relation("sextonOffice")
-  slaughterAreaAvailability                          SanitaryPremisesInfoSection[]    @relation("slaughterAreaAvailability")
+  slaughterRoomAvailability                          SanitaryPremisesInfoSection[]    @relation("slaughterRoomAvailability")
   staffChangingRoom                                  SanitaryPremisesInfoSection[]    @relation("staffChangingRoom")
   storeRoomAvailability                              SanitaryPremisesInfoSection[]    @relation("storeRoomAvailability")
   toiletAvailability                                 SanitaryPremisesInfoSection[]    @relation("toiletAvailability")
@@ -1120,7 +1116,7 @@ model SanitaryPremisesInfoSection {
   disinfectionFrequencyId                   Int?
   disinfestationQuarterlyId                 Int?
   protectiveClothingId                      Int?
-  slaughterAreaAvailabilityId               Int?
+  slaughterRoomAvailabilityId               Int?
   condemnationRoomAvailabilityId            Int?
   cloakRoomAvailabilityId                   Int?
   comfortRoomAvailabilityId                 Int?
@@ -1174,7 +1170,7 @@ model SanitaryPremisesInfoSection {
   scheduleLifting                           YesNo?                 @relation("scheduleLifting", fields: [scheduleLiftingId], references: [id])
   sextonManagement                          YesNo?                 @relation("sextonManagement", fields: [sextonManagementId], references: [id])
   sextonOffice                              YesNo?                 @relation("sextonOffice", fields: [sextonOfficeId], references: [id])
-  slaughterAreaAvailability                 YesNo?                 @relation("slaughterAreaAvailability", fields: [slaughterAreaAvailabilityId], references: [id])
+  slaughterRoomAvailability                 YesNo?                 @relation("slaughterRoomAvailability", fields: [slaughterRoomAvailabilityId], references: [id])
   staffChangingRoom                         YesNo?                 @relation("staffChangingRoom", fields: [staffChangingRoomId], references: [id])
   storeRoomAvailability                     YesNo?                 @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
   toiletAvailability                        YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])

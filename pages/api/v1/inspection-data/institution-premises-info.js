@@ -118,10 +118,10 @@ const post = async (req, res) => {
         req.body.shrinePremisesConditionId == "null"
           ? null
           : Number(req.body.shrinePremisesConditionId),
-      slaughterRoomAvailabilityId:
-        req.body.slaughterRoomAvailabilityId == "null"
+      slaughterAreaAvailabilityId:
+        req.body.slaughterAreaAvailabilityId == "null"
           ? null
-          : Number(req.body.slaughterRoomAvailabilityId),
+          : Number(req.body.slaughterAreaAvailabilityId),
       slaughterAreaConditionId:
         req.body.slaughterAreaConditionId == "null"
           ? null
