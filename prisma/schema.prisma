@@ -545,12 +545,14 @@ model SafeUnsafe {
 }
 
 model SanitaryInsanitary {
-  id                     Int                              @id @default(autoincrement())
-  name                   String                           @db.VarChar(255)
-  deleted                Int?                             @default(0)
-  createdAt              DateTime                         @default(now())
-  updatedAt              DateTime                         @updatedAt
-  toiletCondition        LiquidWasteSection[]             @relation("toiletCondition")
+  id                Int                  @id @default(autoincrement())
+  name              String               @db.VarChar(255)
+  deleted           Int?                 @default(0)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  toiletCondition   LiquidWasteSection[] @relation("toiletCondition")
+  bathroomCondition LiquidWasteSection[] @relation("bathroomCondition")
+
   urinalCubicleCondition LiquidWasteSection[]             @relation("urinalCubicleCondition")
   animalSpaceCondition   ResidentialPremisesInfoSection[] @relation("animalSpaceCondition")
   sanitaryAshesDisposal  SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
@@ -817,7 +819,6 @@ model YesNo {
   drainsConditionLiquidWaste                         LiquidWasteSection[]             @relation("drainsCondition")
   effluentManagementReport                           LiquidWasteSection[]             @relation("effluentManagementReport")
   facilityConnectedSewer                             LiquidWasteSection[]             @relation("facilityConnectedSewer")
-  publicBathRoomCondition                            LiquidWasteSection[]             @relation("publicBathRoomCondition")
   separateStaffUrinal                                LiquidWasteSection[]             @relation("separateStaffUrinal")
   sewerSystem                                        LiquidWasteSection[]             @relation("sewerSystem")
   stagnationEvidence                                 LiquidWasteSection[]             @relation("stagnationEvidence")
@@ -1423,7 +1424,7 @@ model LiquidWasteSection {
   drainsConditionId          Int?
   analCleansingMaterialMgtId Int?
   effluentManagementReportId Int?
-  publicBathRoomConditionId  Int?
+  bathroomConditionId        Int?
   areaSeweredId              Int?
   facilityConnectedSewerId   Int?
   numberUrinalCubicle        Int?
@@ -1459,7 +1460,7 @@ model LiquidWasteSection {
   ExcretaDisposalMethod         ExcretaDisposalMethod?          @relation(fields: [excretaDisposalMethodId], references: [id])
   facilityConnectedSewer        YesNo?                          @relation("facilityConnectedSewer", fields: [facilityConnectedSewerId], references: [id])
   Inspection                    Inspection                      @relation(fields: [inspectionId], references: [id])
-  publicBathRoomCondition       YesNo?                          @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
+  bathroomCondition             SanitaryInsanitary?             @relation("bathroomCondition", fields: [bathroomConditionId], references: [id])
   separateStaffUrinal           YesNo?                          @relation("separateStaffUrinal", fields: [separateStaffUrinalId], references: [id])
   sewerSystem                   YesNo?                          @relation("sewerSystem", fields: [sewerSystemId], references: [id])
   stagnationEvidence            YesNo?                          @relation("stagnationEvidence", fields: [stagnationEvidenceId], references: [id])
