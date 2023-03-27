@@ -128,7 +128,9 @@ const EateryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.RespondentDesignation.name}
+                        value={
+                          data.BasicInfoSection?.RespondentDesignation.name
+                        }
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -438,7 +440,7 @@ const EateryView = ({ data }) => {
         </div>
       </div> */}
 
-<div className="row">
+      <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
             <div className="col-xl-12">
@@ -486,8 +488,8 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.buildingPermitAvailability
-                              .name
+                            data.LicencePermitSection
+                              ?.buildingPermitAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -506,7 +508,7 @@ const EateryView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.LicencePermitSection
-                              .habitationCertificateAvailability.name
+                              ?.habitationCertificateAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -545,7 +547,7 @@ const EateryView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.LicencePermitSection
-                              .suitabilityCertificateAvailability.name
+                              ?.suitabilityCertificateAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -563,7 +565,7 @@ const EateryView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.LicencePermitSection
-                              .structurePermitAvailability.name
+                              ?.structurePermitAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -583,8 +585,7 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .fumigationCertificateAvailability.name
+                            data.LicencePermitSection?.fumigationCertificateAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -603,8 +604,7 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .businessLicenceAvailability.name
+                            data.LicencePermitSection?.businessLicenceAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -661,8 +661,8 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.regGeneralCertAvailability
-                              .name
+                            data.LicencePermitSection
+                              ?.regGeneralCertAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -670,8 +670,8 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.medicalCertificateAvailability !=
-                    null ? (
+                    {data.LicencePermitSection
+                      ?.medicalCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Medical certificate
@@ -1865,43 +1865,44 @@ const EateryView = ({ data }) => {
 
               <div className="row gallery-wrapper">
                 {data.InspectionPictures.map((ip) => {
-                return  <div
-                key={ip.id}
-                    className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
-                    data-category="designing development"
-                  >
-                    <div className="gallery-box card">
-                      <div className="gallery-container">
-                        <a
-                         className="image-popup"
-                         href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                         title=""
-                       >
-
-                        <img
-                          className="gallery-img img-fluid mx-auto"
-                          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                          alt=""
-                        />
-                        <div className="gallery-overlay">
-                          <h5 className="overlay-caption">
-                           {ip.FormSectionImage.name}
-                          </h5>
+                  return (
+                    <div
+                      key={ip.id}
+                      className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                      data-category="designing development"
+                    >
+                      <div className="gallery-box card">
+                        <div className="gallery-container">
+                          <a
+                            className="image-popup"
+                            href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                            title=""
+                          >
+                            <img
+                              className="gallery-img img-fluid mx-auto"
+                              src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                              alt=""
+                            />
+                            <div className="gallery-overlay">
+                              <h5 className="overlay-caption">
+                                {ip.FormSectionImage.name}
+                              </h5>
+                            </div>
+                          </a>
                         </div>
-                        </a>
-                      </div>
 
-                      <div className="box-content">
-                        <div className="d-flex align-items-center mt-1">
-                          <div className="flex-grow-1 text-muted">
-                            <a href="" className="text-body text-truncate">
-                            {ip.FormSectionImage.name}
-                            </a>
+                        <div className="box-content">
+                          <div className="d-flex align-items-center mt-1">
+                            <div className="flex-grow-1 text-muted">
+                              <a href="" className="text-body text-truncate">
+                                {ip.FormSectionImage.name}
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>;
+                  );
                 })}
               </div>
             </div>
@@ -1936,7 +1937,5 @@ const EateryView = ({ data }) => {
     </>
   );
 };
-
-
 
 export default EateryView;
