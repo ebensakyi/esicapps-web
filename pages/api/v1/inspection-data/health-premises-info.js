@@ -41,36 +41,36 @@ const post = async (req, res) => {
         req.body.approvedHandwashingFacilityAvailabilityId == "null"
           ? null
           : Number(req.body.approvedHandwashingFacilityAvailabilityId),
-          ehoAvailabilityId:
+      ehoAvailabilityId:
         req.body.ehoAvailabilityId == "null"
           ? null
           : Number(req.body.ehoAvailabilityId),
-          numberWards:
-        req.body.numberWards == "null"
-          ? null
-          : Number(req.body.numberWards),
+      numberWards:
+        req.body.numberWards == "null" ? null : Number(req.body.numberWards),
 
-          numberBeds:
+      numberBeds:
         req.body.numberBeds == "null" ? null : Number(req.body.numberBeds),
 
-        placentaPitAvailabilityId:
+      placentaPitAvailabilityId:
         req.body.placentaPitAvailabilityId == "null"
           ? null
           : Number(req.body.placentaPitAvailabilityId),
 
-          incineratorAvailabilityId:
+      incineratorAvailabilityId:
         req.body.incineratorAvailabilityId == "null"
           ? null
           : Number(req.body.incineratorAvailabilityId),
-
-      
     };
 
     const response = await prisma.healthPremisesInfoSection.create({
       data,
     });
 
-    res.status(200).json({ statusCode: 1, message: "Data saved" });
+    if (response) {
+      return res.status(200).json({ statusCode: 1, message: "Data saved" });
+    }
+
+    return res.status(500).json({ statusCode: 0, message: "Data skipped" });
   } catch (error) {
     // console.log("Error: " + error);
     // if (error.code === "P2002")
@@ -78,17 +78,14 @@ const post = async (req, res) => {
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
     res.status(500).json({ statusCode: 0, message: "Data skipped" });
-
   }
 };
-
 
 const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
-    if(!userId) return res.status(200).json()
+    if (!userId) return res.status(200).json();
 
-    
     const response = await prisma.healthPremisesInfoSection.findMany({
       where: { userId: userId, deleted: 0 },
     });
