@@ -78,7 +78,7 @@ const get = async (req, res) => {
             vaccinationProof: true,
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
-            bathRoomAvailability: true,
+            bathroomAvailability: true,
             animalSpaceCondition: true,
           },
         },

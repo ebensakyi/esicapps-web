@@ -210,7 +210,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.bathRoomAvailability !=
+                    {data.IndustryPremisesInfoSection.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -222,7 +222,7 @@ const IndustryView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.IndustryPremisesInfoSection
-                              .bathRoomAvailability.name
+                              .bathroomAvailability.name
                           }
                           readOnly="readOnly"
                         />

@@ -531,7 +531,7 @@ model YesNo {
   drainsAvailability   FacilitySection[] @relation("drainsAvailability")
   toiletAvailability   FacilitySection[] @relation("toiletAvailability")
   urinalAvailability   FacilitySection[] @relation("urinalAvailability")
-  bathRoomAvailability FacilitySection[] @relation("bathRoomAvailability")
+  bathroomAvailability FacilitySection[] @relation("bathroomAvailability")
 
   evidenceStagnation        LiquidWasteSection[]   @relation("evidenceStagnation")
   disinfection              FacilitySection[]      @relation("disinfection")
@@ -822,7 +822,7 @@ model FacilitySection {
   drainsAvailability          YesNo?                @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability          YesNo?                @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability          YesNo?                @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability        YesNo?                @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
+  bathroomAvailability        YesNo?                @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
   soundProof                  YesNo?                @relation("soundProof", fields: [soundProofId], references: [id])
   disabilityFriendly          YesNo?                @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
   multipleExit                YesNo?                @relation("multipleExit", fields: [multipleExitId], references: [id])

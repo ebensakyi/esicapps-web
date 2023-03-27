@@ -210,7 +210,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.bathRoomAvailability !=
+                    {data.MarketPremisesInfoSection.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -222,7 +222,7 @@ const MarketView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.MarketPremisesInfoSection
-                              .bathRoomAvailability.name
+                              .bathroomAvailability.name
                           }
                           readOnly="readOnly"
                         />

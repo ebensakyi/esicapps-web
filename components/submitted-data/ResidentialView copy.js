@@ -221,7 +221,7 @@ const ResidentialView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.ResidentialPremisesInfoSection
-                              .bathRoomAvailability.name
+                              .bathroomAvailability.name
                           }
                           readOnly="readOnly"
                         />
