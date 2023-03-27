@@ -66,8 +66,8 @@ const ResidentialView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection.Community != null
-                            ? data.BasicInfoSection.Community.District.Region
+                          data.BasicInfoSection?.Community != null
+                            ? data.BasicInfoSection?.Community?.District?.Region
                                 .name
                             : ""
                         }
@@ -81,8 +81,8 @@ const ResidentialView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection.Community != null
-                            ? data.BasicInfoSection.Community.District.name
+                          data.BasicInfoSection?.Community != null
+                            ? data.BasicInfoSection?.Community?.District?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -95,8 +95,8 @@ const ResidentialView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection.Community != null
-                            ? data.BasicInfoSection.Community.name
+                          data.BasicInfoSection?.Community != null
+                            ? data.BasicInfoSection?.Community?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -108,7 +108,7 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.ghanaPostGps}
+                        value={data.BasicInfoSection?.ghanaPostGps}
                         readOnly="readOnly"
                       />
                     </div>
@@ -118,7 +118,7 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.respondentName}
+                        value={data.BasicInfoSection?.respondentName}
                         readOnly="readOnly"
                       />
                     </div>
@@ -130,7 +130,7 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.RespondentDesignation.name}
+                        value={data.BasicInfoSection?.RespondentDesignation.name}
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -142,7 +142,7 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection.respondentPhoneNumber}
+                        value={data.BasicInfoSection?.respondentPhoneNumber}
                         readOnly="readOnly"
                       />
                     </div>
