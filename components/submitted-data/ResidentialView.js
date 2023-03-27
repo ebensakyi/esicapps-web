@@ -449,7 +449,7 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.LicencePermitSection.animalsPermitAvailability !=
+                    {data.LicencePermitSection?.animalsPermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal permit</label>
@@ -458,7 +458,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection.animalsPermitAvailability
+                            data.LicencePermitSection?.animalsPermitAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -475,7 +475,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection.buildingPermitAvailability
+                            data.LicencePermitSection?.buildingPermitAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -513,7 +513,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection.propertyRateAvailability
+                            data.LicencePermitSection?.propertyRateAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -542,7 +542,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.structurePermitAvailability !=
+                    {data.LicencePermitSection?.structurePermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Structure permit</label>
@@ -581,7 +581,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.businessLicenceAvailability !=
+                    {data.LicencePermitSection?.businessLicenceAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -601,7 +601,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.structurePermitAvailability !=
+                    {data.LicencePermitSection?.structurePermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -621,7 +621,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.waterAnalysisReport != null ? (
+                    {data.LicencePermitSection?.waterAnalysisReport != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water analysis report
@@ -631,7 +631,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection.waterAnalysisReport.name
+                            data.LicencePermitSection?.waterAnalysisReport.name
                           }
                           readOnly="readOnly"
                         />
@@ -639,7 +639,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.regGeneralCertAvailability !=
+                    {data.LicencePermitSection?.regGeneralCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -650,7 +650,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection.regGeneralCertAvailability
+                            data.LicencePermitSection?.regGeneralCertAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -659,7 +659,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection.medicalCertificateAvailability !=
+                    {data.LicencePermitSection?.medicalCertificateAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -700,7 +700,7 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection.pharmacyCertAvailability !=
+                    {data.LicencePermitSection?.pharmacyCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -711,7 +711,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection.pharmacyCertAvailability
+                            data.LicencePermitSection?.pharmacyCertAvailability
                               .value
                           }
                           readOnly="readOnly"
