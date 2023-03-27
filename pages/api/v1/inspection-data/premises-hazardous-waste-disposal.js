@@ -19,8 +19,11 @@ const post = async (req, res) => {
 
     const response = await prisma.premisesHazardousWasteDisposal.create({ data });
 
-    res.status(200).json({ statusCode: 1, message: "Data saved" });
-  } catch (error) {
+    if(response){
+      return  res.status(200).json({ statusCode: 1, message: "Data saved" });
+      }
+  
+      return  res.status(500).json({ statusCode: 0, message: "Data skipped" });  } catch (error) {
     // console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
