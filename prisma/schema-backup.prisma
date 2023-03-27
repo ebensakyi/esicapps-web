@@ -813,7 +813,7 @@ model YesNo {
   drainsConditionLiquidWaste                         LiquidWasteSection[]             @relation("drainsCondition")
   effluentManagementReport                           LiquidWasteSection[]             @relation("effluentManagementReport")
   facilityConnectedSewer                             LiquidWasteSection[]             @relation("facilityConnectedSewer")
-  publicBathRoomCondition                            LiquidWasteSection[]             @relation("publicBathRoomCondition")
+  bathroomCondition                            LiquidWasteSection[]             @relation("bathroomCondition")
   separateStaffUrinal                                LiquidWasteSection[]             @relation("separateStaffUrinal")
   sewerSystem                                        LiquidWasteSection[]             @relation("sewerSystem")
   stagnationEvidence                                 LiquidWasteSection[]             @relation("stagnationEvidence")
@@ -951,7 +951,7 @@ model ResidentialPremisesInfoSection {
   User                                      User                @relation(fields: [userId], references: [id])
   drainsAvailabilityId                      Int
   toiletAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   approvedHandwashingFacilityAvailabilityId Int?
   animalAvailabilityId                      Int?
   householdNumber                           Int?
@@ -968,7 +968,7 @@ model ResidentialPremisesInfoSection {
   animalAvailability                        YesNo?              @relation("animalAvailability", fields: [animalAvailabilityId], references: [id])
   animalSpaceCondition                      SanitaryInsanitary? @relation("animalSpaceCondition", fields: [animalSpaceConditionId], references: [id])
   approvedHandwashingFacilityAvailability   YesNo?              @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?              @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?              @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo               @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   vaccinationProof                          YesNo?              @relation("vaccinationProof", fields: [vaccinationProofId], references: [id])
@@ -999,13 +999,13 @@ model EateryPremisesInfoSection {
   disinfestationFrequencyId                 Int?
   disinfectionId                            Int?
   disinfectionFrequencyId                   Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   approvedHandwashingFacilityAvailabilityId Int?
   deleted                                   Int?     @default(0)
   createdAt                                 DateTime @default(now())
   updatedAt                                 DateTime @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?   @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?   @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?   @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   eateryPremisesSubType                     Subtype? @relation("eateryPremisesSubType", fields: [eateryPremisesSubTypeId], references: [id])
   eateryPremisesType                        Type?    @relation("eateryPremisesType", fields: [eateryPremisesTypeId], references: [id])
@@ -1028,7 +1028,7 @@ model HealthPremisesInfoSection {
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
   ownershipTypeId                           Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   ehoAvailabilityId                         Int?
   numberWards                               Int?
   separateWardId                            Int?
@@ -1040,7 +1040,7 @@ model HealthPremisesInfoSection {
   createdAt                                 DateTime       @default(now())
   updatedAt                                 DateTime       @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   ehoAvailability                           YesNo?         @relation("ehoAvailability", fields: [ehoAvailabilityId], references: [id])
   healthPremisesType                        Type?          @relation("healthPremisesType", fields: [healthPremisesTypeId], references: [id])
@@ -1068,7 +1068,7 @@ model HospitalityPremisesInfoSection {
   designatedSmokingAreaId                   Int?
   protectiveClothingUsedId                  Int?
   firstAidAvailabilityId                    Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   kitchenAvailabilityId                     Int?
   protectiveClothingId                      Int?
   numberMaleWorkers                         Int?
@@ -1081,7 +1081,7 @@ model HospitalityPremisesInfoSection {
   createdAt                                 DateTime       @default(now())
   updatedAt                                 DateTime       @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   cookedFoodStorageCondtionSafe             YesNo?         @relation("cookedFoodStorageCondtionSafe", fields: [cookedFoodStorageCondtionSafeId], references: [id])
   drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   hospitalityPremisesType                   Type?          @relation("hospitalityPremisesType", fields: [hospitalityPremisesTypeId], references: [id])
@@ -1105,7 +1105,7 @@ model SanitaryPremisesInfoSection {
   sanitaryPremisesSubtypeId                 Int?
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   drainsAvailabilityId                      Int?
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
@@ -1145,7 +1145,7 @@ model SanitaryPremisesInfoSection {
   createdAt                                 DateTime               @default(now())
   updatedAt                                 DateTime               @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?                 @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?                 @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?                 @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   cloakRoomAvailability                     YesNo?                 @relation("cloakRoomAvailability", fields: [cloakRoomAvailabilityId], references: [id])
   comfortRoomAvailability                   YesNo?                 @relation("comfortRoomAvailability", fields: [comfortRoomAvailabilityId], references: [id])
   condemnationRoomAvailability              YesNo?                 @relation("condemnationRoomAvailability", fields: [condemnationRoomAvailabilityId], references: [id])
@@ -1191,7 +1191,7 @@ model MarketPremisesInfoSection {
   physicalStructureTypeId                   Int?
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   drainsAvailabilityId                      Int?
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
@@ -1215,7 +1215,7 @@ model MarketPremisesInfoSection {
   createdAt                                 DateTime       @default(now())
   updatedAt                                 DateTime       @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
@@ -1234,7 +1234,7 @@ model InstitutionPremisesInfoSection {
   institutionPremisesSubtypeId              Int?
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   drainsAvailabilityId                      Int?
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
@@ -1279,7 +1279,7 @@ model InstitutionPremisesInfoSection {
   createdAt                                 DateTime @default(now())
   updatedAt                                 DateTime @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?   @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?   @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?   @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
@@ -1307,7 +1307,7 @@ model IndustryPremisesInfoSection {
   storeRoomAvailabilityId                   Int?
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   drainsAvailabilityId                      Int?
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
@@ -1320,7 +1320,7 @@ model IndustryPremisesInfoSection {
   createdAt                                 DateTime       @default(now())
   updatedAt                                 DateTime       @updatedAt
   approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability                      YesNo?         @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
@@ -1455,7 +1455,7 @@ model LiquidWasteSection {
   ExcretaDisposalMethod         ExcretaDisposalMethod?          @relation(fields: [excretaDisposalMethodId], references: [id])
   facilityConnectedSewer        YesNo?                          @relation("facilityConnectedSewer", fields: [facilityConnectedSewerId], references: [id])
   Inspection                    Inspection                      @relation(fields: [inspectionId], references: [id])
-  publicBathRoomCondition       YesNo?                          @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
+  bathroomCondition       YesNo?                          @relation("bathroomCondition", fields: [publicBathRoomConditionId], references: [id])
   separateStaffUrinal           YesNo?                          @relation("separateStaffUrinal", fields: [separateStaffUrinalId], references: [id])
   sewerSystem                   YesNo?                          @relation("sewerSystem", fields: [sewerSystemId], references: [id])
   stagnationEvidence            YesNo?                          @relation("stagnationEvidence", fields: [stagnationEvidenceId], references: [id])

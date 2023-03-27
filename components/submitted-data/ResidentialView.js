@@ -191,7 +191,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection != null ? (
+                    {/* {data?.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal facility availabilty
@@ -201,15 +201,14 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection
-                              .urinalAvailability.name
+                            data?.ResidentialPremisesInfoSection?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {data?.ResidentialPremisesInfoSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">

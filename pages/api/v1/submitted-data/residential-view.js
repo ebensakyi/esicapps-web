@@ -75,7 +75,6 @@ const get = async (req, res) => {
             },
             animalAvailability: true,
             toiletAvailability: true,
-            urinalAvailability: true,
             vaccinationProof: true,
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
@@ -150,7 +149,7 @@ const get = async (req, res) => {
               },
             },
             facilityConnectedSewer: true,
-            publicBathRoomCondition: true,
+            bathroomCondition: true,
             separateStaffUrinal: true,
             sewerSystem: true,
             stagnationEvidence: true,
@@ -191,7 +190,6 @@ const get = async (req, res) => {
         },
         ConclusionSection: {
           include: {
-            generalSanitaryCondition: true,
             obnoxiousTradeExist: true,
             PremisesNuisanceDetected: {
               include: { Nuisance: true },

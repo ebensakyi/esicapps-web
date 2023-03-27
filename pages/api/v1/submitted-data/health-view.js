@@ -166,7 +166,7 @@ const get = async (req, res) => {
               },
             },
             facilityConnectedSewer: true,
-            publicBathRoomCondition: true,
+            bathroomCondition: true,
             separateStaffUrinal: true,
             sewerSystem: true,
             stagnationEvidence: true,

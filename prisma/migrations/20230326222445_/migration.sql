@@ -753,7 +753,7 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainsAvailabilityId" INTEGER NOT NULL,
     "toiletAvailabilityId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "animalAvailabilityId" INTEGER,
     "householdNumber" INTEGER,
@@ -794,7 +794,7 @@ CREATE TABLE "EateryPremisesInfoSection" (
     "disinfestationFrequencyId" INTEGER,
     "disinfectionId" INTEGER,
     "disinfectionFrequencyId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -814,7 +814,7 @@ CREATE TABLE "HealthPremisesInfoSection" (
     "toiletAvailabilityId" INTEGER,
     "urinalAvailabilityId" INTEGER,
     "ownershipTypeId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "ehoAvailabilityId" INTEGER,
     "numberWards" INTEGER,
     "separateWardId" INTEGER,
@@ -846,7 +846,7 @@ CREATE TABLE "HospitalityPremisesInfoSection" (
     "designatedSmokingAreaId" INTEGER,
     "protectiveClothingUsedId" INTEGER,
     "firstAidAvailabilityId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "kitchenAvailabilityId" INTEGER,
     "protectiveClothingId" INTEGER,
     "numberMaleWorkers" INTEGER,
@@ -873,7 +873,7 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
     "sanitaryPremisesSubtypeId" INTEGER,
     "toiletAvailabilityId" INTEGER,
     "urinalAvailabilityId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "drainsAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "firstAidAvailabilityId" INTEGER,
@@ -926,7 +926,7 @@ CREATE TABLE "MarketPremisesInfoSection" (
     "physicalStructureTypeId" INTEGER,
     "toiletAvailabilityId" INTEGER,
     "urinalAvailabilityId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "drainsAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "firstAidAvailabilityId" INTEGER,
@@ -963,7 +963,7 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
     "institutionPremisesSubtypeId" INTEGER,
     "toiletAvailabilityId" INTEGER,
     "urinalAvailabilityId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "drainsAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "firstAidAvailabilityId" INTEGER,
@@ -1027,7 +1027,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "storeRoomAvailabilityId" INTEGER,
     "toiletAvailabilityId" INTEGER,
     "urinalAvailabilityId" INTEGER,
-    "bathRoomAvailabilityId" INTEGER,
+    "bathroomAvailabilityId" INTEGER,
     "drainsAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "firstAidAvailabilityId" INTEGER,
@@ -1744,7 +1744,7 @@ ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremises
 ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_approvedHandwashingFacility_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ResidentialPremisesInfoSection" ADD CONSTRAINT "ResidentialPremisesInfoSection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -1765,7 +1765,7 @@ ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSectio
 ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_approvedHandwashingFacilityAvail_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1798,7 +1798,7 @@ ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSectio
 ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_approvedHandwashingFacilityAvail_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1831,7 +1831,7 @@ ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSectio
 ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_approvedHandwashingFacility_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_cookedFoodStorageCondtionSa_fkey" FOREIGN KEY ("cookedFoodStorageCondtionSafeId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1867,7 +1867,7 @@ ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremises
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_approvedHandwashingFacilityAva_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_cloakRoomAvailabilityId_fkey" FOREIGN KEY ("cloakRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1975,7 +1975,7 @@ ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSe
 ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSection_approvedHandwashingFacilityAvail_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -1999,7 +1999,7 @@ ALTER TABLE "MarketPremisesInfoSection" ADD CONSTRAINT "MarketPremisesInfoSectio
 ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_approvedHandwashingFacility_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremisesInfoSection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2029,7 +2029,7 @@ ALTER TABLE "InstitutionPremisesInfoSection" ADD CONSTRAINT "InstitutionPremises
 ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_approvedHandwashingFacilityAva_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_bathRoomAvailabilityId_fkey" FOREIGN KEY ("bathroomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_drainsAvailabilityId_fkey" FOREIGN KEY ("drainsAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;

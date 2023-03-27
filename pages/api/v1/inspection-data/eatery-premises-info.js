@@ -3,7 +3,7 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log("req.body.bathRoomAvailabilityId: ",req.body.bathroomAvailabilityId);
+    console.log("req.body.bathroomAvailabilityId: ",req.body.bathroomAvailabilityId);
 
     const data = {
       id: req.body.id,
@@ -40,7 +40,7 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.urinalAvailabilityId),
 
-      bathRoomAvailabilityId:
+      bathroomAvailabilityId:
         req.body.bathroomAvailabilityId == "null"
           ? null
           : Number(req.body.bathroomAvailabilityId),

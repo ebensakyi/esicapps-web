@@ -538,7 +538,7 @@ model YesNo {
   disinfestation            FacilitySection[]      @relation("disinfestation")
   safeConditionUncooked     HygieneSection[]       @relation("safeConditionUncooked")
   safeConditionCooked       HygieneSection[]       @relation("safeConditionCooked")
-  publicBathRoomCondition   LiquidWasteSection[]   @relation("publicBathRoomCondition")
+  bathroomCondition   LiquidWasteSection[]   @relation("bathroomCondition")
   animalsPermitAvailability LicencePermitSection[] @relation("animalsPermitAvailability")
   vaccinationProof          HygieneSection[]       @relation("vaccinationProof")
   animalSpaceCondition      HygieneSection[]       @relation("animalSpaceCondition")
@@ -778,7 +778,7 @@ model FacilitySection {
   drainsAvailabilityId                      Int?
   toiletAvailabilityId                      Int?
   urinalAvailabilityId                      Int?
-  bathRoomAvailabilityId                    Int?
+  bathroomAvailabilityId                    Int?
   separateWardId                            Int?
   soundProofId                              Int?
   disabilityFriendlyId                      Int?
@@ -822,7 +822,7 @@ model FacilitySection {
   drainsAvailability          YesNo?                @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability          YesNo?                @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability          YesNo?                @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  bathRoomAvailability        YesNo?                @relation("bathRoomAvailability", fields: [bathRoomAvailabilityId], references: [id])
+  bathRoomAvailability        YesNo?                @relation("bathRoomAvailability", fields: [bathroomAvailabilityId], references: [id])
   soundProof                  YesNo?                @relation("soundProof", fields: [soundProofId], references: [id])
   disabilityFriendly          YesNo?                @relation("disabilityFriendly", fields: [disabilityFriendlyId], references: [id])
   multipleExit                YesNo?                @relation("multipleExit", fields: [multipleExitId], references: [id])
@@ -1085,7 +1085,7 @@ model LiquidWasteSection {
   evidenceStagnation        YesNo?                      @relation("evidenceStagnation", fields: [evidenceStagnationId], references: [id])
   pondingEvidence           YesNo?                      @relation("pondingEvidence", fields: [pondingEvidenceId], references: [id])
 
-  publicBathRoomCondition YesNo? @relation("publicBathRoomCondition", fields: [publicBathRoomConditionId], references: [id])
+  bathroomCondition YesNo? @relation("bathroomCondition", fields: [publicBathRoomConditionId], references: [id])
 }
 
 model PremisesWashroomFacility {
