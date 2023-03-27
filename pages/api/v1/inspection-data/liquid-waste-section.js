@@ -31,6 +31,8 @@ const post = async (req, res) => {
       areaSeweredId: req.body.areaSeweredId == "null" ? null : Number(req.body.areaSeweredId),
       facilityConnectedSewerId: req.body.facilityConnectedSewerId == "null" ? null : Number(req.body.facilityConnectedSewerId),
       bathroomAdequacyId: req.body.bathroomAdequacyId == "null" ? null : Number(req.body.bathroomAdequacyId),
+      bathroomConditionId: req.body.bathroomConditionId == "null" ? null : Number(req.body.bathroomConditionId),
+
       drainsConditionId: req.body.drainsConditionId == "null" ? null : Number(req.body.drainsConditionId),
       desiltingFrequencyId: req.body.desiltingFrequencyId == "null" ? null : Number(req.body.desiltingFrequencyId),
       stagnationEvidenceId: req.body.stagnationEvidenceId == "null" ? null : Number(req.body.stagnationEvidenceId),
@@ -38,12 +40,14 @@ const post = async (req, res) => {
       toiletHouseholdNumberId: req.body.toiletHouseholdNumberId == "null" ?null : Number(req.body.toiletHouseholdNumberId),
     };
 
-    console.log(data)
 
  const response = await prisma.liquidWasteSection.create({ data });
 
-     res.status(200).json({ statusCode: 1, message: "Data saved" });
-  } catch (error) {
+ if(response){
+  return  res.status(200).json({ statusCode: 1, message: "Data saved" });
+  }
+
+  return  res.status(500).json({ statusCode: 0, message: "Data skipped" });  } catch (error) {
     // console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
