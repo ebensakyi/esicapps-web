@@ -65,8 +65,7 @@ const HealthView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.District?.Region
-                                .name
+                            ? data.BasicInfoSection?.Community?.District?.Region?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -128,7 +127,7 @@ const HealthView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.RespondentDesignation.name}
+                        value={data.BasicInfoSection?.RespondentDesignation?.name}
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -152,7 +151,7 @@ const HealthView = ({ data }) => {
           </div>
         </div>
       </div>
-{/* 
+
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -170,7 +169,7 @@ const HealthView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.HealthPremisesInfoSection.toiletAvailability !=
+                    {data?.HealthPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -181,8 +180,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HealthPremisesInfoSection
-                              .toiletAvailability.name
+                            data?.HealthPremisesInfoSection?.toiletAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -190,7 +188,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.HealthPremisesInfoSection.urinalAvailability !=
+                    {data?.HealthPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -201,8 +199,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HealthPremisesInfoSection
-                              .urinalAvailability.name
+                            data?.HealthPremisesInfoSection?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -210,7 +207,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.HealthPremisesInfoSection.bathroomAvailability !=
+                    {data?.HealthPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -221,8 +218,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HealthPremisesInfoSection
-                              .bathroomAvailability.name
+                            data?.HealthPremisesInfoSection?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -230,7 +226,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.HealthPremisesInfoSection.drainsAvailability !=
+                    {data?.HealthPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -241,8 +237,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HealthPremisesInfoSection
-                              .drainsAvailability.name
+                            data?.HealthPremisesInfoSection?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -250,8 +245,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.HealthPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityHealth !=
+                    {data?.HealthPremisesInfoSection?.approvedHandwashingFacilityAvailabilityHealth !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -262,9 +256,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HealthPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityHealth
-                              .name
+                            data?.HealthPremisesInfoSection?.approvedHandwashingFacilityAvailabilityHealth?.name
                           }
                           readOnly="readOnly"
                         />
@@ -272,171 +264,15 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.HealthPremisesInfoSection.householdNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Number of household
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HealthPremisesInfoSection.householdNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HealthPremisesInfoSection.maleOccupantNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Number of male occupants
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HealthPremisesInfoSection
-                              .maleOccupantNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HealthPremisesInfoSection.femaleOccupantNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Number of female occupants
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HealthPremisesInfoSection
-                              .femaleOccupantNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HealthPremisesInfoSection.animalAvailability !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal availabilty
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HealthPremisesInfoSection
-                              .animalAvailability.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HealthPremisesInfoSection.animalNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animal number</label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HealthPremisesInfoSection.animalNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-
-                    {data.HealthPremisesInfoSection.PremisesAnimal
-                      .length != 0 ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animals</label>
-                        {data.HealthPremisesInfoSection.PremisesAnimal.map(
-                          (x) => (
-                            <input
-                              key={x.id}
-                              type="text"
-                              className="form-control bg-light border-0"
-                              id="invoicenoInput"
-                              value={x.AnimalType.name}
-                              readOnly="readOnly"
-                            />
-                          )
-                        )}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-
-                    {data.HealthPremisesInfoSection.vaccinationProof !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal vaccination proof
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HealthPremisesInfoSection.vaccinationProof
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                   
                   </div>
-                  {data.HealthPremisesInfoSection.animalSpaceCondition !=
-                  null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Animal space condition
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.HealthPremisesInfoSection
-                            .animalSpaceCondition.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
 <div className="row">
         <div className="col-lg-12">
@@ -469,8 +305,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.animalsPermitAvailability
-                              .name
+                            data.LicencePermitSection?.animalsPermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -478,7 +313,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Building permit</label>
                         <input
@@ -486,8 +321,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.buildingPermitAvailability
-                              .name
+                            data?.LicencePermitSection?.buildingPermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -495,7 +329,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Certificate of habitation
@@ -505,8 +339,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .habitationCertificateAvailability.name
+                            data?.LicencePermitSection?.habitationCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -524,8 +357,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.propertyRateAvailability
-                              .name
+                            data?.LicencePermitSection?.propertyRateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -572,8 +404,7 @@ const HealthView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection
-                      .fumigationCertificateAvailability != null ? (
+                    {data?.LicencePermitSection?.fumigationCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Fumigation certificate
@@ -583,8 +414,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .fumigationCertificateAvailability.name
+                            data?.LicencePermitSection?.fumigationCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -603,8 +433,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .businessLicenceAvailability.name
+                            data?.LicencePermitSection?.businessLicenceAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -623,8 +452,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .structurePermitAvailability.name
+                            data?.LicencePermitSection?.structurePermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -642,7 +470,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.waterAnalysisReport.name
+                            data?.LicencePermitSection?.waterAnalysisReport?.name
                           }
                           readOnly="readOnly"
                         />
@@ -661,8 +489,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.regGeneralCertAvailability
-                              .name
+                            data?.LicencePermitSection?.regGeneralCertAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -681,8 +508,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .medicalCertificateAvailability.name
+                            data?.LicencePermitSection?.medicalCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -690,8 +516,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
-                      .gtaOperatingLicenceAvailability != null ? (
+                    {data?.LicencePermitSection?.gtaOperatingLicenceAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ghana Tourism Authority operating license
@@ -701,8 +526,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .gtaOperatingLicenceAvailability.name
+                            data?.LicencePermitSection?.gtaOperatingLicenceAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -711,7 +535,7 @@ const HealthView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection?.pharmacyCertAvailability !=
+                    {data?.LicencePermitSection?.pharmacyCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -722,8 +546,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.pharmacyCertAvailability
-                              .value
+                            data?.LicencePermitSection?.pharmacyCertAvailability?.value
                           }
                           readOnly="readOnly"
                         />
@@ -761,16 +584,16 @@ const HealthView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesWaterSources.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
-                        {data.WaterSection.PremisesWaterSources.map((x) => (
+                        {data?.WaterSection?.PremisesWaterSources?.map((x) => (
                           <input
                             key={x.id}
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={x.WaterSourceType.name}
+                            value={x?.WaterSourceType?.name}
                             readOnly="readOnly"
                           />
                         ))}
@@ -778,10 +601,10 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesWaterSupply.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
-                        {data.WaterSection.PremisesWaterSupply.map((x) => (
+                        {data?.WaterSection?.PremisesWaterSupply?.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -795,7 +618,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water source condition
@@ -804,7 +627,7 @@ const HealthView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.WaterSection.waterSourceCondition.name}
+                          value={data?.WaterSection?.waterSourceCondition?.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -812,16 +635,16 @@ const HealthView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
-                        {data.WaterSection.PremisesWaterStorage.map((x) => (
+                        {data?.WaterSection?.PremisesWaterStorage?.map((x) => (
                           <input
-                            key={x.id}
+                            key={x?.id}
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={x.WaterStorageType.name}
+                            value={x?.WaterStorageType?.name}
                             readOnly="readOnly"
                           />
                         ))}
@@ -829,7 +652,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Safe Water storage receptacle condition
