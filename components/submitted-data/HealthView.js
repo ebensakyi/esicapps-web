@@ -908,7 +908,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletPitPosition != null ? (
+                    {data?.LiquidWasteSection?.toiletPitPosition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Pit Position
@@ -917,14 +917,14 @@ const HealthView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletPitPosition.name}
+                          value={data?.LiquidWasteSection?.toiletPitPosition?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDisabilityFriendly !=
+                    {data?.LiquidWasteSection?.toiletDisabilityFriendly !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -935,8 +935,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.toiletDisabilityFriendly
-                              .name
+                            data?.LiquidWasteSection?.toiletDisabilityFriendly?.name
                           }
                           readOnly="readOnly"
                         />
@@ -944,7 +943,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalDisabilityFriendly !=
+                    {data?.LiquidWasteSection?.urinalDisabilityFriendly !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -955,8 +954,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalDisabilityFriendly
-                              .name
+                            data?.LiquidWasteSection?.urinalDisabilityFriendly?.name
                           }
                           readOnly="readOnly"
                         />
@@ -964,21 +962,21 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.drainsCondition != null ? (
+                    {data?.LiquidWasteSection?.drainsCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drains Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.drainsCondition.name}
+                          value={data?.LiquidWasteSection?.drainsCondition?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.stagnationEvidence != null ? (
+                    {data?.LiquidWasteSection?.stagnationEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Stagnation Evidence
@@ -988,7 +986,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.stagnationEvidence.name
+                            data?.LiquidWasteSection?.stagnationEvidence?.name
                           }
                           readOnly="readOnly"
                         />
@@ -996,7 +994,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.analCleansingMaterialMgt !=
+                    {data?.LiquidWasteSection?.analCleansingMaterialMgt !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1007,8 +1005,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.analCleansingMaterialMgt
-                              .name
+                            data?.LiquidWasteSection?.analCleansingMaterialMgt?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1016,7 +1013,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.effluentManagementReport !=
+                    {data?.LiquidWasteSection?.effluentManagementReport !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1027,8 +1024,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.effluentManagementReport
-                              .name
+                            data?.LiquidWasteSection?.effluentManagementReport?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1036,21 +1032,21 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.areaSewered != null ? (
+                    {data?.LiquidWasteSection?.areaSewered != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Is Area Sewered</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.areaSewered.name}
+                          value={data?.LiquidWasteSection?.areaSewered?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.facilityConnectedSewer != null ? (
+                    {data?.LiquidWasteSection?.facilityConnectedSewer != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility Connected Sewer
@@ -1060,7 +1056,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.facilityConnectedSewer.name
+                            data?.LiquidWasteSection?.facilityConnectedSewer?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1068,7 +1064,8 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    <div className="col-lg-3 col-sm-6">
+                     {data?.LiquidWasteSection?.numberUrinalCubicle != null ?
+                      <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Number Urinal Cubicle
                       </label>
@@ -1076,11 +1073,11 @@ const HealthView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.LiquidWasteSection.numberUrinalCubicle}
+                        value={data?.LiquidWasteSection?.numberUrinalCubicle}
                         readOnly="readOnly"
                       />
-                    </div>
-                    {data.LiquidWasteSection.urinalCubicleCondition != null ? (
+                    </div>:<></>}
+                    {data?.LiquidWasteSection?.urinalCubicleCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Cubicle Condition
@@ -1090,7 +1087,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalCubicleCondition.name
+                            data?.LiquidWasteSection?.urinalCubicleCondition?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1098,35 +1095,35 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletCondition != null ? (
+                    {data?.LiquidWasteSection?.toiletCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletCondition.name}
+                          value={data?.LiquidWasteSection?.toiletCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDischarge != null ? (
+                    {data?.LiquidWasteSection?.toiletDischarge != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Discharge</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletDischarge.name}
+                          value={data?.LiquidWasteSection?.toiletDischarge?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.containmentEmptied != null ? (
+                    {data?.LiquidWasteSection?.containmentEmptied != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Containment Emptied
@@ -1136,7 +1133,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.containmentEmptied.name
+                            data?.LiquidWasteSection?.containmentEmptied?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1144,21 +1141,21 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.sewerSystem != null ? (
+                    {data?.LiquidWasteSection?.sewerSystem != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Sewer System</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.sewerSystem.name}
+                          value={data?.LiquidWasteSection?.sewerSystem?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.wasteWaterContainment != null ? (
+                    {data?.LiquidWasteSection?.wasteWaterContainment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Water Containment
@@ -1168,7 +1165,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.wasteWaterContainment.name
+                            data?.LiquidWasteSection?.wasteWaterContainment?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1176,7 +1173,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.EaseYourselfWhere != null ? (
+                    {data?.LiquidWasteSection?.EaseYourselfWhere != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ease Yourself Where
@@ -1185,14 +1182,14 @@ const HealthView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.EaseYourselfWhere.name}
+                          value={data?.LiquidWasteSection?.EaseYourselfWhere?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.DesiltingFrequency != null ? (
+                    {data?.LiquidWasteSection?.DesiltingFrequency != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Desilting Frequency
@@ -1202,7 +1199,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.DesiltingFrequency.name
+                            data?.LiquidWasteSection?.DesiltingFrequency?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1210,9 +1207,10 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                    {data?.LiquidWasteSection?.PremisesDrainType.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                      {data?.LiquidWasteSection?.PremisesDrainType?.map((x) => (
                         <input
                           key={x.id}
                           type="text"
@@ -1222,7 +1220,8 @@ const HealthView = ({ data }) => {
                           readOnly="readOnly"
                         />
                       ))}
-                    </div>{" "}
+                    </div>:<></>}
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
@@ -1239,31 +1238,33 @@ const HealthView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div>:<></>}
+                    {data?.LiquidWasteSection?.PremisesExcretaContainment?.length != 0 ?
+
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
                       </label>
-                      {data.LiquidWasteSection.PremisesExcretaContainment.map(
+                      {data?.LiquidWasteSection?.ExcretaContainment.map(
                         (x) => (
                           <input
                             key={x.id}
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={x.ExcretaContainment.name}
+                            value={x?.ExcretaContainment?.name}
                             readOnly="readOnly"
                           />
                         )
                       )}
-                    </div>{" "}
-                    {data.LiquidWasteSection.PremisesExcretaDisposalMethod
+                    </div>:<></>}
+                    {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Excreta Disposal Method
                         </label>
-                        {data.LiquidWasteSection.PremisesExcretaDisposalMethod.map(
+                        {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1279,20 +1280,20 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
+                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Grey Water Disposal
                         </label>
-                        {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
+                        {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
                           (x) => (
                             <input
                               key={x.id}
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={x.GreyWaterDisposal.name}
+                              value={x?.GreyWaterDisposal?.name}
                               readOnly="readOnly"
                             />
                           )
@@ -1301,10 +1302,10 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.PremisesToiletType.length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesToiletType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
-                        {data.LiquidWasteSection.PremisesToiletType.map((x) => (
+                        {data?.LiquidWasteSection?.PremisesToiletType?.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -1340,7 +1341,7 @@ const HealthView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.SolidWasteSection.wasteServiceProviderRegistration !=
+                    {data?.SolidWasteSection?.wasteServiceProviderRegistration !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1351,11 +1352,8 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
-                              .wasteServiceProviderRegistration != null
-                              ? data.SolidWasteSection
-                                  .wasteServiceProviderRegistration.name
-                              : ""
+                          data?.SolidWasteSection?.wasteServiceProviderRegistration?.name
+                              
                           }
                           readOnly="readOnly"
                         />
@@ -1363,7 +1361,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteCollectorName != null ? (
+                    {data?.SolidWasteSection?.wasteCollectorName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Collector Name
@@ -1372,14 +1370,14 @@ const HealthView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.wasteCollectorName}
+                          value={data?.SolidWasteSection?.wasteCollectorName}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteSortingAvailability != null ? (
+                    {data?.SolidWasteSection?.wasteSortingAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Sorting Availability
@@ -1389,7 +1387,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wasteSortingAvailability.name
+                            data?.SolidWasteSection?.wasteSortingAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1397,7 +1395,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.approvedWasteStorageReceptacle !=
+                    {data?.SolidWasteSection?.approvedWasteStorageReceptacle !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
