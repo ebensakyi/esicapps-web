@@ -3,7 +3,10 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log("req.body.bathroomAvailabilityId: ",req.body.bathroomAvailabilityId);
+    console.log(
+      "req.body.bathroomAvailabilityId: ",
+      req.body.bathroomAvailabilityId
+    );
 
     const data = {
       id: req.body.id,
@@ -102,31 +105,29 @@ const post = async (req, res) => {
           : Number(req.body.disinfectionFrequencyId),
     };
 
-   console.log(data);
-   const response = await prisma.eateryPremisesInfoSection.create({ data });
+    const response = await prisma.eateryPremisesInfoSection.create({ data });
 
-   if(response){
-    return  res.status(200).json({ statusCode: 1, message: "Data saved" });
+    if (response) {
+      return res.status(200).json({ statusCode: 1, message: "Data saved" });
     }
 
-    return  res.status(500).json({ statusCode: 0, message: "Data skipped" });  } catch (error) {
-    // console.log("Error: " + error);
+    return res.status(500).json({ statusCode: 0, message: "Data skipped" });
+  } catch (error) {
+   console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
 
     res.status(500).json({ statusCode: 0, message: "Data skipped" });
-
   }
 };
 
 const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
-    if(!userId) return res.status(200).json()
+    if (!userId) return res.status(200).json();
 
-    
     const response = await prisma.eateryPremisesInfoSection.findMany({
       where: { userId: userId, deleted: 0 },
     });
@@ -136,7 +137,6 @@ const get = async (req, res) => {
     console.log(error);
   }
 };
-
 
 export default (req, res) => {
   req.method === "POST"

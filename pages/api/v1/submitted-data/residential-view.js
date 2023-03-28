@@ -132,7 +132,6 @@ const get = async (req, res) => {
                 ExcretaDisposalMethod: true,
               },
             },
-            effluentManagementReport: true,
             PremisesExcretaContainment: {
               include: {
                 ExcretaContainment: true,
@@ -156,14 +155,9 @@ const get = async (req, res) => {
             toiletCondition: true,
             toiletDisabilityFriendly: true,
             toiletDischarge: true,
-            toiletGenderSensivity: true,
             toiletPitPosition: true,
-            urinalAdequacy: true,
-            urinalCubicleCondition: true,
-            urinalDisabilityFriendly: true,
-            urinalGenderSensivity: true,
-            wasteWaterContainment: true,
-          },
+          
+                    },
         },
         SolidWasteSection: {
           include: {

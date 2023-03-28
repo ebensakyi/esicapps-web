@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const ResidentialView = ({ data }) => {
-  console.log(data);
   const router = useRouter();
   const publish = async (id) => {
     try {
@@ -67,8 +66,8 @@ const ResidentialView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.BasicInfoSection?.Community != null
-                            ? data?.BasicInfoSection?.Community?.District?.Region
-                                .name
+                            ? data?.BasicInfoSection?.Community?.District
+                                ?.Region.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -130,7 +129,9 @@ const ResidentialView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data?.BasicInfoSection?.RespondentDesignation.name}
+                        value={
+                          data?.BasicInfoSection?.RespondentDesignation.name
+                        }
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -167,7 +168,6 @@ const ResidentialView = ({ data }) => {
                     </h5>
                   </div>
                 </div>
-                
               </div>
               <div className="card product">
                 <div className="card-body">
@@ -228,7 +228,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection != null ? (
+                    {data?.ResidentialPremisesInfoSection?.drainsAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drains availabilty
@@ -238,8 +238,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection
-                              .drainsAvailability.name
+                            data?.ResidentialPremisesInfoSection?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -247,7 +246,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection != null ? (
+                    {data?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Handwashing facility availabilty
@@ -257,9 +256,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection
-                              .approvedHandwashingFacilityAvailability
-                              .name
+                            data?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -277,7 +274,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.householdNumber
+                            data?.ResidentialPremisesInfoSection
+                              ?.householdNumber
                           }
                           readOnly="readOnly"
                         />
@@ -285,7 +283,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection != null ? (
+                    {data?.ResidentialPremisesInfoSection?.maleOccupantNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of male occupants
@@ -295,7 +293,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.maleOccupantNumber
+                            data?.ResidentialPremisesInfoSection
+                              ?.maleOccupantNumber
                           }
                           readOnly="readOnly"
                         />
@@ -303,7 +302,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection != null ? (
+                    {data?.ResidentialPremisesInfoSection?.femaleOccupantNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of female occupants
@@ -313,7 +312,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.femaleOccupantNumber
+                            data?.ResidentialPremisesInfoSection
+                              ?.femaleOccupantNumber
                           }
                           readOnly="readOnly"
                         />
@@ -321,7 +321,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection != null ? (
+                    {data?.ResidentialPremisesInfoSection?.animalAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Animal availabilty
@@ -331,7 +331,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.animalAvailability.name
+                            data?.ResidentialPremisesInfoSection
+                              ?.animalAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -339,7 +340,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection?.animalNumber != null ? (
+                    {data?.ResidentialPremisesInfoSection?.animalNumber !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
                         <input
@@ -356,7 +358,8 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.ResidentialPremisesInfoSection?.PremisesAnimal?.length != 0 ? (
+                    {data?.ResidentialPremisesInfoSection?.PremisesAnimal
+                      ?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
                         {data?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
@@ -376,7 +379,8 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.ResidentialPremisesInfoSection?.vaccinationProof != null ? (
+                    {data?.ResidentialPremisesInfoSection?.vaccinationProof !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Animal vaccination proof
@@ -386,7 +390,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.vaccinationProof?.name
+                            data?.ResidentialPremisesInfoSection
+                              ?.vaccinationProof?.name
                           }
                           readOnly="readOnly"
                         />
@@ -395,7 +400,8 @@ const ResidentialView = ({ data }) => {
                       <></>
                     )}
                   </div>
-                  {data?.ResidentialPremisesInfoSection?.animalSpaceCondition != null ? (
+                  {data?.ResidentialPremisesInfoSection?.animalSpaceCondition !=
+                  null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Animal space condition
@@ -405,7 +411,8 @@ const ResidentialView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.ResidentialPremisesInfoSection?.animalSpaceCondition.name
+                          data?.ResidentialPremisesInfoSection
+                            ?.animalSpaceCondition.name
                         }
                         readOnly="readOnly"
                       />
@@ -452,7 +459,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.animalsPermitAvailability?.name
+                            data?.LicencePermitSection
+                              ?.animalsPermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -468,7 +476,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.buildingPermitAvailability?.name
+                            data?.LicencePermitSection
+                              ?.buildingPermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -486,7 +495,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.habitationCertificateAvailability?.name
+                            data?.LicencePermitSection
+                              ?.habitationCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -504,7 +514,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.propertyRateAvailability?.name
+                            data?.LicencePermitSection?.propertyRateAvailability
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -512,7 +523,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LicencePermitSection?.suitabilityCertificateAvailability != null ? (
+                    {data?.LicencePermitSection
+                      ?.suitabilityCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Suitability Certificate
@@ -522,7 +534,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.suitabilityCertificateAvailability?.name
+                            data?.LicencePermitSection
+                              ?.suitabilityCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -539,7 +552,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.structurePermitAvailability.name
+                            data?.LicencePermitSection
+                              ?.structurePermitAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -579,7 +593,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.businessLicenceAvailability?.name
+                            data?.LicencePermitSection
+                              ?.businessLicenceAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -598,7 +613,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.structurePermitAvailability?.name
+                            data?.LicencePermitSection
+                              ?.structurePermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -616,7 +632,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.waterAnalysisReport?.name
+                            data?.LicencePermitSection?.waterAnalysisReport
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -635,8 +652,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.regGeneralCertAvailability
-                              .name
+                            data?.LicencePermitSection
+                              ?.regGeneralCertAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -644,8 +661,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LicencePermitSection?.medicalCertificateAvailability !=
-                    null ? (
+                    {data?.LicencePermitSection
+                      ?.medicalCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Medical certificate
@@ -664,7 +681,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LicencePermitSection?.gtaOperatingLicenceAvailability != null ? (
+                    {data?.LicencePermitSection
+                      ?.gtaOperatingLicenceAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ghana Tourism Authority operating license
@@ -674,7 +692,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.gtaOperatingLicenceAvailability?.name
+                            data?.LicencePermitSection
+                              ?.gtaOperatingLicenceAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -694,7 +713,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LicencePermitSection?.pharmacyCertAvailability?.value
+                            data?.LicencePermitSection?.pharmacyCertAvailability
+                              ?.value
                           }
                           readOnly="readOnly"
                         />
@@ -956,20 +976,6 @@ const ResidentialView = ({ data }) => {
                     )}
                     {data?.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Urinal Adequacy</label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.urinalAdequacy.name}
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom Adequacy
                         </label>
@@ -977,7 +983,9 @@ const ResidentialView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.bathroomAdequacy.name}
+                          value={
+                            data?.LiquidWasteSection?.bathroomAdequacy.name
+                          }
                           readOnly="readOnly"
                         />
                       </div>
@@ -1005,106 +1013,14 @@ const ResidentialView = ({ data }) => {
                     {data?.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                          Toilet Facilty Mgt availabilty
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.availToiletFaciltyMgt.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Toilet Gender Sensivity
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.toiletGenderSensivity.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Urinal Gender Sensivity
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.urinalGenderSensivity.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
                           Toilet Pit Position
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.toiletPitPosition.name}
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Toilet Disability Friendly
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.toiletDisabilityFriendly
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Urinal Disability Friendly
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.urinalDisabilityFriendly
-                              .name
+                            data?.LiquidWasteSection?.toiletPitPosition.name
                           }
                           readOnly="readOnly"
                         />
@@ -1144,8 +1060,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection !=
-                    null ? (
+                    {data?.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Anal Cleansing Material
@@ -1155,92 +1070,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.analCleansingMaterialMgt?.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Effluent Management Report
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.effluentManagementReport
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Is Area Sewered</label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.areaSewered.name}
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Facility Connected Sewer
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.facilityConnectedSewer.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                     {data?.LiquidWasteSection != null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Number Urinal Cubicle
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={data?.LiquidWasteSection?.numberUrinalCubicle}
-                        readOnly="readOnly"
-                      />
-                    </div> ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Urinal Cubicle Condition
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.urinalCubicleCondition.name
+                            data?.LiquidWasteSection?.analCleansingMaterialMgt
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1294,39 +1125,21 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.sewerSystem != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Sewer System</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.sewerSystem.name}
+                          value={data?.LiquidWasteSection?.sewerSystem?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Waste Water Containment
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data?.LiquidWasteSection?.wasteWaterContainment.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.EaseYourselfWhere != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ease Yourself Where
@@ -1335,14 +1148,16 @@ const ResidentialView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.EaseYourselfWhere.name}
+                          value={
+                            data?.LiquidWasteSection?.EaseYourselfWhere?.name
+                          }
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.DesiltingFrequency != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Desilting Frequency
@@ -1352,7 +1167,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.DesiltingFrequency.name
+                            data?.LiquidWasteSection?.DesiltingFrequency?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1360,42 +1175,49 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.LiquidWasteSection != null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">Drain Type</label>
-                      {data?.LiquidWasteSection?.PremisesDrainType.map((x) => (
-                        <input
-                          key={x.id}
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={x.DrainType.name}
-                          readOnly="readOnly"
-                        />
-                      ))}
-                    </div>  ) : (
+                    {data?.LiquidWasteSection != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Drain Type</label>
+                        {data?.LiquidWasteSection?.PremisesDrainType?.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.DrainType?.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
                       <></>
                     )}
-                       {data?.LiquidWasteSection != null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Effluent Management
-                      </label>
-                      {data?.LiquidWasteSection?.PremisesEffluentManagement.map(
-                        (x) => (
-                          <input
-                            key={x.id}
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.EffluentManagement.name}
-                            readOnly="readOnly"
-                          />
-                        )
-                      )}
-                    </div> ) : (
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length !=
+                    0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Effluent Management
+                        </label>
+                        {data?.LiquidWasteSection?.PremisesEffluentManagement.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.EffluentManagement.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
                       <></>
                     )}
+                     {data?.LiquidWasteSection?.PremisesExcretaContainment.length !=
+                    0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
@@ -1412,7 +1234,7 @@ const ResidentialView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div>:<></>}
                     {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
@@ -1435,8 +1257,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal.length !=
-                    0 ? (
+                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal
+                      .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Grey Water Disposal
@@ -1457,19 +1279,22 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesToiletType.length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesToiletType.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
-                        {data?.LiquidWasteSection?.PremisesToiletType.map((x) => (
-                          <input
-                            key={x.id}
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.ToiletType.name}
-                            readOnly="readOnly"
-                          />
-                        ))}
+                        {data?.LiquidWasteSection?.PremisesToiletType.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.ToiletType.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
                       </div>
                     ) : (
                       <></>
@@ -1496,8 +1321,8 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.SolidWasteSection?.wasteServiceProviderRegistration !=
-                    null ? (
+                    {data?.SolidWasteSection
+                      ?.wasteServiceProviderRegistration != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Service Provider Registration
@@ -1535,7 +1360,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.SolidWasteSection?.wasteSortingAvailability != null ? (
+                    {data?.SolidWasteSection?.wasteSortingAvailability !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Sorting Availability
@@ -1545,7 +1371,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.wasteSortingAvailability?.name
+                            data?.SolidWasteSection?.wasteSortingAvailability
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1584,7 +1411,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.adequateWasteStorageReceptacle?.name
+                            data?.SolidWasteSection
+                              ?.adequateWasteStorageReceptacle?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1631,7 +1459,8 @@ const ResidentialView = ({ data }) => {
                         )
                       )}
                     </div>
-                    {data?.SolidWasteSection?.UnservicedWasteDisposal != null ? (
+                    {data?.SolidWasteSection?.UnservicedWasteDisposal !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Unserviced Waste Disposal
@@ -1641,7 +1470,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.UnservicedWasteDisposal?.name
+                            data?.SolidWasteSection?.UnservicedWasteDisposal
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1681,7 +1511,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.SolidWasteSection?.wasteProviderAccreditted != null ? (
+                    {data?.SolidWasteSection?.wasteProviderAccreditted !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Provider Accreditted
@@ -1691,7 +1522,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.wasteProviderAccreditted?.name
+                            data?.SolidWasteSection?.wasteProviderAccreditted
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1721,7 +1553,6 @@ const ResidentialView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                  
                     {data?.ConclusionSection?.obnoxiousTradeExist != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1740,8 +1571,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ConclusionSection?.PremisesNuisanceDetected?.length !=
-                    0 ? (
+                    {data?.ConclusionSection?.PremisesNuisanceDetected
+                      ?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed
@@ -1776,19 +1607,22 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ConclusionSection?.PremisesActionTaken?.length != 0 ? (
+                    {data?.ConclusionSection?.PremisesActionTaken?.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Action Taken</label>
-                        {data?.ConclusionSection.PremisesActionTaken.map((x) => (
-                          <input
-                            key={x.id}
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.Action.name}
-                            readOnly="readOnly"
-                          />
-                        ))}
+                        {data?.ConclusionSection.PremisesActionTaken.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.Action.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
                       </div>
                     ) : (
                       <></>
@@ -1826,42 +1660,44 @@ const ResidentialView = ({ data }) => {
 
               <div className="row gallery-wrapper">
                 {data?.InspectionPictures?.map((ip) => {
-                return  <div   key={ip.id}
-                    className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
-                    data-category="designing development"
-                  >
-                    <div className="gallery-box card">
-                      <div className="gallery-container">
-                        <a
-                         className="image-popup"
-                         href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                         title=""
-                       >
-
-                        <img
-                          className="gallery-img img-fluid mx-auto"
-                          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                          alt=""
-                        />
-                        <div className="gallery-overlay">
-                          <h5 className="overlay-caption">
-                           {ip.FormSectionImage.name}
-                          </h5>
+                  return (
+                    <div
+                      key={ip.id}
+                      className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                      data-category="designing development"
+                    >
+                      <div className="gallery-box card">
+                        <div className="gallery-container">
+                          <a
+                            className="image-popup"
+                            href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                            title=""
+                          >
+                            <img
+                              className="gallery-img img-fluid mx-auto"
+                              src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                              alt=""
+                            />
+                            <div className="gallery-overlay">
+                              <h5 className="overlay-caption">
+                                {ip.FormSectionImage.name}
+                              </h5>
+                            </div>
+                          </a>
                         </div>
-                        </a>
-                      </div>
 
-                      <div className="box-content">
-                        <div className="d-flex align-items-center mt-1">
-                          <div className="flex-grow-1 text-muted">
-                            <a href="" className="text-body text-truncate">
-                            {ip.FormSectionImage.name}
-                            </a>
+                        <div className="box-content">
+                          <div className="d-flex align-items-center mt-1">
+                            <div className="flex-grow-1 text-muted">
+                              <a href="" className="text-body text-truncate">
+                                {ip.FormSectionImage.name}
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>;
+                  );
                 })}
               </div>
             </div>

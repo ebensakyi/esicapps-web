@@ -77,23 +77,22 @@ const get = async (req, res) => {
             pharmacyCertAvailability: true,
           },
         },
-        // ResidentialPremisesInfoSection: {
-        //   include: {
-        //     PremisesAnimal: {
-        //       include: {
-        //         AnimalType: true,
-        //       },
-        //     },
-        //     animalAvailability: true,
-        //     toiletAvailability: true,
-        //     urinalAvailability: true,
-        //     vaccinationProof: true,
-        //     drainsAvailability: true,
-        //     approvedHandwashingFacilityAvailability: true,
-        //     bathroomAvailability: true,
-        //     animalSpaceCondition: true,
-        //   },
-        // },
+        EateryPremisesInfoSection: {
+          include: {
+            
+            toiletAvailability: true,
+            urinalAvailability: true,
+            drainsAvailability: true,
+            drainsAvailability: true,
+            eateryPremisesSubType:true,
+            eateryPremisesType:true,
+            firstAidAvailability: true,
+            kitchenAvailability: true,
+            approvedHandwashingFacilityAvailability: true,
+            bathroomAvailability: true,
+            physicalStructureType: true,
+          },
+        },
 
         WaterSection: {
           include: {
@@ -202,7 +201,6 @@ const get = async (req, res) => {
         },
         ConclusionSection: {
           include: {
-            generalSanitaryCondition: true,
             obnoxiousTradeExist: true,
             PremisesNuisanceDetected: {
               include: { Nuisance: true },

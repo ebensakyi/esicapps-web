@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 const EateryView = ({ data }) => {
   const router = useRouter();
 
+  console.log(data);
+
   const publish = async (id) => {
     try {
       const response = await axios.post(`/api/v1/submitted-data/eatery-view`, {
@@ -154,7 +156,7 @@ const EateryView = ({ data }) => {
           </div>
         </div>
       </div>
-      {/* 
+      
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -172,7 +174,47 @@ const EateryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.EateryPremisesInfoSection.toiletAvailability !=
+                  {data?.EateryPremisesInfoSection?.facilityName !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                         Facility Name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.EateryPremisesInfoSection
+                              .facilityName
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                     {data?.EateryPremisesInfoSection?.physicalStructureType !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                        Physical Structure Type
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data.EateryPremisesInfoSection
+                              .physicalStructureType.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data?.EateryPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -192,7 +234,7 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.EateryPremisesInfoSection.urinalAvailability !=
+                    {data?.EateryPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -203,8 +245,7 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.EateryPremisesInfoSection
-                              .urinalAvailability.name
+                            data?.EateryPremisesInfoSection?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -212,7 +253,7 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.EateryPremisesInfoSection.bathroomAvailability !=
+                    {data?.EateryPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -223,8 +264,7 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.EateryPremisesInfoSection
-                              .bathroomAvailability.name
+                            data?.EateryPremisesInfoSection?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -232,7 +272,7 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.EateryPremisesInfoSection.drainsAvailability !=
+                    {data?.EateryPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -252,8 +292,7 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.EateryPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityEatery !=
+                    {data?.EateryPremisesInfoSection?.approvedHandwashingFacilityAvailabilityEatery !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -264,9 +303,7 @@ const EateryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.EateryPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityEatery
-                              .name
+                            data?.EateryPremisesInfoSection?.approvedHandwashingFacilityAvailabilityEatery?.name
                           }
                           readOnly="readOnly"
                         />
@@ -274,171 +311,17 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.EateryPremisesInfoSection.householdNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Number of household
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.EateryPremisesInfoSection.householdNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.EateryPremisesInfoSection.maleOccupantNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Number of male occupants
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.EateryPremisesInfoSection
-                              .maleOccupantNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.EateryPremisesInfoSection.femaleOccupantNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Number of female occupants
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.EateryPremisesInfoSection
-                              .femaleOccupantNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.EateryPremisesInfoSection.animalAvailability !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal availabilty
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.EateryPremisesInfoSection
-                              .animalAvailability.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.EateryPremisesInfoSection.animalNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animal number</label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.EateryPremisesInfoSection.animalNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                  
+                   
 
-                    {data.EateryPremisesInfoSection.PremisesAnimal
-                      .length != 0 ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animals</label>
-                        {data.EateryPremisesInfoSection.PremisesAnimal.map(
-                          (x) => (
-                            <input
-                              key={x.id}
-                              type="text"
-                              className="form-control bg-light border-0"
-                              id="invoicenoInput"
-                              value={x.AnimalType.name}
-                              readOnly="readOnly"
-                            />
-                          )
-                        )}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-
-                    {data.EateryPremisesInfoSection.vaccinationProof !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal vaccination proof
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.EateryPremisesInfoSection.vaccinationProof
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
                   </div>
-                  {data.EateryPremisesInfoSection.animalSpaceCondition !=
-                  null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Animal space condition
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.EateryPremisesInfoSection
-                            .animalSpaceCondition.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                 
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className="row">
         <div className="col-lg-12">
@@ -497,7 +380,7 @@ const EateryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection?.habitationCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Certificate of habitation
@@ -508,7 +391,7 @@ const EateryView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data.LicencePermitSection
-                              ?.habitationCertificateAvailability.name
+                              ?.habitationCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1864,7 +1747,7 @@ const EateryView = ({ data }) => {
               </div>
 
               <div className="row gallery-wrapper">
-                {data.InspectionPictures.map((ip) => {
+                {data?.InspectionPictures?.map((ip) => {
                   return (
                     <div
                       key={ip.id}

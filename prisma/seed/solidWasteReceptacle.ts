@@ -16,6 +16,8 @@ export const solidWasteReceptacle = [
       },
       {
         name: "Metal container",
+      },{
+        name: "Bare ground",
       },
   ];
   

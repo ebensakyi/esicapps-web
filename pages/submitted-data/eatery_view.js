@@ -32,10 +32,9 @@ export async function getServerSideProps(context) {
     };
   }
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/submitted-data/residential-view?id=${id}`
+    `${SERVER_BASE_URL}/api/v1/submitted-data/eatery-view?id=${id}`
   ).then((res) => res.json());
 
-  console.log(data);
 
   return {
     props: {
