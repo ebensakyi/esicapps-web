@@ -891,6 +891,8 @@ model YesNo {
   kitchenAvailabilityEatery EateryPremisesInfoSection[] @relation("kitchenAvailability")
 
   kitchenAvailabilityHospitality HospitalityPremisesInfoSection[] @relation("kitchenAvailability")
+  placentaPitAvailability      HealthPremisesInfoSection[] @relation("placentaPitAvailability")
+  incineratorAvailability      HealthPremisesInfoSection[] @relation("incineratorAvailability")
 }
 
 model InspectionType {
@@ -1025,9 +1027,9 @@ model EateryPremisesInfoSection {
 }
 
 model HealthPremisesInfoSection {
-  id                                        String         @id @db.VarChar(255)
-  inspectionId                              String         @unique @db.VarChar(255)
-  facilityName                              String         @db.VarChar(255)
+  id                                        String   @id @db.VarChar(255)
+  inspectionId                              String   @unique @db.VarChar(255)
+  facilityName                              String   @db.VarChar(255)
   healthPremisesTypeId                      Int?
   drainsAvailabilityId                      Int?
   toiletAvailabilityId                      Int?
@@ -1041,21 +1043,25 @@ model HealthPremisesInfoSection {
   placentaPitAvailabilityId                 Int?
   incineratorAvailabilityId                 Int?
   approvedHandwashingFacilityAvailabilityId Int?
-  deleted                                   Int?           @default(0)
-  createdAt                                 DateTime       @default(now())
-  updatedAt                                 DateTime       @updatedAt
-  approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathroomAvailability                      YesNo?         @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
-  drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  ehoAvailability                           YesNo?         @relation("ehoAvailability", fields: [ehoAvailabilityId], references: [id])
-  healthPremisesType                        Type?          @relation("healthPremisesType", fields: [healthPremisesTypeId], references: [id])
-  ownershipType                             OwnershipType? @relation(fields: [ownershipTypeId], references: [id])
-  separateWard                              YesNo?         @relation("separateWard", fields: [separateWardId], references: [id])
-  toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  User                                      User           @relation(fields: [userId], references: [id])
-  Inspection                                Inspection     @relation(fields: [inspectionId], references: [id])
-  userId                                    Int
+  deleted                                   Int?     @default(0)
+  createdAt                                 DateTime @default(now())
+  updatedAt                                 DateTime @updatedAt
+  approvedHandwashingFacilityAvailability   YesNo?   @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+  bathroomAvailability                      YesNo?   @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
+  drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  ehoAvailability                           YesNo?   @relation("ehoAvailability", fields: [ehoAvailabilityId], references: [id])
+  incineratorAvailability                   YesNo?   @relation("incineratorAvailability", fields: [incineratorAvailabilityId], references: [id])
+  placentaPitAvailability                   YesNo?   @relation("placentaPitAvailability", fields: [placentaPitAvailabilityId], references: [id])
+
+  healthPremisesType Type?          @relation("healthPremisesType", fields: [healthPremisesTypeId], references: [id])
+  ownershipType      OwnershipType? @relation(fields: [ownershipTypeId], references: [id])
+  separateWard       YesNo?         @relation("separateWard", fields: [separateWardId], references: [id])
+  toiletAvailability YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User               User           @relation(fields: [userId], references: [id])
+  Inspection         Inspection     @relation(fields: [inspectionId], references: [id])
+  userId             Int
+ 
 }
 
 model HospitalityPremisesInfoSection {
