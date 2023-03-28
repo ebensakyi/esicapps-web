@@ -820,7 +820,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.bathroomAdequacy != null ? (
+                    {data?.LiquidWasteSection?.bathroomAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom Adequacy
@@ -829,7 +829,7 @@ const HealthView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.bathroomAdequacy.name}
+                          value={data?.LiquidWasteSection?.bathroomAdequacy?.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -854,7 +854,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                    {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
+                    {data?.LiquidWasteSection?.availToiletFaciltyMgt != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Facilty Mgt availabilty
@@ -864,7 +864,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.availToiletFaciltyMgt.name
+                            data?.LiquidWasteSection?.availToiletFaciltyMgt?.name
                           }
                           readOnly="readOnly"
                         />
@@ -872,7 +872,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletGenderSensivity != null ? (
+                    {data?.LiquidWasteSection?.toiletGenderSensivity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Gender Sensivity
@@ -882,7 +882,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.toiletGenderSensivity.name
+                            data?.LiquidWasteSection?.toiletGenderSensivity?.name
                           }
                           readOnly="readOnly"
                         />
@@ -890,7 +890,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalGenderSensivity != null ? (
+                    {data?.LiquidWasteSection?.urinalGenderSensivity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Gender Sensivity
@@ -900,7 +900,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalGenderSensivity.name
+                            data?.LiquidWasteSection?.urinalGenderSensivity?.name
                           }
                           readOnly="readOnly"
                         />
