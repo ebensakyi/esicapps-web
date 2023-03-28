@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 
 const ResidentialView = ({ data }) => {
   const router = useRouter();
+
+  
   const publish = async (id) => {
     try {
       const response = await axios.post(

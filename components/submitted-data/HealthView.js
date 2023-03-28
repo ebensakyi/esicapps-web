@@ -10,7 +10,8 @@ const HealthView = ({ data }) => {
         id: id,
       });
 
-      if (response.statusCode == 200) {
+      console.log(response);
+      if (response.status == 200) {
         router.push("/submitted-data/health?published=0");
       }
     } catch (error) {
@@ -1245,7 +1246,7 @@ const HealthView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
                       </label>
-                      {data?.LiquidWasteSection?.ExcretaContainment.map(
+                      {data?.LiquidWasteSection?.PremisesExcretaContainment.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1456,11 +1457,13 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                      {data?.SolidWasteSection?.PremisesWasteReceptacle !=
+                    null ? 
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Waste Collection Receptacle
                       </label>
-                      {data.SolidWasteSection.PremisesWasteReceptacle.map(
+                      {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1472,8 +1475,8 @@ const HealthView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>
-                    {data.SolidWasteSection.UnservicedWasteDisposal != null ? (
+                    </div>:<></>}
+                    {data?.SolidWasteSection?.UnservicedWasteDisposal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Unserviced Waste Disposal
@@ -1483,7 +1486,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.UnservicedWasteDisposal.name
+                            data?.SolidWasteSection?.UnservicedWasteDisposal?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1491,7 +1494,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wastePaymentEvidence != null ? (
+                    {data?.SolidWasteSection?.wastePaymentEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Payment Evidence
@@ -1501,7 +1504,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wastePaymentEvidence.name
+                            data?.SolidWasteSection?.wastePaymentEvidence?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1509,21 +1512,21 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.ContainerVolume != null ? (
+                    {data?.SolidWasteSection?.ContainerVolume != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Container Volume</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.ContainerVolume.name}
+                          value={data?.SolidWasteSection?.ContainerVolume?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteProviderAccreditted != null ? (
+                    {data?.SolidWasteSection?.wasteProviderAccreditted != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Provider Accreditted
@@ -1533,7 +1536,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wasteProviderAccreditted.name
+                            data?.SolidWasteSection?.wasteProviderAccreditted?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1563,24 +1566,7 @@ const HealthView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ConclusionSection.generalSanitaryCondition != null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          General Sanitary Condition
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.ConclusionSection.generalSanitaryCondition.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                    
                     {data.ConclusionSection.obnoxiousTradeExist != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
