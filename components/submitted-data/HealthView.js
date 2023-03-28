@@ -1415,7 +1415,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.adequateWasteStorageReceptacle !=
+                    {data?.SolidWasteSection?.adequateWasteStorageReceptacle !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1426,8 +1426,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
-                              .adequateWasteStorageReceptacle.name
+                            data?.SolidWasteSection?.adequateWasteStorageReceptacle.name
                           }
                           readOnly="readOnly"
                         />
@@ -1435,7 +1434,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.PremisesWasteCollection.length !=
+                    {data?.SolidWasteSection?.PremisesWasteCollection?.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
