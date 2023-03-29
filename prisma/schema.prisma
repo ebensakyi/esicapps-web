@@ -1266,7 +1266,7 @@ model InstitutionPremisesInfoSection {
   animalSpaceConditionId                    Int?
   animalSpaceAvailabilityId                 Int?
   shrinePremisesConditionId                 Int?
-  slaughterRoomAvailabilityId               Int?
+  slaughterAreaAvailabilityId               Int?
   slaughterAreaConditionId                  Int?
   soundProofId                              Int?
   ablutionSlabId                            Int?

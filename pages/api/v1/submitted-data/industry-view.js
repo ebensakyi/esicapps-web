@@ -203,7 +203,6 @@ const get = async (req, res) => {
         },
         ConclusionSection: {
           include: {
-            generalSanitaryCondition: true,
             obnoxiousTradeExist: true,
             PremisesNuisanceDetected: {
               include: { Nuisance: true },

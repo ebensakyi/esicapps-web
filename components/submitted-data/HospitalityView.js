@@ -279,14 +279,14 @@ const HospitalityView = ({ data }) => {
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                          Number of female workers
+                          Number of male workers
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.HospitalityPremisesInfoSection?.maleFemaleWorkers
+                            data?.HospitalityPremisesInfoSection?.numberMaleWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -294,18 +294,18 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}{" "}
-                    {data?.HospitalityPremisesInfoSection?.femaleOccupantNumber !=
+                    {data?.HospitalityPremisesInfoSection?.numberFemaleWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                          Number of female occupants
+                          Number of female workers
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.HospitalityPremisesInfoSection?.femaleOccupantNumber
+                            data?.HospitalityPremisesInfoSection?.numberFemaleWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -313,104 +313,10 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.HospitalityPremisesInfoSection.animalAvailability !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal availabilty
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HospitalityPremisesInfoSection
-                              .animalAvailability.name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HospitalityPremisesInfoSection.animalNumber !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animal number</label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HospitalityPremisesInfoSection.animalNumber
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HospitalityPremisesInfoSection.PremisesAnimal
-                      .length != 0 ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animals</label>
-                        {data.HospitalityPremisesInfoSection.PremisesAnimal.map(
-                          (x) => (
-                            <input
-                              key={x.id}
-                              type="text"
-                              className="form-control bg-light border-0"
-                              id="invoicenoInput"
-                              value={x.AnimalType.name}
-                              readOnly="readOnly"
-                            />
-                          )
-                        )}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.HospitalityPremisesInfoSection.vaccinationProof !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal vaccination proof
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.HospitalityPremisesInfoSection.vaccinationProof
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                  
+                  
                   </div>
-                  {data.HospitalityPremisesInfoSection.animalSpaceCondition !=
-                  null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Animal space condition
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.HospitalityPremisesInfoSection
-                            .animalSpaceCondition.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                
                 </div>
               </div>
             </div>
