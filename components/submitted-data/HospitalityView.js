@@ -66,7 +66,7 @@ const HospitalityView = ({ data }) => {
                         value={
                           data.BasicInfoSection?.Community != null
                             ? data.BasicInfoSection?.Community?.District?.Region
-                                .name
+                                ?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -94,7 +94,7 @@ const HospitalityView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.name
+                            ? data?.BasicInfoSection?.Community?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -106,7 +106,7 @@ const HospitalityView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.ghanaPostGps}
+                        value={data?.BasicInfoSection?.ghanaPostGps}
                         readOnly="readOnly"
                       />
                     </div>
@@ -116,7 +116,7 @@ const HospitalityView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.respondentName}
+                        value={data?.BasicInfoSection?.respondentName}
                         readOnly="readOnly"
                       />
                     </div>
@@ -128,7 +128,7 @@ const HospitalityView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.RespondentDesignation.name}
+                        value={data?.BasicInfoSection?.RespondentDesignation?.name}
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -140,7 +140,7 @@ const HospitalityView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.respondentPhoneNumber}
+                        value={data?.BasicInfoSection?.respondentPhoneNumber}
                         readOnly="readOnly"
                       />
                     </div>
@@ -153,7 +153,7 @@ const HospitalityView = ({ data }) => {
         </div>
       </div>
 
-      {/* <div className="row">
+      <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
             <div className="col-xl-12">
@@ -436,7 +436,7 @@ const HospitalityView = ({ data }) => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
 <div className="row">
         <div className="col-lg-12">

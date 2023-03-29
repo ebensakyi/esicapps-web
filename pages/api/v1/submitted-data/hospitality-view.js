@@ -78,7 +78,7 @@ const get = async (req, res) => {
             pharmacyCertAvailability: true,
           },
         },
-        ResidentialPremisesInfoSection: {
+       HospitalityPremisesInfoSection: {
           include: {
             PremisesAnimal: {
               include: {
