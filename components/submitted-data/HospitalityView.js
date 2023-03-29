@@ -68,7 +68,7 @@ const HospitalityView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
+                          data?.BasicInfoSection?.Community != null
                             ? data.BasicInfoSection?.Community?.District?.Region
                                 ?.name
                             : ""
@@ -83,7 +83,7 @@ const HospitalityView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
+                          data?.BasicInfoSection?.Community != null
                             ? data.BasicInfoSection?.Community?.District?.name
                             : ""
                         }
@@ -97,7 +97,7 @@ const HospitalityView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
+                          data?.BasicInfoSection?.Community != null
                             ? data?.BasicInfoSection?.Community?.name
                             : ""
                         }
@@ -275,28 +275,26 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-
-                    {/* {data.HospitalityPremisesInfoSection.maleOccupantNumber !=
+                    {data?.HospitalityPremisesInfoSection?.numberMaleWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                          Number of male occupants
+                          Number of female workers
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HospitalityPremisesInfoSection
-                              .maleOccupantNumber
+                            data?.HospitalityPremisesInfoSection?.maleFemaleWorkers
                           }
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
-                    )} */}
-                    {/* {data.HospitalityPremisesInfoSection.femaleOccupantNumber !=
+                    )}{" "}
+                    {data?.HospitalityPremisesInfoSection?.femaleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -307,16 +305,15 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.HospitalityPremisesInfoSection
-                              .femaleOccupantNumber
+                            data?.HospitalityPremisesInfoSection?.femaleOccupantNumber
                           }
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
-                    )} */}
-                    {/* {data.HospitalityPremisesInfoSection.animalAvailability !=
+                    )}
+                    {data.HospitalityPremisesInfoSection.animalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -335,8 +332,8 @@ const HospitalityView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )} */}
-                    {/* {data.HospitalityPremisesInfoSection.animalNumber !=
+                    )}
+                    {data.HospitalityPremisesInfoSection.animalNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
@@ -352,9 +349,8 @@ const HospitalityView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )} */}
-
-                    {/* {data.HospitalityPremisesInfoSection.PremisesAnimal
+                    )}
+                    {data.HospitalityPremisesInfoSection.PremisesAnimal
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
@@ -373,9 +369,8 @@ const HospitalityView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )} */}
-
-                    {/* {data.HospitalityPremisesInfoSection.vaccinationProof !=
+                    )}
+                    {data.HospitalityPremisesInfoSection.vaccinationProof !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -394,9 +389,9 @@ const HospitalityView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )} */}
+                    )}
                   </div>
-                  {/* {data.HospitalityPremisesInfoSection.animalSpaceCondition !=
+                  {data.HospitalityPremisesInfoSection.animalSpaceCondition !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -415,7 +410,7 @@ const HospitalityView = ({ data }) => {
                     </div>
                   ) : (
                     <></>
-                  )} */}
+                  )}
                 </div>
               </div>
             </div>
@@ -1466,8 +1461,8 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.length !=
-                    0 ? (
+                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal
+                      ?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Grey Water Disposal
@@ -1488,19 +1483,22 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesToiletType?.length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesToiletType?.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
-                        {data?.LiquidWasteSection?.PremisesToiletType?.map((x) => (
-                          <input
-                            key={x.id}
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.ToiletType.name}
-                            readOnly="readOnly"
-                          />
-                        ))}
+                        {data?.LiquidWasteSection?.PremisesToiletType?.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.ToiletType.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
                       </div>
                     ) : (
                       <></>
@@ -1527,8 +1525,8 @@ const HospitalityView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.SolidWasteSection?.wasteServiceProviderRegistration !=
-                    null ? (
+                    {data?.SolidWasteSection
+                      ?.wasteServiceProviderRegistration != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Service Provider Registration
@@ -1538,8 +1536,8 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                          data?.SolidWasteSection?.wasteServiceProviderRegistration?.name
-                             
+                            data?.SolidWasteSection
+                              ?.wasteServiceProviderRegistration?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1563,7 +1561,8 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.SolidWasteSection?.wasteSortingAvailability != null ? (
+                    {data?.SolidWasteSection?.wasteSortingAvailability !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Sorting Availability
@@ -1573,7 +1572,8 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.wasteSortingAvailability?.name
+                            data?.SolidWasteSection?.wasteSortingAvailability
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1592,7 +1592,8 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.approvedWasteStorageReceptacle?.name
+                            data?.SolidWasteSection
+                              ?.approvedWasteStorageReceptacle?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1611,7 +1612,8 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.adequateWasteStorageReceptacle?.name
+                            data?.SolidWasteSection
+                              ?.adequateWasteStorageReceptacle?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1641,26 +1643,30 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SolidWasteSection?.PremisesWasteReceptacle?.length !=
-                    0 ?
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Waste Collection Receptacle
-                      </label>
-                      {data.SolidWasteSection.PremisesWasteReceptacle.map(
-                        (x) => (
-                          <input
-                            key={x.id}
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.SolidWasteReceptacle.name}
-                            readOnly="readOnly"
-                          />
-                        )
-                      )}
-                    </div>:<></>}
-                    {data?.SolidWasteSection?.UnservicedWasteDisposal != null ? (
+                    {data?.SolidWasteSection?.PremisesWasteReceptacle?.length !=
+                    0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Waste Collection Receptacle
+                        </label>
+                        {data.SolidWasteSection.PremisesWasteReceptacle.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.SolidWasteReceptacle.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {data?.SolidWasteSection?.UnservicedWasteDisposal !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Unserviced Waste Disposal
@@ -1670,7 +1676,8 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.UnservicedWasteDisposal?.name
+                            data?.SolidWasteSection?.UnservicedWasteDisposal
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1710,7 +1717,8 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.SolidWasteSection?.wasteProviderAccreditted != null ? (
+                    {data?.SolidWasteSection?.wasteProviderAccreditted !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Provider Accreditted
@@ -1720,7 +1728,8 @@ const HospitalityView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection?.wasteProviderAccreditted?.name
+                            data?.SolidWasteSection?.wasteProviderAccreditted
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1750,7 +1759,6 @@ const HospitalityView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                   
                     {data?.ConclusionSection?.obnoxiousTradeExist != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1769,8 +1777,8 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ConclusionSection?.PremisesNuisanceDetected?.length !=
-                    0 ? (
+                    {data?.ConclusionSection?.PremisesNuisanceDetected
+                      ?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed
@@ -1805,7 +1813,8 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ConclusionSection?.PremisesActionTaken?.length != 0 ? (
+                    {data?.ConclusionSection?.PremisesActionTaken?.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Action Taken</label>
                         {data.ConclusionSection.PremisesActionTaken.map((x) => (
