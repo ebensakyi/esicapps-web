@@ -1268,7 +1268,7 @@ model MarketPremisesInfoSection {
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   firstAidAvailability                      YesNo?   @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
 
-  marketPremisesType Type @relation(fields: [typeId], references: [id])
+  marketPremisesType Type? @relation(fields: [marketPremisesTypeId], references: [id])
 
   User                  User                @relation(fields: [userId], references: [id])
   Inspection            Inspection          @relation(fields: [inspectionId], references: [id])
@@ -1277,7 +1277,6 @@ model MarketPremisesInfoSection {
   derattingFrequency    DerattingFrequency? @relation(fields: [derattingFrequencyId], references: [id])
   ownershipType         OwnershipType?      @relation(fields: [ownershipTypeId], references: [id])
   userId                Int
-  typeId                Int
 }
 
 model InstitutionPremisesInfoSection {

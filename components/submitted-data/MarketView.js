@@ -64,8 +64,8 @@ const MarketView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.District?.Region
+                          data?.BasicInfoSection?.Community != null
+                            ? data?.BasicInfoSection?.Community?.District?.Region
                                 .name
                             : ""
                         }
@@ -79,8 +79,8 @@ const MarketView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.District?.name
+                          data?.BasicInfoSection?.Community != null
+                            ? data?.BasicInfoSection?.Community?.District?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -93,8 +93,8 @@ const MarketView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.name
+                          data?.BasicInfoSection?.Community != null
+                            ? data?.BasicInfoSection?.Community?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -106,7 +106,7 @@ const MarketView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.ghanaPostGps}
+                        value={data?.BasicInfoSection?.ghanaPostGps}
                         readOnly="readOnly"
                       />
                     </div>
@@ -116,7 +116,7 @@ const MarketView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.respondentName}
+                        value={data?.BasicInfoSection?.respondentName}
                         readOnly="readOnly"
                       />
                     </div>
@@ -128,7 +128,7 @@ const MarketView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.RespondentDesignation.name}
+                        value={data?.BasicInfoSection?.RespondentDesignation.name}
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -140,7 +140,7 @@ const MarketView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.respondentPhoneNumber}
+                        value={data?.BasicInfoSection?.respondentPhoneNumber}
                         readOnly="readOnly"
                       />
                     </div>
@@ -153,7 +153,7 @@ const MarketView = ({ data }) => {
         </div>
       </div>
 
-      {/* <div className="row">
+      <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
             <div className="col-xl-12">
@@ -170,7 +170,7 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.MarketPremisesInfoSection.toiletAvailability !=
+                    {data?.MarketPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -181,8 +181,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
-                              .toiletAvailability.name
+                            data?.MarketPremisesInfoSection?.toiletAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -190,7 +189,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.urinalAvailability !=
+                    {data?.MarketPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -201,8 +200,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
-                              .urinalAvailability.name
+                            data?.MarketPremisesInfoSection?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -210,7 +208,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.bathroomAvailability !=
+                    {data?.MarketPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -221,8 +219,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
-                              .bathroomAvailability.name
+                            data?.MarketPremisesInfoSection?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -230,7 +227,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.drainsAvailability !=
+                    {data?.MarketPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -241,8 +238,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
-                              .drainsAvailability.name
+                            data?.MarketPremisesInfoSection?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -250,8 +246,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityMarket !=
+                    {data?.MarketPremisesInfoSection?.approvedHandwashingFacilityAvailabilityMarket !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -262,9 +257,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityMarket
-                              .name
+                            data?.MarketPremisesInfoSection?.approvedHandwashingFacilityAvailabilityMarket?.name
                           }
                           readOnly="readOnly"
                         />
@@ -272,7 +265,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.householdNumber !=
+                    {data?.MarketPremisesInfoSection?.householdNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -283,7 +276,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection.householdNumber
+                            data?.MarketPremisesInfoSection?.householdNumber
                           }
                           readOnly="readOnly"
                         />
@@ -291,7 +284,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.maleOccupantNumber !=
+                    {data?.MarketPremisesInfoSection?.maleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -302,7 +295,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
+                            data?.MarketPremisesInfoSection
                               .maleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -311,7 +304,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.femaleOccupantNumber !=
+                    {data?.MarketPremisesInfoSection?.femaleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -322,7 +315,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
+                            data?.MarketPremisesInfoSection
                               .femaleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -331,7 +324,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.animalAvailability !=
+                    {data?.MarketPremisesInfoSection?.animalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -342,8 +335,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection
-                              .animalAvailability.name
+                            data?.MarketPremisesInfoSection?.animalAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -351,7 +343,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.MarketPremisesInfoSection.animalNumber !=
+                    {data?.MarketPremisesInfoSection?.animalNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
@@ -360,7 +352,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.MarketPremisesInfoSection.animalNumber
+                            data?.MarketPremisesInfoSection?.animalNumber
                           }
                           readOnly="readOnly"
                         />
@@ -369,11 +361,11 @@ const MarketView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.MarketPremisesInfoSection.PremisesAnimal
+                    {data?.MarketPremisesInfoSection?.PremisesAnimal
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
-                        {data.MarketPremisesInfoSection.PremisesAnimal.map(
+                        {data?.MarketPremisesInfoSection?.PremisesAnimal.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -390,53 +382,15 @@ const MarketView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.MarketPremisesInfoSection.vaccinationProof !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Animal vaccination proof
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.MarketPremisesInfoSection.vaccinationProof
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                   
                   </div>
-                  {data.MarketPremisesInfoSection.animalSpaceCondition !=
-                  null ? (
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Animal space condition
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control bg-light border-0"
-                        id="invoicenoInput"
-                        value={
-                          data.MarketPremisesInfoSection
-                            .animalSpaceCondition.name
-                        }
-                        readOnly="readOnly"
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
 <div className="row">
         <div className="col-lg-12">
@@ -460,25 +414,8 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.LicencePermitSection?.animalsPermitAvailability !=
-                    null ? (
-                      <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">Animal permit</label>
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0"
-                          id="invoicenoInput"
-                          value={
-                            data.LicencePermitSection?.animalsPermitAvailability
-                              .name
-                          }
-                          readOnly="readOnly"
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {data.LicencePermitSection != null ? (
+                   
+                    {data?.LicencePermitSection?.buildingPermitAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Building permit</label>
                         <input
@@ -486,8 +423,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.buildingPermitAvailability
-                              .name
+                            data?.LicencePermitSection?.buildingPermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -495,7 +431,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection?.habitationCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Certificate of habitation
@@ -505,8 +441,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .habitationCertificateAvailability.name
+                            data?.LicencePermitSection?.habitationCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -514,7 +449,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection?.propertyRateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Property rate payment
@@ -524,8 +459,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.propertyRateAvailability
-                              .name
+                            data?.LicencePermitSection?.propertyRateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -533,8 +467,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
-                      .suitabilityCertificateAvailability != null ? (
+                    {data?.LicencePermitSection?.suitabilityCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Suitability Certificate
@@ -544,8 +477,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .suitabilityCertificateAvailability.name
+                            data?.LicencePermitSection?.suitabilityCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -553,7 +485,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.structurePermitAvailability !=
+                    {data?.LicencePermitSection?.structurePermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Structure permit</label>
@@ -562,7 +494,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .structurePermitAvailability.name
                           }
                           readOnly="readOnly"
@@ -572,8 +504,7 @@ const MarketView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection
-                      .fumigationCertificateAvailability != null ? (
+                    {data?.LicencePermitSection?.fumigationCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Fumigation certificate
@@ -583,8 +514,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .fumigationCertificateAvailability.name
+                            data?.LicencePermitSection?.fumigationCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -592,7 +522,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.businessLicenceAvailability !=
+                    {data?.LicencePermitSection?.businessLicenceAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -603,8 +533,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .businessLicenceAvailability.name
+                            data?.LicencePermitSection?.businessLicenceAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -612,7 +541,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.structurePermitAvailability !=
+                    {data?.LicencePermitSection?.structurePermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -623,8 +552,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .structurePermitAvailability.name
+                            data?.LicencePermitSection?.structurePermitAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -632,7 +560,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.waterAnalysisReport != null ? (
+                    {data?.LicencePermitSection?.waterAnalysisReport != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water analysis report
@@ -642,7 +570,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.waterAnalysisReport.name
+                            data?.LicencePermitSection?.waterAnalysisReport?.name
                           }
                           readOnly="readOnly"
                         />
@@ -650,7 +578,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.regGeneralCertAvailability !=
+                    {data?.LicencePermitSection?.regGeneralCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -661,8 +589,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.regGeneralCertAvailability
-                              .name
+                            data?.LicencePermitSection?.regGeneralCertAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -670,7 +597,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.medicalCertificateAvailability !=
+                    {data?.LicencePermitSection?.medicalCertificateAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -681,8 +608,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .medicalCertificateAvailability.name
+                            data?.LicencePermitSection?.medicalCertificateAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -690,8 +616,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
-                      .gtaOperatingLicenceAvailability != null ? (
+                    {data?.LicencePermitSection?.gtaOperatingLicenceAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ghana Tourism Authority operating license
@@ -701,8 +626,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
-                              .gtaOperatingLicenceAvailability.name
+                            data?.LicencePermitSection?.gtaOperatingLicenceAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -711,7 +635,7 @@ const MarketView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection?.pharmacyCertAvailability !=
+                    {data?.LicencePermitSection?.pharmacyCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -722,8 +646,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.pharmacyCertAvailability
-                              .value
+                            data?.LicencePermitSection?.pharmacyCertAvailability?.value
                           }
                           readOnly="readOnly"
                         />
@@ -761,10 +684,10 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesWaterSources?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
-                        {data.WaterSection.PremisesWaterSources.map((x) => (
+                        {data?.WaterSection?.PremisesWaterSources.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -778,10 +701,10 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesWaterSupply?.length != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
-                        {data.WaterSection.PremisesWaterSupply.map((x) => (
+                        {data?.WaterSection?.PremisesWaterSupply.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -795,7 +718,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.waterSourceCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water source condition
@@ -804,7 +727,7 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.WaterSection.waterSourceCondition.name}
+                          value={data?.WaterSection?.waterSourceCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -812,10 +735,10 @@ const MarketView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesWaterStorage.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
-                        {data.WaterSection.PremisesWaterStorage.map((x) => (
+                        {data?.WaterSection?.PremisesWaterStorage.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -829,7 +752,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.waterStorageConditionSafe != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Safe Water storage receptacle condition
@@ -839,7 +762,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.WaterSection.waterStorageConditionSafe.name
+                            data?.WaterSection?.waterStorageConditionSafe?.name
                           }
                           readOnly="readOnly"
                         />
@@ -847,12 +770,12 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesWaterTreatmentType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
                         </label>
-                        {data.WaterSection.PremisesWaterTreatmentType.map(
+                        {data?.WaterSection?.PremisesWaterTreatmentType.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -868,12 +791,12 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection?.PremisesDrinkingWaterSources.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
                         </label>
-                        {data.WaterSection.PremisesDrinkingWaterSources.map(
+                        {data?.WaterSection?.PremisesDrinkingWaterSources.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -889,7 +812,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.WaterFlowFrequency != null ? (
+                    {data?.WaterSection?.WaterFlowFrequency != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water flow frequency
@@ -898,7 +821,7 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.WaterSection.WaterFlowFrequency.name}
+                          value={data?.WaterSection?.WaterFlowFrequency.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -937,7 +860,7 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.LiquidWasteSection.numberToiletSeats != null ? (
+                    {data?.LiquidWasteSection.numberToiletSeats != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Toilet Seats
@@ -946,14 +869,14 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.numberToiletSeats}
+                          value={data?.LiquidWasteSection.numberToiletSeats}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Urinal Seats
@@ -962,42 +885,42 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.numberUrinalSeats}
+                          value={data?.LiquidWasteSection.numberUrinalSeats}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletAdequacy != null ? (
+                    {data?.LiquidWasteSection.toiletAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Adequacy</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletAdequacy.name}
+                          value={data?.LiquidWasteSection.toiletAdequacy.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalAdequacy != null ? (
+                    {data?.LiquidWasteSection.urinalAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Urinal Adequacy</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.urinalAdequacy.name}
+                          value={data?.LiquidWasteSection.urinalAdequacy.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.bathroomAdequacy != null ? (
+                    {data?.LiquidWasteSection.bathroomAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom Adequacy
@@ -1006,14 +929,14 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.bathroomAdequacy.name}
+                          value={data?.LiquidWasteSection.bathroomAdequacy.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {/* {data.LiquidWasteSection.separateStaffUrinal != null ? (
+                    {/* {data?.LiquidWasteSection.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Separate Staff Urinal
@@ -1023,7 +946,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.separateStaffUrinal.name
+                            data?.LiquidWasteSection.separateStaffUrinal.name
                           }
                           readOnly="readOnly"
                         />
@@ -1031,7 +954,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                    {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
+                    {data?.LiquidWasteSection.availToiletFaciltyMgt != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Facilty Mgt availabilty
@@ -1041,7 +964,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.availToiletFaciltyMgt.name
+                            data?.LiquidWasteSection.availToiletFaciltyMgt.name
                           }
                           readOnly="readOnly"
                         />
@@ -1049,7 +972,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletGenderSensivity != null ? (
+                    {data?.LiquidWasteSection.toiletGenderSensivity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Gender Sensivity
@@ -1059,7 +982,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.toiletGenderSensivity.name
+                            data?.LiquidWasteSection.toiletGenderSensivity.name
                           }
                           readOnly="readOnly"
                         />
@@ -1067,7 +990,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalGenderSensivity != null ? (
+                    {data?.LiquidWasteSection.urinalGenderSensivity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Gender Sensivity
@@ -1077,7 +1000,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalGenderSensivity.name
+                            data?.LiquidWasteSection.urinalGenderSensivity.name
                           }
                           readOnly="readOnly"
                         />
@@ -1085,7 +1008,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletPitPosition != null ? (
+                    {data?.LiquidWasteSection.toiletPitPosition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Pit Position
@@ -1094,14 +1017,14 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletPitPosition.name}
+                          value={data?.LiquidWasteSection.toiletPitPosition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDisabilityFriendly !=
+                    {data?.LiquidWasteSection.toiletDisabilityFriendly !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1112,7 +1035,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.toiletDisabilityFriendly
+                            data?.LiquidWasteSection.toiletDisabilityFriendly
                               .name
                           }
                           readOnly="readOnly"
@@ -1121,7 +1044,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalDisabilityFriendly !=
+                    {data?.LiquidWasteSection.urinalDisabilityFriendly !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1132,7 +1055,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalDisabilityFriendly
+                            data?.LiquidWasteSection.urinalDisabilityFriendly
                               .name
                           }
                           readOnly="readOnly"
@@ -1141,21 +1064,21 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.drainsCondition != null ? (
+                    {data?.LiquidWasteSection.drainsCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drains Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.drainsCondition.name}
+                          value={data?.LiquidWasteSection.drainsCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.stagnationEvidence != null ? (
+                    {data?.LiquidWasteSection.stagnationEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Stagnation Evidence
@@ -1165,7 +1088,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.stagnationEvidence.name
+                            data?.LiquidWasteSection.stagnationEvidence.name
                           }
                           readOnly="readOnly"
                         />
@@ -1173,7 +1096,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.analCleansingMaterialMgt !=
+                    {data?.LiquidWasteSection.analCleansingMaterialMgt !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1184,7 +1107,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.analCleansingMaterialMgt
+                            data?.LiquidWasteSection.analCleansingMaterialMgt
                               .name
                           }
                           readOnly="readOnly"
@@ -1193,7 +1116,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.effluentManagementReport !=
+                    {data?.LiquidWasteSection.effluentManagementReport !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1204,7 +1127,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.effluentManagementReport
+                            data?.LiquidWasteSection.effluentManagementReport
                               .name
                           }
                           readOnly="readOnly"
@@ -1213,21 +1136,21 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.areaSewered != null ? (
+                    {data?.LiquidWasteSection.areaSewered != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Is Area Sewered</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.areaSewered.name}
+                          value={data?.LiquidWasteSection.areaSewered.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.facilityConnectedSewer != null ? (
+                    {data?.LiquidWasteSection.facilityConnectedSewer != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility Connected Sewer
@@ -1237,7 +1160,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.facilityConnectedSewer.name
+                            data?.LiquidWasteSection.facilityConnectedSewer.name
                           }
                           readOnly="readOnly"
                         />
@@ -1253,11 +1176,11 @@ const MarketView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.LiquidWasteSection.numberUrinalCubicle}
+                        value={data?.LiquidWasteSection.numberUrinalCubicle}
                         readOnly="readOnly"
                       />
                     </div>
-                    {data.LiquidWasteSection.urinalCubicleCondition != null ? (
+                    {data?.LiquidWasteSection.urinalCubicleCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Cubicle Condition
@@ -1267,7 +1190,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalCubicleCondition.name
+                            data?.LiquidWasteSection.urinalCubicleCondition.name
                           }
                           readOnly="readOnly"
                         />
@@ -1275,35 +1198,35 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletCondition != null ? (
+                    {data?.LiquidWasteSection.toiletCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletCondition.name}
+                          value={data?.LiquidWasteSection.toiletCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDischarge != null ? (
+                    {data?.LiquidWasteSection.toiletDischarge != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Discharge</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletDischarge.name}
+                          value={data?.LiquidWasteSection.toiletDischarge.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.containmentEmptied != null ? (
+                    {data?.LiquidWasteSection.containmentEmptied != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Containment Emptied
@@ -1313,7 +1236,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.containmentEmptied.name
+                            data?.LiquidWasteSection.containmentEmptied.name
                           }
                           readOnly="readOnly"
                         />
@@ -1321,21 +1244,21 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.sewerSystem != null ? (
+                    {data?.LiquidWasteSection.sewerSystem != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Sewer System</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.sewerSystem.name}
+                          value={data?.LiquidWasteSection.sewerSystem.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.wasteWaterContainment != null ? (
+                    {data?.LiquidWasteSection.wasteWaterContainment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Water Containment
@@ -1345,7 +1268,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.wasteWaterContainment.name
+                            data?.LiquidWasteSection.wasteWaterContainment.name
                           }
                           readOnly="readOnly"
                         />
@@ -1353,7 +1276,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.EaseYourselfWhere != null ? (
+                    {data?.LiquidWasteSection.EaseYourselfWhere != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ease Yourself Where
@@ -1362,14 +1285,14 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.EaseYourselfWhere.name}
+                          value={data?.LiquidWasteSection.EaseYourselfWhere.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.DesiltingFrequency != null ? (
+                    {data?.LiquidWasteSection.DesiltingFrequency != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Desilting Frequency
@@ -1379,7 +1302,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.DesiltingFrequency.name
+                            data?.LiquidWasteSection.DesiltingFrequency.name
                           }
                           readOnly="readOnly"
                         />
@@ -1389,7 +1312,7 @@ const MarketView = ({ data }) => {
                     )}
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                      {data?.LiquidWasteSection.PremisesDrainType.map((x) => (
                         <input
                           key={x.id}
                           type="text"
@@ -1404,7 +1327,7 @@ const MarketView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Effluent Management
                       </label>
-                      {data.LiquidWasteSection.PremisesEffluentManagement.map(
+                      {data?.LiquidWasteSection.PremisesEffluentManagement.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1421,7 +1344,7 @@ const MarketView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
                       </label>
-                      {data.LiquidWasteSection.PremisesExcretaContainment.map(
+                      {data?.LiquidWasteSection.PremisesExcretaContainment.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1434,13 +1357,13 @@ const MarketView = ({ data }) => {
                         )
                       )}
                     </div>{" "}
-                    {data.LiquidWasteSection.PremisesExcretaDisposalMethod
+                    {data?.LiquidWasteSection.PremisesExcretaDisposalMethod
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Excreta Disposal Method
                         </label>
-                        {data.LiquidWasteSection.PremisesExcretaDisposalMethod.map(
+                        {data?.LiquidWasteSection.PremisesExcretaDisposalMethod.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1456,13 +1379,13 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
+                    {data?.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Grey Water Disposal
                         </label>
-                        {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
+                        {data?.LiquidWasteSection.PremisesGreyWaterDisposal.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1478,10 +1401,10 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.PremisesToiletType.length != 0 ? (
+                    {data?.LiquidWasteSection.PremisesToiletType.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
-                        {data.LiquidWasteSection.PremisesToiletType.map((x) => (
+                        {data?.LiquidWasteSection.PremisesToiletType.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -1517,7 +1440,7 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.SolidWasteSection.wasteServiceProviderRegistration !=
+                    {data?.SolidWasteSection.wasteServiceProviderRegistration !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1528,9 +1451,9 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
+                            data?.SolidWasteSection
                               .wasteServiceProviderRegistration != null
-                              ? data.SolidWasteSection
+                              ? data?.SolidWasteSection
                                   .wasteServiceProviderRegistration.name
                               : ""
                           }
@@ -1540,7 +1463,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteCollectorName != null ? (
+                    {data?.SolidWasteSection.wasteCollectorName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Collector Name
@@ -1549,14 +1472,14 @@ const MarketView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.wasteCollectorName}
+                          value={data?.SolidWasteSection.wasteCollectorName}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteSortingAvailability != null ? (
+                    {data?.SolidWasteSection.wasteSortingAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Sorting Availability
@@ -1566,7 +1489,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wasteSortingAvailability.name
+                            data?.SolidWasteSection.wasteSortingAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -1574,7 +1497,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.approvedWasteStorageReceptacle !=
+                    {data?.SolidWasteSection.approvedWasteStorageReceptacle !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1585,7 +1508,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
+                            data?.SolidWasteSection
                               .approvedWasteStorageReceptacle.name
                           }
                           readOnly="readOnly"
@@ -1594,7 +1517,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.adequateWasteStorageReceptacle !=
+                    {data?.SolidWasteSection.adequateWasteStorageReceptacle !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1605,7 +1528,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
+                            data?.SolidWasteSection
                               .adequateWasteStorageReceptacle.name
                           }
                           readOnly="readOnly"
@@ -1614,13 +1537,13 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.PremisesWasteCollection.length !=
+                    {data?.SolidWasteSection.PremisesWasteCollection.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Collection Type
                         </label>
-                        {data.SolidWasteSection.PremisesWasteCollection.map(
+                        {data?.SolidWasteSection.PremisesWasteCollection.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1640,7 +1563,7 @@ const MarketView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Waste Collection Receptacle
                       </label>
-                      {data.SolidWasteSection.PremisesWasteReceptacle.map(
+                      {data?.SolidWasteSection.PremisesWasteReceptacle.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1653,7 +1576,7 @@ const MarketView = ({ data }) => {
                         )
                       )}
                     </div>
-                    {data.SolidWasteSection.UnservicedWasteDisposal != null ? (
+                    {data?.SolidWasteSection.UnservicedWasteDisposal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Unserviced Waste Disposal
@@ -1663,7 +1586,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.UnservicedWasteDisposal.name
+                            data?.SolidWasteSection.UnservicedWasteDisposal.name
                           }
                           readOnly="readOnly"
                         />
@@ -1671,7 +1594,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wastePaymentEvidence != null ? (
+                    {data?.SolidWasteSection.wastePaymentEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Payment Evidence
@@ -1681,7 +1604,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wastePaymentEvidence.name
+                            data?.SolidWasteSection.wastePaymentEvidence.name
                           }
                           readOnly="readOnly"
                         />
@@ -1689,21 +1612,21 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.ContainerVolume != null ? (
+                    {data?.SolidWasteSection.ContainerVolume != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Container Volume</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.ContainerVolume.name}
+                          value={data?.SolidWasteSection.ContainerVolume.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteProviderAccreditted != null ? (
+                    {data?.SolidWasteSection.wasteProviderAccreditted != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Provider Accreditted
@@ -1713,7 +1636,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wasteProviderAccreditted.name
+                            data?.SolidWasteSection.wasteProviderAccreditted.name
                           }
                           readOnly="readOnly"
                         />
@@ -1743,7 +1666,7 @@ const MarketView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ConclusionSection.generalSanitaryCondition != null ? (
+                    {data?.ConclusionSection.generalSanitaryCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           General Sanitary Condition
@@ -1753,7 +1676,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ConclusionSection.generalSanitaryCondition.name
+                            data?.ConclusionSection.generalSanitaryCondition.name
                           }
                           readOnly="readOnly"
                         />
@@ -1761,7 +1684,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.obnoxiousTradeExist != null ? (
+                    {data?.ConclusionSection.obnoxiousTradeExist != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Obnoxious Trade Exist
@@ -1771,7 +1694,7 @@ const MarketView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ConclusionSection.obnoxiousTradeExist.name
+                            data?.ConclusionSection.obnoxiousTradeExist.name
                           }
                           readOnly="readOnly"
                         />
@@ -1779,13 +1702,13 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesNuisanceDetected.length !=
+                    {data?.ConclusionSection.PremisesNuisanceDetected.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed
                         </label>
-                        {data.ConclusionSection.PremisesNuisanceDetected.map(
+                        {data?.ConclusionSection.PremisesNuisanceDetected.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1801,24 +1724,24 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.officerComment != null ? (
+                    {data?.ConclusionSection.officerComment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Office Comment</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.ConclusionSection.officerComment}
+                          value={data?.ConclusionSection.officerComment}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesActionTaken.length != 0 ? (
+                    {data?.ConclusionSection.PremisesActionTaken.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Action Taken</label>
-                        {data.ConclusionSection.PremisesActionTaken.map((x) => (
+                        {data?.ConclusionSection.PremisesActionTaken.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -1839,7 +1762,7 @@ const MarketView = ({ data }) => {
           </div>
         </div>
       </div>
-      {/* {data.InspectionPictures.map((ip) => {
+      {/* {data?.InspectionPictures.map((ip) => {
      return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
@@ -1864,7 +1787,7 @@ const MarketView = ({ data }) => {
               </div>
 
               <div className="row gallery-wrapper">
-                {data.InspectionPictures.map((ip) => {
+                {data?.InspectionPictures.map((ip) => {
                 return  <div   key={ip.id}
                     className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
                     data-category="designing development"
@@ -1905,13 +1828,13 @@ const MarketView = ({ data }) => {
               </div>
             </div>
             <div className="col-sm-auto">
-              {data.isPublished == 0 ? (
+              {data?.isPublished == 0 ? (
                 <button
                   className="btn btn-success"
                   onClick={(e) => {
                     e.preventDefault();
 
-                    publish(data.id);
+                    publish(data?.id);
                   }}
                 >
                   Publish
@@ -1922,7 +1845,7 @@ const MarketView = ({ data }) => {
                   onClick={(e) => {
                     e.preventDefault();
 
-                    publish(data.id);
+                    publish(data?.id);
                   }}
                 >
                   Unpublish
