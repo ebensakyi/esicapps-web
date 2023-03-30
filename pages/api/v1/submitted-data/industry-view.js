@@ -78,21 +78,19 @@ const get = async (req, res) => {
             pharmacyCertAvailability: true,
           },
         },
-        ResidentialPremisesInfoSection: {
+       IndustryPremisesInfoSection: {
           include: {
-            PremisesAnimal: {
-              include: {
-                AnimalType: true,
-              },
-            },
-            animalAvailability: true,
+            byProductsStorageAreaCond: true,
+            productionRoomCondition: true,
+            staffChangingRoom : true,
+            storeRoomAvailability : true,
+            flyScreenNetAvailability: true,
+            protectiveClothing: true,
             toiletAvailability: true,
             urinalAvailability: true,
-            vaccinationProof: true,
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
-            animalSpaceCondition: true,
           },
         },
 

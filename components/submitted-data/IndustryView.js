@@ -64,8 +64,8 @@ const IndustryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.District?.Region
+                          data?.BasicInfoSection?.Community != null
+                            ? data?.BasicInfoSection?.Community?.District?.Region
                                 .name
                             : ""
                         }
@@ -79,8 +79,8 @@ const IndustryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.District?.name
+                          data?.BasicInfoSection?.Community != null
+                            ? data?.BasicInfoSection?.Community?.District?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -93,8 +93,8 @@ const IndustryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.BasicInfoSection?.Community != null
-                            ? data.BasicInfoSection?.Community?.name
+                          data?.BasicInfoSection?.Community != null
+                            ? data?.BasicInfoSection?.Community?.name
                             : ""
                         }
                         readOnly="readOnly"
@@ -106,7 +106,7 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.ghanaPostGps}
+                        value={data?.BasicInfoSection?.ghanaPostGps}
                         readOnly="readOnly"
                       />
                     </div>
@@ -116,7 +116,7 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.respondentName}
+                        value={data?.BasicInfoSection?.respondentName}
                         readOnly="readOnly"
                       />
                     </div>
@@ -128,7 +128,7 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.RespondentDesignation.name}
+                        value={data?.BasicInfoSection?.RespondentDesignation.name}
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -140,7 +140,7 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.BasicInfoSection?.respondentPhoneNumber}
+                        value={data?.BasicInfoSection?.respondentPhoneNumber}
                         readOnly="readOnly"
                       />
                     </div>
@@ -153,7 +153,7 @@ const IndustryView = ({ data }) => {
         </div>
       </div>
 
-      {/* <div className="row">
+      <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
             <div className="col-xl-12">
@@ -170,7 +170,7 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.IndustryPremisesInfoSection.toiletAvailability !=
+                    {data?.IndustryPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -181,7 +181,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .toiletAvailability.name
                           }
                           readOnly="readOnly"
@@ -190,7 +190,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.urinalAvailability !=
+                    {data?.IndustryPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -201,7 +201,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .urinalAvailability.name
                           }
                           readOnly="readOnly"
@@ -210,7 +210,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.bathroomAvailability !=
+                    {data?.IndustryPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -221,7 +221,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .bathroomAvailability.name
                           }
                           readOnly="readOnly"
@@ -230,7 +230,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.drainsAvailability !=
+                    {data?.IndustryPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -241,7 +241,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .drainsAvailability.name
                           }
                           readOnly="readOnly"
@@ -250,7 +250,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       .approvedHandwashingFacilityAvailabilityIndustry !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -262,7 +262,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .approvedHandwashingFacilityAvailabilityIndustry
                               .name
                           }
@@ -272,7 +272,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.householdNumber !=
+                    {data?.IndustryPremisesInfoSection?.householdNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -283,7 +283,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection.householdNumber
+                            data?.IndustryPremisesInfoSection?.householdNumber
                           }
                           readOnly="readOnly"
                         />
@@ -291,7 +291,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.maleOccupantNumber !=
+                    {data?.IndustryPremisesInfoSection?.maleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -302,7 +302,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .maleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -311,7 +311,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.femaleOccupantNumber !=
+                    {data?.IndustryPremisesInfoSection?.femaleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -322,7 +322,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .femaleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -331,7 +331,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.animalAvailability !=
+                    {data?.IndustryPremisesInfoSection?.animalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -342,7 +342,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               .animalAvailability.name
                           }
                           readOnly="readOnly"
@@ -351,7 +351,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.IndustryPremisesInfoSection.animalNumber !=
+                    {data?.IndustryPremisesInfoSection?.animalNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
@@ -360,7 +360,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection.animalNumber
+                            data?.IndustryPremisesInfoSection?.animalNumber
                           }
                           readOnly="readOnly"
                         />
@@ -369,11 +369,11 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.IndustryPremisesInfoSection.PremisesAnimal
+                    {data?.IndustryPremisesInfoSection?.PremisesAnimal
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
-                        {data.IndustryPremisesInfoSection.PremisesAnimal.map(
+                        {data?.IndustryPremisesInfoSection?.PremisesAnimal.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -390,7 +390,7 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.IndustryPremisesInfoSection.vaccinationProof !=
+                    {data?.IndustryPremisesInfoSection?.vaccinationProof !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -401,7 +401,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.IndustryPremisesInfoSection.vaccinationProof
+                            data?.IndustryPremisesInfoSection?.vaccinationProof
                               .name
                           }
                           readOnly="readOnly"
@@ -411,7 +411,7 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
                   </div>
-                  {data.IndustryPremisesInfoSection.animalSpaceCondition !=
+                  {data?.IndustryPremisesInfoSection?.animalSpaceCondition !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -422,7 +422,7 @@ const IndustryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data.IndustryPremisesInfoSection
+                          data?.IndustryPremisesInfoSection
                             .animalSpaceCondition.name
                         }
                         readOnly="readOnly"
@@ -436,7 +436,7 @@ const IndustryView = ({ data }) => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
 <div className="row">
         <div className="col-lg-12">
@@ -460,7 +460,7 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.LicencePermitSection?.animalsPermitAvailability !=
+                    {data?.LicencePermitSection?.animalsPermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal permit</label>
@@ -469,7 +469,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.animalsPermitAvailability
+                            data?.LicencePermitSection?.animalsPermitAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -478,7 +478,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Building permit</label>
                         <input
@@ -486,7 +486,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.buildingPermitAvailability
+                            data?.LicencePermitSection?.buildingPermitAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -495,7 +495,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Certificate of habitation
@@ -505,7 +505,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .habitationCertificateAvailability.name
                           }
                           readOnly="readOnly"
@@ -514,7 +514,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection != null ? (
+                    {data?.LicencePermitSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Property rate payment
@@ -524,7 +524,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.propertyRateAvailability
+                            data?.LicencePermitSection?.propertyRateAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -533,7 +533,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
+                    {data?.LicencePermitSection
                       .suitabilityCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -544,7 +544,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .suitabilityCertificateAvailability.name
                           }
                           readOnly="readOnly"
@@ -553,7 +553,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.structurePermitAvailability !=
+                    {data?.LicencePermitSection?.structurePermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Structure permit</label>
@@ -562,7 +562,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .structurePermitAvailability.name
                           }
                           readOnly="readOnly"
@@ -572,7 +572,7 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection
+                    {data?.LicencePermitSection
                       .fumigationCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -583,7 +583,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .fumigationCertificateAvailability.name
                           }
                           readOnly="readOnly"
@@ -592,7 +592,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.businessLicenceAvailability !=
+                    {data?.LicencePermitSection?.businessLicenceAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -603,7 +603,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .businessLicenceAvailability.name
                           }
                           readOnly="readOnly"
@@ -612,7 +612,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.structurePermitAvailability !=
+                    {data?.LicencePermitSection?.structurePermitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -623,7 +623,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .structurePermitAvailability.name
                           }
                           readOnly="readOnly"
@@ -632,7 +632,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.waterAnalysisReport != null ? (
+                    {data?.LicencePermitSection?.waterAnalysisReport != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water analysis report
@@ -642,7 +642,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.waterAnalysisReport.name
+                            data?.LicencePermitSection?.waterAnalysisReport.name
                           }
                           readOnly="readOnly"
                         />
@@ -650,7 +650,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.regGeneralCertAvailability !=
+                    {data?.LicencePermitSection?.regGeneralCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -661,7 +661,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.regGeneralCertAvailability
+                            data?.LicencePermitSection?.regGeneralCertAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -670,7 +670,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection?.medicalCertificateAvailability !=
+                    {data?.LicencePermitSection?.medicalCertificateAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -681,7 +681,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .medicalCertificateAvailability.name
                           }
                           readOnly="readOnly"
@@ -690,7 +690,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LicencePermitSection
+                    {data?.LicencePermitSection
                       .gtaOperatingLicenceAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -701,7 +701,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection
+                            data?.LicencePermitSection
                               .gtaOperatingLicenceAvailability.name
                           }
                           readOnly="readOnly"
@@ -711,7 +711,7 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.LicencePermitSection?.pharmacyCertAvailability !=
+                    {data?.LicencePermitSection?.pharmacyCertAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -722,7 +722,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LicencePermitSection?.pharmacyCertAvailability
+                            data?.LicencePermitSection?.pharmacyCertAvailability
                               .value
                           }
                           readOnly="readOnly"
@@ -761,10 +761,10 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
-                        {data.WaterSection.PremisesWaterSources.map((x) => (
+                        {data?.WaterSection.PremisesWaterSources.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -778,10 +778,10 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
-                        {data.WaterSection.PremisesWaterSupply.map((x) => (
+                        {data?.WaterSection.PremisesWaterSupply.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -795,7 +795,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water source condition
@@ -804,7 +804,7 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.WaterSection.waterSourceCondition.name}
+                          value={data?.WaterSection.waterSourceCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -812,10 +812,10 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
 
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
-                        {data.WaterSection.PremisesWaterStorage.map((x) => (
+                        {data?.WaterSection.PremisesWaterStorage.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -829,7 +829,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Safe Water storage receptacle condition
@@ -839,7 +839,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.WaterSection.waterStorageConditionSafe.name
+                            data?.WaterSection.waterStorageConditionSafe.name
                           }
                           readOnly="readOnly"
                         />
@@ -847,12 +847,12 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
                         </label>
-                        {data.WaterSection.PremisesWaterTreatmentType.map(
+                        {data?.WaterSection.PremisesWaterTreatmentType.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -868,12 +868,12 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection != null ? (
+                    {data?.WaterSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
                         </label>
-                        {data.WaterSection.PremisesDrinkingWaterSources.map(
+                        {data?.WaterSection.PremisesDrinkingWaterSources.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -889,7 +889,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.WaterSection.WaterFlowFrequency != null ? (
+                    {data?.WaterSection.WaterFlowFrequency != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water flow frequency
@@ -898,7 +898,7 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.WaterSection.WaterFlowFrequency.name}
+                          value={data?.WaterSection.WaterFlowFrequency.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -937,7 +937,7 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.LiquidWasteSection.numberToiletSeats != null ? (
+                    {data?.LiquidWasteSection.numberToiletSeats != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Toilet Seats
@@ -946,14 +946,14 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.numberToiletSeats}
+                          value={data?.LiquidWasteSection.numberToiletSeats}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number Urinal Seats
@@ -962,42 +962,42 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.numberUrinalSeats}
+                          value={data?.LiquidWasteSection.numberUrinalSeats}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletAdequacy != null ? (
+                    {data?.LiquidWasteSection.toiletAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Adequacy</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletAdequacy.name}
+                          value={data?.LiquidWasteSection.toiletAdequacy.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalAdequacy != null ? (
+                    {data?.LiquidWasteSection.urinalAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Urinal Adequacy</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.urinalAdequacy.name}
+                          value={data?.LiquidWasteSection.urinalAdequacy.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.bathroomAdequacy != null ? (
+                    {data?.LiquidWasteSection.bathroomAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom Adequacy
@@ -1006,14 +1006,14 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.bathroomAdequacy.name}
+                          value={data?.LiquidWasteSection.bathroomAdequacy.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {/* {data.LiquidWasteSection.separateStaffUrinal != null ? (
+                    {/* {data?.LiquidWasteSection.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Separate Staff Urinal
@@ -1023,7 +1023,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.separateStaffUrinal.name
+                            data?.LiquidWasteSection.separateStaffUrinal.name
                           }
                           readOnly="readOnly"
                         />
@@ -1031,7 +1031,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                    {data.LiquidWasteSection.availToiletFaciltyMgt != null ? (
+                    {data?.LiquidWasteSection.availToiletFaciltyMgt != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Facilty Mgt availabilty
@@ -1041,7 +1041,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.availToiletFaciltyMgt.name
+                            data?.LiquidWasteSection.availToiletFaciltyMgt.name
                           }
                           readOnly="readOnly"
                         />
@@ -1049,7 +1049,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletGenderSensivity != null ? (
+                    {data?.LiquidWasteSection.toiletGenderSensivity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Gender Sensivity
@@ -1059,7 +1059,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.toiletGenderSensivity.name
+                            data?.LiquidWasteSection.toiletGenderSensivity.name
                           }
                           readOnly="readOnly"
                         />
@@ -1067,7 +1067,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalGenderSensivity != null ? (
+                    {data?.LiquidWasteSection.urinalGenderSensivity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Gender Sensivity
@@ -1077,7 +1077,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalGenderSensivity.name
+                            data?.LiquidWasteSection.urinalGenderSensivity.name
                           }
                           readOnly="readOnly"
                         />
@@ -1085,7 +1085,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletPitPosition != null ? (
+                    {data?.LiquidWasteSection.toiletPitPosition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Pit Position
@@ -1094,14 +1094,14 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletPitPosition.name}
+                          value={data?.LiquidWasteSection.toiletPitPosition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDisabilityFriendly !=
+                    {data?.LiquidWasteSection.toiletDisabilityFriendly !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1112,7 +1112,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.toiletDisabilityFriendly
+                            data?.LiquidWasteSection.toiletDisabilityFriendly
                               .name
                           }
                           readOnly="readOnly"
@@ -1121,7 +1121,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.urinalDisabilityFriendly !=
+                    {data?.LiquidWasteSection.urinalDisabilityFriendly !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1132,7 +1132,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalDisabilityFriendly
+                            data?.LiquidWasteSection.urinalDisabilityFriendly
                               .name
                           }
                           readOnly="readOnly"
@@ -1141,21 +1141,21 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.drainsCondition != null ? (
+                    {data?.LiquidWasteSection.drainsCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drains Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.drainsCondition.name}
+                          value={data?.LiquidWasteSection.drainsCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.stagnationEvidence != null ? (
+                    {data?.LiquidWasteSection.stagnationEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Stagnation Evidence
@@ -1165,7 +1165,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.stagnationEvidence.name
+                            data?.LiquidWasteSection.stagnationEvidence.name
                           }
                           readOnly="readOnly"
                         />
@@ -1173,7 +1173,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.analCleansingMaterialMgt !=
+                    {data?.LiquidWasteSection.analCleansingMaterialMgt !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1184,7 +1184,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.analCleansingMaterialMgt
+                            data?.LiquidWasteSection.analCleansingMaterialMgt
                               .name
                           }
                           readOnly="readOnly"
@@ -1193,7 +1193,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.effluentManagementReport !=
+                    {data?.LiquidWasteSection.effluentManagementReport !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1204,7 +1204,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.effluentManagementReport
+                            data?.LiquidWasteSection.effluentManagementReport
                               .name
                           }
                           readOnly="readOnly"
@@ -1213,21 +1213,21 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.areaSewered != null ? (
+                    {data?.LiquidWasteSection.areaSewered != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Is Area Sewered</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.areaSewered.name}
+                          value={data?.LiquidWasteSection.areaSewered.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.facilityConnectedSewer != null ? (
+                    {data?.LiquidWasteSection.facilityConnectedSewer != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility Connected Sewer
@@ -1237,7 +1237,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.facilityConnectedSewer.name
+                            data?.LiquidWasteSection.facilityConnectedSewer.name
                           }
                           readOnly="readOnly"
                         />
@@ -1253,11 +1253,11 @@ const IndustryView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data.LiquidWasteSection.numberUrinalCubicle}
+                        value={data?.LiquidWasteSection.numberUrinalCubicle}
                         readOnly="readOnly"
                       />
                     </div>
-                    {data.LiquidWasteSection.urinalCubicleCondition != null ? (
+                    {data?.LiquidWasteSection.urinalCubicleCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal Cubicle Condition
@@ -1267,7 +1267,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.urinalCubicleCondition.name
+                            data?.LiquidWasteSection.urinalCubicleCondition.name
                           }
                           readOnly="readOnly"
                         />
@@ -1275,35 +1275,35 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletCondition != null ? (
+                    {data?.LiquidWasteSection.toiletCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletCondition.name}
+                          value={data?.LiquidWasteSection.toiletCondition.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.toiletDischarge != null ? (
+                    {data?.LiquidWasteSection.toiletDischarge != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Discharge</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.toiletDischarge.name}
+                          value={data?.LiquidWasteSection.toiletDischarge.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.containmentEmptied != null ? (
+                    {data?.LiquidWasteSection.containmentEmptied != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Containment Emptied
@@ -1313,7 +1313,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.containmentEmptied.name
+                            data?.LiquidWasteSection.containmentEmptied.name
                           }
                           readOnly="readOnly"
                         />
@@ -1321,21 +1321,21 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.sewerSystem != null ? (
+                    {data?.LiquidWasteSection.sewerSystem != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Sewer System</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.sewerSystem.name}
+                          value={data?.LiquidWasteSection.sewerSystem.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.wasteWaterContainment != null ? (
+                    {data?.LiquidWasteSection.wasteWaterContainment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Water Containment
@@ -1345,7 +1345,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.wasteWaterContainment.name
+                            data?.LiquidWasteSection.wasteWaterContainment.name
                           }
                           readOnly="readOnly"
                         />
@@ -1353,7 +1353,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.EaseYourselfWhere != null ? (
+                    {data?.LiquidWasteSection.EaseYourselfWhere != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Ease Yourself Where
@@ -1362,14 +1362,14 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.LiquidWasteSection.EaseYourselfWhere.name}
+                          value={data?.LiquidWasteSection.EaseYourselfWhere.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.DesiltingFrequency != null ? (
+                    {data?.LiquidWasteSection.DesiltingFrequency != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Desilting Frequency
@@ -1379,7 +1379,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.LiquidWasteSection.DesiltingFrequency.name
+                            data?.LiquidWasteSection.DesiltingFrequency.name
                           }
                           readOnly="readOnly"
                         />
@@ -1389,7 +1389,7 @@ const IndustryView = ({ data }) => {
                     )}
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
-                      {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                      {data?.LiquidWasteSection.PremisesDrainType.map((x) => (
                         <input
                           key={x.id}
                           type="text"
@@ -1404,7 +1404,7 @@ const IndustryView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Effluent Management
                       </label>
-                      {data.LiquidWasteSection.PremisesEffluentManagement.map(
+                      {data?.LiquidWasteSection.PremisesEffluentManagement.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1421,7 +1421,7 @@ const IndustryView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
                       </label>
-                      {data.LiquidWasteSection.PremisesExcretaContainment.map(
+                      {data?.LiquidWasteSection.PremisesExcretaContainment.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1434,13 +1434,13 @@ const IndustryView = ({ data }) => {
                         )
                       )}
                     </div>{" "}
-                    {data.LiquidWasteSection.PremisesExcretaDisposalMethod
+                    {data?.LiquidWasteSection.PremisesExcretaDisposalMethod
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Excreta Disposal Method
                         </label>
-                        {data.LiquidWasteSection.PremisesExcretaDisposalMethod.map(
+                        {data?.LiquidWasteSection.PremisesExcretaDisposalMethod.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1456,13 +1456,13 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
+                    {data?.LiquidWasteSection.PremisesGreyWaterDisposal.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Grey Water Disposal
                         </label>
-                        {data.LiquidWasteSection.PremisesGreyWaterDisposal.map(
+                        {data?.LiquidWasteSection.PremisesGreyWaterDisposal.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1478,10 +1478,10 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.LiquidWasteSection.PremisesToiletType.length != 0 ? (
+                    {data?.LiquidWasteSection.PremisesToiletType.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
-                        {data.LiquidWasteSection.PremisesToiletType.map((x) => (
+                        {data?.LiquidWasteSection.PremisesToiletType.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -1517,7 +1517,7 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.SolidWasteSection.wasteServiceProviderRegistration !=
+                    {data?.SolidWasteSection.wasteServiceProviderRegistration !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1528,9 +1528,9 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
+                            data?.SolidWasteSection
                               .wasteServiceProviderRegistration != null
-                              ? data.SolidWasteSection
+                              ? data?.SolidWasteSection
                                   .wasteServiceProviderRegistration.name
                               : ""
                           }
@@ -1540,7 +1540,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteCollectorName != null ? (
+                    {data?.SolidWasteSection.wasteCollectorName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Collector Name
@@ -1549,14 +1549,14 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.wasteCollectorName}
+                          value={data?.SolidWasteSection.wasteCollectorName}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteSortingAvailability != null ? (
+                    {data?.SolidWasteSection.wasteSortingAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Sorting Availability
@@ -1566,7 +1566,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wasteSortingAvailability.name
+                            data?.SolidWasteSection.wasteSortingAvailability.name
                           }
                           readOnly="readOnly"
                         />
@@ -1574,7 +1574,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.approvedWasteStorageReceptacle !=
+                    {data?.SolidWasteSection.approvedWasteStorageReceptacle !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1585,7 +1585,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
+                            data?.SolidWasteSection
                               .approvedWasteStorageReceptacle.name
                           }
                           readOnly="readOnly"
@@ -1594,7 +1594,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.adequateWasteStorageReceptacle !=
+                    {data?.SolidWasteSection.adequateWasteStorageReceptacle !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1605,7 +1605,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection
+                            data?.SolidWasteSection
                               .adequateWasteStorageReceptacle.name
                           }
                           readOnly="readOnly"
@@ -1614,13 +1614,13 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.PremisesWasteCollection.length !=
+                    {data?.SolidWasteSection.PremisesWasteCollection.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Collection Type
                         </label>
-                        {data.SolidWasteSection.PremisesWasteCollection.map(
+                        {data?.SolidWasteSection.PremisesWasteCollection.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1640,7 +1640,7 @@ const IndustryView = ({ data }) => {
                       <label htmlFor="invoicenoInput">
                         Waste Collection Receptacle
                       </label>
-                      {data.SolidWasteSection.PremisesWasteReceptacle.map(
+                      {data?.SolidWasteSection.PremisesWasteReceptacle.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1653,7 +1653,7 @@ const IndustryView = ({ data }) => {
                         )
                       )}
                     </div>
-                    {data.SolidWasteSection.UnservicedWasteDisposal != null ? (
+                    {data?.SolidWasteSection.UnservicedWasteDisposal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Unserviced Waste Disposal
@@ -1663,7 +1663,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.UnservicedWasteDisposal.name
+                            data?.SolidWasteSection.UnservicedWasteDisposal.name
                           }
                           readOnly="readOnly"
                         />
@@ -1671,7 +1671,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wastePaymentEvidence != null ? (
+                    {data?.SolidWasteSection.wastePaymentEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Payment Evidence
@@ -1681,7 +1681,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wastePaymentEvidence.name
+                            data?.SolidWasteSection.wastePaymentEvidence.name
                           }
                           readOnly="readOnly"
                         />
@@ -1689,21 +1689,21 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.ContainerVolume != null ? (
+                    {data?.SolidWasteSection.ContainerVolume != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Container Volume</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.ContainerVolume.name}
+                          value={data?.SolidWasteSection.ContainerVolume.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.SolidWasteSection.wasteProviderAccreditted != null ? (
+                    {data?.SolidWasteSection.wasteProviderAccreditted != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Provider Accreditted
@@ -1713,7 +1713,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.SolidWasteSection.wasteProviderAccreditted.name
+                            data?.SolidWasteSection.wasteProviderAccreditted.name
                           }
                           readOnly="readOnly"
                         />
@@ -1743,7 +1743,7 @@ const IndustryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data.ConclusionSection.generalSanitaryCondition != null ? (
+                    {data?.ConclusionSection.generalSanitaryCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           General Sanitary Condition
@@ -1753,7 +1753,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ConclusionSection.generalSanitaryCondition.name
+                            data?.ConclusionSection.generalSanitaryCondition.name
                           }
                           readOnly="readOnly"
                         />
@@ -1761,7 +1761,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.obnoxiousTradeExist != null ? (
+                    {data?.ConclusionSection.obnoxiousTradeExist != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Obnoxious Trade Exist
@@ -1771,7 +1771,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data.ConclusionSection.obnoxiousTradeExist.name
+                            data?.ConclusionSection.obnoxiousTradeExist.name
                           }
                           readOnly="readOnly"
                         />
@@ -1779,13 +1779,13 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesNuisanceDetected.length !=
+                    {data?.ConclusionSection.PremisesNuisanceDetected.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Nuisance Observed
                         </label>
-                        {data.ConclusionSection.PremisesNuisanceDetected.map(
+                        {data?.ConclusionSection.PremisesNuisanceDetected.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1801,24 +1801,24 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.officerComment != null ? (
+                    {data?.ConclusionSection.officerComment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Office Comment</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.ConclusionSection.officerComment}
+                          value={data?.ConclusionSection.officerComment}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data.ConclusionSection.PremisesActionTaken.length != 0 ? (
+                    {data?.ConclusionSection.PremisesActionTaken.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Action Taken</label>
-                        {data.ConclusionSection.PremisesActionTaken.map((x) => (
+                        {data?.ConclusionSection.PremisesActionTaken.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -1839,7 +1839,7 @@ const IndustryView = ({ data }) => {
           </div>
         </div>
       </div>
-      {/* {data.InspectionPictures.map((ip) => {
+      {/* {data?.InspectionPictures.map((ip) => {
      return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
@@ -1864,7 +1864,7 @@ const IndustryView = ({ data }) => {
               </div>
 
               <div className="row gallery-wrapper">
-                {data.InspectionPictures.map((ip) => {
+                {data?.InspectionPictures.map((ip) => {
                 return  <div   key={ip.id}
                     className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
                     data-category="designing development"
@@ -1905,13 +1905,13 @@ const IndustryView = ({ data }) => {
               </div>
             </div>
             <div className="col-sm-auto">
-              {data.isPublished == 0 ? (
+              {data?.isPublished == 0 ? (
                 <button
                   className="btn btn-success"
                   onClick={(e) => {
                     e.preventDefault();
 
-                    publish(data.id);
+                    publish(data?.id);
                   }}
                 >
                   Publish
@@ -1922,7 +1922,7 @@ const IndustryView = ({ data }) => {
                   onClick={(e) => {
                     e.preventDefault();
 
-                    publish(data.id);
+                    publish(data?.id);
                   }}
                 >
                   Unpublish

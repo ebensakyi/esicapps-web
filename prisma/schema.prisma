@@ -309,11 +309,12 @@ model CemeteryWorkers {
 }
 
 model CleaningFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  deleted                   Int?                        @default(0)
+  createdAt                 DateTime                    @default(now())
+  updatedAt                 DateTime                    @updatedAt
+  MarketPremisesInfoSection MarketPremisesInfoSection[]
 }
 
 model Community {
@@ -354,11 +355,12 @@ model ContainerVolume {
 }
 
 model DerattingFrequency {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  deleted                   Int?                        @default(0)
+  createdAt                 DateTime                    @default(now())
+  updatedAt                 DateTime                    @updatedAt
+  MarketPremisesInfoSection MarketPremisesInfoSection[]
 }
 
 model DesiltingFrequency {
@@ -485,6 +487,7 @@ model OwnershipType {
   updatedAt                 DateTime                      @updatedAt
   HealthPremisesInfoSection HealthPremisesInfoSection[]
   ownershipTypeSanitary     SanitaryPremisesInfoSection[] @relation("ownershipTypeSanitary")
+  MarketPremisesInfoSection MarketPremisesInfoSection[]
 }
 
 model PestSign {
@@ -553,12 +556,16 @@ model SanitaryInsanitary {
   toiletCondition   LiquidWasteSection[] @relation("toiletCondition")
   bathroomCondition LiquidWasteSection[] @relation("bathroomCondition")
 
-  urinalCubicleCondition LiquidWasteSection[]             @relation("urinalCubicleCondition")
-  animalSpaceCondition   ResidentialPremisesInfoSection[] @relation("animalSpaceCondition")
-  sanitaryAshesDisposal  SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
-  sanitaryContainer      SanitaryPremisesInfoSection[]    @relation("sanitaryContainer")
-  FollowUpInspection     FollowUpInspection[]             @relation("generalSanitaryCondition")
-  animalSpaceConditionInstitution   InstitutionPremisesInfoSection[] @relation("animalSpaceCondition")
+  urinalCubicleCondition          LiquidWasteSection[]             @relation("urinalCubicleCondition")
+  animalSpaceCondition            ResidentialPremisesInfoSection[] @relation("animalSpaceCondition")
+  sanitaryAshesDisposal           SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
+  sanitaryContainer               SanitaryPremisesInfoSection[]    @relation("sanitaryContainer")
+  FollowUpInspection              FollowUpInspection[]             @relation("generalSanitaryCondition")
+  animalSpaceConditionInstitution InstitutionPremisesInfoSection[] @relation("animalSpaceCondition")
+  byProductsStorageAreaCond       IndustryPremisesInfoSection[]    @relation("byProductsStorageAreaCond")
+  productionRoomCondition         IndustryPremisesInfoSection[]    @relation("productionRoomCondition")
+  slaughterAreaCondition          InstitutionPremisesInfoSection[] @relation("slaughterAreaCondition")
+  ablutionSlabCondition           InstitutionPremisesInfoSection[] @relation("ablutionSlabCondition")
 }
 
 model SewerSystem {
@@ -584,34 +591,38 @@ model StructureType {
 }
 
 model Type {
-  id                      Int                              @id @default(autoincrement())
-  name                    String                           @db.VarChar(255)
-  deleted                 Int?                             @default(0)
-  createdAt               DateTime                         @default(now())
-  updatedAt               DateTime                         @updatedAt
-  inspectionFormId        Int
-  eateryPremisesType      EateryPremisesInfoSection[]      @relation("eateryPremisesType")
-  healthPremisesType      HealthPremisesInfoSection[]      @relation("healthPremisesType")
-  hospitalityPremisesType HospitalityPremisesInfoSection[] @relation("hospitalityPremisesType")
-  sanitaryPremisesType    SanitaryPremisesInfoSection[]    @relation("sanitaryPremisesType")
-  Service                 Service[]
-  Subtype                 Subtype[]
-  InspectionForm          InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
+  id                             Int                              @id @default(autoincrement())
+  name                           String                           @db.VarChar(255)
+  deleted                        Int?                             @default(0)
+  createdAt                      DateTime                         @default(now())
+  updatedAt                      DateTime                         @updatedAt
+  inspectionFormId               Int
+  eateryPremisesType             EateryPremisesInfoSection[]      @relation("eateryPremisesType")
+  healthPremisesType             HealthPremisesInfoSection[]      @relation("healthPremisesType")
+  hospitalityPremisesType        HospitalityPremisesInfoSection[] @relation("hospitalityPremisesType")
+  sanitaryPremisesType           SanitaryPremisesInfoSection[]    @relation("sanitaryPremisesType")
+  Service                        Service[]
+  Subtype                        Subtype[]
+  InspectionForm                 InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
+  IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
+  InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
 
   @@unique([inspectionFormId, name], name: "inspectionFormName")
 }
 
 model Subtype {
-  id                    Int                         @id @default(autoincrement())
-  name                  String                      @db.VarChar(255)
-  deleted               Int?                        @default(0)
-  createdAt             DateTime                    @default(now())
-  updatedAt             DateTime                    @updatedAt
-  inspectionFormId      Int
-  typeId                Int
-  eateryPremisesSubType EateryPremisesInfoSection[] @relation("eateryPremisesSubType")
-  InspectionForm        InspectionForm              @relation(fields: [inspectionFormId], references: [id])
-  Type                  Type                        @relation(fields: [typeId], references: [id])
+  id                             Int                              @id @default(autoincrement())
+  name                           String                           @db.VarChar(255)
+  deleted                        Int?                             @default(0)
+  createdAt                      DateTime                         @default(now())
+  updatedAt                      DateTime                         @updatedAt
+  inspectionFormId               Int
+  typeId                         Int
+  eateryPremisesSubType          EateryPremisesInfoSection[]      @relation("eateryPremisesSubType")
+  InspectionForm                 InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
+  Type                           Type                             @relation(fields: [typeId], references: [id])
+  IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
+  InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
 
   @@unique([typeId, name], name: "typeName")
 }
@@ -895,6 +906,22 @@ model YesNo {
   kitchenAvailabilityHospitality HospitalityPremisesInfoSection[] @relation("kitchenAvailability")
   placentaPitAvailability        HealthPremisesInfoSection[]      @relation("placentaPitAvailability")
   incineratorAvailability        HealthPremisesInfoSection[]      @relation("incineratorAvailability")
+
+  staffChangingRoomIndustry                  IndustryPremisesInfoSection[]    @relation("staffChangingRoom")
+  storeRoomAvailabilityIndustry              IndustryPremisesInfoSection[]    @relation("storeRoomAvailability")
+  flyScreenNetAvailability                   IndustryPremisesInfoSection[]    @relation("flyScreenNetAvailability")
+  protectiveClothingIndustry                 IndustryPremisesInfoSection[]    @relation("protectiveClothing")
+  firstAidAvailabilityIndust                 IndustryPremisesInfoSection[]    @relation("firstAidAvailability")
+  firstAidAvailabilityInstitution            InstitutionPremisesInfoSection[] @relation("firstAidAvailability")
+  uncookedFoodStorageCondtionSafeInstitution InstitutionPremisesInfoSection[] @relation("uncookedFoodStorageCondtionSafe")
+  cookedFoodStorageCondtionSafeInstitution   InstitutionPremisesInfoSection[] @relation("cookedFoodStorageCondtionSafe")
+  shepClubExistence                          InstitutionPremisesInfoSection[] @relation("shepClubExistence")
+  slaughterAreaAvailabilityInstitution       InstitutionPremisesInfoSection[] @relation("slaughterAreaAvailability")
+  soundProof                                 InstitutionPremisesInfoSection[] @relation("soundProof")
+  ablutionSlab                               InstitutionPremisesInfoSection[] @relation("ablutionSlab")
+  firstAidAvailabilityMarket                 MarketPremisesInfoSection[]      @relation("firstAidAvailability")
+  designatedSmokingArea                  EateryPremisesInfoSection[]   @relation("designatedSmokingArea")
+  protectiveClothingEatery                  EateryPremisesInfoSection[]   @relation("protectiveClothing")
 }
 
 model InspectionType {
@@ -1022,6 +1049,8 @@ model EateryPremisesInfoSection {
   toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   kitchenAvailability                       YesNo?   @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
+  protectiveClothing                        YesNo?   @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  designatedSmokingArea                     YesNo?   @relation("designatedSmokingArea", fields: [designatedSmokingAreaId], references: [id])
 
   Inspection            Inspection     @relation(fields: [inspectionId], references: [id])
   userId                Int
@@ -1196,9 +1225,9 @@ model SanitaryPremisesInfoSection {
 }
 
 model MarketPremisesInfoSection {
-  id                                        String         @id @db.VarChar(255)
-  inspectionId                              String         @unique @db.VarChar(255)
-  facilityName                              String         @db.VarChar(255)
+  id                                        String   @id @db.VarChar(255)
+  inspectionId                              String   @unique @db.VarChar(255)
+  facilityName                              String   @db.VarChar(255)
   marketPremisesTypeId                      Int?
   physicalStructureTypeId                   Int?
   toiletAvailabilityId                      Int?
@@ -1223,19 +1252,23 @@ model MarketPremisesInfoSection {
   numberVehicles                            Int?
   numberDrivers                             Int?
   numberFoodVendors                         Int?
-  deleted                                   Int?           @default(0)
-  createdAt                                 DateTime       @default(now())
-  updatedAt                                 DateTime       @updatedAt
-  approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathroomAvailability                      YesNo?         @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
-  drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  User                                      User           @relation(fields: [userId], references: [id])
-  Inspection                                Inspection     @relation(fields: [inspectionId], references: [id])
-  physicalStructureType                     StructureType? @relation(fields: [physicalStructureTypeId], references: [id])
+  deleted                                   Int?     @default(0)
+  createdAt                                 DateTime @default(now())
+  updatedAt                                 DateTime @updatedAt
+  approvedHandwashingFacilityAvailability   YesNo?   @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+  bathroomAvailability                      YesNo?   @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
+  drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  firstAidAvailability                      YesNo?   @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
 
-  userId Int
+  User                  User                @relation(fields: [userId], references: [id])
+  Inspection            Inspection          @relation(fields: [inspectionId], references: [id])
+  physicalStructureType StructureType?      @relation(fields: [physicalStructureTypeId], references: [id])
+  cleanupFrequency      CleaningFrequency?  @relation(fields: [cleanupFrequencyId], references: [id])
+  derattingFrequency    DerattingFrequency? @relation(fields: [derattingFrequencyId], references: [id])
+  ownershipType         OwnershipType?      @relation(fields: [ownershipTypeId], references: [id])
+  userId                Int
 }
 
 model InstitutionPremisesInfoSection {
@@ -1266,7 +1299,7 @@ model InstitutionPremisesInfoSection {
   numberOtherRooms                          Int?
   animalSpaceConditionId                    Int?
   animalSpaceAvailabilityId                 Int?
-  shrinePremisesConditionId                 Int?
+  premisesConditionId                       Int?
   slaughterAreaAvailabilityId               Int?
   slaughterAreaConditionId                  Int?
   soundProofId                              Int?
@@ -1299,22 +1332,33 @@ model InstitutionPremisesInfoSection {
   kitchenAvailability                       YesNo?              @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
   animalSpaceAvailability                   YesNo?              @relation("animalSpaceAvailability", fields: [animalSpaceAvailabilityId], references: [id])
   animalSpaceCondition                      SanitaryInsanitary? @relation("animalSpaceCondition", fields: [animalSpaceConditionId], references: [id])
-
-  physicalStructureType StructureType? @relation(fields: [physicalStructureTypeId], references: [id])
+  firstAidAvailability                      YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  uncookedFoodStorageCondtionSafe           YesNo?              @relation("uncookedFoodStorageCondtionSafe", fields: [uncookedFoodStorageCondtionSafeId], references: [id])
+  cookedFoodStorageCondtionSafe             YesNo?              @relation("cookedFoodStorageCondtionSafe", fields: [cookedFoodStorageCondtionSafeId], references: [id])
+  shepClubExistence                         YesNo?              @relation("shepClubExistence", fields: [shepClubExistenceId], references: [id])
+  slaughterAreaAvailability                 YesNo?              @relation("slaughterAreaAvailability", fields: [slaughterAreaAvailabilityId], references: [id])
+  slaughterAreaCondition                    SanitaryInsanitary? @relation("slaughterAreaCondition", fields: [slaughterAreaConditionId], references: [id])
+  soundProof                                YesNo?              @relation("soundProof", fields: [soundProofId], references: [id])
+  ablutionSlab                              YesNo?              @relation("ablutionSlab", fields: [ablutionSlabId], references: [id])
+  ablutionSlabCondition                     SanitaryInsanitary? @relation("ablutionSlabCondition", fields: [ablutionSlabConditionId], references: [id])
+  physicalStructureType                     StructureType?      @relation(fields: [physicalStructureTypeId], references: [id])
 
   User       User       @relation(fields: [userId], references: [id])
   userId     Int
   Inspection Inspection @relation(fields: [inspectionId], references: [id])
+
+  Type    Type?    @relation(fields: [institutionPremisesTypeId], references: [id])
+  Subtype Subtype? @relation(fields: [institutionPremisesSubtypeId], references: [id])
 }
 
 model IndustryPremisesInfoSection {
-  id                                        String         @id @db.VarChar(255)
-  inspectionId                              String         @unique @db.VarChar(255)
-  facilityName                              String         @db.VarChar(255)
+  id                                        String              @id @db.VarChar(255)
+  inspectionId                              String              @unique @db.VarChar(255)
+  facilityName                              String              @db.VarChar(255)
   industryPremisesTypeId                    Int?
   industryPremisesSubtypeId                 Int?
   physicalStructureTypeId                   Int?
-  otherIndustryFacility                     String?        @db.VarChar(255)
+  otherIndustryFacility                     String?             @db.VarChar(255)
   protectiveClothingId                      Int?
   productionRoomConditionId                 Int?
   flyScreenNetAvailabilityId                Int?
@@ -1326,22 +1370,33 @@ model IndustryPremisesInfoSection {
   approvedHandwashingFacilityAvailabilityId Int?
   firstAidAvailabilityId                    Int?
   staffChangingRoomId                       Int?
-  manufacturedServices                      String         @db.VarChar(255)
-  majorByProducts                           String         @db.VarChar(255)
+  manufacturedServices                      String              @db.VarChar(255)
+  majorByProducts                           String              @db.VarChar(255)
   numberWorkers                             Int?
   byProductsStorageAreaCondId               Int?
-  deleted                                   Int?           @default(0)
-  createdAt                                 DateTime       @default(now())
-  updatedAt                                 DateTime       @updatedAt
-  approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathroomAvailability                      YesNo?         @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
-  drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                        YesNo?         @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  User                                      User           @relation(fields: [userId], references: [id])
+  deleted                                   Int?                @default(0)
+  createdAt                                 DateTime            @default(now())
+  updatedAt                                 DateTime            @updatedAt
+  approvedHandwashingFacilityAvailability   YesNo?              @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+  bathroomAvailability                      YesNo?              @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
+  drainsAvailability                        YesNo?              @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  toiletAvailability                        YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability                        YesNo?              @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  User                                      User                @relation(fields: [userId], references: [id])
   userId                                    Int
-  Inspection                                Inspection     @relation(fields: [inspectionId], references: [id])
-  physicalStructureType                     StructureType? @relation(fields: [physicalStructureTypeId], references: [id])
+  Inspection                                Inspection          @relation(fields: [inspectionId], references: [id])
+  physicalStructureType                     StructureType?      @relation(fields: [physicalStructureTypeId], references: [id])
+  byProductsStorageAreaCond                 SanitaryInsanitary? @relation("byProductsStorageAreaCond", fields: [byProductsStorageAreaCondId], references: [id])
+  productionRoomCondition                   SanitaryInsanitary? @relation("productionRoomCondition", fields: [productionRoomConditionId], references: [id])
+  staffChangingRoom                         YesNo?              @relation("staffChangingRoom", fields: [staffChangingRoomId], references: [id])
+  storeRoomAvailability                     YesNo?              @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
+  flyScreenNetAvailability                  YesNo?              @relation("flyScreenNetAvailability", fields: [flyScreenNetAvailabilityId], references: [id])
+  firstAidAvailability                      YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+
+  protectiveClothing YesNo? @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+
+  Type    Type?    @relation(fields: [industryPremisesTypeId], references: [id])
+  Subtype Subtype? @relation(fields: [industryPremisesSubtypeId], references: [id])
 }
 
 model LicencePermitSection {
