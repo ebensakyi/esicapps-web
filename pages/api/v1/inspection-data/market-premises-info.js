@@ -112,12 +112,12 @@ const post = async (req, res) => {
           : Number(req.body.numberFoodVendors),
     };
 
-    // console.log(data);
+     console.log(data);
     const response = await prisma.marketPremisesInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-    // console.log("Error: " + error);
+    console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)
