@@ -373,16 +373,15 @@ model DesiltingFrequency {
 }
 
 model DisinfectionFrequency {
-  id                          Int                           @id @default(autoincrement())
-  name                        String
-  deleted                     Int?                          @default(0)
-  createdAt                   DateTime                      @default(now())
-  updatedAt                   DateTime                      @updatedAt
-  disinfectionFrequencySanitary       SanitaryPremisesInfoSection[] @relation("disinfectionFrequency")
-  
-  disinfectionFrequencyEatery EateryPremisesInfoSection[]   @relation("disinfectionFrequency")
-  disinfestionFrequencyEatery       EateryPremisesInfoSection[]   @relation("disinfestationFrequency")
+  id                            Int                           @id @default(autoincrement())
+  name                          String
+  deleted                       Int?                          @default(0)
+  createdAt                     DateTime                      @default(now())
+  updatedAt                     DateTime                      @updatedAt
+  disinfectionFrequencySanitary SanitaryPremisesInfoSection[] @relation("disinfectionFrequency")
 
+  disinfectionFrequencyEatery EateryPremisesInfoSection[] @relation("disinfectionFrequency")
+  disinfestionFrequencyEatery EateryPremisesInfoSection[] @relation("disinfestationFrequency")
 }
 
 model DrainType {
@@ -610,6 +609,7 @@ model Type {
   InspectionForm                 InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
+  MarketPremisesInfoSection      MarketPremisesInfoSection[]
 
   @@unique([inspectionFormId, name], name: "inspectionFormName")
 }
@@ -1061,7 +1061,6 @@ model EateryPremisesInfoSection {
   Inspection            Inspection     @relation(fields: [inspectionId], references: [id])
   userId                Int
   physicalStructureType StructureType? @relation(fields: [physicalStructureTypeId], references: [id])
-
 }
 
 model HealthPremisesInfoSection {
@@ -1269,6 +1268,8 @@ model MarketPremisesInfoSection {
   urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   firstAidAvailability                      YesNo?   @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
 
+  marketPremisesType Type @relation(fields: [typeId], references: [id])
+
   User                  User                @relation(fields: [userId], references: [id])
   Inspection            Inspection          @relation(fields: [inspectionId], references: [id])
   physicalStructureType StructureType?      @relation(fields: [physicalStructureTypeId], references: [id])
@@ -1276,6 +1277,7 @@ model MarketPremisesInfoSection {
   derattingFrequency    DerattingFrequency? @relation(fields: [derattingFrequencyId], references: [id])
   ownershipType         OwnershipType?      @relation(fields: [ownershipTypeId], references: [id])
   userId                Int
+  typeId                Int
 }
 
 model InstitutionPremisesInfoSection {
