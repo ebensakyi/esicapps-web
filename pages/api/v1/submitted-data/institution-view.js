@@ -80,7 +80,8 @@ const get = async (req, res) => {
         },
         InstitutionPremisesInfoSection: {
           include: {
-          
+           
+            animalSpaceAvailability:  true,
             toiletAvailability: true,
             urinalAvailability: true,
             drainsAvailability: true,
