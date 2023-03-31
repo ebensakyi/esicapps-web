@@ -23,7 +23,27 @@ export const services = [
     name: "Mortuary",
     inspectionFormId: 3,
   },
-
+  {
+    name: "Pharmacy",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Dental",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Embalming",
+    inspectionFormId: 3,
+  }, {
+    name: "Cremation",
+    inspectionFormId: 3,
+  }, {
+    name: "Dressing of bodies",
+    inspectionFormId: 3,
+  }, {
+    name: "Sales of casket",
+    inspectionFormId: 3,
+  },
    {
     name: "Lodging",
     inspectionFormId: 4,

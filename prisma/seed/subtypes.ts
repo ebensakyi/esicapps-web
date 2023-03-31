@@ -28,7 +28,7 @@ export const subtypes = [
   { id: 22, name: "Specify other non-consumable", inspectionFormId: 6, typeId: 26 },
 
   { id: 23, name: "Bulk Water Suppliers", inspectionFormId: 6, typeId: 27 },
-  { id: 24, name: "Corn/Fufu Mill", inspectionFormId: 6, typeId: 27 },
+  { id: 24, name: "Food Mills", inspectionFormId: 6, typeId: 27 },
   { id: 25, name: "Fitting shop", inspectionFormId: 6, typeId: 27 },
   { id: 26, name: "Carpentry shop", inspectionFormId: 6, typeId: 27 },
   { id: 27, name: "Filling station", inspectionFormId: 6, typeId: 27 },

@@ -55,10 +55,23 @@ export const respondentDesignation = [
     inspectionFormId: 3,
   },
  {
-    name: "Nurse",
+    name: "Pharmacists",
     inspectionFormId: 3,
   },
-
+  {
+    name: "Chemists",
+    inspectionFormId: 3,
+  },
+  {
+    name: "Mortician",
+    inspectionFormId: 3,
+  },{
+    name: "Care taker",
+    inspectionFormId: 3,
+  },{
+    name: "Director",
+    inspectionFormId: 3,
+  },
   {
     name: "Manager",
     inspectionFormId: 4,
