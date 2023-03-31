@@ -78,21 +78,14 @@ const get = async (req, res) => {
             pharmacyCertAvailability: true,
           },
         },
-        ResidentialPremisesInfoSection: {
+        SanitaryPremisesInfoSection: {
           include: {
-            PremisesAnimal: {
-              include: {
-                AnimalType: true,
-              },
-            },
-            animalAvailability: true,
+           
             toiletAvailability: true,
             urinalAvailability: true,
-            vaccinationProof: true,
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
-            animalSpaceCondition: true,
           },
         },
 
@@ -203,7 +196,6 @@ const get = async (req, res) => {
         },
         ConclusionSection: {
           include: {
-            generalSanitaryCondition: true,
             obnoxiousTradeExist: true,
             PremisesNuisanceDetected: {
               include: { Nuisance: true },

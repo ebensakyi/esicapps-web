@@ -34,6 +34,9 @@ export const respondentDesignation = [
   {
     name: "Chief executive officer",
     inspectionFormId: 2,
+  },  {
+    name: "Chef",
+    inspectionFormId: 2,
   },
   {
     name: "Administrator",
@@ -48,6 +51,10 @@ export const respondentDesignation = [
     inspectionFormId: 3,
   },
   {
+    name: "Nurse",
+    inspectionFormId: 3,
+  },
+ {
     name: "Nurse",
     inspectionFormId: 3,
   },

@@ -1,8 +1,6 @@
 export const nuisance = [
-  {
-    inspectionFormId: 1,
-    name: "Exposed Excretment",
-  },
+  { inspectionFormId: 1, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 1,
     name: "Unsanitary bathroom",
@@ -25,7 +23,6 @@ export const nuisance = [
   { inspectionFormId: 1, name: "Rats and other vermin" },
   { inspectionFormId: 1, name: "Construction waste" },
   { inspectionFormId: 1, name: "Stagnant waste water" },
-  { inspectionFormId: 1, name: "Exposed Faecal matter" },
   { inspectionFormId: 1, name: "Offensive odour" },
   { inspectionFormId: 1, name: "Insanitary Animal Space" },
   { inspectionFormId: 1, name: "Unsafe structure" },
@@ -46,10 +43,8 @@ export const nuisance = [
   // { inspectionFormId: 1, name: "Exposed Anal Cleansing Material" },
 
 
-  {
-    inspectionFormId: 2,
-    name: "Exposed Excretment",
-  },
+  { inspectionFormId: 2, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 2,
     name: "Unsanitary bathroom",
@@ -72,7 +67,6 @@ export const nuisance = [
   { inspectionFormId: 2, name: "Rats and other vermin" },
   { inspectionFormId: 2, name: "Construction waste" },
   { inspectionFormId: 2, name: "Stagnant waste water" },
-  { inspectionFormId: 2, name: "Exposed Faecal matter" },
   { inspectionFormId: 2, name: "Offensive odour" },
   { inspectionFormId: 2, name: "Insanitary Animal Space" },
   { inspectionFormId: 2, name: "Unsafe structure" },
@@ -80,15 +74,15 @@ export const nuisance = [
   { inspectionFormId: 2, name: "Dumping and Burning" },
   { inspectionFormId: 2, name: "Insanitary bathroom" },
   { inspectionFormId: 2, name: "Expired Medicine" },
+  { inspectionFormId: 2, name: "Expired food or drink" },
+  { inspectionFormId: 2, name: "Adultrated drink" },
+
   { inspectionFormId: 2, name: "Exposed food" },
   { inspectionFormId: 2, name: "Insanitary kitchen" },
   { inspectionFormId: 2, name: "No Permit" },
 
- 
-  {
-    inspectionFormId: 3,
-    name: "Exposed Excretment",
-  },
+  { inspectionFormId: 3, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 3,
     name: "Insanitary bathroom",
@@ -110,7 +104,6 @@ export const nuisance = [
   { inspectionFormId: 3, name: "Dirty walls of premises" },
   { inspectionFormId: 3, name: "Rats and other vermin" },
   { inspectionFormId: 3, name: "Stagnant waste water" },
-  { inspectionFormId: 3, name: "Exposed Faecal matter" },
   { inspectionFormId: 3, name: "Offensive odour" },
   { inspectionFormId: 3, name: "Dumping and Burning" },
   { inspectionFormId: 3, name: "Insanitary bathroom" },
@@ -124,11 +117,8 @@ export const nuisance = [
 
 
 
+  { inspectionFormId: 4, name: "Exposed Faecal matter" },
 
-  {
-    inspectionFormId: 4,
-    name: "Exposed Excretment",
-  },
   {
     inspectionFormId: 4,
     name: "Insanitary bathroom",
@@ -185,10 +175,8 @@ export const nuisance = [
 // Offensive odour
 // Insanitary Animal Space 
 // Unsafe structure
-  {
-    inspectionFormId: 5,
-    name: "Exposed Excretment",
-  },
+{ inspectionFormId: 5, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 5,
     name: "Insanitary bathroom",
@@ -223,10 +211,8 @@ export const nuisance = [
 
 
 
-  {
-    inspectionFormId: 6,
-    name: "Exposed Excretment",
-  },
+  { inspectionFormId: 6, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 6,
     name: "Insanitary bathroom",
@@ -261,10 +247,8 @@ export const nuisance = [
  
 
 
-  {
-    inspectionFormId: 7,
-    name: "Exposed Excretment",
-  },
+  { inspectionFormId: 7, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 7,
     name: "Unsanitary bathroom",
@@ -299,10 +283,8 @@ export const nuisance = [
   { inspectionFormId: 7, name: "No Permit" },
  
 
-  {
-    inspectionFormId: 8,
-    name: "Exposed Excretment",
-  },
+  { inspectionFormId: 8, name: "Exposed Faecal matter" },
+
   {
     inspectionFormId: 8,
     name: "Unsanitary bathroom",

@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 const ResidentialView = ({ data }) => {
   const router = useRouter();
 
-  
   const publish = async (id) => {
     try {
       const response = await axios.post(
@@ -21,11 +20,26 @@ const ResidentialView = ({ data }) => {
     }
   };
 
+  const downloadInspection = async () => {};
+
   return (
     <>
       <div className="row">
         <div className="col-12">
+        <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+          <div>
+            <button
+              type="button"
+              className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+              onClick={downloadInspection}
+            >
+              <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+              Download Inspection
+            </button>
+          </div>
+          </div>
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+         
             <h4 className="mb-sm-0">RESIDENTIAL</h4>
             <div className="page-title-right">
               <ol className="breadcrumb m-0">
@@ -230,7 +244,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection?.drainsAvailability != null ? (
+                    {data?.ResidentialPremisesInfoSection?.drainsAvailability !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drains availabilty
@@ -240,7 +255,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.drainsAvailability?.name
+                            data?.ResidentialPremisesInfoSection
+                              ?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -248,7 +264,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability != null ? (
+                    {data?.ResidentialPremisesInfoSection
+                      ?.approvedHandwashingFacilityAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Handwashing facility availabilty
@@ -258,7 +275,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability?.name
+                            data?.ResidentialPremisesInfoSection
+                              ?.approvedHandwashingFacilityAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -285,7 +303,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection?.maleOccupantNumber != null ? (
+                    {data?.ResidentialPremisesInfoSection?.maleOccupantNumber !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of male occupants
@@ -304,7 +323,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection?.femaleOccupantNumber != null ? (
+                    {data?.ResidentialPremisesInfoSection
+                      ?.femaleOccupantNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of female occupants
@@ -323,7 +343,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ResidentialPremisesInfoSection?.animalAvailability != null ? (
+                    {data?.ResidentialPremisesInfoSection?.animalAvailability !=
+                    null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Animal availabilty
@@ -1196,8 +1217,8 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length !=
-                    0 ? (
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement
+                      .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Effluent Management
@@ -1218,25 +1239,28 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.LiquidWasteSection?.PremisesExcretaContainment.length !=
-                    0 ?
-                    <div className="col-lg-3 col-sm-6">
-                      <label htmlFor="invoicenoInput">
-                        Excreta Containment
-                      </label>
-                      {data?.LiquidWasteSection?.PremisesExcretaContainment.map(
-                        (x) => (
-                          <input
-                            key={x.id}
-                            type="text"
-                            className="form-control bg-light border-0"
-                            id="invoicenoInput"
-                            value={x.ExcretaContainment.name}
-                            readOnly="readOnly"
-                          />
-                        )
-                      )}
-                    </div>:<></>}
+                    {data?.LiquidWasteSection?.PremisesExcretaContainment
+                      .length != 0 ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Excreta Containment
+                        </label>
+                        {data?.LiquidWasteSection?.PremisesExcretaContainment.map(
+                          (x) => (
+                            <input
+                              key={x.id}
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={x.ExcretaContainment.name}
+                              readOnly="readOnly"
+                            />
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
