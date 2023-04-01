@@ -327,7 +327,7 @@ const AddDistrict = ({ data, regions }) => {
                                 Edit
                               </button>
                             </li>
-                            <li>
+                            {/* <li>
                               <button
                                 className="dropdown-item delete-item-btn"
                                 onClick={(e) => {
@@ -337,7 +337,7 @@ const AddDistrict = ({ data, regions }) => {
                                 <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}
                                 Delete
                               </button>
-                            </li>
+                            </li> */}
                             {/* <li>
                                 <a className="dropdown-item remove-item-btn">
                                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}

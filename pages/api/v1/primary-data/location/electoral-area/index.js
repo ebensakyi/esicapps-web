@@ -3,7 +3,6 @@ import { getUserCookie } from "../../../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../../../helpers/token-verifier";
 
 const put = async (req, res) => {
-
   if (req.body.electoralAreaId) {
     await prisma.electoralArea.update({
       where: {
@@ -11,8 +10,7 @@ const put = async (req, res) => {
       },
       data: {
         name: req.body.name,
-        regionId:req.body.regionId,
-        abbrv: req.body.abbrv
+        districtId: req.body.districtId,
       },
     });
 
@@ -20,53 +18,41 @@ const put = async (req, res) => {
       .status(200)
       .json({ statusCode: 1, message: "ElectoralArea update" });
   }
-}
+};
 
 const post = async (req, res) => {
   try {
     console.log(req.body);
 
+    // district user oonly. Use his id
+
     let userCookie = await getUserCookie(req, res);
-    // if (userCookie.user.electoralAreaId == null) {
-    //   return res
-    //     .status(401)
-    //     .json({ message: "You don't have permission to save community" });
-    // }
-   
-    if (userCookie.user.regionId) {
+    let districtId = userCookie?.user?.districtId;
+
+    if (districtId) {
       const data = {
         name: req.body.name,
-        regionId: Number(userCookie.user.regionId),
+        districtId: Number(userCookie.user.districtId),
       };
 
       const electoralArea = await prisma.electoralArea.create({ data });
-      return res
-        .status(200)
-        .json({
-          statusCode: 1,
-          message: "ElectoralArea saved",
-          data: { electoralArea },
-        });
+      return res.status(200).json({
+        statusCode: 1,
+        message: "ElectoralArea saved",
+        data: { electoralArea },
+      });
     }
-    if (req.body.regionId) {
-    
-      const data = {
-      
-        name: req.body.name,
-        regionId: Number(req.body.regionId),
-        abbrv: req.body.abbrv
-      };
-console.log("data===", data);
+    const data = {
+      name: req.body.name,
+      districtId: req.body.districtId,
+    };
 
-      const electoralArea = await prisma.electoralArea.create({ data });
-      return res
-        .status(200)
-        .json({
-          statusCode: 1,
-          message: "ElectoralArea saved",
-          data: { electoralArea },
-        });
-    }
+    const electoralArea = await prisma.electoralArea.create({ data });
+    return res.status(200).json({
+      statusCode: 1,
+      message: "ElectoralArea saved",
+      data: { electoralArea },
+    });
   } catch (error) {
     console.log(error);
     if (error.code === "P2002")
@@ -113,11 +99,10 @@ const get = async (req, res) => {
       orderBy: {
         name: "asc",
       },
-      include: {  Region: true  },
+      include: { District: true },
     });
 
     console.log(electoralArea);
-
 
     return res.status(200).json({
       statusCode: 1,
