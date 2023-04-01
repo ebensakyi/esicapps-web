@@ -54,7 +54,7 @@ const AddDistrict = ({ data }) => {
         id: districtId,
         // electoralAreaId,
       };
-      const response = await axios.post("/api/v1/primary-data/district-data", {
+      const response = await axios.post("/api/v1/primary-data/location/district", {
         data,
       });
       toast.success(response.data.message);

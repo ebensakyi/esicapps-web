@@ -595,18 +595,18 @@ const Header = () => {
                    
                     <li class="nav-item">
                       <a
-                        href="#sidebarProfile"
+                        href="#district"
                         class="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
-                        aria-controls="sidebarProfile"
+                        aria-controls="district"
                         data-key="t-profile"
                       >
                         {" "}
                         District
                       </a>
-                      <div class="collapse menu-dropdown" id="sidebarProfile">
+                      <div class="collapse menu-dropdown" id="district">
                         <ul class="nav nav-sm flex-column">
                           <li class="nav-item">
                             <a
@@ -632,18 +632,18 @@ const Header = () => {
                     </li>
                     <li class="nav-item">
                       <a
-                        href="#sidebarProfile"
+                        href="#ea"
                         class="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
-                        aria-controls="sidebarProfile"
+                        aria-controls="sidebeaarProfile"
                         data-key="t-profile"
                       >
                         {" "}
                         Electoral Area
                       </a>
-                      <div class="collapse menu-dropdown" id="sidebarProfile">
+                      <div class="collapse menu-dropdown" id="ea">
                         <ul class="nav nav-sm flex-column">
                           <li class="nav-item">
                             <a
@@ -668,18 +668,18 @@ const Header = () => {
                       </div>
                     </li> <li class="nav-item">
                       <a
-                        href="#sidebarProfile"
+                        href="#communities"
                         class="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
-                        aria-controls="sidebarProfile"
+                        aria-controls="communities"
                         data-key="t-profile"
                       >
                         {" "}
                         Communities
                       </a>
-                      <div class="collapse menu-dropdown" id="sidebarProfile">
+                      <div class="collapse menu-dropdown" id="communities">
                         <ul class="nav nav-sm flex-column">
                           <li class="nav-item">
                             <a

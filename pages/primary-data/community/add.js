@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
 
 
 
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community-data?token=${token}&page=${page}&searchText=${searchText}`).then(
+  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/location/community?token=${token}&page=${page}&searchText=${searchText}`).then(
     (res) => res.json()
   );
 

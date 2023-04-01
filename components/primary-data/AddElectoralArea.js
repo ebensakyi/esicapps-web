@@ -54,7 +54,7 @@ const AddElectoralArea = ({ data }) => {
         id: electoralAreaId,
         // electoralAreaId,
       };
-      const response = await axios.post("/api/v1/primary-data/electoralArea-data", {
+      const response = await axios.post("/api/v1/primary-data/location/electoral-area", {
         data,
       });
       toast.success(response.data.message);

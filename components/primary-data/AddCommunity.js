@@ -54,7 +54,7 @@ const AddCommunity = ({ data }) => {
         id: communityId,
         // electoralAreaId,
       };
-      const response = await axios.post("/api/v1/primary-data/community-data", {
+      const response = await axios.post("/api/v1/primary-data/location/community", {
         data,
       });
       toast.success(response.data.message);
