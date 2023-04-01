@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AddDistrict = ({ data }) => {
+const AddDistrict = ({ data, regions }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [districtName, setDistrictName] = useState(null);
+  const [regionId, setRegionId] = useState(null);
   const [districtId, setDistrictId] = useState(null);
+
+  const [abbrv, setAbbrv] = useState(null);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -46,37 +49,78 @@ const AddDistrict = ({ data }) => {
   const addDistrict = async (e) => {
     try {
       e.preventDefault();
-      if (districtName == "" || districtName == null) {
+      if (
+        districtName == "" ||
+        districtName == null ||
+        regionId == null ||
+        regionId == ""
+      ) {
         return toast.error("Enter district name");
       }
       let data = {
         name: districtName,
-        id: districtId,
-        // electoralAreaId,
+        regionId: Number(regionId),
+        abbrv: abbrv,
       };
-      const response = await axios.post("/api/v1/primary-data/location/district", {
-        data,
-      });
+      const response = await axios.post(
+        "/api/v1/primary-data/location/district",
+
+        data
+      );
       toast.success(response.data.message);
       setDistrictName("");
       setDistrictId(null);
 
       router.replace(router.asPath);
     } catch (error) {
-      if (error.response.status == 401) {
-        toast.error(error.response.data.message);
-      }
+      console.log(error);
+      toast.error("An error occurred");
     }
   };
 
-  const deleteDistrict = async (e,id) => {
+  const updateDistrict = async (e) => {
+    try {
+      e.preventDefault();
+      if (
+        districtName == "" ||
+        districtName == null ||
+        regionId == null ||
+        regionId == ""
+      ) {
+        return toast.error("Enter district name");
+      }
+      let data = {
+        id:id,
+        name: districtName,
+        regionId: Number(regionId),
+        abbrv: abbrv,
+      };
+      const response = await axios.put(
+        "/api/v1/primary-data/location/district",
+
+        data
+      );
+      toast.success(response.data.message);
+      setDistrictName("");
+      setDistrictId(null);
+
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occurred");
+    }
+  };
+
+
+  const deleteDistrict = async (e, id) => {
     e.preventDefault();
     console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/district-data", { data: { id } });
+      await axios.delete("/api/v1/primary-data/district-data", {
+        data: { id },
+      });
       router.replace(router.asPath);
-
     } catch (error) {}
   };
   return (
@@ -96,12 +140,12 @@ const AddDistrict = ({ data }) => {
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">ADD COMMUNITY</h5>
+              <h5 className="card-title mb-0">ADD DISTRICT</h5>
             </div>
             <div className="card-body">
               {/* <h6 className="card-title">Add District</h6> */}
               <div className="row gy-4">
-                <div className="col-xxl-4 col-md-8">
+                <div className="col-xxl-3 col-md-8">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       Name
@@ -115,16 +159,54 @@ const AddDistrict = ({ data }) => {
                     />
                   </div>
                 </div>
+                <div className="col-xxl-2 col-md-8">
+                  <div>
+                    <label htmlFor="basiInput" className="form-label">
+                      Abbreviation
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="basiInput"
+                      value={abbrv}
+                      onChange={(e) => setAbbrv(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-xxl-2 col-md-8">
+                  <label htmlFor="basiInput" className="form-label">
+                    Select region
+                  </label>
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    value={regionId}
+                    onChange={(e) => {
+                      setRegionId(e.target.value);
+                    }}
+                  >
+                    <option>Choose...</option>
+                    {regions.map((reg) => (
+                      <option key={reg.id} value={reg.id}>
+                        {reg.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                <div className="col-lg-4">
+                <div className="col-xxl-4">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       .
                     </label>
                     <div className="text-end">
                       <button
-                        onClick={(e) => {
-                          addDistrict(e);
+                        onClick={async(e)  => {
+                          if(!id){
+                           return  await addDistrict(e);
+                          }
+                          await updateDistrict(e);
+                         
                         }}
                         className="btn btn-primary"
                       >
@@ -140,7 +222,7 @@ const AddDistrict = ({ data }) => {
 
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">COMMUNITIES</h5>
+            <h5 className="card-title mb-0">DISTRICTS</h5>
           </div>
           <div className="card-body">
             {/* <div className="col-md-4" style={{ textAlign: "end" }}>
@@ -185,7 +267,6 @@ const AddDistrict = ({ data }) => {
             >
               <thead>
                 <tr>
-                  <th>District</th>
                   <th>Region</th>
                   <th>District</th>
 
@@ -198,8 +279,7 @@ const AddDistrict = ({ data }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
+                      <td>{dt.Region.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
                           <button
@@ -223,6 +303,7 @@ const AddDistrict = ({ data }) => {
                                 onClick={(e) => {
                                   setDistrictId(dt.id);
                                   setDistrictName(dt.name);
+                                  setAbbrv(dt.abbrv);
                                 }}
                               >
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
@@ -233,7 +314,7 @@ const AddDistrict = ({ data }) => {
                               <button
                                 className="dropdown-item delete-item-btn"
                                 onClick={(e) => {
-                                  deleteDistrict(e,dt.id);
+                                  deleteDistrict(e, dt.id);
                                 }}
                               >
                                 <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}

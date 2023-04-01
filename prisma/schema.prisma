@@ -518,13 +518,13 @@ model Region {
 model District {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
-  abbrv            String             @unique @db.VarChar(255)
+  abbrv            String?             @unique @db.VarChar(255)
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   regionId         Int
   Community        Community[]
-  Region           Region             @relation(fields: [regionId], references: [id])
+  Region           Region          @relation(fields: [regionId], references: [id])
   ElectoralArea    ElectoralArea[]
   User             User[]
   SanitationReport SanitationReport[]
@@ -2006,3 +2006,6 @@ model FollowUpInspection {
 
   generalSanitaryCondition SanitaryInsanitary? @relation("generalSanitaryCondition", fields: [generalSanitaryConditionId], references: [id])
 }
+
+//reset internal autoincrement id
+//SELECT setval(pg_get_serial_sequence('"District"', 'id'), coalesce(max(id)+1, 1), false) FROM "District";

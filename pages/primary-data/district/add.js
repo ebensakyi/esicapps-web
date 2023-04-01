@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 import { SERVER_BASE_URL } from "../../../config";
 import AddDistrict from "../../../components/primary-data/AddDistrict";
 
-export default function district({ data }) {
+export default function district({ data,regions }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,7 @@ export default function district({ data }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <AddDistrict data={data} />
+            <AddDistrict data={data}regions={regions} />
           </div>
         </div>
       </div>
@@ -22,8 +22,8 @@ export default function district({ data }) {
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
-  const page = context.query.page || 1
-  const searchText = context.query.searchText || ""
+  const page = context.query.page || 1;
+  const searchText = context.query.searchText || "";
   if (!token) {
     return {
       redirect: {
@@ -32,17 +32,14 @@ export async function getServerSideProps(context) {
       },
     };
   }
- 
 
+  const data = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/location/district?token=${token}&page=${page}&searchText=${searchText}`
+  ).then((res) => res.json());
 
-
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/location/district?token=${token}&page=${page}&searchText=${searchText}`).then(
-    (res) => res.json()
-  );
-
-  //   const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
-  //     res.json()
-  //   );
+  const regions = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/location/region?token=${token}&page=${page}&searchText=${searchText}`
+  ).then((res) => res.json());
 
   //   const regions = await fetch(
   //     `${SERVER_BASE_URL}/api/v1/primary-data/region`
@@ -50,10 +47,10 @@ export async function getServerSideProps(context) {
   //   const districts = await fetch(
   //     `${SERVER_BASE_URL}/api/v1/primary-data/district`
   //   ).then((res) => res.json());
-
+ console.log(data);
   return {
     props: {
-      data,
+    data,regions
     },
   };
 }
