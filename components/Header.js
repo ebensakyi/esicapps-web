@@ -604,6 +604,79 @@ const Header = () => {
                         data-key="t-profile"
                       >
                         {" "}
+                        District
+                      </a>
+                      <div class="collapse menu-dropdown" id="sidebarProfile">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <a
+                              href="/primary-data/district/upload"
+                              class="nav-link"
+                              data-key="t-simple-page"
+                            >
+                             Upload
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a
+                              href="/primary-data/district/add"
+                              class="nav-link"
+                              data-key="t-settings"
+                            >
+                              {" "}
+                              Add{" "}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#sidebarProfile"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="sidebarProfile"
+                        data-key="t-profile"
+                      >
+                        {" "}
+                        Electoral Area
+                      </a>
+                      <div class="collapse menu-dropdown" id="sidebarProfile">
+                        <ul class="nav nav-sm flex-column">
+                          <li class="nav-item">
+                            <a
+                              href="/primary-data/electoral-area/upload"
+                              class="nav-link"
+                              data-key="t-simple-page"
+                            >
+                             Upload
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a
+                              href="/primary-data/electoral-area/add"
+                              class="nav-link"
+                              data-key="t-settings"
+                            >
+                              {" "}
+                              Add{" "}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li> <li class="nav-item">
+                      <a
+                        href="#sidebarProfile"
+                        class="nav-link"
+                        data-bs-toggle="collapse"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="sidebarProfile"
+                        data-key="t-profile"
+                      >
+                        {" "}
                         Communities
                       </a>
                       <div class="collapse menu-dropdown" id="sidebarProfile">
