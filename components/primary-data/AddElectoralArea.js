@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AddElectoralArea = ({ data }) => {
+const AddElectoralArea = ({ data, regions }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [electoralAreaName, setElectoralAreaName] = useState(null);
+  const [regionId, setRegionId] = useState(null);
   const [electoralAreaId, setElectoralAreaId] = useState(null);
+
+  const [abbrv, setAbbrv] = useState(null);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -49,34 +52,83 @@ const AddElectoralArea = ({ data }) => {
       if (electoralAreaName == "" || electoralAreaName == null) {
         return toast.error("Enter electoralArea name");
       }
+      if (abbrv == "" || abbrv == null) {
+        return toast.error("Enter abbreviation");
+      }
+      if (regionId == "" || regionId == null) {
+        return toast.error("Enter region name");
+      }
       let data = {
         name: electoralAreaName,
-        id: electoralAreaId,
-        // electoralAreaId,
+        regionId: Number(regionId),
+        abbrv: abbrv,
       };
-      const response = await axios.post("/api/v1/primary-data/location/electoral-area", {
-        data,
-      });
+      const response = await axios.post(
+        "/api/v1/primary-data/location/electoralArea",
+
+        data
+      );
       toast.success(response.data.message);
       setElectoralAreaName("");
-      setElectoralAreaId(null);
+      setElectoralAreaId("");
+      setAbbrv("");
+      setRegionId("");
 
       router.replace(router.asPath);
     } catch (error) {
-      if (error.response.status == 401) {
-        toast.error(error.response.data.message);
-      }
+      console.log(error);
+      toast.error("An error occurred");
     }
   };
 
-  const deleteElectoralArea = async (e,id) => {
+  const updateElectoralArea = async (e) => {
+    try {
+      e.preventDefault();
+      if (electoralAreaName == "" || electoralAreaName == null) {
+        return toast.error("Enter electoralArea name");
+      }
+      if (abbrv == "" || abbrv == null) {
+        return toast.error("Enter abbreviation");
+      }
+      if (regionId == "" || regionId == null) {
+        return toast.error("Enter region name");
+      }
+      if (electoralAreaId == "" || electoralAreaId == null) {
+        return toast.error("Please select electoralArea");
+      }
+      let data = {
+        electoralAreaId: Number(electoralAreaId),
+        name: electoralAreaName,
+        regionId: Number(regionId),
+        abbrv: abbrv,
+      };
+      const response = await axios.put(
+        "/api/v1/primary-data/location/electoralArea",
+
+        data
+      );
+      toast.success(response.data.message);
+      setElectoralAreaName("");
+      setRegionId("");
+      setElectoralAreaId("");
+      setAbbrv("");
+
+      router.replace(router.asPath);
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occurred");
+    }
+  };
+
+  const deleteElectoralArea = async (e, id) => {
     e.preventDefault();
     console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/electoralArea-data", { data: { id } });
+      await axios.delete("/api/v1/primary-data/electoralArea-data", {
+        data: { id },
+      });
       router.replace(router.asPath);
-
     } catch (error) {}
   };
   return (
@@ -96,12 +148,12 @@ const AddElectoralArea = ({ data }) => {
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">ADD COMMUNITY</h5>
+              <h5 className="card-title mb-0">ADD DISTRICT</h5>
             </div>
             <div className="card-body">
               {/* <h6 className="card-title">Add ElectoralArea</h6> */}
               <div className="row gy-4">
-                <div className="col-xxl-4 col-md-8">
+                <div className="col-xxl-3 col-md-8">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       Name
@@ -115,21 +167,66 @@ const AddElectoralArea = ({ data }) => {
                     />
                   </div>
                 </div>
+                <div className="col-xxl-2 col-md-8">
+                  <div>
+                    <label htmlFor="basiInput" className="form-label">
+                      Abbreviation
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="basiInput"
+                      value={abbrv}
+                      onChange={(e) => setAbbrv(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-xxl-2 col-md-8">
+                  <label htmlFor="basiInput" className="form-label">
+                    Select region
+                  </label>
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    value={regionId}
+                    onChange={(e) => {
+                      setRegionId(e.target.value);
+                    }}
+                  >
+                    <option>Choose...</option>
+                    {regions.map((reg) => (
+                      <option key={reg.id} value={reg.id}>
+                        {reg.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                <div className="col-lg-4">
+                <div className="col-xxl-4">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       .
                     </label>
                     <div className="text-end">
-                      <button
-                        onClick={(e) => {
-                          addElectoralArea(e);
-                        }}
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
+                      {electoralAreaId ? (
+                        <button
+                          onClick={async (e) => {
+                            await updateElectoralArea(e);
+                          }}
+                          className="btn btn-warning"
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        <button
+                          onClick={async (e) => {
+                            await addElectoralArea(e);
+                          }}
+                          className="btn btn-success"
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -140,7 +237,7 @@ const AddElectoralArea = ({ data }) => {
 
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">COMMUNITIES</h5>
+            <h5 className="card-title mb-0">DISTRICTS</h5>
           </div>
           <div className="card-body">
             {/* <div className="col-md-4" style={{ textAlign: "end" }}>
@@ -185,10 +282,10 @@ const AddElectoralArea = ({ data }) => {
             >
               <thead>
                 <tr>
-                  <th>ElectoralArea</th>
                   <th>Region</th>
-                  <th>District</th>
-
+                 
+                  <th>Abbreviation</th> 
+                  <th>ElectoralArea</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -198,8 +295,8 @@ const AddElectoralArea = ({ data }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
+                      <td>{dt.abbrv}</td>
+                      <td>{dt.Region.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
                           <button
@@ -223,6 +320,7 @@ const AddElectoralArea = ({ data }) => {
                                 onClick={(e) => {
                                   setElectoralAreaId(dt.id);
                                   setElectoralAreaName(dt.name);
+                                  setAbbrv(dt.abbrv);
                                 }}
                               >
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
@@ -233,7 +331,7 @@ const AddElectoralArea = ({ data }) => {
                               <button
                                 className="dropdown-item delete-item-btn"
                                 onClick={(e) => {
-                                  deleteElectoralArea(e,dt.id);
+                                  deleteElectoralArea(e, dt.id);
                                 }}
                               >
                                 <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}

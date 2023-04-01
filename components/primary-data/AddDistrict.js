@@ -49,13 +49,14 @@ const AddDistrict = ({ data, regions }) => {
   const addDistrict = async (e) => {
     try {
       e.preventDefault();
-      if (
-        districtName == "" ||
-        districtName == null ||
-        regionId == null ||
-        regionId == ""
-      ) {
+      if (districtName == "" || districtName == null) {
         return toast.error("Enter district name");
+      }
+      if (abbrv == "" || abbrv == null) {
+        return toast.error("Enter abbreviation");
+      }
+      if (regionId == "" || regionId == null) {
+        return toast.error("Enter region name");
       }
       let data = {
         name: districtName,
@@ -69,7 +70,9 @@ const AddDistrict = ({ data, regions }) => {
       );
       toast.success(response.data.message);
       setDistrictName("");
-      setDistrictId(null);
+      setDistrictId("");
+      setAbbrv("");
+      setRegionId("");
 
       router.replace(router.asPath);
     } catch (error) {
@@ -81,16 +84,20 @@ const AddDistrict = ({ data, regions }) => {
   const updateDistrict = async (e) => {
     try {
       e.preventDefault();
-      if (
-        districtName == "" ||
-        districtName == null ||
-        regionId == null ||
-        regionId == ""
-      ) {
+      if (districtName == "" || districtName == null) {
         return toast.error("Enter district name");
       }
+      if (abbrv == "" || abbrv == null) {
+        return toast.error("Enter abbreviation");
+      }
+      if (regionId == "" || regionId == null) {
+        return toast.error("Enter region name");
+      }
+      if (districtId == "" || districtId == null) {
+        return toast.error("Please select district");
+      }
       let data = {
-        id:id,
+        districtId: Number(districtId),
         name: districtName,
         regionId: Number(regionId),
         abbrv: abbrv,
@@ -102,7 +109,9 @@ const AddDistrict = ({ data, regions }) => {
       );
       toast.success(response.data.message);
       setDistrictName("");
-      setDistrictId(null);
+      setRegionId("");
+      setDistrictId("");
+      setAbbrv("");
 
       router.replace(router.asPath);
     } catch (error) {
@@ -110,7 +119,6 @@ const AddDistrict = ({ data, regions }) => {
       toast.error("An error occurred");
     }
   };
-
 
   const deleteDistrict = async (e, id) => {
     e.preventDefault();
@@ -200,18 +208,25 @@ const AddDistrict = ({ data, regions }) => {
                       .
                     </label>
                     <div className="text-end">
-                      <button
-                        onClick={async(e)  => {
-                          if(!id){
-                           return  await addDistrict(e);
-                          }
-                          await updateDistrict(e);
-                         
-                        }}
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
+                      {districtId ? (
+                        <button
+                          onClick={async (e) => {
+                            await updateDistrict(e);
+                          }}
+                          className="btn btn-warning"
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        <button
+                          onClick={async (e) => {
+                            await addDistrict(e);
+                          }}
+                          className="btn btn-success"
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -268,8 +283,9 @@ const AddDistrict = ({ data, regions }) => {
               <thead>
                 <tr>
                   <th>Region</th>
+                 
+                  <th>Abbreviation</th> 
                   <th>District</th>
-
                   <th>Action</th>
                 </tr>
               </thead>
@@ -279,6 +295,7 @@ const AddDistrict = ({ data, regions }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
+                      <td>{dt.abbrv}</td>
                       <td>{dt.Region.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
