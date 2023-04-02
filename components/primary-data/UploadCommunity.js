@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UploadCommunity = ({ data, districts }) => {
+const UploadCommunity = ({ data, electoralAreas }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [district, setDistrict] = useState(null);
@@ -130,9 +130,9 @@ const UploadCommunity = ({ data, districts }) => {
                       }}
                     >
                       <option>Choose...</option>
-                      {districts.map((district) => (
-                        <option key={district.id} value={district.id}>
-                          {district.name}
+                      {electoralAreas.map((ea) => (
+                        <option key={ea.id} value={ea.id}>
+                          {ea.name}
                         </option>
                       ))}
                     </select>

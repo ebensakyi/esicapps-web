@@ -24,7 +24,6 @@ const put = async (req, res) => {
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
 
     let userCookie = await getUserCookie(req, res);
     // if (userCookie.user.districtId == null) {
@@ -33,7 +32,7 @@ const post = async (req, res) => {
     //     .json({ message: "You don't have permission to save community" });
     // }
    
-    if (userCookie.user.regionId) {
+    if (userCookie?.user?.regionId) {
       const data = {
         name: req.body.name,
         regionId: Number(userCookie.user.regionId),

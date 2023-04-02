@@ -1,4 +1,5 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -20,7 +21,17 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    if (req.query.electoralAreaId) {
+    let data = await verifyToken(token);
+    let districtId = data?.user?.districtId;
+    if (districtId) {
+      const electoralArea = await prisma.electoralArea.findMany({
+        where: { deleted: 0, districtId: Number(districtId) },
+        include: { District: true  },
+      });
+
+      return res.status(200).json(electoralArea);
+    }
+    if (req?.query?.electoralAreaId) {
 
       const electoralArea = await prisma.electoralArea.findMany({
         where: { deleted: 0, regionId: Number(req.query.electoralAreaId) },
