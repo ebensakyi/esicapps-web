@@ -1,10 +1,10 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UploadElectoralArea = ({ data,districts }) => {
+const UploadElectoralArea = ({ data, districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [district, setDistrict] = useState(null);
@@ -50,50 +50,44 @@ const UploadElectoralArea = ({ data,districts }) => {
     try {
       e.preventDefault();
 
-    let body = new FormData(form.current);
-    body.append("electoralAreaFile", electoralAreaFile);
-    body.append("districtId", district);
+      let body = new FormData(form.current);
+      body.append("csvFile", electoralAreaFile);
+      body.append("districtId", district);
 
+      const response = await axios({
+        url: "/api/v1/primary-data/location/electoral-area/upload",
+        method: "POST",
+        headers: {
+          authorization: "A",
+          "Content-Type": "text/csv",
+        },
+        data: body,
+      });
 
-    const response = await axios({
-      url: "/api/v1/csv-upload/electoralArea-upload",
-      method: "POST",
-      headers: {
-        authorization: "A",
-        "Content-Type": "application/json",
-      },
-      data: body,
-    });
-     
-     
       router.replace(router.asPath);
     } catch (error) {
-console.log(error);
-        toast.error(error);
-      
+      console.log(error);
+      toast.error(error);
     }
   };
 
   const uploadElectoralArea = (event) => {
-   
-
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
-
 
       setElectoralAreaFile(i);
       setElectoralAreaFileUrl(URL.createObjectURL(i));
     }
   };
 
-  const deleteElectoralArea = async (e,id) => {
+  const deleteElectoralArea = async (e, id) => {
     e.preventDefault();
-    console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/electoralArea-data", { data: { id } });
+      await axios.delete("/api/v1/primary-data/location/electoral-area", {
+        data: { id },
+      });
       router.replace(router.asPath);
-
     } catch (error) {}
   };
   return (
@@ -113,75 +107,73 @@ console.log(error);
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">UPLOAD COMMUNITY</h5>
+              <h5 className="card-title mb-0">UPLOAD ELECTORAL AREA</h5>
             </div>
             <div className="card-body">
               {/* <h6 className="card-title">Add ElectoralArea</h6> */}
               <form ref={form}>
-                 <div className="row gy-4">
-                 <div className="col-xxl-4 col-md-8">
-                 <label htmlFor="basiInput" className="form-label">
+                <div className="row gy-4">
+                  <div className="col-xxl-4 col-md-8">
+                    <label htmlFor="basiInput" className="form-label">
                       Select district
                     </label>
-                 <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        value={district}
-                        onChange={(e) => {
-                          setDistrict(e.target.value);
-                          // getElectoralByDistrict(e, e.target.value);
-                          console.log("district ", district);
-                        }}
-                      >
-                        <option>Choose...</option>
-                        {districts.map((district) => (
-                          <option key={district.id} value={district.id}>
-                            {district.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                <div className="col-xxl-4 col-md-8">
-                  <div>
-                    <label htmlFor="basiInput" className="form-label">
-                      Upload CSV(With name column)
-                    </label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="basiInput"
-                      onChange={uploadElectoralArea}
-                    />
+                    <select
+                      className="form-select"
+                      id="inputGroupSelect02"
+                      value={district}
+                      onChange={(e) => {
+                        setDistrict(e.target.value);
+                        // getElectoralByDistrict(e, e.target.value);
+                      }}
+                    >
+                      <option>Choose...</option>
+                      {districts.map((district) => (
+                        <option key={district.id} value={district.id}>
+                          {district.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                </div>
+                  <div className="col-xxl-4 col-md-8">
+                    <div>
+                      <label htmlFor="basiInput" className="form-label">
+                        Upload CSV(With name column)
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        id="basiInput"
+                        onChange={uploadElectoralArea}
+                      />
+                    </div>
+                  </div>
 
-                <div className="col-lg-4">
-                  <div>
-                    <label htmlFor="basiInput" className="form-label">
-                      .
-                    </label>
-                    <div className="text-end">
-                      <button
-                         onClick={(e) => {
-                          submit(e);
-                        }}
-                        className="btn btn-primary"
-                      >
-                        Upload
-                      </button>
+                  <div className="col-lg-4">
+                    <div>
+                      <label htmlFor="basiInput" className="form-label">
+                        .
+                      </label>
+                      <div className="text-end">
+                        <button
+                          onClick={(e) => {
+                            submit(e);
+                          }}
+                          className="btn btn-primary"
+                        >
+                          Upload
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
               </form>
-             
             </div>
           </div>
         </div>
 
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">COMMUNITIES</h5>
+            <h5 className="card-title mb-0">ELECTORAL AREAS</h5>
           </div>
           <div className="card-body">
             {/* <div className="col-md-4" style={{ textAlign: "end" }}>
@@ -227,10 +219,9 @@ console.log(error);
               <thead>
                 <tr>
                   <th>ElectoralArea</th>
-                  <th>Region</th>
                   <th>District</th>
 
-                  <th>Action</th>
+                  {/* <th>Action</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -239,8 +230,8 @@ console.log(error);
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
+                      {/* <td>{dt.District.Region.name}</td>*/}
+                      <td>{dt.District.name}</td> 
                       <td>
                         <div className="dropdown d-inline-block">
                           <button
@@ -252,18 +243,13 @@ console.log(error);
                             <i className="ri-more-fill align-middle" />
                           </button>
                           <ul className="dropdown-menu dropdown-menu-end">
+                          
                             {/* <li>
-                                <a href="#!" className="dropdown-item">
-                                  <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                  View
-                                </a>
-                              </li> */}
-                            <li>
                               <button
                                 className="dropdown-item edit-item-btn"
                                 onClick={(e) => {
-                                  setElectoralAreaId(dt.id);
-                                  setElectoralAreaName(dt.name);
+                                  // setElectoralAreaId(dt.id);
+                                  // setElectoralAreaName(dt.name);
                                 }}
                               >
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
@@ -274,13 +260,13 @@ console.log(error);
                               <button
                                 className="dropdown-item delete-item-btn"
                                 onClick={(e) => {
-                                  deleteElectoralArea(e,dt.id);
+                                  deleteElectoralArea(e, dt.id);
                                 }}
                               >
                                 <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}
                                 Delete
                               </button>
-                            </li>
+                            </li> */}
                             {/* <li>
                                 <a className="dropdown-item remove-item-btn">
                                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
