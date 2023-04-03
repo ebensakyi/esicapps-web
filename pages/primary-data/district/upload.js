@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 import { SERVER_BASE_URL } from "../../../config";
 import UploadDistrict from "../../../components/primary-data/UploadDistrict";
 
-export default function district({ data,districts }) {
+export default function district({ data, regions }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,7 @@ export default function district({ data,districts }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <UploadDistrict data={data} districts={districts}/>
+            <UploadDistrict data={data} regions={regions} />
           </div>
         </div>
       </div>
@@ -22,8 +22,8 @@ export default function district({ data,districts }) {
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
-  const page = context.query.page || 1
-  const searchText = context.query.searchText || ""
+  const page = context.query.page || 1;
+  const searchText = context.query.searchText || "";
   if (!token) {
     return {
       redirect: {
@@ -32,16 +32,13 @@ export async function getServerSideProps(context) {
       },
     };
   }
- 
 
-
-
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district-data?token=${token}&page=${page}&searchText=${searchText}`).then(
-    (res) => res.json()
-  );
-  const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`).then(
-    (res) => res.json()
-);
+  const data = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/location/district?token=${token}&page=${page}&searchText=${searchText}`
+  ).then((res) => res.json());
+  const regions = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
+  ).then((res) => res.json());
 
   //   const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
   //     res.json()
@@ -56,7 +53,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      data,districts
+      data,
+      regions,
     },
   };
 }

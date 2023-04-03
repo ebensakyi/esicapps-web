@@ -4,13 +4,14 @@ import { useState, useEffect,useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const UploadCommunity = ({ data,districts }) => {
+
+const UploadDistrict = ({ data,regions }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [district, setDistrict] = useState(null);
+  const [region, setRegion] = useState(null);
 
-  const [communityFile, setCommunityFile] = useState(null);
-  const [communityFileUrl, setCommunityFileUrl] = useState(null);
+  const [districtFile, setDistrictFile] = useState(null);
+  const [districtFileUrl, setDistrictFileUrl] = useState(null);
   const form = useRef(null);
 
   const handlePagination = (page) => {
@@ -51,12 +52,12 @@ const UploadCommunity = ({ data,districts }) => {
       e.preventDefault();
 
     let body = new FormData(form.current);
-    body.append("communityFile", communityFile);
-    body.append("districtId", district);
+    body.append("csvFile", districtFile);
+    body.append("regionId", region);
 
 
     const response = await axios({
-      url: "/api/v1/csv-upload/community-upload",
+      url: "/api/v1/primary-data/location/district/upload",
       method: "POST",
       headers: {
         authorization: "A",
@@ -74,24 +75,24 @@ console.log(error);
     }
   };
 
-  const uploadCommunity = (event) => {
+  const uploadDistrict = (event) => {
    
 
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
 
 
-      setCommunityFile(i);
-      setCommunityFileUrl(URL.createObjectURL(i));
+      setDistrictFile(i);
+      setDistrictFileUrl(URL.createObjectURL(i));
     }
   };
 
-  const deleteCommunity = async (e,id) => {
+  const deleteDistrict = async (e,id) => {
     e.preventDefault();
     console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/community-data", { data: { id } });
+      await axios.delete("/api/v1/primary-data/district-data", { data: { id } });
       router.replace(router.asPath);
 
     } catch (error) {}
@@ -113,30 +114,29 @@ console.log(error);
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">UPLOAD COMMUNITY</h5>
+              <h5 className="card-title mb-0">UPLOAD DISTRICT</h5>
             </div>
             <div className="card-body">
-              {/* <h6 className="card-title">Add Community</h6> */}
+              {/* <h6 className="card-title">Add District</h6> */}
               <form ref={form}>
                  <div className="row gy-4">
                  <div className="col-xxl-4 col-md-8">
                  <label htmlFor="basiInput" className="form-label">
-                      Select district
+                      Select region
                     </label>
                  <select
                         className="form-select"
                         id="inputGroupSelect02"
-                        value={district}
+                        value={region}
                         onChange={(e) => {
-                          setDistrict(e.target.value);
+                          setRegion(e.target.value);
                           // getElectoralByDistrict(e, e.target.value);
-                          console.log("district ", district);
                         }}
                       >
                         <option>Choose...</option>
-                        {districts.map((district) => (
-                          <option key={district.id} value={district.id}>
-                            {district.name}
+                        {regions.map((region) => (
+                          <option key={region.id} value={region.id}>
+                            {region.name}
                           </option>
                         ))}
                       </select>
@@ -150,7 +150,7 @@ console.log(error);
                       type="file"
                       className="form-control"
                       id="basiInput"
-                      onChange={uploadCommunity}
+                      onChange={uploadDistrict}
                     />
                   </div>
                 </div>
@@ -181,7 +181,7 @@ console.log(error);
 
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">COMMUNITIES</h5>
+            <h5 className="card-title mb-0">DISTRICTS</h5>
           </div>
           <div className="card-body">
             {/* <div className="col-md-4" style={{ textAlign: "end" }}>
@@ -226,70 +226,19 @@ console.log(error);
             >
               <thead>
                 <tr>
-                  <th>Community</th>
-                  <th>Region</th>
                   <th>District</th>
+                  <th>Region</th>
 
-                  <th>Action</th>
+                  {/* <th>Action</th> */}
                 </tr>
               </thead>
               <tbody>
-                {data.community.map((dt) => {
+                {data.district.map((dt) => {
                   return (
                     <tr key={dt.id}>
-                      {" "}
                       <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
-                      <td>
-                        <div className="dropdown d-inline-block">
-                          <button
-                            className="btn btn-soft-secondary btn-sm dropdown"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="ri-more-fill align-middle" />
-                          </button>
-                          <ul className="dropdown-menu dropdown-menu-end">
-                            {/* <li>
-                                <a href="#!" className="dropdown-item">
-                                  <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                  View
-                                </a>
-                              </li> */}
-                            <li>
-                              <button
-                                className="dropdown-item edit-item-btn"
-                                onClick={(e) => {
-                                  setCommunityId(dt.id);
-                                  setCommunityName(dt.name);
-                                }}
-                              >
-                                <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
-                                Edit
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="dropdown-item delete-item-btn"
-                                onClick={(e) => {
-                                  deleteCommunity(e,dt.id);
-                                }}
-                              >
-                                <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </button>
-                            </li>
-                            {/* <li>
-                                <a className="dropdown-item remove-item-btn">
-                                  <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
-                                  Delete
-                                </a>
-                              </li> */}
-                          </ul>
-                        </div>
-                      </td>
+                      <td>{dt.Region.name}</td>
+                     
                     </tr>
                   );
                 })}
@@ -322,4 +271,4 @@ console.log(error);
   );
 };
 
-export default UploadCommunity;
+export default UploadDistrict;

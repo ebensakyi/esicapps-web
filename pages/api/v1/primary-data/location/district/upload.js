@@ -1,5 +1,5 @@
-import prisma from "../../../../prisma/MyPrismaClient";
-import { verifyToken } from "../../../../helpers/token-verifier";
+import prisma from "../../../../../../prisma/MyPrismaClient";
+import { verifyToken } from "../../../../../../helpers/token-verifier";
 import { createReadStream } from "fs";
 import { parse } from "fast-csv";
 import formidable from "formidable";
@@ -14,35 +14,43 @@ export const config = {
 const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
+
+
     form.parse(req, async function (err, fields, files) {
-      let districtId = Number(fields.districtId);
+      let regionId = Number(fields.regionId);
 
-      console.log(districtId);
+      console.log(regionId);
 
-      let filePath = await saveFile(files, districtId);
+
+
+      let filePath = await saveFile(files, regionId);
 
       return res.status(201).json({});
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const get = async (req, res) => {
-  try {
-    await csvUploader();
-  } catch (error) {}
-};
+// const get = async (req, res) => {
+//   try {
+//     await csvUploader();
+//   } catch (error) {}
+// };
 
-const saveFile = async (files, districtId) => {
+const saveFile = async (files, regionId) => {
   try {
-    const communityCsv = await files.communityFile;
+    const csvFile = await files.csvFile;
 
     const fileName = nanoid() + ".csv";
-    const data = fs.readFileSync(communityCsv.filepath);
+    const data = fs.readFileSync(csvFile.filepath);
     let filePath = `./public/temp/${fileName}`;
+
+    console.log(filePath);
 
     let x = fs.writeFileSync(filePath, data);
 
-    await csvUploader(filePath, districtId);
+    await csvUploader(filePath, regionId);
      //fs.unlinkSync(filePath);
 
     return fileName;
@@ -51,8 +59,9 @@ const saveFile = async (files, districtId) => {
   }
 };
 
-const csvUploader = async (path, districtId) => {
-  let data = [];
+const csvUploader = async (path, regionId) => {
+  try {
+     let data = [];
 
   createReadStream(path)
     .pipe(parse({ headers: true }))
@@ -63,19 +72,29 @@ const csvUploader = async (path, districtId) => {
       data.push(row);
     })
     .on("end", async () => {
-      let newData = await formatData(data, districtId);
-      await prisma.community.createMany({
+      let newData = await formatData(data, regionId);
+      await prisma.district.createMany({
         data: newData,
       });
     });
+  } catch (error) {
+    console.log(error);
+  }
+ 
 };
 
-const formatData = async (data, districtId) => {
-  let newData = data.map((row) => ({
-    districtId: Number(districtId),
+const formatData = async (data, regionId) => {
+  try {
+     let newData = data.map((row) => ({
+    regionId: Number(regionId),
     name: row.name,
+    abbrv: row.abbrv
   }));
   return newData;
+  } catch (error) {
+    console.log(error);
+  }
+ 
 };
 export default (req, res) => {
   req.method === "POST"

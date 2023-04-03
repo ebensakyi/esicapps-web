@@ -714,6 +714,15 @@ const Header = () => {
                         <a className="nav-link"> User Guide</a>
                       </Link>
                     </li>
+                    <li className="nav-item">
+                      <a
+                        href="/setup/bulk-upload-templates"
+                        className="nav-link"
+                      >
+                        {" "}
+                       Bulk Upload Templates
+                      </a>
+                    </li>
                     {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"

@@ -96,8 +96,9 @@ const getSearchParams = async (req, searchText) => {
 
 const get = async (req, res) => {
   try {
-    let curPage = req.query.page;
-    let searchText = req.query.searchText.trim();
+    let curPage = req?.query?.page;
+    console.log("curPage",curPage);
+    let searchText = req?.query?.searchText?.trim();
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage);
