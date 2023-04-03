@@ -117,7 +117,7 @@ const UploadCommunity = ({ data, electoralAreas }) => {
                 <div className="row gy-4">
                   <div className="col-xxl-4 col-md-8">
                     <label htmlFor="basiInput" className="form-label">
-                      Select district
+                      Select electoral area
                     </label>
                     <select
                       className="form-select"

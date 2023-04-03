@@ -21,6 +21,8 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    let token = req?.cookies?.token || req?.query?.token;
+
     let data = await verifyToken(token);
     let districtId = data?.user?.districtId;
     if (districtId) {

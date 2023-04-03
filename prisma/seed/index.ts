@@ -9,7 +9,7 @@ import { userType } from "./userType";
 import { region } from "./region";
 import { inspectionForm } from "./inspectionForm";
 
-import { community } from "./community";
+// import { community } from "./community";
 import { district } from "./district";
 import { drainType } from "./drainType";
 import { effluentManagement } from "./effluentManagement";
@@ -47,10 +47,8 @@ import { ownershipType } from "./ownershipType";
 import { cemeteryWorkers } from "./cemeteryWorkers";
 import { wasteWaterContainment } from "./wasteWaterContainment";
 
-import { pages } from "./page";
-import { pageActions } from "./pageAction";
 import { users } from "./users";
-import { electoralArea } from "./electoralArea";
+// import { electoralArea } from "./electoralArea";
 import { animalType } from "./animalType";
 import { unservicedWasteDisposal } from "./unservicedWasteDisposal";
 import { unsafeWaterStorage } from "./unsafeWaterStorage";
@@ -207,9 +205,9 @@ async function main() {
   await prisma.userType.createMany({
     data: userType,
   });
-  await prisma.electoralArea.createMany({
-    data: electoralArea,
-  });
+  // await prisma.electoralArea.createMany({
+  //   data: electoralArea,
+  // });
 
  
   await prisma.user.createMany({
@@ -280,9 +278,9 @@ async function main() {
   await prisma.sendingType.createMany({
     data: sendingType,
   });
-  await prisma.community.createMany({
-    data: community,
-  });
+  // await prisma.community.createMany({
+  //   data: community,
+  // });
  await prisma.reportType.createMany({
     data: reportType,
   });

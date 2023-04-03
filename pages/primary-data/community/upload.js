@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
   const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/location/community?token=${token}&page=${page}&searchText=${searchText}`).then(
     (res) => res.json()
   );
-  const electoralAreas = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/community?token=${token}`).then(
+  const electoralAreas = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/electoral-area?token=${token}`).then(
     (res) => res.json()
 );
 
