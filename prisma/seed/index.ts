@@ -71,6 +71,7 @@ import {sendingType} from "./sendingType";
 import {reportType} from "./reportType";
 import { userGuides } from "./userGuides";
 import { formSectionImage } from "./formSectionImage";
+import { rating } from "./rating";
 
 async function main() {
 
@@ -284,9 +285,11 @@ async function main() {
  await prisma.reportType.createMany({
     data: reportType,
   });
-
-  await prisma.userGuides.createMany({
-    data: userGuides,
+  await prisma.reportType.createMany({
+    data: reportType,
+  });
+  await prisma.rating.createMany({
+    data: rating,
   });
 
   await prisma.formSectionImage.createMany({

@@ -21,7 +21,8 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let districtId = Number(req.query.districtId);
+    let districtId = Number(req?.query?.districtId);
+    console.log("districtId ",districtId);
     let community;
     if (districtId) {
       community = await prisma.community.findMany({

@@ -52,8 +52,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
       }
       let data = {
         name: communityName,
-        communityId: communityId,
-        electoralArea,
+        electoralAreaId:Number(electoralArea),
       };
       const response = await axios.post("/api/v1/primary-data/location/community", 
         data,
@@ -79,7 +78,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
       }
       let data = {
         name: communityName,
-        communityId: communityId,
+        communityId: Number(communityId),
         electoralArea,
       };
       const response = await axios.put("/api/v1/primary-data/location/community", 
@@ -102,7 +101,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
     console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/community-data", { data: { id } });
+      await axios.delete("/api/v1/primary-data/location/community", { data: { id } });
       router.replace(router.asPath);
 
     } catch (error) {}

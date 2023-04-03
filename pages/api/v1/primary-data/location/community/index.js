@@ -3,7 +3,6 @@ import { getUserCookie } from "../../../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../../../helpers/token-verifier";
 
 const put = async (req, res) => {
-
   if (req.body.communityId) {
     await prisma.community.update({
       where: {
@@ -11,37 +10,54 @@ const put = async (req, res) => {
       },
       data: {
         name: req.body.name,
-        electoralAreaId:req.body.electoralAreaId,
+        electoralAreaId: req.body.electoralAreaId,
       },
     });
 
-    return res
-      .status(200)
-      .json({ statusCode: 1, message: "District update" });
+    return res.status(200).json({ statusCode: 1, message: "District update" });
   }
-}
-
+};
 
 const post = async (req, res) => {
   try {
     let userCookie = await getUserCookie(req, res);
-    if (userCookie.user.districtId == null) {
-      return res
-        .status(401)
-        .json({ message: "You don't have permission to save community" });
-    }
- 
+    let districtId = userCookie?.user?.districtId;
 
+    if (districtId) {
+      const data = {
+        name: req.body.name,
+        districtId: Number(userCookie.user.districtId),
+        electoralAreaId: Number(req.body.electoralAreaId),
+      };
+
+      const community = await prisma.community.create({ data });
+      return res.status(200).json({
+        statusCode: 1,
+        message: "Community saved",
+        data: { community },
+      });
+    }
+
+    console.log(req.body);
+    let electoralAreaId = req.body.electoralAreaId;
+    let district = await prisma.electoralArea.findFirst({
+      where: { id: electoralAreaId },
+    });
+    console.log(district);
     const data = {
-      name: req.body.data.name,
-      districtId: Number(userCookie.user.districtId),
+      name: req.body.name,
+      districtId: Number(district.id),
+      electoralAreaId: Number(req.body.electoralAreaId),
     };
 
     const community = await prisma.community.create({ data });
-    return res
-      .status(200)
-      .json({ statusCode: 1, message: "Community saved", data: { community } });
+    return res.status(200).json({
+      statusCode: 1,
+      message: "Community saved",
+      data: { community },
+    });
   } catch (error) {
+    console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)
@@ -56,7 +72,7 @@ const getSearchParams = async (req, searchText) => {
     data.user.districtId == null || isNaN(data.user.districtId)
       ? undefined
       : Number(data.user.districtId);
-      console.log(district);
+  console.log(district);
   if (searchText != "" && searchText != null) {
     return {
       where: {

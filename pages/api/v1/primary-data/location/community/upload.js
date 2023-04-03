@@ -16,10 +16,12 @@ const post = async (req, res) => {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, files) {
       let electoralAreaId = Number(fields.electoralAreaId);
+      let electoralArea = await prisma.electoralArea.findFirst({
+        where: { id: electoralAreaId },
+      });
+      let districtId = Number(electoralArea.districtId);
 
-      console.log(electoralAreaId);
-
-      let filePath = await saveFile(files, electoralAreaId);
+      let filePath = await saveFile(files, electoralAreaId, districtId);
 
       return res.status(201).json({});
     });
@@ -32,7 +34,7 @@ const get = async (req, res) => {
   } catch (error) {}
 };
 
-const saveFile = async (files, electoralAreaId) => {
+const saveFile = async (files, electoralAreaId, districtId) => {
   try {
     const communityCsv = await files.communityFile;
 
@@ -42,8 +44,8 @@ const saveFile = async (files, electoralAreaId) => {
 
     let x = fs.writeFileSync(filePath, data);
 
-    await csvUploader(filePath, electoralAreaId);
-     //fs.unlinkSync(filePath);
+    await csvUploader(filePath, electoralAreaId, districtId);
+    //fs.unlinkSync(filePath);
 
     return fileName;
   } catch (error) {
@@ -51,7 +53,7 @@ const saveFile = async (files, electoralAreaId) => {
   }
 };
 
-const csvUploader = async (path, electoralAreaId) => {
+const csvUploader = async (path, electoralAreaId, districtId) => {
   let data = [];
 
   createReadStream(path)
@@ -63,16 +65,17 @@ const csvUploader = async (path, electoralAreaId) => {
       data.push(row);
     })
     .on("end", async () => {
-      let newData = await formatData(data, electoralAreaId);
+      let newData = await formatData(data, electoralAreaId, districtId);
       await prisma.community.createMany({
         data: newData,
       });
     });
 };
 
-const formatData = async (data, electoralAreaId) => {
+const formatData = async (data, electoralAreaId, districtId) => {
   let newData = data.map((row) => ({
     electoralAreaId: Number(electoralAreaId),
+    districtId,
     name: row.name,
   }));
   return newData;

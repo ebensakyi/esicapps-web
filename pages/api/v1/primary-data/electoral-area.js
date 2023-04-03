@@ -33,11 +33,11 @@ const get = async (req, res) => {
 
       return res.status(200).json(electoralArea);
     }
-    if (req?.query?.electoralAreaId) {
+    if (req?.query?.districtId) {
 
       const electoralArea = await prisma.electoralArea.findMany({
-        where: { deleted: 0, regionId: Number(req.query.electoralAreaId) },
-        include: { District: true  },
+        where: { deleted: 0, districtId: Number(req.query.districtId) },
+      
       });
 
       return res.status(200).json(electoralArea);

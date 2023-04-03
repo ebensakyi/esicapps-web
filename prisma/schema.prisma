@@ -317,6 +317,15 @@ model CleaningFrequency {
   MarketPremisesInfoSection MarketPremisesInfoSection[]
 }
 
+model Rating {
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  deleted                   Int?                        @default(0)
+  createdAt                 DateTime                    @default(now())
+  updatedAt                 DateTime                    @updatedAt
+
+}
+
 model Community {
   id              Int    @id @default(autoincrement())
   name            String @db.VarChar(255)
@@ -562,7 +571,7 @@ model SanitaryInsanitary {
   urinalCubicleCondition          LiquidWasteSection[]             @relation("urinalCubicleCondition")
   animalSpaceCondition            ResidentialPremisesInfoSection[] @relation("animalSpaceCondition")
   sanitaryAshesDisposal           SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
-  sanitaryContainer               SanitaryPremisesInfoSection[]    @relation("sanitaryContainer")
+  sanitaryContainer               SolidWasteSection[]    @relation("sanitaryContainer")
   FollowUpInspection              FollowUpInspection[]             @relation("generalSanitaryCondition")
   animalSpaceConditionInstitution InstitutionPremisesInfoSection[] @relation("animalSpaceCondition")
   byProductsStorageAreaCond       IndustryPremisesInfoSection[]    @relation("byProductsStorageAreaCond")
@@ -875,7 +884,7 @@ model YesNo {
   protectiveClothing                                 SanitaryPremisesInfoSection[]    @relation("protectiveClothing")
   safeHazardousWasteMgt                              SanitaryPremisesInfoSection[]    @relation("safeHazardousWasteMgt")
   sanitaryFacilityMgt                                SanitaryPremisesInfoSection[]    @relation("sanitaryFacilityMgt")
-  scheduleLifting                                    SanitaryPremisesInfoSection[]    @relation("scheduleLifting")
+  scheduleLifting                                    SolidWasteSection[]    @relation("scheduleLifting")
   sextonManagement                                   SanitaryPremisesInfoSection[]    @relation("sextonManagement")
   sextonOffice                                       SanitaryPremisesInfoSection[]    @relation("sextonOffice")
   slaughterAreaAvailability                          SanitaryPremisesInfoSection[]    @relation("slaughterAreaAvailability")
@@ -1182,9 +1191,7 @@ model SanitaryPremisesInfoSection {
   numberContainer                           Int?
   containerAttendantName                    Int?
   containerAttendantPhoneNumber             Int?
-  containerServiceProviderName              Int?
-  scheduleLiftingId                         Int?
-  sanitaryContainerId                       Int?
+  
   numberWorkers                             Int?
   cremationPlatformId                       Int?
   sanitaryAshesDisposalId                   Int?
@@ -1211,10 +1218,8 @@ model SanitaryPremisesInfoSection {
   protectiveClothing                        YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
   safeHazardousWasteMgt                     YesNo?                 @relation("safeHazardousWasteMgt", fields: [safeHazardousWasteMgtId], references: [id])
   sanitaryAshesDisposal                     SanitaryInsanitary?    @relation("sanitaryAshesDisposal", fields: [sanitaryAshesDisposalId], references: [id])
-  sanitaryContainer                         SanitaryInsanitary?    @relation("sanitaryContainer", fields: [sanitaryContainerId], references: [id])
   sanitaryFacilityMgt                       YesNo?                 @relation("sanitaryFacilityMgt", fields: [sanitaryFacilityMgtId], references: [id])
   sanitaryPremisesType                      Type?                  @relation("sanitaryPremisesType", fields: [sanitaryPremisesTypeId], references: [id])
-  scheduleLifting                           YesNo?                 @relation("scheduleLifting", fields: [scheduleLiftingId], references: [id])
   sextonManagement                          YesNo?                 @relation("sextonManagement", fields: [sextonManagementId], references: [id])
   sextonOffice                              YesNo?                 @relation("sextonOffice", fields: [sextonOfficeId], references: [id])
   slaughterAreaAvailability                 YesNo?                 @relation("slaughterAreaAvailability", fields: [slaughterAreaAvailabilityId], references: [id])
@@ -1575,6 +1580,9 @@ model SolidWasteSection {
   wasteContainerVolumeId             Int?
   wasteProviderAccredittedId         Int?
   containerNumber                    Int?
+  containerServiceProviderName              Int?
+  scheduleLiftingId                         Int?
+  sanitaryContainerId                       Int?
   rating                             Int?
 
   deleted                          Int?                             @default(0)
@@ -1592,6 +1600,8 @@ model SolidWasteSection {
   wasteServiceProviderRegistration YesNo?                           @relation("wasteServiceProviderRegistration", fields: [wasteServiceProviderRegistrationId], references: [id])
   wasteSortingAvailability         YesNo?                           @relation("wasteSortingAvailability", fields: [wasteSortingAvailabilityId], references: [id])
   wasteProviderAccreditted         YesNo?                           @relation("wasteProviderAccreditted", fields: [wasteProviderAccredittedId], references: [id])
+  sanitaryContainer                         SanitaryInsanitary?    @relation("sanitaryContainer", fields: [sanitaryContainerId], references: [id])
+  scheduleLifting                           YesNo?                 @relation("scheduleLifting", fields: [scheduleLiftingId], references: [id])
 
   WasteCollectionType     WasteCollectionType?     @relation(fields: [wasteCollectionTypeId], references: [id])
   UnservicedWasteDisposal UnservicedWasteDisposal? @relation(fields: [unservicedWasteDisposalId], references: [id])
