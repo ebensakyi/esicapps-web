@@ -80,7 +80,7 @@ const get = async (req, res) => {
       orderBy: {
         name: "asc",
       },
-      include: { District: { include: { Region: true } } },
+      include: { ElectoralArea: { include: { District: true } } },
     });
 
     return res.status(200).json({

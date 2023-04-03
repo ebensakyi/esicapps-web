@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 import { SERVER_BASE_URL } from "../../../config";
 import AddElectoralArea from "../../../components/primary-data/AddElectoralArea";
 
-export default function electoralArea({ data }) {
+export default function electoralArea({ data, districts }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,7 @@ export default function electoralArea({ data }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <AddElectoralArea data={data} />
+            <AddElectoralArea data={data} districts={districts} />
           </div>
         </div>
       </div>
@@ -22,8 +22,8 @@ export default function electoralArea({ data }) {
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
-  const page = context.query.page || 1
-  const searchText = context.query.searchText || ""
+  const page = context.query.page || 1;
+  const searchText = context.query.searchText || "";
   if (!token) {
     return {
       redirect: {
@@ -32,13 +32,10 @@ export async function getServerSideProps(context) {
       },
     };
   }
- 
 
-
-
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/location/electoral-area?token=${token}&page=${page}&searchText=${searchText}`).then(
-    (res) => res.json()
-  );
+  const data = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/location/electoral-area?token=${token}&page=${page}&searchText=${searchText}`
+  ).then((res) => res.json());
 
   //   const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
   //     res.json()
@@ -47,13 +44,14 @@ export async function getServerSideProps(context) {
   //   const regions = await fetch(
   //     `${SERVER_BASE_URL}/api/v1/primary-data/region`
   //   ).then((res) => res.json());
-  //   const districts = await fetch(
-  //     `${SERVER_BASE_URL}/api/v1/primary-data/district`
-  //   ).then((res) => res.json());
+  const districts = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
+  ).then((res) => res.json());
 
   return {
     props: {
       data,
+      districts,
     },
   };
 }

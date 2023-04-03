@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AddCommunity = ({ data }) => {
+const AddCommunity = ({ data,electoralAreas }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState(null);
   const [communityId, setCommunityId] = useState(null);
+  const [electoralArea, setElectoralArea] = useState(null);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -115,6 +116,27 @@ const AddCommunity = ({ data }) => {
                     />
                   </div>
                 </div>
+                <div className="col-xxl-4 col-md-8">
+                    <label htmlFor="basiInput" className="form-label">
+                      Select electoral area
+                    </label>
+                    <select
+                      className="form-select"
+                      id="inputGroupSelect02"
+                      value={electoralArea}
+                      onChange={(e) => {
+                        setElectoralArea(e.target.value);
+                        // getElectoralByDistrict(e, e.target.value);
+                      }}
+                    >
+                      <option>Choose...</option>
+                      {electoralAreas.map((ea) => (
+                        <option key={ea.id} value={ea.id}>
+                          {ea.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
                 <div className="col-lg-4">
                   <div>
@@ -186,7 +208,7 @@ const AddCommunity = ({ data }) => {
               <thead>
                 <tr>
                   <th>Community</th>
-                  <th>Region</th>
+                  <th>Electoral Area</th>
                   <th>District</th>
 
                   <th>Action</th>
@@ -198,8 +220,9 @@ const AddCommunity = ({ data }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
+                      <td>{dt.ElectoralArea.name}</td>
+
+                      <td>{dt.ElectoralArea.District.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
                           <button

@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const UploadCommunity = ({ data, electoralAreas }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [district, setDistrict] = useState(null);
+  const [electoralArea, setElectoralArea] = useState(null);
 
   const [communityFile, setCommunityFile] = useState(null);
   const [communityFileUrl, setCommunityFileUrl] = useState(null);
@@ -52,7 +52,7 @@ const UploadCommunity = ({ data, electoralAreas }) => {
 
       let body = new FormData(form.current);
       body.append("communityFile", communityFile);
-      body.append("districtId", district);
+      body.append("electoralAreaId", electoralArea);
 
       const response = await axios({
         // url: "/api/v1/csv-upload/community-upload",
@@ -122,11 +122,10 @@ const UploadCommunity = ({ data, electoralAreas }) => {
                     <select
                       className="form-select"
                       id="inputGroupSelect02"
-                      value={district}
+                      value={electoralArea}
                       onChange={(e) => {
-                        setDistrict(e.target.value);
+                        setElectoralArea(e.target.value);
                         // getElectoralByDistrict(e, e.target.value);
-                        console.log("district ", district);
                       }}
                     >
                       <option>Choose...</option>
@@ -222,7 +221,7 @@ const UploadCommunity = ({ data, electoralAreas }) => {
               <thead>
                 <tr>
                   <th>Community</th>
-                  <th>Region</th>
+                  <th>Electoral Area</th>
                   <th>District</th>
 
                   {/* <th>Action</th> */}
@@ -234,8 +233,8 @@ const UploadCommunity = ({ data, electoralAreas }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
-                      <td>{dt.District.Region.name}</td>
-                      <td>{dt.District.name}</td>
+                      <td>{dt.ElectoralArea.name}</td>
+                      <td>{dt.ElectoralArea.District.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
                           <button

@@ -15,11 +15,11 @@ const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, files) {
-      let districtId = Number(fields.districtId);
+      let electoralAreaId = Number(fields.electoralAreaId);
 
-      console.log(districtId);
+      console.log(electoralAreaId);
 
-      let filePath = await saveFile(files, districtId);
+      let filePath = await saveFile(files, electoralAreaId);
 
       return res.status(201).json({});
     });
@@ -32,7 +32,7 @@ const get = async (req, res) => {
   } catch (error) {}
 };
 
-const saveFile = async (files, districtId) => {
+const saveFile = async (files, electoralAreaId) => {
   try {
     const communityCsv = await files.communityFile;
 
@@ -42,7 +42,7 @@ const saveFile = async (files, districtId) => {
 
     let x = fs.writeFileSync(filePath, data);
 
-    await csvUploader(filePath, districtId);
+    await csvUploader(filePath, electoralAreaId);
      //fs.unlinkSync(filePath);
 
     return fileName;
@@ -51,7 +51,7 @@ const saveFile = async (files, districtId) => {
   }
 };
 
-const csvUploader = async (path, districtId) => {
+const csvUploader = async (path, electoralAreaId) => {
   let data = [];
 
   createReadStream(path)
@@ -63,16 +63,16 @@ const csvUploader = async (path, districtId) => {
       data.push(row);
     })
     .on("end", async () => {
-      let newData = await formatData(data, districtId);
+      let newData = await formatData(data, electoralAreaId);
       await prisma.community.createMany({
         data: newData,
       });
     });
 };
 
-const formatData = async (data, districtId) => {
+const formatData = async (data, electoralAreaId) => {
   let newData = data.map((row) => ({
-    districtId: Number(districtId),
+    electoralAreaId: Number(electoralAreaId),
     name: row.name,
   }));
   return newData;

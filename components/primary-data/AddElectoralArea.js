@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AddElectoralArea = ({ data, regions }) => {
+const AddElectoralArea = ({ data, districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [electoralAreaName, setElectoralAreaName] = useState(null);
   const [electoralAreaId, setElectoralAreaId] = useState(null);
+  const [districtId, setDistrictId] = useState(null);
 
 
   const handlePagination = (page) => {
@@ -53,6 +54,7 @@ const AddElectoralArea = ({ data, regions }) => {
      
       let data = {
         name: electoralAreaName,
+        districtId: Number(districtId),
       };
       const response = await axios.post(
         "/api/v1/primary-data/location/electoral-area",
@@ -148,7 +150,26 @@ const AddElectoralArea = ({ data, regions }) => {
                   </div>
                 </div>
                 
-                
+                <div className="col-xxl-2 col-md-8">
+                  <label htmlFor="basiInput" className="form-label">
+                    Select district
+                  </label>
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    value={districtId}
+                    onChange={(e) => {
+                      setDistrictId(e.target.value);
+                    }}
+                  >
+                    <option>Choose...</option>
+                    {districts.map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <div className="col-xxl-2">
                   <div>
@@ -231,7 +252,8 @@ const AddElectoralArea = ({ data, regions }) => {
               <thead>
                 <tr>
                  
-                  <th>ElectoralArea</th>
+                  <th>Electoral Area</th>
+                  <th>District</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -241,6 +263,8 @@ const AddElectoralArea = ({ data, regions }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{dt.name}</td>
+
+                      <td>{dt.District.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
                           <button
@@ -264,6 +288,7 @@ const AddElectoralArea = ({ data, regions }) => {
                                 onClick={(e) => {
                                   setElectoralAreaId(dt.id);
                                   setElectoralAreaName(dt.name);
+                                  setDistrictId(dt.District.id)
                                 }}
                               >
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}

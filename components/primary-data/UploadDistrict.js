@@ -227,6 +227,8 @@ console.log(error);
               <thead>
                 <tr>
                   <th>District</th>
+                  <th>Abbreviation</th>
+
                   <th>Region</th>
 
                   {/* <th>Action</th> */}
@@ -237,8 +239,8 @@ console.log(error);
                   return (
                     <tr key={dt.id}>
                       <td>{dt.name}</td>
+                      <td>{dt.abbrv}</td>
                       <td>{dt.Region.name}</td>
-                     
                     </tr>
                   );
                 })}

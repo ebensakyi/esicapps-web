@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 import { SERVER_BASE_URL } from "../../../config";
 import AddCommunity from "../../../components/primary-data/AddCommunity";
 
-export default function community({ data }) {
+export default function community({ data,electoralAreas }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,7 @@ export default function community({ data }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <AddCommunity data={data} />
+            <AddCommunity data={data} electoralAreas={electoralAreas} />
           </div>
         </div>
       </div>
@@ -40,20 +40,13 @@ export async function getServerSideProps(context) {
     (res) => res.json()
   );
 
-  //   const users = await fetch(`${SERVER_BASE_URL}/api/v1/user`).then((res) =>
-  //     res.json()
-  //   );
-
-  //   const regions = await fetch(
-  //     `${SERVER_BASE_URL}/api/v1/primary-data/region`
-  //   ).then((res) => res.json());
-  //   const districts = await fetch(
-  //     `${SERVER_BASE_URL}/api/v1/primary-data/district`
-  //   ).then((res) => res.json());
+  const electoralAreas = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/electoral-area?token=${token}`).then(
+    (res) => res.json()
+);
 
   return {
     props: {
-      data,
+      data,electoralAreas
     },
   };
 }

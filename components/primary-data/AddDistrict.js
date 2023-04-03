@@ -282,10 +282,10 @@ const AddDistrict = ({ data, regions }) => {
             >
               <thead>
                 <tr>
-                  <th>Region</th>
+                  <th>District</th>
                  
                   <th>Abbreviation</th> 
-                  <th>District</th>
+                  <th>Region</th>
                   <th>Action</th>
                 </tr>
               </thead>
