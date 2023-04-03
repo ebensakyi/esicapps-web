@@ -2,6 +2,26 @@ import prisma from "../../../../../../prisma/MyPrismaClient";
 import { getUserCookie } from "../../../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../../../helpers/token-verifier";
 
+const put = async (req, res) => {
+
+  if (req.body.communityId) {
+    await prisma.community.update({
+      where: {
+        id: req.body.communityId,
+      },
+      data: {
+        name: req.body.name,
+        electoralAreaId:req.body.electoralAreaId,
+      },
+    });
+
+    return res
+      .status(200)
+      .json({ statusCode: 1, message: "District update" });
+  }
+}
+
+
 const post = async (req, res) => {
   try {
     let userCookie = await getUserCookie(req, res);
@@ -10,20 +30,7 @@ const post = async (req, res) => {
         .status(401)
         .json({ message: "You don't have permission to save community" });
     }
-    if (req.body.data.id) {
-      await prisma.community.update({
-        where: {
-          id: req.body.data.id,
-        },
-        data: {
-          name: req.body.data.name,
-        },
-      });
-
-      return res
-        .status(200)
-        .json({ statusCode: 1, message: "Community update" });
-    }
+ 
 
     const data = {
       name: req.body.data.name,

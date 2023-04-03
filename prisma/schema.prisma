@@ -321,6 +321,7 @@ model Community {
   id              Int    @id @default(autoincrement())
   name            String @db.VarChar(255)
   electoralAreaId Int?
+  districtId       Int?
 
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
@@ -328,7 +329,6 @@ model Community {
   BasicInfoSection BasicInfoSection[]
   ElectoralArea    ElectoralArea?     @relation(fields: [electoralAreaId], references: [id])
   District         District?          @relation(fields: [districtId], references: [id])
-  districtId       Int?
 
   @@unique([electoralAreaId, name], name: "electoralAreaIdIdentifier")
 }

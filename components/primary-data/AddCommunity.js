@@ -52,12 +52,39 @@ const AddCommunity = ({ data,electoralAreas }) => {
       }
       let data = {
         name: communityName,
-        id: communityId,
-        // electoralAreaId,
+        communityId: communityId,
+        electoralArea,
       };
-      const response = await axios.post("/api/v1/primary-data/location/community", {
+      const response = await axios.post("/api/v1/primary-data/location/community", 
         data,
-      });
+      );
+      toast.success(response.data.message);
+      setCommunityName("");
+      setCommunityId(null);
+
+      router.replace(router.asPath);
+    } catch (error) {
+      if (error.response.status == 401) {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
+
+
+  const updateCommunity = async (e) => {
+    try {
+      e.preventDefault();
+      if (communityName == "" || communityName == null) {
+        return toast.error("Enter community name");
+      }
+      let data = {
+        name: communityName,
+        communityId: communityId,
+        electoralArea,
+      };
+      const response = await axios.put("/api/v1/primary-data/location/community", 
+        data,
+      );
       toast.success(response.data.message);
       setCommunityName("");
       setCommunityId(null);
@@ -143,16 +170,25 @@ const AddCommunity = ({ data,electoralAreas }) => {
                     <label htmlFor="basiInput" className="form-label">
                       .
                     </label>
-                    <div className="text-end">
+                    {!communityId ? <div className="text-end">
                       <button
                         onClick={(e) => {
                           addCommunity(e);
                         }}
-                        className="btn btn-primary"
+                        className="btn btn-success"
                       >
-                        Submit
+                        Add
                       </button>
-                    </div>
+                    </div>:<div className="text-end">
+                      <button
+                        onClick={(e) => {
+                          updateCommunity(e);
+                        }}
+                        className="btn btn-warning"
+                      >
+                        Update
+                      </button>
+                    </div>}
                   </div>
                 </div>
               </div>
@@ -246,6 +282,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
                                 onClick={(e) => {
                                   setCommunityId(dt.id);
                                   setCommunityName(dt.name);
+                                  setElectoralArea(dt.ElectoralArea.id)
                                 }}
                               >
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}

@@ -10,7 +10,7 @@ import { generateCode } from "../../../../helpers/generate-code";
 const post = async (req, res) => {
   try {
     // let password = await nanoid(8); //req.body.password;
-    let password = await generateCode(8);
+    let password = await generateCode(4);
 
     const salt = bcrypt.genSaltSync(10);
 
