@@ -593,10 +593,10 @@ const Header = () => {
                       </a>
                     </li>
                    
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#district"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -606,21 +606,21 @@ const Header = () => {
                         {" "}
                         District
                       </a>
-                      <div class="collapse menu-dropdown" id="district">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="district">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <a
                               href="/primary-data/district/upload"
-                              class="nav-link"
+                              className="nav-link"
                               data-key="t-simple-page"
                             >
                              Upload
                             </a>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <a
                               href="/primary-data/district/add"
-                              class="nav-link"
+                              className="nav-link"
                               data-key="t-settings"
                             >
                               {" "}
@@ -630,10 +630,10 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#ea"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -643,21 +643,21 @@ const Header = () => {
                         {" "}
                         Electoral Area
                       </a>
-                      <div class="collapse menu-dropdown" id="ea">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="ea">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <a
                               href="/primary-data/electoral-area/upload"
-                              class="nav-link"
+                              className="nav-link"
                               data-key="t-simple-page"
                             >
                              Upload
                             </a>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <a
                               href="/primary-data/electoral-area/add"
-                              class="nav-link"
+                              className="nav-link"
                               data-key="t-settings"
                             >
                               {" "}
@@ -666,10 +666,10 @@ const Header = () => {
                           </li>
                         </ul>
                       </div>
-                    </li> <li class="nav-item">
+                    </li> <li className="nav-item">
                       <a
                         href="#communities"
-                        class="nav-link"
+                        className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
@@ -679,21 +679,21 @@ const Header = () => {
                         {" "}
                         Communities
                       </a>
-                      <div class="collapse menu-dropdown" id="communities">
-                        <ul class="nav nav-sm flex-column">
-                          <li class="nav-item">
+                      <div className="collapse menu-dropdown" id="communities">
+                        <ul className="nav nav-sm flex-column">
+                          <li className="nav-item">
                             <a
                               href="/primary-data/community/upload"
-                              class="nav-link"
+                              className="nav-link"
                               data-key="t-simple-page"
                             >
                              Upload
                             </a>
                           </li>
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <a
                               href="/primary-data/community/add"
-                              class="nav-link"
+                              className="nav-link"
                               data-key="t-settings"
                             >
                               {" "}

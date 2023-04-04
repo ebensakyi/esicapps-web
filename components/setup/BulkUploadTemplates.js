@@ -70,7 +70,7 @@ const BulkUploadTemplates = ({}) => {
               {/* <h6 className="card-title">Add Community</h6> */}
               <div className="row gy-4">
                 <div className="col-xxl-3 col-md-12">
-                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf" target="_blank">
+                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf" target="_blank" rel="noreferrer" >
                     {" "}
                     <label htmlFor="basiInput" className="form-label">
                       Click here to download District Upload Template
@@ -78,7 +78,7 @@ const BulkUploadTemplates = ({}) => {
                   </a>
                 </div>
                 <div className="col-xxl-3 col-md-12">
-                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf"  target="_blank">
+                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf"  target="_blank" rel="noreferrer" >
                     {" "}
                     <label htmlFor="basiInput" className="form-label">
                       Click here to download Electoral Area Upload Template
@@ -86,7 +86,7 @@ const BulkUploadTemplates = ({}) => {
                   </a>
                 </div>
                 <div className="col-xxl-3 col-md-12">
-                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf"  target="_blank">
+                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/ESICAPPS-II-MOBILE-USER-GUIDE-v150323.pdf"  target="_blank" rel="noreferrer" >
                     {" "}
                     <label htmlFor="basiInput" className="form-label">
                       Click here to download Communities Upload Template
