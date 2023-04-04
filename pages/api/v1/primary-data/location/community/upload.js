@@ -76,7 +76,7 @@ const formatData = async (data, electoralAreaId, districtId) => {
   let newData = data.map((row) => ({
     electoralAreaId: Number(electoralAreaId),
     districtId,
-    name: row.name,
+    name: row.name.trim(),
   }));
   return newData;
 };

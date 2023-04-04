@@ -16,6 +16,10 @@ export const respondentDesignation = [
     inspectionFormId: 1,
   },
   {
+    name: "Occupier",
+    inspectionFormId: 1,
+  },
+  {
     name: "Owner",
     inspectionFormId: 2,
   },
