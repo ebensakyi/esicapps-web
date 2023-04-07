@@ -1204,45 +1204,44 @@ model SanitaryPremisesInfoSection {
   numberWorkers                           Int?
   cremationPlatformId                     Int?
   sanitaryAshesDisposalId                 Int?
-  deleted                                 Int?                                 @default(0)
-  createdAt                               DateTime                             @default(now())
-  updatedAt                               DateTime                             @updatedAt
-  approvedHandwashingFacilityAvailability YesNo?                               @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathroomAvailability                    YesNo?                               @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
-  cloakRoomAvailability                   YesNo?                               @relation("cloakRoomAvailability", fields: [cloakRoomAvailabilityId], references: [id])
-  comfortRoomAvailability                 YesNo?                               @relation("comfortRoomAvailability", fields: [comfortRoomAvailabilityId], references: [id])
-  condemnationRoomAvailability            YesNo?                               @relation("condemnationRoomAvailability", fields: [condemnationRoomAvailabilityId], references: [id])
-  cremationPlatform                       YesNo?                               @relation("cremationPlatform", fields: [cremationPlatformId], references: [id])
-  cremationPracticed                      YesNo?                               @relation("cremationPracticed", fields: [cremationPracticedId], references: [id])
-  disinfectionFrequency                   DisinfectionFrequency?               @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
-  disinfestationQuarterly                 YesNo?                               @relation("disinfestationQuarterly", fields: [disinfestationQuarterlyId], references: [id])
-  drainsAvailability                      YesNo?                               @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  fenced                                  YesNo?                               @relation("fenced", fields: [fencedId], references: [id])
-  firstAidAvailability                    YesNo?                               @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
-  footbathAvailability                    YesNo?                               @relation("footbathAvailability", fields: [footbathAvailabilityId], references: [id])
-  leachateMgt                             YesNo?                               @relation("leachateMgt", fields: [leachateMgtId], references: [id])
-  ownershipType                           OwnershipType?                       @relation("ownershipTypeSanitary", fields: [ownershipTypeId], references: [id])
-  physicalStructureType                   StructureType?                       @relation(fields: [physicalStructureTypeId], references: [id])
-  properLayout                            YesNo?                               @relation("properLayout", fields: [properLayoutId], references: [id])
-  protectiveClothing                      YesNo?                               @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
-  safeHazardousWasteMgt                   YesNo?                               @relation("safeHazardousWasteMgt", fields: [safeHazardousWasteMgtId], references: [id])
-  sanitaryAshesDisposal                   SanitaryInsanitary?                  @relation("sanitaryAshesDisposal", fields: [sanitaryAshesDisposalId], references: [id])
-  sanitaryFacilityMgt                     YesNo?                               @relation("sanitaryFacilityMgt", fields: [sanitaryFacilityMgtId], references: [id])
-  sanitaryPremisesType                    Type?                                @relation("sanitaryPremisesType", fields: [sanitaryPremisesTypeId], references: [id])
-  sextonManagement                        YesNo?                               @relation("sextonManagement", fields: [sextonManagementId], references: [id])
-  sextonOffice                            YesNo?                               @relation("sextonOffice", fields: [sextonOfficeId], references: [id])
-  slaughterAreaAvailability               YesNo?                               @relation("slaughterAreaAvailability", fields: [slaughterAreaAvailabilityId], references: [id])
-  staffChangingRoom                       YesNo?                               @relation("staffChangingRoom", fields: [staffChangingRoomId], references: [id])
-  storeRoomAvailability                   YesNo?                               @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
-  toiletAvailability                      YesNo?                               @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                      YesNo?                               @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  wasteSorting                            YesNo?                               @relation("wasteSorting", fields: [wasteSortingId], references: [id])
-  wheelbathAvailability                   YesNo?                               @relation("wheelbathAvailability", fields: [wheelbathAvailabilityId], references: [id])
-  workersOfficeAvailability               YesNo?                               @relation("workersOfficeAvailability", fields: [workersOfficeAvailabilityId], references: [id])
-  User                                    User                                 @relation(fields: [userId], references: [id])
-  Inspection                              Inspection                           @relation(fields: [inspectionId], references: [id])
+  deleted                                 Int?                   @default(0)
+  createdAt                               DateTime               @default(now())
+  updatedAt                               DateTime               @updatedAt
+  approvedHandwashingFacilityAvailability YesNo?                 @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+  bathroomAvailability                    YesNo?                 @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
+  cloakRoomAvailability                   YesNo?                 @relation("cloakRoomAvailability", fields: [cloakRoomAvailabilityId], references: [id])
+  comfortRoomAvailability                 YesNo?                 @relation("comfortRoomAvailability", fields: [comfortRoomAvailabilityId], references: [id])
+  condemnationRoomAvailability            YesNo?                 @relation("condemnationRoomAvailability", fields: [condemnationRoomAvailabilityId], references: [id])
+  cremationPlatform                       YesNo?                 @relation("cremationPlatform", fields: [cremationPlatformId], references: [id])
+  cremationPracticed                      YesNo?                 @relation("cremationPracticed", fields: [cremationPracticedId], references: [id])
+  disinfectionFrequency                   DisinfectionFrequency? @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
+  disinfestationQuarterly                 YesNo?                 @relation("disinfestationQuarterly", fields: [disinfestationQuarterlyId], references: [id])
+  drainsAvailability                      YesNo?                 @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  fenced                                  YesNo?                 @relation("fenced", fields: [fencedId], references: [id])
+  firstAidAvailability                    YesNo?                 @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  footbathAvailability                    YesNo?                 @relation("footbathAvailability", fields: [footbathAvailabilityId], references: [id])
+  leachateMgt                             YesNo?                 @relation("leachateMgt", fields: [leachateMgtId], references: [id])
+  ownershipType                           OwnershipType?         @relation("ownershipTypeSanitary", fields: [ownershipTypeId], references: [id])
+  physicalStructureType                   StructureType?         @relation(fields: [physicalStructureTypeId], references: [id])
+  properLayout                            YesNo?                 @relation("properLayout", fields: [properLayoutId], references: [id])
+  protectiveClothing                      YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  safeHazardousWasteMgt                   YesNo?                 @relation("safeHazardousWasteMgt", fields: [safeHazardousWasteMgtId], references: [id])
+  sanitaryAshesDisposal                   SanitaryInsanitary?    @relation("sanitaryAshesDisposal", fields: [sanitaryAshesDisposalId], references: [id])
+  sanitaryFacilityMgt                     YesNo?                 @relation("sanitaryFacilityMgt", fields: [sanitaryFacilityMgtId], references: [id])
+  sanitaryPremisesType                    Type?                  @relation("sanitaryPremisesType", fields: [sanitaryPremisesTypeId], references: [id])
+  sextonManagement                        YesNo?                 @relation("sextonManagement", fields: [sextonManagementId], references: [id])
+  sextonOffice                            YesNo?                 @relation("sextonOffice", fields: [sextonOfficeId], references: [id])
+  slaughterAreaAvailability               YesNo?                 @relation("slaughterAreaAvailability", fields: [slaughterAreaAvailabilityId], references: [id])
+  staffChangingRoom                       YesNo?                 @relation("staffChangingRoom", fields: [staffChangingRoomId], references: [id])
+  storeRoomAvailability                   YesNo?                 @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
+  toiletAvailability                      YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability                      YesNo?                 @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  wasteSorting                            YesNo?                 @relation("wasteSorting", fields: [wasteSortingId], references: [id])
+  wheelbathAvailability                   YesNo?                 @relation("wheelbathAvailability", fields: [wheelbathAvailabilityId], references: [id])
+  workersOfficeAvailability               YesNo?                 @relation("workersOfficeAvailability", fields: [workersOfficeAvailabilityId], references: [id])
+  User                                    User                   @relation(fields: [userId], references: [id])
+  Inspection                              Inspection             @relation(fields: [inspectionId], references: [id])
   userId                                  Int
-  PremisesCommunalContainerCondition      PremisesCommunalContainerCondition[]
 }
 
 model MarketPremisesInfoSection {
@@ -1613,9 +1612,10 @@ model SolidWasteSection {
   sanitaryContainer                SanitaryInsanitary?              @relation("sanitaryContainer", fields: [sanitaryContainerId], references: [id])
   scheduleLifting                  YesNo?                           @relation("scheduleLifting", fields: [scheduleLiftingId], references: [id])
 
-  WasteCollectionType     WasteCollectionType?     @relation(fields: [wasteCollectionTypeId], references: [id])
-  UnservicedWasteDisposal UnservicedWasteDisposal? @relation(fields: [unservicedWasteDisposalId], references: [id])
-  ContainerVolume         ContainerVolume?         @relation(fields: [wasteContainerVolumeId], references: [id])
+  WasteCollectionType                WasteCollectionType?                 @relation(fields: [wasteCollectionTypeId], references: [id])
+  UnservicedWasteDisposal            UnservicedWasteDisposal?             @relation(fields: [unservicedWasteDisposalId], references: [id])
+  ContainerVolume                    ContainerVolume?                     @relation(fields: [wasteContainerVolumeId], references: [id])
+  PremisesCommunalContainerCondition PremisesCommunalContainerCondition[]
 }
 
 model ConclusionSection {
@@ -1711,18 +1711,18 @@ model PremisesUnsafeWaterStorage {
 }
 
 model PremisesCommunalContainerCondition {
-  id                            String                      @id @db.VarChar(255)
-  inspectionId                  String                      @db.VarChar(255)
-  deleted                       Int?                        @default(0)
-  createdAt                     DateTime                    @default(now())
-  updatedAt                     DateTime                    @updatedAt
-  userId                        Int
-  User                          User                        @relation(fields: [userId], references: [id])
-  SanitaryPremisesInfoSection   SanitaryPremisesInfoSection @relation(fields: [sanitaryPremisesInfoSectionId], references: [id])
-  sanitaryPremisesInfoSectionId String                      @db.VarChar(255)
-  CommunalContainerCondition    CommunalContainerCondition  @relation(fields: [communalContainerConditionId], references: [id])
+  id                         String                     @id @db.VarChar(255)
+  inspectionId               String                     @db.VarChar(255)
+  deleted                    Int?                       @default(0)
+  createdAt                  DateTime                   @default(now())
+  updatedAt                  DateTime                   @updatedAt
+  userId                     Int
+  User                       User                       @relation(fields: [userId], references: [id])
+  CommunalContainerCondition CommunalContainerCondition @relation(fields: [communalContainerConditionId], references: [id])
+  SolidWasteSection          SolidWasteSection          @relation(fields: [solidWasteSectionId], references: [id])
 
   communalContainerConditionId Int
+  solidWasteSectionId          String @db.VarChar(255)
 }
 
 model PremisesDrinkingWaterSources {
