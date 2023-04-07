@@ -45,7 +45,7 @@ export const types = [
   { id: 36, name: "Communal container", inspectionFormId: 8 },
 
   { id: 37, name: "Abattoir", inspectionFormId: 8 },
-  { id: 38, name: "Bath House", inspectionFormId: 8 },
+  { id: 38, name: "Public bath house", inspectionFormId: 8 },
   { id: 39, name: "Urinal", inspectionFormId: 8 },
   { id: 40, name: "Herbal Shop", inspectionFormId: 3 },
 ];
