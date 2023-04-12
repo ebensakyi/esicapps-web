@@ -32,8 +32,21 @@ const HospitalityView = ({ data }) => {
 
   return (
     <>
-      <div className="row">
+     <div className="row">
         <div className="col-12">
+          <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div>
+              <button
+                type="button"
+                className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+                onClick={() => downloadInspection()}
+              >
+                <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                Download Inspection
+              </button>
+            </div>
+          </div>
+          <div id="printableArea">
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 className="mb-sm-0">HOSPITALITY</h4>
             <div className="page-title-right">
@@ -44,8 +57,7 @@ const HospitalityView = ({ data }) => {
                 <li className="breadcrumb-item active">Single inspection</li>
               </ol>
             </div>
-          </div>
-        </div>
+          
       </div>
       <div className="row">
         <div className="col-lg-12">
@@ -1846,6 +1858,9 @@ const HospitalityView = ({ data }) => {
             </div>
           </div>
         </div>
+      </div>
+      </div>
+      </div>
       </div>
     </>
   );
