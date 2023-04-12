@@ -15,8 +15,7 @@ const post = async (req, res) => {
     await prisma.inspection.update({
       data: {
         isPublished: Math.abs(isPublished - 1),
-        publishedById: Number(userCookie.user.id)
-
+        publishedById: Number(userCookie.user.id),
       },
       where: {
         id: req.body.id,
@@ -40,6 +39,8 @@ const get = async (req, res) => {
         id: inspectionId,
       },
       include: {
+        ElectoralArea: true,
+
         BasicInfoSection: {
           include: {
             Community: { include: { District: { include: { Region: true } } } },
@@ -156,8 +157,7 @@ const get = async (req, res) => {
             toiletDisabilityFriendly: true,
             toiletDischarge: true,
             toiletPitPosition: true,
-          
-                    },
+          },
         },
         SolidWasteSection: {
           include: {
@@ -194,9 +194,9 @@ const get = async (req, res) => {
           },
         },
 
-      InspectionPictures: {
-        include:{FormSectionImage:true}
-      },
+        InspectionPictures: {
+          include: { FormSectionImage: true },
+        },
       },
     });
 
