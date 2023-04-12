@@ -128,7 +128,7 @@ const MarketView = ({ data }) => {
                         type="text"
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
-                        value={data?.BasicInfoSection?.RespondentDesignation.name}
+                        value={data?.BasicInfoSection?.RespondentDesignation?.name}
                         readOnly="readOnly"
                       />
                     </div>{" "}
@@ -541,7 +541,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LicencePermitSection?.medicalCertificateAvailability !=
+                    {/* {data?.LicencePermitSection?.medicalCertificateAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -559,7 +559,7 @@ const MarketView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {data?.LicencePermitSection?.gtaOperatingLicenceAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -735,7 +735,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesDrinkingWaterSources.length != 0 ? (
+                    {data?.WaterSection?.PremisesDrinkingWaterSources?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
@@ -1265,7 +1265,7 @@ const MarketView = ({ data }) => {
                         />
                       ))}
                     </div>:<></>}
-                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length != 0 ? 
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement?.length != 0 ? 
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
@@ -1283,7 +1283,7 @@ const MarketView = ({ data }) => {
                         )
                       )}
                     </div>:<></>}
-                    {data?.LiquidWasteSection?.PremisesExcretaContainment.length != 0 ? 
+                    {data?.LiquidWasteSection?.PremisesExcretaContainment?.length != 0 ? 
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
@@ -1323,7 +1323,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal.length !=
+                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -1345,7 +1345,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesToiletType.length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesToiletType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
                         {data?.LiquidWasteSection?.PremisesToiletType.map((x) => (
@@ -1501,7 +1501,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.SolidWasteSection?.PremisesWasteReceptacle.length !=
+                    {data?.SolidWasteSection?.PremisesWasteReceptacle?.length !=
                     0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
