@@ -22,7 +22,11 @@ const post = async (req, res) => {
       wasteProviderAccredittedId: req.body.wasteProviderAccredittedId == "null" ? null : Number(req.body.wasteProviderAccredittedId),
       containerNumber: req.body.containerNumber == "null" ? null : Number(req.body.containerNumber),
       rating: req.body.rating == "null" ? null : Number(req.body.rating),
+
+      //////NEW////////////////////////////////////////////////////////////////
+      wasteServicePhoneNumber: req.body.wasteServicePhoneNumber 
     };
+
 
     // console.log(data);
 

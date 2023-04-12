@@ -92,7 +92,6 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.byProductsStorageAreaCondId),
 
-          /////////////////////NEW///////////
 
           numberFoodHandlers:
           req.body.numberFoodHandlers == "null"

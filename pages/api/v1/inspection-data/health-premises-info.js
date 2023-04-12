@@ -75,11 +75,7 @@ const post = async (req, res) => {
               ? null
               : Number(req.body.bodyTraysAdequateId),
 
-              coldRoomAvailabilityId:
-              req.body.coldRoomAvailabilityId == "null"
-                ? null
-                : Number(req.body.coldRoomAvailabilityId),
-
+    
                 coldRoomAvailabilityId:
                 req.body.coldRoomAvailabilityId == "null"
                   ? null
