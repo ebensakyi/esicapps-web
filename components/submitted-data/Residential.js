@@ -6,12 +6,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import * as moment from "moment";
-const Residential = ({ data }) => {
-  console.log(data);
+const Residential = ({ data, regions, districts,electoralAreas,communities }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState(null);
   const [communityId, setCommunityId] = useState(null);
+  const [filterValue, setFilterValue] = useState(null);
+  const [filterBy, setFilterBy] = useState(null);
+  const [from, setFrom] = useState(null);
+  const [to, setTo] = useState(null);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -53,23 +56,201 @@ const Residential = ({ data }) => {
     }
   };
 
+  const handleFilter = (e) => {
+    e.preventDefault();
+
+    const path = router.pathname;
+    const query = router.query;
+
+    let published = query.published;
+    let page = query.page;
+
+    // console.log(path);
+    // console.log(router.asPath);
+    router.push({
+      pathname: path,
+      query: { published, page, filterBy, filterValue, from, to },
+    });
+
+    // router.push({
+    //   pathname: '/destination',
+    //   query: {
+    //     myData: JSON.stringify({'some data'})
+    //    }
+    // });
+  };
+
   return (
     <div className="row">
+      <div class="row row-cols-lg-auto g-3 align-items-center">
+        <div className="col-md-2">
+          <label class="form-label mb-0">Select level</label>
+          <select
+            class="form-select mb-3"
+            aria-label="Default select example"
+            onChange={(e) => setFilterBy(e.target.value)}
+            value={filterBy}
+          >
+            <option selected>Filter by </option>
+            <option value="regionId">Region</option>
+            <option value="districtId">District</option>
+            <option value="electoralAreaId">Electoral Area</option>
+            <option value="communityId">Community</option>
+          </select>
+        </div>
+        {/* <div className="col-md-2">
+                <select
+                  class="form-select mb-3"
+                  aria-label="Default select example"
+                >
+                  <option selected>Filter by </option>
+
+                  <option value="2">District</option>
+                  <option value="3">Electoral Area</option>
+                  <option value="3">Community</option>
+                </select>
+              </div>
+              <div className="col-md-2">
+                <select
+                  class="form-select mb-3"
+                  aria-label="Default select example"
+                >
+                  <option selected>Filter by </option>
+
+                  <option value="3">Electoral Area</option>
+                  <option value="3">Community</option>
+                </select>
+              </div> */}
+        {filterBy == "regionId" ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select region</label>
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterValue(e.target.value)}
+              value={filterValue}
+            >
+              {regions.map((data) => (
+                <option key={data.id} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+        {filterBy == "districtId" ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select district</label>
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterValue(e.target.value)}
+              value={filterValue}
+            >
+              {districts.map((data) => (
+                <option key={data.id} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+        {filterBy == "electoralAreaId" ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select Electoral Area</label>
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterValue(e.target.value)}
+              value={filterValue}
+            >
+              {electoralAreas.map((data) => (
+                <option key={data.id} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+        {filterBy == "communityId" ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select community</label>
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterValue(e.target.value)}
+              value={filterValue}
+            >
+             {communities.map((data) => (
+                <option key={data.id} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+
+        <div class="col-md-12">
+          <label class="form-label mb-0">Range</label>
+          <div class="row">
+            <div class="col-lg-6">
+              <input
+                type="date"
+                class="form-control"
+                onChange={(e) => setFrom(e.target.value)}
+                value={from}
+              />
+            </div>
+
+            <div class="col-lg-6">
+              <input
+                type="date"
+                class="form-control"
+                onChange={(e) => setTo(e.target.value)}
+                value={to}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label mb-0">.</label>
+          <br />
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onClick={(e) => handleFilter(e)}
+          >
+            Filter
+          </button>
+        </div>
+      </div>
+
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">
             <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
           </div>
           <div className="card-body">
-            <div>
-              <button
-                type="button"
-                className="btn btn-success btn-label waves-effect right waves-light rounded-pill"
-                onClick={handleExportToExcel}
-              >
-                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                Export To Excel
-              </button>
+            <div className="row">
+              <div className="col-md-3">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                  onClick={handleExportToExcel}
+                >
+                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                  Export To Excel
+                </button>
+              </div>
             </div>
             <br />
             <table

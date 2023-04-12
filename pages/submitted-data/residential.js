@@ -1,55 +1,67 @@
-
-import Residential from '../../components/submitted-data/Residential'
-import Header from '../../components/Header'
+import Residential from "../../components/submitted-data/Residential";
+import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import { inspect } from 'util';
+import { inspect } from "util";
 
+export default function residential({ data, regions, districts,electoralAreas,communities }) {
+  return (
+    <div id="layout-wrapper">
+      <Header />
 
-export default function residential({ data }) {
-    return (
-        <div id="layout-wrapper">
-            <Header />
-
-            <div className="main-content">
-                <div className="page-content">
-                    <div className="container-fluid">
-
-                        <Residential data={data} />
-
-                    </div>
-                </div>
-            </div>
+      <div className="main-content">
+        <div className="page-content">
+          <div className="container-fluid">
+            <Residential data={data} regions={regions} districts={districts} electoralAreas={electoralAreas} communities={communities} />
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-
 export async function getServerSideProps(context) {
-    const { token } = context.req.cookies;
-    const  {published}  =context.query;
+  const { token } = context.req.cookies;
+  const { published } = context.query;
+  const  filterBy  = "regionId";
+//   const  filterBy  = context.query.filterBy || "regionId";
+ const  filterValue  = context.query.filterValue ;
+  const { from } = context.query;
+  const { to } = context.query;
 
-
-    const page = context.query.page || 1
-    const searchText = context.query.searchText || ""
-    if (!token) {
-        return {
-            redirect: {
-                destination: '/auth/login',
-                permanent: true,
-            },
-        }
-    }
-
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/submitted-data/data?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=1`).then(
-        (res) => res.json()
-    );
-
-   
+  const page = context.query.page || 1;
+  const searchText = context.query.searchText || "";
+  if (!token) {
     return {
-        props: {
-            data,
-        },
+      redirect: {
+        destination: "/auth/login",
+        permanent: true,
+      },
     };
+  }
 
+  const data = await fetch(
+    `${SERVER_BASE_URL}/api/v1/submitted-data/data?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=1&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}
+   `
+  ).then((res) => res.json());
+
+  const regions = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
+  ).then((res) => res.json());
+  const districts = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
+  ).then((res) => res.json());
+  const electoralAreas = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/electoral-area?token=${token}`
+  ).then((res) => res.json());
+  const communities = await fetch(
+    `${SERVER_BASE_URL}/api/v1/primary-data/community?token=${token}`
+  ).then((res) => res.json());
+  return {
+    props: {
+      data,
+      regions,
+      districts,electoralAreas,communities
+    },
+  };
 }

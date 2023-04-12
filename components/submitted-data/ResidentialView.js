@@ -43,6 +43,7 @@ const ResidentialView = ({ data }) => {
                 <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                 Download Inspection
               </button>
+            
             </div>
           </div>
           <div id="printableArea">

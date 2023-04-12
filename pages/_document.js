@@ -88,7 +88,9 @@ export default function Document() {
 
     <script src="/assets/js/pages/gallery.init.js"></script>
 
-   
+    <script src="/assets/libs/@simonwep/pickr/pickr.min.js"></script>
+
+<script src="/assets/js/pages/form-pickers.init.js"></script>
       
         <script async src="/assets/js/app.js"></script>
       </body>

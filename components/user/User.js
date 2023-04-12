@@ -247,7 +247,6 @@ const User = ({ users, userTypes, regions, districts }) => {
                         onChange={(e) => {
                           let selectedUserType = e.target.value;
 
-                          console.log(selectedUserType);
                           setUserType(selectedUserType);
 
                           if (

@@ -11,8 +11,6 @@ const get = async (req, res) => {
   try {
     let mainWhere = await generateWhereMainObject(req, res);
 
-
-
     let inspectionFormId = Number(req.query.inspectionFormId);
 
     let curPage = req.query.page;
@@ -45,13 +43,25 @@ const generateWhereMainObject = async (req, res) => {
   let district;
   let whereObject;
 
-  console.log(req.query.token);
-  let published = Number(req.query.published);
-  let inspectionFormId = Number(req.query.inspectionFormId);
-  let curPage = req.query.page;
+  console.log(req.query);
+  let published = Number(req?.query?.published);
+  let inspectionFormId = Number(req?.query?.inspectionFormId);
+  let curPage = req?.query?.page;
+
+
+
+  let filterBy = req?.query?.filterBy;
+  let filterValue =
+    req?.query?.filterValue == "undefined"
+      ? undefined
+      : Number(req?.query?.filterValue);
+  let from = Number(req?.query?.from);
+  let to = Number(req?.query?.to);
+
+  // let filterColumn = filterBy==1?"regionId"
 
   let perPage = 10;
-  let skip = Number((curPage - 1) * perPage);
+  let skip = Number((curPage - 1) * perPage) || 0;
 
   let data = await verifyToken(req.query.token);
 
@@ -60,10 +70,9 @@ const generateWhereMainObject = async (req, res) => {
   if (userType == 1) {
     return {
       where: {
-       
         deleted: 0,
-        Inspection: { 
-        
+        Inspection: {
+          [filterBy]: filterValue,
           isPublished: published,
           inspectionFormId: inspectionFormId,
         },
@@ -86,9 +95,8 @@ const generateWhereMainObject = async (req, res) => {
 
     return {
       where: {
-       
         deleted: 0,
-        Inspection: { 
+        Inspection: {
           regionId: region,
           isPublished: published,
           inspectionFormId: inspectionFormId,
