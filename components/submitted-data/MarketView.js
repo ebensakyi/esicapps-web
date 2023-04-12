@@ -645,7 +645,7 @@ const MarketView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesWaterSupply?.length != null ? (
+                    {data?.WaterSection?.PremisesWaterSupply?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
                         {data?.WaterSection?.PremisesWaterSupply.map((x) => (

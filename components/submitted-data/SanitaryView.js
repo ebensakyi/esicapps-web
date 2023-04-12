@@ -181,8 +181,7 @@ const SanitaryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              .toiletAvailability.name
+                            data?.SanitaryPremisesInfoSection?.toiletAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -739,7 +738,7 @@ const SanitaryView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.WaterSection?.PremisesWaterSources.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterSources?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
                         {data?.WaterSection?.PremisesWaterSources?.map((x) => (
@@ -756,7 +755,7 @@ const SanitaryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesWaterSupply.length != null ? (
+                    {data?.WaterSection?.PremisesWaterSupply?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water supply</label>
                         {data?.WaterSection?.PremisesWaterSupply.map((x) => (
@@ -825,7 +824,7 @@ const SanitaryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesWaterTreatmentType.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterTreatmentType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
@@ -1362,7 +1361,7 @@ const SanitaryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesDrainType.length != null ?
+                    {data?.LiquidWasteSection?.PremisesDrainType.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
                       {data?.LiquidWasteSection?.PremisesDrainType.map((x) => (
@@ -1376,7 +1375,7 @@ const SanitaryView = ({ data }) => {
                         />
                       ))}
                     </div>:<></>}
-                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length != null ?
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
@@ -1394,7 +1393,7 @@ const SanitaryView = ({ data }) => {
                         )
                       )}
                     </div>:<></>}
-                    {data?.LiquidWasteSection?.PremisesExcretaContainment?.length != null ?
+                    {data?.LiquidWasteSection?.PremisesExcretaContainment?.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment

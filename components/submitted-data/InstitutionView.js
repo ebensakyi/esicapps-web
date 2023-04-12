@@ -799,7 +799,7 @@ const InstitutionView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesDrinkingWaterSources?.length != null ? (
+                    {data?.WaterSection?.PremisesDrinkingWaterSources?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
