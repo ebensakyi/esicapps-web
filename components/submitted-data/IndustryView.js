@@ -28,8 +28,21 @@ const IndustryView = ({ data }) => {
 
   return (
     <>
-      <div className="row">
+     <div className="row">
         <div className="col-12">
+          <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div>
+              <button
+                type="button"
+                className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+                onClick={() => downloadInspection()}
+              >
+                <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                Download Inspection
+              </button>
+            </div>
+          </div>
+          <div id="printableArea">
           <div className="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 className="mb-sm-0">INDUSTRY</h4>
             <div className="page-title-right">
@@ -41,8 +54,7 @@ const IndustryView = ({ data }) => {
               </ol>
             </div>
           </div>
-        </div>
-      </div>
+       
       <div className="row">
         <div className="col-lg-12">
           <div className="row mb-3">
@@ -1788,6 +1800,9 @@ const IndustryView = ({ data }) => {
             </div>
           </div>
         </div>
+      </div>
+      </div>
+      </div>
       </div>
     </>
   );
