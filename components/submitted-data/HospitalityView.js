@@ -541,7 +541,7 @@ const HospitalityView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LicencePermitSection
+                    {/* {data?.LicencePermitSection
                       ?.medicalCertificateAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -560,7 +560,7 @@ const HospitalityView = ({ data }) => {
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {data?.LicencePermitSection
                       ?.gtaOperatingLicenceAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -1287,7 +1287,7 @@ const HospitalityView = ({ data }) => {
                     {data?.LiquidWasteSection?.PremisesDrainType.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drain Type</label>
-                        {data.LiquidWasteSection.PremisesDrainType.map((x) => (
+                        {data?.LiquidWasteSection?.PremisesDrainType.map((x) => (
                           <input
                             key={x.id}
                             type="text"
@@ -1307,7 +1307,7 @@ const HospitalityView = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Effluent Management
                         </label>
-                        {data.LiquidWasteSection.PremisesEffluentManagement.map(
+                        {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1329,7 +1329,7 @@ const HospitalityView = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Excreta Containment
                         </label>
-                        {data.LiquidWasteSection.PremisesExcretaContainment.map(
+                        {data?.LiquidWasteSection?.PremisesExcretaContainment?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1555,7 +1555,7 @@ const HospitalityView = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Waste Collection Receptacle
                         </label>
-                        {data.SolidWasteSection.PremisesWasteReceptacle.map(
+                        {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1616,7 +1616,7 @@ const HospitalityView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data.SolidWasteSection.ContainerVolume.name}
+                          value={data?.SolidWasteSection?.ContainerVolume?.name}
                           readOnly="readOnly"
                         />
                       </div>

@@ -666,7 +666,7 @@ const HealthView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.WaterSection?.PremisesWaterSources.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterSources?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water source</label>
                         {data?.WaterSection?.PremisesWaterSources?.map((x) => (
@@ -717,7 +717,7 @@ const HealthView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.WaterSection?.PremisesWaterStorage.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterStorage?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
                         {data?.WaterSection?.PremisesWaterStorage?.map((x) => (
@@ -744,7 +744,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.WaterSection.waterStorageConditionSafe.name
+                            data?.WaterSection?.waterStorageConditionSafe.name
                           }
                           readOnly="readOnly"
                         />
@@ -922,7 +922,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {/* {data?.LiquidWasteSection.separateStaffUrinal != null ? (
+                    {/* {data?.LiquidWasteSection?.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Separate Staff Urinal
@@ -932,7 +932,7 @@ const HealthView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection.separateStaffUrinal.name
+                            data?.LiquidWasteSection?.separateStaffUrinal.name
                           }
                           readOnly="readOnly"
                         />
@@ -1206,7 +1206,7 @@ const HealthView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.toiletCondition.name}
+                          value={data?.LiquidWasteSection?.toiletCondition?.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -1316,7 +1316,7 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesDrainType.length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesDrainType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drain Type</label>
                         {data?.LiquidWasteSection?.PremisesDrainType?.map(
@@ -1326,7 +1326,7 @@ const HealthView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={x.DrainType.name}
+                              value={x?.DrainType?.name}
                               readOnly="readOnly"
                             />
                           )
@@ -1341,7 +1341,7 @@ const HealthView = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Effluent Management
                         </label>
-                        {data?.LiquidWasteSection.PremisesEffluentManagement.map(
+                        {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1392,7 +1392,7 @@ const HealthView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={x.ExcretaDisposalMethod.name}
+                              value={x?.ExcretaDisposalMethod?.name}
                               readOnly="readOnly"
                             />
                           )
@@ -1567,7 +1567,7 @@ const HealthView = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Waste Collection Type
                         </label>
-                        {data?.SolidWasteSection.PremisesWasteCollection.map(
+                        {data?.SolidWasteSection?.PremisesWasteCollection.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1583,8 +1583,8 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.SolidWasteSection?.PremisesWasteReceptacle !=
-                    null ? (
+                    {data?.SolidWasteSection?.PremisesWasteReceptacle.length !=
+                    0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Waste Collection Receptacle
@@ -1739,21 +1739,21 @@ const HealthView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.ConclusionSection.officerComment != null ? (
+                    {data?.ConclusionSection?.officerComment != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Office Comment</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.ConclusionSection.officerComment}
+                          value={data?.ConclusionSection?.officerComment}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.ConclusionSection.PremisesActionTaken.length != 0 ? (
+                    {data?.ConclusionSection?.PremisesActionTaken?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Action Taken</label>
                         {data?.ConclusionSection.PremisesActionTaken.map(

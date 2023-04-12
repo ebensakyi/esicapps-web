@@ -954,7 +954,7 @@ const SanitaryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.toiletAdequacy.name}
+                          value={data?.LiquidWasteSection?.toiletAdequacy?.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -968,7 +968,7 @@ const SanitaryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.urinalAdequacy.name}
+                          value={data?.LiquidWasteSection?.urinalAdequacy?.name}
                           readOnly="readOnly"
                         />
                       </div>

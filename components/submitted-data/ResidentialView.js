@@ -983,21 +983,21 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.toiletAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Adequacy</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.toiletAdequacy.name}
+                          value={data?.LiquidWasteSection?.toiletAdequacy?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.bathroomAdequacy != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom Adequacy
@@ -1007,7 +1007,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.bathroomAdequacy.name
+                            data?.LiquidWasteSection?.bathroomAdequacy?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1033,7 +1033,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.toiletPitPosition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet Pit Position
@@ -1043,7 +1043,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.toiletPitPosition.name
+                            data?.LiquidWasteSection?.toiletPitPosition?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1051,21 +1051,21 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.drainsCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drains Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.drainsCondition.name}
+                          value={data?.LiquidWasteSection?.drainsCondition?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.stagnationEvidence != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Stagnation Evidence
@@ -1075,7 +1075,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.stagnationEvidence.name
+                            data?.LiquidWasteSection?.stagnationEvidence?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1083,7 +1083,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.analCleansingMaterialMgt != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Anal Cleansing Material
@@ -1102,35 +1102,35 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.toiletCondition != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Condition</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.toiletCondition.name}
+                          value={data?.LiquidWasteSection?.toiletCondition?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.toiletDischarge != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Discharge</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.LiquidWasteSection?.toiletDischarge.name}
+                          value={data?.LiquidWasteSection?.toiletDischarge?.name}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.containmentEmptied != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Containment Emptied
@@ -1140,7 +1140,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.containmentEmptied.name
+                            data?.LiquidWasteSection?.containmentEmptied?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1198,7 +1198,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection != null ? (
+                    {data?.LiquidWasteSection?.PremisesDrainType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Drain Type</label>
                         {data?.LiquidWasteSection?.PremisesDrainType?.map(
@@ -1217,13 +1217,12 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesEffluentManagement
-                      .length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Effluent Management
                         </label>
-                        {data?.LiquidWasteSection?.PremisesEffluentManagement.map(
+                        {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1239,8 +1238,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesExcretaContainment
-                      .length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesExcretaContainment?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Excreta Containment
@@ -1261,13 +1259,12 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod
-                      .length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Excreta Disposal Method
                         </label>
-                        {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod.map(
+                        {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1283,13 +1280,12 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal
-                      .length != 0 ? (
+                    {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Grey Water Disposal
                         </label>
-                        {data?.LiquidWasteSection?.PremisesGreyWaterDisposal.map(
+                        {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1305,11 +1301,11 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.LiquidWasteSection?.PremisesToiletType.length !=
+                    {data?.LiquidWasteSection?.PremisesToiletType?.length !=
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Toilet Type</label>
-                        {data?.LiquidWasteSection?.PremisesToiletType.map(
+                        {data?.LiquidWasteSection?.PremisesToiletType?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -1358,11 +1354,8 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection
-                              .wasteServiceProviderRegistration != null
-                              ? data?.SolidWasteSection
-                                  .wasteServiceProviderRegistration.name
-                              : ""
+                           data?.SolidWasteSection?.wasteServiceProviderRegistration?.name
+                            
                           }
                           readOnly="readOnly"
                         />
@@ -1417,8 +1410,7 @@ const ResidentialView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SolidWasteSection
-                              .approvedWasteStorageReceptacle.name
+                            data?.SolidWasteSection?.approvedWasteStorageReceptacle?.name
                           }
                           readOnly="readOnly"
                         />
@@ -1479,7 +1471,7 @@ const ResidentialView = ({ data }) => {
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={x.SolidWasteReceptacle.name}
+                            value={x?.SolidWasteReceptacle?.name}
                             readOnly="readOnly"
                           />
                         )
@@ -1610,7 +1602,7 @@ const ResidentialView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={x.Nuisance.name}
+                              value={x?.Nuisance?.name}
                               readOnly="readOnly"
                             />
                           )
@@ -1637,14 +1629,14 @@ const ResidentialView = ({ data }) => {
                     0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Action Taken</label>
-                        {data?.ConclusionSection.PremisesActionTaken.map(
+                        {data?.ConclusionSection?.PremisesActionTaken?.map(
                           (x) => (
                             <input
                               key={x.id}
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={x.Action.name}
+                              value={x?.Action?.name}
                               readOnly="readOnly"
                             />
                           )
