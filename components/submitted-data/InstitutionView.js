@@ -778,7 +778,7 @@ const InstitutionView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesWaterTreatmentType.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterTreatmentType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
@@ -799,7 +799,7 @@ const InstitutionView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection?.PremisesDrinkingWaterSources.length != null ? (
+                    {data?.WaterSection?.PremisesDrinkingWaterSources?.length != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drinking water source
@@ -1315,6 +1315,7 @@ const InstitutionView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+                     {data?.LiquidWasteSection?.PremisesDrainType.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
                       {data?.LiquidWasteSection?.PremisesDrainType.map((x) => (
@@ -1327,7 +1328,9 @@ const InstitutionView = ({ data }) => {
                           readOnly="readOnly"
                         />
                       ))}
-                    </div>{" "}
+                    </div>:<></>}
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length != 0 ?
+
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
@@ -1344,7 +1347,9 @@ const InstitutionView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div>:<></>}
+                    {data?.LiquidWasteSection?.PremisesExcretaContainment.length != 0 ?
+
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Excreta Containment
@@ -1361,7 +1366,7 @@ const InstitutionView = ({ data }) => {
                           />
                         )
                       )}
-                    </div>{" "}
+                    </div>:<></>}
                     {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod
                       .length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
@@ -1682,7 +1687,7 @@ const InstitutionView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ConclusionSection.obnoxiousTradeExist?.name
+                            data?.ConclusionSection?.obnoxiousTradeExist?.name
                           }
                           readOnly="readOnly"
                         />

@@ -79,9 +79,8 @@ const IndustryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.BasicInfoSection?.Community != null
-                            ? data?.BasicInfoSection?.Community?.District?.name
-                            : ""
+                         data?.BasicInfoSection?.Community?.District?.name
+                          
                         }
                         readOnly="readOnly"
                       />
@@ -93,9 +92,8 @@ const IndustryView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.BasicInfoSection?.Community != null
-                            ? data?.BasicInfoSection?.Community?.name
-                            : ""
+                          data?.BasicInfoSection?.Community?.name
+                          
                         }
                         readOnly="readOnly"
                       />
@@ -181,8 +179,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.IndustryPremisesInfoSection
-                              .toiletAvailability.name
+                            data?.IndustryPremisesInfoSection?.toiletAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -201,8 +198,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.IndustryPremisesInfoSection
-                              .urinalAvailability.name
+                            data?.IndustryPremisesInfoSection?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -221,8 +217,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.IndustryPremisesInfoSection
-                              .bathroomAvailability.name
+                            data?.IndustryPremisesInfoSection?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -241,8 +236,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.IndustryPremisesInfoSection
-                              .drainsAvailability.name
+                            data?.IndustryPremisesInfoSection?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -250,8 +244,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.IndustryPremisesInfoSection
-                      .approvedHandwashingFacilityAvailabilityIndustry !=
+                    {data?.IndustryPremisesInfoSection?.approvedHandwashingFacilityAvailabilityIndustry !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -262,9 +255,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.IndustryPremisesInfoSection
-                              .approvedHandwashingFacilityAvailabilityIndustry
-                              .name
+                            data?.IndustryPremisesInfoSection?.approvedHandwashingFacilityAvailabilityIndustry?.name
                           }
                           readOnly="readOnly"
                         />
@@ -686,7 +677,7 @@ const IndustryView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.WaterSection?.PremisesWaterStorage.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterStorage?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Water storage</label>
                         {data?.WaterSection?.PremisesWaterStorage.map((x) => (
@@ -721,19 +712,19 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.WaterSection.PremisesWaterTreatmentType.length != 0 ? (
+                    {data?.WaterSection?.PremisesWaterTreatmentType?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Water treatment type
                         </label>
-                        {data?.WaterSection.PremisesWaterTreatmentType.map(
+                        {data?.WaterSection?.PremisesWaterTreatmentType?.map(
                           (x) => (
                             <input
                               key={x.id}
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={x.WaterTreatmentType.name}
+                              value={x?.WaterTreatmentType?.name}
                               readOnly="readOnly"
                             />
                           )
@@ -747,7 +738,7 @@ const IndustryView = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Drinking water source
                         </label>
-                        {data?.WaterSection.PremisesDrinkingWaterSources.map(
+                        {data?.WaterSection?.PremisesDrinkingWaterSources?.map(
                           (x) => (
                             <input
                               key={x.id}
@@ -772,7 +763,7 @@ const IndustryView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.WaterSection.WaterFlowFrequency.name}
+                          value={data?.WaterSection?.WaterFlowFrequency.name}
                           readOnly="readOnly"
                         />
                       </div>
@@ -1258,7 +1249,7 @@ const IndustryView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.LiquidWasteSection?.PremisesDrainType.length != 0 ?
+                     {data?.LiquidWasteSection?.PremisesDrainType?.length != 0 ?
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Drain Type</label>
                       {data?.LiquidWasteSection.PremisesDrainType.map((x) => (
@@ -1272,13 +1263,13 @@ const IndustryView = ({ data }) => {
                         />
                       ))}
                     </div>:<></>}
-                    {data?.LiquidWasteSection?.PremisesEffluentManagement.length != 0 ?
+                    {data?.LiquidWasteSection?.PremisesEffluentManagement?.length != 0 ?
 
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
                         Effluent Management
                       </label>
-                      {data?.LiquidWasteSection.PremisesEffluentManagement.map(
+                      {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                         (x) => (
                           <input
                             key={x.id}
@@ -1629,7 +1620,7 @@ const IndustryView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.ConclusionSection.obnoxiousTradeExist.name
+                            data?.ConclusionSection?.obnoxiousTradeExist.name
                           }
                           readOnly="readOnly"
                         />
