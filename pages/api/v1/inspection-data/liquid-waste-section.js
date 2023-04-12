@@ -112,7 +112,6 @@ const post = async (req, res) => {
           : Number(req.body.toiletHouseholdNumberId),
 
 
-          ////////////////////////NEW///////////////
 
           separateStaffUrinalId: req.body.separateStaffUrinalId == "null" ? null : Number(req.body.separateStaffUrinalId),
 
