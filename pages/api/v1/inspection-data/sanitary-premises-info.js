@@ -125,6 +125,15 @@ const post = async (req, res) => {
       containerAttendantName: req.body.containerAttendantName == "null" ? null : Number(req.body.containerAttendantName),
       containerAttendantPhoneNumber: req.body.containerAttendantPhoneNumber== "null" ? null :  req.body.containerAttendantPhoneNumber== ""?null: req.body.containerAttendantPhoneNumber,
 
+
+      ///////////////New////
+      numberWorkers: req.body.numberWorkers == "null" ? null : Number(req.body.numberWorkers),
+      cremationPlatformId: req.body.cremationPlatformId == "null" ? null : Number(req.body.cremationPlatformId),
+      sanitaryAshesDisposalId: req.body.sanitaryAshesDisposalId == "null" ? null : Number(req.body.sanitaryAshesDisposalId),
+      numberCarcassHandlers: req.body.numberCarcassHandlers == "null" ? null : Number(req.body.numberCarcassHandlers),
+      numberCarcassHandlersMedicalCert: req.body.numberCarcassHandlersMedicalCert == "null" ? null : Number(req.body.numberCarcassHandlersMedicalCert),
+
+   
     };
 
     // console.log(data);
