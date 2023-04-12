@@ -110,9 +110,24 @@ const post = async (req, res) => {
         req.body.toiletHouseholdNumberId == "null"
           ? null
           : Number(req.body.toiletHouseholdNumberId),
+
+
+          ////////////////////////NEW///////////////
+
+          separateStaffUrinalId: req.body.separateStaffUrinalId == "null" ? null : Number(req.body.separateStaffUrinalId),
+
+          availToiletFaciltyMgtId: req.body.availToiletFaciltyMgtId == "null" ? null : Number(req.body.availToiletFaciltyMgtId),
+
+          analCleansingMaterialMgtId: req.body.analCleansingMaterialMgtId == "null" ? null : Number(req.body.analCleansingMaterialMgtId),
+
+          numberUrinalSeats: req.body.numberUrinalSeats == "null" ? null : Number(req.body.numberUrinalSeats),
+
+          numberBathroomCubicle: req.body.numberBathroomCubicle == "null" ? null : Number(req.body.numberBathroomCubicle),
+
+          
     };
 
-    console.log(data);
+    
 
     const response = await prisma.liquidWasteSection.create({ data });
 

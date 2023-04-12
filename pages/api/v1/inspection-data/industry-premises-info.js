@@ -91,6 +91,16 @@ const post = async (req, res) => {
         req.body.byProductsStorageAreaCondId == "null"
           ? null
           : Number(req.body.byProductsStorageAreaCondId),
+
+
+          numberFoodHandlers:
+          req.body.numberFoodHandlers == "null"
+            ? null
+            : Number(req.body.numberFoodHandlers),
+            numberFoodHandlersCert:
+            req.body.numberFoodHandlersCert == "null"
+              ? null
+              : Number(req.body.numberFoodHandlersCert),
     };
     const response = await prisma.industryPremisesInfoSection.create({
       data,

@@ -60,6 +60,35 @@ const post = async (req, res) => {
         req.body.incineratorAvailabilityId == "null"
           ? null
           : Number(req.body.incineratorAvailabilityId),
+
+////////////////////////NEW/////////////
+          embalmingAreaConditionId:
+          req.body.embalmingAreaConditionId == "null"
+            ? null
+            : Number(req.body.embalmingAreaConditionId),
+            embalmingAreaAvailabilityId:
+            req.body.embalmingAreaAvailabilityId == "null"
+              ? null
+              : Number(req.body.embalmingAreaAvailabilityId),
+            bodyTraysAdequateId:
+            req.body.bodyTraysAdequateId == "null"
+              ? null
+              : Number(req.body.bodyTraysAdequateId),
+
+              coldRoomAvailabilityId:
+              req.body.coldRoomAvailabilityId == "null"
+                ? null
+                : Number(req.body.coldRoomAvailabilityId),
+
+                coldRoomAvailabilityId:
+                req.body.coldRoomAvailabilityId == "null"
+                  ? null
+                  : Number(req.body.coldRoomAvailabilityId),
+
+                  coldRoomConditionId:
+                  req.body.coldRoomConditionId == "null"
+                    ? null
+                    : Number(req.body.coldRoomConditionId),
     };
 
     const response = await prisma.healthPremisesInfoSection.create({

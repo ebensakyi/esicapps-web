@@ -14,11 +14,13 @@ model Inspection {
   premisesCode     String? @db.VarChar(255)
   districtId       Int
   regionId         Int
+  electoralAreaId    Int
 
   userId           Int
   inspectionFormId Int
   inspectionTypeId Int
   isPublished      Int     @default(0)
+  rejected         Int     @default(-1)
   publishedById    Int?
   followUpDate     String? @db.VarChar(255)
   doFollowUp       Int?
@@ -51,6 +53,7 @@ model Inspection {
   IndustryPremisesInfoSection    IndustryPremisesInfoSection?
   District                       District                        @relation(fields: [districtId], references: [id])
   Region                         Region                          @relation(fields: [regionId], references: [id])
+  ElectoralArea                  ElectoralArea                   @relation(fields: [electoralAreaId], references: [id])
 
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
@@ -343,15 +346,16 @@ model Community {
 }
 
 model ElectoralArea {
-  id         Int         @id @default(autoincrement())
-  name       String      @unique @db.VarChar(255)
-  deleted    Int?        @default(0)
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  id         Int          @id @default(autoincrement())
+  name       String       @unique @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
   districtId Int
-  District   District    @relation(fields: [districtId], references: [id])
+  District   District     @relation(fields: [districtId], references: [id])
   User       User[]
   Community  Community[]
+  Inspection Inspection[]
 }
 
 model ContainerVolume {

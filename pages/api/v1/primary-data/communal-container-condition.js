@@ -20,6 +20,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     const communalContainerCondition = await prisma.communalContainerCondition.findMany({ where: { deleted: 0 } });
+
     return res.status(200).json(communalContainerCondition);
 
   } catch (error) {
