@@ -62,10 +62,10 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.kitchenAvailabilityId),
 
-      protectiveClothingId:
-        req.body.protectiveClothingId == "null"
+      protectiveClothingUsedId:
+        req.body.protectiveClothingUsedId == "null"
           ? null
-          : Number(req.body.protectiveClothingId),
+          : Number(req.body.protectiveClothingUsedId),
 
       numberFoodHandling:
         req.body.numberFoodHandling == "null"

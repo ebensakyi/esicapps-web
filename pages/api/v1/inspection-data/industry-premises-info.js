@@ -25,10 +25,10 @@ const post = async (req, res) => {
       otherIndustryFacility:
         req.body.otherIndustryFacility ,
 
-      protectiveClothingId:
-        req.body.protectiveClothingId == "null"
+      protectiveClothingUsedId:
+        req.body.protectiveClothingUsedId == "null"
           ? null
-          : Number(req.body.protectiveClothingId),
+          : Number(req.body.protectiveClothingUsedId),
 
       productionRoomConditionId:
         req.body.productionRoomConditionId == "null"

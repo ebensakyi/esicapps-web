@@ -3,6 +3,7 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
+    console.log(req.body);
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
@@ -87,6 +88,8 @@ const post = async (req, res) => {
                     : Number(req.body.coldRoomConditionId),
     };
 
+    console.log(data);
+
     const response = await prisma.healthPremisesInfoSection.create({
       data,
     });
@@ -97,7 +100,7 @@ const post = async (req, res) => {
 
     return res.status(500).json({ statusCode: 0, message: "Data skipped" });
   } catch (error) {
-    // console.log("Error: " + error);
+   console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)

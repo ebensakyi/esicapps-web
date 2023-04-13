@@ -773,7 +773,7 @@ model FacilitySection {
   premiseTypeId                             Int
   respondentDesignationId                   Int
   approvedHandwashingFacilityAvailabilityId Int
-  protectiveClothingId                      Int?
+  protectiveClothingUsedId                      Int?
   firstAidAvailabilityId                    Int?
   drainsAvailabilityId                      Int?
   toiletAvailabilityId                      Int?
@@ -817,7 +817,7 @@ model FacilitySection {
   Inspection                  Inspection            @relation(fields: [inspectionId], references: [id])
   labourersOfficeAvailability YesNo?                @relation("labourersOfficeAvailability", fields: [labourersOfficeAvailabilityId], references: [id])
   storeRoomAvailability       YesNo?                @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
-  protectiveClothing          YesNo?                @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  protectiveClothing          YesNo?                @relation("protectiveClothing", fields: [protectiveClothingUsedId], references: [id])
   firstAidAvailability        YesNo?                @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   drainsAvailability          YesNo?                @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
   toiletAvailability          YesNo?                @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])

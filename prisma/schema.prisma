@@ -956,6 +956,8 @@ model YesNo {
   bodyTraysAdequate                          HealthPremisesInfoSection[]      @relation("bodyTraysAdequate")
   embalmingAreaAvailability                  HealthPremisesInfoSection[]      @relation("embalmingAreaAvailability")
   coldRoomAvailability                       HealthPremisesInfoSection[]      @relation("coldRoomAvailability")
+  protectiveClothingUsed             HospitalityPremisesInfoSection[]  @relation("protectiveClothingUsed")
+  firstAidAvailabilityHosp             HospitalityPremisesInfoSection[]  @relation("firstAidAvailability")
 }
 
 model InspectionType {
@@ -1060,7 +1062,7 @@ model EateryPremisesInfoSection {
   firstAidAvailabilityId                    Int?
   designatedSmokingAreaId                   Int?
   kitchenAvailabilityId                     Int?
-  protectiveClothingId                      Int?
+  protectiveClothingUsedId                  Int?
   numberFoodHandling                        Int?
   numberFoodHandlingMedical                 Int?
   uncookedFoodStorageCondtionSafeId         Int?
@@ -1083,7 +1085,7 @@ model EateryPremisesInfoSection {
   toiletAvailability                        YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?                 @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   kitchenAvailability                       YesNo?                 @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
-  protectiveClothing                        YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  protectiveClothing                        YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingUsedId], references: [id])
   designatedSmokingArea                     YesNo?                 @relation("designatedSmokingArea", fields: [designatedSmokingAreaId], references: [id])
   disinfestationFrequency                   DisinfectionFrequency? @relation("disinfestationFrequency", fields: [disinfestationFrequencyId], references: [id])
   disinfectionFrequency                     DisinfectionFrequency? @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
@@ -1128,11 +1130,11 @@ model HealthPremisesInfoSection {
   User                        User           @relation(fields: [userId], references: [id])
   Inspection                  Inspection     @relation(fields: [inspectionId], references: [id])
   userId                      Int
-  embalmingAreaConditionId    Int
-  embalmingAreaAvailabilityId Int
-  bodyTraysAdequateId         Int
-  coldRoomAvailabilityId      Int
-  coldRoomConditionId         Int
+  embalmingAreaConditionId    Int?
+  embalmingAreaAvailabilityId Int?
+  bodyTraysAdequateId         Int?
+  coldRoomAvailabilityId      Int?
+  coldRoomConditionId         Int?
 
   embalmingAreaCondition    SanitaryInsanitary? @relation("embalmingAreaCondition", fields: [embalmingAreaConditionId], references: [id])
   embalmingAreaAvailability YesNo?              @relation("embalmingAreaAvailability", fields: [embalmingAreaAvailabilityId], references: [id])
@@ -1158,7 +1160,6 @@ model HospitalityPremisesInfoSection {
   firstAidAvailabilityId                    Int?
   bathroomAvailabilityId                    Int?
   kitchenAvailabilityId                     Int?
-  protectiveClothingId                      Int?
   numberMaleWorkers                         Int?
   numberFemaleWorkers                       Int?
   numberFoodHandlingMedical                 Int?
@@ -1180,6 +1181,8 @@ model HospitalityPremisesInfoSection {
   User                                      User           @relation(fields: [userId], references: [id])
   Inspection                                Inspection     @relation(fields: [inspectionId], references: [id])
   kitchenAvailability                       YesNo?         @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
+  protectiveClothingUsed                    YesNo?         @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
+  firstAidAvailability                      YesNo?         @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
 
   userId Int
 }
@@ -1203,7 +1206,7 @@ model SanitaryPremisesInfoSection {
   sanitaryFacilityMgtId                     Int?
   disinfectionFrequencyId                   Int?
   disinfestationQuarterlyId                 Int?
-  protectiveClothingId                      Int?
+  protectiveClothingUsedId                  Int?
   slaughterAreaAvailabilityId               Int?
   condemnationRoomAvailabilityId            Int?
   cloakRoomAvailabilityId                   Int?
@@ -1247,7 +1250,7 @@ model SanitaryPremisesInfoSection {
   ownershipType                           OwnershipType?         @relation("ownershipTypeSanitary", fields: [ownershipTypeId], references: [id])
   physicalStructureType                   StructureType?         @relation(fields: [physicalStructureTypeId], references: [id])
   properLayout                            YesNo?                 @relation("properLayout", fields: [properLayoutId], references: [id])
-  protectiveClothing                      YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  protectiveClothing                      YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingUsedId], references: [id])
   safeHazardousWasteMgt                   YesNo?                 @relation("safeHazardousWasteMgt", fields: [safeHazardousWasteMgtId], references: [id])
   sanitaryAshesDisposal                   SanitaryInsanitary?    @relation("sanitaryAshesDisposal", fields: [sanitaryAshesDisposalId], references: [id])
   sanitaryFacilityMgt                     YesNo?                 @relation("sanitaryFacilityMgt", fields: [sanitaryFacilityMgtId], references: [id])
@@ -1339,7 +1342,7 @@ model InstitutionPremisesInfoSection {
   uncookedFoodStorageCondtionSafeId         Int?
   cookedFoodStorageCondtionSafeId           Int?
   kitchenConditionId                        Int?
-  protectiveClothingId                      Int?
+  protectiveClothingUsedId                  Int?
   numberFoodHandling                        Int?
   numberFoodHandlingMedicalId               Int?
   numberClassRoomsId                        Int?
@@ -1407,7 +1410,7 @@ model IndustryPremisesInfoSection {
   industryPremisesSubtypeId                 Int?
   physicalStructureTypeId                   Int?
   otherIndustryFacility                     String? @db.VarChar(255)
-  protectiveClothingId                      Int?
+  protectiveClothingUsedId                  Int?
   productionRoomConditionId                 Int?
   flyScreenNetAvailabilityId                Int?
   storeRoomAvailabilityId                   Int?
@@ -1444,7 +1447,7 @@ model IndustryPremisesInfoSection {
   flyScreenNetAvailability                YesNo?              @relation("flyScreenNetAvailability", fields: [flyScreenNetAvailabilityId], references: [id])
   firstAidAvailability                    YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
 
-  protectiveClothing YesNo? @relation("protectiveClothing", fields: [protectiveClothingId], references: [id])
+  protectiveClothing YesNo? @relation("protectiveClothing", fields: [protectiveClothingUsedId], references: [id])
 
   Type    Type?    @relation(fields: [industryPremisesTypeId], references: [id])
   Subtype Subtype? @relation(fields: [industryPremisesSubtypeId], references: [id])

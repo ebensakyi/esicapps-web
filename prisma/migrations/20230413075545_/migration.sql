@@ -810,7 +810,7 @@ CREATE TABLE "EateryPremisesInfoSection" (
     "firstAidAvailabilityId" INTEGER,
     "designatedSmokingAreaId" INTEGER,
     "kitchenAvailabilityId" INTEGER,
-    "protectiveClothingId" INTEGER,
+    "protectiveClothingUsedId" INTEGER,
     "numberFoodHandling" INTEGER,
     "numberFoodHandlingMedical" INTEGER,
     "uncookedFoodStorageCondtionSafeId" INTEGER,
@@ -878,7 +878,7 @@ CREATE TABLE "HospitalityPremisesInfoSection" (
     "firstAidAvailabilityId" INTEGER,
     "bathroomAvailabilityId" INTEGER,
     "kitchenAvailabilityId" INTEGER,
-    "protectiveClothingId" INTEGER,
+    "protectiveClothingUsedId" INTEGER,
     "numberMaleWorkers" INTEGER,
     "numberFemaleWorkers" INTEGER,
     "numberFoodHandlingMedical" INTEGER,
@@ -913,7 +913,7 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
     "sanitaryFacilityMgtId" INTEGER,
     "disinfectionFrequencyId" INTEGER,
     "disinfestationQuarterlyId" INTEGER,
-    "protectiveClothingId" INTEGER,
+    "protectiveClothingUsedId" INTEGER,
     "slaughterAreaAvailabilityId" INTEGER,
     "condemnationRoomAvailabilityId" INTEGER,
     "cloakRoomAvailabilityId" INTEGER,
@@ -1004,7 +1004,7 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
     "uncookedFoodStorageCondtionSafeId" INTEGER,
     "cookedFoodStorageCondtionSafeId" INTEGER,
     "kitchenConditionId" INTEGER,
-    "protectiveClothingId" INTEGER,
+    "protectiveClothingUsedId" INTEGER,
     "numberFoodHandling" INTEGER,
     "numberFoodHandlingMedicalId" INTEGER,
     "numberClassRoomsId" INTEGER,
@@ -1050,7 +1050,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "industryPremisesSubtypeId" INTEGER,
     "physicalStructureTypeId" INTEGER,
     "otherIndustryFacility" VARCHAR(255),
-    "protectiveClothingId" INTEGER,
+    "protectiveClothingUsedId" INTEGER,
     "productionRoomConditionId" INTEGER,
     "flyScreenNetAvailabilityId" INTEGER,
     "storeRoomAvailabilityId" INTEGER,
@@ -1845,7 +1845,7 @@ ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSectio
 ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_kitchenAvailabilityId_fkey" FOREIGN KEY ("kitchenAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_protectiveClothingId_fkey" FOREIGN KEY ("protectiveClothingId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_protectiveClothingUsedId_fkey" FOREIGN KEY ("protectiveClothingUsedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "EateryPremisesInfoSection" ADD CONSTRAINT "EateryPremisesInfoSection_designatedSmokingAreaId_fkey" FOREIGN KEY ("designatedSmokingAreaId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2004,7 +2004,7 @@ ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSe
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_properLayoutId_fkey" FOREIGN KEY ("properLayoutId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_protectiveClothingId_fkey" FOREIGN KEY ("protectiveClothingId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_protectiveClothingUsedId_fkey" FOREIGN KEY ("protectiveClothingUsedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SanitaryPremisesInfoSection" ADD CONSTRAINT "SanitaryPremisesInfoSection_safeHazardousWasteMgtId_fkey" FOREIGN KEY ("safeHazardousWasteMgtId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2205,7 +2205,7 @@ ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSe
 ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_firstAidAvailabilityId_fkey" FOREIGN KEY ("firstAidAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_protectiveClothingId_fkey" FOREIGN KEY ("protectiveClothingId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_protectiveClothingUsedId_fkey" FOREIGN KEY ("protectiveClothingUsedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "IndustryPremisesInfoSection" ADD CONSTRAINT "IndustryPremisesInfoSection_industryPremisesTypeId_fkey" FOREIGN KEY ("industryPremisesTypeId") REFERENCES "Type"("id") ON DELETE SET NULL ON UPDATE CASCADE;

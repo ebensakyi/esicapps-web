@@ -204,7 +204,9 @@ const get = async (req, res) => {
             },
           },
         },
-
+        InspectionPictures: {
+          include: { FormSectionImage: true },
+        },
         // User: true,
       },
     });

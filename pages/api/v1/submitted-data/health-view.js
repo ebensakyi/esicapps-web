@@ -15,7 +15,7 @@ const post = async (req, res) => {
     await prisma.inspection.update({
       data: {
         isPublished: Math.abs(isPublished - 1),
-        publishedById: Number(userCookie.user.id)
+        publishedById: Number(userCookie.user.id),
       },
       where: {
         id: req.body.id,
@@ -84,7 +84,6 @@ const get = async (req, res) => {
         },
         HealthPremisesInfoSection: {
           include: {
-           
             toiletAvailability: true,
             urinalAvailability: true,
             drainsAvailability: true,
@@ -212,12 +211,13 @@ const get = async (req, res) => {
             },
           },
         },
+        InspectionPictures: {
+          include: { FormSectionImage: true },
+        },
 
         // User: true,
       },
     });
-
-    console.log(data);
 
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
     return res.status(200).json(data);

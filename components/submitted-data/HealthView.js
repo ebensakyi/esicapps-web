@@ -87,10 +87,9 @@ const HealthView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community != null
-                                  ? data?.BasicInfoSection?.Community?.District
+                                 data?.BasicInfoSection?.Community?.District
                                       ?.Region?.name
-                                  : ""
+                                 
                               }
                               readOnly="readOnly"
                             />
@@ -102,11 +101,22 @@ const HealthView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community != null
-                                  ? data?.BasicInfoSection?.Community?.District
+                                data?.BasicInfoSection?.Community?.District
                                       ?.name
-                                  : ""
+                                
                               }
+                              readOnly="readOnly"
+                            />
+                          </div>
+                          <div className="col-lg-3 col-sm-6">
+                            <label htmlFor="invoicenoInput">
+                              Electoral Area
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={data?.ElectoralArea?.name}
                               readOnly="readOnly"
                             />
                           </div>
