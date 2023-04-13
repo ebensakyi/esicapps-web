@@ -23,8 +23,7 @@ export default function residential({ data, regions, districts,electoralAreas,co
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
   const { published } = context.query;
-  const  filterBy  = "regionId";
-//   const  filterBy  = context.query.filterBy || "regionId";
+ const  filterBy  = context.query.filterBy || "regionId";
  const  filterValue  = context.query.filterValue ;
   const { from } = context.query;
   const { to } = context.query;

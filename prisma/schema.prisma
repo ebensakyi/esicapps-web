@@ -15,6 +15,7 @@ model Inspection {
   districtId       Int
   regionId         Int
   electoralAreaId  Int
+  communityId      Int
 
   userId           Int
   inspectionFormId Int
@@ -54,6 +55,7 @@ model Inspection {
   District                       District                        @relation(fields: [districtId], references: [id])
   Region                         Region                          @relation(fields: [regionId], references: [id])
   ElectoralArea                  ElectoralArea                   @relation(fields: [electoralAreaId], references: [id])
+  Community                      Community                       @relation(fields: [communityId], references: [id])
 
   prevInspection Inspection? @relation("CurrentPreviousInspection", fields: [prevInspectionId], references: [id])
 
@@ -341,6 +343,7 @@ model Community {
   BasicInfoSection BasicInfoSection[]
   ElectoralArea    ElectoralArea?     @relation(fields: [electoralAreaId], references: [id])
   District         District?          @relation(fields: [districtId], references: [id])
+  Inspection       Inspection[]
 
   @@unique([electoralAreaId, name], name: "electoralAreaIdIdentifier")
 }

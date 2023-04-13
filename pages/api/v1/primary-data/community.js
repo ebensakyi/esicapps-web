@@ -22,17 +22,24 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let districtId = Number(req?.query?.districtId);
-    console.log("districtId ",districtId);
     let community;
     if (districtId) {
       community = await prisma.community.findMany({
         where: { deleted: 0, districtId: districtId },
         // include: {District: true}
+        orderBy: {
+       
+            name: 'asc',
+          }
       });
     } else {
       community = await prisma.community.findMany({
         where: { deleted: 0 },
         // include: {District: true}
+        orderBy: {
+       
+          name: 'asc',
+        }
       });
     }
 

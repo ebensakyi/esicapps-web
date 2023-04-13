@@ -10,8 +10,7 @@ const post = async (req, res) => {
     const districtData = await prisma.district.findFirst({
       where: { id: Number(district) },
     });
-    let region = Number(districtData.regionId)
-
+    let region = Number(districtData.regionId);
 
     const data = {
       id: req.body.id,
@@ -19,6 +18,9 @@ const post = async (req, res) => {
       totalRating: Number(req.body.totalRating),
       districtId: district,
       regionId: region,
+      communityId: Number(req.body.communityId),
+      electoralAreaId: Number(req.body.electoralAreaId),
+
       premisesCode: req.body.premisesCode,
       inspectionFormId:
         req.body.inspectionFormId == "null"
@@ -39,14 +41,14 @@ const post = async (req, res) => {
       completedAt: new Date(req.body.completedAt),
     };
 
+    const response = await prisma.inspection.create({ data });
 
-   const response = await prisma.inspection.create({ data });
-
-   if(response){
-    return  res.status(200).json({ statusCode: 1, message: "Data saved" });
+    if (response) {
+      return res.status(200).json({ statusCode: 1, message: "Data saved" });
     }
 
-    return  res.status(500).json({ statusCode: 0, message: "Data skipped" });  } catch (error) {
+    return res.status(500).json({ statusCode: 0, message: "Data skipped" });
+  } catch (error) {
     console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res

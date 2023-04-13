@@ -43,20 +43,18 @@ const generateWhereMainObject = async (req, res) => {
   let district;
   let whereObject;
 
-  console.log(req.query);
   let published = Number(req?.query?.published);
   let inspectionFormId = Number(req?.query?.inspectionFormId);
   let curPage = req?.query?.page;
-
-
 
   let filterBy = req?.query?.filterBy;
   let filterValue =
     req?.query?.filterValue == "undefined"
       ? undefined
       : Number(req?.query?.filterValue);
-  let from = Number(req?.query?.from);
-  let to = Number(req?.query?.to);
+  let from =
+    req?.query?.from == "" ? undefined : new Date(req?.query?.from);
+  let to = req?.query?.to == "" ? undefined : new Date(req?.query?.to);
 
   // let filterColumn = filterBy==1?"regionId"
 
@@ -73,8 +71,13 @@ const generateWhereMainObject = async (req, res) => {
         deleted: 0,
         Inspection: {
           [filterBy]: filterValue,
+
           isPublished: published,
           inspectionFormId: inspectionFormId,
+        },
+        createdAt: {
+          gte: from,
+          lte: to,
         },
       },
       // where: getSearchParams(req, searchText).where,
