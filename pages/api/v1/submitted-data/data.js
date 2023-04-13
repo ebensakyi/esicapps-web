@@ -11,6 +11,8 @@ const get = async (req, res) => {
   try {
     let mainWhere = await generateWhereMainObject(req, res);
 
+    console.log(mainWhere);
+
     let inspectionFormId = Number(req.query.inspectionFormId);
 
     let curPage = req.query.page;
@@ -47,14 +49,25 @@ const generateWhereMainObject = async (req, res) => {
   let inspectionFormId = Number(req?.query?.inspectionFormId);
   let curPage = req?.query?.page;
 
-  let filterBy = req?.query?.filterBy;
+  // let filterBy = req?.query?.filterBy;
+
+  let filterBy;
+
   let filterValue =
     req?.query?.filterValue == "undefined"
       ? undefined
       : Number(req?.query?.filterValue);
   let from =
-    req?.query?.from == "" ? undefined : new Date(req?.query?.from);
-  let to = req?.query?.to == "" ? undefined : new Date(req?.query?.to);
+    req?.query?.from == "undefined" || req?.query?.from == ""
+      ? undefined
+      : new Date(req?.query?.from);
+
+  let to =
+    req.query.to == "" || req?.query?.to == "undefined"
+      ? undefined
+      : new Date(req?.query?.to);
+
+  console.log(typeof req?.query?.from);
 
   // let filterColumn = filterBy==1?"regionId"
 
@@ -64,8 +77,11 @@ const generateWhereMainObject = async (req, res) => {
   let data = await verifyToken(req.query.token);
 
   let userType = data.user.UserType.id;
+  // let filterColumn = userType == 1 ?""
 
-  if (userType == 1) {
+  if (userType == 1 || userType == 2) {
+    filterBy = filterBy == 'undefined' ? "regionId" : filterBy;
+
     return {
       where: {
         deleted: 0,
@@ -93,16 +109,23 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userType == 2) {
+  if (userType == 3) {
     region = data.user.regionId;
+    filterBy = filterBy == undefined ? "districtId" : filterBy;
 
     return {
       where: {
         deleted: 0,
         Inspection: {
+          [filterBy]: filterValue,
+
           regionId: region,
           isPublished: published,
           inspectionFormId: inspectionFormId,
+        },
+        createdAt: {
+          gte: from,
+          lte: to,
         },
       },
       // where: getSearchParams(req, searchText).where,
@@ -118,15 +141,28 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userType == 3) {
+  if (userType == 4) {
+    console.log("here>>>> ", filterBy);
+    console.log(typeof filterBy);
+
+    filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
+
+    console.log("here>>>>2s ", filterBy);
+
     district = data.user.districtId;
     return {
       where: {
+        [filterBy]: filterValue,
+
         districtId: district,
         deleted: 0,
         Inspection: {
           isPublished: published,
           inspectionFormId: inspectionFormId,
+        },
+        createdAt: {
+          gte: from,
+          lte: to,
         },
       },
       // where: getSearchParams(req, searchText).where,

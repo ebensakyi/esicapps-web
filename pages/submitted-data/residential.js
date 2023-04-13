@@ -4,7 +4,13 @@ import Header from "../../components/Header";
 import { SERVER_BASE_URL } from "../../config";
 import { inspect } from "util";
 
-export default function residential({ data, regions, districts,electoralAreas,communities }) {
+export default function residential({
+  data,
+  regions,
+  districts,
+  electoralAreas,
+  communities,
+}) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -12,7 +18,13 @@ export default function residential({ data, regions, districts,electoralAreas,co
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <Residential data={data} regions={regions} districts={districts} electoralAreas={electoralAreas} communities={communities} />
+            <Residential
+              data={data}
+              regions={regions}
+              districts={districts}
+              electoralAreas={electoralAreas}
+              communities={communities}
+            />
           </div>
         </div>
       </div>
@@ -23,10 +35,10 @@ export default function residential({ data, regions, districts,electoralAreas,co
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
   const { published } = context.query;
- const  filterBy  = context.query.filterBy || "regionId";
- const  filterValue  = context.query.filterValue ;
-  const { from } = context.query;
-  const { to } = context.query;
+  const filterBy = context.query.filterBy ;
+  const filterValue = context.query.filterValue;
+  const from = context.query.from || "undefined";
+  const to = context.query.to || "undefined";
 
   const page = context.query.page || 1;
   const searchText = context.query.searchText || "";
@@ -60,7 +72,9 @@ export async function getServerSideProps(context) {
     props: {
       data,
       regions,
-      districts,electoralAreas,communities
+      districts,
+      electoralAreas,
+      communities,
     },
   };
 }

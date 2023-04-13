@@ -6,7 +6,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import * as moment from "moment";
-const Residential = ({ data, regions, districts,electoralAreas,communities }) => {
+import Cookies from "js-cookie";
+
+const Residential = ({
+  data,
+  regions,
+  districts,
+  electoralAreas,
+  communities,
+}) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState(null);
@@ -15,6 +23,10 @@ const Residential = ({ data, regions, districts,electoralAreas,communities }) =>
   const [filterBy, setFilterBy] = useState(null);
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
+
+  let loggedInUserType = Cookies.get("ut").split("??")[1];
+
+  console.log(loggedInUserType);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -83,7 +95,27 @@ const Residential = ({ data, regions, districts,electoralAreas,communities }) =>
   return (
     <div className="row">
       <div class="row row-cols-lg-auto g-3 align-items-center">
-        <div className="col-md-2">
+        {loggedInUserType == 1||loggedInUserType == 2 ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select level</label>
+
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterBy(e.target.value)}
+              value={filterBy}
+            >
+              <option selected>Filter by </option>
+              <option value="regionId">Region</option>
+              <option value="districtId">District</option>
+              <option value="electoralAreaId">Electoral Area</option>
+              <option value="communityId">Community</option>
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+         {loggedInUserType == 3 ? <div className="col-md-2">
           <label class="form-label mb-0">Select level</label>
           <select
             class="form-select mb-3"
@@ -92,35 +124,27 @@ const Residential = ({ data, regions, districts,electoralAreas,communities }) =>
             value={filterBy}
           >
             <option selected>Filter by </option>
-            <option value="regionId">Region</option>
             <option value="districtId">District</option>
             <option value="electoralAreaId">Electoral Area</option>
             <option value="communityId">Community</option>
           </select>
-        </div>
-        {/* <div className="col-md-2">
-                <select
-                  class="form-select mb-3"
-                  aria-label="Default select example"
-                >
-                  <option selected>Filter by </option>
+        </div>:<></>}
 
-                  <option value="2">District</option>
-                  <option value="3">Electoral Area</option>
-                  <option value="3">Community</option>
-                </select>
-              </div>
-              <div className="col-md-2">
-                <select
-                  class="form-select mb-3"
-                  aria-label="Default select example"
-                >
-                  <option selected>Filter by </option>
+        {loggedInUserType == 4 ? <div className="col-md-2">
+          <label class="form-label mb-0">Select level</label>
+          <select
+            class="form-select mb-3"
+            aria-label="Default select example"
+            onChange={(e) => setFilterBy(e.target.value)}
+            value={filterBy}
+          >
+            <option selected>Filter by </option>
+           
+            <option value="electoralAreaId">Electoral Area</option>
+            <option value="communityId">Community</option>
+          </select>
+        </div>:<></>}
 
-                  <option value="3">Electoral Area</option>
-                  <option value="3">Community</option>
-                </select>
-              </div> */}
         {filterBy == "regionId" ? (
           <div className="col-md-2">
             <label class="form-label mb-0">Select region</label>
@@ -131,6 +155,7 @@ const Residential = ({ data, regions, districts,electoralAreas,communities }) =>
               value={filterValue}
             >
               {regions.map((data) => (
+                
                 <option key={data.id} value={data.id}>
                   {data.name}
                 </option>
@@ -187,7 +212,7 @@ const Residential = ({ data, regions, districts,electoralAreas,communities }) =>
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
             >
-             {communities.map((data) => (
+              {communities.map((data) => (
                 <option key={data.id} value={data.id}>
                   {data.name}
                 </option>
@@ -255,26 +280,27 @@ const Residential = ({ data, regions, districts,electoralAreas,communities }) =>
             <br />
             <table
               id="fixed-header"
-              className="table table-bordered dt-responsive nowrap table-striped align-middle"
-              style={{ width: "100%" }}
+              className="table table-bordered table-responsive nowrap table-striped align-middle"
+              style={{ width: "100%",    overflow: "scroll"
+            }}
             >
               <thead>
                 <tr>
-                  <th>Rating </th>
-                  <th>Premises Code</th>
-                  <th> Start Date</th>
-                  <th> End Date</th>
-                  <th>Inspection Officer</th>
-                  <th>GhanaPost GPS</th>
-                  <th>GPS Accuracy</th>
-                  <th>Region</th>
-                  <th>District</th>
-                  <th>Community</th>
+                  <th scope="col">Rating </th>
+                  <th scope="col">Premises Code</th>
+                  <th scope="col"> Start Date</th>
+                  <th scope="col"> End Date</th>
+                  <th scope="col">Inspection Officer</th>
+                  <th scope="col">GhanaPost GPS</th>
+                  <th scope="col">GPS Accuracy</th>
+                  <th scope="col">Region</th>
+                  <th scope="col">District</th>
+                  <th scope="col">Community</th>
                   {/* <th>Respondent</th>
                   <th>Designation</th> */}{" "}
-                  <th>Submission Date</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th scope="col">Submission Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
