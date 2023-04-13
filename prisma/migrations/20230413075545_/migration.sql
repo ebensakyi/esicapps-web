@@ -5,10 +5,13 @@ CREATE TABLE "Inspection" (
     "premisesCode" VARCHAR(255),
     "districtId" INTEGER NOT NULL,
     "regionId" INTEGER NOT NULL,
+    "electoralAreaId" INTEGER NOT NULL,
+    "communityId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
     "inspectionTypeId" INTEGER NOT NULL,
     "isPublished" INTEGER NOT NULL DEFAULT 0,
+    "rejected" INTEGER NOT NULL DEFAULT -1,
     "publishedById" INTEGER,
     "followUpDate" VARCHAR(255),
     "doFollowUp" INTEGER,
@@ -557,6 +560,17 @@ CREATE TABLE "UnsafeToiletCondition" (
 );
 
 -- CreateTable
+CREATE TABLE "CommunalContainerCondition" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "CommunalContainerCondition_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "UnsafeWaterStorage" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -837,6 +851,11 @@ CREATE TABLE "HealthPremisesInfoSection" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "embalmingAreaConditionId" INTEGER NOT NULL,
+    "embalmingAreaAvailabilityId" INTEGER NOT NULL,
+    "bodyTraysAdequateId" INTEGER NOT NULL,
+    "coldRoomAvailabilityId" INTEGER NOT NULL,
+    "coldRoomConditionId" INTEGER NOT NULL,
 
     CONSTRAINT "HealthPremisesInfoSection_pkey" PRIMARY KEY ("id")
 );
@@ -921,6 +940,8 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "numberCarcassHandlers" INTEGER NOT NULL,
+    "numberCarcassHandlersMedicalCert" INTEGER NOT NULL,
 
     CONSTRAINT "SanitaryPremisesInfoSection_pkey" PRIMARY KEY ("id")
 );
@@ -1043,6 +1064,8 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "manufacturedServices" VARCHAR(255) NOT NULL,
     "majorByProducts" VARCHAR(255) NOT NULL,
     "numberWorkers" INTEGER,
+    "numberFoodHandlers" INTEGER,
+    "numberFoodHandlersCert" INTEGER,
     "byProductsStorageAreaCondId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1121,6 +1144,7 @@ CREATE TABLE "LiquidWasteSection" (
     "areaSeweredId" INTEGER,
     "facilityConnectedSewerId" INTEGER,
     "numberUrinalCubicle" INTEGER,
+    "numberBathroomCubicle" INTEGER,
     "urinalCubicleConditionId" INTEGER,
     "toiletConditionId" INTEGER,
     "toiletDischargeId" INTEGER,
@@ -1163,6 +1187,7 @@ CREATE TABLE "SolidWasteSection" (
     "scheduleLiftingId" INTEGER,
     "sanitaryContainerId" INTEGER,
     "rating" INTEGER,
+    "wasteServicePhoneNumber" TEXT,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1255,6 +1280,20 @@ CREATE TABLE "PremisesUnsafeWaterStorage" (
     "unsafeWaterStorageId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesUnsafeWaterStorage_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PremisesCommunalContainerCondition" (
+    "id" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "communalContainerConditionId" INTEGER NOT NULL,
+    "solidWasteSectionId" VARCHAR(255) NOT NULL,
+
+    CONSTRAINT "PremisesCommunalContainerCondition_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1665,6 +1704,12 @@ ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_districtId_fkey" FOREIGN KEY
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_communityId_fkey" FOREIGN KEY ("communityId") REFERENCES "Community"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_prevInspectionId_fkey" FOREIGN KEY ("prevInspectionId") REFERENCES "Inspection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -1855,6 +1900,21 @@ ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSectio
 
 -- AddForeignKey
 ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_embalmingAreaConditionId_fkey" FOREIGN KEY ("embalmingAreaConditionId") REFERENCES "SanitaryInsanitary"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_embalmingAreaAvailabilityId_fkey" FOREIGN KEY ("embalmingAreaAvailabilityId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_bodyTraysAdequateId_fkey" FOREIGN KEY ("bodyTraysAdequateId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_coldRoomAvailabilityId_fkey" FOREIGN KEY ("coldRoomAvailabilityId") REFERENCES "YesNo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "HealthPremisesInfoSection" ADD CONSTRAINT "HealthPremisesInfoSection_coldRoomConditionId_fkey" FOREIGN KEY ("coldRoomConditionId") REFERENCES "SanitaryInsanitary"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "HospitalityPremisesInfoSection" ADD CONSTRAINT "HospitalityPremisesInfoSection_approvedHandwashingFacility_fkey" FOREIGN KEY ("approvedHandwashingFacilityAvailabilityId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2413,6 +2473,15 @@ ALTER TABLE "PremisesUnsafeWaterStorage" ADD CONSTRAINT "PremisesUnsafeWaterStor
 
 -- AddForeignKey
 ALTER TABLE "PremisesUnsafeWaterStorage" ADD CONSTRAINT "PremisesUnsafeWaterStorage_waterStorageTypeId_fkey" FOREIGN KEY ("waterStorageTypeId") REFERENCES "WaterStorageType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesCommunalContainerCondition" ADD CONSTRAINT "PremisesCommunalContainerCondition_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesCommunalContainerCondition" ADD CONSTRAINT "PremisesCommunalContainerCondition_communalContainerCondit_fkey" FOREIGN KEY ("communalContainerConditionId") REFERENCES "CommunalContainerCondition"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PremisesCommunalContainerCondition" ADD CONSTRAINT "PremisesCommunalContainerCondition_solidWasteSectionId_fkey" FOREIGN KEY ("solidWasteSectionId") REFERENCES "SolidWasteSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesDrinkingWaterSources" ADD CONSTRAINT "PremisesDrinkingWaterSources_drinkingWaterSourceId_fkey" FOREIGN KEY ("drinkingWaterSourceId") REFERENCES "DrinkingWaterSourceType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

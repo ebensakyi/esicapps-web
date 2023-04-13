@@ -43,7 +43,6 @@ const ResidentialView = ({ data }) => {
                 <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                 Download Inspection
               </button>
-            
             </div>
           </div>
           <div id="printableArea">
@@ -889,7 +888,8 @@ const ResidentialView = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection?.PremisesWaterStorage.length !=
+                          0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water storage
@@ -910,7 +910,8 @@ const ResidentialView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection.waterStorageConditionSafe !=
+                          null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Safe Water storage receptacle condition
@@ -929,7 +930,8 @@ const ResidentialView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection?.PremisesWaterTreatmentType
+                            .length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water treatment type
@@ -950,7 +952,8 @@ const ResidentialView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection?.PremisesDrinkingWaterSources
+                            .length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Drinking water source
@@ -1021,7 +1024,8 @@ const ResidentialView = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.LiquidWasteSection != null ? (
+                          {data?.LiquidWasteSection?.numberToiletSeats !=
+                          null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Number Toilet Seats
@@ -1039,7 +1043,8 @@ const ResidentialView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection != null ? (
+                          {data?.LiquidWasteSection?.numberUrinalSeats !=
+                          null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Number Urinal Seats
@@ -1581,23 +1586,28 @@ const ResidentialView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
-                              Waste Collection Receptacle
-                            </label>
-                            {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
-                              (x) => (
-                                <input
-                                  key={x.id}
-                                  type="text"
-                                  className="form-control bg-light border-0"
-                                  id="invoicenoInput"
-                                  value={x?.SolidWasteReceptacle?.name}
-                                  readOnly="readOnly"
-                                />
-                              )
-                            )}
-                          </div>
+                          {data?.SolidWasteSection?.PremisesWasteReceptacle
+                            ?.length != 0 ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">
+                                Waste Collection Receptacle
+                              </label>
+                              {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+                                (x) => (
+                                  <input
+                                    key={x.id}
+                                    type="text"
+                                    className="form-control bg-light border-0"
+                                    id="invoicenoInput"
+                                    value={x?.SolidWasteReceptacle?.name}
+                                    readOnly="readOnly"
+                                  />
+                                )
+                              )}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                           {data?.SolidWasteSection?.UnservicedWasteDisposal !=
                           null ? (
                             <div className="col-lg-3 col-sm-6">

@@ -5,6 +5,7 @@ var hash2 = bcrypt.hashSync("12345678", salt);
 var hash3 = bcrypt.hashSync("12345678", salt);
 var hash4 = bcrypt.hashSync("12345678", salt);
 var hash5 = bcrypt.hashSync("12345678", salt);
+var hashx = bcrypt.hashSync("87654321", salt);
 
 export const users = [
   {
@@ -33,7 +34,7 @@ export const users = [
     surname: "National",
     otherNames: "Supervisor",
     email: "ns@gmail.com",
-    phoneNumber: "0542222222",
+    phoneNumber: "0541111111",
     password: hash3,
     regionId: 1,
     designation: "Super Admin",
@@ -43,7 +44,7 @@ export const users = [
     surname: "Regional",
     otherNames: "Admin",
     email: "ra@gmail.com",
-    phoneNumber: "0543333333",
+    phoneNumber: "0542222222",
     password: hash3,
     regionId: 1,
     designation: "Admin",
@@ -52,7 +53,7 @@ export const users = [
     surname: "Regional",
     otherNames: "Supervisor",
     email: "rs@gmail.com",
-    phoneNumber: "0544444444",
+    phoneNumber: "0543333333",
     password: hash3,
     regionId: 1,
     designation: "Supervisor",
@@ -63,7 +64,7 @@ export const users = [
     surname: "District",
     otherNames: "Admin",
     email: "da@gmail.com",
-    phoneNumber: "0545555555",
+    phoneNumber: "0544444444",
     password: hash4,
     regionId: 1,
     districtId: 1,
@@ -75,7 +76,7 @@ export const users = [
     otherNames: "Supervisor",
     email: "ds@gmail.com",
     phoneNumber: "0546666666",
-    password: hash4,
+    password: hashx,
     regionId: 1,
     districtId: 1,
     designation: "Supervisor",

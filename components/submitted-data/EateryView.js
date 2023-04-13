@@ -104,6 +104,18 @@ const EateryView = ({ data }) => {
                         />
                       </div>
                       <div className="col-lg-3 col-sm-6">
+                            <label htmlFor="invoicenoInput">
+                              Electoral Area
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={data?.ElectoralArea?.name}
+                              readOnly="readOnly"
+                            />
+                          </div>
+                      <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Community</label>
                         <input
                           type="text"
@@ -855,7 +867,7 @@ const EateryView = ({ data }) => {
                       ) : (
                         <></>
                       )}
-                      {data?.LiquidWasteSection != null ? (
+                      {data?.LiquidWasteSection?.numberUrinalSeats != null ? (
                         <div className="col-lg-3 col-sm-6">
                           <label htmlFor="invoicenoInput">
                             Number Urinal Seats

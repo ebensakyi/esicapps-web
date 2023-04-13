@@ -38,11 +38,11 @@ const Industry = ({ data }) => {
 
   const handleRating = (rating) => {
     try {
-      if (rating >= 4) {
+      if (rating == 3) {
         return <span className="badge bg-success">Good</span>;
-      } else if (rating < 4 && rating >= 3) {
+      } else if (rating == 2 ) {
         return <span className="badge bg-warning">Average</span>;
-      } else if (rating < 3) {
+      } else if (rating == 1) {
         return <span className="badge bg-danger">Poor</span>;
       }else{
         return <span className="badge bg-primary">Default</span>;
@@ -51,7 +51,6 @@ const Industry = ({ data }) => {
       console.log(error);
     }
   };
-
   return (
     <div className="row">
       <div className="col-lg-12">
