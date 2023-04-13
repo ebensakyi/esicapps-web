@@ -87,6 +87,7 @@ const get = async (req, res) => {
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
+            protectiveClothingUsed: true
           },
         },
 

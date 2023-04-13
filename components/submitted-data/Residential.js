@@ -56,11 +56,11 @@ const Residential = ({
     try {
       if (rating == 3) {
         return <span className="badge bg-success">Good</span>;
-      } else if (rating == 2 ) {
+      } else if (rating == 2) {
         return <span className="badge bg-warning">Average</span>;
       } else if (rating == 1) {
         return <span className="badge bg-danger">Poor</span>;
-      }else{
+      } else {
         return <span className="badge bg-primary">Default</span>;
       }
     } catch (error) {
@@ -94,7 +94,7 @@ const Residential = ({
   return (
     <div className="row">
       <div class="row row-cols-lg-auto g-3 align-items-center">
-        {loggedInUserType == 1||loggedInUserType == 2 ? (
+        {loggedInUserType == 1 || loggedInUserType == 2 ? (
           <div className="col-md-2">
             <label class="form-label mb-0">Select level</label>
 
@@ -114,35 +114,43 @@ const Residential = ({
         ) : (
           <></>
         )}
-         {loggedInUserType == 3 ? <div className="col-md-2">
-          <label class="form-label mb-0">Select level</label>
-          <select
-            class="form-select mb-3"
-            aria-label="Default select example"
-            onChange={(e) => setFilterBy(e.target.value)}
-            value={filterBy}
-          >
-            <option selected>Filter by </option>
-            <option value="districtId">District</option>
-            <option value="electoralAreaId">Electoral Area</option>
-            <option value="communityId">Community</option>
-          </select>
-        </div>:<></>}
+        {loggedInUserType == 3 ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select level</label>
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterBy(e.target.value)}
+              value={filterBy}
+            >
+              <option selected>Filter by </option>
+              <option value="districtId">District</option>
+              <option value="electoralAreaId">Electoral Area</option>
+              <option value="communityId">Community</option>
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
 
-        {loggedInUserType == 4 ? <div className="col-md-2">
-          <label class="form-label mb-0">Select level</label>
-          <select
-            class="form-select mb-3"
-            aria-label="Default select example"
-            onChange={(e) => setFilterBy(e.target.value)}
-            value={filterBy}
-          >
-            <option selected>Filter by </option>
-           
-            <option value="electoralAreaId">Electoral Area</option>
-            <option value="communityId">Community</option>
-          </select>
-        </div>:<></>}
+        {loggedInUserType == 4 ? (
+          <div className="col-md-2">
+            <label class="form-label mb-0">Select level</label>
+            <select
+              class="form-select mb-3"
+              aria-label="Default select example"
+              onChange={(e) => setFilterBy(e.target.value)}
+              value={filterBy}
+            >
+              <option selected>Filter by </option>
+
+              <option value="electoralAreaId">Electoral Area</option>
+              <option value="communityId">Community</option>
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
 
         {filterBy == "regionId" ? (
           <div className="col-md-2">
@@ -154,7 +162,6 @@ const Residential = ({
               value={filterValue}
             >
               {regions.map((data) => (
-                
                 <option key={data.id} value={data.id}>
                   {data.name}
                 </option>
@@ -280,12 +287,12 @@ const Residential = ({
             <table
               id="fixed-header"
               className="table table-bordered table-responsive nowrap table-striped align-middle"
-              style={{ width: "100%",    overflow: "scroll"
-            }}
+              style={{ width: "100%", overflow: "scroll" }}
             >
               <thead>
                 <tr>
                   <th scope="col">Rating </th>
+                  <th scope="col">Type</th>
                   <th scope="col">Premises Code</th>
                   <th scope="col"> Start Date</th>
                   <th scope="col"> End Date</th>
@@ -308,6 +315,25 @@ const Residential = ({
                     <tr key={dt.id}>
                       {" "}
                       <td>{handleRating(dt.Inspection.totalRating)}</td>
+                      <td>
+                        {dt.Inspection.InspectionType.name}
+                        {dt.Inspection.InspectionType.id == 2?
+                        <span>
+                        
+                          <Link
+                            href={{
+                              pathname: `/submitted-data/residential_view`,
+                              query: {
+                                id: dt.Inspection.prevInspectionId,
+                              },
+                            }}
+                          >
+                            <a className="dropdown-item">
+                              <i className="ri-external-link-line align-bottom me-2 text-muted" />
+                            </a>
+                          </Link>
+                        </span>:<></>}
+                      </td>
                       <td>{dt.Inspection.premisesCode}</td>
                       <td>
                         {moment(dt.Inspection.startedAt).format(

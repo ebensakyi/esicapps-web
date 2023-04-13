@@ -78,6 +78,7 @@ const Eatery = ({ data }) => {
               <thead>
                 <tr>
                   <th>Rating </th>
+                  <th>Type</th>
                   <th>Premises Code</th>
                   <th> Start Date</th>
                   <th> End Date</th>
@@ -99,8 +100,11 @@ const Eatery = ({ data }) => {
                   return (
                     <tr key={dt.id}>
                       {" "}
-                      <td>{handleRating(dt.Inspection.totalRating)}</td>
+                      <td>{handleRating(dt.Inspection.totalRating)}</td> 
+                                           <td>{dt.Inspection.InspectionType.name}</td>
+
                       <td>{dt.Inspection.premisesCode}</td>
+
                       <td>
                         {moment(dt.Inspection.startedAt).format(
                           "MMM Do YYYY, h:mm:ss a"

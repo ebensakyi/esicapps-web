@@ -941,7 +941,7 @@ model YesNo {
   staffChangingRoomIndustry                  IndustryPremisesInfoSection[]    @relation("staffChangingRoom")
   storeRoomAvailabilityIndustry              IndustryPremisesInfoSection[]    @relation("storeRoomAvailability")
   flyScreenNetAvailability                   IndustryPremisesInfoSection[]    @relation("flyScreenNetAvailability")
-  protectiveClothingIndustry                 IndustryPremisesInfoSection[]    @relation("protectiveClothing")
+  protectiveClothingIndustry                 IndustryPremisesInfoSection[]    @relation("protectiveClothingUsed")
   firstAidAvailabilityIndust                 IndustryPremisesInfoSection[]    @relation("firstAidAvailability")
   firstAidAvailabilityInstitution            InstitutionPremisesInfoSection[] @relation("firstAidAvailability")
   uncookedFoodStorageCondtionSafeInstitution InstitutionPremisesInfoSection[] @relation("uncookedFoodStorageCondtionSafe")
@@ -952,12 +952,12 @@ model YesNo {
   ablutionSlab                               InstitutionPremisesInfoSection[] @relation("ablutionSlab")
   firstAidAvailabilityMarket                 MarketPremisesInfoSection[]      @relation("firstAidAvailability")
   designatedSmokingArea                      EateryPremisesInfoSection[]      @relation("designatedSmokingArea")
-  protectiveClothingEatery                   EateryPremisesInfoSection[]      @relation("protectiveClothing")
+  protectiveClothingEatery                   EateryPremisesInfoSection[]      @relation("protectiveClothingUsed")
   bodyTraysAdequate                          HealthPremisesInfoSection[]      @relation("bodyTraysAdequate")
   embalmingAreaAvailability                  HealthPremisesInfoSection[]      @relation("embalmingAreaAvailability")
   coldRoomAvailability                       HealthPremisesInfoSection[]      @relation("coldRoomAvailability")
-  protectiveClothingUsed             HospitalityPremisesInfoSection[]  @relation("protectiveClothingUsed")
-  firstAidAvailabilityHosp             HospitalityPremisesInfoSection[]  @relation("firstAidAvailability")
+  protectiveClothingUsed                     HospitalityPremisesInfoSection[] @relation("protectiveClothingUsed")
+  firstAidAvailabilityHosp                   HospitalityPremisesInfoSection[] @relation("firstAidAvailability")
 }
 
 model InspectionType {
@@ -1085,7 +1085,7 @@ model EateryPremisesInfoSection {
   toiletAvailability                        YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?                 @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   kitchenAvailability                       YesNo?                 @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
-  protectiveClothing                        YesNo?                 @relation("protectiveClothing", fields: [protectiveClothingUsedId], references: [id])
+  protectiveClothingUsed                        YesNo?                 @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
   designatedSmokingArea                     YesNo?                 @relation("designatedSmokingArea", fields: [designatedSmokingAreaId], references: [id])
   disinfestationFrequency                   DisinfectionFrequency? @relation("disinfestationFrequency", fields: [disinfestationFrequencyId], references: [id])
   disinfectionFrequency                     DisinfectionFrequency? @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
@@ -1447,7 +1447,7 @@ model IndustryPremisesInfoSection {
   flyScreenNetAvailability                YesNo?              @relation("flyScreenNetAvailability", fields: [flyScreenNetAvailabilityId], references: [id])
   firstAidAvailability                    YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
 
-  protectiveClothing YesNo? @relation("protectiveClothing", fields: [protectiveClothingUsedId], references: [id])
+  protectiveClothingUsed YesNo? @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
 
   Type    Type?    @relation(fields: [industryPremisesTypeId], references: [id])
   Subtype Subtype? @relation(fields: [industryPremisesSubtypeId], references: [id])

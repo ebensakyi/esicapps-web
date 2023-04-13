@@ -67,8 +67,6 @@ const generateWhereMainObject = async (req, res) => {
       ? undefined
       : new Date(req?.query?.to);
 
-  console.log(typeof req?.query?.from);
-
   // let filterColumn = filterBy==1?"regionId"
 
   let perPage = 10;
@@ -80,7 +78,7 @@ const generateWhereMainObject = async (req, res) => {
   // let filterColumn = userType == 1 ?""
 
   if (userType == 1 || userType == 2) {
-    filterBy = filterBy == 'undefined' ? "regionId" : filterBy;
+    filterBy = filterBy == "undefined" ? "regionId" : filterBy;
 
     return {
       where: {
@@ -103,7 +101,9 @@ const generateWhereMainObject = async (req, res) => {
         createdAt: "asc",
       },
       include: {
-        Inspection: true,
+        Inspection: {
+          include: { InspectionType: true },
+        },
         Community: { include: { District: { include: { Region: true } } } },
         User: true,
       },
@@ -142,12 +142,7 @@ const generateWhereMainObject = async (req, res) => {
     };
   }
   if (userType == 4) {
-    console.log("here>>>> ", filterBy);
-    console.log(typeof filterBy);
-
     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
-
-    console.log("here>>>>2s ", filterBy);
 
     district = data.user.districtId;
     return {
