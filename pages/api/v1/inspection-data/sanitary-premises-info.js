@@ -25,7 +25,7 @@ const post = async (req, res) => {
           : Number(req.body.sanitaryPremisesTypeId),
       toiletAvailabilityId:
         req.body.toiletAvailabilityId == "null"
-          ? ""
+          ? null
           : Number(req.body.toiletAvailabilityId),
       staffChangingRoomId:
         req.body.staffChangingRoomId == "null"
