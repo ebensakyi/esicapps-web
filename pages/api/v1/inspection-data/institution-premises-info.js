@@ -202,7 +202,29 @@ const post = async (req, res) => {
         req.body.foodVendorAvailabilityId == "null"
           ? null
           : Number(req.body.foodVendorAvailabilityId),
+
+          boardingHouseAvailabilityId:
+          req.body.boardingHouseAvailabilityId == "null"
+            ? null
+            : Number(req.body.boardingHouseAvailabilityId),
+
+            boardingHouseOvercrowdedId:
+            req.body.boardingHouseOvercrowdedId == "null"
+              ? null
+              : Number(req.body.boardingHouseOvercrowdedId),
+
+              separateBoardingBoysGirlsId:
+              req.body.separateBoardingBoysGirlsId == "null"
+                ? null
+                : Number(req.body.separateBoardingBoysGirlsId),
+
+                boardingHouseConditionId:
+                req.body.boardingHouseConditionId == "null"
+                  ? null
+                  : Number(req.body.boardingHouseConditionId),
     };
+
+
 
     console.log(data);
     const response = await prisma.institutionPremisesInfoSection.create({

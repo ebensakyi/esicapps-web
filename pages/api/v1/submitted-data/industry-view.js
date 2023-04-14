@@ -85,7 +85,7 @@ const get = async (req, res) => {
             staffChangingRoom : true,
             storeRoomAvailability : true,
             flyScreenNetAvailability: true,
-            protectiveClothing: true,
+            protectiveClothingUsed: true,
             toiletAvailability: true,
             urinalAvailability: true,
             drainsAvailability: true,

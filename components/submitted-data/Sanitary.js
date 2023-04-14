@@ -38,11 +38,11 @@ const Sanitary = ({ data }) => {
   };
   const handleRating = (rating) => {
     try {
-      if (rating == 3) {
+      if (rating == 1) {
         return <span className="badge bg-success">Good</span>;
       } else if (rating == 2 ) {
         return <span className="badge bg-warning">Average</span>;
-      } else if (rating == 1) {
+      } else if (rating == 3) {
         return <span className="badge bg-danger">Poor</span>;
       }else{
         return <span className="badge bg-primary">Default</span>;

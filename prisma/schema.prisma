@@ -587,6 +587,7 @@ model SanitaryInsanitary {
   ablutionSlabCondition           InstitutionPremisesInfoSection[] @relation("ablutionSlabCondition")
   coldRoomCondition               HealthPremisesInfoSection[]      @relation("coldRoomCondition")
   embalmingAreaCondition          HealthPremisesInfoSection[]      @relation("embalmingAreaCondition")
+  boardingHouseCondition          InstitutionPremisesInfoSection[] @relation("boardingHouseCondition")
 }
 
 model SewerSystem {
@@ -958,6 +959,11 @@ model YesNo {
   coldRoomAvailability                       HealthPremisesInfoSection[]      @relation("coldRoomAvailability")
   protectiveClothingUsed                     HospitalityPremisesInfoSection[] @relation("protectiveClothingUsed")
   firstAidAvailabilityHosp                   HospitalityPremisesInfoSection[] @relation("firstAidAvailability")
+  boardingHouseAvailability                  InstitutionPremisesInfoSection[] @relation("boardingHouseAvailability")
+  boardingHouseOvercrowded                   InstitutionPremisesInfoSection[] @relation("boardingHouseOvercrowded")
+  separateBoardingBoysGirls                  InstitutionPremisesInfoSection[] @relation("separateBoardingBoysGirls")
+
+  protectiveClothingUsedInstitution InstitutionPremisesInfoSection[]  @relation("protectiveClothingUsed")
 }
 
 model InspectionType {
@@ -1085,7 +1091,7 @@ model EateryPremisesInfoSection {
   toiletAvailability                        YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?                 @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
   kitchenAvailability                       YesNo?                 @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
-  protectiveClothingUsed                        YesNo?                 @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
+  protectiveClothingUsed                    YesNo?                 @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
   designatedSmokingArea                     YesNo?                 @relation("designatedSmokingArea", fields: [designatedSmokingAreaId], references: [id])
   disinfestationFrequency                   DisinfectionFrequency? @relation("disinfestationFrequency", fields: [disinfestationFrequencyId], references: [id])
   disinfectionFrequency                     DisinfectionFrequency? @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
@@ -1371,6 +1377,10 @@ model InstitutionPremisesInfoSection {
   buildingStructureConditionId              Int?
   physicalStructureTypeId                   Int?
   foodVendorAvailabilityId                  Int?
+  boardingHouseAvailabilityId               Int?
+  boardingHouseOvercrowdedId                Int?
+  separateBoardingBoysGirlsId               Int?
+  boardingHouseConditionId                  Int?
   deleted                                   Int?                @default(0)
   createdAt                                 DateTime            @default(now())
   updatedAt                                 DateTime            @updatedAt
@@ -1394,12 +1404,20 @@ model InstitutionPremisesInfoSection {
   ablutionSlabCondition                     SanitaryInsanitary? @relation("ablutionSlabCondition", fields: [ablutionSlabConditionId], references: [id])
   physicalStructureType                     StructureType?      @relation(fields: [physicalStructureTypeId], references: [id])
 
+  boardingHouseAvailability YesNo?              @relation("boardingHouseAvailability", fields: [boardingHouseAvailabilityId], references: [id])
+  boardingHouseOvercrowded  YesNo?              @relation("boardingHouseOvercrowded", fields: [boardingHouseOvercrowdedId], references: [id])
+  separateBoardingBoysGirls YesNo?              @relation("separateBoardingBoysGirls", fields: [separateBoardingBoysGirlsId], references: [id])
+  boardingHouseCondition    SanitaryInsanitary? @relation("boardingHouseCondition", fields: [boardingHouseConditionId], references: [id])
+
+  protectiveClothingUsed YesNo? @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
+
   User       User       @relation(fields: [userId], references: [id])
   userId     Int
   Inspection Inspection @relation(fields: [inspectionId], references: [id])
 
   Type    Type?    @relation(fields: [institutionPremisesTypeId], references: [id])
   Subtype Subtype? @relation(fields: [institutionPremisesSubtypeId], references: [id])
+ 
 }
 
 model IndustryPremisesInfoSection {

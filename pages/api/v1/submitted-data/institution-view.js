@@ -80,14 +80,32 @@ const get = async (req, res) => {
         },
         InstitutionPremisesInfoSection: {
           include: {
-           
+            ablutionSlabCondition:  true,
+            ablutionSlab:  true,
+            animalSpaceAvailability:  true,
+            animalSpaceCondition:  true,
+            cookedFoodStorageCondtionSafe: true,
+            drainsAvailability:  true,
+            firstAidAvailability:  true,
+            foodVendorAvailability:  true,
+            Subtype: true,
+            Type:  true,
+            kitchenAvailability:  true,
+            physicalStructureType:  true,
+            shepClubExistence:  true,
+            slaughterAreaAvailability:  true,
+            slaughterAreaCondition:  true,
+            soundProof:  true,
+            toiletAvailability:  true,
+            uncookedFoodStorageCondtionSafe: true,
+            urinalAvailability:  true,
             animalSpaceAvailability:  true,
             toiletAvailability: true,
             urinalAvailability: true,
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
-            protectiveClothingUsed: true
+             protectiveClothingUsed: true
           },
         },
 
