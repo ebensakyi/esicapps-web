@@ -10,7 +10,7 @@ const IndustryView = ({ data }) => {
         id: id,
       });
 
-      if (response.statusCode == 200) {
+      if (response.status == 200) {
         router.push("/submitted-data/industry?published=0");
       }
     } catch (error) {

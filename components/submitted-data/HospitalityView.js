@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const HospitalityView = ({ data }) => {
-  console.log(data);
   const router = useRouter();
 
   const publish = async (id) => {

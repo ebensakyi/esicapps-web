@@ -13,7 +13,7 @@ const SanitaryView = ({ data }) => {
         }
       );
 
-      if (response.statusCode == 200) {
+      if (response.status == 200) {
         router.push("/submitted-data/sanitary?published=0");
       }
     } catch (error) {

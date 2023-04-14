@@ -13,7 +13,7 @@ const InstitutionView = ({ data }) => {
         }
       );
 
-      if (response.statusCode == 200) {
+      if (response.status == 200) {
         router.push("/submitted-data/institution?published=0");
       }
     } catch (error) {

@@ -2,6 +2,8 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
+    let userCookie = await getUserCookie(req, res);
+
     let inspection = await prisma.inspection.findFirst({
       where: {
         id: req.body.id,
@@ -12,13 +14,13 @@ const post = async (req, res) => {
     await prisma.inspection.update({
       data: {
         isPublished: Math.abs(isPublished - 1),
+        publishedById: Number(userCookie.user.id),
       },
       where: {
         id: req.body.id,
       },
     });
 
-    res.status(200).json();
   } catch (error) {
     console.log(error);
   }
