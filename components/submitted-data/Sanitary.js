@@ -79,6 +79,7 @@ const Sanitary = ({ data }) => {
               <thead>
                 <tr>
                   <th>Rating </th>
+                  <th>Type</th>
                   <th>Premises Code</th>
                   <th> Start Date</th>
                   <th> End Date</th>
@@ -101,6 +102,25 @@ const Sanitary = ({ data }) => {
                     <tr key={dt.id}>
                       {" "}
                       <td>{handleRating(dt.Inspection.totalRating)}</td>
+                      <td>
+                        {dt.Inspection.InspectionType.name}
+                        {dt.Inspection.InspectionType.id == 2?
+                        <span>
+                        
+                          <Link
+                            href={{
+                              pathname: `/submitted-data/sanitary_view`,
+                              query: {
+                                id: dt.Inspection.prevInspectionId,
+                              },
+                            }}
+                          >
+                            <a className="dropdown-item">
+                              <i className="ri-external-link-line align-bottom me-2 text-muted" />
+                            </a>
+                          </Link>
+                        </span>:<></>}
+                      </td>
                       <td>{dt.Inspection.premisesCode}</td>
                       <td>
                         {moment(dt.Inspection.startedAt).format(

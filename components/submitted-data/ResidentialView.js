@@ -226,7 +226,7 @@ const ResidentialView = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.ResidentialPremisesInfoSection != null ? (
+                          {data?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet facility availabilty
@@ -263,7 +263,7 @@ const ResidentialView = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                          {data?.ResidentialPremisesInfoSection != null ? (
+                          {data?.ResidentialPremisesInfoSection?.bathroomAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Bathroom facility availabilty
@@ -324,7 +324,7 @@ const ResidentialView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.ResidentialPremisesInfoSection != null ? (
+                          {data?.ResidentialPremisesInfoSection?.householdNumber != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Number of household

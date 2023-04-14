@@ -407,11 +407,10 @@ const SanitaryView = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.SanitaryPremisesInfoSection?.PremisesAnimal
-                            .length != 0 ? (
+                          {data?.SanitaryPremisesInfoSection?.PremisesAnimal?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">Animals</label>
-                              {data?.SanitaryPremisesInfoSection?.PremisesAnimal.map(
+                              {data?.SanitaryPremisesInfoSection?.PremisesAnimal?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -460,8 +459,7 @@ const SanitaryView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.SanitaryPremisesInfoSection
-                                  .animalSpaceCondition.name
+                                data?.SanitaryPremisesInfoSection?.animalSpaceCondition?.name
                               }
                               readOnly="readOnly"
                             />
@@ -721,26 +719,7 @@ const SanitaryView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
-                            ?.medicalCertificateAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Medical certificate
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.LicencePermitSection
-                                    ?.medicalCertificateAvailability?.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                         
                           {data?.LicencePermitSection
                             ?.gtaOperatingLicenceAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
@@ -1467,7 +1446,7 @@ const SanitaryView = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.sewerSystem.name
+                                  data?.LiquidWasteSection?.sewerSystem?.name
                                 }
                                 readOnly="readOnly"
                               />
@@ -1487,7 +1466,7 @@ const SanitaryView = ({ data }) => {
                                 id="invoicenoInput"
                                 value={
                                   data?.LiquidWasteSection
-                                    ?.wasteWaterContainment.name
+                                    ?.wasteWaterContainment?.name
                                 }
                                 readOnly="readOnly"
                               />
@@ -1698,8 +1677,7 @@ const SanitaryView = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection
-                                    .wasteServiceProviderRegistration.name
+                                  data?.SolidWasteSection?.wasteServiceProviderRegistration?.name
                                 }
                                 readOnly="readOnly"
                               />
@@ -1814,7 +1792,7 @@ const SanitaryView = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Receptacle
                               </label>
-                              {data?.SolidWasteSection?.PremisesWasteReceptacle.map(
+                              {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1943,8 +1921,7 @@ const SanitaryView = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.ConclusionSection.obnoxiousTradeExist
-                                    .name
+                                  data?.ConclusionSection?.obnoxiousTradeExist?.name
                                 }
                                 readOnly="readOnly"
                               />

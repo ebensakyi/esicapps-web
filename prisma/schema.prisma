@@ -895,7 +895,7 @@ model YesNo {
   cremationPracticed                                 SanitaryPremisesInfoSection[]    @relation("cremationPracticed")
   disinfestationQuarterly                            SanitaryPremisesInfoSection[]    @relation("disinfestationQuarterly")
   drainsAvailability                                 SanitaryPremisesInfoSection[]    @relation("drainsAvailability")
-  fenced                                             SanitaryPremisesInfoSection[]    @relation("fenced")
+  siteFenced                                             SanitaryPremisesInfoSection[]    @relation("siteFenced")
   firstAidAvailability                               SanitaryPremisesInfoSection[]    @relation("firstAidAvailability")
   footbathAvailability                               SanitaryPremisesInfoSection[]    @relation("footbathAvailability")
   leachateMgt                                        SanitaryPremisesInfoSection[]    @relation("leachateMgt")
@@ -911,7 +911,6 @@ model YesNo {
   storeRoomAvailability                              SanitaryPremisesInfoSection[]    @relation("storeRoomAvailability")
   toiletAvailability                                 SanitaryPremisesInfoSection[]    @relation("toiletAvailability")
   urinalAvailability                                 SanitaryPremisesInfoSection[]    @relation("urinalAvailability")
-  wasteSortingSanitary                               SanitaryPremisesInfoSection[]    @relation("wasteSorting")
   wheelbathAvailability                              SanitaryPremisesInfoSection[]    @relation("wheelbathAvailability")
   workersOfficeAvailability                          SanitaryPremisesInfoSection[]    @relation("workersOfficeAvailability")
   adequateWasteStorageReceptacle                     SolidWasteSection[]              @relation("adequateWasteStorageReceptacle")
@@ -1219,13 +1218,12 @@ model SanitaryPremisesInfoSection {
   comfortRoomAvailabilityId                 Int?
   wheelbathAvailabilityId                   Int?
   footbathAvailabilityId                    Int?
-  wasteSortingId                            Int?
   leachateMgtId                             Int?
   safeHazardousWasteMgtId                   Int?
   sextonManagementId                        Int?
   sextonOfficeId                            Int?
   properLayoutId                            Int?
-  fencedId                                  Int?
+  siteFencedId                                  Int?
   cremationPracticedId                      Int?
   workersOfficeAvailabilityId               Int?
   transferStationCapacity                   Int?
@@ -1249,7 +1247,7 @@ model SanitaryPremisesInfoSection {
   disinfectionFrequency                   DisinfectionFrequency? @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
   disinfestationQuarterly                 YesNo?                 @relation("disinfestationQuarterly", fields: [disinfestationQuarterlyId], references: [id])
   drainsAvailability                      YesNo?                 @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  fenced                                  YesNo?                 @relation("fenced", fields: [fencedId], references: [id])
+  siteFenced                                  YesNo?                 @relation("siteFenced", fields: [siteFencedId], references: [id])
   firstAidAvailability                    YesNo?                 @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   footbathAvailability                    YesNo?                 @relation("footbathAvailability", fields: [footbathAvailabilityId], references: [id])
   leachateMgt                             YesNo?                 @relation("leachateMgt", fields: [leachateMgtId], references: [id])
@@ -1268,15 +1266,14 @@ model SanitaryPremisesInfoSection {
   storeRoomAvailability                   YesNo?                 @relation("storeRoomAvailability", fields: [storeRoomAvailabilityId], references: [id])
   toiletAvailability                      YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                      YesNo?                 @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  wasteSorting                            YesNo?                 @relation("wasteSorting", fields: [wasteSortingId], references: [id])
   wheelbathAvailability                   YesNo?                 @relation("wheelbathAvailability", fields: [wheelbathAvailabilityId], references: [id])
   workersOfficeAvailability               YesNo?                 @relation("workersOfficeAvailability", fields: [workersOfficeAvailabilityId], references: [id])
   User                                    User                   @relation(fields: [userId], references: [id])
   Inspection                              Inspection             @relation(fields: [inspectionId], references: [id])
   userId                                  Int
 
-  numberCarcassHandlers            Int
-  numberCarcassHandlersMedicalCert Int
+  numberCarcassHandlers            Int?
+  numberCarcassHandlersMedicalCert Int?
 }
 
 model MarketPremisesInfoSection {

@@ -3,8 +3,8 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
 
+    console.log(req.body);
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
@@ -32,7 +32,7 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.staffChangingRoomId),
 
-          ownershipTypeId:
+      ownershipTypeId:
         req.body.ownershipTypeId == "null"
           ? null
           : Number(req.body.ownershipTypeId),
@@ -57,10 +57,10 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.protectiveClothingUsedId),
 
-      slaughterRoomAvailabilityId:
-        req.body.slaughterRoomAvailabilityId == "null"
+          slaughterAreaAvailabilityId:
+        req.body.slaughterAreaAvailabilityId == "null"
           ? null
-          : Number(req.body.slaughterRoomAvailabilityId),
+          : Number(req.body.slaughterAreaAvailabilityId),
 
       storeRoomAvailabilityId:
         req.body.storeRoomAvailabilityId == "null"
@@ -72,7 +72,7 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.condemnationRoomAvailabilityId),
 
-          cloakRoomAvailabilityId:
+      cloakRoomAvailabilityId:
         req.body.cloakRoomAvailabilityId == "null"
           ? null
           : Number(req.body.cloakRoomAvailabilityId),
@@ -80,7 +80,7 @@ const post = async (req, res) => {
         req.body.comfortRoomAvailabilityId == "null"
           ? null
           : Number(req.body.comfortRoomAvailabilityId),
-          wheelbathAvailabilityId:
+      wheelbathAvailabilityId:
         req.body.wheelbathAvailabilityId == "null"
           ? null
           : Number(req.body.wheelbathAvailabilityId),
@@ -89,10 +89,10 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.footbathAvailabilityId),
 
-      wasteSortingId:
-        req.body.wasteSortingId == "null"
-          ? null
-          : Number(req.body.wasteSortingId),
+      // wasteSortingId:
+      //   req.body.wasteSortingId == "null"
+      //     ? null
+      //     : Number(req.body.wasteSortingId),
 
       leachateMgtId:
         req.body.leachateMgtId == "null"
@@ -115,43 +115,73 @@ const post = async (req, res) => {
         req.body.properLayoutId == "null"
           ? null
           : Number(req.body.properLayoutId),
-      fencedId: req.body.fencedId == "null" ? null : Number(req.body.fencedId),
+          siteFencedId: req.body.siteFencedId == "null" ? null : Number(req.body.siteFencedId),
 
-      cremationPracticedId: req.body.cremationPracticedId == "null" ? null : Number(req.body.cremationPracticedId),
-      workersOfficeAvailabilityId: req.body.workersOfficeAvailabilityId == "null" ? null : Number(req.body.workersOfficeAvailabilityId),
-      sanitaryContainerId: req.body.sanitaryContainerId == "null" ? null : Number(req.body.sanitaryContainerId),
-      transferStationCapacity: req.body.transferStationCapacity == "null" ? null : Number(req.body.transferStationCapacity),
-      numberContainer: req.body.numberContainer == "null" ? null : Number(req.body.numberContainer),
-      containerAttendantName: req.body.containerAttendantName == "null" ? null : Number(req.body.containerAttendantName),
-      containerAttendantPhoneNumber: req.body.containerAttendantPhoneNumber== "null" ? null :  req.body.containerAttendantPhoneNumber== ""?null: req.body.containerAttendantPhoneNumber,
-
+      cremationPracticedId:
+        req.body.cremationPracticedId == "null"
+          ? null
+          : Number(req.body.cremationPracticedId),
+      workersOfficeAvailabilityId:
+        req.body.workersOfficeAvailabilityId == "null"
+          ? null
+          : Number(req.body.workersOfficeAvailabilityId),
+     
+      transferStationCapacity:
+        req.body.transferStationCapacity == "null"
+          ? null
+          : Number(req.body.transferStationCapacity),
+      numberContainer:
+        req.body.numberContainer == "null"
+          ? null
+          : Number(req.body.numberContainer),
+      containerAttendantName:
+        req.body.containerAttendantName == "null"
+          ? null
+          : Number(req.body.containerAttendantName),
+      containerAttendantPhoneNumber:
+        req.body.containerAttendantPhoneNumber == "null"
+          ? null
+          : req.body.containerAttendantPhoneNumber == ""
+          ? null
+          : req.body.containerAttendantPhoneNumber,
 
       ///////////////New////
-      numberWorkers: req.body.numberWorkers == "null" ? null : Number(req.body.numberWorkers),
-      cremationPlatformId: req.body.cremationPlatformId == "null" ? null : Number(req.body.cremationPlatformId),
-      sanitaryAshesDisposalId: req.body.sanitaryAshesDisposalId == "null" ? null : Number(req.body.sanitaryAshesDisposalId),
-      numberCarcassHandlers: req.body.numberCarcassHandlers == "null" ? null : Number(req.body.numberCarcassHandlers),
-      numberCarcassHandlersMedicalCert: req.body.numberCarcassHandlersMedicalCert == "null" ? null : Number(req.body.numberCarcassHandlersMedicalCert),
-
-   
+      numberWorkers:
+        req.body.numberWorkers == "null"
+          ? null
+          : Number(req.body.numberWorkers),
+      cremationPlatformId:
+        req.body.cremationPlatformId == "null"
+          ? null
+          : Number(req.body.cremationPlatformId),
+      sanitaryAshesDisposalId:
+        req.body.sanitaryAshesDisposalId == "null"
+          ? null
+          : Number(req.body.sanitaryAshesDisposalId),
+      numberCarcassHandlers:
+        req.body.numberCarcassHandlers == "null"
+          ? null
+          : Number(req.body.numberCarcassHandlers),
+      numberCarcassHandlersMedicalCert:
+        req.body.numberCarcassHandlersMedicalCert == "null"
+          ? null
+          : Number(req.body.numberCarcassHandlersMedicalCert),
     };
 
-    // console.log(data);
+   console.log(data);
     const response = await prisma.sanitaryPremisesInfoSection.create({ data });
 
-    if(response){
-      return  res.status(200).json({ statusCode: 1, message: "Data saved" });
-      }
-  
-      return  res.status(500).json({ statusCode: 0, message: "Data skipped" });  } catch (error) {
-    // console.log("Error: " + error);
+    if (response) {
+      return res.status(200).json({ statusCode: 1, message: "Data saved" });
+    }
+
+    return res.status(500).json({ statusCode: 0, message: "Data skipped" });
+  } catch (error) {
+   console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)
     //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
-
-    res.status(500).json({ statusCode: 0, message: "Data skipped" });
-
   }
 };
 const get = async (req, res) => {
@@ -177,4 +207,3 @@ export default (req, res) => {
     ? get(req, res)
     : res.status(404).send("");
 };
-
