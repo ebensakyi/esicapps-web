@@ -28,7 +28,6 @@ const post = async (req, res) => {
     
     };
 
-    console.log(data);
 
     const response = await prisma.followUpInspection.create({ data });
 

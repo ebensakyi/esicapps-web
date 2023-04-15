@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 const ResidentialFollowupView = ({ data }) => {
   const router = useRouter();
 
-  
 
   const downloadInspection = async () => {
     const printContents = document.getElementById("printableArea").innerHTML;
@@ -56,14 +55,7 @@ const ResidentialFollowupView = ({ data }) => {
                           </h5>
                         </div>
                       </div>
-                      {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
+                     
                     </div>
                     <div className="card product">
                       <div className="card-body">

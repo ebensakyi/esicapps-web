@@ -43,7 +43,7 @@ const ResidentialFollowUp = ({
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/export-followups-to-excel`,
+        `/api/v1/submitted-data/export-followup-to-excel`,
         { inspectionFormId: 1, fileName: "residential-follow-up.xlsx" }
       );
       if (response.status == 200) {
@@ -379,7 +379,7 @@ const ResidentialFollowUp = ({
                       <td>
                         <Link
                           href={{
-                            pathname: `/submitted-data/residential_followup_view`,
+                            pathname: `/submitted-data/residential-followup-view`,
                             query: {
                               id: dt.id,
                             },
