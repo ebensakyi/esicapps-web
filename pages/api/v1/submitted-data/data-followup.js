@@ -11,13 +11,15 @@ const get = async (req, res) => {
   try {
     let mainWhere = await generateWhereMainObject(req, res);
 
+    console.log(mainWhere);
+
     let inspectionFormId = Number(req.query.inspectionFormId);
 
     let curPage = req.query.page;
     //let searchText = req.query.searchText.trim();
 
     let perPage = 10;
-    let count = await prisma.inspection.count({
+    let count = await prisma.followUpInspection.count({
       //where: getSearchParams(req, searchText).where,
       where: {
         inspectionFormId: inspectionFormId,
@@ -41,9 +43,7 @@ const get = async (req, res) => {
 const generateWhereMainObject = async (req, res) => {
   let region;
   let district;
-  let whereObject;
 
-  let published = Number(req?.query?.published);
   let inspectionFormId = Number(req?.query?.inspectionFormId);
   let curPage = req?.query?.page;
 
@@ -83,8 +83,6 @@ const generateWhereMainObject = async (req, res) => {
         deleted: 0,
         Inspection: {
           [filterBy]: filterValue,
-
-          isPublished: published,
           inspectionFormId: inspectionFormId,
         },
         createdAt: {
@@ -128,7 +126,6 @@ const generateWhereMainObject = async (req, res) => {
           [filterBy]: filterValue,
 
           regionId: region,
-          isPublished: published,
           inspectionFormId: inspectionFormId,
         },
         createdAt: {
@@ -172,7 +169,6 @@ const generateWhereMainObject = async (req, res) => {
         districtId: district,
         deleted: 0,
         Inspection: {
-          isPublished: published,
           inspectionFormId: inspectionFormId,
         },
         createdAt: {
