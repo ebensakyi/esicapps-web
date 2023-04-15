@@ -32,30 +32,51 @@ const get = async (req, res) => {
   try {
     let inspectionId = req.query.id;
 
-    let data = await prisma.followUpInspection.findFirst({ where: {
-      deleted: 0,
-      id: inspectionId
-    },
-    include: {
-      InspectionType: true,
-      Rating: true,
-      Inspection: {
-        include: { User: true, BasicInfoSection: {
-          include: {  Community: { include: { District: { include: { Region: true } } } },}
-        
-        }},
+    let followup = await prisma.followUpInspection.findFirst({
+      where: {
+        deleted: 0,
+        id: inspectionId,
       },
-     
-    },
-  }
-);
+      include: {
+        InspectionType: true,
+        Rating: true,
+        Inspection: {
+          include: {
+            User: true,
+            BasicInfoSection: {
+              include: {
+                Community: {
+                  include: { District: { include: { Region: true } } },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
 
+    let actionsTaken = await prisma.premisesActionTaken.findMany({
+      where: {
+        deleted: 0,
+        inspectionId,
+      },
+      include: {
+        Action: true,
+      },
+    });
 
-
-   
+    let nuisances = await prisma.premisesNuisanceDetected.findMany({
+      where: {
+        deleted: 0,
+        inspectionId,
+      },
+      include: {
+        Nuisance: true,
+      },
+    });
 
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
-    return res.status(200).json(data);
+    return res.status(200).json({followup,actionsTaken,nuisances});
   } catch (error) {
     console.log("Error: " + error);
   }

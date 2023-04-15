@@ -26,7 +26,6 @@ const Residential = ({
 
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
-  console.log(loggedInUserType);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -160,7 +159,7 @@ const Residential = ({
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
-            >
+            > <option selected>Filter by </option>
               {regions.map((data) => (
                 <option key={data.id} value={data.id}>
                   {data.name}
@@ -179,7 +178,7 @@ const Residential = ({
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
-            >
+            > <option selected>Filter by </option>
               {districts.map((data) => (
                 <option key={data.id} value={data.id}>
                   {data.name}
@@ -198,7 +197,7 @@ const Residential = ({
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
-            >
+            > <option selected>Filter by </option>
               {electoralAreas.map((data) => (
                 <option key={data.id} value={data.id}>
                   {data.name}
@@ -217,7 +216,7 @@ const Residential = ({
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
-            >
+            > <option selected>Filter by </option>
               {communities.map((data) => (
                 <option key={data.id} value={data.id}>
                   {data.name}
@@ -313,18 +312,18 @@ const Residential = ({
                 {data.inspection.map((dt) => {
                   return (
                     <tr key={dt.id}>
-                      {" "}
-                      <td>{handleRating(dt.Inspection.totalRating)}</td>
+                   
+                      <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                       <td>
-                        {dt.Inspection.InspectionType.name}
-                        {dt.Inspection.InspectionType.id == 2?
+                        {dt?.Inspection?.InspectionType?.name}
+                        {dt?.Inspection?.InspectionType?.id == 2?
                         <span>
                         
                           <Link
                             href={{
                               pathname: `/submitted-data/residential_view`,
                               query: {
-                                id: dt.Inspection.prevInspectionId,
+                                id: dt?.Inspection?.prevInspectionId,
                               },
                             }}
                           >
@@ -351,17 +350,15 @@ const Residential = ({
                       <td>{dt.ghanaPostGps}</td>
                       <td>{dt.accuracy}</td>
                       <td>
-                        {dt.Community != null
-                          ? dt.Community.District.Region.name
-                          : ""}
+                        {dt.Community.District.Region.name
+                         }
                       </td>
                       <td>
-                        {dt.Community != null ? dt.Community.District.name : ""}
+                        { dt.Community.District.name }
                       </td>
                       <td>
-                        {dt.Community != null
-                          ? dt.Community.name
-                          : dt.community}
+                        { dt.Community.name
+                         }
                         {/* {dt.community} */}
                       </td>{" "}
                       <td>

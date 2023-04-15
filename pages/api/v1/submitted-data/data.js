@@ -11,16 +11,14 @@ const get = async (req, res) => {
   try {
     let mainWhere = await generateWhereMainObject(req, res);
 
-    console.log(mainWhere);
-
     let inspectionFormId = Number(req.query.inspectionFormId);
 
     let curPage = req.query.page;
-    //let searchText = req.query.searchText.trim();
+    // let searchText = req.query.searchText.trim();
 
     let perPage = 10;
     let count = await prisma.inspection.count({
-      //where: getSearchParams(req, searchText).where,
+      // where: getSearchParams(req, searchText).where,
       where: {
         inspectionFormId: inspectionFormId,
       },
@@ -36,22 +34,18 @@ const get = async (req, res) => {
 
     // return res.status(200).json(community);
   } catch (error) {
-    console.log("Error: " + error);
+    console.log("Error..s: " + error);
   }
 };
 
 const generateWhereMainObject = async (req, res) => {
-  let region;
-  let district;
   let whereObject;
 
   let published = Number(req?.query?.published);
   let inspectionFormId = Number(req?.query?.inspectionFormId);
   let curPage = req?.query?.page;
 
-  // let filterBy = req?.query?.filterBy;
-
-  let filterBy;
+  let filterBy = req?.query?.filterBy;
 
   let filterValue =
     req?.query?.filterValue == "undefined"
@@ -72,9 +66,12 @@ const generateWhereMainObject = async (req, res) => {
   let perPage = 10;
   let skip = Number((curPage - 1) * perPage) || 0;
 
-  let data = await verifyToken(req.query.token);
+  let userObj = await verifyToken(req.query.token);
 
-  let userType = data.user.UserType.id;
+  console.log("verifyToken====>", userObj);
+
+  let userType = userObj.user?.userTypeId;
+
   // let filterColumn = userType == 1 ?""
 
   if (userType == 1 || userType == 2) {
@@ -102,15 +99,25 @@ const generateWhereMainObject = async (req, res) => {
       },
       include: {
         Inspection: {
-          include: { InspectionType: true },
+          include: {
+            InspectionType: true,
+          },
         },
-        Community: { include: { District: { include: { Region: true } } } },
+        Community: {
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
+        },
         User: true,
       },
     };
   }
   if (userType == 3) {
-    region = data.user.regionId;
+    let region = userObj.user.regionId;
     filterBy = filterBy == undefined ? "districtId" : filterBy;
 
     return {
@@ -118,7 +125,6 @@ const generateWhereMainObject = async (req, res) => {
         deleted: 0,
         Inspection: {
           [filterBy]: filterValue,
-
           regionId: region,
           isPublished: published,
           inspectionFormId: inspectionFormId,
@@ -136,7 +142,15 @@ const generateWhereMainObject = async (req, res) => {
       },
       include: {
         Inspection: true,
-        Community: { include: { District: { include: { Region: true } } } },
+        Community: {
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
+        },
         User: true,
       },
     };
@@ -144,7 +158,7 @@ const generateWhereMainObject = async (req, res) => {
   if (userType == 4) {
     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
 
-    district = data.user.districtId;
+   let district = user.districtId;
     return {
       where: {
         [filterBy]: filterValue,
@@ -168,7 +182,15 @@ const generateWhereMainObject = async (req, res) => {
       },
       include: {
         Inspection: true,
-        Community: { include: { District: { include: { Region: true } } } },
+        Community: {
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
+        },
         User: true,
       },
     };

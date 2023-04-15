@@ -1,7 +1,11 @@
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import { useRouter } from 'next/router';
+
 const Header = () => {
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
 
   let ut = Cookies.get("ut").split("??")[1];
@@ -191,21 +195,21 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/residential?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/residential?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a  className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/residential-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
@@ -231,21 +235,21 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/eatery?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/eatery?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/eatery-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>

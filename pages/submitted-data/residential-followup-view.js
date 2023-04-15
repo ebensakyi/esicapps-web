@@ -41,10 +41,11 @@ export async function getServerSideProps(context) {
         (res) => res.json()
     );
 
+    console.log(data);
    
     return {
         props: {
-            data,
+            data
         },
     };
 

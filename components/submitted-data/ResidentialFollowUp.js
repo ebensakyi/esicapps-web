@@ -25,7 +25,6 @@ const ResidentialFollowUp = ({
   const [to, setTo] = useState(null);
 
 
-  console.log(data);
 
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
@@ -296,7 +295,7 @@ const ResidentialFollowUp = ({
                   <th scope="col">Rating </th>
                   <th scope="col">Type</th>
                   <th scope="col">Premises Code</th>
-                  <th scope="col"> Start Date</th>
+                  <th scope="col">Start Date</th>
                   <th scope="col"> End Date</th>
                   <th scope="col">Inspection Officer</th>
                   <th scope="col">GhanaPost GPS</th>

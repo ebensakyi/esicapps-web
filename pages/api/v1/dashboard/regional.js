@@ -673,7 +673,7 @@ ORDER BY "InspectionForm"."name"`;
 
     return res.status(200).json(data);
   } catch (error) {
-    console.log("Error: " + error);
+    console.log("Error:.. " + error);
   }
 };
 function toJson(data) {

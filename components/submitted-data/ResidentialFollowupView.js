@@ -68,7 +68,7 @@ const ResidentialFollowupView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.premisesCode}
+                              value={data?.followup?.premisesCode}
                               readOnly="readOnly"
                             />
                           </div>
@@ -79,8 +79,7 @@ const ResidentialFollowupView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community?.District
-                                  ?.Region.name
+                                data?.followup.Inspection.BasicInfoSection.Community.District.Region.name
                               }
                               readOnly="readOnly"
                             />
@@ -92,10 +91,9 @@ const ResidentialFollowupView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community != null
-                                  ? data?.BasicInfoSection?.Community?.District
+                              data?.followup?.Inspection.BasicInfoSection?.Community?.District
                                       ?.name
-                                  : ""
+                                 
                               }
                               readOnly="readOnly"
                             />
@@ -108,7 +106,8 @@ const ResidentialFollowupView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.ElectoralArea?.name}
+                              value={ data?.followup.Inspection.BasicInfoSection?.Community?.District.ElectoralArea
+                                ?.name}
                               readOnly="readOnly"
                             />
                           </div>
@@ -119,9 +118,8 @@ const ResidentialFollowupView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community != null
-                                  ? data?.BasicInfoSection?.Community?.name
-                                  : ""
+                                data?.followup?.Inspection?.BasicInfoSection?.Community?.name
+                               
                               }
                               readOnly="readOnly"
                             />
@@ -134,7 +132,7 @@ const ResidentialFollowupView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.BasicInfoSection?.ghanaPostGps}
+                              value={data?.followup?.Inspection?.BasicInfoSection?.ghanaPostGps}
                               readOnly="readOnly"
                             />
                           </div>
@@ -146,11 +144,11 @@ const ResidentialFollowupView = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.BasicInfoSection?.respondentName}
+                              value={data?.followup?.Inspection?.BasicInfoSection?.respondentName}
                               readOnly="readOnly"
                             />
                           </div>
-                          <div className="col-lg-3 col-sm-6">
+                          {/* <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               Respondent designation
                             </label>
@@ -159,7 +157,7 @@ const ResidentialFollowupView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.RespondentDesignation
+                                data?.Inspection?.BasicInfoSection?.RespondentDesignation
                                   .name
                               }
                               readOnly="readOnly"
@@ -174,11 +172,11 @@ const ResidentialFollowupView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.respondentPhoneNumber
+                                data?.Inspection?.BasicInfoSection?.respondentPhoneNumber
                               }
                               readOnly="readOnly"
                             />
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
@@ -225,13 +223,13 @@ const ResidentialFollowupView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.ConclusionSection?.PremisesNuisanceDetected
+                          {data?.nuisances
                             ?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Nuisance Observed
                               </label>
-                              {data?.ConclusionSection?.PremisesNuisanceDetected?.map(
+                              {data?.nuisances?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -247,7 +245,7 @@ const ResidentialFollowupView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.ConclusionSection?.officerComment != null ? (
+                          {data?.followup?.officerComment != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Office Comment
@@ -256,20 +254,20 @@ const ResidentialFollowupView = ({ data }) => {
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
-                                value={data?.ConclusionSection?.officerComment}
+                                value={data?.followup?.officerComment}
                                 readOnly="readOnly"
                               />
                             </div>
                           ) : (
                             <></>
                           )}
-                          {data?.ConclusionSection?.PremisesActionTaken
+                          {data?.actionsTaken
                             ?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Action Taken
                               </label>
-                              {data?.ConclusionSection?.PremisesActionTaken?.map(
+                              {data?.actionsTaken?.map(
                                 (x) => (
                                   <input
                                     key={x.id}

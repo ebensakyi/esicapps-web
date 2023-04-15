@@ -492,7 +492,6 @@ const Dashboard = ({ regions }) => {
                         onChange={(e) => {
                           setDistrict(e.target.value);
                           // getElectoralByDistrict(e, e.target.value);
-                          console.log("district ", district);
                         }}
                       >
                         <option>Choose...</option>
