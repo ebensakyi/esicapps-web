@@ -39,6 +39,7 @@ export async function getServerSideProps(context) {
   const filterValue = context.query.filterValue;
   const from = context.query.from || "undefined";
   const to = context.query.to || "undefined";
+  const inspectionFormId = context.query.inspectionFormId || "undefined";
 
   const page = context.query.page || 1;
   const searchText = context.query.searchText || "";
@@ -52,7 +53,7 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/submitted-data/data-followup?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=1&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}
+    `${SERVER_BASE_URL}/api/v1/submitted-data/data-followup?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=${inspectionFormId}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}
    `
   ).then((res) => res.json());
 

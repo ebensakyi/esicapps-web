@@ -24,10 +24,9 @@ const ResidentialFollowUp = ({
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
 
-
-
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
+  let { inspectionFormId } = router.query;
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -57,12 +56,36 @@ const ResidentialFollowUp = ({
     try {
       if (rating == 1) {
         return <span className="badge bg-success">Good</span>;
-      } else if (rating == 2 ) {
+      } else if (rating == 2) {
         return <span className="badge bg-warning">Average</span>;
       } else if (rating == 3) {
         return <span className="badge bg-danger">Poor</span>;
-      }else{
+      } else {
         return <span className="badge bg-primary">Default</span>;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleTitle = () => {
+    try {
+      if (inspectionFormId == 1) {
+        return "RESIDENTIAL FOLLOW-UP";
+      } else if (inspectionFormId == 2) {
+        return "EATERY FOLLOW-UP";
+      } else if (inspectionFormId == 3) {
+        return "HEALTH FOLLOW-UP";
+      } else if (inspectionFormId == 4) {
+        return "HOSPITALITY FOLLOW-UP";
+      } else if (inspectionFormId == 5) {
+        return "INSTITUTION FOLLOW-UP";
+      } else if (inspectionFormId == 6) {
+        return "INDUSTRY FOLLOW-UP";
+      } else if (inspectionFormId == 7) {
+        return "MARKET FOLLOW-UP";
+      } else if (inspectionFormId == 8) {
+        return "SANITARY FOLLOW-UP";
       }
     } catch (error) {
       console.log(error);
@@ -269,7 +292,9 @@ const ResidentialFollowUp = ({
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">RESIDENTIAL PREMISES - FOLLOW-UP</h5>
+            <h5 className="card-title mb-0">
+            {handleTitle()}
+            </h5>
           </div>
           <div className="card-body">
             <div className="row">
@@ -315,12 +340,11 @@ const ResidentialFollowUp = ({
                   return (
                     <tr key={dt.id}>
                       {" "}
-                      <td>{handleRating(dt?.Rating?.name)}</td>
+                      <td>{handleRating(dt?.rating)}</td>
                       <td>
                         {dt.InspectionType.name}
-                       
+
                         <span>
-                        
                           <Link
                             href={{
                               pathname: `/submitted-data/residential_view`,
@@ -347,22 +371,21 @@ const ResidentialFollowUp = ({
                         )}
                       </td>
                       <td>
-                        {dt.Inspection.User.otherNames} {dt.Inspection.User.surname}
+                        {dt.Inspection.User.otherNames}{" "}
+                        {dt.Inspection.User.surname}
                       </td>
                       <td>{dt.Inspection.BasicInfoSection.ghanaPostGps}</td>
                       <td>{dt.Inspection.BasicInfoSection.accuracy}</td>
                       <td>
-                      {dt.Inspection.BasicInfoSection.Community.District.Region.name
-                         }
+                        {
+                          dt.Inspection.BasicInfoSection.Community.District
+                            .Region.name
+                        }
                       </td>
                       <td>
-                      {dt.Inspection.BasicInfoSection.Community.District.name
-                         }
+                        {dt.Inspection.BasicInfoSection.Community.District.name}
                       </td>
-                      <td>
-                      {dt.Inspection.BasicInfoSection.Community.name
-                         }
-                      </td>{" "}
+                      <td>{dt.Inspection.BasicInfoSection.Community.name}</td>{" "}
                       <td>
                         {moment(dt.Inspection.createdAt).format(
                           "MMM Do YYYY, h:mm:ss a"

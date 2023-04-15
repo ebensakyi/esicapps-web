@@ -11,7 +11,6 @@ const get = async (req, res) => {
   try {
     let mainWhere = await generateWhereMainObject(req, res);
 
-    console.log(mainWhere);
 
     let inspectionFormId = Number(req.query.inspectionFormId);
 
@@ -27,6 +26,8 @@ const get = async (req, res) => {
     });
 
     let inspection = await prisma.followUpInspection.findMany(mainWhere);
+
+    console.log(inspection);
 
     return res.status(200).json({
       inspection,
