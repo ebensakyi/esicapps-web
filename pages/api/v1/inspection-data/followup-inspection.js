@@ -25,10 +25,7 @@ const post = async (req, res) => {
         req.body.isNuisanceObservedId == "null"
           ? null
           : Number(req.body.isNuisanceObservedId),
-      generalSanitaryConditionId:
-        req.body.generalSanitaryConditionId == "null"
-          ? null
-          : Number(req.body.generalSanitaryConditionId),
+    
     };
 
     console.log(data);

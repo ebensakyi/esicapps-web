@@ -324,11 +324,12 @@ model CleaningFrequency {
 }
 
 model Rating {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  FollowUpInspection FollowUpInspection[]
 }
 
 model Community {
@@ -579,7 +580,6 @@ model SanitaryInsanitary {
   animalSpaceCondition            ResidentialPremisesInfoSection[] @relation("animalSpaceCondition")
   sanitaryAshesDisposal           SanitaryPremisesInfoSection[]    @relation("sanitaryAshesDisposal")
   sanitaryContainer               SolidWasteSection[]              @relation("sanitaryContainer")
-  FollowUpInspection              FollowUpInspection[]             @relation("generalSanitaryCondition")
   animalSpaceConditionInstitution InstitutionPremisesInfoSection[] @relation("animalSpaceCondition")
   byProductsStorageAreaCond       IndustryPremisesInfoSection[]    @relation("byProductsStorageAreaCond")
   productionRoomCondition         IndustryPremisesInfoSection[]    @relation("productionRoomCondition")
@@ -895,7 +895,7 @@ model YesNo {
   cremationPracticed                                 SanitaryPremisesInfoSection[]    @relation("cremationPracticed")
   disinfestationQuarterly                            SanitaryPremisesInfoSection[]    @relation("disinfestationQuarterly")
   drainsAvailability                                 SanitaryPremisesInfoSection[]    @relation("drainsAvailability")
-  siteFenced                                             SanitaryPremisesInfoSection[]    @relation("siteFenced")
+  siteFenced                                         SanitaryPremisesInfoSection[]    @relation("siteFenced")
   firstAidAvailability                               SanitaryPremisesInfoSection[]    @relation("firstAidAvailability")
   footbathAvailability                               SanitaryPremisesInfoSection[]    @relation("footbathAvailability")
   leachateMgt                                        SanitaryPremisesInfoSection[]    @relation("leachateMgt")
@@ -962,16 +962,17 @@ model YesNo {
   boardingHouseOvercrowded                   InstitutionPremisesInfoSection[] @relation("boardingHouseOvercrowded")
   separateBoardingBoysGirls                  InstitutionPremisesInfoSection[] @relation("separateBoardingBoysGirls")
 
-  protectiveClothingUsedInstitution InstitutionPremisesInfoSection[]  @relation("protectiveClothingUsed")
+  protectiveClothingUsedInstitution InstitutionPremisesInfoSection[] @relation("protectiveClothingUsed")
 }
 
 model InspectionType {
-  id         Int          @id @default(autoincrement())
-  name       String       @db.VarChar(255)
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  Inspection Inspection[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  Inspection         Inspection[]
+  FollowUpInspection FollowUpInspection[]
 }
 
 model Logs {
@@ -1223,7 +1224,7 @@ model SanitaryPremisesInfoSection {
   sextonManagementId                        Int?
   sextonOfficeId                            Int?
   properLayoutId                            Int?
-  siteFencedId                                  Int?
+  siteFencedId                              Int?
   cremationPracticedId                      Int?
   workersOfficeAvailabilityId               Int?
   transferStationCapacity                   Int?
@@ -1247,7 +1248,7 @@ model SanitaryPremisesInfoSection {
   disinfectionFrequency                   DisinfectionFrequency? @relation("disinfectionFrequency", fields: [disinfectionFrequencyId], references: [id])
   disinfestationQuarterly                 YesNo?                 @relation("disinfestationQuarterly", fields: [disinfestationQuarterlyId], references: [id])
   drainsAvailability                      YesNo?                 @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  siteFenced                                  YesNo?                 @relation("siteFenced", fields: [siteFencedId], references: [id])
+  siteFenced                              YesNo?                 @relation("siteFenced", fields: [siteFencedId], references: [id])
   firstAidAvailability                    YesNo?                 @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   footbathAvailability                    YesNo?                 @relation("footbathAvailability", fields: [footbathAvailabilityId], references: [id])
   leachateMgt                             YesNo?                 @relation("leachateMgt", fields: [leachateMgtId], references: [id])
@@ -1414,7 +1415,6 @@ model InstitutionPremisesInfoSection {
 
   Type    Type?    @relation(fields: [institutionPremisesTypeId], references: [id])
   Subtype Subtype? @relation(fields: [institutionPremisesSubtypeId], references: [id])
- 
 }
 
 model IndustryPremisesInfoSection {
@@ -2070,25 +2070,27 @@ model FollowUpInspection {
 
   userId           Int
   inspectionFormId Int
-  inspectionTypeId Int
+  inspectionTypeId Int @default(3)
 
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String @db.VarChar(255)
   officerComment                String @db.VarChar(255)
 
-  generalSanitaryConditionId Int?
-  isNuisanceObservedId       Int?
-  deleted                    Int?     @default(0)
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
+  isNuisanceObservedId Int?
+  rating               Int?
+
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   Inspection Inspection? @relation(fields: [prevInspectionId], references: [id])
 
   obnoxiousTradeExistFollowUp YesNo @relation("obnoxiousTradeExistFollowUp", fields: [obnoxiousTradeExistFollowUpId], references: [id])
 
-  isNuisanceObserved YesNo? @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
+  isNuisanceObserved YesNo?         @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
+  InspectionType     InspectionType @relation(fields: [inspectionTypeId], references: [id])
 
-  generalSanitaryCondition SanitaryInsanitary? @relation("generalSanitaryCondition", fields: [generalSanitaryConditionId], references: [id])
+  Rating Rating? @relation(fields: [rating], references: [id])
 }
 
 //reset internal autoincrement id

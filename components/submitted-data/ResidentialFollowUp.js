@@ -8,7 +8,7 @@ import Link from "next/link";
 import * as moment from "moment";
 import Cookies from "js-cookie";
 
-const Residential = ({
+const ResidentialFollowUp = ({
   data,
   regions,
   districts,
@@ -24,9 +24,11 @@ const Residential = ({
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
 
+
+  console.log(data);
+
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
-  console.log(loggedInUserType);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -41,8 +43,8 @@ const Residential = ({
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/export-to-excel`,
-        { inspectionFormId: 1, fileName: "residential.xlsx" }
+        `/api/v1/submitted-data/export-followups-to-excel`,
+        { inspectionFormId: 1, fileName: "residential-follow-up.xlsx" }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -268,7 +270,7 @@ const Residential = ({
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
+            <h5 className="card-title mb-0">RESIDENTIAL PREMISES - FOLLOW-UP</h5>
           </div>
           <div className="card-body">
             <div className="row">
@@ -305,7 +307,7 @@ const Residential = ({
                   {/* <th>Respondent</th>
                   <th>Designation</th> */}{" "}
                   <th scope="col">Submission Date</th>
-                  <th scope="col">Status</th>
+                  {/* <th scope="col">Status</th> */}
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -314,17 +316,17 @@ const Residential = ({
                   return (
                     <tr key={dt.id}>
                       {" "}
-                      <td>{handleRating(dt.Inspection.totalRating)}</td>
+                      <td>{handleRating(dt?.Rating?.name)}</td>
                       <td>
-                        {dt.Inspection.InspectionType.name}
-                        {dt.Inspection.InspectionType.id == 2?
+                        {dt.InspectionType.name}
+                       
                         <span>
                         
                           <Link
                             href={{
                               pathname: `/submitted-data/residential_view`,
                               query: {
-                                id: dt.Inspection.prevInspectionId,
+                                id: dt.prevInspectionId,
                               },
                             }}
                           >
@@ -332,7 +334,7 @@ const Residential = ({
                               <i className="ri-external-link-line align-bottom me-2 text-success" />
                             </a>
                           </Link>
-                        </span>:<></>}
+                        </span>
                       </td>
                       <td>{dt.Inspection.premisesCode}</td>
                       <td>
@@ -346,42 +348,40 @@ const Residential = ({
                         )}
                       </td>
                       <td>
-                        {dt.User.otherNames} {dt.User.surname}
+                        {dt.Inspection.User.otherNames} {dt.Inspection.User.surname}
                       </td>
-                      <td>{dt.ghanaPostGps}</td>
-                      <td>{dt.accuracy}</td>
+                      <td>{dt.Inspection.BasicInfoSection.ghanaPostGps}</td>
+                      <td>{dt.Inspection.BasicInfoSection.accuracy}</td>
                       <td>
-                        {dt.Community != null
-                          ? dt.Community.District.Region.name
-                          : ""}
-                      </td>
-                      <td>
-                        {dt.Community != null ? dt.Community.District.name : ""}
+                      {dt.Inspection.BasicInfoSection.Community.District.Region.name
+                         }
                       </td>
                       <td>
-                        {dt.Community != null
-                          ? dt.Community.name
-                          : dt.community}
-                        {/* {dt.community} */}
+                      {dt.Inspection.BasicInfoSection.Community.District.name
+                         }
+                      </td>
+                      <td>
+                      {dt.Inspection.BasicInfoSection.Community.name
+                         }
                       </td>{" "}
                       <td>
                         {moment(dt.Inspection.createdAt).format(
                           "MMM Do YYYY, h:mm:ss a"
                         )}
                       </td>
-                      <td>
+                      {/* <td>
                         {dt.Inspection.isPublished == 0 ? (
                           <span className="badge bg-danger">Unpublished</span>
                         ) : (
                           <span className="badge bg-success">Published</span>
                         )}{" "}
-                      </td>
+                      </td> */}
                       <td>
                         <Link
                           href={{
-                            pathname: `/submitted-data/residential_view`,
+                            pathname: `/submitted-data/residential_followup_view`,
                             query: {
-                              id: dt.Inspection.id,
+                              id: dt.id,
                             },
                           }}
                         >
@@ -423,4 +423,4 @@ const Residential = ({
   );
 };
 
-export default Residential;
+export default ResidentialFollowUp;

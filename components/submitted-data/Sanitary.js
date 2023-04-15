@@ -116,7 +116,7 @@ const Sanitary = ({ data }) => {
                             }}
                           >
                             <a className="dropdown-item">
-                              <i className="ri-external-link-line align-bottom me-2 text-muted" />
+                              <i className="ri-external-link-line align-bottom me-2 text-success" />
                             </a>
                           </Link>
                         </span>:<></>}

@@ -44,7 +44,7 @@ const Eatery = ({ data }) => {
       } else if (rating == 3) {
         return <span className="badge bg-danger">Poor</span>;
       }else{
-        return <span className="badge bg-primary">Default</span>;
+        return <span className="badge bg-primary">N/A</span>;
       }
     } catch (error) {
       console.log(error);

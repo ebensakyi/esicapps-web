@@ -203,6 +203,13 @@ const Header = () => {
                               </a>
                             </Link>
                           </li>
+                          <li className="nav-item">
+                            <Link href="/submitted-data/residential-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
+                              </a>
+                            </Link>
+                          </li>
                         </ul>
                       </div>
                     </li>
@@ -233,6 +240,13 @@ const Header = () => {
                             <Link href="/submitted-data/eatery?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link href="/submitted-data/eatery-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
                               </a>
                             </Link>
                           </li>
@@ -267,6 +281,12 @@ const Header = () => {
                                 Unpublished
                               </a>
                             </Link>
+                          </li> <li className="nav-item">
+                            <Link href="/submitted-data/health-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
+                              </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -297,6 +317,12 @@ const Header = () => {
                             <Link href="/submitted-data/hospitality?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
+                              </a>
+                            </Link>
+                          </li> <li className="nav-item">
+                            <Link href="/submitted-data/hospitality-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
                               </a>
                             </Link>
                           </li>
@@ -333,6 +359,13 @@ const Header = () => {
                               </a>
                             </Link>
                           </li>
+                          <li className="nav-item">
+                            <Link href="/submitted-data/institution-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
+                              </a>
+                            </Link>
+                          </li>
                         </ul>
                       </div>
                     </li>
@@ -362,6 +395,13 @@ const Header = () => {
                             <Link href="/submitted-data/industry?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link href="/submitted-data/industry-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
                               </a>
                             </Link>
                           </li>
@@ -396,6 +436,12 @@ const Header = () => {
                                 Unpublished
                               </a>
                             </Link>
+                          </li> <li className="nav-item">
+                            <Link href="/submitted-data/market-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
+                              </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -426,6 +472,13 @@ const Header = () => {
                             <Link href="/submitted-data/sanitary?published=0">
                               <a className="nav-link" data-key="t-calendar">
                                 Unpublished
+                              </a>
+                            </Link>
+                          </li>
+                          <li className="nav-item">
+                            <Link href="/submitted-data/sanitary-followup?published=0">
+                              <a className="nav-link" data-key="t-calendar">
+                                Follow-up
                               </a>
                             </Link>
                           </li>
