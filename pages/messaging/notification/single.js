@@ -44,10 +44,10 @@ export async function getServerSideProps(context) {
   );
 
   const regions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/region`
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
   ).then((res) => res.json());
   const districts = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/district`
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
   ).then((res) => res.json());
 
   return {
