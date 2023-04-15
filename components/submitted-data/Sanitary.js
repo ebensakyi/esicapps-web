@@ -103,8 +103,8 @@ const Sanitary = ({ data }) => {
                       {" "}
                       <td>{handleRating(dt.Inspection.totalRating)}</td>
                       <td>
-                        {dt.Inspection.InspectionType.name}
-                        {dt.Inspection.InspectionType.id == 2?
+                        {dt?.Inspection?.InspectionType?.name}
+                        {dt?.Inspection?.InspectionType?.id == 2?
                         <span>
                         
                           <Link

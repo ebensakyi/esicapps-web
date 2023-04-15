@@ -95,7 +95,7 @@ const generateWhereMainObject = async (req, res) => {
       skip: skip,
       take: perPage,
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
       include: {
         Inspection: {
@@ -138,10 +138,14 @@ const generateWhereMainObject = async (req, res) => {
       skip: skip,
       take: perPage,
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
       include: {
-        Inspection: true,
+        Inspection: {
+          include: {
+            InspectionType: true,
+          },
+        },
         Community: {
           include: {
             District: {
@@ -158,7 +162,7 @@ const generateWhereMainObject = async (req, res) => {
   if (userType == 4) {
     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
 
-   let district = user.districtId;
+   let district = userObj.user.districtId;
     return {
       where: {
         [filterBy]: filterValue,
@@ -178,10 +182,14 @@ const generateWhereMainObject = async (req, res) => {
       skip: skip,
       take: perPage,
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
       include: {
-        Inspection: true,
+        Inspection: {
+          include: {
+            InspectionType: true,
+          },
+        },
         Community: {
           include: {
             District: {

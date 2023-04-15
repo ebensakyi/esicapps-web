@@ -274,20 +274,20 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/health?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/health?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li> <li className="nav-item">
                             <Link href="/submitted-data/health-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
@@ -312,20 +312,20 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/hospitality?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/hospitality?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li> <li className="nav-item">
                             <Link href="/submitted-data/hospitality-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
@@ -351,21 +351,21 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/institution?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/institution?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/institution-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
@@ -390,21 +390,21 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/industry?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/industry?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/industry-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
@@ -429,20 +429,20 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/market?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/market?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li> <li className="nav-item">
                             <Link href="/submitted-data/market-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
@@ -450,7 +450,7 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item">
+                    <li  className={router.pathname == "/" ? "nav-item active" : "nav-item"}>
                       <a
                         href="#sanitary"
                         className="nav-link"
@@ -467,21 +467,21 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/sanitary?published=1">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/sanitary?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/sanitary-followup?published=0">
-                              <a className="nav-link" data-key="t-calendar">
+                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
                             </Link>
