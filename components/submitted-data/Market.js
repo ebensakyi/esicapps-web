@@ -8,11 +8,7 @@ import Link from "next/link";
 import * as moment from "moment";
 import Cookies from "js-cookie";
 
-const Market = ({  data,
-  regions,
-  districts,
-  electoralAreas,
-  communities, }) => {
+const Market = ({ data, regions, districts, electoralAreas, communities }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState(null);
@@ -49,7 +45,6 @@ const Market = ({  data,
     });
   };
 
-
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
@@ -64,16 +59,15 @@ const Market = ({  data,
     }
   };
 
-
   const handleRating = (rating) => {
     try {
       if (rating == 1) {
         return <span className="badge bg-success">Good</span>;
-      } else if (rating == 2 ) {
+      } else if (rating == 2) {
         return <span className="badge bg-warning">Average</span>;
       } else if (rating == 3) {
         return <span className="badge bg-danger">Poor</span>;
-      }else{
+      } else {
         return <span className="badge bg-primary">Default</span>;
       }
     } catch (error) {
@@ -82,8 +76,7 @@ const Market = ({  data,
   };
   return (
     <div className="row">
-
-<div className="row row-cols-lg-auto g-3 align-items-center">
+      <div className="row row-cols-lg-auto g-3 align-items-center">
         {loggedInUserType == 1 || loggedInUserType == 2 ? (
           <div className="col-md-2">
             <label className="form-label mb-0">Select level</label>
@@ -288,7 +281,6 @@ const Market = ({  data,
                 <tr>
                   <th>Rating </th>
                   <th scope="col">Type</th>
-
                   <th>Premises Code</th>
                   <th> Start Date</th>
                   <th> End Date</th>
@@ -313,22 +305,24 @@ const Market = ({  data,
                       <td>{handleRating(dt.Inspection.totalRating)}</td>
                       <td>
                         {dt.Inspection.InspectionType.name}
-                        {dt.Inspection.InspectionType.id == 2?
-                        <span>
-                        
-                          <Link
-                            href={{
-                              pathname: `/submitted-data/market_view`,
-                              query: {
-                                id: dt.Inspection.prevInspectionId,
-                              },
-                            }}
-                          >
-                            <a className="dropdown-item">
-                              <i className="ri-external-link-line align-bottom me-2 text-muted" />
-                            </a>
-                          </Link>
-                        </span>:<></>}
+                        {dt.Inspection.InspectionType.id == 2 ? (
+                          <span>
+                            <Link
+                              href={{
+                                pathname: `/submitted-data/market_view`,
+                                query: {
+                                  id: dt.Inspection.prevInspectionId,
+                                },
+                              }}
+                            >
+                              <a className="dropdown-item">
+                                <i className="ri-external-link-line align-bottom me-2 text-muted" />
+                              </a>
+                            </Link>
+                          </span>
+                        ) : (
+                          <></>
+                        )}
                       </td>
                       <td>{dt.Inspection.premisesCode}</td>
                       <td>
@@ -373,19 +367,19 @@ const Market = ({  data,
                         )}{" "}
                       </td>
                       <td>
-                      <Link
-                              href={{
-                                pathname: `/submitted-data/market_view`,
-                                query: {
-                                  id: dt.Inspection.id,
-                                },
-                              }}
-                            >
-                              <a className="dropdown-item">
-                                <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                View
-                              </a>
-                            </Link>
+                        <Link
+                          href={{
+                            pathname: `/submitted-data/market_view`,
+                            query: {
+                              id: dt.Inspection.id,
+                            },
+                          }}
+                        >
+                          <a className="dropdown-item">
+                            <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
+                            View
+                          </a>
+                        </Link>
                       </td>
                     </tr>
                   );

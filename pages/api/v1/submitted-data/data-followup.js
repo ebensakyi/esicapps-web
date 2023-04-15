@@ -102,10 +102,16 @@ const generateWhereMainObject = async (req, res) => {
         InspectionType: true,
         Rating: true,
         Inspection: {
-          include: { User: true, BasicInfoSection: {
-            include: {  Community: { include: { District: { include: { Region: true } } } },}
-          
-          }},
+          include: {
+            User: true,
+            BasicInfoSection: {
+              include: {
+                Community: {
+                  include: { District: { include: { Region: true } } },
+                },
+              },
+            },
+          },
         },
         //  User: true,
       },
@@ -137,9 +143,21 @@ const generateWhereMainObject = async (req, res) => {
         createdAt: "asc",
       },
       include: {
-        Inspection: true,
-        Community: { include: { District: { include: { Region: true } } } },
-        User: true,
+        InspectionType: true,
+        Rating: true,
+        Inspection: {
+          include: {
+            User: true,
+            BasicInfoSection: {
+              include: {
+                Community: {
+                  include: { District: { include: { Region: true } } },
+                },
+              },
+            },
+          },
+        },
+        //  User: true,
       },
     };
   }

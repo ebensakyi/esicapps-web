@@ -378,7 +378,7 @@ const ResidentialFollowUp = ({
                       <td>
                         <Link
                           href={{
-                            pathname: `/submitted-data/residential-followup-view`,
+                            pathname: `/submitted-data/followup-view`,
                             query: {
                               id: dt.id,
                             },

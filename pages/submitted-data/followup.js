@@ -1,4 +1,4 @@
-import ResidentialFollowUp from "../../components/submitted-data/ResidentialFollowUp";
+import FollowUp from "../../components/submitted-data/FollowUp";
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
@@ -18,7 +18,7 @@ export default function residential_followup({
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <ResidentialFollowUp
+            <FollowUp
               data={data}
               regions={regions}
               districts={districts}

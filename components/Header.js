@@ -208,7 +208,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/residential-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=1">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -248,7 +248,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/eatery-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=2">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -286,7 +286,7 @@ const Header = () => {
                               </a>
                             </Link>
                           </li> <li className="nav-item">
-                            <Link href="/submitted-data/health-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=3">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -324,7 +324,7 @@ const Header = () => {
                               </a>
                             </Link>
                           </li> <li className="nav-item">
-                            <Link href="/submitted-data/hospitality-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=4">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -364,7 +364,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/institution-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=5">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -403,7 +403,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/industry-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=6">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -441,7 +441,7 @@ const Header = () => {
                               </a>
                             </Link>
                           </li> <li className="nav-item">
-                            <Link href="/submitted-data/market-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=7">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>
@@ -480,7 +480,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/sanitary-followup?published=0">
+                            <Link href="/submitted-data/followup?inspectionFormId=8">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Follow-up
                               </a>

@@ -61,7 +61,6 @@ const generateWhereMainObject = async (req, res) => {
       ? undefined
       : new Date(req?.query?.to);
 
-  // let filterColumn = filterBy==1?"regionId"
 
   let perPage = 10;
   let skip = Number((curPage - 1) * perPage) || 0;
@@ -72,7 +71,6 @@ const generateWhereMainObject = async (req, res) => {
 
   let userType = userObj.user?.userTypeId;
 
-  // let filterColumn = userType == 1 ?""
 
   if (userType == 1 || userType == 2) {
     filterBy = filterBy == "undefined" ? "regionId" : filterBy;
