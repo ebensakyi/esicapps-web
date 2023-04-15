@@ -24,7 +24,20 @@ const Hospitality = ({
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
   let loggedInUserType = Cookies.get("ut").split("??")[1];
+ const handleFilter = (e) => {
+    e.preventDefault();
 
+    const path = router.pathname;
+    const query = router.query;
+
+    let published = query.published;
+    let page = query.page;
+
+    router.push({
+      pathname: path,
+      query: { published, page, filterBy, filterValue, from, to },
+    });
+  };
   const handlePagination = (page) => {
     const path = router.pathname;
     const query = router.query;
@@ -63,20 +76,7 @@ const Hospitality = ({
       console.log(error);
     }
   };
-  const handleFilter = (e) => {
-    e.preventDefault();
-
-    const path = router.pathname;
-    const query = router.query;
-
-    let published = query.published;
-    let page = query.page;
-
-    router.push({
-      pathname: path,
-      query: { published, page, filterBy, filterValue, from, to },
-    });
-  };
+ 
   return (
     <div className="row">
       <div className="row row-cols-lg-auto g-3 align-items-center">
