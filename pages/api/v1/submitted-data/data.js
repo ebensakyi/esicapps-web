@@ -114,7 +114,7 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userType == 3) {
+  if (userType == 3||userType == 4) {
     let region = userObj.user.regionId;
     filterBy = filterBy == undefined ? "districtId" : filterBy;
 
@@ -157,7 +157,7 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userType == 4) {
+  if (userType == 5 || userType == 6) {
     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
 
    let district = userObj.user.districtId;

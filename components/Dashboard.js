@@ -337,7 +337,7 @@ const Dashboard = ({ regions }) => {
       {
         label: "# of submissions",
         data: dashboardData.lw?.toiletAvailabilityArray,
-        backgroundColor: ["green", "red"],
+        backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -350,7 +350,7 @@ const Dashboard = ({ regions }) => {
       {
         label: "# of submissions",
         data: dashboardData.lw?.toiletAdequacyArray,
-        backgroundColor: ["green", "red"],
+        backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -363,7 +363,7 @@ const Dashboard = ({ regions }) => {
       {
         label: "# of submissions",
         data: dashboardData.lw?.toiletConditionArray,
-        backgroundColor: ["green", "red"],
+        backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -379,7 +379,7 @@ const Dashboard = ({ regions }) => {
       {
         label: "# of submissions",
         data: dashboardData.sw?.wasteCollectorArray,
-        backgroundColor: ["green", "red"],
+        backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -392,7 +392,7 @@ const Dashboard = ({ regions }) => {
       {
         label: "# of submissions",
         data: dashboardData.sw?.wasteSortingArray,
-        backgroundColor: ["green", "red"],
+        backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -405,7 +405,7 @@ const Dashboard = ({ regions }) => {
       {
         label: "# of submissions",
         data: dashboardData.sw?.wasteReceptacleArray,
-        backgroundColor: ["green", "red"],
+        backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -817,7 +817,7 @@ const Dashboard = ({ regions }) => {
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
               <h4 className="card-title mb-0 flex-grow-1">Actions Taken</h4>
-              <div className="flex-shrink-0">
+              {/* <div className="flex-shrink-0">
                 <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"
@@ -842,7 +842,7 @@ const Dashboard = ({ regions }) => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="card-body">
               <Pie data={actionsTakenBarchartData} />
@@ -859,7 +859,7 @@ const Dashboard = ({ regions }) => {
                 Baseline Submissions
               </h4>
               <div className="flex-shrink-0">
-                <div className="dropdown card-header-dropdown">
+                {/* <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"
                     href="#"
@@ -882,7 +882,7 @@ const Dashboard = ({ regions }) => {
                       Import
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="card-body">
@@ -897,7 +897,7 @@ const Dashboard = ({ regions }) => {
                 Reinspection Submissions
               </h4>
               <div className="flex-shrink-0">
-                <div className="dropdown card-header-dropdown">
+                {/* <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"
                     href="#"
@@ -920,7 +920,7 @@ const Dashboard = ({ regions }) => {
                       Import
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="card-body">
@@ -935,7 +935,7 @@ const Dashboard = ({ regions }) => {
                 Follow-up Submissions
               </h4>
               <div className="flex-shrink-0">
-                <div className="dropdown card-header-dropdown">
+                {/* <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"
                     href="#"
@@ -958,7 +958,7 @@ const Dashboard = ({ regions }) => {
                       Import
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="card-body">

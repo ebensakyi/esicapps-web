@@ -42,6 +42,7 @@ COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 
 FROM "InspectionForm" 
 LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
 LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+WHERE "Inspection"."districtId" = ${districtId}
 
 GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
 ORDER BY "InspectionForm"."name"
@@ -662,17 +663,17 @@ ORDER BY "InspectionForm"."name"`;
         wasteReceptacleArray,
       },
 
-      baselineCount: 5,
-      reInspectionCount: 88,
-      followUpCount: 9,
-      publishedCount: 3,
-      unPublishedCount: 9,
-      usersCount: 56,
-      safeWaterSourceCount: 9,
-      unsafeWaterSourceCount: 90,
-      sanitationReportCount: 24,
-      actionTakenCount: 87,
-      actionTakenLabel: 88,
+      baselineCount,
+      reInspectionCount,
+      followUpCount,
+      publishedCount,
+      unPublishedCount,
+      usersCount,
+      safeWaterSourceCount,
+      unsafeWaterSourceCount,
+      sanitationReportCount,
+      actionTakenCount,
+      actionTakenLabel,
     };
 
     //return res.status(200).json({ statusCode: 1, data: dataVersion });
