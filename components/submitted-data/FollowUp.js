@@ -117,13 +117,13 @@ const ResidentialFollowUp = ({
 
   return (
     <div className="row">
-      <div class="row row-cols-lg-auto g-3 align-items-center">
+      <div className="row row-cols-lg-auto g-3 align-items-center">
         {loggedInUserType == 1 || loggedInUserType == 2 ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select level</label>
+            <label className="form-label mb-0">Select level</label>
 
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterBy(e.target.value)}
               value={filterBy}
@@ -140,9 +140,9 @@ const ResidentialFollowUp = ({
         )}
         {loggedInUserType == 3 ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select level</label>
+            <label className="form-label mb-0">Select level</label>
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterBy(e.target.value)}
               value={filterBy}
@@ -159,9 +159,9 @@ const ResidentialFollowUp = ({
 
         {loggedInUserType == 4 ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select level</label>
+            <label className="form-label mb-0">Select level</label>
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterBy(e.target.value)}
               value={filterBy}
@@ -178,9 +178,9 @@ const ResidentialFollowUp = ({
 
         {filterBy == "regionId" ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select region</label>
+            <label className="form-label mb-0">Select region</label>
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
@@ -197,9 +197,9 @@ const ResidentialFollowUp = ({
         )}
         {filterBy == "districtId" ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select district</label>
+            <label className="form-label mb-0">Select district</label>
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
@@ -216,9 +216,9 @@ const ResidentialFollowUp = ({
         )}
         {filterBy == "electoralAreaId" ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select Electoral Area</label>
+            <label className="form-label mb-0">Select Electoral Area</label>
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
@@ -235,9 +235,9 @@ const ResidentialFollowUp = ({
         )}
         {filterBy == "communityId" ? (
           <div className="col-md-2">
-            <label class="form-label mb-0">Select community</label>
+            <label className="form-label mb-0">Select community</label>
             <select
-              class="form-select mb-3"
+              className="form-select mb-3"
               aria-label="Default select example"
               onChange={(e) => setFilterValue(e.target.value)}
               value={filterValue}
@@ -253,22 +253,22 @@ const ResidentialFollowUp = ({
           <></>
         )}
 
-        <div class="col-md-12">
-          <label class="form-label mb-0">Range</label>
-          <div class="row">
-            <div class="col-lg-6">
+        <div className="col-md-12">
+          <label className="form-label mb-0">Range</label>
+          <div className="row">
+            <div className="col-lg-6">
               <input
                 type="date"
-                class="form-control"
+                className="form-control"
                 onChange={(e) => setFrom(e.target.value)}
                 value={from}
               />
             </div>
 
-            <div class="col-lg-6">
+            <div className="col-lg-6">
               <input
                 type="date"
-                class="form-control"
+                className="form-control"
                 onChange={(e) => setTo(e.target.value)}
                 value={to}
               />
@@ -276,12 +276,12 @@ const ResidentialFollowUp = ({
           </div>
         </div>
 
-        <div class="col-12">
-          <label class="form-label mb-0">.</label>
+        <div className="col-12">
+          <label className="form-label mb-0">.</label>
           <br />
           <button
             type="submit"
-            class="btn btn-primary"
+            className="btn btn-primary"
             onClick={(e) => handleFilter(e)}
           >
             Filter
