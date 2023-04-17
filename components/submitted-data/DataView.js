@@ -1,26 +1,26 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import ResidentialPremisesInfoView from "./PremisesInfoViews/ResidentialPremisesInfoView";
+import EateryPremisesInfoView from "./PremisesInfoViews/EateryPremisesInfoView";
 
-const ResidentialView = ({ data }) => {
+const DataView = ({ data }) => {
   const router = useRouter();
 
   const query = router.query;
 
-  
   let formId = query.inspectionFormId;
   let published = query.published;
 
   const publish = async (id) => {
     try {
-      const response = await axios.post(
-        `/api/v1/submitted-data/data-view`,
-        {
-          id: id,
-        }
-      );
+      const response = await axios.post(`/api/v1/submitted-data/data-view`, {
+        id: id,
+      });
       if (response.status == 200) {
-        router.push(`/submitted-data/data?published=${published}&inspectionFormId=${formId}`);
+        router.push(
+          `/submitted-data/data?published=${published}&inspectionFormId=${formId}`
+        );
       }
     } catch (error) {
       console.log(error);
@@ -36,32 +36,31 @@ const ResidentialView = ({ data }) => {
     router.reload(window.location.pathname);
   };
 
-
   const handleTitle = () => {
     try {
-     
-
       if (formId == 1) {
-        return  <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
-      } else if (formId == 2 ) {
-        return  <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>
+        return <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>;
+      } else if (formId == 2) {
+        return <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>;
       } else if (formId == 3) {
-        return  <h5 className="card-title mb-0">HEALTH PREMISES</h5>
+        return <h5 className="card-title mb-0">HEALTH PREMISES</h5>;
       } else if (formId == 4) {
-        return  <h5 className="card-title mb-0">HOSPITALITY PREMISES</h5>
+        return <h5 className="card-title mb-0">HOSPITALITY PREMISES</h5>;
       } else if (formId == 5) {
-        return  <h5 className="card-title mb-0">INSTITUTION PREMISES</h5>
+        return <h5 className="card-title mb-0">INSTITUTION PREMISES</h5>;
       } else if (formId == 6) {
-        return  <h5 className="card-title mb-0">INDUSTRY PREMISES</h5>
+        return <h5 className="card-title mb-0">INDUSTRY PREMISES</h5>;
       } else if (formId == 7) {
-        return  <h5 className="card-title mb-0">MARKETS & LORRY PARK PREMISES</h5>
+        return (
+          <h5 className="card-title mb-0">MARKETS & LORRY PARK PREMISES</h5>
+        );
       } else if (formId == 8) {
-        return  <h5 className="card-title mb-0">SANITARY FACILITY PREMISES</h5>
+        return <h5 className="card-title mb-0">SANITARY FACILITY PREMISES</h5>;
       }
     } catch (error) {
       console.log(error);
-    }}
-
+    }
+  };
 
   return (
     <>
@@ -81,26 +80,22 @@ const ResidentialView = ({ data }) => {
           </div>
           <div id="printableArea">
             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-           DATA VIEW 
+              DATA VIEW
               <h4 className="mb-sm-0">{handleTitle()}</h4>
               <div className="page-title-right">
                 <ol className="breadcrumb m-0">
                   <li className="breadcrumb-item">
-
-                  <Link
-                            href={{
-                              pathname: `/submitted-data/data`,
-                              query: {
-                                published:published,
-                                inspectionFormId:formId
-                              },
-                            }}
-                          >
-                            <a className="dropdown-item">
-                           Go to Data list
-                            </a>
-                          </Link>
-                 
+                    <Link
+                      href={{
+                        pathname: `/submitted-data/data`,
+                        query: {
+                          published: published,
+                          inspectionFormId: formId,
+                        },
+                      }}
+                    >
+                      <a className="dropdown-item">Go to Data list</a>
+                    </Link>
                   </li>
                 </ol>
               </div>
@@ -258,272 +253,8 @@ const ResidentialView = ({ data }) => {
               </div>
             </div>
 
-            {/* <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">
-                            RESIDENTIAL INFORMATION SECTION
-                          </h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          {data?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Toilet facility availabilty
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    .toiletAvailability.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                         
-                          {data?.ResidentialPremisesInfoSection?.bathroomAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Bathroom facility availabilty
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    .bathroomAvailability.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection
-                            ?.drainsAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Drains availabilty
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.drainsAvailability?.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection
-                            ?.approvedHandwashingFacilityAvailability !=
-                          null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Handwashing facility availabilty
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.approvedHandwashingFacilityAvailability
-                                    ?.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection?.householdNumber != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Number of household
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.householdNumber
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection
-                            ?.maleOccupantNumber != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Number of male occupants
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.maleOccupantNumber
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection
-                            ?.femaleOccupantNumber != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Number of female occupants
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.femaleOccupantNumber
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection
-                            ?.animalAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Animal availabilty
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.animalAvailability.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.ResidentialPremisesInfoSection?.animalNumber !=
-                          null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Animal number
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.animalNumber
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {data?.ResidentialPremisesInfoSection?.PremisesAnimal
-                            ?.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">Animals</label>
-                              {data?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
-                                (x) => (
-                                  <input
-                                    key={x.id}
-                                    type="text"
-                                    className="form-control bg-light border-0"
-                                    id="invoicenoInput"
-                                    value={x.AnimalType.name}
-                                    readOnly="readOnly"
-                                  />
-                                )
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {data?.ResidentialPremisesInfoSection
-                            ?.vaccinationProof != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Animal vaccination proof
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.ResidentialPremisesInfoSection
-                                    ?.vaccinationProof?.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        {data?.ResidentialPremisesInfoSection
-                          ?.animalSpaceCondition != null ? (
-                          <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
-                              Animal space condition
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control bg-light border-0"
-                              id="invoicenoInput"
-                              value={
-                                data?.ResidentialPremisesInfoSection
-                                  ?.animalSpaceCondition.name
-                              }
-                              readOnly="readOnly"
-                            />
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-
+            <ResidentialPremisesInfoView data={data} />
+            <EateryPremisesInfoView data={data} />
             <div className="row">
               <div className="col-lg-12">
                 <div className="row mb-3">
@@ -1932,4 +1663,4 @@ const ResidentialView = ({ data }) => {
   );
 };
 
-export default ResidentialView;
+export default DataView;

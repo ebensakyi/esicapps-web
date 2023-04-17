@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const ResidentialPremisesInfoView = ({ data }) => {
+const IndustryPremisesInfoView = ({ data }) => {
   const router = useRouter();
 
   const query = router.query;
@@ -303,4 +303,4 @@ const ResidentialPremisesInfoView = ({ data }) => {
   );
 };
 
-export default ResidentialPremisesInfoView;
+export default IndustryPremisesInfoView;
