@@ -17,8 +17,15 @@ const Residential = ({
 }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [communityName, setCommunityName] = useState(null);
-  const [communityId, setCommunityId] = useState(null);
+  const [districtsData, setDistrictsData] = useState([]);
+  const [electoralAreasData, setElectoralAreasData] = useState([]);
+  const [communitiesData, setCommunitiesData] = useState([]);
+
+  const [region, setRegion] = useState();
+  const [district, setDistrict] = useState();
+  const [electoralArea, setElectoralArea] = useState();
+  const [community, setCommunity] = useState();
+
   const [filterValue, setFilterValue] = useState(null);
   const [filterBy, setFilterBy] = useState(null);
   const [from, setFrom] = useState(null);
@@ -89,6 +96,61 @@ const Residential = ({
     //    }
     // });
   };
+
+
+  const returnFilterValue = async (filterBy) => {
+    if (filterBy == "regionId") {
+      setFilterValue(region);
+      return region;
+    }
+    if (filterBy == "districtId") {
+      setFilterValue(district);
+      return district;
+    }
+    if (filterBy == "electoralAreaId") {
+      setFilterValue(electoralArea);
+      return electoralArea;
+    }
+    if (filterBy == "community") {
+      setFilterValue(community);
+      return community;
+    }
+  };
+
+  const getDistrictsByRegion = async (regionId) => {
+    try {
+      const response = await axios.get(
+        "/api/v1/primary-data/district?regionId=" + regionId
+      );
+      setDistrictsData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getElectoralAreasByDistrict = async (districtId) => {
+    try {
+
+      const response = await axios.get(
+        "/api/v1/primary-data/electoral-area?districtId=" + districtId
+      );
+      setElectoralAreasData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCommunitiesByElectoralArea = async (electoralAreaId) => {
+    try {
+
+      const response = await axios.get(
+        "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
+      );
+
+      setCommunitiesData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <div className="row">

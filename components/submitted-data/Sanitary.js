@@ -77,6 +77,60 @@ const Sanitary = ({  data,
     }
   };
 
+  const returnFilterValue = async (filterBy) => {
+    if (filterBy == "regionId") {
+      setFilterValue(region);
+      return region;
+    }
+    if (filterBy == "districtId") {
+      setFilterValue(district);
+      return district;
+    }
+    if (filterBy == "electoralAreaId") {
+      setFilterValue(electoralArea);
+      return electoralArea;
+    }
+    if (filterBy == "community") {
+      setFilterValue(community);
+      return community;
+    }
+  };
+
+  const getDistrictsByRegion = async (regionId) => {
+    try {
+      const response = await axios.get(
+        "/api/v1/primary-data/district?regionId=" + regionId
+      );
+      setDistrictsData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getElectoralAreasByDistrict = async (districtId) => {
+    try {
+
+      const response = await axios.get(
+        "/api/v1/primary-data/electoral-area?districtId=" + districtId
+      );
+      setElectoralAreasData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCommunitiesByElectoralArea = async (electoralAreaId) => {
+    try {
+
+      const response = await axios.get(
+        "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
+      );
+
+      setCommunitiesData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
     <div className="row">
            <div className="row row-cols-lg-auto g-3 align-items-center">
