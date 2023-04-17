@@ -67,7 +67,6 @@ const generateWhereMainObject = async (req, res) => {
 
   let userObj = await verifyToken(req.query.token);
 
-  console.log("verifyToken====>", userObj);
 
   let userType = userObj.user?.userTypeId;
 

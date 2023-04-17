@@ -22,14 +22,14 @@ export default function addUserGuides({ data }) {
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
-  // if (!token) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/login",
-  //       permanent: true,
-  //     },
-  //   };
-  // }
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: true,
+      },
+    };
+  }
 
   const data = await fetch(
     `${SERVER_BASE_URL}/api/v1/setup/user-guides?token=${token}`
