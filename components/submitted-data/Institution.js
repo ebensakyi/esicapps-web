@@ -130,7 +130,9 @@ const Institution = ({
       console.log(error);
     }
   };
-
+  let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
+  let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
+  let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
   return (
     <div className="row">
        <div className="row row-cols-lg-auto g-3 align-items-center">
