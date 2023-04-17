@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useState } from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const Header = () => {
   let designation = Cookies.get("designation");
   let userType = Cookies.get("userType");
 
-  console.log("COOKIE ut",ut);
+  console.log("COOKIE ut", ut);
 
   return (
     <div>
@@ -195,21 +195,42 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/data?published=1&inspectionFormId=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=1">
-                              <a  className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=1">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -234,22 +255,43 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="eatery">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=1&inspectionFormId=2">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=2">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=2">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=2">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=2">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -257,7 +299,7 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
- <li className="nav-item">
+                    <li className="nav-item">
                       <a
                         href="#health"
                         className="nav-link"
@@ -273,21 +315,45 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="health">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/health?published=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=3">
+                            
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/health?published=0">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=3">
+
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
-                          </li> <li className="nav-item">
+                          </li>{" "}
+                          <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=3">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -311,21 +377,43 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="hospitality">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/hospitality?published=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=1&inspectionFormId=4">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/hospitality?published=0">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=4">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
-                          </li> <li className="nav-item">
+                          </li>{" "}
+                          <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=4">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -333,7 +421,7 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                   
+
                     <li className="nav-item">
                       <a
                         href="#institution"
@@ -350,22 +438,43 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="institution">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/institution?published=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=1&inspectionFormId=5">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/institution?published=0">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=5">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=5">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -389,22 +498,43 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="industry">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/industry?published=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=1&inspectionFormId=6">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/industry?published=0">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=6">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=6">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -428,21 +558,43 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="market">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/market?published=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=1&inspectionFormId=7">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/market?published=0">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=7">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
-                          </li> <li className="nav-item">
+                          </li>{" "}
+                          <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=7">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -450,7 +602,11 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
-                    <li  className={router.pathname == "/" ? "nav-item active" : "nav-item"}>
+                    <li
+                      className={
+                        router.pathname == "/" ? "nav-item active" : "nav-item"
+                      }
+                    >
                       <a
                         href="#sanitary"
                         className="nav-link"
@@ -466,22 +622,43 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="sanitary">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/sanitary?published=1">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=1&inspectionFormId=8">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/sanitary?published=0">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=8">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Unpublished
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=8">
-                              <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
+                              <a
+                                className={
+                                  router.pathname == "/"
+                                    ? "nav-link active"
+                                    : "nav-link"
+                                }
+                                data-key="t-calendar"
+                              >
                                 Follow-up
                               </a>
                             </Link>
@@ -649,7 +826,6 @@ const Header = () => {
                         Primary data
                       </a>
                     </li>
-                   
                     <li className="nav-item">
                       <a
                         href="#district"
@@ -671,7 +847,7 @@ const Header = () => {
                               className="nav-link"
                               data-key="t-simple-page"
                             >
-                             Upload
+                              Upload
                             </a>
                           </li>
                           <li className="nav-item">
@@ -708,7 +884,7 @@ const Header = () => {
                               className="nav-link"
                               data-key="t-simple-page"
                             >
-                             Upload
+                              Upload
                             </a>
                           </li>
                           <li className="nav-item">
@@ -723,7 +899,8 @@ const Header = () => {
                           </li>
                         </ul>
                       </div>
-                    </li> <li className="nav-item">
+                    </li>{" "}
+                    <li className="nav-item">
                       <a
                         href="#communities"
                         className="nav-link"
@@ -744,7 +921,7 @@ const Header = () => {
                               className="nav-link"
                               data-key="t-simple-page"
                             >
-                             Upload
+                              Upload
                             </a>
                           </li>
                           <li className="nav-item">
@@ -777,7 +954,7 @@ const Header = () => {
                         className="nav-link"
                       >
                         {" "}
-                       Bulk Upload Templates
+                        Bulk Upload Templates
                       </a>
                     </li>
                     {/* <li className="nav-item">

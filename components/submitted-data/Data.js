@@ -33,8 +33,11 @@ const Data = ({
 
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
+  const query = router.query;
 
-  console.log(data);
+  
+  let formId = query.inspectionFormId;
+  let published = query.published;
 
 
   const handlePagination = (page) => {
@@ -76,7 +79,52 @@ const Data = ({
       console.log(error);
     }
   };
-  const handleFilter = (e) => {
+
+    const handleTitle = () => {
+    try {
+     
+
+      if (formId == 1) {
+        return  <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
+      } else if (formId == 2 ) {
+        return  <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>
+      } else if (formId == 3) {
+        return  <h5 className="card-title mb-0">HEALTH PREMISES</h5>
+      } else if (formId == 4) {
+        return  <h5 className="card-title mb-0">HOSPITALITY PREMISES</h5>
+      } else if (formId == 5) {
+        return  <h5 className="card-title mb-0">INSTITUTION PREMISES</h5>
+      } else if (formId == 6) {
+        return  <h5 className="card-title mb-0">INDUSTRY PREMISES</h5>
+      } else if (formId == 7) {
+        return  <h5 className="card-title mb-0">MARKETS & LORRY PARK PREMISES</h5>
+      } else if (formId == 8) {
+        return  <h5 className="card-title mb-0">SANITARY FACILITY PREMISES</h5>
+      }
+    } catch (error) {
+      console.log(error);
+    }}
+
+
+    const returnFilterValue = async (filterBy) => {
+      if (filterBy == "regionId") {
+        setFilterValue(region);
+        return region;
+      }
+      if (filterBy == "districtId") {
+        setFilterValue(district);
+        return district;
+      }
+      if (filterBy == "electoralAreaId") {
+        setFilterValue(electoralArea);
+        return electoralArea;
+      }
+      if (filterBy == "community") {
+        setFilterValue(community);
+        return community;
+      }
+    };
+  const handleFilter =async (e) => {
     e.preventDefault();
 
     const path = router.pathname;
@@ -87,6 +135,7 @@ const Data = ({
     let inspectionFormId = query.inspectionFormId;
 
     let page = query.page;
+    await returnFilterValue(filterBy);
 
     // console.log(path);
     // console.log(router.asPath);
@@ -104,24 +153,7 @@ const Data = ({
   };
 
 
-  const returnFilterValue = async (filterBy) => {
-    if (filterBy == "regionId") {
-      setFilterValue(region);
-      return region;
-    }
-    if (filterBy == "districtId") {
-      setFilterValue(district);
-      return district;
-    }
-    if (filterBy == "electoralAreaId") {
-      setFilterValue(electoralArea);
-      return electoralArea;
-    }
-    if (filterBy == "community") {
-      setFilterValue(community);
-      return community;
-    }
-  };
+
 
   const getDistrictsByRegion = async (regionId) => {
     try {
@@ -481,7 +513,8 @@ const Data = ({
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">
-            <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
+          {handleTitle()}
+           
           </div>
           <div className="card-body">
             <div className="row">
@@ -536,9 +569,11 @@ const Data = ({
                         
                           <Link
                             href={{
-                              pathname: `/submitted-data/residential_view`,
+                              pathname: `/submitted-data/data_view`,
                               query: {
                                 id: dt?.Inspection?.prevInspectionId,
+                                inspectionFormId:formId,
+                                published:published
                               },
                             }}
                           >
@@ -595,9 +630,11 @@ const Data = ({
                       <td>
                         <Link
                           href={{
-                            pathname: `/submitted-data/residential_view`,
+                            pathname: `/submitted-data/data_view`,
                             query: {
                               id: dt.Inspection.id,
+                              inspectionFormId:formId,
+                              published:published
                             },
                           }}
                         >

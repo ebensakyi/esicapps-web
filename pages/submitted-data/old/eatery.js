@@ -1,5 +1,5 @@
 
-import Eatery from '../../../components/submitted-data/Eatery';
+import Eatery from '../../../components/submitted-data/old/Eatery';
 import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../../config";

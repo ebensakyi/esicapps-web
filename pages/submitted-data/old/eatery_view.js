@@ -1,7 +1,7 @@
 import EateryView from "../../components/submitted-data/EateryView";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 //import Footer from '../../components/Footer'
-import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../../../config";
 
 export default function eatery({ data }) {
   return (
