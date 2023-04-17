@@ -89,23 +89,23 @@ export default function primary_data({
 export async function getServerSideProps(context) {
   const { token } = context.req.cookies;
 
-  // if (!token) {
-  //     return {
-  //         redirect: {
-  //             destination: '/auth/login',
-  //             permanent: true,
-  //         },
-  //     }
-  // }
+  if (!token) {
+      return {
+          redirect: {
+              destination: '/auth/login',
+              permanent: true,
+          },
+      }
+  }
   const inspectionForms = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/inspection-form`
+    `${SERVER_BASE_URL}/api/v1/primary-data/inspection-form?token=${token}`
   ).then((res) => res.json());
   const regions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/region`
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
   ).then((res) => res.json());
 
   const districts = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/district`
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
   ).then((res) => res.json());
 
   // const electoralAreas = await fetch(
@@ -113,11 +113,11 @@ export async function getServerSideProps(context) {
   // ).then((res) => res.json());
 
   const communities = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/community`
+    `${SERVER_BASE_URL}/api/v1/primary-data/community?token=${token}`
   ).then((res) => res.json());
 
   const actions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/action`
+    `${SERVER_BASE_URL}/api/v1/primary-data/action?token=${token}`
   ).then((res) => res.json());
 
 
