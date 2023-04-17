@@ -27,15 +27,19 @@ ChartJS.register(
   BarElement
 );
 
-const Dashboard = ({  dashboardData,
+const Dashboard = ({
+  dashboardData,
   regions,
   districts,
   electoralAreas,
-  communities, }) => {
+  communities,
+}) => {
   let loggedInUserType = Cookies.get("ut").split("??")[1];
   const [showLoading, setShowLoading] = useState(false);
 
-  // const [dashboardData, setDashboardData] = useState({});
+  const [districtsData, setDistrictsData] = useState([]);
+  const [electoralAreasData, setElectoralAreasData] = useState([]);
+  const [communitiesData, setCommunitiesData] = useState([]);
 
   const [filterValue, setFilterValue] = useState(null);
   const [filterBy, setFilterBy] = useState(null);
@@ -46,30 +50,62 @@ const Dashboard = ({  dashboardData,
   // const getDashboard = async () => {
   //   try {
   //     setShowLoading(false);
-    
 
   //     const response = await axios.get("/api/v1/dashboard");
   //     setDashboardData(response.data);
 
   //     setShowLoading(false);
-    
+
   //   } catch (error) {
   //     console.log(error);
   //   }
-    
+
   // };
 
   const getDistrictsByRegion = async (regionId) => {
     try {
-
+      console.log("getDistrictsByRegion called");
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
       console.log(response);
-      setDistricts(response.data);
+      setDistrictsData(response.data);
     } catch (error) {
       console.log(error);
     }
+  };
+  const getElectoralAreasByDistrict = async (districtId) => {
+    try {
+      const response = await axios.get(
+        "/api/v1/primary-data/electoral-area?districtId=" + districtId
+      );
+      console.log(response);
+      setElectoralAreasData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCommunitiesByElectoralArea = async (electoralAreaId) => {
+    try {
+      const response = await axios.get(
+        "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
+      );
+      console.log(response);
+      setCommunitiesData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLocationsFilter = async (region) => {
+ 
+    // if (filterBy == 'districtId') {
+    //   await getDistrictsByRegion(region);
+    // }
+
+    // if (filterBy == 'electoralAreaId') {
+    //   await getElectoralAreasByDistrict(region);
+    // }
   };
 
   const handleFilter = (e) => {
@@ -81,8 +117,6 @@ const Dashboard = ({  dashboardData,
     let published = query.published;
     let page = query.page;
 
-    // console.log(path);
-    // console.log(router.asPath);
     router.push({
       pathname: path,
       query: { published, page, filterBy, filterValue, from, to },
@@ -96,15 +130,9 @@ const Dashboard = ({  dashboardData,
     // });
   };
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     // You can await here
-  //     const response = await getDashboard();
-  //     // ...
-  //   }
-  //   fetchData();
-    
-  // }, []);
+  useEffect(() => {
+    setDistrictsData(districts);
+  }, []);
 
   let baselinePieChartData,
     reinspectionPieChartData,
@@ -408,6 +436,10 @@ const Dashboard = ({  dashboardData,
 
   //});
 
+  let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
+  let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
+  let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
+
   return (
     <>
       {" "}
@@ -417,146 +449,253 @@ const Dashboard = ({  dashboardData,
         text="Loading dashboard. Please wait..."
       >
         <>
-        <div className="row row-cols-lg-auto g-3 align-items-center">
-        {loggedInUserType == 1 || loggedInUserType == 2 ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select level</label>
+          <div className="row row-cols-lg-auto g-3 align-items-center">
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select level</label>
 
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterBy(e.target.value)}
-              value={filterBy}
-            >
-              <option selected>Filter by </option>
-              <option value="regionId">Region</option>
-              <option value="districtId">District</option>
-              <option value="electoralAreaId">Electoral Area</option>
-              <option value="communityId">Community</option>
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-        {loggedInUserType == 3 ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select level</label>
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterBy(e.target.value)}
-              value={filterBy}
-            >
-              <option selected>Filter by </option>
-              <option value="districtId">District</option>
-              <option value="electoralAreaId">Electoral Area</option>
-              <option value="communityId">Community</option>
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-
-        {loggedInUserType == 4 ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select level</label>
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterBy(e.target.value)}
-              value={filterBy}
-            >
-              <option selected>Filter by </option>
-
-              <option value="electoralAreaId">Electoral Area</option>
-              <option value="communityId">Community</option>
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-
-        {filterBy == "regionId" ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select region</label>
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterValue(e.target.value)}
-              value={filterValue}
-            > <option selected>Filter by </option>
-              {regions.map((data) => (
-                <option key={data.id} value={data.id}>
-                  {data.name}
+              <select
+                className="form-control"
+                aria-label="Default select example"
+                onChange={(e) => setFilterBy(e.target.value)}
+                value={filterBy}
+              >
+                <option selected>Filter by </option>
+                <option hidden={!nationalUser} value="regionId">
+                  Region
                 </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-        {filterBy == "districtId" ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select district</label>
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterValue(e.target.value)}
-              value={filterValue}
-            > <option selected>Filter by </option>
-              {districts.map((data) => (
-                <option key={data.id} value={data.id}>
-                  {data.name}
+                <option
+                  hidden={!nationalUser && !regionalUser}
+                  value="districtId"
+                >
+                  District
                 </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-        {filterBy == "electoralAreaId" ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select Electoral Area</label>
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterValue(e.target.value)}
-              value={filterValue}
-            > <option selected>Filter by </option>
-              {electoralAreas.map((data) => (
-                <option key={data.id} value={data.id}>
-                  {data.name}
+                <option
+                  hidden={!nationalUser && !regionalUser && !districtUser}
+                  value="electoralAreaId"
+                >
+                  Electoral Area
                 </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
-        {filterBy == "communityId" ? (
-          <div className="col-md-2">
-            <label className="form-label mb-0">Select community</label>
-            <select
-              className="form-select mb-3"
-              aria-label="Default select example"
-              onChange={(e) => setFilterValue(e.target.value)}
-              value={filterValue}
-            > <option selected>Filter by </option>
-              {communities.map((data) => (
-                <option key={data.id} value={data.id}>
-                  {data.name}
+                <option
+                  hidden={!nationalUser && !regionalUser && !districtUser}
+                  value="communityId"
+                >
+                  Community
                 </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <></>
-        )}
+              </select>
+            </div>
 
-        <div className="col-md-12">
-          <label className="form-label mb-0">Range</label>
-          <div className="row">
-            <div className="col-lg-6">
+            {filterBy == "regionId" ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select region</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async(e) => {
+                    setFilterValue(e.target.value);
+
+                  }}
+                  value={filterValue}
+                >
+                  {" "}
+                  <option selected>Filter by </option>
+                  {regions?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
+            {filterBy == "districtId" ? (
+              <>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select region</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getDistrictsByRegion(e.target.value)
+                    }}
+                    value={filterValue}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {regions?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select district</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={(e) => setFilterValue(e.target.value)}
+                    value={filterValue}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {districtsData?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {filterBy == "electoralAreaId" ? (
+              <>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select region</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getDistrictsByRegion(e.target.value)
+                    }}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {regions?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select district</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getElectoralAreasByDistrict(e.target.value)
+                    }}
+                    value={filterValue}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {districtsData?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">
+                    Select Electoral Area
+                  </label>
+                  <select
+                    className=" form-control "
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getCommunitiesByElectoralArea(e.target.value)
+                    }}
+                    value={filterValue}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {electoralAreasData?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {filterBy == "communityId" ? (
+              <>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select region</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getDistrictsByRegion(e.target.value)
+                    }}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {regions?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select district</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getElectoralAreasByDistrict(e.target.value)
+                    }}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {districtsData?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label className="form-label mb-0">
+                    Select Electoral Area
+                  </label>
+                  <select
+                    className=" form-control "
+                    aria-label="Default select example"
+                    onChange={async(e) => {setFilterValue(e.target.value)
+                      await getCommunitiesByElectoralArea(e.target.value)
+                    }}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {electoralAreasData?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>{" "}
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select community</label>
+                  <select
+                    className=" form-control "
+                    aria-label="Default select example"
+                    onChange={(e) => setFilterValue(e.target.value)}
+                    value={filterValue}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {communitiesData?.map((data) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            <div className="col-md-12">
+              <label className="form-label mb-0">Start Date</label>
               <input
                 type="date"
                 className="form-control"
@@ -564,8 +703,9 @@ const Dashboard = ({  dashboardData,
                 value={from}
               />
             </div>
+            <div className="col-md-12">
+              <label className="form-label mb-0">End Date</label>
 
-            <div className="col-lg-6">
               <input
                 type="date"
                 className="form-control"
@@ -573,21 +713,18 @@ const Dashboard = ({  dashboardData,
                 value={to}
               />
             </div>
-          </div>
-        </div>
 
-        <div className="col-12">
-          <label className="form-label mb-0">.</label>
-          <br />
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={(e) => handleFilter(e)}
-          >
-            Filter
-          </button>
-        </div>
-      </div>
+            <div className="col-12">
+              <label className="form-label mb-0">.</label>
+              <button
+                type="submit"
+                className="form-control btn btn-primary"
+                onClick={(e) => handleFilter(e)}
+              >
+                Filter
+              </button>
+            </div>
+          </div>
 
           <br />
           <div className="row">
@@ -756,99 +893,98 @@ const Dashboard = ({  dashboardData,
             </div>
           </div>
         </>{" "}
-     
-      {/* end row */}
-      <div className="row">
-        <div className="col-xl-7">
-          <div className="card">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                INSPECTION SUMMARY
-              </h4>
-            </div>
-            {/* end card header */}
-            <div className="card-body">
-              <div className="table-responsive table-card">
-                <table className="table  table-hover table-nowrap align-middle mb-0  table-bordered table-nowrap align-middle mb-0">
-                  <thead className="table-light">
-                    <tr className="text-muted">
-                      <th scope="col">Form</th>
+        {/* end row */}
+        <div className="row">
+          <div className="col-xl-7">
+            <div className="card">
+              <div className="card-header align-items-center d-flex">
+                <h4 className="card-title mb-0 flex-grow-1">
+                  INSPECTION SUMMARY
+                </h4>
+              </div>
+              {/* end card header */}
+              <div className="card-body">
+                <div className="table-responsive table-card">
+                  <table className="table  table-hover table-nowrap align-middle mb-0  table-bordered table-nowrap align-middle mb-0">
+                    <thead className="table-light">
+                      <tr className="text-muted">
+                        <th scope="col">Form</th>
 
-                      <th scope="col">Baseline</th>
-                      <th scope="col" style={{ width: "16%" }}>
-                        Reinspection
-                      </th>
-                      {/* <th scope="col" style={{ width: "12%" }}>
+                        <th scope="col">Baseline</th>
+                        <th scope="col" style={{ width: "16%" }}>
+                          Reinspection
+                        </th>
+                        {/* <th scope="col" style={{ width: "12%" }}>
                         Follow Up
                       </th> */}
-                      <th scope="col" style={{ width: "12%" }}>
-                        Published
-                      </th>
-                      <th scope="col" style={{ width: "12%" }}>
-                        UnPublished
-                      </th>
-                      <th scope="col" style={{ width: "20%" }}>
-                        Total
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {" "}
-                    {dashboardData.allInspectionSummary?.map((a) => {
-                      return (
-                        <tr key={a.id}>
-                          <td>{a.name}</td>
-                          <td>
-                            <span className="badge badge-soft-success p-2">
-                              {a.baselineCount}
-                            </span>
-                          </td>
-                          <td>
-                            <span className="badge badge-soft-warning p-2">
-                              {a.reinspectionCount}
-                            </span>
-                          </td>
-                          {/* <td>
+                        <th scope="col" style={{ width: "12%" }}>
+                          Published
+                        </th>
+                        <th scope="col" style={{ width: "12%" }}>
+                          UnPublished
+                        </th>
+                        <th scope="col" style={{ width: "20%" }}>
+                          Total
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {" "}
+                      {dashboardData.allInspectionSummary?.map((a) => {
+                        return (
+                          <tr key={a.id}>
+                            <td>{a.name}</td>
+                            <td>
+                              <span className="badge badge-soft-success p-2">
+                                {a.baselineCount}
+                              </span>
+                            </td>
+                            <td>
+                              <span className="badge badge-soft-warning p-2">
+                                {a.reinspectionCount}
+                              </span>
+                            </td>
+                            {/* <td>
                             <span className="badge badge-soft-danger p-2">
                               {a.followupCount}
                             </span>
                           </td>{" "} */}
-                          <td>
-                            <span className="badge badge-soft-success p-2">
-                              {a.publishedCount}
-                            </span>
-                          </td>
-                          <td>
-                            <span className="badge badge-soft-primary p-2">
-                              {a.unPublishedCount}
-                            </span>
-                          </td>
-                          <td>
-                            {/* <span className="badge badge-soft-primary p-2"> */}
-                            {a.inspectionCount}
-                            {/* </span> */}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                  {/* end tbody */}
-                </table>
-                {/* end table */}
+                            <td>
+                              <span className="badge badge-soft-success p-2">
+                                {a.publishedCount}
+                              </span>
+                            </td>
+                            <td>
+                              <span className="badge badge-soft-primary p-2">
+                                {a.unPublishedCount}
+                              </span>
+                            </td>
+                            <td>
+                              {/* <span className="badge badge-soft-primary p-2"> */}
+                              {a.inspectionCount}
+                              {/* </span> */}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                    {/* end tbody */}
+                  </table>
+                  {/* end table */}
+                </div>
+                {/* end table responsive */}
               </div>
-              {/* end table responsive */}
+              {/* end card body */}
             </div>
-            {/* end card body */}
+            {/* end card */}
           </div>
-          {/* end card */}
-        </div>
-        
-        {/* end col */}
-        <div className="col-xl-5">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">Actions Taken</h4>
-              {/* <div className="flex-shrink-0">
+
+          {/* end col */}
+          <div className="col-xl-5">
+            <div className="card card-height-100">
+              <div className="card-header align-items-center d-flex">
+                <h4 className="card-title mb-0 flex-grow-1">Actions Taken</h4>
+                {/* <div className="flex-shrink-0">
                 <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"
@@ -874,13 +1010,13 @@ const Dashboard = ({  dashboardData,
                   </div>
                 </div>
               </div> */}
-            </div>
-            <div className="card-body">
-              <Pie data={actionsTakenBarchartData} />
+              </div>
+              <div className="card-body">
+                <Pie data={actionsTakenBarchartData} />
+              </div>{" "}
             </div>{" "}
-          </div>{" "}
-        </div>
-      </div>{" "}
+          </div>
+        </div>{" "}
       </LoadingOverlay>
       {/* end row */}
       <div className="row">
@@ -1134,7 +1270,6 @@ const Dashboard = ({  dashboardData,
           </div>
         </div>
       </div>
-      
       {/* end row */}
     </>
   );

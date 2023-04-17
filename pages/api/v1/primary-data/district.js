@@ -25,8 +25,6 @@ const get = async (req, res) => {
     let data = await verifyToken(token);
     let userType = data.user.UserType.id;
 
-    console.log(userType);
-
     if (userType == 3 || userType == 4) {
       let regionId = data.user.regionId;
 
@@ -37,7 +35,14 @@ const get = async (req, res) => {
 
       return res.status(200).json(district);
     }
+    if (req?.query?.regionId) {
+      const district = await prisma.district.findMany({
+        where: { deleted: 0, regionId: Number(req?.query?.regionId) },
+        include: { Region: true },
+      });
 
+      return res.status(200).json(district);
+    }
     // if (req.query.token && !req.query.regionId) {
     //   let data = await verifyToken(req.query.token);
 

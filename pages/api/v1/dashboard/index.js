@@ -216,7 +216,7 @@ ORDER BY "InspectionForm"."name"`;
   });
 
   const usersCount = await prisma.user.count({
-    where: { deleted: 0, [filterBy]: filterValue },
+    where: { deleted: 0, },
   });
 
   const sanitationReportCount = await prisma.sanitationReport.count({
