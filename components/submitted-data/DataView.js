@@ -3,6 +3,12 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import ResidentialPremisesInfoView from "./PremisesInfoViews/ResidentialPremisesInfoView";
 import EateryPremisesInfoView from "./PremisesInfoViews/EateryPremisesInfoView";
+import HealthPremisesInfoView from "./PremisesInfoViews/HealthPremisesInfoView";
+import HospitalityPremisesInfoView from "./PremisesInfoViews/HospitalityPremisesInfoView";
+import IndustryPremisesInfoView from "./PremisesInfoViews/IndustryPremisesInfoView";
+import InstitutionPremisesInfoView from "./PremisesInfoViews/InstitutionPremisesInfoView";
+import SanitaryPremisesInfoView from "./PremisesInfoViews/SanitaryPremisesInfoView";
+import MarketPremisesInfoView from "./PremisesInfoViews/MarketPremisesInfoView";
 
 const DataView = ({ data }) => {
   const router = useRouter();
@@ -253,8 +259,14 @@ const DataView = ({ data }) => {
               </div>
             </div>
 
-            <ResidentialPremisesInfoView data={data} />
-            <EateryPremisesInfoView data={data} />
+            {formId == 1 ? <ResidentialPremisesInfoView data={data} /> : <></>}
+            {formId == 2 ? <EateryPremisesInfoView data={data} /> : <></>}
+            {formId == 3 ? <HealthPremisesInfoView data={data} /> : <></>}
+            {formId == 4 ? <HospitalityPremisesInfoView data={data} /> : <></>}
+            {formId == 5 ? <InstitutionPremisesInfoView data={data} /> : <></>}
+            {formId == 6 ? <IndustryPremisesInfoView data={data} /> : <></>}
+            {formId == 7 ? <MarketPremisesInfoView data={data} /> : <></>}
+            {formId == 8 ? <SanitaryPremisesInfoView data={data} /> : <></>}
             <div className="row">
               <div className="col-lg-12">
                 <div className="row mb-3">
