@@ -17,8 +17,15 @@ const Hospitality = ({
 }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [communityName, setCommunityName] = useState(null);
-  const [communityId, setCommunityId] = useState(null);
+  const [districtsData, setDistrictsData] = useState([]);
+  const [electoralAreasData, setElectoralAreasData] = useState([]);
+  const [communitiesData, setCommunitiesData] = useState([]);
+
+  const [region, setRegion] = useState();
+  const [district, setDistrict] = useState();
+  const [electoralArea, setElectoralArea] = useState();
+  const [community, setCommunity] = useState();
+
   const [filterValue, setFilterValue] = useState(null);
   const [filterBy, setFilterBy] = useState(null);
   const [from, setFrom] = useState(null);
