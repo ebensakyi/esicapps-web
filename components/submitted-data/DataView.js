@@ -20,7 +20,7 @@ const ResidentialView = ({ data }) => {
         }
       );
       if (response.status == 200) {
-        router.push(`/submitted-data/data?published=${published}`);
+        router.push(`/submitted-data/data?published=${published}&inspectionFormId=${formId}`);
       }
     } catch (error) {
       console.log(error);
