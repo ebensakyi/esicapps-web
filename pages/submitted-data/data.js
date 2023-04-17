@@ -1,9 +1,9 @@
+import Data from "../../components/submitted-data/Data";
 import Header from "../../components/Header";
 //import Footer from '../../components/Footer'
 import { SERVER_BASE_URL } from "../../config";
-import Health from "../../components/submitted-data/Health";
 
-export default function health({
+export default function data({
   data,
   regions,
   districts,
@@ -17,7 +17,7 @@ export default function health({
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <Health
+            <Data
               data={data}
               regions={regions}
               districts={districts}
@@ -32,15 +32,17 @@ export default function health({
 }
 
 export async function getServerSideProps(context) {
-    const { token } = context.req.cookies;
-    const { published } = context.query;
-    const filterBy = context.query.filterBy ;
-    const filterValue = context.query.filterValue;
-    const from = context.query.from || "undefined";
-    const to = context.query.to || "undefined";
-  
-    const page = context.query.page || 1;
-    const searchText = context.query.searchText || "";
+  const { token } = context.req.cookies;
+  const { published } = context.query;
+  const filterBy = context.query.filterBy ;
+  const filterValue = context.query.filterValue;
+  const from = context.query.from || "undefined";
+  const to = context.query.to || "undefined";
+
+  const page = context.query.page || 1;
+  const searchText = context.query.searchText || "";
+  const inspectionFormId = context.query.inspectionFormId || 1;
+
   if (!token) {
     return {
       redirect: {
@@ -51,7 +53,7 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/submitted-data/data?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=3&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}
+    `${SERVER_BASE_URL}/api/v1/submitted-data/data?token=${token}&published=${published}&page=${page}&searchText=${searchText}&inspectionFormId=${inspectionFormId}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}
    `
   ).then((res) => res.json());
 

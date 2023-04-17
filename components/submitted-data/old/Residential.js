@@ -34,6 +34,9 @@ const Residential = ({
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
 
+  console.log(data);
+
+
   const handlePagination = (page) => {
     const path = router.pathname;
     const query = router.query;
@@ -508,6 +511,7 @@ const Residential = ({
                   <th scope="col">GPS Accuracy</th>
                   <th scope="col">Region</th>
                   <th scope="col">District</th>
+                  <th scope="col">Electoral Area</th>
                   <th scope="col">Community</th>
                   {/* <th>Respondent</th>
                   <th>Designation</th> */}{" "}
@@ -558,16 +562,20 @@ const Residential = ({
                       <td>{dt.ghanaPostGps}</td>
                       <td>{dt.accuracy}</td>
                       <td>
-                        {dt.Community.District.Region.name
+                        {dt.Community.ElectoralArea.District.Region.name
                          }
                       </td>
                       <td>
-                        { dt.Community.District.name }
+                      {dt.Community.ElectoralArea.District.name
+                         }
+                      </td>
+                      <td>
+                      {dt.Community.ElectoralArea.name
+                         }
                       </td>
                       <td>
                         { dt.Community.name
                          }
-                        {/* {dt.community} */}
                       </td>{" "}
                       <td>
                         {moment(dt.Inspection.createdAt).format(

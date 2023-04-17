@@ -531,17 +531,21 @@ const Eatery = ({  data,
                       <td>{dt.ghanaPostGps}</td>
                       <td>{dt.accuracy}</td>
                       <td>
-                        {dt.Community != null
-                          ? dt.Community.District.Region.name
-                          : ""}
+                        {dt.Community.ElectoralArea.District.Region.name
+                         }
                       </td>
                       <td>
-                        { dt.Community.District.name}
+                      {dt.Community.ElectoralArea.District.name
+                         }
                       </td>
                       <td>
-                        {dt.Community.name
-                       }
-                        {/* {dt.community} */}
+                      {dt.Community.ElectoralArea.name
+                         }
+                      </td>
+                      <td>
+                        { dt.Community.name
+                         }
+                     
                       </td>{" "}
                       <td>
                         {moment(dt.Inspection.createdAt).format(

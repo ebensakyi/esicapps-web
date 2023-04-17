@@ -102,9 +102,14 @@ const generateWhereMainObject = async (req, res) => {
         },
         Community: {
           include: {
-            District: {
+            ElectoralArea: {
               include: {
-                Region: true,
+                District:{
+                  include: {
+                    Region:true,
+                  }
+                }
+                
               },
             },
           },

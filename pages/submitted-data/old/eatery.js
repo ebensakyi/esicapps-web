@@ -1,8 +1,8 @@
 
-import Eatery from '../../components/submitted-data/Eatery';
-import Header from '../../components/Header'
+import Eatery from '../../../components/submitted-data/Eatery';
+import Header from '../../../components/Header'
 //import Footer from '../../components/Footer'
-import { SERVER_BASE_URL } from "../../config";
+import { SERVER_BASE_URL } from "../../../config";
 
 
 export default function eatery({ data,regions,districts,electoralAreas,communities }) {

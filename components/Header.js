@@ -194,14 +194,14 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="Residential">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/residential?published=1">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=1">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/residential?published=0">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=1">
                               <a  className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
@@ -234,14 +234,14 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="eatery">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/eatery?published=1">
+                          <Link href="/submitted-data/data?published=1&inspectionFormId=2">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Published
                               </a>
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/eatery?published=0">
+                          <Link href="/submitted-data/data?published=0&inspectionFormId=2">
                               <a className={router.pathname == "/" ? "nav-link active" : "nav-link"} data-key="t-calendar">
                                 Unpublished
                               </a>
