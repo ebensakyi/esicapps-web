@@ -25,6 +25,8 @@ const get = async (req, res) => {
 
     let data = await verifyToken(token);
     let districtId = data?.user?.districtId;
+
+    console.log("disid ",districtId);
     if (districtId) {
       const electoralArea = await prisma.electoralArea.findMany({
         where: { deleted: 0, districtId: Number(districtId) },

@@ -28,20 +28,31 @@ const get = async (req, res) => {
         where: { deleted: 0, districtId: districtId },
         // include: {District: true}
         orderBy: {
-       
-            name: 'asc',
-          }
-      });
-    } else {
-      community = await prisma.community.findMany({
-        where: { deleted: 0 },
-        // include: {District: true}
-        orderBy: {
-       
-          name: 'asc',
-        }
+          name: "asc",
+        },
       });
     }
+    if (req?.query?.electoralAreaId) {
+      community = await prisma.community.findMany({
+        where: {
+          deleted: 0,
+          electoralAreaId: Number(req?.query?.electoralAreaId),
+        },
+        // include: {District: true}
+        orderBy: {
+          name: "asc",
+        },
+      });
+
+      return res.status(200).json(community);
+    }
+    community = await prisma.community.findMany({
+      where: { deleted: 0 },
+      // include: {District: true}
+      orderBy: {
+        name: "asc",
+      },
+    });
 
     return res.status(200).json(community);
   } catch (error) {
