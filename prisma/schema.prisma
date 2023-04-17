@@ -801,13 +801,7 @@ model WaterTreatmentType {
   PremisesWaterTreatmentType PremisesWaterTreatmentType[]
 }
 
-model Zone {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+
 
 model YesNo {
   id                                                 Int                              @id @default(autoincrement())
@@ -1001,7 +995,6 @@ model BasicInfoSection {
   id                      String                 @id @db.VarChar(255)
   inspectionId            String                 @unique @db.VarChar(255)
   userId                  Int
-  zoneId                  Int?
   communityId             Int?
   community               String?                @db.VarChar(255)
   ghanaPostGps            String?                @db.VarChar(255)

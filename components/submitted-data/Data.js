@@ -53,8 +53,8 @@ const Data = ({
   const handleExportToExcel = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/export-to-excel`,
-        { inspectionFormId: 1, fileName: "residential.xlsx" }
+        `/api/v1/submitted-data/data-to-excel`,
+        { inspectionFormId: Number(formId), fileName: handleExcelName() }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -79,6 +79,32 @@ const Data = ({
       console.log(error);
     }
   };
+
+  const handleExcelName = () => {
+    try {
+     
+
+      if (formId == 1) {
+        return  `RESIDENTIAL PREMISES.xlsx`
+      } else if (formId == 2 ) {
+        return  `EATING & DRINKING PREMISES.xlsx`
+      } else if (formId == 3) {
+        return  `HEALTH PREMISES.xlsx`
+      } else if (formId == 4) {
+        return  `HOSPITALITY PREMISES.xlsx`
+      } else if (formId == 5) {
+        return  `INSTITUTION PREMISES.xlsx`
+      } else if (formId == 6) {
+        return  `INDUSTRY PREMISES.xlsx`
+      } else if (formId == 7) {
+        return  `MARKETS & LORRY PARK PREMISES.xlsx`
+      } else if (formId == 8) {
+        return  `SANITARY FACILITY PREMISES.xlsx`
+      }
+    } catch (error) {
+      console.log(error);
+    }}
+
 
     const handleTitle = () => {
     try {
@@ -292,7 +318,7 @@ const Data = ({
                     value={district}
                   >
                     {" "}
-                    <option selected>Filter by </option>
+                    <option selected>Select district </option>
                     {districtsData?.map((data) => (
                       <option key={data.id} value={data.id}>
                         {data.name}
@@ -319,7 +345,7 @@ const Data = ({
                       }}
                     >
                       {" "}
-                      <option selected>Filter by </option>
+                      <option selected>Select region </option>
                       {regions?.map((data) => (
                         <option key={data.id} value={data.id}>
                           {data.name}
@@ -344,7 +370,7 @@ const Data = ({
                       value={district}
                     >
                       {" "}
-                      <option selected>Filter by </option>
+                      <option selected>Select district </option>
                       {districtsData?.map((data) => (
                         <option key={data.id} value={data.id}>
                           {data.name}
@@ -369,7 +395,7 @@ const Data = ({
                     value={electoralArea}
                   >
                     {" "}
-                    <option selected>Filter by </option>
+                    <option selected> Select Electoral Area </option>
                     {electoralAreasData?.map((data) => (
                       <option key={data.id} value={data.id}>
                         {data.name}
@@ -396,7 +422,7 @@ const Data = ({
                       value={region}
                     >
                       {" "}
-                      <option selected>Filter by </option>
+                      <option selected>Select region </option>
                       {regions?.map((data) => (
                         <option key={data.id} value={data.id}>
                           {data.name}
@@ -423,7 +449,7 @@ const Data = ({
                       value={district}
                     >
                       {" "}
-                      <option selected>Filter by </option>
+                      <option selected>Select district </option>
                       {districtsData?.map((data) => (
                         <option key={data.id} value={data.id}>
                           {data.name}
@@ -465,7 +491,7 @@ const Data = ({
                     value={community}
                   >
                     {" "}
-                    <option selected>Filter by </option>
+                    <option selected>Select community </option>
                     {communitiesData?.map((data) => (
                       <option key={data.id} value={data.id}>
                         {data.name}
