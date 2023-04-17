@@ -88,11 +88,9 @@ const Dashboard = ({
 
   const getDistrictsByRegion = async (regionId) => {
     try {
-      console.log("getDistrictsByRegion called");
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
-      console.log(response);
       setDistrictsData(response.data);
     } catch (error) {
       console.log(error);
@@ -100,10 +98,10 @@ const Dashboard = ({
   };
   const getElectoralAreasByDistrict = async (districtId) => {
     try {
+
       const response = await axios.get(
         "/api/v1/primary-data/electoral-area?districtId=" + districtId
       );
-      console.log(response);
       setElectoralAreasData(response.data);
     } catch (error) {
       console.log(error);
@@ -111,9 +109,11 @@ const Dashboard = ({
   };
   const getCommunitiesByElectoralArea = async (electoralAreaId) => {
     try {
+
       const response = await axios.get(
         "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
       );
+
       setCommunitiesData(response.data);
     } catch (error) {
       console.log(error);
@@ -430,25 +430,6 @@ const Dashboard = ({
     ],
   };
 
-  //   const labels = ['', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-  //  const barChartData = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: 'Dataset 1',
-  //       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-  //       backgroundColor: 'rgba(255, 99, 132, 0.5)',
-  //     },
-  //     {
-  //       label: 'Dataset 2',
-  //       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-  //       backgroundColor: 'rgba(53, 162, 235, 0.5)',
-  //     },
-  //   ],
-  // };
-
-  //});
 
   let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
   let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
@@ -470,7 +451,12 @@ const Dashboard = ({
               <select
                 className="form-control"
                 aria-label="Default select example"
-                onChange={(e) => setFilterBy(e.target.value)}
+                onChange={(e) => {setFilterBy(e.target.value);
+                
+                if(districtUser){
+                  getElectoralAreasByDistrict()
+                }
+              }}
                 value={filterBy}
               >
                 <option selected>Filter by </option>
@@ -570,7 +556,7 @@ const Dashboard = ({
             )}
             {filterBy == "electoralAreaId" ? (
               <>
-                {loggedInUserType == 1 || loggedInUserType == 2 ? (
+                {nationalUser ? (
                   <div className="col-md-2">
                     <label className="form-label mb-0">Select region</label>
                     <select
@@ -594,30 +580,31 @@ const Dashboard = ({
                 ) : (
                   <></>
                 )}
- {loggedInUserType == 1 ||
-                loggedInUserType == 2 ||
-                loggedInUserType == 3 ||
-                loggedInUserType == 4 ? 
-                <div className="col-md-2">
-                  <label className="form-label mb-0">Select district</label>
-                  <select
-                    className="form-control"
-                    aria-label="Default select example"
-                    onChange={async (e) => {
-                      setFilterValue(e.target.value);
-                      await getElectoralAreasByDistrict(e.target.value);
-                    }}
-                    value={district}
-                  >
-                    {" "}
-                    <option selected>Filter by </option>
-                    {districtsData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>:<></>}
+                {nationalUser ||
+                regionalUser ? (
+                  <div className="col-md-2">
+                    <label className="form-label mb-0">Select district</label>
+                    <select
+                      className="form-control"
+                      aria-label="Default select example"
+                      onChange={async (e) => {
+                        setFilterValue(e.target.value);
+                        await getElectoralAreasByDistrict(e.target.value);
+                      }}
+                      value={district}
+                    >
+                      {" "}
+                      <option selected>Filter by </option>
+                      {districtsData?.map((data) => (
+                        <option key={data.id} value={data.id}>
+                          {data.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <div className="col-md-2">
                   <label className="form-label mb-0">
                     Select Electoral Area
@@ -711,7 +698,7 @@ const Dashboard = ({
                     value={electoralArea}
                   >
                     {" "}
-                    <option selected>Filter by </option>
+                    <option selected> Select Electoral Area </option>
                     {electoralAreasData?.map((data) => (
                       <option key={data.id} value={data.id}>
                         {data.name}
