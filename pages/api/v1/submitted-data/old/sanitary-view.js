@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
