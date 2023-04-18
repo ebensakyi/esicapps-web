@@ -8,13 +8,7 @@ import Link from "next/link";
 import * as moment from "moment";
 import Cookies from "js-cookie";
 
-const Data = ({
-  data,
-  regions,
-  districts,
-  electoralAreas,
-  communities,
-}) => {
+const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [districtsData, setDistrictsData] = useState([]);
@@ -35,10 +29,8 @@ const Data = ({
 
   const query = router.query;
 
-  
   let formId = query.inspectionFormId;
   let published = query.published;
-
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -68,11 +60,11 @@ const Data = ({
     try {
       if (rating == 1) {
         return <span className="badge bg-success">Good</span>;
-      } else if (rating == 2 ) {
+      } else if (rating == 2) {
         return <span className="badge bg-warning">Average</span>;
       } else if (rating == 3) {
         return <span className="badge bg-danger">Poor</span>;
-      }else{
+      } else {
         return <span className="badge bg-primary">Default</span>;
       }
     } catch (error) {
@@ -82,75 +74,73 @@ const Data = ({
 
   const handleExcelName = () => {
     try {
-     
-
       if (formId == 1) {
-        return  `RESIDENTIAL PREMISES.xlsx`
-      } else if (formId == 2 ) {
-        return  `EATING & DRINKING PREMISES.xlsx`
+        return `RESIDENTIAL PREMISES.xlsx`;
+      } else if (formId == 2) {
+        return `EATING & DRINKING PREMISES.xlsx`;
       } else if (formId == 3) {
-        return  `HEALTH PREMISES.xlsx`
+        return `HEALTH PREMISES.xlsx`;
       } else if (formId == 4) {
-        return  `HOSPITALITY PREMISES.xlsx`
+        return `HOSPITALITY PREMISES.xlsx`;
       } else if (formId == 5) {
-        return  `INSTITUTION PREMISES.xlsx`
+        return `INSTITUTION PREMISES.xlsx`;
       } else if (formId == 6) {
-        return  `INDUSTRY PREMISES.xlsx`
+        return `INDUSTRY PREMISES.xlsx`;
       } else if (formId == 7) {
-        return  `MARKETS & LORRY PARK PREMISES.xlsx`
+        return `MARKETS & LORRY PARK PREMISES.xlsx`;
       } else if (formId == 8) {
-        return  `SANITARY FACILITY PREMISES.xlsx`
+        return `SANITARY FACILITY PREMISES.xlsx`;
       }
     } catch (error) {
       console.log(error);
-    }}
+    }
+  };
 
-
-    const handleTitle = () => {
+  const handleTitle = () => {
     try {
-     
-
       if (formId == 1) {
-        return  <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>
-      } else if (formId == 2 ) {
-        return  <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>
+        return <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>;
+      } else if (formId == 2) {
+        return <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>;
       } else if (formId == 3) {
-        return  <h5 className="card-title mb-0">HEALTH PREMISES</h5>
+        return <h5 className="card-title mb-0">HEALTH PREMISES</h5>;
       } else if (formId == 4) {
-        return  <h5 className="card-title mb-0">HOSPITALITY PREMISES</h5>
+        return <h5 className="card-title mb-0">HOSPITALITY PREMISES</h5>;
       } else if (formId == 5) {
-        return  <h5 className="card-title mb-0">INSTITUTION PREMISES</h5>
+        return <h5 className="card-title mb-0">INSTITUTION PREMISES</h5>;
       } else if (formId == 6) {
-        return  <h5 className="card-title mb-0">INDUSTRY PREMISES</h5>
+        return <h5 className="card-title mb-0">INDUSTRY PREMISES</h5>;
       } else if (formId == 7) {
-        return  <h5 className="card-title mb-0">MARKETS & LORRY PARK PREMISES</h5>
+        return (
+          <h5 className="card-title mb-0">MARKETS & LORRY PARK PREMISES</h5>
+        );
       } else if (formId == 8) {
-        return  <h5 className="card-title mb-0">SANITARY FACILITY PREMISES</h5>
+        return <h5 className="card-title mb-0">SANITARY FACILITY PREMISES</h5>;
       }
     } catch (error) {
       console.log(error);
-    }}
+    }
+  };
 
-
-    const returnFilterValue = async (filterBy) => {
-      if (filterBy == "regionId") {
-        setFilterValue(region);
-        return region;
-      }
-      if (filterBy == "districtId") {
-        setFilterValue(district);
-        return district;
-      }
-      if (filterBy == "electoralAreaId") {
-        setFilterValue(electoralArea);
-        return electoralArea;
-      }
-      if (filterBy == "community") {
-        setFilterValue(community);
-        return community;
-      }
-    };
-  const handleFilter =async (e) => {
+  const returnFilterValue = async (filterBy) => {
+    if (filterBy == "regionId") {
+      setFilterValue(region);
+      return region;
+    }
+    if (filterBy == "districtId") {
+      setFilterValue(district);
+      return district;
+    }
+    if (filterBy == "electoralAreaId") {
+      setFilterValue(electoralArea);
+      return electoralArea;
+    }
+    if (filterBy == "community") {
+      setFilterValue(community);
+      return community;
+    }
+  };
+  const handleFilter = async (e) => {
     e.preventDefault();
 
     const path = router.pathname;
@@ -163,23 +153,19 @@ const Data = ({
     let page = query.page;
     await returnFilterValue(filterBy);
 
-    // console.log(path);
-    // console.log(router.asPath);
     router.push({
       pathname: path,
-      query: { published,inspectionFormId, page, filterBy, filterValue, from, to },
+      query: {
+        published,
+        inspectionFormId,
+        page,
+        filterBy,
+        filterValue,
+        from,
+        to,
+      },
     });
-
-    // router.push({
-    //   pathname: '/destination',
-    //   query: {
-    //     myData: JSON.stringify({'some data'})
-    //    }
-    // });
   };
-
-
-
 
   const getDistrictsByRegion = async (regionId) => {
     try {
@@ -193,7 +179,6 @@ const Data = ({
   };
   const getElectoralAreasByDistrict = async (districtId) => {
     try {
-
       const response = await axios.get(
         "/api/v1/primary-data/electoral-area?districtId=" + districtId
       );
@@ -204,7 +189,6 @@ const Data = ({
   };
   const getCommunitiesByElectoralArea = async (electoralAreaId) => {
     try {
-
       const response = await axios.get(
         "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
       );
@@ -221,46 +205,69 @@ const Data = ({
   return (
     <div className="row">
       <div className="row row-cols-lg-auto g-3 align-items-center">
-            <div className="col-md-2">
-              <label className="form-label mb-0">Select level</label>
+        <div className="col-md-2">
+          <label className="form-label mb-0">Select level</label>
 
-              <select
-                className="form-control"
-                aria-label="Default select example"
-                onChange={(e) => {setFilterBy(e.target.value);
-                
-                if(districtUser){
-                  getElectoralAreasByDistrict()
-                }
+          <select
+            className="form-control"
+            aria-label="Default select example"
+            onChange={(e) => {
+              setFilterBy(e.target.value);
+
+              if (districtUser) {
+                getElectoralAreasByDistrict();
+              }
+            }}
+            value={filterBy}
+          >
+            <option selected>Filter by </option>
+            <option hidden={!nationalUser} value="regionId">
+              Region
+            </option>
+            <option hidden={!nationalUser && !regionalUser} value="districtId">
+              District
+            </option>
+            <option
+              hidden={!nationalUser && !regionalUser && !districtUser}
+              value="electoralAreaId"
+            >
+              Electoral Area
+            </option>
+            <option
+              hidden={!nationalUser && !regionalUser && !districtUser}
+              value="communityId"
+            >
+              Community
+            </option>
+          </select>
+        </div>
+
+        {filterBy == "regionId" ? (
+          <div className="col-md-2">
+            <label className="form-label mb-0">Select region</label>
+            <select
+              className="form-control"
+              aria-label="Default select example"
+              onChange={async (e) => {
+                setFilterValue(e.target.value);
               }}
-                value={filterBy}
-              >
-                <option selected>Filter by </option>
-                <option hidden={!nationalUser} value="regionId">
-                  Region
+              value={region}
+            >
+              {" "}
+              <option selected>Select region </option>
+              {regions?.map((data) => (
+                <option key={data.id} value={data.id}>
+                  {data.name}
                 </option>
-                <option
-                  hidden={!nationalUser && !regionalUser}
-                  value="districtId"
-                >
-                  District
-                </option>
-                <option
-                  hidden={!nationalUser && !regionalUser && !districtUser}
-                  value="electoralAreaId"
-                >
-                  Electoral Area
-                </option>
-                <option
-                  hidden={!nationalUser && !regionalUser && !districtUser}
-                  value="communityId"
-                >
-                  Community
-                </option>
-              </select>
-            </div>
-
-            {filterBy == "regionId" ? (
+              ))}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+        {filterBy == "districtId" ? (
+          <>
+            {loggedInUserType == 1 || loggedInUserType == 2 ? (
               <div className="col-md-2">
                 <label className="form-label mb-0">Select region</label>
                 <select
@@ -268,6 +275,7 @@ const Data = ({
                   aria-label="Default select example"
                   onChange={async (e) => {
                     setFilterValue(e.target.value);
+                    await getDistrictsByRegion(e.target.value);
                   }}
                   value={region}
                 >
@@ -283,265 +291,231 @@ const Data = ({
             ) : (
               <></>
             )}
-            {filterBy == "districtId" ? (
-              <>
-                {loggedInUserType == 1 || loggedInUserType == 2 ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select region</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        await getDistrictsByRegion(e.target.value);
-                      }}
-                      value={region}
-                    >
-                      {" "}
-                      <option selected>Select region </option>
-                      {regions?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">Select district</label>
-                  <select
-                    className="form-control"
-                    aria-label="Default select example"
-                    onChange={(e) => setFilterValue(e.target.value)}
-                    value={district}
-                  >
-                    {" "}
-                    <option selected>Select district </option>
-                    {districtsData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
-            ) : (
-              <></>
-            )}
-            {filterBy == "electoralAreaId" ? (
-              <>
-                {nationalUser ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select region</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      value={region}
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        await getDistrictsByRegion(e.target.value);
-                      }}
-                    >
-                      {" "}
-                      <option selected>Select region </option>
-                      {regions?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {nationalUser ||
-                regionalUser ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select district</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        await getElectoralAreasByDistrict(e.target.value);
-                      }}
-                      value={district}
-                    >
-                      {" "}
-                      <option selected>Select district </option>
-                      {districtsData?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">
-                    Select Electoral Area
-                  </label>
-                  <select
-                    className=" form-control "
-                    aria-label="Default select example"
-                    onChange={async (e) => {
-                      setFilterValue(e.target.value);
-                      await getCommunitiesByElectoralArea(e.target.value);
-                    }}
-                    value={electoralArea}
-                  >
-                    {" "}
-                    <option selected> Select Electoral Area </option>
-                    {electoralAreasData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
-            ) : (
-              <></>
-            )}
-            {filterBy == "communityId" ? (
-              <>
-                {loggedInUserType == 1 || loggedInUserType == 2 ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select region</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        await getDistrictsByRegion(e.target.value);
-                      }}
-                      value={region}
-                    >
-                      {" "}
-                      <option selected>Select region </option>
-                      {regions?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {loggedInUserType == 1 ||
-                loggedInUserType == 2 ||
-                loggedInUserType == 3 ||
-                loggedInUserType == 4 ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select district</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        await getElectoralAreasByDistrict(e.target.value);
-                      }}
-                      value={district}
-                    >
-                      {" "}
-                      <option selected>Select district </option>
-                      {districtsData?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">
-                    Select Electoral Area
-                  </label>
-                  <select
-                    className=" form-control "
-                    aria-label="Default select example"
-                    onChange={async (e) => {
-                      setFilterValue(e.target.value);
-                      await getCommunitiesByElectoralArea(e.target.value);
-                    }}
-                    value={electoralArea}
-                  >
-                    {" "}
-                    <option selected> Select Electoral Area </option>
-                    {electoralAreasData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>{" "}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">Select community</label>
-                  <select
-                    className=" form-control "
-                    aria-label="Default select example"
-                    onChange={(e) => setFilterValue(e.target.value)}
-                    value={community}
-                  >
-                    {" "}
-                    <option selected>Select community </option>
-                    {communitiesData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
-            ) : (
-              <></>
-            )}
-
-            <div className="col-md-12">
-              <label className="form-label mb-0">Start Date</label>
-              <input
-                type="date"
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select district</label>
+              <select
                 className="form-control"
-                onChange={(e) => setFrom(e.target.value)}
-                value={from}
-              />
-            </div>
-            <div className="col-md-12">
-              <label className="form-label mb-0">End Date</label>
-
-              <input
-                type="date"
-                className="form-control"
-                onChange={(e) => setTo(e.target.value)}
-                value={to}
-              />
-            </div>
-
-            <div className="col-12">
-              <label className="form-label mb-0">.</label>
-              <button
-                type="submit"
-                className="form-control btn btn-primary"
-                onClick={(e) => handleFilter(e)}
+                aria-label="Default select example"
+                onChange={(e) => setFilterValue(e.target.value)}
+                value={district}
               >
-                Filter
-              </button>
+                {" "}
+                <option selected>Select district </option>
+                {districtsData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
+          </>
+        ) : (
+          <></>
+        )}
+        {filterBy == "electoralAreaId" ? (
+          <>
+            {nationalUser ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select region</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  value={region}
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    await getDistrictsByRegion(e.target.value);
+                  }}
+                >
+                  {" "}
+                  <option selected>Select region </option>
+                  {regions?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
+            {nationalUser || regionalUser ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select district</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    await getElectoralAreasByDistrict(e.target.value);
+                  }}
+                  value={district}
+                >
+                  {" "}
+                  <option selected>Select district </option>
+                  {districtsData?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select Electoral Area</label>
+              <select
+                className=" form-control "
+                aria-label="Default select example"
+                onChange={async (e) => {
+                  setFilterValue(e.target.value);
+                  await getCommunitiesByElectoralArea(e.target.value);
+                }}
+                value={electoralArea}
+              >
+                {" "}
+                <option selected> Select Electoral Area </option>
+                {electoralAreasData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+        {filterBy == "communityId" ? (
+          <>
+            {loggedInUserType == 1 || loggedInUserType == 2 ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select region</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    await getDistrictsByRegion(e.target.value);
+                  }}
+                  value={region}
+                >
+                  {" "}
+                  <option selected>Select region </option>
+                  {regions?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
+            {loggedInUserType == 1 ||
+            loggedInUserType == 2 ||
+            loggedInUserType == 3 ||
+            loggedInUserType == 4 ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select district</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    await getElectoralAreasByDistrict(e.target.value);
+                  }}
+                  value={district}
+                >
+                  {" "}
+                  <option selected>Select district </option>
+                  {districtsData?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select Electoral Area</label>
+              <select
+                className=" form-control "
+                aria-label="Default select example"
+                onChange={async (e) => {
+                  setFilterValue(e.target.value);
+                  await getCommunitiesByElectoralArea(e.target.value);
+                }}
+                value={electoralArea}
+              >
+                {" "}
+                <option selected> Select Electoral Area </option>
+                {electoralAreasData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>{" "}
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select community</label>
+              <select
+                className=" form-control "
+                aria-label="Default select example"
+                onChange={(e) => setFilterValue(e.target.value)}
+                value={community}
+              >
+                {" "}
+                <option selected>Select community </option>
+                {communitiesData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
+        <div className="col-md-12">
+          <label className="form-label mb-0">Start Date</label>
+          <input
+            type="date"
+            className="form-control"
+            onChange={(e) => setFrom(e.target.value)}
+            value={from}
+          />
+        </div>
+        <div className="col-md-12">
+          <label className="form-label mb-0">End Date</label>
+
+          <input
+            type="date"
+            className="form-control"
+            onChange={(e) => setTo(e.target.value)}
+            value={to}
+          />
+        </div>
+
+        <div className="col-12">
+          <label className="form-label mb-0">.</label>
+          <button
+            type="submit"
+            className="form-control btn btn-primary"
+            onClick={(e) => handleFilter(e)}
+          >
+            Filter
+          </button>
+        </div>
+      </div>
 
       <div className="col-lg-12">
         <div className="card">
-          <div className="card-header">
-          {handleTitle()}
-           
-          </div>
+          <div className="card-header">{handleTitle()}</div>
           <div className="card-body">
             <div className="row">
               <div className="col-md-3">
@@ -586,28 +560,29 @@ const Data = ({
                 {data.inspection.map((dt) => {
                   return (
                     <tr key={dt.id}>
-                   
                       <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                       <td>
                         {dt?.Inspection?.InspectionType?.name}
-                        {dt?.Inspection?.InspectionType?.id == 2?
-                        <span>
-                        
-                          <Link
-                            href={{
-                              pathname: `/submitted-data/data_view`,
-                              query: {
-                                id: dt?.Inspection?.prevInspectionId,
-                                inspectionFormId:formId,
-                                published:published
-                              },
-                            }}
-                          >
-                            <a className="dropdown-item">
-                              <i className="ri-external-link-line align-bottom me-2 text-success" />
-                            </a>
-                          </Link>
-                        </span>:<></>}
+                        {dt?.Inspection?.InspectionType?.id == 2 ? (
+                          <span>
+                            <Link
+                              href={{
+                                pathname: `/submitted-data/data_view`,
+                                query: {
+                                  id: dt?.Inspection?.prevInspectionId,
+                                  inspectionFormId: formId,
+                                  published: published,
+                                },
+                              }}
+                            >
+                              <a className="dropdown-item">
+                                <i className="ri-external-link-line align-bottom me-2 text-success" />
+                              </a>
+                            </Link>
+                          </span>
+                        ) : (
+                          <></>
+                        )}
                       </td>
                       <td>{dt.Inspection.premisesCode}</td>
                       <td>
@@ -625,22 +600,10 @@ const Data = ({
                       </td>
                       <td>{dt.ghanaPostGps}</td>
                       <td>{dt.accuracy}</td>
-                      <td>
-                        {dt.Community.ElectoralArea.District.Region.name
-                         }
-                      </td>
-                      <td>
-                      {dt.Community.ElectoralArea.District.name
-                         }
-                      </td>
-                      <td>
-                      {dt.Community.ElectoralArea.name
-                         }
-                      </td>
-                      <td>
-                        { dt.Community.name
-                         }
-                      </td>{" "}
+                      <td>{dt.Community.ElectoralArea.District.Region.name}</td>
+                      <td>{dt.Community.ElectoralArea.District.name}</td>
+                      <td>{dt.Community.ElectoralArea.name}</td>
+                      <td>{dt.Community.name}</td>{" "}
                       <td>
                         {moment(dt.Inspection.createdAt).format(
                           "MMM Do YYYY, h:mm:ss a"
@@ -659,8 +622,8 @@ const Data = ({
                             pathname: `/submitted-data/data_view`,
                             query: {
                               id: dt.Inspection.id,
-                              inspectionFormId:formId,
-                              published:published
+                              inspectionFormId: formId,
+                              published: published,
                             },
                           }}
                         >

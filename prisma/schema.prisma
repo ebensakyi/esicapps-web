@@ -801,8 +801,6 @@ model WaterTreatmentType {
   PremisesWaterTreatmentType PremisesWaterTreatmentType[]
 }
 
-
-
 model YesNo {
   id                                                 Int                              @id @default(autoincrement())
   name                                               String                           @db.VarChar(255)
@@ -997,6 +995,8 @@ model BasicInfoSection {
   userId                  Int
   communityId             Int?
   community               String?                @db.VarChar(255)
+  electoralAreaId         Int?
+  electoralArea           String?                @db.VarChar(255)
   ghanaPostGps            String?                @db.VarChar(255)
   latitude                Decimal                @db.Decimal(11, 8)
   longitude               Decimal                @db.Decimal(11, 8)

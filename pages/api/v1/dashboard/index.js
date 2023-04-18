@@ -56,18 +56,20 @@ const get = async (req, res) => {
       LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
       LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
 
-      WHERE "Inspection"."regionId" = ${filterValue}
+    
 
       GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
       ORDER BY "InspectionForm"."name"
 `;
+//  WHERE "Inspection"."regionId" = ${filterValue}
+
 
   const baselineInspectionSummary =
     await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
       COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=1 AND "Inspection"."regionId" = ${filterValue}
+WHERE "Inspection"."inspectionTypeId"=1 
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
@@ -76,17 +78,11 @@ ORDER BY "InspectionForm"."name"`;
             COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount"
 FROM "InspectionForm" 
 LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-WHERE "Inspection"."inspectionTypeId"=2 AND "Inspection"."regionId" = ${filterValue}
+WHERE "Inspection"."inspectionTypeId"=2 
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"`;
 
-  //   await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
-  //                   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
 
-  // FROM "InspectionForm"
-  // LEFT JOIN "Inspection"  ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-  // WHERE "Inspection"."inspectionTypeId"=3 AND "Inspection"."[filterBy]" = ${[filterBy]}
-  // GROUP BY "InspectionForm"."name" `;
 
   const waterSourceTypeSummary =
     await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "sourceCount"
@@ -96,8 +92,10 @@ ORDER BY "InspectionForm"."name"`;
     LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
     LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
 
-    WHERE  "Inspection"."regionId" = ${filterValue} AND "WaterSourceType"."id" IS NOT NULL
+    WHERE "WaterSourceType"."id" IS NOT NULL
     GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
+
+    // "Inspection"."regionId" = ${filterValue} AND 
 
   const healthEducActionTakenCount = await prisma.premisesActionTaken.count({
     where: {

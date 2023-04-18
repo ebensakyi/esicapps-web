@@ -707,6 +707,13 @@ const Header = () => {
                   </ul>
                 </div>
               </li> */}
+
+<li className="nav-item">
+                <a className="nav-link menu-link" href="/report">
+                  <i className="ri-line-chart-line" />{" "}
+                  <span data-key="t-dashboards">Reports</span>
+                </a>
+              </li>{" "}
               <li className="nav-item">
                 <Link href="/sanitation-reports">
                   <a className="nav-link menu-link">
@@ -940,7 +947,7 @@ const Header = () => {
                     <li className="nav-item">
                       <a href="/setup/assign-data" className="nav-link">
                         {" "}
-                        Assign Data
+                        Transfer Data Ownership
                       </a>
                     </li>
                     <li className="nav-item">

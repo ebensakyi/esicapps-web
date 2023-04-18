@@ -24,6 +24,9 @@ const post = async (req, res) => {
       communityId:
         req.body.communityId == "null" ? null : Number(req.body.communityId),
       community: req.body.community == "null" ? null : req.body.community,
+      electoralAreaId:
+      req.body.electoralAreaId == "null" ? null : Number(req.body.electoralAreaId),
+      electoralArea: req.body.electoralArea == "null" ? null : req.body.electoralArea,
       ghanaPostGps: req.body.ghanaPostGps,
       latitude: req.body.latitude,
       longitude: req.body.longitude,
