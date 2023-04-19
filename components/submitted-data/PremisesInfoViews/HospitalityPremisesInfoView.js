@@ -11,7 +11,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
   let formId = query.inspectionFormId;
   let published = query.published;
 
-
+console.log(data);
 
   return (
     <>
@@ -33,6 +33,40 @@ const HospitalityPremisesInfoView = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
+                        {data?.HospitalityPremisesInfoSection?.facilityName != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Facility Name</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.HospitalityPremisesInfoSection?.facilityName
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )} {data?.HospitalityPremisesInfoSection
+                      ?.hospitalityPremisesTypeId != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Premises Type</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.HospitalityPremisesInfoSection
+                              ?.hospitalityPremisesType?.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                   
                           {data?.HospitalityPremisesInfoSection
                             ?.toiletAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">

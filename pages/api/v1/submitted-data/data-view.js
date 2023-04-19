@@ -117,6 +117,8 @@ const get = async (req, res) => {
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
+            hospitalityPremisesType: true,
+                physicalStructureType: true,
           },
         },
 
@@ -133,6 +135,10 @@ const get = async (req, res) => {
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
+          Type: true,
+        Subtype: true,
+            physicalStructureType: true,
+            firstAidAvailability : true
           },
         },
         InstitutionPremisesInfoSection: {
@@ -163,6 +169,7 @@ const get = async (req, res) => {
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
             protectiveClothingUsed: true,
+
           },
         },
         MarketPremisesInfoSection: {
