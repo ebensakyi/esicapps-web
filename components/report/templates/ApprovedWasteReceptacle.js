@@ -1,17 +1,25 @@
-import ReportHeader from "./ReportHeader";
+import ReportHeader from './ReportHeader';
 
-// Pipe-borne
-// Protected hand dug well
-// Unprotected hand dug well
-// Rain Water
-// River/stream
-// Tanker service
-// Borehole
-// Mechanised Borehole
-// Not applicable
-const ToiletAdequacy = ({ data,level }) => {
- 
-  let title = "TOILET ADEQUACY";
+const ApprovedWasteReceptacle = ({ data,level }) => {
+
+  const handleFormName = (id) => {
+    try {
+      if (id == 1) {
+        return `Hygiene Education`;
+      } else if (id == 2) {
+        return `Notice Served`;
+      } else if (id == 3) {
+        return `Criminal Summons`;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+  let  title = "ACTIONS TAKEN SUMMARY"
+
 
   return (
     <div className="card">
@@ -26,10 +34,8 @@ const ToiletAdequacy = ({ data,level }) => {
         >
           <thead>
             <tr>
-              <th>Form</th>
-              <th>Adequate</th>
-              <th>Not Adequate</th>
-              {/* <th>Total</th> */}
+              <th>Action</th>
+              <th>Number</th>
             </tr>
           </thead>
           <tbody>
@@ -37,10 +43,8 @@ const ToiletAdequacy = ({ data,level }) => {
               return (
                 <tr key={dt.id}>
                   {" "}
-                  <td>{dt.name}</td>
-                  <td>{dt.adequate}</td>
-                  <td>{dt.inadequate}</td>
-                  {/* <td>{dt.available + dt.notAvailable}</td> */}
+                  <td>{handleFormName(dt.actionId)}</td>
+                  <td>{dt._count.actionId}</td>
                 </tr>
               );
             })}
@@ -51,4 +55,4 @@ const ToiletAdequacy = ({ data,level }) => {
   );
 };
 
-export default ToiletAdequacy;
+export default ApprovedWasteReceptacle;

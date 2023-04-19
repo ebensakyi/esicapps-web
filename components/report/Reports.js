@@ -10,6 +10,10 @@ import ActionSummary from "./templates/ActionSummary";
 import WaterSources from "./templates/WaterSources";
 import PremisesWaterCondition from "./templates/PremisesWaterCondition";
 import ToiletAvailability from "./templates/ToiletAvailability";
+import ToiletAdequacy from "./templates/ToiletAdequacy";
+import DrainAvailability from "./templates/DrainAvailability";
+import WasteCollectionType from "./templates/WasteCollectionType";
+import ApprovedWasteReceptacle from "./templates/ApprovedWasteReceptacle";
 
 const Reports = ({ inspectionForm, regions, districts }) => {
   const router = useRouter();
@@ -25,6 +29,18 @@ const Reports = ({ inspectionForm, regions, districts }) => {
 
   const [toiletAvailabilityVisibility, setToiletAvailabilityVisibility] =
     useState(false);
+  const [drainAvailabilityVisibility, setDrainAvailabilityVisibility] =
+    useState(false);
+  const [toiletAdequacyVisibility, setToiletAdequacyVisibility] =
+    useState(false);
+
+  const [
+    approvedWasteReceptacleVisibility,
+    setApprovedWasteReceptacleVisibility,
+  ] = useState(false);
+  const [wasteCollectionTypeVisibility, setWasteCollectionTypeyVisibility] =
+    useState(false);
+
   const [level, setLevel] = useState();
   const [form, setForm] = useState(null);
   const [searchText, setSearchText] = useState();
@@ -69,6 +85,18 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     if (report == 21) {
       return "/api/v1/report/toilet-availability";
     }
+    if (report == 22) {
+      return "/api/v1/report/toilet-adequacy";
+    }
+    if (report == 23) {
+      return "/api/v1/report/drain-availability";
+    }
+    if (report == 31) {
+      return "/api/v1/report/waste-collection-type";
+    }
+    if (report == 32) {
+      return "/api/v1/report/approved-waste-receptacle";
+    }
   };
 
   const handleVisibility = async (report) => {
@@ -78,6 +106,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
     }
     if (report == 2) {
       setActionSummaryVisibility(true);
@@ -85,6 +117,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
     }
     if (report == 11) {
       setActionSummaryVisibility(false);
@@ -92,6 +128,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWaterSourceSummaryVisibility(true);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
     }
     if (report == 12) {
       setActionSummaryVisibility(false);
@@ -99,6 +139,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(true);
       setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
     }
     if (report == 21) {
       setActionSummaryVisibility(false);
@@ -106,6 +150,54 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(true);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
+    }
+    if (report == 22) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false);
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(true);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
+    }
+    if (report == 23) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false);
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(true);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(false);
+    }
+    if (report == 31) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false);
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(true);
+      setApprovedWasteReceptacleVisibility(false);
+    }
+    if (report == 32) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false);
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
+      setToiletAdequacyVisibility(false);
+      setDrainAvailabilityVisibility(false);
+      setWasteCollectionTypeVisibility(false);
+      setApprovedWasteReceptacleVisibility(true);
     }
   };
 
@@ -269,8 +361,8 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                         <option value="23">Drain Availability</option>
                       </optgroup>
                       <optgroup label="Solid Waste">
-                        <option value="31">Waste Bins Availability</option>
-                        <option value="32">Waste Bins Adequacy</option>
+                        <option value="31">Waste Collection Type</option>
+                        <option value="32">Approved Waste Receptacle</option>
                         {/* <option value="Michigan">Michigan</option> */}
                       </optgroup>
                     </select>
@@ -678,6 +770,29 @@ const Reports = ({ inspectionForm, regions, districts }) => {
         )}
         {toiletAvailabilityVisibility ? (
           <ToiletAvailability data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
+
+        {toiletAdequacyVisibility ? (
+          <ToiletAdequacy data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
+        {drainAvailabilityVisibility ? (
+          <DrainAvailability data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
+
+        {wasteCollectionTypeVisibility ? (
+          <WasteCollectionType data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
+
+        {approvedWasteReceptacleVisibility ? (
+          <ApprovedWasteReceptacle data={reportData} level={filterValue} />
         ) : (
           <></>
         )}

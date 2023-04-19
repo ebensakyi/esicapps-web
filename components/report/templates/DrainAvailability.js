@@ -9,9 +9,9 @@ import ReportHeader from "./ReportHeader";
 // Borehole
 // Mechanised Borehole
 // Not applicable
-const ToiletAdequacy = ({ data,level }) => {
+const DrainAvailability = ({ data,level }) => {
  
-  let title = "TOILET ADEQUACY";
+  let title = "DRAIN AVAILABILITY";
 
   return (
     <div className="card">
@@ -27,8 +27,8 @@ const ToiletAdequacy = ({ data,level }) => {
           <thead>
             <tr>
               <th>Form</th>
-              <th>Adequate</th>
-              <th>Not Adequate</th>
+              <th>Available</th>
+              <th>Not Available</th>
               {/* <th>Total</th> */}
             </tr>
           </thead>
@@ -38,8 +38,8 @@ const ToiletAdequacy = ({ data,level }) => {
                 <tr key={dt.id}>
                   {" "}
                   <td>{dt.name}</td>
-                  <td>{dt.adequate}</td>
-                  <td>{dt.inadequate}</td>
+                  <td>{dt.available}</td>
+                  <td>{dt.notAvailable}</td>
                   {/* <td>{dt.available + dt.notAvailable}</td> */}
                 </tr>
               );
@@ -51,4 +51,4 @@ const ToiletAdequacy = ({ data,level }) => {
   );
 };
 
-export default ToiletAdequacy;
+export default DrainAvailability;
