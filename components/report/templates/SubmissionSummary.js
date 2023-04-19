@@ -27,8 +27,8 @@ const SubmissionSummary = ({ data, level }) => {
 
   let title = "SUBMISSION SUMMARY";
   return (
-    <div className="card">
-      <ReportHeader title={title} level={level} />
+    <div className="card" id="printableArea">
+    <ReportHeader title={title} level={level} />
       <div className="card-body">
         <div className="col-sm"></div>
         <br />

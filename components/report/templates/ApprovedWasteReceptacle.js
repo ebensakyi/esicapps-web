@@ -1,48 +1,44 @@
-import ReportHeader from './ReportHeader';
+import ReportHeader from "./ReportHeader";
 
-const ApprovedWasteReceptacle = ({ data,level }) => {
+const ApprovedWasteReceptacle = ({ data, level }) => {
+  let title = "APPROVED WASTE RECEPTACLE";
 
-
-
-  let  title = "APPROVED WASTE RECEPTACLE"
 
 
   return (
-    <div className="card">
-        <ReportHeader title={title} level={level}/>
-      <div className="card-body">
-        <div className="col-sm"></div>
-        <br />
-        <table
-          id="fixed-header"
-          className="table table-bordered dt-responsive nowrap table-striped align-middle"
-          style={{ width: "100%" }}
-        >
-          <thead>
-            <tr>
-              <th>Form</th>
-              <th>Approved</th>
-              <th>Unapproved</th>
 
-            </tr>
-          </thead>
-          <tbody>
-         
+      <div className="card" id="printableArea">
+        <ReportHeader title={title} level={level} />
+        <div className="card-body">
+          <div className="col-sm"></div>
+          <br />
+          <table
+            id="fixed-header"
+            className="table table-bordered dt-responsive nowrap table-striped align-middle"
+            style={{ width: "100%" }}
+          >
+            <thead>
+              <tr>
+                <th>Form</th>
+                <th>Approved</th>
+                <th>Unapproved</th>
+              </tr>
+            </thead>
+            <tbody>
               {data?.map((dt) => {
-              return (
-                <tr key={dt.id}>
-                  {" "}
-                  <td>{dt.name}</td>
-                  <td>{dt.approved}</td>
-                  <td>{dt.unapproved}</td>
-                </tr>
-              );
-            })}
-                
-          </tbody>
-        </table>
+                return (
+                  <tr key={dt.id}>
+                    {" "}
+                    <td>{dt.name}</td>
+                    <td>{dt.approved}</td>
+                    <td>{dt.unapproved}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
   );
 };
 

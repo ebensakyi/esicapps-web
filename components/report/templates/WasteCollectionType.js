@@ -19,8 +19,8 @@ const WasteCollectionType = ({ data, level }) => {
 
   let title = "WASTE COLLECTION TYPE";
   return (
-    <div className="card">
-      <ReportHeader title={title} level={level} />
+    <div className="card" id="printableArea">
+    <ReportHeader title={title} level={level} />
       <div className="card-body">
         <div className="col-sm"></div>
         <br />
