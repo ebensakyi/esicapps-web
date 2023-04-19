@@ -2,26 +2,28 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
+    console.log("Water Sources");
     let filterBy = req.body.filterBy;
     let filterValue = Number(req.body.filterValue);
 
-    const report = await prisma.premisesActionTaken.groupBy({
+    const report = await prisma.premisesWaterSources.groupBy({
       where: {
-        ConclusionSection: {
+        WaterSection: {
           Inspection: {
             [filterBy]: filterValue,
           },
         },
       },
-      by: ["actionId"],
+      by: ["waterSourceId"],
       _count: {
-        actionId: true,
+        waterSourceId: true
+         
       },
-      orderBy: {
-        _count: {
-          actionId: "desc",
-        },
-      },
+    //   orderBy: {
+    //     _count: {
+    //       waterSourceId: "desc",
+    //     },
+    //   },
     });
 
     res.status(200).json({

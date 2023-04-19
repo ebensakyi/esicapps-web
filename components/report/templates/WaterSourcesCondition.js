@@ -1,21 +1,44 @@
 import ReportHeader from './ReportHeader';
 
-const ActionSummary = ({ data }) => {
+
+
+// Pipe-borne
+// Protected hand dug well
+// Unprotected hand dug well
+// Rain Water
+// River/stream
+// Tanker service
+// Borehole
+// Mechanised Borehole
+// Not applicable
+const WaterSourcesCondition = ({ data }) => {
   const handleFormName = (id) => {
     try {
       if (id == 1) {
-        return `Hygiene Education`;
+        return `Pipe-borne`;
       } else if (id == 2) {
-        return `Notice Served`;
+        return `Protected hand dug well`;
       } else if (id == 3) {
-        return `Criminal Summons`;
+        return `Unprotected hand dug well`;
+      } else if (id == 4) {
+        return `Rain Water`;
+      } else if (id == 5) {
+        return `River/stream`;
+      } else if (id == 6) {
+        return `Tanker service`;
+      } else if (id == 7) {
+        return `Borehole`;
+      } else if (id == 8) {
+        return `Mechanised Borehole`;
+      } else if (id == 9) {
+        return `Not applicable`;
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  let  title = "ACTIONS TAKEN SUMMARY"
+  let  title = "WATER SOURCES CONDITION"
 
 
   return (
@@ -31,7 +54,7 @@ const ActionSummary = ({ data }) => {
         >
           <thead>
             <tr>
-              <th>Action</th>
+              <th>Source</th>
               <th>Count</th>
             </tr>
           </thead>
@@ -40,8 +63,8 @@ const ActionSummary = ({ data }) => {
               return (
                 <tr key={dt.id}>
                   {" "}
-                  <td>{handleFormName(dt.actionId)}</td>
-                  <td>{dt._count.actionId}</td>
+                  <td>{handleFormName(dt.waterSourceId)}</td>
+                  <td>{dt._count.waterSourceId}</td>
                 </tr>
               );
             })}
@@ -52,4 +75,4 @@ const ActionSummary = ({ data }) => {
   );
 };
 
-export default ActionSummary;
+export default WaterSourcesCondition;

@@ -77,7 +77,7 @@ const getSubmissionSummary = async (req, res) => {
   //   },
   // });
 
-  const submissionSummary = await prisma.inspection.groupBy({
+  const report = await prisma.inspection.groupBy({
     where: {
 
         [filterBy]: filterValue,
@@ -104,41 +104,10 @@ const getSubmissionSummary = async (req, res) => {
   res.status(200).json({
     statusCode: 1,
     message: "Data saved",
-    data: { submissionSummary },
+    data:report,
   });
 };
 
-const get = async (req, res) => {
-  try {
-    if (req.query.userId) {
-      // const count = await prisma.assignData.count({
-      //   where: { assignedToId: Number(req.query.userId) },
-      // });
-
-      const data = await prisma.assignData.findFirst({
-        where: { assignedToId: Number(req.query.userId), deleted: 0 },
-      });
-
-      return res.status(200).json(data);
-    }
-
-    const data = await prisma.assignData.findMany({
-      where: { deleted: 0 },
-      include: { assignedFrom: true, assignedTo: true },
-    });
-    return res.status(200).json(data || []);
-  } catch (error) {
-    console.log("Error: " + error);
-  }
-};
-
-function toJson(data) {
-  return JSON.parse(
-    JSON.stringify(data, (_, v) =>
-      typeof v === "bigint" ? `${v}n` : v
-    ).replace(/"(-?\d+)n"/g, (_, a) => a)
-  );
-}
 
 export default (req, res) => {
   req.method === "POST"

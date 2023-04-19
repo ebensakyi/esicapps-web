@@ -1,9 +1,8 @@
-import Image from 'next/image'
-import moment from 'moment';
+
+import ReportHeader from './ReportHeader';
 
 
 const SubmissionSummary = ({ data }) => {
-  var dateString =  moment().format("DD/MM/yyyy HH:mm a");
   const handleFormName = (formId) => {
     try {
       if (formId == 1) {
@@ -28,22 +27,9 @@ const SubmissionSummary = ({ data }) => {
     }
   };
 
+  let  title = "SUBMISSION SUMMARY"
    return <div className="card">
-    <div className="card-header" style={{margin: "auto"}}>
-
-      <center><Image
-      src="/assets/images/logo_.png"
-      alt="title"
-      width={180}
-      height={100}
-	  quality={100}
-    /></center>
-    <h5 className="card-title mb-0">  EXPANDED SANITARY INSPECTIONS COMPLIANCE APPLICATION</h5>
-     <center><h5 className="card-title mb-0">SUBMISSION SUMMARY</h5></center> 
-     <center>Report Generated On: {dateString}
-</center>
-
-    </div>
+    <ReportHeader title={title}/>
     <div className="card-body">
       <div className="col-sm"></div>
       <br />

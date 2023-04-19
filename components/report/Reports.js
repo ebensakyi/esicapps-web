@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import "react-toastify/dist/ReactToastify.css";
 import SubmissionSummary from "./templates/SubmissionSummary";
 import ActionSummary from "./templates/ActionSummary";
+import WaterSources from "./templates/WaterSources";
 
 const Reports = ({ inspectionForm, regions, districts }) => {
   const router = useRouter();
@@ -17,7 +18,6 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   const [reportData, setReportData] = useState([]);
   const [actionSummaryVisibility, setActionSummaryVisibility] = useState(false);
 
-  const [wasterSourceSummary, setWaterSourceSummary] = useState([]);
   const [waterSourceSummaryVisibility, setWaterSourceSummaryVisibility] =
     useState(false);
 
@@ -46,14 +46,15 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   let published = query.published;
 
   const handleUrl = async (report) => {
+    console.log(report);
     if (report == 1) {
       return "/api/v1/report/submission-summaries";
     }
     if (report == 2) {
       return "/api/v1/report/action-summaries";
     }
-    if (report == 3) {
-      return "/api/v1/report/submission-summaries";
+    if (report == 11) {
+      return "/api/v1/report/water-sources";
     }
     if (report == 4) {
       return "/api/v1/report/submission-summaries";
@@ -66,12 +67,20 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   const handleVisibility = async (report) => {
     if (report == 1) {
       setSubmissionSummaryVisibility(true);
+      setActionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false)
     }
     if (report == 2) {
       setActionSummaryVisibility(true);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false)
+
+
     }
-    if (report == 3) {
-      return "/api/v1/report/submission-summaries";
+    if (report == 11) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(true)
     }
     if (report == 4) {
       return "/api/v1/report/submission-summaries";
@@ -94,13 +103,15 @@ const Reports = ({ inspectionForm, regions, districts }) => {
         to,
       };
 
-      let url =await handleUrl(reportType);
+      let url = await handleUrl(reportType);
+
+      console.log(url);
 
       const response = await axios.post(url, data);
       console.log("response", response);
       if (response.status == 200) {
-       handleVisibility(reportType)
-        setReportData(response.data.data.submissionSummary);
+        handleVisibility(reportType);
+        setReportData(response.data.data);
       }
 
       // router.replace(router.asPath);
@@ -112,35 +123,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     }
   };
 
-  const getActionTaken = async (e) => {
-    try {
-      // console.log("sendBroadcastMessage");
-      e.preventDefault();
-      let data = {
-        level,
-        reportType,
-      };
-
-      const response = await axios.post(
-        "/api/v1/report/national/submission-summaries",
-        data
-      );
-      console.log("response", response);
-      if (response.status == 200) {
-        console.log(response.data.data.submissionSummary);
-        setSubmissionSummaryVisibility(false);
-        setActionTakenVisibility(true);
-        setActionTaken(response.data.data.actionTaken);
-      }
-
-      // router.replace(router.asPath);
-
-      return toast.success("Message sent");
-    } catch (error) {
-      console.log(error);
-      return toast.error("An error occurred");
-    }
-  };
+  
 
   const returnFilterValue = async (filterBy) => {
     if (filterBy == "regionId") {
@@ -613,6 +596,8 @@ const Reports = ({ inspectionForm, regions, districts }) => {
           <></>
         )}
         {actionSummaryVisibility ? <ActionSummary data={reportData} /> : <></>}
+        {waterSourceSummaryVisibility ? <WaterSources data={reportData} /> : <></>}
+
       </div>
     </div>
   );
