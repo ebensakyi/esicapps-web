@@ -3,7 +3,6 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
 
     const data = {
       id: req.body.id,
@@ -112,7 +111,6 @@ const post = async (req, res) => {
           : Number(req.body.numberFoodVendors),
     };
 
-     console.log(data);
     const response = await prisma.marketPremisesInfoSection.create({ data });
 
     res.status(200).json({ statusCode: 1, message: "Data saved" });

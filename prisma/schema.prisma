@@ -588,6 +588,7 @@ model SanitaryInsanitary {
   coldRoomCondition               HealthPremisesInfoSection[]      @relation("coldRoomCondition")
   embalmingAreaCondition          HealthPremisesInfoSection[]      @relation("embalmingAreaCondition")
   boardingHouseCondition          InstitutionPremisesInfoSection[] @relation("boardingHouseCondition")
+  generalSanitaryCondition       MarketPremisesInfoSection[] @relation("generalSanitaryCondition")
 }
 
 model SewerSystem {
@@ -729,13 +730,13 @@ model WasteCollectionFrequency {
 }
 
 model WasteCollectionType {
-  id                      Int                       @id @default(autoincrement())
-  name                    String                    @db.VarChar(255)
-  deleted                 Int?                      @default(0)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  deleted           Int?                @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
   // PremisesWasteCollection PremisesWasteCollection[]
-  SolidWasteSection       SolidWasteSection[]
+  SolidWasteSection SolidWasteSection[]
 }
 
 model SolidWasteReceptacle {
@@ -1271,9 +1272,9 @@ model SanitaryPremisesInfoSection {
 }
 
 model MarketPremisesInfoSection {
-  id                                        String   @id @db.VarChar(255)
-  inspectionId                              String   @unique @db.VarChar(255)
-  facilityName                              String   @db.VarChar(255)
+  id                                        String              @id @db.VarChar(255)
+  inspectionId                              String              @unique @db.VarChar(255)
+  facilityName                              String              @db.VarChar(255)
   marketPremisesTypeId                      Int?
   physicalStructureTypeId                   Int?
   toiletAvailabilityId                      Int?
@@ -1298,15 +1299,16 @@ model MarketPremisesInfoSection {
   numberVehicles                            Int?
   numberDrivers                             Int?
   numberFoodVendors                         Int?
-  deleted                                   Int?     @default(0)
-  createdAt                                 DateTime @default(now())
-  updatedAt                                 DateTime @updatedAt
-  approvedHandwashingFacilityAvailability   YesNo?   @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
-  bathroomAvailability                      YesNo?   @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
-  drainsAvailability                        YesNo?   @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  toiletAvailability                        YesNo?   @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
-  urinalAvailability                        YesNo?   @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
-  firstAidAvailability                      YesNo?   @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  deleted                                   Int?                @default(0)
+  createdAt                                 DateTime            @default(now())
+  updatedAt                                 DateTime            @updatedAt
+  approvedHandwashingFacilityAvailability   YesNo?              @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
+  bathroomAvailability                      YesNo?              @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
+  drainsAvailability                        YesNo?              @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
+  toiletAvailability                        YesNo?              @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
+  urinalAvailability                        YesNo?              @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
+  firstAidAvailability                      YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
+  generalSanitaryCondition                  SanitaryInsanitary? @relation("generalSanitaryCondition", fields: [generalSanitaryConditionId], references: [id])
 
   marketPremisesType Type? @relation(fields: [marketPremisesTypeId], references: [id])
 

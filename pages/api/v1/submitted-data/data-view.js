@@ -172,6 +172,17 @@ const get = async (req, res) => {
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
+
+            marketPremisesType:true,
+            firstAidAvailability:true,
+            ownershipType:true,
+
+            derattingFrequency:true,
+            cleanupFrequency:true,
+            firstAidAvailability: true,
+            physicalStructureType: true,
+            marketPremisesType:true,
+
           },
         },
         SanitaryPremisesInfoSection: {
