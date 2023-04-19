@@ -4,7 +4,6 @@ import moment from "moment";
 const post = async (req, res) => {
   try {
 
-    console.log(req.body);
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
@@ -168,7 +167,6 @@ const post = async (req, res) => {
           : Number(req.body.numberCarcassHandlersMedicalCert),
     };
 
-   console.log(data);
     const response = await prisma.sanitaryPremisesInfoSection.create({ data });
 
     if (response) {
