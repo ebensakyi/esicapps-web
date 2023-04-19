@@ -1,8 +1,6 @@
+import ReportHeader from "./ReportHeader";
 
-import ReportHeader from './ReportHeader';
-
-
-const SubmissionSummary = ({ data }) => {
+const SubmissionSummary = ({ data, level }) => {
   const handleFormName = (formId) => {
     try {
       if (formId == 1) {
@@ -27,37 +25,39 @@ const SubmissionSummary = ({ data }) => {
     }
   };
 
-  let  title = "SUBMISSION SUMMARY"
-   return <div className="card">
-    <ReportHeader title={title}/>
-    <div className="card-body">
-      <div className="col-sm"></div>
-      <br />
-      <table
-        id="fixed-header"
-        className="table table-bordered dt-responsive nowrap table-striped align-middle"
-        style={{ width: "100%" }}
-      >
-        <thead>
-          <tr>
-            <th>Form</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((dt) => {
-            return (
-              <tr key={dt.id}>
-                {" "}
-                <td>{handleFormName(dt.inspectionFormId)}</td>
-                <td>{dt._count.inspectionFormId}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+  let title = "SUBMISSION SUMMARY";
+  return (
+    <div className="card">
+      <ReportHeader title={title} level={level} />
+      <div className="card-body">
+        <div className="col-sm"></div>
+        <br />
+        <table
+          id="fixed-header"
+          className="table table-bordered dt-responsive nowrap table-striped align-middle"
+          style={{ width: "100%" }}
+        >
+          <thead>
+            <tr>
+              <th>Form</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((dt) => {
+              return (
+                <tr key={dt.id}>
+                  {" "}
+                  <td>{handleFormName(dt.inspectionFormId)}</td>
+                  <td>{dt._count.inspectionFormId}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-}
+  );
+};
 
 export default SubmissionSummary;

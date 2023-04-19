@@ -1,6 +1,6 @@
 
 
-const SubmissionSummary = ({ data }) => {
+const SubmissionSummary = ({ data,level }) => {
     <div className="card">
     <div className="card-header">
       <h5 className="card-title mb-0">SUBMISSION SUMMARY</h5>

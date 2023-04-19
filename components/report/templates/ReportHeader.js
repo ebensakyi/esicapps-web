@@ -1,21 +1,16 @@
 import Image from 'next/image'
 import moment from 'moment';
 
-const ReportHeader = ({ data }) => {
-  const handleFormName = (id) => {
-    try {
-      if (id == 1) {
-        return `Hygiene Education`;
-      } else if (id == 2) {
-        return `Notice Served`;
-      } else if (id == 3) {
-        return `Criminal Summons`;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const ReportHeader = ({ title,level }) => {
+
   var dateString =  moment().format("DD/MM/yyyy HH:mm a");
+
+  const capitalize = str => {
+    return (
+      str.toUpperCase() 
+    );
+  };
+  
 
   return (
     <div className="card-header" style={{ margin: "auto" }}>
@@ -33,7 +28,10 @@ const ReportHeader = ({ data }) => {
         EXPANDED SANITARY INSPECTIONS COMPLIANCE APPLICATION
       </h5>
       <center>
-        <h5 className="card-title mb-0">SUBMISSION SUMMARY</h5>
+        <h5 className="card-title mb-0">{title}</h5>
+      </center>
+      <center>
+        {/* <h6 >REPORT FOR {capitalize(level)}</h6> */}
       </center>
       <center>Report Generated On: {dateString}</center>
     </div>

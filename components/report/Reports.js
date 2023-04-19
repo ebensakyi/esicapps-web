@@ -20,10 +20,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   const [actionSummaryVisibility, setActionSummaryVisibility] = useState(false);
   const [waterSourceSummaryVisibility, setWaterSourceSummaryVisibility] =
     useState(false);
-    const [waterConditionVisibility, setWaterConditionVisibility] =
+  const [waterConditionVisibility, setWaterConditionVisibility] =
     useState(false);
 
-    const [toiletAvailabilityVisibility, setToiletAvailabilityVisibility] =
+  const [toiletAvailabilityVisibility, setToiletAvailabilityVisibility] =
     useState(false);
   const [level, setLevel] = useState();
   const [form, setForm] = useState(null);
@@ -38,6 +38,9 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   const [community, setCommunity] = useState();
 
   const [filterValue, setFilterValue] = useState(null);
+
+  const [filterLabel, setFilterLabel] = useState(null);
+
   const [filterBy, setFilterBy] = useState(null);
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
@@ -72,39 +75,35 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     if (report == 1) {
       setSubmissionSummaryVisibility(true);
       setActionSummaryVisibility(false);
-      setWaterSourceSummaryVisibility(false)
+      setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(false);
     }
     if (report == 2) {
       setActionSummaryVisibility(true);
       setSubmissionSummaryVisibility(false);
-      setWaterSourceSummaryVisibility(false)
+      setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(false);
-
-
     }
     if (report == 11) {
       setActionSummaryVisibility(false);
       setSubmissionSummaryVisibility(false);
-      setWaterSourceSummaryVisibility(true)
+      setWaterSourceSummaryVisibility(true);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(false);
-
     }
     if (report == 12) {
       setActionSummaryVisibility(false);
       setSubmissionSummaryVisibility(false);
-      setWaterSourceSummaryVisibility(false)
+      setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(true);
       setToiletAvailabilityVisibility(false);
-
     }
     if (report == 21) {
       setActionSummaryVisibility(false);
       setSubmissionSummaryVisibility(false);
-      setWaterSourceSummaryVisibility(false)
+      setWaterSourceSummaryVisibility(false);
       setWaterConditionVisibility(false);
       setToiletAvailabilityVisibility(true);
     }
@@ -142,8 +141,6 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       return toast.error("An error occurred");
     }
   };
-
-  
 
   const returnFilterValue = async (filterBy) => {
     if (filterBy == "regionId") {
@@ -293,7 +290,9 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                       }}
                       value={filterBy}
                     >
-                      <option selected value="regionId">Filter by </option>
+                      <option selected value="regionId">
+                        Filter by{" "}
+                      </option>
                       <option hidden={!nationalUser} value="regionId">
                         Region
                       </option>
@@ -326,6 +325,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                         aria-label="Default select example"
                         onChange={async (e) => {
                           setFilterValue(e.target.value);
+                          var id = e.nativeEvent.target.selectedIndex;
+                          var text = e.nativeEvent.target[id].text;
+
+                          setFilterLabel(text);
                         }}
                         value={region}
                       >
@@ -353,6 +356,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                             aria-label="Default select example"
                             onChange={async (e) => {
                               setFilterValue(e.target.value);
+                              var id = e.nativeEvent.target.selectedIndex;
+                              var text = e.nativeEvent.target[id].text;
+
+                              setFilterLabel(text);
                               await getDistrictsByRegion(e.target.value);
                             }}
                             value={region}
@@ -376,7 +383,13 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                         <select
                           className="form-control"
                           aria-label="Default select example"
-                          onChange={(e) => setFilterValue(e.target.value)}
+                          onChange={(e) => {
+                            setFilterValue(e.target.value);
+                            var id = e.nativeEvent.target.selectedIndex;
+                            var text = e.nativeEvent.target[id].text;
+
+                            setFilterLabel(text);
+                          }}
                           value={district}
                         >
                           {" "}
@@ -405,6 +418,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                             value={region}
                             onChange={async (e) => {
                               setFilterValue(e.target.value);
+                              var id = e.nativeEvent.target.selectedIndex;
+                              var text = e.nativeEvent.target[id].text;
+
+                              setFilterLabel(text);
                               await getDistrictsByRegion(e.target.value);
                             }}
                           >
@@ -430,6 +447,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                             aria-label="Default select example"
                             onChange={async (e) => {
                               setFilterValue(e.target.value);
+                              var id = e.nativeEvent.target.selectedIndex;
+                              var text = e.nativeEvent.target[id].text;
+
+                              setFilterLabel(text);
                               await getElectoralAreasByDistrict(e.target.value);
                             }}
                             value={district}
@@ -455,6 +476,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                           aria-label="Default select example"
                           onChange={async (e) => {
                             setFilterValue(e.target.value);
+                            var id = e.nativeEvent.target.selectedIndex;
+                            var text = e.nativeEvent.target[id].text;
+
+                            setFilterLabel(text);
                             await getCommunitiesByElectoralArea(e.target.value);
                           }}
                           value={electoralArea}
@@ -484,6 +509,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                             aria-label="Default select example"
                             onChange={async (e) => {
                               setFilterValue(e.target.value);
+                              var id = e.nativeEvent.target.selectedIndex;
+                              var text = e.nativeEvent.target[id].text;
+
+                              setFilterLabel(text);
                               await getDistrictsByRegion(e.target.value);
                             }}
                             value={region}
@@ -513,6 +542,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                             aria-label="Default select example"
                             onChange={async (e) => {
                               setFilterValue(e.target.value);
+                              var id = e.nativeEvent.target.selectedIndex;
+                              var text = e.nativeEvent.target[id].text;
+
+                              setFilterLabel(text);
                               await getElectoralAreasByDistrict(e.target.value);
                             }}
                             value={district}
@@ -538,6 +571,12 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                           aria-label="Default select example"
                           onChange={async (e) => {
                             setFilterValue(e.target.value);
+
+                            var id = e.nativeEvent.target.selectedIndex;
+                            var text = e.nativeEvent.target[id].text;
+
+                            setFilterLabel(text);
+
                             await getCommunitiesByElectoralArea(e.target.value);
                           }}
                           value={electoralArea}
@@ -558,7 +597,14 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                         <select
                           className=" form-control "
                           aria-label="Default select example"
-                          onChange={(e) => setFilterValue(e.target.value)}
+                          onChange={(e) => {
+                            setFilterValue(e.target.value);
+
+                            var id = e.nativeEvent.target.selectedIndex;
+                            var text = e.nativeEvent.target[id].text;
+
+                            setFilterLabel(text);
+                          }}
                           value={community}
                         >
                           {" "}
@@ -615,11 +661,26 @@ const Reports = ({ inspectionForm, regions, districts }) => {
         ) : (
           <></>
         )}
-        {actionSummaryVisibility ? <ActionSummary data={reportData} /> : <></>}
-        {waterSourceSummaryVisibility ? <WaterSources data={reportData} /> : <></>}
-        {waterConditionVisibility ? <PremisesWaterCondition data={reportData} /> : <></>}
-        {toiletAvailabilityVisibility ? <ToiletAvailability data={reportData} /> : <></>}
-
+        {actionSummaryVisibility ? (
+          <ActionSummary data={reportData} level={filterLabel} />
+        ) : (
+          <></>
+        )}
+        {waterSourceSummaryVisibility ? (
+          <WaterSources data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
+        {waterConditionVisibility ? (
+          <PremisesWaterCondition data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
+        {toiletAvailabilityVisibility ? (
+          <ToiletAvailability data={reportData} level={filterValue} />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

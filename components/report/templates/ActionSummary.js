@@ -1,6 +1,7 @@
 import ReportHeader from './ReportHeader';
 
-const ActionSummary = ({ data }) => {
+const ActionSummary = ({ data,level }) => {
+
   const handleFormName = (id) => {
     try {
       if (id == 1) {
@@ -15,12 +16,14 @@ const ActionSummary = ({ data }) => {
     }
   };
 
+
+
   let  title = "ACTIONS TAKEN SUMMARY"
 
 
   return (
     <div className="card">
-        <ReportHeader title={title} />
+        <ReportHeader title={title} level={level}/>
       <div className="card-body">
         <div className="col-sm"></div>
         <br />
@@ -32,7 +35,7 @@ const ActionSummary = ({ data }) => {
           <thead>
             <tr>
               <th>Action</th>
-              <th>Count</th>
+              <th>Number</th>
             </tr>
           </thead>
           <tbody>

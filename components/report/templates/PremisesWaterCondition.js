@@ -9,14 +9,14 @@ import ReportHeader from "./ReportHeader";
 // Borehole
 // Mechanised Borehole
 // Not applicable
-const PremisesWaterCondition = ({ data }) => {
+const PremisesWaterCondition = ({ data,level }) => {
 
 
   let title = "WATER SOURCES CONDITION";
 
   return (
     <div className="card">
-      <ReportHeader title={title} />
+        <ReportHeader title={title} level={level}/>
       <div className="card-body">
         <div className="col-sm"></div>
         <br />

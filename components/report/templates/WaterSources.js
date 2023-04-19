@@ -11,7 +11,7 @@ import ReportHeader from './ReportHeader';
 // Borehole
 // Mechanised Borehole
 // Not applicable
-const WaterSources = ({ data }) => {
+const WaterSources = ({ data,level }) => {
   const handleFormName = (id) => {
     try {
       if (id == 1) {
@@ -43,7 +43,7 @@ const WaterSources = ({ data }) => {
 
   return (
     <div className="card">
-        <ReportHeader title={title} />
+        <ReportHeader title={title} level={level}/>
       <div className="card-body">
         <div className="col-sm"></div>
         <br />
@@ -55,7 +55,7 @@ const WaterSources = ({ data }) => {
           <thead>
             <tr>
               <th>Source</th>
-              <th>Count</th>
+              <th>Number</th>
             </tr>
           </thead>
           <tbody>
