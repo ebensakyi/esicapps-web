@@ -190,9 +190,8 @@ const DataView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community != null
-                                  ? data?.BasicInfoSection?.Community?.name
-                                  : ""
+                                 data?.BasicInfoSection?.Community?.name
+                                 
                               }
                               readOnly="readOnly"
                             />
@@ -230,8 +229,7 @@ const DataView = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.RespondentDesignation
-                                  .name
+                                data?.BasicInfoSection?.RespondentDesignation?.name
                               }
                               readOnly="readOnly"
                             />
@@ -311,7 +309,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection != null ? (
+                          {data?.LicencePermitSection?.buildingPermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Building permit
@@ -330,7 +328,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection != null ? (
+                          {data?.LicencePermitSection ?.habitationCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Certificate of habitation
@@ -349,7 +347,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection != null ? (
+                          {data?.LicencePermitSection  ?.propertyRateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Property rate payment
@@ -409,8 +407,7 @@ const DataView = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.LicencePermitSection
-                            .fumigationCertificateAvailability != null ? (
+                          {data?.LicencePermitSection?.fumigationCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Fumigation certificate
@@ -421,7 +418,7 @@ const DataView = ({ data }) => {
                                 id="invoicenoInput"
                                 value={
                                   data?.LicencePermitSection
-                                    .fumigationCertificateAvailability.name
+                                    ?.fumigationCertificateAvailability.name
                                 }
                                 readOnly="readOnly"
                               />
@@ -600,7 +597,7 @@ const DataView = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection?.PremisesWaterSources.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water source
@@ -621,7 +618,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection?.PremisesWaterSupply.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water supply
@@ -642,7 +639,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection != null ? (
+                          {data?.WaterSection?.waterSourceCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water source condition
@@ -703,8 +700,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.PremisesWaterTreatmentType
-                            .length != 0 ? (
+                          {data?.WaterSection?.PremisesWaterTreatmentType?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water treatment type

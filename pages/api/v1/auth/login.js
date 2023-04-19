@@ -20,7 +20,6 @@ const post = async (req, res) => {
       include: { UserType: true },
     });
 
-    console.log(user);
 
     if (!user) {
       return res
