@@ -8,19 +8,23 @@ import "react-toastify/dist/ReactToastify.css";
 import SubmissionSummary from "./templates/SubmissionSummary";
 import ActionSummary from "./templates/ActionSummary";
 import WaterSources from "./templates/WaterSources";
+import PremisesWaterCondition from "./templates/PremisesWaterCondition";
+import ToiletAvailability from "../../pages/api/v1/report/toilet-availability";
 
 const Reports = ({ inspectionForm, regions, districts }) => {
   const router = useRouter();
   const [reportType, setReportType] = useState(null);
   const [submissionSummaryVisibility, setSubmissionSummaryVisibility] =
     useState(false);
-
   const [reportData, setReportData] = useState([]);
   const [actionSummaryVisibility, setActionSummaryVisibility] = useState(false);
-
   const [waterSourceSummaryVisibility, setWaterSourceSummaryVisibility] =
     useState(false);
+    const [waterConditionVisibility, setWaterConditionVisibility] =
+    useState(false);
 
+    const [toiletAvailabilityVisibility, setToiletAvailabilityVisibility] =
+    useState(false);
   const [level, setLevel] = useState();
   const [form, setForm] = useState(null);
   const [searchText, setSearchText] = useState();
@@ -56,11 +60,11 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     if (report == 11) {
       return "/api/v1/report/water-sources";
     }
-    if (report == 4) {
-      return "/api/v1/report/submission-summaries";
+    if (report == 12) {
+      return "/api/v1/report/premises-water-condition";
     }
-    if (report == 5) {
-      return "/api/v1/report/submission-summaries";
+    if (report == 21) {
+      return "/api/v1/report/toilet-availability";
     }
   };
 
@@ -69,11 +73,15 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setSubmissionSummaryVisibility(true);
       setActionSummaryVisibility(false);
       setWaterSourceSummaryVisibility(false)
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
     }
     if (report == 2) {
       setActionSummaryVisibility(true);
       setSubmissionSummaryVisibility(false);
       setWaterSourceSummaryVisibility(false)
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
 
 
     }
@@ -81,12 +89,24 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setActionSummaryVisibility(false);
       setSubmissionSummaryVisibility(false);
       setWaterSourceSummaryVisibility(true)
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(false);
+
     }
-    if (report == 4) {
-      return "/api/v1/report/submission-summaries";
+    if (report == 12) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false)
+      setWaterConditionVisibility(true);
+      setToiletAvailabilityVisibility(false);
+
     }
-    if (report == 5) {
-      return "/api/v1/report/submission-summaries";
+    if (report == 21) {
+      setActionSummaryVisibility(false);
+      setSubmissionSummaryVisibility(false);
+      setWaterSourceSummaryVisibility(false)
+      setWaterConditionVisibility(false);
+      setToiletAvailabilityVisibility(true);
     }
   };
 
@@ -243,7 +263,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                       </optgroup>
                       <optgroup label="Water">
                         <option value="11">Water Sources</option>
-                        <option value="12">Water Source Condition</option>
+                        <option value="12">Water Condition</option>
                         {/* <option value="Marseille">Marseille</option> */}
                       </optgroup>
                       <optgroup label="Liquid Waste">
@@ -273,7 +293,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                       }}
                       value={filterBy}
                     >
-                      <option selected>Filter by </option>
+                      <option selected value="regionId">Filter by </option>
                       <option hidden={!nationalUser} value="regionId">
                         Region
                       </option>
@@ -597,6 +617,8 @@ const Reports = ({ inspectionForm, regions, districts }) => {
         )}
         {actionSummaryVisibility ? <ActionSummary data={reportData} /> : <></>}
         {waterSourceSummaryVisibility ? <WaterSources data={reportData} /> : <></>}
+        {waterConditionVisibility ? <PremisesWaterCondition data={reportData} /> : <></>}
+        {toiletAvailabilityVisibility ? <ToiletAvailability data={reportData} /> : <></>}
 
       </div>
     </div>
