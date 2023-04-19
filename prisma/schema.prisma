@@ -132,7 +132,7 @@ model User {
   PremisesNuisanceDetected       PremisesNuisanceDetected[]
   PremisesPestSigns              PremisesPestSigns[]
   PremisesToiletType             PremisesToiletType[]
-  PremisesWasteCollection        PremisesWasteCollection[]
+  // PremisesWasteCollection        PremisesWasteCollection[]
   PremisesWasteReceptacle        PremisesWasteReceptacle[]
   PremisesWaterSources           PremisesWaterSources[]
   PremisesWaterStorage           PremisesWaterStorage[]
@@ -734,7 +734,7 @@ model WasteCollectionType {
   deleted                 Int?                      @default(0)
   createdAt               DateTime                  @default(now())
   updatedAt               DateTime                  @updatedAt
-  PremisesWasteCollection PremisesWasteCollection[]
+  // PremisesWasteCollection PremisesWasteCollection[]
   SolidWasteSection       SolidWasteSection[]
 }
 
@@ -1640,7 +1640,7 @@ model SolidWasteSection {
   createdAt                          DateTime                         @default(now())
   updatedAt                          DateTime                         @updatedAt
   PremisesHazardousWasteDisposal     PremisesHazardousWasteDisposal[]
-  PremisesWasteCollection            PremisesWasteCollection[]
+  // PremisesWasteCollection            PremisesWasteCollection[]
   PremisesWasteReceptacle            PremisesWasteReceptacle[]
   adequateWasteStorageReceptacle     YesNo?                           @relation("adequateWasteStorageReceptacle", fields: [adequateWasteStorageReceptacleId], references: [id])
   approvedWasteStorageReceptacle     YesNo?                           @relation("approvedWasteStorageReceptacle", fields: [approvedWasteStorageReceptacleId], references: [id])
@@ -1865,18 +1865,18 @@ model PremisesWasteReceptacle {
   User                   User                 @relation(fields: [userId], references: [id])
 }
 
-model PremisesWasteCollection {
-  id                    String              @id @db.VarChar(255)
-  wasteCollectionTypeId Int
-  deleted               Int?                @default(0)
-  createdAt             DateTime            @default(now())
-  updatedAt             DateTime            @updatedAt
-  solidWasteSectionId   String              @db.VarChar(255)
-  userId                Int
-  SolidWasteSection     SolidWasteSection   @relation(fields: [solidWasteSectionId], references: [id])
-  User                  User                @relation(fields: [userId], references: [id])
-  WasteCollectionType   WasteCollectionType @relation(fields: [wasteCollectionTypeId], references: [id])
-}
+// model PremisesWasteCollection {
+//   id                    String              @id @db.VarChar(255)
+//   wasteCollectionTypeId Int
+//   deleted               Int?                @default(0)
+//   createdAt             DateTime            @default(now())
+//   updatedAt             DateTime            @updatedAt
+//   solidWasteSectionId   String              @db.VarChar(255)
+//   userId                Int
+//   SolidWasteSection     SolidWasteSection   @relation(fields: [solidWasteSectionId], references: [id])
+//   User                  User                @relation(fields: [userId], references: [id])
+//   WasteCollectionType   WasteCollectionType @relation(fields: [wasteCollectionTypeId], references: [id])
+// }
 
 model PremisesPestSigns {
   id         String   @id @db.VarChar(255)

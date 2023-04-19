@@ -2,37 +2,31 @@ import ReportHeader from './ReportHeader';
 
 
 
-// Pipe-borne
-// Protected hand dug well
-// Unprotected hand dug well
-// Rain Water
-// River/stream
-// Tanker service
-// Borehole
-// Mechanised Borehole
-// Not applicable
-const WaterSources = ({ data,level }) => {
+
+
+
+
+
+
+
+const WasteReceptacle = ({ data,level }) => {
   const handleFormName = (id) => {
     try {
       if (id == 1) {
-        return `Pipe-borne`;
+        return `Colour coded bins`;
       } else if (id == 2) {
-        return `Protected hand dug well`;
+        return `Covered bins`;
       } else if (id == 3) {
-        return `Unprotected hand dug well`;
+        return `Open bins`;
       } else if (id == 4) {
-        return `Rain Water`;
+        return `Polythene bags`;
       } else if (id == 5) {
-        return `River/stream`;
+        return `Sacks`;
       } else if (id == 6) {
-        return `Tanker service`;
+        return `Metal container`;
       } else if (id == 7) {
-        return `Borehole`;
-      } else if (id == 8) {
-        return `Mechanised Borehole`;
-      } else if (id == 9) {
-        return `Not applicable`;
-      }
+        return `Bare ground`;
+      } 
     } catch (error) {
       console.log(error);
     }
@@ -63,8 +57,8 @@ const WaterSources = ({ data,level }) => {
               return (
                 <tr key={dt.id}>
                   {" "}
-                  <td>{handleFormName(dt.waterSourceId)}</td>
-                  <td>{dt._count.waterSourceId}</td>
+                  <td>{handleFormName(dt.solidWasteReceptacleId)}</td>
+                  <td>{dt._count.solidWasteReceptacleId}</td>
                 </tr>
               );
             })}
@@ -75,4 +69,4 @@ const WaterSources = ({ data,level }) => {
   );
 };
 
-export default WaterSources;
+export default WasteReceptacle;
