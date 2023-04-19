@@ -2,20 +2,6 @@ import ReportHeader from './ReportHeader';
 
 const ApprovedWasteReceptacle = ({ data,level }) => {
 
-  const handleFormName = (id) => {
-    try {
-      if (id == 1) {
-        return `Hygiene Education`;
-      } else if (id == 2) {
-        return `Notice Served`;
-      } else if (id == 3) {
-        return `Criminal Summons`;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
 
 
   let  title = "APPROVED WASTE RECEPTACLE"
@@ -34,20 +20,25 @@ const ApprovedWasteReceptacle = ({ data,level }) => {
         >
           <thead>
             <tr>
-              <th>Action</th>
-              <th>Number</th>
+              <th>Form</th>
+              <th>Approved</th>
+              <th>Unapproved</th>
+
             </tr>
           </thead>
           <tbody>
-            {data?.map((dt) => {
+         
+              {data?.map((dt) => {
               return (
                 <tr key={dt.id}>
                   {" "}
-                  <td>{handleFormName(dt.actionId)}</td>
-                  <td>{dt._count.actionId}</td>
+                  <td>{dt.name}</td>
+                  <td>{dt.approved}</td>
+                  <td>{dt.unapproved}</td>
                 </tr>
               );
             })}
+                
           </tbody>
         </table>
       </div>
