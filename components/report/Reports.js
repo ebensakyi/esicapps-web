@@ -9,7 +9,7 @@ import SubmissionSummary from "./templates/SubmissionSummary";
 import ActionSummary from "./templates/ActionSummary";
 import WaterSources from "./templates/WaterSources";
 import PremisesWaterCondition from "./templates/PremisesWaterCondition";
-import ToiletAvailability from "../../pages/api/v1/report/toilet-availability";
+import ToiletAvailability from "./templates/ToiletAvailability";
 
 const Reports = ({ inspectionForm, regions, districts }) => {
   const router = useRouter();

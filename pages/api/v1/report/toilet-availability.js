@@ -2,89 +2,7 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-  
-    let filterBy = req.body.filterBy;
-    let filterValue = Number(req.body.filterValue);
-    let _summary;
-
-    if (filterBy == "regionId") {
-      _summary =
-        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "LiquidWasteSection"."inspectionId") AS "inspectionCount", 
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 1) AS "available",
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 2) AS "notAvailable"
-
-    FROM "InspectionForm" 
-    LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    LEFT JOIN "LiquidWasteSection" ON "Inspection"."id" = "LiquidWasteSection"."inspectionId"
-    WHERE  "Inspection"."regionId" = ${filterValue}
-    
-        GROUP BY "InspectionForm"."name" 
-    ORDER BY "InspectionForm"."name"
-`;
-    } else if (filterBy == "districtId") {
-      _summary =
-        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "LiquidWasteSection"."inspectionId") AS "inspectionCount", 
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 1) AS "safe",
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 2) AS "unsafe"
-
-    FROM "InspectionForm" 
-    LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    LEFT JOIN "LiquidWasteSection" ON "Inspection"."id" = "LiquidWasteSection"."inspectionId"
-    WHERE  "Inspection"."districtId" = ${filterValue}
-    
-        GROUP BY "InspectionForm"."name" 
-    ORDER BY "InspectionForm"."name"
-`;
-    } else if (filterBy == "electoralAreaId") {
-      _summary =
-        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "LiquidWasteSection"."inspectionId") AS "inspectionCount", 
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 1) AS "safe",
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 2) AS "unsafe"
-
-    FROM "InspectionForm" 
-    LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    LEFT JOIN "LiquidWasteSection" ON "Inspection"."id" = "LiquidWasteSection"."inspectionId"
-    WHERE  "Inspection"."electoralAreaId" = ${filterValue}
-    
-        GROUP BY "InspectionForm"."name" 
-    ORDER BY "InspectionForm"."name"
-`;
-    } else if (filterBy == "communityId") {
-      _summary =
-        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "LiquidWasteSection"."inspectionId") AS "inspectionCount", 
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 1) AS "safe",
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 2) AS "unsafe"
-
-    FROM "InspectionForm" 
-    LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    LEFT JOIN "LiquidWasteSection" ON "Inspection"."id" = "LiquidWasteSection"."inspectionId"
-    WHERE  "Inspection"."communityId" = ${filterValue}
-    GROUP BY "InspectionForm"."name" 
-    ORDER BY "InspectionForm"."name"
-`;
-    } else {
-      _summary =
-        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "LiquidWasteSection"."inspectionId") AS "inspectionCount", 
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 1) AS "safe",
-    COUNT("LiquidWasteSection"."toiletAvailabilityId")  filter (where "LiquidWasteSection"."toiletAvailabilityId" = 2) AS "unsafe"
-
-    FROM "InspectionForm" 
-    LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-    LEFT JOIN "LiquidWasteSection" ON "Inspection"."id" = "LiquidWasteSection"."inspectionId"
-   
-    GROUP BY "InspectionForm"."name" 
-    ORDER BY "InspectionForm"."name"
-`;
-    }
-
-    let summary = JSON.stringify(_summary, (_, v) =>
-      typeof v === "bigint" ? v.toString() : v
-    );
-    let report = JSON.parse(summary);
-
-    res.status(200).json({
-      data: report,
-    });
+    await getToiletAvailability(req, res);
   } catch (error) {
     console.log(error);
     if (error.code === "P2002")
@@ -92,6 +10,189 @@ const post = async (req, res) => {
         .status(200)
         .json({ statusCode: 0, message: "action prefix should be unique" });
   }
+};
+
+const getToiletAvailability = async (req, res) => {
+  let filterBy = req.body.filterBy;
+  let filterValue = Number(req.body.filterValue);
+
+  const resAvailCount = await prisma.ResidentialPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+
+      toiletAvailabilityId: 1,
+    },
+  });
+  const resNotAvailCount = await prisma.ResidentialPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+
+  const eateryAvailCount = await prisma.EateryPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const eateryNotAvailCount = await prisma.EateryPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+
+  const healthAvailCount = await prisma.HealthPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const healthNotAvailCount = await prisma.HealthPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+
+  const hospAvailCount = await prisma.HospitalityPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const hospNotAvailCount = await prisma.HospitalityPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+
+
+  const industryAvailCount = await prisma.IndustryPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const industryNotAvailCount = await prisma.IndustryPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+  const institutionAvailCount = await prisma.InstitutionPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const institutionNotAvailCount = await prisma.InstitutionPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+  const marketAvailCount = await prisma.MarketPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const marketNotAvailCount = await prisma.MarketPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+  const sanitaryAvailCount = await prisma.SanitaryPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 1,
+    },
+  });
+  const sanitaryNotAvailCount = await prisma.SanitaryPremisesInfoSection.count({
+    where: {
+      Inspection: {
+        [filterBy]: filterValue,
+      },
+      toiletAvailabilityId: 2,
+    },
+  });
+  let report = [
+    {
+      name: "Residential Premises",
+      available: resAvailCount,
+      notAvailable: resNotAvailCount,
+    },
+    {
+      name: "Eating & Drinking Premises",
+      available: eateryAvailCount,
+      notAvailable: eateryNotAvailCount,
+    },
+    {
+      name: "Health Premises",
+      available: healthAvailCount,
+      notAvailable: healthNotAvailCount,
+    },
+    {
+      name: "Hospitality Premises",
+      available: hospAvailCount,
+      notAvailable: hospNotAvailCount,
+    },
+    {
+      name: "Industry Premises",
+      available: industryAvailCount,
+      notAvailable: industryNotAvailCount,
+    },  {
+      name: "Institution Premises",
+      available: institutionAvailCount,
+      notAvailable: institutionNotAvailCount,
+    },  {
+      name: "Sanitary Premises",
+      available: sanitaryAvailCount,
+      notAvailable: sanitaryNotAvailCount,
+    },  {
+      name: "Markets & Lorry Parks Premises",
+      available: marketAvailCount,
+      notAvailable: marketNotAvailCount,
+    },
+  ];
+
+  res.status(200).json({
+    data: report,
+  });
 };
 
 export default (req, res) => {

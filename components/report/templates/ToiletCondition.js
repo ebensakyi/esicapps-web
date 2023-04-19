@@ -9,9 +9,9 @@ import ReportHeader from "./ReportHeader";
 // Borehole
 // Mechanised Borehole
 // Not applicable
-const ToiletAvailability = ({ data }) => {
+const ToiletCondition = ({ data }) => {
  
-  let title = "TOILET AVAILABILITY";
+  let title = "TOILET CONDITION";
 
   return (
     <div className="card">
@@ -26,10 +26,10 @@ const ToiletAvailability = ({ data }) => {
         >
           <thead>
             <tr>
-              <th>Form</th>
-              <th>Available</th>
-              <th>Not Available</th>
-              {/* <th>Total</th> */}
+              <th>Source</th>
+              <th>Safe</th>
+              <th>Unsafe</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -38,9 +38,9 @@ const ToiletAvailability = ({ data }) => {
                 <tr key={dt.id}>
                   {" "}
                   <td>{dt.name}</td>
-                  <td>{dt.available}</td>
-                  <td>{dt.notAvailable}</td>
-                  {/* <td>{dt.available + dt.notAvailable}</td> */}
+                  <td>{dt.safe}</td>
+                  <td>{dt.unsafe}</td>
+                  <td>{dt.safe}</td>
                 </tr>
               );
             })}
@@ -51,4 +51,4 @@ const ToiletAvailability = ({ data }) => {
   );
 };
 
-export default ToiletAvailability;
+export default ToiletCondition;
