@@ -1,29 +1,26 @@
-import ReportHeader from './ReportHeader';
+import ReportHeader from "./ReportHeader";
 
-const WasteCollectionType = ({ data,level }) => {
-
+const WasteCollectionType = ({ data, level }) => {
   const handleFormName = (id) => {
     try {
       if (id == 1) {
-        return `Hygiene Education`;
+        return `Communal container`;
       } else if (id == 2) {
-        return `Notice Served`;
+        return `Door to door`;
       } else if (id == 3) {
-        return `Criminal Summons`;
+        return `Not serviced`;
+      } else if (id == 4) {
+        return "Communal Dump Site";
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-
-
-  let  title = "WASTE COLLECTION TYPE"
-
-
+  let title = "WASTE COLLECTION TYPE";
   return (
     <div className="card">
-        <ReportHeader title={title} level={level}/>
+      <ReportHeader title={title} level={level} />
       <div className="card-body">
         <div className="col-sm"></div>
         <br />
@@ -34,17 +31,17 @@ const WasteCollectionType = ({ data,level }) => {
         >
           <thead>
             <tr>
-              <th>Action</th>
+              <th>Collection Type</th>
               <th>Number</th>
             </tr>
           </thead>
           <tbody>
-          {data?.map((dt) => {
+            {data?.map((dt) => {
               return (
                 <tr key={dt.id}>
                   {" "}
-                  <td>{handleFormName(dt.waterSourceId)}</td>
-                  <td>{dt._count.waterSourceId}</td>
+                  <td>{handleFormName(dt.wasteCollectionTypeId)}</td>
+                  <td>{dt._count.wasteCollectionTypeId}</td>
                 </tr>
               );
             })}

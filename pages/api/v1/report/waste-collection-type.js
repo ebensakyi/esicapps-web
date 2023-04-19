@@ -5,15 +5,14 @@ const post = async (req, res) => {
     let filterBy = req.body.filterBy;
     let filterValue = Number(req.body.filterValue);
 
-    const report = await prisma.premisesWasteCollection.groupBy({
+    const report = await prisma.SolidWasteSection.groupBy({
       where: {
-        SolidWasteSection: {
           Inspection: {
             [filterBy]: filterValue,
-          },
+          
         },
       },
-      by: ["waterSourceId"],
+      by: ["wasteCollectionTypeId"],
       _count: {
         wasteCollectionTypeId: true
          
