@@ -18,7 +18,7 @@ const ApprovedWasteReceptacle = ({ data,level }) => {
 
 
 
-  let  title = "ACTIONS TAKEN SUMMARY"
+  let  title = "APPROVED WASTE RECEPTACLE"
 
 
   return (

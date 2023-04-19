@@ -38,7 +38,9 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     approvedWasteReceptacleVisibility,
     setApprovedWasteReceptacleVisibility,
   ] = useState(false);
-  const [wasteCollectionTypeVisibility, setWasteCollectionTypeyVisibility] =
+  const [wasteCollectionTypeVisibility, setWasteCollectionTypeVisibility] =
+    useState(false);
+    const [wasteReceptacleVisibility, setWasteReceptacleVisibility] =
     useState(false);
 
   const [level, setLevel] = useState();
@@ -96,6 +98,8 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     }
     if (report == 32) {
       return "/api/v1/report/approved-waste-receptacle";
+    } if (report == 33) {
+      return "/api/v1/report/premises-waste-receptacle";
     }
   };
 
@@ -363,6 +367,8 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                       <optgroup label="Solid Waste">
                         <option value="31">Waste Collection Type</option>
                         <option value="32">Approved Waste Receptacle</option>
+                        <option value="33">Waste Receptacle</option>
+
                         {/* <option value="Michigan">Michigan</option> */}
                       </optgroup>
                     </select>
