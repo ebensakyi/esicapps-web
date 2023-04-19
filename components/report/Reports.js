@@ -228,10 +228,42 @@ const Reports = ({ inspectionForm, regions, districts }) => {
     }
   };
 
+  const handleResetFilters = async () => {
+    if (loggedInUserType == 1 || loggedInUserType == 2) {
+      if (filterBy == null) {
+        setFilterBy("regionId");
+      }
+
+      if (filterValue == null || filterValue == 0) {
+        setFilterValue(undefined);
+      }
+    }
+    if (loggedInUserType == 3 || loggedInUserType == 4) {
+      if (filterBy == null) {
+        setFilterBy("regionId");
+      }
+
+      if (filterValue == null || filterValue == 0) {
+        setFilterValue(undefined);
+      }
+    }
+    if (loggedInUserType == 5 || loggedInUserType == 6) {
+      if (filterBy == null) {
+        setFilterBy("districtId");
+      }
+
+      if (filterValue == null || filterValue == 0) {
+        setFilterValue(undefined);
+      }
+    }
+  };
+
   const generateReport = async (e) => {
     try {
-      // console.log("sendBroadcastMessage");
       e.preventDefault();
+
+//     await handleResetFilters();
+
       let data = {
         level,
         reportType,
@@ -243,10 +275,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
 
       let url = await handleUrl(reportType);
 
-      console.log(url);
-
       const response = await axios.post(url, data);
-      console.log("response", response);
       if (response.status == 200) {
         handleVisibility(reportType);
         setReportData(response.data.data);
@@ -826,7 +855,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
           <></>
         )}
 
-{wasteReceptacleVisibility ? (
+        {wasteReceptacleVisibility ? (
           <WasteReceptacle data={reportData} level={filterValue} />
         ) : (
           <></>
