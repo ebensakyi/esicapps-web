@@ -13,10 +13,8 @@ const post = async (req, res) => {
 };
 
 const getToiletAvailability = async (req, res) => {
-  let filterBy = req.body.filterBy==null ? "regionId" : req.body.filterBy;
-  let filterValue =req.body.filterValue==null ? undefined : Number(req.body.filterValue);
-  // let filterBy = req.body.filterBy;
-  // let filterValue = Number(req.body.filterValue);
+  let filterBy = req.body.filterBy;
+  let filterValue = Number(req.body.filterValue);
 
   const resAvailCount = await prisma.ResidentialPremisesInfoSection.count({
     where: {

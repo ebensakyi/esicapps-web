@@ -17,65 +17,8 @@ const post = async (req, res) => {
 
 
 const getSubmissionSummary = async (req, res) => {
-  let filterBy = req.body.filterBy==null ? "regionId" : req.body.filterBy;
-  let filterValue =req.body.filterValue==null ? undefined : Number(req.body.filterValue);
-
-  // console.log(filterBy);
-  // console.log(filterValue);
-  // let qry = `SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
-  // COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
-  // COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
-  // COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
-
-  // FROM "InspectionForm"
-
-  // LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-  // LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
-
-  // WHERE '${filterBy}' = ${filterValue}
-
-  // GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
-  // ORDER BY "InspectionForm"."name"`
-
-  // console.log(qry);
-
-  //   const _allInspectionSummary = await prisma.$queryRaw`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount",
-  //   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1) as "baselineCount",
-  //   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2) as "reinspectionCount",
-  //   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 3) as "followupCount"
-
-  //   FROM "InspectionForm"
-
-  //   LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-  //   LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
-  //    WHERE  ||' ${filterBy} '|| = 1
-
-  //   GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
-  //   ORDER BY "InspectionForm"."name"`;
-
-  //   let allInspectionSummary = JSON.stringify(_allInspectionSummary, (_, v) =>
-  //     typeof v === "bigint" ? v.toString() : v
-  //   );
-  //   let submissionSummary = JSON.parse(allInspectionSummary);
-
-  // const submissionSummary1 = await prisma.inspectionForm.groupBy({
-  //   by: ["name"],
-  //   include: {
-  //     Inspection: true,
-  //   },
-  // });
-
-  // const submissionSummary = await prisma.inspectionForm.findMany({
-   
-  //   include: {
-  //     _count: {
-  //       select: { Inspection: true },
-  //     },
-  //     Inspection: {
-  //       include: { InspectionType: true },
-  //     },
-  //   },
-  // });
+  let filterBy = req.body.filterBy;
+  let filterValue = Number(req.body.filterValue);
 
   const report = await prisma.inspection.groupBy({
     where: {
