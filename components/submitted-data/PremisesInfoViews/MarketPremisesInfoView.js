@@ -28,27 +28,21 @@ const MarketPremisesInfoView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.MarketPremisesInfoSection?.facilityName !=
-                    null ? (
+                    {data?.MarketPremisesInfoSection?.facilityName != null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                         Facility Name
-                        </label>
+                        <label htmlFor="invoicenoInput">Facility Name</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={
-                            data?.MarketPremisesInfoSection?.facilityName
-                             
-                          }
+                          value={data?.MarketPremisesInfoSection?.facilityName}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                     {data?.MarketPremisesInfoSection?.marketPremisesTypeId !=
+                    {data?.MarketPremisesInfoSection?.marketPremisesTypeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Type</label>
@@ -66,7 +60,7 @@ const MarketPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.MarketPremisesInfoSection?.toiletAvailability !=
+                    {data?.MarketPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -169,7 +163,6 @@ const MarketPremisesInfoView = ({ data }) => {
                       <></>
                     )}
 
-                   
                     {data?.MarketPremisesInfoSection?.firstAidAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -440,6 +433,27 @@ const MarketPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.MarketPremisesInfoSection.numberFoodVendors
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+                    {data?.MarketPremisesInfoSection
+                      ?.generalSanitaryConditionId != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          General Sanitary Condition
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.MarketPremisesInfoSection
+                              ?.generalSanitaryCondition.name
                           }
                           readOnly="readOnly"
                         />

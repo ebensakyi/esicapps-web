@@ -182,7 +182,7 @@ const get = async (req, res) => {
             firstAidAvailability: true,
             physicalStructureType: true,
             marketPremisesType:true,
-
+            generalSanitaryCondition: true
           },
         },
         SanitaryPremisesInfoSection: {
@@ -311,7 +311,7 @@ const get = async (req, res) => {
             PremisesHazardousWasteDisposal: {
               include: { HazardousWasteDisposalMethod: true },
             },
-            PremisesWasteCollection: {
+            PremisesWasteReceptacle: {
               include: { WasteCollectionType: true },
             },
             PremisesWasteReceptacle: {
