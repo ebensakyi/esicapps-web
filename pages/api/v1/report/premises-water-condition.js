@@ -3,8 +3,11 @@ import prisma from "../../../../prisma/MyPrismaClient";
 const post = async (req, res) => {
   try {
   
-    let filterBy = req.body.filterBy;
-    let filterValue = Number(req.body.filterValue);
+    // let filterBy = req.body.filterBy;
+    // let filterValue = Number(req.body.filterValue);
+    let filterBy = req.body.filterBy==null ? "regionId" : req.body.filterBy;
+    let filterValue =req.body.filterValue==null ? undefined : Number(req.body.filterValue);
+
     let _summary;
 
     if (filterBy == "regionId") {

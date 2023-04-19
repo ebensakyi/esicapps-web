@@ -2,9 +2,11 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    console.log("Water Sources");
-    let filterBy = req.body.filterBy;
-    let filterValue = Number(req.body.filterValue);
+    let filterBy = req.body.filterBy==null ? "regionId" : req.body.filterBy;
+    let filterValue =req.body.filterValue==null ? undefined : Number(req.body.filterValue);
+    
+    // let filterBy = req.body.filterBy;
+    // let filterValue = Number(req.body.filterValue);
 
     const report = await prisma.premisesWaterSources.groupBy({
       where: {
