@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import * as moment from "moment";
+import moment from "moment";
 import Cookies from "js-cookie";
 
 const Data = ({ data, regions, districts, electoralAreas, communities }) => {
@@ -26,6 +26,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   const [to, setTo] = useState(null);
 
   let loggedInUserType = Cookies.get("ut").split("??")[1];
+  var dateString = moment().format("DD-MM-yyyy-HH-mm-a");
 
   const query = router.query;
 
@@ -42,11 +43,34 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
     });
   };
 
-  const handleExportToExcel = async () => {
+  const handleExportAll = async () => {
     try {
       const response = await axios.post(
         `/api/v1/submitted-data/data-to-excel`,
-        { inspectionFormId: Number(formId), fileName: handleExcelName() }
+        {
+          inspectionFormId: Number(formId),
+          fileName: handleExcelName(),
+          published,
+        }
+      );
+      if (response.status == 200) {
+        router.push(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleExportFiltered = async () => {
+    try {
+      const response = await axios.post(
+        `/api/v1/submitted-data/data-to-excel`,
+        {
+          inspectionFormId: Number(formId),
+          fileName: handleExcelName(),
+          published,
+          filterBy,
+          filterValue,
+        }
       );
       if (response.status == 200) {
         router.push(response.data);
@@ -75,21 +99,21 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   const handleExcelName = () => {
     try {
       if (formId == 1) {
-        return `RESIDENTIAL PREMISES.xlsx`;
+        return `RESIDENTIAL PREMISES-${dateString}.xlsx`;
       } else if (formId == 2) {
-        return `EATING & DRINKING PREMISES.xlsx`;
+        return `EATING & DRINKING PREMISES-${dateString}.xlsx`;
       } else if (formId == 3) {
-        return `HEALTH PREMISES.xlsx`;
+        return `HEALTH PREMISES-${dateString}.xlsx`;
       } else if (formId == 4) {
-        return `HOSPITALITY PREMISES.xlsx`;
+        return `HOSPITALITY PREMISES-${dateString}.xlsx`;
       } else if (formId == 5) {
-        return `INSTITUTION PREMISES.xlsx`;
+        return `INSTITUTION PREMISES-${dateString}.xlsx`;
       } else if (formId == 6) {
-        return `INDUSTRY PREMISES.xlsx`;
+        return `INDUSTRY PREMISES-${dateString}.xlsx`;
       } else if (formId == 7) {
-        return `MARKETS & LORRY PARK PREMISES.xlsx`;
+        return `MARKETS & LORRY PARK PREMISES-${dateString}.xlsx`;
       } else if (formId == 8) {
-        return `SANITARY FACILITY PREMISES.xlsx`;
+        return `SANITARY FACILITY PREMISES-${dateString}.xlsx`;
       }
     } catch (error) {
       console.log(error);
@@ -522,10 +546,18 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                 <button
                   type="button"
                   className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
-                  onClick={handleExportToExcel}
+                  onClick={handleExportAll}
                 >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                  Export To Excel
+                  Export All
+                </button>{" "}
+                <button
+                  type="button"
+                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                  onClick={handleExportFiltered}
+                >
+                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                  Export Filtered
                 </button>
               </div>
             </div>

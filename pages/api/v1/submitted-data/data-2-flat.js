@@ -3,24 +3,29 @@ import AWS from "aws-sdk";
 import fs from "fs";
 const XLSX = require("xlsx");
 
-const post = async (req, res) => {
+const get = async (req, res) => {
   try {
-
-    console.log(req.body);
-
-    let fileName = req.body.fileName;
-    let inspectionFormId = req.body.inspectionFormId;
+    // let fileName = req?.body?.fileName;
+    // let inspectionFormId = req?.body?.inspectionFormId;
 
     let data = await prisma.basicInfoSection.findMany({
       where: {
         deleted: 0,
         Inspection: {
           // isPublished: 0,
-          inspectionFormId: inspectionFormId,
+          inspectionFormId: 1,
         },
       },
 
       include: {
+        RespondentDesignation: true,
+        Community: {
+          include: {
+            District: {
+              include: { Region: true },
+            },
+          },
+        },
         Inspection: {
           include: {
             LicencePermitSection: {
@@ -31,7 +36,6 @@ const post = async (req, res) => {
                 businessLicenceAvailability: true,
                 fumigationCertificateAvailability: true,
                 habitationCertificateAvailability: true,
-                medicalCertificateAvailability: true,
                 operatingLicenceAvailability: true,
                 propertyRateAvailability: true,
                 structurePermitAvailability: true,
@@ -425,60 +429,20 @@ const post = async (req, res) => {
       });
     }
 
-
-    const workSheet = XLSX.utils.json_to_sheet(newData);
-    const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
-    let filePath = `./public/temp/${fileName}`;
-    XLSX.writeFile(workBook, filePath);
-
-    let url = await uploadFile(fileName);
-
-    res.status(200).json(url);
-
+    res.status(200).json(newData);
   } catch (error) {
-    console.log(error);
-  }
-};
-
-
-
-const uploadFile = async (fileName) => {
-  try {
-    AWS.config.update({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    });
-
-    var s3 = new AWS.S3();
-
-    var filePath = `./public/temp/${fileName}`;
-
-    var params = {
-      Bucket: "esicapps-exports",
-      Body: fs.createReadStream(filePath),
-      // Key: prefix + "/" + fileName,
-      Key: fileName,
-    };
-
-    let stored = await s3.upload(params).promise();
-    console.log("STORE ", stored.Location);
-
-    return stored.Location;
-  } catch (error) {
-    console.log("UploadFile Error ", error);
-    return error;
+    console?.log(error);
   }
 };
 
 export default (req, res) => {
-  req.method === "POST"
+  req?.method === "POST"
     ? post(req, res)
-    : req.method === "PUT"
-    ? console.log("PUT")
-    : req.method === "DELETE"
-    ? console.log("DELETE")
-    : req.method === "GET"
+    : req?.method === "PUT"
+    ? console?.log("PUT")
+    : req?.method === "DELETE"
+    ? console?.log("DELETE")
+    : req?.method === "GET"
     ? get(req, res)
-    : res.status(404).send("");
+    : res?.status(404)?.send("");
 };
