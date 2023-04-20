@@ -82,7 +82,7 @@ export const users = [
     designation: "Supervisor",
   },
   {
-    userTypeId: 6,
+    userTypeId: 7,
     surname: "Doe",
     otherNames: "John",
     email: "fu@gmail.com",
