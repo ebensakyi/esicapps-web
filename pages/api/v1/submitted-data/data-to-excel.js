@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import AWS from "aws-sdk";
 import fs from "fs";
-
+const flatten = require('flat').flatten;
 const XLSX = require("xlsx");
 
 const post = async (req, res) => {
@@ -70,9 +70,10 @@ const post = async (req, res) => {
       },
     });
 
-    console.log(data);
+   let newData =flatten(data);
+    console.log(newData);
 
-    const workSheet = XLSX.utils.json_to_sheet(data);
+    const workSheet = XLSX.utils.json_to_sheet(newData);
     const workBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
     let filePath = `./public/temp/${fileName}`;
@@ -85,6 +86,8 @@ const post = async (req, res) => {
     console.log(error);
   }
 };
+
+
 
 const uploadFile = async (fileName) => {
   try {
