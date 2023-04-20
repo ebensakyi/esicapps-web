@@ -13,7 +13,6 @@ const Header = () => {
   let designation = Cookies.get("designation");
   let userType = Cookies.get("userType");
 
-
   return (
     <div>
       <header id="page-topbar">
@@ -948,27 +947,27 @@ const Header = () => {
                             </a>
                           </li>
                         </li>
-                       
-                      </div> <li className="nav-item">
-                          <a href="/setup/assign-data" className="nav-link">
-                            {" "}
-                            Transfer Data Ownership
-                          </a>
-                        </li>
-                        <li className="nav-item">
-                          <Link href="/setup/user-guides">
-                            <a className="nav-link"> User Guide</a>
-                          </Link>
-                        </li>
-                        <li className="nav-item">
-                          <a
-                            href="/setup/bulk-upload-templates"
-                            className="nav-link"
-                          >
-                            {" "}
-                            Bulk Upload Templates
-                          </a>
-                        </li>
+                      </div>{" "}
+                      <li className="nav-item">
+                        <a href="/setup/assign-data" className="nav-link">
+                          {" "}
+                          Transfer Data Ownership
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <Link href="/setup/user-guides">
+                          <a className="nav-link"> User Guide</a>
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          href="/setup/bulk-upload-templates"
+                          className="nav-link"
+                        >
+                          {" "}
+                          Bulk Upload Templates
+                        </a>
+                      </li>
                     </li>
 
                     {/* <li className="nav-item">
@@ -1002,8 +1001,7 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              {ut == 1 || ut == 3 || ut == 5 ? (
-                <>
+            
                   <li className="nav-item">
                     <a
                       className="nav-link menu-link"
@@ -1032,7 +1030,7 @@ const Header = () => {
                             <span data-key="t-widgets">Logs</span>
                           </a>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                           <a
                             href="/auth/password-reset-request"
                             className="nav-link"
@@ -1040,14 +1038,11 @@ const Header = () => {
                             {" "}
                             Password Reset
                           </a>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                   </li>
-                </>
-              ) : (
-                <></>
-              )}
+              
             </ul>
           </div>
           {/* Sidebar */}
