@@ -588,7 +588,7 @@ model SanitaryInsanitary {
   coldRoomCondition               HealthPremisesInfoSection[]      @relation("coldRoomCondition")
   embalmingAreaCondition          HealthPremisesInfoSection[]      @relation("embalmingAreaCondition")
   boardingHouseCondition          InstitutionPremisesInfoSection[] @relation("boardingHouseCondition")
-  generalSanitaryCondition       MarketPremisesInfoSection[] @relation("generalSanitaryCondition")
+  generalSanitaryCondition        MarketPremisesInfoSection[]      @relation("generalSanitaryCondition")
 }
 
 model SewerSystem {
@@ -956,6 +956,7 @@ model YesNo {
   separateBoardingBoysGirls                  InstitutionPremisesInfoSection[] @relation("separateBoardingBoysGirls")
 
   protectiveClothingUsedInstitution InstitutionPremisesInfoSection[] @relation("protectiveClothingUsed")
+  designatedSmokingAreaHosp    HospitalityPremisesInfoSection[]@relation("designatedSmokingArea")
 }
 
 model InspectionType {
@@ -1183,8 +1184,8 @@ model HospitalityPremisesInfoSection {
   kitchenAvailability                       YesNo?         @relation("kitchenAvailability", fields: [kitchenAvailabilityId], references: [id])
   protectiveClothingUsed                    YesNo?         @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
   firstAidAvailability                      YesNo?         @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
-
-  userId Int
+  designatedSmokingArea                     YesNo?         @relation("designatedSmokingArea", fields: [designatedSmokingAreaId], references: [id])
+  userId                                    Int
 }
 
 model SanitaryPremisesInfoSection {

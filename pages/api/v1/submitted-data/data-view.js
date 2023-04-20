@@ -118,7 +118,14 @@ const get = async (req, res) => {
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
             hospitalityPremisesType: true,
-                physicalStructureType: true,
+            physicalStructureType: true,
+            cookedFoodStorageCondtionSafe: true,
+            uncookedFoodStorageCondtionSafe: true,
+            ////////
+            designatedSmokingArea: true,
+            protectiveClothingUsed:true,
+            firstAidAvailability: true,
+            kitchenAvailability: true,
           },
         },
 
@@ -135,10 +142,10 @@ const get = async (req, res) => {
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
-          Type: true,
-        Subtype: true,
+            Type: true,
+            Subtype: true,
             physicalStructureType: true,
-            firstAidAvailability : true
+            firstAidAvailability: true,
           },
         },
         InstitutionPremisesInfoSection: {
@@ -169,7 +176,6 @@ const get = async (req, res) => {
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
             protectiveClothingUsed: true,
-
           },
         },
         MarketPremisesInfoSection: {
@@ -180,16 +186,16 @@ const get = async (req, res) => {
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
 
-            marketPremisesType:true,
-            firstAidAvailability:true,
-            ownershipType:true,
+            marketPremisesType: true,
+            firstAidAvailability: true,
+            ownershipType: true,
 
-            derattingFrequency:true,
-            cleanupFrequency:true,
+            derattingFrequency: true,
+            cleanupFrequency: true,
             firstAidAvailability: true,
             physicalStructureType: true,
-            marketPremisesType:true,
-            generalSanitaryCondition: true
+            marketPremisesType: true,
+            generalSanitaryCondition: true,
           },
         },
         SanitaryPremisesInfoSection: {
@@ -225,7 +231,7 @@ const get = async (req, res) => {
             workersOfficeAvailability: true,
             cremationPlatform: true,
             sanitaryAshesDisposal: true,
-            siteFenced: true
+            siteFenced: true,
           },
         },
         WaterSection: {
