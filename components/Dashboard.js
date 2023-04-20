@@ -41,10 +41,10 @@ const Dashboard = ({
   const [electoralAreasData, setElectoralAreasData] = useState([]);
   const [communitiesData, setCommunitiesData] = useState([]);
 
-  const [region, setRegion] = useState();
-  const [district, setDistrict] = useState();
-  const [electoralArea, setElectoralArea] = useState();
-  const [community, setCommunity] = useState();
+  const [region, setRegion] = useState(null);
+  const [district, setDistrict] = useState(null);
+  const [electoralArea, setElectoralArea] = useState(null);
+  const [community, setCommunity] = useState(null);
 
   const [filterValue, setFilterValue] = useState(null);
   const [filterBy, setFilterBy] = useState(null);
@@ -98,7 +98,6 @@ const Dashboard = ({
   };
   const getElectoralAreasByDistrict = async (districtId) => {
     try {
-
       const response = await axios.get(
         "/api/v1/primary-data/electoral-area?districtId=" + districtId
       );
@@ -109,7 +108,6 @@ const Dashboard = ({
   };
   const getCommunitiesByElectoralArea = async (electoralAreaId) => {
     try {
-
       const response = await axios.get(
         "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
       );
@@ -122,6 +120,21 @@ const Dashboard = ({
 
   const handleFilter = async (e) => {
     e.preventDefault();
+    if (filterBy == ""||filterBy == null) {
+      return toast.error("Please select a filter");
+    }
+    if (filterBy == "communityId" && community == null) {
+      return toast.error("Please select community");
+    }
+    if (filterBy == "electoralAreaId" && electoralArea == null) {
+      return toast.error("Please select electoral area");
+    }
+    if (filterBy == "districtId" && district == null) {
+      return toast.error("Please select district");
+    }
+    if (filterBy == "regionId" && region == null) {
+      return toast.error("Please select region");
+    }
 
     const path = router.pathname;
     const query = router.query;
@@ -313,16 +326,9 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData.water?.waterSourceConditionCountArray,
-        backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-        ],
+        backgroundColor: ["#38a286", "#c3103c"],
+
+        borderColor: ["white"],
         borderWidth: 1,
       },
     ],
@@ -334,16 +340,9 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData.water?.waterStorageConditionCountArray,
-        backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-        ],
+        backgroundColor: ["#38a286", "#c3103c"],
+
+        borderColor: ["white"],
         borderWidth: 1,
       },
     ],
@@ -430,7 +429,6 @@ const Dashboard = ({
     ],
   };
 
-
   let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
   let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
   let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
@@ -444,6 +442,17 @@ const Dashboard = ({
         text="Loading dashboard. Please wait..."
       >
         <>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="row row-cols-lg-auto g-3 align-items-center">
             <div className="col-md-2">
               <label className="form-label mb-0">Select level</label>
@@ -451,15 +460,27 @@ const Dashboard = ({
               <select
                 className="form-control"
                 aria-label="Default select example"
-                onChange={(e) => {setFilterBy(e.target.value);
-                
-                if(districtUser){
-                  getElectoralAreasByDistrict()
-                }
-              }}
+                onChange={(e) => {
+                  setFilterBy(e.target.value);
+
+          
+                    if (regionalUser) {
+                getDistrictsByRegion();
+              }
+
+              if (districtUser) {
+                getElectoralAreasByDistrict();
+              }
+              if(e.target.value=="national"){
+                setFilterValue(null)
+              }
+                }}
                 value={filterBy}
               >
-                <option selected>Filter by </option>
+                <option value="" selected>Filter by </option>
+                <option hidden={!nationalUser} value="national">
+                  National
+                </option>
                 <option hidden={!nationalUser} value="regionId">
                   Region
                 </option>
@@ -491,6 +512,8 @@ const Dashboard = ({
                   className="form-control"
                   aria-label="Default select example"
                   onChange={async (e) => {
+                    setRegion(e.target.value);
+
                     setFilterValue(e.target.value);
                   }}
                   value={region}
@@ -517,6 +540,8 @@ const Dashboard = ({
                       aria-label="Default select example"
                       onChange={async (e) => {
                         setFilterValue(e.target.value);
+                        setRegion(e.target.value);
+
                         await getDistrictsByRegion(e.target.value);
                       }}
                       value={region}
@@ -538,7 +563,10 @@ const Dashboard = ({
                   <select
                     className="form-control"
                     aria-label="Default select example"
-                    onChange={(e) => setFilterValue(e.target.value)}
+                    onChange={(e) => {
+                      setFilterValue(e.target.value);
+                      setDistrict(e.target.value);
+                    }}
                     value={district}
                   >
                     {" "}
@@ -565,6 +593,8 @@ const Dashboard = ({
                       value={region}
                       onChange={async (e) => {
                         setFilterValue(e.target.value);
+                        setRegion(e.target.value);
+
                         await getDistrictsByRegion(e.target.value);
                       }}
                     >
@@ -580,8 +610,7 @@ const Dashboard = ({
                 ) : (
                   <></>
                 )}
-                {nationalUser ||
-                regionalUser ? (
+                {nationalUser || regionalUser ? (
                   <div className="col-md-2">
                     <label className="form-label mb-0">Select district</label>
                     <select
@@ -589,6 +618,8 @@ const Dashboard = ({
                       aria-label="Default select example"
                       onChange={async (e) => {
                         setFilterValue(e.target.value);
+                        setDistrict(e.target.value);
+
                         await getElectoralAreasByDistrict(e.target.value);
                       }}
                       value={district}
@@ -614,6 +645,8 @@ const Dashboard = ({
                     aria-label="Default select example"
                     onChange={async (e) => {
                       setFilterValue(e.target.value);
+                      setElectoralArea(e.target.value);
+
                       await getCommunitiesByElectoralArea(e.target.value);
                     }}
                     value={electoralArea}
@@ -641,6 +674,8 @@ const Dashboard = ({
                       aria-label="Default select example"
                       onChange={async (e) => {
                         setFilterValue(e.target.value);
+                        setRegion(e.target.value);
+
                         await getDistrictsByRegion(e.target.value);
                       }}
                       value={region}
@@ -668,6 +703,7 @@ const Dashboard = ({
                       aria-label="Default select example"
                       onChange={async (e) => {
                         setFilterValue(e.target.value);
+                        setDistrict(e.target.value);
                         await getElectoralAreasByDistrict(e.target.value);
                       }}
                       value={district}
@@ -693,6 +729,8 @@ const Dashboard = ({
                     aria-label="Default select example"
                     onChange={async (e) => {
                       setFilterValue(e.target.value);
+                      setElectoralArea(e.target.value);
+
                       await getCommunitiesByElectoralArea(e.target.value);
                     }}
                     value={electoralArea}
@@ -711,7 +749,10 @@ const Dashboard = ({
                   <select
                     className=" form-control "
                     aria-label="Default select example"
-                    onChange={(e) => setFilterValue(e.target.value)}
+                    onChange={(e) => {
+                      setFilterValue(e.target.value);
+                      setCommunity(e.target.value);
+                    }}
                     value={community}
                   >
                     {" "}
@@ -728,7 +769,7 @@ const Dashboard = ({
               <></>
             )}
 
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <label className="form-label mb-0">Start Date</label>
               <input
                 type="date"
@@ -746,7 +787,7 @@ const Dashboard = ({
                 onChange={(e) => setTo(e.target.value)}
                 value={to}
               />
-            </div>
+            </div> */}
 
             <div className="col-12">
               <label className="form-label mb-0">.</label>

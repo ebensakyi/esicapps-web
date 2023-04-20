@@ -21,9 +21,6 @@ const post = async (req, res) => {
     //     ? undefined
     //     : Number(req?.body?.filterValue);
 
-
-    console.log("FV==> ",req.body);
-
     let filterValue =
       Number(req?.body?.filterValue) == NaN
         ? undefined
@@ -43,15 +40,15 @@ const post = async (req, res) => {
 
     console.log("USERTYPE ", userType);
     if (userType == 1 || userType == 2) {
-      filterBy = filterBy == undefined ? "regionId" : filterBy;
+      filterBy = filterBy == "undefined" ? "regionId" : filterBy;
     }
 
     if (userType == 3 || userType == 4) {
-      filterBy = filterBy == undefined ? "districtId" : filterBy;
+      filterBy = filterBy == "undefined" ? "districtId" : filterBy;
     }
 
     if (userType == 5 || userType == 6) {
-      filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
+      filterBy = filterBy == "undefined" ? "electoralAreaId" : filterBy;
     }
 
     let fileName = req.body.fileName;
