@@ -316,7 +316,6 @@ const Header = () => {
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
                             <Link href="/submitted-data/data?published=1&inspectionFormId=3">
-                            
                               <a
                                 className={
                                   router.pathname == "/"
@@ -330,8 +329,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=3">
-
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=3">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -377,7 +375,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="hospitality">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=1&inspectionFormId=4">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=4">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -391,7 +389,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=4">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=4">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -438,7 +436,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="institution">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=1&inspectionFormId=5">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=5">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -452,7 +450,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=5">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=5">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -498,7 +496,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="industry">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=1&inspectionFormId=6">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=6">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -512,7 +510,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=6">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=6">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -558,7 +556,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="market">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=1&inspectionFormId=7">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=7">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -572,7 +570,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=7">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=7">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -622,7 +620,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="sanitary">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=1&inspectionFormId=8">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=8">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -636,7 +634,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                          <Link href="/submitted-data/data?published=0&inspectionFormId=8">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=8">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -707,8 +705,7 @@ const Header = () => {
                   </ul>
                 </div>
               </li> */}
-
-<li className="nav-item">
+              <li className="nav-item">
                 <a className="nav-link menu-link" href="/report">
                   <i className="ri-line-chart-line" />{" "}
                   <span data-key="t-dashboards">Reports</span>
@@ -820,130 +817,143 @@ const Header = () => {
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
                       <a
-                        href="/auth/password-reset-request"
-                        className="nav-link"
-                      >
-                        {" "}
-                        Password Reset
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a href="/primary-data" className="nav-link">
-                        {" "}
-                        Primary data
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="#district"
+                        href="#pd"
                         className="nav-link"
                         data-bs-toggle="collapse"
                         role="button"
                         aria-expanded="false"
-                        aria-controls="district"
+                        aria-controls="pd"
                         data-key="t-profile"
                       >
                         {" "}
-                        District
+                        Primary Data
                       </a>
-                      <div className="collapse menu-dropdown" id="district">
-                        <ul className="nav nav-sm flex-column">
+                      <div className="collapse menu-dropdown" id="pd">
+                       
+                        <li className="nav-item">
+                          <a
+                            href="#district"
+                            className="nav-link"
+                            data-bs-toggle="collapse"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="district"
+                            data-key="t-profile"
+                          >
+                            {" "}
+                            District
+                          </a>
+                          <div className="collapse menu-dropdown" id="district">
+                            <ul className="nav nav-sm flex-column">
+                              <li className="nav-item">
+                                <a
+                                  href="/primary-data/district/upload"
+                                  className="nav-link"
+                                  data-key="t-simple-page"
+                                >
+                                  Upload
+                                </a>
+                              </li>
+                              <li className="nav-item">
+                                <a
+                                  href="/primary-data/district/add"
+                                  className="nav-link"
+                                  data-key="t-settings"
+                                >
+                                  {" "}
+                                  Add{" "}
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li className="nav-item">
+                          <a
+                            href="#ea"
+                            className="nav-link"
+                            data-bs-toggle="collapse"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="sidebeaarProfile"
+                            data-key="t-profile"
+                          >
+                            {" "}
+                            Electoral Area
+                          </a>
+                          <div className="collapse menu-dropdown" id="ea">
+                            <ul className="nav nav-sm flex-column">
+                              <li className="nav-item">
+                                <a
+                                  href="/primary-data/electoral-area/upload"
+                                  className="nav-link"
+                                  data-key="t-simple-page"
+                                >
+                                  Upload
+                                </a>
+                              </li>
+                              <li className="nav-item">
+                                <a
+                                  href="/primary-data/electoral-area/add"
+                                  className="nav-link"
+                                  data-key="t-settings"
+                                >
+                                  {" "}
+                                  Add{" "}
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>{" "}
+                        <li className="nav-item">
+                          <a
+                            href="#communities"
+                            className="nav-link"
+                            data-bs-toggle="collapse"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="communities"
+                            data-key="t-profile"
+                          >
+                            {" "}
+                            Communities
+                          </a>
+                          <div
+                            className="collapse menu-dropdown"
+                            id="communities"
+                          >
+                            <ul className="nav nav-sm flex-column">
+                              <li className="nav-item">
+                                <a
+                                  href="/primary-data/community/upload"
+                                  className="nav-link"
+                                  data-key="t-simple-page"
+                                >
+                                  Upload
+                                </a>
+                              </li>
+                              <li className="nav-item">
+                                <a
+                                  href="/primary-data/community/add"
+                                  className="nav-link"
+                                  data-key="t-settings"
+                                >
+                                  {" "}
+                                  Add{" "}
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
                           <li className="nav-item">
-                            <a
-                              href="/primary-data/district/upload"
-                              className="nav-link"
-                              data-key="t-simple-page"
-                            >
-                              Upload
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              href="/primary-data/district/add"
-                              className="nav-link"
-                              data-key="t-settings"
-                            >
-                              {" "}
-                              Add{" "}
-                            </a>
-                          </li>
-                        </ul>
+                          <a href="/primary-data" className="nav-link">
+                            {" "}
+                            Other data
+                          </a>
+                        </li>
+                        </li>
                       </div>
                     </li>
-                    <li className="nav-item">
-                      <a
-                        href="#ea"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebeaarProfile"
-                        data-key="t-profile"
-                      >
-                        {" "}
-                        Electoral Area
-                      </a>
-                      <div className="collapse menu-dropdown" id="ea">
-                        <ul className="nav nav-sm flex-column">
-                          <li className="nav-item">
-                            <a
-                              href="/primary-data/electoral-area/upload"
-                              className="nav-link"
-                              data-key="t-simple-page"
-                            >
-                              Upload
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              href="/primary-data/electoral-area/add"
-                              className="nav-link"
-                              data-key="t-settings"
-                            >
-                              {" "}
-                              Add{" "}
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>{" "}
-                    <li className="nav-item">
-                      <a
-                        href="#communities"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="communities"
-                        data-key="t-profile"
-                      >
-                        {" "}
-                        Communities
-                      </a>
-                      <div className="collapse menu-dropdown" id="communities">
-                        <ul className="nav nav-sm flex-column">
-                          <li className="nav-item">
-                            <a
-                              href="/primary-data/community/upload"
-                              className="nav-link"
-                              data-key="t-simple-page"
-                            >
-                              Upload
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              href="/primary-data/community/add"
-                              className="nav-link"
-                              data-key="t-settings"
-                            >
-                              {" "}
-                              Add{" "}
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
+                   
+
                     <li className="nav-item">
                       <a href="/setup/assign-data" className="nav-link">
                         {" "}
@@ -997,7 +1007,23 @@ const Header = () => {
               </li>
               {ut == 1 || ut == 3 || ut == 5 ? (
                 <>
-                  <li className="nav-item">
+
+<li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#us"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="us"
+                >
+                  <i className="ri-apps-2-line" />
+                  <span data-key="t-apps">User Management</span>
+                </a>
+                <div className="collapse menu-dropdown" id="us">
+                  <ul className="nav nav-sm flex-column">
+                   
+                    <li className="nav-item">
                     <Link href="/account/user">
                       <a className="nav-link menu-link">
                         <i className=" ri-shield-user-line" />{" "}
@@ -1011,6 +1037,20 @@ const Header = () => {
                       <span data-key="t-widgets">Logs</span>
                     </a>
                   </li>
+                  <li className="nav-item">
+                      <a
+                        href="/auth/password-reset-request"
+                        className="nav-link"
+                      >
+                        {" "}
+                        Password Reset
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+                 
                 </>
               ) : (
                 <></>

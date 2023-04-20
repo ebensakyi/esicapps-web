@@ -26,7 +26,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   const [to, setTo] = useState(null);
 
   let loggedInUserType = Cookies.get("ut").split("??")[1];
-  var dateString = moment().format("DD-MM-yyyy-HH-mm-a");
+  var dateString = moment().format("DD-MM-yyyy-HH-mm-ss-a");
 
   const query = router.query;
 

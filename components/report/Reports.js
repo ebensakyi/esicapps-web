@@ -434,6 +434,11 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                       onChange={(e) => {
                         setFilterBy(e.target.value);
 
+                      
+                        if (regionalUser) {
+                          getDistrictsByRegion();
+                        }
+          
                         if (districtUser) {
                           getElectoralAreasByDistrict();
                         }
