@@ -113,7 +113,6 @@ const get = async (req, res) => {
             healthPremisesType: true,
             separateWard: true,
             ownershipType: true,
-            ehoAvailability: true,
             embalmingAreaCondition: true,
             embalmingAreaAvailability: true,
             bodyTraysAdequate: true,

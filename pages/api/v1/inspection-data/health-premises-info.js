@@ -3,7 +3,6 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,

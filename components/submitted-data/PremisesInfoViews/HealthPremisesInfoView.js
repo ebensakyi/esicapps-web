@@ -10,6 +10,9 @@ const HealthPremisesInfoView = ({ data }) => {
   let formId = query.inspectionFormId;
   let published = query.published;
 
+
+  console.log(data);
+
   return (
     <>
       <div className="row">
@@ -61,8 +64,9 @@ const HealthPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.HealthPremisesInfoSection?.physicalStructureType
-                      .name != null ? (
+                  
+  {data?.HealthPremisesInfoSection?.physicalStructureTypeId
+                       != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Premises Structure
@@ -81,7 +85,6 @@ const HealthPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-
 
                     {data?.HealthPremisesInfoSection?.toiletAvailability !=
                     null ? (
@@ -416,6 +419,28 @@ const HealthPremisesInfoView = ({ data }) => {
                           value={
                             data?.HealthPremisesInfoSection
                               ?.coldRoomCondition?.name
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+
+{data?.HealthPremisesInfoSection?.numberWards !=
+                    null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                         Number of  Ward
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.HealthPremisesInfoSection
+                              ?.numberWards
                           }
                           readOnly="readOnly"
                         />
