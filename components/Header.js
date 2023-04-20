@@ -13,7 +13,6 @@ const Header = () => {
   let designation = Cookies.get("designation");
   let userType = Cookies.get("userType");
 
-  console.log("COOKIE ut", ut);
 
   return (
     <div>

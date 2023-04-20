@@ -25,14 +25,17 @@ const Profile = ({ user }) => {
       let data = {
         currentPassword,
         newPassword,
-        phoneNumber: user.user.phoneNumber
+        phoneNumber: user.user.phoneNumber,
       };
 
       const response = await axios.post("/api/v1/auth/profile", data);
-      console.log(response);
-     // router.replace(router.asPath);
+      if (response.status == 200) {
+        router.replace(router.asPath);
 
-      return toast.success(response.data.message);
+        return toast.success("Password changed");
+      }
+
+      return toast.success("An error occurred while updating the password");
     } catch (error) {
       console.log(error);
       return toast.error("User account not found");
