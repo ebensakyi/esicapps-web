@@ -235,7 +235,7 @@ const UploadCommunity = ({ data, electoralAreas }) => {
                       <td>{dt.name}</td>
                       <td>{dt.ElectoralArea.name}</td>
                       <td>{dt.ElectoralArea.District.name}</td>
-                      <td>
+                      {/* <td>
                         <div className="dropdown d-inline-block">
                           <button
                             className="btn btn-soft-secondary btn-sm dropdown"
@@ -274,16 +274,16 @@ const UploadCommunity = ({ data, electoralAreas }) => {
                                 <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}
                                 Delete
                               </button>
-                            </li> */}
-                            {/* <li>
+                            </li> 
+                         <li>
                                 <a className="dropdown-item remove-item-btn">
                                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
                                   Delete
                                 </a>
-                              </li> */}
+                              </li> 
                           </ul>
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   );
                 })}

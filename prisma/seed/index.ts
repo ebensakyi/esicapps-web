@@ -29,7 +29,6 @@ import { waterStorageType } from "./waterStorageType";
 import { waterSupplyType } from "./waterSupplyType";
 import { waterTreatmentType } from "./waterTreatmentType";
 import { yesNo } from "./yesNo";
-import { zone } from "./zone";
 import { greyWaterDisposal } from "./greyWaterDisposal";
 import { wasteCollectionType } from "./wasteCollectionType";
 import { nuisance } from "./nuisance";
@@ -140,9 +139,6 @@ async function main() {
   });
   await prisma.yesNo.createMany({
     data: yesNo,
-  });
-  await prisma.zone.createMany({
-    data: zone,
   });
   await prisma.greyWaterDisposal.createMany({
     data: greyWaterDisposal,

@@ -829,7 +829,6 @@ const Header = () => {
                         Primary Data
                       </a>
                       <div className="collapse menu-dropdown" id="pd">
-                       
                         <li className="nav-item">
                           <a
                             href="#district"
@@ -944,36 +943,35 @@ const Header = () => {
                             </ul>
                           </div>
                           <li className="nav-item">
-                          <a href="/primary-data" className="nav-link">
+                            <a href="/primary-data" className="nav-link">
+                              {" "}
+                              Other data
+                            </a>
+                          </li>
+                        </li>
+                       
+                      </div> <li className="nav-item">
+                          <a href="/setup/assign-data" className="nav-link">
                             {" "}
-                            Other data
+                            Transfer Data Ownership
                           </a>
                         </li>
+                        <li className="nav-item">
+                          <Link href="/setup/user-guides">
+                            <a className="nav-link"> User Guide</a>
+                          </Link>
                         </li>
-                      </div>
+                        <li className="nav-item">
+                          <a
+                            href="/setup/bulk-upload-templates"
+                            className="nav-link"
+                          >
+                            {" "}
+                            Bulk Upload Templates
+                          </a>
+                        </li>
                     </li>
-                   
 
-                    <li className="nav-item">
-                      <a href="/setup/assign-data" className="nav-link">
-                        {" "}
-                        Transfer Data Ownership
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/setup/user-guides">
-                        <a className="nav-link"> User Guide</a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        href="/setup/bulk-upload-templates"
-                        className="nav-link"
-                      >
-                        {" "}
-                        Bulk Upload Templates
-                      </a>
-                    </li>
                     {/* <li className="nav-item">
                       <a
                         href="#sidebarSignIn"
@@ -1007,50 +1005,46 @@ const Header = () => {
               </li>
               {ut == 1 || ut == 3 || ut == 5 ? (
                 <>
-
-<li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#us"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="us"
-                >
-                  <i className="ri-apps-2-line" />
-                  <span data-key="t-apps">User Management</span>
-                </a>
-                <div className="collapse menu-dropdown" id="us">
-                  <ul className="nav nav-sm flex-column">
-                   
-                    <li className="nav-item">
-                    <Link href="/account/user">
-                      <a className="nav-link menu-link">
-                        <i className=" ri-shield-user-line" />{" "}
-                        <span data-key="t-widgets">Users</span>
-                      </a>
-                    </Link>
-                  </li>{" "}
                   <li className="nav-item">
-                    <a className="nav-link menu-link" href="/auth/logs">
-                      <i className="ri-honour-line" />{" "}
-                      <span data-key="t-widgets">Logs</span>
+                    <a
+                      className="nav-link menu-link"
+                      href="#us"
+                      data-bs-toggle="collapse"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="us"
+                    >
+                      <i className="ri-apps-2-line" />
+                      <span data-key="t-apps">User Management</span>
                     </a>
+                    <div className="collapse menu-dropdown" id="us">
+                      <ul className="nav nav-sm flex-column">
+                        <li className="nav-item">
+                          <Link href="/account/user">
+                            <a className="nav-link menu-link">
+                              <i className=" ri-shield-user-line" />{" "}
+                              <span data-key="t-widgets">Users</span>
+                            </a>
+                          </Link>
+                        </li>{" "}
+                        <li className="nav-item">
+                          <a className="nav-link menu-link" href="/auth/logs">
+                            <i className="ri-honour-line" />{" "}
+                            <span data-key="t-widgets">Logs</span>
+                          </a>
+                        </li>
+                        <li className="nav-item">
+                          <a
+                            href="/auth/password-reset-request"
+                            className="nav-link"
+                          >
+                            {" "}
+                            Password Reset
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </li>
-                  <li className="nav-item">
-                      <a
-                        href="/auth/password-reset-request"
-                        className="nav-link"
-                      >
-                        {" "}
-                        Password Reset
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-                 
                 </>
               ) : (
                 <></>
