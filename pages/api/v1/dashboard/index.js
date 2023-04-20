@@ -41,7 +41,6 @@ const get = async (req, res) => {
     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
   }
 
-  console.log("filterBy--->",filterBy);      console.log("filterValue-->",filterValue);
 
   //try {
   const allInspectionSummary =

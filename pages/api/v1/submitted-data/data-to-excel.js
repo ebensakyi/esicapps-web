@@ -1,23 +1,80 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import AWS from "aws-sdk";
 import fs from "fs";
+import { getUserCookie } from "../../../../helpers/cookies-manager";
+
 const XLSX = require("xlsx");
 
 const post = async (req, res) => {
   try {
+    let userObj = await getUserCookie(req, res);
 
-    console.log(req.body);
+    // console.log(userObj);
+    // console.log(req.body);
+
+    let published = req.body.published == null ? 0 : Number(req.body.published);
+
+    let filterBy = req?.body?.filterBy;
+
+    // let filterValue =
+    //   req?.body?.filterValue == "undefined"
+    //     ? undefined
+    //     : Number(req?.body?.filterValue);
+
+
+    console.log("FV==> ",req.body);
+
+    let filterValue =
+      Number(req?.body?.filterValue) == NaN
+        ? undefined
+        : Number(req?.body?.filterValue);
+
+    let from =
+      req?.body?.from == "undefined" || req?.body?.from == ""
+        ? undefined
+        : new Date(req?.body?.from);
+
+    let to =
+      req.body.to == "" || req?.body?.to == "undefined"
+        ? undefined
+        : new Date(req?.body?.to);
+
+    let userType = userObj?.user?.UserType?.id;
+
+    console.log("USERTYPE ", userType);
+    if (userType == 1 || userType == 2) {
+      filterBy = filterBy == undefined ? "regionId" : filterBy;
+    }
+
+    if (userType == 3 || userType == 4) {
+      filterBy = filterBy == undefined ? "districtId" : filterBy;
+    }
+
+    if (userType == 5 || userType == 6) {
+      filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
+    }
 
     let fileName = req.body.fileName;
     let inspectionFormId = req.body.inspectionFormId;
+    let exportType = req.body.exportType;
 
+    let filterObject =
+      exportType == 1
+        ? {
+            isPublished: published,
+            inspectionFormId: inspectionFormId,
+          }
+        : {
+            isPublished: published,
+            inspectionFormId: inspectionFormId,
+            [filterBy]: filterValue,
+          };
+
+    console.log(filterObject);
     let data = await prisma.basicInfoSection.findMany({
       where: {
         deleted: 0,
-        Inspection: {
-          // isPublished: 0,
-          inspectionFormId: inspectionFormId,
-        },
+        Inspection: filterObject,
       },
 
       include: {
@@ -60,7 +117,7 @@ const post = async (req, res) => {
                 disinfestationFrequency: true,
                 disinfection: true,
                 disinfectionFrequency: true,
-                protectiveClothingUsed: true
+                protectiveClothingUsed: true,
               },
             },
             HealthPremisesInfoSection: {
@@ -70,7 +127,7 @@ const post = async (req, res) => {
                 drainsAvailability: true,
                 approvedHandwashingFacilityAvailability: true,
                 bathroomAvailability: true,
-    
+
                 /////////
                 ehoAvailability: true,
                 incineratorAvailability: true,
@@ -82,7 +139,7 @@ const post = async (req, res) => {
                 embalmingAreaAvailability: true,
                 bodyTraysAdequate: true,
                 coldRoomAvailability: true,
-                coldRoomCondition: true
+                coldRoomCondition: true,
               },
             },
             HospitalityPremisesInfoSection: {
@@ -98,12 +155,12 @@ const post = async (req, res) => {
                 uncookedFoodStorageCondtionSafe: true,
                 ////////
                 designatedSmokingArea: true,
-                protectiveClothingUsed:true,
+                protectiveClothingUsed: true,
                 firstAidAvailability: true,
                 kitchenAvailability: true,
               },
             },
-    
+
             IndustryPremisesInfoSection: {
               include: {
                 byProductsStorageAreaCond: true,
@@ -158,11 +215,11 @@ const post = async (req, res) => {
                 drainsAvailability: true,
                 approvedHandwashingFacilityAvailability: true,
                 bathroomAvailability: true,
-    
+
                 marketPremisesType: true,
                 firstAidAvailability: true,
                 ownershipType: true,
-    
+
                 derattingFrequency: true,
                 cleanupFrequency: true,
                 firstAidAvailability: true,
@@ -178,7 +235,7 @@ const post = async (req, res) => {
                 drainsAvailability: true,
                 approvedHandwashingFacilityAvailability: true,
                 bathroomAvailability: true,
-    
+
                 //////////////
                 physicalStructureType: true,
                 sanitaryPremisesType: true,
@@ -316,7 +373,6 @@ const post = async (req, res) => {
                 },
               },
             },
-    
           },
         },
         Community: { include: { District: { include: { Region: true } } } },
@@ -334,97 +390,217 @@ const post = async (req, res) => {
         "Inspection Officer": `${data[i]?.User?.surname} ${data[i]?.User?.otherNames}`,
         "Premises Code": data[i]?.Inspection?.premisesCode,
         "Premises Rating": data[i]?.Inspection?.totalRating,
-        "Region": data[i]?.Community?.District?.Region?.name,
-        "District": data[i]?.Community?.District?.name,
+        Region: data[i]?.Community?.District?.Region?.name,
+        District: data[i]?.Community?.District?.name,
         "Electoral Area": data[i]?.electoralArea,
 
-        "Community": data[i]?.community,
+        Community: data[i]?.community,
         "Ghana Post GPS": data[i]?.ghanaPostGps,
-        "Latitude": data[i]?.latitude,
-        "Longitude": data[i]?.longitude,
-        "Accuracy": data[i]?.accuracy,
+        Latitude: data[i]?.latitude,
+        Longitude: data[i]?.longitude,
+        Accuracy: data[i]?.accuracy,
         "Respondent Name": data[i]?.respondentName,
         "Respondent Designation": data[i]?.RespondentDesignation?.name,
 
-        "Animals Permit Availability": data[i]?.Inspection?.LicencePermitSection?.animalsPermitAvailability?.name,
-        "Building Permit Availability": data[i]?.Inspection?.LicencePermitSection?.buildingPermitAvailability?.name,
+        "Animals Permit Availability":
+          data[i]?.Inspection?.LicencePermitSection?.animalsPermitAvailability
+            ?.name,
+        "Building Permit Availability":
+          data[i]?.Inspection?.LicencePermitSection?.buildingPermitAvailability
+            ?.name,
 
-        "Business Licence Availability": data[i]?.Inspection?.LicencePermitSection?.businessLicenceAvailability?.name,
-        "Fumigation Certificate Availability": data[i]?.Inspection?.LicencePermitSection?.fumigationCertificateAvailability?.name,
-        "Habitation Certificate Availability": data[i]?.Inspection?.LicencePermitSection?.habitationCertificateAvailability?.name,
-        "Operating Licence Availability": data[i]?.Inspection?.LicencePermitSection?.operatingLicenceAvailability?.name,
-        "Property Rate Availability": data[i]?.Inspection?.LicencePermitSection?.propertyRateAvailability?.name,
-        "Structure Permit Availability": data[i]?.Inspection?.LicencePermitSection?.structurePermitAvailability?.name,
-        "GTA Operating Licence Availability": data[i]?.Inspection?.LicencePermitSection?.gtaOperatingLicenceAvailability?.name,
-        "Water Analysis Report": data[i]?.Inspection?.LicencePermitSection?.waterAnalysisReport?.name,
-        "Reg General Cert Availability": data[i]?.Inspection?.LicencePermitSection?.regGeneralCertAvailability?.name,
-        "Suitability Certificate Availability": data[i]?.Inspection?.LicencePermitSection?.suitabilityCertificateAvailability?.name,
-        "Pharmacy Cert Availability": data[i]?.Inspection?.LicencePermitSection?.pharmacyCertAvailability?.name,
+        "Business Licence Availability":
+          data[i]?.Inspection?.LicencePermitSection?.businessLicenceAvailability
+            ?.name,
+        "Fumigation Certificate Availability":
+          data[i]?.Inspection?.LicencePermitSection
+            ?.fumigationCertificateAvailability?.name,
+        "Habitation Certificate Availability":
+          data[i]?.Inspection?.LicencePermitSection
+            ?.habitationCertificateAvailability?.name,
+        "Operating Licence Availability":
+          data[i]?.Inspection?.LicencePermitSection
+            ?.operatingLicenceAvailability?.name,
+        "Property Rate Availability":
+          data[i]?.Inspection?.LicencePermitSection?.propertyRateAvailability
+            ?.name,
+        "Structure Permit Availability":
+          data[i]?.Inspection?.LicencePermitSection?.structurePermitAvailability
+            ?.name,
+        "GTA Operating Licence Availability":
+          data[i]?.Inspection?.LicencePermitSection
+            ?.gtaOperatingLicenceAvailability?.name,
+        "Water Analysis Report":
+          data[i]?.Inspection?.LicencePermitSection?.waterAnalysisReport?.name,
+        "Reg General Cert Availability":
+          data[i]?.Inspection?.LicencePermitSection?.regGeneralCertAvailability
+            ?.name,
+        "Suitability Certificate Availability":
+          data[i]?.Inspection?.LicencePermitSection
+            ?.suitabilityCertificateAvailability?.name,
+        "Pharmacy Cert Availability":
+          data[i]?.Inspection?.LicencePermitSection?.pharmacyCertAvailability
+            ?.name,
 
+        "Water Flow Frequency":
+          data[i]?.Inspection?.WaterSection?.WaterFlowFrequency?.name,
+        "Water Storage Condition Safe":
+          data[i]?.Inspection?.WaterSection?.waterStorageConditionSafe?.name,
+        "Water Source Condition":
+          data[i]?.Inspection?.WaterSection?.waterSourceCondition?.name,
+        "Safe Distance Water Storage Sanitary":
+          data[i]?.Inspection?.WaterSection?.safeDistanceWaterStorageSanitary
+            ?.name,
+        "Premises Drinking Water Sources": data[
+          i
+        ]?.Inspection?.WaterSection?.PremisesDrinkingWaterSources?.map(
+          (data) => data?.DrinkingWaterSourceType?.name
+        ).toString(),
+        "Premises Water Sources": data[
+          i
+        ]?.Inspection?.WaterSection?.PremisesWaterSources?.map(
+          (data) => data?.WaterSourceType?.name
+        ).toString(),
+        "Premises Water Storage": data[
+          i
+        ]?.Inspection?.WaterSection?.PremisesWaterStorage?.map(
+          (data) => data?.WaterStorage?.name
+        ).toString(),
+        "Premises Water Supply": data[
+          i
+        ]?.Inspection?.WaterSection?.PremisesWaterSupply?.map(
+          (data) => data?.WaterSupplyType?.name
+        ).toString(),
+        "Premises Water Treatment Type": data[
+          i
+        ]?.Inspection?.WaterSection?.PremisesWaterTreatmentType?.map(
+          (data) => data?.WaterTreatmentType?.name
+        ).toString(),
 
-        "Water Flow Frequency": data[i]?.Inspection?.WaterSection?.WaterFlowFrequency?.name,
-        "Water Storage Condition Safe": data[i]?.Inspection?.WaterSection?.waterStorageConditionSafe?.name,
-        "Water Source Condition": data[i]?.Inspection?.WaterSection?.waterSourceCondition?.name,
-        "Safe Distance Water Storage Sanitary": data[i]?.Inspection?.WaterSection?.safeDistanceWaterStorageSanitary?.name,
-        "Premises Drinking Water Sources": data[i]?.Inspection?.WaterSection?.PremisesDrinkingWaterSources?.map(data=>data?.DrinkingWaterSourceType?.name).toString(),
-        "Premises Water Sources": data[i]?.Inspection?.WaterSection?.PremisesWaterSources?.map(data=>data?.WaterSourceType?.name).toString(),
-        "Premises Water Storage": data[i]?.Inspection?.WaterSection?.PremisesWaterStorage?.map(data=>data?.WaterStorage?.name).toString(),
-        "Premises Water Supply": data[i]?.Inspection?.WaterSection?.PremisesWaterSupply?.map(data=>data?.WaterSupplyType?.name).toString(),
-        "Premises Water Treatment Type": data[i]?.Inspection?.WaterSection?.PremisesWaterTreatmentType?.map(data=>data?.WaterTreatmentType?.name).toString(),
+        ///LIQUID  WASTE
 
-///LIQUID  WASTE
+        "Toilet Adequate":
+          data[i]?.Inspection?.LiquidWasteSection?.toiletAdequacy?.name,
+        "Anal Cleansing Material Mgt":
+          data[i]?.Inspection?.LiquidWasteSection?.analCleansingMaterialMgt
+            ?.name,
+        "Area Sewered":
+          data[i]?.Inspection?.LiquidWasteSection?.areaSewered?.name,
+        "Toilet Facilty Mgt Available":
+          data[i]?.Inspection?.LiquidWasteSection?.availToiletFaciltyMgt?.name,
+        "Bathroom Adequacy":
+          data[i]?.Inspection?.LiquidWasteSection?.bathroomAdequacy?.name,
+        "Containment Emptied":
+          data[i]?.Inspection?.LiquidWasteSection?.containmentEmptied?.name,
+        "Desilting Frequency":
+          data[i]?.Inspection?.LiquidWasteSection?.DesiltingFrequency?.name,
+        "Drains Condition":
+          data[i]?.Inspection?.LiquidWasteSection?.drainsCondition?.name,
+        "Ease Yourself Where":
+          data[i]?.Inspection?.LiquidWasteSection?.EaseYourselfWhere?.name,
+        "Premises Effluent Management": data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+          (data) => data?.EffluentManagement?.name
+        ).toString(),
 
-        "Toilet Adequate": data[i]?.Inspection?.LiquidWasteSection?.toiletAdequacy?.name,
-        "Anal Cleansing Material Mgt": data[i]?.Inspection?.LiquidWasteSection?.analCleansingMaterialMgt?.name,
-        "Area Sewered": data[i]?.Inspection?.LiquidWasteSection?.areaSewered?.name,
-        "Toilet Facilty Mgt Available": data[i]?.Inspection?.LiquidWasteSection?.availToiletFaciltyMgt?.name,
-        "Bathroom Adequacy": data[i]?.Inspection?.LiquidWasteSection?.bathroomAdequacy?.name,
-        "Containment Emptied": data[i]?.Inspection?.LiquidWasteSection?.containmentEmptied?.name,
-        "Desilting Frequency": data[i]?.Inspection?.LiquidWasteSection?.DesiltingFrequency?.name,
-        "Drains Condition": data[i]?.Inspection?.LiquidWasteSection?.drainsCondition?.name,
-        "Ease Yourself Where": data[i]?.Inspection?.LiquidWasteSection?.EaseYourselfWhere?.name,
-        "Premises Effluent Management": data[i]?.Inspection?.LiquidWasteSection?.PremisesEffluentManagement?.map(data=>data?.EffluentManagement?.name).toString(),
+        "Premises Excreta Disposal Method": data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
+          (data) => data?.ExcretaDisposalMethod?.name
+        ).toString(),
+        "Premises Excreta Containment": data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesExcretaContainment?.map(
+          (data) => data?.ExcretaContainment?.name
+        ).toString(),
+        "Premises Grey Water Disposal": data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+          (data) => data?.GreyWaterDisposal?.name
+        ).toString(),
+        "Premises Toilet Type": data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesToiletType?.map(
+          (data) => data?.ToiletType?.name
+        ).toString(),
 
-        "Premises Excreta Disposal Method": data[i]?.Inspection?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(data=>data?.ExcretaDisposalMethod?.name).toString(),
-        "Premises Excreta Containment": data[i]?.Inspection?.LiquidWasteSection?.PremisesExcretaContainment?.map(data=>data?.ExcretaContainment?.name).toString(),
-        "Premises Grey Water Disposal": data[i]?.Inspection?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(data=>data?.GreyWaterDisposal?.name).toString(),
-        "Premises Toilet Type": data[i]?.Inspection?.LiquidWasteSection?.PremisesToiletType?.map(data=>data?.ToiletType?.name).toString(),
-
-        "Facility Connected Sewer": data[i]?.Inspection?.LiquidWasteSection?.facilityConnectedSewer?.name,
-        "Bathroom Condition": data[i]?.Inspection?.LiquidWasteSection?.bathroomCondition?.name,
-        "Separate Staff Urinal": data[i]?.Inspection?.LiquidWasteSection?.separateStaffUrinal?.name,
-        "Sewer System": data[i]?.Inspection?.LiquidWasteSection?.sewerSystem?.name,
-        "Stagnation Evidence": data[i]?.Inspection?.LiquidWasteSection?.stagnationEvidence?.name,
-        "Toilet Condition": data[i]?.Inspection?.LiquidWasteSection?.toiletCondition?.name,
-        "Toilet Disability Friendly": data[i]?.Inspection?.LiquidWasteSection?.toiletDisabilityFriendly?.name,
-        "Toilet Discharge": data[i]?.Inspection?.LiquidWasteSection?.toiletDischarge?.name,
-        "Toilet Pit Position": data[i]?.Inspection?.LiquidWasteSection?.toiletPitPosition?.name,
+        "Facility Connected Sewer":
+          data[i]?.Inspection?.LiquidWasteSection?.facilityConnectedSewer?.name,
+        "Bathroom Condition":
+          data[i]?.Inspection?.LiquidWasteSection?.bathroomCondition?.name,
+        "Separate Staff Urinal":
+          data[i]?.Inspection?.LiquidWasteSection?.separateStaffUrinal?.name,
+        "Sewer System":
+          data[i]?.Inspection?.LiquidWasteSection?.sewerSystem?.name,
+        "Stagnation Evidence":
+          data[i]?.Inspection?.LiquidWasteSection?.stagnationEvidence?.name,
+        "Toilet Condition":
+          data[i]?.Inspection?.LiquidWasteSection?.toiletCondition?.name,
+        "Toilet Disability Friendly":
+          data[i]?.Inspection?.LiquidWasteSection?.toiletDisabilityFriendly
+            ?.name,
+        "Toilet Discharge":
+          data[i]?.Inspection?.LiquidWasteSection?.toiletDischarge?.name,
+        "Toilet Pit Position":
+          data[i]?.Inspection?.LiquidWasteSection?.toiletPitPosition?.name,
 
         ///SOLID WASTE
-        "Waste Service Provider Registration": data[i]?.Inspection?.SolidWasteSection?.wasteServiceProviderRegistration?.name,
-        "Waste Sorting Availability": data[i]?.Inspection?.SolidWasteSection?.wasteSortingAvailability?.name,
-        "Waste Collection Frequency": data[i]?.Inspection?.SolidWasteSection?.wasteCollectionFrequency?.name,
-        "Approved Waste Storage Receptacle": data[i]?.Inspection?.SolidWasteSection?.approvedWasteStorageReceptacle?.name,
-        "Adequate Waste Storage Receptacle": data[i]?.Inspection?.SolidWasteSection?.adequateWasteStorageReceptacle?.name,
-        "Waste Collection Type": data[i]?.Inspection?.SolidWasteSection?.WasteCollectionType?.name,
-        "Unserviced Waste Disposal": data[i]?.Inspection?.SolidWasteSection?.UnservicedWasteDisposal?.name,
-        "Waste Payment Evidence": data[i]?.Inspection?.SolidWasteSection?.wastePaymentEvidence?.name,
-        "Container Volume": data[i]?.Inspection?.SolidWasteSection?.ContainerVolume?.name,
-        "Waste Provider Accreditted": data[i]?.Inspection?.SolidWasteSection?.wasteProviderAccreditted?.name,
+        "Waste Service Provider Registration":
+          data[i]?.Inspection?.SolidWasteSection
+            ?.wasteServiceProviderRegistration?.name,
+        "Waste Sorting Availability":
+          data[i]?.Inspection?.SolidWasteSection?.wasteSortingAvailability
+            ?.name,
+        "Waste Collection Frequency":
+          data[i]?.Inspection?.SolidWasteSection?.wasteCollectionFrequency
+            ?.name,
+        "Approved Waste Storage Receptacle":
+          data[i]?.Inspection?.SolidWasteSection?.approvedWasteStorageReceptacle
+            ?.name,
+        "Adequate Waste Storage Receptacle":
+          data[i]?.Inspection?.SolidWasteSection?.adequateWasteStorageReceptacle
+            ?.name,
+        "Waste Collection Type":
+          data[i]?.Inspection?.SolidWasteSection?.WasteCollectionType?.name,
+        "Unserviced Waste Disposal":
+          data[i]?.Inspection?.SolidWasteSection?.UnservicedWasteDisposal?.name,
+        "Waste Payment Evidence":
+          data[i]?.Inspection?.SolidWasteSection?.wastePaymentEvidence?.name,
+        "Container Volume":
+          data[i]?.Inspection?.SolidWasteSection?.ContainerVolume?.name,
+        "Waste Provider Accreditted":
+          data[i]?.Inspection?.SolidWasteSection?.wasteProviderAccreditted
+            ?.name,
 
-        "PremisesHazardousWasteDisposal": data[i]?.Inspection?.LiquidWasteSection?.PremisesHazardousWasteDisposal?.map(data=>data?.HazardousWasteDisposalMethod?.name).toString(),
-        "PremisesWasteReceptacle": data[i]?.Inspection?.LiquidWasteSection?.PremisesWasteReceptacle?.map(data=>data?.SolidWasteReceptacle?.name).toString(),
-
+        PremisesHazardousWasteDisposal: data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesHazardousWasteDisposal?.map(
+          (data) => data?.HazardousWasteDisposalMethod?.name
+        ).toString(),
+        PremisesWasteReceptacle: data[
+          i
+        ]?.Inspection?.LiquidWasteSection?.PremisesWasteReceptacle?.map(
+          (data) => data?.SolidWasteReceptacle?.name
+        ).toString(),
 
         ///CONCLUSION
-        "Obnoxious Trade ": data[i]?.Inspection?.ConclusionSection?.obnoxiousTrade,
-        "Officer Comment": data[i]?.Inspection?.ConclusionSection?.officerComment,
-        "Nuisance": data[i]?.Inspection?.ConclusionSection?.PremisesNuisanceDetected?.map(data=>data?.Nuisance?.name).toString(),
-        "Premises Action Taken": data[i]?.Inspection?.ConclusionSection?.PremisesActionTaken?.map(data=>data?.Action?.name).toString(),
-
+        "Obnoxious Trade ":
+          data[i]?.Inspection?.ConclusionSection?.obnoxiousTrade,
+        "Officer Comment":
+          data[i]?.Inspection?.ConclusionSection?.officerComment,
+        Nuisance: data[
+          i
+        ]?.Inspection?.ConclusionSection?.PremisesNuisanceDetected?.map(
+          (data) => data?.Nuisance?.name
+        ).toString(),
+        "Premises Action Taken": data[
+          i
+        ]?.Inspection?.ConclusionSection?.PremisesActionTaken?.map(
+          (data) => data?.Action?.name
+        ).toString(),
       });
     }
-
 
     const workSheet = XLSX.utils.json_to_sheet(newData);
     const workBook = XLSX.utils.book_new();
@@ -435,13 +611,10 @@ const post = async (req, res) => {
     let url = await uploadFile(fileName);
 
     res.status(200).json(url);
-
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 const uploadFile = async (fileName) => {
   try {

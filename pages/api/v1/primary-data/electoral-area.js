@@ -23,8 +23,12 @@ const get = async (req, res) => {
   try {
     let token = req?.cookies?.token || req?.query?.token;
 
+
+    console.log("token====>",token);
+
     let data = await verifyToken(token);
     let districtId = data?.user?.districtId;
+    console.log("data====>",data);
 
   
 

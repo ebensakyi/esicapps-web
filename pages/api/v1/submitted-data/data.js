@@ -39,7 +39,6 @@ const get = async (req, res) => {
 };
 
 const generateWhereMainObject = async (req, res) => {
-  let whereObject;
 
   let published = Number(req?.query?.published);
   let inspectionFormId = Number(req?.query?.inspectionFormId);
@@ -150,9 +149,14 @@ const generateWhereMainObject = async (req, res) => {
         },
         Community: {
           include: {
-            District: {
+            ElectoralArea: {
               include: {
-                Region: true,
+                District:{
+                  include: {
+                    Region:true,
+                  }
+                }
+                
               },
             },
           },
@@ -194,9 +198,14 @@ const generateWhereMainObject = async (req, res) => {
         },
         Community: {
           include: {
-            District: {
+            ElectoralArea: {
               include: {
-                Region: true,
+                District:{
+                  include: {
+                    Region:true,
+                  }
+                }
+                
               },
             },
           },

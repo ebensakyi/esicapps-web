@@ -51,6 +51,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
           inspectionFormId: Number(formId),
           fileName: handleExcelName(),
           published,
+          exportType: 1,
         }
       );
       if (response.status == 200) {
@@ -68,8 +69,9 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
           inspectionFormId: Number(formId),
           fileName: handleExcelName(),
           published,
-          filterBy,
-          filterValue,
+          filterBy: query.filterBy,
+          filterValue: query.filterValue,
+          exportType: 2,
         }
       );
       if (response.status == 200) {
@@ -237,6 +239,10 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
             aria-label="Default select example"
             onChange={(e) => {
               setFilterBy(e.target.value);
+
+              if (regionalUser) {
+                getDistrictsByRegion();
+              }
 
               if (districtUser) {
                 getElectoralAreasByDistrict();
@@ -572,8 +578,8 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   <th scope="col">Rating </th>
                   <th scope="col">Type</th>
                   <th scope="col">Premises Code</th>
-                  <th scope="col"> Start Date</th>
-                  <th scope="col"> End Date</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
                   <th scope="col">Inspection Officer</th>
                   <th scope="col">GhanaPost GPS</th>
                   <th scope="col">GPS Accuracy</th>
@@ -628,16 +634,16 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                         )}
                       </td>
                       <td>
-                        {dt.User.otherNames} {dt.User.surname}
+                        {dt?.User?.otherNames} {dt?.User?.surname}
                       </td>
-                      <td>{dt.ghanaPostGps}</td>
-                      <td>{dt.accuracy}</td>
-                      <td>{dt.Community.ElectoralArea.District.Region.name}</td>
-                      <td>{dt.Community.ElectoralArea.District.name}</td>
-                      <td>{dt.Community.ElectoralArea.name}</td>
-                      <td>{dt.Community.name}</td>{" "}
+                      <td>{dt?.ghanaPostGps}</td>
+                      <td>{dt?.accuracy}</td>
+                      <td>{dt?.Community?.ElectoralArea?.District?.Region?.name}</td>
+                      <td>{dt?.Community?.ElectoralArea?.District?.name}</td>
+                      <td>{dt?.Community?.ElectoralArea?.name}</td>
+                      <td>{dt?.Community?.name}</td>{" "}
                       <td>
-                        {moment(dt.Inspection.createdAt).format(
+                        {moment(dt?.Inspection?.createdAt).format(
                           "MMM Do YYYY, h:mm:ss a"
                         )}
                       </td>
