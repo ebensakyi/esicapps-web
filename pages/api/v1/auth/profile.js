@@ -1,58 +1,65 @@
-import prisma from "../../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { nanoid } from "nanoid";
+import { sendSMS } from "../../../../helpers/send-hubtel-sms";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
-
-
-    let phoneNumber = req.body.phoneNumber;
+    const salt = await bcrypt.genSaltSync(10);
     let newPassword = req.body.newPassword;
-    let oldPassword = req.body.oldPassword;
+    let currentPassword = req.body.currentPassword;
+    let phoneNumber = req.body.phoneNumber;
 
-
-    //let hash = await bcrypt.hashSync(password, salt);
+    console.log(req.body);
 
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
     });
     if (!user) {
       return res
-        .status(400)
+        .status(404)
         .json({ statusCode: 0, message: "Wrong user account" });
     }
 
-    let isValid = await bcrypt.compare(oldPassword, user.password);
+    let isValid = await bcrypt.compare(currentPassword, user.password);
+
+console.log(user);
+    console.log(isValid);
 
     if (isValid) {
-      const salt = await bcrypt.genSaltSync(10);
       let hashedPassword = bcrypt.hashSync(newPassword, salt);
       let x = await prisma.user.update({
         where: { phoneNumber },
         data: { password: hashedPassword, passwordChanged: 1 },
       });
-
-      //const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
-
+      await sendSMS(
+        phoneNumber,
+        `Your password is changed successfully. Your new password is ${newPassword}`
+      );
       return res.status(200).json(user);
-    } else {
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: "Wrong user credentials" });
     }
+
+    // let newPhoneNumber = await append_233(phoneNumber);
+
+    //  await sendSMS("233543212322","password")
+
+    res.status(400).json(user);
   } catch (error) {
-    console.log("Server error", error);
+    console.log(error);
     if (error.code === "P2002")
       return res
-        .status(500)
-        .json({ statusCode: 0, message: "A server error occurred" });
+        .status(200)
+        .json({ statusCode: 0, message: "user prefix should be unique" });
   }
 };
 
 const get = async (req, res) => {
   try {
-    const user = await prisma.user.findMany({ where: { deleted: 0 } });
-    return res.status(200).json({ statusCode: 1, data: user });
+    let user = await verifyToken(req.query.token);
+    console.log(user);
+
+    return res.status(200).json(user);
   } catch (error) {
     console.log("Error: " + error);
   }

@@ -99,7 +99,7 @@ const Header = () => {
                 <div className="dropdown-menu dropdown-menu-end">
                   {/* item*/}
                   <h6 className="dropdown-header"> {fullName}</h6>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="/auth/profile">
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle">Profile</span>
                   </a>
