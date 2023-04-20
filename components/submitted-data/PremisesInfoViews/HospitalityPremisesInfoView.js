@@ -350,10 +350,10 @@ const HospitalityPremisesInfoView = ({ data }) => {
                       <></>
                     )}
                     {data?.HospitalityPremisesInfoSection
-                      ?.numberFemaleWorkers != null ? (
+                      ?.numberMaleWorkers != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                          Number of female workers
+                          Number of male workers
                         </label>
                         <input
                           type="text"
@@ -361,7 +361,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.HospitalityPremisesInfoSection
-                              ?.numberFemaleWorkers
+                              ?.numberMaleWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -390,10 +390,10 @@ const HospitalityPremisesInfoView = ({ data }) => {
                       <></>
                     )}
                     {data?.HospitalityPremisesInfoSection
-                      ?.numberFemaleWorkers != null ? (
+                      ?.numberFoodHandlingMedical != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                          Number of female workers
+                          Number of food Handling Medically Cert
                         </label>
                         <input
                           type="text"
@@ -401,7 +401,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.HospitalityPremisesInfoSection
-                              ?.numberFemaleWorkers
+                              ?.numberFoodHandlingMedical
                           }
                           readOnly="readOnly"
                         />
@@ -409,6 +409,72 @@ const HospitalityPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
+
+
+{data?.HospitalityPremisesInfoSection
+                      ?.numberFoodHandling != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Number of food Handling Staff
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.HospitalityPremisesInfoSection
+                              ?.numberFoodHandling
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+
+{data?.HospitalityPremisesInfoSection
+                      ?.numberRooms != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                          Number of rooms
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.HospitalityPremisesInfoSection
+                              ?.numberRooms
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+{data?.HospitalityPremisesInfoSection
+                      ?.facilityCapacity != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">
+                         Facility capacity
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.HospitalityPremisesInfoSection
+                              ?.facilityCapacity
+                          }
+                          readOnly="readOnly"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
                   </div>
                 </div>
               </div>

@@ -105,9 +105,20 @@ const get = async (req, res) => {
             drainsAvailability: true,
             approvedHandwashingFacilityAvailability: true,
             bathroomAvailability: true,
+
+            /////////
             ehoAvailability: true,
             incineratorAvailability: true,
             placentaPitAvailability: true,
+            healthPremisesType: true,
+            separateWard: true,
+            ownershipType: true,
+            ehoAvailability: true,
+            embalmingAreaCondition: true,
+            embalmingAreaAvailability: true,
+            bodyTraysAdequate: true,
+            coldRoomAvailability: true,
+            coldRoomCondition: true
           },
         },
         HospitalityPremisesInfoSection: {

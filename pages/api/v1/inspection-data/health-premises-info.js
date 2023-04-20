@@ -62,33 +62,30 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.incineratorAvailabilityId),
 
-////////////////////////NEW/////////////
-          embalmingAreaConditionId:
-          req.body.embalmingAreaConditionId == "null"
-            ? null
-            : Number(req.body.embalmingAreaConditionId),
-            embalmingAreaAvailabilityId:
-            req.body.embalmingAreaAvailabilityId == "null"
-              ? null
-              : Number(req.body.embalmingAreaAvailabilityId),
-            bodyTraysAdequateId:
-            req.body.bodyTraysAdequateId == "null"
-              ? null
-              : Number(req.body.bodyTraysAdequateId),
+      ////////////////////////NEW/////////////
+      embalmingAreaConditionId:
+        req.body.embalmingAreaConditionId == "null"
+          ? null
+          : Number(req.body.embalmingAreaConditionId),
+      embalmingAreaAvailabilityId:
+        req.body.embalmingAreaAvailabilityId == "null"
+          ? null
+          : Number(req.body.embalmingAreaAvailabilityId),
+      bodyTraysAdequateId:
+        req.body.bodyTraysAdequateId == "null"
+          ? null
+          : Number(req.body.bodyTraysAdequateId),
 
-    
-                coldRoomAvailabilityId:
-                req.body.coldRoomAvailabilityId == "null"
-                  ? null
-                  : Number(req.body.coldRoomAvailabilityId),
+      coldRoomAvailabilityId:
+        req.body.coldRoomAvailabilityId == "null"
+          ? null
+          : Number(req.body.coldRoomAvailabilityId),
 
-                  coldRoomConditionId:
-                  req.body.coldRoomConditionId == "null"
-                    ? null
-                    : Number(req.body.coldRoomConditionId),
+      coldRoomConditionId:
+        req.body.coldRoomConditionId == "null"
+          ? null
+          : Number(req.body.coldRoomConditionId),
     };
-
-    console.log(data);
 
     const response = await prisma.healthPremisesInfoSection.create({
       data,
@@ -100,7 +97,7 @@ const post = async (req, res) => {
 
     return res.status(500).json({ statusCode: 0, message: "Data skipped" });
   } catch (error) {
-   console.log("Error: " + error);
+    console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)
