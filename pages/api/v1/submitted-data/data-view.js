@@ -38,7 +38,9 @@ const get = async (req, res) => {
 
         id: inspectionId,
       },
+
       include: {
+        User: true,
         ElectoralArea: true,
 
         BasicInfoSection: {

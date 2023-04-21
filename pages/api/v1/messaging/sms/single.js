@@ -59,7 +59,7 @@ const post = async (req, res) => {
   //   }
   // }
 
-  res.status(200).json({ statusCode: 1, message: "Data saved" });
+  res.status(200).json({ });
   // } catch (error) {
   //   console.log("Error: " + error);
   //   if (error.code === "P2002")

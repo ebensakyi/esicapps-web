@@ -4,7 +4,7 @@ import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
-  // try {
+ try {
 
   let userCookie = await getUserCookie(req, res);
 
@@ -54,13 +54,12 @@ const post = async (req, res) => {
   // }
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
-  // } catch (error) {
-  //   console.log("Error: " + error);
-  //   if (error.code === "P2002")
-  //     return res
-  //       .status(400)
-  //       .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  // }
+  } catch (error) {
+   
+      return res
+        .status(400)
+        .json({ statusCode: 0, message: "Error" });
+  }
 };
 
 const get = async (req, res) => {

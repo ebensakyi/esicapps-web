@@ -133,6 +133,18 @@ const DataView = ({ data }) => {
                         <div className="row gy-3">
                           <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
+                              Reporting Officer
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control bg-light border-0"
+                              id="invoicenoInput"
+                              value={`${data?.User?.otherNames} ${data?.User?.otherNames}`} 
+                              readOnly="readOnly"
+                            />
+                          </div>
+                          <div className="col-lg-3 col-sm-6">
+                            <label htmlFor="invoicenoInput">
                               Premises Code
                             </label>
                             <input
