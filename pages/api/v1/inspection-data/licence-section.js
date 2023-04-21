@@ -39,10 +39,7 @@ const post = async (req, res) => {
         req.body.fumigationCertificateAvailabilityId == "null"
           ? null
           : Number(req.body.fumigationCertificateAvailabilityId),
-      medicalCertificateAvailabilityId:
-        req.body.medicalCertificateAvailabilityId == "null"
-          ? null
-          : Number(req.body.medicalCertificateAvailabilityId),
+     
       gtaOperatingLicenceAvailabilityId:
         req.body.gtaOperatingLicenceAvailabilityId == "null"
           ? null
@@ -65,7 +62,11 @@ const post = async (req, res) => {
           : Number(req.body.pharmacyCertAvailabilityId),
     };
 
+    console.log(data);
+
     const response = await prisma.licencePermitSection.create({ data });
+
+    console.log(response);
 
     if(response){
       return  res.status(200).json({ statusCode: 1, message: "Data saved" });
@@ -73,7 +74,7 @@ const post = async (req, res) => {
   
       return  res.status(500).json({ statusCode: 0, message: "Data skipped" });
   } catch (error) {
-    // console.log("Error: " + error);
+   console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)

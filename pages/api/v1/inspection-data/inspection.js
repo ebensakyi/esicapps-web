@@ -3,6 +3,9 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
+
+    console.log(req.body);
+
     const user = await prisma.user.findFirst({
       where: { id: Number(req.body.userId) },
     });
@@ -40,6 +43,8 @@ const post = async (req, res) => {
       startedAt: new Date(req.body.startedAt),
       completedAt: new Date(req.body.completedAt),
     };
+
+    console.log(data);
 
     const response = await prisma.inspection.create({ data });
 

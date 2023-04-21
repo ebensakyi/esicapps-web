@@ -56,7 +56,6 @@ const get = async (req, res) => {
             businessLicenceAvailability: true,
             fumigationCertificateAvailability: true,
             habitationCertificateAvailability: true,
-            medicalCertificateAvailability: true,
             operatingLicenceAvailability: true,
             propertyRateAvailability: true,
             structurePermitAvailability: true,

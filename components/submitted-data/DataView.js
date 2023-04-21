@@ -506,26 +506,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
-                            ?.medicalCertificateAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
-                                Medical certificate
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.LicencePermitSection
-                                    .medicalCertificateAvailability.name
-                                }
-                                readOnly="readOnly"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                         
                           {data?.LicencePermitSection
                             ?.gtaOperatingLicenceAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">

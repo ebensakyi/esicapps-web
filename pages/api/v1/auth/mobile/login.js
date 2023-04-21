@@ -13,7 +13,6 @@ const post = async (req, res) => {
       include: { District: { include: { Region: true } } },
     });
 
-    console.log("user ",user);
 
     if (!user) {
       return res
@@ -31,7 +30,6 @@ const post = async (req, res) => {
 
 
     let isValid = await bcrypt.compare(password, user.password);
-    console.log(isValid);
 
     if (isValid) {
       // const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);

@@ -844,7 +844,6 @@ model YesNo {
   businessLicenceAvailability                        LicencePermitSection[]           @relation("businessLicenceAvailability")
   fumigationCertificateAvailability                  LicencePermitSection[]           @relation("fumigationCertificateAvailability")
   habitationCertificateAvailability                  LicencePermitSection[]           @relation("habitationCertificateAvailability")
-  medicalCertificateAvailability                     LicencePermitSection[]           @relation("medicalCertificateAvailability")
   operatingLicenceAvailability                       LicencePermitSection[]           @relation("operatingLicenceAvailability")
   propertyRateAvailability                           LicencePermitSection[]           @relation("propertyRateAvailability")
   structurePermitAvailability                        LicencePermitSection[]           @relation("structurePermitAvailability")
@@ -1480,7 +1479,6 @@ model LicencePermitSection {
   userId                               Int
   buildingPermitAvailabilityId         Int?
   businessLicenceAvailabilityId        Int?
-  medicalCertAvailabilityId            Int?
   operatingLicenceAvailabilityId       Int?
   propertyRateAvailabilityId           Int?
   structurePermitAvailabilityId        Int?
@@ -1501,7 +1499,6 @@ model LicencePermitSection {
   businessLicenceAvailability          YesNo?   @relation("businessLicenceAvailability", fields: [businessLicenceAvailabilityId], references: [id])
   fumigationCertificateAvailability    YesNo?   @relation("fumigationCertificateAvailability", fields: [fumigationCertificateAvailabilityId], references: [id])
   habitationCertificateAvailability    YesNo?   @relation("habitationCertificateAvailability", fields: [habitationCertificateAvailabilityId], references: [id])
-  medicalCertificateAvailability       YesNo?   @relation("medicalCertificateAvailability", fields: [medicalCertAvailabilityId], references: [id])
   operatingLicenceAvailability         YesNo?   @relation("operatingLicenceAvailability", fields: [operatingLicenceAvailabilityId], references: [id])
   propertyRateAvailability             YesNo?   @relation("propertyRateAvailability", fields: [propertyRateAvailabilityId], references: [id])
   structurePermitAvailability          YesNo?   @relation("structurePermitAvailability", fields: [structurePermitAvailabilityId], references: [id])
