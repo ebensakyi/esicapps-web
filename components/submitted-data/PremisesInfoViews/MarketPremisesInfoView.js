@@ -269,7 +269,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.numberMeatShops
+                            data?.MarketPremisesInfoSection?.numberMeatShops
                           }
                           readOnly="readOnly"
                         />
@@ -288,7 +288,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.numberColdStores
+                            data?.MarketPremisesInfoSection?.numberColdStores
                           }
                           readOnly="readOnly"
                         />
@@ -320,7 +320,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection.numberChopbars}
+                          value={data?.MarketPremisesInfoSection?.numberChopbars}
                           readOnly="readOnly"
                         />
                       </div>
@@ -340,7 +340,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.MarketPremisesInfoSection?.derattingFrequency
-                              .name
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -359,8 +359,8 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.cleanupFrequency
-                              .name
+                            data?.MarketPremisesInfoSection?.cleanupFrequency
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -379,7 +379,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.numberLorrySheds
+                            data?.MarketPremisesInfoSection?.numberLorrySheds
                           }
                           readOnly="readOnly"
                         />
@@ -414,7 +414,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection.numberDrivers}
+                          value={data?.MarketPremisesInfoSection?.numberDrivers}
                           readOnly="readOnly"
                         />
                       </div>
@@ -432,7 +432,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.numberFoodVendors
+                            data?.MarketPremisesInfoSection?.numberFoodVendors
                           }
                           readOnly="readOnly"
                         />
@@ -453,7 +453,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.MarketPremisesInfoSection
-                              ?.generalSanitaryCondition.name
+                              ?.generalSanitaryCondition?.name
                           }
                           readOnly="readOnly"
                         />

@@ -77,7 +77,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.HospitalityPremisesInfoSection
-                              ?.physicalStructureType.name
+                              ?.physicalStructureType?.name
                           }
                           readOnly="readOnly"
                         />
@@ -241,7 +241,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.HospitalityPremisesInfoSection
-                              ?.cookedFoodStorageCondtionSafe.name
+                              ?.cookedFoodStorageCondtionSafe?.name
                           }
                           readOnly="readOnly"
                         />
@@ -261,7 +261,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.HospitalityPremisesInfoSection
-                              ?.uncookedFoodStorageCondtionSafe.name
+                              ?.uncookedFoodStorageCondtionSafe?.name
                           }
                           readOnly="readOnly"
                         />

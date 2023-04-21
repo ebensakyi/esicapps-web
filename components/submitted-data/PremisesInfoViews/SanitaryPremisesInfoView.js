@@ -29,7 +29,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                 <div className="card-body">
                   <div className="row gy-3">
                     {data?.SanitaryPremisesInfoSection?.physicalStructureType
-                      .name != null ? (
+                      ?.name != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Premises Structure
@@ -40,7 +40,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.physicalStructureType.name
+                              ?.physicalStructureType?.name
                           }
                           readOnly="readOnly"
                         />
@@ -50,7 +50,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                     )}
 
                     {data?.SanitaryPremisesInfoSection?.sanitaryPremisesType
-                      .name != null ? (
+                      ?.name != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Subtype</label>
                         <input
@@ -99,7 +99,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection?.staffChangingRoom
-                              .name
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -139,7 +139,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.sanitaryFacilityMgt.name
+                              ?.sanitaryFacilityMgt?.name
                           }
                           readOnly="readOnly"
                         />
@@ -243,7 +243,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.storeRoomAvailability.name
+                              ?.storeRoomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -263,7 +263,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.condemnationRoomAvailability.name
+                              ?.condemnationRoomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -283,7 +283,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.cloakRoomAvailability.name
+                              ?.cloakRoomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -303,7 +303,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.comfortRoomAvailability.name
+                              ?.comfortRoomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -343,7 +343,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.footbathAvailability.name
+                              ?.footbathAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -363,7 +363,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.leachateMgt.name
+                              ?.leachateMgt?.name
                           }
                           readOnly="readOnly"
                         />
@@ -385,7 +385,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.safeHazardousWasteMgt.name
+                              ?.safeHazardousWasteMgt?.name
                           }
                           readOnly="readOnly"
                         />
@@ -425,7 +425,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.sextonOffice.name
+                              ?.sextonOffice?.name
                           }
                           readOnly="readOnly"
                         />
@@ -445,7 +445,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.properLayout.name
+                              ?.properLayout?.name
                           }
                           readOnly="readOnly"
                         />
@@ -465,7 +465,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.cremationPracticed.name
+                              ?.cremationPracticed?.name
                           }
                           readOnly="readOnly"
                         />
@@ -488,7 +488,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.workersOfficeAvailability.name
+                              ?.workersOfficeAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -737,7 +737,7 @@ const SanitaryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.SanitaryPremisesInfoSection
-                              ?.bathroomAvailability.name
+                              ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
                         />

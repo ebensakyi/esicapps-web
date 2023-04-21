@@ -129,7 +129,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.InstitutionPremisesInfoSection
-                              .bathroomAvailability?.name
+                              ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -149,7 +149,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.InstitutionPremisesInfoSection
-                              .drainsAvailability?.name
+                              ?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
                         />
@@ -231,7 +231,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.InstitutionPremisesInfoSection
-                              .numberMaleStudents
+                              ?.numberMaleStudents
                           }
                           readOnly="readOnly"
                         />
@@ -270,7 +270,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.InstitutionPremisesInfoSection.ablutionSlab
+                          data?.InstitutionPremisesInfoSection?.ablutionSlab
                             ?.name
                         }
                         readOnly="readOnly"
@@ -292,7 +292,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .ablutionSlabCondition?.name
+                            ?.ablutionSlabCondition?.name
                         }
                         readOnly="readOnly"
                       />
@@ -313,7 +313,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .animalSpaceAvailability?.name
+                            ?.animalSpaceAvailability?.name
                         }
                         readOnly="readOnly"
                       />
@@ -333,7 +333,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .animalSpaceCondition?.name
+                            ?.animalSpaceCondition?.name
                         }
                         readOnly="readOnly"
                       />
@@ -353,7 +353,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .cookedFoodStorageCondtionSafe?.name
+                            ?.cookedFoodStorageCondtionSafe?.name
                         }
                         readOnly="readOnly"
                       />
@@ -373,7 +373,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .uncookedFoodStorageCondtionSafe?.name
+                            ?.uncookedFoodStorageCondtionSafe?.name
                         }
                         readOnly="readOnly"
                       />
@@ -393,7 +393,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .foodVendorAvailability?.name
+                            ?.foodVendorAvailability?.name
                         }
                         readOnly="readOnly"
                       />
@@ -413,7 +413,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .kitchenAvailability?.name
+                            ?.kitchenAvailability?.name
                         }
                         readOnly="readOnly"
                       />
@@ -433,7 +433,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .physicalStructureType?.name
+                            ?.physicalStructureType?.name
                         }
                         readOnly="readOnly"
                       />
@@ -452,7 +452,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.InstitutionPremisesInfoSection.shepClubExistence
+                          data?.InstitutionPremisesInfoSection?.shepClubExistence
                             ?.name
                         }
                         readOnly="readOnly"
@@ -473,7 +473,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .slaughterAreaAvailability?.name
+                            ?.slaughterAreaAvailability?.name
                         }
                         readOnly="readOnly"
                       />
@@ -493,7 +493,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .slaughterAreaCondition?.name
+                            ?.slaughterAreaCondition?.name
                         }
                         readOnly="readOnly"
                       />
@@ -510,7 +510,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.InstitutionPremisesInfoSection.soundProof?.name
+                          data?.InstitutionPremisesInfoSection?.soundProof?.name
                         }
                         readOnly="readOnly"
                       />
@@ -530,7 +530,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         id="invoicenoInput"
                         value={
                           data?.InstitutionPremisesInfoSection
-                            .protectiveClothingUsed?.name
+                            ?.protectiveClothingUsed?.name
                         }
                         readOnly="readOnly"
                       />

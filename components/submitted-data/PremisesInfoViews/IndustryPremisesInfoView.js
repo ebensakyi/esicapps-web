@@ -366,7 +366,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.IndustryPremisesInfoSection
-                              .numberWorkers
+                              ?.numberWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -409,7 +409,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.IndustryPremisesInfoSection
-                              .numberFoodHandlers
+                              ?.numberFoodHandlers
                           }
                           readOnly="readOnly"
                         />
@@ -429,7 +429,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.IndustryPremisesInfoSection
-                              .numberFoodHandlersCert
+                              ?.numberFoodHandlersCert
                           }
                           readOnly="readOnly"
                         />
@@ -449,7 +449,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                           id="invoicenoInput"
                           value={
                             data?.IndustryPremisesInfoSection
-                              .numberWorkers
+                              ?.numberWorkers
                           }
                           readOnly="readOnly"
                         />

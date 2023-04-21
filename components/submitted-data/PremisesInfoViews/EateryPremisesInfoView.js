@@ -41,7 +41,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.physicalStructureType !=
+                    {data?.EateryPremisesInfoSection?.physicalStructureType?.name !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -410,7 +410,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfestation.name
+                            data?.EateryPremisesInfoSection?.disinfestation?.name
                           }
                           readOnly="readOnly"
                         />
@@ -429,7 +429,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfestationFrequency.name
+                            data?.EateryPremisesInfoSection?.disinfestationFrequency?.name
                           }
                           readOnly="readOnly"
                         />
@@ -448,7 +448,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfection.name
+                            data?.EateryPremisesInfoSection?.disinfection?.name
                           }
                           readOnly="readOnly"
                         />
@@ -468,7 +468,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfectionFrequency.name
+                            data?.EateryPremisesInfoSection?.disinfectionFrequency?.name
                           }
                           readOnly="readOnly"
                         />
