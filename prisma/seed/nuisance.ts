@@ -3,7 +3,7 @@ export const nuisance = [
 
   {
     inspectionFormId: 1,
-    name: "Unsanitary bathroom",
+    name: "Insanitary bathroom",
   },
   {
     inspectionFormId: 1,
@@ -47,7 +47,7 @@ export const nuisance = [
 
   {
     inspectionFormId: 2,
-    name: "Unsanitary bathroom",
+    name: "Insanitary bathroom",
   },
   {
     inspectionFormId: 2,
@@ -72,7 +72,6 @@ export const nuisance = [
   { inspectionFormId: 2, name: "Unsafe structure" },
   { inspectionFormId: 2, name: "Stray animals" },
   { inspectionFormId: 2, name: "Dumping and Burning" },
-  { inspectionFormId: 2, name: "Insanitary bathroom" },
   { inspectionFormId: 2, name: "Expired Medicine" },
   { inspectionFormId: 2, name: "Expired food or drink" },
   { inspectionFormId: 2, name: "Adultrated drink" },
@@ -251,7 +250,7 @@ export const nuisance = [
 
   {
     inspectionFormId: 7,
-    name: "Unsanitary bathroom",
+    name: "Insanitary bathroom",
   },
   {
     inspectionFormId: 7,
@@ -287,7 +286,7 @@ export const nuisance = [
 
   {
     inspectionFormId: 8,
-    name: "Unsanitary bathroom",
+    name: "Insanitary bathroom",
   },
   {
     inspectionFormId: 8,

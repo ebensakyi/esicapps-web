@@ -33,7 +33,6 @@ try {
   const user = await prisma.user.findFirst({
     where: { id: response.recipientId },
   });
-  console.log(user);
 
   let x = await sendFCM(title, message, user.fcmId);
 
