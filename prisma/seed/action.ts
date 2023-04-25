@@ -6,7 +6,7 @@ export const action = [
     name: "Notice served",
   },
   {
-    name: "Criminal Summons",
+    name: "Summons",
   },
   
 ];

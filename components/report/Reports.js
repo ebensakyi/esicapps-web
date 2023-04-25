@@ -776,7 +776,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                     <></>
                   )}
 
-                  {/* <div className="col-md-12">
+                  <div className="col-md-12">
                     <label className="form-label mb-0">Start Date</label>
                     <input
                       type="date"
@@ -794,7 +794,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                       onChange={(e) => setTo(e.target.value)}
                       value={to}
                     />
-                  </div> */}
+                  </div>
 
                   <div className="col-12">
                     <label className="form-label mb-0">.</label>
