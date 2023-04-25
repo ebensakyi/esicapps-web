@@ -224,6 +224,20 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       console.log(error);
     }
   };
+
+
+  const autoHandleSearch = (searchText) => {
+    try {
+      router.push({
+        pathname: '/admin/broadsheet/[id]',
+        query: { ...router.query, searchText },
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
   let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
   let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
   let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
