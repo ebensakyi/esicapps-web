@@ -728,8 +728,8 @@ const Header = () => {
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-pages">Accounts</span>
               </li> */}
-              {ut == 1 ? (
-                <>
+              {/* {ut == 1 ? (
+                <> */}
                   <li className="menu-title">
                     <i className="ri-more-fill" />{" "}
                     <span data-key="t-components">MESSAGES</span>
@@ -791,10 +791,10 @@ const Header = () => {
                       </ul>
                     </div>
                   </li>
-                </>
+                {/* </>
               ) : (
                 <></>
-              )}
+              )} */}
               <li className="menu-title">
                 <i className="ri-more-fill" />{" "}
                 <span data-key="t-components">SETTINGS</span>
