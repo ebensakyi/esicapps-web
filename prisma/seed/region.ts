@@ -6,11 +6,7 @@ export const region = [
     code: "01",
   },
   { name: "Ashanti", abbrv: "ASR", code: "02" }, 
-   {
-    name: "Ahafo",
-    abbrv: "AFR",
-    code: "07",
-  },
+  
     {
       name: "Bono",
       abbrv: "BNR",
@@ -31,7 +27,11 @@ export const region = [
       abbrv: "ETR",
       code: "06",
     },
-
+ {
+    name: "Ahafo",
+    abbrv: "AFR",
+    code: "07",
+  },
     {
       name: "North East",
       abbrv: "NER",
