@@ -1027,7 +1027,7 @@ const Header = () => {
                         <li className="nav-item">
                           <a className="nav-link menu-link" href="/auth/logs">
                             <i className="ri-honour-line" />{" "}
-                            <span data-key="t-widgets">Logs</span>
+                            <span data-key="t-widgets">User Logs</span>
                           </a>
                         </li>
                         {/* <li className="nav-item">
