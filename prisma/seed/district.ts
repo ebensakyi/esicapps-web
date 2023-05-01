@@ -96,7 +96,7 @@ export const district = [
   {  name: "Sunyani West Municipal", abbrv: "SYWMA", regionId: 3 },
   {  name: "Tain District", abbrv: "TANDA", regionId: 3 },
   {  name: "Wenchi Municipal", abbrv: "WCMA", regionId: 3 },
-  {  name: "Wenchi Municipal", abbrv: "WCMA", regionId: 3 },
+  {  name: "Berekum West District", abbrv: "BWDA", regionId: 3 },
 
   
 
