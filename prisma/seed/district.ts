@@ -83,4 +83,13 @@ export const district = [
   {  name: "Sekyere Kumawu", abbrv: "SYKMA", regionId: 2 },
   {  name: "Sekyere South", abbrv: "SYSMA", regionId: 2 },
   {  name: "Suame", abbrv: "SMEMA", regionId: 2 },
+
+
+  {  name: "Banda District", abbrv: "BADA", regionId: 3 },
+  {  name: "Berekum East", abbrv: "SMEMA", regionId: 3 },
+  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
+  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
+  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
+  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
+
 ];
