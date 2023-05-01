@@ -87,9 +87,9 @@ export const district = [
 
   {  name: "Banda District", abbrv: "BADA", regionId: 3 },
   {  name: "Berekum East", abbrv: "SMEMA", regionId: 3 },
-  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
-  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
-  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
-  {  name: "Suame", abbrv: "SMEMA", regionId: 3 },
+  {  name: "Dormaa Central Municipal", abbrv: "DCMA", regionId: 3 },
+  {  name: "Dormaa East District", abbrv: "DEDA", regionId: 3 },
+  {  name: "Dormaa West District", abbrv: "DWDA", regionId: 3 },
+  {  name: "Jaman North District", abbrv: "JNDA", regionId: 3 },
 
 ];
