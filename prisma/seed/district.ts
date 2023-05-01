@@ -91,5 +91,13 @@ export const district = [
   {  name: "Dormaa East District", abbrv: "DEDA", regionId: 3 },
   {  name: "Dormaa West District", abbrv: "DWDA", regionId: 3 },
   {  name: "Jaman North District", abbrv: "JNDA", regionId: 3 },
+  {  name: "Jaman South Municipal", abbrv: "JSDA", regionId: 3 },
+  {  name: "Sunyani Municipal", abbrv: "SYMA", regionId: 3 },
+  {  name: "Sunyani West Municipal", abbrv: "SYWMA", regionId: 3 },
+  {  name: "Tain District", abbrv: "TANDA", regionId: 3 },
+  {  name: "Wenchi Municipal", abbrv: "WCMA", regionId: 3 },
+  {  name: "Wenchi Municipal", abbrv: "WCMA", regionId: 3 },
+
+  
 
 ];
