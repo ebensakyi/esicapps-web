@@ -2,23 +2,21 @@ import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
     const data = {
       assignedToId: Number(req.body.assignedToUser),
       assignedFromId: Number(req.body.assignedFromUser),
     };
 
-    console.log(data);
     const action = await prisma.assignData.create({ data });
     res
       .status(200)
-      .json({ statusCode: 1, message: "Data saved", data: { action } });
+      .json({ statusCode: 1, message: "Data assigned", data: { action } });
   } catch (error) {
     console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "action prefix should be unique" });
+        .json({ statusCode: 0, message: "Should be unique" });
   }
 };
 

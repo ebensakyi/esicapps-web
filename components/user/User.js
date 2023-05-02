@@ -9,18 +9,18 @@ const User = ({ users, userTypes, regions, districts }) => {
   const router = useRouter();
 
   const [userType, setUserType] = useState();
-  const [surname, setSurname] = useState(null);
-  const [otherNames, setOtherNames] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [designation, setDesignation] = useState(null);
-  const [region, setRegion] = useState(null);
+  const [surname, setSurname] = useState("");
+  const [otherNames, setOtherNames] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [region, setRegion] = useState("");
   const [electoralAreas, setElectoralAreas] = useState([]);
-  const [district, setDistrict] = useState(null);
+  const [district, setDistrict] = useState("");
   const [electoralArea, setElectoralArea] = useState();
   const [showRegion, setShowRegion] = useState(false);
   const [showDistrict, setShowDistrict] = useState(false);
-  const [districtsArr, setDistricts] = useState(null);
+  const [districtsArr, setDistricts] = useState("");
 
   let loggedInUserType = Cookies.get("ut").split("??")[1];
 
@@ -32,28 +32,28 @@ const User = ({ users, userTypes, regions, districts }) => {
     try {
       e.preventDefault();
 
-      if (surname == null) {
+      if (surname == "") {
         return toast.error("Surname cannot be empty");
       }
-      if (otherNames == null) {
+      if (otherNames == "") {
         return toast.error("Other Names cannot be empty");
       }
-      if (email == null) {
+      if (email == "") {
         return toast.error("Email cannot be empty");
       }
-      if (phoneNumber == null) {
+      if (phoneNumber == "") {
         return toast.error("PhoneNumber cannot be empty");
       }
-      if (designation == null) {
+      if (designation == "") {
         return toast.error("Designation cannot be empty");
       }
-      if (userType == null) {
+      if (userType == "") {
         return toast.error("User type cannot be empty");
       }
-      if (showRegion && (region == null || region == "")) {
+      if (showRegion && (region == "" || region == "")) {
         return toast.error("Region cannot be empty");
       }
-      if (showDistrict && (district == null || district == "")) {
+      if (showDistrict && (district == "" || district == "")) {
         return toast.error("District cannot be empty");
       }
       let data = {
@@ -75,7 +75,10 @@ const User = ({ users, userTypes, regions, districts }) => {
       setEmail("");
       setPhoneNumber("");
       setDesignation("");
-      setUserType(null);
+      setUserType("");
+      setRegion("");
+      setDistrict("");
+
       return toast.success(response.data.message);
     } catch (error) {
       console.log(error);
@@ -255,8 +258,8 @@ const User = ({ users, userTypes, regions, districts }) => {
                           ) {
                             setShowRegion(false);
                             setShowDistrict(false);
-                            setDistrict(null);
-                            setRegion(null);
+                            setDistrict("");
+                            setRegion("");
                           }
                           if (
                             (selectedUserType == 3 || selectedUserType == 4) &&
@@ -264,7 +267,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                           ) {
                             setShowRegion(true);
 
-                            setDistrict(null);
+                            setDistrict("");
                           }
                           if (
                             (selectedUserType == 5 ||
@@ -275,14 +278,14 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setShowRegion(true);
                             setShowDistrict(true);
 
-                            // setRegion(null);
+                            // setRegion("");
                           }
 
                           // if (selectedUserType == 7 && loggedInUserType == 1) {
                           //   setShowRegion(false);
                           //   setShowDistrict(true);
 
-                          //   setRegion(null);
+                          //   setRegion("");
                           // }
 
                           if (
@@ -292,8 +295,8 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setShowRegion(false);
                             setShowDistrict(false);
 
-                            setDistrict(null);
-                            setRegion(null);
+                            setDistrict("");
+                            setRegion("");
                           }
                           if (
                             (selectedUserType == 5 ||
@@ -304,14 +307,14 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setShowRegion(false);
                             setShowDistrict(true);
 
-                            setRegion(null);
+                            setRegion("");
                           }
                           if (
                             (selectedUserType == 3 || selectedUserType == 4) &&
                             loggedInUserType == 5
                           ) {
                             setShowRegion(false);
-                            setRegion(null);
+                            setRegion("");
                           }
                           if (
                             (selectedUserType == 3 || selectedUserType == 4) &&
@@ -319,7 +322,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                           ) {
                             setShowRegion(false);
 
-                            setRegion(null);
+                            setRegion("");
                           }
 
                           if (
@@ -327,12 +330,12 @@ const User = ({ users, userTypes, regions, districts }) => {
                             loggedInUserType == 5
                           ) {
                             setShowRegion(false);
-                            setRegion(null);
+                            setRegion("");
                           }
                         }}
                         value={userType}
                       >
-                        <option>Choose...</option>
+                          <option value="">Choose...</option>
                         {userTypes.map((userType) => (
                           <option key={userType.id} value={userType.id}>
                             {userType.name}
@@ -357,7 +360,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                             getDistrictsByRegion(e, e.target.value);
                           }}
                         >
-                          <option>Choose...</option>
+                          <option value="">Choose...</option>
                           {regions.map((region) => (
                             <option value={region.id} key={region.id}>
                               {region.name}
@@ -386,7 +389,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                             // getElectoralByDistrict(e, e.target.value);
                           }}
                         >
-                          <option>Choose...</option>
+                          <option value="">Choose...</option>
                           {districtsArr.map((district) => (
                             <option key={district.id} value={district.id}>
                               {district.name}

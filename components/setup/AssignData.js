@@ -13,8 +13,8 @@ const AssignData = ({ districts,assignments }) => {
   const [assignedFromUsers, setAssignedFromUsers] = useState([]);
 
   const [assignedToUsers, setAssignedToUsers] = useState([]);
-  const [assignedToUser, setAssignedToUser] = useState(null);
-  const [assignedFromUser, setAssignedFromUser] = useState(null);
+  const [assignedToUser, setAssignedToUser] = useState("");
+  const [assignedFromUser, setAssignedFromUser] = useState("");
 
   const [assignedFromDistrict, setAssignedFromDistrict] = useState();
   const [assignedToDistrict, setAssignedToDistrict] = useState();
@@ -71,8 +71,8 @@ const AssignData = ({ districts,assignments }) => {
   const assignData = async (e) => {
     try {
       e.preventDefault();
-      if (assignedFromUser == null || assignedToUser == null) {
-        return toast.error("Enter community name");
+      if (assignedFromUser == "" || assignedToUser == "") {
+        return toast.error("Enter select users");
       }
       let data = {
         assignedFromUser,
@@ -82,8 +82,8 @@ const AssignData = ({ districts,assignments }) => {
         data,
       );
       toast.success(response.data.message);
-      setAssignedFromUser(null);
-      setAssignedToUser(null);
+      setAssignedFromUser("");
+      setAssignedToUser("");
       router.replace(router.asPath);
 
       router.replace(router.asPath);
