@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 const AddElectoralArea = ({ data, districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [electoralAreaName, setElectoralAreaName] = useState(null);
-  const [electoralAreaId, setElectoralAreaId] = useState(null);
-  const [districtId, setDistrictId] = useState(null);
+  const [electoralAreaName, setElectoralAreaName] = useState("");
+  const [electoralAreaId, setElectoralAreaId] = useState("");
+  const [districtId, setDistrictId] = useState("");
 
 
   const handlePagination = (page) => {
@@ -48,7 +48,7 @@ const AddElectoralArea = ({ data, districts }) => {
   const addElectoralArea = async (e) => {
     try {
       e.preventDefault();
-      if (electoralAreaName == "" || electoralAreaName == null) {
+      if (electoralAreaName == "" || electoralAreaName == "") {
         return toast.error("Enter electoralArea name");
       }
      
@@ -75,7 +75,7 @@ const AddElectoralArea = ({ data, districts }) => {
   const updateElectoralArea = async (e) => {
     try {
       e.preventDefault();
-      if (electoralAreaName == "" || electoralAreaName == null) {
+      if (electoralAreaName == "" || electoralAreaName == "") {
         return toast.error("Enter electoralArea name");
       }
     
@@ -162,7 +162,7 @@ const AddElectoralArea = ({ data, districts }) => {
                       setDistrictId(e.target.value);
                     }}
                   >
-                    <option>Choose...</option>
+                          <option value="">Choose...</option>
                     {districts.map((d) => (
                       <option key={d.id} value={d.id}>
                         {d.name}

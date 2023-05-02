@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 const AddCommunity = ({ data,electoralAreas }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [communityName, setCommunityName] = useState(null);
-  const [communityId, setCommunityId] = useState(null);
-  const [electoralArea, setElectoralArea] = useState(null);
+  const [communityName, setCommunityName] = useState("");
+  const [communityId, setCommunityId] = useState("");
+  const [electoralArea, setElectoralArea] = useState("");
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -47,7 +47,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
   const addCommunity = async (e) => {
     try {
       e.preventDefault();
-      if (communityName == "" || communityName == null) {
+      if (communityName == "" || communityName == "") {
         return toast.error("Enter community name");
       }
       let data = {
@@ -59,7 +59,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
       );
       toast.success(response.data.message);
       setCommunityName("");
-      setCommunityId(null);
+      setCommunityId("");
 
       router.replace(router.asPath);
     } catch (error) {
@@ -73,7 +73,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
   const updateCommunity = async (e) => {
     try {
       e.preventDefault();
-      if (communityName == "" || communityName == null) {
+      if (communityName == "" || communityName == "") {
         return toast.error("Enter community name");
       }
       let data = {
@@ -86,7 +86,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
       );
       toast.success(response.data.message);
       setCommunityName("");
-      setCommunityId(null);
+      setCommunityId("");
 
       router.replace(router.asPath);
     } catch (error) {
@@ -155,7 +155,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
                         // getElectoralByDistrict(e, e.target.value);
                       }}
                     >
-                      <option>Choose...</option>
+                          <option value="">Choose...</option>
                       {electoralAreas.map((ea) => (
                         <option key={ea.id} value={ea.id}>
                           {ea.name}

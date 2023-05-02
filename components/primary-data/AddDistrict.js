@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 const AddDistrict = ({ data, regions }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [districtName, setDistrictName] = useState(null);
-  const [regionId, setRegionId] = useState(null);
-  const [districtId, setDistrictId] = useState(null);
+  const [districtName, setDistrictName] = useState("");
+  const [regionId, setRegionId] = useState("");
+  const [districtId, setDistrictId] = useState("");
 
-  const [abbrv, setAbbrv] = useState(null);
+  const [abbrv, setAbbrv] = useState("");
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -49,13 +49,13 @@ const AddDistrict = ({ data, regions }) => {
   const addDistrict = async (e) => {
     try {
       e.preventDefault();
-      if (districtName == "" || districtName == null) {
+      if (districtName == "" || districtName == "") {
         return toast.error("Enter district name");
       }
-      if (abbrv == "" || abbrv == null) {
+      if (abbrv == "" || abbrv == "") {
         return toast.error("Enter abbreviation");
       }
-      if (regionId == "" || regionId == null) {
+      if (regionId == "" || regionId == "") {
         return toast.error("Enter region name");
       }
       let data = {
@@ -84,16 +84,16 @@ const AddDistrict = ({ data, regions }) => {
   const updateDistrict = async (e) => {
     try {
       e.preventDefault();
-      if (districtName == "" || districtName == null) {
+      if (districtName == "" || districtName == "") {
         return toast.error("Enter district name");
       }
-      if (abbrv == "" || abbrv == null) {
+      if (abbrv == "" || abbrv == "") {
         return toast.error("Enter abbreviation");
       }
-      if (regionId == "" || regionId == null) {
+      if (regionId == "" || regionId == "") {
         return toast.error("Enter region name");
       }
-      if (districtId == "" || districtId == null) {
+      if (districtId == "" || districtId == "") {
         return toast.error("Please select district");
       }
       let data = {
@@ -193,7 +193,7 @@ const AddDistrict = ({ data, regions }) => {
                       setRegionId(e.target.value);
                     }}
                   >
-                    <option>Choose...</option>
+                          <option value="">Choose...</option>
                     {regions.map((reg) => (
                       <option key={reg.id} value={reg.id}>
                         {reg.name}
