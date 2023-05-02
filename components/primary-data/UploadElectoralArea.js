@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 const UploadElectoralArea = ({ data, districts }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
-  const [district, setDistrict] = useState(null);
+  const [district, setDistrict] = useState("");
 
-  const [electoralAreaFile, setElectoralAreaFile] = useState(null);
-  const [electoralAreaFileUrl, setElectoralAreaFileUrl] = useState(null);
-  const form = useRef(null);
+  const [electoralAreaFile, setElectoralAreaFile] = useState("");
+  const [electoralAreaFileUrl, setElectoralAreaFileUrl] = useState("");
+  const form = useRef("");
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -126,7 +126,7 @@ const UploadElectoralArea = ({ data, districts }) => {
                         // getElectoralByDistrict(e, e.target.value);
                       }}
                     >
-                      <option>Choose...</option>
+                          <option value="">Choose...</option>
                       {districts.map((district) => (
                         <option key={district.id} value={district.id}>
                           {district.name}
