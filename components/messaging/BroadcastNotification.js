@@ -128,7 +128,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         }}
                         value={recipient}
                       >
-                        <option selected>Choose...</option>
+                          <option value="">Choose...</option>
                         <option key={1} value="1">
                           District
                         </option>
@@ -153,7 +153,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                           }}
                           value={recipient}
                         >
-                          <option selected>Choose...</option>
+                          <option value="">Choose...</option>
                           {districts.map((d) => (
                             <option key={d.id} value={d.id+"$"+d.name}>
                               {d.name}
@@ -179,7 +179,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                             setRecipient(e.target.value);
                           }}
                         >
-                          <option selected>Choose...</option>
+                          <option value="">Choose...</option>
                           {regions.map((region) => (
                             <option value={region.id+"$"+region.name} key={region.id}>
                               {region.name}

@@ -129,7 +129,7 @@ const SingleNotification = ({ users, messages }) => {
                           setRecipient(e.target.value);
                         }}
                       >
-                        <option selected>Choose...</option>
+                          <option value="">Choose...</option>
                         {users.map((u) => (
                           <option
                             key={u.id}
