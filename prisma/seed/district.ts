@@ -98,6 +98,44 @@ export const district = [
   {  name: "Wenchi Municipal", abbrv: "WCMA", regionId: 3 },
   {  name: "Berekum West District", abbrv: "BWDA", regionId: 3 },
 
+
+
+  {  name: "Atebubu Amantin Municipal", abbrv: "AAMA", regionId: 4 },
+  {  name: "Kintampo North Municipal", abbrv: "KNMA", regionId: 4 },
+  {  name: "Kintampo South District", abbrv: "KSDA", regionId: 4 },
+  {  name: "Nkoranza South Municipal", abbrv: "NSMA", regionId: 4 },
+  {  name: "Nkoranza North District", abbrv: "NNMA", regionId: 4 },
+  {  name: "Pru East District", abbrv: "PEDA", regionId: 4 },
+  {  name: "Sene East District", abbrv: "SEDA", regionId: 4 },
+  {  name: "Sene West District", abbrv: "SWDA", regionId: 4 },
+  {  name: "Techiman Municipal", abbrv: "TMMA", regionId: 4 },
+  {  name: "Techiman North District", abbrv: "TNDA", regionId: 4 },
+  {  name: "Pru West District", abbrv: "PWDA", regionId: 4 },
+
   
+
+  {  name: "Abura Asebu Kwamankese District", abbrv: "AAKDA", regionId: 5 },
+  {  name: "Agona East District", abbrv: "AGEDA", regionId: 5 },
+  {  name: "Agona West Municipal", abbrv: "AGWDA", regionId: 5 },
+  {  name: "Ajumako Enyan Essiam District", abbrv: "AEEDA", regionId: 5 },
+  {  name: "Asikuma Odoben Brankwa District", abbrv: "AOBDA", regionId: 5 },
+  {  name: "Assin Foso Municipal", abbrv: "ASFMA", regionId: 5 },
+  {  name: "Assin South District", abbrv: "ASSDA", regionId: 5 },
+  {  name: "Awutu Senya East Municipal", abbrv: "ASEMA", regionId: 5 },
+  {  name: "Awutu Senya West District", abbrv: "ASWDA", regionId: 5 },
+  {  name: "Cape Coast Metropolitan", abbrv: "CCMA", regionId: 5 },
+  {  name: "Effutu Municipal", abbrv: "EFFMA", regionId: 5 },
+  {  name: "Ekumfi District", abbrv: "EKFDA", regionId: 5 },
+  {  name: "Gomoa Central District", abbrv: "GOCDA", regionId: 5 },
+  {  name: "Gomoa West District", abbrv: "GOWDA", regionId: 5 },
+  {  name: "Komenda Edina Eguafo Abirem Municipal", abbrv: "KEEAMA", regionId: 5 },
+  {  name: "Mfantseman Municipal", abbrv: "MFMMA", regionId: 5 },
+  {  name: "Twifo Atti Morkwa District", abbrv: "TAMDA", regionId: 5 },
+  {  name: "Twifo Heman Lower Denkyira District", abbrv: "THLDDA", regionId: 5 },
+  {  name: "Upper Denkyira East Municipal", abbrv: "UDEMA", regionId: 5 },
+  {  name: "Upper Denkyira West District", abbrv: "UDWDA", regionId: 5 },
+  {  name: "Assin North District", abbrv: "ASNDA", regionId: 5 },
+  {  name: "Gomoa East District", abbrv: "GMEDA", regionId: 5 },
+
 
 ];
