@@ -51,17 +51,17 @@ export const region = [
       name: "Savannah",
       abbrv: "SVR",
       code: "11",
+    },  {
+      name: "Upper West",
+      abbrv: "UWR",
+      code: "12",
     },
     {
       name: "Upper East",
       abbrv: "UER",
-      code: "12",
-    },
-    {
-      name: "Upper West",
-      abbrv: "UWR",
       code: "13",
     },
+  
 
     {
       name: "Volta",
