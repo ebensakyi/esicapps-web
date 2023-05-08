@@ -289,17 +289,17 @@ export const district = [
   {  name: "Shama District", abbrv: "SHMDA", regionId: 15},
   {  name: "Tarkwa Nsuaem Municipal", abbrv: "TKNMA", regionId: 15},
   {  name: "Wassa East District", abbrv: "WSEDA", regionId: 15},
-  {  name: "Effia Kwesimintsim Municipal", abbrv: "XXXXXXXX", regionId: 15},
+  {  name: "Effia Kwesimintsim Municipal", abbrv: "EFKMA", regionId: 15},
 
-  {  name: "Aowin Municipal", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Bia East District", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Bia West District", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Bibiani-Anhwiaso Bekwai Municipal", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Bodi District", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Juaboso District", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Sefwi Akontombra District", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Sefwi Wiawso Municipal", abbrv: "XXXXXXXX", regionId: 16},
-  {  name: "Suaman District", abbrv: "XXXXXXXX", regionId: 16},
+  {  name: "Aowin Municipal", abbrv: "AWNMA", regionId: 16},
+  {  name: "Bia East District", abbrv: "BIEDA", regionId: 16},
+  {  name: "Bia West District", abbrv: "BIWDA", regionId: 16},
+  {  name: "Bibiani-Anhwiaso Bekwai Municipal", abbrv: "BABMA", regionId: 16},
+  {  name: "Bodi District", abbrv: "BDIDA", regionId: 16},
+  {  name: "Juaboso District", abbrv: "JBSDA", regionId: 16},
+  {  name: "Sefwi Akontombra District", abbrv: "SFADA", regionId: 16},
+  {  name: "Sefwi Wiawso Municipal", abbrv: "SFWMA", regionId: 16},
+  {  name: "Suaman District", abbrv: "SMNDA", regionId: 16},
 
 
 ];
