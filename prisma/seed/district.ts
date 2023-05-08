@@ -221,9 +221,9 @@ export const district = [
   {  name: "Central Gonja District", abbrv: "CTGDA", regionId: 11},
   {  name: "East Gonja Municipal", abbrv: "ETGMA", regionId: 11},
   {  name: "North Gonja District", abbrv: "NTGDA", regionId: 11},
-  {  name: "Sawla-Tuna-Kalba District", abbrv: "S", regionId: 11},
-  {  name: "West Gonja Municipal", abbrv: "XXXXXXXX", regionId: 11},
-  {  name: "West Gonja Municipal", abbrv: "XXXXXXXX", regionId: 11},
+  {  name: "Sawla-Tuna-Kalba District", abbrv: "STKDA", regionId: 11},
+  {  name: "West Gonja Municipal", abbrv: "WGJMA", regionId: 11},
+  {  name: "North East Gonja Municipal", abbrv: "NEGMA", regionId: 11},
 
 
   {  name: "Daffiama Bussie Issa District", abbrv: "XXXXXXXX", regionId: 12},
