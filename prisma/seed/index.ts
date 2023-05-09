@@ -75,6 +75,14 @@ import { containerCondition } from "./containerCondition";
 
 async function main() {
 
+
+
+
+
+
+
+
+
   await prisma.inspectionForm.createMany({
     data: inspectionForm,
   });
