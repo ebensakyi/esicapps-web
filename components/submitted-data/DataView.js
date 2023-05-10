@@ -68,6 +68,21 @@ const DataView = ({ data }) => {
     }
   };
 
+  const handleDelete =async ()=>{
+    try {
+      const response = await axios.post(`/api/v1/submitted-data/data-view`, {
+        id: id,
+      });
+      if (response.status == 200) {
+        router.push(
+          `/submitted-data/data?published=${published}&inspectionFormId=${formId}`
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="row">
@@ -1658,6 +1673,22 @@ const DataView = ({ data }) => {
                       >
                         Unpublish
                       </button>
+                    )}
+                  </div>
+                  <div className="col-sm-auto">
+                    {data?.isPublished == 0 ? (
+                      <button
+                        className="btn btn-danger"
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          handleDelete(data?.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    ) : (
+                     <></>
                     )}
                   </div>
                 </div>
