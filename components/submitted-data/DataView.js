@@ -681,7 +681,7 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection.waterStorageConditionSafe !=
+                          {data?.WaterSection?.waterStorageConditionSafe !=
                           null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
