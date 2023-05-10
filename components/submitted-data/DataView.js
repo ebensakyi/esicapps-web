@@ -70,7 +70,7 @@ const DataView = ({ data }) => {
 
   const handleDelete =async ()=>{
     try {
-      const response = await axios.post(`/api/v1/submitted-data/data-view`, {
+      const response = await axios.update(`/api/v1/submitted-data/data-view`, {
         id: id,
       });
       if (response.status == 200) {
