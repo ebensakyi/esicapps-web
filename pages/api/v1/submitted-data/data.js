@@ -20,6 +20,7 @@ const get = async (req, res) => {
     let count = await prisma.inspection.count({
       // where: getSearchParams(req, searchText).where,
       where: {
+
         inspectionFormId: inspectionFormId,
       },
     });
@@ -81,6 +82,7 @@ const generateWhereMainObject = async (req, res) => {
 
           isPublished: published,
           inspectionFormId: inspectionFormId,
+          deleted:0
         },
         createdAt: {
           gte: from,
