@@ -28,6 +28,27 @@ const post = async (req, res) => {
   }
 };
 
+
+const put = async (req, res) => {
+  try {
+    let userCookie = await getUserCookie(req, res);
+
+   
+    await prisma.inspection.update({
+      data: {
+        deleted: 1,
+      },
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    res.status(200).json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const get = async (req, res) => {
   try {
     let inspectionId = req.query.id;
@@ -376,7 +397,7 @@ export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
     : req.method === "PUT"
-    ? console.log("PUT")
+    ? put(req, res)
     : req.method === "DELETE"
     ? console.log("DELETE")
     : req.method === "GET"
