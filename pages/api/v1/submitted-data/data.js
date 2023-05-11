@@ -44,6 +44,8 @@ const generateWhereMainObject = async (req, res) => {
   let curPage = req?.query?.page;
   let searchText = req?.query?.searchText;
 
+  console.log(req.query);
+
   console.log("searchText ==>", searchText);
   console.log(typeof searchText);
 
@@ -75,18 +77,27 @@ const generateWhereMainObject = async (req, res) => {
 
     return {
       where: {
-        Community:searchText==null? {
-          //  name: {search:"Amasamabn".replace(/[\s\n\t]/g, "_")}
-          name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-        }:{},
+        Community:
+          searchText != ""
+            ? {
+                name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+              }
+            : {},
         deleted: 0,
-        Inspection: {
-          [filterBy]: filterValue,
+        Inspection:
+          filterBy == ""
+            ? {
+                isPublished: published,
+                inspectionFormId: inspectionFormId,
+                deleted: 0,
+              }
+            : {
+                [filterBy]: filterValue,
 
-          isPublished: published,
-          inspectionFormId: inspectionFormId,
-          deleted: 0,
-        },
+                isPublished: published,
+                inspectionFormId: inspectionFormId,
+                deleted: 0,
+              },
         createdAt: {
           gte: from,
           lte: to,
@@ -127,6 +138,12 @@ const generateWhereMainObject = async (req, res) => {
 
     return {
       where: {
+        Community:
+          searchText != ""
+            ? {
+                name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+              }
+            : {},
         deleted: 0,
         Inspection: {
           [filterBy]: filterValue,
@@ -139,6 +156,7 @@ const generateWhereMainObject = async (req, res) => {
           lte: to,
         },
       },
+
       // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
@@ -174,11 +192,16 @@ const generateWhereMainObject = async (req, res) => {
     let district = userObj.user.districtId;
     return {
       where: {
-        [filterBy]: filterValue,
-
-        districtId: district,
+        Community:
+          searchText != ""
+            ? {
+                name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+              }
+            : {},
         deleted: 0,
         Inspection: {
+          [filterBy]: filterValue,
+          districtId: district,
           isPublished: published,
           inspectionFormId: inspectionFormId,
         },
@@ -187,6 +210,7 @@ const generateWhereMainObject = async (req, res) => {
           lte: to,
         },
       },
+
       // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
@@ -217,8 +241,6 @@ const generateWhereMainObject = async (req, res) => {
     };
   }
 };
-
-
 
 export default (req, res) => {
   req.method === "POST"
