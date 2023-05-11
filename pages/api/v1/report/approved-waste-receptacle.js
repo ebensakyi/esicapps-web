@@ -1,17 +1,21 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-
+import { logActivity } from "../../../../helpers/Log";
+import { getUserCookie } from "../../../../helpers/cookies-manager";
 const post = async (req, res) => {
   try {
 
-let filterBy = req.body.filterBy;
-let filterValue = Number(req.body.filterValue);
+    let userCookie = await getUserCookie(req, res);
+    await logActivity("Report generated",  userCookie.user.id);
 
 
-let _summary;
+    let filterBy = req.body.filterBy;
+    let filterValue = Number(req.body.filterValue);
 
-if (filterBy == "regionId") {
-     _summary =
-    await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."id") AS "inspectionCount", 
+    let _summary;
+
+    if (filterBy == "regionId") {
+      _summary =
+        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."id") AS "inspectionCount", 
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 1) AS "approved",
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 2) AS "unapproved"
 
@@ -23,11 +27,9 @@ LEFT JOIN "SolidWasteSection" ON "Inspection"."id" = "SolidWasteSection"."inspec
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"
 `;
-
-
-} else if (filterBy == "districtId") {
-     _summary =
-    await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
+    } else if (filterBy == "districtId") {
+      _summary =
+        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 1) AS "approved",
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 2) AS "unapproved"
 
@@ -39,11 +41,9 @@ LEFT JOIN "SolidWasteSection" ON "Inspection"."id" = "SolidWasteSection"."inspec
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"
 `;
-
-
-} else if (filterBy == "electoralAreaId") {
-    _summary =
-    await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
+    } else if (filterBy == "electoralAreaId") {
+      _summary =
+        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 1) AS "approved",
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 2) AS "unapproved"
 
@@ -55,11 +55,9 @@ WHERE  "Inspection"."electoralAreaId" = ${filterValue}
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"
 `;
-
-
-} else if (filterBy == "communityId") {
-     _summary =
-    await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
+    } else if (filterBy == "communityId") {
+      _summary =
+        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 1) AS "approved",
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 2) AS "unapproved"
 
@@ -71,11 +69,9 @@ LEFT JOIN "SolidWasteSection" ON "Inspection"."id" = "SolidWasteSection"."inspec
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"
 `;
-
-
-} else {
-     _summary =
-    await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
+    } else {
+      _summary =
+        await prisma.$queryRaw`SELECT  DISTINCT "InspectionForm"."name", COUNT( "SolidWasteSection"."inspectionId") AS "inspectionCount", 
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 1) AS "approved",
 COUNT("SolidWasteSection"."approvedWasteStorageReceptacleId")  filter (where "SolidWasteSection"."approvedWasteStorageReceptacleId" = 2) AS "unapproved"
 
@@ -86,22 +82,18 @@ LEFT JOIN "SolidWasteSection" ON "Inspection"."id" = "SolidWasteSection"."inspec
 GROUP BY "InspectionForm"."name" 
 ORDER BY "InspectionForm"."name"
 `;
+    }
 
+    let summary = JSON.stringify(_summary, (_, v) =>
+      typeof v === "bigint" ? v.toString() : v
+    );
+    let report = JSON.parse(summary);
 
-}
+    console.log(report);
 
-let summary = JSON.stringify(_summary, (_, v) =>
-  typeof v === "bigint" ? v.toString() : v
-);
-let report = JSON.parse(summary);
-
-console.log(report);
-
-res.status(200).json({
-  data: report,
-});
-
-
+    res.status(200).json({
+      data: report,
+    });
   } catch (error) {
     console.log(error);
     if (error.code === "P2002")
