@@ -7,6 +7,8 @@ import { logActivity } from "../../../../../helpers/Log";
 const post = async (req, res) => {
  try {
 
+  console.log(req.body);
+
   let userCookie = await getUserCookie(req, res);
 
   await logActivity("Broadcast notification sent",  userCookie.user.id);

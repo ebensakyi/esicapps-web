@@ -2,10 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const BroadcastNotification = ({ regions, districts, messages }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [group, setGroup] = useState("");
   const [title, setTitle] = useState("");
@@ -28,12 +28,15 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
       if (message == "") return toast.error("Message cannot be empty");
       if (recipient == "") return toast.error("Recipient cannot be empty");
 
-      const response = await axios.post("/api/v1/messaging/notification/broadcast", data);
-     router.push('/messaging/notification/broadcast')
+      const response = await axios.post(
+        "/api/v1/messaging/notification/broadcast",
+        data
+      );
+      router.push("/messaging/notification/broadcast");
 
-      setRecipient("")
-      setMessage("")
-      setTitle("")
+      setRecipient("");
+      setMessage("");
+      setTitle("");
       router.replace(router.asPath);
 
       return toast.success("Message sent");
@@ -42,8 +45,6 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
       return toast.error("An error occurred");
     }
   };
-
- 
 
   return (
     <div className="row">
@@ -93,8 +94,8 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         type="text"
                         className="form-control"
                         id="valueInput"
-                      onChange={(e) => setTitle(e.target.value)}
-                      value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                       />
                     </div>
                   </div>
@@ -109,7 +110,6 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         id="valueInput"
                         onChange={(e) => setMessage(e.target.value)}
                         value={message}
-                        
                       />
                     </div>
                   </div>
@@ -117,18 +117,19 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
-                        Group
+                        Recipient Group
                       </label>
 
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
+                          console.log(e.target.value);
                           setGroup(e.target.value);
                         }}
                         value={recipient}
                       >
-                          <option value="">Choose...</option>
+                        <option value="">Choose...</option>
                         <option key={1} value="districtId">
                           District
                         </option>
@@ -138,7 +139,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                       </select>
                     </div>
                   </div>
-                  {group == 1 ? (
+                  {group == "districtId" ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -155,7 +156,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         >
                           <option value="">Choose...</option>
                           {districts.map((d) => (
-                            <option key={d.id} value={d.id+"$"+d.name}>
+                            <option key={d.id} value={d.id}>
                               {d.name}
                             </option>
                           ))}
@@ -165,7 +166,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                   ) : (
                     ""
                   )}
-                  {group == 2 ? (
+                  {group == "regionId" ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -181,7 +182,10 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         >
                           <option value="">Choose...</option>
                           {regions.map((region) => (
-                            <option value={region.id+"$"+region.name} key={region.id}>
+                            <option
+                              value={region.id}
+                              key={region.id}
+                            >
                               {region.name}
                             </option>
                           ))}
@@ -255,7 +259,6 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
               </div>
             </div>
 
-           
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
@@ -288,10 +291,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                             <td>{msg.title}</td>
                             <td>{msg.message}</td>
 
-                            <td>
-                              
-                              { msg.recipient}
-                            </td>
+                            <td>{msg.recipient}</td>
                             {/* <td>
                         {user.activated == 0 ? (
                           <span className="badge text-bg-warning">
