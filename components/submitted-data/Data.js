@@ -226,17 +226,34 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   };
   const autoHandleSearch = (searchText) => {
     try {
-       let currentUrl = router.pathname;
-    router.push({
-      pathname: currentUrl,
-      query: `&searchText=${searchText}`,
-    });
+      let currentUrl = router.pathname;
+      const path = router.pathname;
+      const query = router.query;
+  
+      let published = query.published;
+  
+      let inspectionFormId = query.inspectionFormId;
+      router.push({
+        pathname: path,
+        query: {
+          published,
+          inspectionFormId,
+          page,
+          filterBy,
+          filterValue,
+          from,
+          to,
+          searchText
+        },
+      });
+      // router.push({
+      //   pathname: currentUrl,
+      //   query: `&searchText=${searchText}`,
+      // });
     } catch (error) {
       console.log(error);
     }
-   
   };
-
 
   let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
   let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
@@ -667,7 +684,9 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                       </td>
                       <td>{dt?.ghanaPostGps}</td>
                       <td>{dt?.accuracy}</td>
-                      <td>{dt?.Community?.ElectoralArea?.District?.Region?.name}</td>
+                      <td>
+                        {dt?.Community?.ElectoralArea?.District?.Region?.name}
+                      </td>
                       <td>{dt?.Community?.ElectoralArea?.District?.name}</td>
                       <td>{dt?.Community?.ElectoralArea?.name}</td>
                       <td>{dt?.Community?.name}</td>{" "}

@@ -44,7 +44,7 @@ const generateWhereMainObject = async (req, res) => {
   let curPage = req?.query?.page;
   let searchText = req?.query?.searchText;
 
-  console.log("searchText ==>",searchText);
+  console.log("searchText ==>", searchText);
   console.log(typeof searchText);
 
   let filterBy = req?.query?.filterBy;
@@ -75,10 +75,10 @@ const generateWhereMainObject = async (req, res) => {
 
     return {
       where: {
-        Community: {
-        //  name: {search:"Amasamabn".replace(/[\s\n\t]/g, "_")}
-        name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-        },
+        Community:searchText==null? {
+          //  name: {search:"Amasamabn".replace(/[\s\n\t]/g, "_")}
+          name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+        }:{},
         deleted: 0,
         Inspection: {
           [filterBy]: filterValue,
@@ -218,24 +218,7 @@ const generateWhereMainObject = async (req, res) => {
   }
 };
 
-// const getSearchParams = async (req, searchText) => {
-//   let data = await verifyToken(req.query.token);
 
-//   let district =
-//     data.user.districtId == null || isNaN(data.user.districtId)
-//       ? undefined
-//       : Number(data.user.districtId);
-//   if (searchText != "" && searchText != null) {
-//     return {
-//       where: {
-//         deleted: 0,
-//         districtId: district,
-//         name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-//       },
-//     };
-//   }
-//   return { where: { deleted: 0, districtId: district } };
-// };
 
 export default (req, res) => {
   req.method === "POST"

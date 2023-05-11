@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
   const to = context.query.to || "undefined";
 
   const page = context.query.page || 1;
-  const searchText = context.query.searchText || "undefined";
+  const searchText = context.query.searchText || "";
   const inspectionFormId = context.query.inspectionFormId || 1;
 
   if (!token) {
