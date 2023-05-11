@@ -1,10 +1,16 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import { logActivity } from "../../../../helpers/Log";
+import { getUserCookie } from "../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
   try {
-    console.log(">>>>>>>");
    
+
       await getSubmissionSummary(req, res);
+
+      let userCookie = await getUserCookie(req, res);
+
+      await logActivity(`SubmissionSummary report generated`, userCookie.user.id);
     
   } catch (error) {
     console.log(error);

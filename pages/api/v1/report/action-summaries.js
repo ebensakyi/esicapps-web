@@ -1,7 +1,13 @@
 import prisma from "../../../../prisma/MyPrismaClient";
+import { logActivity } from "../../../../helpers/Log";
+import { getUserCookie } from "../../../../helpers/cookies-manager";
 
 const post = async (req, res) => {
   try {
+
+    let userCookie = await getUserCookie(req, res);
+    await logActivity("Action summaries report generated",  userCookie.user.id);
+
     let filterBy = req.body.filterBy;
     let filterValue = Number(req.body.filterValue);
     
@@ -33,7 +39,7 @@ const post = async (req, res) => {
     if (error.code === "P2002")
       return res
         .status(200)
-        .json({ statusCode: 0, message: "action prefix should be unique" });
+        .json({ statusCode: 0, message: "action  should be unique" });
   }
 };
 
