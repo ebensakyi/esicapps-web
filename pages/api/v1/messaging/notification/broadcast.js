@@ -3,22 +3,34 @@ import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
 import { logActivity } from "../../../../../helpers/Log";
-import { sendFCM } from "../../../../../helpers/send-fcm";
+import { sendBulkFCM } from "../../../../../helpers/send-fcm";
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
 
     let userCookie = await getUserCookie(req, res);
 
     await logActivity("Broadcast notification sent", userCookie.user.id);
 
-    let recipientId = req.body.recipientId;
+    let recipientId = Number(req.body.recipientId);
     let recipient = req.body.recipient;
-let title = req.body.title
+    let title = req.body.title;
+    let message = req.body.message;
+    let recipientGroup 
+
+    if (recipient=="districtId") {
+      let rec = await prisma.district.findFirst({where: {id: recipientId}})
+      recipientGroup = rec.name
+    }
+
+    if (recipient=="regionId") {
+      let rec = await prisma.region.findFirst({where: {id: recipientId}})
+      recipientGroup = rec.name
+    }
+
     const data = {
-      recipient: recipient,
-      message: req.body.message,
+      recipient: recipientGroup,
+      message: message,
       title: title,
       // recipientTag: Number(req.body.group),
       recipientId: Number(recipientId),
@@ -36,9 +48,8 @@ let title = req.body.title
 
     let fcm = userGroup.map((ug) => ug.fcmId);
 
-    console.log("FCM", fcm);
 
-    let x = await sendFCM(title, message, fcm);
+    let x = await sendBulkFCM(title, message, fcm);
 
     // if (recipient != null || recipient != "") {
     //   const res = await prisma.user.findMany({
