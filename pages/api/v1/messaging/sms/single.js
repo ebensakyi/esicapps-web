@@ -17,7 +17,7 @@ try {
   const data = {
     recipient: recipient,
     message: req.body.message,
-    title: req.body.title,
+    title: "",
     recipientTag: Number(req.body.group),
     recipientId: Number(recipientId),
 

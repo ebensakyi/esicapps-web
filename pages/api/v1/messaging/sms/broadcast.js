@@ -17,7 +17,7 @@ const post = async (req, res) => {
   const data = {
     recipient: recipient,
     message: req.body.message,
-    title: req.body.title,
+    title: "",
     recipientTag: group,
     recipientId: Number(recipientId),
     sender: Number(userCookie.user.id),

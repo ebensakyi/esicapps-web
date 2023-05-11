@@ -8,7 +8,6 @@ const BroadcastSms = ({ regions, districts, messages }) => {
   const router = useRouter()
 
   const [group, setGroup] = useState("");
-  const [title, setTitle] = useState("");
   const [recipient, setRecipient] = useState("");
 
   const [message, setMessage] = useState("");
@@ -18,13 +17,11 @@ const BroadcastSms = ({ regions, districts, messages }) => {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
       let data = {
-        title,
         message,
         sendingType: 2,
         group,
         recipient,
       };
-      if (title == "") return toast.error("Title cannot be empty");
       if (message == "") return toast.error("Message cannot be empty");
       if (recipient == "") return toast.error("Recipient cannot be empty");
 
@@ -33,7 +30,6 @@ const BroadcastSms = ({ regions, districts, messages }) => {
 
       setRecipient("")
       setMessage("")
-      setTitle("")
       router.replace(router.asPath);
 
       return toast.success("Message sent");
@@ -84,7 +80,7 @@ const BroadcastSms = ({ regions, districts, messages }) => {
               {/* end card header */}
               <div className="card-body">
                 <div className="row gy-4">
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">
                         Title
@@ -97,7 +93,7 @@ const BroadcastSms = ({ regions, districts, messages }) => {
                       value={title}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">

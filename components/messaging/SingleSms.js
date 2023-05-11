@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 const SingleSMS = ({ users, messages }) => {
   const router = useRouter();
 
-  const [title, setTitle] = useState("");
   const [recipient, setRecipient] = useState("");
 
   const [message, setMessage] = useState("");
@@ -16,13 +15,11 @@ const SingleSMS = ({ users, messages }) => {
     try {
       // console.log("sendBroadcastMessage");
       e.preventDefault();
-      if (title == "") return toast.error("Title cannot be empty");
       if (message == "") return toast.error("Message cannot be empty");
       if (recipient == "") return toast.error("Recipient cannot be empty");
 
       let data = {
         recipient: recipient,
-        title,
         message,
         sendingType: 2,
 
@@ -35,7 +32,6 @@ const SingleSMS = ({ users, messages }) => {
       );
       setRecipient("");
       setMessage("");
-      setTitle("");
       router.replace(router.asPath);
       //router.push("/messaging/sms/single");
 
@@ -86,7 +82,7 @@ const SingleSMS = ({ users, messages }) => {
               {/* end card header */}
               <div className="card-body">
                 <div className="row gy-4">
-                  <div className="col-xxl-3 col-md-6">
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">
                         Title
@@ -99,7 +95,7 @@ const SingleSMS = ({ users, messages }) => {
                         onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">
