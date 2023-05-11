@@ -8,14 +8,16 @@ import { logActivity } from "../../../../../helpers/Log";
 const post = async (req, res) => {
 try {
 
-  let userCookie = await getUserCookie(req, res);
-  await logActivity("Single notification sent",  userCookie.user.id);
+ 
 
   let recipientId = req.body.recipient.split("$")[0];
   let recipient = req.body.recipient.split("$")[1];
   let title = req.body.title;
   let message = req.body.message;
 
+
+ let userCookie = await getUserCookie(req, res);
+  await logActivity(`Single notification sent to ${recipientId}`,  userCookie.user.id);
   const data = {
     recipient: recipient,
     message,

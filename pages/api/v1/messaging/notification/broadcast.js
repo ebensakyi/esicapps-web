@@ -26,6 +26,14 @@ const post = async (req, res) => {
   };
 
  const response = await prisma.messaging.create({ data });
+
+ const user = await prisma.user.findMany({
+  where: { id: response.recipientId },
+});
+
+
+ let x = await sendFCM(title, message, user.fcmId);
+
   // if (recipient != null || recipient != "") {
   //   const res = await prisma.user.findMany({
   //     where: { deleted: 0, id: recipient },

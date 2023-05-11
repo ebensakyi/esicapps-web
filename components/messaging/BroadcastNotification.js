@@ -129,10 +129,10 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         value={recipient}
                       >
                           <option value="">Choose...</option>
-                        <option key={1} value="1">
+                        <option key={1} value="districtId">
                           District
                         </option>
-                        <option key={2} value="2">
+                        <option key={2} value="regionId">
                           Region
                         </option>
                       </select>
