@@ -3,78 +3,58 @@ import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
 import { logActivity } from "../../../../../helpers/Log";
-
 const post = async (req, res) => {
-   try {
-
-  let userCookie = await getUserCookie(req, res);
-  await logActivity("Broadcast SMS sent",  userCookie.user.id);
-
-  // let recipientId = req.body.recipient.split("$")[0];
-  // let recipient = req.body.recipient.split("$")[1];
-  // let group = Number(req.body.group);
-
-  const data = {
-    recipient: recipient,
-    message: req.body.message,
-    title: "",
-    // recipientTag: group,
-    recipientId: Number(recipientId),
-    sender: Number(userCookie.user.id),
-    messageType: 2,
-    sendingType: Number(req.body.sendingType),
-  };
-
-  const response = await prisma.messaging.create({ data });
-  if (group == 1) {
-    //Send broadcast sms to district
-    const res = await prisma.user.findMany({
-      where: { deleted: 0, districtId: Number(recipientId) },
-    });
-
-    for (let i = 0; i < res.length; i++) {
-      let phoneNumber = await append_233(res[i].phoneNumber);
-      await send(phoneNumber, req.body.message);
-    }
-  } else if (group == 2) {
-    //Send broadcast sms to region
-
-    const res = await prisma.user.findMany({
-      where: { deleted: 0, regionId: Number(recipientId) },
-    });
-
-    for (let i = 0; i < res.length; i++) {
-      let phoneNumber = await append_233(res[i].phoneNumber);
-      await send(phoneNumber, req.body.message);
-    }
-  }
-  
-  res.status(200).json({ statusCode: 1, message: "Data saved" });
-  } catch (error) {
-    console.log("Error: " + error);
-    if (error.code === "P2002")
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  }
-};
-
-const get = async (req, res) => {
   try {
-    const messaging = await prisma.messaging.findMany({
-      where: { deleted: 0, messageType: 2 },
-      include: {
-        SendingType: true,
-        MessageType: true,
-        Region: true,
-        District: true,
-        Recipient: true,
-      },
+
+    let userCookie = await getUserCookie(req, res);
+
+    await logActivity("Broadcast SMS sent",  userCookie.user.id);
+
+    let recipientId = Number(req.body.recipientId);
+    let recipient = req.body.recipient;
+    let title = req.body.title;
+    let message = req.body.message;
+    let recipientGroup 
+
+    if (recipient=="districtId") {
+      let rec = await prisma.district.findFirst({where: {id: recipientId}})
+      recipientGroup = rec.name
+    }
+
+    if (recipient=="regionId") {
+      let rec = await prisma.region.findFirst({where: {id: recipientId}})
+      recipientGroup = rec.name
+    }
+
+    const data = {
+      recipient: recipientGroup,
+      message: message,
+      title: title,
+      // recipientTag: Number(req.body.group),
+      recipientId: Number(recipientId),
+      sender: Number(userCookie.user.id),
+      messageType: 2,
+      sendingType: Number(req.body.sendingType),
+    };
+
+ await prisma.messaging.create({ data });
+
+    const userGroup = await prisma.user.findMany({
+      where: { [recipient]: Number(recipientId) },
     });
 
-    return res.status(200).json(messaging);
+    for (let i = 0; i < userGroup.length; i++) {
+      let phoneNumber = await append_233(userGroup[i].phoneNumber);
+      await send(phoneNumber, req.body.message);
+    }
+
+   
+
+
+    res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-    console.log("Error: " + error);
+    console.log(error);
+    return res.status(400).json({ statusCode: 0, message: "Error" });
   }
 };
 
