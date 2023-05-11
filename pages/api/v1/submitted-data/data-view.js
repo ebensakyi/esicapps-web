@@ -1,5 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import { getUserCookie } from "../../../../helpers/cookies-manager";
+import { logActivity } from "../../../../helpers/Log";
+import { verifyToken } from "../../../../helpers/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -21,6 +23,7 @@ const post = async (req, res) => {
         id: req.body.id,
       },
     });
+    await logActivity(`Published inspection ${req.body.id}`, userCookie.user.id);
 
     res.status(200).json();
   } catch (error) {
@@ -51,6 +54,11 @@ const put = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    let userObj = await verifyToken(req.query.token);
+
+    let user = userObj.user?.id;
+    await logActivity(`Visited dataview page for ${req.query.id}`, user);
+
     let inspectionId = req.query.id;
 
     const data = await prisma.inspection.findFirst({

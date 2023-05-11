@@ -2,6 +2,7 @@ import prisma from "../../../../prisma/MyPrismaClient";
 import AWS from "aws-sdk";
 import fs from "fs";
 import { getUserCookie } from "../../../../helpers/cookies-manager";
+import { logActivity } from "../../../../helpers/Log";
 
 const XLSX = require("xlsx");
 
@@ -9,8 +10,7 @@ const post = async (req, res) => {
   try {
     let userObj = await getUserCookie(req, res);
 
-    // console.log(userObj);
-    // console.log(req.body);
+    await logActivity("Exported data to excel",  userObj?.user?.id);
 
     let published = req.body.published == null ? 0 : Number(req.body.published);
 
@@ -38,7 +38,6 @@ const post = async (req, res) => {
 
     let userType = userObj?.user?.UserType?.id;
 
-    console.log("USERTYPE ", userType);
     if (userType == 1 || userType == 2) {
       filterBy = filterBy == "undefined" ? "regionId" : filterBy;
     }
@@ -67,7 +66,6 @@ const post = async (req, res) => {
             [filterBy]: filterValue,
           };
 
-    console.log(filterObject);
     let data = await prisma.basicInfoSection.findMany({
       where: {
         deleted: 0,

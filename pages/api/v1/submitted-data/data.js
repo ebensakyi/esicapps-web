@@ -1,6 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import { getUserCookie } from "../../../../helpers/cookies-manager";
 import { verifyToken } from "../../../../helpers/token-verifier";
+import { logActivity } from "../../../../helpers/Log";
 
 const post = async (req, res) => {
   try {
@@ -9,6 +10,11 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    let userObj = await verifyToken(req.query.token);
+
+    let user = userObj.user?.id;
+    await logActivity("Visited submitted data list", user);
+
     let mainWhere = await generateWhereMainObject(req, res);
 
     let inspectionFormId = Number(req.query.inspectionFormId);
@@ -44,10 +50,10 @@ const generateWhereMainObject = async (req, res) => {
   let curPage = req?.query?.page;
   let searchText = req?.query?.searchText;
 
-  console.log(req.query);
+  // console.log(req.query);
 
-  console.log("searchText ==>", searchText);
-  console.log(typeof searchText);
+  // console.log("searchText ==>", searchText);
+  // console.log(typeof searchText);
 
   let filterBy = req?.query?.filterBy;
 
