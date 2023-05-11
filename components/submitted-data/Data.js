@@ -233,6 +233,8 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       let published = query.published;
   
       let inspectionFormId = query.inspectionFormId;
+      let page = query.page;
+
       router.push({
         pathname: path,
         query: {
