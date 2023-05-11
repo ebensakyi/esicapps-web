@@ -21,8 +21,8 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
         title,
         message,
         sendingType: 2,
-        group,
-        recipient,
+
+        recipient: group,
       };
       if (title == "") return toast.error("Title cannot be empty");
       if (message == "") return toast.error("Message cannot be empty");
@@ -182,10 +182,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         >
                           <option value="">Choose...</option>
                           {regions.map((region) => (
-                            <option
-                              value={region.id}
-                              key={region.id}
-                            >
+                            <option value={region.id} key={region.id}>
                               {region.name}
                             </option>
                           ))}

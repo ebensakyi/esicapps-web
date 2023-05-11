@@ -20,7 +20,7 @@ const post = async (req, res) => {
     recipient: recipient,
     message: req.body.message,
     title: req.body.title,
-    recipientTag: Number(req.body.group),
+    // recipientTag: Number(req.body.group),
     recipientId: Number(recipientId),
     sender: Number(userCookie.user.id),
     messageType: 1,
@@ -67,7 +67,7 @@ const post = async (req, res) => {
 
   res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-   
+   console.log(error);
       return res
         .status(400)
         .json({ statusCode: 0, message: "Error" });

@@ -193,7 +193,6 @@ model Messaging {
   title        String? @db.VarChar(255)
   message      String  @db.VarChar(2550)
   recipient    String?
-  recipientTag Int?
   recipientId  Int?
 
   messageType Int?
