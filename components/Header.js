@@ -192,7 +192,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="Residential">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=1">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=1&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -206,7 +206,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=1">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=1&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -253,7 +253,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="eatery">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=2">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=2&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -267,7 +267,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=2">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=2&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -313,7 +313,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="health">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=3">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=3&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -327,7 +327,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=3">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=3&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -373,7 +373,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="hospitality">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=4">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=4&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -387,7 +387,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=4">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=4&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -434,7 +434,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="institution">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=5">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=5&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -448,7 +448,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=5">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=5&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -494,7 +494,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="industry">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=6">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=6&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -508,7 +508,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=6">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=6&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -554,7 +554,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="market">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=7">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=7&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -568,7 +568,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=7">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=7&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -618,7 +618,7 @@ const Header = () => {
                       <div className="collapse menu-dropdown" id="sanitary">
                         <ul className="nav nav-sm flex-column">
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=1&inspectionFormId=8">
+                            <Link href="/submitted-data/data?published=1&inspectionFormId=8&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
@@ -632,7 +632,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="nav-item">
-                            <Link href="/submitted-data/data?published=0&inspectionFormId=8">
+                            <Link href="/submitted-data/data?published=0&inspectionFormId=8&page=1">
                               <a
                                 className={
                                   router.pathname == "/"
