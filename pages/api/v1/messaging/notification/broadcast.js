@@ -2,12 +2,14 @@ import prisma from "../../../../../prisma/MyPrismaClient";
 import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
+import { logActivity } from "../../../../../helpers/Log";
 
 const post = async (req, res) => {
  try {
 
   let userCookie = await getUserCookie(req, res);
 
+  await logActivity("Broadcast notification sent",  userCookie.user.id);
 
   let recipientId = req.body.recipient.split("$")[0];
   let recipient = req.body.recipient.split("$")[1];

@@ -4,10 +4,12 @@ import { sendSMS } from "../../../../../helpers/send-hubtel-sms";
 
 import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
+import { logActivity } from "../../../../../helpers/Log";
 
 const post = async (req, res) => {
-  // try {
+try {
   let userCookie = await getUserCookie(req, res);
+  await logActivity("Single SMS sent",  userCookie.user.id);
 
   let recipientId = req.body.recipient.split("$")[0];
   let recipient = req.body.recipient.split("$")[1];
@@ -60,13 +62,13 @@ const post = async (req, res) => {
   // }
 
   res.status(200).json({ });
-  // } catch (error) {
-  //   console.log("Error: " + error);
-  //   if (error.code === "P2002")
-  //     return res
-  //       .status(400)
-  //       .json({ statusCode: 0, message: "dataVersion s should be unique" });
-  // }
+  } catch (error) {
+    console.log("Error: " + error);
+    if (error.code === "P2002")
+      return res
+        .status(400)
+        .json({ statusCode: 0, message: "dataVersion s should be unique" });
+  }
 };
 
 const get = async (req, res) => {
