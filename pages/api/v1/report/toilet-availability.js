@@ -6,8 +6,8 @@ import { getUserCookie } from "../../../../helpers/cookies-manager";
 const post = async (req, res) => {
   try {
     let userCookie = await getUserCookie(req, res);
-    await logActivity("Report generated",  userCookie.user.id);
-    
+    await logActivity("Toilet Availabilty Report generated",  userCookie.user.id);
+
     await getToiletAvailability(req, res);
   } catch (error) {
     console.log(error);
