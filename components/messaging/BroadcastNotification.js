@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 const BroadcastNotification = ({ regions, districts, messages }) => {
   const router = useRouter();
 
-  const [group, setGroup] = useState("");
+  const [recipientGroup, setRecipientGroup] = useState("");
   const [title, setTitle] = useState("");
-  const [recipient, setRecipient] = useState("");
+  const [recipientId, setRecipientId] = useState("");
 
   const [message, setMessage] = useState("");
 
@@ -22,11 +22,12 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
         message,
         sendingType: 2,
 
-        recipient: group,
+        recipient: recipientGroup,
+        recipientId 
       };
       if (title == "") return toast.error("Title cannot be empty");
       if (message == "") return toast.error("Message cannot be empty");
-      if (recipient == "") return toast.error("Recipient cannot be empty");
+      if (recipientId == ""||recipientGroup =="") return toast.error("Recipient cannot be empty");
 
       const response = await axios.post(
         "/api/v1/messaging/notification/broadcast",
@@ -34,7 +35,8 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
       );
       router.push("/messaging/notification/broadcast");
 
-      setRecipient("");
+      setRecipientId("");
+      setRecipientGroup("")
       setMessage("");
       setTitle("");
       router.replace(router.asPath);
@@ -124,10 +126,9 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
-                          console.log(e.target.value);
-                          setGroup(e.target.value);
+                          setRecipientGroup(e.target.value);
                         }}
-                        value={recipient}
+                        value={recipientGroup}
                       >
                         <option value="">Choose...</option>
                         <option key={1} value="districtId">
@@ -139,7 +140,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                       </select>
                     </div>
                   </div>
-                  {group == "districtId" ? (
+                  {recipientGroup == "districtId" ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -150,9 +151,9 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={(e) => {
-                            setRecipient(e.target.value);
+                            setRecipientId(e.target.value);
                           }}
-                          value={recipient}
+                          value={recipientId}
                         >
                           <option value="">Choose...</option>
                           {districts.map((d) => (
@@ -166,7 +167,7 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                   ) : (
                     ""
                   )}
-                  {group == "regionId" ? (
+                  {recipientGroup == "regionId" ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -177,8 +178,9 @@ const BroadcastNotification = ({ regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={async (e) => {
-                            setRecipient(e.target.value);
+                            setRecipientId(e.target.value);
                           }}
+                          value={recipientId}
                         >
                           <option value="">Choose...</option>
                           {regions.map((region) => (

@@ -6,70 +6,69 @@ import { getUserCookie } from "../../../../../helpers/cookies-manager";
 import { logActivity } from "../../../../../helpers/Log";
 
 const post = async (req, res) => {
-try {
+  try {
+    let recipientId = req.body.recipient.split("$")[0];
+    let recipient = req.body.recipient.split("$")[1];
+    let title = req.body.title;
+    let message = req.body.message;
 
- 
+    let userCookie = await getUserCookie(req, res);
+    await logActivity(
+      `Single notification sent to ${recipientId}`,
+      userCookie.user.id
+    );
+    const data = {
+      recipient: recipient,
+      message,
+      title,
+      recipientTag: Number(req.body.group),
+      recipientId: Number(recipientId),
 
-  let recipientId = req.body.recipient.split("$")[0];
-  let recipient = req.body.recipient.split("$")[1];
-  let title = req.body.title;
-  let message = req.body.message;
+      sender: Number(userCookie.user.id),
+      messageType: 1,
+      sendingType: 1,
+    };
 
+    const response = await prisma.messaging.create({
+      data,
+    });
 
- let userCookie = await getUserCookie(req, res);
-  await logActivity(`Single notification sent to ${recipientId}`,  userCookie.user.id);
-  const data = {
-    recipient: recipient,
-    message,
-    title,
-    recipientTag: Number(req.body.group),
-    recipientId: Number(recipientId),
+    const user = await prisma.user.findFirst({
+      where: { id: response.recipientId },
+    });
 
-    sender: Number(userCookie.user.id),
-    messageType: 1,
-    sendingType: 1,
-  };
+    let x = await sendFCM(title, message, user.fcmId);
 
-  const response = await prisma.messaging.create({
-    data,
-  });
+    // if (recipient != null || recipient != "") {
+    //   const res = await prisma.user.findMany({
+    //     where: { deleted: 0, id: recipient },
+    //   });
 
-  const user = await prisma.user.findFirst({
-    where: { id: response.recipientId },
-  });
+    //   for (let i = 0; i < res.length; i++) {
+    //     let phoneNumber = await append_233(res[i].phoneNumber);
+    //     await send(phoneNumber, req.body.message);
+    //   }
+    // }
+    // if (regionRecipient != null || regionRecipient != "") {
+    //   const res = await prisma.user.findMany({
+    //     where: { deleted: 0, regionId: regionRecipient },
+    //   });
+    //   for (let i = 0; i < res.length; i++) {
+    //     await send(res[i].phoneNumber, req.body.message);
 
-  let x = await sendFCM(title, message, user.fcmId);
+    //   }
+    // }
+    // if (districtRecipient != null || districtRecipient != "") {
+    //   const res = await prisma.user.findMany({
+    //     where: { deleted: 0, districtId: districtRecipient },
+    //   });
+    //   for (let i = 0; i < res.length; i++) {
+    //     console.log(res.phoneNumber);
+    //     await send(res[i].phoneNumber, req.body.message);
+    //   }
+    // }
 
-  // if (recipient != null || recipient != "") {
-  //   const res = await prisma.user.findMany({
-  //     where: { deleted: 0, id: recipient },
-  //   });
-
-  //   for (let i = 0; i < res.length; i++) {
-  //     let phoneNumber = await append_233(res[i].phoneNumber);
-  //     await send(phoneNumber, req.body.message);
-  //   }
-  // }
-  // if (regionRecipient != null || regionRecipient != "") {
-  //   const res = await prisma.user.findMany({
-  //     where: { deleted: 0, regionId: regionRecipient },
-  //   });
-  //   for (let i = 0; i < res.length; i++) {
-  //     await send(res[i].phoneNumber, req.body.message);
-
-  //   }
-  // }
-  // if (districtRecipient != null || districtRecipient != "") {
-  //   const res = await prisma.user.findMany({
-  //     where: { deleted: 0, districtId: districtRecipient },
-  //   });
-  //   for (let i = 0; i < res.length; i++) {
-  //     console.log(res.phoneNumber);
-  //     await send(res[i].phoneNumber, req.body.message);
-  //   }
-  // }
-
-  res.status(200).json({ statusCode: 1, message: "Data saved" });
+    res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
     console.log("Error: " + error);
     if (error.code === "P2002")
@@ -81,7 +80,6 @@ try {
 
 const get = async (req, res) => {
   try {
-
     const messaging = await prisma.messaging.findMany({
       where: { deleted: 0, messageType: 2 },
       include: {

@@ -3,74 +3,76 @@ import { send } from "../../../../../helpers/send-sms";
 import { append_233 } from "../../../../../helpers/append-233";
 import { getUserCookie } from "../../../../../helpers/cookies-manager";
 import { logActivity } from "../../../../../helpers/Log";
+import { sendFCM } from "../../../../../helpers/send-fcm";
 
 const post = async (req, res) => {
- try {
+  try {
+    console.log(req.body);
 
-  console.log(req.body);
+    let userCookie = await getUserCookie(req, res);
 
-  let userCookie = await getUserCookie(req, res);
+    await logActivity("Broadcast notification sent", userCookie.user.id);
 
-  await logActivity("Broadcast notification sent",  userCookie.user.id);
+    let recipientId = req.body.recipientId;
+    let recipient = req.body.recipient;
+let title = req.body.title
+    const data = {
+      recipient: recipient,
+      message: req.body.message,
+      title: title,
+      // recipientTag: Number(req.body.group),
+      recipientId: Number(recipientId),
+      sender: Number(userCookie.user.id),
+      messageType: 1,
+      sendingType: Number(req.body.sendingType),
+    };
 
-  let recipientId = req.body.recipient.split("$")[0];
-  let recipient = req.body.recipient.split("$")[1];
+    const response = await prisma.messaging.create({ data });
 
-  const data = {
-    recipient: recipient,
-    message: req.body.message,
-    title: req.body.title,
-    // recipientTag: Number(req.body.group),
-    recipientId: Number(recipientId),
-    sender: Number(userCookie.user.id),
-    messageType: 1,
-    sendingType: Number(req.body.sendingType),
-  };
+    const userGroup = await prisma.user.findMany({
+      where: { [recipient]: Number(recipientId) },
+    });
+    console.log("userGroup--->", userGroup);
 
- const response = await prisma.messaging.create({ data });
+    let fcm = userGroup.map((ug) => ug.fcmId);
 
- const user = await prisma.user.findMany({
-  where: { id: response.recipientId },
-});
+    console.log("FCM", fcm);
 
+    let x = await sendFCM(title, message, fcm);
 
- let x = await sendFCM(title, message, user.fcmId);
+    // if (recipient != null || recipient != "") {
+    //   const res = await prisma.user.findMany({
+    //     where: { deleted: 0, id: recipient },
+    //   });
 
-  // if (recipient != null || recipient != "") {
-  //   const res = await prisma.user.findMany({
-  //     where: { deleted: 0, id: recipient },
-  //   });
+    //   for (let i = 0; i < res.length; i++) {
+    //     let phoneNumber = await append_233(res[i].phoneNumber);
+    //     await send(phoneNumber, req.body.message);
+    //   }
+    // }
+    // if (regionRecipient != null || regionRecipient != "") {
+    //   const res = await prisma.user.findMany({
+    //     where: { deleted: 0, regionId: regionRecipient },
+    //   });
+    //   for (let i = 0; i < res.length; i++) {
+    //     await send(res[i].phoneNumber, req.body.message);
 
-  //   for (let i = 0; i < res.length; i++) {
-  //     let phoneNumber = await append_233(res[i].phoneNumber);
-  //     await send(phoneNumber, req.body.message);
-  //   }
-  // }
-  // if (regionRecipient != null || regionRecipient != "") {
-  //   const res = await prisma.user.findMany({
-  //     where: { deleted: 0, regionId: regionRecipient },
-  //   });
-  //   for (let i = 0; i < res.length; i++) {
-  //     await send(res[i].phoneNumber, req.body.message);
+    //   }
+    // }
+    // if (districtRecipient != null || districtRecipient != "") {
+    //   const res = await prisma.user.findMany({
+    //     where: { deleted: 0, districtId: districtRecipient },
+    //   });
+    //   for (let i = 0; i < res.length; i++) {
+    //     console.log(res.phoneNumber);
+    //     await send(res[i].phoneNumber, req.body.message);
+    //   }
+    // }
 
-  //   }
-  // }
-  // if (districtRecipient != null || districtRecipient != "") {
-  //   const res = await prisma.user.findMany({
-  //     where: { deleted: 0, districtId: districtRecipient },
-  //   });
-  //   for (let i = 0; i < res.length; i++) {
-  //     console.log(res.phoneNumber);
-  //     await send(res[i].phoneNumber, req.body.message);
-  //   }
-  // }
-
-  res.status(200).json({ statusCode: 1, message: "Data saved" });
+    res.status(200).json({ statusCode: 1, message: "Data saved" });
   } catch (error) {
-   console.log(error);
-      return res
-        .status(400)
-        .json({ statusCode: 0, message: "Error" });
+    console.log(error);
+    return res.status(400).json({ statusCode: 0, message: "Error" });
   }
 };
 
@@ -81,12 +83,11 @@ const get = async (req, res) => {
       include: {
         SendingType: true,
         MessageType: true,
-       
+
         Recipient: true,
       },
     });
-console.log(messaging);
-    
+    console.log(messaging);
 
     return res.status(200).json(messaging);
   } catch (error) {

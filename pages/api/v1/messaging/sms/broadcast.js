@@ -10,15 +10,15 @@ const post = async (req, res) => {
   let userCookie = await getUserCookie(req, res);
   await logActivity("Broadcast SMS sent",  userCookie.user.id);
 
-  let recipientId = req.body.recipient.split("$")[0];
-  let recipient = req.body.recipient.split("$")[1];
-  let group = Number(req.body.group);
+  // let recipientId = req.body.recipient.split("$")[0];
+  // let recipient = req.body.recipient.split("$")[1];
+  // let group = Number(req.body.group);
 
   const data = {
     recipient: recipient,
     message: req.body.message,
     title: "",
-    recipientTag: group,
+    // recipientTag: group,
     recipientId: Number(recipientId),
     sender: Number(userCookie.user.id),
     messageType: 2,
