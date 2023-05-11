@@ -55,7 +55,6 @@ const post = async (req, res) => {
         regionId: Number(req.body.regionId),
         abbrv: req.body.abbrv
       };
-console.log("data===", data);
 
       const district = await prisma.district.create({ data });
       return res
@@ -97,7 +96,6 @@ const getSearchParams = async (req, searchText) => {
 const get = async (req, res) => {
   try {
     let curPage = req?.query?.page;
-    console.log("curPage",curPage);
     let searchText = req?.query?.searchText?.trim();
 
     let perPage = 10;

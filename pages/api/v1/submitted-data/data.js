@@ -14,13 +14,12 @@ const get = async (req, res) => {
     let inspectionFormId = Number(req.query.inspectionFormId);
 
     let curPage = req.query.page;
-    // let searchText = req.query.searchText.trim();
+    let searchText = req.query.searchText.trim();
 
     let perPage = 10;
     let count = await prisma.inspection.count({
       // where: getSearchParams(req, searchText).where,
       where: {
-
         inspectionFormId: inspectionFormId,
       },
     });
@@ -40,10 +39,13 @@ const get = async (req, res) => {
 };
 
 const generateWhereMainObject = async (req, res) => {
-
   let published = Number(req?.query?.published);
   let inspectionFormId = Number(req?.query?.inspectionFormId);
   let curPage = req?.query?.page;
+  let searchText = req?.query?.searchText;
+
+  console.log("searchText ==>",searchText);
+  console.log(typeof searchText);
 
   let filterBy = req?.query?.filterBy;
 
@@ -61,28 +63,29 @@ const generateWhereMainObject = async (req, res) => {
       ? undefined
       : new Date(req?.query?.to);
 
-
   let perPage = 10;
   let skip = Number((curPage - 1) * perPage) || 0;
 
   let userObj = await verifyToken(req.query.token);
 
-
   let userType = userObj.user?.userTypeId;
-
 
   if (userType == 1 || userType == 2) {
     filterBy = filterBy == "undefined" ? "regionId" : filterBy;
 
     return {
       where: {
+        Community: {
+        //  name: {search:"Amasamabn".replace(/[\s\n\t]/g, "_")}
+        name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+        },
         deleted: 0,
         Inspection: {
           [filterBy]: filterValue,
 
           isPublished: published,
           inspectionFormId: inspectionFormId,
-          deleted:0
+          deleted: 0,
         },
         createdAt: {
           gte: from,
@@ -105,12 +108,11 @@ const generateWhereMainObject = async (req, res) => {
           include: {
             ElectoralArea: {
               include: {
-                District:{
+                District: {
                   include: {
-                    Region:true,
-                  }
-                }
-                
+                    Region: true,
+                  },
+                },
               },
             },
           },
@@ -119,7 +121,7 @@ const generateWhereMainObject = async (req, res) => {
       },
     };
   }
-  if (userType == 3||userType == 4) {
+  if (userType == 3 || userType == 4) {
     let region = userObj.user.regionId;
     filterBy = filterBy == undefined ? "districtId" : filterBy;
 
@@ -153,12 +155,11 @@ const generateWhereMainObject = async (req, res) => {
           include: {
             ElectoralArea: {
               include: {
-                District:{
+                District: {
                   include: {
-                    Region:true,
-                  }
-                }
-                
+                    Region: true,
+                  },
+                },
               },
             },
           },
@@ -170,7 +171,7 @@ const generateWhereMainObject = async (req, res) => {
   if (userType == 5 || userType == 6) {
     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
 
-   let district = userObj.user.districtId;
+    let district = userObj.user.districtId;
     return {
       where: {
         [filterBy]: filterValue,
@@ -202,12 +203,11 @@ const generateWhereMainObject = async (req, res) => {
           include: {
             ElectoralArea: {
               include: {
-                District:{
+                District: {
                   include: {
-                    Region:true,
-                  }
-                }
-                
+                    Region: true,
+                  },
+                },
               },
             },
           },
@@ -217,6 +217,25 @@ const generateWhereMainObject = async (req, res) => {
     };
   }
 };
+
+// const getSearchParams = async (req, searchText) => {
+//   let data = await verifyToken(req.query.token);
+
+//   let district =
+//     data.user.districtId == null || isNaN(data.user.districtId)
+//       ? undefined
+//       : Number(data.user.districtId);
+//   if (searchText != "" && searchText != null) {
+//     return {
+//       where: {
+//         deleted: 0,
+//         districtId: district,
+//         name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+//       },
+//     };
+//   }
+//   return { where: { deleted: 0, districtId: district } };
+// };
 
 export default (req, res) => {
   req.method === "POST"

@@ -224,20 +224,20 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       console.log(error);
     }
   };
-
-
   const autoHandleSearch = (searchText) => {
     try {
-      router.push({
-        pathname: '/admin/broadsheet/[id]',
-        query: { ...router.query, searchText },
-      })
-
+       let currentUrl = router.pathname;
+    router.push({
+      pathname: currentUrl,
+      query: `&searchText=${searchText}`,
+    });
     } catch (error) {
       console.log(error);
     }
-
+   
   };
+
+
   let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
   let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
   let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
@@ -579,6 +579,21 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                   Export Filtered
                 </button>
+              </div>
+              <div className="d-flex justify-content-sm-end">
+                <div className="search-box ms-2">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="searchResultList"
+                    onChange={(e) => {
+                      setSearchText(e.target.value);
+                      autoHandleSearch(e.target.value);
+                    }}
+                    placeholder="Search...."
+                  />
+                  <i className="ri-search-line search-icon"></i>
+                </div>
               </div>
             </div>
             <br />
