@@ -4,6 +4,8 @@ const post = async (req, res) => {
   try {
     const data = {
       name: req.body.data.name,
+      inspectionFormId: Number(req.body.data.inspectionFormId),
+
     };
     const service = await prisma.service.create({ data });
     res
