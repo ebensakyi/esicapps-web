@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Modal from 'react-modal'
 
 const PrimaryData = ({
   inspectionForms,
@@ -84,6 +85,10 @@ const PrimaryData = ({
   const [pestsSignName, setPestsSignName] = useState();
 
   const [nuisanceId, setNuisanceId] = useState();
+
+
+  const [isOpen, setIsOpen] = useState(false)
+
 
   const router = useRouter();
 
@@ -755,6 +760,11 @@ const PrimaryData = ({
   };
   return (
     <div className="row">
+        <button onClick={() => setIsOpen(true)}>Open Modal</button>
+         <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
+            <h1>Modal Content</h1>
+            <button onClick={() => setIsOpen(false)}>Close Modal</button>
+         </Modal>
       <div className="col-xxl-12">
         <h5 className="mb-3">Primary Data</h5>
         <div className="card">
