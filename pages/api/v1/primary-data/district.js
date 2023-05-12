@@ -57,7 +57,7 @@ const get = async (req, res) => {
     //   return res.status(200).json(district);
     // }
 
-    if (userType == 1) {
+    if (userType == 1 || userType == 2) {
       const district = await prisma.district.findMany({
         where: { deleted: 0 },
         include: { Region: true },
