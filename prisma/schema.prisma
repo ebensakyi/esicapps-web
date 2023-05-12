@@ -73,10 +73,11 @@ model InspectionForm {
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
 
-  Service  Service[]
-  Subtype  Subtype[]
-  Type     Type[]
-  Nuisance Nuisance[]
+  Service               Service[]
+  Subtype               Subtype[]
+  Type                  Type[]
+  Nuisance              Nuisance[]
+  RespondentDesignation RespondentDesignation[]
 }
 
 model PasswordResetRequest {
@@ -189,11 +190,11 @@ model UserAddedByUser {
 // }
 
 model Messaging {
-  id           Int     @id @default(autoincrement())
-  title        String? @db.VarChar(255)
-  message      String  @db.VarChar(2550)
-  recipient    String?
-  recipientId  Int?
+  id          Int     @id @default(autoincrement())
+  title       String? @db.VarChar(255)
+  message     String  @db.VarChar(2550)
+  recipient   String?
+  recipientId Int?
 
   messageType Int?
   sendingType Int?
@@ -555,6 +556,8 @@ model RespondentDesignation {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   BasicInfoSection BasicInfoSection[]
+
+  InspectionForm InspectionForm @relation(fields: [inspectionFormId], references: [id])
 }
 
 model SafeUnsafe {

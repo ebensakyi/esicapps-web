@@ -174,7 +174,7 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const respondentDesignations = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/respondent-designation`
+    `${SERVER_BASE_URL}/api/v1/primary-data/respondent-designation?from=1`
   ).then((res) => res.json());
 
   const services = await fetch(

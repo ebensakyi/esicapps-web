@@ -1880,7 +1880,7 @@ const PrimaryData = ({
                                     <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
-                                      {/* <td>{cw.InspectionForm.name}</td> */}
+                                      <td>{cw.InspectionForm.name}</td>
 
                                       <td>
                                         <button className="badge bg-success">
