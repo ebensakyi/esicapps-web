@@ -1,11 +1,11 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UploadDistrict = ({ data,regions }) => {
+const UploadDistrict = ({ data, regions }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [region, setRegion] = useState("");
@@ -51,50 +51,45 @@ const UploadDistrict = ({ data,regions }) => {
     try {
       e.preventDefault();
 
-    let body = new FormData(form.current);
-    body.append("csvFile", districtFile);
-    body.append("regionId", region);
+      let body = new FormData(form.current);
+      body.append("csvFile", districtFile);
+      body.append("regionId", region);
 
+      const response = await axios({
+        url: "/api/v1/primary-data/location/district/upload",
+        method: "POST",
+        headers: {
+          authorization: "A",
+          "Content-Type": "application/json",
+        },
+        data: body,
+      });
 
-    const response = await axios({
-      url: "/api/v1/primary-data/location/district/upload",
-      method: "POST",
-      headers: {
-        authorization: "A",
-        "Content-Type": "application/json",
-      },
-      data: body,
-    });
-     
-     
       router.replace(router.asPath);
     } catch (error) {
-console.log(error);
-        toast.error(error);
-      
+      console.log(error);
+      toast.error(error);
     }
   };
 
   const uploadDistrict = (event) => {
-   
-
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
-
 
       setDistrictFile(i);
       setDistrictFileUrl(URL.createObjectURL(i));
     }
   };
 
-  const deleteDistrict = async (e,id) => {
+  const deleteDistrict = async (e, id) => {
     e.preventDefault();
     console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/district-data", { data: { id } });
+      await axios.delete("/api/v1/primary-data/district-data", {
+        data: { id },
+      });
       router.replace(router.asPath);
-
     } catch (error) {}
   };
   return (
@@ -119,62 +114,61 @@ console.log(error);
             <div className="card-body">
               {/* <h6 className="card-title">Add District</h6> */}
               <form ref={form}>
-                 <div className="row gy-4">
-                 <div className="col-xxl-4 col-md-8">
-                 <label htmlFor="basiInput" className="form-label">
+                <div className="row gy-4">
+                  <div className="col-xxl-4 col-md-8">
+                    <label htmlFor="basiInput" className="form-label">
                       Select region
                     </label>
-                 <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        value={region}
-                        onChange={(e) => {
-                          setRegion(e.target.value);
-                          // getElectoralByDistrict(e, e.target.value);
-                        }}
-                      >
-                          <option value="">Choose...</option>
-                        {regions.map((region) => (
-                          <option key={region.id} value={region.id}>
-                            {region.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                <div className="col-xxl-4 col-md-8">
-                  <div>
-                    <label htmlFor="basiInput" className="form-label">
-                      Upload CSV(With name column)
-                    </label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="basiInput"
-                      onChange={uploadDistrict}
-                    />
+                    <select
+                      className="form-select"
+                      id="inputGroupSelect02"
+                      value={region}
+                      onChange={(e) => {
+                        setRegion(e.target.value);
+                        // getElectoralByDistrict(e, e.target.value);
+                      }}
+                    >
+                      <option value="">Choose...</option>
+                      {regions.map((region) => (
+                        <option key={region.id} value={region.id}>
+                          {region.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                </div>
+                  <div className="col-xxl-4 col-md-8">
+                    <div>
+                      <label htmlFor="basiInput" className="form-label">
+                        Upload CSV(With name column)
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        id="basiInput"
+                        onChange={uploadDistrict}
+                      />
+                    </div>
+                  </div>
 
-                <div className="col-lg-4">
-                  <div>
-                    <label htmlFor="basiInput" className="form-label">
-                      .
-                    </label>
-                    <div className="text-end">
-                      <button
-                         onClick={(e) => {
-                          submit(e);
-                        }}
-                        className="btn btn-primary"
-                      >
-                        Upload
-                      </button>
+                  <div className="col-lg-4">
+                    <div>
+                      <label htmlFor="basiInput" className="form-label">
+                        .
+                      </label>
+                      <div className="text-end">
+                        <button
+                          onClick={(e) => {
+                            submit(e);
+                          }}
+                          className="btn btn-primary"
+                        >
+                          Upload
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
               </form>
-             
             </div>
           </div>
         </div>

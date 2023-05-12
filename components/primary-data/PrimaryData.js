@@ -86,8 +86,6 @@ const PrimaryData = ({
 
   const router = useRouter();
 
- 
-
   const addAction = async (e) => {
     try {
       e.preventDefault();
@@ -98,14 +96,13 @@ const PrimaryData = ({
       const response = await axios.post("/api/v1/primary-data/action", {
         data,
       });
-      setActionName("")
+      setActionName("");
 
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-
 
   const addCemeteryWorker = async (e) => {
     try {
@@ -137,7 +134,7 @@ const PrimaryData = ({
       const response = await axios.post("/api/v1/primary-data/drain-type", {
         data,
       });
-setDrainTypeName("");
+      setDrainTypeName("");
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
@@ -226,7 +223,7 @@ setDrainTypeName("");
       console.log(error);
     }
   };
-  
+
   const addGreyWaterDisposal = async (e) => {
     try {
       e.preventDefault();
@@ -314,7 +311,6 @@ setDrainTypeName("");
         id: nuisanceId,
       };
 
-
       const response = await axios.put("/api/v1/primary-data/nuisance", {
         data,
       });
@@ -347,6 +343,7 @@ setDrainTypeName("");
       e.preventDefault();
       let data = {
         name: respondentDesignationName,
+        inspectionFormId
       };
 
       const response = await axios.post(
@@ -613,15 +610,12 @@ setDrainTypeName("");
     try {
       e.preventDefault();
       let data = {
-        name: pes,
+        name: pestsSignName,
       };
 
-      const response = await axios.post(
-        "/api/v1/primary-data/pest-sign",
-        {
-          data,
-        }
-      );
+      const response = await axios.post("/api/v1/primary-data/pest-sign", {
+        data,
+      });
 
       setPestsSignName("");
       router.replace(router.asPath);
@@ -646,8 +640,6 @@ setDrainTypeName("");
                   className="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
                   id="accordionBordered"
                 >
-                 
-
                   <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
@@ -750,7 +742,6 @@ setDrainTypeName("");
                     </div>
                   </div>
 
-                 
                   <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
@@ -1367,7 +1358,7 @@ setDrainTypeName("");
                       </div>
                     </div>
                   </div>
-                
+
                   <div className="accordion-item mt-2">
                     <h2
                       className="accordion-header"
@@ -1639,7 +1630,7 @@ setDrainTypeName("");
                                     </label>
                                     <div className="text-end">
                                       <button
-                                      disabled
+                                        disabled
                                         onClick={(e) => {
                                           addOwnershipType(e);
                                         }}
@@ -1832,6 +1823,23 @@ setDrainTypeName("");
                                       }
                                     />
                                   </div>
+                                </div>
+                                <div className="col-xxl-4 col-md-8">
+                                <select
+                                  className="form-select"
+                                  id="inputGroupSelect02"
+                                  value={inspectionFormId}
+                                  onChange={(e) => {
+                                    setInspectionFormId(e.target.value);
+                                  }}
+                                >
+                                  <option value="">Choose...</option>
+                                  {inspectionForms.map((i) => (
+                                    <option key={i.id} value={i.id}>
+                                      {i.name}
+                                    </option>
+                                  ))}
+                                </select>
                                 </div>
 
                                 <div className="col-lg-4">

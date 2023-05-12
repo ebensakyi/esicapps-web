@@ -5,6 +5,7 @@ const post = async (req, res) => {
     const data = {
       name: req.body.data.name,
     };
+    console.log(data);
     const respondentDesignation = await prisma.respondentDesignation.create({
       data,
     });
@@ -12,6 +13,7 @@ const post = async (req, res) => {
       .status(200)
       .json( respondentDesignation );
   } catch (error) {
+    console.log(error);
     if (error.code === "P2002")
       return res
         .status(200)
