@@ -613,7 +613,7 @@ setDrainTypeName("");
     try {
       e.preventDefault();
       let data = {
-        name: waterSupplyTypeName,
+        name: pes,
       };
 
       const response = await axios.post(

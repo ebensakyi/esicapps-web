@@ -3,8 +3,9 @@ import prisma from "../../../../prisma/MyPrismaClient";
 const post = async (req, res) => {
   try {
     const data = {
-      name: req.body.data.name,
+      name: req.body.name,
     };
+    console.log(data);
     const pestSign = await prisma.pestSign.create({ data });
     res
       .status(200)
