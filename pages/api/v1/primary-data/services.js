@@ -19,6 +19,17 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    if (req.query.from == "1") {
+      const service = await prisma.service.findMany(
+        {
+          where: { deleted: 0 },
+          include: { InspectionForm: true },
+        }
+      );
+
+      return res.status(200).json(service);
+    }
+
     // let inspectionFormId = Number(req.query.id)
     const service = await prisma.service.findMany({
       where: { deleted: 0 },

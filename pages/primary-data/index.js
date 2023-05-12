@@ -178,7 +178,7 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const services = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/services`
+    `${SERVER_BASE_URL}/api/v1/primary-data/services?from=1`
   ).then((res) => res.json());
 
   const structureTypes = await fetch(

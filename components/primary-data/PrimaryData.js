@@ -1944,7 +1944,23 @@ const PrimaryData = ({
                                     />
                                   </div>
                                 </div>
-
+                                <div className="col-xxl-4 col-md-8">
+                                <select
+                                  className="form-select"
+                                  id="inputGroupSelect02"
+                                  value={inspectionFormId}
+                                  onChange={(e) => {
+                                    setInspectionFormId(e.target.value);
+                                  }}
+                                >
+                                  <option value="">Choose...</option>
+                                  {inspectionForms.map((i) => (
+                                    <option key={i.id} value={i.id}>
+                                      {i.name}
+                                    </option>
+                                  ))}
+                                </select>
+                                </div>
                                 <div className="col-lg-4">
                                   <div>
                                     <label
@@ -1973,6 +1989,7 @@ const PrimaryData = ({
                                   <tr>
                                     {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
+                                    <th scope="col">Form</th>
 
                                     <th scope="col">Action</th>
                                   </tr>
@@ -1982,6 +1999,8 @@ const PrimaryData = ({
                                     <tr key={cw.id}>
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
+                                      <td>{cw.InspectionForm.name}</td>
+
                                       <td>
                                         <button className="badge bg-success">
                                           Edit
