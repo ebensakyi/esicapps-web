@@ -363,6 +363,7 @@ const PrimaryData = ({
     try {
       e.preventDefault();
       let data = {
+        inspectionFormId,
         name: serviceName,
       };
 
@@ -2073,7 +2074,7 @@ const PrimaryData = ({
                                       .
                                     </label>
                                     <div className="text-end">
-                                      <button
+                                      <button disabled
                                         onClick={(e) => {
                                           addStructureType(e);
                                         }}
@@ -2093,7 +2094,7 @@ const PrimaryData = ({
                                     {/* <th scope="col">Id</th> */}
                                     <th scope="col">Name</th>
 
-                                    <th scope="col">Action</th>
+                                    {/* <th scope="col">Action</th> */}
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -2102,11 +2103,11 @@ const PrimaryData = ({
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{cw.name}</td>
 
-                                      <td>
+                                      {/* <td>
                                         <button className="badge bg-success">
                                           Edit
                                         </button>
-                                      </td>
+                                      </td> */}
                                     </tr>
                                   ))}
                                 </tbody>
@@ -2220,7 +2221,6 @@ const PrimaryData = ({
                                     <th scope="col">Name</th>
                                     <th scope="col">Type</th>
 
-                                    <th scope="col">Date</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
@@ -2230,7 +2230,6 @@ const PrimaryData = ({
                                       {/* <th scope="row">{region.id}</th> */}
                                       <td>{s.name}</td>
                                       {/* <td>{region.abbrv}</td> */}
-                                      <td>{s.createdAt}</td>
                                       <td>
                                         <button className="badge bg-primary">
                                           Edit

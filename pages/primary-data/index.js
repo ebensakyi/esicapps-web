@@ -186,7 +186,7 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const subtypes = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/subtypes`
+    `${SERVER_BASE_URL}/api/v1/primary-data/subtypes?from=1`
   ).then((res) => res.json());
 
   const toiletPitPositions = await fetch(

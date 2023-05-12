@@ -11,21 +11,25 @@ const post = async (req, res) => {
       .json({ statusCode: 1, message: "Data saved", data: { subtypes } });
   } catch (error) {
     if (error.code === "P2002")
-      return res
-        .status(200)
-        .json({
-          statusCode: 0,
-          message: "subtype prefix should be unique",
-        });
+      return res.status(200).json({
+        statusCode: 0,
+        message: "subtype prefix should be unique",
+      });
   }
 };
 
 const get = async (req, res) => {
   try {
-    //let inspectionFormId = Number(req.query.id);
+    if (req.query.from == "1") {
+      const subtype = await prisma.subtype.findMany({
+        where: { deleted: 0 },
+        include: { InspectionForm: true },
+      });
 
+      return res.status(200).json(subtype);
+    }
     const subtype = await prisma.subtype.findMany({
-      where: {deleted: 0 },
+      where: { deleted: 0 },
     });
     return res.status(200).json(subtype);
   } catch (error) {
