@@ -2145,7 +2145,7 @@ const PrimaryData = ({
                         <div className="col-sm-12 col-lg-12">
                           <div className="card">
                             <div className="card-body">
-                              <h6 className="card-title">Add subtype</h6>
+                              <h6 className="card-title">Add sub-type</h6>
                               <div className="row gy-4">
                                 <div className="col-xxl-4 col-md-8">
                                   <div>
@@ -2218,8 +2218,9 @@ const PrimaryData = ({
                                 <thead>
                                   <tr>
                                     {/* <th scope="col">Id</th> */}
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Form</th>
                                     <th scope="col">Type</th>
+                                    <th scope="col">Name</th>
 
                                     <th scope="col">Action</th>
                                   </tr>
@@ -2227,9 +2228,9 @@ const PrimaryData = ({
                                 <tbody>
                                   {subtypes.map((s) => (
                                     <tr key={s.id}>
-                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{s.InspectionForm.name}</td>
                                       <td>{s.name}</td>
-                                      {/* <td>{region.abbrv}</td> */}
+                                      <td>{s.Type.name}</td>
                                       <td>
                                         <button className="badge bg-primary">
                                           Edit

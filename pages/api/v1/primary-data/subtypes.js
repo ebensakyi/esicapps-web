@@ -23,7 +23,7 @@ const get = async (req, res) => {
     if (req.query.from == "1") {
       const subtype = await prisma.subtype.findMany({
         where: { deleted: 0 },
-        include: { InspectionForm: true },
+        include: { InspectionForm: true, Type: true },
       });
 
       return res.status(200).json(subtype);
