@@ -142,7 +142,7 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const excretaDisposals = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/excreta-containment`
+    `${SERVER_BASE_URL}/api/v1/primary-data/excreta-disposal`
   ).then((res) => res.json());
 
   // const facilities = await fetch(

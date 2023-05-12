@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Modal from 'react-modal'
 
 const PrimaryData = ({
   inspectionForms,
@@ -49,7 +48,6 @@ const PrimaryData = ({
   const [typeId, setTypeId] = useState();
 
   const [actionName, setActionName] = useState();
-  const [analCleansingName, setAnalCleansingName] = useState();
   const [cemeteryWorkerName, setCemeteryWorkerName] = useState();
   const [drainTypeName, setDrainTypeName] = useState();
   const [drinkingWaterSourceName, setDrinkingWaterSourceName] = useState();
@@ -86,83 +84,9 @@ const PrimaryData = ({
 
   const [nuisanceId, setNuisanceId] = useState();
 
-
-  const [isOpen, setIsOpen] = useState(false)
-
-
   const router = useRouter();
 
-  const addRegion = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: regionName,
-        abbrv: regionAbbrv,
-      };
-
-      const response = await axios.post("/api/v1/primary-data/region", {
-        data,
-      });
-
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addDistrict = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: regionName,
-        regionId,
-        abbrv: regionAbbrv,
-      };
-
-      const response = await axios.post("/api/v1/primary-data/district", {
-        data,
-      });
-
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // const addElectoralArea = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     let data = {
-  //       name: electoralAreaName,
-  //       districtId,
-  //     };
-
-  //     const response = await axios.post("/api/v1/primary-data/electoral-area", {
-  //       data,
-  //     });
-
-  //     router.replace(router.asPath);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  const addCommunity = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: communityName,
-        electoralAreaId,
-      };
-
-      const response = await axios.post("/api/v1/primary-data/community", {
-        data,
-      });
-
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
 
   const addAction = async (e) => {
     try {
@@ -174,31 +98,14 @@ const PrimaryData = ({
       const response = await axios.post("/api/v1/primary-data/action", {
         data,
       });
+      setActionName("")
 
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
     }
   };
-  const addAnalCleansing = async (e) => {
-    try {
-      e.preventDefault();
-      let data = {
-        name: actionName,
-      };
 
-      const response = await axios.post(
-        "/api/v1/primary-data/anal-cleansing-material",
-        {
-          data,
-        }
-      );
-
-      router.replace(router.asPath);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const addCemeteryWorker = async (e) => {
     try {
@@ -230,7 +137,7 @@ const PrimaryData = ({
       const response = await axios.post("/api/v1/primary-data/drain-type", {
         data,
       });
-
+setDrainTypeName("");
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
@@ -319,43 +226,7 @@ const PrimaryData = ({
       console.log(error);
     }
   };
-  // const addFacility = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     let data = {
-  //       name: facilityName,
-  //       inspectionFormId,
-  //     };
-
-  //     const response = await axios.post("/api/v1/primary-data/facility", {
-  //       data,
-  //     });
-
-  //     setFacilityName("");
-  //     router.replace(router.asPath);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const addFrequency = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     let data = {
-  //       name: frequencyName,
-  //     };
-
-  //     const response = await axios.post("/api/v1/primary-data/frequency", {
-  //       data,
-  //     });
-
-  //     setFrequencyName("");
-  //     router.replace(router.asPath);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+  
   const addGreyWaterDisposal = async (e) => {
     try {
       e.preventDefault();
@@ -443,7 +314,7 @@ const PrimaryData = ({
         id: nuisanceId,
       };
 
-      console.log(data);
+
       const response = await axios.put("/api/v1/primary-data/nuisance", {
         data,
       });
@@ -704,7 +575,7 @@ const PrimaryData = ({
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/water-supply-type",
         {
           data,
         }
@@ -725,13 +596,13 @@ const PrimaryData = ({
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/water-treatment-type",
         {
           data,
         }
       );
 
-      setWaterSupplyTypeName("");
+      setWaterTreatmentTypeName("");
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
@@ -746,13 +617,13 @@ const PrimaryData = ({
       };
 
       const response = await axios.post(
-        "/api/v1/primary-data/grey-water-disposal",
+        "/api/v1/primary-data/pest-sign",
         {
           data,
         }
       );
 
-      setWaterSupplyTypeName("");
+      setPestsSignName("");
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);
@@ -760,11 +631,6 @@ const PrimaryData = ({
   };
   return (
     <div className="row">
-        <button onClick={() => setIsOpen(true)}>Open Modal</button>
-         <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-            <h1>Modal Content</h1>
-            <button onClick={() => setIsOpen(false)}>Close Modal</button>
-         </Modal>
       <div className="col-xxl-12">
         <h5 className="mb-3">Primary Data</h5>
         <div className="card">
@@ -773,191 +639,2620 @@ const PrimaryData = ({
               Use <code>flex-column</code> className to create Vertical nav tabs.
             </p> */}
             <div className="row">
-              <table
-                id="fixed-header"
-                className="table table-bordered dt-responsive nowrap table-striped align-middle"
-                style={{ width: "100%" }}
-              >
-                <thead>
-                  <tr>
-                    <th>Data</th>
+              <div className="col-md-6">
+                {/* Accordions Bordered */}
 
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Regions</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Districts</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Actions</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Cemetery Workers</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Drain Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Drinking Water Sources</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Effluent Managements</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Excreta Containments</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Excreta Disposals</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Grey Water Disposals</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Hazardous Waste Disposals</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Inspection Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nuisances</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ownership Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Pest Signs</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Respondent Designations</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Structure Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Premises types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                  <td>Premises sub-types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Toilet Pit Positions</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Toilet Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Waste Collection Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Waste Storage Receptacles</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Waste Water Containments</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Water Source Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Water Storage Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Water Supply Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Water Treatment Types</td>
-                    <td>
-                      <button className="badge bg-success">Edit</button>
-                    </td>
-                  </tr>
+                <div
+                  className="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
+                  id="accordionBordered"
+                >
                  
-                </tbody>
-              </table>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_action"
+                        aria-expanded="false"
+                        aria-controls="accor_action"
+                      >
+                        Actions
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_action"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add Action</h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={actionName}
+                                      onChange={(e) =>
+                                        setActionName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addAction(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {actions.map((a) => (
+                                    <tr key={a.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{a.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                 
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_cemetery_workers"
+                        aria-expanded="false"
+                        aria-controls="accor_cemetery_workers"
+                      >
+                        Cemetery workers
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_cemetery_workers"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={cemeteryWorkerName}
+                                      onChange={(e) =>
+                                        setCemeteryWorkerName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addCemeteryWorker(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {cemeteryWorkers.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_drain_type"
+                        aria-expanded="false"
+                        aria-controls="accor_drain_type"
+                      >
+                        Drain Type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_drain_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={drainTypeName}
+                                      onChange={(e) =>
+                                        setDrainTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addDrainType(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {drainTypes.map((d) => (
+                                    <tr key={d.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{d.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_drinking_water"
+                        aria-expanded="false"
+                        aria-controls="accor_drinking_water"
+                      >
+                        Drinking Water Source
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_drinking_water"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={drinkingWaterSourceName}
+                                      onChange={(e) =>
+                                        setDrinkingWaterSourceName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addDrinkingWaterSource(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {drinkingWaterSources.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_effluent_mgt"
+                        aria-expanded="false"
+                        aria-controls="accor_effluent_mgt"
+                      >
+                        Effluent Management
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_effluent_mgt"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={effluentManagementName}
+                                      onChange={(e) =>
+                                        setEffluentManagementName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addEffluentManagement(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {effluentManagements.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_excreta_containment"
+                        aria-expanded="false"
+                        aria-controls="accor_excreta_containment"
+                      >
+                        Excreta Containment
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_excreta_containment"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={excretaContainmentName}
+                                      onChange={(e) =>
+                                        setExcretaContainmentName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addExcretaContainment(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {excretaContainments.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_excreta_disposal"
+                        aria-expanded="false"
+                        aria-controls="accor_excreta_disposal"
+                      >
+                        Excreta Disposal
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_excreta_disposal"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={excretaDisposalName}
+                                      onChange={(e) =>
+                                        setExcretaDisposalName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addExcretaDisposal(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {excretaDisposals.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_grey_water_disposal"
+                        aria-expanded="false"
+                        aria-controls="accor_grey_water_disposal"
+                      >
+                        Grey water disposal
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_grey_water_disposal"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={greyWaterDisposalName}
+                                      onChange={(e) =>
+                                        setGreyWaterDisposalName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addGreyWaterDisposal(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {greyWaterDisposals.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_hazardous_waste"
+                        aria-expanded="false"
+                        aria-controls="accor_hazardous_waste"
+                      >
+                        Hazardous Waste Disposal
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_hazardous_waste"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={cemeteryWorkerName}
+                                      onChange={(e) =>
+                                        setHazardousWasteDisposalName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addHazardousWasteDisposal(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {hazardousWasteDisposals.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                {/* Accordions Bordered */}
+
+                <div
+                  className="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
+                  id="accordionBordered"
+                >
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_ownership_type"
+                        aria-expanded="false"
+                        aria-controls="accor_ownership_type"
+                      >
+                        Ownership type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_ownership_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={ownershipTypeName}
+                                      onChange={(e) =>
+                                        setOwnershipTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                      disabled
+                                        onClick={(e) => {
+                                          addOwnershipType(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    {/* <th scope="col">Action</th> */}
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {ownershipTypes.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      {/* <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td> */}
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_pest_signs"
+                        aria-expanded="false"
+                        aria-controls="accor_pest_signs"
+                      >
+                        Pest Signs
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_pest_signs"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={pestsSignName}
+                                      onChange={(e) =>
+                                        setPestsSignName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addPestsSign(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {pestSigns.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_respondent_designation"
+                        aria-expanded="false"
+                        aria-controls="accor_respondent_designation"
+                      >
+                        Respondent Designations
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_respondent_designation"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={respondentDesignationName}
+                                      onChange={(e) =>
+                                        setRespondentDesignationName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addRespondentDesignation(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Form</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {respondentDesignations.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+                                      {/* <td>{cw.InspectionForm.name}</td> */}
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_service"
+                        aria-expanded="false"
+                        aria-controls="accor_service"
+                      >
+                        Services
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_service"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={serviceName}
+                                      onChange={(e) =>
+                                        setServiceName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addService(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {services.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_structure_type"
+                        aria-expanded="false"
+                        aria-controls="accor_structure_type"
+                      >
+                        Structure type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_structure_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={structureTypeName}
+                                      onChange={(e) =>
+                                        setStructureTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addStructureType(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {structureTypes.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample1"
+                    >
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_subtype"
+                        aria-expanded="false"
+                        aria-controls="accor_subtype"
+                      >
+                        Subtype
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_subtype"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample1"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add subtype</h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={subtypeName}
+                                      onChange={(e) =>
+                                        setSubtypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Type
+                                    </label>
+                                    <select
+                                      className="form-select"
+                                      id="inputGroupSelect02"
+                                      value={regionId}
+                                      onChange={(e) =>
+                                        setTypeId(Number(e.target.value))
+                                      }
+                                    >
+                                      <option selected>Choose...</option>
+                                      {types.map((r) => (
+                                        <option key={r.id} value={r.id}>
+                                          {r.name}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                </div>
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addSubtype(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Type</th>
+
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {subtypes.map((s) => (
+                                    <tr key={s.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{s.name}</td>
+                                      {/* <td>{region.abbrv}</td> */}
+                                      <td>{s.createdAt}</td>
+                                      <td>
+                                        <button className="badge bg-primary">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample1"
+                    >
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_toilet_pit"
+                        aria-expanded="false"
+                        aria-controls="accor_toilet_pit"
+                      >
+                        Toilet Pit Position
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_toilet_pit"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample1"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add Toilet Pit</h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={toiletPitPositionName}
+                                      onChange={(e) =>
+                                        setToiletPitPositionName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addToiletPitPosition(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {toiletPitPositions.map((a) => (
+                                    <tr key={a.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{a.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-danger">
+                                          Cancelled
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample2"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_toilet_type"
+                        aria-expanded="false"
+                        aria-controls="accor_toilet_type"
+                      >
+                        Toilet Type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_toilet_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample2"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add Toilet Type</h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={toiletTypeName}
+                                      onChange={(e) =>
+                                        setToiletTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addToiletType(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {toiletTypes.map((ea) => (
+                                    <tr key={ea.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{ea.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_waste_collection_type"
+                        aria-expanded="false"
+                        aria-controls="accor_waste_collection_type"
+                      >
+                        Waste collection type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_waste_collection_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">
+                                Add Waste Collection Type
+                              </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={wasteCollectionTypeName}
+                                      onChange={(e) =>
+                                        setWasteCollectionTypeName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addWasteCollectionType(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {wasteCollectionTypes.map((c) => (
+                                    <tr key={c.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{c.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_waste_storage"
+                        aria-expanded="false"
+                        aria-controls="accor_waste_storage"
+                      >
+                        Waste Storage Receptacles
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_waste_storage"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">
+                                Add Waste Storage Receptacles
+                              </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={actionName}
+                                      onChange={(e) =>
+                                        setWasteStorageReceptacleName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addWasteStorageReceptacle(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {wasteStorageReceptacles.map((a) => (
+                                    <tr key={a.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{a.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_waste_water_containment"
+                        aria-expanded="false"
+                        aria-controls="accor_waste_water_containment"
+                      >
+                        Waste Water Containment
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_waste_water_containment"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={wasteWaterContainmentName}
+                                      onChange={(e) =>
+                                        setWasteWaterContainmentName(
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addWasteWaterContainment(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {wasteWaterContainments.map((a) => (
+                                    <tr key={a.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{a.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_water_source_type"
+                        aria-expanded="false"
+                        aria-controls="accor_water_source_type"
+                      >
+                        Water Source Type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_water_source_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={waterSourceTypeName}
+                                      onChange={(e) =>
+                                        setWaterSourceTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addWaterSource(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {waterSourceTypes.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_water_storage_type"
+                        aria-expanded="false"
+                        aria-controls="accor_water_storage_type"
+                      >
+                        Water Storage Type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_water_storage_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={drainTypeName}
+                                      onChange={(e) =>
+                                        setWaterStorageTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addWaterStorage(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {waterStorageTypes.map((d) => (
+                                    <tr key={d.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{d.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_water_supply"
+                        aria-expanded="false"
+                        aria-controls="accor_water_supply"
+                      >
+                        Water Supply Types
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_water_supply"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={drinkingWaterSourceName}
+                                      onChange={(e) =>
+                                        setWaterSupplyTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addWaterSupply(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {waterSupplyTypes.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_inspection_type"
+                        aria-expanded="false"
+                        aria-controls="accor_inspection_type"
+                      >
+                        Inspection type
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_inspection_type"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={inspectionTypeName}
+                                      onChange={(e) =>
+                                        setInspectionTypeName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          addInspectionType(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {inspectionTypes.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button className="badge bg-success">
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="accordion-item mt-2">
+                    <h2
+                      className="accordion-header"
+                      id="accordionborderedExample3"
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accor_nuisance"
+                        aria-expanded="false"
+                        aria-controls="accor_nuisance"
+                      >
+                        Nuisance
+                      </button>
+                    </h2>
+                    <div
+                      id="accor_nuisance"
+                      className="accordion-collapse collapse"
+                      aria-labelledby="accordionborderedExample3"
+                      data-bs-parent="#accordionBordered"
+                    >
+                      <div className="accordion-body">
+                        <div className="col-sm-12 col-lg-12">
+                          <div className="card">
+                            <div className="card-body">
+                              <h6 className="card-title">Add </h6>
+                              <div className="row gy-4">
+                                <div className="col-xxl-4 col-md-8">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="basiInput"
+                                      value={nuisanceName}
+                                      onChange={(e) =>
+                                        setNuisanceName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-4">
+                                  <div>
+                                    <label
+                                      htmlFor="basiInput"
+                                      className="form-label"
+                                    >
+                                      .
+                                    </label>
+                                    <div className="text-end">
+                                      <button
+                                        onClick={(e) => {
+                                          if (nuisanceId) updateNuisance(e);
+                                          addNuisance(e);
+                                        }}
+                                        className="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="card-footer">
+                              <table className="table table-striped">
+                                <thead>
+                                  <tr>
+                                    {/* <th scope="col">Id</th> */}
+                                    <th scope="col">Name</th>
+
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {nuisances.map((cw) => (
+                                    <tr key={cw.id}>
+                                      {/* <th scope="row">{region.id}</th> */}
+                                      <td>{cw.name}</td>
+
+                                      <td>
+                                        <button
+                                          className="badge bg-success"
+                                          onClick={(e) => {
+                                            setNuisanceName(cw.name);
+                                            setNuisanceId(cw.id);
+                                          }}
+                                        >
+                                          Edit
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             {/*end row*/}
           </div>
