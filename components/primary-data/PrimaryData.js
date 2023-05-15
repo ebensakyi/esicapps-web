@@ -2227,7 +2227,7 @@ const PrimaryData = ({
                                 </thead>
                                 <tbody>
                                   {subtypes.map((s) => (
-                                    <tr key={s.id}>
+                                    <tr key={s.id }>
                                       <td>{s.InspectionForm.name}</td>
                                       <td>{s.name}</td>
                                       <td>{s.Type.name}</td>
