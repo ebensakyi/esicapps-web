@@ -98,6 +98,8 @@ const Dashboard = ({
   };
   const getElectoralAreasByDistrict = async (districtId) => {
     try {
+
+      console.log("di",districtId);
       const response = await axios.get(
         "/api/v1/primary-data/electoral-area?districtId=" + districtId
       );

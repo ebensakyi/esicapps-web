@@ -24,7 +24,9 @@ const get = async (req, res) => {
   try {
     let token = req?.cookies?.token || req?.query?.token;
 
+
     let data = await verifyToken(token);
+
     let districtId = data?.user?.districtId;
 
     if (districtId) {
@@ -35,7 +37,7 @@ const get = async (req, res) => {
 
       return res.status(200).json(electoralArea);
     }
-    
+
     if (req?.query?.districtId) {
       const electoralArea = await prisma.electoralArea.findMany({
         where: { deleted: 0, districtId: Number(req.query.districtId) },

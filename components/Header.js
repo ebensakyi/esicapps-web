@@ -97,6 +97,7 @@ const Header = () => {
                 <div className="dropdown-menu dropdown-menu-end">
                   {/* item*/}
                   <h6 className="dropdown-header"> {fullName}</h6>
+                  
                   <a className="dropdown-item" href="/auth/profile">
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle">Profile</span>
@@ -1019,14 +1020,14 @@ const Header = () => {
                         <li className="nav-item">
                           <Link href="/account/user">
                             <a className="nav-link menu-link">
-                              <i className=" ri-shield-user-line" />{" "}
+                              {/* <i className=" ri-shield-user-line" />{" "} */}
                               <span data-key="t-widgets">Users</span>
                             </a>
                           </Link>
                         </li>{" "}
                         <li className="nav-item">
                           <a className="nav-link menu-link" href="/auth/logs">
-                            <i className="ri-honour-line" />{" "}
+                            {/* <i className="ri-honour-line" />{" "} */}
                             <span data-key="t-widgets">User Logs</span>
                           </a>
                         </li>
