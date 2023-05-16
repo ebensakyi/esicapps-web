@@ -26,8 +26,9 @@ export default function Login() {
       if (response.status != 200) {
         return toast.error(response.data.message);
       }
+
+      console.log(response.data.user);
       if (response.status == 200) {
-        console.log(response.data);
         Cookies.set("ut", nanoid(50) + "??" + response.data.userType, {
           expires: 3 * 60 * 60,
         });
@@ -46,7 +47,13 @@ export default function Login() {
         Cookies.set("designation", response.data.user.designation, {
           expires: 3 * 60 * 60,
         });
-        console.log("LOLs");
+
+        Cookies.set("region", response.data.user.Region.name, {
+          expires: 3 * 60 * 60,
+        });
+        Cookies.set("district", response.data.user.District.name, {
+          expires: 3 * 60 * 60,
+        });
         return router.replace("/dashboard");
       }
     } catch (error) {

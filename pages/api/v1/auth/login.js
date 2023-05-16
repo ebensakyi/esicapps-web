@@ -16,10 +16,13 @@ const post = async (req, res) => {
 
     let user = await prisma.user.findFirst({
       where: { email, deleted: 0 },
-      include: { District: true },
-      include: { UserType: true },
+      include: { Region: true, District: true, UserType: true },
+
+      // include: { District: true },
+      // include: { UserType: true },
     });
 
+    console.log(user);
 
     if (!user) {
       return res
@@ -27,14 +30,13 @@ const post = async (req, res) => {
         .json({ statusCode: 0, message: "User account not found" });
     }
 
-    if(user.userTypeId==7){
+    if (user.userTypeId == 7) {
       return res
-      .status(404)
-      .json({ statusCode: 0, message: "User a field user" });
+        .status(404)
+        .json({ statusCode: 0, message: "User a field user" });
     }
 
     let isValid = await bcrypt.compare(password, user.password);
-
 
     if (isValid) {
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
@@ -42,7 +44,7 @@ const post = async (req, res) => {
       // let userId = user.id;
       let userType = user.userTypeId;
       await setUserCookie(token, req, res);
-      return res.status(200).json({ userType,  user });
+      return res.status(200).json({ userType, user });
     } else {
       return res
         .status(404)
