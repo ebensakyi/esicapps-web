@@ -15,7 +15,7 @@ export default function Login() {
   const router = useRouter();
 
   const login = async (e) => {
-    try {
+   // try {
       e.preventDefault();
       let data = {
         email,
@@ -23,44 +23,45 @@ export default function Login() {
       };
       const response = await axios.post(`/api/v1/auth/login`, data);
 
-      if (response.status != 200) {
-        return toast.error(response.data.message);
+
+      if (response?.status != 200) {
+        return toast.error(response?.data?.message);
       }
 
       if (response.status == 200) {
-        Cookies.set("ut", nanoid(50) + "??" + response.data.userType, {
+        Cookies.set("ut", nanoid(50) + "??" + response?.data?.userType, {
           expires: 3 * 60 * 60,
         });
        
 
         Cookies.set(
           "fullName",
-          response.data.user.surname + " " + response.data.user.otherNames,
+          response?.data?.user?.surname + " " + response?.data?.user?.otherNames,
           {
             expires: 3 * 60 * 60,
           }
         );
-        Cookies.set("userType", response.data.user.UserType.name, {
+        Cookies.set("userType", response?.data?.user?.UserType?.name, {
           expires: 3 * 60 * 60,
         });
-        Cookies.set("designation", response.data.user.designation, {
+        Cookies.set("designation", response?.data?.user?.designation, {
           expires: 3 * 60 * 60,
         });
 
-        Cookies.set("region", response.data.user.Region.name, {
+        Cookies.set("region", response?.data?.user?.Region?.name, {
           expires: 3 * 60 * 60,
         });
-        Cookies.set("district", response.data.user.District.name, {
+        Cookies.set("district", response?.data?.user?.District?.name, {
           expires: 3 * 60 * 60,
         });
         return router.replace("/dashboard");
       }
-    } catch (error) {
-      return toast.error("User account  not found");
-    }
+    // } catch (error) {
+    //   console.log(error);
+    //   return toast.error("User account  not found");
+    // }
 
-    // router.replace(router.asPath)
-    // router.push("/");
+   
   };
 
   const getYear = () => {
