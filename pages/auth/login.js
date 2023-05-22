@@ -27,7 +27,6 @@ export default function Login() {
         return toast.error(response.data.message);
       }
 
-      console.log(response.data.user);
       if (response.status == 200) {
         Cookies.set("ut", nanoid(50) + "??" + response.data.userType, {
           expires: 3 * 60 * 60,
