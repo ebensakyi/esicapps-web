@@ -11,15 +11,19 @@ try {
   let userCookie = await getUserCookie(req, res);
   await logActivity("Single SMS sent",  userCookie.user.id);
 
+
+  console.log(req.body);
+
   let recipientId = req.body.recipient.split("$")[0];
   let recipient = req.body.recipient.split("$")[1];
 
   const data = {
-    recipient: recipient,
+    recipient: recipient,   
+     recipientId: Number(recipientId),
+
     message: req.body.message,
     title: "",
-    recipientTag: Number(req.body.group),
-    recipientId: Number(recipientId),
+   // recipient: Number(req.body.group),
 
     sender: Number(userCookie.user.id),
     messageType: 2,

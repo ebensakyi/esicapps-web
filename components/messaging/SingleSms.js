@@ -216,7 +216,7 @@ const SingleSMS = ({ users, messages }) => {
                       <tr>
                         <th>Sending Type</th>
                         <th>Msg Type</th>
-                        <th>Title</th>
+                        {/* <th>Title</th> */}
                         <th>Message</th>
 
                         <th>Recipient</th>
@@ -230,7 +230,7 @@ const SingleSMS = ({ users, messages }) => {
                             <td>{msg.SendingType.name}</td>
                             <td>{msg.MessageType.name}</td>
 
-                            <td>{msg.title}</td>
+                            {/* <td>{msg.title}</td> */}
                             <td>{msg.message}</td>
 
                             <td>{msg.recipient}</td>
