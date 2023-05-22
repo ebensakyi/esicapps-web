@@ -4,7 +4,7 @@ var hash1 = bcrypt.hashSync("Kofi@2318", salt);
 var hash2 = bcrypt.hashSync("12345678", salt);
 var hash3 = bcrypt.hashSync("12345678", salt);
 var hash4 = bcrypt.hashSync("12345678", salt);
-var hash5 = bcrypt.hashSync("12345678", salt);
+var hash5 = bcrypt.hashSync("eo@12345678", salt);
 var hashx = bcrypt.hashSync("87654321", salt);
 
 export const users = [

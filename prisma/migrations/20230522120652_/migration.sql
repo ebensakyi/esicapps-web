@@ -95,7 +95,6 @@ CREATE TABLE "Messaging" (
     "title" VARCHAR(255),
     "message" VARCHAR(2550) NOT NULL,
     "recipient" TEXT,
-    "recipientTag" INTEGER,
     "recipientId" INTEGER,
     "messageType" INTEGER,
     "sendingType" INTEGER,
@@ -1734,6 +1733,9 @@ ALTER TABLE "Nuisance" ADD CONSTRAINT "Nuisance_inspectionFormId_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "District" ADD CONSTRAINT "District_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "RespondentDesignation" ADD CONSTRAINT "RespondentDesignation_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Type" ADD CONSTRAINT "Type_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
