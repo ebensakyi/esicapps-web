@@ -15,18 +15,16 @@ const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
 
-
     form.parse(req, async function (err, fields, files) {
       let districtId = Number(fields.districtId);
 
+      let response = await csvUploader(files, districtId);
+      
 
-
-      let filePath = await saveFile(files, districtId);
-
-      return res.status(201).json({});
+      return res.status(201).json(response);
     });
   } catch (error) {
-    //console.log(error);
+    console.log("post==> " + error);
   }
 };
 
@@ -36,52 +34,71 @@ const post = async (req, res) => {
 //   } catch (error) {}
 // };
 
-const saveFile = async (files, districtId) => {
+// const saveFile = async (files, districtId) => {
+//   try {
+//     const csvFile = await files.csvFile;
+
+//     const fileName = nanoid() + ".csv";
+//     const data = fs.readFileSync(csvFile.filepath);
+//     let filePath = `./public/temp/${fileName}`;
+
+//     let x = fs.writeFileSync(filePath, data);
+
+//     await csvUploader(filePath, districtId);
+//      //fs.unlinkSync(filePath);
+
+//     return fileName;
+//   } catch (error) {
+//     console.log("saveFile>> ", error);
+//   }
+// };
+
+const csvUploader = async (file, districtId) => {
   try {
-    const csvFile = await files.csvFile;
+    let data = [];
+//Upload file to temp folder
+    const csvFile = await file.csvFile;
 
     const fileName = nanoid() + ".csv";
-    const data = fs.readFileSync(csvFile.filepath);
+    const csvData = fs.readFileSync(csvFile.filepath);
     let filePath = `./public/temp/${fileName}`;
 
-    console.log(filePath);
+    let x = fs.writeFileSync(filePath, csvData);
 
-    let x = fs.writeFileSync(filePath, data);
 
-    await csvUploader(filePath, districtId);
-     //fs.unlinkSync(filePath);
+//Read file
+    createReadStream(filePath)
+      .pipe(parse({ headers: true }))
+      .on("error", (error) => {
+        throw error.message;
+      })
+      .on("data", (row) => {
+        data.push(row);
+      })
+      .on("end", async () => {
+        let newData = await formatData(data, districtId);
 
-    return fileName;
+        await prisma.electoralArea.createMany({
+          data: newData,
+        });
+      });
+console.log(data);
+      return data.length
   } catch (error) {
-    console.log("saveFile>> ", error);
+    console.log("csvUploader ==>", error);
   }
 };
 
-const csvUploader = async (path, districtId) => {
-  let data = [];
-
-  createReadStream(path)
-    .pipe(parse({ headers: true }))
-    .on("error", (error) => {
-      throw error.message;
-    })
-    .on("data", (row) => {
-      data.push(row);
-    })
-    .on("end", async () => {
-      let newData = await formatData(data, districtId);
-      await prisma.electoralArea.createMany({
-        data: newData,
-      });
-    });
-};
-
 const formatData = async (data, districtId) => {
-  let newData = data.map((row) => ({
-    districtId: Number(districtId),
-    name: row.name,
-  }));
-  return newData;
+  try {
+    let newData = data.map((row) => ({
+      districtId: Number(districtId),
+      name: row.name,
+    }));
+    return newData;
+  } catch (error) {
+    console.log(error);
+  }
 };
 export default (req, res) => {
   req.method === "POST"

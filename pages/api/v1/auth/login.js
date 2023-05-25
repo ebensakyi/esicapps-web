@@ -8,6 +8,7 @@ import {
 
 const post = async (req, res) => {
   try {
+
     await clearUserCookie(req, res);
 
     let email = req.body.email;
@@ -23,6 +24,7 @@ const post = async (req, res) => {
     });
 
 
+
     if (!user) {
       return res
         .status(404)
@@ -36,7 +38,7 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(password, user.password);
-
+console.log(isValid);
 
     if (isValid) {
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
@@ -46,6 +48,7 @@ const post = async (req, res) => {
       await setUserCookie(token, req, res);
       return res.status(200).json({ userType, user });
     } else {
+
       return res
         .status(404)
         .json({ statusCode: 0, message: "Wrong user credentials" });

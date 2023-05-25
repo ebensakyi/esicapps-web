@@ -25,7 +25,9 @@ const post = async (req, res) => {
 
       return res.status(201).json({});
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const get = async (req, res) => {
@@ -54,7 +56,8 @@ const saveFile = async (files, electoralAreaId, districtId) => {
 };
 
 const csvUploader = async (path, electoralAreaId, districtId) => {
-  let data = [];
+  try {
+    let data = [];
 
   createReadStream(path)
     .pipe(parse({ headers: true }))
@@ -70,15 +73,24 @@ const csvUploader = async (path, electoralAreaId, districtId) => {
         data: newData,
       });
     });
+  } catch (error) {
+    console.log(error);
+  }
+  
 };
 
 const formatData = async (data, electoralAreaId, districtId) => {
-  let newData = data.map((row) => ({
+  try {
+     let newData = data.map((row) => ({
     electoralAreaId: Number(electoralAreaId),
     districtId,
     name: row.name.trim(),
   }));
   return newData;
+  } catch (error) {
+    console.log(error);
+  }
+ 
 };
 export default (req, res) => {
   req.method === "POST"

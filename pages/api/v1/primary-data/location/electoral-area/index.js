@@ -22,7 +22,6 @@ const put = async (req, res) => {
 
 const post = async (req, res) => {
   try {
-    console.log(req.body);
 
     // district user oonly. Use his id
 

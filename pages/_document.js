@@ -25,11 +25,11 @@ export default function Document() {
           type="text/css"
         />
 
-        <link
+        {/* <link
           href="/assets/libs/jsvectormap/css/jsvectormap.min.css"
           rel="stylesheet"
           type="text/css"
-        />
+        /> */}
 
         <script async src="/assets/js/layout.js"></script>
         <link

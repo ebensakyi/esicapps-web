@@ -15,7 +15,7 @@ export default function Login() {
   const router = useRouter();
 
   const login = async (e) => {
-   // try {
+   try {
       e.preventDefault();
       let data = {
         email,
@@ -56,10 +56,10 @@ export default function Login() {
         });
         return router.replace("/dashboard");
       }
-    // } catch (error) {
-    //   console.log(error);
-    //   return toast.error("User account  not found");
-    // }
+    } catch (error) {
+      console.log(error);
+      return toast.error("User account  not found");
+    }
 
    
   };
