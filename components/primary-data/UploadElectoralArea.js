@@ -64,7 +64,7 @@ const UploadElectoralArea = ({ data, districts }) => {
         data: body,
       });
 
-      toast.success(response.data);
+      toast.success("Uploaded");
 
       router.replace(router.asPath);
     } catch (error) {

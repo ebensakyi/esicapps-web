@@ -64,6 +64,7 @@ const UploadCommunity = ({ data, electoralAreas }) => {
         },
         data: body,
       });
+      toast.success("Uploaded");
 
       router.replace(router.asPath);
     } catch (error) {

@@ -64,6 +64,7 @@ const UploadDistrict = ({ data, regions }) => {
         },
         data: body,
       });
+      toast.success("Uploaded");
 
       router.replace(router.asPath);
     } catch (error) {
