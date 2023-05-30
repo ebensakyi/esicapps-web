@@ -97,7 +97,7 @@ const Header = () => {
                 <div className="dropdown-menu dropdown-menu-end">
                   {/* item*/}
                   <h6 className="dropdown-header"> {fullName}</h6>
-                  
+
                   <a className="dropdown-item" href="/auth/profile">
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />{" "}
                     <span className="align-middle">Profile</span>
@@ -731,68 +731,67 @@ const Header = () => {
               </li> */}
               {/* {ut == 1 ? (
                 <> */}
-                  <li className="menu-title">
-                    <i className="ri-more-fill" />{" "}
-                    <span data-key="t-components">MESSAGES</span>
-                  </li>
-
-                  <li className="nav-item">
-                    <a
-                      className="nav-link menu-link"
-                      href="#notifications"
-                      data-bs-toggle="collapse"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="sidebarPages"
-                    >
-                      <i className="ri-notification-2-line" />{" "}
-                      <span data-key="t-pages">Notifications</span>
-                    </a>
-                    <div className="collapse menu-dropdown" id="notifications">
-                      <ul className="nav nav-sm flex-column">
-                        <li className="nav-item">
-                          <li className="nav-item">
-                            <Link href="/messaging/notification/broadcast">
-                              <a className="nav-link"> Broadcast</a>
-                            </Link>
-                          </li>
-                          <li className="nav-item">
-                            <Link href="/messaging/notification/single">
-                              <a className="nav-link"> Single Notification</a>
-                            </Link>
-                          </li>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link menu-link"
-                      href="#sidebarPages"
-                      data-bs-toggle="collapse"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="sidebarPages"
-                    >
-                      <i className="ri-message-2-line" />{" "}
-                      <span data-key="t-pages">SMS</span>
-                    </a>
-                    <div className="collapse menu-dropdown" id="sidebarPages">
-                      <ul className="nav nav-sm flex-column">
-                        <li className="nav-item">
-                          <Link href="/messaging/sms/broadcast">
-                            <a className="nav-link"> Broadcast</a>
-                          </Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link href="/messaging/sms/single">
-                            <a className="nav-link"> Single SMS</a>
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                {/* </>
+              <li className="menu-title">
+                <i className="ri-more-fill" />{" "}
+                <span data-key="t-components">MESSAGES</span>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#notifications"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="sidebarPages"
+                >
+                  <i className="ri-notification-2-line" />{" "}
+                  <span data-key="t-pages">Notifications</span>
+                </a>
+                <div className="collapse menu-dropdown" id="notifications">
+                  <ul className="nav nav-sm flex-column">
+                    <li className="nav-item">
+                      <li className="nav-item">
+                        <Link href="/messaging/notification/broadcast">
+                          <a className="nav-link"> Broadcast</a>
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link href="/messaging/notification/single">
+                          <a className="nav-link"> Single Notification</a>
+                        </Link>
+                      </li>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#sidebarPages"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="sidebarPages"
+                >
+                  <i className="ri-message-2-line" />{" "}
+                  <span data-key="t-pages">SMS</span>
+                </a>
+                <div className="collapse menu-dropdown" id="sidebarPages">
+                  <ul className="nav nav-sm flex-column">
+                    <li className="nav-item">
+                      <Link href="/messaging/sms/broadcast">
+                        <a className="nav-link"> Broadcast</a>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/messaging/sms/single">
+                        <a className="nav-link"> Single SMS</a>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              {/* </>
               ) : (
                 <></>
               )} */}
@@ -1002,36 +1001,35 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-            
-                  <li className="nav-item">
-                    <a
-                      className="nav-link menu-link"
-                      href="#us"
-                      data-bs-toggle="collapse"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="us"
-                    >
-                      <i className="ri-apps-2-line" />
-                      <span data-key="t-apps">User Management</span>
-                    </a>
-                    <div className="collapse menu-dropdown" id="us">
-                      <ul className="nav nav-sm flex-column">
-                        <li className="nav-item">
-                          <Link href="/account/user">
-                            <a className="nav-link menu-link">
-                              {/* <i className=" ri-shield-user-line" />{" "} */}
-                              <span data-key="t-widgets">Users</span>
-                            </a>
-                          </Link>
-                        </li>{" "}
-                        <li className="nav-item">
-                          <a className="nav-link menu-link" href="/auth/logs">
-                            {/* <i className="ri-honour-line" />{" "} */}
-                            <span data-key="t-widgets">User Logs</span>
-                          </a>
-                        </li>
-                        {/* <li className="nav-item">
+              <li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#us"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="us"
+                >
+                  <i className="ri-apps-2-line" />
+                  <span data-key="t-apps">User Management</span>
+                </a>
+                <div className="collapse menu-dropdown" id="us">
+                  <ul className="nav nav-sm flex-column">
+                    <li className="nav-item">
+                      <Link href="/account/user">
+                        <a className="nav-link menu-link">
+                          {/* <i className=" ri-shield-user-line" />{" "} */}
+                          <span data-key="t-widgets">Users</span>
+                        </a>
+                      </Link>
+                    </li>{" "}
+                    <li className="nav-item">
+                      <a className="nav-link menu-link" href="/auth/logs">
+                        {/* <i className="ri-honour-line" />{" "} */}
+                        <span data-key="t-widgets">User Logs</span>
+                      </a>
+                    </li>
+                    {/* <li className="nav-item">
                           <a
                             href="/auth/password-reset-request"
                             className="nav-link"
@@ -1040,10 +1038,9 @@ const Header = () => {
                             Password Reset
                           </a>
                         </li> */}
-                      </ul>
-                    </div>
-                  </li>
-              
+                  </ul>
+                </div>
+              </li>
             </ul>
           </div>
           {/* Sidebar */}
