@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import { SERVER_BASE_URL } from "../../config";
 import ElectoralAreaBulkUploadTemplate from "../../../components/setup/ElectoralAreaBulkUploadTemplate";
 
-export default function addUserGuides({  }) {
+export default function eabut({  }) {
   return (
     <div id="layout-wrapper">
       <Header />
