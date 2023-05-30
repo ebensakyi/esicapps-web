@@ -1,9 +1,9 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { SERVER_BASE_URL } from "../../config";
-import BulkUploadTemplates from "../../components/setup/BulkUploadTemplates";
+import CommunityBulkUploadTemplate from "../../../components/setup/CommunityBulkUploadTemplate";
 
-export default function addUserGuides({  }) {
+export default function cbut({  }) {
   return (
     <div id="layout-wrapper">
       <Header />
@@ -11,7 +11,7 @@ export default function addUserGuides({  }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <BulkUploadTemplates  />
+            <CommunityBulkUploadTemplate/>
           </div>
         </div>
       </div>
