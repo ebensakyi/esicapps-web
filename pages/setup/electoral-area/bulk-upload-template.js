@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { SERVER_BASE_URL } from "../../config";
-import BulkUploadTemplates from "../../components/setup/BulkUploadTemplates";
+import ElectoralAreaBulkUploadTemplate from "../../../components/setup/ElectoralAreaBulkUploadTemplate";
 
 export default function addUserGuides({  }) {
   return (
@@ -11,7 +11,7 @@ export default function addUserGuides({  }) {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-            <BulkUploadTemplates  />
+            <ElectoralAreaBulkUploadTemplate  />
           </div>
         </div>
       </div>
