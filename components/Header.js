@@ -861,6 +861,15 @@ const Header = () => {
                                   Add{" "}
                                 </a>
                               </li>
+                              <li className="nav-item">
+                        <a
+                          href="/setup/district/bulk-upload-template"
+                          className="nav-link"
+                        >
+                          {" "}
+                          Bulk Upload Template
+                        </a>
+                      </li>
                             </ul>
                           </div>
                         </li>
@@ -898,6 +907,15 @@ const Header = () => {
                                   Add{" "}
                                 </a>
                               </li>
+                              <li className="nav-item">
+                        <a
+                          href="/setup/electoral-area/bulk-upload-template"
+                          className="nav-link"
+                        >
+                          {" "}
+                          Bulk Upload Template
+                        </a>
+                      </li>
                             </ul>
                           </div>
                         </li>{" "}
@@ -938,6 +956,15 @@ const Header = () => {
                                   Add{" "}
                                 </a>
                               </li>
+                              <li className="nav-item">
+                        <a
+                          href="/setup/community/bulk-upload-template"
+                          className="nav-link"
+                        >
+                          {" "}
+                          Bulk Upload Template
+                        </a>
+                      </li>
                             </ul>
                           </div>
                           <li className="nav-item">
@@ -959,15 +986,7 @@ const Header = () => {
                           <a className="nav-link"> User Guide</a>
                         </Link>
                       </li>
-                      <li className="nav-item">
-                        <a
-                          href="/setup/bulk-upload-templates"
-                          className="nav-link"
-                        >
-                          {" "}
-                          Bulk Upload Templates
-                        </a>
-                      </li>
+                     
                     </li>
 
                     {/* <li className="nav-item">

@@ -7,7 +7,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const BulkUploadTemplates = ({}) => {
+const DistrictBulkUploadTemplate = ({}) => {
   const router = useRouter();
 
   const addUserGuide = async (e) => {
@@ -77,22 +77,7 @@ const BulkUploadTemplates = ({}) => {
                     </label>
                   </a>
                 </div>
-                <div className="col-xxl-3 col-md-12">
-                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/electoral-area-upload-template.csv"  target="_blank" rel="noreferrer" >
-                    {" "}
-                    <label htmlFor="basiInput" className="form-label">
-                      Click here to download Electoral Area Upload Template
-                    </label>
-                  </a>
-                </div>
-                <div className="col-xxl-3 col-md-12">
-                  <a href="https://esicapps-files.s3.eu-west-2.amazonaws.com/community-upload-template.csv"  target="_blank" rel="noreferrer" >
-                    {" "}
-                    <label htmlFor="basiInput" className="form-label">
-                      Click here to download Communities Upload Template
-                    </label>
-                  </a>
-                </div>
+             
               </div>
             </div>
           </div>
@@ -102,4 +87,4 @@ const BulkUploadTemplates = ({}) => {
   );
 };
 
-export default BulkUploadTemplates;
+export default DistrictBulkUploadTemplate;
