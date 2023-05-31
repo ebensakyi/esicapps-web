@@ -13,14 +13,23 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const user = await prisma.logs.findMany({
+    let curPage = req.query.page;
+
+    let perPage = 10;
+
+    const data = await prisma.logs.findMany({
       where: { deleted: 0 },
       include: { User: true },
     });
 
-    console.log(user);
-    //return res.status(200).json({ statusCode: 1, data: user });
-    return res.status(200).json(user);
+    let count = data.length;
+    let max =  Math.ceil(count / perPage)
+
+    return res.status(200).json({
+      data,
+      curPage: curPage,
+      maxPage: max,
+    });
   } catch (error) {
     console.log("Error: " + error);
   }

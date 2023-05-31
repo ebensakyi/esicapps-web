@@ -5,7 +5,7 @@ import { SERVER_BASE_URL } from "../../config";
 import Logs from '../../components/auth/Logs'
 
 
-export default function logs({ logs }) {
+export default function logs({ data }) {
     return (
         <div id="layout-wrapper">
             <Header />
@@ -14,7 +14,7 @@ export default function logs({ logs }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <Logs logs={logs} />
+                        <Logs data={data} />
 
                     </div>
                 </div>
@@ -26,6 +26,7 @@ export default function logs({ logs }) {
 
 export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
+    const page = context.query.page || 1;
 
     if (!token) {
         return {
@@ -35,14 +36,14 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const logs = await fetch(`${SERVER_BASE_URL}/api/v1/auth/logs`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/auth/logs?page=${page}`).then(
         (res) => res.json()
     );
 
    
     return {
         props: {
-            logs,
+            data,
         },
     };
 
