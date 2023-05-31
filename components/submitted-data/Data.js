@@ -630,6 +630,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   <th scope="col">End Date</th>
                   <th scope="col">Inspection Officer</th>
                   <th scope="col">GhanaPost GPS</th>
+                  <th scope="col">Lat/Lng</th>
                   <th scope="col">GPS Accuracy</th>
                   <th scope="col">Region</th>
                   <th scope="col">District</th>
@@ -685,6 +686,19 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                         {dt?.User?.otherNames} {dt?.User?.surname}
                       </td>
                       <td>{dt?.ghanaPostGps}</td>
+                      <td> <Link
+                              href={{
+                                pathname: `http://www.google.com/maps/place/${dt?.latitude},${dt?.longitude}`,
+                                query: {
+                             
+                                },
+                              }}
+                              passHref
+                            >
+                              <a target="_blank" rel="noopener noreferrer" className="dropdown-item" > {dt?.latitude},{dt?.longitude}
+                                <i className="ri-external-link-line align-bottom me-2 text-success" />
+                              </a>
+                           </Link></td>
                       <td>{dt?.accuracy}</td>
                       <td>
                         {dt?.Community?.ElectoralArea?.District?.Region?.name}
