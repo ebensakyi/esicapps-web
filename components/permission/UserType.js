@@ -3,62 +3,51 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-import { components } from "react-select";
+import Multiselect from "multiselect-react-dropdown";
 
-const Option = (props) => {
-  return (
-    <div>
-      <components.Option {...props}>
-        <input
-          type="checkbox"
-          checked={props.isSelected}
-          onChange={() => null}
-        />{" "}
-        <label>{props.label}</label>
-      </components.Option>
-    </div>
-  );
-};
-const UserType = ({ userTypes, pages }) => {
+const UserType = ({ userTypes, pagesOptions,pages }) => {
   const router = useRouter();
 
   const [userTypeName, setUserTypeName] = useState("");
   const [selectedPages, setSelectedPages] = useState([]);
 
-
   // const [message, setMessage] = useState("");
 
-  // const sendSingleMessage = async (e) => {
-  //   try {
-  //     // console.log("sendBroadcastMessage");
-  //     e.preventDefault();
-  //     if (message == "") return toast.error("Message cannot be empty");
-  //     if (recipient == "") return toast.error("Recipient cannot be empty");
+  const add = async (e) => {
+    try {
+      e.preventDefault();
+      if (selectedPages.length == 0) return toast.error("Pages cannot be empty");
+      if (userTypeName == "") return toast.error("User type cannot be empty");
 
-  //     let data = {
-  //       recipient: recipient,
-  //       message,
-  //       sendingType: 2,
+      let data = {
+        userTypeName,
+        
+        selectedPages:selectedPages
+      };
 
-  //       group: 3,
-  //     };
+      const response = await axios.post(
+        "/api/v1/permission/user-type",
+        data
+      );
+      setSelectedPages([]);
+      setUserTypeName("");
+      router.replace(router.asPath);
 
-  //     const response = await axios.post(
-  //       "/api/v1/messaging/sms/single",
-  //       data
-  //     );
-  //     setRecipient("");
-  //     setMessage("");
-  //     router.replace(router.asPath);
-  //     //router.push("/messaging/sms/single");
+      return toast.success("User Type saved");
+    } catch (error) {
+      console.log(error);
+      return toast.error("An error occurred");
+    }
+  };
 
-  //     return toast.success("Message sent");
-  //   } catch (error) {
-  //     console.log(error);
-  //     return toast.error("An error occurred");
-  //   }
-  // };
+ const onRemove= ()=>{
 
+  }
+  const onSelect= (selected)=>{
+    console.log(selected[selected.length-1].value);
+    setSelectedPages(selected)
+
+  }
   return (
     <div className="row">
       <ToastContainer
@@ -75,11 +64,11 @@ const UserType = ({ userTypes, pages }) => {
       <div className="col-12">
         <div className="row">
           <div className="col-lg-12">
-            <h5 className="mb-3">SMS</h5>
+            <h5 className="mb-3">User Type</h5>
 
             <div className="card">
               <div className="card-header align-items-center d-flex">
-                <h4 className="card-title mb-0 flex-grow-1">Single</h4>
+                <h4 className="card-title mb-0 flex-grow-1">Add</h4>
                 {/* <div className="flex-shrink-0">
                   <div className="form-check form-switch form-switch-right form-switch-md">
                     <label
@@ -113,7 +102,7 @@ const UserType = ({ userTypes, pages }) => {
                       />
                     </div>
                   </div> */}
-                  <div className="col-xxl-3 col-md-6">
+                  <div className="col-xxl-4 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">
                         User Type Name
@@ -128,26 +117,20 @@ const UserType = ({ userTypes, pages }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-xxl-3 col-md-6">
+                  <div className="col-xxl-8 col-md-8">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         Pages
                       </label>
 
-                      <ReactSelect
-                        options={pagesOptions}
-                        isMulti
-                        closeMenuOnSelect={false}
-                        hideSelectedOptions={false}
-                        components={{
-                          Option,
-                        }}
-                        onChange={this.handleChange}
-                        allowSelectAll={true}
-                        value={this.state.optionSelected}
+                      <Multiselect
+                        options={pagesOptions} 
+                        selectedValues={selectedPages} 
+                        onSelect={onSelect} 
+                        onRemove={onRemove} 
+                        displayValue="label" 
                       />
-
-                      <select
+                      {/* <select
                         className="form-select"
                         id="inputGroupSelect02"
                         value={pages}
@@ -161,7 +144,7 @@ const UserType = ({ userTypes, pages }) => {
                             {u.name}
                           </option>
                         ))}
-                      </select>
+                      </select> */}
                     </div>
                   </div>
 
@@ -217,10 +200,10 @@ const UserType = ({ userTypes, pages }) => {
                         <button
                           className="btn btn-primary"
                           onClick={(e) => {
-                            // sendSingleMessage(e);
+                             add(e);
                           }}
                         >
-                          Send
+                          Create
                         </button>
                       </div>
                     </div>
@@ -231,7 +214,7 @@ const UserType = ({ userTypes, pages }) => {
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
-                  <h5 className="card-title mb-0">Messages</h5>
+                  <h5 className="card-title mb-0">List</h5>
                 </div>
                 <div className="card-body">
                   <table

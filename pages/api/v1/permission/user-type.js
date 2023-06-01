@@ -4,22 +4,35 @@ import { getUserCookie } from "../../../../utils/cookies-manager";
 
 const post = async (req, res) => {
   try {
-
     let userCookie = await getUserCookie(req, res);
-    await logActivity("Action summaries report generated",  userCookie.user.id);
+    await logActivity("User type added", userCookie.user.id);
 
-    let name = req.body.name;
-    let href = req.body.href;
-    let icon = req.body.icon;
+    let name = req.body.userTypeName;
+    let selectedPages = req.body.selectedPages;
 
-    let filterValue = Number(req.body.filterValue);
-    
-
-    const page = await prisma.page.create({
+    const userType = await prisma.userType.create({
       data: {
-       
+        name,
       },
-     
+    });
+
+    console.log(userType);
+
+    let pages =await selectedPages.map((page) => {
+      return {
+        pageId: page,
+        userTypeId: userType.id,
+      };
+    });
+
+    console.log(pages);
+
+    const pageAccess = await prisma.pageAccess.createMany({
+      data: {
+        userTypeId: userType.id,
+      },
+      data: pages,
+      skipDuplicates: true,
     });
 
     res.status(200).json({
@@ -34,16 +47,14 @@ const post = async (req, res) => {
   }
 };
 
-
 const get = async (req, res) => {
-    try {
-      const page = await prisma.page.findMany({ where: { deleted: 0 } });
-      return res.status(200).json( page);
-  
-    } catch (error) {
-      console.log("Error: " + error);
-    }
-  };
+  try {
+    const page = await prisma.userType.findMany({ where: { deleted: 0 } });
+    return res.status(200).json(page);
+  } catch (error) {
+    console.log("Error: " + error);
+  }
+};
 
 export default (req, res) => {
   req.method === "POST"
