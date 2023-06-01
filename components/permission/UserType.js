@@ -11,7 +11,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
   const [userTypeName, setUserTypeName] = useState("");
   const [selectedPages, setSelectedPages] = useState([]);
 
-  // const [message, setMessage] = useState("");
+ const [isEditing, setIsEditing] = useState(0);
 
   const add = async (e) => {
     try {
@@ -38,20 +38,18 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
     }
   };
   const deleteUserType = async (selected) => {
-    console.log(selected[selected.length - 1].value);
-    arr = selectedPages.filter(function (item) {
-      return item !== selected[selected.length - 1].value;
-    });
-    console.log(arr);
+    // arr = selectedPages.filter(function (item) {
+    //   return item !== selected[selected.length - 1].value;
+    // });
+    // console.log(arr);
   };
   const onRemove = (selected) => {
-    setSelectedPages([selected.length - 1].value);
-    console.log(selectedPages);
+
+   // setSelectedPages([selected.length - 1].value);
   };
   const onSelect = (selected) => {
-    console.log([selectedPages.length - 1].value);
-    setSelectedPages(selected[selectedPages.length - 1].value);
-    console.log(selectedPages);
+    // setSelectedPages(selected[selected.length - 1].value);
+    setSelectedPages(selected);
   };
   return (
     <div className="row">
@@ -202,7 +200,15 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                   <div className="flex-shrink-0">
                     <div className="col-lg-12">
                       <div className="text-end">
-                        <button
+                        {isEditing==1?
+                         <button
+                         className="btn btn-warning"
+                         onClick={(e) => {
+                           add(e);
+                         }}
+                       >
+                         Update
+                       </button>: <button
                           className="btn btn-primary"
                           onClick={(e) => {
                             add(e);
@@ -210,6 +216,8 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                         >
                           Create
                         </button>
+                        }
+                       
                       </div>
                     </div>
                   </div>
@@ -288,6 +296,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                                             }
                                           );
                                           setSelectedPages(pageAcess);
+                                          setIsEditing(1)
                                         }}
                                       >
                                         Update
@@ -298,6 +307,8 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                                         className="dropdown-item btn btn-sm "
                                         onClick={(e) => {
                                           e.preventDefault();
+
+                                          deleteUserType()
                                         }}
                                       >
                                         Delete
