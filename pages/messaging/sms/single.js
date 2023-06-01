@@ -5,8 +5,8 @@ import SingleSms from "../../../components/messaging/SingleSms";
 
 export default function broadcast_sms({ regions, districts, messages, users }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -21,7 +21,7 @@ export default function broadcast_sms({ regions, districts, messages, users }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

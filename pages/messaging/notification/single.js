@@ -5,8 +5,8 @@ import SingleNotification from "../../../components/messaging/SingleNotification
 
 export default function single_notification({ regions, districts, messages, users }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -20,7 +20,7 @@ export default function single_notification({ regions, districts, messages, user
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

@@ -7,8 +7,8 @@ import Logs from '../../components/auth/Logs'
 
 export default function logs({ data }) {
     return (
-        <div id="layout-wrapper">
-            <Header />
+        // <div id="layout-wrapper">
+        //     <Header />
 
             <div className="main-content">
                 <div className="page-content">
@@ -19,7 +19,7 @@ export default function logs({ data }) {
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

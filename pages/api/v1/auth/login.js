@@ -61,6 +61,8 @@ console.log(isValid);
 
 const get = async (req, res) => {
   try {
+    await clearUserCookie(req, res);
+
     const user = await prisma.user.findMany({ where: { deleted: 0 } });
     return res.status(200).json({ statusCode: 1, data: user });
   } catch (error) {

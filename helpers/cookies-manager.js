@@ -1,6 +1,6 @@
 import cookie from "cookie";
 import prisma from "../prisma/MyPrismaClient";
-import { verifyToken } from "./token-verifier"
+import { verifyToken } from "./token-verifier";
 
 export const setUserCookie = async (token, req, res) => {
   try {
@@ -19,9 +19,12 @@ export const setUserCookie = async (token, req, res) => {
   }
 };
 
-
-
-export const setAccessiblePositionCookie = async (access, userType, req, res) => {
+export const setAccessiblePositionCookie = async (
+  access,
+  userType,
+  req,
+  res
+) => {
   try {
     res.setHeader(
       "Set-Cookie",
@@ -34,7 +37,6 @@ export const setAccessiblePositionCookie = async (access, userType, req, res) =>
       })
     );
 
-
     return res.status(200).json({
       statusCode: 1,
       data: { userType },
@@ -46,16 +48,35 @@ export const setAccessiblePositionCookie = async (access, userType, req, res) =>
 };
 
 export const clearUserCookie = async (req, res) => {
-  res.setHeader(
-    "Set-Cookie",
-    cookie.serialize("token", '', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      maxAge: -1,
-      sameSite: "strict",
-      path: "/",
-    })
-  );
+  try {
+    console.log("Clear cooke");
+    res.setHeader('Set-Cookie', 'token=someValue; Max-Age=0');
+
+
+    res.setHeader("Set-Cookie", [
+      cookie.serialize("token", "", {
+        maxAge: -1,
+        path: "/",
+      }),
+      cookie.serialize("userType", "", {
+        maxAge: -1,
+        path: "/",
+      }),
+    ]);
+  } catch (error) {
+    console.log(error);
+  }
+
+  // res.setHeader(
+  //   "Set-Cookie",
+  //   cookie.serialize("token", '', {
+  //     httpOnly: true,
+  //     secure: process.env.NODE_ENV !== "development",
+  //     maxAge: -1,
+  //     sameSite: "strict",
+  //     path: "/",
+  //   })
+  // );
 };
 
 // export const setUserTypeCookie = async (userType, res) => {
@@ -87,8 +108,6 @@ export const getUserCookie = async (req, res) => {
     console.log(">>>>>>>>>>", error);
   }
 };
-
-
 
 // export const setJobSession = async (jobId) => {
 //   try {
@@ -128,7 +147,4 @@ export const isSubmitted = async (userId, res) => {
       path: "/",
     })
   );
-
-
-  
 };

@@ -5,8 +5,8 @@ import Sms from "../../components/messaging/Sms";
 
 export default function sms({ regions, districts, messages, users }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -20,7 +20,7 @@ export default function sms({ regions, districts, messages, users }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

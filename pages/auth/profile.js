@@ -7,8 +7,8 @@ import Profile from '../../components/auth/Profile';
 
 export default function profile({ regions,  districts, userTypes,user }) {
     return (
-        <div id="layout-wrapper">
-            <Header />
+        // <div id="layout-wrapper">
+        //     <Header />
 
             <div className="main-content">
                 <div className="page-content">
@@ -19,7 +19,7 @@ export default function profile({ regions,  districts, userTypes,user }) {
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

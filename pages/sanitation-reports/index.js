@@ -5,8 +5,8 @@ import Reports from "../../components/sanitation-reports/Reports";
 
 export default function sanitation_reports({ data }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -15,7 +15,7 @@ export default function sanitation_reports({ data }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

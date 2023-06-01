@@ -5,8 +5,8 @@ import Reports from "../../components/report/Reports";
 
 export default function index({ inspectionForm, regions, districts }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -19,7 +19,7 @@ export default function index({ inspectionForm, regions, districts }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

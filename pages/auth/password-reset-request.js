@@ -7,8 +7,8 @@ import PasswordResetRequest from '../../components/auth/PasswordResetRequest'
 
 export default function passwordResetRequest({ data }) {
     return (
-        <div id="layout-wrapper">
-            <Header />
+        // <div id="layout-wrapper">
+        //     <Header />
 
             <div className="main-content">
                 <div className="page-content">
@@ -19,7 +19,7 @@ export default function passwordResetRequest({ data }) {
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

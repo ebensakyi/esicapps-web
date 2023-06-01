@@ -5,8 +5,8 @@ import Notification from "../../components/messaging/Notification";
 
 export default function notification({ regions, districts, messages, users }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -20,7 +20,7 @@ export default function notification({ regions, districts, messages, users }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

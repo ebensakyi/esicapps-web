@@ -140,6 +140,69 @@ CREATE TABLE "UserType" (
 );
 
 -- CreateTable
+CREATE TABLE "MenuAccess" (
+    "id" SERIAL NOT NULL,
+    "pageId" INTEGER NOT NULL,
+    "userTypeId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "MenuAccess_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Menu" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "url" VARCHAR(255) NOT NULL,
+    "icon" VARCHAR(255) NOT NULL,
+    "hasSubmenu" INTEGER DEFAULT 0,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Menu_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SubMenu" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "url" VARCHAR(255) NOT NULL,
+    "icon" VARCHAR(255),
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "menuId" INTEGER NOT NULL,
+
+    CONSTRAINT "SubMenu_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "MenuAction" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "MenuAction_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "MenuActionAccess" (
+    "id" SERIAL NOT NULL,
+    "userTypeId" INTEGER NOT NULL,
+    "pageActionId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "MenuActionAccess_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Action" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -1584,6 +1647,12 @@ CREATE TABLE "FollowUpInspection" (
     CONSTRAINT "FollowUpInspection_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "_MenuToMenuAction" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Inspection_prevInspectionId_key" ON "Inspection"("prevInspectionId");
 
@@ -1662,6 +1731,12 @@ CREATE UNIQUE INDEX "InspectionPictures_formSectionImageId_inspectionId_key" ON 
 -- CreateIndex
 CREATE UNIQUE INDEX "FollowUpInspection_prevInspectionId_key" ON "FollowUpInspection"("prevInspectionId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "_MenuToMenuAction_AB_unique" ON "_MenuToMenuAction"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_MenuToMenuAction_B_index" ON "_MenuToMenuAction"("B");
+
 -- AddForeignKey
 ALTER TABLE "Inspection" ADD CONSTRAINT "Inspection_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -1718,6 +1793,21 @@ ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sen
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MenuAccess" ADD CONSTRAINT "MenuAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Menu"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MenuAccess" ADD CONSTRAINT "MenuAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SubMenu" ADD CONSTRAINT "SubMenu_menuId_fkey" FOREIGN KEY ("menuId") REFERENCES "Menu"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MenuActionAccess" ADD CONSTRAINT "MenuActionAccess_pageActionId_fkey" FOREIGN KEY ("pageActionId") REFERENCES "MenuAction"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MenuActionAccess" ADD CONSTRAINT "MenuActionAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Community" ADD CONSTRAINT "Community_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2651,3 +2741,9 @@ ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_inspectionTy
 
 -- AddForeignKey
 ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_rating_fkey" FOREIGN KEY ("rating") REFERENCES "Rating"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_MenuToMenuAction" ADD CONSTRAINT "_MenuToMenuAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Menu"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_MenuToMenuAction" ADD CONSTRAINT "_MenuToMenuAction_B_fkey" FOREIGN KEY ("B") REFERENCES "MenuAction"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -5,8 +5,8 @@ import BroadcastNotification from "../../../components/messaging/BroadcastNotifi
 
 export default function broadcast_notification({ regions, districts, messages, users }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -20,7 +20,7 @@ export default function broadcast_notification({ regions, districts, messages, u
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

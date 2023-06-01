@@ -8,10 +8,10 @@ const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  let ut = Cookies.get("ut").split("??")[1];
-  let fullName = Cookies.get("fullName");
-  let designation = Cookies.get("designation");
-  let userType = Cookies.get("userType");
+  let ut = Cookies?.get("ut")?.split("??")[1];
+  let fullName = Cookies?.get("fullName");
+  let designation = Cookies?.get("designation");
+  let userType = Cookies?.get("userType");
 
   return (
     <div>
@@ -19,7 +19,6 @@ const Header = () => {
         <div className="layout-width">
           <div className="navbar-header">
             <div className="d-flex">
-              {/* LOGO */}
               <div className="navbar-brand-box horizontal-logo">
                 <a href="/dashboard" className="logo logo-dark">
                   <span className="logo-sm">
@@ -50,15 +49,6 @@ const Header = () => {
                 type="button"
                 className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                 id="topnav-hamburger-icon"
-                // onClick={(e) => {
-                //   setIsOpen(true);
-                //   if (isOpen) {
-                //     document.body.classList.remove("vertical-sidebar-enable");
-                //   } else {
-                //     document.body.classList.add("vertical-sidebar-enable");
-                //   }
-
-                // }}
               >
                 <span className="hamburger-icon">
                   <span />
@@ -66,7 +56,6 @@ const Header = () => {
                   <span />
                 </span>
               </button>
-              {/* App Search*/}
             </div>
             <div className="d-flex align-items-center">
               <div className="dropdown ms-sm-3 header-item topbar-user">
@@ -95,20 +84,15 @@ const Header = () => {
                   </span>
                 </button>
                 <div className="dropdown-menu dropdown-menu-end">
-                  {/* item*/}
                   <h6 className="dropdown-header"> {fullName}</h6>
 
                   <a className="dropdown-item" href="/auth/profile">
-                    <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />{" "}
+                    <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />
                     <span className="align-middle">Profile</span>
                   </a>
-                  {/* <a className="dropdown-item" href="#">
-                    <i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1" />
-                    <span className="align-middle">Messages</span>
-                  </a> */}
 
                   <a className="dropdown-item" href="/auth/login">
-                    <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />{" "}
+                    <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />
                     <span className="align-middle" data-key="t-logout">
                       Logout
                     </span>
@@ -119,11 +103,8 @@ const Header = () => {
           </div>
         </div>
       </header>
-      {/* ========== App Menu ========== */}
       <div className="app-menu navbar-menu">
-        {/* LOGO */}
         <div className="navbar-brand-box">
-          {/* Dark Logo*/}
           <a href="/dashboard" className="logo logo-dark">
             <span className="logo-sm">
               <img src="/assets/images/logo-sm.png" alt="" height={22} />
@@ -132,7 +113,6 @@ const Header = () => {
               <img src="/assets/images/logo-dark.png" alt="" height={17} />
             </span>
           </a>
-          {/* Light Logo*/}
           <a href="/dashboard" className="logo logo-light">
             <span className="logo-sm">
               <img src="/assets/images/logo-sm.png" alt="" height={22} />
@@ -157,12 +137,13 @@ const Header = () => {
                 <span data-key="t-menu">Menu</span>
               </li>
               <li className="nav-item">
-                <a className="nav-link menu-link" href="/dashboard">
-                  <i className="ri-home-2-line" />{" "}
-                  <span data-key="t-dashboards">Dashboard</span>
-                </a>
-              </li>{" "}
-              {/* end Dashboard Menu */}
+                <Link href="/dashboard">
+                  <a className="nav-link menu-link">
+                    <i className="ri-home-2-line" />
+                    <span data-key="t-dashboards">Dashboard</span>
+                  </a>
+                </Link>
+              </li>
               <li className="nav-item">
                 <a
                   className="nav-link menu-link"
@@ -187,7 +168,6 @@ const Header = () => {
                         aria-controls="Residential"
                         data-key="t-profile"
                       >
-                        {" "}
                         Residential
                       </a>
                       <div className="collapse menu-dropdown" id="Residential">
@@ -248,7 +228,6 @@ const Header = () => {
                         aria-controls="eatery"
                         data-key="t-profile"
                       >
-                        {" "}
                         Eatery
                       </a>
                       <div className="collapse menu-dropdown" id="eatery">
@@ -308,7 +287,6 @@ const Header = () => {
                         aria-controls="health"
                         data-key="t-profile"
                       >
-                        {" "}
                         Health
                       </a>
                       <div className="collapse menu-dropdown" id="health">
@@ -340,7 +318,7 @@ const Header = () => {
                                 Unpublished
                               </a>
                             </Link>
-                          </li>{" "}
+                          </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=3">
                               <a
@@ -368,7 +346,6 @@ const Header = () => {
                         aria-controls="hospitality"
                         data-key="t-profile"
                       >
-                        {" "}
                         Hospitality
                       </a>
                       <div className="collapse menu-dropdown" id="hospitality">
@@ -400,7 +377,7 @@ const Header = () => {
                                 Unpublished
                               </a>
                             </Link>
-                          </li>{" "}
+                          </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=4">
                               <a
@@ -429,7 +406,6 @@ const Header = () => {
                         aria-controls="institution"
                         data-key="t-profile"
                       >
-                        {" "}
                         Institution
                       </a>
                       <div className="collapse menu-dropdown" id="institution">
@@ -489,7 +465,6 @@ const Header = () => {
                         aria-controls="industry"
                         data-key="t-profile"
                       >
-                        {" "}
                         Industry
                       </a>
                       <div className="collapse menu-dropdown" id="industry">
@@ -549,7 +524,6 @@ const Header = () => {
                         aria-controls="market"
                         data-key="t-profile"
                       >
-                        {" "}
                         Market
                       </a>
                       <div className="collapse menu-dropdown" id="market">
@@ -581,7 +555,7 @@ const Header = () => {
                                 Unpublished
                               </a>
                             </Link>
-                          </li>{" "}
+                          </li>
                           <li className="nav-item">
                             <Link href="/submitted-data/followup?inspectionFormId=7">
                               <a
@@ -613,7 +587,6 @@ const Header = () => {
                         aria-controls="sanitary"
                         data-key="t-profile"
                       >
-                        {" "}
                         Sanitary
                       </a>
                       <div className="collapse menu-dropdown" id="sanitary">
@@ -666,73 +639,24 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              {/* <li className="nav-item">
-                <a
-                  className="nav-link menu-link"
-                  href="#report"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="sidebarLayouts"
-                >
-                  <i className="ri-layout-3-line" />{" "}
-                  <span data-key="t-layouts">Reports</span>
-                </a>
-                <div className="collapse menu-dropdown" id="report">
-                  <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
-                      <Link href="/report/national">
-                        <a className="nav-link" data-key="t-calendar">
-                          National
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link href="/report/regional">
-                        <a className="nav-link" data-key="t-calendar">
-                          Regional
-                        </a>
-                      </Link>
-                    </li>{" "}
-                    <li className="nav-item">
-                      <Link href="/report/mmda">
-                        <a className="nav-link" data-key="t-calendar">
-                          MMDAs
-                        </a>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </li> */}
+
               <li className="nav-item">
                 <a className="nav-link menu-link" href="/report">
-                  <i className="ri-line-chart-line" />{" "}
+                  <i className="ri-line-chart-line" />
                   <span data-key="t-dashboards">Reports</span>
                 </a>
-              </li>{" "}
+              </li>
               <li className="nav-item">
                 <Link href="/sanitation-reports">
                   <a className="nav-link menu-link">
-                    <i className="ri-bar-chart-box-line" />{" "}
+                    <i className="ri-bar-chart-box-line" />
                     <span data-key="t-landing">Sanitation Reports</span>
-                    {/* <span
-                        className="badge badge-pill bg-success"
-                        data-key="t-new"
-                      >
-                        New
-                      </span> */}
                   </a>
                 </Link>
               </li>
-              {/* end Dashboard Menu */}
-              {/* <li className="menu-title">
-                <i className="ri-more-fill" />{" "}
-                <span data-key="t-pages">Accounts</span>
-              </li> */}
-              {/* {ut == 1 ? (
-                <> */}
+
               <li className="menu-title">
-                <i className="ri-more-fill" />{" "}
+                <i className="ri-more-fill" />
                 <span data-key="t-components">MESSAGES</span>
               </li>
               <li className="nav-item">
@@ -744,7 +668,7 @@ const Header = () => {
                   aria-expanded="false"
                   aria-controls="sidebarPages"
                 >
-                  <i className="ri-notification-2-line" />{" "}
+                  <i className="ri-notification-2-line" />
                   <span data-key="t-pages">Notifications</span>
                 </a>
                 <div className="collapse menu-dropdown" id="notifications">
@@ -773,7 +697,7 @@ const Header = () => {
                   aria-expanded="false"
                   aria-controls="sidebarPages"
                 >
-                  <i className="ri-message-2-line" />{" "}
+                  <i className="ri-message-2-line" />
                   <span data-key="t-pages">SMS</span>
                 </a>
                 <div className="collapse menu-dropdown" id="sidebarPages">
@@ -791,12 +715,9 @@ const Header = () => {
                   </ul>
                 </div>
               </li>
-              {/* </>
-              ) : (
-                <></>
-              )} */}
+
               <li className="menu-title">
-                <i className="ri-more-fill" />{" "}
+                <i className="ri-more-fill" />
                 <span data-key="t-components">SETTINGS</span>
               </li>
               <li className="nav-item">
@@ -808,7 +729,7 @@ const Header = () => {
                   aria-expanded="false"
                   aria-controls="sidebarPages"
                 >
-                  <i className="ri-settings-2-line" />{" "}
+                  <i className="ri-settings-2-line" />
                   <span data-key="t-pages">Setup</span>
                 </a>
                 <div className="collapse menu-dropdown" id="settings">
@@ -823,7 +744,6 @@ const Header = () => {
                         aria-controls="pd"
                         data-key="t-profile"
                       >
-                        {" "}
                         Primary Data
                       </a>
                       <div className="collapse menu-dropdown" id="pd">
@@ -837,7 +757,6 @@ const Header = () => {
                             aria-controls="district"
                             data-key="t-profile"
                           >
-                            {" "}
                             District
                           </a>
                           <div className="collapse menu-dropdown" id="district">
@@ -857,19 +776,17 @@ const Header = () => {
                                   className="nav-link"
                                   data-key="t-settings"
                                 >
-                                  {" "}
-                                  Add{" "}
+                                  Add
                                 </a>
                               </li>
                               <li className="nav-item">
-                        <a
-                          href="/setup/district/bulk-upload-template"
-                          className="nav-link"
-                        >
-                          {" "}
-                          Bulk Upload Template
-                        </a>
-                      </li>
+                                <a
+                                  href="/setup/district/bulk-upload-template"
+                                  className="nav-link"
+                                >
+                                  Bulk Upload Template
+                                </a>
+                              </li>
                             </ul>
                           </div>
                         </li>
@@ -883,7 +800,6 @@ const Header = () => {
                             aria-controls="sidebeaarProfile"
                             data-key="t-profile"
                           >
-                            {" "}
                             Electoral Area
                           </a>
                           <div className="collapse menu-dropdown" id="ea">
@@ -903,22 +819,20 @@ const Header = () => {
                                   className="nav-link"
                                   data-key="t-settings"
                                 >
-                                  {" "}
-                                  Add{" "}
+                                  Add
                                 </a>
                               </li>
                               <li className="nav-item">
-                        <a
-                          href="/setup/electoral-area/bulk-upload-template"
-                          className="nav-link"
-                        >
-                          {" "}
-                          Bulk Upload Template
-                        </a>
-                      </li>
+                                <a
+                                  href="/setup/electoral-area/bulk-upload-template"
+                                  className="nav-link"
+                                >
+                                  Bulk Upload Template
+                                </a>
+                              </li>
                             </ul>
                           </div>
-                        </li>{" "}
+                        </li>
                         <li className="nav-item">
                           <a
                             href="#communities"
@@ -929,7 +843,6 @@ const Header = () => {
                             aria-controls="communities"
                             data-key="t-profile"
                           >
-                            {" "}
                             Communities
                           </a>
                           <div
@@ -952,32 +865,28 @@ const Header = () => {
                                   className="nav-link"
                                   data-key="t-settings"
                                 >
-                                  {" "}
-                                  Add{" "}
+                                  Add
                                 </a>
                               </li>
                               <li className="nav-item">
-                        <a
-                          href="/setup/community/bulk-upload-template"
-                          className="nav-link"
-                        >
-                          {" "}
-                          Bulk Upload Template
-                        </a>
-                      </li>
+                                <a
+                                  href="/setup/community/bulk-upload-template"
+                                  className="nav-link"
+                                >
+                                  Bulk Upload Template
+                                </a>
+                              </li>
                             </ul>
                           </div>
                           <li className="nav-item">
                             <a href="/primary-data" className="nav-link">
-                              {" "}
                               Other data
                             </a>
                           </li>
                         </li>
-                      </div>{" "}
+                      </div>
                       <li className="nav-item">
                         <a href="/setup/assign-data" className="nav-link">
-                          {" "}
                           Transfer Data Ownership
                         </a>
                       </li>
@@ -986,37 +895,7 @@ const Header = () => {
                           <a className="nav-link"> User Guide</a>
                         </Link>
                       </li>
-                     
                     </li>
-
-                    {/* <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Permission
-                      </a>
-                    </li> */}
-                    {/* <li className="nav-item">
-                      <a
-                        href="#sidebarSignIn"
-                        className="nav-link"
-                        data-bs-toggle="collapse"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="sidebarSignIn"
-                        data-key="t-signin"
-                      >
-                        {" "}
-                        Manage
-                      </a>
-                    </li>  */}
                   </ul>
                 </div>
               </li>
@@ -1037,36 +916,39 @@ const Header = () => {
                     <li className="nav-item">
                       <Link href="/account/user">
                         <a className="nav-link menu-link">
-                          {/* <i className=" ri-shield-user-line" />{" "} */}
                           <span data-key="t-widgets">Users</span>
                         </a>
                       </Link>
-                    </li>{" "}
-                    <li className="nav-item">
-                      <a className="nav-link menu-link" href="/auth/logs">
-                        {/* <i className="ri-honour-line" />{" "} */}
-                        <span data-key="t-widgets">User Logs</span>
-                      </a>
                     </li>
-                    {/* <li className="nav-item">
-                          <a
-                            href="/auth/password-reset-request"
-                            className="nav-link"
-                          >
-                            {" "}
-                            Password Reset
-                          </a>
-                        </li> */}
+                    <li className="nav-item">
+                      <Link href="/auth/logs">
+                        <a className="nav-link menu-link">
+                          <span data-key="t-widgets">User Logs</span>
+                        </a>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/permission/page">
+                        <a className="nav-link menu-link">
+                          <span data-key="t-widgets">Pages</span>
+                        </a>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/permissions/user-type">
+                        <a className="nav-link menu-link">
+                          <span data-key="t-widgets">User Type</span>
+                        </a>
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </li>
             </ul>
           </div>
-          {/* Sidebar */}
         </div>
       </div>
-      {/* Left Sidebar End */}
-      {/* Vertical Overlay*/}
+
       <div className="vertical-overlay" />
     </div>
   );
