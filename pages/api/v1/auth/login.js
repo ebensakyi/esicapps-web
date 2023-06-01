@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import {
   clearUserCookie,
   setUserCookie,
-} from "../../../../helpers/cookies-manager";
+} from "../../../../utils/cookies-manager";
 
 const post = async (req, res) => {
   try {
