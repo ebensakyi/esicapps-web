@@ -143,7 +143,7 @@ model User {
   District                       District?                        @relation(fields: [districtId], references: [id])
   ElectoralArea                  ElectoralArea?                   @relation(fields: [electoralAreaId], references: [id])
   Region                         Region?                          @relation(fields: [regionId], references: [id])
-  UserType                       UserType                         @relation(fields: [userTypeId], references: [id])
+  UserType                       UserType  ?                       @relation(fields: [userTypeId], references: [id])
   WaterSection                   WaterSection[]
   EateryPremisesInfoSection      EateryPremisesInfoSection[]
   HealthPremisesInfoSection      HealthPremisesInfoSection[]

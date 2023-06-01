@@ -16,16 +16,14 @@ const post = async (req, res) => {
       },
     });
 
-    console.log(userType);
+    console.log(selectedPages);
 
-    let pages =await selectedPages.map((page) => {
+    let pages = await selectedPages.map((page) => {
       return {
-        pageId: page,
+        pageId: page.value,
         userTypeId: userType.id,
       };
     });
-
-    console.log(pages);
 
     const pageAccess = await prisma.pageAccess.createMany({
       data: {
@@ -36,7 +34,7 @@ const post = async (req, res) => {
     });
 
     res.status(200).json({
-      data: page,
+      data: pageAccess,
     });
   } catch (error) {
     console.log(error);
@@ -49,7 +47,11 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const page = await prisma.userType.findMany({ where: { deleted: 0 } });
+    const page = await prisma.userType.findMany({
+      where: { deleted: 0 },
+      include: { PageAccess: { include: { Page: true } } },
+    });
+
     return res.status(200).json(page);
   } catch (error) {
     console.log("Error: " + error);

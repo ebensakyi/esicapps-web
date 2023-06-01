@@ -73,6 +73,7 @@ import { formSectionImage } from "./formSectionImage";
 import { rating } from "./rating";
 import { containerCondition } from "./containerCondition";
 import { pages } from "./page";
+import { pageAccess } from "./pageAccess";
 
 async function main() {
 
@@ -91,9 +92,7 @@ async function main() {
   await prisma.inspectionType.createMany({
     data: inspectionType,
   });
-  // await prisma.userLevel.createMany({
-  //   data: userLevel,
-  // });
+
   await prisma.region.createMany({
     data: region,
   });
@@ -205,16 +204,19 @@ async function main() {
 
   await prisma.wasteWaterContainment.createMany({
     data: wasteWaterContainment,
-  });
-
-  
-
-  await prisma.userType.createMany({
+  }); await prisma.userType.createMany({
     data: userType,
   });
-  // await prisma.electoralArea.createMany({
-  //   data: electoralArea,
-  // });
+  await prisma.page.createMany({
+    data: pages,
+  })
+  await prisma.pageAccess.createMany({
+    data: pageAccess,
+  })
+  
+
+ 
+ 
 
  
   await prisma.user.createMany({
@@ -305,9 +307,7 @@ async function main() {
     data: containerCondition,
   })
 
-  await prisma.page.createMany({
-    data: pages,
-  })
+ 
 }
 
 main()

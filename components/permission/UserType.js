@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Multiselect from "multiselect-react-dropdown";
 
-const UserType = ({ userTypes, pagesOptions,pages }) => {
+const UserType = ({ userTypes, pagesOptions, pages }) => {
   const router = useRouter();
 
   const [userTypeName, setUserTypeName] = useState("");
@@ -16,19 +16,17 @@ const UserType = ({ userTypes, pagesOptions,pages }) => {
   const add = async (e) => {
     try {
       e.preventDefault();
-      if (selectedPages.length == 0) return toast.error("Pages cannot be empty");
+      if (selectedPages.length == 0)
+        return toast.error("Pages cannot be empty");
       if (userTypeName == "") return toast.error("User type cannot be empty");
 
       let data = {
         userTypeName,
-        
-        selectedPages:selectedPages
+
+        selectedPages: selectedPages,
       };
 
-      const response = await axios.post(
-        "/api/v1/permission/user-type",
-        data
-      );
+      const response = await axios.post("/api/v1/permission/user-type", data);
       setSelectedPages([]);
       setUserTypeName("");
       router.replace(router.asPath);
@@ -39,15 +37,22 @@ const UserType = ({ userTypes, pagesOptions,pages }) => {
       return toast.error("An error occurred");
     }
   };
-
- const onRemove= ()=>{
-
-  }
-  const onSelect= (selected)=>{
-    console.log(selected[selected.length-1].value);
-    setSelectedPages(selected)
-
-  }
+  const deleteUserType = async (selected) => {
+    console.log(selected[selected.length - 1].value);
+    arr = selectedPages.filter(function (item) {
+      return item !== selected[selected.length - 1].value;
+    });
+    console.log(arr);
+  };
+  const onRemove = (selected) => {
+    setSelectedPages([selected.length - 1].value);
+    console.log(selectedPages);
+  };
+  const onSelect = (selected) => {
+    console.log([selectedPages.length - 1].value);
+    setSelectedPages(selected[selectedPages.length - 1].value);
+    console.log(selectedPages);
+  };
   return (
     <div className="row">
       <ToastContainer
@@ -124,11 +129,11 @@ const UserType = ({ userTypes, pagesOptions,pages }) => {
                       </label>
 
                       <Multiselect
-                        options={pagesOptions} 
-                        selectedValues={selectedPages} 
-                        onSelect={onSelect} 
-                        onRemove={onRemove} 
-                        displayValue="label" 
+                        options={pagesOptions}
+                        selectedValues={selectedPages}
+                        onSelect={onSelect}
+                        onRemove={onRemove}
+                        displayValue="label"
                       />
                       {/* <select
                         className="form-select"
@@ -200,7 +205,7 @@ const UserType = ({ userTypes, pagesOptions,pages }) => {
                         <button
                           className="btn btn-primary"
                           onClick={(e) => {
-                             add(e);
+                            add(e);
                           }}
                         >
                           Create
@@ -226,6 +231,7 @@ const UserType = ({ userTypes, pagesOptions,pages }) => {
                       <tr>
                         <th>User Type</th>
                         <th>Allowed Pages</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -233,7 +239,81 @@ const UserType = ({ userTypes, pagesOptions,pages }) => {
                         return (
                           <tr key={ut.id}>
                             <td>{ut.name}</td>
-                            {/* <td>{msg.MessageType.name}</td> */}
+                            <div className="row" key={ut.id}>
+                              {ut.PageAccess.map((ut) => {
+                                return (
+                                  <div className="col-md-3">
+                                    <span className="badge badge-outline-success">
+                                      {ut.Page.name}
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <td>
+                              <div
+                                class="btn-group"
+                                role="group"
+                                aria-label="Button group with nested dropdown"
+                              >
+                                <div className="btn-group" role="group">
+                                  <button
+                                    id="btnGroupDrop1"
+                                    type="button"
+                                    className="btn btn-primary dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                  >
+                                    Actions
+                                  </button>
+                                  <ul
+                                    className="dropdown-menu"
+                                    aria-labelledby="btnGroupDrop1"
+                                  >
+                                    <li>
+                                      {/* <button className="dropdown-item btn btn-sm ">
+                                        Delete
+                                      </button> */}
+                                      <button
+                                        className="dropdown-item btn btn-sm "
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          setUserTypeName(ut.name);
+                                          let pageAcess = ut.PageAccess.map(
+                                            (access) => {
+                                              return {
+                                                value: access.Page.id,
+                                                label: access.Page.name,
+                                              };
+                                            }
+                                          );
+                                          setSelectedPages(pageAcess);
+                                        }}
+                                      >
+                                        Update
+                                      </button>
+                                    </li>
+                                    <li>
+                                      <button
+                                        className="dropdown-item btn btn-sm "
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                        }}
+                                      >
+                                        Delete
+                                      </button>
+                                      {/* <button className="dropdown-itembtn btn-sm ">
+                                        Update
+                                      </button> */}
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              {/* <button className="btn btn-sm btn-danger">
+                                Delete
+                                <i className=" ri-delete-bin-2-line" />
+                              </button> */}
+                            </td>
                           </tr>
                         );
                       })}

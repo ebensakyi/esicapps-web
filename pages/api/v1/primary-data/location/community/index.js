@@ -38,12 +38,10 @@ const post = async (req, res) => {
       });
     }
 
-    console.log(req.body);
     let electoralAreaId = req.body.electoralAreaId;
     let district = await prisma.electoralArea.findFirst({
       where: { id: electoralAreaId },
     });
-    console.log(district);
     const data = {
       name: req.body.name,
       districtId: Number(district.id),
@@ -72,7 +70,6 @@ const getSearchParams = async (req, searchText) => {
     data.user.districtId == null || isNaN(data.user.districtId)
       ? undefined
       : Number(data.user.districtId);
-  console.log(district);
   if (searchText != "" && searchText != null) {
     return {
       where: {
