@@ -1,4 +1,4 @@
-import prisma from "../../../../../../prisma/MyPrismaClient";
+import prisma from "../../../../../../prisma/db";
 import { getUserCookie } from "../../../../../../utils/cookies-manager";
 import { verifyToken } from "../../../../../../utils/token-verifier";
 

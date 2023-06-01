@@ -1,5 +1,5 @@
 import { sendFCM } from "../../../../utils/send-fcm";
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 
 const post = async (req, res) => {
   // try {

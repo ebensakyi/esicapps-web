@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 import formidable from "formidable";
 import fs from "fs";
 import { nanoid } from "nanoid";

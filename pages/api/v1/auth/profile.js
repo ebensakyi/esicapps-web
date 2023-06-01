@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
 import { sendSMS } from "../../../../utils/send-hubtel-sms";

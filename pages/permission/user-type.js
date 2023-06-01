@@ -5,12 +5,12 @@ import { SERVER_BASE_URL } from "../../config";
 import Page from "../../components/permission/Page";
 import UserType from "../../components/permission/UserType";
 
-export default function page({ pages }) {
+export default function page({ pages,userTypes }) {
   return (
     <div className="main-content">
       <div className="page-content">
         <div className="container-fluid">
-          <UserType pages={pages}  />
+          <UserType pages={pages} userTypes={userTypes} />
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const userType = await fetch(
+  const userTypes = await fetch(
     `${SERVER_BASE_URL}/api/v1/permission/user-type?token=${token}`
   ).then((res) => res.json());
   const pages = await fetch(
@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       pages,
-     
+     userTypes
     },
   };
 }

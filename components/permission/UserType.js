@@ -3,44 +3,61 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import { components } from "react-select";
 
-const UserType = ({ users, messages }) => {
+const Option = (props) => {
+  return (
+    <div>
+      <components.Option {...props}>
+        <input
+          type="checkbox"
+          checked={props.isSelected}
+          onChange={() => null}
+        />{" "}
+        <label>{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
+const UserType = ({ userTypes, pages }) => {
   const router = useRouter();
 
-  const [recipient, setRecipient] = useState("");
+  const [userTypeName, setUserTypeName] = useState("");
+  const [selectedPages, setSelectedPages] = useState([]);
 
-  const [message, setMessage] = useState("");
 
-  const sendSingleMessage = async (e) => {
-    try {
-      // console.log("sendBroadcastMessage");
-      e.preventDefault();
-      if (message == "") return toast.error("Message cannot be empty");
-      if (recipient == "") return toast.error("Recipient cannot be empty");
+  // const [message, setMessage] = useState("");
 
-      let data = {
-        recipient: recipient,
-        message,
-        sendingType: 2,
+  // const sendSingleMessage = async (e) => {
+  //   try {
+  //     // console.log("sendBroadcastMessage");
+  //     e.preventDefault();
+  //     if (message == "") return toast.error("Message cannot be empty");
+  //     if (recipient == "") return toast.error("Recipient cannot be empty");
 
-        group: 3,
-      };
+  //     let data = {
+  //       recipient: recipient,
+  //       message,
+  //       sendingType: 2,
 
-      const response = await axios.post(
-        "/api/v1/messaging/sms/single",
-        data
-      );
-      setRecipient("");
-      setMessage("");
-      router.replace(router.asPath);
-      //router.push("/messaging/sms/single");
+  //       group: 3,
+  //     };
 
-      return toast.success("Message sent");
-    } catch (error) {
-      console.log(error);
-      return toast.error("An error occurred");
-    }
-  };
+  //     const response = await axios.post(
+  //       "/api/v1/messaging/sms/single",
+  //       data
+  //     );
+  //     setRecipient("");
+  //     setMessage("");
+  //     router.replace(router.asPath);
+  //     //router.push("/messaging/sms/single");
+
+  //     return toast.success("Message sent");
+  //   } catch (error) {
+  //     console.log(error);
+  //     return toast.error("An error occurred");
+  //   }
+  // };
 
   return (
     <div className="row">
@@ -99,39 +116,49 @@ const UserType = ({ users, messages }) => {
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="valueInput" className="form-label">
-                        Message
+                        User Type Name
                       </label>
 
                       <input
                         type="text"
                         className="form-control"
                         id="valueInput"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
+                        value={userTypeName}
+                        onChange={(e) => setUserTypeName(e.target.value)}
                       />
                     </div>
                   </div>
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
-                        User
+                        Pages
                       </label>
+
+                      <ReactSelect
+                        options={pagesOptions}
+                        isMulti
+                        closeMenuOnSelect={false}
+                        hideSelectedOptions={false}
+                        components={{
+                          Option,
+                        }}
+                        onChange={this.handleChange}
+                        allowSelectAll={true}
+                        value={this.state.optionSelected}
+                      />
 
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
-                        value={recipient}
+                        value={pages}
                         onChange={(e) => {
-                          setRecipient(e.target.value);
+                          setSelectedPages(e.target.value);
                         }}
                       >
-                          <option value="">Choose...</option>
-                        {users.map((u) => (
-                          <option
-                            key={u.id}
-                            value={u.id + "$" + u.otherNames + " " + u.surname}
-                          >
-                            {u.otherNames} {u.surname}
+                        <option value="">Choose...</option>
+                        {pages.map((u) => (
+                          <option key={u.id} value={u.id}>
+                            {u.name}
                           </option>
                         ))}
                       </select>
@@ -190,7 +217,7 @@ const UserType = ({ users, messages }) => {
                         <button
                           className="btn btn-primary"
                           onClick={(e) => {
-                            sendSingleMessage(e);
+                            // sendSingleMessage(e);
                           }}
                         >
                           Send
@@ -214,57 +241,16 @@ const UserType = ({ users, messages }) => {
                   >
                     <thead>
                       <tr>
-                        <th>Sending Type</th>
-                        <th>Msg Type</th>
-                        {/* <th>Title</th> */}
-                        <th>Message</th>
-
-                        <th>Recipient</th>
-                        {/* <th>Action</th> */}
+                        <th>User Type</th>
+                        <th>Allowed Pages</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {messages.map((msg) => {
+                      {userTypes.map((ut) => {
                         return (
-                          <tr key={msg.id}>
-                            <td>{msg.SendingType.name}</td>
-                            <td>{msg.MessageType.name}</td>
-
-                            {/* <td>{msg.title}</td> */}
-                            <td>{msg.message}</td>
-
-                            <td>{msg.recipient}</td>
-                            {/* <td>
-                        {user.activated == 0 ? (
-                          <span className="badge text-bg-warning">
-                            INACTIVE
-                          </span>
-                        ) : (
-                          <span className="badge text-bg-success">ACTIVE</span>
-                        )}
-                      </td> */}
-
-                            {/* <td>
-                              <div className="dropdown d-inline-block">
-                                <button
-                                  className="btn btn-soft-secondary btn-sm dropdown"
-                                  type="button"
-                                  data-bs-toggle="dropdown"
-                                  aria-expanded="false"
-                                >
-                                  <i className="ri-more-fill align-middle" />
-                                </button>
-                                <ul className="dropdown-menu dropdown-menu-end">
-                                  <li>
-                                    <a className="dropdown-item edit-item-btn">
-                                      <i className=" ri-send-plane-line align-bottom me-2 text-muted" />{" "}
-                                      Resend
-                                    </a>
-                                  </li>
-                             
-                                </ul>
-                              </div>
-                            </td> */}
+                          <tr key={ut.id}>
+                            <td>{ut.name}</td>
+                            {/* <td>{msg.MessageType.name}</td> */}
                           </tr>
                         );
                       })}

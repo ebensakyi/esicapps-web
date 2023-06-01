@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 import { send } from "../../../../utils/send-sms";
 import { append_233 } from "../../../../utils/append-233";
 

@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 import AWS from "aws-sdk";
 import fs from "fs";
 const XLSX = require("xlsx");

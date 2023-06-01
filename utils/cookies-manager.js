@@ -1,5 +1,5 @@
 import cookie from "cookie";
-import prisma from "../prisma/MyPrismaClient";
+import prisma from "../prisma/db";
 import { verifyToken } from "./token-verifier";
 
 export const setUserCookie = async (token, req, res) => {

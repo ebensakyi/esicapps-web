@@ -1,4 +1,4 @@
-// import prisma from "../../../../prisma/MyPrismaClient";
+// import prisma from "../../../../prisma/db";
 // // const { PrismaClient } = require("@prisma/client");
 // // let prisma = new PrismaClient();
 

@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 import { logActivity } from "../../../../utils/Log";
 import { getUserCookie } from "../../../../utils/cookies-manager";
 const post = async (req, res) => {

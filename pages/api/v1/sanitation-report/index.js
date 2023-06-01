@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import AWS from "aws-sdk";
 import moment from "moment";
 
-import prisma from "../../../../prisma/MyPrismaClient";
+import prisma from "../../../../prisma/db";
 
 export const config = {
   api: {
