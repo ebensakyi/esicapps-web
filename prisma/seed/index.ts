@@ -72,6 +72,7 @@ import { userGuides } from "./userGuides";
 import { formSectionImage } from "./formSectionImage";
 import { rating } from "./rating";
 import { containerCondition } from "./containerCondition";
+import { pages } from "./page";
 
 async function main() {
 
@@ -302,6 +303,10 @@ async function main() {
   })
   await prisma.communalContainerCondition.createMany({
     data: containerCondition,
+  })
+
+  await prisma.page.createMany({
+    data: pages,
   })
 }
 

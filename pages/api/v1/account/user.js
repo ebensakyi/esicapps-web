@@ -1,11 +1,11 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
-import { getUserCookie } from "../../../../helpers/cookies-manager";
-import { verifyToken } from "../../../../helpers/token-verifier";
+import { getUserCookie } from "../../../../utils/cookies-manager";
+import { verifyToken } from "../../../../utils/token-verifier";
 import { nanoid } from "nanoid";
-import { logActivity } from "../../../../helpers/Log";
-import { sendSMS } from "../../../../helpers/send-hubtel-sms";
-import { generateCode } from "../../../../helpers/generate-code";
+import { logActivity } from "../../../../utils/Log";
+import { sendSMS } from "../../../../utils/send-hubtel-sms";
+import { generateCode } from "../../../../utils/generate-code";
 
 const post = async (req, res) => {
   try {

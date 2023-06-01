@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-import { verifyToken } from "../../../../helpers/token-verifier";
+import { verifyToken } from "../../../../utils/token-verifier";
 
 const post = async (req, res) => {
   try {

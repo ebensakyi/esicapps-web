@@ -1,6 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-import { send } from "../../../../helpers/send-sms";
-import { append_233 } from "../../../../helpers/append-233";
+import { send } from "../../../../utils/send-sms";
+import { append_233 } from "../../../../utils/append-233";
 
 const post = async (req, res) => {
   // try {

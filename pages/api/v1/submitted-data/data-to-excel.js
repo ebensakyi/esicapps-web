@@ -1,8 +1,8 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import AWS from "aws-sdk";
 import fs from "fs";
-import { getUserCookie } from "../../../../helpers/cookies-manager";
-import { logActivity } from "../../../../helpers/Log";
+import { getUserCookie } from "../../../../utils/cookies-manager";
+import { logActivity } from "../../../../utils/Log";
 
 const XLSX = require("xlsx");
 
@@ -596,9 +596,9 @@ const post = async (req, res) => {
       });
     }
 
-    const workSheet = XLSX.utils.json_to_sheet(newData);
-    const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
+    const workSheet = XLSX.helpers.json_to_sheet(newData);
+    const workBook = XLSX.helpers.book_new();
+    XLSX.helpers.book_append_sheet(workBook, workSheet, "Sheet 1");
     let filePath = `./public/temp/${fileName}`;
     XLSX.writeFile(workBook, filePath);
 

@@ -234,78 +234,65 @@ model UserType {
   updatedAt DateTime @updatedAt
 
   User             User[]
-  MenuAccess       MenuAccess[]
-  MenuActionAccess MenuActionAccess[]
+  PageAccess       PageAccess[]
+  PageActionAccess PageActionAccess[]
 }
 
-model MenuAccess {
+model PageAccess {
   id         Int      @id @default(autoincrement())
   pageId     Int
   userTypeId Int
   deleted    Int?     @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  Menu       Menu     @relation(fields: [pageId], references: [id])
+  Page       Page     @relation(fields: [pageId], references: [id])
   UserType   UserType @relation(fields: [userTypeId], references: [id])
 }
 
-model Menu {
+model Page {
   id         Int    @id @default(autoincrement())
   name       String @db.VarChar(255)
-  url        String @db.VarChar(255)
-  icon       String @db.VarChar(255)
-  hasSubmenu Int?   @default(0)
+  url        String? @db.VarChar(255)
+  icon       String? @db.VarChar(255)
 
   deleted    Int?         @default(0)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  MenuAccess MenuAccess[]
-  MenuAction MenuAction[] @relation("MenuToMenuAction")
-  SubMenu    SubMenu[]
+  PageAccess PageAccess[]
+  PageAction PageAction[] @relation("PageToPageAction")
 }
 
-model SubMenu {
-  id   Int     @id @default(autoincrement())
-  name String  @db.VarChar(255)
-  url  String  @db.VarChar(255)
-  icon String? @db.VarChar(255)
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Menu      Menu     @relation(fields: [menuId], references: [id])
-  menuId    Int
-}
 
-model MenuAction {
+model PageAction {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
-  Menu             Menu[]             @relation("MenuToMenuAction")
-  MenuActionAccess MenuActionAccess[]
+  Page             Page[]             @relation("PageToPageAction")
+  PageActionAccess PageActionAccess[]
 }
 
-model MenuActionAccess {
+model PageActionAccess {
   id           Int        @id @default(autoincrement())
   userTypeId   Int
   pageActionId Int
   deleted      Int?       @default(0)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  MenuAction   MenuAction @relation(fields: [pageActionId], references: [id])
+  PageAction   PageAction @relation(fields: [pageActionId], references: [id])
   UserType     UserType   @relation(fields: [userTypeId], references: [id])
 }
 
-// model MenuAction {
+// model PageAction {
 //   id               Int                @id @default(autoincrement())
 //   name             String             @db.VarChar(255)
 //   deleted          Int?               @default(0)
 //   createdAt        DateTime           @default(now())
 //   updatedAt        DateTime           @updatedAt
-//   MenuActionAccess MenuActionAccess[]
-//   Menu             Menu[]             @relation("MenuToMenuAction")
+//   PageActionAccess PageActionAccess[]
+//   Page             Page[]             @relation("PageToPageAction")
 // }
 
 model Action {

@@ -927,15 +927,15 @@ const Header = () => {
                         </a>
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <Link href="/permission/page">
                         <a className="nav-link menu-link">
                           <span data-key="t-widgets">Pages</span>
                         </a>
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
-                      <Link href="/permissions/user-type">
+                      <Link href="/permission/user-type">
                         <a className="nav-link menu-link">
                           <span data-key="t-widgets">User Type</span>
                         </a>

@@ -1,7 +1,7 @@
 import prisma from "../../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { generateCode } from "../../../../../helpers/generate-code";
+import { generateCode } from "../../../../../utils/generate-code";
 
 const post = async (req, res) => {
  try {

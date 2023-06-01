@@ -1,6 +1,6 @@
 import prisma from "../../../../../../prisma/MyPrismaClient";
-import { getUserCookie } from "../../../../../../helpers/cookies-manager";
-import { verifyToken } from "../../../../../../helpers/token-verifier";
+import { getUserCookie } from "../../../../../../utils/cookies-manager";
+import { verifyToken } from "../../../../../../utils/token-verifier";
 
 const put = async (req, res) => {
   if (req.body.communityId) {

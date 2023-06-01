@@ -1,6 +1,6 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-import { logActivity } from "../../../../helpers/Log";
-import { getUserCookie } from "../../../../helpers/cookies-manager";
+import { logActivity } from "../../../../utils/Log";
+import { getUserCookie } from "../../../../utils/cookies-manager";
 
 
 const post = async (req, res) => {

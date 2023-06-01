@@ -229,4 +229,4 @@ const Page = ({}) => {
   );
 };
 
-export default Menu;
+export default Page;

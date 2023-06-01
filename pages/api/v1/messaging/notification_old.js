@@ -1,4 +1,4 @@
-import { sendFCM } from "../../../../helpers/send-fcm";
+import { sendFCM } from "../../../../utils/send-fcm";
 import prisma from "../../../../prisma/MyPrismaClient";
 
 const post = async (req, res) => {

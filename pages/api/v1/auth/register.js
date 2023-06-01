@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
-import {sendSMS} from "../../../../helpers/send-hubtel-sms"
+import {sendSMS} from "../../../../utils/send-hubtel-sms"
 
 const post = async (req, res) => {
   try {

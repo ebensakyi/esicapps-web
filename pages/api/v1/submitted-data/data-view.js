@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/MyPrismaClient";
-import { getUserCookie } from "../../../../helpers/cookies-manager";
-import { logActivity } from "../../../../helpers/Log";
-import { verifyToken } from "../../../../helpers/token-verifier";
+import { getUserCookie } from "../../../../utils/cookies-manager";
+import { logActivity } from "../../../../utils/Log";
+import { verifyToken } from "../../../../utils/token-verifier";
 
 const post = async (req, res) => {
   try {
