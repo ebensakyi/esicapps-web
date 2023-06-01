@@ -37,6 +37,31 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
       return toast.error("An error occurred");
     }
   };
+
+  const update = async (e) => {
+    try {
+      e.preventDefault();
+      if (selectedPages.length == 0)
+        return toast.error("Pages cannot be empty");
+      if (userTypeName == "") return toast.error("User type cannot be empty");
+
+      let data = {
+
+        userTypeName,
+        selectedPages: selectedPages,
+      };
+
+      const response = await axios.put("/api/v1/permission/user-type", data);
+      setSelectedPages([]);
+      setUserTypeName("");
+      router.replace(router.asPath);
+
+      return toast.success("User Type saved");
+    } catch (error) {
+      console.log(error);
+      return toast.error("An error occurred");
+    }
+  };
   const deleteUserType = async (selected) => {
     // arr = selectedPages.filter(function (item) {
     //   return item !== selected[selected.length - 1].value;
