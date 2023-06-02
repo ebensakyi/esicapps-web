@@ -43,7 +43,6 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(password, user.password);
-    console.log(isValid);
 
     if (isValid) {
       const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
