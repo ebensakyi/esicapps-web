@@ -20,7 +20,7 @@ export default function data_view({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
   const { id } = context.query;
   const inspectionFormId = context.query.inspectionFormId || 1;
 
@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
     };
   }
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/submitted-data/data-view?id=${id}&?token=${token}&inspectionFormId=${inspectionFormId}&token=${token}`
+    `${SERVER_BASE_URL}/api/v1/submitted-data/data-view?id=${id}&?session=${session}&inspectionFormId=${inspectionFormId}&session=${session}`
   ).then((res) => res.json());
 
   return {

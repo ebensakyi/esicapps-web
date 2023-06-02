@@ -20,7 +20,7 @@ export default function community({ data,electoralAreas }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   const page = context.query.page || 1
   const searchText = context.query.searchText || ""
@@ -36,11 +36,11 @@ export async function getServerSideProps(context) {
 
 
 
-  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/location/community?token=${token}&page=${page}&searchText=${searchText}`).then(
+  const data = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/location/community?session=${session}&page=${page}&searchText=${searchText}`).then(
     (res) => res.json()
   );
 
-  const electoralAreas = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/electoral-area?token=${token}`).then(
+  const electoralAreas = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/electoral-area?session=${session}`).then(
     (res) => res.json()
 );
 

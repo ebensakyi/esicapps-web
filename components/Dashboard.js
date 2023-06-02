@@ -34,7 +34,11 @@ const Dashboard = ({
   electoralAreas,
   communities,
 }) => {
-  let loggedInUserType = Cookies?.get("ut")?.split("??")[1];
+  let districtId = Cookies?.get("d_id");
+  let regionId = Cookies?.get("r_id");
+
+  console.log(districtId);
+
   const [showLoading, setShowLoading] = useState(false);
 
   const [districtsData, setDistrictsData] = useState([]);
@@ -98,8 +102,7 @@ const Dashboard = ({
   };
   const getElectoralAreasByDistrict = async (districtId) => {
     try {
-
-      console.log("di",districtId);
+      console.log("di", districtId);
       const response = await axios.get(
         "/api/v1/primary-data/electoral-area?districtId=" + districtId
       );
@@ -122,7 +125,7 @@ const Dashboard = ({
 
   const handleFilter = async (e) => {
     e.preventDefault();
-    if (filterBy == ""||filterBy == null) {
+    if (filterBy == "" || filterBy == null) {
       return toast.error("Please select a filter");
     }
     if (filterBy == "communityId" && community == null) {
@@ -431,10 +434,9 @@ const Dashboard = ({
     ],
   };
 
-  let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
-  let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
-  let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
-
+  let nationalUser = districtId == "undefined" && regionId == "undefined";
+  let regionalUser = districtId == "undefined" && regionId != "undefined";
+  let districtUser = districtId != "undefined";
   return (
     <>
       {" "}
@@ -465,21 +467,22 @@ const Dashboard = ({
                 onChange={(e) => {
                   setFilterBy(e.target.value);
 
-          
-                    if (regionalUser) {
-                getDistrictsByRegion();
-              }
+                  if (regionalUser) {
+                    getDistrictsByRegion();
+                  }
 
-              if (districtUser) {
-                getElectoralAreasByDistrict();
-              }
-              if(e.target.value=="national"){
-                setFilterValue(null)
-              }
+                  if (districtUser) {
+                    getElectoralAreasByDistrict();
+                  }
+                  if (e.target.value == "national") {
+                    setFilterValue(null);
+                  }
                 }}
                 value={filterBy}
               >
-                <option value="" selected>Filter by </option>
+                <option value="" selected>
+                  Filter by{" "}
+                </option>
                 <option hidden={!nationalUser} value="national">
                   National
                 </option>

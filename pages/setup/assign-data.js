@@ -20,7 +20,7 @@ export default function assignData({ districts, assignments }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   if (!token) {
     return {
@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
     };
   }
   const districts = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?session=${session}`
   ).then((res) => res.json());
   const assignments = await fetch(
     `${SERVER_BASE_URL}/api/v1/setup/assign-data`

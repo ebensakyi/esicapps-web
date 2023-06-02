@@ -17,7 +17,7 @@ export default function page({ pages }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   if (!token) {
     return {
@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
     };
   }
   const pages = await fetch(
-    `${SERVER_BASE_URL}/api/v1/permission/page?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/permission/page?session=${session}`
   ).then((res) => res.json());
 
   

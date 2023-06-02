@@ -21,11 +21,33 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let data = await getSession(req);
-    let userType = data.user.UserType.id;
 
-    if (userType == 3 || userType == 4) {
-      let regionId = data.user.regionId;
+    console.log("DATA>>>", data);
+    let regionId = data.RegionId || req?.query?.regionId || undefined;
+    let districtId = data.DistrictId || req?.query?.districtId || undefined;
+    
 
+    //Admin national
+    if (districtId == null && regionId == null) {
+      const district = await prisma.district.findMany({
+        where: { deleted: 0, districtId: districtId },
+        include: { Region: true },
+      });
+
+      return res.status(200).json(district);
+    }
+
+    //regional admin
+    if (districtId == null && regionId != null) {
+      const district = await prisma.district.findMany({
+        where: { deleted: 0, districtId: Number(districtId) },
+        include: { Region: true },
+      });
+
+      return res.status(200).json(district);
+    }
+
+    if (regionId) {
       const district = await prisma.district.findMany({
         where: { deleted: 0, regionId: Number(regionId) },
         include: { Region: true },
@@ -41,36 +63,36 @@ const get = async (req, res) => {
 
       return res.status(200).json(district);
     }
-    // if (req.query.token && !req.query.regionId) {
-    //   let data = await getSession(req.query.token);
+    // // if (req.query.token && !req.query.regionId) {
+    // //   let data = await getSession(req.query.token);
 
-    //   regionId = data.user.regionId;
-    //   userType = data.user.UserType.id;
+    // //   regionId = data.user.regionId;
+    // //   userType = data.user.UserType.id;
 
+    // //   const district = await prisma.district.findMany({
+    // //     where: { deleted: 0, regionId: Number(regionId) },
+    // //     include: { Region: true },
+    // //   });
+
+    // //   return res.status(200).json(district);
+    // // }
+
+    // if (userType == 1 || userType == 2) {
     //   const district = await prisma.district.findMany({
-    //     where: { deleted: 0, regionId: Number(regionId) },
+    //     where: { deleted: 0 },
     //     include: { Region: true },
     //   });
 
     //   return res.status(200).json(district);
     // }
+    // if (req.query.regionId) {
+    //   const district = await prisma.district.findMany({
+    //     where: { deleted: 0, regionId: Number(req.query.regionId) },
+    //     include: { Region: true },
+    //   });
 
-    if (userType == 1 || userType == 2) {
-      const district = await prisma.district.findMany({
-        where: { deleted: 0 },
-        include: { Region: true },
-      });
-
-      return res.status(200).json(district);
-    }
-    if (req.query.regionId) {
-      const district = await prisma.district.findMany({
-        where: { deleted: 0, regionId: Number(req.query.regionId) },
-        include: { Region: true },
-      });
-
-      return res.status(200).json(district);
-    }
+    //   return res.status(200).json(district);
+    // }
 
     const district = await prisma.district.findMany({
       where: { deleted: 0 },

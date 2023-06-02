@@ -2,8 +2,9 @@ import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
 export async function setSession(res, session) {
-    console.log(session);
   const token = jwt.sign(session, process.env.TOKEN_SECRET);
+
+  
   const cookieValue = cookie.serialize("session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -13,12 +14,14 @@ export async function setSession(res, session) {
   });
   res.setHeader("Set-Cookie", cookieValue);
 
-  res.status(200).json();
+  res.status(200).json({session});
 }
 
 export async function getSession(req) {
-  const cookies = cookie.parse(req.headers.cookie || "");
-  const token = cookies.session;
+let token =req.query.session
+
+  // const cookies = cookie.parse(req.headers.cookie || "");
+  // const token = cookies.session;
   if (!token) return null;
   try {
     return jwt.verify(token, process.env.TOKEN_SECRET);

@@ -25,7 +25,7 @@ export default function followup_view({ data }) {
 
 
 export async function getServerSideProps(context) {
-    const { token } = context.req.cookies;
+    const { session } = context.req.cookies;
     const  {id}  =context.query;
 
 

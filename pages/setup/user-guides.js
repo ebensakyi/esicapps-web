@@ -20,7 +20,7 @@ export default function addUserGuides({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   if (!token) {
     return {
@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/setup/user-guides?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/setup/user-guides?session=${session}`
   ).then((res) => res.json());
 
 

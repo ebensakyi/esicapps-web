@@ -25,7 +25,7 @@ export default function passwordResetRequest({ data }) {
 
 
 export async function getServerSideProps(context) {
-    const { token } = context.req.cookies;
+    const { session } = context.req.cookies;
 
     if (!token) {
         return {

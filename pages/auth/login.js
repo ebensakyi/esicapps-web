@@ -23,7 +23,6 @@ export default function Login() {
       };
       const response = await axios.post(`/api/v1/auth/login`, data);
 
-      console.log(response);
 
 
       if (response?.status != 200) {
@@ -31,7 +30,13 @@ export default function Login() {
       }
 
       if (response.status == 200) {
-       
+
+      let regionId = response?.data?.session?.Region?.id 
+      let districtId = response?.data?.session?.District?.id
+
+        Cookies.set("r_id", regionId);
+        Cookies.set("d_id", districtId);
+
         return router.replace("/dashboard");
       }
     } catch (error) {

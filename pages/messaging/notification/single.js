@@ -25,7 +25,7 @@ export default function single_notification({ regions, districts, messages, user
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   if (!token) {
     return {
@@ -39,15 +39,15 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/messaging/notification`
   ).then((res) => res.json());
 
-  const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?token=${token}`).then((res) =>
+  const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?session=${session}`).then((res) =>
     res.json()
   );
 
   const regions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?session=${session}`
   ).then((res) => res.json());
   const districts = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?session=${session}`
   ).then((res) => res.json());
 
   return {

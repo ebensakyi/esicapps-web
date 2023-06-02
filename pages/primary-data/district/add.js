@@ -20,7 +20,7 @@ export default function district({ data,regions }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   const page = context.query.page || 1;
   const searchText = context.query.searchText || "";
@@ -34,11 +34,11 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/location/district?token=${token}&page=${page}&searchText=${searchText}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/location/district?session=${session}&page=${page}&searchText=${searchText}`
   ).then((res) => res.json());
 
   const regions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/location/region?token=${token}&page=${page}&searchText=${searchText}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/location/region?session=${session}&page=${page}&searchText=${searchText}`
   ).then((res) => res.json());
 
   //   const regions = await fetch(

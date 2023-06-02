@@ -25,7 +25,7 @@ export default function logs({ data }) {
 
 
 export async function getServerSideProps(context) {
-    const { token } = context.req.cookies;
+    const { session } = context.req.cookies;
     const page = context.query.page || 1;
 
     if (!token) {

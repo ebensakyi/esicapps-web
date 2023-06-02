@@ -24,7 +24,7 @@ export default function index({ inspectionForm, regions, districts }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   const page = context.query.page || 1;
   const searchText = context.query.searchText || "";
@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/community-data?token=${token}&page=${page}&searchText=${searchText}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/community-data?session=${session}&page=${page}&searchText=${searchText}`
   ).then((res) => res.json());
 
   const inspectionForm = await fetch(
@@ -46,10 +46,10 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const regions = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/region?session=${session}`
   ).then((res) => res.json());
   const districts = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/district?session=${session}`
   ).then((res) => res.json());
 
 

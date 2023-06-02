@@ -25,7 +25,7 @@ export default function profile({ regions,  districts, userTypes,user }) {
 
 
 export async function getServerSideProps(context) {
-    const { token } = context.req.cookies;
+    const { session } = context.req.cookies;
 
     if (!token) {
         return {
@@ -35,21 +35,21 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const user = await fetch(`${SERVER_BASE_URL}/api/v1/auth/profile?token=${token}`).then(
+    const user = await fetch(`${SERVER_BASE_URL}/api/v1/auth/profile?session=${session}`).then(
         (res) => res.json()
     );
-    const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-type?token=${token}`).then(
-        (res) => res.json()
-    );
-
-    const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?token=${token}`).then(
+    const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-type?session=${session}`).then(
         (res) => res.json()
     );
 
-    const regions = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/region?token=${token}`).then(
+    const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?session=${session}`).then(
         (res) => res.json()
     );
-    const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district?token=${token}`).then(
+
+    const regions = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/region?session=${session}`).then(
+        (res) => res.json()
+    );
+    const districts = await fetch(`${SERVER_BASE_URL}/api/v1/primary-data/district?session=${session}`).then(
         (res) => res.json()
     );
     

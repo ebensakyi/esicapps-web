@@ -19,7 +19,7 @@ export default function dbut({  }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   if (!token) {
     return {

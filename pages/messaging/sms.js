@@ -25,7 +25,7 @@ export default function sms({ regions, districts, messages, users }) {
 }
 
 export async function getServerSideProps(context) {
-  const { token } = context.req.cookies;
+  const { session } = context.req.cookies;
 
   if (!token) {
     return {
@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
     `${SERVER_BASE_URL}/api/v1/messaging/notification`
   ).then((res) => res.json());
 
-  const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?token=${token}`).then((res) =>
+  const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?session=${session}`).then((res) =>
     res.json()
   );
 
