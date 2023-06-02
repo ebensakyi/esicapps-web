@@ -1,9 +1,9 @@
 import prisma from "../../../../prisma/db";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
 
     let inspection = await prisma.inspection.findFirst({
       where: {

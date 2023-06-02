@@ -1,11 +1,11 @@
 import prisma from "../../../../prisma/db";
 import { logActivity } from "../../../../utils/Log";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
 
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
     await logActivity("Action summaries report generated",  userCookie.user.id);
 
     let filterBy = req.body.filterBy;

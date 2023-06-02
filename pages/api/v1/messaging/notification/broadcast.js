@@ -1,14 +1,14 @@
 import prisma from "../../../../../prisma/db";
 import { send } from "../../../../../utils/send-sms";
 import { append_233 } from "../../../../../utils/append-233";
-import { getUserCookie } from "../../../../../utils/cookies-manager";
+import { getSession } from "../../../../../utils/session-manager";
 import { logActivity } from "../../../../../utils/Log";
 import { sendBulkFCM } from "../../../../../utils/send-fcm";
 
 const post = async (req, res) => {
   try {
 
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
 
     await logActivity("Broadcast notification sent", userCookie.user.id);
 

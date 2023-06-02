@@ -1,14 +1,14 @@
 import prisma from "../../../../prisma/db";
 import AWS from "aws-sdk";
 import fs from "fs";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 import { logActivity } from "../../../../utils/Log";
 
 const XLSX = require("xlsx");
 
 const post = async (req, res) => {
   try {
-    let userObj = await getUserCookie(req, res);
+    let userObj = await getSession(req);
 
     await logActivity("Exported data to excel",  userObj?.user?.id);
 

@@ -96,7 +96,7 @@
 // //   }
 // // };
 
-// export const getUserCookie = async (req, res) => {
+// export const getSession = async (req, res) => {
 //   try {
 //     let cookies = cookie.parse(req.headers.cookie || "");
 //     let token = cookies.token;

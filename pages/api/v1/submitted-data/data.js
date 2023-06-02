@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/db";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 import { verifyToken } from "../../../../utils/token-verifier";
 import { logActivity } from "../../../../utils/Log";
 

@@ -3,12 +3,12 @@ import { send } from "../../../../../utils/send-sms";
 import { sendSMS } from "../../../../../utils/send-hubtel-sms";
 
 import { append_233 } from "../../../../../utils/append-233";
-import { getUserCookie } from "../../../../../utils/cookies-manager";
+import { getSession } from "../../../../../utils/session-manager";
 import { logActivity } from "../../../../../utils/Log";
 
 const post = async (req, res) => {
 try {
-  let userCookie = await getUserCookie(req, res);
+  let userCookie = await getSession(req);
   await logActivity("Single SMS sent",  userCookie.user.id);
 
 

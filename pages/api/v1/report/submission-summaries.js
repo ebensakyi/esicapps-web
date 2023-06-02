@@ -1,6 +1,6 @@
 import prisma from "../../../../prisma/db";
 import { logActivity } from "../../../../utils/Log";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
@@ -8,7 +8,7 @@ const post = async (req, res) => {
 
       await getSubmissionSummary(req, res);
 
-      let userCookie = await getUserCookie(req, res);
+      let userCookie = await getSession(req);
 
       await logActivity(`SubmissionSummary report generated`, userCookie.user.id);
     

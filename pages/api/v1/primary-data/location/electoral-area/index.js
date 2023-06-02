@@ -1,5 +1,5 @@
 import prisma from "../../../../../../prisma/db";
-import { getUserCookie } from "../../../../../../utils/cookies-manager";
+import { getSession } from "../../../../../../utils/session-manager";
 import { verifyToken } from "../../../../../../utils/token-verifier";
 
 const put = async (req, res) => {
@@ -25,7 +25,7 @@ const post = async (req, res) => {
 
     // district user oonly. Use his id
 
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
     let districtId = userCookie?.user?.districtId;
 
     if (districtId) {

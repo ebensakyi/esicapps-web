@@ -1,6 +1,6 @@
 import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 import { nanoid } from "nanoid";
 import { logActivity } from "../../../../utils/Log";
 import { sendSMS } from "../../../../utils/send-hubtel-sms";
@@ -14,7 +14,7 @@ const post = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
 
     let hashedPassword = await bcrypt.hashSync(password, salt);
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
 
     let regionId;
     let data = {};

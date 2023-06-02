@@ -2,7 +2,7 @@ import prisma from "../../../../../prisma/db";
 import { send } from "../../../../../utils/send-sms";
 import { append_233 } from "../../../../../utils/append-233";
 import { sendFCM } from "../../../../../utils/send-fcm";
-import { getUserCookie } from "../../../../../utils/cookies-manager";
+import { getSession } from "../../../../../utils/session-manager";
 import { logActivity } from "../../../../../utils/Log";
 
 const post = async (req, res) => {
@@ -12,7 +12,7 @@ const post = async (req, res) => {
     let title = req.body.title;
     let message = req.body.message;
 
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
     await logActivity(
       `Single notification sent to ${recipientId}`,
       userCookie.user.id

@@ -1,11 +1,11 @@
 import prisma from "../../../../prisma/db";
-import { getUserCookie } from "../../../../utils/cookies-manager";
+import { getSession } from "../../../../utils/session-manager";
 import { logActivity } from "../../../../utils/Log";
 import { verifyToken } from "../../../../utils/token-verifier";
 
 const post = async (req, res) => {
   try {
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
 
     let inspection = await prisma.inspection.findFirst({
       where: {
@@ -34,7 +34,7 @@ const post = async (req, res) => {
 
 const put = async (req, res) => {
   try {
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
 
    
     await prisma.inspection.update({

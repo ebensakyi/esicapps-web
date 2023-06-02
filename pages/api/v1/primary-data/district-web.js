@@ -1,6 +1,5 @@
 import prisma from "../../../../prisma/db";
-import { getUserCookie } from "../../../../utils/cookies-manager";
-import { verifyToken } from "../../../../utils/token-verifier";
+import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {

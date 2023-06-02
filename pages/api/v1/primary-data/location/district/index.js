@@ -1,5 +1,5 @@
 import prisma from "../../../../../../prisma/db";
-import { getUserCookie } from "../../../../../../utils/cookies-manager";
+import { getSession } from "../../../../../../utils/session-manager";
 import { verifyToken } from "../../../../../../utils/token-verifier";
 
 const put = async (req, res) => {
@@ -25,7 +25,7 @@ const put = async (req, res) => {
 const post = async (req, res) => {
   try {
 
-    let userCookie = await getUserCookie(req, res);
+    let userCookie = await getSession(req);
     // if (userCookie.user.districtId == null) {
     //   return res
     //     .status(401)
