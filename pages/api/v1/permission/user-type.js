@@ -70,9 +70,41 @@ const Delete = async (req, res) => {
       },
     });
 
-  console.log("id==>",id);
-  console.log("userType==>",userType);
+  
+  return res.status(200).json()
+  } catch (error) {
+    console.log(error);
+  }
+ 
 
+}
+
+const put = async (req, res) => {
+  try {
+   console.log(req.body);
+   let userTypeId = req.body.userTypeId;
+   let name = req.body.userTypeName;
+   let selectedPages = req.body.selectedPages;
+
+   let pages = await selectedPages.map((page) => {
+    return {
+      pageId: page.value,
+      userTypeId: userTypeId,
+    };
+  });
+
+
+    //  const userType = await prisma.userType.update({
+    //   where: {
+    //     id: id
+    //   },
+    //   data: {
+    //     deleted: 1
+    //   },
+    // });
+
+  
+  return res.status(200).json()
   } catch (error) {
     console.log(error);
   }

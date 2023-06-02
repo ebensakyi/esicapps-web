@@ -10,8 +10,9 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
 
   const [userTypeName, setUserTypeName] = useState("");
   const [selectedPages, setSelectedPages] = useState([]);
+  const [userTypeId, setUserTypeId] = useState();
 
- const [isEditing, setIsEditing] = useState(0);
+  const [isEditing, setIsEditing] = useState(0);
 
   const add = async (e) => {
     try {
@@ -38,7 +39,8 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
     }
   };
 
-  const update = async (e) => {
+  const update = async (e, id) => {
+    console.log(id);
     try {
       e.preventDefault();
       if (selectedPages.length == 0)
@@ -46,7 +48,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
       if (userTypeName == "") return toast.error("User type cannot be empty");
 
       let data = {
-
+        userTypeId: id,
         userTypeName,
         selectedPages: selectedPages,
       };
@@ -56,24 +58,32 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
       setUserTypeName("");
       router.replace(router.asPath);
 
-      return toast.success("User Type saved");
+      return toast.success("User Type update");
     } catch (error) {
       console.log(error);
       return toast.error("An error occurred");
     }
   };
   const deleteUserType = async (id) => {
-    console.log("ID==> ", id);
-    const response = await axios.delete(`/api/v1/permission/user-type/?id=${id}` );
+    try {
+      console.log("ID==> ", id);
+      const response = await axios.delete(
+        `/api/v1/permission/user-type/?id=${id}`
+      );
 
-    // arr = selectedPages.filter(function (item) {
-    //   return item !== selected[selected.length - 1].value;
-    // });
-    // console.log(arr);
+      console.log(response);
+      if (response.status == 200) {
+        router.replace(router.asPath);
+        return toast.success("User Type deleted");
+      }
+
+      return toast.success("An error occurred while deleting");
+    } catch (error) {
+      return toast.success("An error occurred while deleting");
+    }
   };
   const onRemove = (selected) => {
-
-   // setSelectedPages([selected.length - 1].value);
+    // setSelectedPages([selected.length - 1].value);
   };
   const onSelect = (selected) => {
     // setSelectedPages(selected[selected.length - 1].value);
@@ -228,24 +238,25 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                   <div className="flex-shrink-0">
                     <div className="col-lg-12">
                       <div className="text-end">
-                        {isEditing==1?
-                         <button
-                         className="btn btn-warning"
-                         onClick={(e) => {
-                           add(e);
-                         }}
-                       >
-                         Update
-                       </button>: <button
-                          className="btn btn-primary"
-                          onClick={(e) => {
-                            add(e);
-                          }}
-                        >
-                          Create
-                        </button>
-                        }
-                       
+                        {isEditing == 1 ? (
+                          <button
+                            className="btn btn-warning"
+                            onClick={(e) => {
+                              update(e, userTypeId);
+                            }}
+                          >
+                            Update
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-primary"
+                            onClick={(e) => {
+                              add(e);
+                            }}
+                          >
+                            Create
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -324,7 +335,10 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                                             }
                                           );
                                           setSelectedPages(pageAcess);
-                                          setIsEditing(1)
+                                          setIsEditing(1);
+                                          setUserTypeId(ut.id);
+
+                                          console.log("ut.id ", ut.id);
                                         }}
                                       >
                                         Update
@@ -336,7 +350,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                                         onClick={(e) => {
                                           e.preventDefault();
 
-                                          deleteUserType(ut.id)
+                                          deleteUserType(ut.id);
                                         }}
                                       >
                                         Delete
