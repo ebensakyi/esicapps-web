@@ -34,7 +34,7 @@ const Dashboard = ({
   electoralAreas,
   communities,
 }) => {
-  let loggedInUserType = Cookies.get("ut").split("??")[1];
+  let loggedInUserType = Cookies?.get("ut")?.split("??")[1];
   const [showLoading, setShowLoading] = useState(false);
 
   const [districtsData, setDistrictsData] = useState([]);

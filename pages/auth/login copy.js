@@ -29,7 +29,31 @@ export default function Login() {
       }
 
       if (response.status == 200) {
+        Cookies.set("ut", nanoid(50) + "??" + response?.data?.userType, {
+          expires: 3 * 60 * 60,
+        });
        
+
+        Cookies.set(
+          "fullName",
+          response?.data?.user?.surname + " " + response?.data?.user?.otherNames,
+          {
+            expires: 3 * 60 * 60,
+          }
+        );
+        Cookies.set("userType", response?.data?.user?.UserType?.name, {
+          expires: 3 * 60 * 60,
+        });
+        Cookies.set("designation", response?.data?.user?.designation, {
+          expires: 3 * 60 * 60,
+        });
+
+        Cookies.set("region", response?.data?.user?.Region?.name, {
+          expires: 3 * 60 * 60,
+        });
+        Cookies.set("district", response?.data?.user?.District?.name, {
+          expires: 3 * 60 * 60,
+        });
         return router.replace("/dashboard");
       }
     } catch (error) {
@@ -56,7 +80,7 @@ export default function Login() {
       data-sidebar-image="none"
     >
       <head>
-        <meta charSet="utf-8" />
+        <meta charset="utf-8" />
         <title>Sign In | ESICApps</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta content="Sign In | ESICApps" name="description" />

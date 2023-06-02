@@ -19,33 +19,33 @@ export const setUserCookie = async (token, req, res) => {
   }
 };
 
-export const setAccessiblePositionCookie = async (
-  access,
-  userType,
-  req,
-  res
-) => {
-  try {
-    res.setHeader(
-      "Set-Cookie",
-      cookie.serialize("access", access, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "development",
-        maxAge: 3 * 60 * 60,
-        sameSite: "strict",
-        path: "/",
-      })
-    );
+// export const setAccessiblePositionCookie = async (
+//   access,
+//   userType,
+//   req,
+//   res
+// ) => {
+//   try {
+//     res.setHeader(
+//       "Set-Cookie",
+//       cookie.serialize("access", access, {
+//         httpOnly: true,
+//         secure: process.env.NODE_ENV !== "development",
+//         maxAge: 3 * 60 * 60,
+//         sameSite: "strict",
+//         path: "/",
+//       })
+//     );
 
-    return res.status(200).json({
-      statusCode: 1,
-      data: { userType },
-      message: "Logged in",
-    });
-  } catch (error) {
-    console.log(">>>>>>>>>>", error);
-  }
-};
+//     return res.status(200).json({
+//       statusCode: 1,
+//       data: { userType },
+//       message: "Logged in",
+//     });
+//   } catch (error) {
+//     console.log(">>>>>>>>>>", error);
+//   }
+// };
 
 export const clearUserCookie = async (req, res) => {
   try {

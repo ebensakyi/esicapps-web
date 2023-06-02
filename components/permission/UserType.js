@@ -30,9 +30,13 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
       const response = await axios.post("/api/v1/permission/user-type", data);
       setSelectedPages([]);
       setUserTypeName("");
-      router.replace(router.asPath);
-
-      return toast.success("User Type saved");
+      if (response.status == 200) {
+        router.replace(router.asPath);
+        return toast.success("User Type added");
+      }
+      if (response.status == 201) {
+        return toast.error("Same name already exist");
+      }
     } catch (error) {
       console.log(error);
       return toast.error("An error occurred");
@@ -40,13 +44,13 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
   };
 
   const update = async (e, id) => {
-    console.log(id);
     try {
       e.preventDefault();
       if (selectedPages.length == 0)
         return toast.error("Pages cannot be empty");
       if (userTypeName == "") return toast.error("User type cannot be empty");
 
+      console.log(selectedPages);
       let data = {
         userTypeId: id,
         userTypeName,
@@ -76,6 +80,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
         router.replace(router.asPath);
         return toast.success("User Type deleted");
       }
+      
 
       return toast.success("An error occurred while deleting");
     } catch (error) {
@@ -84,6 +89,8 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
   };
   const onRemove = (selected) => {
     // setSelectedPages([selected.length - 1].value);
+    setSelectedPages(selected);
+
   };
   const onSelect = (selected) => {
     // setSelectedPages(selected[selected.length - 1].value);

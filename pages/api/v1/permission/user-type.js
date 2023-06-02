@@ -16,7 +16,6 @@ const post = async (req, res) => {
       },
     });
 
-
     let pages = await selectedPages.map((page) => {
       return {
         pageId: page.value,
@@ -37,10 +36,7 @@ const post = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    if (error.code === "P2002")
-      return res
-        .status(200)
-        .json({ statusCode: 0, message: "Page  should be unique" });
+    if (error.code === "P2002") return res.status(201).json({});
   }
 };
 
@@ -59,75 +55,75 @@ const get = async (req, res) => {
 
 const Delete = async (req, res) => {
   try {
-     let id = Number(req.query.id);
+    let id = Number(req.query.id);
 
-     const userType = await prisma.userType.update({
+    const userType = await prisma.userType.update({
       where: {
-        id: id
+        id: id,
       },
       data: {
-        deleted: 1
+        deleted: 1,
       },
     });
-
     const pageAccess = await prisma.pageAccess.deleteMany({
       where: {
-        userTypeId: id
+        userTypeId: id,
       },
-      
     });
-  
 
-  
-  return res.status(200).json()
+    return res.status(200).json();
   } catch (error) {
     console.log(error);
   }
- 
-
-}
+};
 
 const put = async (req, res) => {
   try {
-   console.log(req.body);
-   let userTypeId = req.body.userTypeId;
-   let name = req.body.userTypeName;
-   let selectedPages = req.body.selectedPages;
+    console.log(req.body);
+    let userTypeId = req.body.userTypeId;
+    let name = req.body.userTypeName;
+    let selectedPages = req.body.selectedPages;
 
-   let pages = await selectedPages.map((page) => {
-    return {
-      pageId: page.value,
-      userTypeId: userTypeId,
-    };
-  });  
-  
-  console.log(pages);
+    let pages = await selectedPages.map((page) => {
+      return {
+        pageId: page.value,
+        userTypeId: userTypeId,
+      };
+    });
 
-  const userType = await prisma.pageAccess.delete({
-    where: {
-      id: userTypeId
-    },
-    
-  });
+    console.log(pages);
+
+     await prisma.pageAccess.deleteMany({
+      where: {
+        userTypeId: userTypeId,
+      },
+    });
+
+     await prisma.userType.update({
+      data: {
+         name,
+      },
+      where: {
+        id: userTypeId,
+      },
+    });
 
 
-    //  const userType = await prisma.userType.update({
-    //   where: {
-    //     id: userTypeId
-    //   },
-    //   data: {
-    //     deleted: 1
-    //   },
-    // });
+    const pageAccess = await prisma.pageAccess.createMany({
+      data: {
+        userTypeId: userTypeId,
+        userTypeName: name,
+      },
+      data: pages,
+      skipDuplicates: true,
+    });
 
-  
-  return res.status(200).json()
+
+    return res.status(200).json();
   } catch (error) {
     console.log(error);
   }
- 
-
-}
+};
 
 export default (req, res) => {
   req.method === "POST"

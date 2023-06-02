@@ -7,12 +7,11 @@ const Header = () => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  console.log(Cookies?.get("token"));
 
-  //let ut = Cookies?.get("ut")?.split("??")[1];
-let fullName = Cookies?.get("fullName");
-  // let designation = Cookies?.get("designation");
- let userType = Cookies?.get("userType");
+  let ut = Cookies?.get("ut")?.split("??")[1];
+  let fullName = Cookies?.get("fullName");
+  let designation = Cookies?.get("designation");
+  let userType = Cookies?.get("userType");
 
   return (
     <div>

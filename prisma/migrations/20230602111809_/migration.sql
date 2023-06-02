@@ -1648,6 +1648,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "UserType_name_key" ON "UserType"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Community_electoralAreaId_name_key" ON "Community"("electoralAreaId", "name");
 
 -- CreateIndex
