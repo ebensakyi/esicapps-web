@@ -70,6 +70,14 @@ const Delete = async (req, res) => {
       },
     });
 
+    const pageAccess = await prisma.pageAccess.deleteMany({
+      where: {
+        userTypeId: id
+      },
+      
+    });
+  
+
   
   return res.status(200).json()
   } catch (error) {
@@ -91,12 +99,21 @@ const put = async (req, res) => {
       pageId: page.value,
       userTypeId: userTypeId,
     };
+  });  
+  
+  console.log(pages);
+
+  const userType = await prisma.pageAccess.delete({
+    where: {
+      id: userTypeId
+    },
+    
   });
 
 
     //  const userType = await prisma.userType.update({
     //   where: {
-    //     id: id
+    //     id: userTypeId
     //   },
     //   data: {
     //     deleted: 1
