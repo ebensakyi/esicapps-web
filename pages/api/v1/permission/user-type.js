@@ -16,7 +16,6 @@ const post = async (req, res) => {
       },
     });
 
-    console.log(selectedPages);
 
     let pages = await selectedPages.map((page) => {
       return {
@@ -58,13 +57,36 @@ const get = async (req, res) => {
   }
 };
 
+const Delete = async (req, res) => {
+  try {
+     let id = Number(req.query.id);
+
+     const userType = await prisma.userType.update({
+      where: {
+        id: id
+      },
+      data: {
+        deleted: 1
+      },
+    });
+
+  console.log("id==>",id);
+  console.log("userType==>",userType);
+
+  } catch (error) {
+    console.log(error);
+  }
+ 
+
+}
+
 export default (req, res) => {
   req.method === "POST"
     ? post(req, res)
     : req.method === "PUT"
-    ? console.log("PUT")
+    ? put(req, res)
     : req.method === "DELETE"
-    ? console.log("DELETE")
+    ? Delete(req, res)
     : req.method === "GET"
     ? get(req, res)
     : res.status(404).send("");

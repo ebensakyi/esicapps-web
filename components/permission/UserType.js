@@ -62,7 +62,10 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
       return toast.error("An error occurred");
     }
   };
-  const deleteUserType = async (selected) => {
+  const deleteUserType = async (id) => {
+    console.log("ID==> ", id);
+    const response = await axios.delete(`/api/v1/permission/user-type/?id=${id}` );
+
     // arr = selectedPages.filter(function (item) {
     //   return item !== selected[selected.length - 1].value;
     // });
@@ -333,7 +336,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                                         onClick={(e) => {
                                           e.preventDefault();
 
-                                          deleteUserType()
+                                          deleteUserType(ut.id)
                                         }}
                                       >
                                         Delete
