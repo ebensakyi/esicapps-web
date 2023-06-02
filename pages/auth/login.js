@@ -23,6 +23,8 @@ export default function Login() {
       };
       const response = await axios.post(`/api/v1/auth/login`, data);
 
+      console.log(response);
+
 
       if (response?.status != 200) {
         return toast.error(response?.data?.message);

@@ -1,14 +1,11 @@
 import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import {
-  clearUserCookie,
-  setUserCookie,
-} from "../../../../utils/cookies-manager";
+
+import { destroySession, setSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
-    await clearUserCookie(req, res);
 
     let email = req.body.email;
     let password = req.body.password;
@@ -34,8 +31,6 @@ const post = async (req, res) => {
       // include: { UserType: true },
     });
 
-    console.log(user.UserType.PageAccess);
-
     if (!user) {
       return res
         .status(404)
@@ -45,12 +40,12 @@ const post = async (req, res) => {
     let isValid = await bcrypt.compare(password, user.password);
 
     if (isValid) {
-      const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
+      // const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
 
-      // let userId = user.id;
-      let userType = user.userTypeId;
-      await setUserCookie(token, req, res);
-      return res.status(200).json({  user });
+      await setSession( res,user);
+
+
+     // return res.status(200).json({ user });
     } else {
       return res
         .status(404)
@@ -64,7 +59,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    await clearUserCookie(req, res);
+    await destroySession(res);
 
     const user = await prisma.user.findMany({ where: { deleted: 0 } });
     return res.status(200).json({ statusCode: 1, data: user });

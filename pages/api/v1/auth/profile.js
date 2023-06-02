@@ -56,7 +56,7 @@ console.log(user);
 
 const get = async (req, res) => {
   try {
-    let user = await verifyToken(req.query.token);
+    let user = await getSession(req.query.token);
     console.log(user);
 
     return res.status(200).json(user);

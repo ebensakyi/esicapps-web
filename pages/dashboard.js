@@ -38,14 +38,14 @@ export async function getServerSideProps(context) {
   const from = context.query.from || "undefined";
   const to = context.query.to || "undefined";
 
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: true,
-      },
-    };
-  }
+  // if (!token) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth/login",
+  //       permanent: true,
+  //     },
+  //   };
+  // }
   const dashboardData = await fetch(
     `${SERVER_BASE_URL}/api/v1/dashboard?token=${token}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
   ).then((res) => res.json());

@@ -1,7 +1,6 @@
 import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
 import { getUserCookie } from "../../../../utils/cookies-manager";
-import { verifyToken } from "../../../../utils/token-verifier";
 import { nanoid } from "nanoid";
 import { logActivity } from "../../../../utils/Log";
 import { sendSMS } from "../../../../utils/send-hubtel-sms";
@@ -151,7 +150,7 @@ const get = async (req, res) => {
       return res.status(200).json(user);
     }
 
-    let data = await verifyToken(req.query.token);
+    let data = await getSession(req.query.token);
 
     let userType = data.user.UserType.id;
     let region = data.user.regionId;

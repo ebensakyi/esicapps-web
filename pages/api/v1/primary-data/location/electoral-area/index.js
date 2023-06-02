@@ -62,7 +62,7 @@ const post = async (req, res) => {
 };
 
 const getSearchParams = async (req, searchText) => {
-  let data = await verifyToken(req.query.token);
+  let data = await getSession(req.query.token);
 
   let electoralArea =
     data.user.electoralAreaId == null || isNaN(data.user.electoralAreaId)

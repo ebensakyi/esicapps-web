@@ -1,5 +1,6 @@
 import prisma from "../../../../prisma/db";
-import { verifyToken } from "../../../../utils/token-verifier";
+import { getSession } from "../../../../utils/session-manager";
+// import { verifyToken } from "../../../../utils/token-verifier";
 
 const post = async (req, res) => {
   try {
@@ -25,7 +26,7 @@ const get = async (req, res) => {
     let token = req?.cookies?.token || req?.query?.token;
 
 
-    let data = await verifyToken(token);
+    let data = await getSession(token);
 
     let districtId = data?.user?.districtId;
 

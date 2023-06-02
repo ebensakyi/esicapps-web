@@ -71,7 +71,7 @@ const generateWhereMainObject = async (req, res) => {
   let perPage = 10;
   let skip = Number((curPage - 1) * perPage) || 0;
 
-  let data = await verifyToken(req.query.token);
+  let data = await getSession(req.query.token);
 
   let userType = data.user.UserType.id;
   // let filterColumn = userType == 1 ?""

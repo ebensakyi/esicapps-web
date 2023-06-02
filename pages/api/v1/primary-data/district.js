@@ -22,7 +22,7 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let token = req?.cookies?.token || req?.query?.token;
-    let data = await verifyToken(token);
+    let data = await getSession(token);
     let userType = data.user.UserType.id;
 
     if (userType == 3 || userType == 4) {
@@ -44,7 +44,7 @@ const get = async (req, res) => {
       return res.status(200).json(district);
     }
     // if (req.query.token && !req.query.regionId) {
-    //   let data = await verifyToken(req.query.token);
+    //   let data = await getSession(req.query.token);
 
     //   regionId = data.user.regionId;
     //   userType = data.user.UserType.id;

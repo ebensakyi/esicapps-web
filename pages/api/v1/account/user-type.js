@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/db";
-import {verifyToken } from "../../../../utils/token-verifier";
+import {getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const get = async (req, res) => {
   try {
   // console.log(req.query.token);
 
-    let data = await verifyToken(req.query.token);  
+    let data = await getSession(req.query.token);  
 
 
 

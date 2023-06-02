@@ -7,7 +7,7 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
-  let userObj = await verifyToken(req.query.token);
+  let userObj = await getSession(req.query.token);
   let filterBy; //= req?.query?.filterBy;
   let filterValue; // = Number(req?.query?.filterValue);
 

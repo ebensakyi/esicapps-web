@@ -92,7 +92,7 @@ let fullName = Cookies?.get("fullName");
                     <span className="align-middle">Profile</span>
                   </a>
 
-                  <a className="dropdown-item" href="/auth/login">
+                  <a className="dropdown-item" href="/api/v1/auth/logout">
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />
                     <span className="align-middle" data-key="t-logout">
                       Logout

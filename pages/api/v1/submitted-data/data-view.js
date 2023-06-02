@@ -54,7 +54,7 @@ const put = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let userObj = await verifyToken(req.query.token);
+    let userObj = await getSession(req.query.token);
 
     let user = userObj.user?.id;
     await logActivity(`Visited dataview page for ${req.query.id}`, user);
