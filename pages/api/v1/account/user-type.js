@@ -23,7 +23,7 @@ const get = async (req, res) => {
   try {
   // console.log(req.query.token);
 
-    let data = await getSession(req.query.token);  
+    let data = await getSession(req);  
 
 
 

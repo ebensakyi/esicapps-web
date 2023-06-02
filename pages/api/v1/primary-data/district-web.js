@@ -23,7 +23,7 @@ const get = async (req, res) => {
   try {
     let data, regionId, userType;
     if (req.query.token) {
-      data = await getSession(req.query.token);
+      data = await getSession(req);
 
       regionId = data.regionId;
       userType = data.user.UserType.id;

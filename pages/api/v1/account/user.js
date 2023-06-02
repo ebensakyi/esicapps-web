@@ -150,7 +150,7 @@ const get = async (req, res) => {
       return res.status(200).json(user);
     }
 
-    let data = await getSession(req.query.token);
+    let data = await getSession(req);
 
     let userType = data.user.UserType.id;
     let region = data.user.regionId;

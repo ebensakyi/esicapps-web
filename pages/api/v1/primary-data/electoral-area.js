@@ -23,10 +23,9 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let token = req?.cookies?.token || req?.query?.token;
 
 
-    let data = await getSession(token);
+    let data = await getSession(req);
 
     let districtId = data?.user?.districtId;
 

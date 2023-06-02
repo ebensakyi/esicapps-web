@@ -7,7 +7,7 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
-  let userObj = await getSession(req.query.token);
+  let userObj = await getSession(req);
   let filterBy = req?.query?.filterBy;
   let filterValue = req?.query?.filterValue;
       let userType = userObj?.user?.UserType?.id;

@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/db";
-import { verifyToken } from "../../../../utils/token-verifier";
+import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
-  let userObj = await getSession(req.query.token);
+  let userObj = await getSession(req);
   let filterBy; //= req?.query?.filterBy;
   let filterValue; // = Number(req?.query?.filterValue);
 

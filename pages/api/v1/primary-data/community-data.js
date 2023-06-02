@@ -43,7 +43,7 @@ const post = async (req, res) => {
 };
 
 const getSearchParams = async (req, searchText) => {
-  let data = await getSession(req.query.token);
+  let data = await getSession(req);
 
   let district =
     data.user.districtId == null || isNaN(data.user.districtId)

@@ -10,7 +10,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let userObj = await getSession(req.query.token);
+    let userObj = await getSession(req);
 
     let user = userObj.user?.id;
     await logActivity("Visited submitted data list", user);
@@ -74,7 +74,7 @@ const generateWhereMainObject = async (req, res) => {
   let perPage = 10;
   let skip = Number((curPage - 1) * perPage) || 0;
 
-  let userObj = await getSession(req.query.token);
+  let userObj = await getSession(req);
 
   let userType = userObj.user?.userTypeId;
 

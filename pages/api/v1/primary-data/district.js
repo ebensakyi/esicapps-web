@@ -21,8 +21,7 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let token = req?.cookies?.token || req?.query?.token;
-    let data = await getSession(token);
+    let data = await getSession(req);
     let userType = data.user.UserType.id;
 
     if (userType == 3 || userType == 4) {
