@@ -7,44 +7,43 @@ const Header = () => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  console.log(Cookies?.get("token"));
 
   //let ut = Cookies?.get("ut")?.split("??")[1];
-let fullName = Cookies?.get("fullName");
+  let fullName = Cookies?.get("fullName");
   // let designation = Cookies?.get("designation");
- let userType = Cookies?.get("userType");
+  let userType = Cookies?.get("userType");
 
+  let priv = Cookies.get("vrip");
 
- let priv = localStorage.getItem("priv");
+  console.log("PRV ",priv);
 
- let includesDashboard= priv.includes("1")
- let includesResData= priv.includes("2")
- let includesEatData= priv.includes("3")
- let includesHealthData= priv.includes("4")
- let includesHospData= priv.includes("5")
- let includesMarketData= priv.includes("6")
- let includesIndustryData= priv.includes("7")
- let includesInstitutionData= priv.includes("8")
- let includesSanitaryData= priv.includes("9")
- let includesReports= priv.includes("10")
- let includesSanitationReport= priv.includes("11")
- let includesNotifications= priv.includes("12")
- let includesSingleSMS= priv.includes("13")
- let includesBulkSMS= priv.includes("14")
- let includesSingleNotification= priv.includes("15")
- let includesBulkNotification= priv.includes("16")
- let includesBulkUploadDistrictData= priv.includes("17")
- let includesBulkUploadElectoralAreaData= priv.includes("18")
- let includesBulkUploadCommunityData= priv.includes("19")
- let includesAddSingleDistrict= priv.includes("20")
- let includesAddSingleElectoralArea= priv.includes("21")
- let includesAddSingleCommunity= priv.includes("22")
- let includesTransferDataOwnership= priv.includes("23")
- let includesUserGuide= priv.includes("24")
- let includesUser= priv.includes("25")
- let includesUserLog= priv.includes("26")
- let includesUserType= priv.includes("27")
-
+  let includesDashboard = priv.includes("1");
+  let includesResData = priv.includes("2");
+  let includesEatData = priv.includes("3");
+  let includesHealthData = priv.includes("4");
+  let includesHospData = priv.includes("5");
+  let includesMarketData = priv.includes("6");
+  let includesIndustryData = priv.includes("7");
+  let includesInstitutionData = priv.includes("8");
+  let includesSanitaryData = priv.includes("9");
+  let includesReports = priv.includes("10");
+  let includesSanitationReport = priv.includes("11");
+  let includesNotifications = priv.includes("12");
+  let includesSingleSMS = priv.includes("13");
+  let includesBulkSMS = priv.includes("14");
+  let includesSingleNotification = priv.includes("15");
+  let includesBulkNotification = priv.includes("16");
+  let includesBulkUploadDistrictData = priv.includes("17");
+  let includesBulkUploadElectoralAreaData = priv.includes("18");
+  let includesBulkUploadCommunityData = priv.includes("19");
+  let includesAddSingleDistrict = priv.includes("20");
+  let includesAddSingleElectoralArea = priv.includes("21");
+  let includesAddSingleCommunity = priv.includes("22");
+  let includesTransferDataOwnership = priv.includes("23");
+  let includesUserGuide = priv.includes("24");
+  let includesUser = priv.includes("25");
+  let includesUserLog = priv.includes("26");
+  let includesUserType = priv.includes("27");
 
   return (
     <div>
@@ -124,12 +123,20 @@ let fullName = Cookies?.get("fullName");
                     <span className="align-middle">Profile</span>
                   </a>
 
-                  <a className="dropdown-item" href="/api/v1/auth/logout">
+                  <button
+                    className="dropdown-item"
+                    onClick={() => {
+                      Cookies.remove("r_id")
+                      Cookies.remove("d_id")
+                      Cookies.remove("vrip")
+                      router.replace("api/v1/auth/logout");
+                    }}
+                  >
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />
                     <span className="align-middle" data-key="t-logout">
                       Logout
                     </span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -251,7 +258,7 @@ let fullName = Cookies?.get("fullName");
                       </div>
                     </li>
 
-                    <li className="nav-item"  hidden={!includesEatData}>
+                    <li className="nav-item" hidden={!includesEatData}>
                       <a
                         href="#eatery"
                         className="nav-link"
@@ -310,7 +317,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item"  hidden={!includesHealthData}>
+                    <li className="nav-item" hidden={!includesHealthData}>
                       <a
                         href="#health"
                         className="nav-link"
@@ -369,7 +376,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item"  hidden={!includesHospData}>
+                    <li className="nav-item" hidden={!includesHospData}>
                       <a
                         href="#hospitality"
                         className="nav-link"
@@ -429,7 +436,7 @@ let fullName = Cookies?.get("fullName");
                       </div>
                     </li>
 
-                    <li className="nav-item"  hidden={!includesInstitutionData}>
+                    <li className="nav-item" hidden={!includesInstitutionData}>
                       <a
                         href="#institution"
                         className="nav-link"
@@ -488,7 +495,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item"  hidden={!includesIndustryData}>
+                    <li className="nav-item" hidden={!includesIndustryData}>
                       <a
                         href="#industry"
                         className="nav-link"
@@ -547,7 +554,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item"  hidden={!includesMarketData}>
+                    <li className="nav-item" hidden={!includesMarketData}>
                       <a
                         href="#market"
                         className="nav-link"
@@ -607,11 +614,11 @@ let fullName = Cookies?.get("fullName");
                       </div>
                     </li>
                     <li
-                    
                       className={
                         router.pathname == "/" ? "nav-item active" : "nav-item"
                       }
-                      hidden={!includesSanitaryData}>
+                      hidden={!includesSanitaryData}
+                    >
                       <a
                         href="#sanitary"
                         className="nav-link"
@@ -674,7 +681,7 @@ let fullName = Cookies?.get("fullName");
                 </div>
               </li>
 
-              <li className="nav-item"  hidden={!includesReports}>
+              <li className="nav-item" hidden={!includesReports}>
                 <a className="nav-link menu-link" href="/report">
                   <i className="ri-line-chart-line" />
                   <span data-key="t-dashboards">Reports</span>
@@ -693,7 +700,7 @@ let fullName = Cookies?.get("fullName");
                 <i className="ri-more-fill" />
                 <span data-key="t-components">MESSAGES</span>
               </li>
-              <li className="nav-item" >
+              <li className="nav-item">
                 <a
                   className="nav-link menu-link"
                   href="#notifications"
@@ -708,12 +715,18 @@ let fullName = Cookies?.get("fullName");
                 <div className="collapse menu-dropdown" id="notifications">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <li className="nav-item"  hidden={!includesBulkNotification}>
+                      <li
+                        className="nav-item"
+                        hidden={!includesBulkNotification}
+                      >
                         <Link href="/messaging/notification/broadcast">
                           <a className="nav-link"> Broadcast</a>
                         </Link>
                       </li>
-                      <li className="nav-item"  hidden={!includesSingleNotification}>
+                      <li
+                        className="nav-item"
+                        hidden={!includesSingleNotification}
+                      >
                         <Link href="/messaging/notification/single">
                           <a className="nav-link"> Single Notification</a>
                         </Link>
@@ -736,7 +749,7 @@ let fullName = Cookies?.get("fullName");
                 </a>
                 <div className="collapse menu-dropdown" id="sidebarPages">
                   <ul className="nav nav-sm flex-column">
-                    <li className="nav-item"  hidden={!includesBulkSMS}>
+                    <li className="nav-item" hidden={!includesBulkSMS}>
                       <Link href="/messaging/sms/broadcast">
                         <a className="nav-link"> Broadcast</a>
                       </Link>
@@ -793,9 +806,12 @@ let fullName = Cookies?.get("fullName");
                           >
                             District
                           </a>
-                          <div className="collapse menu-dropdown" id="district" >
+                          <div className="collapse menu-dropdown" id="district">
                             <ul className="nav nav-sm flex-column">
-                              <li className="nav-item" hidden={!includesBulkUploadDistrictData}>
+                              <li
+                                className="nav-item"
+                                hidden={!includesBulkUploadDistrictData}
+                              >
                                 <a
                                   href="/primary-data/district/upload"
                                   className="nav-link"
@@ -804,7 +820,10 @@ let fullName = Cookies?.get("fullName");
                                   Upload
                                 </a>
                               </li>
-                              <li className="nav-item" hidden={!includesAddSingleDistrict}>
+                              <li
+                                className="nav-item"
+                                hidden={!includesAddSingleDistrict}
+                              >
                                 <a
                                   href="/primary-data/district/add"
                                   className="nav-link"
@@ -838,7 +857,10 @@ let fullName = Cookies?.get("fullName");
                           </a>
                           <div className="collapse menu-dropdown" id="ea">
                             <ul className="nav nav-sm flex-column">
-                              <li className="nav-item" hidden={!includesBulkUploadElectoralAreaData}>
+                              <li
+                                className="nav-item"
+                                hidden={!includesBulkUploadElectoralAreaData}
+                              >
                                 <a
                                   href="/primary-data/electoral-area/upload"
                                   className="nav-link"
@@ -847,7 +869,10 @@ let fullName = Cookies?.get("fullName");
                                   Upload
                                 </a>
                               </li>
-                              <li className="nav-item" hidden={!includesAddSingleElectoralArea}>
+                              <li
+                                className="nav-item"
+                                hidden={!includesAddSingleElectoralArea}
+                              >
                                 <a
                                   href="/primary-data/electoral-area/add"
                                   className="nav-link"
@@ -884,7 +909,10 @@ let fullName = Cookies?.get("fullName");
                             id="communities"
                           >
                             <ul className="nav nav-sm flex-column">
-                              <li className="nav-item" hidden={!includesBulkUploadCommunityData}>
+                              <li
+                                className="nav-item"
+                                hidden={!includesBulkUploadCommunityData}
+                              >
                                 <a
                                   href="/primary-data/community/upload"
                                   className="nav-link"
@@ -893,7 +921,10 @@ let fullName = Cookies?.get("fullName");
                                   Upload
                                 </a>
                               </li>
-                              <li className="nav-item" hidden={!includesAddSingleCommunity}>
+                              <li
+                                className="nav-item"
+                                hidden={!includesAddSingleCommunity}
+                              >
                                 <a
                                   href="/primary-data/community/add"
                                   className="nav-link"
@@ -919,7 +950,10 @@ let fullName = Cookies?.get("fullName");
                           </li>
                         </li>
                       </div>
-                      <li className="nav-item" hidden={!includesTransferDataOwnership}>
+                      <li
+                        className="nav-item"
+                        hidden={!includesTransferDataOwnership}
+                      >
                         <a href="/setup/assign-data" className="nav-link">
                           Transfer Data Ownership
                         </a>

@@ -8,7 +8,7 @@ export async function setSession(res, session,privileges) {
   const cookieValue = cookie.serialize("session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60, // 1 week
+    maxAge: 60*60,
     sameSite: "strict",
     path: "/",
   });
@@ -18,10 +18,10 @@ export async function setSession(res, session,privileges) {
 }
 
 export async function getSession(req) {
-  let token = req?.query?.session;
 
-  // const cookies = cookie.parse(req.headers.cookie || "");
-  // const token = cookies.session;
+  const cookies = cookie.parse(req.headers.cookie || "");
+  const token = cookies.session || req?.query?.session;
+  console.log("TOKEN ",token);
   if (!token) return null;
   try {
     return jwt.verify(token, process.env.TOKEN_SECRET);
@@ -32,16 +32,28 @@ export async function getSession(req) {
 
 export async function destroySession(res) {
   try {
-    res.setHeader(
-      "Set-Cookie",
-      cookie.serialize("session", "", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        expires: new Date(0),
-        sameSite: "strict",
-        path: "/",
-      })
-    );
+
+  const cookieValue = cookie.serialize("session", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: -1, // 1 week
+    sameSite: "strict",
+    path: "/",
+  });
+  res.setHeader("Set-Cookie", cookieValue);
+
+    // res.setHeader(
+    //   "Set-Cookie",
+    //   cookie.serialize("sessfdfdion", "", {
+    //     httpOnly: true,
+    //     secure: process.env.NODE_ENV === "production",
+    //     expires: new Date(0),
+    //     sameSite: "strict",
+    //     path: "/",
+    //   })
+    // );
+
+    res.redirect("/")
   } catch (error) {
     console.log(error);
   }

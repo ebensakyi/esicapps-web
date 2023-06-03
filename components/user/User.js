@@ -5,33 +5,47 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
-const User = ({ users, userTypes, regions, districts }) => {
+const User = ({ users, userTypes, regions }) => {
   const router = useRouter();
 
   const [userType, setUserType] = useState();
+  const [selectedUserLevel, setSelectedUserLevel] = useState();
+
   const [surname, setSurname] = useState("");
   const [otherNames, setOtherNames] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [designation, setDesignation] = useState("");
   const [region, setRegion] = useState("");
-  const [electoralAreas, setElectoralAreas] = useState([]);
+  const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState("");
+
   const [electoralArea, setElectoralArea] = useState();
   const [showRegion, setShowRegion] = useState(false);
   const [showDistrict, setShowDistrict] = useState(false);
-  const [districtsArr, setDistricts] = useState("");
 
-  let loggedInUserType = Cookies.get("ut").split("??")[1];
-
+  // let loggedInUserType = Cookies.get("ut").split("??")[1];
+  let districtId = Cookies?.get("d_id");
+  let regionId = Cookies?.get("r_id");
   useEffect(() => {
-    setDistricts(districts);
+    // setDistricts(districts);
   }, []);
 
   const addUser = async (e) => {
     try {
       e.preventDefault();
+      console.log(selectedUserLevel);
 
+      // if (selectedUserLevel == 1) {
+      //   setDistrict(null);
+      //   setRegion(null);
+      // }
+      // if (selectedUserLevel == 2) {
+      //   setDistrict(null);
+      // }
+      // if (selectedUserLevel == 3) {
+      //   setDistrict(null);
+      // }
       if (surname == "") {
         return toast.error("Surname cannot be empty");
       }
@@ -50,12 +64,17 @@ const User = ({ users, userTypes, regions, districts }) => {
       if (userType == "") {
         return toast.error("User type cannot be empty");
       }
-      if (showRegion && (region == "" || region == "")) {
-        return toast.error("Region cannot be empty");
+      if (selectedUserLevel == 2) {
+        if (region == null || region == "") {
+          return toast.error("Region cannot be empty");
+        }
       }
-      if (showDistrict && (district == "" || district == "")) {
-        return toast.error("District cannot be empty");
+      if (selectedUserLevel == 3) {
+        if (district == null || district == "") {
+          return toast.error("District cannot be empty");
+        }
       }
+    
       let data = {
         userTypeId: Number(userType),
         surname,
@@ -66,6 +85,8 @@ const User = ({ users, userTypes, regions, districts }) => {
         region,
         district,
       };
+
+      console.log(data);
 
       const response = await axios.post("/api/v1/account/user", data);
       router.replace(router.asPath);
@@ -82,13 +103,13 @@ const User = ({ users, userTypes, regions, districts }) => {
       return toast.success(response.data.message);
     } catch (error) {
       console.log(error);
-      return toast.error(error.response.data.message);
+      return toast.error("An error occurred while adding user");
     }
   };
 
-  const getDistrictsByRegion = async (e, regionId) => {
+  const getDistrictsByRegion = async (regionId) => {
     try {
-      e.preventDefault();
+      //e.preventDefault();
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
@@ -106,6 +127,10 @@ const User = ({ users, userTypes, regions, districts }) => {
   //     setElectoralAreas(response.data);
   //   } catch (error) {}
   // };
+
+  let nationalUser = districtId == "undefined" && regionId == "undefined";
+  let regionalUser = districtId == "undefined" && regionId != "undefined";
+  let districtUser = districtId != "undefined";
   return (
     <div className="row">
       <ToastContainer
@@ -217,28 +242,155 @@ const User = ({ users, userTypes, regions, districts }) => {
                       />
                     </div>
                   </div>
-                  {/* <div className="col-xxl-3 col-md-6">
+                  <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
-                      Role
+                        User type
                       </label>
 
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
-                          setRole(e.target.value);
-
+                          setUserType(e.target.value);
                         }}
+                        value={userType}
                       >
-                        <option selected>Choose...</option>
-                        {roles.map((role) => (
-                          <option key={role.id} value={role.id}>{role.name}</option>
+                        <option value="">Choose...</option>
+                        {userTypes.map((userType) => (
+                          <option key={userType.id} value={userType.id}>
+                            {userType.name}
+                          </option>
                         ))}
                       </select>
-                    </div> 
-                  </div>*/}
+                    </div>
+                  </div>
                   <div className="col-xxl-3 col-md-6">
+                    <label className="form-label mb-0">Select user level</label>
+
+                    <select
+                      className="form-control"
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setSelectedUserLevel(e.target.value);
+
+                        if (selectedUserLevel==1) {
+                          setRegion(null);
+                          setDistrict(null);
+                        }
+                        if (selectedUserLevel==2) {
+                          setDistrict(null);
+                        }
+                        if (selectedUserLevel==3) {
+                          setRegion(null);
+                        }
+                        // if (districtUser) {
+                        //   getElectoralAreasByDistrict();
+                        // }
+                        // if (e.target.value == "national") {
+                        //   setFilterValue(null);
+                        // }
+                      }}
+                      value={selectedUserLevel}
+                    >
+                      <option value="" selected>
+                        ...Select...{" "}
+                      </option>
+                      <option hidden={!nationalUser} value="1">
+                        National
+                      </option>
+                      <option hidden={!nationalUser} value="2">
+                        Region
+                      </option>
+                      <option hidden={!nationalUser && !regionalUser} value="3">
+                        District
+                      </option>
+                    </select>
+                  </div>
+
+                  {selectedUserLevel == "2" ? (
+                    <div className="col-xxl-3 col-md-6">
+                      <label className="form-label mb-0">Select region</label>
+                      <select
+                        className="form-control"
+                        aria-label="Default select example"
+                        onChange={async (e) => {
+                          setRegion(e.target.value);
+
+                          // setFilterValue(e.target.value);
+                        }}
+                        value={region}
+                      >
+                        {" "}
+                        <option selected>Select region </option>
+                        {regions?.map((data) => (
+                          <option key={data.id} value={data.id}>
+                            {data.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {selectedUserLevel == "3" ? (
+                    <>
+                      {nationalUser ? (
+                        <div className="col-xxl-3 col-md-6">
+                          <label className="form-label mb-0">
+                            Select region
+                          </label>
+                          <select
+                            className="form-control"
+                            aria-label="Default select example"
+                            onChange={async (e) => {
+                              //setFilterValue(e.target.value);
+                              setRegion(e.target.value);
+
+                              await getDistrictsByRegion(e.target.value);
+                            }}
+                            value={region}
+                          >
+                            {" "}
+                            <option selected>...Select region... </option>
+                            {regions?.map((data) => (
+                              <option key={data.id} value={data.id}>
+                                {data.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      <div className="col-xxl-3 col-md-6">
+                        <label className="form-label mb-0">
+                          Select district
+                        </label>
+                        <select
+                          className="form-control"
+                          aria-label="Default select example"
+                          onChange={(e) => {
+                            // setFilterValue(e.target.value);
+                            setDistrict(e.target.value);
+                          }}
+                          value={district}
+                        >
+                          {" "}
+                          <option selected>...Select... </option>
+                          {districts?.map((data) => (
+                            <option key={data.id} value={data.id}>
+                              {data.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
+                  {/* <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
                         User type
@@ -280,13 +432,6 @@ const User = ({ users, userTypes, regions, districts }) => {
 
                             // setRegion("");
                           }
-
-                          // if (selectedUserType == 7 && loggedInUserType == 1) {
-                          //   setShowRegion(false);
-                          //   setShowDistrict(true);
-
-                          //   setRegion("");
-                          // }
 
                           if (
                             (selectedUserType == 3 || selectedUserType == 4) &&
@@ -332,7 +477,7 @@ const User = ({ users, userTypes, regions, districts }) => {
                             setShowRegion(false);
                             setRegion("");
                           }
-                        }}
+                         }}
                         value={userType}
                       >
                           <option value="">Choose...</option>
@@ -400,28 +545,8 @@ const User = ({ users, userTypes, regions, districts }) => {
                     </div>
                   ) : (
                     <></>
-                  )}
+                  )} */}
                   <hr />
-                  {/* <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        Electoral Area
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => setElectoralArea(e.target.value)}
-                      >
-                        <option selected>Choose...</option>
-                        {electoralAreas.map((ea) => (
-                          <option key={ea.id} value={ea.id}>
-                            {ea.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div> */}
                 </div>
                 <br />
                 <div className="row gy-4">

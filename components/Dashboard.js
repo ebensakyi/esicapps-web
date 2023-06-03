@@ -101,7 +101,6 @@ const Dashboard = ({
   };
   const getElectoralAreasByDistrict = async (districtId) => {
     try {
-      console.log("di", districtId);
       const response = await axios.get(
         "/api/v1/primary-data/electoral-area?districtId=" + districtId
       );
@@ -432,6 +431,9 @@ const Dashboard = ({
       },
     ],
   };
+
+  console.log("districtId ",districtId);
+  console.log("regionId ",regionId);
 
   let nationalUser = districtId == "undefined" && regionId == "undefined";
   let regionalUser = districtId == "undefined" && regionId != "undefined";
