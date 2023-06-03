@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   const inspectionFormId = context.query.inspectionFormId || 1;
 
-  if (!token) {
+  if (!session) {
     return {
       redirect: {
         destination: "/auth/login",

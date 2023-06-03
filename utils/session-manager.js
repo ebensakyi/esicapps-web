@@ -23,7 +23,7 @@ let token =req?.query?.session
 
   // const cookies = cookie.parse(req.headers.cookie || "");
   // const token = cookies.session;
-  if (!token) return null;
+  if (!session) return null;
   try {
     return jwt.verify(token, process.env.TOKEN_SECRET);
   } catch (err) {

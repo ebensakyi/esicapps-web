@@ -27,7 +27,7 @@ export default function notification({ regions, districts, messages, users }) {
 export async function getServerSideProps(context) {
   const { session } = context.req.cookies;
 
-  if (!token) {
+  if (!session) {
     return {
       redirect: {
         destination: "/auth/login",

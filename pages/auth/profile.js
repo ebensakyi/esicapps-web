@@ -27,7 +27,7 @@ export default function profile({ regions,  districts, userTypes,user }) {
 export async function getServerSideProps(context) {
     const { session } = context.req.cookies;
 
-    if (!token) {
+    if (!session) {
         return {
             redirect: {
                 destination: '/auth/login',

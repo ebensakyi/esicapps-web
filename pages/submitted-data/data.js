@@ -43,7 +43,7 @@ export async function getServerSideProps(context) {
   const searchText = context.query.searchText || "";
   const inspectionFormId = context.query.inspectionFormId || 1;
 
-  if (!token) {
+  if (!session) {
     return {
       redirect: {
         destination: "/auth/login",

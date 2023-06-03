@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
 
   const page = context.query.page || 1;
   const searchText = context.query.searchText || "";
-  if (!token) {
+  if (!session) {
     return {
       redirect: {
         destination: "/auth/login",

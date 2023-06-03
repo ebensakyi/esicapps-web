@@ -12,13 +12,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-  
     "@prisma/client": "^4.10.1",
     "aws-sdk": "^2.1287.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.1.2",
     "cookie": "^0.5.0",
+    "fast-csv": "^4.3.6",
     "formidable": "^2.1.1",
     "geojson": "^0.5.0",
     "js-cookie": "^3.0.1",

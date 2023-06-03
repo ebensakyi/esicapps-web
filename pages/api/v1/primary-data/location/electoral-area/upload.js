@@ -1,5 +1,4 @@
 import prisma from "../../../../../../prisma/db";
-import { verifyToken } from "../../../../../../utils/token-verifier";
 import { createReadStream } from "fs";
 import { parse } from "fast-csv";
 import formidable from "formidable";

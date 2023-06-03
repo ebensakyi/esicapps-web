@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
     const  {id}  =context.query;
 
 
-    if (!token) {
+    if (!session) {
         return {
             redirect: {
                 destination: '/auth/login',

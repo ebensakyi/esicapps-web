@@ -33,13 +33,20 @@ const get = async (req, res) => {
     let districtId = Number(req?.query?.districtId) || undefined;
 
 
+
     //Admin national
-    if (userRegionId == null && userDistrictId == null) {
+    if (userRegionId == null && userDistrictId == null) {    console.log(districtId);
+
+      if(districtId==null) {
+        return res.status(200).json([]);
+      }
 
       const electoralArea = await prisma.electoralArea.findMany({
         where: { deleted: 0, districtId: Number(districtId) },
         include: { District: true },
       });
+
+      console.log(electoralArea);
 
       return res.status(200).json(electoralArea);
     }

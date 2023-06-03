@@ -30,7 +30,7 @@ export default function user({ regions,  districts, userTypes,users }) {
 export async function getServerSideProps(context) {
     const { session } = context.req.cookies;
 
-    if (!token) {
+    if (!session) {
         return {
             redirect: {
                 destination: '/auth/login',
