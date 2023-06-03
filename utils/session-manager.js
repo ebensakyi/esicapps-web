@@ -1,8 +1,9 @@
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
-export async function setSession(res, session) {
+export async function setSession(res, session,privileges) {
   const token = jwt.sign(session, process.env.TOKEN_SECRET);
+
 
   const cookieValue = cookie.serialize("session", token, {
     httpOnly: true,
@@ -13,11 +14,10 @@ export async function setSession(res, session) {
   });
   res.setHeader("Set-Cookie", cookieValue);
 
-  res.status(200).json({ session });
+  res.status(200).json({ session,privileges });
 }
 
 export async function getSession(req) {
-  console.log("nmnnnjnbhjjhj");
   let token = req?.query?.session;
 
   // const cookies = cookie.parse(req.headers.cookie || "");

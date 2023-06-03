@@ -1,6 +1,5 @@
 import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 import { destroySession, setSession } from "../../../../utils/session-manager";
 
@@ -30,6 +29,8 @@ const post = async (req, res) => {
       // include: { District: true },
       // include: { UserType: true },
     });
+  let privileges = user?.UserType?.PageAccess?.map((prv)=>{ return prv.pageId });
+  console.log("prev", privileges);
 
     if (!user) {
       return res
@@ -42,7 +43,7 @@ const post = async (req, res) => {
     if (isValid) {
       // const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
 
-      await setSession( res,user);
+      await setSession( res,user,privileges);
 
 
      // return res.status(200).json({ user });

@@ -14,6 +14,38 @@ let fullName = Cookies?.get("fullName");
   // let designation = Cookies?.get("designation");
  let userType = Cookies?.get("userType");
 
+
+ let priv = localStorage.getItem("priv");
+
+ let includesDashboard= priv.includes("1")
+ let includesResData= priv.includes("2")
+ let includesEatData= priv.includes("3")
+ let includesHealthData= priv.includes("4")
+ let includesHospData= priv.includes("5")
+ let includesMarketData= priv.includes("6")
+ let includesIndustryData= priv.includes("7")
+ let includesInstitutionData= priv.includes("8")
+ let includesSanitaryData= priv.includes("9")
+ let includesReports= priv.includes("10")
+ let includesSanitationReport= priv.includes("11")
+ let includesNotifications= priv.includes("12")
+ let includesSingleSMS= priv.includes("13")
+ let includesBulkSMS= priv.includes("14")
+ let includesSingleNotification= priv.includes("15")
+ let includesBulkNotification= priv.includes("16")
+ let includesBulkUploadDistrictData= priv.includes("17")
+ let includesBulkUploadElectoralAreaData= priv.includes("18")
+ let includesBulkUploadCommunityData= priv.includes("19")
+ let includesAddSingleDistrict= priv.includes("20")
+ let includesAddSingleElectoralArea= priv.includes("21")
+ let includesAddSingleCommunity= priv.includes("22")
+ let includesTransferDataOwnership= priv.includes("23")
+ let includesUserGuide= priv.includes("24")
+ let includesUser= priv.includes("25")
+ let includesUserLog= priv.includes("26")
+ let includesUserType= priv.includes("27")
+
+
   return (
     <div>
       <header id="page-topbar">
@@ -137,7 +169,7 @@ let fullName = Cookies?.get("fullName");
               <li className="menu-title">
                 <span data-key="t-menu">Menu</span>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" hidden={!includesDashboard}>
                 <Link href="/dashboard">
                   <a className="nav-link menu-link">
                     <i className="ri-home-2-line" />
@@ -159,7 +191,7 @@ let fullName = Cookies?.get("fullName");
                 </a>
                 <div className="collapse menu-dropdown" id="data">
                   <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
+                    <li className="nav-item" hidden={!includesResData}>
                       <a
                         href="#Residential"
                         className="nav-link"
@@ -219,7 +251,7 @@ let fullName = Cookies?.get("fullName");
                       </div>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesEatData}>
                       <a
                         href="#eatery"
                         className="nav-link"
@@ -278,7 +310,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesHealthData}>
                       <a
                         href="#health"
                         className="nav-link"
@@ -337,7 +369,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesHospData}>
                       <a
                         href="#hospitality"
                         className="nav-link"
@@ -397,7 +429,7 @@ let fullName = Cookies?.get("fullName");
                       </div>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesInstitutionData}>
                       <a
                         href="#institution"
                         className="nav-link"
@@ -456,7 +488,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesIndustryData}>
                       <a
                         href="#industry"
                         className="nav-link"
@@ -515,7 +547,7 @@ let fullName = Cookies?.get("fullName");
                         </ul>
                       </div>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesMarketData}>
                       <a
                         href="#market"
                         className="nav-link"
@@ -575,10 +607,11 @@ let fullName = Cookies?.get("fullName");
                       </div>
                     </li>
                     <li
+                    
                       className={
                         router.pathname == "/" ? "nav-item active" : "nav-item"
                       }
-                    >
+                      hidden={!includesSanitaryData}>
                       <a
                         href="#sanitary"
                         className="nav-link"
@@ -641,7 +674,7 @@ let fullName = Cookies?.get("fullName");
                 </div>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item"  hidden={!includesReports}>
                 <a className="nav-link menu-link" href="/report">
                   <i className="ri-line-chart-line" />
                   <span data-key="t-dashboards">Reports</span>
@@ -660,7 +693,7 @@ let fullName = Cookies?.get("fullName");
                 <i className="ri-more-fill" />
                 <span data-key="t-components">MESSAGES</span>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" >
                 <a
                   className="nav-link menu-link"
                   href="#notifications"
@@ -675,12 +708,12 @@ let fullName = Cookies?.get("fullName");
                 <div className="collapse menu-dropdown" id="notifications">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item">
-                      <li className="nav-item">
+                      <li className="nav-item"  hidden={!includesBulkNotification}>
                         <Link href="/messaging/notification/broadcast">
                           <a className="nav-link"> Broadcast</a>
                         </Link>
                       </li>
-                      <li className="nav-item">
+                      <li className="nav-item"  hidden={!includesSingleNotification}>
                         <Link href="/messaging/notification/single">
                           <a className="nav-link"> Single Notification</a>
                         </Link>
@@ -703,12 +736,12 @@ let fullName = Cookies?.get("fullName");
                 </a>
                 <div className="collapse menu-dropdown" id="sidebarPages">
                   <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
+                    <li className="nav-item"  hidden={!includesBulkSMS}>
                       <Link href="/messaging/sms/broadcast">
                         <a className="nav-link"> Broadcast</a>
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" hidden={!includesSingleSMS}>
                       <Link href="/messaging/sms/single">
                         <a className="nav-link"> Single SMS</a>
                       </Link>
@@ -760,9 +793,9 @@ let fullName = Cookies?.get("fullName");
                           >
                             District
                           </a>
-                          <div className="collapse menu-dropdown" id="district">
+                          <div className="collapse menu-dropdown" id="district" >
                             <ul className="nav nav-sm flex-column">
-                              <li className="nav-item">
+                              <li className="nav-item" hidden={!includesBulkUploadDistrictData}>
                                 <a
                                   href="/primary-data/district/upload"
                                   className="nav-link"
@@ -771,7 +804,7 @@ let fullName = Cookies?.get("fullName");
                                   Upload
                                 </a>
                               </li>
-                              <li className="nav-item">
+                              <li className="nav-item" hidden={!includesAddSingleDistrict}>
                                 <a
                                   href="/primary-data/district/add"
                                   className="nav-link"
@@ -805,7 +838,7 @@ let fullName = Cookies?.get("fullName");
                           </a>
                           <div className="collapse menu-dropdown" id="ea">
                             <ul className="nav nav-sm flex-column">
-                              <li className="nav-item">
+                              <li className="nav-item" hidden={!includesBulkUploadElectoralAreaData}>
                                 <a
                                   href="/primary-data/electoral-area/upload"
                                   className="nav-link"
@@ -814,7 +847,7 @@ let fullName = Cookies?.get("fullName");
                                   Upload
                                 </a>
                               </li>
-                              <li className="nav-item">
+                              <li className="nav-item" hidden={!includesAddSingleElectoralArea}>
                                 <a
                                   href="/primary-data/electoral-area/add"
                                   className="nav-link"
@@ -851,7 +884,7 @@ let fullName = Cookies?.get("fullName");
                             id="communities"
                           >
                             <ul className="nav nav-sm flex-column">
-                              <li className="nav-item">
+                              <li className="nav-item" hidden={!includesBulkUploadCommunityData}>
                                 <a
                                   href="/primary-data/community/upload"
                                   className="nav-link"
@@ -860,7 +893,7 @@ let fullName = Cookies?.get("fullName");
                                   Upload
                                 </a>
                               </li>
-                              <li className="nav-item">
+                              <li className="nav-item" hidden={!includesAddSingleCommunity}>
                                 <a
                                   href="/primary-data/community/add"
                                   className="nav-link"
@@ -886,12 +919,12 @@ let fullName = Cookies?.get("fullName");
                           </li>
                         </li>
                       </div>
-                      <li className="nav-item">
+                      <li className="nav-item" hidden={!includesTransferDataOwnership}>
                         <a href="/setup/assign-data" className="nav-link">
                           Transfer Data Ownership
                         </a>
                       </li>
-                      <li className="nav-item">
+                      <li className="nav-item" hidden={!includesUserGuide}>
                         <Link href="/setup/user-guides">
                           <a className="nav-link"> User Guide</a>
                         </Link>
@@ -914,14 +947,14 @@ let fullName = Cookies?.get("fullName");
                 </a>
                 <div className="collapse menu-dropdown" id="us">
                   <ul className="nav nav-sm flex-column">
-                    <li className="nav-item">
+                    <li className="nav-item" hidden={!includesUser}>
                       <Link href="/account/user">
                         <a className="nav-link menu-link">
                           <span data-key="t-widgets">Users</span>
                         </a>
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" hidden={!includesUserLog}>
                       <Link href="/auth/logs">
                         <a className="nav-link menu-link">
                           <span data-key="t-widgets">User Logs</span>
@@ -935,7 +968,7 @@ let fullName = Cookies?.get("fullName");
                         </a>
                       </Link>
                     </li> */}
-                    <li className="nav-item">
+                    <li className="nav-item" hidden={!includesUserType}>
                       <Link href="/permission/user-type">
                         <a className="nav-link menu-link">
                           <span data-key="t-widgets">User Type</span>
