@@ -18,7 +18,8 @@ export async function setSession(res, session) {
 }
 
 export async function getSession(req) {
-let token =req.query.session
+  console.log("nmnnnjnbhjjhj", );
+let token =req?.query?.session
 
   // const cookies = cookie.parse(req.headers.cookie || "");
   // const token = cookies.session;

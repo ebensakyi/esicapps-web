@@ -457,7 +457,6 @@ const Dashboard = ({
             pauseOnHover
           />
           <div className="row row-cols-lg-auto g-3 align-items-center">
-            
             <div className="col-md-2">
               <label className="form-label mb-0">Select level</label>
 

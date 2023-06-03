@@ -23,33 +23,34 @@ const get = async (req, res) => {
     let data = await getSession(req);
 
     console.log("DATA>>>", data);
-    let regionId = data.RegionId || req?.query?.regionId || undefined;
-    let districtId = data.DistrictId || req?.query?.districtId || undefined;
-    
+    let userRegionId = data?.RegionId;
+    let userDistrictId = data?.DistrictId;
 
-    //Admin national
-    if (districtId == null && regionId == null) {
+    let regionId = Number(req?.query?.regionId) || undefined;
+    let districtId = Number(req?.query?.districtId) || undefined;
+    // national user
+    if (userRegionId == null && userDistrictId == null) {
       const district = await prisma.district.findMany({
-        where: { deleted: 0, districtId: districtId },
+        where: { deleted: 0, regionId: regionId },
         include: { Region: true },
       });
 
       return res.status(200).json(district);
     }
 
-    //regional admin
-    if (districtId == null && regionId != null) {
+    //regional user
+    if (userDistrictId == null && userRegionId != null) {
       const district = await prisma.district.findMany({
-        where: { deleted: 0, districtId: Number(districtId) },
+        where: { deleted: 0, regionId: Number(userRegionId) },
         include: { Region: true },
       });
 
       return res.status(200).json(district);
     }
-
-    if (regionId) {
+//district user
+    if (userDistrictId != null) {
       const district = await prisma.district.findMany({
-        where: { deleted: 0, regionId: Number(regionId) },
+        where: { deleted: 0, regionId: Number(userRegionId) },
         include: { Region: true },
       });
 

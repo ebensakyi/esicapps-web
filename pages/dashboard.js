@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { SERVER_BASE_URL } from "../config";
 import Dashboard from "../components/Dashboard";
+import { getSession } from "../utils/session-manager";
 
 export default function dashboard({
   dashboardData,
@@ -31,21 +32,30 @@ export default function dashboard({
   );
 }
 
-export async function getServerSideProps(context) {
-  const { session } = context.req.cookies;
-  const filterBy = context.query.filterBy;
-  const filterValue = context.query.filterValue;
-  const from = context.query.from || "undefined";
-  const to = context.query.to || "undefined";
+export async function getServerSideProps({ req, res }) {
+  const { session } =req?.cookies;
+  const filterBy = req?.query?.filterBy;
+  const filterValue = req?.query?.filterValue;
+  const from = req?.query?.from || "undefined";
+  const to = req?.query?.to || "undefined";
 
-  // if (!token) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/login",
-  //       permanent: true,
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: true,
+      },
+    };
+  }
+
+
+
+  // const userSession = await getSession(session);
+
+  // console.log("userSession ",userSession);
+
+
+
   const dashboardData = await fetch(
     `${SERVER_BASE_URL}/api/v1/dashboard?session=${session}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
   ).then((res) => res.json());

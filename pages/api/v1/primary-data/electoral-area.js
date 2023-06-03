@@ -26,10 +26,16 @@ const get = async (req, res) => {
 
 
     let data = await getSession(req);
+    let userRegionId = data?.RegionId;
+    let userDistrictId = data?.DistrictId;
 
-    let districtId = data?.user?.districtId;
+    let regionId = Number(req?.query?.regionId) || undefined;
+    let districtId = Number(req?.query?.districtId) || undefined;
 
-    if (districtId) {
+
+    //Admin national
+    if (userRegionId == null && userDistrictId == null) {
+
       const electoralArea = await prisma.electoralArea.findMany({
         where: { deleted: 0, districtId: Number(districtId) },
         include: { District: true },
@@ -38,9 +44,20 @@ const get = async (req, res) => {
       return res.status(200).json(electoralArea);
     }
 
-    if (req?.query?.districtId) {
+    //regional user
+    if (userDistrictId == null && userRegionId != null) {
       const electoralArea = await prisma.electoralArea.findMany({
         where: { deleted: 0, districtId: Number(req.query.districtId) },
+      });
+
+      return res.status(200).json(electoralArea);
+    }
+
+    //district user
+    if (userDistrictId != null) {
+      const electoralArea = await prisma.electoralArea.findMany({
+        where: { deleted: 0, districtId: Number(userDistrictId) },
+        include: { Region: true },
       });
 
       return res.status(200).json(electoralArea);
