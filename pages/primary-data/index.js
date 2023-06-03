@@ -89,7 +89,7 @@ export default function primary_data({
 export async function getServerSideProps(context) {
   const { session } = context.req.cookies;
 
-  if (!token) {
+  if (!session) {
       return {
           redirect: {
               destination: '/auth/login',
