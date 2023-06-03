@@ -67,9 +67,9 @@ const getSearchParams = async (req, searchText) => {
   let data = await getSession(req);
 
   let district =
-    data.user.districtId == null || isNaN(data.user.districtId)
+    data?.districtId == null || isNaN(data?.districtId)
       ? undefined
-      : Number(data.user.districtId);
+      : Number(data?.districtId);
   if (searchText != "" && searchText != null) {
     return {
       where: {

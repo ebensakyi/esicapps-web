@@ -5,8 +5,8 @@ import Header from "../components/Header";
 import Cookies from "js-cookie";
 
 function MyApp({ Component, pageProps }) {
-  let userType = Cookies?.get("userType");
-  console.log("userType",userType);
+  let session = Cookies?.get("session");
+  console.log("session, ",session);
 
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
       <>
         <NextNProgress height={6} color="#f2ae02" />
         <div id="layout-wrapper">
-          {userType ? <Header /> : <></>}
+          {session ? <Header /> : <></>}
 
           <Component {...pageProps} />
         </div>

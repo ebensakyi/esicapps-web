@@ -76,11 +76,12 @@ const post = async (req, res) => {
 
 const getSearchParams = async (req, searchText) => {
   let data = await getSession(req);
+  console.log("DAAA ",data);
 
   let district =
-    data.user.districtId == null || isNaN(data.user.districtId)
+    data?.districtId == null || isNaN(data?.districtId)
       ? undefined
-      : Number(data.user.districtId);
+      : Number(data?.districtId);
   if (searchText != "" && searchText != null) {
     return {
       where: {

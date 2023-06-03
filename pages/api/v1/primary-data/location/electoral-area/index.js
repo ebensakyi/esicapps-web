@@ -1,6 +1,5 @@
 import prisma from "../../../../../../prisma/db";
 import { getSession } from "../../../../../../utils/session-manager";
-import { verifyToken } from "../../../../../../utils/token-verifier";
 
 const put = async (req, res) => {
   if (req.body.electoralAreaId) {
@@ -101,7 +100,6 @@ const get = async (req, res) => {
       include: { District: true },
     });
 
-    console.log(electoralArea);
 
     return res.status(200).json({
       statusCode: 1,
@@ -112,7 +110,7 @@ const get = async (req, res) => {
 
     // return res.status(200).json(community);
   } catch (error) {
-    console.log("Error: " + error);
+    console.log("Error>>: " + error);
   }
 };
 const Delete = async (req, res) => {

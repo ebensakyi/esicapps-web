@@ -21,6 +21,8 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+
+    console.log("HERRRE");
     let districtId = Number(req?.query?.districtId);
     let community;
     if (districtId) {

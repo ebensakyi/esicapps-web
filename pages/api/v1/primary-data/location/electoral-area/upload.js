@@ -81,7 +81,6 @@ const csvUploader = async (file, districtId) => {
           data: newData,
         });
       });
-console.log(data);
       return data.length
   } catch (error) {
     console.log("csvUploader ==>", error);
