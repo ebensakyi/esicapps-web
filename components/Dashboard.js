@@ -432,8 +432,7 @@ const Dashboard = ({
     ],
   };
 
-  console.log("districtId ",districtId);
-  console.log("regionId ",regionId);
+
 
   let nationalUser = districtId == "undefined" && regionId == "undefined";
   let regionalUser = districtId == "undefined" && regionId != "undefined";
