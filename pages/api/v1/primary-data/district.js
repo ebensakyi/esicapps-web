@@ -22,7 +22,6 @@ const get = async (req, res) => {
   try {
     let data = await getSession(req);
 
-    console.log("DATA>>>", data);
     let userRegionId = data?.RegionId;
     let userDistrictId = data?.DistrictId;
 

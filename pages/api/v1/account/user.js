@@ -146,6 +146,7 @@ const get = async (req, res) => {
 
 const Delete = async (req, res) => {
   try {
+    console.log("req.params",req.body);
     let user = await prisma.user.findFirst({
       where: { id: Number(req.body.id) },
     });
@@ -160,6 +161,8 @@ const Delete = async (req, res) => {
 
 const put = async (req, res) => {
   try {
+
+    console.log(req.body);
     let data = {
       userTypeId: Number(req.body.userTypeId),
       userLevelId: Number(req.body.userLevelId),
@@ -167,8 +170,7 @@ const put = async (req, res) => {
       otherNames: req?.body?.otherNames,
       email: req?.body?.email,
       phoneNumber: req?.body?.phoneNumber,
-      password: hashedPassword,
-      tempPassword: password,
+     
       designation: req?.body?.designation,
       regionId:
         req?.body?.region == null || req?.body?.region == ""
@@ -180,16 +182,20 @@ const put = async (req, res) => {
           : Number(req?.body?.district),
     };
 
+    console.log(data);
+
     // let user = await prisma.user.findFirst({
     //   where: { id: Number(req.body.id) },
     // });
 
     await prisma.user.update({
-      // where: { id: Number(req.body.id) },
+     where: { id: Number(req.body.userId) },
       data: data,
     });
     return res.status(200).json();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default (req, res) => {

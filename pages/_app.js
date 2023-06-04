@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 function MyApp({ Component, pageProps }) {
   let session = Cookies?.get("vrip");
-  console.log("session, ", session);
+  let d_id = Cookies?.get("d_id");
 
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {

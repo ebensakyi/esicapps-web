@@ -128,7 +128,7 @@ const Header = () => {
                       Cookies.remove("r_id")
                       Cookies.remove("d_id")
                       Cookies.remove("vrip")
-                      router.replace("api/v1/auth/logout");
+                      router.push("api/v1/auth/logout");
                     }}
                   >
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1" />

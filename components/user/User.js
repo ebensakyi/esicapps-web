@@ -9,6 +9,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
   const router = useRouter();
 
   const [userType, setUserType] = useState();
+  const [userId, setUserId] = useState()
   const [selectedUserLevel, setSelectedUserLevel] = useState();
 
   const [surname, setSurname] = useState("");
@@ -36,16 +37,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
     try {
       e.preventDefault();
 
-      // if (selectedUserLevel == 1) {
-      //   setDistrict(null);
-      //   setRegion(null);
-      // }
-      // if (selectedUserLevel == 2) {
-      //   setDistrict(null);
-      // }
-      // if (selectedUserLevel == 3) {
-      //   setDistrict(null);
-      // }
+   
       if (surname == "") {
         return toast.error("Surname cannot be empty");
       }
@@ -77,6 +69,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
 
       let data = {
         userTypeId: Number(userType),
+        userLevelId: Number(selectedUserLevel),
+
         surname,
         otherNames,
         email,
@@ -105,7 +99,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
     }
   };
 
-  const editUser = async (e) => {
+  const updateUser = async (e) => {
     try {
       e.preventDefault();
 
@@ -139,7 +133,9 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       }
 
       let data = {
+        userId,
         userTypeId: Number(userType),
+        userLevelId: Number(selectedUserLevel),
         surname,
         otherNames,
         email,
@@ -148,6 +144,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
         region,
         district,
       };
+
+      console.log("data ",data);
 
       const response = await axios.put("/api/v1/account/user", data);
       router.replace(router.asPath);
@@ -164,7 +162,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       return toast.success(response.data.message);
     } catch (error) {
       console.log(error);
-      return toast.error("An error occurred while adding user");
+      return toast.error("An error occurred while updating user");
     }
   };
 
@@ -755,6 +753,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                     setDesignation(user.designation);
                                     setUserType(user.userTypeId);
                                     setSelectedUserLevel(user.userLevelId);
+                                    setUserId(user.id);
 
                                     // const response = await axios.put(
                                     //   "/api/v1/account/user",{
@@ -773,10 +772,11 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                   className="dropdown-item remove-item-btn"
                                   onClick={async (e) => {
                                     e.preventDefault();
-                                    const response = await axios.put(
-                                      "/api/v1/account/user",
+                                    let id = user.id
+                                    const response = await axios.delete(
+                                      `/api/v1/account/user`,
                                       {
-                                        id: user.id,
+                                        data: { id },
                                       }
                                     );
                                     router.replace(router.asPath);
