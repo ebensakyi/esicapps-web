@@ -40,3 +40,11 @@ update "District"
    
    update "Community"
    set name = upper(name);
+
+
+
+   1. woork on reset password
+   2. enable sms foor accoount creation
+   3. paginate, search and filter users
+   4. paginate, search and filter user loogs
+   5. edit dataview

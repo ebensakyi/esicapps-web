@@ -145,7 +145,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
         district,
       };
 
-      console.log("data ",data);
 
       const response = await axios.put("/api/v1/account/user", data);
       router.replace(router.asPath);
@@ -784,6 +783,25 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                 >
                                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
                                   Change Status
+                                </button>
+                              </li>
+                              <li>
+                                <button
+                                  className="dropdown-item remove-item-btn"
+                                  onClick={async (e) => {
+                                    e.preventDefault();
+                                    let id = user.id
+                                    const response = await axios.delete(
+                                      `/api/v1/account/reset-password`,
+                                      {
+                                        data: { id },
+                                      }
+                                    );
+                                    router.replace(router.asPath);
+                                  }}
+                                >
+                                  <i className="ri-key-fill align-bottom me-2 text-muted" />{" "}
+                                  Reset Password
                                 </button>
                               </li>
                             </ul>
