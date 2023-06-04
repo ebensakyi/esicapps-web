@@ -9,20 +9,20 @@ import { SERVER_BASE_URL } from "../../config";
 
 export default function user({ regions,  districts, userTypes,users }) {
     return (
-        <div id="layout-wrapper">
-            <Header />
+        // <div id="layout-wrapper">
+        //     <Header />
 
             <div className="main-content">
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <User regions = {regions} districts={districts} userTypes = {userTypes}/>
-                        <ListUser users={users}/>
+                        <User users={users} regions = {regions} districts={districts} userTypes = {userTypes}/>
+                        {/* <ListUser/> */}
 
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
