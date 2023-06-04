@@ -12,8 +12,8 @@ export default function dashboard({
   communities,
 }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -28,7 +28,7 @@ export default function dashboard({
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

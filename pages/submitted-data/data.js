@@ -11,8 +11,8 @@ export default function data({
   communities,
 }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -27,7 +27,7 @@ export default function data({
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

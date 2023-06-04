@@ -7,8 +7,8 @@ import { SERVER_BASE_URL } from "../../config";
 
 export default function followup_view({ data }) {
     return (
-        <div id="layout-wrapper">
-            <Header />
+        // <div id="layout-wrapper">
+        //     <Header />
 
             <div className="main-content">
                 <div className="page-content">
@@ -19,7 +19,7 @@ export default function followup_view({ data }) {
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
