@@ -34,9 +34,9 @@ export default function Login() {
       let regionId = response?.data?.session?.Region?.id 
       let districtId = response?.data?.session?.District?.id
 
-        Cookies.set("r_id", regionId);
-        Cookies.set("d_id", districtId);
-        Cookies.set("vrip", response?.data?.privileges);
+        Cookies.set("r_id", regionId,{ expires: 1 / 24 });
+        Cookies.set("d_id", districtId,{ expires: 1 / 24 });
+        Cookies.set("vrip", response?.data?.privileges,{ expires: 1 / 24 });
 
         return router.replace("/dashboard");
       }

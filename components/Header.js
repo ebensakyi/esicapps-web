@@ -15,7 +15,6 @@ const Header = () => {
 
   let priv = Cookies.get("vrip");
 
-  console.log("PRV ",priv);
 
   let includesDashboard = priv.includes("1");
   let includesResData = priv.includes("2");
@@ -687,7 +686,7 @@ const Header = () => {
                   <span data-key="t-dashboards">Reports</span>
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" hidden={!includesSanitationReport}>
                 <Link href="/sanitation-reports">
                   <a className="nav-link menu-link">
                     <i className="ri-bar-chart-box-line" />
