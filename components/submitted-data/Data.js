@@ -615,7 +615,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">{handleTitle()}</div>
-          <div className="card-body">
+            <div className="card-body" style={{"overflow":"auto","max-height": "400px"}}>
             <div className="row">
               <div className="col-md-3">
                 <button
@@ -654,8 +654,8 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
             <br />
             <table
               id="fixed-header"
-              className="table table-bordered table-responsive nowrap table-striped align-middle"
-              style={{ width: "100%", overflow: "scroll" }}
+              className="table table-bordered dt-responsive nowrap table-striped align-middle"
+              style={{ width: "100%" }}
             >
               <thead>
                 <tr>

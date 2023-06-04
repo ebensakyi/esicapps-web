@@ -670,6 +670,25 @@ const User = ({ users, userTypes, regions }) => {
                                 }}
                               >
                                 <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                Edit
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                className="dropdown-item remove-item-btn"
+                                onClick={async(e) => {
+                                  e.preventDefault();
+                                  const response = await axios.put(
+                                    "/api/v1/account/user",{
+                                      id:user.id
+                                    }
+                                  );
+                                  router.replace(router.asPath);
+
+
+                                }}
+                              >
+                                <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
                                 Change Status
                               </button>
                             </li>
