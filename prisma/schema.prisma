@@ -103,15 +103,17 @@ model User {
   tempPassword String? @db.VarChar(255)
   imagePath    String? @db.VarChar(255)
 
-  regionId                       Int?
-  districtId                     Int?
-  electoralAreaId                Int?
-  loginTimes                     Int?                             @default(0)
-  passwordChanged                Int?                             @default(0)
-  activated                      Int?                             @default(1)
-  deleted                        Int?                             @default(0)
-  createdAt                      DateTime                         @default(now())
-  updatedAt                      DateTime                         @updatedAt
+  regionId        Int?
+  districtId      Int?
+  electoralAreaId Int?
+  loginTimes      Int?     @default(0)
+  passwordChanged Int?     @default(0)
+  activated       Int?     @default(1)
+  deleted         Int?     @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  UserLevel                      UserLevel                        @relation(fields: [userLevelId], references: [id])
   BasicInfoSection               BasicInfoSection[]
   ConclusionSection              ConclusionSection[]
   publishedBy                    Inspection[]                     @relation("publishedBy")
@@ -143,7 +145,7 @@ model User {
   District                       District?                        @relation(fields: [districtId], references: [id])
   ElectoralArea                  ElectoralArea?                   @relation(fields: [electoralAreaId], references: [id])
   Region                         Region?                          @relation(fields: [regionId], references: [id])
-  UserType                       UserType  ?                       @relation(fields: [userTypeId], references: [id])
+  UserType                       UserType?                        @relation(fields: [userTypeId], references: [id])
   WaterSection                   WaterSection[]
   EateryPremisesInfoSection      EateryPremisesInfoSection[]
   HealthPremisesInfoSection      HealthPremisesInfoSection[]
@@ -166,6 +168,7 @@ model User {
   assignedTo                         AssignData[]                         @relation("assignedTo")
   assignedFrom                       AssignData[]                         @relation("assignedFrom")
   PremisesCommunalContainerCondition PremisesCommunalContainerCondition[]
+  userLevelId                        Int
 }
 
 model UserAddedByUser {
@@ -180,14 +183,15 @@ model UserAddedByUser {
   addeeId   Int?
 }
 
-// model UserLevel {
-//   id        Int        @id @default(autoincrement())
-//   name      String     @db.VarChar(255)
-//   deleted   Int?       @default(0)
-//   createdAt DateTime   @default(now())
-//   updatedAt DateTime   @updatedAt
-//   UserType  UserType[]
-// }
+model UserLevel {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // UserType  UserType[]
+  User      User[]
+}
 
 model Messaging {
   id          Int     @id @default(autoincrement())
@@ -228,7 +232,7 @@ model MessageType {
 
 model UserType {
   id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255) @unique
+  name      String   @unique @db.VarChar(255)
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -250,10 +254,10 @@ model PageAccess {
 }
 
 model Page {
-  id         Int    @id @default(autoincrement())
-  name       String @db.VarChar(255)
-  url        String? @db.VarChar(255)
-  icon       String? @db.VarChar(255)
+  id   Int     @id @default(autoincrement())
+  name String  @db.VarChar(255)
+  url  String? @db.VarChar(255)
+  icon String? @db.VarChar(255)
 
   deleted    Int?         @default(0)
   createdAt  DateTime     @default(now())
@@ -261,8 +265,6 @@ model Page {
   PageAccess PageAccess[]
   PageAction PageAction[] @relation("PageToPageAction")
 }
-
-
 
 model PageAction {
   id               Int                @id @default(autoincrement())

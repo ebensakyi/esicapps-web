@@ -34,7 +34,6 @@ const User = ({ users, userTypes, regions }) => {
   const addUser = async (e) => {
     try {
       e.preventDefault();
-      console.log(selectedUserLevel);
 
       // if (selectedUserLevel == 1) {
       //   setDistrict(null);
@@ -105,6 +104,73 @@ const User = ({ users, userTypes, regions }) => {
       return toast.error("An error occurred while adding user");
     }
   };
+
+
+  const editUser = async (e) => {
+    try {
+      e.preventDefault();
+
+    
+      if (surname == "") {
+        return toast.error("Surname cannot be empty");
+      }
+      if (otherNames == "") {
+        return toast.error("Other Names cannot be empty");
+      }
+      if (email == "") {
+        return toast.error("Email cannot be empty");
+      }
+      if (phoneNumber == "") {
+        return toast.error("PhoneNumber cannot be empty");
+      }
+      if (designation == "") {
+        return toast.error("Designation cannot be empty");
+      }
+      if (userType == "") {
+        return toast.error("User type cannot be empty");
+      }
+      if (selectedUserLevel == 2) {
+        if (region == null || region == "") {
+          return toast.error("Region cannot be empty");
+        }
+      }
+      if (selectedUserLevel == 3) {
+        if (district == null || district == "") {
+          return toast.error("District cannot be empty");
+        }
+      }
+    
+      let data = {
+        userTypeId: Number(userType),
+        surname,
+        otherNames,
+        email,
+        phoneNumber,
+        designation,
+        region,
+        district,
+      };
+
+
+      const response = await axios.put("/api/v1/account/user", data);
+      router.replace(router.asPath);
+
+      setSurname("");
+      setOtherNames("");
+      setEmail("");
+      setPhoneNumber("");
+      setDesignation("");
+      setUserType("");
+      setRegion("");
+      setDistrict("");
+
+      return toast.success(response.data.message);
+    } catch (error) {
+      console.log(error);
+      return toast.error("An error occurred while adding user");
+    }
+  };
+
 
   const getDistrictsByRegion = async (regionId) => {
     try {
@@ -659,17 +725,28 @@ const User = ({ users, userTypes, regions }) => {
                                 className="dropdown-item remove-item-btn"
                                 onClick={async(e) => {
                                   e.preventDefault();
-                                  const response = await axios.put(
-                                    "/api/v1/account/user",{
-                                      id:user.id
-                                    }
-                                  );
-                                  router.replace(router.asPath);
+
+                                  setSurname(user.surname)
+                                  setOtherNames(user.otherNames)
+                                  setEmail(user.email)
+                                  setPhoneNumber(user.phoneNumber)
+                                  setDesignation(user.designation)
+                                  setUserType(user.userTypeId)
+                                  setSelectedUserLevel(user.userLevel)
+
+
+
+                                  // const response = await axios.put(
+                                  //   "/api/v1/account/user",{
+                                  //     id:user.id
+                                  //   }
+                                  // );
+                                  // router.replace(router.asPath);
 
 
                                 }}
                               >
-                                <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                <i className="ri-edit-line align-bottom me-2 text-muted" />{" "}
                                 Edit
                               </button>
                             </li>
