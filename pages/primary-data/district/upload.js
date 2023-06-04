@@ -5,8 +5,8 @@ import UploadDistrict from "../../../components/primary-data/UploadDistrict";
 
 export default function district({ data, regions }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -15,7 +15,7 @@ export default function district({ data, regions }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

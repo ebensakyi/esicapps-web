@@ -5,8 +5,8 @@ import UploadCommunity from "../../../components/primary-data/UploadCommunity";
 
 export default function community({ data,electoralAreas }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -15,7 +15,7 @@ export default function community({ data,electoralAreas }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const AddCommunity = ({ data,electoralAreas }) => {
+const AddCommunity = ({ data, electoralAreas }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [communityName, setCommunityName] = useState("");
@@ -52,10 +52,11 @@ const AddCommunity = ({ data,electoralAreas }) => {
       }
       let data = {
         name: communityName,
-        electoralAreaId:Number(electoralArea),
+        electoralAreaId: Number(electoralArea),
       };
-      const response = await axios.post("/api/v1/primary-data/location/community", 
-        data,
+      const response = await axios.post(
+        "/api/v1/primary-data/location/community",
+        data
       );
       toast.success(response.data.message);
       setCommunityName("");
@@ -68,7 +69,6 @@ const AddCommunity = ({ data,electoralAreas }) => {
       }
     }
   };
-
 
   const updateCommunity = async (e) => {
     try {
@@ -81,8 +81,9 @@ const AddCommunity = ({ data,electoralAreas }) => {
         communityId: Number(communityId),
         electoralArea,
       };
-      const response = await axios.put("/api/v1/primary-data/location/community", 
-        data,
+      const response = await axios.put(
+        "/api/v1/primary-data/location/community",
+        data
       );
       toast.success(response.data.message);
       setCommunityName("");
@@ -96,14 +97,15 @@ const AddCommunity = ({ data,electoralAreas }) => {
     }
   };
 
-  const deleteCommunity = async (e,id) => {
+  const deleteCommunity = async (e, id) => {
     e.preventDefault();
     console.log(id);
 
     try {
-      await axios.delete("/api/v1/primary-data/location/community", { data: { id } });
+      await axios.delete("/api/v1/primary-data/location/community", {
+        data: { id },
+      });
       router.replace(router.asPath);
-
     } catch (error) {}
   };
   return (
@@ -143,51 +145,55 @@ const AddCommunity = ({ data,electoralAreas }) => {
                   </div>
                 </div>
                 <div className="col-xxl-4 col-md-8">
-                    <label htmlFor="basiInput" className="form-label">
-                      Select electoral area
-                    </label>
-                    <select
-                      className="form-select"
-                      id="inputGroupSelect02"
-                      value={electoralArea}
-                      onChange={(e) => {
-                        setElectoralArea(e.target.value);
-                        // getElectoralByDistrict(e, e.target.value);
-                      }}
-                    >
-                          <option value="">Choose...</option>
-                      {electoralAreas.map((ea) => (
-                        <option key={ea.id} value={ea.id}>
-                          {ea.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <label htmlFor="basiInput" className="form-label">
+                    Select electoral area
+                  </label>
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect02"
+                    value={electoralArea}
+                    onChange={(e) => {
+                      setElectoralArea(e.target.value);
+                      // getElectoralByDistrict(e, e.target.value);
+                    }}
+                  >
+                    <option value="">Choose...</option>
+                    {electoralAreas.map((ea) => (
+                      <option key={ea.id} value={ea.id}>
+                        {ea.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <div className="col-lg-4">
                   <div>
                     <label htmlFor="basiInput" className="form-label">
                       .
                     </label>
-                    {!communityId ? <div className="text-end">
-                      <button
-                        onClick={(e) => {
-                          addCommunity(e);
-                        }}
-                        className="btn btn-success"
-                      >
-                        Add
-                      </button>
-                    </div>:<div className="text-end">
-                      <button
-                        onClick={(e) => {
-                          updateCommunity(e);
-                        }}
-                        className="btn btn-warning"
-                      >
-                        Update
-                      </button>
-                    </div>}
+                    {!communityId ? (
+                      <div className="text-end">
+                        <button
+                          onClick={(e) => {
+                            addCommunity(e);
+                          }}
+                          className="btn btn-success"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="text-end">
+                        <button
+                          onClick={(e) => {
+                            updateCommunity(e);
+                          }}
+                          className="btn btn-warning"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -256,7 +262,6 @@ const AddCommunity = ({ data,electoralAreas }) => {
                       {" "}
                       <td>{dt.name}</td>
                       <td>{dt.ElectoralArea.name}</td>
-
                       <td>{dt.ElectoralArea.District.name}</td>
                       <td>
                         <div className="dropdown d-inline-block">
@@ -281,7 +286,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
                                 onClick={(e) => {
                                   setCommunityId(dt.id);
                                   setCommunityName(dt.name);
-                                  setElectoralArea(dt.ElectoralArea.id)
+                                  setElectoralArea(dt.ElectoralArea.id);
                                 }}
                               >
                                 <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
@@ -292,7 +297,7 @@ const AddCommunity = ({ data,electoralAreas }) => {
                               <button
                                 className="dropdown-item delete-item-btn"
                                 onClick={(e) => {
-                                  deleteCommunity(e,dt.id);
+                                  deleteCommunity(e, dt.id);
                                 }}
                               >
                                 <i className=" ri-delete-bin-line align-bottom me-2 text-muted" />{" "}

@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Cookies from "js-cookie";
 
 function MyApp({ Component, pageProps }) {
-  let session = Cookies?.get("session");
+  let session = Cookies?.get("vrip");
   console.log("session, ", session);
 
   const [showChild, setShowChild] = useState(false);

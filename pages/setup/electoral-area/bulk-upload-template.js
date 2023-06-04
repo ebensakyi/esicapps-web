@@ -4,8 +4,8 @@ import ElectoralAreaBulkUploadTemplate from "../../../components/setup/Electoral
 
 export default function eabut({  }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -14,7 +14,7 @@ export default function eabut({  }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

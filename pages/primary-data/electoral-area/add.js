@@ -5,8 +5,8 @@ import AddElectoralArea from "../../../components/primary-data/AddElectoralArea"
 
 export default function electoralArea({ data, districts }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -15,7 +15,7 @@ export default function electoralArea({ data, districts }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

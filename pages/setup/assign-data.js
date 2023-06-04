@@ -5,8 +5,8 @@ import AssignData from "../../components/setup/AssignData";
 
 export default function assignData({ districts, assignments }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -15,7 +15,7 @@ export default function assignData({ districts, assignments }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

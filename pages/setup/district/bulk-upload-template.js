@@ -4,8 +4,8 @@ import DistrictBulkUploadTemplate from "../../../components/setup/DistrictBulkUp
 
 export default function dbut({  }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -14,7 +14,7 @@ export default function dbut({  }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

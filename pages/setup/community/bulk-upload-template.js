@@ -3,8 +3,8 @@ import CommunityBulkUploadTemplate from "../../../components/setup/CommunityBulk
 
 export default function cbut({  }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -13,7 +13,7 @@ export default function cbut({  }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

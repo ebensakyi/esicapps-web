@@ -39,8 +39,8 @@ export default function primary_data({
 
 }) {
   return (
-    <div id="layout-wrapper">
-      <Header />
+    // <div id="layout-wrapper">
+    //   <Header />
 
       <div className="main-content">
         <div className="page-content">
@@ -82,7 +82,7 @@ export default function primary_data({
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 
