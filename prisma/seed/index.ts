@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-// import { userLevel} from "./userLevel";
+import { userLevel} from "./userLevel";
 
 import { userType } from "./userType";
 
@@ -214,7 +214,9 @@ async function main() {
     data: pageAccess,
   })
   
-
+  await prisma.userLevel.createMany({
+    data: userLevel,
+  });
  
  
 

@@ -7,7 +7,7 @@ import Header from '../../components/Header'
 import { SERVER_BASE_URL } from "../../config";
 
 
-export default function user({ regions,  districts, userTypes,users }) {
+export default function user({ regions,  districts, userTypes,userLevels,users }) {
     return (
         // <div id="layout-wrapper">
         //     <Header />
@@ -16,7 +16,7 @@ export default function user({ regions,  districts, userTypes,users }) {
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <User users={users} regions = {regions} districts={districts} userTypes = {userTypes}/>
+                        <User users={users} regions = {regions} districts={districts} userTypes = {userTypes} userLevels={userLevels}/>
                         {/* <ListUser/> */}
 
                     </div>
@@ -41,7 +41,9 @@ export async function getServerSideProps(context) {
     const userTypes = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-type?session=${session}`).then(
         (res) => res.json()
     );
-
+    const userLevels = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-level?session=${session}`).then(
+        (res) => res.json()
+    );
     const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?session=${session}`).then(
         (res) => res.json()
     );
@@ -57,6 +59,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             userTypes,
+            userLevels,
             users,
             districts,
             regions

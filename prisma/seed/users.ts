@@ -15,7 +15,7 @@ export const users = [
     email: "ebensakyi@gmail.com",
     phoneNumber: "0543212322",
     password: hash1,
-
+    userLevelId: 1,
     designation: "Enterprise Admin",
   },
   {
@@ -25,10 +25,11 @@ export const users = [
     email: "oe@gmail.com",
     phoneNumber: "0242260004",
     password: hash5,
+    userLevelId: 1,
 
     designation: "Enterprise Admin",
   },
- 
+
   // {
   //   userTypeId: 2,
   //   surname: "National",
@@ -58,7 +59,7 @@ export const users = [
   //   regionId: 1,
   //   designation: "Supervisor",
   // },
-  
+
   // {
   //   userTypeId: 5,
   //   surname: "District",
