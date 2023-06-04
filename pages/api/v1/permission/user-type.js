@@ -4,8 +4,8 @@ import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
-    let userCookie = await getSession(req);
-    await logActivity("User type added", userCookie.user.id);
+    let userData = await getSession(req);
+    await logActivity("User type added", userData.id);
 
     let name = req.body.userTypeName;
     let selectedPages = req.body.selectedPages;
