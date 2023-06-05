@@ -790,12 +790,11 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                   className="dropdown-item remove-item-btn"
                                   onClick={async (e) => {
                                     e.preventDefault();
-                                    let id = user.id
-                                    const response = await axios.delete(
+                                    let phoneNumber = user.phoneNumber
+                                    const response = await axios.post(
                                       `/api/v1/account/reset-password`,
-                                      {
-                                        data: { id },
-                                      }
+                                      { phoneNumber },
+                                      
                                     );
                                     router.replace(router.asPath);
                                   }}
