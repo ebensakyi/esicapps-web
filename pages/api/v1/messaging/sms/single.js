@@ -35,7 +35,6 @@ try {
     where: { id: response.recipientId },
   });
 
-  console.log(user);
   // if (recipient != null || recipient != "") {
   //   const res = await prisma.user.findMany({
   //     where: { deleted: 0, id: recipient },
