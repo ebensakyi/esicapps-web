@@ -633,7 +633,7 @@ const uploadFile = async (fileName) => {
 
     return stored.Location;
   } catch (error) {
-    console.log("UploadFile Error ", error);
+    console.log("Upload File Error ", error);
     return error;
   }
 };
