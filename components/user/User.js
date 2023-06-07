@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import ReactPaginate from "react-paginate";
 
 const User = ({ users, userTypes, userLevels, regions }) => {
   const router = useRouter();
@@ -70,7 +71,38 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       console.log(error);
     }
   };
+  const autoHandleSearch = (searchText) => {
+    try {
+      let currentUrl = router.pathname;
+      const path = router.pathname;
+      const query = router.query;
+  
+      let published = query.published;
+  
+      let inspectionFormId = query.inspectionFormId;
+      let page = query.page;
 
+      router.push({
+        pathname: path,
+        query: {
+          published,
+          inspectionFormId,
+          page,
+          filterBy,
+          filterValue,
+          from,
+          to,
+          searchText
+        },
+      });
+      // router.push({
+      //   pathname: currentUrl,
+      //   query: `&searchText=${searchText}`,
+      // });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const addUser = async (e) => {
     try {
       e.preventDefault();

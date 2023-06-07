@@ -95,7 +95,6 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
         return <span className="badge bg-primary">Default</span>;
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -119,7 +118,6 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
         return `SANITARY FACILITY PREMISES-${dateString}.xlsx`;
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
