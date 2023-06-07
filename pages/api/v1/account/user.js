@@ -89,15 +89,6 @@ const get = async (req, res) => {
     let searchBy = req.query.searchBy;
     let searchText = req.query.searchText;
 
-    let searchQuery =
-      searchBy == "1"
-        ? surname
-        : searchText != ""
-        ? {
-            name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-          }
-        : {};
-
     if (req.query.districtId) {
       user = await prisma.user.findMany({
         where: { deleted: 0, districtId: Number(req.query.districtId) },
@@ -112,34 +103,36 @@ const get = async (req, res) => {
     //National User
     if (userLevel == 1) {
       user = await prisma.user.findMany({
-        where: searchText != "" ?{
-          OR: [
-            {
-              surname:
-              {
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
                       contains: searchText,
                       mode: "insensitive",
-                    }
-                 
-            },
-            {
-              otherNames:
-               {
+                    },
+                  },
+                  {
+                    otherNames: {
                       contains: searchText,
                       mode: "insensitive",
-                    }
-                 
-            },
-
-            {
-              Region:
-                 {
-                      name: { contains: searchText , mode: "insensitive",},
-                    }
-               
-            },
-          ],
-        }:{},
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                ],
+              }
+            : {},
         include: {
           Region: true,
           District: true,
