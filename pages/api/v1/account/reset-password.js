@@ -47,11 +47,11 @@ const post = async (req, res) => {
       data: { tempPassword: password, userId: Number(user.id) },
     });
 
-    let phoneNumber = await append_233(phoneNumber);
+     phoneNumber = await append_233(phoneNumber);
 
     await sendSMS(
        phoneNumber,
-          `The temporal password for ESICApps Mobile App is ${password}`
+          `Your new temporal password for ESICApps is ${password}`
         );
 
     return res.status(200).json(user);
