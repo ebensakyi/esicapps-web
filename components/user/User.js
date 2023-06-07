@@ -519,162 +519,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                       <></>
                     )}
 
-                    {/* <div className="col-xxl-3 col-md-6">
-                    <div>
-                      <label htmlFor="readonlyInput" className="form-label">
-                        User type
-                      </label>
-
-                      <select
-                        className="form-select"
-                        id="inputGroupSelect02"
-                        onChange={(e) => {
-                          let selectedUserType = e.target.value;
-
-                          setUserType(selectedUserType);
-
-                          if (
-                            (selectedUserType == 1 || selectedUserType == 2) &&
-                            loggedInUserType == 1
-                          ) {
-                            setShowRegion(false);
-                            setShowDistrict(false);
-                            setDistrict("");
-                            setRegion("");
-                          }
-                          if (
-                            (selectedUserType == 3 || selectedUserType == 4) &&
-                            loggedInUserType == 1
-                          ) {
-                            setShowRegion(true);
-
-                            setDistrict("");
-                          }
-                          if (
-                            (selectedUserType == 5 ||
-                              selectedUserType == 6 ||
-                              selectedUserType == 7) &&
-                            loggedInUserType == 1
-                          ) {
-                            setShowRegion(true);
-                            setShowDistrict(true);
-
-                            // setRegion("");
-                          }
-
-                          if (
-                            (selectedUserType == 3 || selectedUserType == 4) &&
-                            loggedInUserType == 3
-                          ) {
-                            setShowRegion(false);
-                            setShowDistrict(false);
-
-                            setDistrict("");
-                            setRegion("");
-                          }
-                          if (
-                            (selectedUserType == 5 ||
-                              selectedUserType == 6 ||
-                              selectedUserType == 7) &&
-                            loggedInUserType == 3
-                          ) {
-                            setShowRegion(false);
-                            setShowDistrict(true);
-
-                            setRegion("");
-                          }
-                          if (
-                            (selectedUserType == 3 || selectedUserType == 4) &&
-                            loggedInUserType == 5
-                          ) {
-                            setShowRegion(false);
-                            setRegion("");
-                          }
-                          if (
-                            (selectedUserType == 3 || selectedUserType == 4) &&
-                            loggedInUserType == 5
-                          ) {
-                            setShowRegion(false);
-
-                            setRegion("");
-                          }
-
-                          if (
-                            (selectedUserType == 5 || selectedUserType == 4) &&
-                            loggedInUserType == 5
-                          ) {
-                            setShowRegion(false);
-                            setRegion("");
-                          }
-                         }}
-                        value={userType}
-                      >
-                          <option value="">Choose...</option>
-                        {userTypes.map((userType) => (
-                          <option key={userType.id} value={userType.id}>
-                            {userType.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  {loggedInUserType == 1 && showRegion ? (
-                    <div className="col-xxl-3 col-md-6">
-                      <div>
-                        <label htmlFor="readonlyInput" className="form-label">
-                          Region
-                        </label>
-
-                        <select
-                          className="form-select"
-                          id="inputGroupSelect02"
-                          value={region}
-                          onChange={async (e) => {
-                            setRegion(e.target.value);
-                            getDistrictsByRegion(e, e.target.value);
-                          }}
-                        >
-                          <option value="">Choose...</option>
-                          {regions.map((region) => (
-                            <option value={region.id} key={region.id}>
-                              {region.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {(loggedInUserType == 1 && showDistrict) ||
-                  (loggedInUserType == 3 && showDistrict) ? (
-                    <div className="col-xxl-3 col-md-6">
-                      <div>
-                        <label htmlFor="readonlyInput" className="form-label">
-                          District
-                        </label>
-
-                        <select
-                          className="form-select"
-                          id="inputGroupSelect02"
-                          value={district}
-                          onChange={(e) => {
-                            setDistrict(e.target.value);
-                            // getElectoralByDistrict(e, e.target.value);
-                          }}
-                        >
-                          <option value="">Choose...</option>
-                          {districtsArr.map((district) => (
-                            <option key={district.id} value={district.id}>
-                              {district.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )} */}
+                    
                     <hr />
                   </div>
                   <br />
@@ -743,7 +588,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                   </button>
                 </div>
                 <div className="d-flex justify-content-sm-end">
-                  <div className="ms-2">
+                  {/* <div className="ms-2">
                     <label className="form-label mb-0">Search by</label>
 
                     <select
@@ -765,18 +610,19 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                       <option hidden={!nationalUser && !regionalUser} value="3">
                         District
                       </option>
-                      {/* <option hidden={!nationalUser && !regionalUser} value="3">
+                       <option hidden={!nationalUser && !regionalUser} value="3">
                         Community
-                      </option> */}
+                      </option> 
                     </select>
-                  </div>
+                  </div> */}
                   <div className="search-box ms-2">
-                  <label className="form-label mb-0">Enter search value</label>
+                  <label className="form-label mb-0">Search </label>
 
                     <input
                       type="text"
                       className="form-control"
                       id="searchResultList"
+                      value={searchText}
                       onChange={(e) => {
                         setSearchText(e.target.value);
                         autoHandleSearch(e.target.value);

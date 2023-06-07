@@ -112,14 +112,34 @@ const get = async (req, res) => {
     //National User
     if (userLevel == 1) {
       user = await prisma.user.findMany({
-        where: {
-          body:
-            searchText != ""
-              ? {
-                  search: searchText.replace(/[\s\n\t]/g, "_"),
-                }
-              : {},
-        },
+        where: searchText != "" ?{
+          OR: [
+            {
+              surname:
+              {
+                      contains: searchText,
+                      mode: "insensitive",
+                    }
+                 
+            },
+            {
+              otherNames:
+               {
+                      contains: searchText,
+                      mode: "insensitive",
+                    }
+                 
+            },
+
+            {
+              Region:
+                 {
+                      name: { contains: searchText , mode: "insensitive",},
+                    }
+               
+            },
+          ],
+        }:{},
         include: {
           Region: true,
           District: true,
