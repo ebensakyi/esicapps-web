@@ -10,7 +10,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
   const router = useRouter();
 
   const [userType, setUserType] = useState();
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
   const [selectedUserLevel, setSelectedUserLevel] = useState();
 
   const [surname, setSurname] = useState("");
@@ -26,6 +26,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
   const [electoralArea, setElectoralArea] = useState();
   const [showRegion, setShowRegion] = useState(false);
   const [showDistrict, setShowDistrict] = useState(false);
+  const [searchText, setSearchText] = useState();
+  const [searchBy, setSearchBy] = useState();
 
   // let loggedInUserType = Cookies.get("ut").split("??")[1];
   let districtId = Cookies?.get("d_id");
@@ -56,11 +58,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       const response = await axios.post(
         `/api/v1/submitted-data/data-to-excel`,
         {
-          inspectionFormId: Number(formId),
-          fileName: handleExcelName(),
-          published,
-          filterBy: query.filterBy,
-          filterValue: query.filterValue,
+          searchBy: query.searchBy,
+          searchText: query.searchText,
           exportType: 2,
         }
       );
@@ -76,23 +75,15 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       let currentUrl = router.pathname;
       const path = router.pathname;
       const query = router.query;
-  
-      let published = query.published;
-  
-      let inspectionFormId = query.inspectionFormId;
+
       let page = query.page;
 
       router.push({
         pathname: path,
         query: {
-          published,
-          inspectionFormId,
           page,
-          filterBy,
-          filterValue,
-          from,
-          to,
-          searchText
+          searchBy,
+          searchText,
         },
       });
       // router.push({
@@ -107,7 +98,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
     try {
       e.preventDefault();
 
-   
       if (surname == "") {
         return toast.error("Surname cannot be empty");
       }
@@ -214,7 +204,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
         region,
         district,
       };
-
 
       const response = await axios.put("/api/v1/account/user", data);
       router.replace(router.asPath);
@@ -428,21 +417,24 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                         value={selectedUserLevel}
                       >
                         <option value="">...Select...</option>
-                       {/*  {userLevels?.map((data) => (
+                        {/*  {userLevels?.map((data) => (
                           <option key={data.id} value={data.id}>
                             {data.name}
                           </option>
                         ))} */}
 
                         <option hidden={!nationalUser} value="1">
-                        National
-                      </option>
-                      <option hidden={!nationalUser} value="2">
-                        Region
-                      </option>
-                      <option hidden={!nationalUser && !regionalUser} value="3">
-                        District
-                      </option>
+                          National
+                        </option>
+                        <option hidden={!nationalUser} value="2">
+                          Region
+                        </option>
+                        <option
+                          hidden={!nationalUser && !regionalUser}
+                          value="3"
+                        >
+                          District
+                        </option>
                       </select>
                     </div>
 
@@ -690,22 +682,25 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                     <div className="flex-shrink-0">
                       <div className="col-lg-12">
                         <div className="text-end">
-                          {isEditing? <button
-                            className="btn btn-success"
-                            onClick={(e) => {
-                              updateUser(e);
-                            }}
-                          >
-                            Update
-                          </button>: <button
-                            className="btn btn-primary"
-                            onClick={(e) => {
-                              addUser(e);
-                            }}
-                          >
-                            Submit
-                          </button>}
-                        
+                          {isEditing ? (
+                            <button
+                              className="btn btn-success"
+                              onClick={(e) => {
+                                updateUser(e);
+                              }}
+                            >
+                              Update
+                            </button>
+                          ) : (
+                            <button
+                              className="btn btn-primary"
+                              onClick={(e) => {
+                                addUser(e);
+                              }}
+                            >
+                              Submit
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -728,42 +723,71 @@ const User = ({ users, userTypes, userLevels, regions }) => {
               className="card-body"
               style={{ overflow: "auto", "max-height": "400px" }}
             >
-               <div className="row">
-              <div className="col-md-3">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
-                  onClick={handleExportAll}
-                >
-                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                  Export All
-                </button>{" "}
-                <button
-                  type="button"
-                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
-                  onClick={handleExportFiltered}
-                >
-                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                  Export Filtered
-                </button>
-              </div>
-              <div className="d-flex justify-content-sm-end">
-                <div className="search-box ms-2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="searchResultList"
-                    onChange={(e) => {
-                      setSearchText(e.target.value);
-                      autoHandleSearch(e.target.value);
-                    }}
-                    placeholder="Search...."
-                  />
-                  <i className="ri-search-line search-icon"></i>
+              <div className="row">
+                <div className="col-md-3">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                    onClick={handleExportAll}
+                  >
+                    <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                    Export All
+                  </button>{" "}
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                    onClick={handleExportFiltered}
+                  >
+                    <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                    Export Filtered
+                  </button>
+                </div>
+                <div className="d-flex justify-content-sm-end">
+                  <div className="ms-2">
+                    <label className="form-label mb-0">Search by</label>
+
+                    <select
+                      className="form-control"
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setSearchBy(e.target.value);
+                      }}
+                      value={setSearchBy}
+                    >
+                      <option value="1">...Select...</option>
+
+                      <option value="1">
+                        Officer Name
+                      </option>
+                      <option hidden={!nationalUser} value="2">
+                        Region
+                      </option>
+                      <option hidden={!nationalUser && !regionalUser} value="3">
+                        District
+                      </option>
+                      {/* <option hidden={!nationalUser && !regionalUser} value="3">
+                        Community
+                      </option> */}
+                    </select>
+                  </div>
+                  <div className="search-box ms-2">
+                  <label className="form-label mb-0">Enter search value</label>
+
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="searchResultList"
+                      onChange={(e) => {
+                        setSearchText(e.target.value);
+                        autoHandleSearch(e.target.value);
+                      }}
+                      placeholder="Search...."
+                    />
+                    {/* <i className="ri-search-line search-icon"></i> */}
+                  </div>
                 </div>
               </div>
-            </div>
-            <br />
+              <br />
               <table
                 id="fixed-header"
                 className="table table-bordered dt-responsive nowrap table-striped align-middle"
@@ -849,7 +873,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                   onClick={async (e) => {
                                     e.preventDefault();
 
-                                    setIsEditing(true)
+                                    setIsEditing(true);
 
                                     setSurname(user.surname);
                                     setOtherNames(user.otherNames);
@@ -877,7 +901,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                   className="dropdown-item remove-item-btn"
                                   onClick={async (e) => {
                                     e.preventDefault();
-                                    let id = user.id
+                                    let id = user.id;
                                     const response = await axios.delete(
                                       `/api/v1/account/user`,
                                       {
@@ -896,11 +920,10 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                   className="dropdown-item remove-item-btn"
                                   onClick={async (e) => {
                                     e.preventDefault();
-                                    let phoneNumber = user.phoneNumber
+                                    let phoneNumber = user.phoneNumber;
                                     const response = await axios.post(
                                       `/api/v1/account/reset-password`,
-                                      { phoneNumber },
-                                      
+                                      { phoneNumber }
                                     );
                                     router.replace(router.asPath);
                                   }}

@@ -7,75 +7,74 @@ import { sendSMS } from "../../../../utils/send-hubtel-sms";
 import { generateCode } from "../../../../utils/generate-code";
 
 const post = async (req, res) => {
-  // try {
+  try {
+    let userData = await getSession(req);
 
-  let userData = await getSession(req);
+    // let password = await nanoid(8); //req.body.password;
+    let userRegionId = userData?.RegionId;
+    let userDistrictId = userData?.DistrictId;
 
-  // let password = await nanoid(8); //req.body.password;
-  let userRegionId = userData?.RegionId;
-  let userDistrictId = userData?.DistrictId;
+    let password = await generateCode(4);
+    const salt = bcrypt.genSaltSync(10);
+    let hashedPassword = await bcrypt.hashSync(password, salt);
 
-  let password = await generateCode(4);
-  const salt = bcrypt.genSaltSync(10);
-  let hashedPassword = await bcrypt.hashSync(password, salt);
+    let regionId;
+    let data = {};
 
-  let regionId;
-  let data = {};
+    await logActivity(
+      `Added user ${req.body.surname} ${req.body.otherNames} `,
+      Number(userData.id)
+    );
+    data = {
+      userTypeId: Number(req.body.userTypeId),
+      userLevelId: Number(req.body.userLevelId),
+      surname: req?.body?.surname,
+      otherNames: req?.body?.otherNames,
+      email: req?.body?.email,
+      phoneNumber: req?.body?.phoneNumber,
+      password: hashedPassword,
+      tempPassword: password,
+      designation: req?.body?.designation,
+      regionId:
+        req?.body?.region == null || req?.body?.region == ""
+          ? null
+          : Number(req?.body?.region),
+      districtId:
+        req?.body?.district == null || req?.body?.district == ""
+          ? null
+          : Number(req?.body?.district),
+    };
 
-  await logActivity(
-    `Added user ${req.body.surname} ${req.body.otherNames} `,
-    Number(userData.id)
-  );
-  data = {
-    userTypeId: Number(req.body.userTypeId),
-    userLevelId: Number(req.body.userLevelId),
-    surname: req?.body?.surname,
-    otherNames: req?.body?.otherNames,
-    email: req?.body?.email,
-    phoneNumber: req?.body?.phoneNumber,
-    password: hashedPassword,
-    tempPassword: password,
-    designation: req?.body?.designation,
-    regionId:
-      req?.body?.region == null || req?.body?.region == ""
-        ? null
-        : Number(req?.body?.region),
-    districtId:
-      req?.body?.district == null || req?.body?.district == ""
-        ? null
-        : Number(req?.body?.district),
-  };
+    // }
 
-  // }
+    const user = await prisma.user.create({ data });
+    // if (Number(req.body.userTypeId) == 7) {
+    //   await sendSMS(
+    //     req.body.phoneNumber,
+    //     `The temporal password for ESICApps Mobile App is ${password}`
+    //   );
+    // } else {
+    //   await sendSMS(
+    //     req.body.phoneNumber,
+    //     `The password for ESICApps Web App is ${password}`
+    //   );
+    // }
 
-  const user = await prisma.user.create({ data });
-  // if (Number(req.body.userTypeId) == 7) {
-  //   await sendSMS(
-  //     req.body.phoneNumber,
-  //     `The temporal password for ESICApps Mobile App is ${password}`
-  //   );
-  // } else {
-  //   await sendSMS(
-  //     req.body.phoneNumber,
-  //     `The password for ESICApps Web App is ${password}`
-  //   );
-  // }
+    await prisma.userAddedByUser.create({
+      data: { addeeId: user.id, adderId: Number(userData.id) },
+    });
 
-  await prisma.userAddedByUser.create({
-    data: { addeeId: user.id, adderId: Number(userData.id) },
-  });
-
-  return res
-    .status(200)
-    .json({ statusCode: 1, message: "Data saved", data: { user } });
-  // } catch (error) {
-  //   console.log(error);
-  //   if (error.code === "P2002")
-  //     return res.status(500).json({
-  //       statusCode: 0,
-  //       message: "Phone number and Email should be unique",
-  //     });
-  // }
+    return res
+      .status(200)
+      .json({ statusCode: 1, message: "Data saved", data: { user } });
+  } catch (error) {
+    console.log(error);
+    if (error.code === "P2002")
+      return res.status(500).json({
+        statusCode: 0,
+        message: "Phone number and Email should be unique",
+      });
+  }
 };
 
 const get = async (req, res) => {
@@ -86,6 +85,18 @@ const get = async (req, res) => {
     let region = data.regionId;
     let district = data.districtId;
     let user;
+
+    let searchBy = req.query.searchBy;
+    let searchText = req.query.searchText;
+
+    let searchQuery =
+      searchBy == "1"
+        ? surname
+        : searchText != ""
+        ? {
+            name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+          }
+        : {};
 
     if (req.query.districtId) {
       user = await prisma.user.findMany({
@@ -98,9 +109,17 @@ const get = async (req, res) => {
       return res.status(200).json(user);
     }
 
+    //National User
     if (userLevel == 1) {
       user = await prisma.user.findMany({
-        // where: { deleted: 0 },
+        where: {
+          body:
+            searchText != ""
+              ? {
+                  search: searchText.replace(/[\s\n\t]/g, "_"),
+                }
+              : {},
+        },
         include: {
           Region: true,
           District: true,
@@ -113,6 +132,7 @@ const get = async (req, res) => {
       });
       return res.status(200).json(user);
     }
+    //Regional User
     if (userLevel == 2) {
       user = await prisma.user.findMany({
         where: { regionId: Number(region) },
@@ -146,7 +166,7 @@ const get = async (req, res) => {
 
 const Delete = async (req, res) => {
   try {
-    console.log("req.params",req.body);
+    console.log("req.params", req.body);
     let user = await prisma.user.findFirst({
       where: { id: Number(req.body.id) },
     });
@@ -161,7 +181,6 @@ const Delete = async (req, res) => {
 
 const put = async (req, res) => {
   try {
-
     console.log(req.body);
     let data = {
       userTypeId: Number(req.body.userTypeId),
@@ -170,7 +189,7 @@ const put = async (req, res) => {
       otherNames: req?.body?.otherNames,
       email: req?.body?.email,
       phoneNumber: req?.body?.phoneNumber,
-     
+
       designation: req?.body?.designation,
       regionId:
         req?.body?.region == null || req?.body?.region == ""
@@ -189,7 +208,7 @@ const put = async (req, res) => {
     // });
 
     await prisma.user.update({
-     where: { id: Number(req.body.userId) },
+      where: { id: Number(req.body.userId) },
       data: data,
     });
     return res.status(200).json();

@@ -29,7 +29,8 @@ export default function user({ regions,  districts, userTypes,userLevels,users }
 
 export async function getServerSideProps(context) {
     const { session } = context.req.cookies;
-
+    const searchBy = context.query.searchBy ;
+    const searchText = context.query.searchText;
     if (!session) {
         return {
             redirect: {
@@ -44,7 +45,7 @@ export async function getServerSideProps(context) {
     const userLevels = await fetch(`${SERVER_BASE_URL}/api/v1/account/user-level?session=${session}`).then(
         (res) => res.json()
     );
-    const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?session=${session}`).then(
+    const users = await fetch(`${SERVER_BASE_URL}/api/v1/account/user?session=${session}&searchBy=${searchBy}&searchText=${searchText}`).then(
         (res) => res.json()
     );
 
