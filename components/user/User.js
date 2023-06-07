@@ -32,6 +32,44 @@ const User = ({ users, userTypes, userLevels, regions }) => {
   useEffect(() => {
     // setDistricts(districts);
   }, []);
+  const handleExportAll = async () => {
+    try {
+      const response = await axios.post(
+        `/api/v1/submitted-data/data-to-excel`,
+        {
+          inspectionFormId: Number(formId),
+          fileName: handleExcelName(),
+          published,
+          exportType: 1,
+        }
+      );
+      if (response.status == 200) {
+        router.push(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleExportFiltered = async () => {
+    try {
+      const response = await axios.post(
+        `/api/v1/submitted-data/data-to-excel`,
+        {
+          inspectionFormId: Number(formId),
+          fileName: handleExcelName(),
+          published,
+          filterBy: query.filterBy,
+          filterValue: query.filterValue,
+          exportType: 2,
+        }
+      );
+      if (response.status == 200) {
+        router.push(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const addUser = async (e) => {
     try {
@@ -658,6 +696,42 @@ const User = ({ users, userTypes, userLevels, regions }) => {
               className="card-body"
               style={{ overflow: "auto", "max-height": "400px" }}
             >
+               <div className="row">
+              <div className="col-md-3">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                  onClick={handleExportAll}
+                >
+                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                  Export All
+                </button>{" "}
+                <button
+                  type="button"
+                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                  onClick={handleExportFiltered}
+                >
+                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                  Export Filtered
+                </button>
+              </div>
+              <div className="d-flex justify-content-sm-end">
+                <div className="search-box ms-2">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="searchResultList"
+                    onChange={(e) => {
+                      setSearchText(e.target.value);
+                      autoHandleSearch(e.target.value);
+                    }}
+                    placeholder="Search...."
+                  />
+                  <i className="ri-search-line search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <br />
               <table
                 id="fixed-header"
                 className="table table-bordered dt-responsive nowrap table-striped align-middle"
