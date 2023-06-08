@@ -140,6 +140,11 @@ const get = async (req, res) => {
                       name: { contains: searchText, mode: "insensitive" },
                     },
                   },
+                  {
+                    UserLevel: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
                 ],
               }
             : {},
