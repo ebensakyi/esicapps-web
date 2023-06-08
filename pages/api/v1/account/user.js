@@ -86,7 +86,7 @@ const get = async (req, res) => {
     let district = data.districtId;
     let user;
 
-    let searchText = req.query.searchText 
+    let searchText = req.query.searchText;
 
     // if (req.query.districtId) {
     //   user = await prisma.user.findMany({
@@ -103,7 +103,7 @@ const get = async (req, res) => {
     if (userLevel == 1) {
       user = await prisma.user.findMany({
         where:
-          searchText != "" 
+          searchText != ""
             ? {
                 OR: [
                   {
@@ -164,7 +164,53 @@ const get = async (req, res) => {
     //Regional User
     if (userLevel == 2) {
       user = await prisma.user.findMany({
-        where: { regionId: Number(region) },
+        where:
+          searchText != ""
+            ? {
+                regionId: Number(region),
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    UserLevel: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                ],
+              }
+            : { regionId: Number(region) },
         include: {
           Region: true,
           District: true,
@@ -180,7 +226,53 @@ const get = async (req, res) => {
 
     if (userLevel == 3) {
       user = await prisma.user.findMany({
-        where: { districtId: Number(district) },
+        where:
+        searchText != ""
+          ? {
+              districtId: Number(district),
+              OR: [
+                {
+                  surname: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  otherNames: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  phoneNumber: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  email: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  Region: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+                {
+                  District: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+                {
+                  UserLevel: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              ],
+            }
+          : { districtId: Number(district) },
         include: { Region: true, District: true, UserType: true },
         orderBy: {
           id: "desc",
