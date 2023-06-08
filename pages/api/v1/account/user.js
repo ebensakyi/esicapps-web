@@ -84,9 +84,9 @@ const get = async (req, res) => {
     let perPage = 10;
     let skip = Number((page - 1) * perPage) || 0;
 
-    let userLevel = data.userLevelId;
-    let region = data.regionId;
-    let district = data.districtId;
+    let userLevel = data?.userLevelId;
+    let region = data?.regionId;
+    let district = data?.districtId;
     let users;
 
     let searchText = req.query.searchText;

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import ReactPaginate from "react-paginate";
 
-const User = ({ users, userTypes, userLevels, regions }) => {
+const User = ({ users, pagination, userTypes, userLevels, regions }) => {
   const router = useRouter();
 
   const [userType, setUserType] = useState();
@@ -79,7 +79,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       const query = router.query;
 
       let page = query.page;
-     
+
       router.push({
         pathname: path,
         query: {
@@ -91,13 +91,21 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       //   pathname: currentUrl,
       //   query: `&searchText=${searchText}`,
       // });
-
-
-
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handlePagination = (page) => {
+    const path = router.pathname;
+    const query = router.query;
+    query.page = page.selected + 1;
+    router.push({
+      pathname: path,
+      query: query,
+    });
+  };
+
   const addUser = async (e) => {
     try {
       e.preventDefault();
@@ -155,7 +163,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       setUserType("");
       setRegion("");
       setDistrict("");
-      setSelectedUserLevel("")
+      setSelectedUserLevel("");
 
       return toast.success(response.data.message);
     } catch (error) {
@@ -222,7 +230,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       setRegion("");
       setDistrict("");
       setIsEditing(false);
-      setSelectedUserLevel("")
+      setSelectedUserLevel("");
 
       return toast.success(response.data.message);
     } catch (error) {
@@ -412,6 +420,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                             setDistrict(null);
                           }
                           if (selectedUserLevel == 3) {
+                            getDistrictsByRegion(null);
+
                             setRegion(null);
                           }
                           // if (districtUser) {
@@ -535,38 +545,37 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                         <div className="text-end">
                           {isEditing ? (
                             <>
-                             <button
-                              className="btn btn-danger"
-                              onClick={(e) => {
-                                e.preventDefault();
+                              <button
+                                className="btn btn-danger"
+                                onClick={(e) => {
+                                  e.preventDefault();
 
-                                setIsEditing("");
+                                  setIsEditing("");
 
-                                setSurname("");
-                                setOtherNames("");
-                                setEmail("");
-                                setPhoneNumber("");
-                                setDesignation("");
-                                setUserType("");
-                                setSelectedUserLevel("");
-                                setUserId("");
-                                setRegion("");
-                                setDistrict("");
-                              }}
-                            >
-                              Cancel
-                            </button>
-                            {"  "} {"  "}
-                            <button
-                              className="btn btn-success"
-                              onClick={(e) => {
-                                updateUser(e);
-                              }}
-                            >
-                              Update
-                            </button>
+                                  setSurname("");
+                                  setOtherNames("");
+                                  setEmail("");
+                                  setPhoneNumber("");
+                                  setDesignation("");
+                                  setUserType("");
+                                  setSelectedUserLevel("");
+                                  setUserId("");
+                                  setRegion("");
+                                  setDistrict("");
+                                }}
+                              >
+                                Cancel
+                              </button>
+                              {"  "} {"  "}
+                              <button
+                                className="btn btn-success"
+                                onClick={(e) => {
+                                  updateUser(e);
+                                }}
+                              >
+                                Update
+                              </button>
                             </>
-                           
                           ) : (
                             <button
                               className="btn btn-primary"
@@ -600,8 +609,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
               style={{ overflow: "auto", "max-height": "400px" }}
             >
               <div className="row">
-              <div className="d-flex justify-content-sm-end">
-
+                <div className="d-flex justify-content-sm-end">
                   <button
                     type="button"
                     className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
@@ -619,7 +627,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                     Export Filtered
                   </button> */}
                 </div>
-               
+
                 <div className="d-flex justify-content-sm-end">
                   <div className="search-box ms-2">
                     <label className="form-label mb-0">Search </label>
@@ -794,6 +802,26 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                   })}
                 </tbody>
               </table>
+              <ReactPaginate
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                breakLabel={"..."}
+                initialPage={pagination.curPage - 1}
+                pageCount={pagination.maxPage}
+                onPageChange={handlePagination}
+                breakClassName={"page-item"}
+                breakLinkClassName={"page-link"}
+                containerClassName={"pagination"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousClassName={"page-item"}
+                previousLinkClassName={"page-link"}
+                nextClassName={"page-item"}
+                nextLinkClassName={"page-link"}
+                activeClassName={"active"}
+              />
             </div>
           </div>
         </div>
