@@ -245,7 +245,6 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
       const response = await axios.get(
         "/api/v1/primary-data/district?regionId=" + regionId
       );
-      console.log(response);
       setDistricts(response.data);
     } catch (error) {}
   };

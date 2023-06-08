@@ -11,20 +11,38 @@ const post = async (req, res) => {
     let userData = await getSession(req);
 
     // let password = await nanoid(8); //req.body.password;
-    let userRegionId = userData?.RegionId;
-    let userDistrictId = userData?.DistrictId;
+    let loggedInUserRegionId = userData?.regionId;
+    let loggedInUserDistrictId = userData?.districtId;
+    let loggedInUserLevelId = userData?.userLevelId;
 
     let password = await generateCode(4);
     const salt = bcrypt.genSaltSync(10);
     let hashedPassword = await bcrypt.hashSync(password, salt);
+    // console.log(req.body);
 
-    let regionId;
+    let regionId,districtId;
     let data = {};
 
     await logActivity(
       `Added user ${req.body.surname} ${req.body.otherNames} `,
       Number(userData.id)
     );
+
+     //National Level
+    if (loggedInUserLevelId == "1") {
+      regionId = req.body.regionId;
+      districtId = req.body.districtId;
+    }
+
+    //Regional Level
+    if (loggedInUserLevelId == "2") {
+      regionId = loggedInUserRegionId;
+      districtId = Number(req.body.district);
+    }
+    if (loggedInUserLevelId == "3") {
+      regionId = req.body.regionId;
+      districtId = req.body.districtId;
+    }
     data = {
       userTypeId: Number(req.body.userTypeId),
       userLevelId: Number(req.body.userLevelId),
@@ -35,17 +53,15 @@ const post = async (req, res) => {
       password: hashedPassword,
       tempPassword: password,
       designation: req?.body?.designation,
-      regionId:
-        req?.body?.region == null || req?.body?.region == ""
-          ? null
-          : Number(req?.body?.region),
-      districtId:
-        req?.body?.district == null || req?.body?.district == ""
-          ? null
-          : Number(req?.body?.district),
+      regionId: regionId,
+      districtId: districtId,
     };
+// console.log("loggedInUserRegionId=>",loggedInUserRegionId);
+// console.log("loggedInUserDistrictId=>",loggedInUserDistrictId);
+// console.log("loggedInUserLevelId=>",loggedInUserLevelId);
 
-    // }
+//     console.log(data);
+
 
     const user = await prisma.user.create({ data });
     // if (Number(req.body.userTypeId) == 7) {
@@ -165,9 +181,10 @@ const get = async (req, res) => {
 
       let count = users.length;
 
-      return res
-        .status(200)
-        .json({ users,pagination:{curPage: page, maxPage: Math.ceil(count / perPage) } });
+      return res.status(200).json({
+        users,
+        pagination: { curPage: page, maxPage: Math.ceil(count / perPage) },
+      });
     }
     //Regional User
     if (userLevel == 2) {
@@ -233,9 +250,10 @@ const get = async (req, res) => {
       });
       let count = users.length;
 
-      return res
-        .status(200)
-        .json({ users,pagination:{curPage: page, maxPage: Math.ceil(count / perPage) } });
+      return res.status(200).json({
+        users,
+        pagination: { curPage: page, maxPage: Math.ceil(count / perPage) },
+      });
     }
 
     if (userLevel == 3) {
@@ -296,9 +314,10 @@ const get = async (req, res) => {
       });
       let count = users.length;
 
-      return res
-        .status(200)
-        .json({ users,pagination:{curPage: page, maxPage: Math.ceil(count / perPage) } });
+      return res.status(200).json({
+        users,
+        pagination: { curPage: page, maxPage: Math.ceil(count / perPage) },
+      });
     }
   } catch (error) {
     console.log("Error: " + error);

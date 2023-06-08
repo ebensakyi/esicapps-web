@@ -48,3 +48,10 @@ update "District"
    3. paginate, search and filter users
    4. paginate, search and filter user loogs
    5. edit dataview
+
+
+
+   ////////////////////////////////////////////////////////////////
+   1. Check added users district and regions based on login user level
+   2. work on user export
+   3. work on data filter
