@@ -167,7 +167,7 @@ const get = async (req, res) => {
 
       return res
         .status(200)
-        .json({ user, curPage: page, maxPage: Math.ceil(count / perPage) });
+        .json({ users,pagination:{curPage: page, maxPage: Math.ceil(count / perPage) } });
     }
     //Regional User
     if (userLevel == 2) {
@@ -235,7 +235,7 @@ const get = async (req, res) => {
 
       return res
         .status(200)
-        .json({ users, curPage: page, maxPage: Math.ceil(count / perPage) });
+        .json({ users,pagination:{curPage: page, maxPage: Math.ceil(count / perPage) } });
     }
 
     if (userLevel == 3) {
@@ -298,7 +298,7 @@ const get = async (req, res) => {
 
       return res
         .status(200)
-        .json({ users, curPage: page, maxPage: Math.ceil(count / perPage) });
+        .json({ users,pagination:{curPage: page, maxPage: Math.ceil(count / perPage) } });
     }
   } catch (error) {
     console.log("Error: " + error);

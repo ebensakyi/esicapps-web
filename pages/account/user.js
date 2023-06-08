@@ -16,7 +16,7 @@ export default function user({ regions,  districts, userTypes,userLevels,data })
                 <div className="page-content">
                     <div className="container-fluid">
 
-                        <User users={data.users} regions = {regions} districts={districts} userTypes = {userTypes} userLevels={userLevels}/>
+                        <User users={data.users} pagination={data.pagination} regions = {regions} districts={districts} userTypes = {userTypes} userLevels={userLevels}/>
                         {/* <ListUser/> */}
 
                     </div>
