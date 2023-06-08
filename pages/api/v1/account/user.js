@@ -125,7 +125,18 @@ const get = async (req, res) => {
                     },
                   },
                   {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
                     Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    District: {
                       name: { contains: searchText, mode: "insensitive" },
                     },
                   },
@@ -143,7 +154,6 @@ const get = async (req, res) => {
         },
       });
 
-      console.log(user);
       return res.status(200).json(user);
     }
     //Regional User

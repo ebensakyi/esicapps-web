@@ -33,6 +33,10 @@ const User = ({ users, userTypes, userLevels, regions }) => {
   let regionId = Cookies?.get("r_id");
   useEffect(() => {
     // setDistricts(districts);
+    const path = router.pathname;
+    const query = router.query;
+    let searchText = query.searchText;
+    setSearchText(searchText);
   }, []);
   const handleExportAll = async () => {
     try {
@@ -75,7 +79,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       const query = router.query;
 
       let page = query.page;
-
+     
       router.push({
         pathname: path,
         query: {
@@ -87,6 +91,9 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       //   pathname: currentUrl,
       //   query: `&searchText=${searchText}`,
       // });
+
+
+
     } catch (error) {
       console.log(error);
     }
@@ -516,7 +523,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                       <></>
                     )}
 
-                    
                     <hr />
                   </div>
                   <br />
@@ -566,7 +572,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
               style={{ overflow: "auto", "max-height": "400px" }}
             >
               <div className="row">
-                <div className="col-md-3">
+              <div className="d-flex justify-content-sm-end">
+
                   <button
                     type="button"
                     className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
@@ -575,45 +582,19 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                     <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                     Export All
                   </button>{" "}
-                  <button
+                  {/* <button
                     type="button"
                     className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
                     onClick={handleExportFiltered}
                   >
                     <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                     Export Filtered
-                  </button>
+                  </button> */}
                 </div>
+               
                 <div className="d-flex justify-content-sm-end">
-                  {/* <div className="ms-2">
-                    <label className="form-label mb-0">Search by</label>
-
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        setSearchBy(e.target.value);
-                      }}
-                      value={setSearchBy}
-                    >
-                      <option value="1">...Select...</option>
-
-                      <option value="1">
-                        Officer Name
-                      </option>
-                      <option hidden={!nationalUser} value="2">
-                        Region
-                      </option>
-                      <option hidden={!nationalUser && !regionalUser} value="3">
-                        District
-                      </option>
-                       <option hidden={!nationalUser && !regionalUser} value="3">
-                        Community
-                      </option> 
-                    </select>
-                  </div> */}
                   <div className="search-box ms-2">
-                  <label className="form-label mb-0">Search </label>
+                    <label className="form-label mb-0">Search </label>
 
                     <input
                       type="text"
