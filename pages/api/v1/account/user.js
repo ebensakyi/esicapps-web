@@ -15,12 +15,14 @@ const post = async (req, res) => {
     let loggedInUserDistrictId = userData?.districtId;
     let loggedInUserLevelId = userData?.userLevelId;
 
+    let userLevelId = Number(req.body.userLevelId);
+
     let password = await generateCode(4);
     const salt = bcrypt.genSaltSync(10);
     let hashedPassword = await bcrypt.hashSync(password, salt);
     // console.log(req.body);
 
-    let regionId,districtId;
+    let regionId, districtId;
     let data = {};
 
     await logActivity(
@@ -28,7 +30,7 @@ const post = async (req, res) => {
       Number(userData.id)
     );
 
-     //National Level
+    //National Level
     if (loggedInUserLevelId == "1") {
       regionId = req.body.regionId;
       districtId = req.body.districtId;
@@ -38,6 +40,10 @@ const post = async (req, res) => {
     if (loggedInUserLevelId == "2") {
       regionId = loggedInUserRegionId;
       districtId = Number(req.body.district);
+      if (districtId == 0) {
+        districtId = null;
+        userLevelId = loggedInUserLevelId;
+      }
     }
     if (loggedInUserLevelId == "3") {
       regionId = req.body.regionId;
@@ -45,7 +51,7 @@ const post = async (req, res) => {
     }
     data = {
       userTypeId: Number(req.body.userTypeId),
-      userLevelId: Number(req.body.userLevelId),
+      userLevelId: userLevelId,
       surname: req?.body?.surname,
       otherNames: req?.body?.otherNames,
       email: req?.body?.email,
@@ -56,12 +62,11 @@ const post = async (req, res) => {
       regionId: regionId,
       districtId: districtId,
     };
-// console.log("loggedInUserRegionId=>",loggedInUserRegionId);
-// console.log("loggedInUserDistrictId=>",loggedInUserDistrictId);
-// console.log("loggedInUserLevelId=>",loggedInUserLevelId);
+    // console.log("loggedInUserRegionId=>",loggedInUserRegionId);
+    // console.log("loggedInUserDistrictId=>",loggedInUserDistrictId);
+    // console.log("loggedInUserLevelId=>",loggedInUserLevelId);
 
-//     console.log(data);
-
+         console.log(data);
 
     const user = await prisma.user.create({ data });
     // if (Number(req.body.userTypeId) == 7) {
