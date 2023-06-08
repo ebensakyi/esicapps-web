@@ -80,11 +80,14 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let data = await getSession(req);
+    let page = req.query.page;
+    let perPage = 10;
+    let skip = Number((page - 1) * perPage) || 0;
 
     let userLevel = data.userLevelId;
     let region = data.regionId;
     let district = data.districtId;
-    let user;
+    let users;
 
     let searchText = req.query.searchText;
 
@@ -101,7 +104,7 @@ const get = async (req, res) => {
 
     //National User
     if (userLevel == 1) {
-      user = await prisma.user.findMany({
+      users = await prisma.user.findMany({
         where:
           searchText != ""
             ? {
@@ -148,6 +151,7 @@ const get = async (req, res) => {
                 ],
               }
             : {},
+        skip: skip,
         include: {
           Region: true,
           District: true,
@@ -159,11 +163,15 @@ const get = async (req, res) => {
         },
       });
 
-      return res.status(200).json(user);
+      let count = users.length;
+
+      return res
+        .status(200)
+        .json({ user, curPage: page, maxPage: Math.ceil(count / perPage) });
     }
     //Regional User
     if (userLevel == 2) {
-      user = await prisma.user.findMany({
+      users = await prisma.user.findMany({
         where:
           searchText != ""
             ? {
@@ -211,6 +219,8 @@ const get = async (req, res) => {
                 ],
               }
             : { regionId: Number(region) },
+        skip: skip,
+
         include: {
           Region: true,
           District: true,
@@ -221,64 +231,74 @@ const get = async (req, res) => {
           id: "desc",
         },
       });
-      return res.status(200).json(user);
+      let count = users.length;
+
+      return res
+        .status(200)
+        .json({ users, curPage: page, maxPage: Math.ceil(count / perPage) });
     }
 
     if (userLevel == 3) {
-      user = await prisma.user.findMany({
+      users = await prisma.user.findMany({
         where:
-        searchText != ""
-          ? {
-              districtId: Number(district),
-              OR: [
-                {
-                  surname: {
-                    contains: searchText,
-                    mode: "insensitive",
+          searchText != ""
+            ? {
+                districtId: Number(district),
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
                   },
-                },
-                {
-                  otherNames: {
-                    contains: searchText,
-                    mode: "insensitive",
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
                   },
-                },
-                {
-                  phoneNumber: {
-                    contains: searchText,
-                    mode: "insensitive",
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
                   },
-                },
-                {
-                  email: {
-                    contains: searchText,
-                    mode: "insensitive",
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
                   },
-                },
-                {
-                  Region: {
-                    name: { contains: searchText, mode: "insensitive" },
+                  {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
                   },
-                },
-                {
-                  District: {
-                    name: { contains: searchText, mode: "insensitive" },
+                  {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
                   },
-                },
-                {
-                  UserLevel: {
-                    name: { contains: searchText, mode: "insensitive" },
+                  {
+                    UserLevel: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
                   },
-                },
-              ],
-            }
-          : { districtId: Number(district) },
+                ],
+              }
+            : { districtId: Number(district) },
+        skip: skip,
+
         include: { Region: true, District: true, UserType: true },
         orderBy: {
           id: "desc",
         },
       });
-      return res.status(200).json(user);
+      let count = users.length;
+
+      return res
+        .status(200)
+        .json({ users, curPage: page, maxPage: Math.ceil(count / perPage) });
     }
   } catch (error) {
     console.log("Error: " + error);

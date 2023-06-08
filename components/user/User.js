@@ -155,6 +155,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       setUserType("");
       setRegion("");
       setDistrict("");
+      setSelectedUserLevel("")
 
       return toast.success(response.data.message);
     } catch (error) {
@@ -220,6 +221,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       setUserType("");
       setRegion("");
       setDistrict("");
+      setIsEditing(false);
+      setSelectedUserLevel("")
 
       return toast.success(response.data.message);
     } catch (error) {
@@ -531,6 +534,29 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                       <div className="col-lg-12">
                         <div className="text-end">
                           {isEditing ? (
+                            <>
+                             <button
+                              className="btn btn-danger"
+                              onClick={(e) => {
+                                e.preventDefault();
+
+                                setIsEditing("");
+
+                                setSurname("");
+                                setOtherNames("");
+                                setEmail("");
+                                setPhoneNumber("");
+                                setDesignation("");
+                                setUserType("");
+                                setSelectedUserLevel("");
+                                setUserId("");
+                                setRegion("");
+                                setDistrict("");
+                              }}
+                            >
+                              Cancel
+                            </button>
+                            {"  "} {"  "}
                             <button
                               className="btn btn-success"
                               onClick={(e) => {
@@ -539,6 +565,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                             >
                               Update
                             </button>
+                            </>
+                           
                           ) : (
                             <button
                               className="btn btn-primary"
@@ -693,7 +721,7 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                             </li> */}
                               <li>
                                 <button
-                                  className="dropdown-item remove-item-btn"
+                                  className="dropdown-item"
                                   onClick={async (e) => {
                                     e.preventDefault();
 
@@ -707,6 +735,8 @@ const User = ({ users, userTypes, userLevels, regions }) => {
                                     setUserType(user.userTypeId);
                                     setSelectedUserLevel(user.userLevelId);
                                     setUserId(user.id);
+                                    setRegion(user.regionId);
+                                    setDistrict(user.districtId);
 
                                     // const response = await axios.put(
                                     //   "/api/v1/account/user",{
