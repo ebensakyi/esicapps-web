@@ -86,7 +86,6 @@ const get = async (req, res) => {
     let district = data.districtId;
     let user;
 
-    let searchBy = req.query.searchBy;
     let searchText = req.query.searchText;
 
     if (req.query.districtId) {

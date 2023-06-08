@@ -27,7 +27,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
   const [showRegion, setShowRegion] = useState(false);
   const [showDistrict, setShowDistrict] = useState(false);
   const [searchText, setSearchText] = useState();
-  const [searchBy, setSearchBy] = useState();
 
   // let loggedInUserType = Cookies.get("ut").split("??")[1];
   let districtId = Cookies?.get("d_id");
@@ -58,7 +57,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
       const response = await axios.post(
         `/api/v1/submitted-data/data-to-excel`,
         {
-          searchBy: query.searchBy,
           searchText: query.searchText,
           exportType: 2,
         }
@@ -82,7 +80,6 @@ const User = ({ users, userTypes, userLevels, regions }) => {
         pathname: path,
         query: {
           page,
-          searchBy,
           searchText,
         },
       });

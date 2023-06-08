@@ -981,7 +981,7 @@ const Header = () => {
                 <div className="collapse menu-dropdown" id="us">
                   <ul className="nav nav-sm flex-column">
                     <li className="nav-item" hidden={!includesUser}>
-                      <Link href="/account/user">
+                      <Link href="/account/user?page=1">
                         <a className="nav-link menu-link">
                           <span data-key="t-widgets">Users</span>
                         </a>
