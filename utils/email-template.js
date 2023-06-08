@@ -202,7 +202,7 @@ exports.html = (firstName, message) => {
                 color: transparent;
                 display: none;
                 height: 0;
-                max-height: 0;
+                maxHeight: 0;
                 max-width: 0;
                 opacity: 0;
                 overflow: hidden;

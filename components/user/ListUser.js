@@ -12,7 +12,7 @@ const ListUser = ({ users }) => {
             <h5 className="card-title mb-0">Users</h5>
           </div>
 
-          <div className="card-body" style={{"overflow":"auto","max-height": "400px"}}>
+          <div className="card-body" style={{"overflow":"auto","maxHeight": "400px"}}>
             <table
               id="fixed-header"
               className="table table-bordered dt-responsive nowrap table-striped align-middle"
