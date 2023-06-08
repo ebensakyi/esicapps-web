@@ -29,7 +29,7 @@ export default function user({ regions,  districts, userTypes,userLevels,users }
 
 export async function getServerSideProps(context) {
     const { session } = context.req.cookies;
-    const searchText = context.query.searchText;
+    const searchText = context.query.searchText|| "";
     if (!session) {
         return {
             redirect: {
