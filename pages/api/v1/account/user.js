@@ -10,6 +10,8 @@ const post = async (req, res) => {
   try {
     let userData = await getSession(req);
 
+    console.log("Iuser ",userData);
+
     // let password = await nanoid(8); //req.body.password;
     let loggedInUserRegionId = userData?.regionId;
     let loggedInUserDistrictId = userData?.districtId;
@@ -20,7 +22,7 @@ const post = async (req, res) => {
     let password = await generateCode(4);
     const salt = bcrypt.genSaltSync(10);
     let hashedPassword = await bcrypt.hashSync(password, salt);
-    // console.log(req.body);
+  console.log(req.body);
 
     let regionId, districtId;
     let data = {};
@@ -32,8 +34,8 @@ const post = async (req, res) => {
 
     //National Level
     if (loggedInUserLevelId == "1") {
-      regionId = req.body.regionId;
-      districtId = req.body.districtId;
+      regionId = req.body.region;
+      districtId = req.body.district;
     }
 
     //Regional Level
@@ -45,9 +47,20 @@ const post = async (req, res) => {
         userLevelId = loggedInUserLevelId;
       }
     }
+
+    //District Level
     if (loggedInUserLevelId == "3") {
-      regionId = req.body.regionId;
-      districtId = req.body.districtId;
+      regionId = req.body.region;
+      districtId = req.body.district;
+
+console.log("????",districtId);
+      if (districtId == 0) {
+        districtId = loggedInUserDistrictId;
+        userLevelId = loggedInUserLevelId;
+        regionId = loggedInUserRegionId;
+
+      }      console.log(">>>>.", regionId, districtId);
+
     }
     data = {
       userTypeId: Number(req.body.userTypeId),
@@ -66,7 +79,6 @@ const post = async (req, res) => {
     // console.log("loggedInUserDistrictId=>",loggedInUserDistrictId);
     // console.log("loggedInUserLevelId=>",loggedInUserLevelId);
 
-         console.log(data);
 
     const user = await prisma.user.create({ data });
     // if (Number(req.body.userTypeId) == 7) {
@@ -101,9 +113,11 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let data = await getSession(req);
-    let page = req.query.page;
+    let page = req.query.page || 1;
     let perPage = 10;
     let skip = Number((page - 1) * perPage) || 0;
+
+    console.log("skip=>",skip);
 
     let userLevel = data?.userLevelId;
     let region = data?.regionId;

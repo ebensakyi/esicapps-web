@@ -148,8 +148,8 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
         email,
         phoneNumber,
         designation,
-        region,
-        district,
+        region: Number(region), 
+        district: Number(district),
       };
 
       const response = await axios.post("/api/v1/account/user", data);
@@ -676,13 +676,13 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
                     return (
                       <tr key={user.id}>
                         {/* <td>{user.id}</td> */}
-                        <td>{user.surname}</td>
-                        <td>{user.otherNames}</td>
-                        <td>{user.email}</td>
-                        <td>{user.phoneNumber}</td>
-                        <td>{user.tempPassword}</td>
-                        <td>{user.UserType.name}</td>
-                        <td>{user.UserLevel.name}</td>
+                        <td>{user?.surname}</td>
+                        <td>{user?.otherNames}</td>
+                        <td>{user?.email}</td>
+                        <td>{user?.phoneNumber}</td>
+                        <td>{user?.tempPassword}</td>
+                        <td>{user?.UserType?.name}</td>
+                        <td>{user?.UserLevel?.name}</td>
 
                         <td>{user.designation}</td>
                         <td>{user.Region == null ? "" : user.Region.name}</td>
