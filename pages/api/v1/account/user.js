@@ -22,7 +22,6 @@ const post = async (req, res) => {
     let password = await generateCode(4);
     const salt = bcrypt.genSaltSync(10);
     let hashedPassword = await bcrypt.hashSync(password, salt);
-  console.log(req.body);
 
     let regionId, districtId;
     let data = {};
