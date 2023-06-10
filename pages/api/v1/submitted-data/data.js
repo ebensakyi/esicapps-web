@@ -49,11 +49,7 @@ const generateWhereMainObject = async (req, res) => {
   let inspectionFormId = Number(req?.query?.inspectionFormId);
   let curPage = req?.query?.page;
   let searchText = req?.query?.searchText;
-
-  // console.log(req.query);
-
-  // console.log("searchText ==>", searchText);
-  // console.log(typeof searchText);
+  let data = await getSession(req);
 
   let filterBy = req?.query?.filterBy;
 
