@@ -53,7 +53,6 @@ const post = async (req, res) => {
       regionId = req.body.region;
       districtId = req.body.district;
 
-console.log("????",districtId);
       if (districtId == 0) {
         districtId = loggedInUserDistrictId;
         userLevelId = loggedInUserLevelId;
