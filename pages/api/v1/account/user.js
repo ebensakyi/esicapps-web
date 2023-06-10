@@ -10,7 +10,6 @@ const post = async (req, res) => {
   try {
     let userData = await getSession(req);
 
-    console.log("Iuser ",userData);
 
     // let password = await nanoid(8); //req.body.password;
     let loggedInUserRegionId = userData?.regionId;
