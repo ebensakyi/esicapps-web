@@ -15,14 +15,14 @@ const get = async (req, res) => {
     let userId = userData?.user?.id;
     await logActivity("Visited submitted data list", userId);
 
-    let mainWhere = await generateWhereMainObject(req, res);
-
     let inspectionFormId = Number(req?.query?.inspectionFormId);
 
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
 
     let perPage = 10;
+    let skip = Number((curPage - 1) * perPage) || 0;
+
     let count = await prisma.inspection.count({
       // where: getSearchParams(req, searchText).where,
       where: {
@@ -31,51 +31,63 @@ const get = async (req, res) => {
     });
 
     let inspection = await prisma.basicInfoSection.findMany({
-      where: searchText != ""
-      ? {
-          OR: [
-            {
-              surname: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            },
-            {
-              otherNames: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            },
-            {
-              phoneNumber: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            },
-            {
-              email: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            },
-            {
-              Region: {
-                name: { contains: searchText, mode: "insensitive" },
-              },
-            },
-            {
-              District: {
-                name: { contains: searchText, mode: "insensitive" },
-              },
-            },
-            {
-              UserLevel: {
-                name: { contains: searchText, mode: "insensitive" },
-              },
-            },
-          ],
-        }
-      : {},
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  ghanaPostGps: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  Inspection: {
+                  premisesCode: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                },
+                {
+                  Inspection: {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      surname: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      otherNames: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                // {
+                //   Inspection: {
+                //     Region: {
+                //       District: {
+                //         name: { contains: searchText, mode: "insensitive" },
+                //       },
+                //     },
+                //   },
+                // },
+
+                // {
+                //   Community: {
+                //     name: { contains: searchText, mode: "insensitive" },
+                //   },
+                // },
+              ],
+            }
+          : {},
       // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
@@ -103,8 +115,9 @@ const get = async (req, res) => {
         },
         User: true,
       },
-    
-  });
+    });
+
+    console.log("IN ", inspection);
 
     return res.status(200).json({
       inspection,

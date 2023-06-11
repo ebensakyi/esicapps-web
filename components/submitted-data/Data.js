@@ -613,7 +613,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">{handleTitle()}</div>
-            <div className="card-body" style={{"overflow":"auto","maxHeight": "400px"}}>
+            <div className="card-body" style={{"overflow":"auto","maxHeight": "600px"}}>
             <div className="row">
               <div className="col-md-3">
                 <button
