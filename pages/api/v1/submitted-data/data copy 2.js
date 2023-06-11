@@ -10,14 +10,14 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let userData = await getSession(req);
+    let userObj = await getSession(req);
 
-    let userId = userData?.user?.id;
-    await logActivity("Visited submitted data list", userId);
+    let user = userObj.user?.id;
+    await logActivity("Visited submitted data list", user);
 
     let mainWhere = await generateWhereMainObject(req, res);
 
-    let inspectionFormId = Number(req?.query?.inspectionFormId);
+    let inspectionFormId = Number(req.query.inspectionFormId);
 
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
