@@ -622,16 +622,16 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   onClick={handleExportAll}
                 >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                  Export All
+                  Export as excel
                 </button>{" "}
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
                   onClick={handleExportFiltered}
                 >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                   Export Filtered
-                </button>
+                </button> */}
               </div>
               <div className="d-flex justify-content-sm-end">
                 <div className="search-box ms-2">
