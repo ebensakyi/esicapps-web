@@ -705,14 +705,14 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                           <></>
                         )}
                       </td>
-                      <td>{dt.Inspection.premisesCode}</td>
+                      <td>{dt?.Inspection?.premisesCode}</td>
                       <td>
-                        {moment(dt.Inspection.startedAt).format(
+                        {moment(dt?.Inspection?.startedAt).format(
                           "MMM Do YYYY, h:mm:ss a"
                         )}
                       </td>
                       <td>
-                        {moment(dt.Inspection.completedAt).format(
+                        {moment(dt?.Inspection?.completedAt).format(
                           "MMM Do YYYY, h:mm:ss a"
                         )}
                       </td>
@@ -746,7 +746,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                         )}
                       </td>
                       <td>
-                        {dt.Inspection.isPublished == 0 ? (
+                        {dt?.Inspection?.isPublished == 0 ? (
                           <span className="badge bg-danger">Unpublished</span>
                         ) : (
                           <span className="badge bg-success">Published</span>
@@ -757,7 +757,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                           href={{
                             pathname: `/submitted-data/data_view`,
                             query: {
-                              id: dt.Inspection.id,
+                              id: dt?.Inspection?.id,
                               inspectionFormId: formId,
                               published: published,
                             },
