@@ -30,7 +30,81 @@ const get = async (req, res) => {
       },
     });
 
-    let inspection = await prisma.basicInfoSection.findMany(mainWhere);
+    let inspection = await prisma.basicInfoSection.findMany({
+      where: searchText != ""
+      ? {
+          OR: [
+            {
+              surname: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+            {
+              otherNames: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+            {
+              phoneNumber: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+            {
+              email: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+            {
+              Region: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
+            },
+            {
+              District: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
+            },
+            {
+              UserLevel: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
+            },
+          ],
+        }
+      : {},
+      // where: getSearchParams(req, searchText).where,
+      skip: skip,
+      take: perPage,
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        Inspection: {
+          include: {
+            InspectionType: true,
+          },
+        },
+        Community: {
+          include: {
+            ElectoralArea: {
+              include: {
+                District: {
+                  include: {
+                    Region: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        User: true,
+      },
+    
+  });
 
     return res.status(200).json({
       inspection,
