@@ -11,6 +11,8 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let userData = await getSession(req);
+    let userLevelId = Number(userData?.userLevelId);
+    console.log(userLevelId);
 
     let userId = userData?.user?.id;
     await logActivity("Visited submitted data list", userId);
@@ -97,6 +99,13 @@ const get = async (req, res) => {
                 //   },
                 // },
               ],
+            
+                // Inspection: {
+                //   User: {
+                //     userLevelId: userLevelId,
+                //   },
+                // },
+              
             }
           : {},
       // where: getSearchParams(req, searchText).where,
@@ -128,7 +137,6 @@ const get = async (req, res) => {
       },
     });
 
-    console.log("IN ", inspection);
 
     return res.status(200).json({
       inspection,
@@ -141,6 +149,14 @@ const get = async (req, res) => {
     console.log("Error..s: " + error);
   }
 };
+
+
+
+
+
+
+
+
 
 const generateWhereMainObject = async (req, res) => {
   let published = Number(req?.query?.published);
