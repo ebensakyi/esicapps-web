@@ -43,15 +43,22 @@ const get = async (req, res) => {
                 },
                 {
                   Inspection: {
-                  premisesCode: {
-                    contains: searchText,
-                    mode: "insensitive",
+                    premisesCode: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
                   },
-                },
                 },
                 {
                   Inspection: {
                     Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    District: {
                       name: { contains: searchText, mode: "insensitive" },
                     },
                   },
@@ -70,16 +77,20 @@ const get = async (req, res) => {
                     },
                   },
                 },
-                // {
-                //   Inspection: {
-                //     Region: {
-                //       District: {
-                //         name: { contains: searchText, mode: "insensitive" },
-                //       },
-                //     },
-                //   },
-                // },
-
+                {
+                  Inspection: {
+                    Community: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
                 // {
                 //   Community: {
                 //     name: { contains: searchText, mode: "insensitive" },
