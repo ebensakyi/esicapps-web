@@ -116,7 +116,11 @@ const get = async (req, res) => {
               //   },
               // },
             }
-          : {},
+          : { Inspection: {
+            
+            isPublished: published,
+            
+          },},
       // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
