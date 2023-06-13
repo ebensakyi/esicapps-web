@@ -289,7 +289,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   Filter by{" "}
                 </option>
                 <option hidden={!nationalUser} value="national">
-                  National
+                  All
                 </option>
                 <option hidden={!nationalUser} value="regionId">
                   Region

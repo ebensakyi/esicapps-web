@@ -12,16 +12,20 @@ const get = async (req, res) => {
   try {
     let userData = await getSession(req);
     let userLevelId = Number(userData?.userLevelId);
-    
-    console.log(userLevelId);
-
+    let userRegion = Number(userData?.regionId);
+    let userDistrict = Number(userData?.districtId);
     let userId = userData?.user?.id;
+
     await logActivity("Visited submitted data list", userId);
 
     let inspectionFormId = Number(req?.query?.inspectionFormId);
     let published = Number(req?.query?.published);
+    let filterBy = req?.query?.filterBy;
+    let filterValue = Number(req?.query?.filterValue);
 
-    console.log("P ",published);
+    let filter = await handleFilterBy(userData, filterBy);
+
+    console.log("filterBy", filter);
 
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
@@ -97,7 +101,7 @@ const get = async (req, res) => {
                     },
                   },
                 },
-              
+
                 // {
                 //   Community: {
                 //     name: { contains: searchText, mode: "insensitive" },
@@ -106,21 +110,21 @@ const get = async (req, res) => {
               ],
 
               Inspection: {
-            
                 isPublished: published,
-                
+                //[filterBy]: filter,
+
+                // districtId: userLevelId != 3 ? undefined : userDistrict,
+                // regionId: userLevelId != 2 ? undefined : userRegion,
               },
-              // Inspection: {
-              //   User: {
-              //     userLevelId: userLevelId,
-              //   },
-              // },
             }
-          : { Inspection: {
-            
-            isPublished: published,
-            
-          },},
+          : {
+              Inspection: {
+                isPublished: published,
+                //[filterBy]: filter,
+                // districtId: userLevelId != 3 ? undefined : userDistrict,
+                // regionId: userLevelId != 2 ? undefined : userRegion,
+              },
+            },
       // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
@@ -162,6 +166,26 @@ const get = async (req, res) => {
   }
 };
 
+const handleFilterBy = async (userData, filterBy) => {
+  if (userData?.userLevelId == 1) {
+    if (filterBy) {
+      return filterBy;
+    }
+    return;
+  }
+  if (userData?.userLevelId ==2) {
+      return regionId
+  }
+  if (userData?.userLevelId == 3) {
+   return districtId
+  }
+};
+const handleFilterValue = async (userData, filterValue) => {
+  if (userData.userLevelId == 1) {
+    // return { districtId: userData.districtId };
+    return { districtId: 15 };
+  }
+};
 const generateWhereMainObject = async (req, res) => {
   let published = Number(req?.query?.published);
   let inspectionFormId = Number(req?.query?.inspectionFormId);
