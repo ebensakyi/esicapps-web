@@ -23,9 +23,11 @@ const get = async (req, res) => {
     let filterBy = req?.query?.filterBy;
     let filterValue = Number(req?.query?.filterValue);
 
-    let filter = await handleFilterBy(userData, filterBy);
+    let _filterBy = await handleFilterBy(userData, filterBy);
+    let _filterValue = await handleFilterValue(userData, filterValue);
 
-    console.log("filterBy", filter);
+    console.log("filterBy=====>", _filterBy);
+    console.log("filterBy=====>", _filterValue);
 
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
@@ -111,7 +113,7 @@ const get = async (req, res) => {
 
               Inspection: {
                 isPublished: published,
-                //[filterBy]: filter,
+                [_filterBy]: _filterValue,
 
                 // districtId: userLevelId != 3 ? undefined : userDistrict,
                 // regionId: userLevelId != 2 ? undefined : userRegion,
@@ -120,7 +122,7 @@ const get = async (req, res) => {
           : {
               Inspection: {
                 isPublished: published,
-                //[filterBy]: filter,
+                [_filterBy]: _filterValue,
                 // districtId: userLevelId != 3 ? undefined : userDistrict,
                 // regionId: userLevelId != 2 ? undefined : userRegion,
               },
@@ -173,17 +175,28 @@ const handleFilterBy = async (userData, filterBy) => {
     }
     return;
   }
-  if (userData?.userLevelId ==2) {
-      return regionId
+  if (userData?.userLevelId == 2) {
+    if (filterBy) {
+      return filterBy;
+    }
+    return regionId;
   }
   if (userData?.userLevelId == 3) {
-   return districtId
+    return districtId;
   }
 };
 const handleFilterValue = async (userData, filterValue) => {
-  if (userData.userLevelId == 1) {
-    // return { districtId: userData.districtId };
-    return { districtId: 15 };
+  if (userData?.userLevelId == 1) {
+    return filterValue;
+  }
+  if (userData?.userLevelId == 2) {
+    if (filterValue) {
+      return filterValue;
+    }
+    return userData?.regionId;
+  }
+  if (userData?.userLevelId == 3) {
+    return userData?.districtId;
   }
 };
 const generateWhereMainObject = async (req, res) => {
