@@ -16,7 +16,7 @@ const post = async (req, res) => {
     let loggedInUserDistrictId = userData?.districtId;
     let loggedInUserLevelId = userData?.userLevelId;
 
-    let userLevelId = Number(req.body.userLevelId);
+    let userLevelId = Number(req?.body?.userLevelId);
 
     let password = await generateCode(4);
     const salt = bcrypt.genSaltSync(10);

@@ -12,12 +12,16 @@ const get = async (req, res) => {
   try {
     let userData = await getSession(req);
     let userLevelId = Number(userData?.userLevelId);
+    
     console.log(userLevelId);
 
     let userId = userData?.user?.id;
     await logActivity("Visited submitted data list", userId);
 
     let inspectionFormId = Number(req?.query?.inspectionFormId);
+    let published = Number(req?.query?.published);
+
+    console.log("P ",published);
 
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
@@ -93,19 +97,24 @@ const get = async (req, res) => {
                     },
                   },
                 },
+              
                 // {
                 //   Community: {
                 //     name: { contains: searchText, mode: "insensitive" },
                 //   },
                 // },
               ],
+
+              Inspection: {
             
-                // Inspection: {
-                //   User: {
-                //     userLevelId: userLevelId,
-                //   },
-                // },
-              
+                isPublished: published,
+                
+              },
+              // Inspection: {
+              //   User: {
+              //     userLevelId: userLevelId,
+              //   },
+              // },
             }
           : {},
       // where: getSearchParams(req, searchText).where,
@@ -137,7 +146,6 @@ const get = async (req, res) => {
       },
     });
 
-
     return res.status(200).json({
       inspection,
       curPage: curPage,
@@ -149,14 +157,6 @@ const get = async (req, res) => {
     console.log("Error..s: " + error);
   }
 };
-
-
-
-
-
-
-
-
 
 const generateWhereMainObject = async (req, res) => {
   let published = Number(req?.query?.published);
