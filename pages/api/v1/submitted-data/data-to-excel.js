@@ -12,7 +12,6 @@ const post = async (req, res) => {
 
     await logActivity("Exported data to excel", userData.id);
 
-    console.log(req.body);
 
     let published = Number(req?.body?.published) || 0;
 
@@ -43,7 +42,6 @@ const post = async (req, res) => {
       inspectionFormId: inspectionFormId,
       [filterBy]: filterValue,
     };
-    console.log(filterObject);
 
 
     let data = await prisma.basicInfoSection.findMany({
