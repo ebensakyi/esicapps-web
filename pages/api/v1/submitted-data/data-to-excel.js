@@ -43,17 +43,23 @@ const post = async (req, res) => {
       inspectionFormId: inspectionFormId,
       [filterBy]: filterValue,
     };
-
     console.log(filterObject);
+
 
     let data = await prisma.basicInfoSection.findMany({
       where: {
         deleted: 0,
-        Inspection: filterObject,
+       Inspection:  {
+        isPublished: published,
+       inspectionFormId: inspectionFormId,
+        [filterBy]: filterValue,
+      },
       },
 
       include: {
         Inspection: {
+        
+          
           include: {
             LicencePermitSection: {
               include: {
