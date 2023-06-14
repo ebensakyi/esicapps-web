@@ -2,6 +2,7 @@ import prisma from "../../../../prisma/db";
 import { getSession } from "../../../../utils/session-manager";
 import { verifyToken } from "../../../../utils/token-verifier";
 import { logActivity } from "../../../../utils/Log";
+import { log } from "console";
 
 const post = async (req, res) => {
   try {
@@ -21,7 +22,7 @@ const get = async (req, res) => {
     let inspectionFormId = Number(req?.query?.inspectionFormId);
     let published = Number(req?.query?.published);
     let filterBy = req?.query?.filterBy;
-    let filterValue = Number(req?.query?.filterValue);
+    let filterValue = req?.query?.filterValue;
 
     let _filterBy = await handleFilterBy(userData, filterBy);
     let _filterValue = await handleFilterValue(userData, filterValue);
@@ -169,12 +170,14 @@ const get = async (req, res) => {
 };
 
 const handleFilterBy = async (userData, filterBy) => {
+
   if (userData?.userLevelId == 1) {
-    if (filterBy) {
-      return filterBy;
+    if (filterBy == undefined) {
+      return regionId;
     }
-    return;
+    return filterBy;
   }
+
   if (userData?.userLevelId == 2) {
     if (filterBy) {
       return filterBy;
@@ -184,14 +187,16 @@ const handleFilterBy = async (userData, filterBy) => {
   if (userData?.userLevelId == 3) {
     return districtId;
   }
+
 };
 const handleFilterValue = async (userData, filterValue) => {
   if (userData?.userLevelId == 1) {
-    return filterValue;
+    return Number(filterValue) || undefined
   }
   if (userData?.userLevelId == 2) {
     if (filterValue) {
-      return filterValue;
+      return Number(filterValue) || undefined
+
     }
     return userData?.regionId;
   }

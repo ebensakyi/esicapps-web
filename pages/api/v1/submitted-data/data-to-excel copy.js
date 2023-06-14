@@ -8,26 +8,23 @@ const XLSX = require("xlsx");
 
 const post = async (req, res) => {
   try {
-    let userData = await getSession(req);
+    let userObj = await getSession(req);
 
-    await logActivity("Exported data to excel", userData.id);
+    await logActivity("Exported data to excel",  userObj?.user?.id);
 
     let published = req.body.published == null ? 0 : Number(req.body.published);
 
     let filterBy = req?.body?.filterBy;
-    // let filterValue = req?.body?.filterValue;
-    let filterValue =
-      Number(req?.body?.filterValue) == NaN
-        ? undefined
-        : Number(req?.body?.filterValue);
-    let inspectionFormId = req?.body?.inspectionFormId;
 
     // let filterValue =
     //   req?.body?.filterValue == "undefined"
     //     ? undefined
     //     : Number(req?.body?.filterValue);
 
-
+    let filterValue =
+      Number(req?.body?.filterValue) == NaN
+        ? undefined
+        : Number(req?.body?.filterValue);
 
     let from =
       req?.body?.from == "undefined" || req?.body?.from == ""
@@ -39,11 +36,31 @@ const post = async (req, res) => {
         ? undefined
         : new Date(req?.body?.to);
 
-   
+    let userType = userObj?.user?.UserType?.id;
+
+    if (userType == 1 || userType == 2) {
+      filterBy = filterBy == "undefined" ? "regionId" : filterBy;
+    }
+
+    if (userType == 3 || userType == 4) {
+      filterBy = filterBy == "undefined" ? "districtId" : filterBy;
+    }
+
+    if (userType == 5 || userType == 6) {
+      filterBy = filterBy == "undefined" ? "electoralAreaId" : filterBy;
+    }
+
     let fileName = req.body.fileName;
+    let inspectionFormId = req.body.inspectionFormId;
+    let exportType = req.body.exportType;
 
     let filterObject =
-      {
+      exportType == 1
+        ? {
+            isPublished: published,
+            inspectionFormId: inspectionFormId,
+          }
+        : {
             isPublished: published,
             inspectionFormId: inspectionFormId,
             [filterBy]: filterValue,
