@@ -40,6 +40,9 @@ const get = async (req, res) => {
       // where: getSearchParams(req, searchText).where,
       where: {
         inspectionFormId: inspectionFormId,
+        isPublished: published,
+        [_filterBy]: _filterValue,
+
       },
     });
 
