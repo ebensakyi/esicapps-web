@@ -52,7 +52,8 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
           inspectionFormId: Number(formId),
           fileName: handleExcelName(),
           published,
-          exportType: 1,
+          filterBy: query.filterBy || 'districtId',
+          filterValue: query.filterValue|| 'undefined',
         }
       );
       if (response.status == 200) {

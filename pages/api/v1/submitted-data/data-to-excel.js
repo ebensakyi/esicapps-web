@@ -12,22 +12,19 @@ const post = async (req, res) => {
 
     await logActivity("Exported data to excel", userData.id);
 
-    let published = req.body.published == null ? 0 : Number(req.body.published);
+    console.log(req.body);
+
+    let published = Number(req?.body?.published) || 0;
 
     let filterBy = req?.body?.filterBy;
     // let filterValue = req?.body?.filterValue;
-    let filterValue =
-      Number(req?.body?.filterValue) == NaN
-        ? undefined
-        : Number(req?.body?.filterValue);
+    // let filterValue = req?.body?.filterValue;
     let inspectionFormId = req?.body?.inspectionFormId;
 
-    // let filterValue =
-    //   req?.body?.filterValue == "undefined"
-    //     ? undefined
-    //     : Number(req?.body?.filterValue);
-
-
+    let filterValue =
+      req?.body?.filterValue == "undefined"
+        ? undefined
+        : Number(req?.body?.filterValue);
 
     let from =
       req?.body?.from == "undefined" || req?.body?.from == ""
@@ -39,15 +36,15 @@ const post = async (req, res) => {
         ? undefined
         : new Date(req?.body?.to);
 
-   
     let fileName = req.body.fileName;
 
-    let filterObject =
-      {
-            isPublished: published,
-            inspectionFormId: inspectionFormId,
-            [filterBy]: filterValue,
-          };
+    let filterObject = {
+      isPublished: published,
+      inspectionFormId: inspectionFormId,
+      [filterBy]: filterValue,
+    };
+
+    console.log(filterObject);
 
     let data = await prisma.basicInfoSection.findMany({
       where: {
@@ -579,9 +576,11 @@ const post = async (req, res) => {
       });
     }
 
-    const workSheet = XLSX.helpers.json_to_sheet(newData);
-    const workBook = XLSX.helpers.book_new();
-    XLSX.helpers.book_append_sheet(workBook, workSheet, "Sheet 1");
+    console.log(newData);
+
+    const workSheet = XLSX.utils.json_to_sheet(newData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
     let filePath = `./public/temp/${fileName}`;
     XLSX.writeFile(workBook, filePath);
 
