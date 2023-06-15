@@ -261,6 +261,14 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   let regionalUser = districtId == "undefined" && regionId != "undefined";
   let districtUser = districtId != "undefined";
 
+
+  useEffect(() => {
+
+    const query = router.query;
+    let searchText = query.searchText;
+    setSearchText(searchText);
+  }, []);
+
   return (
     <div className="row">
        <div className="row row-cols-lg-auto g-3 align-items-center">
@@ -641,6 +649,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                     type="text"
                     className="form-control"
                     id="searchResultList"
+                    value={searchText}
                     onChange={(e) => {
                       setSearchText(e.target.value);
                       autoHandleSearch(e.target.value);
