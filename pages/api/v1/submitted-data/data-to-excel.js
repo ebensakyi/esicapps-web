@@ -13,7 +13,7 @@ const post = async (req, res) => {
     await logActivity("Exported data to excel", userData.id);
 
     let published = Number(req?.body?.published) || 0;
-    let searchText = req?.body?.searchText.trim();
+    let searchText = req?.body?.searchText.trim()||"";
 
     let filterBy = req?.body?.filterBy;
     // let filterValue = req?.body?.filterValue;
