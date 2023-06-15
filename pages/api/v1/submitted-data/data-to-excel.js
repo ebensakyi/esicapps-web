@@ -12,8 +12,8 @@ const post = async (req, res) => {
 
     await logActivity("Exported data to excel", userData.id);
 
-
     let published = Number(req?.body?.published) || 0;
+    let searchText = req?.body?.searchText.trim();
 
     let filterBy = req?.body?.filterBy;
     // let filterValue = req?.body?.filterValue;
@@ -43,21 +43,93 @@ const post = async (req, res) => {
       [filterBy]: filterValue,
     };
 
-
     let data = await prisma.basicInfoSection.findMany({
-      where: {
+      where: searchText != ""
+      ? {
+          OR: [
+            {
+              ghanaPostGps: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+            {
+              Inspection: {
+                premisesCode: {
+                  contains: searchText,
+                  mode: "insensitive",
+                },
+              },
+            },
+            {
+              Inspection: {
+                Region: {
+                  name: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            },
+            {
+              Inspection: {
+                District: {
+                  name: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            },
+            {
+              Inspection: {
+                User: {
+                  surname: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            },
+            {
+              Inspection: {
+                User: {
+                  otherNames: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            },
+            {
+              Inspection: {
+                Community: {
+                  name: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            },
+            {
+              Inspection: {
+                ElectoralArea: {
+                  name: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            },
+
+            // {
+            //   Community: {
+            //     name: { contains: searchText, mode: "insensitive" },
+            //   },
+            // },
+          ],
+
+          Inspection: {
+            isPublished: published,
+            inspectionFormId,
+            [filterBy]: filterValue,
+
+            // districtId: userLevelId != 3 ? undefined : userDistrict,
+            // regionId: userLevelId != 2 ? undefined : userRegion,
+          },
+        }: {
         deleted: 0,
-       Inspection:  {
-        isPublished: published,
-       inspectionFormId: inspectionFormId,
-        [filterBy]: filterValue,
-      },
+        Inspection: {
+          isPublished: published,
+          inspectionFormId: inspectionFormId,
+          [filterBy]: filterValue,
+        },
       },
 
       include: {
         Inspection: {
-        
-          
           include: {
             LicencePermitSection: {
               include: {
