@@ -54,6 +54,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
           published,
           filterBy: query.filterBy || 'districtId',
           filterValue: query.filterValue|| 'undefined',
+          searchText: query.searchText || ""
         }
       );
       if (response.status == 200) {
