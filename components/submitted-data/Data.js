@@ -629,7 +629,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   type="button"
                   className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
                   onClick={handleExportFiltered}
-                >
+              >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                   Export Filtered
                 </button> */}
