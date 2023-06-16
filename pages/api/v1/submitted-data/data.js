@@ -36,7 +36,7 @@ const get = async (req, res) => {
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage) || 0;
 
-    let count = await prisma.inspection.count({
+    let count = await prisma.basicInfoSection.count({
       // where: getSearchParams(req, searchText).where,
       where:
         searchText != ""
@@ -99,9 +99,9 @@ const get = async (req, res) => {
                   },
                 },
               ],
-              inspectionFormId: inspectionFormId,
-              isPublished: published,
-              [_filterBy]: _filterValue,
+              // inspectionFormId: inspectionFormId,
+              // isPublished: published,
+              // [_filterBy]: _filterValue,
             }
           : {
               inspectionFormId: inspectionFormId,
