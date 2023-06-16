@@ -99,9 +99,13 @@ const get = async (req, res) => {
                   },
                 },
               ],
-              // inspectionFormId: inspectionFormId,
-              // isPublished: published,
-              // [_filterBy]: _filterValue,
+             
+              Inspection: {
+                isPublished: published,
+                inspectionFormId,
+                [_filterBy]: _filterValue,
+
+              },
             }
           : {
               inspectionFormId: inspectionFormId,
@@ -184,8 +188,6 @@ const get = async (req, res) => {
                 inspectionFormId,
                 [_filterBy]: _filterValue,
 
-                // districtId: userLevelId != 3 ? undefined : userDistrict,
-                // regionId: userLevelId != 2 ? undefined : userRegion,
               },
             }
           : {
