@@ -38,12 +38,76 @@ const get = async (req, res) => {
 
     let count = await prisma.inspection.count({
       // where: getSearchParams(req, searchText).where,
-      where: {
-        inspectionFormId: inspectionFormId,
-        isPublished: published,
-        [_filterBy]: _filterValue,
-
-      },
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  ghanaPostGps: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  Inspection: {
+                    premisesCode: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      surname: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      otherNames: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    Community: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+              ],
+              inspectionFormId: inspectionFormId,
+              isPublished: published,
+              [_filterBy]: _filterValue,
+            }
+          : {
+              inspectionFormId: inspectionFormId,
+              isPublished: published,
+              [_filterBy]: _filterValue,
+            },
     });
 
     let inspection = await prisma.basicInfoSection.findMany({
@@ -128,7 +192,7 @@ const get = async (req, res) => {
               Inspection: {
                 isPublished: published,
                 [_filterBy]: _filterValue,
-                inspectionFormId
+                inspectionFormId,
                 // districtId: userLevelId != 3 ? undefined : userDistrict,
                 // regionId: userLevelId != 2 ? undefined : userRegion,
               },
@@ -175,7 +239,6 @@ const get = async (req, res) => {
 };
 
 const handleFilterBy = async (userData, filterBy) => {
-
   if (userData?.userLevelId == 1) {
     if (filterBy == undefined) {
       return regionId;
@@ -192,16 +255,14 @@ const handleFilterBy = async (userData, filterBy) => {
   if (userData?.userLevelId == 3) {
     return districtId;
   }
-
 };
 const handleFilterValue = async (userData, filterValue) => {
   if (userData?.userLevelId == 1) {
-    return Number(filterValue) || undefined
+    return Number(filterValue) || undefined;
   }
   if (userData?.userLevelId == 2) {
     if (filterValue) {
-      return Number(filterValue) || undefined
-
+      return Number(filterValue) || undefined;
     }
     return userData?.regionId;
   }
