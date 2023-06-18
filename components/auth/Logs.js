@@ -11,6 +11,8 @@ const Logs = ({ data }) => {
 
   const router = useRouter();
 
+  console.log(data);
+
   const handlePagination = (page) => {
     const path = router.pathname;
     const query = router.query;

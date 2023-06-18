@@ -14,15 +14,21 @@ const post = async (req, res) => {
 const get = async (req, res) => {
   try {
     let curPage = req.query.page;
-
     let perPage = 10;
+    let skip = Number((curPage - 1) * perPage) || 0;
 
+
+    const count = await prisma.logs.count({
+      where: { deleted: 0 },
+     
+    });
     const data = await prisma.logs.findMany({
       where: { deleted: 0 },
       include: { User: true },
+      skip: skip,
+      take: perPage,
     });
 
-    let count = data.length;
     let max =  Math.ceil(count / perPage)
 
     return res.status(200).json({
@@ -30,6 +36,8 @@ const get = async (req, res) => {
       curPage: curPage,
       maxPage: max,
     });
+
+   
   } catch (error) {
     console.log("Error: " + error);
   }
