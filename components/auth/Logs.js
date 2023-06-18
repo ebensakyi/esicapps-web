@@ -8,6 +8,7 @@ import Link from "next/link";
 import moment from "moment";
 import Cookies from "js-cookie";
 const Logs = ({ data }) => {
+  const [searchText, setSearchText] = useState();
 
   const router = useRouter();
 
@@ -21,7 +22,26 @@ const Logs = ({ data }) => {
       query: query,
     });
   };
-
+  const handleExportAll = async () => {
+    try {
+      const response = await axios.post(
+        `/api/v1/submitted-data/data-to-excel`,
+        {
+          inspectionFormId: Number(formId),
+          fileName: handleExcelName(),
+          published,
+          filterBy: query.filterBy || 'districtId',
+          filterValue: query.filterValue|| 'undefined',
+          searchText: query.searchText || ""
+        }
+      );
+      if (response.status == 200) {
+        router.push(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="row">
       <div className="col-12">
@@ -30,6 +50,43 @@ const Logs = ({ data }) => {
             <h5 className="card-title mb-0">Logs</h5>
           </div>
           <div className="card-body">
+          <div className="row">
+              <div className="col-md-3">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                  // onClick={handleExportAll}
+                >
+                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                  Export as excel
+                </button>{" "}
+                {/* <button
+                  type="button"
+                  className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                  onClick={handleExportFiltered}
+              >
+                  <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                  Export Filtered
+                </button> */}
+              </div>
+              <div className="d-flex justify-content-sm-end">
+                <div className="search-box ms-2">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="searchResultList"
+                    value={searchText}
+                    onChange={(e) => {
+                      setSearchText(e.target.value);
+                      autoHandleSearch(e.target.value);
+                    }}
+                    placeholder="Search...."
+                  />
+                  <i className="ri-search-line search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <br />
             <table
               id="fixed-header"
               className="table table-bordered dt-responsive nowrap table-striped align-middle"
