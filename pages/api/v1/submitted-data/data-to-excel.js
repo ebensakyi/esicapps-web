@@ -652,7 +652,6 @@ const post = async (req, res) => {
       });
     }
 
-    console.log(newData);
 
     const workSheet = XLSX.utils.json_to_sheet(newData);
     const workBook = XLSX.utils.book_new();
@@ -687,7 +686,6 @@ const uploadFile = async (fileName) => {
     };
 
     let stored = await s3.upload(params).promise();
-    console.log("STORE ", stored.Location);
 
     return stored.Location;
   } catch (error) {
