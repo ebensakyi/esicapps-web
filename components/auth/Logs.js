@@ -11,7 +11,6 @@ const Logs = ({ data }) => {
 
   const router = useRouter();
 
-  console.log(data);
 
   const handlePagination = (page) => {
     const path = router.pathname;
@@ -38,26 +37,27 @@ const Logs = ({ data }) => {
             >
               <thead>
                 <tr>
-                  <th>Surname</th>
+                  <th>User name</th>
 
-                  <th>Other Names</th>
                   <th>Email</th>
                   <th>Designation</th>
 
-                  <th>Activities</th>
-                  {/* <th>View</th> */}
+                  <th>Activity</th>
+                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
                 {data.data.map((log) => {
                   return (
                     <tr key={log.id}>
-                      <td>{log.User.surname}</td>
-                      <td>{log.User.otherNames}</td>
+                      <td>{log.User.surname}{log.User.otherNames}</td>
                       <td>{log.User.email}</td>
 
                       <td>{log.User.designation}</td>
                       <td>{log.activity}</td>
+                      <td> {moment(log.createdAt).format(
+                          "MMM Do YYYY, h:mm:ss a"
+                        )}</td>
 
                       {/* <td>
                           <div className="dropdown d-inline-block">
