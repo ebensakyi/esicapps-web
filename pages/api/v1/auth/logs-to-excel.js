@@ -13,7 +13,7 @@ const post = async (req, res) => {
     await logActivity("Exported data to excel", userData.id);
 
     let published = Number(req?.body?.published) || 0;
-    let searchText = req?.body?.searchText.trim()||"";
+    let searchText = req?.body?.searchText.trim() || "";
 
     let filterBy = req?.body?.filterBy;
     // let filterValue = req?.body?.filterValue;
@@ -43,114 +43,28 @@ const post = async (req, res) => {
       [filterBy]: filterValue,
     };
 
-    let data = await prisma.basicInfoSection.findMany({
-      where: searchText != ""
-      ? {
-          OR: [
-            {
-              ghanaPostGps: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            },
-            {
-              Inspection: {
-                premisesCode: {
-                  contains: searchText,
-                  mode: "insensitive",
-                },
-              },
-            },
-            {
-              Inspection: {
-                Region: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              },
-            },
-            {
-              Inspection: {
-                District: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              },
-            },
-            {
-              Inspection: {
-                User: {
-                  surname: { contains: searchText, mode: "insensitive" },
-                },
-              },
-            },
-            {
-              Inspection: {
-                User: {
-                  otherNames: { contains: searchText, mode: "insensitive" },
-                },
-              },
-            },
-            {
-              Inspection: {
-                Community: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              },
-            },
-            {
-              Inspection: {
-                ElectoralArea: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              },
-            },
-
-            // {
-            //   Community: {
-            //     name: { contains: searchText, mode: "insensitive" },
-            //   },
-            // },
-          ],
-
-          Inspection: {
-            isPublished: published,
-            inspectionFormId,
-            [filterBy]: filterValue,
-
-            // districtId: userLevelId != 3 ? undefined : userDistrict,
-            // regionId: userLevelId != 2 ? undefined : userRegion,
-          },
-        }: {
+    let data = await prisma.logs.findMany({
+      where: {
         deleted: 0,
-        Inspection: {
-          isPublished: published,
-          inspectionFormId: inspectionFormId,
-          [filterBy]: filterValue,
-        },
-      },
+        // User: {
 
-   
+        //   [filterBy]: filterValue,
+        // },
+      },
+      include: { User: true },
     });
 
     let newData = [];
 
     for (let i = 0; i < data?.length; i++) {
       newData?.push({
-        "Inspection Id": data[i]?.inspectionId,
-        "Inspection Date": data[i]?.Inspection?.createdAt,
+        "Name": data[i]?.User.surname,
+        "Email": data[i]?.User?.email,
 
-        "Inspection Officer": `${data[i]?.User?.surname} ${data[i]?.User?.otherNames}`,
-        "Premises Code": data[i]?.Inspection?.premisesCode,
-        "Premises Rating": data[i]?.Inspection?.totalRating,
-        Region: data[i]?.Community?.District?.Region?.name,
-        District: data[i]?.Community?.District?.name,
-        "Electoral Area": data[i]?.electoralArea,
-
-      
-        "Premises Action Taken": data[
-          i
-        ]?.Inspection?.ConclusionSection?.PremisesActionTaken?.map(
-          (data) => data?.Action?.name
-        ).toString(),
+        "Designation": `${data[i]?.User?.designation} `,
+        "Activity": data[i]?.activity,
+        "Date": data[i]?.createdAt,
+   
       });
     }
 

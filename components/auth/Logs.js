@@ -11,6 +11,7 @@ const Logs = ({ data }) => {
   const [searchText, setSearchText] = useState();
 
   const router = useRouter();
+  const query = router.query;
 
 
   const handlePagination = (page) => {
@@ -27,7 +28,7 @@ const Logs = ({ data }) => {
       const response = await axios.post(
         `/api/v1/auth/logs-to-excel`,
         {
-          fileName: "Logs",
+          fileName: "activity-logs.xlsx",
           filterBy: query.filterBy || 'districtId',
           filterValue: query.filterValue|| 'undefined',
           searchText: query.searchText || ""
