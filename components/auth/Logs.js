@@ -25,11 +25,9 @@ const Logs = ({ data }) => {
   const handleExportAll = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/submitted-data/data-to-excel`,
+        `/api/v1/auth/logs-to-excel`,
         {
-          inspectionFormId: Number(formId),
-          fileName: handleExcelName(),
-          published,
+          fileName: "Logs",
           filterBy: query.filterBy || 'districtId',
           filterValue: query.filterValue|| 'undefined',
           searchText: query.searchText || ""
@@ -55,7 +53,7 @@ const Logs = ({ data }) => {
                 <button
                   type="button"
                   className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
-                  // onClick={handleExportAll}
+                 onClick={handleExportAll}
                 >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                   Export as excel
