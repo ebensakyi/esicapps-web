@@ -50,7 +50,7 @@ const Logs = ({ data }) => {
                 {data.data.map((log) => {
                   return (
                     <tr key={log.id}>
-                      <td>{log.User.surname}{log.User.otherNames}</td>
+                      <td>{log.User.otherNames} {log.User.surname}</td>
                       <td>{log.User.email}</td>
 
                       <td>{log.User.designation}</td>
