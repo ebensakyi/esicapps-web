@@ -12,6 +12,9 @@ const Header = () => {
   let fullName = Cookies?.get("fullName");
   // let designation = Cookies?.get("designation");
   let userType = Cookies?.get("userType");
+  let region = Cookies?.get("region");
+  let district = Cookies?.get("district");
+  let ul = Cookies?.get("ul");
 
   let priv = Cookies.get("vrip");
 
@@ -116,6 +119,7 @@ const Header = () => {
                 </button>
                 <div className="dropdown-menu dropdown-menu-end">
                   <h6 className="dropdown-header"> {fullName}</h6>
+                 {ul==2?<h6 className="dropdown-header"> {region}</h6>:ul==3?<h6 className="dropdown-header"> {district}</h6>:<></>} 
 
                   <a className="dropdown-item" href="/auth/profile">
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />
@@ -129,6 +133,9 @@ const Header = () => {
                       Cookies.remove("d_id")
                       Cookies.remove("vrip")
                       Cookies.remove("ul")
+                      Cookies.remove("fullName")
+                      Cookies.remove("region")
+                      Cookies.remove("district")
                       router.push("/api/v1/auth/logout");
                     }}
                   >

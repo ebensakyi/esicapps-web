@@ -30,7 +30,10 @@ export default function Login() {
       if (response.status == 200) {
         let regionId = response?.data?.session?.Region?.id;
         let districtId = response?.data?.session?.District?.id;
+        let region = response?.data?.session?.Region?.name;
+        let district = response?.data?.session?.District?.name;
         let userLevelId = response?.data?.session?.userLevelId;
+        let fullName = response?.data?.session?.otherNames+" "+response?.data?.session?.surname;
 
 
         Cookies.set("r_id", regionId, {
@@ -45,7 +48,15 @@ export default function Login() {
         Cookies.set("ul", userLevelId, {
           expires: 1 / 24,
         });
-
+        Cookies.set("fullName", fullName, {
+          expires: 1 / 24,
+        });
+        Cookies.set("region", region, {
+          expires: 1 / 24,
+        });
+        Cookies.set("district", district, {
+          expires: 1 / 24,
+        });
         return router.replace("/dashboard");
       }
     } catch (error) {

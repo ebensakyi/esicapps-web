@@ -73,7 +73,6 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   let published = query.published;
 
   const handleUrl = async (report) => {
-    console.log(report);
     if (report == 1) {
       return "/api/v1/report/submission-summaries";
     }

@@ -36,6 +36,7 @@ const Dashboard = ({
 }) => {
   let districtId = Cookies?.get("d_id");
   let regionId = Cookies?.get("r_id");
+  let ul = Cookies?.get("ul");
 
 
   const [showLoading, setShowLoading] = useState(false);
@@ -434,9 +435,13 @@ const Dashboard = ({
 
 
 
-  let nationalUser = districtId == "undefined" && regionId == "undefined";
-  let regionalUser = districtId == "undefined" && regionId != "undefined";
-  let districtUser = districtId != "undefined";
+  // let nationalUser = districtId == "undefined" && regionId == "undefined";
+  // let regionalUser = districtId == "undefined" && regionId != "undefined";
+  // let districtUser = districtId != "undefined";
+
+  let nationalUser =ul == 1 
+  let regionalUser = ul == 2;
+  let districtUser = ul == 3;
   return (
     <>
       {" "}
