@@ -8,8 +8,10 @@ const post = async (req, res) => {
     await logActivity("Report generated",  userCookie.user.id);
 
 
-    let filterBy = req.body.filterBy;
-    let filterValue = Number(req.body.filterValue);
+    let filterBy = req?.body?.filterBy;
+    let filterValue = Number(req?.body?.filterValue);
+    let fromDate = new Date(req?.body?.from);
+    let toDate = new Date(req?.body?.to);
 
     let _summary;
 

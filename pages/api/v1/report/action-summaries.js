@@ -8,9 +8,10 @@ const post = async (req, res) => {
     let userCookie = await getSession(req);
     await logActivity("Action summaries report generated",  userCookie.user.id);
 
-    let filterBy = req.body.filterBy;
-    let filterValue = Number(req.body.filterValue);
-    
+    let filterBy = req?.body?.filterBy;
+    let filterValue = Number(req?.body?.filterValue);
+    let fromDate = new Date(req?.body?.from);
+    let toDate = new Date(req?.body?.to);
 
     const report = await prisma.premisesActionTaken.groupBy({
       where: {

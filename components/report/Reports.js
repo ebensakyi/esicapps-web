@@ -66,6 +66,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
 
   let districtId = Cookies?.get("d_id");
   let regionId = Cookies?.get("r_id");
+  let ul = Cookies?.get("ul");
   const query = router.query;
 
   let formId = query.inspectionFormId;
@@ -227,9 +228,9 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWasteReceptacleVisibility(true);
     }
   };
-  let nationalUser = districtId == "undefined" && regionId == "undefined";
-  let regionalUser = districtId == "undefined" && regionId != "undefined";
-  let districtUser = districtId != "undefined";
+  let nationalUser =ul == 1 
+  let regionalUser = ul == 2;
+  let districtUser = ul == 3;
 
 
   const handleResetFilters = async () => {
@@ -502,7 +503,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
                   )}
                   {filterBy == "districtId" ? (
                     <>
-                      {loggedInUserType == 1 || loggedInUserType == 2 ? (
+                      {nationalUser ? (
                         <div className="col-md-2">
                           <label className="form-label mb-0">
                             Select region

@@ -18,8 +18,10 @@ const post = async (req, res) => {
 };
 
 const getDrainAvailability = async (req, res) => {
-  let filterBy = req.body.filterBy;
-  let filterValue = Number(req.body.filterValue);
+  let filterBy = req?.body?.filterBy;
+  let filterValue = Number(req?.body?.filterValue);
+  let fromDate = new Date(req?.body?.from);
+  let toDate = new Date(req?.body?.to);
 
   const resAvailCount = await prisma.ResidentialPremisesInfoSection.count({
     where: {

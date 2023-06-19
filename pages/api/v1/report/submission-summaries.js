@@ -4,14 +4,11 @@ import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {
   try {
-   
+    await getSubmissionSummary(req, res);
 
-      await getSubmissionSummary(req, res);
+    let userData = await getSession(req);
 
-      let userCookie = await getSession(req);
-
-      await logActivity(`SubmissionSummary report generated`, userCookie.user.id);
-    
+    await logActivity(`SubmissionSummary report generated`, userData.id);
   } catch (error) {
     console.log(error);
     if (error.code === "P2002")
@@ -21,42 +18,48 @@ const post = async (req, res) => {
   }
 };
 
-
 const getSubmissionSummary = async (req, res) => {
-  let filterBy = req.body.filterBy;
-  let filterValue = Number(req.body.filterValue);
+  let filterBy = req?.body?.filterBy;
+  let filterValue = Number(req?.body?.filterValue);
+  let fromDate = new Date(req?.body?.from);
+  let toDate = new Date(req?.body?.to);
+
+  console.log(req.body);
 
   const report = await prisma.inspection.groupBy({
     where: {
+      [filterBy]: filterValue,
 
-        [filterBy]: filterValue,
+      createdAt:
+      req?.body?.from != null ||  req?.body?.to != null
+          ? {
+              gte: fromDate,
+              lte: toDate,
+            }
+          : {},
     },
     by: ["inspectionFormId"],
     _count: {
       inspectionFormId: true,
     },
     orderBy: {
-      inspectionFormId: 'asc',
+      inspectionFormId: "asc",
     },
     // include: {
     //   _count: {
     //     select: { inspectionFormId: true },
     //   },
     //    include: { InspectionType: true },
-      
-   // },
+
+    // },
   });
-
-
-
 
   res.status(200).json({
     statusCode: 1,
     message: "Data saved",
-    data:report,
+    data: report,
   });
 };
-
 
 export default (req, res) => {
   req.method === "POST"
