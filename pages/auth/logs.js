@@ -27,6 +27,7 @@ export default function logs({ data }) {
 export async function getServerSideProps(context) {
     const { session } = context.req.cookies;
     const page = context.query.page || 1;
+    const searchText = context.query.searchText|| "";
 
     if (!session) {
         return {
@@ -36,7 +37,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const data = await fetch(`${SERVER_BASE_URL}/api/v1/auth/logs?page=${page}`).then(
+    const data = await fetch(`${SERVER_BASE_URL}/api/v1/auth/logs?page=${page}&session=${session}&searchText=${searchText}`).then(
         (res) => res.json()
     );
 

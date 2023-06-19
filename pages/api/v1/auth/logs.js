@@ -13,17 +13,50 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    let curPage = req.query.page;
+    let curPage = req?.query?.page;
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage) || 0;
+    let searchText = req?.query?.searchText;
+    console.log(searchText);
 
 
-    const count = await prisma.logs.count({
-      where: { deleted: 0 },
-     
-    });
+   
     const data = await prisma.logs.findMany({
-      where: { deleted: 0 },
+      where: searchText != ""
+      ? {
+          OR: [
+           
+            {
+              activity: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+            {
+              User: {
+                surname: { contains: searchText, mode: "insensitive" },
+              },
+            },
+            {
+              User: {
+                otherNames: { contains: searchText, mode: "insensitive" },
+              },
+            },
+            {
+              User: {
+                email: { contains: searchText, mode: "insensitive" },
+              },
+            },
+            {
+              User: {
+                designation: { contains: searchText, mode: "insensitive" },
+              },
+            },
+           
+          ],
+          deleted: 0
+        }
+      : {  deleted: 0},
       include: { User: true },
       skip: skip,
       take: perPage,
@@ -31,6 +64,7 @@ const get = async (req, res) => {
         id: "desc",
       },
     });
+    let count = data.length;
 
     let max =  Math.ceil(count / perPage)
 

@@ -41,6 +41,30 @@ const Logs = ({ data }) => {
       console.log(error);
     }
   };
+
+  const autoHandleSearch = (searchText) => {
+    try {
+      let currentUrl = router.pathname;
+      const path = router.pathname;
+      const query = router.query;
+
+      let page = query.page;
+
+      router.push({
+        pathname: path,
+        query: {
+          page,
+          searchText,
+        },
+      });
+      // router.push({
+      //   pathname: currentUrl,
+      //   query: `&searchText=${searchText}`,
+      // });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="row">
       <div className="col-12">

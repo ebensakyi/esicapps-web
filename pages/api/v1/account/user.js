@@ -56,7 +56,7 @@ const post = async (req, res) => {
         userLevelId = loggedInUserLevelId;
         regionId = loggedInUserRegionId;
 
-      }      console.log(">>>>.", regionId, districtId);
+      }     
 
     }
     data = {
@@ -120,7 +120,7 @@ const get = async (req, res) => {
     let district = data?.districtId;
     let users;
 
-    let searchText = req.query.searchText;
+    let searchText = req?.query?.searchText;
 
     // if (req.query.districtId) {
     //   user = await prisma.user.findMany({
