@@ -2,7 +2,6 @@ import { destroySession } from "../../../../utils/session-manager";
 
 const get = async (req, res) => {
   try {
-    console.log("LOL");
     await destroySession(res);
 
     // return res.status(200).json({ statusCode: 1, data: user });

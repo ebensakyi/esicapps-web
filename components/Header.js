@@ -128,6 +128,7 @@ const Header = () => {
                       Cookies.remove("r_id")
                       Cookies.remove("d_id")
                       Cookies.remove("vrip")
+                      Cookies.remove("ul")
                       router.push("/api/v1/auth/logout");
                     }}
                   >
