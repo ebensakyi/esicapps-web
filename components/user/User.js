@@ -604,7 +604,7 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
 
             <div
               className="card-body"
-              style={{ overflow: "auto", "maxHeight": "400px" }}
+              // style={{ overflow: "auto", "maxHeight": "400px" }}
             >
               <div className="row">
                 <div className="d-flex justify-content-sm-end">

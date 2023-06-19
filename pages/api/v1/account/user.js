@@ -23,7 +23,7 @@ const post = async (req, res) => {
 
     let regionId, districtId;
     let data = {};
-
+    let count
     await logActivity(
       `Added user ${req.body.surname} ${req.body.otherNames} `,
       Number(userData.id)
@@ -110,6 +110,8 @@ const get = async (req, res) => {
     let perPage = 10;
     let skip = Number((page - 1) * perPage) || 0;
 
+    console.log("skip ",skip);
+
     let userLevel = data?.userLevelId;
     let region = data?.regionId;
     let district = data?.districtId;
@@ -117,17 +119,7 @@ const get = async (req, res) => {
 
     let searchText = req?.query?.searchText;
 
-    // if (req.query.districtId) {
-    //   user = await prisma.user.findMany({
-    //     where: { deleted: 0, districtId: Number(req.query.districtId) },
-
-    //     orderBy: {
-    //       id: "desc",
-    //     },
-    //   });
-    //   return res.status(200).json(user);
-    // }
-
+  
     //National User
     if (userLevel == 1) {
       users = await prisma.user.findMany({
@@ -178,6 +170,8 @@ const get = async (req, res) => {
               }
             : {},
         skip: skip,
+        take: perPage,
+
         include: {
           Region: true,
           District: true,
@@ -189,7 +183,59 @@ const get = async (req, res) => {
         },
       });
 
-      let count = users.length;
+      console.log(">>>>>>.",users.length);
+
+ let  count =   await prisma.user.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    UserLevel: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                ],
+              }
+            : {},
+       
+       
+       
+      });
 
       return res.status(200).json({
         users,
@@ -248,6 +294,7 @@ const get = async (req, res) => {
               }
             : { regionId: Number(region) },
         skip: skip,
+        take: perPage,
 
         include: {
           Region: true,
@@ -259,7 +306,60 @@ const get = async (req, res) => {
           id: "desc",
         },
       });
-      let count = users.length;
+      let   count =   await prisma.user.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    UserLevel: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                ],regionId: Number(region),
+              }
+            : {regionId: Number(region),},
+       
+       
+        orderBy: {
+          id: "desc",
+        },
+      });
+
 
       return res.status(200).json({
         users,
@@ -318,14 +418,66 @@ const get = async (req, res) => {
               }
             : { districtId: Number(district) },
         skip: skip,
+        take: perPage,
 
         include: { Region: true, District: true, UserType: true },
         orderBy: {
           id: "desc",
         },
       });
-      let count = users.length;
-
+      let   count =   await prisma.user.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    UserLevel: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                ],districtId: Number(district),
+              }
+            : {districtId: Number(district),},
+       
+       
+        orderBy: {
+          id: "desc",
+        },
+      });
       return res.status(200).json({
         users,
         pagination: { curPage: page, maxPage: Math.ceil(count / perPage) },

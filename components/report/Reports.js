@@ -64,8 +64,8 @@ const Reports = ({ inspectionForm, regions, districts }) => {
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
 
-  let loggedInUserType = Cookies.get("ut").split("??")[1];
-
+  let districtId = Cookies?.get("d_id");
+  let regionId = Cookies?.get("r_id");
   const query = router.query;
 
   let formId = query.inspectionFormId;
@@ -227,6 +227,10 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       setWasteReceptacleVisibility(true);
     }
   };
+  let nationalUser = districtId == "undefined" && regionId == "undefined";
+  let regionalUser = districtId == "undefined" && regionId != "undefined";
+  let districtUser = districtId != "undefined";
+
 
   const handleResetFilters = async () => {
     if (loggedInUserType == 1 || loggedInUserType == 2) {
@@ -265,7 +269,6 @@ const Reports = ({ inspectionForm, regions, districts }) => {
 //     await handleResetFilters();
 
       let data = {
-        level,
         reportType,
         filterBy,
         filterValue,
@@ -366,9 +369,7 @@ const Reports = ({ inspectionForm, regions, districts }) => {
       console.log(error);
     }
   };
-  let nationalUser = loggedInUserType == 1 || loggedInUserType == 2;
-  let regionalUser = loggedInUserType == 3 || loggedInUserType == 4;
-  let districtUser = loggedInUserType == 5 || loggedInUserType == 6;
+
   return (
     <div className="row">
       <ToastContainer

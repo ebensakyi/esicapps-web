@@ -26,9 +26,7 @@ const get = async (req, res) => {
     let searchText = req?.query?.searchText;
 
 
-    console.log("region ",region);
-    console.log("district ",district);
-    console.log("ul ",userLevel);
+
 
     if (userLevel == 1) {
       logs = await prisma.logs.findMany({
@@ -106,7 +104,7 @@ const get = async (req, res) => {
           id: "desc",
         },
       });
-      count = await prisma.logs.count({
+       let  logsCount = await prisma.logs.findMany({
         where:
           searchText != ""
             ? {
@@ -116,12 +114,22 @@ const get = async (req, res) => {
             : {
                 deleted: 0,
               },
-             
+        include: {
+          User: true,
+        },
+      
       });
+
 
       logs = logs.filter(function (el) {
         return el.User.regionId == region;
       })
+
+    
+
+      count = logsCount.filter(function (el) {
+        return el.User.regionId == region;
+      }).length
     }
     if (userLevel == 3) {
       logs = await prisma.logs.findMany({
@@ -146,7 +154,7 @@ const get = async (req, res) => {
 
    
 
-      count = await prisma.logs.count({
+      let  logsCount = await prisma.logs.findMany({
         where:
           searchText != ""
             ? {
@@ -156,11 +164,22 @@ const get = async (req, res) => {
             : {
                 deleted: 0,
               },
+        include: {
+          User: true,
+        },
+      
       });
+
 
       logs = logs.filter(function (el) {
         return el.User.districtId == district;
       })
+
+    
+
+      count = logsCount.filter(function (el) {
+        return el.User.districtId == district;
+      }).length
     }
 
     let max = Math.ceil(count / perPage);

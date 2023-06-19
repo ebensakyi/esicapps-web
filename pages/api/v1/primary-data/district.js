@@ -26,7 +26,6 @@ const get = async (req, res) => {
     let userDistrict = userData?.districtId;
     let queriedRegion =  Number(req?.query?.regionId) || undefined;
 
-    console.log(req.query);
 
     // national user
     if (userLevel == "1") {
@@ -49,12 +48,12 @@ const get = async (req, res) => {
     }
     //district user
     if (userLevel == "3") {
-      const district = await prisma.district.findMany({
-        where: { deleted: 0, districtId: Number(userDistrict) },
+      const districts = await prisma.district.findMany({
+        where: { deleted: 0, id: Number(userDistrict) },
         include: { Region: true },
       });
 
-      return res.status(200).json(district);
+      return res.status(200).json(districts);
     }
     if (req?.query?.regionId) {
       const district = await prisma.district.findMany({

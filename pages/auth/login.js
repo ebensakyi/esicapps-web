@@ -15,7 +15,7 @@ export default function Login() {
   const router = useRouter();
 
   const login = async (e) => {
-   try {
+    try {
       e.preventDefault();
       let data = {
         email,
@@ -23,20 +23,28 @@ export default function Login() {
       };
       const response = await axios.post(`/api/v1/auth/login`, data);
 
-
-
       if (response?.status != 200) {
         return toast.error(response?.data?.message);
       }
 
       if (response.status == 200) {
+        let regionId = response?.data?.session?.Region?.id;
+        let districtId = response?.data?.session?.District?.id;
+        let userLevelId = response?.data?.session?.userLevelId;
 
-      let regionId = response?.data?.session?.Region?.id 
-      let districtId = response?.data?.session?.District?.id
 
-        Cookies.set("r_id", regionId,{ expires: 1 / 24 });
-        Cookies.set("d_id", districtId,{ expires: 1 / 24 });
-        Cookies.set("vrip", response?.data?.privileges,{ expires: 1 / 24 });
+        Cookies.set("r_id", regionId, {
+          expires: 1 / 24,
+        });
+        Cookies.set("d_id", districtId, {
+          expires: 1 / 24,
+        });
+        Cookies.set("vrip", response?.data?.privileges, {
+          expires: 1 / 24,
+        });
+        Cookies.set("ul", userLevelId, {
+          expires: 1 / 24,
+        });
 
         return router.replace("/dashboard");
       }
@@ -44,8 +52,6 @@ export default function Login() {
       console.log(error);
       return toast.error("User account  not found");
     }
-
-   
   };
 
   const getYear = () => {
@@ -103,7 +109,7 @@ export default function Login() {
                 viewBox="0 0 1440 120"
               >
                 <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
-              </svg> */}
+              </svg> */}{" "}
             </div>
           </div>
 
@@ -130,14 +136,14 @@ export default function Login() {
               </div>
               <ToastContainer
                 position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
+                autoclose={5000}
+                hideprogressbar={false}
+                newestontop={false}
+                closeonclick
                 rtl={false}
-                pauseOnFocusLoss
+                pauseonfocusloss
                 draggable
-                pauseOnHover
+                pauseonhover
               />
               <div className="row justify-content-center">
                 <div className="col-md-8 col-lg-6 col-xl-5">
@@ -163,7 +169,6 @@ export default function Login() {
                               onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
-
                           <div className="mb-3">
                             {/* <div className="float-end">
                               <a
@@ -197,7 +202,6 @@ export default function Login() {
                               </button>
                             </div>
                           </div>
-
                           {/* <div className="form-check">
                             <input
                               className="form-check-input"
@@ -212,7 +216,6 @@ export default function Login() {
                               Remember me
                             </label>
                           </div> */}
-
                           <div className="mt-4">
                             <button
                               className="btn btn-success w-100"
@@ -223,7 +226,6 @@ export default function Login() {
                               Sign In
                             </button>
                           </div>
-
                           {/* <div className="mt-4 text-center">
                             <div className="signin-other-title">
                               <h5 className="fs-13 mb-4 title">Sign In with</h5>
@@ -254,12 +256,11 @@ export default function Login() {
                                 <i className="ri-twitter-fill fs-16"></i>
                               </button>
                             </div>
-                          </div> */}
+                          </div> */}{" "}
                         </form>
                       </div>
                     </div>
                   </div>
-
                   {/* <div className="mt-4 text-center">
                     <p className="mb-0">
                       Don't have an account ?{" "}
@@ -271,7 +272,7 @@ export default function Login() {
                         Signup{" "}
                       </a>{" "}
                     </p>
-                  </div> */}
+                  </div> */}{" "}
                 </div>
               </div>
             </div>
@@ -283,12 +284,11 @@ export default function Login() {
                 <div className="col-lg-12">
                   <div className="text-center">
                     <p className="mb-0 text-muted">
-                      &copy;
-                      {`${getYear()} `}
-                      ESICApps
+                      &copy; {`${getYear()} `}
+                      ESICApps{" "}
                       {/* . Crafted with{" "}
                       <i className="mdi mdi-heart text-danger"></i> by Expedient
-                      Systems */}
+                      Systems */}{" "}
                     </p>
                   </div>
                 </div>

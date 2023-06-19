@@ -21,7 +21,6 @@ export async function getSession(req) {
 
   const cookies = cookie.parse(req.headers.cookie || "");
   const token = cookies.session || req?.query?.session;
-  console.log("TOKEN ",token);
   if (!token) return null;
   try {
     return jwt.verify(token, process.env.TOKEN_SECRET);
