@@ -7,93 +7,43 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
-  let userObj = await getSession(req);
+  let userData = await getSession(req);
   let filterBy; //= req?.query?.filterBy;
   let filterValue; // = Number(req?.query?.filterValue);
 
-  let userType = userObj?.user?.UserType?.id;
+  let userLevel = userData?.userLevelId;
+  console.log("usertype ", userType);
+  let from = new Date(req?.query?.from);
 
-  let from =
-    req?.query?.from == "undefined" || req?.query?.from == ""
-      ? undefined
-      : new Date(req?.query?.from);
+  let to = new Date(req?.query?.to);
 
-  let to =
-    req.query.to == "" || req?.query?.to == "undefined"
-      ? undefined
-      : new Date(req?.query?.to);
-
-  if (userType == 1 || userType == 2) {
+  if (userLevel == 1) {
     filterBy = req?.query?.filterBy;
     filterValue = Number(req?.query?.filterValue);
-
-    if(isNaN(filterValue)) {
-      filterValue = undefined;
-    }
-    if (filterValue == 0 || filterValue == NaN || filterValue == 'NaN') {
-      filterValue = undefined;
-    }
-    if (filterBy == "undefined" || filterBy == "national") {
-      filterBy = "regionId";
-    }
-    // if (filterValue == "") {
-    //   filterValue = undefined;
-    // } else if (filterValue == "undefined") {
-    //   filterValue = undefined;
-    // } else if (filterValue == null) {
-    //   filterValue = undefined;
-    // } else {
-    //   filterValue = Number(filterValue);
-    // }
-
-    // if()
-    // console.log( filterValue=="NaN");
-
-    // console.log("filterValue", filterValue);
-    // console.log("filterBy", filterBy);
-    // if (filterBy == "undefined" || filterBy == "national") {
-    //   filterBy = "regionId";
-    // }
-
-    // if (filterValue == undefined || filterValue == NaN || filterValue == 0) {
-    //   filterValue = undefined;
-    // }
-    // filterValue = filterValue == NaN ? undefined : filterValue;
   }
 
-  if (userType == 3 || userType == 4) {
-    let regionId = userObj?.user?.regionId;
+  if (userLevel == 2) {
+    let regionId = userData?.regionId;
 
-    filterBy = req?.query?.filterBy;
-    filterValue = Number(req?.query?.filterValue);
-
-    if(isNaN(filterValue)) {
-      filterValue = regionId;
-    }
-    if (filterValue == 0 || filterValue == NaN || filterValue == undefined) {
-      filterValue = regionId;
-    }
-    if (filterBy == "undefined" ) {
-      filterBy = "regionId";
-    }
+    filterBy = req?.query?.filterBy || "regionId";
+    filterValue = Number(req?.query?.filterValue) || regionId;
   }
 
-  if (userType == 5 || userType == 6) {
-    let districtId = userObj?.user?.districtId;
+  if (userLevel == 3) {
+    let districtId = userData?.districtId;
 
-    // filterBy = filterBy == "undefined" ? "districtId" : filterBy;
-    // filterValue = filterValue == NaN ? districtId : Number(filterValue);
+  
 
     filterBy = req?.query?.filterBy;
     filterValue = Number(req?.query?.filterValue);
 
-    if(isNaN(filterValue)) {
+    if (isNaN(filterValue)) {
       filterValue = districtId;
     }
     if (filterValue == 0 || filterValue == NaN || filterValue == undefined) {
       filterValue = districtId;
     }
-    if (filterBy == "undefined" ) {
+    if (filterBy == "undefined") {
       filterBy = "districtId";
     }
   }

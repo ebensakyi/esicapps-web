@@ -1,8 +1,6 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 import { SERVER_BASE_URL } from "../config";
 import Dashboard from "../components/Dashboard";
-import { getSession } from "../utils/session-manager";
 
 export default function dashboard({
   dashboardData,
