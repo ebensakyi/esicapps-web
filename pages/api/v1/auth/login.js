@@ -30,7 +30,7 @@ const post = async (req, res) => {
       // include: { UserType: true },
     });
   let privileges = user?.UserType?.PageAccess?.map((prv)=>{ return prv.pageId });
-  console.log("prev", privileges);
+  await logActivity("Logged in to dashboard", user.id);
 
     if (!user) {
       return res

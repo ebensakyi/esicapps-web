@@ -27,6 +27,9 @@ const get = async (req, res) => {
       include: { User: true },
       skip: skip,
       take: perPage,
+      orderBy: {
+        id: "desc",
+      },
     });
 
     let max =  Math.ceil(count / perPage)
