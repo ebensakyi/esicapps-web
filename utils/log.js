@@ -4,8 +4,8 @@ export const logActivity = async (activity, userId) => {
       activity,
       userId,
     };
-await prisma.logs.create({ data });
+    await prisma.logs.create({ data });
   } catch (error) {
-   return
+    return;
   }
 };

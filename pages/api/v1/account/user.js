@@ -10,7 +10,6 @@ const post = async (req, res) => {
   try {
     let userData = await getSession(req);
 
-
     // let password = await nanoid(8); //req.body.password;
     let loggedInUserRegionId = userData?.regionId;
     let loggedInUserDistrictId = userData?.districtId;
@@ -55,9 +54,7 @@ const post = async (req, res) => {
         districtId = loggedInUserDistrictId;
         userLevelId = loggedInUserLevelId;
         regionId = loggedInUserRegionId;
-
-      }     
-
+      }
     }
     data = {
       userTypeId: Number(req.body.userTypeId),
@@ -76,13 +73,12 @@ const post = async (req, res) => {
     // console.log("loggedInUserDistrictId=>",loggedInUserDistrictId);
     // console.log("loggedInUserLevelId=>",loggedInUserLevelId);
 
-
     const user = await prisma.user.create({ data });
     // if (Number(req.body.userTypeId) == 7) {
-    //   await sendSMS(
-    //     req.body.phoneNumber,
-    //     `The temporal password for ESICApps Mobile App is ${password}`
-    //   );
+      await sendSMS(
+        req.body.phoneNumber,
+        `The temporal password for ESICApps App is ${password}`
+      );
     // } else {
     //   await sendSMS(
     //     req.body.phoneNumber,
@@ -113,7 +109,6 @@ const get = async (req, res) => {
     let page = req.query.page || 1;
     let perPage = 10;
     let skip = Number((page - 1) * perPage) || 0;
-
 
     let userLevel = data?.userLevelId;
     let region = data?.regionId;
@@ -249,6 +244,7 @@ const get = async (req, res) => {
                     },
                   },
                 ],
+                regionId: Number(region),
               }
             : { regionId: Number(region) },
         skip: skip,
@@ -318,6 +314,7 @@ const get = async (req, res) => {
                     },
                   },
                 ],
+                districtId: Number(district),
               }
             : { districtId: Number(district) },
         skip: skip,

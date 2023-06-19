@@ -13,27 +13,20 @@ const Logs = ({ data }) => {
   const router = useRouter();
   const query = router.query;
 
-
   const handlePagination = (page) => {
     const path = router.pathname;
     const query = router.query;
     query.page = page.selected + 1;
-    router.push({
-      pathname: path,
-      query: query,
-    });
+    router.push({ pathname: path, query: query });
   };
   const handleExportAll = async () => {
     try {
-      const response = await axios.post(
-        `/api/v1/auth/logs-to-excel`,
-        {
-          fileName: "activity-logs.xlsx",
-          filterBy: query.filterBy || 'districtId',
-          filterValue: query.filterValue|| 'undefined',
-          searchText: query.searchText || ""
-        }
-      );
+      const response = await axios.post(`/api/v1/auth/logs-to-excel`, {
+        fileName: "activity-logs.xlsx",
+        filterBy: query.filterBy || "districtId",
+        filterValue: query.filterValue || "undefined",
+        searchText: query.searchText || "",
+      });
       if (response.status == 200) {
         router.push(response.data);
       }
@@ -48,7 +41,7 @@ const Logs = ({ data }) => {
       const path = router.pathname;
       const query = router.query;
 
-      let page = query.page;
+      let page = 1;
 
       router.push({
         pathname: path,
@@ -58,13 +51,21 @@ const Logs = ({ data }) => {
         },
       });
       // router.push({
-      //   pathname: currentUrl,
-      //   query: `&searchText=${searchText}`,
+      // pathname: currentUrl,
+      // query: `&searchText=${searchText}`,
       // });
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const path = router.pathname;
+    const query = router.query;
+    let searchText = query.searchText;
+    setSearchText(searchText);
+  }, []);
+
   return (
     <div className="row">
       <div className="col-12">
@@ -73,12 +74,12 @@ const Logs = ({ data }) => {
             <h5 className="card-title mb-0">Logs</h5>
           </div>
           <div className="card-body">
-          <div className="row">
+            <div className="row">
               <div className="col-md-3">
                 <button
                   type="button"
                   className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
-                 onClick={handleExportAll}
+                  onClick={handleExportAll}
                 >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                   Export as excel
@@ -90,7 +91,7 @@ const Logs = ({ data }) => {
               >
                   <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                   Export Filtered
-                </button> */}
+                </button> */}{" "}
               </div>
               <div className="d-flex justify-content-sm-end">
                 <div className="search-box ms-2">
@@ -127,18 +128,21 @@ const Logs = ({ data }) => {
                 </tr>
               </thead>
               <tbody>
-                {data.data.map((log) => {
+                {" "}
+                {data.logs.map((log) => {
                   return (
                     <tr key={log.id}>
-                      <td>{log.User.otherNames} {log.User.surname}</td>
+                      <td>
+                        {log.User.otherNames}{" "}
+                        {log.User.surname}
+                      </td>
                       <td>{log.User.email}</td>
-
                       <td>{log.User.designation}</td>
                       <td>{log.activity}</td>
-                      <td> {moment(log.createdAt).format(
-                          "MMM Do YYYY, h:mm:ss a"
-                        )}</td>
-
+                      <td>
+                        {" "}
+                        {moment(log.createdAt).format("MMM Do YYYY, h:mm:ss a")}
+                      </td>
                       {/* <td>
                           <div className="dropdown d-inline-block">
                             <button
@@ -159,10 +163,10 @@ const Logs = ({ data }) => {
                               
                             </ul>
                           </div>
-                        </td> */}
+                        </td> */}{" "}
                     </tr>
                   );
-                })}
+                })}{" "}
               </tbody>
             </table>
 

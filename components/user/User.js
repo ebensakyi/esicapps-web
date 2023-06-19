@@ -32,7 +32,6 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
   let districtId = Cookies?.get("d_id");
   let regionId = Cookies?.get("r_id");
   useEffect(() => {
-    // setDistricts(districts);
     const path = router.pathname;
     const query = router.query;
     let searchText = query.searchText;
@@ -78,7 +77,7 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
       const path = router.pathname;
       const query = router.query;
 
-      let page = query.page;
+      let page =1// query.page;
 
       router.push({
         pathname: path,
