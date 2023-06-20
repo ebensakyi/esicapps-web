@@ -15,6 +15,8 @@ const get = async (req, res) => {
   let from = new Date(req?.query?.from);
 
   let to = new Date(req?.query?.to);
+  let  allInspectionSummary;
+
 
   if (userLevel == 1) {
     filterBy = req?.query?.filterBy;
@@ -37,27 +39,21 @@ const get = async (req, res) => {
   }
 
   try {
-    // const groupUsers = await prisma.inspectionForm.groupBy({
-    //   by: ['name'],
-    //   select:{
-    //     Inspection: true
-    //   }
 
-    // })
 
-    const usersWithCount = await prisma.inspectionForm.findMany({
-      select: {
-        _count: {
-          select: {
-            Inspection: {
-              where: {
-                districtId: 2,
-              },
-            },
-          },
-        },
-      },
-    });
+    // const usersWithCount = await prisma.inspectionForm.findMany({
+    //   select: {
+    //     _count: {
+    //       select: {
+    //         Inspection: {
+    //           where: {
+    //             districtId: 2,
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // });
 
     // await prisma.user.findMany({
     //   select: {
@@ -69,24 +65,91 @@ const get = async (req, res) => {
     //   },
     // })
 
-    console.log("gggoo", usersWithCount);
+if(filterBy == regionId){
+  allInspectionSummary =
+  await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
 
-    const allInspectionSummary =
-      await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
-      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
-      COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
 
-      COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
-      COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
+  FROM "InspectionForm" 
+  LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+  LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+  WHERE "Inspection"."regionId" = ${filterValue}
 
-      FROM "InspectionForm" 
-      LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
-      LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
-    
-
-      GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
-      ORDER BY "InspectionForm"."name"
+  GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
+  ORDER BY "InspectionForm"."name"
 `;
+}
+
+if(filterBy == districtId){
+  console.log(">>>>>>>>>>>>>>>>>userLevel>>>>>>>>>>>>>",filterValue);
+  allInspectionSummary =
+  await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
+
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
+
+  FROM "InspectionForm" 
+  LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+  LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+
+  WHERE "Inspection"."districtId" = ${filterValue}
+
+
+  GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
+  ORDER BY "InspectionForm"."name"
+`;
+
+console.log(allInspectionSummary);
+}
+
+if(filterBy == electoralAreaId){
+  allInspectionSummary =
+  await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
+
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
+
+  FROM "InspectionForm" 
+  LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+  LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+
+  WHERE "Inspection"."electoralAreaId" = ${filterValue}
+
+
+  GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
+  ORDER BY "InspectionForm"."name"
+`;
+}
+
+if(filterBy == communityId){
+  allInspectionSummary =
+  await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
+  COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 2 ) as "reinspectionCount",
+
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 1 ) as "publishedCount",
+  COUNT("Inspection"."isPublished")  filter (where "Inspection"."isPublished" = 0 ) as "unPublishedCount"
+
+  FROM "InspectionForm" 
+  LEFT JOIN "Inspection" ON "Inspection"."inspectionFormId" = "InspectionForm"."id"
+  LEFT JOIN "InspectionType" ON "Inspection"."inspectionTypeId" = "InspectionType"."id"
+
+  WHERE "Inspection"."communityId" = ${filterValue}
+
+
+  GROUP BY "InspectionForm"."name" , "Inspection"."inspectionTypeId"
+  ORDER BY "InspectionForm"."name"
+`;
+}
+     
     //  WHERE "Inspection"."regionId" = ${filterValue}
 
     const baselineInspectionSummary =
