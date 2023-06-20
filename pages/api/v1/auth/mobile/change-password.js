@@ -3,47 +3,45 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const post = async (req, res) => {
- try {
+  try {
+
+
     let phoneNumber = req.body.phoneNumber;
-    let password = req.body.password;
+    let newPassword = req.body.newPassword;
+    let oldPassword = req.body.oldPassword;
+
+
     //let hash = await bcrypt.hashSync(password, salt);
 
     let user = await prisma.user.findFirst({
       where: { phoneNumber, deleted: 0 },
-      include: { District: { include: { Region: true } } },
     });
-
     if (!user) {
       return res
         .status(400)
-        .json({ statusCode: 0, message: "User account not found" });
+        .json({ statusCode: 0, message: "Wrong user account" });
     }
 
-
-    if (user.districtId==null || user.districtId=="") {
-      return res
-        .status(401)
-        .json({ statusCode: 10, message: "User cannot access mobile app" });
-    }
-    let loginTimes = user.loginTimes;
-
-
-    let isValid = await bcrypt.compare(password, user.password);
+    let isValid = await bcrypt.compare(oldPassword, user.password);
 
     if (isValid) {
-      // const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { loginTimes: loginTimes + 1 },
+      const salt = await bcrypt.genSaltSync(10);
+      let hashedPassword = bcrypt.hashSync(newPassword, salt);
+      let x = await prisma.user.update({
+        where: { phoneNumber },
+        data: { password: hashedPassword, passwordChanged: 1 },
       });
+
+      //const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
+
       return res.status(200).json(user);
     } else {
       return res
-        .status(404)
+        .status(400)
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
   } catch (error) {
-    console.log("Server errorr: ", error);
+    console.log("Server error", error);
     if (error.code === "P2002")
       return res
         .status(500)
