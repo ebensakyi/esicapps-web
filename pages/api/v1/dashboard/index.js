@@ -12,7 +12,6 @@ const get = async (req, res) => {
   let filterValue; // = Number(req?.query?.filterValue);
 
   let userLevel = userData?.userLevelId;
-  console.log("usertype ", userType);
   let from = new Date(req?.query?.from);
 
   let to = new Date(req?.query?.to);
@@ -25,27 +24,17 @@ const get = async (req, res) => {
   if (userLevel == 2) {
     let regionId = userData?.regionId;
 
-    filterBy = req?.query?.filterBy || "regionId";
+    filterBy =
+      req?.query?.filterBy == "undefined" ? "regionId" : req?.query?.filterBy;
     filterValue = Number(req?.query?.filterValue) || regionId;
+
   }
 
   if (userLevel == 3) {
     let districtId = userData?.districtId;
 
-  
-
-    filterBy = req?.query?.filterBy;
+    filterBy = req?.query?.filterBy || "districtId";
     filterValue = Number(req?.query?.filterValue);
-
-    if (isNaN(filterValue)) {
-      filterValue = districtId;
-    }
-    if (filterValue == 0 || filterValue == NaN || filterValue == undefined) {
-      filterValue = districtId;
-    }
-    if (filterBy == "undefined") {
-      filterBy = "districtId";
-    }
   }
 
   try {

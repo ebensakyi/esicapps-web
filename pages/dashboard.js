@@ -1,4 +1,3 @@
-
 import { SERVER_BASE_URL } from "../config";
 import Dashboard from "../components/Dashboard";
 
@@ -13,28 +12,28 @@ export default function dashboard({
     // <div id="layout-wrapper">
     //   <Header />
 
-      <div className="main-content">
-        <div className="page-content">
-          <div className="container-fluid">
-            <Dashboard
-              dashboardData={dashboardData}
-              regions={regions}
-              districts={districts}
-              electoralAreas={electoralAreas}
-              communities={communities}
-            />
-          </div>
+    <div className="main-content">
+      <div className="page-content">
+        <div className="container-fluid">
+          <Dashboard
+            dashboardData={dashboardData}
+            regions={regions}
+            districts={districts}
+            electoralAreas={electoralAreas}
+            communities={communities}
+          />
         </div>
       </div>
+    </div>
     // </div>
   );
 }
 
 export async function getServerSideProps({ req, res }) {
-  const { session } =req?.cookies;
+  const { session } = req?.cookies;
   const filterBy = req?.query?.filterBy;
   const filterValue = req?.query?.filterValue;
-  const from = req?.query?.from || "undefined";
+  const from = req?.query?.from || undefined;
   const to = req?.query?.to || "undefined";
 
   if (!session) {
@@ -46,13 +45,9 @@ export async function getServerSideProps({ req, res }) {
     };
   }
 
-
-
   // const userSession = await getSession(session);
 
   // console.log("userSession ",userSession);
-
-
 
   const dashboardData = await fetch(
     `${SERVER_BASE_URL}/api/v1/dashboard?session=${session}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
