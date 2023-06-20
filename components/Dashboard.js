@@ -146,7 +146,7 @@ const Dashboard = ({
     let published = query.published;
     let page = query.page;
 
-    await returnFilterValue(filterBy);
+ await returnFilterValue(filterBy);
 
     router.push({
       pathname: path,

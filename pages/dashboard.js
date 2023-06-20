@@ -29,12 +29,13 @@ export default function dashboard({
   );
 }
 
-export async function getServerSideProps({ req, res }) {
-  const { session } = req?.cookies;
-  const filterBy = req?.query?.filterBy;
-  const filterValue = req?.query?.filterValue;
-  const from = req?.query?.from || undefined;
-  const to = req?.query?.to || "undefined";
+export async function getServerSideProps(context) {
+  const { session } = context.req.cookies;
+  const filterBy = context?.query?.filterBy;
+  const filterValue = context?.query?.filterValue;
+  const from = context?.query?.from || "undefined";
+  const to = context?.query?.to || "undefined";
+
 
   if (!session) {
     return {
