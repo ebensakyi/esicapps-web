@@ -46,6 +46,7 @@ const Header = () => {
   let includesUser = priv.includes("25");
   let includesUserLog = priv.includes("26");
   let includesUserType = priv.includes("27");
+  let includesMap = priv.includes("28");
 
   return (
     <div>
@@ -686,6 +687,16 @@ const Header = () => {
                     </li>
                   </ul>
                 </div>
+              </li>
+              {/* <li className="nav-item" hidden={!includesMap}> */}
+
+              <li className="nav-item" >
+                <Link href="/map">
+                  <a className="nav-link menu-link">
+                    <i className="ri-map-2-line" />
+                    <span data-key="t-map">Map</span>
+                  </a>
+                </Link>
               </li>
 
               <li className="nav-item" hidden={!includesReports}>

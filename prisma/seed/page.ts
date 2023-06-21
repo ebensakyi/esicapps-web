@@ -113,5 +113,8 @@ export const pages = [
     name: "User Type",
    
   },
-
+  {
+    name: "Map",
+   
+  },
 ];

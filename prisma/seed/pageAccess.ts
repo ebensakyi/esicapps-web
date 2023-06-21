@@ -107,4 +107,8 @@ export const pageAccess = [
     userTypeId: 1,
     pageId: 27,
   },
+  {
+    userTypeId: 1,
+    pageId: 28,
+  },
 ];
