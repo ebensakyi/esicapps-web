@@ -17,6 +17,7 @@ const get = async (req, res) => {
     let userDistrict = Number(userData?.districtId);
     let userId = userData?.user?.id;
 
+
     await logActivity("Visited submitted data list", userId);
 
     let inspectionFormId = Number(req?.query?.inspectionFormId);
@@ -24,12 +25,14 @@ const get = async (req, res) => {
     let filterBy = req?.query?.filterBy;
     let filterValue = req?.query?.filterValue;
 
-    // let _filterBy = await handleFilterBy(userData, filterBy);
-    // let _filterValue = await handleFilterValue(userData, filterValue);
+    let _filterBy = await handleFilterBy(userData, filterBy);
+    let _filterValue = await handleFilterValue(userData, filterValue);
 
-    // console.log("inspectionFormId = ", inspectionFormId);
-    // console.log("published = ", published);
-    // console.log("ffilterBy = ", _filterBy);
+    console.log("inspectionFormId = ",inspectionFormId);
+    console.log("published = ",published);
+    console.log("ffilterBy = ",_filterBy);
+
+   
 
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
@@ -100,21 +103,18 @@ const get = async (req, res) => {
                   },
                 },
               ],
-
+             
               Inspection: {
                 isPublished: published,
                 inspectionFormId,
-                // regionId: filterValue,
-                // districtId: filterValue,
+                [_filterBy]: _filterValue,
+
               },
             }
           : {
-              Inspection: {
-                inspectionFormId: inspectionFormId,
-                isPublished: published,
-                // regionId: filterValue,
-                // districtId: filterValue,
-              },
+              inspectionFormId: inspectionFormId,
+              isPublished: published,
+              [_filterBy]: _filterValue,
             },
     });
 
@@ -180,25 +180,30 @@ const get = async (req, res) => {
                   },
                 },
 
-               
+                // {
+                //   Community: {
+                //     name: { contains: searchText, mode: "insensitive" },
+                //   },
+                // },
               ],
 
               Inspection: {
                 isPublished: published,
                 inspectionFormId,
-                regionId: filterValue!="undefined"? Number(filterValue):"undefined",
-                districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+                [_filterBy]: _filterValue,
+
               },
             }
           : {
               Inspection: {
                 isPublished: published,
-                inspectionFormId ,
-
-                regionId: filterValue!="undefined"? Number(filterValue):"undefined",
-                districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+                [_filterBy]: _filterValue,
+                inspectionFormId,
+                // districtId: userLevelId != 3 ? undefined : userDistrict,
+                // regionId: userLevelId != 2 ? undefined : userRegion,
               },
             },
+      // where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
       orderBy: {
@@ -241,25 +246,26 @@ const get = async (req, res) => {
 
 const handleFilterBy = async (userData, filterBy) => {
   try {
-    if (userData?.userLevelId == 1) {
-      if (filterBy == undefined) {
-        return regionId;
-      }
-      return filterBy;
-    }
-
-    if (userData?.userLevelId == 2) {
-      if (filterBy == "undefined") {
-        return "regionId";
-      }
+     if (userData?.userLevelId == 1) {
+    if (filterBy == undefined) {
       return regionId;
     }
-    if (userData?.userLevelId == 3) {
-      return districtId;
-    }
-  } catch (error) {
-    console.log("handleFilterBy", error);
+    return filterBy;
   }
+
+  if (userData?.userLevelId == 2) {
+    if (filterBy=="undefined") {
+      return "regionId";
+    }
+    return regionId;
+  }
+  if (userData?.userLevelId == 3) {
+    return districtId;
+  }
+  } catch (error) {
+    console.log("handleFilterBy",error);
+  }
+ 
 };
 const handleFilterValue = async (userData, filterValue) => {
   if (userData?.userLevelId == 1) {

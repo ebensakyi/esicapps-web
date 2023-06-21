@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-const Map = () => {
+const Map = ({data}) => {
   // useEffect(() => {
   //     // Initialize the map when the component mounts
   //     const map = L.map('map').setView([51.505, -0.09], 13);
@@ -15,11 +15,11 @@ const Map = () => {
   //     L.marker([51.5, -0.09]).addTo(map);
   //   }, []);
 
-  const coordinates = [7.967, -2.406]; // Replace with your desired coordinates
-
+  const position = [7.967, -1.505]; // Replace with your desired coordinates
+  const coordinates = [7.967, -1.505];
   return (
     <MapContainer
-      center={coordinates}
+      center={position}
       zoom={7}
       scrollWheelZoom={false}
       style={{ height: "800px" }}
