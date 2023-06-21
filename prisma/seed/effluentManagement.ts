@@ -1,6 +1,6 @@
 export const effluentManagement = [
   {
-    name: "Soak pit",
+    name: "Soak away pit",
   },
   {
     name: "Drain field",

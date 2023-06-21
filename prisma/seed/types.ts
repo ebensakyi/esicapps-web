@@ -32,7 +32,7 @@ export const types = [
 
   { id: 25, name: "Consumables", inspectionFormId: 6 },
   { id: 26, name: "Non-consumables", inspectionFormId: 6 },
-  { id: 27, name: "Other  Services", inspectionFormId: 6 },
+  { id: 27, name: "Other Services", inspectionFormId: 6 },
 
   { id: 28, name: "Market", inspectionFormId: 7 },
   { id: 29, name: "Lorry park", inspectionFormId: 7 },

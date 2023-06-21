@@ -62,7 +62,7 @@ export const subtypes = [
   { id: 49, name: "Basic School", inspectionFormId: 5, typeId: 22 },
   { id: 50, name: "Sencondary School", inspectionFormId: 5, typeId: 22 },
   { id: 51, name: "Tertiary School", inspectionFormId: 5, typeId: 22 },
-
+  { id: 52, name: "Animal Farm", inspectionFormId: 6, typeId: 27 },
 
 
 

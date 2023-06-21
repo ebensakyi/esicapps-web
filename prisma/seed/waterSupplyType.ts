@@ -14,7 +14,5 @@ export const waterSupplyType = [
   {
     name: "Public borehole",
   },
-  {
-    name: "Not applicable",
-  },
+  
 ];

@@ -9,7 +9,5 @@ export const waterTreatmentType = [
   { name: "Chlorination" },
   { name: "Reversed Osmosis" },
   { name: "Solar Disinfection" },
-  {
-    name: "Not applicable",
-  },
+ 
 ];
