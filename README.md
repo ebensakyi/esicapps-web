@@ -59,3 +59,9 @@ update "District"
 
 //// ***
 1. add searchval to export to xls
+
+
+
+1.structure old data
+2. work on filters
+3. terst mobile app. create user from backend and use to login, download primary data and conduct inspection
