@@ -296,7 +296,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                             <div className="row" key={ut.id}>
                               {ut.PageAccess.map((ut) => {
                                 return (
-                                  <div className="col-md-3">
+                                  <div  key={ut.id} className="col-md-3">
                                     <span className="badge badge-outline-success">
                                       {ut.Page.name}
                                     </span>
@@ -306,7 +306,7 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
                             </div>
                             <td>
                               <div
-                                class="btn-group"
+                                className="btn-group"
                                 role="group"
                                 aria-label="Button group with nested dropdown"
                               >
