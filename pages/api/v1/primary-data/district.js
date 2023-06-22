@@ -32,6 +32,9 @@ const get = async (req, res) => {
       const districts = await prisma.district.findMany({
         where: { deleted: 0,regionId: queriedRegion },
         include: { Region: true },
+        orderBy: {
+          name: 'asc',
+        },
       });
 
       return res.status(200).json(districts);
@@ -41,7 +44,9 @@ const get = async (req, res) => {
     if (userLevel=="2") {
       const districts = await prisma.district.findMany({
         where: { deleted: 0, regionId: Number(userRegion) },
-        include: { Region: true },
+        include: { Region: true },  orderBy: {
+          name: 'asc',
+        },
       });
 
       return res.status(200).json(districts);
@@ -50,7 +55,9 @@ const get = async (req, res) => {
     if (userLevel == "3") {
       const districts = await prisma.district.findMany({
         where: { deleted: 0, id: Number(userDistrict) },
-        include: { Region: true },
+        include: { Region: true },  orderBy: {
+          name: 'asc',
+        },
       });
 
       return res.status(200).json(districts);
@@ -58,7 +65,9 @@ const get = async (req, res) => {
     if (req?.query?.regionId) {
       const district = await prisma.district.findMany({
         where: { deleted: 0, regionId: Number(req?.query?.regionId) },
-        include: { Region: true },
+        include: { Region: true },  orderBy: {
+          name: 'asc',
+        },
       });
 
       return res.status(200).json(district);

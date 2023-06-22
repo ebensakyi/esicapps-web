@@ -1,8 +1,15 @@
 import prisma from "../../../../prisma/db";
 import {getSession } from "../../../../utils/session-manager";
+import { logActivity } from "../../../../utils/Log";
 
 const post = async (req, res) => {
   try {
+    let userCookie = await getSession(req);
+    await logActivity(
+      `User type ${req.body.data.userTypeName} created`,
+      userCookie.id
+    );
+
     const data = {
       name: req.body.data.userTypeName,
     };

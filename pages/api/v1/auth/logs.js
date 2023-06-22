@@ -13,7 +13,7 @@ const post = async (req, res) => {
 };
 
 const get = async (req, res) => {
-  try {
+try {
     let userData = await getSession(req);
     let userLevel = userData?.userLevelId;
     let region = userData?.regionId;
@@ -33,7 +33,7 @@ const get = async (req, res) => {
         where:
           searchText != ""
             ? {
-                OR: searchArr(),
+                OR: searchArr(searchText),
                 deleted: 0,
               }
             : {
@@ -53,7 +53,7 @@ const get = async (req, res) => {
         where:
           searchText != ""
             ? {
-                OR: searchArr(),
+                OR: searchArr(searchText),
                 deleted: 0,
               }
             : {
@@ -62,32 +62,14 @@ const get = async (req, res) => {
       });
     }
 
-    // const result = await prisma.user.findMany({
-    //   where: {
-    //     email: {
-    //       endsWith: 'prisma.io',
-    //     },
-    //     posts: {
-    //       some: {
-    //         published: true,
-    //       },
-    //     },
-    //   },
-    //   include: {
-    //     posts: {
-    //       where: {
-    //         published: true,
-    //       },
-    //     },
-    //   },
-    // })
+   
 
     if (userLevel == 2) {
       logs = await prisma.logs.findMany({
         where:
           searchText != ""
             ? {
-                OR: searchArr(),
+                OR: searchArr(searchText),
                 deleted: 0, 
        
               }
@@ -108,7 +90,7 @@ const get = async (req, res) => {
         where:
           searchText != ""
             ? {
-                OR: searchArr(),
+                OR: searchArr(searchText),
                 deleted: 0,
               }
             : {
@@ -136,7 +118,7 @@ const get = async (req, res) => {
         where:
           searchText != ""
             ? {
-                OR: searchArr(),
+                OR: searchArr(searchText),
                 deleted: 0,
               }
             : {
@@ -158,7 +140,7 @@ const get = async (req, res) => {
         where:
           searchText != ""
             ? {
-                OR: searchArr(),
+                OR: searchArr(searchText),
                 deleted: 0,
               }
             : {
@@ -190,7 +172,7 @@ const get = async (req, res) => {
   }
 };
 
-const searchArr = () => {
+const searchArr = (searchText) => {
   return [
     {
       activity: {

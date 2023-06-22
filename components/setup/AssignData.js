@@ -51,7 +51,8 @@ const AssignData = ({ districts,assignments }) => {
         "/api/v1/account/user?districtId=" + districtId
       );
 
-      setAssignedFromUsers(response.data);
+
+      setAssignedFromUsers(response.data.users);
     } catch (error) {}
   };
 
@@ -63,7 +64,7 @@ const AssignData = ({ districts,assignments }) => {
       const response = await axios.get(
         "/api/v1/account/user?districtId=" + districtId
       );
-      setAssignedToUsers(response.data);
+      setAssignedToUsers(response.data.users);
     } catch (error) {
      
     }
@@ -131,7 +132,7 @@ const AssignData = ({ districts,assignments }) => {
                     }}
                   >
                     <option selected>Select district of data owner</option>
-                    {districts.map((district) => (
+                    {districts?.map((district) => (
                       <option key={district.id} value={district.id}>
                         {district.name}
                       </option>
@@ -151,7 +152,7 @@ const AssignData = ({ districts,assignments }) => {
                     }}
                   >
                     <option selected>Select name of data owner</option>
-                    {assignedFromUsers.map((u) => (
+                    {assignedFromUsers?.map((u) => (
                       <option key={u.id} value={u.id}>
                         {u.surname} {u.otherNames}
                       </option>
@@ -174,7 +175,7 @@ const AssignData = ({ districts,assignments }) => {
                     }}
                   >
                     <option selected>Select district of data receiver</option>
-                    {districts.map((district) => (
+                    {districts?.map((district) => (
                       <option key={district.id} value={district.id}>
                         {district.name}
                       </option>
@@ -195,7 +196,7 @@ const AssignData = ({ districts,assignments }) => {
                     }}
                   >
                     <option selected>Select name of data receiver</option>
-                    {assignedToUsers.map((u) => (
+                    {assignedToUsers?.map((u) => (
                       <option key={u.id} value={u.id}>
                         {u.surname} {u.otherNames}
                       </option>
@@ -249,7 +250,7 @@ const AssignData = ({ districts,assignments }) => {
                 </tr>
               </thead>
               <tbody>
-                {assignments.map((dt) => {
+                {assignments?.map((dt) => {
                   return (
                     <tr key={dt.id}>
                       {" "}

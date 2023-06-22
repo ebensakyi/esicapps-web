@@ -112,6 +112,8 @@ const get = async (req, res) => {
     let perPage = 10;
     let skip = Number((page - 1) * perPage) || 0;
 
+    let districtId= Number(req?.query?.districtId) || undefined;
+
     console.log("skip ",skip);
 
     let userLevel = data?.userLevelId;
@@ -121,7 +123,6 @@ const get = async (req, res) => {
 
     let searchText = req?.query?.searchText;
 
-      console.log("loggedInUserLevelId=======>",userLevel);
 
     //National User
     if (userLevel == 1) {
@@ -170,6 +171,7 @@ const get = async (req, res) => {
                     },
                   },
                 ],
+                districtId:districtId
               }
             : {},
         skip: skip,

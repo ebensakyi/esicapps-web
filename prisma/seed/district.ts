@@ -12,7 +12,7 @@ export const district = [
     regionId: 1,
   },
   { name: "Ablekuma West", abbrv: "ABWMA", regionId: 1},
-  {name: "Accra", abbrv: "ACCMA", regionId: 1},
+  {name: "Accra Metropolitan", abbrv: "ACCMA", regionId: 1},
   {  name: "Ada East", abbrv: "ADEMA", regionId: 1},
   { name: "Ada West", abbrv: "ADWMA", regionId: 1},
   { name: "Adenta", abbrv: "ADTMA", regionId: 1},
