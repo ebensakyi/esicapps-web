@@ -166,8 +166,7 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
 
       return toast.success(response.data.message);
     } catch (error) {
-      console.log(error);
-      return toast.error("An error occurred while adding user");
+      return toast.error(error.response.data.message);
     }
   };
 

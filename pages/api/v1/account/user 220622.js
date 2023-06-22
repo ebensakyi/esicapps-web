@@ -22,6 +22,7 @@ const post = async (req, res) => {
 
     let regionId, districtId;
     let data = {};
+    let count;
     await logActivity(
       `Added user ${req.body.surname} ${req.body.otherNames} `,
       Number(userData.id)
@@ -75,7 +76,12 @@ const post = async (req, res) => {
         req.body.phoneNumber,
         `The temporal password for ESICApps App is ${password}`
       );
-   
+    // } else {
+    //   await sendSMS(
+    //     req.body.phoneNumber,
+    //     `The password for ESICApps Web App is ${password}`
+    //   );
+    // }
 
     await prisma.userAddedByUser.create({
       data: { addeeId: user.id, adderId: Number(userData.id) },
@@ -175,6 +181,7 @@ const get = async (req, res) => {
         },
       });
 
+      console.log("User ", users);
 
       let count = await prisma.user.count({
         where:

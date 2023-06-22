@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const post = async (req, res) => {
- try {
+ //try {
     let phoneNumber = req.body.phoneNumber;
     let password = req.body.password;
     //let hash = await bcrypt.hashSync(password, salt);
@@ -42,13 +42,13 @@ const post = async (req, res) => {
         .status(404)
         .json({ statusCode: 0, message: "Wrong user credentials" });
     }
-  } catch (error) {
-    console.log("Server errorr: ", error);
-    if (error.code === "P2002")
-      return res
-        .status(500)
-        .json({ statusCode: 0, message: "A server error occurred" });
-  }
+  // } catch (error) {
+  //   console.log("Server errorr: ", error);
+  //   if (error.code === "P2002")
+  //     return res
+  //       .status(500)
+  //       .json({ statusCode: 0, message: "A server error occurred" });
+  // }
 };
 
 const get = async (req, res) => {
