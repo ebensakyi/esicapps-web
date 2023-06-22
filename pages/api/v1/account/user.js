@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
 import { getSession } from "../../../../utils/session-manager";
-import { logActivity } from "../../../../utils/Log";
+import { logActivity } from "../../../../utils/log";
 import { sendSMS } from "../../../../utils/send-hubtel-sms";
 import { generateCode } from "../../../../utils/generate-code";
 

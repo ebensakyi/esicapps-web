@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/db";
 import { getSession } from "../../../../utils/session-manager";
 import { verifyToken } from "../../../../utils/token-verifier";
-import { logActivity } from "../../../../utils/Log";
+import { logActivity } from "../../../../utils/log";
 
 const post = async (req, res) => {
   try {

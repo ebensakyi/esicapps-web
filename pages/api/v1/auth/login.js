@@ -2,7 +2,7 @@ import prisma from "../../../../prisma/db";
 import bcrypt from "bcryptjs";
 
 import { destroySession, setSession } from "../../../../utils/session-manager";
-import { logActivity } from "../../../../utils/Log";
+import { logActivity } from "../../../../utils/log";
 
 const post = async (req, res) => {
   try {

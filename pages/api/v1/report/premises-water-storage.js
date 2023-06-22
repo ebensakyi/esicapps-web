@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/db";
-import { logActivity } from "../../../../utils/Log";
+import { logActivity } from "../../../../utils/log";
 import { getSession } from "../../../../utils/session-manager";
 
 const post = async (req, res) => {

@@ -2,7 +2,7 @@ import prisma from "../../../../prisma/db";
 import AWS from "aws-sdk";
 import fs from "fs";
 import { getSession } from "../../../../utils/session-manager";
-import { logActivity } from "../../../../utils/Log";
+import { logActivity } from "../../../../utils/log";
 
 const XLSX = require("xlsx");
 

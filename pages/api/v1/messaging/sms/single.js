@@ -4,7 +4,7 @@ import { sendSMS } from "../../../../../utils/send-hubtel-sms";
 
 import { append_233 } from "../../../../../utils/append-233";
 import { getSession } from "../../../../../utils/session-manager";
-import { logActivity } from "../../../../../utils/Log";
+import { logActivity } from "../../../../../utils/log";
 
 const post = async (req, res) => {
 try {
