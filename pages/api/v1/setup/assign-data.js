@@ -34,12 +34,31 @@ const get = async (req, res) => {
       return res.status(200).json(data);
     }
 
-
     const data = await prisma.assignData.findMany({
       where: { deleted: 0 },
       include: { assignedFrom: true, assignedTo: true },
     });
     return res.status(200).json(data || []);
+  } catch (error) {
+    console.log("Error: " + error);
+  }
+};
+
+const Delete = async (req, res) => {
+  try {
+    console.log(req.body);
+
+    await prisma.assignData.update({
+      where: {
+        id: Number(req.body.id),
+      },
+      data: {
+        deleted: 1,
+      },
+    });
+    return res.status(200).json();
+
+   
   } catch (error) {
     console.log("Error: " + error);
   }
@@ -51,7 +70,7 @@ export default (req, res) => {
     : req.method === "PUT"
     ? console.log("PUT")
     : req.method === "DELETE"
-    ? console.log("DELETE")
+    ? Delete(req, res)
     : req.method === "GET"
     ? get(req, res)
     : res.status(404).send("");

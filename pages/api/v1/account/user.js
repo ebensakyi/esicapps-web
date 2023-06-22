@@ -495,7 +495,6 @@ const get = async (req, res) => {
 
 const Delete = async (req, res) => {
   try {
-    console.log("req.params", req.body);
     let user = await prisma.user.findFirst({
       where: { id: Number(req.body.id) },
     });

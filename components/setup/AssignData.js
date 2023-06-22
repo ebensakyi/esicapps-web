@@ -1,13 +1,13 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AssignData = ({ districts,assignments }) => {
+const AssignData = ({ districts, assignments }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState();
   const [assignedFromUsers, setAssignedFromUsers] = useState([]);
@@ -51,7 +51,6 @@ const AssignData = ({ districts,assignments }) => {
         "/api/v1/account/user?districtId=" + districtId
       );
 
-
       setAssignedFromUsers(response.data.users);
     } catch (error) {}
   };
@@ -65,10 +64,23 @@ const AssignData = ({ districts,assignments }) => {
         "/api/v1/account/user?districtId=" + districtId
       );
       setAssignedToUsers(response.data.users);
+    } catch (error) {}
+  };
+
+  const deleteAssignment = async (id) => {
+    try {
+      
+      const response = await axios.delete(`/api/v1/setup/assign-data`,{
+        id: id,
+      }
+      );
+      router.replace(router.asPath);
     } catch (error) {
-     
+      console.log(error);
     }
   };
+
+
   const assignData = async (e) => {
     try {
       e.preventDefault();
@@ -77,16 +89,12 @@ const AssignData = ({ districts,assignments }) => {
       }
       let data = {
         assignedFromUser,
-        assignedToUser
+        assignedToUser,
       };
-      const response = await axios.post("/api/v1/setup/assign-data", 
-        data,
-      );
+      const response = await axios.post("/api/v1/setup/assign-data", data);
       toast.success(response.data.message);
       setAssignedFromUser("");
       setAssignedToUser("");
-      router.replace(router.asPath);
-
       router.replace(router.asPath);
     } catch (error) {
       if (error.response.status == 401) {
@@ -95,7 +103,6 @@ const AssignData = ({ districts,assignments }) => {
     }
   };
 
- 
   return (
     <div className="row">
       <ToastContainer
@@ -167,11 +174,10 @@ const AssignData = ({ districts,assignments }) => {
                   <select
                     className="form-select"
                     id="inputGroupSelect02"
-                   // value={assignedToDistrict}
+                    // value={assignedToDistrict}
                     onChange={(e) => {
                       setAssignedToDistrict(e.target.value);
                       getAssignedToUsersByDistricts(e);
-                     
                     }}
                   >
                     <option selected>Select district of data receiver</option>
@@ -232,44 +238,51 @@ const AssignData = ({ districts,assignments }) => {
               <h5 className="card-title mb-0">DATA ASSIGNMENTS</h5>
             </div>
             <div className="card-body">
-            <table
-              id="fixed-header"
-              className="table table-bordered dt-responsive nowrap table-striped align-middle"
-              style={{ width: "100%" }}
-            >
-              <thead>
-                <tr>
-                  <th> Date</th>
-                  <th>Assigned From</th>
+              <table
+                id="fixed-header"
+                className="table table-bordered dt-responsive nowrap table-striped align-middle"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th> Date</th>
+                    <th>Assigned From</th>
 
-                  <th>Assigned To</th>
+                    <th>Assigned To</th>
 
-                
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {assignments?.map((dt) => {
-                  return (
-                    <tr key={dt.id}>
-                      {" "}
-                      <td>{moment(dt.createdAt).format("MMM Do YYYY, h:mm:ss a")}</td>
-                      <td>{dt.assignedFrom.surname} {dt.assignedFrom.otherNames}</td>
-                      <td>{dt.assignedTo.surname} {dt.assignedTo.otherNames}</td>
-                      <td>{dt.deleted==0?"Active":"Inactive"}</td>
-                      <td>
-                        <div className="dropdown d-inline-block">
-                          <button
-                            className="btn btn-soft-secondary btn-sm dropdown"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="ri-more-fill align-middle" />
-                          </button>
-                          <ul className="dropdown-menu dropdown-menu-end">
-                            {/* <li>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {assignments?.map((dt) => {
+                    return (
+                      <tr key={dt.id}>
+                        {" "}
+                        <td>
+                          {moment(dt.createdAt).format(
+                            "MMM Do YYYY, h:mm:ss a"
+                          )}
+                        </td>
+                        <td>
+                          {dt.assignedFrom.surname} {dt.assignedFrom.otherNames}
+                        </td>
+                        <td>
+                          {dt.assignedTo.surname} {dt.assignedTo.otherNames}
+                        </td>
+                        <td>{dt.deleted == 0 ? "Active" : "Inactive"}</td>
+                        <td>
+                          <div className="dropdown d-inline-block">
+                            <button
+                              className="btn btn-soft-secondary btn-sm dropdown"
+                              type="button"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              <i className="ri-more-fill align-middle" />
+                            </button>
+                            <ul className="dropdown-menu dropdown-menu-end">
+                              {/* <li>
                               <a href="#!" className="dropdown-item">
                                 <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
                                 View
@@ -287,22 +300,26 @@ const AssignData = ({ districts,assignments }) => {
                                 Publish
                               </a>
                             </li> */}
-                            <li>
-                              <a  href="#!" className="dropdown-item remove-item-btn">
-                                <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
-                                Delete
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </td>
-                     
-                     
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                              <li>
+                                <button
+                                  onClick={async (e) => {
+                                    e.preventDefault();
+                                    await deleteAssignment(dt.id);
+                                  }}
+                                  className="dropdown-item remove-item-btn"
+                                >
+                                  <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                  Delete
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>{" "}
         </div>

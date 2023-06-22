@@ -186,8 +186,8 @@ const get = async (req, res) => {
               Inspection: {
                 isPublished: published,
                 inspectionFormId,
-                regionId: filterValue!="undefined"? Number(filterValue):"undefined",
-                districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+                // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
+                // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
               },
             }
           : {
@@ -195,8 +195,8 @@ const get = async (req, res) => {
                 isPublished: published,
                 inspectionFormId ,
 
-                regionId: filterValue!="undefined"? Number(filterValue):"undefined",
-                districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+                // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
+                // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
               },
             },
       skip: skip,
@@ -275,205 +275,205 @@ const handleFilterValue = async (userData, filterValue) => {
     return userData?.districtId;
   }
 };
-const generateWhereMainObject = async (req, res) => {
-  let published = Number(req?.query?.published);
-  let inspectionFormId = Number(req?.query?.inspectionFormId);
-  let curPage = req?.query?.page;
-  let searchText = req?.query?.searchText;
-  let data = await getSession(req);
+// const generateWhereMainObject = async (req, res) => {
+//   let published = Number(req?.query?.published);
+//   let inspectionFormId = Number(req?.query?.inspectionFormId);
+//   let curPage = req?.query?.page;
+//   let searchText = req?.query?.searchText;
+//   let data = await getSession(req);
 
-  let filterBy = req?.query?.filterBy;
+//   let filterBy = req?.query?.filterBy;
 
-  let filterValue =
-    req?.query?.filterValue == "undefined"
-      ? undefined
-      : Number(req?.query?.filterValue);
-  let from =
-    req?.query?.from == "undefined" || req?.query?.from == ""
-      ? undefined
-      : new Date(req?.query?.from);
+//   let filterValue =
+//     req?.query?.filterValue == "undefined"
+//       ? undefined
+//       : Number(req?.query?.filterValue);
+//   let from =
+//     req?.query?.from == "undefined" || req?.query?.from == ""
+//       ? undefined
+//       : new Date(req?.query?.from);
 
-  let to =
-    req.query.to == "" || req?.query?.to == "undefined"
-      ? undefined
-      : new Date(req?.query?.to);
+//   let to =
+//     req.query.to == "" || req?.query?.to == "undefined"
+//       ? undefined
+//       : new Date(req?.query?.to);
 
-  let perPage = 10;
-  let skip = Number((curPage - 1) * perPage) || 0;
+//   let perPage = 10;
+//   let skip = Number((curPage - 1) * perPage) || 0;
 
-  let userObj = await getSession(req);
+//   let userObj = await getSession(req);
 
-  let userType = userObj.user?.userTypeId;
+//   let userType = userObj.user?.userTypeId;
 
-  if (userType == 1 || userType == 2) {
-    filterBy = filterBy == "undefined" ? "regionId" : filterBy;
+//   if (userType == 1 || userType == 2) {
+//     filterBy = filterBy == "undefined" ? "regionId" : filterBy;
 
-    return {
-      where: {
-        Community:
-          searchText != ""
-            ? {
-                name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-              }
-            : {},
-        deleted: 0,
-        Inspection:
-          filterBy == ""
-            ? {
-                isPublished: published,
-                inspectionFormId: inspectionFormId,
-                deleted: 0,
-              }
-            : {
-                [filterBy]: filterValue,
+//     return {
+//       where: {
+//         Community:
+//           searchText != ""
+//             ? {
+//                 name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+//               }
+//             : {},
+//         deleted: 0,
+//         Inspection:
+//           filterBy == ""
+//             ? {
+//                 isPublished: published,
+//                 inspectionFormId: inspectionFormId,
+//                 deleted: 0,
+//               }
+//             : {
+//                 [filterBy]: filterValue,
 
-                isPublished: published,
-                inspectionFormId: inspectionFormId,
-                deleted: 0,
-              },
-        createdAt: {
-          gte: from,
-          lte: to,
-        },
-      },
-      // where: getSearchParams(req, searchText).where,
-      skip: skip,
-      take: perPage,
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        Inspection: {
-          include: {
-            InspectionType: true,
-          },
-        },
-        Community: {
-          include: {
-            ElectoralArea: {
-              include: {
-                District: {
-                  include: {
-                    Region: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        User: true,
-      },
-    };
-  }
-  if (userType == 3 || userType == 4) {
-    let region = userObj.user.regionId;
-    filterBy = filterBy == undefined ? "districtId" : filterBy;
+//                 isPublished: published,
+//                 inspectionFormId: inspectionFormId,
+//                 deleted: 0,
+//               },
+//         createdAt: {
+//           gte: from,
+//           lte: to,
+//         },
+//       },
+//       // where: getSearchParams(req, searchText).where,
+//       skip: skip,
+//       take: perPage,
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//       include: {
+//         Inspection: {
+//           include: {
+//             InspectionType: true,
+//           },
+//         },
+//         Community: {
+//           include: {
+//             ElectoralArea: {
+//               include: {
+//                 District: {
+//                   include: {
+//                     Region: true,
+//                   },
+//                 },
+//               },
+//             },
+//           },
+//         },
+//         User: true,
+//       },
+//     };
+//   }
+//   if (userType == 3 || userType == 4) {
+//     let region = userObj.user.regionId;
+//     filterBy = filterBy == undefined ? "districtId" : filterBy;
 
-    return {
-      where: {
-        Community:
-          searchText != ""
-            ? {
-                name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-              }
-            : {},
-        deleted: 0,
-        Inspection: {
-          [filterBy]: filterValue,
-          regionId: region,
-          isPublished: published,
-          inspectionFormId: inspectionFormId,
-        },
-        createdAt: {
-          gte: from,
-          lte: to,
-        },
-      },
+//     return {
+//       where: {
+//         Community:
+//           searchText != ""
+//             ? {
+//                 name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+//               }
+//             : {},
+//         deleted: 0,
+//         Inspection: {
+//           [filterBy]: filterValue,
+//           regionId: region,
+//           isPublished: published,
+//           inspectionFormId: inspectionFormId,
+//         },
+//         createdAt: {
+//           gte: from,
+//           lte: to,
+//         },
+//       },
 
-      // where: getSearchParams(req, searchText).where,
-      skip: skip,
-      take: perPage,
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        Inspection: {
-          include: {
-            InspectionType: true,
-          },
-        },
-        Community: {
-          include: {
-            ElectoralArea: {
-              include: {
-                District: {
-                  include: {
-                    Region: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        User: true,
-      },
-    };
-  }
-  if (userType == 5 || userType == 6) {
-    filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
+//       // where: getSearchParams(req, searchText).where,
+//       skip: skip,
+//       take: perPage,
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//       include: {
+//         Inspection: {
+//           include: {
+//             InspectionType: true,
+//           },
+//         },
+//         Community: {
+//           include: {
+//             ElectoralArea: {
+//               include: {
+//                 District: {
+//                   include: {
+//                     Region: true,
+//                   },
+//                 },
+//               },
+//             },
+//           },
+//         },
+//         User: true,
+//       },
+//     };
+//   }
+//   if (userType == 5 || userType == 6) {
+//     filterBy = filterBy == undefined ? "electoralAreaId" : filterBy;
 
-    let district = userObj.user.districtId;
-    return {
-      where: {
-        Community:
-          searchText != ""
-            ? {
-                name: { search: searchText.replace(/[\s\n\t]/g, "_") },
-              }
-            : {},
-        deleted: 0,
-        Inspection: {
-          [filterBy]: filterValue,
-          districtId: district,
-          isPublished: published,
-          inspectionFormId: inspectionFormId,
-        },
-        createdAt: {
-          gte: from,
-          lte: to,
-        },
-      },
+//     let district = userObj.user.districtId;
+//     return {
+//       where: {
+//         Community:
+//           searchText != ""
+//             ? {
+//                 name: { search: searchText.replace(/[\s\n\t]/g, "_") },
+//               }
+//             : {},
+//         deleted: 0,
+//         Inspection: {
+//           [filterBy]: filterValue,
+//           districtId: district,
+//           isPublished: published,
+//           inspectionFormId: inspectionFormId,
+//         },
+//         createdAt: {
+//           gte: from,
+//           lte: to,
+//         },
+//       },
 
-      // where: getSearchParams(req, searchText).where,
-      skip: skip,
-      take: perPage,
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        Inspection: {
-          include: {
-            InspectionType: true,
-          },
-        },
-        Community: {
-          include: {
-            ElectoralArea: {
-              include: {
-                District: {
-                  include: {
-                    Region: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        User: true,
-      },
-    };
-  }
-};
+//       // where: getSearchParams(req, searchText).where,
+//       skip: skip,
+//       take: perPage,
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//       include: {
+//         Inspection: {
+//           include: {
+//             InspectionType: true,
+//           },
+//         },
+//         Community: {
+//           include: {
+//             ElectoralArea: {
+//               include: {
+//                 District: {
+//                   include: {
+//                     Region: true,
+//                   },
+//                 },
+//               },
+//             },
+//           },
+//         },
+//         User: true,
+//       },
+//     };
+//   }
+// };
 
 export default (req, res) => {
   req.method === "POST"

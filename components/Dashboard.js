@@ -195,6 +195,8 @@ const Dashboard = ({
           "rgba(255, 159, 64, 0.2)",
           "rgb(64, 80, 137)",
           "rgb(56, 162, 134)",
+          "rgb(56, 21, 134)",
+
         ],
         borderColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -486,7 +488,7 @@ const Dashboard = ({
                 }}
                 value={filterBy}
               >
-                <option value="" selected>
+                <option value="" >
                   Filter by{" "}
                 </option>
                 <option hidden={!nationalUser} value="national">
@@ -944,7 +946,7 @@ const Dashboard = ({
               </div>
             </div>
 
-            <div className="col-xxl-2">
+            {/* <div className="col-xxl-2">
               <div className="card card-height-100">
                 <div className="card-header align-items-center d-flex">
                   <h4 className="card-title mb-0 flex-grow-1"> USERS </h4>
@@ -954,7 +956,6 @@ const Dashboard = ({
                     </span>
                   </div>
                 </div>
-                {/* end card header */}
                 <div className="card-body px-0">
                   <ul className="list-inline main-chart text-center mb-0">
                     <li className="list-inline-item chart-border-left me-0 border-0">
@@ -975,7 +976,7 @@ const Dashboard = ({
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </>{" "}
         {/* end row */}

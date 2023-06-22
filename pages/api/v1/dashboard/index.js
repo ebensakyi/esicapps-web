@@ -19,6 +19,7 @@ const get = async (req, res) => {
 
 
   if (userLevel == 1) {
+    console.log("HERE LEVEL 1");
     filterBy = req?.query?.filterBy;
     filterValue = Number(req?.query?.filterValue);
   }
@@ -65,7 +66,7 @@ const get = async (req, res) => {
     //   },
     // })
 
-if(filterBy == regionId){
+if(filterBy == "regionId"){
   allInspectionSummary =
   await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
@@ -84,8 +85,7 @@ if(filterBy == regionId){
 `;
 }
 
-if(filterBy == districtId){
-  console.log(">>>>>>>>>>>>>>>>>userLevel>>>>>>>>>>>>>",filterValue);
+if(filterBy == "districtId"){
   allInspectionSummary =
   await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
@@ -105,10 +105,9 @@ if(filterBy == districtId){
   ORDER BY "InspectionForm"."name"
 `;
 
-console.log(allInspectionSummary);
 }
 
-if(filterBy == electoralAreaId){
+if(filterBy == "electoralAreaId"){
   allInspectionSummary =
   await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",
@@ -129,7 +128,7 @@ if(filterBy == electoralAreaId){
 `;
 }
 
-if(filterBy == communityId){
+if(filterBy == "communityId"){
   allInspectionSummary =
   await prisma.$queryRawUnsafe`SELECT  "InspectionForm"."name", COUNT("Inspection"."id") AS "inspectionCount", 
   COUNT("Inspection"."inspectionTypeId")  filter (where "Inspection"."inspectionTypeId" = 1 ) as "baselineCount",

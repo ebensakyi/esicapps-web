@@ -779,6 +779,21 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                             View
                           </a>
                         </Link>
+                        <Link
+                          href={{
+                            pathname: `/submitted-data/data_edit`,
+                            query: {
+                              id: dt?.Inspection?.id,
+                              inspectionFormId: formId,
+                              published: published,
+                            },
+                          }}
+                        >
+                          <a className="dropdown-item">
+                            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
+                            Edit
+                          </a>
+                        </Link>
                       </td>
                     </tr>
                   );
