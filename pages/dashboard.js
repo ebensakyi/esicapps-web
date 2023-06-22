@@ -1,6 +1,10 @@
 import { SERVER_BASE_URL } from "../config";
-import Dashboard from "../components/Dashboard";
+// import Dashboard from "../components/Dashboard";
+import dynamic from "next/dynamic";
 
+const Dashboard = dynamic(()=>import("../components/Dashboard"),{
+  ssr:false
+})
 export default function dashboard({
   dashboardData,
   regions,
