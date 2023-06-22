@@ -6,7 +6,7 @@ const post = async (req, res) => {
   try {
 
     let userCookie = await getSession(req);
-    await logActivity("Water Receptacle Report generated",  userCookie.user.id);
+    await logActivity("Water Receptacle Report generated",  userCookie.id);
 
     let filterBy = req?.body?.filterBy;
     let filterValue = Number(req?.body?.filterValue);

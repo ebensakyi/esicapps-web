@@ -18,7 +18,6 @@ const Header = () => {
 
   let priv = Cookies.get("vrip");
 
-
   let includesDashboard = priv.includes("1");
   let includesResData = priv.includes("2");
   let includesEatData = priv.includes("3");
@@ -120,7 +119,15 @@ const Header = () => {
                 </button>
                 <div className="dropdown-menu dropdown-menu-end">
                   <h6 className="dropdown-header"> {fullName}</h6>
-                 {ul==2?<h6 className="dropdown-header"> {region}</h6>:ul==3?<h6 className="dropdown-header"> {district}</h6>:<></>} 
+                  {ul == 1 ? (
+                    <h6 className="dropdown-header"> {""}</h6>
+                  ) : ul == 2 ? (
+                    <h6 className="dropdown-header"> {region}</h6>
+                  ) : ul == 3 ? (
+                    <h6 className="dropdown-header"> {district}</h6>
+                  ) : (
+                    <></>
+                  )}
 
                   <a className="dropdown-item" href="/auth/profile">
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1" />
@@ -130,13 +137,13 @@ const Header = () => {
                   <button
                     className="dropdown-item"
                     onClick={() => {
-                      Cookies.remove("r_id")
-                      Cookies.remove("d_id")
-                      Cookies.remove("vrip")
-                      Cookies.remove("ul")
-                      Cookies.remove("fullName")
-                      Cookies.remove("region")
-                      Cookies.remove("district")
+                      Cookies.remove("r_id");
+                      Cookies.remove("d_id");
+                      Cookies.remove("vrip");
+                      Cookies.remove("ul");
+                      Cookies.remove("fullName");
+                      Cookies.remove("region");
+                      Cookies.remove("district");
                       router.push("/api/v1/auth/logout");
                     }}
                   >
@@ -690,7 +697,7 @@ const Header = () => {
               </li>
               {/* <li className="nav-item" hidden={!includesMap}> */}
 
-              <li className="nav-item" >
+              <li className="nav-item">
                 <Link href="/map">
                   <a className="nav-link menu-link">
                     <i className="ri-map-2-line" />

@@ -17,13 +17,13 @@ const post = async (req, res) => {
     await prisma.inspection.update({
       data: {
         isPublished: Math.abs(isPublished - 1),
-        publishedById: Number(userCookie.user.id),
+        publishedById: Number(userCookie.id),
       },
       where: {
         id: req.body.id,
       },
     });
-    await logActivity(`Published inspection ${req.body.id}`, userCookie.user.id);
+    await logActivity(`Published inspection ${req.body.id}`, userCookie.id);
 
     res.status(200).json();
   } catch (error) {
@@ -56,7 +56,7 @@ const get = async (req, res) => {
   try {
     let userObj = await getSession(req);
 
-    let user = userObj.user?.id;
+    let user = userObj?.id;
     await logActivity(`Visited dataview page for ${req.query.id}`, user);
 
     let inspectionId = req.query.id;

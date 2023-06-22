@@ -5,7 +5,7 @@ const post = async (req, res) => {
   try {
 
     let userCookie = await getSession(req);
-    await logActivity("Report generated",  userCookie.user.id);
+    await logActivity("Report generated",  userCookie.id);
 
 
     let filterBy = req?.body?.filterBy;

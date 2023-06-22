@@ -32,7 +32,7 @@ const post = async (req, res) => {
 
       await logActivity(
         `Added user ${req.body.surname} ${req.body.otherNames} `,
-        Number(userCookie.user.id)
+        Number(userCookie.id)
       );
       data = {
         userTypeId: Number(req.body.userTypeId),
@@ -58,7 +58,7 @@ const post = async (req, res) => {
       //   districtData == null ? null : Number(districtData.regionId);
       await logActivity(
         `Added user ${req.body.surname} ${req.body.otherNames} `,
-        Number(userCookie.user.id)
+        Number(userCookie.id)
       );
       data = {
         userTypeId: Number(req.body.userTypeId),
@@ -79,7 +79,7 @@ const post = async (req, res) => {
     if (userCookie.user.userTypeId == 5) {
       await logActivity(
         `Added user ${req.body.surname} ${req.body.otherNames} `,
-        Number(userCookie.user.id)
+        Number(userCookie.id)
       );
 
       let districtId = Number(userCookie.user.districtId);
@@ -119,7 +119,7 @@ const post = async (req, res) => {
     }
 
     await prisma.userAddedByUser.create({
-      data: { addeeId: user.id, adderId: Number(userCookie.user.id) },
+      data: { addeeId: user.id, adderId: Number(userCookie.id) },
     });
 
     return res

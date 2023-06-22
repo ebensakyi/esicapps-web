@@ -6,7 +6,7 @@ import { getSession } from "../../../../utils/session-manager";
 const post = async (req, res) => {
   try {
     let userCookie = await getSession(req);
-    await logActivity("Toilet Availabilty Report generated",  userCookie.user.id);
+    await logActivity("Toilet Availabilty Report generated",  userCookie.id);
 
     await getToiletAvailability(req, res);
   } catch (error) {

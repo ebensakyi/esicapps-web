@@ -15,7 +15,7 @@ const post = async (req, res) => {
     let userCookie = await getSession(req);
     await logActivity(
       `Single notification sent to ${recipientId}`,
-      userCookie.user.id
+      userCookie.id
     );
     const data = {
       recipient: recipient,
@@ -24,7 +24,7 @@ const post = async (req, res) => {
      // recipientTag: Number(req.body.group),
       recipientId: Number(recipientId),
 
-      sender: Number(userCookie.user.id),
+      sender: Number(userCookie.id),
       messageType: 1,
       sendingType: 1,
     };

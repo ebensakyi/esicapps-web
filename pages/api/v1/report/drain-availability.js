@@ -5,7 +5,7 @@ import { getSession } from "../../../../utils/session-manager";
 const post = async (req, res) => {
   try {
     let userCookie = await getSession(req);
-    await logActivity("Report generated",  userCookie.user.id);
+    await logActivity("Report generated",  userCookie.id);
 
     await getDrainAvailability(req, res);
   } catch (error) {

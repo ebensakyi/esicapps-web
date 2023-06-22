@@ -15,7 +15,7 @@ const get = async (req, res) => {
     let userLevelId = Number(userData?.userLevelId);
     let userRegion = Number(userData?.regionId);
     let userDistrict = Number(userData?.districtId);
-    let userId = userData?.user?.id;
+    let userId = userData?.id;
 
     await logActivity("Visited submitted data list", userId);
 

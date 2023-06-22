@@ -15,7 +15,7 @@ const post = async (req, res) => {
     await prisma.inspection.update({
       data: {
         isPublished: Math.abs(isPublished - 1),
-        publishedById: Number(userCookie.user.id),
+        publishedById: Number(userCookie.id),
       },
       where: {
         id: req.body.id,

@@ -6,7 +6,7 @@ const post = async (req, res) => {
   try {
 
     let userCookie = await getSession(req);
-    await logActivity("Action summaries report generated",  userCookie.user.id);
+    await logActivity("Action summaries report generated",  userCookie.id);
 
     let filterBy = req?.body?.filterBy;
     let filterValue = Number(req?.body?.filterValue);

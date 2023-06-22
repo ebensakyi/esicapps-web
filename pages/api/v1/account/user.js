@@ -29,8 +29,10 @@ const post = async (req, res) => {
       Number(userData.id)
     );
 
+
     //National Level
     if (loggedInUserLevelId == "1") {
+
       regionId = req.body.region;
       districtId = req.body.district;
     }
@@ -119,7 +121,8 @@ const get = async (req, res) => {
 
     let searchText = req?.query?.searchText;
 
-  
+      console.log("loggedInUserLevelId=======>",userLevel);
+
     //National User
     if (userLevel == 1) {
       users = await prisma.user.findMany({

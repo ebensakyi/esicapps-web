@@ -9,7 +9,7 @@ import { logActivity } from "../../../../../utils/Log";
 const post = async (req, res) => {
 try {
   let userCookie = await getSession(req);
-  await logActivity("Single SMS sent",  userCookie.user.id);
+  await logActivity("Single SMS sent",  userCookie.id);
 
 
   console.log(req.body);
@@ -25,7 +25,7 @@ try {
     title: "",
    // recipient: Number(req.body.group),
 
-    sender: Number(userCookie.user.id),
+    sender: Number(userCookie.id),
     messageType: 2,
     sendingType: 1,
   };

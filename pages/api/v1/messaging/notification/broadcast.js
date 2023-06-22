@@ -10,7 +10,7 @@ const post = async (req, res) => {
 
     let userCookie = await getSession(req);
 
-    await logActivity("Broadcast notification sent", userCookie.user.id);
+    await logActivity("Broadcast notification sent", userCookie.id);
 
     let recipientId = Number(req.body.recipientId);
     let recipient = req.body.recipient;
@@ -34,7 +34,7 @@ const post = async (req, res) => {
       title: title,
       // recipientTag: Number(req.body.group),
       recipientId: Number(recipientId),
-      sender: Number(userCookie.user.id),
+      sender: Number(userCookie.id),
       messageType: 1,
       sendingType: Number(req.body.sendingType),
     };

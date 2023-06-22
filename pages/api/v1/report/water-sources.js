@@ -5,7 +5,7 @@ import { getSession } from "../../../../utils/session-manager";
 const post = async (req, res) => {
   try {
     let userCookie = await getSession(req);
-    await logActivity("Water Sources Report generated",  userCookie.user.id);
+    await logActivity("Water Sources Report generated",  userCookie.id);
 
     let filterBy = req?.body?.filterBy;
     let filterValue = Number(req?.body?.filterValue);
