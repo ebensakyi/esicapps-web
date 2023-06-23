@@ -29,8 +29,9 @@ const post = async (req, res) => {
 
     //National Level
     if (loggedInUserLevelId == "1") {
-      regionId = req?.body?.region;
-      districtId = req?.body?.district;
+      regionId = req?.body?.region == 0 ? null : req?.body?.region;
+      districtId = req?.body?.district == 0 ? null : req?.body?.districtId;
+     // password = await generateCode(8);
     }
 
     //Regional Level
@@ -71,11 +72,10 @@ const post = async (req, res) => {
     console.log(data);
 
     const user = await prisma.user.create({ data });
-      await sendSMS(
-        req.body.phoneNumber,
-        `The temporal password for ESICApps App is ${password}`
-      );
-   
+    await sendSMS(
+      req.body.phoneNumber,
+      `The temporal password for ESICApps App is ${password}`
+    );
 
     await prisma.userAddedByUser.create({
       data: { addeeId: user.id, adderId: Number(userData.id) },
@@ -174,7 +174,6 @@ const get = async (req, res) => {
           id: "desc",
         },
       });
-
 
       let count = await prisma.user.count({
         where:

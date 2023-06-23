@@ -30,6 +30,7 @@ const post = async (req, res) => {
       // include: { District: true },
       // include: { UserType: true },
     });
+
   let privileges = user?.UserType?.PageAccess?.map((prv)=>{ return prv.pageId });
   await logActivity("Logged in to dashboard", user.id);
 
@@ -40,6 +41,8 @@ const post = async (req, res) => {
     }
 
     let isValid = await bcrypt.compare(password, user.password);
+
+    console.log(isValid);
 
     if (isValid) {
       // const token = jwt.sign({ user }, process.env.TOKEN_SECRET);

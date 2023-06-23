@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/db";
-import {getSession } from "../../../../utils/session-manager";
+import { getSession } from "../../../../utils/session-manager";
 import { logActivity } from "../../../../utils/log";
 
 const post = async (req, res) => {
@@ -28,16 +28,15 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-  // console.log(req.query.token);
+    // console.log(req.query.token);
 
-    let data = await getSession(req);  
-
-
+    let data = await getSession(req);
 
     const userType = await prisma.userType.findMany({
-      where: { deleted: 0, 
-       
-},
+      where: { deleted: 0 },
+      orderBy: {
+        id: "desc",
+      },
     });
     //return res.status(200).json({ statusCode: 1, data: userType });
     return res.status(200).json(userType);

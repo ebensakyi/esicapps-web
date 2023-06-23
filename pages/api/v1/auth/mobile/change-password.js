@@ -1,12 +1,15 @@
 import prisma from "../../../../../prisma/db";
-
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const post = async (req, res) => {
   try {
 
+    console.log(req.body);
+
     let phoneNumber = req.body.phoneNumber;
-    let surname = req.body.surname;
-    let otherNames = req.body.otherNames;
+    let newPassword = req.body.newPassword;
+    let oldPassword = req.body.oldPassword;
 
 
     //let hash = await bcrypt.hashSync(password, salt);
@@ -20,18 +23,24 @@ const post = async (req, res) => {
         .json({ statusCode: 0, message: "Wrong user account" });
     }
 
-    let updated = await prisma.user.update({
-      where: { phoneNumber},
-      data: {
-        surname,otherNames,
-      }
-    });
+    let isValid = await bcrypt.compare(oldPassword, user.password);
 
+    if (isValid) {
+      const salt = await bcrypt.genSaltSync(10);
+      let hashedPassword = bcrypt.hashSync(newPassword, salt);
+      let x = await prisma.user.update({
+        where: { phoneNumber },
+        data: { password: hashedPassword, passwordChanged: 1 },
+      });
 
+      //const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
 
-    return res
-    .status(200)
-    .json({ statusCode: 0, message: "Profile updated" });
+      return res.status(200).json(user);
+    } else {
+      return res
+        .status(400)
+        .json({ statusCode: 0, message: "Wrong user credentials" });
+    }
   } catch (error) {
     console.log("Server error", error);
     if (error.code === "P2002")
