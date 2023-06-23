@@ -130,7 +130,7 @@ const SingleNotification = ({ users, messages }) => {
                         }}
                       >
                           <option value="">Choose...</option>
-                        {users.map((u) => (
+                        {users.users.map((u) => (
                           <option
                             key={u.id}
                             value={u.id + "$" + u.otherNames + " " + u.surname}
