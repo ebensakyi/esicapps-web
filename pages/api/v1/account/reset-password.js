@@ -11,7 +11,6 @@ const post = async (req, res) => {
   let phoneNumber = req.body.phoneNumber;
   let password = await generateCode(8);
 
-  console.log(req.body);
 
 
   const salt = bcrypt.genSaltSync(10);

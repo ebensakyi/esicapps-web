@@ -109,7 +109,6 @@ const get = async (req, res) => {
     let users;
 
     let searchText = req?.query?.searchText;
-    console.log("userLevel==", userLevel);
 
     //National User
     if (userLevel == 1) {

@@ -126,12 +126,12 @@ const SingleSMS = ({ users, messages }) => {
                         }}
                       >
                           <option value="">Choose...</option>
-                        {users.map((u) => (
+                        {users.users.map((u) => (
                           <option
                             key={u.id}
                             value={u.id + "$" + u.otherNames + " " + u.surname}
                           >
-                            {u.otherNames} {u.surname}
+                            {u.otherNames} {u.surname}{"\n"}{u.phoneNumber}
                           </option>
                         ))}
                       </select>
