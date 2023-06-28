@@ -87,11 +87,11 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
 
   const handleRating = (rating) => {
     try {
-      if (rating == 1) {
+      if (rating >= 4) {
         return <span className="badge bg-success">Good</span>;
       } else if (rating == 2) {
         return <span className="badge bg-warning">Average</span>;
-      } else if (rating == 3) {
+      } else if (rating < 3) {
         return <span className="badge bg-danger">Poor</span>;
       } else {
         return <span className="badge bg-primary">Default</span>;
@@ -674,7 +674,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                   <th scope="col">Start Date</th>
                   <th scope="col">End Date</th>
                   <th scope="col">Inspection Officer</th>
-                  <th scope="col">GhanaPost GPS</th>
+                  {/* <th scope="col">GhanaPost GPS</th> */}
                   <th scope="col">Lat/Lng</th>
                   <th scope="col">GPS Accuracy</th>
                   <th scope="col">Region</th>
@@ -730,7 +730,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                       <td>
                         {dt?.User?.otherNames} {dt?.User?.surname}
                       </td>
-                      <td>{dt?.ghanaPostGps}</td>
+                      {/* <td>{dt?.ghanaPostGps}</td> */}
                       <td> <Link
                               href={{
                                 pathname: `http://www.google.com/maps/place/${dt?.latitude},${dt?.longitude}`,

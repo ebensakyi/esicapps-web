@@ -209,7 +209,7 @@ const DataView = ({ data }) => {
                               readOnly="readOnly"
                             />
                           </div>
-                          <div className="col-lg-3 col-sm-6">
+                          {/* <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               GhanaPost GPS
                             </label>
@@ -220,7 +220,7 @@ const DataView = ({ data }) => {
                               value={data?.BasicInfoSection?.ghanaPostGps}
                               readOnly="readOnly"
                             />
-                          </div>
+                          </div> */}
                           <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               Name of respondent
