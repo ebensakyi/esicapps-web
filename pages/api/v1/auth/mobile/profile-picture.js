@@ -52,6 +52,8 @@ const saveFile = async (file) => {
     return fileName;
   } catch (error) {
     console.log(error);
+    console.log("saveFile");
+
   }
 };
 
