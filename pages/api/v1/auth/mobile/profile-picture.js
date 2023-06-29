@@ -13,6 +13,8 @@ export const config = {
 
 const post = async (req, res) => {
   try {
+
+    req.connection.setTimeout(100000); 
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
       // let imageFile = file.imageFile;
