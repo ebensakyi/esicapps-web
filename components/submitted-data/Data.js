@@ -52,9 +52,9 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
           inspectionFormId: Number(formId),
           fileName: handleExcelName(),
           published,
-          filterBy: query.filterBy || 'districtId',
-          filterValue: query.filterValue|| 'undefined',
-          searchText: query.searchText || ""
+          filterBy: query.filterBy || "districtId",
+          filterValue: query.filterValue || "undefined",
+          searchText: query.searchText || "",
         }
       );
       if (response.status == 200) {
@@ -89,15 +89,14 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
     try {
       if (rating >= 4) {
         return <span className="badge bg-success">Good</span>;
-      } else if (rating == 2) {
+      } else if (rating >= 3 && rating < 4) {
         return <span className="badge bg-warning">Average</span>;
       } else if (rating < 3) {
         return <span className="badge bg-danger">Poor</span>;
       } else {
         return <span className="badge bg-primary">Default</span>;
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleExcelName = () => {
@@ -119,8 +118,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       } else if (formId == 8) {
         return `SANITARY FACILITY PREMISES-${dateString}.xlsx`;
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleTitle = () => {
@@ -230,9 +228,9 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
       let currentUrl = router.pathname;
       const path = router.pathname;
       const query = router.query;
-  
+
       let published = query.published;
-  
+
       let inspectionFormId = query.inspectionFormId;
       let page = query.page;
 
@@ -246,7 +244,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
           filterValue,
           from,
           to,
-          searchText
+          searchText,
         },
       });
       // router.push({
@@ -261,9 +259,7 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
   let regionalUser = districtId == "undefined" && regionId != "undefined";
   let districtUser = districtId != "undefined";
 
-
   useEffect(() => {
-
     const query = router.query;
     let searchText = query.searchText;
     setSearchText(searchText);
@@ -271,70 +267,94 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
 
   return (
     <div className="row">
-       <div className="row row-cols-lg-auto g-3 align-items-center">
-            
-            <div className="col-md-2">
-              <label className="form-label mb-0">Select level</label>
+      <div className="row row-cols-lg-auto g-3 align-items-center">
+        <div className="col-md-2">
+          <label className="form-label mb-0">Select level</label>
 
-              <select
-                className="form-control"
-                aria-label="Default select example"
-                onChange={(e) => {
-                  setFilterBy(e.target.value);
+          <select
+            className="form-control"
+            aria-label="Default select example"
+            onChange={(e) => {
+              setFilterBy(e.target.value);
 
-                  if (regionalUser) {
-                    getDistrictsByRegion();
-                  }
+              if (regionalUser) {
+                getDistrictsByRegion();
+              }
 
-                  if (districtUser) {
-                    getElectoralAreasByDistrict();
-                  }
-                  if (e.target.value == "national") {
-                    setFilterValue(null);
-                  }
-                }}
-                value={filterBy}
-              >
-                <option value="" selected>
-                  Filter by{" "}
-                </option>
-                <option hidden={!nationalUser} value="national">
-                  All
-                </option>
-                <option hidden={!nationalUser} value="regionId">
-                  Region
-                </option>
-                <option
-                  hidden={!nationalUser && !regionalUser}
-                  value="districtId"
-                >
-                  District
-                </option>
-                <option
-                  hidden={!nationalUser && !regionalUser && !districtUser}
-                  value="electoralAreaId"
-                >
-                  Electoral Area
-                </option>
-                <option
-                  hidden={!nationalUser && !regionalUser && !districtUser}
-                  value="communityId"
-                >
-                  Community
-                </option>
-              </select>
-            </div>
+              if (districtUser) {
+                getElectoralAreasByDistrict();
+              }
+              if (e.target.value == "national") {
+                setFilterValue(null);
+              }
+            }}
+            value={filterBy}
+          >
+            <option value="" selected>
+              Filter by{" "}
+            </option>
+            <option hidden={!nationalUser} value="national">
+              All
+            </option>
+            <option hidden={!nationalUser} value="regionId">
+              Region
+            </option>
+            <option hidden={!nationalUser && !regionalUser} value="districtId">
+              District
+            </option>
+            <option
+              hidden={!nationalUser && !regionalUser && !districtUser}
+              value="electoralAreaId"
+            >
+              Electoral Area
+            </option>
+            <option
+              hidden={!nationalUser && !regionalUser && !districtUser}
+              value="communityId"
+            >
+              Community
+            </option>
+          </select>
+        </div>
 
-            {filterBy == "regionId" ? (
+        {filterBy == "regionId" ? (
+          <div className="col-md-2">
+            <label className="form-label mb-0">Select region</label>
+            <select
+              className="form-control"
+              aria-label="Default select example"
+              onChange={async (e) => {
+                setRegion(e.target.value);
+
+                setFilterValue(e.target.value);
+              }}
+              value={region}
+            >
+              {" "}
+              <option selected>Select region </option>
+              {regions?.map((data) => (
+                <option key={data.id} value={data.id}>
+                  {data.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <></>
+        )}
+        {filterBy == "districtId" ? (
+          <>
+            {nationalUser ? (
               <div className="col-md-2">
                 <label className="form-label mb-0">Select region</label>
                 <select
                   className="form-control"
                   aria-label="Default select example"
                   onChange={async (e) => {
+                    setFilterValue(e.target.value);
                     setRegion(e.target.value);
 
-                    setFilterValue(e.target.value);
+                    await getDistrictsByRegion(e.target.value);
                   }}
                   value={region}
                 >
@@ -350,245 +370,211 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
             ) : (
               <></>
             )}
-            {filterBy == "districtId" ? (
-              <>
-                {nationalUser? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select region</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        setRegion(e.target.value);
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select district</label>
+              <select
+                className="form-control"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setFilterValue(e.target.value);
+                  setDistrict(e.target.value);
+                }}
+                value={district}
+              >
+                {" "}
+                <option selected>Filter by </option>
+                {districtsData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+        {filterBy == "electoralAreaId" ? (
+          <>
+            {nationalUser ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select region</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  value={region}
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    setRegion(e.target.value);
 
-                        await getDistrictsByRegion(e.target.value);
-                      }}
-                      value={region}
-                    >
-                      {" "}
-                      <option selected>Select region </option>
-                      {regions?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">Select district</label>
-                  <select
-                    className="form-control"
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      setFilterValue(e.target.value);
-                      setDistrict(e.target.value);
-                    }}
-                    value={district}
-                  >
-                    {" "}
-                    <option selected>Filter by </option>
-                    {districtsData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
+                    await getDistrictsByRegion(e.target.value);
+                  }}
+                >
+                  {" "}
+                  <option selected>Filter by </option>
+                  {regions?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             ) : (
               <></>
             )}
-            {filterBy == "electoralAreaId" ? (
-              <>
-                {nationalUser ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select region</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      value={region}
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        setRegion(e.target.value);
+            {nationalUser || regionalUser ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select district</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    setDistrict(e.target.value);
 
-                        await getDistrictsByRegion(e.target.value);
-                      }}
-                    >
-                      {" "}
-                      <option selected>Filter by </option>
-                      {regions?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {nationalUser || regionalUser ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select district</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        setDistrict(e.target.value);
-
-                        await getElectoralAreasByDistrict(e.target.value);
-                      }}
-                      value={district}
-                    >
-                      {" "}
-                      <option selected>Filter by </option>
-                      {districtsData?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">
-                    Select Electoral Area
-                  </label>
-                  <select
-                    className=" form-control "
-                    aria-label="Default select example"
-                    onChange={async (e) => {
-                      setFilterValue(e.target.value);
-                      setElectoralArea(e.target.value);
-
-                      await getCommunitiesByElectoralArea(e.target.value);
-                    }}
-                    value={electoralArea}
-                  >
-                    {" "}
-                    <option selected>Filter by </option>
-                    {electoralAreasData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
+                    await getElectoralAreasByDistrict(e.target.value);
+                  }}
+                  value={district}
+                >
+                  {" "}
+                  <option selected>Filter by </option>
+                  {districtsData?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             ) : (
               <></>
             )}
-            {filterBy == "communityId" ? (
-              <>
-                {nationalUser || regionalUser ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select region</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        setRegion(e.target.value);
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select Electoral Area</label>
+              <select
+                className=" form-control "
+                aria-label="Default select example"
+                onChange={async (e) => {
+                  setFilterValue(e.target.value);
+                  setElectoralArea(e.target.value);
 
-                        await getDistrictsByRegion(e.target.value);
-                      }}
-                      value={region}
-                    >
-                      {" "}
-                      <option selected>Filter by </option>
-                      {regions?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {nationalUser||
-               regionalUser ||
-                districtUser ? (
-                  <div className="col-md-2">
-                    <label className="form-label mb-0">Select district</label>
-                    <select
-                      className="form-control"
-                      aria-label="Default select example"
-                      onChange={async (e) => {
-                        setFilterValue(e.target.value);
-                        setDistrict(e.target.value);
-                        await getElectoralAreasByDistrict(e.target.value);
-                      }}
-                      value={district}
-                    >
-                      {" "}
-                      <option selected>Filter by </option>
-                      {districtsData?.map((data) => (
-                        <option key={data.id} value={data.id}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">
-                    Select Electoral Area
-                  </label>
-                  <select
-                    className=" form-control "
-                    aria-label="Default select example"
-                    onChange={async (e) => {
-                      setFilterValue(e.target.value);
-                      setElectoralArea(e.target.value);
+                  await getCommunitiesByElectoralArea(e.target.value);
+                }}
+                value={electoralArea}
+              >
+                {" "}
+                <option selected>Filter by </option>
+                {electoralAreasData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+        {filterBy == "communityId" ? (
+          <>
+            {nationalUser || regionalUser ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select region</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    setRegion(e.target.value);
 
-                      await getCommunitiesByElectoralArea(e.target.value);
-                    }}
-                    value={electoralArea}
-                  >
-                    {" "}
-                    <option selected> Select Electoral Area </option>
-                    {electoralAreasData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>{" "}
-                <div className="col-md-2">
-                  <label className="form-label mb-0">Select community</label>
-                  <select
-                    className=" form-control "
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      setFilterValue(e.target.value);
-                      setCommunity(e.target.value);
-                    }}
-                    value={community}
-                  >
-                    {" "}
-                    <option selected>Filter by </option>
-                    {communitiesData?.map((data) => (
-                      <option key={data.id} value={data.id}>
-                        {data.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
+                    await getDistrictsByRegion(e.target.value);
+                  }}
+                  value={region}
+                >
+                  {" "}
+                  <option selected>Filter by </option>
+                  {regions?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             ) : (
               <></>
             )}
+            {nationalUser || regionalUser || districtUser ? (
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select district</label>
+                <select
+                  className="form-control"
+                  aria-label="Default select example"
+                  onChange={async (e) => {
+                    setFilterValue(e.target.value);
+                    setDistrict(e.target.value);
+                    await getElectoralAreasByDistrict(e.target.value);
+                  }}
+                  value={district}
+                >
+                  {" "}
+                  <option selected>Filter by </option>
+                  {districtsData?.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select Electoral Area</label>
+              <select
+                className=" form-control "
+                aria-label="Default select example"
+                onChange={async (e) => {
+                  setFilterValue(e.target.value);
+                  setElectoralArea(e.target.value);
 
-            {/* <div className="col-md-12">
+                  await getCommunitiesByElectoralArea(e.target.value);
+                }}
+                value={electoralArea}
+              >
+                {" "}
+                <option selected> Select Electoral Area </option>
+                {electoralAreasData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>{" "}
+            <div className="col-md-2">
+              <label className="form-label mb-0">Select community</label>
+              <select
+                className=" form-control "
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setFilterValue(e.target.value);
+                  setCommunity(e.target.value);
+                }}
+                value={community}
+              >
+                {" "}
+                <option selected>Filter by </option>
+                {communitiesData?.map((data) => (
+                  <option key={data.id} value={data.id}>
+                    {data.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
+        {/* <div className="col-md-12">
               <label className="form-label mb-0">Start Date</label>
               <input
                 type="date"
@@ -608,22 +594,25 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
               />
             </div> */}
 
-            <div className="col-12">
-              <label className="form-label mb-0">.</label>
-              <button
-                type="submit"
-                className="form-control btn btn-primary"
-                onClick={(e) => handleFilter(e)}
-              >
-                Filter
-              </button>
-            </div>
-          </div>
+        <div className="col-12">
+          <label className="form-label mb-0">.</label>
+          <button
+            type="submit"
+            className="form-control btn btn-primary"
+            onClick={(e) => handleFilter(e)}
+          >
+            Filter
+          </button>
+        </div>
+      </div>
 
       <div className="col-lg-12">
         <div className="card">
           <div className="card-header">{handleTitle()}</div>
-            <div className="card-body" style={{"overflow":"auto","maxHeight": "100%"}}>
+          <div
+            className="card-body"
+            style={{ overflow: "auto", maxHeight: "100%" }}
+          >
             <div className="row">
               <div className="col-md-3">
                 <button
@@ -731,19 +720,26 @@ const Data = ({ data, regions, districts, electoralAreas, communities }) => {
                         {dt?.User?.otherNames} {dt?.User?.surname}
                       </td>
                       {/* <td>{dt?.ghanaPostGps}</td> */}
-                      <td> <Link
-                              href={{
-                                pathname: `http://www.google.com/maps/place/${dt?.latitude},${dt?.longitude}`,
-                                query: {
-                             
-                                },
-                              }}
-                              passHref
-                            >
-                              <a target="_blank" rel="noopener noreferrer" className="dropdown-item" > {dt?.latitude},{dt?.longitude}
-                                <i className="ri-external-link-line align-bottom me-2 text-success" />
-                              </a>
-                           </Link></td>
+                      <td>
+                        {" "}
+                        <Link
+                          href={{
+                            pathname: `http://www.google.com/maps/place/${dt?.latitude},${dt?.longitude}`,
+                            query: {},
+                          }}
+                          passHref
+                        >
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="dropdown-item"
+                          >
+                            {" "}
+                            {dt?.latitude},{dt?.longitude}
+                            <i className="ri-external-link-line align-bottom me-2 text-success" />
+                          </a>
+                        </Link>
+                      </td>
                       <td>{dt?.accuracy}</td>
                       <td>
                         {dt?.Community?.ElectoralArea?.District?.Region?.name}
