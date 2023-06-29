@@ -19,25 +19,13 @@ const post = async (req, res) => {
       let image = await saveFile(file);
 
       const data = {
-      
         imagePath: image,
-       
       };
       const ui = await prisma.user.update({
         data,
         where: { id: Number(fields.userId) },
       });
 
-      //   const data = {
-      //     inspectionId: fields.inspectionId,
-      //     _key:fields.key,
-      //     // waterPicture: waterPicture,
-      //     // liquidWastePicture1: liquidWastePicture1,
-      //     // liquidWastePicture2: liquidWastePicture2,
-      //     // solidWastePicture: solidWastePicture,
-      //   };
-
-      //Move to payment
       return res.status(200).json();
     });
   } catch (error) {
@@ -47,20 +35,24 @@ const post = async (req, res) => {
 };
 
 const saveFile = async (file) => {
-  const imageFile = await file.imageFile;
+  try {
+    const imageFile = await file.imageFile;
 
-  var now = moment();
+    var now = moment();
 
-  let prefix = now.format("YYYYMM");
+    let prefix = now.format("YYYYMM");
 
-  const ext = await imageFile.originalFilename.split(".").pop();
-  const fileName = prefix + "" + nanoid() + "." + ext;
-  const data = fs.readFileSync(imageFile.filepath);
-  fs.writeFileSync(`./public/uploads/${fileName}`, data);
+    const ext = await imageFile.originalFilename.split(".").pop();
+    const fileName = prefix + "" + nanoid() + "." + ext;
+    const data = fs.readFileSync(imageFile.filepath);
+    fs.writeFileSync(`./public/uploads/${fileName}`, data);
 
-  let fileUrl = await uploadFile(fileName);
-  fs.unlinkSync(`./public/uploads/${fileName}`);
-  return fileName;
+    let fileUrl = await uploadFile(fileName);
+    fs.unlinkSync(`./public/uploads/${fileName}`);
+    return fileName;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const uploadFile = async (fileName) => {
