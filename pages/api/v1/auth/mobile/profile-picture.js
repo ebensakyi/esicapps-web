@@ -13,8 +13,7 @@ export const config = {
 
 const post = async (req, res) => {
   try {
-
-    req.connection.setTimeout(100000); 
+    req.connection.setTimeout(100000);
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
       // let imageFile = file.imageFile;
@@ -28,8 +27,7 @@ const post = async (req, res) => {
         where: { id: Number(fields.userId) },
       });
 
-      return res.status(200).json({image});
-
+      return res.status(200).json({ data: image });
     });
   } catch (error) {
     console.log(error);
@@ -56,7 +54,6 @@ const saveFile = async (file) => {
   } catch (error) {
     console.log(error);
     console.log("saveFile");
-
   }
 };
 
