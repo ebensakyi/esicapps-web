@@ -1,3 +1,5 @@
+import prisma from "../../../../../prisma/db";
+
 const get = async (req, res) => {
   try {
     let userId = Number(req.query.userId);
