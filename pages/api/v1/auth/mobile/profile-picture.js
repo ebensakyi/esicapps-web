@@ -28,7 +28,7 @@ const post = async (req, res) => {
       });
 
       console.log(image);
-      return res.status(200).json({ data: image });
+      return res.status(200).json({ data: "image" });
     });
   } catch (error) {
     console.log(error);
