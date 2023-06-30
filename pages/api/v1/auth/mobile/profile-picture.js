@@ -28,7 +28,8 @@ const post = async (req, res) => {
         where: { id: Number(fields.userId) },
       });
 
-      return res.status(200).json();
+      return res.status(200).json({image});
+
     });
   } catch (error) {
     console.log(error);
