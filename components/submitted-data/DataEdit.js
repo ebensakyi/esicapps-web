@@ -78,6 +78,18 @@ const DataEdit = ({ data }) => {
   // const [name, setName] = useState();
 
   const [selectedWaterSupply, setSelectedWaterSupply] = useState([]);
+  const [selectedWaterSource, setSelectedWaterSource] = useState([]);
+  const [selectedWaterTreatment, setSelectedWaterTreatment] = useState([]);
+  const [selectedDrinkingWaterSource, setSelectedDrinkingWaterSource] = useState([]);
+  const [selectedDrainType, setSelectedDrainType] = useState([]);
+  const [selectedEffluentManagement, setSelectedEffluentManagement] = useState([]);
+  const [selectedExcretaContainment, setSelectedExcretaContainment] = useState([]);
+  const [selectedGreyWaterDisposal, setSelectedGreyWaterDisposal] = useState([]);
+  const [selectedToiletType, setSelectedToiletType] = useState([]);
+  const [selectedWasteReceptacle, setSelectedWasteReceptacle] = useState([]);
+  const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] = useState([]);
+  const [selectedNuisanceDetected, setSelectedNuisanceDetected] = useState([]);
+  const [selectedAction, setSelectedAction] = useState([]);
 
   const router = useRouter();
 
@@ -152,13 +164,80 @@ const DataEdit = ({ data }) => {
   };
 
   const onWaterSupplyRemove = (selected) => {
-    // setSelectedPages([selected.length - 1].value);
     setSelectedWaterSupply(selected);
   };
   const onWaterSupplySelect = (selected) => {
-    // setSelectedPages(selected[selected.length - 1].value);
     setSelectedWaterSupply(selected);
   };
+
+
+  const onWaterSourcesRemove = (selected) => {
+    setSelectedWaterSource(selected);
+  };
+  const onWaterSourcesSelect = (selected) => {
+    setSelectedWaterSource(selected);
+  };
+
+
+  const onWaterTreatmentRemove = (selected) => {
+    setSelectedWaterTreatment(selected);
+  };
+  const onWaterTreatmentSelect = (selected) => {
+    setSelectedWaterTreatment(selected);
+  };
+
+
+  const onDrinkingWaterSourceRemove = (selected) => {
+    setSelectedDrinkingWaterSource(selected);
+  };
+  const onDrinkingWaterSourceSelect = (selected) => {
+    setSelectedDrinkingWaterSource(selected);
+  };
+
+
+  const onDrainTypeRemove = (selected) => {
+    setSelectedDrainType(selected);
+  };
+  const onDrainTypeSelect = (selected) => {
+    setSelectedDrainType(selected);
+  };
+
+
+  const onEffluentManagementRemove = (selected) => {
+    setSelectedEffluentManagement(selected);
+  };
+  const onEffluentManagementSelect = (selected) => {
+    setSelectedEffluentManagement(selected);
+  };
+
+
+  const onExcretaContainmentRemove = (selected) => {
+    setSelectedExcretaContainment(selected);
+  };
+  const onExcretaContainmentSelect = (selected) => {
+    setSelectedExcretaContainment(selected);
+  };
+
+  const onGreyWaterDisposalRemove = (selected) => {
+    setSelectedGreyWaterDisposal(selected);
+  };
+  const onToiletTypeSelect = (selected) => {
+    setSelectedToiletType(selected);
+  };
+  const onWasteReceptacleRemove = (selected) => {
+    setSelectedWasteReceptacle(selected);
+  };
+  const onUnservicedWasteDisposalSelect = (selected) => {
+    setSelectedUnservicedWasteDisposal(selected);
+  };
+  const onNuisanceDetectedRemove = (selected) => {
+    setSelectedNuisanceDetected(selected);
+  };
+  const onActionSelect = (selected) => {
+    setSelectedAction(selected);
+  };
+
+  
 
   useEffect(() => {
     let premisesWaterSupply =
@@ -170,6 +249,145 @@ const DataEdit = ({ data }) => {
       });
 
     setSelectedWaterSupply(premisesWaterSupply);
+
+
+    let premisesWaterSource =
+    data?.submittedData?.WaterSection?.premisesWaterSource?.map((data) => {
+      return {
+        value: data.WaterSourceType.id,
+        label: data.WaterSourceType.name,
+      };
+    });
+
+    setSelectedWaterSource(premisesWaterSource);
+
+
+  let premisesWaterTreatment =
+  data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map((data) => {
+    return {
+      value: data.WaterTreatmentType.id,
+      label: data.WaterTreatmentType.name,
+    };
+  });
+
+  setSelectedWaterTreatment(premisesWaterTreatment);
+
+
+
+let premisesDrinkingWaterSource =
+data?.submittedData?.WaterSection?.PremisesDrinkingWaterSource?.map((data) => {
+  return {
+    value: data.DrinkingWaterSource.id,
+    label: data.DrinkingWaterSource.name,
+  };
+});
+
+setSelectedDrinkingWaterSource(premisesWaterSupply);
+
+
+
+
+let premisesDrainType =
+data?.submittedData?.WaterSection?.PremisesDrainType?.map((data) => {
+  return {
+    value: data.DrainType.id,
+    label: data.DrainType.name,
+  };
+});
+
+setSelectedDrainType(premisesDrainType);
+
+
+
+let premisesnEffluentManagement =
+data?.submittedData?.WaterSection?.PremisesnEffluentManagement?.map((data) => {
+  return {
+    value: data.EffluentManagement.id,
+    label: data.EffluentManagement.name,
+  };
+});
+
+setSelectedEffluentManagement(premisesnEffluentManagement);
+
+
+
+let premisesExcretaContainment =
+data?.submittedData?.WaterSection?.PremisesExcretaContainment?.map((data) => {
+  return {
+    value: data.ExcretaContainment.id,
+    label: data.ExcretaContainment.name,
+  };
+});
+
+setSelectedExcretaContainment(premisesExcretaContainment);
+
+
+
+let premisesGreyWaterDisposal =
+data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map((data) => {
+  return {
+    value: data.GreyWaterDisposal.id,
+    label: data.GreyWaterDisposal.name,
+  };
+});
+
+setSelectedGreyWaterDisposal(premisesGreyWaterDisposal);
+
+
+
+let premisesToiletType =
+data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map((data) => {
+  return {
+    value: data.ToiletType.id,
+    label: data.ToiletType.name,
+  };
+});
+
+setSelectedToiletType(premisesWaterSupply);
+
+
+let premisesWasteReceptacle =
+data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map((data) => {
+  return {
+    value: data.WasteReceptacle.id,
+    label: data.WasteReceptacle.name,
+  };
+});
+
+setSelectedWasteReceptacle(premisesWasteReceptacle);
+
+
+let premisesUnservicedWasteDisposal =
+data?.submittedData?.SolidWasteSection?.PremisesUnservicedWasteDisposal?.map((data) => {
+  return {
+    value: data.UnservicedWasteDisposal.id,
+    label: data.UnservicedWasteDisposal.name,
+  };
+});
+
+setSelectedUnservicedWasteDisposal(premisesWaterSupply);
+
+let premisesActionTaken =
+data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map((data) => {
+  return {
+    value: data.Action.id,
+    label: data.Action.name,
+  };
+});
+
+setSelectedAction(premisesActionTaken);
+
+
+
+let premisesNuisanceDetected =
+data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map((data) => {
+  return {
+    value: data.NuisanceDetected .id,
+    label: data.NuisanceDetected .name,
+  };
+});
+
+setSelectedNuisanceDetected(premisesWaterSupply);
   }, []);
 
   return (
