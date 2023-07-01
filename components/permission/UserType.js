@@ -50,7 +50,6 @@ const UserType = ({ userTypes, pagesOptions, pages }) => {
         return toast.error("Pages cannot be empty");
       if (userTypeName == "") return toast.error("User type cannot be empty");
 
-      console.log(selectedPages);
       let data = {
         userTypeId: id,
         userTypeName,

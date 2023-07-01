@@ -68,7 +68,7 @@ const DataView = ({ data }) => {
     }
   };
 
-  const handleDelete =async (id)=>{
+  const handleDelete = async (id) => {
     try {
       const response = await axios.put(`/api/v1/submitted-data/data-view`, {
         id: id,
@@ -81,7 +81,7 @@ const DataView = ({ data }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -146,7 +146,6 @@ const DataView = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                       
                           <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               Premises Code
@@ -1335,22 +1334,23 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.WasteCollectionType
-                             != null ?(
+                          {data?.SolidWasteSection?.WasteCollectionType !=
+                          null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Type
                               </label>
-                              
-                                  <input
-                                    type="text"
-                                    className="form-control bg-light border-0"
-                                    id="invoicenoInput"
-                                    value={data?.SolidWasteSection?.WasteCollectionType.name}
-                                    readOnly="readOnly"
-                                  />
-                                
-                              
+
+                              <input
+                                type="text"
+                                className="form-control bg-light border-0"
+                                id="invoicenoInput"
+                                value={
+                                  data?.SolidWasteSection?.WasteCollectionType
+                                    .name
+                                }
+                                readOnly="readOnly"
+                              />
                             </div>
                           ) : (
                             <></>
@@ -1561,17 +1561,17 @@ const DataView = ({ data }) => {
                           )}
                         </div>
                         <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
-                              Reporting Officer
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control bg-light border-0"
-                              id="invoicenoInput"
-                              value={`${data?.User?.otherNames} ${data?.User?.surname}`}
-                              readOnly="readOnly"
-                            />
-                          </div>
+                          <label htmlFor="invoicenoInput">
+                            Reporting Officer
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control bg-light border-0"
+                            id="invoicenoInput"
+                            value={`${data?.User?.otherNames} ${data?.User?.surname}`}
+                            readOnly="readOnly"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1674,23 +1674,23 @@ const DataView = ({ data }) => {
                     )}
                   </div>
                   <div className="col-sm-auto">
-                  <Link
-                   className="btn btn-primary"
-                          href={{
-                            pathname: `/submitted-data/data_edit`,
-                            query: {
-                              id: data?.Inspection?.id,
-                              inspectionFormId: formId,
-                              published: published,
-                            },
-                          }}
-                        >
-                          <a className="dropdown-item">
-                            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
-                            Edit
-                          </a>
-                        </Link>
-                        </div>
+                    <Link
+                     
+                      href={{
+                        pathname: `/submitted-data/data_edit`,
+                        query: {
+                          id: data?.id,
+                          inspectionFormId: formId,
+                          published: published,
+                        },
+                      }}
+                    >
+                      <a className="btn btn-primary">
+                        <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
+                        Edit
+                      </a>
+                    </Link>
+                  </div>
                   {/* <div className="col-sm-auto">
                       <button
                         className="btn btn-primary"
@@ -1717,7 +1717,7 @@ const DataView = ({ data }) => {
                         Delete
                       </button>
                     ) : (
-                     <></>
+                      <></>
                     )}
                   </div>
                 </div>

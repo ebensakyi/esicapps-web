@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Multiselect from "multiselect-react-dropdown";
+
 import ResidentialPremisesInfoEdit from "./PremisesInfoEdits/ResidentialPremisesInfoEdit";
 import EateryPremisesInfoEdit from "./PremisesInfoEdits/EateryPremisesInfoEdit";
 import HealthPremisesInfoEdit from "./PremisesInfoEdits/HealthPremisesInfoEdit";
@@ -25,22 +27,22 @@ const DataEdit = ({ data }) => {
     setSuitabilityCertificateAvailability,
   ] = useState();
   const [structurePermitAvailability, setStructurePermitAvailability] =
-    useState("");
+    useState();
   const [
     fumigationCertificateAvailability,
     setFumigationCertificateAvailability,
-  ] = useState("");
+  ] = useState();
   const [businessPermitAvailability, setBusinessPermitAvailability] =
-    useState("");
+    useState();
   const [tempStructurePermitAvailability, setTempStructurePermitAvailability] =
-    useState("");
+    useState();
   const [waterAnalysisReportSafeUnsafe, setWaterAnalysisReportSafeUnsafe] =
-    useState("");
+    useState();
   const [regGeneralCertAvailability, setRegGeneralCertAvailability] =
-    useState("");
+    useState();
   const [gtaOperatingLicenceAvailability, setGtaOperatingLicenceAvailability] =
-    useState("");
-  const [pharmacyCertAvailability, setPharmacyCertAvailability] = useState("");
+    useState();
+  const [pharmacyCertAvailability, setPharmacyCertAvailability] = useState();
   const [waterSourceCondition, setWaterSourceCondition] = useState();
   const [waterStorageCondition, setWaterStorageCondition] = useState();
   const [toiletAdequacy, setToiletAdequacy] = useState();
@@ -75,9 +77,7 @@ const DataEdit = ({ data }) => {
   // const [name, setName] = useState();
   // const [name, setName] = useState();
 
-
-
-  console.log(data?.SolidWasteSection?.WasteCollectionType);
+  const [selectedWaterSupply, setSelectedWaterSupply] = useState([]);
 
   const router = useRouter();
 
@@ -151,6 +151,27 @@ const DataEdit = ({ data }) => {
     }
   };
 
+  const onWaterSupplyRemove = (selected) => {
+    // setSelectedPages([selected.length - 1].value);
+    setSelectedWaterSupply(selected);
+  };
+  const onWaterSupplySelect = (selected) => {
+    // setSelectedPages(selected[selected.length - 1].value);
+    setSelectedWaterSupply(selected);
+  };
+
+  useEffect(() => {
+    let premisesWaterSupply =
+      data?.submittedData?.WaterSection?.PremisesWaterSupply?.map((data) => {
+        return {
+          value: data.WaterSupplyType.id,
+          label: data.WaterSupplyType.name,
+        };
+      });
+
+    setSelectedWaterSupply(premisesWaterSupply);
+  }, []);
+
   return (
     <>
       <div className="row">
@@ -222,7 +243,7 @@ const DataEdit = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.premisesCode}
+                              value={data?.submittedData?.premisesCode}
                               readOnly="readOnly"
                             />
                           </div>
@@ -233,8 +254,8 @@ const DataEdit = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community?.District
-                                  ?.Region.name
+                                data?.submittedData?.BasicInfoSection?.Community
+                                  ?.District?.Region.name
                               }
                               readOnly="readOnly"
                             />
@@ -246,9 +267,10 @@ const DataEdit = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.Community != null
-                                  ? data?.BasicInfoSection?.Community?.District
-                                      ?.name
+                                data?.submittedData?.BasicInfoSection
+                                  ?.Community != null
+                                  ? data?.submittedData?.BasicInfoSection
+                                      ?.Community?.District?.name
                                   : ""
                               }
                               readOnly="readOnly"
@@ -262,7 +284,7 @@ const DataEdit = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.ElectoralArea?.name}
+                              value={data?.submittedData?.ElectoralArea?.name}
                               readOnly="readOnly"
                             />
                           </div>
@@ -272,7 +294,10 @@ const DataEdit = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.BasicInfoSection?.Community?.name}
+                              value={
+                                data?.submittedData?.BasicInfoSection?.Community
+                                  ?.name
+                              }
                               readOnly="readOnly"
                             />
                           </div>
@@ -284,7 +309,7 @@ const DataEdit = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.BasicInfoSection?.ghanaPostGps}
+                              value={data?.submittedData?.BasicInfoSection?.ghanaPostGps}
                               readOnly="readOnly"
                             />
                           </div> */}
@@ -296,7 +321,10 @@ const DataEdit = ({ data }) => {
                               type="text"
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
-                              value={data?.BasicInfoSection?.respondentName}
+                              value={
+                                data?.submittedData?.BasicInfoSection
+                                  ?.respondentName
+                              }
                               readOnly="readOnly"
                             />
                           </div>
@@ -309,8 +337,8 @@ const DataEdit = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.RespondentDesignation
-                                  ?.name
+                                data?.submittedData?.BasicInfoSection
+                                  ?.RespondentDesignation?.name
                               }
                               readOnly="readOnly"
                             />
@@ -324,7 +352,8 @@ const DataEdit = ({ data }) => {
                               className="form-control bg-light border-0"
                               id="invoicenoInput"
                               value={
-                                data?.BasicInfoSection?.respondentPhoneNumber
+                                data?.submittedData?.BasicInfoSection
+                                  ?.respondentPhoneNumber
                               }
                               readOnly="readOnly"
                             />
@@ -370,7 +399,7 @@ const DataEdit = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.animalsPermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -384,7 +413,7 @@ const DataEdit = ({ data }) => {
                                   setAnimalPermitAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.animalsPermitAvailability?.id
                                 }
                               >
@@ -399,7 +428,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.animalsPermitAvailability?.name
                                 }
                               /> */}
@@ -407,7 +436,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.buildingPermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -420,7 +449,7 @@ const DataEdit = ({ data }) => {
                                   setBuildingPermitAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.buildingPermitAvailability?.id
                                 }
                               >
@@ -435,7 +464,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.buildingPermitAvailability?.name
                                 }
                               /> */}
@@ -443,7 +472,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.habitationCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -458,7 +487,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.habitationCertificateAvailability?.id
                                 }
                               >
@@ -473,7 +502,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.habitationCertificateAvailability?.name
                                 }
                               /> */}
@@ -481,7 +510,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.propertyRateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -494,7 +523,7 @@ const DataEdit = ({ data }) => {
                                   setPropertyRateAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.propertyRateAvailability?.id
                                 }
                               >
@@ -509,7 +538,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.propertyRateAvailability?.name
                                 }
                               /> */}
@@ -517,7 +546,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.suitabilityCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -532,7 +561,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.suitabilityCertificateAvailability?.id
                                 }
                               >
@@ -547,7 +576,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.suitabilityCertificateAvailability?.name
                                 }
                               /> */}
@@ -555,7 +584,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.structurePermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -570,7 +599,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.structurePermitAvailability?.id
                                 }
                               >
@@ -585,7 +614,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.structurePermitAvailability.name
                                 }
                               /> */}
@@ -594,7 +623,7 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.fumigationCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -610,7 +639,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.fumigationCertificateAvailability.id
                                 }
                               >
@@ -625,7 +654,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.fumigationCertificateAvailability.name
                                 }
                                 
@@ -634,7 +663,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.businessLicenceAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -647,7 +676,7 @@ const DataEdit = ({ data }) => {
                                   setBusinessPermitAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.businessLicenceAvailability?.id
                                 }
                               >
@@ -662,7 +691,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.businessLicenceAvailability?.name
                                 }
                               /> */}
@@ -670,7 +699,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.structurePermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -685,7 +714,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.structurePermitAvailability?.id
                                 }
                               >
@@ -700,7 +729,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.structurePermitAvailability?.name
                                 }
                               /> */}
@@ -708,8 +737,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection?.waterAnalysisReport !=
-                          null ? (
+                          {data?.submittedData?.LicencePermitSection
+                            ?.waterAnalysisReport != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water analysis report
@@ -724,7 +753,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.waterAnalysisReport?.id
                                 }
                               >
@@ -739,7 +768,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.waterAnalysisReport?.name
                                 }
                               /> */}
@@ -747,7 +776,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.regGeneralCertAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -761,7 +790,7 @@ const DataEdit = ({ data }) => {
                                   setRegGeneralCertAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.regGeneralCertAvailability?.id
                                 }
                               >
@@ -776,7 +805,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.regGeneralCertAvailability.name
                                 }
                               /> */}
@@ -785,7 +814,7 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.gtaOperatingLicenceAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -800,7 +829,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.gtaOperatingLicenceAvailability?.id
                                 }
                               >
@@ -816,7 +845,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.gtaOperatingLicenceAvailability?.name
                                 }
                               /> */}
@@ -825,7 +854,7 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.LicencePermitSection
+                          {data?.submittedData?.LicencePermitSection
                             ?.pharmacyCertAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -838,7 +867,7 @@ const DataEdit = ({ data }) => {
                                   setPharmacyCertAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.pharmacyCertAvailability?.id
                                 }
                               >
@@ -854,7 +883,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LicencePermitSection
+                                  data?.submittedData?.LicencePermitSection
                                     ?.pharmacyCertAvailability?.value
                                 }
                               /> */}
@@ -892,13 +921,21 @@ const DataEdit = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.WaterSection?.PremisesWaterSources.length !=
-                          0 ? (
+                          {data?.submittedData?.WaterSection
+                            ?.PremisesWaterSources.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water source
                               </label>
-                              {data?.WaterSection?.PremisesWaterSources.map(
+
+                              <Multiselect
+                                options={data.waterSourcesOptions}
+                                selectedValues={selectedWaterSources}
+                                onSelect={onwaterSourcesSelect}
+                                onRemove={onwaterSourcesRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.WaterSection?.PremisesWaterSources.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -908,18 +945,18 @@ const DataEdit = ({ data }) => {
                                     value={x.WaterSourceType.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.PremisesWaterSupply.length !=
-                          0 ? (
+                          {data?.submittedData?.WaterSection
+                            ?.PremisesWaterSupply.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water supply
                               </label>
-                              {data?.WaterSection?.PremisesWaterSupply.map(
+                              {/* {data?.submittedData?.WaterSection?.PremisesWaterSupply.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -929,12 +966,20 @@ const DataEdit = ({ data }) => {
                                     value={x.WaterSupplyType.name}
                                   />
                                 )
-                              )}
+                              )} */}
+                              <Multiselect
+                                options={data.waterSupplyOptions}
+                                selectedValues={selectedWaterSupply}
+                                onSelect={onWaterSupplySelect}
+                                onRemove={onWaterSupplyRemove}
+                                displayValue="label"
+                              />
                             </div>
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.waterSourceCondition != null ? (
+                          {data?.submittedData?.WaterSection
+                            ?.waterSourceCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water source condition
@@ -946,7 +991,8 @@ const DataEdit = ({ data }) => {
                                   setWaterSourceCondition(e.target.value);
                                 }}
                                 value={
-                                  data?.WaterSection?.waterSourceCondition?.id
+                                  data?.submittedData?.WaterSection
+                                    ?.waterSourceCondition?.id
                                 }
                               >
                                 <option value="" selected>
@@ -960,7 +1006,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.WaterSection?.waterSourceCondition?.name
+                                  data?.submittedData?.WaterSection?.waterSourceCondition?.name
                                 }
                               /> */}
                             </div>
@@ -968,13 +1014,13 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
 
-                          {data?.WaterSection?.PremisesWaterStorage.length !=
-                          0 ? (
+                          {data?.submittedData?.WaterSection
+                            ?.PremisesWaterStorage.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water storage
                               </label>
-                              {data?.WaterSection?.PremisesWaterStorage.map(
+                              {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -989,8 +1035,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.waterStorageConditionSafe !=
-                          null ? (
+                          {data?.submittedData?.WaterSection
+                            ?.waterStorageConditionSafe != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Safe Water storage receptacle condition
@@ -1002,7 +1048,8 @@ const DataEdit = ({ data }) => {
                                   setWaterStorageCondition(e.target.value);
                                 }}
                                 value={
-                                  data?.WaterSection?.waterStorageConditionSafe?.id
+                                  data?.submittedData?.WaterSection
+                                    ?.waterStorageConditionSafe?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1016,7 +1063,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.WaterSection?.waterStorageConditionSafe
+                                  data?.submittedData?.WaterSection?.waterStorageConditionSafe
                                     .name
                                 }
                               /> */}
@@ -1024,13 +1071,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.PremisesWaterTreatmentType
-                            ?.length != 0 ? (
+                          {data?.submittedData?.WaterSection
+                            ?.PremisesWaterTreatmentType?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water treatment type
                               </label>
-                              {data?.WaterSection?.PremisesWaterTreatmentType?.map(
+                              {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1045,13 +1092,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.PremisesDrinkingWaterSources
-                            .length != 0 ? (
+                          {data?.submittedData?.WaterSection
+                            ?.PremisesDrinkingWaterSources.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Drinking water source
                               </label>
-                              {data?.WaterSection?.PremisesDrinkingWaterSources?.map(
+                              {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1066,7 +1113,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.WaterSection?.WaterFlowFrequency != null ? (
+                          {data?.submittedData?.WaterSection
+                            ?.WaterFlowFrequency != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Water flow frequency
@@ -1076,7 +1124,8 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.WaterSection?.WaterFlowFrequency?.name
+                                  data?.submittedData?.WaterSection
+                                    ?.WaterFlowFrequency?.name
                                 }
                               />
                             </div>
@@ -1115,8 +1164,8 @@ const DataEdit = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.LiquidWasteSection?.numberToiletSeats !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.numberToiletSeats != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Number Toilet Seats
@@ -1126,7 +1175,8 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.numberToiletSeats
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.numberToiletSeats
                                 }
                                 onChange={() => {
                                   setNumberToiletSeats(e.target.value);
@@ -1136,8 +1186,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.numberUrinalSeats !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.numberUrinalSeats != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Number Urinal Seats
@@ -1147,7 +1197,8 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.numberUrinalSeats
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.numberUrinalSeats
                                 }
                                 onChange={() => {
                                   setNumberUrinalSeats(e.target.value);
@@ -1157,7 +1208,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.toiletAdequacy != null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.toiletAdequacy != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet Adequacy
@@ -1167,7 +1219,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.toiletAdequacy?.name
+                                  data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.name
                                 }
                               /> */}
                               <select
@@ -1177,7 +1229,8 @@ const DataEdit = ({ data }) => {
                                   setToiletAdequacy(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.toiletAdequacy?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.toiletAdequacy?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1190,8 +1243,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.bathroomAdequacy !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.bathroomAdequacy != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Bathroom Adequacy
@@ -1201,7 +1254,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.bathroomAdequacy
+                                  data?.submittedData?.LiquidWasteSection?.bathroomAdequacy
                                     ?.name
                                 }
                               /> */}
@@ -1212,7 +1265,8 @@ const DataEdit = ({ data }) => {
                                   setBathroomAdequacy(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.bathroomAdequacy?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.bathroomAdequacy?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1225,7 +1279,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {/* {data?.LiquidWasteSection?.separateStaffUrinal != null ? (
+                          {/* {data?.submittedData?.LiquidWasteSection?.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Separate Staff Urinal
@@ -1235,7 +1289,7 @@ const DataEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.separateStaffUrinal.name
+                            data?.submittedData?.LiquidWasteSection?.separateStaffUrinal.name
                           }
                           
                         />
@@ -1243,8 +1297,8 @@ const DataEdit = ({ data }) => {
                     ) : (
                       <></>
                     )} */}
-                          {data?.LiquidWasteSection?.toiletPitPosition !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.toiletPitPosition != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet Pit Position
@@ -1256,8 +1310,8 @@ const DataEdit = ({ data }) => {
                                   setToiletPitPosition(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.toiletPitPosition
-                                    ?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.toiletPitPosition?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1272,7 +1326,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.toiletPitPosition
+                                  data?.submittedData?.LiquidWasteSection?.toiletPitPosition
                                     ?.name
                                 }
                               /> */}
@@ -1280,7 +1334,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.drainsCondition != null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.drainsCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Drains Condition
@@ -1290,7 +1345,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.drainsCondition
+                                  data?.submittedData?.LiquidWasteSection?.drainsCondition
                                     ?.name
                                 }
                               /> */}
@@ -1302,7 +1357,8 @@ const DataEdit = ({ data }) => {
                                   setDrainCondition(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.drainsCondition?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.drainsCondition?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1316,8 +1372,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.stagnationEvidence !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.stagnationEvidence != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Stagnation Evidence
@@ -1329,8 +1385,8 @@ const DataEdit = ({ data }) => {
                                   setStagnationEvidence(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.stagnationEvidence
-                                    ?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.stagnationEvidence?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1344,7 +1400,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.stagnationEvidence
+                                  data?.submittedData?.LiquidWasteSection?.stagnationEvidence
                                     ?.name
                                 }
                               /> */}
@@ -1352,8 +1408,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.analCleansingMaterialMgt !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.analCleansingMaterialMgt != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Anal Cleansing Material Management
@@ -1365,7 +1421,7 @@ const DataEdit = ({ data }) => {
                                   setAnalCleansingMaterialMgt(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection
+                                  data?.submittedData?.LiquidWasteSection
                                     ?.analCleansingMaterialMgt?.id
                                 }
                               >
@@ -1380,7 +1436,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection
+                                  data?.submittedData?.LiquidWasteSection
                                     ?.analCleansingMaterialMgt?.name
                                 }
                               /> */}
@@ -1388,7 +1444,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.toiletCondition != null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.toiletCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet Condition
@@ -1400,7 +1457,8 @@ const DataEdit = ({ data }) => {
                                   setToiletCondition(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.toiletCondition?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.toiletCondition?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1414,7 +1472,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.toiletCondition
+                                  data?.submittedData?.LiquidWasteSection?.toiletCondition
                                     ?.name
                                 }
                               /> */}
@@ -1422,7 +1480,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.toiletDischarge != null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.toiletDischarge != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet Discharge
@@ -1432,7 +1491,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.toiletDischarge
+                                  data?.submittedData?.LiquidWasteSection?.toiletDischarge
                                     ?.name
                                 }
                               /> */}
@@ -1443,7 +1502,8 @@ const DataEdit = ({ data }) => {
                                   setToiletDischarge(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.toiletDischarge?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.toiletDischarge?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1456,8 +1516,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.containmentEmptied !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.containmentEmptied != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Containment Emptied
@@ -1469,8 +1529,8 @@ const DataEdit = ({ data }) => {
                                   setContainmentEmptied(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.containmentEmptied
-                                    ?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.containmentEmptied?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1484,7 +1544,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.containmentEmptied
+                                  data?.submittedData?.LiquidWasteSection?.containmentEmptied
                                     ?.name
                                 }
                               /> */}
@@ -1492,7 +1552,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.sewerSystem != null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.sewerSystem != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Sewer System
@@ -1502,7 +1563,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.sewerSystem?.name
+                                  data?.submittedData?.LiquidWasteSection?.sewerSystem?.name
                                 }
                               /> */}
                               <select
@@ -1512,7 +1573,8 @@ const DataEdit = ({ data }) => {
                                   setSewerSystem(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.sewerSystem?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.sewerSystem?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1525,8 +1587,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.EaseYourselfWhere !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.EaseYourselfWhere != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Ease Yourself Where
@@ -1536,7 +1598,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.EaseYourselfWhere
+                                  data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere
                                     ?.name
 
                               /> */}
@@ -1547,8 +1609,8 @@ const DataEdit = ({ data }) => {
                                   setEaseYourselfWhere(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.EaseYourselfWhere
-                                    ?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.EaseYourselfWhere?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1562,8 +1624,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.DesiltingFrequency !=
-                          null ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.DesiltingFrequency != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Desilting Frequency
@@ -1573,7 +1635,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.LiquidWasteSection?.DesiltingFrequency
+                                  data?.submittedData?.LiquidWasteSection?.DesiltingFrequency
                                     ?.name
                                 }
 
@@ -1586,8 +1648,8 @@ const DataEdit = ({ data }) => {
                                   setDesiltingFrequency(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.DesiltingFrequency
-                                    ?.id
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.DesiltingFrequency?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1605,11 +1667,11 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.PremisesDrainType
-                            ?.length != 0 ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.PremisesDrainType?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">Drain Type</label>
-                              {data?.LiquidWasteSection?.PremisesDrainType?.map(
+                              {data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1624,13 +1686,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.PremisesEffluentManagement
-                            ?.length != 0 ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.PremisesEffluentManagement?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Effluent Management
                               </label>
-                              {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+                              {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1645,13 +1707,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.PremisesExcretaContainment
-                            ?.length != 0 ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.PremisesExcretaContainment?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Excreta Containment
                               </label>
-                              {data?.LiquidWasteSection?.PremisesExcretaContainment.map(
+                              {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1666,13 +1728,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection
+                          {data?.submittedData?.LiquidWasteSection
                             ?.PremisesExcretaDisposalMethod?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Excreta Disposal Method
                               </label>
-                              {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
+                              {data?.submittedData?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1687,13 +1749,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.PremisesGreyWaterDisposal
-                            ?.length != 0 ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.PremisesGreyWaterDisposal?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Grey Water Disposal
                               </label>
-                              {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+                              {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1708,13 +1770,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.LiquidWasteSection?.PremisesToiletType
-                            ?.length != 0 ? (
+                          {data?.submittedData?.LiquidWasteSection
+                            ?.PremisesToiletType?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet Type
                               </label>
-                              {data?.LiquidWasteSection?.PremisesToiletType?.map(
+                              {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1751,7 +1813,7 @@ const DataEdit = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.SolidWasteSection
+                          {data?.submittedData?.SolidWasteSection
                             ?.wasteServiceProviderRegistration != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -1762,7 +1824,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.wasteServiceProviderRegistration?.name
                                 }
                               /> */}
@@ -1775,7 +1837,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.wasteServiceProviderRegistration?.id
                                 }
                               >
@@ -1789,8 +1851,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.wasteCollectorName !=
-                          null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.wasteCollectorName != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Collector Name
@@ -1800,7 +1862,8 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection?.wasteCollectorName
+                                  data?.submittedData?.SolidWasteSection
+                                    ?.wasteCollectorName
                                 }
                                 onChange={(e) => {
                                   setWasteCollectorName(e.target.value);
@@ -1810,8 +1873,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.wasteSortingAvailability !=
-                          null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.wasteSortingAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Sorting Availability
@@ -1821,7 +1884,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.wasteSortingAvailability?.name
                                 }
                               /> */}
@@ -1832,7 +1895,7 @@ const DataEdit = ({ data }) => {
                                   setWasteSortingAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.wasteSortingAvailability?.id
                                 }
                               >
@@ -1846,7 +1909,7 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection
+                          {data?.submittedData?.SolidWasteSection
                             ?.approvedWasteStorageReceptacle != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
@@ -1857,7 +1920,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.approvedWasteStorageReceptacle?.name
                                 }
                               /> */}
@@ -1870,7 +1933,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.approvedWasteStorageReceptacle?.id
                                 }
                               >
@@ -1884,13 +1947,12 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection
+                          {data?.submittedData?.SolidWasteSection
                             ?.adequateWasteStorageReceptacle != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Adequate Waste Storage Receptacle
                               </label>
-                             
 
                               <select
                                 className="form-control"
@@ -1901,7 +1963,7 @@ const DataEdit = ({ data }) => {
                                   );
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.adequateWasteStorageReceptacle?.id
                                 }
                               >
@@ -1915,8 +1977,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.WasteCollectionType
-                             != null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.WasteCollectionType != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Type
@@ -1926,12 +1988,10 @@ const DataEdit = ({ data }) => {
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
-                                  setWasteCollectionType(
-                                    e.target.value
-                                  );
+                                  setWasteCollectionType(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.WasteCollectionType?.id
                                 }
                               >
@@ -1942,9 +2002,8 @@ const DataEdit = ({ data }) => {
                                 <option value={2}>Door to door</option>
                                 <option value={3}>Not serviced</option>
                                 <option value={4}>Communal Dump Site</option>
-
                               </select>
-                              {data?.SolidWasteSection?.PremisesWasteCollection?.map(
+                              {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteCollection?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1954,18 +2013,18 @@ const DataEdit = ({ data }) => {
                                     value={x.WasteCollectionType.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.PremisesWasteReceptacle
-                            ?.length != 0 ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.PremisesWasteReceptacle?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Receptacle
                               </label>
-                              {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+                              {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1980,8 +2039,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.UnservicedWasteDisposal !=
-                          null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.UnservicedWasteDisposal != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Unserviced Waste Disposal
@@ -1991,7 +2050,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.UnservicedWasteDisposal?.name
                                 }
                               /> */}
@@ -2003,7 +2062,7 @@ const DataEdit = ({ data }) => {
                                   setUnservicedWasteDisposal(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.UnservicedWasteDisposal?.id
                                 }
                               >
@@ -2018,8 +2077,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.wastePaymentEvidence !=
-                          null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.wastePaymentEvidence != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Payment Evidence
@@ -2029,7 +2088,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection?.wastePaymentEvidence
+                                  data?.submittedData?.SolidWasteSection?.wastePaymentEvidence
                                     ?.name
                                 }
                               /> */}
@@ -2040,8 +2099,8 @@ const DataEdit = ({ data }) => {
                                   setWastePaymentEvidence(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection?.wastePaymentEvidence
-                                    ?.id
+                                  data?.submittedData?.SolidWasteSection
+                                    ?.wastePaymentEvidence?.id
                                 }
                               >
                                 <option value="" selected>
@@ -2054,7 +2113,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.ContainerVolume != null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.ContainerVolume != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Container Volume
@@ -2064,7 +2124,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection?.ContainerVolume?.name
+                                  data?.submittedData?.SolidWasteSection?.ContainerVolume?.name
                                 }
                               /> */}
                               <select
@@ -2074,7 +2134,8 @@ const DataEdit = ({ data }) => {
                                   setContainerVolume(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection?.ContainerVolume?.id
+                                  data?.submittedData?.SolidWasteSection
+                                    ?.ContainerVolume?.id
                                 }
                               >
                                 <option value="" selected>
@@ -2089,8 +2150,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.wasteProviderAccreditted !=
-                          null ? (
+                          {data?.submittedData?.SolidWasteSection
+                            ?.wasteProviderAccreditted != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Provider Accreditted
@@ -2100,7 +2161,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.wasteProviderAccreditted?.name
                                 }
                               /> */}
@@ -2111,7 +2172,7 @@ const DataEdit = ({ data }) => {
                                   setWasteProviderAccreditted(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection
+                                  data?.submittedData?.SolidWasteSection
                                     ?.wasteProviderAccreditted?.id
                                 }
                               >
@@ -2149,8 +2210,8 @@ const DataEdit = ({ data }) => {
                     <div className="card product">
                       <div className="card-body">
                         <div className="row gy-3">
-                          {data?.ConclusionSection?.obnoxiousTradeExist !=
-                          null ? (
+                          {data?.submittedData?.ConclusionSection
+                            ?.obnoxiousTradeExist != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Obnoxious Trade Exist
@@ -2160,7 +2221,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
-                                  data?.ConclusionSection?.obnoxiousTradeExist
+                                  data?.submittedData?.ConclusionSection?.obnoxiousTradeExist
                                     ?.name
                                 }
                               /> */}
@@ -2171,8 +2232,8 @@ const DataEdit = ({ data }) => {
                                   setObnoxiousTradeExist(e.target.value);
                                 }}
                                 value={
-                                  data?.ConclusionSection?.obnoxiousTradeExist
-                                    ?.id
+                                  data?.submittedData?.ConclusionSection
+                                    ?.obnoxiousTradeExist?.id
                                 }
                               >
                                 <option value="" selected>
@@ -2185,13 +2246,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.ConclusionSection?.PremisesNuisanceDetected
-                            ?.length != 0 ? (
+                          {data?.submittedData?.ConclusionSection
+                            ?.PremisesNuisanceDetected?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Nuisance Observed
                               </label>
-                              {data?.ConclusionSection?.PremisesNuisanceDetected?.map(
+                              {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2206,7 +2267,8 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.ConclusionSection?.officerComment != null ? (
+                          {data?.submittedData?.ConclusionSection
+                            ?.officerComment != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Office Comment
@@ -2215,19 +2277,22 @@ const DataEdit = ({ data }) => {
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
-                                value={data?.ConclusionSection?.officerComment}
+                                value={
+                                  data?.submittedData?.ConclusionSection
+                                    ?.officerComment
+                                }
                               />
                             </div>
                           ) : (
                             <></>
                           )}
-                          {data?.ConclusionSection?.PremisesActionTaken
-                            ?.length != 0 ? (
+                          {data?.submittedData?.ConclusionSection
+                            ?.PremisesActionTaken?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Action Taken
                               </label>
-                              {data?.ConclusionSection?.PremisesActionTaken?.map(
+                              {data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2251,7 +2316,7 @@ const DataEdit = ({ data }) => {
                             type="text"
                             className="form-control bg-light border-0"
                             id="invoicenoInput"
-                            value={`${data?.User?.otherNames} ${data?.User?.surname}`}
+                            value={`${data?.submittedData?.User?.otherNames} ${data?.submittedData?.User?.surname}`}
                           />
                         </div>
                       </div>
@@ -2260,7 +2325,7 @@ const DataEdit = ({ data }) => {
                 </div>
               </div>
             </div>
-            {/* {data?.InspectionPictures.map((ip) => {
+            {/* {data?.submittedData?.InspectionPictures.map((ip) => {
      return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
@@ -2285,7 +2350,7 @@ const DataEdit = ({ data }) => {
                     </div>
 
                     <div className="row gallery-wrapper">
-                      {data?.InspectionPictures?.map((ip) => {
+                      {data?.submittedData?.InspectionPictures?.map((ip) => {
                         return (
                           <div
                             key={ip.id}
@@ -2331,13 +2396,13 @@ const DataEdit = ({ data }) => {
                     </div>
                   </div>
                   <div className="col-sm-auto">
-                    {data?.isPublished == 0 ? (
+                    {data?.submittedData?.isPublished == 0 ? (
                       <button
                         className="btn btn-success"
                         onClick={(e) => {
                           e.preventDefault();
 
-                          publish(data?.id);
+                          publish(data?.submittedData?.id);
                         }}
                       >
                         Publish
@@ -2348,7 +2413,7 @@ const DataEdit = ({ data }) => {
                         onClick={(e) => {
                           e.preventDefault();
 
-                          publish(data?.id);
+                          publish(data?.submittedData?.id);
                         }}
                       >
                         Unpublish
@@ -2356,13 +2421,13 @@ const DataEdit = ({ data }) => {
                     )}
                   </div>
                   <div className="col-sm-auto">
-                    {data?.isPublished == 0 ? (
+                    {data?.submittedData?.isPublished == 0 ? (
                       <button
                         className="btn btn-danger"
                         onClick={(e) => {
                           e.preventDefault();
 
-                          handleDelete(data?.id);
+                          handleDelete(data?.submittedData?.id);
                         }}
                       >
                         Delete
