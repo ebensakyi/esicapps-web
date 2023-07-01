@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import ResidentialPremisesInfoEdit from "./PremisesInfoEdits/ResidentialPremisesInfoEdit";
@@ -11,6 +12,69 @@ import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEd
 import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
+  const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
+  const [buildingPermitAvailability, setBuildingPermitAvailability] =
+    useState();
+  const [
+    certificateHabitationAvailability,
+    setCertificateHabitationAvailability,
+  ] = useState();
+  const [propertyRateAvailability, setPropertyRateAvailability] = useState();
+  const [
+    suitabilityCertificateAvailability,
+    setSuitabilityCertificateAvailability,
+  ] = useState();
+  const [structurePermitAvailability, setStructurePermitAvailability] =
+    useState("");
+  const [
+    fumigationCertificateAvailability,
+    setFumigationCertificateAvailability,
+  ] = useState("");
+  const [businessPermitAvailability, setBusinessPermitAvailability] =
+    useState("");
+  const [tempStructurePermitAvailability, setTempStructurePermitAvailability] =
+    useState("");
+  const [waterAnalysisReportSafeUnsafe, setWaterAnalysisReportSafeUnsafe] =
+    useState("");
+  const [regGeneralCertAvailability, setRegGeneralCertAvailability] =
+    useState("");
+  const [gtaOperatingLicenceAvailability, setGtaOperatingLicenceAvailability] =
+    useState("");
+  const [pharmacyCertAvailability, setPharmacyCertAvailability] = useState("");
+  const [waterSourceCondition, setWaterSourceCondition] = useState();
+  const [waterStorageCondition, setWaterStorageCondition] = useState();
+  const [toiletAdequacy, setToiletAdequacy] = useState();
+  const [bathroomAdequacy, setBathroomAdequacy] = useState();
+  const [toiletPitPosition, setToiletPitPosition] = useState();
+  const [drainCondition, setDrainCondition] = useState();
+  const [stagnationEvidence, setStagnationEvidence] = useState();
+  const [analCleansingMaterialMgt, setAnalCleansingMaterialMgt] = useState();
+  const [toiletCondition, setToiletCondition] = useState();
+  const [toiletDischarge, setToiletDischarge] = useState();
+  const [containmentEmptied, setContainmentEmptied] = useState();
+  const [sewerSystem, setSewerSystem] = useState();
+  const [easeYourselfWhere, setEaseYourselfWhere] = useState();
+  const [desiltingFrequency, setDesiltingFrequency] = useState();
+  const [
+    wasteServiceProviderRegistration,
+    setWasteServiceProviderRegistration,
+  ] = useState();
+  const [wasteSortingAvailability, setWasteSortingAvailability] = useState();
+  const [
+    wasteStorageReceptacleAvailability,
+    setApprovedWasteStorageReceptacleAvailability,
+  ] = useState();
+  const [unservicedWasteDisposal, setUnservicedWasteDisposal] = useState();
+  const [wastePaymentEvidence, setWastePaymentEvidence] = useState();
+  const [containerVolume, setContainerVolume] = useState();
+  const [wasteProviderAccreditted, setWasteProviderAccreditted] = useState();
+  const [obnoxiousTradeExist, setObnoxiousTradeExist] = useState();
+  const [adequateWasteStorageReceptacle, setAdequateWasteStorageReceptacle] =
+    useState();
+  // const [name, setName] = useState();
+  // const [name, setName] = useState();
+  // const [name, setName] = useState();
+
   const router = useRouter();
 
   const query = router.query;
@@ -612,7 +676,7 @@ const DataEdit = ({ data }) => {
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
-                                  setStructurePermitAvailability(
+                                  setTempStructurePermitAvailability(
                                     e.target.value
                                   );
                                 }}
@@ -934,7 +998,7 @@ const DataEdit = ({ data }) => {
                                   setWaterStorageCondition(e.target.value);
                                 }}
                                 value={
-                                  data?.WaterSection?.waterStorageCondition?.id
+                                  data?.WaterSection?.waterStorageConditionSafe?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1137,7 +1201,7 @@ const DataEdit = ({ data }) => {
                                     ?.name
                                 }
                               /> */}
-                               <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
@@ -1188,7 +1252,8 @@ const DataEdit = ({ data }) => {
                                   setToiletPitPosition(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.toiletPitPosition?.id
+                                  data?.LiquidWasteSection?.toiletPitPosition
+                                    ?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1197,7 +1262,6 @@ const DataEdit = ({ data }) => {
                                 <option value={1}>Direct</option>
                                 <option value={2}>Offsite</option>
                                 <option value={3}>NA</option>
-
                               </select>
                               {/* <input
                                 type="text"
@@ -1227,7 +1291,7 @@ const DataEdit = ({ data }) => {
                                 }
                               /> */}
 
-<select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
@@ -1243,7 +1307,6 @@ const DataEdit = ({ data }) => {
                                 <option value={1}>Direct</option>
                                 <option value={2}>Offsite</option>
                                 <option value={3}>NA</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1262,7 +1325,8 @@ const DataEdit = ({ data }) => {
                                   setStagnationEvidence(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.stagnationEvidence?.id
+                                  data?.LiquidWasteSection?.stagnationEvidence
+                                    ?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1270,7 +1334,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
-
                               </select>
                               {/* <input
                                 type="text"
@@ -1298,7 +1361,8 @@ const DataEdit = ({ data }) => {
                                   setAnalCleansingMaterialMgt(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.analCleansingMaterialMgt?.id
+                                  data?.LiquidWasteSection
+                                    ?.analCleansingMaterialMgt?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1306,7 +1370,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
-
                               </select>
                               {/* <input
                                 type="text"
@@ -1341,7 +1404,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Sanitary</option>
                                 <option value={2}>Insanitary</option>
-
                               </select>
                               {/* <input
                                 type="text"
@@ -1370,14 +1432,14 @@ const DataEdit = ({ data }) => {
                                     ?.name
                                 }
                               /> */}
-                               <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
-                                  setToiletCondition(e.target.value);
+                                  setToiletDischarge(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.toiletCondition?.id
+                                  data?.LiquidWasteSection?.toiletDischarge?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1385,7 +1447,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>On site</option>
                                 <option value={2}>Off site</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1404,7 +1465,8 @@ const DataEdit = ({ data }) => {
                                   setContainmentEmptied(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.containmentEmptied?.id
+                                  data?.LiquidWasteSection?.containmentEmptied
+                                    ?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1412,7 +1474,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>On site</option>
                                 <option value={2}>Off site</option>
-
                               </select>
                               {/* <input
                                 type="text"
@@ -1440,7 +1501,7 @@ const DataEdit = ({ data }) => {
                                   data?.LiquidWasteSection?.sewerSystem?.name
                                 }
                               /> */}
-                               <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
@@ -1455,7 +1516,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Centralised</option>
                                 <option value={2}>Decentralised</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1476,14 +1536,15 @@ const DataEdit = ({ data }) => {
                                     ?.name
 
                               /> */}
-                               <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
                                   setEaseYourselfWhere(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.EeaseYourselfWhere?.id
+                                  data?.LiquidWasteSection?.EaseYourselfWhere
+                                    ?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1492,7 +1553,6 @@ const DataEdit = ({ data }) => {
                                 <option value={1}>Neighbours place</option>
                                 <option value={2}>Bush</option>
                                 <option value={3}>Public toilet</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1515,14 +1575,15 @@ const DataEdit = ({ data }) => {
 
                               
                               /> */}
-                                <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
                                   setDesiltingFrequency(e.target.value);
                                 }}
                                 value={
-                                  data?.LiquidWasteSection?.DesiltingFrequency?.id
+                                  data?.LiquidWasteSection?.DesiltingFrequency
+                                    ?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1535,7 +1596,6 @@ const DataEdit = ({ data }) => {
                                 <option value={5}>Bi yearly</option>
                                 <option value={6}>Yearly</option>
                                 <option value={7}>None</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1702,14 +1762,17 @@ const DataEdit = ({ data }) => {
                                     ?.wasteServiceProviderRegistration?.name
                                 }
                               /> */}
-                               <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
-                                  setWasteServiceProviderRegistration(e.target.value);
+                                  setWasteServiceProviderRegistration(
+                                    e.target.value
+                                  );
                                 }}
                                 value={
-                                  data?.SolidWasteSection?.wasteServiceProviderRegistration?.id
+                                  data?.SolidWasteSection
+                                    ?.wasteServiceProviderRegistration?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1717,7 +1780,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1736,7 +1798,7 @@ const DataEdit = ({ data }) => {
                                 value={
                                   data?.SolidWasteSection?.wasteCollectorName
                                 }
-                                 onChange={(e) => {
+                                onChange={(e) => {
                                   setWasteCollectorName(e.target.value);
                                 }}
                               />
@@ -1766,7 +1828,8 @@ const DataEdit = ({ data }) => {
                                   setWasteSortingAvailability(e.target.value);
                                 }}
                                 value={
-                                  data?.SolidWasteSection?.wasteSortingAvailability?.id
+                                  data?.SolidWasteSection
+                                    ?.wasteSortingAvailability?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1774,7 +1837,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1795,14 +1857,17 @@ const DataEdit = ({ data }) => {
                                     ?.approvedWasteStorageReceptacle?.name
                                 }
                               /> */}
-                               <select
+                              <select
                                 className="form-control"
                                 aria-label="Default select example"
                                 onChange={(e) => {
-                                  setApprovedWasteStorageReceptacleAvailability(e.target.value);
+                                  setApprovedWasteStorageReceptacleAvailability(
+                                    e.target.value
+                                  );
                                 }}
                                 value={
-                                  data?.SolidWasteSection?.approvedWasteStorageReceptacle?.id
+                                  data?.SolidWasteSection
+                                    ?.approvedWasteStorageReceptacle?.id
                                 }
                               >
                                 <option value="" selected>
@@ -1810,7 +1875,6 @@ const DataEdit = ({ data }) => {
                                 </option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
-
                               </select>
                             </div>
                           ) : (
@@ -1822,15 +1886,27 @@ const DataEdit = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Adequate Waste Storage Receptacle
                               </label>
-                              <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
+                             
+
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setAdequateWasteStorageReceptacle(
+                                    e.target.value
+                                  );
+                                }}
                                 value={
                                   data?.SolidWasteSection
-                                    ?.adequateWasteStorageReceptacle?.name
+                                    ?.adequateWasteStorageReceptacle?.id
                                 }
-                              />
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Yes</option>
+                                <option value={2}>No</option>
+                              </select>
                             </div>
                           ) : (
                             <></>
@@ -1883,7 +1959,7 @@ const DataEdit = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Unserviced Waste Disposal
                               </label>
-                              <input
+                              {/* <input
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
@@ -1891,7 +1967,26 @@ const DataEdit = ({ data }) => {
                                   data?.SolidWasteSection
                                     ?.UnservicedWasteDisposal?.name
                                 }
-                              />
+                              /> */}
+
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setUnservicedWasteDisposal(e.target.value);
+                                }}
+                                value={
+                                  data?.SolidWasteSection
+                                    ?.UnservicedWasteDisposal?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Crude Dumping</option>
+                                <option value={2}>Burning</option>
+                                <option value={2}>Burying</option>
+                              </select>
                             </div>
                           ) : (
                             <></>
@@ -1902,7 +1997,7 @@ const DataEdit = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Waste Payment Evidence
                               </label>
-                              <input
+                              {/* <input
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
@@ -1910,7 +2005,24 @@ const DataEdit = ({ data }) => {
                                   data?.SolidWasteSection?.wastePaymentEvidence
                                     ?.name
                                 }
-                              />
+                              /> */}
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setWastePaymentEvidence(e.target.value);
+                                }}
+                                value={
+                                  data?.SolidWasteSection?.wastePaymentEvidence
+                                    ?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Yes</option>
+                                <option value={2}>No</option>
+                              </select>
                             </div>
                           ) : (
                             <></>
@@ -1920,14 +2032,32 @@ const DataEdit = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Container Volume
                               </label>
-                              <input
+                              {/* <input
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
                                 value={
                                   data?.SolidWasteSection?.ContainerVolume?.name
                                 }
-                              />
+                              /> */}
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setContainerVolume(e.target.value);
+                                }}
+                                value={
+                                  data?.SolidWasteSection?.ContainerVolume?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>10 Cubic</option>
+                                <option value={2}>12 Cubic</option>
+                                <option value={3}>14 Cubic</option>
+                                <option value={4}>20 and Above</option>
+                              </select>
                             </div>
                           ) : (
                             <></>
@@ -1938,7 +2068,7 @@ const DataEdit = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Waste Provider Accreditted
                               </label>
-                              <input
+                              {/* <input
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
@@ -1946,7 +2076,24 @@ const DataEdit = ({ data }) => {
                                   data?.SolidWasteSection
                                     ?.wasteProviderAccreditted?.name
                                 }
-                              />
+                              /> */}
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setWasteProviderAccreditted(e.target.value);
+                                }}
+                                value={
+                                  data?.SolidWasteSection
+                                    ?.wasteProviderAccreditted?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Yes</option>
+                                <option value={2}>No</option>
+                              </select>
                             </div>
                           ) : (
                             <></>
@@ -1981,7 +2128,7 @@ const DataEdit = ({ data }) => {
                               <label htmlFor="invoicenoInput">
                                 Obnoxious Trade Exist
                               </label>
-                              <input
+                              {/* <input
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
@@ -1989,7 +2136,24 @@ const DataEdit = ({ data }) => {
                                   data?.ConclusionSection?.obnoxiousTradeExist
                                     ?.name
                                 }
-                              />
+                              /> */}
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setObnoxiousTradeExist(e.target.value);
+                                }}
+                                value={
+                                  data?.ConclusionSection?.obnoxiousTradeExist
+                                    ?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Yes</option>
+                                <option value={2}>No</option>
+                              </select>
                             </div>
                           ) : (
                             <></>
