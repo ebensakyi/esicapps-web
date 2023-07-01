@@ -75,6 +75,10 @@ const DataEdit = ({ data }) => {
   // const [name, setName] = useState();
   // const [name, setName] = useState();
 
+
+
+  console.log(data?.SolidWasteSection?.WasteCollectionType);
+
   const router = useRouter();
 
   const query = router.query;
@@ -272,7 +276,7 @@ const DataEdit = ({ data }) => {
                               readOnly="readOnly"
                             />
                           </div>
-                          <div className="col-lg-3 col-sm-6">
+                          {/* <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               GhanaPost GPS
                             </label>
@@ -283,7 +287,7 @@ const DataEdit = ({ data }) => {
                               value={data?.BasicInfoSection?.ghanaPostGps}
                               readOnly="readOnly"
                             />
-                          </div>
+                          </div> */}
                           <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               Name of respondent
@@ -1911,12 +1915,35 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.PremisesWasteCollection
-                            ?.length != 0 ? (
+                          {data?.SolidWasteSection?.WasteCollectionType
+                             != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Type
                               </label>
+
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setWasteCollectionType(
+                                    e.target.value
+                                  );
+                                }}
+                                value={
+                                  data?.SolidWasteSection
+                                    ?.WasteCollectionType?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Communal container</option>
+                                <option value={2}>Door to door</option>
+                                <option value={3}>Not serviced</option>
+                                <option value={4}>Communal Dump Site</option>
+
+                              </select>
                               {data?.SolidWasteSection?.PremisesWasteCollection?.map(
                                 (x) => (
                                   <input

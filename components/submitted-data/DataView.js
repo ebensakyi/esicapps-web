@@ -1335,24 +1335,22 @@ const DataView = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.SolidWasteSection?.PremisesWasteCollection
-                            ?.length != 0 ? (
+                          {data?.SolidWasteSection?.WasteCollectionType
+                             != null ?(
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Type
                               </label>
-                              {data?.SolidWasteSection?.PremisesWasteCollection?.map(
-                                (x) => (
+                              
                                   <input
-                                    key={x.id}
                                     type="text"
                                     className="form-control bg-light border-0"
                                     id="invoicenoInput"
-                                    value={x.WasteCollectionType.name}
+                                    value={data?.SolidWasteSection?.WasteCollectionType.name}
                                     readOnly="readOnly"
                                   />
-                                )
-                              )}
+                                
+                              
                             </div>
                           ) : (
                             <></>
@@ -1675,6 +1673,37 @@ const DataView = ({ data }) => {
                       </button>
                     )}
                   </div>
+                  <div className="col-sm-auto">
+                  <Link
+                   className="btn btn-primary"
+                          href={{
+                            pathname: `/submitted-data/data_edit`,
+                            query: {
+                              id: data?.Inspection?.id,
+                              inspectionFormId: formId,
+                              published: published,
+                            },
+                          }}
+                        >
+                          <a className="dropdown-item">
+                            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
+                            Edit
+                          </a>
+                        </Link>
+                        </div>
+                  {/* <div className="col-sm-auto">
+                      <button
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          handleEdit(data?.id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                   
+                  </div> */}
                   <div className="col-sm-auto">
                     {data?.isPublished == 0 ? (
                       <button

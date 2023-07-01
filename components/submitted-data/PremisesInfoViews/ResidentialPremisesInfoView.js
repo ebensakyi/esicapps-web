@@ -11,7 +11,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
   let formId = query.inspectionFormId;
   let published = query.published;
 
-
+console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
 
   return (
     <>
