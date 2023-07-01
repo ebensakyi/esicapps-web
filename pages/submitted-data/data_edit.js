@@ -66,7 +66,7 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const excretaDisposalMethod = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/excreta-disposal-method?session=${session}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/excreta-disposal?session=${session}`
   ).then((res) => res.json());
 
   const greyWaterDisposal = await fetch(
@@ -78,7 +78,7 @@ export async function getServerSideProps(context) {
   ).then((res) => res.json());
 
   const wasteReceptacle = await fetch(
-    `${SERVER_BASE_URL}/api/v1/primary-data/waste-receptacle?session=${session}`
+    `${SERVER_BASE_URL}/api/v1/primary-data/waste-storage-receptacle?session=${session}`
   ).then((res) => res.json());
 
   const unservicedWasteDisposal = await fetch(

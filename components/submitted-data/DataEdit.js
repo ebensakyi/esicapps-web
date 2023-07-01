@@ -79,17 +79,30 @@ const DataEdit = ({ data }) => {
 
   const [selectedWaterSupply, setSelectedWaterSupply] = useState([]);
   const [selectedWaterSource, setSelectedWaterSource] = useState([]);
+  const [selectedWaterStorage, setSelectedWaterStorage] = useState([]);
+
   const [selectedWaterTreatment, setSelectedWaterTreatment] = useState([]);
-  const [selectedDrinkingWaterSource, setSelectedDrinkingWaterSource] = useState([]);
+  const [selectedDrinkingWaterSource, setSelectedDrinkingWaterSource] =
+    useState([]);
   const [selectedDrainType, setSelectedDrainType] = useState([]);
-  const [selectedEffluentManagement, setSelectedEffluentManagement] = useState([]);
-  const [selectedExcretaContainment, setSelectedExcretaContainment] = useState([]);
-  const [selectedGreyWaterDisposal, setSelectedGreyWaterDisposal] = useState([]);
+  const [selectedEffluentManagement, setSelectedEffluentManagement] = useState(
+    []
+  );
+  const [selectedExcretaContainment, setSelectedExcretaContainment] = useState(
+    []
+  );
+  const [selectedExcretaDisposalMethod, setSelectedExcretaDisposalMethod] =
+    useState([]);
+
+  const [selectedGreyWaterDisposal, setSelectedGreyWaterDisposal] = useState(
+    []
+  );
   const [selectedToiletType, setSelectedToiletType] = useState([]);
   const [selectedWasteReceptacle, setSelectedWasteReceptacle] = useState([]);
-  const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] = useState([]);
+
   const [selectedNuisanceDetected, setSelectedNuisanceDetected] = useState([]);
   const [selectedAction, setSelectedAction] = useState([]);
+  const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] = useState([]);
 
   const router = useRouter();
 
@@ -169,7 +182,12 @@ const DataEdit = ({ data }) => {
   const onWaterSupplySelect = (selected) => {
     setSelectedWaterSupply(selected);
   };
-
+  const onWaterStorageRemove = (selected) => {
+    setSelectedWaterStorage(selected);
+  };
+  const onWaterStorageSelect = (selected) => {
+    setSelectedWaterStorage(selected);
+  };
 
   const onWaterSourcesRemove = (selected) => {
     setSelectedWaterSource(selected);
@@ -178,14 +196,12 @@ const DataEdit = ({ data }) => {
     setSelectedWaterSource(selected);
   };
 
-
   const onWaterTreatmentRemove = (selected) => {
     setSelectedWaterTreatment(selected);
   };
   const onWaterTreatmentSelect = (selected) => {
     setSelectedWaterTreatment(selected);
   };
-
 
   const onDrinkingWaterSourceRemove = (selected) => {
     setSelectedDrinkingWaterSource(selected);
@@ -194,14 +210,12 @@ const DataEdit = ({ data }) => {
     setSelectedDrinkingWaterSource(selected);
   };
 
-
   const onDrainTypeRemove = (selected) => {
     setSelectedDrainType(selected);
   };
   const onDrainTypeSelect = (selected) => {
     setSelectedDrainType(selected);
   };
-
 
   const onEffluentManagementRemove = (selected) => {
     setSelectedEffluentManagement(selected);
@@ -210,12 +224,21 @@ const DataEdit = ({ data }) => {
     setSelectedEffluentManagement(selected);
   };
 
-
   const onExcretaContainmentRemove = (selected) => {
     setSelectedExcretaContainment(selected);
   };
   const onExcretaContainmentSelect = (selected) => {
     setSelectedExcretaContainment(selected);
+  };
+
+  const onExcretaDisposalMethodRemove = (selected) => {
+    setSelectedExcretaDisposalMethod(selected);
+  };
+  const onExcretaDisposalMethodSelect = (selected) => {
+    setSelectedExcretaDisposalMethod(selected);
+  };
+  const onGreyWaterDisposalSelect = (selected) => {
+    setSelectedGreyWaterDisposal(selected);
   };
 
   const onGreyWaterDisposalRemove = (selected) => {
@@ -224,20 +247,29 @@ const DataEdit = ({ data }) => {
   const onToiletTypeSelect = (selected) => {
     setSelectedToiletType(selected);
   };
+  const onToiletTypeRemove = (selected) => {
+    setSelectedToiletType(selected);
+  };
+  const onWasteReceptacleSelect = (selected) => {
+    setSelectedWasteReceptacle(selected);
+  };
   const onWasteReceptacleRemove = (selected) => {
     setSelectedWasteReceptacle(selected);
   };
   const onUnservicedWasteDisposalSelect = (selected) => {
     setSelectedUnservicedWasteDisposal(selected);
   };
+  const onNuisanceDetectedSelect = (selected) => {
+    setSelectedNuisanceDetected(selected);
+  };
   const onNuisanceDetectedRemove = (selected) => {
     setSelectedNuisanceDetected(selected);
   };
   const onActionSelect = (selected) => {
     setSelectedAction(selected);
+  }; const onActionRemove = (selected) => {
+    setSelectedAction(selected);
   };
-
-  
 
   useEffect(() => {
     let premisesWaterSupply =
@@ -250,144 +282,145 @@ const DataEdit = ({ data }) => {
 
     setSelectedWaterSupply(premisesWaterSupply);
 
-
     let premisesWaterSource =
-    data?.submittedData?.WaterSection?.premisesWaterSource?.map((data) => {
-      return {
-        value: data.WaterSourceType.id,
-        label: data.WaterSourceType.name,
-      };
-    });
+      data?.submittedData?.WaterSection?.premisesWaterSource?.map((data) => {
+        return {
+          value: data.WaterSourceType.id,
+          label: data.WaterSourceType.name,
+        };
+      });
 
     setSelectedWaterSource(premisesWaterSource);
 
+    let premisesWaterTreatment =
+      data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
+        (data) => {
+          return {
+            value: data.WaterTreatmentType.id,
+            label: data.WaterTreatmentType.name,
+          };
+        }
+      );
 
-  let premisesWaterTreatment =
-  data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map((data) => {
-    return {
-      value: data.WaterTreatmentType.id,
-      label: data.WaterTreatmentType.name,
-    };
-  });
+    setSelectedWaterTreatment(premisesWaterTreatment);
 
-  setSelectedWaterTreatment(premisesWaterTreatment);
+    let premisesDrinkingWaterSource =
+      data?.submittedData?.WaterSection?.PremisesDrinkingWaterSource?.map(
+        (data) => {
+          return {
+            value: data.DrinkingWaterSource.id,
+            label: data.DrinkingWaterSource.name,
+          };
+        }
+      );
 
+    setSelectedDrinkingWaterSource(premisesDrinkingWaterSource);
 
+    let premisesDrainType =
+      data?.submittedData?.WaterSection?.PremisesDrainType?.map((data) => {
+        return {
+          value: data.DrainType.id,
+          label: data.DrainType.name,
+        };
+      });
 
-let premisesDrinkingWaterSource =
-data?.submittedData?.WaterSection?.PremisesDrinkingWaterSource?.map((data) => {
-  return {
-    value: data.DrinkingWaterSource.id,
-    label: data.DrinkingWaterSource.name,
-  };
-});
+    setSelectedDrainType(premisesDrainType);
 
-setSelectedDrinkingWaterSource(premisesWaterSupply);
+    let premisesnEffluentManagement =
+      data?.submittedData?.WaterSection?.PremisesnEffluentManagement?.map(
+        (data) => {
+          return {
+            value: data.EffluentManagement.id,
+            label: data.EffluentManagement.name,
+          };
+        }
+      );
 
+    setSelectedEffluentManagement(premisesnEffluentManagement);
 
+    let premisesExcretaContainment =
+      data?.submittedData?.WaterSection?.PremisesExcretaContainment?.map(
+        (data) => {
+          return {
+            value: data.ExcretaContainment.id,
+            label: data.ExcretaContainment.name,
+          };
+        }
+      );
 
+    setSelectedExcretaContainment(premisesExcretaContainment);
 
-let premisesDrainType =
-data?.submittedData?.WaterSection?.PremisesDrainType?.map((data) => {
-  return {
-    value: data.DrainType.id,
-    label: data.DrainType.name,
-  };
-});
+    let premisesGreyWaterDisposal =
+      data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+        (data) => {
+          return {
+            value: data.GreyWaterDisposal.id,
+            label: data.GreyWaterDisposal.name,
+          };
+        }
+      );
 
-setSelectedDrainType(premisesDrainType);
+    setSelectedGreyWaterDisposal(premisesGreyWaterDisposal);
 
+    let premisesToiletType =
+      data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
+        (data) => {
+          return {
+            value: data.ToiletType.id,
+            label: data.ToiletType.name,
+          };
+        }
+      );
 
+    setSelectedToiletType(premisesToiletType);
 
-let premisesnEffluentManagement =
-data?.submittedData?.WaterSection?.PremisesnEffluentManagement?.map((data) => {
-  return {
-    value: data.EffluentManagement.id,
-    label: data.EffluentManagement.name,
-  };
-});
+    let premisesWasteReceptacle =
+      data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+        (data) => {
+          return {
+            value: data.SolidWasteReceptacle.id,
+            label: data.SolidWasteReceptacle.name,
+          };
+        }
+      );
 
-setSelectedEffluentManagement(premisesnEffluentManagement);
+    setSelectedWasteReceptacle(premisesWasteReceptacle);
 
+    let premisesUnservicedWasteDisposal =
+      data?.submittedData?.SolidWasteSection?.PremisesUnservicedWasteDisposal?.map(
+        (data) => {
+          return {
+            value: data.UnservicedWasteDisposal.id,
+            label: data.UnservicedWasteDisposal.name,
+          };
+        }
+      );
 
+    setSelectedUnservicedWasteDisposal(premisesUnservicedWasteDisposal);
 
-let premisesExcretaContainment =
-data?.submittedData?.WaterSection?.PremisesExcretaContainment?.map((data) => {
-  return {
-    value: data.ExcretaContainment.id,
-    label: data.ExcretaContainment.name,
-  };
-});
+    let premisesActionTaken =
+      data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
+        (data) => {
+          return {
+            value: data.Action.id,
+            label: data.Action.name,
+          };
+        }
+      );
 
-setSelectedExcretaContainment(premisesExcretaContainment);
+    setSelectedAction(premisesActionTaken);
 
+    let premisesNuisanceDetected =
+      data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
+        (data) => {
+          return {
+            value: data.Nuisance?.id,
+            label: data.Nuisance?.name,
+          };
+        }
+      );
 
-
-let premisesGreyWaterDisposal =
-data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map((data) => {
-  return {
-    value: data.GreyWaterDisposal.id,
-    label: data.GreyWaterDisposal.name,
-  };
-});
-
-setSelectedGreyWaterDisposal(premisesGreyWaterDisposal);
-
-
-
-let premisesToiletType =
-data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map((data) => {
-  return {
-    value: data.ToiletType.id,
-    label: data.ToiletType.name,
-  };
-});
-
-setSelectedToiletType(premisesWaterSupply);
-
-
-let premisesWasteReceptacle =
-data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map((data) => {
-  return {
-    value: data.WasteReceptacle.id,
-    label: data.WasteReceptacle.name,
-  };
-});
-
-setSelectedWasteReceptacle(premisesWasteReceptacle);
-
-
-let premisesUnservicedWasteDisposal =
-data?.submittedData?.SolidWasteSection?.PremisesUnservicedWasteDisposal?.map((data) => {
-  return {
-    value: data.UnservicedWasteDisposal.id,
-    label: data.UnservicedWasteDisposal.name,
-  };
-});
-
-setSelectedUnservicedWasteDisposal(premisesWaterSupply);
-
-let premisesActionTaken =
-data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map((data) => {
-  return {
-    value: data.Action.id,
-    label: data.Action.name,
-  };
-});
-
-setSelectedAction(premisesActionTaken);
-
-
-
-let premisesNuisanceDetected =
-data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map((data) => {
-  return {
-    value: data.NuisanceDetected .id,
-    label: data.NuisanceDetected .name,
-  };
-});
-
-setSelectedNuisanceDetected(premisesWaterSupply);
+    setSelectedNuisanceDetected(premisesNuisanceDetected);
   }, []);
 
   return (
@@ -1148,9 +1181,9 @@ setSelectedNuisanceDetected(premisesWaterSupply);
 
                               <Multiselect
                                 options={data.waterSourcesOptions}
-                                selectedValues={selectedWaterSources}
-                                onSelect={onwaterSourcesSelect}
-                                onRemove={onwaterSourcesRemove}
+                                selectedValues={selectedWaterSource}
+                                onSelect={onWaterSourcesSelect}
+                                onRemove={onWaterSourcesRemove}
                                 displayValue="label"
                               />
                               {/* {data?.submittedData?.WaterSection?.PremisesWaterSources.map(
@@ -1238,7 +1271,16 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Water storage
                               </label>
-                              {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
+
+                              <Multiselect
+                                options={data.waterStoragesOptions}
+                                selectedValues={selectedWaterStorage}
+                                onSelect={onWaterStorageSelect}
+                                onRemove={onWaterStorageRemove}
+                                displayValue="label"
+                              />
+
+                              {/* {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1248,7 +1290,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.WaterStorageType.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1295,7 +1337,15 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Water treatment type
                               </label>
-                              {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
+
+                              <Multiselect
+                                options={data.waterTreatmentOptions}
+                                selectedValues={selectedWaterTreatment}
+                                onSelect={onWaterTreatmentSelect}
+                                onRemove={onWaterTreatmentRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1305,7 +1355,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.WaterTreatmentType.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1316,7 +1366,15 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Drinking water source
                               </label>
-                              {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
+
+                              <Multiselect
+                                options={data.drinkingWaterSourceOptions}
+                                selectedValues={selectedDrinkingWaterSource}
+                                onSelect={onDrinkingWaterSourceSelect}
+                                onRemove={onDrinkingWaterSourceRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1326,7 +1384,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.DrinkingWaterSourceType.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1337,7 +1395,24 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Water flow frequency
                               </label>
-                              <input
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setWaterFlowFrequency(e.target.value);
+                                }}
+                                value={
+                                  data?.submittedData?.WaterSection
+                                    ?.WaterFlowFrequency?.id
+                                }
+                              >
+                                <option value="" selected>
+                                  Select
+                                </option>
+                                <option value={1}>Regular</option>
+                                <option value={2}>Intermittent</option>
+                              </select>
+                              {/* <input
                                 type="text"
                                 className="form-control bg-light border-0"
                                 id="invoicenoInput"
@@ -1345,7 +1420,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                   data?.submittedData?.WaterSection
                                     ?.WaterFlowFrequency?.name
                                 }
-                              />
+                              /> */}
                             </div>
                           ) : (
                             <></>
@@ -1889,7 +1964,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                             ?.PremisesDrainType?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">Drain Type</label>
-                              {data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map(
+                              <Multiselect
+                                options={data.drainTypeOptions}
+                                selectedValues={selectedDrainType}
+                                onSelect={onDrainTypeSelect}
+                                onRemove={onDrainTypeRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1899,7 +1981,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.DrainType?.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1910,7 +1992,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Effluent Management
                               </label>
-                              {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+                              <Multiselect
+                                options={data.effluentManagementOptions}
+                                selectedValues={selectedEffluentManagement}
+                                onSelect={onEffluentManagementSelect}
+                                onRemove={onEffluentManagementRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1920,7 +2009,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.EffluentManagement.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1931,7 +2020,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Excreta Containment
                               </label>
-                              {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment.map(
+                              <Multiselect
+                                options={data.excretaContainmentOptions}
+                                selectedValues={selectedExcretaContainment}
+                                onSelect={onExcretaContainmentSelect}
+                                onRemove={onExcretaContainmentRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1941,7 +2037,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.ExcretaContainment.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1952,7 +2048,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Excreta Disposal Method
                               </label>
-                              {data?.submittedData?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
+                              <Multiselect
+                                options={data.excretaDisposalMethodOptions}
+                                selectedValues={selectedExcretaDisposalMethod}
+                                onSelect={onExcretaDisposalMethodSelect}
+                                onRemove={onExcretaDisposalMethodRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1962,7 +2065,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.ExcretaDisposalMethod.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1973,7 +2076,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Grey Water Disposal
                               </label>
-                              {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+                              <Multiselect
+                                options={data.greyWaterDisposalOptions}
+                                selectedValues={selectedGreyWaterDisposal}
+                                onSelect={onGreyWaterDisposalSelect}
+                                onRemove={onGreyWaterDisposalRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1983,7 +2093,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.GreyWaterDisposal.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -1994,7 +2104,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Toilet Type
                               </label>
-                              {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
+                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2004,7 +2114,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x.ToiletType.name}
                                   />
                                 )
-                              )}
+                              )} */}
+                              <Multiselect
+                                options={data.toiletTypeOptions}
+                                selectedValues={selectedToiletType}
+                                onSelect={onToiletTypeSelect}
+                                onRemove={onToiletTypeRemove}
+                                displayValue="label"
+                              />
                             </div>
                           ) : (
                             <></>
@@ -2242,7 +2359,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Waste Collection Receptacle
                               </label>
-                              {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+                              {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2252,7 +2369,15 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x?.SolidWasteReceptacle?.name}
                                   />
                                 )
-                              )}
+                              )} */}
+
+                              <Multiselect
+                                options={data.wasteReceptacleOptions}
+                                selectedValues={selectedWasteReceptacle}
+                                onSelect={onWasteReceptacleSelect}
+                                onRemove={onWasteReceptacleRemove}
+                                displayValue="label"
+                              />
                             </div>
                           ) : (
                             <></>
@@ -2470,7 +2595,15 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Nuisance Observed
                               </label>
-                              {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
+
+                              <Multiselect
+                                options={data.nuisanceDetectedOptions}
+                                selectedValues={selectedNuisanceDetected}
+                                onSelect={onNuisanceDetectedSelect}
+                                onRemove={onNuisanceDetectedRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2480,7 +2613,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x?.Nuisance?.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
@@ -2510,7 +2643,14 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                               <label htmlFor="invoicenoInput">
                                 Action Taken
                               </label>
-                              {data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
+                              <Multiselect
+                                options={data.actionOptions}
+                                selectedValues={selectedAction}
+                                onSelect={onActionSelect}
+                                onRemove={onActionRemove}
+                                displayValue="label"
+                              />
+                              {/* {data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2520,7 +2660,7 @@ setSelectedNuisanceDetected(premisesWaterSupply);
                                     value={x?.Action?.name}
                                   />
                                 )
-                              )}
+                              )} */}
                             </div>
                           ) : (
                             <></>
