@@ -14,6 +14,7 @@ import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEd
 import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
+
   const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
   const [buildingPermitAvailability, setBuildingPermitAvailability] =
     useState();
@@ -73,7 +74,7 @@ const DataEdit = ({ data }) => {
   const [obnoxiousTradeExist, setObnoxiousTradeExist] = useState();
   const [adequateWasteStorageReceptacle, setAdequateWasteStorageReceptacle] =
     useState();
-  // const [name, setName] = useState();
+ const [numberToiletSeats, setNumberToiletSeats] = useState();
   // const [name, setName] = useState();
   // const [name, setName] = useState();
 
@@ -283,12 +284,14 @@ const DataEdit = ({ data }) => {
     setSelectedWaterSupply(premisesWaterSupply);
 
     let premisesWaterSource =
-      data?.submittedData?.WaterSection?.premisesWaterSource?.map((data) => {
+      data?.submittedData?.WaterSection?.PremisesWaterSources?.map((data) => {
         return {
           value: data.WaterSourceType.id,
           label: data.WaterSourceType.name,
         };
       });
+
+      console.log("premisesWaterSource ",premisesWaterSource);
 
     setSelectedWaterSource(premisesWaterSource);
 
@@ -305,11 +308,11 @@ const DataEdit = ({ data }) => {
     setSelectedWaterTreatment(premisesWaterTreatment);
 
     let premisesDrinkingWaterSource =
-      data?.submittedData?.WaterSection?.PremisesDrinkingWaterSource?.map(
+      data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
         (data) => {
           return {
-            value: data.DrinkingWaterSource.id,
-            label: data.DrinkingWaterSource.name,
+            value: data.DrinkingWaterSourceType.id,
+            label: data.DrinkingWaterSourceType.name,
           };
         }
       );
@@ -492,7 +495,7 @@ const DataEdit = ({ data }) => {
                             </label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={data?.submittedData?.premisesCode}
                               readOnly="readOnly"
@@ -502,7 +505,7 @@ const DataEdit = ({ data }) => {
                             <label htmlFor="invoicenoInput">Region</label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={
                                 data?.submittedData?.BasicInfoSection?.Community
@@ -515,7 +518,7 @@ const DataEdit = ({ data }) => {
                             <label htmlFor="invoicenoInput">District</label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={
                                 data?.submittedData?.BasicInfoSection
@@ -533,7 +536,7 @@ const DataEdit = ({ data }) => {
                             </label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={data?.submittedData?.ElectoralArea?.name}
                               readOnly="readOnly"
@@ -543,7 +546,7 @@ const DataEdit = ({ data }) => {
                             <label htmlFor="invoicenoInput">Community</label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={
                                 data?.submittedData?.BasicInfoSection?.Community
@@ -558,7 +561,7 @@ const DataEdit = ({ data }) => {
                             </label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={data?.submittedData?.BasicInfoSection?.ghanaPostGps}
                               readOnly="readOnly"
@@ -570,7 +573,7 @@ const DataEdit = ({ data }) => {
                             </label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={
                                 data?.submittedData?.BasicInfoSection
@@ -585,7 +588,7 @@ const DataEdit = ({ data }) => {
                             </label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={
                                 data?.submittedData?.BasicInfoSection
@@ -594,13 +597,15 @@ const DataEdit = ({ data }) => {
                               readOnly="readOnly"
                             />
                           </div>{" "}
+                          {data?.submittedData?.ConclusionSection
+                            ?.officerComment != ""?
                           <div className="col-lg-3 col-sm-6">
                             <label htmlFor="invoicenoInput">
                               Respondent phone number
                             </label>
                             <input
                               type="text"
-                              className="form-control bg-light border-0"
+                              className="form-control"
                               id="invoicenoInput"
                               value={
                                 data?.submittedData?.BasicInfoSection
@@ -608,7 +613,7 @@ const DataEdit = ({ data }) => {
                               }
                               readOnly="readOnly"
                             />
-                          </div>
+                          </div>:<></>}
                         </div>
                       </div>
                     </div>
@@ -676,7 +681,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -712,7 +717,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -750,7 +755,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -786,7 +791,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -824,7 +829,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -862,7 +867,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -902,7 +907,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -939,7 +944,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -977,7 +982,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -1016,7 +1021,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -1053,7 +1058,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -1093,7 +1098,7 @@ const DataEdit = ({ data }) => {
 
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -1131,7 +1136,7 @@ const DataEdit = ({ data }) => {
 
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LicencePermitSection
@@ -1191,7 +1196,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.WaterSourceType.name}
                                   />
@@ -1212,7 +1217,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.WaterSupplyType.name}
                                   />
@@ -1254,7 +1259,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.WaterSection?.waterSourceCondition?.name
@@ -1285,7 +1290,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.WaterStorageType.name}
                                   />
@@ -1299,7 +1304,7 @@ const DataEdit = ({ data }) => {
                             ?.waterStorageConditionSafe != null ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
-                                Safe Water storage receptacle condition
+                                Water storage receptacle condition
                               </label>
                               <select
                                 className="form-control"
@@ -1320,7 +1325,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.WaterSection?.waterStorageConditionSafe
@@ -1350,7 +1355,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.WaterTreatmentType.name}
                                   />
@@ -1379,7 +1384,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.DrinkingWaterSourceType.name}
                                   />
@@ -1414,7 +1419,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.WaterSection
@@ -1464,17 +1469,16 @@ const DataEdit = ({ data }) => {
                                 Number Toilet Seats
                               </label>
                               <input
-                                type="text"
-                                className="form-control bg-light border-0"
-                                id="invoicenoInput"
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.numberToiletSeats
-                                }
-                                onChange={() => {
-                                  setNumberToiletSeats(e.target.value);
-                                }}
-                              />
+                        type="text"
+                        className="form-control"
+                        id="valueInput"
+                        value={
+                          data?.submittedData?.LiquidWasteSection
+                            ?.numberToiletSeats
+                        }
+                        onChange={(e) =>   setNumberToiletSeats(e.target.value)}
+                      />
+                             
                             </div>
                           ) : (
                             <></>
@@ -1487,7 +1491,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection
@@ -1509,7 +1513,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.name
@@ -1544,7 +1548,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.bathroomAdequacy
@@ -1579,7 +1583,7 @@ const DataEdit = ({ data }) => {
                         </label>
                         <input
                           type="text"
-                          className="form-control bg-light border-0"
+                          className="form-control"
                           id="invoicenoInput"
                           value={
                             data?.submittedData?.LiquidWasteSection?.separateStaffUrinal.name
@@ -1616,7 +1620,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.toiletPitPosition
@@ -1635,7 +1639,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.drainsCondition
@@ -1690,7 +1694,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.stagnationEvidence
@@ -1726,7 +1730,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection
@@ -1762,7 +1766,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.toiletCondition
@@ -1781,7 +1785,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.toiletDischarge
@@ -1834,7 +1838,7 @@ const DataEdit = ({ data }) => {
                               </select>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.containmentEmptied
@@ -1853,7 +1857,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.sewerSystem?.name
@@ -1888,7 +1892,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere
@@ -1925,7 +1929,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.LiquidWasteSection?.DesiltingFrequency
@@ -1976,7 +1980,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.DrainType?.name}
                                   />
@@ -2004,7 +2008,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.EffluentManagement.name}
                                   />
@@ -2032,7 +2036,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.ExcretaContainment.name}
                                   />
@@ -2060,7 +2064,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.ExcretaDisposalMethod.name}
                                   />
@@ -2088,7 +2092,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.GreyWaterDisposal.name}
                                   />
@@ -2109,7 +2113,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.ToiletType.name}
                                   />
@@ -2156,7 +2160,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection
@@ -2194,7 +2198,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection
@@ -2216,7 +2220,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection
@@ -2252,7 +2256,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection
@@ -2343,7 +2347,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x.WasteCollectionType.name}
                                   />
@@ -2364,7 +2368,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x?.SolidWasteReceptacle?.name}
                                   />
@@ -2390,7 +2394,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection
@@ -2428,7 +2432,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection?.wastePaymentEvidence
@@ -2464,7 +2468,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection?.ContainerVolume?.name
@@ -2501,7 +2505,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.SolidWasteSection
@@ -2561,7 +2565,7 @@ const DataEdit = ({ data }) => {
                               </label>
                               {/* <input
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.ConclusionSection?.obnoxiousTradeExist
@@ -2608,7 +2612,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x?.Nuisance?.name}
                                   />
@@ -2618,15 +2622,16 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {data?.submittedData?.ConclusionSection
-                            ?.officerComment != null ? (
+                          {(data?.submittedData?.ConclusionSection
+                            ?.officerComment != "") ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Office Comment
                               </label>
                               <input
+                              
                                 type="text"
-                                className="form-control bg-light border-0"
+                                className="form-control"
                                 id="invoicenoInput"
                                 value={
                                   data?.submittedData?.ConclusionSection
@@ -2655,7 +2660,7 @@ const DataEdit = ({ data }) => {
                                   <input
                                     key={x.id}
                                     type="text"
-                                    className="form-control bg-light border-0"
+                                    className="form-control"
                                     id="invoicenoInput"
                                     value={x?.Action?.name}
                                   />
@@ -2672,7 +2677,7 @@ const DataEdit = ({ data }) => {
                           </label>
                           <input
                             type="text"
-                            className="form-control bg-light border-0"
+                            className="form-control"
                             id="invoicenoInput"
                             value={`${data?.submittedData?.User?.otherNames} ${data?.submittedData?.User?.surname}`}
                           />
@@ -2778,6 +2783,21 @@ const DataEdit = ({ data }) => {
                       </button>
                     )}
                   </div>
+                  <div className="col-sm-auto">
+                  
+                      <button
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          handleUpdate(data?.submittedData?.id);
+                        }}
+                      >
+                        Update
+                      </button>
+                   
+                  </div>
+
                   <div className="col-sm-auto">
                     {data?.submittedData?.isPublished == 0 ? (
                       <button
