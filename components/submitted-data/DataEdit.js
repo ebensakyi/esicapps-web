@@ -14,7 +14,6 @@ import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEd
 import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
-
   const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
   const [buildingPermitAvailability, setBuildingPermitAvailability] =
     useState();
@@ -74,7 +73,7 @@ const DataEdit = ({ data }) => {
   const [obnoxiousTradeExist, setObnoxiousTradeExist] = useState();
   const [adequateWasteStorageReceptacle, setAdequateWasteStorageReceptacle] =
     useState();
- const [numberToiletSeats, setNumberToiletSeats] = useState();
+  const [numberToiletSeats, setNumberToiletSeats] = useState();
   // const [name, setName] = useState();
   // const [name, setName] = useState();
 
@@ -103,7 +102,8 @@ const DataEdit = ({ data }) => {
 
   const [selectedNuisanceDetected, setSelectedNuisanceDetected] = useState([]);
   const [selectedAction, setSelectedAction] = useState([]);
-  const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] = useState([]);
+  const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] =
+    useState([]);
 
   const router = useRouter();
 
@@ -175,6 +175,15 @@ const DataEdit = ({ data }) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleUpdate = async (id) => {
+    let data = {
+      id,
+    };
+    const response = await axios.put(`/api/v1/inspection-data`, {
+      id: id,
+    });
   };
 
   const onWaterSupplyRemove = (selected) => {
@@ -268,7 +277,8 @@ const DataEdit = ({ data }) => {
   };
   const onActionSelect = (selected) => {
     setSelectedAction(selected);
-  }; const onActionRemove = (selected) => {
+  };
+  const onActionRemove = (selected) => {
     setSelectedAction(selected);
   };
 
@@ -291,7 +301,7 @@ const DataEdit = ({ data }) => {
         };
       });
 
-      console.log("premisesWaterSource ",premisesWaterSource);
+    console.log("premisesWaterSource ", premisesWaterSource);
 
     setSelectedWaterSource(premisesWaterSource);
 
@@ -598,22 +608,25 @@ const DataEdit = ({ data }) => {
                             />
                           </div>{" "}
                           {data?.submittedData?.ConclusionSection
-                            ?.officerComment != ""?
-                          <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
-                              Respondent phone number
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={
-                                data?.submittedData?.BasicInfoSection
-                                  ?.respondentPhoneNumber
-                              }
-                              readOnly="readOnly"
-                            />
-                          </div>:<></>}
+                            ?.officerComment != "" ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">
+                                Respondent phone number
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="invoicenoInput"
+                                value={
+                                  data?.submittedData?.BasicInfoSection
+                                    ?.respondentPhoneNumber
+                                }
+                                readOnly="readOnly"
+                              />
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -1469,16 +1482,17 @@ const DataEdit = ({ data }) => {
                                 Number Toilet Seats
                               </label>
                               <input
-                        type="text"
-                        className="form-control"
-                        id="valueInput"
-                        value={
-                          data?.submittedData?.LiquidWasteSection
-                            ?.numberToiletSeats
-                        }
-                        onChange={(e) =>   setNumberToiletSeats(e.target.value)}
-                      />
-                             
+                                type="text"
+                                className="form-control"
+                                id="valueInput"
+                                value={
+                                  data?.submittedData?.LiquidWasteSection
+                                    ?.numberToiletSeats
+                                }
+                                onChange={(e) =>
+                                  setNumberToiletSeats(e.target.value)
+                                }
+                              />
                             </div>
                           ) : (
                             <></>
@@ -2622,14 +2636,13 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
-                          {(data?.submittedData?.ConclusionSection
-                            ?.officerComment != "") ? (
+                          {data?.submittedData?.ConclusionSection
+                            ?.officerComment != "" ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Office Comment
                               </label>
                               <input
-                              
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2784,18 +2797,16 @@ const DataEdit = ({ data }) => {
                     )}
                   </div>
                   <div className="col-sm-auto">
-                  
-                      <button
-                        className="btn btn-primary"
-                        onClick={(e) => {
-                          e.preventDefault();
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        e.preventDefault();
 
-                          handleUpdate(data?.submittedData?.id);
-                        }}
-                      >
-                        Update
-                      </button>
-                   
+                        handleUpdate(data?.submittedData?.id);
+                      }}
+                    >
+                      Update
+                    </button>
                   </div>
 
                   <div className="col-sm-auto">
