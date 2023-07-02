@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "postgresqlExtensions","views"]
+  previewFeatures = ["fullTextSearch", "postgresqlExtensions", "views"]
 }
 
 datasource db {
@@ -62,6 +62,7 @@ model Inspection {
   currentInspection  Inspection?          @relation("CurrentPreviousInspection")
   InspectionPictures InspectionPictures[]
   FollowUpInspection FollowUpInspection[]
+  NotApplicable      NotApplicable[]
 }
 
 model InspectionForm {
@@ -169,6 +170,7 @@ model User {
   assignedFrom                       AssignData[]                         @relation("assignedFrom")
   PremisesCommunalContainerCondition PremisesCommunalContainerCondition[]
   userLevelId                        Int
+  NotApplicable                      NotApplicable[]
 }
 
 model UserAddedByUser {
@@ -2055,6 +2057,27 @@ model FormSectionImage {
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   InspectionPictures InspectionPictures[]
+}
+
+// int isNotApplicable;
+// String inspectionId;
+// int type;
+// int? deleted;
+// DateTime? createdAt;
+// DateTime? updatedAt;
+
+model NotApplicable {
+  id              Int        @id @default(autoincrement())
+  inspectionId    String     @db.VarChar(255)
+    userId          Int
+
+  isNotApplicable Int
+  type            Int
+  deleted         Int?       @default(0)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  Inspection      Inspection @relation(fields: [inspectionId], references: [id])
+  User            User       @relation(fields: [userId], references: [id])
 }
 
 model InspectionPictures {
