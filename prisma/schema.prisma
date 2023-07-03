@@ -2067,9 +2067,9 @@ model FormSectionImage {
 // DateTime? updatedAt;
 
 model NotApplicable {
-  id              Int        @id @default(autoincrement())
-  inspectionId    String     @db.VarChar(255)
-    userId          Int
+  id           String @id
+  inspectionId String @db.VarChar(255)
+  userId       Int
 
   isNotApplicable Int
   type            Int

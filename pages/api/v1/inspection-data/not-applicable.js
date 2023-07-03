@@ -3,7 +3,7 @@ import prisma from "../../../../prisma/db";
 const post = async (req, res) => {
   try {
     const data = {
-        id: Number(req.body.id),
+        id: req.body.id,
         userId: Number(req.body.userId),
 
       isNotApplicable: Number(req.body.isNotApplicable),
