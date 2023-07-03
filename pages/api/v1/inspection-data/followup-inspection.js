@@ -8,8 +8,41 @@ const post = async (req, res) => {
       prevInspectionId: req.body.prevInspectionId,
       inspectionFormId: Number(req.body.inspectionFormId),
       premisesCode: req.body.premisesCode,
-      inspectionTypeId: 3,
+
       userId: Number(req.body.userId),
+      communityId:
+        req.body.communityId == "null" ? null : req.body.communityId,
+        community:
+        req.body.community == "null" ? "" : req.body.community,
+        electoralAreaId:
+        req.body.electoralAreaId == "null" ? null : req.body.electoralAreaId,
+        electoralArea:
+        req.body.electoralArea == "null" ? null : req.body.electoralArea,
+        ghanaPostGps:
+        req.body.ghanaPostGps == "null" ? "" : req.body.ghanaPostGps,
+        latitude:
+        req.body.latitude == "null" ? null : req.body.latitude,
+        longitude:
+        req.body.longitude == "null" ? null : req.body.longitude,
+        accuracy:
+        req.body.accuracy == "null" ? null : req.body.accuracy,
+        respondentName:
+        req.body.respondentName == "null" ? null : req.body.respondentName,
+        respondentPhoneNumber:
+        req.body.respondentPhoneNumber == "null" ? null : req.body.respondentPhoneNumber,
+        respondentDesignationId:
+        req.body.respondentDesignationId == "null" ? null : req.body.respondentDesignationId,
+
+        waterRating:
+        req.body.waterRating == "null" ? "" : req.body.waterRating,
+        solidWasteRating:
+        req.body.solidWasteRating == "null" ? "" : req.body.solidWasteRating,
+        liquidWasteRating:
+        req.body.liquidWasteRating == "null" ? null : req.body.liquidWasteRating,
+        totalRating:
+        req.body.totalRating == "null" ? null : req.body.totalRating,
+
+
       officerComment:
         req.body.officerComment == "null" ? null : req.body.officerComment,
 
@@ -25,9 +58,7 @@ const post = async (req, res) => {
         req.body.isNuisanceObservedId == "null"
           ? null
           : Number(req.body.isNuisanceObservedId),
-    
     };
-
 
     const response = await prisma.followUpInspection.create({ data });
 

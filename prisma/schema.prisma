@@ -79,6 +79,7 @@ model InspectionForm {
   Type                  Type[]
   Nuisance              Nuisance[]
   RespondentDesignation RespondentDesignation[]
+  FollowUpInspection    FollowUpInspection[]
 }
 
 model PasswordResetRequest {
@@ -344,12 +345,11 @@ model CleaningFrequency {
 }
 
 model Rating {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  FollowUpInspection FollowUpInspection[]
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Community {
@@ -985,13 +985,12 @@ model YesNo {
 }
 
 model InspectionType {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  Inspection         Inspection[]
-  FollowUpInspection FollowUpInspection[]
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  deleted    Int?         @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Inspection Inspection[]
 }
 
 model Logs {
@@ -2108,22 +2107,39 @@ model AssignData {
   assignedFromId Int
 }
 
+
+
 model FollowUpInspection {
   id String @id @db.VarChar(255)
 
   prevInspectionId String? @unique @db.VarChar(255)
   premisesCode     String? @db.VarChar(255)
 
-  userId           Int
-  inspectionFormId Int
-  inspectionTypeId Int @default(3)
+  userId                  Int
+  inspectionFormId        Int
+  communityId             Int
+  community               String  @db.VarChar(255)
+  electoralAreaId         String  @db.VarChar(255)
+  electoralArea           String  @db.VarChar(255)
+  ghanaPostGps            String? @db.VarChar(255)
+  latitude                String  @db.VarChar(255)
+  longitude               String  @db.VarChar(255)
+  accuracy                String  @db.VarChar(255)
+  respondentName          String  @db.VarChar(255)
+  respondentPhoneNumber   String  @db.VarChar(255)
+  respondentDesignationId String  @db.VarChar(255)
+  waterRating             String  @db.VarChar(255)
+  solidWasteRating        String  @db.VarChar(255)
+  liquidWasteRating       String  @db.VarChar(255)
+  totalRating             String  @db.VarChar(255)
+
+  InspectionForm InspectionForm @relation(fields: [inspectionFormId], references: [id])
 
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String @db.VarChar(255)
   officerComment                String @db.VarChar(255)
 
   isNuisanceObservedId Int?
-  rating               Int?
 
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
@@ -2133,10 +2149,7 @@ model FollowUpInspection {
 
   obnoxiousTradeExistFollowUp YesNo @relation("obnoxiousTradeExistFollowUp", fields: [obnoxiousTradeExistFollowUpId], references: [id])
 
-  isNuisanceObserved YesNo?         @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
-  InspectionType     InspectionType @relation(fields: [inspectionTypeId], references: [id])
-
-  Rating Rating? @relation(fields: [rating], references: [id])
+  isNuisanceObserved YesNo? @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
 }
 
 //reset internal autoincrement id
