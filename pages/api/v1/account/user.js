@@ -4,6 +4,7 @@ import { getSession } from "../../../../utils/session-manager";
 import { logActivity } from "../../../../utils/log";
 import { sendSMS } from "../../../../utils/send-hubtel-sms";
 import { generateCode } from "../../../../utils/generate-code";
+import { log } from "console";
 
 const post = async (req, res) => {
   try {
@@ -29,9 +30,11 @@ const post = async (req, res) => {
 
     //National Level
     if (loggedInUserLevelId == "1") {
+     
       regionId = req?.body?.region == 0 ? null : req?.body?.region;
-      districtId = req?.body?.district == 0 ? null : req?.body?.districtId;
+      districtId = req?.body?.district == 0 ? null : req?.body?.district;
      // password = await generateCode(8);
+      console.log("districtId",districtId);
     }
 
     //Regional Level
@@ -43,11 +46,14 @@ const post = async (req, res) => {
         userLevelId = loggedInUserLevelId;
       }
     }
+    console.log("loggedInUserLevelId:",loggedInUserLevelId);
 
     //District Level
     if (loggedInUserLevelId == "3") {
       regionId = req.body.region;
       districtId = Number(req.body.district);
+
+     
 
       if (districtId == 0) {
         districtId = loggedInUserDistrictId;
