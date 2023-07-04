@@ -7,7 +7,9 @@ import moment from "moment";
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: {
+      sizeLimit: '14mb' 
+    },
   },
 };
 
