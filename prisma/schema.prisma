@@ -2119,7 +2119,7 @@ model FollowUpInspection {
   inspectionFormId        Int
   communityId             Int
   community               String  @db.VarChar(255)
-  electoralAreaId         String  @db.VarChar(255)
+  electoralAreaId         Int  
   electoralArea           String  @db.VarChar(255)
   ghanaPostGps            String? @db.VarChar(255)
   latitude                String  @db.VarChar(255)
@@ -2127,7 +2127,7 @@ model FollowUpInspection {
   accuracy                String  @db.VarChar(255)
   respondentName          String  @db.VarChar(255)
   respondentPhoneNumber   String  @db.VarChar(255)
-  respondentDesignationId String  @db.VarChar(255)
+  respondentDesignationId Int  
   waterRating             String  @db.VarChar(255)
   solidWasteRating        String  @db.VarChar(255)
   liquidWasteRating       String  @db.VarChar(255)

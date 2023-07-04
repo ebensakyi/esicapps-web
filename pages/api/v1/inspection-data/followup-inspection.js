@@ -2,6 +2,8 @@ import prisma from "../../../../prisma/db";
 
 const post = async (req, res) => {
   try {
+
+    console.log(req.body);
     const data = {
       id: req.body.id,
 
@@ -11,11 +13,11 @@ const post = async (req, res) => {
 
       userId: Number(req.body.userId),
       communityId:
-        req.body.communityId == "null" ? null : req.body.communityId,
+        req.body.communityId == "null" ? null : Number(req.body.communityId),
         community:
         req.body.community == "null" ? "" : req.body.community,
         electoralAreaId:
-        req.body.electoralAreaId == "null" ? null : req.body.electoralAreaId,
+        req.body.electoralAreaId == "null" ? null : Number(req.body.electoralAreaId),
         electoralArea:
         req.body.electoralArea == "null" ? null : req.body.electoralArea,
         ghanaPostGps:
@@ -29,9 +31,9 @@ const post = async (req, res) => {
         respondentName:
         req.body.respondentName == "null" ? null : req.body.respondentName,
         respondentPhoneNumber:
-        req.body.respondentPhoneNumber == "null" ? null : req.body.respondentPhoneNumber,
+        req.body.respondentPhoneNumber == "null" ? null :req.body.respondentPhoneNumber,
         respondentDesignationId:
-        req.body.respondentDesignationId == "null" ? null : req.body.respondentDesignationId,
+        req.body.respondentDesignationId == "null" ? null : Number( req.body.respondentDesignationId),
 
         waterRating:
         req.body.waterRating == "null" ? "" : req.body.waterRating,
@@ -59,6 +61,7 @@ const post = async (req, res) => {
           ? null
           : Number(req.body.isNuisanceObservedId),
     };
+    console.log(data);
 
     const response = await prisma.followUpInspection.create({ data });
 

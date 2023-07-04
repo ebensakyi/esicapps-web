@@ -1600,6 +1600,20 @@ CREATE TABLE "FormSectionImage" (
 );
 
 -- CreateTable
+CREATE TABLE "NotApplicable" (
+    "id" TEXT NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "isNotApplicable" INTEGER NOT NULL,
+    "type" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "NotApplicable_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "InspectionPictures" (
     "id" SERIAL NOT NULL,
     "imagePath" VARCHAR(255) NOT NULL,
@@ -1631,12 +1645,25 @@ CREATE TABLE "FollowUpInspection" (
     "premisesCode" VARCHAR(255),
     "userId" INTEGER NOT NULL,
     "inspectionFormId" INTEGER NOT NULL,
-    "inspectionTypeId" INTEGER NOT NULL DEFAULT 3,
+    "communityId" INTEGER NOT NULL,
+    "community" VARCHAR(255) NOT NULL,
+    "electoralAreaId" INTEGER NOT NULL,
+    "electoralArea" VARCHAR(255) NOT NULL,
+    "ghanaPostGps" VARCHAR(255),
+    "latitude" VARCHAR(255) NOT NULL,
+    "longitude" VARCHAR(255) NOT NULL,
+    "accuracy" VARCHAR(255) NOT NULL,
+    "respondentName" VARCHAR(255) NOT NULL,
+    "respondentPhoneNumber" VARCHAR(255) NOT NULL,
+    "respondentDesignationId" INTEGER NOT NULL,
+    "waterRating" VARCHAR(255) NOT NULL,
+    "solidWasteRating" VARCHAR(255) NOT NULL,
+    "liquidWasteRating" VARCHAR(255) NOT NULL,
+    "totalRating" VARCHAR(255) NOT NULL,
     "obnoxiousTradeExistFollowUpId" INTEGER NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "officerComment" VARCHAR(255) NOT NULL,
     "isNuisanceObservedId" INTEGER,
-    "rating" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -2716,6 +2743,12 @@ ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey"
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "NotApplicable" ADD CONSTRAINT "NotApplicable_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "NotApplicable" ADD CONSTRAINT "NotApplicable_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2728,6 +2761,9 @@ ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedToId_fkey" FOREIGN K
 ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedFromId_fkey" FOREIGN KEY ("assignedFromId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_prevInspectionId_fkey" FOREIGN KEY ("prevInspectionId") REFERENCES "Inspection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2735,12 +2771,6 @@ ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_obnoxiousTra
 
 -- AddForeignKey
 ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_isNuisanceObservedId_fkey" FOREIGN KEY ("isNuisanceObservedId") REFERENCES "YesNo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_inspectionTypeId_fkey" FOREIGN KEY ("inspectionTypeId") REFERENCES "InspectionType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_rating_fkey" FOREIGN KEY ("rating") REFERENCES "Rating"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PageToPageAction" ADD CONSTRAINT "_PageToPageAction_A_fkey" FOREIGN KEY ("A") REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;
