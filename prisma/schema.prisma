@@ -2138,6 +2138,10 @@ model FollowUpInspection {
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String @db.VarChar(255)
   officerComment                String @db.VarChar(255)
+  waterImageFilePath    String? @db.VarChar(255)
+  solidWasteImageFilePath    String? @db.VarChar(255)
+  liquidWasteImageFilePath    String? @db.VarChar(255)
+  premisesImageFilePath    String? @db.VarChar(255)
 
   isNuisanceObservedId Int?
 

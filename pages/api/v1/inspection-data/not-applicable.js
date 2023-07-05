@@ -2,6 +2,7 @@ import prisma from "../../../../prisma/db";
 
 const post = async (req, res) => {
   try {
+    console.log(req.body);
     const data = {
         id: req.body.id,
         userId: Number(req.body.userId),
@@ -11,6 +12,8 @@ const post = async (req, res) => {
 
       inspectionId: req.body.inspectionId,
     };
+
+    console.log(data);
 
     const response = await prisma.notApplicable.create({ data });
 
