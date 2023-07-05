@@ -5,20 +5,25 @@ import { nanoid } from "nanoid";
 import AWS from "aws-sdk";
 import moment from "moment";
 
+
 export const config = {
   api: {
-    bodyParser: {
-      sizeLimit: '100mb' // Set desired value here
-  },
+    bodyParser: false,
   },
 };
 
+// export const config = {
+//   api: {
+//     bodyParser: {
+//       sizeLimit: '100mb' // Set desired value here
+//   },
+//   },
+// };
 const post = async (req, res) => {
   try {
-    req.connection.setTimeout(100000);
+   // req.connection.setTimeout(100000);
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
-      // let imageFile = file.imageFile;
       let image = await saveFile(file);
 
       const data = {
