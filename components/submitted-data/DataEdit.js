@@ -85,6 +85,7 @@ const DataEdit = ({ data }) => {
   const [selectedDrinkingWaterSource, setSelectedDrinkingWaterSource] =
     useState([]);
   const [selectedDrainType, setSelectedDrainType] = useState([]);
+  const [waterFlowFrequency, setWaterFlowFrequency] = useState();
   const [selectedEffluentManagement, setSelectedEffluentManagement] = useState(
     []
   );
@@ -104,6 +105,10 @@ const DataEdit = ({ data }) => {
   const [selectedAction, setSelectedAction] = useState([]);
   const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] =
     useState([]);
+  const [numberUrinalSeats, setNumberUrinalSeats] = useState();
+  const [wasteCollectorName, setWasteCollectorName] = useState();
+  const [wasteCollectionType, setWasteCollectionType] = useState();
+  const [officerComment, setOfficerComment] = useState();
 
   const router = useRouter();
 
@@ -339,6 +344,169 @@ const DataEdit = ({ data }) => {
   };
 
   useEffect(() => {
+    setCertificateHabitationAvailability(
+      data?.submittedData?.LicencePermitSection
+        ?.habitationCertificateAvailability?.id
+    );
+    setAnimalPermitAvailability(
+      data?.submittedData?.LicencePermitSection?.animalsPermitAvailability?.id
+    );
+
+    setBuildingPermitAvailability(
+      data?.submittedData?.LicencePermitSection?.buildingPermitAvailability?.id
+    );
+
+    setPropertyRateAvailability(
+      data?.submittedData?.LicencePermitSection?.propertyRateAvailability?.id
+    );
+
+    setSuitabilityCertificateAvailability(
+      data?.submittedData?.LicencePermitSection
+        ?.suitabilityCertificateAvailability?.id
+    );
+
+    setStructurePermitAvailability(
+      data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
+    );
+
+    setFumigationCertificateAvailability(
+      data?.submittedData?.LicencePermitSection
+        ?.fumigationCertificateAvailability?.id
+    );
+
+    setBusinessPermitAvailability(
+      data?.submittedData?.LicencePermitSection?.businessLicenceAvailability?.id
+    );
+
+    setTempStructurePermitAvailability(
+      data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
+    );
+
+    setWaterAnalysisReportSafeUnsafe(
+      data?.submittedData?.LicencePermitSection?.waterAnalysisReport?.id
+    );
+
+    setRegGeneralCertAvailability(
+      data?.submittedData?.LicencePermitSection?.regGeneralCertAvailability?.id
+    );
+
+    setGtaOperatingLicenceAvailability(
+      data?.submittedData?.LicencePermitSection?.gtaOperatingLicenceAvailability
+        ?.id
+    );
+    setPharmacyCertAvailability(
+      data?.submittedData?.LicencePermitSection?.pharmacyCertAvailability?.id
+    );
+
+    setWaterSourceCondition(
+      data?.submittedData?.WaterSection?.waterSourceCondition?.id
+    );
+
+    setWaterStorageCondition(
+      data?.submittedData?.WaterSection?.waterStorageConditionSafe?.id
+    );
+
+    setWaterFlowFrequency(
+      data?.submittedData?.WaterSection?.WaterFlowFrequency?.id
+    );
+
+    setNumberToiletSeats(
+      data?.submittedData?.LiquidWasteSection?.numberToiletSeats
+    );
+    setNumberUrinalSeats(
+      data?.submittedData?.LiquidWasteSection?.numberUrinalSeats
+    );
+    setToiletAdequacy(
+      data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.id
+    );
+
+    setBathroomAdequacy(
+      data?.submittedData?.LiquidWasteSection?.bathroomAdequacy?.id
+    );
+
+    setToiletPitPosition(
+      data?.submittedData?.LiquidWasteSection?.toiletPitPosition?.id
+    );
+
+    setDrainCondition(
+      data?.submittedData?.LiquidWasteSection?.drainsCondition?.id
+    );
+
+    setStagnationEvidence(
+      data?.submittedData?.LiquidWasteSection?.stagnationEvidence?.id
+    );
+    setAnalCleansingMaterialMgt(
+      data?.submittedData?.LiquidWasteSection?.analCleansingMaterialMgt?.id
+    );
+
+    setToiletCondition(
+      data?.submittedData?.LiquidWasteSection?.toiletCondition?.id
+    );
+
+    setToiletDischarge(
+      data?.submittedData?.LiquidWasteSection?.toiletDischarge?.id
+    );
+
+    setContainmentEmptied(
+      data?.submittedData?.LiquidWasteSection?.containmentEmptied?.id
+    );
+
+    setSewerSystem(data?.submittedData?.LiquidWasteSection?.sewerSystem?.id);
+    setEaseYourselfWhere(
+      data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere?.id
+    );
+
+    setDesiltingFrequency(
+      data?.submittedData?.LiquidWasteSection?.DesiltingFrequency?.id
+    );
+
+    setWasteServiceProviderRegistration(
+      data?.submittedData?.SolidWasteSection?.wasteServiceProviderRegistration
+        ?.id
+    );
+
+    setWasteCollectorName(
+      data?.submittedData?.SolidWasteSection?.wasteCollectorName
+    );
+
+    setWasteSortingAvailability(
+      data?.submittedData?.SolidWasteSection?.wasteSortingAvailability?.id
+    );
+
+    setAdequateWasteStorageReceptacle(
+      data?.submittedData?.SolidWasteSection?.approvedWasteStorageReceptacle?.id
+    );
+
+    setAdequateWasteStorageReceptacle(
+      data?.submittedData?.SolidWasteSection?.adequateWasteStorageReceptacle?.id
+    );
+
+    setWasteCollectionType(
+      data?.submittedData?.SolidWasteSection?.WasteCollectionType?.id
+    );
+
+    setUnservicedWasteDisposal(
+      data?.submittedData?.SolidWasteSection?.UnservicedWasteDisposal?.id
+    );
+
+    setWastePaymentEvidence(
+      data?.submittedData?.SolidWasteSection?.wastePaymentEvidence?.id
+    );
+
+    setContainerVolume(
+      data?.submittedData?.SolidWasteSection?.ContainerVolume?.id
+    );
+
+    setWasteProviderAccreditted(
+      data?.submittedData?.SolidWasteSection?.wasteProviderAccreditted?.id
+    );
+
+    setObnoxiousTradeExist(
+      data?.submittedData?.ConclusionSection?.obnoxiousTradeExist?.id
+    );
+
+    setOfficerComment(data?.submittedData?.ConclusionSection?.officerComment);
+
     let premisesWaterSupply =
       data?.submittedData?.WaterSection?.PremisesWaterSupply?.map((data) => {
         return {
@@ -675,7 +843,6 @@ const DataEdit = ({ data }) => {
                                   data?.submittedData?.BasicInfoSection
                                     ?.respondentPhoneNumber
                                 }
-
                                 readOnly="readOnly"
                               />
                             </div>
@@ -736,10 +903,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setAnimalPermitAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.animalsPermitAvailability?.id
-                                }
+                                value={animalPermitAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -772,10 +936,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setBuildingPermitAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.buildingPermitAvailability?.id
-                                }
+                                value={buildingPermitAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -810,10 +971,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.habitationCertificateAvailability?.id
-                                }
+                                value={certificateHabitationAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -846,10 +1004,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setPropertyRateAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.propertyRateAvailability?.id
-                                }
+                                value={propertyRateAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -884,10 +1039,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.suitabilityCertificateAvailability?.id
-                                }
+                                value={suitabilityCertificateAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -922,10 +1074,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.structurePermitAvailability?.id
-                                }
+                                value={structurePermitAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -962,10 +1111,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.fumigationCertificateAvailability.id
-                                }
+                                value={fumigationCertificateAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -999,10 +1145,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setBusinessPermitAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.businessLicenceAvailability?.id
-                                }
+                                value={buildingPermitAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -1037,10 +1180,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.structurePermitAvailability?.id
-                                }
+                                value={tempStructurePermitAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -1076,10 +1216,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.waterAnalysisReport?.id
-                                }
+                                value={waterAnalysisReportSafeUnsafe}
                               >
                                 <option value="" selected>
                                   Select
@@ -1113,10 +1250,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setRegGeneralCertAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.regGeneralCertAvailability?.id
-                                }
+                                value={regGeneralCertAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -1152,10 +1286,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.gtaOperatingLicenceAvailability?.id
-                                }
+                                value={gtaOperatingLicenceAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -1190,10 +1321,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setPharmacyCertAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LicencePermitSection
-                                    ?.pharmacyCertAvailability?.id
-                                }
+                                value={pharmacyCertAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -1314,10 +1442,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWaterSourceCondition(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.WaterSection
-                                    ?.waterSourceCondition?.id
-                                }
+                                value={waterSourceCondition}
                               >
                                 <option value="" selected>
                                   Select
@@ -1380,10 +1505,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWaterStorageCondition(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.WaterSection
-                                    ?.waterStorageConditionSafe?.id
-                                }
+                                value={waterStorageCondition}
                               >
                                 <option value="" selected>
                                   Select
@@ -1474,10 +1596,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWaterFlowFrequency(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.WaterSection
-                                    ?.WaterFlowFrequency?.id
-                                }
+                                value={waterFlowFrequency}
                               >
                                 <option value="" selected>
                                   Select
@@ -1540,10 +1659,7 @@ const DataEdit = ({ data }) => {
                                 type="text"
                                 className="form-control"
                                 id="valueInput"
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.numberToiletSeats
-                                }
+                                value={numberToiletSeats}
                                 onChange={(e) =>
                                   setNumberToiletSeats(e.target.value)
                                 }
@@ -1562,10 +1678,7 @@ const DataEdit = ({ data }) => {
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.numberUrinalSeats
-                                }
+                                value={numberUrinalSeats}
                                 onChange={() => {
                                   setNumberUrinalSeats(e.target.value);
                                 }}
@@ -1594,10 +1707,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setToiletAdequacy(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.toiletAdequacy?.id
-                                }
+                                value={toiletAdequacy}
                               >
                                 <option value="" selected>
                                   Select
@@ -1630,10 +1740,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setBathroomAdequacy(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.bathroomAdequacy?.id
-                                }
+                                value={bathroomAdequacy}
                               >
                                 <option value="" selected>
                                   Select
@@ -1675,10 +1782,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setToiletPitPosition(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.toiletPitPosition?.id
-                                }
+                                value={toiletPitPosition}
                               >
                                 <option value="" selected>
                                   Select
@@ -1722,10 +1826,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setDrainCondition(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.drainsCondition?.id
-                                }
+                                value={drainCondition}
                               >
                                 <option value="" selected>
                                   Select
@@ -1750,10 +1851,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setStagnationEvidence(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.stagnationEvidence?.id
-                                }
+                                value={stagnationEvidence}
                               >
                                 <option value="" selected>
                                   Select
@@ -1786,10 +1884,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setAnalCleansingMaterialMgt(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.analCleansingMaterialMgt?.id
-                                }
+                                value={analCleansingMaterialMgt}
                               >
                                 <option value="" selected>
                                   Select
@@ -1822,10 +1917,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setToiletCondition(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.toiletCondition?.id
-                                }
+                                value={toiletCondition}
                               >
                                 <option value="" selected>
                                   Select
@@ -1867,10 +1959,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setToiletDischarge(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.toiletDischarge?.id
-                                }
+                                value={toiletDischarge}
                               >
                                 <option value="" selected>
                                   Select
@@ -1894,10 +1983,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setContainmentEmptied(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.containmentEmptied?.id
-                                }
+                                value={containmentEmptied}
                               >
                                 <option value="" selected>
                                   Select
@@ -1938,10 +2024,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setSewerSystem(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.sewerSystem?.id
-                                }
+                                value={sewerSystem}
                               >
                                 <option value="" selected>
                                   Select
@@ -1974,10 +2057,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setEaseYourselfWhere(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.EaseYourselfWhere?.id
-                                }
+                                value={easeYourselfWhere}
                               >
                                 <option value="" selected>
                                   Select
@@ -2013,10 +2093,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setDesiltingFrequency(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.LiquidWasteSection
-                                    ?.DesiltingFrequency?.id
-                                }
+                                value={desiltingFrequency}
                               >
                                 <option value="" selected>
                                   Select
@@ -2244,10 +2321,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.wasteServiceProviderRegistration?.id
-                                }
+                                value={wasteServiceProviderRegistration}
                               >
                                 <option value="" selected>
                                   Select
@@ -2269,10 +2343,7 @@ const DataEdit = ({ data }) => {
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.wasteCollectorName
-                                }
+                                value={wasteCollectorName}
                                 onChange={(e) => {
                                   setWasteCollectorName(e.target.value);
                                 }}
@@ -2302,10 +2373,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWasteSortingAvailability(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.wasteSortingAvailability?.id
-                                }
+                                value={wasteSortingAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -2340,10 +2408,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.approvedWasteStorageReceptacle?.id
-                                }
+                                value={wasteStorageReceptacleAvailability}
                               >
                                 <option value="" selected>
                                   Select
@@ -2370,10 +2435,7 @@ const DataEdit = ({ data }) => {
                                     e.target.value
                                   );
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.adequateWasteStorageReceptacle?.id
-                                }
+                                value={adequateWasteStorageReceptacle}
                               >
                                 <option value="" selected>
                                   Select
@@ -2398,10 +2460,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWasteCollectionType(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.WasteCollectionType?.id
-                                }
+                                value={wasteCollectionType}
                               >
                                 <option value="" selected>
                                   Select
@@ -2477,10 +2536,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setUnservicedWasteDisposal(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.UnservicedWasteDisposal?.id
-                                }
+                                value={unservicedWasteDisposal}
                               >
                                 <option value="" selected>
                                   Select
@@ -2514,10 +2570,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWastePaymentEvidence(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.wastePaymentEvidence?.id
-                                }
+                                value={wastePaymentEvidence}
                               >
                                 <option value="" selected>
                                   Select
@@ -2549,10 +2602,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setContainerVolume(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.ContainerVolume?.id
-                                }
+                                value={containerVolume}
                               >
                                 <option value="" selected>
                                   Select
@@ -2587,10 +2637,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setWasteProviderAccreditted(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.wasteProviderAccreditted?.id
-                                }
+                                value={wasteProviderAccreditted}
                               >
                                 <option value="" selected>
                                   Select
@@ -2647,10 +2694,7 @@ const DataEdit = ({ data }) => {
                                 onChange={(e) => {
                                   setObnoxiousTradeExist(e.target.value);
                                 }}
-                                value={
-                                  data?.submittedData?.ConclusionSection
-                                    ?.obnoxiousTradeExist?.id
-                                }
+                                value={obnoxiousTradeExist}
                               >
                                 <option value="" selected>
                                   Select
@@ -2701,10 +2745,10 @@ const DataEdit = ({ data }) => {
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
-                                value={
-                                  data?.submittedData?.ConclusionSection
-                                    ?.officerComment
-                                }
+                                value={officerComment}
+                                onChange={(e) => {
+                                  setOfficerComment(e.target.value);
+                                }}
                               />
                             </div>
                           ) : (
@@ -2744,6 +2788,7 @@ const DataEdit = ({ data }) => {
                             Reporting Officer
                           </label>
                           <input
+                            disabled={true}
                             type="text"
                             className="form-control"
                             id="invoicenoInput"

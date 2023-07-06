@@ -435,7 +435,7 @@ const DataView = ({ data }) => {
                                 id="invoicenoInput"
                                 value={
                                   data?.LicencePermitSection
-                                    ?.fumigationCertificateAvailability.name
+                                    ?.fumigationCertificateAvailability?.name
                                 }
                                 readOnly="readOnly"
                               />
