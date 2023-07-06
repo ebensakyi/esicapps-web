@@ -14,25 +14,28 @@ export const config = {
 const post = async (req, res) => {
   try {
     req.connection.setTimeout(100000); 
+    console.log("FOLLOW UP IMAGES1s");
 
 
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, file) {
     
 
+console.log("FOLLOW UP IMAGES");
+console.log(fields);
 
       // let imageFile = file.imageFile;
       let image = await saveFile(file);
 
       const data = {
-        inspectionId: fields.inspectionId,
+        followUpInspectionId: fields.inspectionId,
         imagePath: image,
         formSectionImageId:
           fields.formSectionImageId == "null"
-            ? 1
+            ? 6
             : Number(fields.formSectionImageId),
       };
-      const ip = await prisma.inspectionPictures.create({ data });
+      const ip = await prisma.followUpInspectionPictures.create({ data });
 
      
 

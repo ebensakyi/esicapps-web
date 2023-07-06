@@ -70,7 +70,6 @@ import {sendingType} from "./sendingType";
 import {reportType} from "./reportType";
 import { userGuides } from "./userGuides";
 import { formSectionImage } from "./formSectionImage";
-import { rating } from "./rating";
 import { containerCondition } from "./containerCondition";
 import { pages } from "./page";
 import { pageAccess } from "./pageAccess";
@@ -298,9 +297,7 @@ async function main() {
   await prisma.reportType.createMany({
     data: reportType,
   });
-  await prisma.rating.createMany({
-    data: rating,
-  });
+
 
   await prisma.formSectionImage.createMany({
     data: formSectionImage,

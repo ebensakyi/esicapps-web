@@ -20,15 +20,15 @@ model Inspection {
   userId           Int
   inspectionFormId Int
   inspectionTypeId Int
-  isPublished      Int     @default(0)
-  rejected         Int     @default(-1)
+  isPublished      Int      @default(0)
+  rejected         Int      @default(-1)
   publishedById    Int?
-  followUpDate     String? @db.VarChar(255)
+  followUpDate     String?  @db.VarChar(255)
   doFollowUp       Int?
-  deleted          Int?    @default(0)
-  isReinspected    Int?    @default(0)
-  isFollowedUp     Int?    @default(0)
-  totalRating      Decimal @db.Decimal(4, 2)
+  deleted          Int?     @default(0)
+  isReinspected    Int?     @default(0)
+  isFollowedUp     Int?     @default(0)
+  totalRating      Decimal? @db.Decimal(4, 2)
 
   createdAt                      DateTime                        @default(now())
   updatedAt                      DateTime                        @updatedAt
@@ -342,14 +342,6 @@ model CleaningFrequency {
   createdAt                 DateTime                    @default(now())
   updatedAt                 DateTime                    @updatedAt
   MarketPremisesInfoSection MarketPremisesInfoSection[]
-}
-
-model Rating {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Community {
@@ -1543,7 +1535,7 @@ model WaterSection {
   waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
 
-  rating                           Int
+  rating                           Decimal                        @db.Decimal(4, 2)
   deleted                          Int?                           @default(0)
   createdAt                        DateTime                       @default(now())
   updatedAt                        DateTime                       @updatedAt
@@ -1595,7 +1587,7 @@ model LiquidWasteSection {
   wasteWaterContainmentId  Int?
   easeYourselfWhereId      Int?
   desiltingFrequencyId     Int?
-  rating                   Int?
+  rating                   Decimal @db.Decimal(4, 2)
 
   deleted                       Int?                            @default(0)
   createdAt                     DateTime                        @default(now())
@@ -1665,7 +1657,7 @@ model SolidWasteSection {
   containerServiceProviderName       Int?
   scheduleLiftingId                  Int?
   sanitaryContainerId                Int?
-  rating                             Int?
+  rating                             Decimal?                         @db.Decimal(4, 2)
   wasteServicePhoneNumber            String?
   deleted                            Int?                             @default(0)
   createdAt                          DateTime                         @default(now())
@@ -2050,12 +2042,13 @@ model UserGuides {
 }
 
 model FormSectionImage {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  InspectionPictures InspectionPictures[]
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  deleted                    Int?                         @default(0)
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  InspectionPictures         InspectionPictures[]
+  FollowUpInspectionPictures FollowUpInspectionPictures[]
 }
 
 // int isNotApplicable;
@@ -2094,6 +2087,21 @@ model InspectionPictures {
   @@unique([formSectionImageId, inspectionId], name: "inspectionFormSectionImage")
 }
 
+model FollowUpInspectionPictures {
+  id                 Int    @id @default(autoincrement())
+  imagePath          String @db.VarChar(255)
+  formSectionImageId Int
+
+  deleted              Int?               @default(0)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  FormSectionImage     FormSectionImage   @relation(fields: [formSectionImageId], references: [id])
+  FollowUpInspection   FollowUpInspection @relation(fields: [followUpInspectionId], references: [id])
+  followUpInspectionId String             @db.VarChar(255)
+
+  @@unique([formSectionImageId, followUpInspectionId], name: "inspectionFormSectionImage")
+}
+
 model AssignData {
   id        Int      @id @default(autoincrement())
   deleted   Int?     @default(0)
@@ -2107,8 +2115,6 @@ model AssignData {
   assignedFromId Int
 }
 
-
-
 model FollowUpInspection {
   id String @id @db.VarChar(255)
 
@@ -2119,7 +2125,7 @@ model FollowUpInspection {
   inspectionFormId        Int
   communityId             Int
   community               String  @db.VarChar(255)
-  electoralAreaId         Int  
+  electoralAreaId         Int
   electoralArea           String  @db.VarChar(255)
   ghanaPostGps            String? @db.VarChar(255)
   latitude                String  @db.VarChar(255)
@@ -2127,7 +2133,7 @@ model FollowUpInspection {
   accuracy                String  @db.VarChar(255)
   respondentName          String  @db.VarChar(255)
   respondentPhoneNumber   String  @db.VarChar(255)
-  respondentDesignationId Int  
+  respondentDesignationId Int
   waterRating             String  @db.VarChar(255)
   solidWasteRating        String  @db.VarChar(255)
   liquidWasteRating       String  @db.VarChar(255)
@@ -2138,10 +2144,6 @@ model FollowUpInspection {
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String @db.VarChar(255)
   officerComment                String @db.VarChar(255)
-  waterImageFilePath    String? @db.VarChar(255)
-  solidWasteImageFilePath    String? @db.VarChar(255)
-  liquidWasteImageFilePath    String? @db.VarChar(255)
-  premisesImageFilePath    String? @db.VarChar(255)
 
   isNuisanceObservedId Int?
 
@@ -2153,7 +2155,8 @@ model FollowUpInspection {
 
   obnoxiousTradeExistFollowUp YesNo @relation("obnoxiousTradeExistFollowUp", fields: [obnoxiousTradeExistFollowUpId], references: [id])
 
-  isNuisanceObserved YesNo? @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
+  isNuisanceObserved         YesNo?                       @relation("isNuisanceObserved", fields: [isNuisanceObservedId], references: [id])
+  FollowUpInspectionPictures FollowUpInspectionPictures[]
 }
 
 //reset internal autoincrement id

@@ -18,7 +18,7 @@ CREATE TABLE "Inspection" (
     "deleted" INTEGER DEFAULT 0,
     "isReinspected" INTEGER DEFAULT 0,
     "isFollowedUp" INTEGER DEFAULT 0,
-    "totalRating" DECIMAL(4,2) NOT NULL,
+    "totalRating" DECIMAL(4,2),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
@@ -252,17 +252,6 @@ CREATE TABLE "CleaningFrequency" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "CleaningFrequency_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Rating" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "deleted" INTEGER DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Rating_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1161,7 +1150,7 @@ CREATE TABLE "WaterSection" (
     "waterStorageConditionId" INTEGER,
     "waterFlowFrequencyId" INTEGER,
     "safeDistanceWaterStorageSanitaryId" INTEGER,
-    "rating" INTEGER NOT NULL,
+    "rating" DECIMAL(4,2) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1203,7 +1192,7 @@ CREATE TABLE "LiquidWasteSection" (
     "wasteWaterContainmentId" INTEGER,
     "easeYourselfWhereId" INTEGER,
     "desiltingFrequencyId" INTEGER,
-    "rating" INTEGER,
+    "rating" DECIMAL(4,2) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1236,7 +1225,7 @@ CREATE TABLE "SolidWasteSection" (
     "containerServiceProviderName" INTEGER,
     "scheduleLiftingId" INTEGER,
     "sanitaryContainerId" INTEGER,
-    "rating" INTEGER,
+    "rating" DECIMAL(4,2),
     "wasteServicePhoneNumber" TEXT,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1627,6 +1616,19 @@ CREATE TABLE "InspectionPictures" (
 );
 
 -- CreateTable
+CREATE TABLE "FollowUpInspectionPictures" (
+    "id" SERIAL NOT NULL,
+    "imagePath" VARCHAR(255) NOT NULL,
+    "formSectionImageId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "followUpInspectionId" VARCHAR(255) NOT NULL,
+
+    CONSTRAINT "FollowUpInspectionPictures_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "AssignData" (
     "id" SERIAL NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -1754,6 +1756,9 @@ CREATE UNIQUE INDEX "ConclusionSection_inspectionId_key" ON "ConclusionSection"(
 
 -- CreateIndex
 CREATE UNIQUE INDEX "InspectionPictures_formSectionImageId_inspectionId_key" ON "InspectionPictures"("formSectionImageId", "inspectionId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "FollowUpInspectionPictures_formSectionImageId_followUpInspe_key" ON "FollowUpInspectionPictures"("formSectionImageId", "followUpInspectionId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "FollowUpInspection_prevInspectionId_key" ON "FollowUpInspection"("prevInspectionId");
@@ -2753,6 +2758,12 @@ ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_inspectionId
 
 -- AddForeignKey
 ALTER TABLE "InspectionPictures" ADD CONSTRAINT "InspectionPictures_formSectionImageId_fkey" FOREIGN KEY ("formSectionImageId") REFERENCES "FormSectionImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowUpInspectionPictures" ADD CONSTRAINT "FollowUpInspectionPictures_formSectionImageId_fkey" FOREIGN KEY ("formSectionImageId") REFERENCES "FormSectionImage"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowUpInspectionPictures" ADD CONSTRAINT "FollowUpInspectionPictures_followUpInspectionId_fkey" FOREIGN KEY ("followUpInspectionId") REFERENCES "FollowUpInspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedToId_fkey" FOREIGN KEY ("assignedToId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
