@@ -111,6 +111,7 @@ const DataEdit = ({ data }) => {
 
   let formId = query.inspectionFormId;
   let published = query.published;
+  let inspectionId = query.id;
 
   const publish = async (id) => {
     try {
@@ -178,12 +179,67 @@ const DataEdit = ({ data }) => {
   };
 
   const handleUpdate = async (id) => {
+    console.log("inspectionId ", inspectionId);
     let data = {
-      id,
+      inspectionId: inspectionId,
+      waterSupply: selectedWaterSupply?.map((x) => x.value),
+      waterSource: selectedWaterSource?.map((x) => x.value),
+      waterStorage: selectedWaterStorage?.map((x) => x.value),
+      waterTreatment: selectedWaterTreatment?.map((x) => x.value),
+      drinkingWaterSource: selectedDrinkingWaterSource?.map((x) => x.value),
+      drainType: selectedDrainType?.map((x) => x.value),
+      effluentManagement: selectedEffluentManagement?.map((x) => x.value),
+      excretaContainment: selectedExcretaContainment?.map((x) => x.value),
+      excretaDisposalMethod: selectedExcretaDisposalMethod?.map((x) => x.value),
+      greyWaterDisposal: selectedGreyWaterDisposal?.map((x) => x.value),
+      toiletType: selectedToiletType?.map((x) => x.value),
+      wasteReceptacle: selectedWasteReceptacle?.map((x) => x.value),
+      nuisanceDetected: selectedNuisanceDetected?.map((x) => x.value),
+      action: selectedAction?.map((x) => x.value),
+      animalPermitAvailability: animalPermitAvailability,
+      buildingPermitAvailability: buildingPermitAvailability,
+      habitationCertificateAvailability: certificateHabitationAvailability,
+      propertyRateAvailability: propertyRateAvailability,
+      suitabilityCertificateAvailability: suitabilityCertificateAvailability,
+      structurePermitAvailability: structurePermitAvailability,
+      fumigationCertificateAvailability: fumigationCertificateAvailability,
+      businessPermitAvailability: businessPermitAvailability,
+      structurePermitAvailability: structurePermitAvailability,
+      waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
+      regGeneralCertAvailability: regGeneralCertAvailability,
+      gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
+      pharmacyCertAvailability: pharmacyCertAvailability,
+      waterSourceCondition: waterSourceCondition,
+      waterStorageCondition: waterStorageCondition,
+      waterFlowFrequency: waterFlowFrequency,
+      numberToiletSeats: numberToiletSeats,
+      numberUrinalSeats: numberUrinalSeats,
+      toiletAdequacy: toiletAdequacy,
+      bathroomAdequacy: bathroomAdequacy,
+      toiletPitPosition: toiletPitPosition,
+      drainCondition: drainCondition,
+      stagnationEvidence: stagnationEvidence,
+      analCleansingMaterialMgt: analCleansingMaterialMgt,
+      toiletCondition: toiletCondition,
+      toiletDischarge: toiletDischarge,
+      containmentEmptied: containmentEmptied,
+      sewerSystem: sewerSystem,
+      easeYourselfWhere: easeYourselfWhere,
+      desiltingFrequency: desiltingFrequency,
+      wasteServiceProviderRegistration: wasteServiceProviderRegistration,
+      wasteCollectorName: wasteCollectorName,
+      wasteSortingAvailability: wasteSortingAvailability,
+      wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
+      adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
+      wasteCollectionType: wasteCollectionType,
+      unservicedWasteDisposal: unservicedWasteDisposal,
+      wastePaymentEvidence: wastePaymentEvidence,
+      containerVolume: containerVolume,
+      wasteProviderAccreditted: wasteProviderAccreditted,
+      obnoxiousTradeExist: obnoxiousTradeExist,
+      officerComment: officerComment,
     };
-    const response = await axios.put(`/api/v1/inspection-data`, {
-      id: id,
-    });
+    const response = await axios.put(`/api/v1/inspection-data`, data);
   };
 
   const onWaterSupplyRemove = (selected) => {
@@ -300,8 +356,6 @@ const DataEdit = ({ data }) => {
           label: data.WaterSourceType.name,
         };
       });
-
-    console.log("premisesWaterSource ", premisesWaterSource);
 
     setSelectedWaterSource(premisesWaterSource);
 
@@ -607,8 +661,8 @@ const DataEdit = ({ data }) => {
                               readOnly="readOnly"
                             />
                           </div>{" "}
-                          {data?.submittedData?.ConclusionSection
-                            ?.officerComment != "" ? (
+                          {data?.submittedData?.BasicInfoSection
+                            ?.respondentPhoneNumber != "" ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Respondent phone number
@@ -621,6 +675,7 @@ const DataEdit = ({ data }) => {
                                   data?.submittedData?.BasicInfoSection
                                     ?.respondentPhoneNumber
                                 }
+
                                 readOnly="readOnly"
                               />
                             </div>

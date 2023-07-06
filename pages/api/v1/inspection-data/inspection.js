@@ -4,7 +4,6 @@ import moment from "moment";
 const post = async (req, res) => {
   try {
 
-    console.log(req.body);
 
     const user = await prisma.user.findFirst({
       where: { id: Number(req.body.userId) },

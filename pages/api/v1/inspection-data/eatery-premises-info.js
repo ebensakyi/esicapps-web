@@ -3,11 +3,7 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-    console.log(
-      "req.body.bathroomAvailabilityId: ",
-      req.body.bathroomAvailabilityId
-    );
-
+  
     const data = {
       id: req.body.id,
       inspectionId: req.body.inspectionId,
