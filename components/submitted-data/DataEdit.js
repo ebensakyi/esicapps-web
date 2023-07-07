@@ -187,6 +187,7 @@ const DataEdit = ({ data }) => {
     console.log("inspectionId ", inspectionId);
     let data = {
       inspectionId: inspectionId,
+      inspectionFormId:formId,
       waterSupply: selectedWaterSupply?.map((x) => x.value),
       waterSource: selectedWaterSource?.map((x) => x.value),
       waterStorage: selectedWaterStorage?.map((x) => x.value),

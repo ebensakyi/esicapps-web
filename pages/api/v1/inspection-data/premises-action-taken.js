@@ -16,6 +16,8 @@ const post = async (req, res) => {
       actionId: req.body.actionId == "null" ? null : Number(req.body.actionId),
     };
 
+    console.log(data);
+
     const response = await prisma.premisesActionTaken.create({ data });
 
     if(response){

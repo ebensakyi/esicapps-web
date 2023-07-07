@@ -32,6 +32,9 @@ const post = async (req, res) => {
             ? 1
             : Number(fields.formSectionImageId),
       };
+
+      console.log(data);
+
       const ip = await prisma.inspectionPictures.create({ data });
 
      

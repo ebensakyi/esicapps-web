@@ -15,6 +15,7 @@ const post = async (req, res) => {
           ? null
           : req.body.conclusionSectionId,
     };
+    console.log(data);
 
     const response = await prisma.premisesNuisanceDetected.create({ data });
 
