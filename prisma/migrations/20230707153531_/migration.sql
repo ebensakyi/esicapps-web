@@ -19,6 +19,7 @@ CREATE TABLE "Inspection" (
     "isReinspected" INTEGER DEFAULT 0,
     "isFollowedUp" INTEGER DEFAULT 0,
     "totalRating" DECIMAL(4,2),
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
@@ -804,6 +805,7 @@ CREATE TABLE "BasicInfoSection" (
     "respondentPhoneNumber" VARCHAR(255) NOT NULL,
     "respondentDesignationId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -827,6 +829,7 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
     "animalSpaceConditionId" INTEGER,
     "vaccinationProofId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -860,6 +863,7 @@ CREATE TABLE "EateryPremisesInfoSection" (
     "bathroomAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -886,6 +890,7 @@ CREATE TABLE "HealthPremisesInfoSection" (
     "incineratorAvailabilityId" INTEGER,
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -923,6 +928,7 @@ CREATE TABLE "HospitalityPremisesInfoSection" (
     "numberRooms" INTEGER,
     "facilityCapacity" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -973,6 +979,7 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
     "cremationPlatformId" INTEGER,
     "sanitaryAshesDisposalId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1012,6 +1019,7 @@ CREATE TABLE "MarketPremisesInfoSection" (
     "numberDrivers" INTEGER,
     "numberFoodVendors" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1074,6 +1082,7 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
     "separateBoardingBoysGirlsId" INTEGER,
     "boardingHouseConditionId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1108,6 +1117,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "numberFoodHandlersCert" INTEGER,
     "byProductsStorageAreaCondId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1134,6 +1144,7 @@ CREATE TABLE "LicencePermitSection" (
     "waterAnalysisReportId" INTEGER,
     "regGeneralCertAvailabilityId" INTEGER,
     "pharmacyCertAvailabilityId" INTEGER,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1151,6 +1162,7 @@ CREATE TABLE "WaterSection" (
     "waterFlowFrequencyId" INTEGER,
     "safeDistanceWaterStorageSanitaryId" INTEGER,
     "rating" DECIMAL(4,2) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1193,6 +1205,7 @@ CREATE TABLE "LiquidWasteSection" (
     "easeYourselfWhereId" INTEGER,
     "desiltingFrequencyId" INTEGER,
     "rating" DECIMAL(4,2) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1227,6 +1240,7 @@ CREATE TABLE "SolidWasteSection" (
     "sanitaryContainerId" INTEGER,
     "rating" DECIMAL(4,2),
     "wasteServicePhoneNumber" TEXT,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1244,6 +1258,7 @@ CREATE TABLE "ConclusionSection" (
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "isNuisanceObservedId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -1257,6 +1272,7 @@ CREATE TABLE "PremisesWaterSources" (
     "waterSectionId" VARCHAR(255) NOT NULL,
     "waterSourceId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1271,6 +1287,7 @@ CREATE TABLE "PremisesWaterTreatmentType" (
     "waterSectionId" VARCHAR(255) NOT NULL,
     "waterTreatmentTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1286,6 +1303,7 @@ CREATE TABLE "PremisesWaterSupply" (
     "waterSupplyTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "version" INTEGER DEFAULT 0,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
@@ -1299,6 +1317,7 @@ CREATE TABLE "PremisesWaterStorage" (
     "waterSectionId" VARCHAR(255) NOT NULL,
     "waterStorageTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1312,6 +1331,7 @@ CREATE TABLE "PremisesUnsafeWaterStorage" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1327,6 +1347,7 @@ CREATE TABLE "PremisesCommunalContainerCondition" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "version" INTEGER DEFAULT 0,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
     "communalContainerConditionId" INTEGER NOT NULL,
@@ -1342,6 +1363,7 @@ CREATE TABLE "PremisesDrinkingWaterSources" (
     "waterSectionId" VARCHAR(255) NOT NULL,
     "drinkingWaterSourceId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1353,6 +1375,7 @@ CREATE TABLE "PremisesDrinkingWaterSources" (
 CREATE TABLE "PremisesToiletType" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1369,6 +1392,7 @@ CREATE TABLE "PremisesEffluentManagement" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "effluentManagementId" INTEGER NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1382,6 +1406,7 @@ CREATE TABLE "PremisesExcretaDisposalMethod" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1396,6 +1421,7 @@ CREATE TABLE "PremisesExcretaContainment" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1410,6 +1436,7 @@ CREATE TABLE "PremisesGreyWaterDisposal" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1424,6 +1451,7 @@ CREATE TABLE "PremisesWasteReceptacle" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "solidWasteReceptacleId" INTEGER NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1438,6 +1466,7 @@ CREATE TABLE "PremisesPestSigns" (
     "id" VARCHAR(255) NOT NULL,
     "pestSignId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1452,6 +1481,7 @@ CREATE TABLE "PremisesAnimal" (
     "animalTypeId" INTEGER NOT NULL,
     "residentialPremisesInfoSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1465,6 +1495,7 @@ CREATE TABLE "PremisesDrainType" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainTypeId" INTEGER NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1479,6 +1510,7 @@ CREATE TABLE "PremisesDrainBadCondition" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1493,6 +1525,7 @@ CREATE TABLE "PremisesHazardousWasteDisposal" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "hazardousWasteDisposalMethodId" INTEGER NOT NULL,
     "solidWasteSectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1506,8 +1539,9 @@ CREATE TABLE "PremisesActionTaken" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "actionId" INTEGER NOT NULL,
-    "conclusionSectionId" VARCHAR(255) NOT NULL,
+    "conclusionSectionId" VARCHAR(255),
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1520,6 +1554,7 @@ CREATE TABLE "PremisesNuisanceDetected" (
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "conclusionSectionId" VARCHAR(255) NOT NULL,
@@ -1527,6 +1562,34 @@ CREATE TABLE "PremisesNuisanceDetected" (
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesNuisanceDetected_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "FollowupPremisesActionTaken" (
+    "id" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "actionId" INTEGER NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "FollowupPremisesActionTaken_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "FollowupPremisesNuisanceDetected" (
+    "id" VARCHAR(255) NOT NULL,
+    "inspectionId" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "nuisanceId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "FollowupPremisesNuisanceDetected_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -1544,6 +1607,7 @@ CREATE TABLE "SanitationReport" (
     "latitude" DECIMAL(11,8),
     "longitude" DECIMAL(11,8),
     "status" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1596,6 +1660,7 @@ CREATE TABLE "NotApplicable" (
     "isNotApplicable" INTEGER NOT NULL,
     "type" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "version" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -1608,6 +1673,7 @@ CREATE TABLE "InspectionPictures" (
     "imagePath" VARCHAR(255) NOT NULL,
     "formSectionImageId" INTEGER NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1620,6 +1686,7 @@ CREATE TABLE "FollowUpInspectionPictures" (
     "id" SERIAL NOT NULL,
     "imagePath" VARCHAR(255) NOT NULL,
     "formSectionImageId" INTEGER NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1662,6 +1729,7 @@ CREATE TABLE "FollowUpInspection" (
     "solidWasteRating" VARCHAR(255) NOT NULL,
     "liquidWasteRating" VARCHAR(255) NOT NULL,
     "totalRating" VARCHAR(255) NOT NULL,
+    "version" INTEGER DEFAULT 0,
     "obnoxiousTradeExistFollowUpId" INTEGER NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "officerComment" VARCHAR(255) NOT NULL,
@@ -2727,7 +2795,7 @@ ALTER TABLE "PremisesHazardousWasteDisposal" ADD CONSTRAINT "PremisesHazardousWa
 ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_actionId_fkey" FOREIGN KEY ("actionId") REFERENCES "Action"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_conclusionSectionId_fkey" FOREIGN KEY ("conclusionSectionId") REFERENCES "ConclusionSection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesActionTaken" ADD CONSTRAINT "PremisesActionTaken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -2740,6 +2808,18 @@ ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_
 
 -- AddForeignKey
 ALTER TABLE "PremisesNuisanceDetected" ADD CONSTRAINT "PremisesNuisanceDetected_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowupPremisesActionTaken" ADD CONSTRAINT "FollowupPremisesActionTaken_actionId_fkey" FOREIGN KEY ("actionId") REFERENCES "Action"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowupPremisesActionTaken" ADD CONSTRAINT "FollowupPremisesActionTaken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowupPremisesNuisanceDetected" ADD CONSTRAINT "FollowupPremisesNuisanceDetected_nuisanceId_fkey" FOREIGN KEY ("nuisanceId") REFERENCES "Nuisance"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FollowupPremisesNuisanceDetected" ADD CONSTRAINT "FollowupPremisesNuisanceDetected_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
