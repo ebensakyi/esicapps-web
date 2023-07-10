@@ -24,7 +24,21 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
   const [vaccinationProof, setVaccinationProof] = useState();
   const [animalSpaceCondition, setAnimalSpaceCondition] = useState();
 
-
+useEffect(() => {
+  setToiletAvailability(
+    data?.submittedData?.ResidentialPremisesInfoSection?.toiletAvailability?.id
+  );
+setBathroomAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.bathroomAvailability?.id)
+setDrainAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.drainsAvailability?.id)
+setHandWashingAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability?.id)
+setHouseHoldNumber(data?.submittedData?.ResidentialPremisesInfoSection?.householdNumber)
+setMaleNumber(data?.submittedData?.ResidentialPremisesInfoSection?.maleOccupantNumber)
+setFemaleNumber(data?.submittedData?.ResidentialPremisesInfoSection?.femaleOccupantNumber)
+setAnimalAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.animalAvailability?.id) 
+setAnimalNumber(data?.submittedData?.ResidentialPremisesInfoSection?.animalNumber)
+setVaccinationProof( data?.submittedData?.ResidentialPremisesInfoSection?.vaccinationProof?.id)
+setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.animalSpaceCondition.id)
+},[])
   return (
     <>
       <div className="row">
@@ -267,17 +281,22 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                         <label htmlFor="invoicenoInput">
                           Animal availabilty
                         </label>
-                        <input
-                           type="text"
-                           className="form-control"
-                          id="invoicenoInput"
+                        <select
+                          className="form-control"
+                          aria-label="Default select example"
+                          onChange={(e) => {
+                            setAnimalAvailability(e.target.value);
+                          }}
                           value={animalAvailability}
-                          onChange={(e) => setAnimalAvailability(e.target.value)}
-                          //  value={
-                          //    data?.submittedData?.ResidentialPremisesInfoSection
-                          //      ?.animalAvailability.name
-                          //  }
-                        />
+                        >
+                          <option value="" selected>
+                            Select
+                          </option>
+                          <option value={1}>Yes</option>
+                          <option value={2}>No</option>
+                        </select>
+
+                        
                       </div>
                     ) : (
                       <></>
