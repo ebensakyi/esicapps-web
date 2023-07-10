@@ -30,7 +30,7 @@ const Map = ({data}) => {
       />
       <Marker position={coordinates}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          Residential
         </Popup>
       </Marker>
     </MapContainer>

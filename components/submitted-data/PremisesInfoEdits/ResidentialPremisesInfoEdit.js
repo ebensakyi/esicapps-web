@@ -10,7 +10,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
   
   let formId = query.inspectionFormId;
   let published = query.published;
-
+console.log(data?.submittedData?.submitteddata?.submittedData?.ResidentialPremisesInfoSection?.PremisesAnimal.length);
 
 
   return (
@@ -24,7 +24,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                        <div className="col-sm">
                          <div>
                            <h5 className="fs-14 mb-0">
-                             RESIDENTIAL INFORMATION SECTION
+                             RESIDENTIAL INFORMATION SECTION 
                            </h5>
                          </div>
                        </div>
@@ -32,7 +32,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                      <div className="card product">
                        <div className="card-body">
                          <div className="row gy-3">
-                           {data?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Toilet facility availabilty
@@ -42,7 +42,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      .toiletAvailability.name
                                  }
                                  readOnly="readOnly"
@@ -51,7 +51,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {/* {data?.ResidentialPremisesInfoSection != null ? (
+                           {/* {data?.submittedData?.ResidentialPremisesInfoSection != null ? (
                        <div className="col-lg-3 col-sm-6">
                          <label htmlFor="invoicenoInput">
                            Urinal facility availabilty
@@ -61,7 +61,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            className="form-control bg-light border-0"
                            id="invoicenoInput"
                            value={
-                             data?.ResidentialPremisesInfoSection?.urinalAvailability?.name
+                             data?.submittedData?.ResidentialPremisesInfoSection?.urinalAvailability?.name
                            }
                            readOnly="readOnly"
                          />
@@ -69,7 +69,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                      ) : (
                        <></>
                      )} */}
-                           {data?.ResidentialPremisesInfoSection?.bathroomAvailability != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.bathroomAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Bathroom facility availabilty
@@ -79,7 +79,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      .bathroomAvailability.name
                                  }
                                  readOnly="readOnly"
@@ -88,7 +88,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.drainsAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -99,7 +99,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.drainsAvailability?.name
                                  }
                                  readOnly="readOnly"
@@ -108,7 +108,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.approvedHandwashingFacilityAvailability !=
                            null ? (
                              <div className="col-lg-3 col-sm-6">
@@ -120,7 +120,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.approvedHandwashingFacilityAvailability
                                      ?.name
                                  }
@@ -130,7 +130,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection?.householdNumber != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.householdNumber != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Number of household
@@ -140,7 +140,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.householdNumber
                                  }
                                  readOnly="readOnly"
@@ -149,7 +149,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.maleOccupantNumber != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -160,7 +160,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.maleOccupantNumber
                                  }
                                  readOnly="readOnly"
@@ -169,7 +169,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.femaleOccupantNumber != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -180,7 +180,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.femaleOccupantNumber
                                  }
                                  readOnly="readOnly"
@@ -189,7 +189,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.animalAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -200,7 +200,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.animalAvailability.name
                                  }
                                  readOnly="readOnly"
@@ -209,7 +209,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection?.animalNumber !=
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.animalNumber !=
                            null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -220,7 +220,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.animalNumber
                                  }
                                  readOnly="readOnly"
@@ -230,11 +230,11 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                              <></>
                            )}
 
-                           {data?.ResidentialPremisesInfoSection?.PremisesAnimal
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.PremisesAnimal
                              ?.length != 0 ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">Animals</label>
-                               {data?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
+                               {data?.submittedData?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
                                  (x) => (
                                    <input
                                      key={x.id}
@@ -251,7 +251,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                              <></>
                            )}
 
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.vaccinationProof != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -262,7 +262,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.vaccinationProof?.name
                                  }
                                  readOnly="readOnly"
@@ -272,7 +272,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                              <></>
                            )}
                          </div>
-                         {data?.ResidentialPremisesInfoSection
+                         {data?.submittedData?.ResidentialPremisesInfoSection
                            ?.animalSpaceCondition != null ? (
                            <div className="col-lg-3 col-sm-6">
                              <label htmlFor="invoicenoInput">
@@ -283,7 +283,7 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
                                className="form-control bg-light border-0"
                                id="invoicenoInput"
                                value={
-                                 data?.ResidentialPremisesInfoSection
+                                 data?.submittedData?.ResidentialPremisesInfoSection
                                    ?.animalSpaceCondition.name
                                }
                                readOnly="readOnly"

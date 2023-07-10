@@ -22,6 +22,8 @@ export default function assignData({ districts, assignments }) {
 export async function getServerSideProps(context) {
   const { session } = context.req.cookies;
 
+  console.log("sesssion ", session);
+
   if (!session) {
     return {
       redirect: {

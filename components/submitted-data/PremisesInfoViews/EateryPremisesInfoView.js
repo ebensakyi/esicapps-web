@@ -27,21 +27,21 @@ const EateryPremisesInfoView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.EateryPremisesInfoSection?.facilityName != null ? (
+                    {data?.submittedData?.EateryPremisesInfoSection?.facilityName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Facility Name</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.EateryPremisesInfoSection.facilityName}
+                          value={data?.submittedData?.EateryPremisesInfoSection.facilityName}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.physicalStructureType?.name !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.physicalStructureType?.name !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -52,7 +52,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
                           readOnly="readOnly"
@@ -61,7 +61,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.toiletAvailability !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -72,7 +72,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.toiletAvailability
+                            data?.submittedData?.EateryPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -81,7 +81,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.urinalAvailability !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -92,7 +92,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.urinalAvailability
+                            data?.submittedData?.EateryPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -101,7 +101,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.bathroomAvailability !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -112,7 +112,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -121,7 +121,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.drainsAvailability !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -132,7 +132,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.drainsAvailability
+                            data?.submittedData?.EateryPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -141,7 +141,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection
+                    {data?.submittedData?.EateryPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailabilityEatery !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -153,7 +153,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailabilityEatery
                               ?.name
                           }
@@ -164,7 +164,7 @@ const EateryPremisesInfoView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.EateryPremisesInfoSection
+                    {data?.submittedData?.EateryPremisesInfoSection
                       ?.cookedFoodStorageCondtionSafeId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -175,7 +175,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.cookedFoodStorageCondtionSafe.name
                           }
                           readOnly="readOnly"
@@ -184,7 +184,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection
+                    {data?.submittedData?.EateryPremisesInfoSection
                       ?.uncookedFoodStorageCondtionSafeId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -195,7 +195,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.uncookedFoodStorageCondtionSafe.name
                           }
                           readOnly="readOnly"
@@ -204,7 +204,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.designatedSmokingAreaId !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.designatedSmokingAreaId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -215,7 +215,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.designatedSmokingArea?.name
                           }
                           readOnly="readOnly"
@@ -224,7 +224,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection
+                    {data?.submittedData?.EateryPremisesInfoSection
                       ?.protectiveClothingUsedId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -235,7 +235,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.protectiveClothingUsed?.name
                           }
                           readOnly="readOnly"
@@ -244,7 +244,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.firstAidAvailabilityId !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.firstAidAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -255,7 +255,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.firstAidAvailability?.name
                           }
                           readOnly="readOnly"
@@ -264,7 +264,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.kitchenAvailabilityId !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.kitchenAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -275,7 +275,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.kitchenAvailability
+                            data?.submittedData?.EateryPremisesInfoSection?.kitchenAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -284,7 +284,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.numberMaleWorkers !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.numberMaleWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -295,7 +295,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.numberMaleWorkers
+                            data?.submittedData?.EateryPremisesInfoSection?.numberMaleWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -303,7 +303,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection?.numberFemaleWorkers !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.numberFemaleWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -314,7 +314,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.numberFemaleWorkers
+                            data?.submittedData?.EateryPremisesInfoSection?.numberFemaleWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -322,7 +322,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.EateryPremisesInfoSection
+                    {data?.submittedData?.EateryPremisesInfoSection
                       ?.numberFoodHandlingMedical != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -333,7 +333,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection
+                            data?.submittedData?.EateryPremisesInfoSection
                               ?.numberFoodHandlingMedical
                           }
                           readOnly="readOnly"
@@ -343,7 +343,7 @@ const EateryPremisesInfoView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.EateryPremisesInfoSection?.numberFoodHandling !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.numberFoodHandling !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -354,7 +354,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.numberFoodHandling
+                            data?.submittedData?.EateryPremisesInfoSection?.numberFoodHandling
                           }
                           readOnly="readOnly"
                         />
@@ -363,14 +363,14 @@ const EateryPremisesInfoView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.EateryPremisesInfoSection?.numberRooms != null ? (
+                    {data?.submittedData?.EateryPremisesInfoSection?.numberRooms != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Number of rooms</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.EateryPremisesInfoSection?.numberRooms}
+                          value={data?.submittedData?.EateryPremisesInfoSection?.numberRooms}
                           readOnly="readOnly"
                         />
                       </div>
@@ -378,7 +378,7 @@ const EateryPremisesInfoView = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.EateryPremisesInfoSection?.facilityCapacity !=
+                    {data?.submittedData?.EateryPremisesInfoSection?.facilityCapacity !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -389,7 +389,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.facilityCapacity
+                            data?.submittedData?.EateryPremisesInfoSection?.facilityCapacity
                           }
                           readOnly="readOnly"
                         />
@@ -399,7 +399,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     )}
 
 
-{data?.EateryPremisesInfoSection?.disinfestationId !=
+{data?.submittedData?.EateryPremisesInfoSection?.disinfestationId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -410,7 +410,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfestation?.name
+                            data?.submittedData?.EateryPremisesInfoSection?.disinfestation?.name
                           }
                           readOnly="readOnly"
                         />
@@ -418,7 +418,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.EateryPremisesInfoSection?.disinfestationFrequencyId !=
+                     {data?.submittedData?.EateryPremisesInfoSection?.disinfestationFrequencyId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -429,7 +429,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfestationFrequency?.name
+                            data?.submittedData?.EateryPremisesInfoSection?.disinfestationFrequency?.name
                           }
                           readOnly="readOnly"
                         />
@@ -437,7 +437,7 @@ const EateryPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.EateryPremisesInfoSection?.disinfectionId !=
+                     {data?.submittedData?.EateryPremisesInfoSection?.disinfectionId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -448,7 +448,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfection?.name
+                            data?.submittedData?.EateryPremisesInfoSection?.disinfection?.name
                           }
                           readOnly="readOnly"
                         />
@@ -457,7 +457,7 @@ const EateryPremisesInfoView = ({ data }) => {
                       <></>
                     )}
 
-{data?.EateryPremisesInfoSection?.disinfectionFrequencyId !=
+{data?.submittedData?.EateryPremisesInfoSection?.disinfectionFrequencyId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -468,7 +468,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.EateryPremisesInfoSection?.disinfectionFrequency?.name
+                            data?.submittedData?.EateryPremisesInfoSection?.disinfectionFrequency?.name
                           }
                           readOnly="readOnly"
                         />

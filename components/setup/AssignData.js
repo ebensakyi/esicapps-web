@@ -245,7 +245,7 @@ const AssignData = ({ districts, assignments }) => {
               >
                 <thead>
                   <tr>
-                    <th> Date</th>
+                    <th>Date</th>
                     <th>Assigned From</th>
 
                     <th>Assigned To</th>

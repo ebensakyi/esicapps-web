@@ -14,6 +14,8 @@ import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEd
 import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
+
+  console.log(data);
   const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
   const [buildingPermitAvailability, setBuildingPermitAvailability] =
     useState();
@@ -859,14 +861,14 @@ const DataEdit = ({ data }) => {
               </div>
             </div>
 
-            {/* {formId == 1 ? <ResidentialPremisesInfoEdit data={data} /> : <></>}
+            {formId == 1 ? <ResidentialPremisesInfoEdit data={data} /> : <></>}
             {formId == 2 ? <EateryPremisesInfoEdit data={data} /> : <></>}
             {formId == 3 ? <HealthPremisesInfoEdit data={data} /> : <></>}
             {formId == 4 ? <HospitalityPremisesInfoEdit data={data} /> : <></>}
             {formId == 5 ? <InstitutionPremisesInfoEdit data={data} /> : <></>}
             {formId == 6 ? <IndustryPremisesInfoEdit data={data} /> : <></>}
             {formId == 7 ? <MarketPremisesInfoEdit data={data} /> : <></>}
-            {formId == 8 ? <SanitaryPremisesInfoEdit data={data} /> : <></>} */}
+            {formId == 8 ? <SanitaryPremisesInfoEdit data={data} /> : <></>}
             <div className="row">
               <div className="col-lg-12">
                 <div className="row mb-3">

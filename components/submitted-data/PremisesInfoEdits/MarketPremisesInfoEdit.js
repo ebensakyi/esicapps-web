@@ -28,21 +28,21 @@ const MarketPremisesInfoEdit = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.MarketPremisesInfoSection?.facilityName != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.facilityName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Facility Name</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection?.facilityName}
+                          value={data?.submittedData?.MarketPremisesInfoSection?.facilityName}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.marketPremisesTypeId !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.marketPremisesTypeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Type</label>
@@ -51,7 +51,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.marketPremisesType
+                            data?.submittedData?.MarketPremisesInfoSection?.marketPremisesType
                               .name
                           }
                           readOnly="readOnly"
@@ -60,7 +60,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.toiletAvailability !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -71,7 +71,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.toiletAvailability
+                            data?.submittedData?.MarketPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -80,7 +80,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.urinalAvailability !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -91,7 +91,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.urinalAvailability
+                            data?.submittedData?.MarketPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -100,7 +100,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.bathroomAvailability !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -111,7 +111,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection
+                            data?.submittedData?.MarketPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -120,7 +120,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.drainsAvailability !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -131,7 +131,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.drainsAvailability
+                            data?.submittedData?.MarketPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -140,7 +140,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection
+                    {data?.submittedData?.MarketPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailabilityMarket !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -152,7 +152,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection
+                            data?.submittedData?.MarketPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailabilityMarket
                               ?.name
                           }
@@ -163,7 +163,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.MarketPremisesInfoSection?.firstAidAvailabilityId !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.firstAidAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -174,7 +174,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.firstAidAvailability
+                            data?.submittedData?.MarketPremisesInfoSection.firstAidAvailability
                               .name
                           }
                           readOnly="readOnly"
@@ -183,7 +183,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.ownershipTypeId !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.ownershipTypeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Ownership Type</label>
@@ -192,7 +192,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection.ownershipType.name
+                            data?.submittedData?.MarketPremisesInfoSection.ownershipType.name
                           }
                           readOnly="readOnly"
                         />
@@ -200,49 +200,49 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberStores != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberStores != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Number of stores</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection?.numberStores}
+                          value={data?.submittedData?.MarketPremisesInfoSection?.numberStores}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberSheds != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberSheds != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Number of sheds</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection.numberSheds}
+                          value={data?.submittedData?.MarketPremisesInfoSection.numberSheds}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberStalls != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberStalls != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Number of stalls</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection.numberStalls}
+                          value={data?.submittedData?.MarketPremisesInfoSection.numberStalls}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberTraders != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberTraders != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of traders
@@ -251,14 +251,14 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection?.numberTraders}
+                          value={data?.submittedData?.MarketPremisesInfoSection?.numberTraders}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberMeatShops !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberMeatShops !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -269,7 +269,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.numberMeatShops
+                            data?.submittedData?.MarketPremisesInfoSection?.numberMeatShops
                           }
                           readOnly="readOnly"
                         />
@@ -277,7 +277,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberColdStores !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberColdStores !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -288,7 +288,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.numberColdStores
+                            data?.submittedData?.MarketPremisesInfoSection?.numberColdStores
                           }
                           readOnly="readOnly"
                         />
@@ -297,21 +297,21 @@ const MarketPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.MarketPremisesInfoSection?.numberMills != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberMills != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Number of mills</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection?.numberMills}
+                          value={data?.submittedData?.MarketPremisesInfoSection?.numberMills}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberChopbars != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberChopbars != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of chopbars
@@ -320,7 +320,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection?.numberChopbars}
+                          value={data?.submittedData?.MarketPremisesInfoSection?.numberChopbars}
                           readOnly="readOnly"
                         />
                       </div>
@@ -328,7 +328,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.MarketPremisesInfoSection?.derattingFrequencyId !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.derattingFrequencyId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -339,7 +339,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.derattingFrequency
+                            data?.submittedData?.MarketPremisesInfoSection?.derattingFrequency
                               ?.name
                           }
                           readOnly="readOnly"
@@ -348,7 +348,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.cleanupFrequencyId !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.cleanupFrequencyId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -359,7 +359,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.cleanupFrequency
+                            data?.submittedData?.MarketPremisesInfoSection?.cleanupFrequency
                               ?.name
                           }
                           readOnly="readOnly"
@@ -368,7 +368,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberLorrySheds !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberLorrySheds !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -379,7 +379,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.numberLorrySheds
+                            data?.submittedData?.MarketPremisesInfoSection?.numberLorrySheds
                           }
                           readOnly="readOnly"
                         />
@@ -387,7 +387,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberVehicles != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberVehicles != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of Vehicles
@@ -397,7 +397,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.numberVehicles
+                            data?.submittedData?.MarketPremisesInfoSection?.numberVehicles
                           }
                           readOnly="readOnly"
                         />
@@ -405,7 +405,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberDrivers != null ? (
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberDrivers != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of drivers
@@ -414,14 +414,14 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
-                          value={data?.MarketPremisesInfoSection?.numberDrivers}
+                          value={data?.submittedData?.MarketPremisesInfoSection?.numberDrivers}
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
                     )}
-                    {data?.MarketPremisesInfoSection?.numberFoodVendors !=
+                    {data?.submittedData?.MarketPremisesInfoSection?.numberFoodVendors !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -432,7 +432,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection?.numberFoodVendors
+                            data?.submittedData?.MarketPremisesInfoSection?.numberFoodVendors
                           }
                           readOnly="readOnly"
                         />
@@ -441,7 +441,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.MarketPremisesInfoSection
+                    {data?.submittedData?.MarketPremisesInfoSection
                       ?.generalSanitaryConditionId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -452,7 +452,7 @@ const MarketPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.MarketPremisesInfoSection
+                            data?.submittedData?.MarketPremisesInfoSection
                               ?.generalSanitaryCondition?.name
                           }
                           readOnly="readOnly"

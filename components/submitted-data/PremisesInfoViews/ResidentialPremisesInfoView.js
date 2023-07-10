@@ -11,7 +11,6 @@ const ResidentialPremisesInfoView = ({ data }) => {
   let formId = query.inspectionFormId;
   let published = query.published;
 
-console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
 
   return (
     <>
@@ -32,7 +31,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                      <div className="card product">
                        <div className="card-body">
                          <div className="row gy-3">
-                           {data?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Toilet facility availabilty
@@ -42,7 +41,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      .toiletAvailability.name
                                  }
                                  readOnly="readOnly"
@@ -51,7 +50,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {/* {data?.ResidentialPremisesInfoSection != null ? (
+                           {/* {data?.submittedData?.ResidentialPremisesInfoSection != null ? (
                        <div className="col-lg-3 col-sm-6">
                          <label htmlFor="invoicenoInput">
                            Urinal facility availabilty
@@ -61,7 +60,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            className="form-control bg-light border-0"
                            id="invoicenoInput"
                            value={
-                             data?.ResidentialPremisesInfoSection?.urinalAvailability?.name
+                             data?.submittedData?.ResidentialPremisesInfoSection?.urinalAvailability?.name
                            }
                            readOnly="readOnly"
                          />
@@ -69,7 +68,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                      ) : (
                        <></>
                      )} */}
-                           {data?.ResidentialPremisesInfoSection?.bathroomAvailability != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.bathroomAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Bathroom facility availabilty
@@ -79,7 +78,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      .bathroomAvailability.name
                                  }
                                  readOnly="readOnly"
@@ -88,7 +87,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.drainsAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -99,7 +98,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.drainsAvailability?.name
                                  }
                                  readOnly="readOnly"
@@ -108,7 +107,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.approvedHandwashingFacilityAvailability !=
                            null ? (
                              <div className="col-lg-3 col-sm-6">
@@ -120,7 +119,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.approvedHandwashingFacilityAvailability
                                      ?.name
                                  }
@@ -130,7 +129,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection?.householdNumber != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.householdNumber != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Number of household
@@ -140,7 +139,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.householdNumber
                                  }
                                  readOnly="readOnly"
@@ -149,7 +148,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.maleOccupantNumber != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -160,7 +159,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.maleOccupantNumber
                                  }
                                  readOnly="readOnly"
@@ -169,7 +168,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.femaleOccupantNumber != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -180,7 +179,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.femaleOccupantNumber
                                  }
                                  readOnly="readOnly"
@@ -189,7 +188,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.animalAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -200,7 +199,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.animalAvailability.name
                                  }
                                  readOnly="readOnly"
@@ -209,7 +208,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                            ) : (
                              <></>
                            )}
-                           {data?.ResidentialPremisesInfoSection?.animalNumber !=
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.animalNumber !=
                            null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -220,7 +219,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.animalNumber
                                  }
                                  readOnly="readOnly"
@@ -230,11 +229,11 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                              <></>
                            )}
 
-                           {data?.ResidentialPremisesInfoSection?.PremisesAnimal
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.PremisesAnimal
                              ?.length != 0 ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">Animals</label>
-                               {data?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
+                               {data?.submittedData?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
                                  (x) => (
                                    <input
                                      key={x.id}
@@ -251,7 +250,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                              <></>
                            )}
 
-                           {data?.ResidentialPremisesInfoSection
+                           {data?.submittedData?.ResidentialPremisesInfoSection
                              ?.vaccinationProof != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
@@ -262,7 +261,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.ResidentialPremisesInfoSection
+                                   data?.submittedData?.ResidentialPremisesInfoSection
                                      ?.vaccinationProof?.name
                                  }
                                  readOnly="readOnly"
@@ -272,7 +271,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                              <></>
                            )}
                          </div>
-                         {data?.ResidentialPremisesInfoSection
+                         {data?.submittedData?.ResidentialPremisesInfoSection
                            ?.animalSpaceCondition != null ? (
                            <div className="col-lg-3 col-sm-6">
                              <label htmlFor="invoicenoInput">
@@ -283,7 +282,7 @@ console.log(data?.ResidentialPremisesInfoSection?.PremisesAnimal);
                                className="form-control bg-light border-0"
                                id="invoicenoInput"
                                value={
-                                 data?.ResidentialPremisesInfoSection
+                                 data?.submittedData?.ResidentialPremisesInfoSection
                                    ?.animalSpaceCondition.name
                                }
                                readOnly="readOnly"
