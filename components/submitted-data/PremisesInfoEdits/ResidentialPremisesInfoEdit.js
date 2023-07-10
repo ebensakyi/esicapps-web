@@ -37,7 +37,7 @@ setFemaleNumber(data?.submittedData?.ResidentialPremisesInfoSection?.femaleOccup
 setAnimalAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.animalAvailability?.id) 
 setAnimalNumber(data?.submittedData?.ResidentialPremisesInfoSection?.animalNumber)
 setVaccinationProof( data?.submittedData?.ResidentialPremisesInfoSection?.vaccinationProof?.id)
-setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.animalSpaceCondition.id)
+setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.animalSpaceCondition?.id)
 },[])
   return (
     <>

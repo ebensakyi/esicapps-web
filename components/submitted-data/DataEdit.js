@@ -14,7 +14,9 @@ import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEd
 import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
+  console.log(data);
 
+  const [userId, setUserId] = useState();
   const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
   const [buildingPermitAvailability, setBuildingPermitAvailability] =
     useState();
@@ -110,6 +112,9 @@ const DataEdit = ({ data }) => {
   const [wasteCollectorName, setWasteCollectorName] = useState();
   const [wasteCollectionType, setWasteCollectionType] = useState();
   const [officerComment, setOfficerComment] = useState();
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+  const [accuracy, setAccuracy] = useState();
 
   const router = useRouter();
 
@@ -188,63 +193,80 @@ const DataEdit = ({ data }) => {
     console.log("inspectionId ", inspectionId);
     let data = {
       inspectionId: inspectionId,
-      inspectionFormId:formId,
-      waterSupply: selectedWaterSupply?.map((x) => x.value),
-      waterSource: selectedWaterSource?.map((x) => x.value),
-      waterStorage: selectedWaterStorage?.map((x) => x.value),
-      waterTreatment: selectedWaterTreatment?.map((x) => x.value),
-      drinkingWaterSource: selectedDrinkingWaterSource?.map((x) => x.value),
-      drainType: selectedDrainType?.map((x) => x.value),
-      effluentManagement: selectedEffluentManagement?.map((x) => x.value),
-      excretaContainment: selectedExcretaContainment?.map((x) => x.value),
-      excretaDisposalMethod: selectedExcretaDisposalMethod?.map((x) => x.value),
-      greyWaterDisposal: selectedGreyWaterDisposal?.map((x) => x.value),
-      toiletType: selectedToiletType?.map((x) => x.value),
-      wasteReceptacle: selectedWasteReceptacle?.map((x) => x.value),
-      nuisanceDetected: selectedNuisanceDetected?.map((x) => x.value),
-      action: selectedAction?.map((x) => x.value),
-      animalPermitAvailability: animalPermitAvailability,
-      buildingPermitAvailability: buildingPermitAvailability,
-      habitationCertificateAvailability: certificateHabitationAvailability,
-      propertyRateAvailability: propertyRateAvailability,
-      suitabilityCertificateAvailability: suitabilityCertificateAvailability,
-      structurePermitAvailability: structurePermitAvailability,
-      fumigationCertificateAvailability: fumigationCertificateAvailability,
-      businessPermitAvailability: businessPermitAvailability,
-      structurePermitAvailability: structurePermitAvailability,
-      waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
-      regGeneralCertAvailability: regGeneralCertAvailability,
-      gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
-      pharmacyCertAvailability: pharmacyCertAvailability,
-      waterSourceCondition: waterSourceCondition,
-      waterStorageCondition: waterStorageCondition,
-      waterFlowFrequency: waterFlowFrequency,
-      numberToiletSeats: numberToiletSeats,
-      numberUrinalSeats: numberUrinalSeats,
-      toiletAdequacy: toiletAdequacy,
-      bathroomAdequacy: bathroomAdequacy,
-      toiletPitPosition: toiletPitPosition,
-      drainCondition: drainCondition,
-      stagnationEvidence: stagnationEvidence,
-      analCleansingMaterialMgt: analCleansingMaterialMgt,
-      toiletCondition: toiletCondition,
-      toiletDischarge: toiletDischarge,
-      containmentEmptied: containmentEmptied,
-      sewerSystem: sewerSystem,
-      easeYourselfWhere: easeYourselfWhere,
-      desiltingFrequency: desiltingFrequency,
-      wasteServiceProviderRegistration: wasteServiceProviderRegistration,
-      wasteCollectorName: wasteCollectorName,
-      wasteSortingAvailability: wasteSortingAvailability,
-      wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
-      adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
-      wasteCollectionType: wasteCollectionType,
-      unservicedWasteDisposal: unservicedWasteDisposal,
-      wastePaymentEvidence: wastePaymentEvidence,
-      containerVolume: containerVolume,
-      wasteProviderAccreditted: wasteProviderAccreditted,
-      obnoxiousTradeExist: obnoxiousTradeExist,
-      officerComment: officerComment,
+      inspectionFormId: formId,
+      BasicInfoSection: {
+        latitude: latitude,
+        longitude: longitude,
+        accuracy: accuracy,
+      },
+
+      waterSection: {
+        waterSupply: selectedWaterSupply?.map((x) => x.value),
+        waterSource: selectedWaterSource?.map((x) => x.value),
+        waterStorage: selectedWaterStorage?.map((x) => x.value),
+        waterTreatment: selectedWaterTreatment?.map((x) => x.value),
+        drinkingWaterSource: selectedDrinkingWaterSource?.map((x) => x.value),
+        waterSourceCondition: waterSourceCondition,
+        waterStorageCondition: waterStorageCondition,
+        waterFlowFrequency: waterFlowFrequency,
+      },
+      liquidWasteSection: {
+        drainType: selectedDrainType?.map((x) => x.value),
+        effluentManagement: selectedEffluentManagement?.map((x) => x.value),
+        excretaContainment: selectedExcretaContainment?.map((x) => x.value),
+        excretaDisposalMethod: selectedExcretaDisposalMethod?.map(
+          (x) => x.value
+        ),
+        greyWaterDisposal: selectedGreyWaterDisposal?.map((x) => x.value),
+        toiletType: selectedToiletType?.map((x) => x.value),
+        wasteReceptacle: selectedWasteReceptacle?.map((x) => x.value),
+        numberToiletSeats: numberToiletSeats,
+        numberUrinalSeats: numberUrinalSeats,
+        toiletAdequacy: toiletAdequacy,
+        bathroomAdequacy: bathroomAdequacy,
+        toiletPitPosition: toiletPitPosition,
+        drainCondition: drainCondition,
+        stagnationEvidence: stagnationEvidence,
+        analCleansingMaterialMgt: analCleansingMaterialMgt,
+        toiletCondition: toiletCondition,
+        toiletDischarge: toiletDischarge,
+        containmentEmptied: containmentEmptied,
+        sewerSystem: sewerSystem,
+        easeYourselfWhere: easeYourselfWhere,
+        desiltingFrequency: desiltingFrequency,
+        wasteServiceProviderRegistration: wasteServiceProviderRegistration,
+        wasteCollectorName: wasteCollectorName,
+        wasteSortingAvailability: wasteSortingAvailability,
+        wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
+        adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
+        wasteCollectionType: wasteCollectionType,
+        unservicedWasteDisposal: unservicedWasteDisposal,
+        wastePaymentEvidence: wastePaymentEvidence,
+        containerVolume: containerVolume,
+        wasteProviderAccreditted: wasteProviderAccreditted,
+      },
+
+      conclusionSection: {
+        nuisanceDetected: selectedNuisanceDetected?.map((x) => x.value),
+        action: selectedAction?.map((x) => x.value),
+        obnoxiousTradeExist: obnoxiousTradeExist,
+        officerComment: officerComment,
+      },
+      licencePermitSection: {
+        animalPermitAvailability: animalPermitAvailability,
+        buildingPermitAvailability: buildingPermitAvailability,
+        habitationCertificateAvailability: certificateHabitationAvailability,
+        propertyRateAvailability: propertyRateAvailability,
+        suitabilityCertificateAvailability: suitabilityCertificateAvailability,
+        structurePermitAvailability: structurePermitAvailability,
+        fumigationCertificateAvailability: fumigationCertificateAvailability,
+        businessPermitAvailability: businessPermitAvailability,
+        structurePermitAvailability: structurePermitAvailability,
+        waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
+        regGeneralCertAvailability: regGeneralCertAvailability,
+        gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
+        pharmacyCertAvailability: pharmacyCertAvailability,
+      },
     };
     const response = await axios.put(`/api/v1/inspection-data`, data);
   };
@@ -346,6 +368,7 @@ const DataEdit = ({ data }) => {
   };
 
   useEffect(() => {
+    setUserId(data?.submittedData?.User.id);
     setCertificateHabitationAvailability(
       data?.submittedData?.LicencePermitSection
         ?.habitationCertificateAvailability?.id
@@ -658,6 +681,10 @@ const DataEdit = ({ data }) => {
       );
 
     setSelectedNuisanceDetected(premisesNuisanceDetected);
+
+    setAccuracy(data?.submittedData?.BasicInfoSection?.accuracy);
+    setLatitude(data?.submittedData?.BasicInfoSection?.latitude);
+    setLongitude(data?.submittedData?.BasicInfoSection?.longitude);
   }, []);
 
   return (
@@ -850,6 +877,59 @@ const DataEdit = ({ data }) => {
                             </div>
                           ) : (
                             <></>
+                          )}{" "}
+                          {data?.submittedData?.BasicInfoSection?.latitude !=
+                          "" ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">Latitude</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="invoicenoInput"
+                                onChange={(e) => setLatitude(e.target.value)}
+                                value={latitude}
+                                // value={
+                                //   data?.submittedData?.BasicInfoSection
+                                //     ?.latitude
+                                // }
+                              />
+                            </div>
+                          ) : (
+                            <></>
+                          )}{" "}
+                          {data?.submittedData?.BasicInfoSection?.longitude !=
+                          "" ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">Longitude</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="invoicenoInput"
+                                onChange={(e) => setLongitude(e.target.value)}
+                                value={longitude}
+                                // value={
+                                //   data?.submittedData?.BasicInfoSection
+                                //     ?.longitude
+                                // }
+                              />
+                            </div>
+                          ) : (
+                            <></>
+                          )}{" "}
+                          {data?.submittedData?.BasicInfoSection?.accuracy !=
+                          "" ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">Accuracy</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="invoicenoInput"
+                                onChange={(e) => setAccuracy(e.target.value)}
+                                value={accuracy}
+                              />
+                            </div>
+                          ) : (
+                            <></>
                           )}
                         </div>
                       </div>
@@ -880,7 +960,6 @@ const DataEdit = ({ data }) => {
                           </h5>
                         </div>
                       </div>
-                     
                     </div>
                     <div className="card product">
                       <div className="card-body">
@@ -900,9 +979,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={animalPermitAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -933,9 +1010,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={buildingPermitAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -968,9 +1043,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={certificateHabitationAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -1001,9 +1074,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={propertyRateAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -1036,9 +1107,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={suitabilityCertificateAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -1071,9 +1140,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={structurePermitAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -1108,9 +1175,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={fumigationCertificateAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option>Available</option>
                                 <option>Not Available</option>
                               </select>
@@ -1142,9 +1207,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={buildingPermitAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -1177,9 +1240,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={tempStructurePermitAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Not Available</option>
                               </select>
@@ -1213,9 +1274,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={waterAnalysisReportSafeUnsafe}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Safe</option>
                                 <option value={2}>Unsafe</option>
                               </select>
@@ -1247,9 +1306,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={regGeneralCertAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Unavailable</option>
                               </select>
@@ -1283,9 +1340,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={gtaOperatingLicenceAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Unavailable</option>
                               </select>
@@ -1318,9 +1373,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={pharmacyCertAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Available</option>
                                 <option value={2}>Unavailable</option>
                               </select>
@@ -1439,9 +1492,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={waterSourceCondition}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Safe</option>
                                 <option value={2}>Unsafe</option>
                               </select>
@@ -1502,9 +1553,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={waterStorageCondition}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Safe</option>
                                 <option value={2}>Unsafe</option>
                               </select>
@@ -1593,9 +1642,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={waterFlowFrequency}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Regular</option>
                                 <option value={2}>Intermittent</option>
                               </select>
@@ -1651,7 +1698,7 @@ const DataEdit = ({ data }) => {
                                 Number Toilet Seats
                               </label>
                               <input
-                                type="text"
+                                type="number"
                                 className="form-control"
                                 id="valueInput"
                                 value={numberToiletSeats}
@@ -1670,7 +1717,7 @@ const DataEdit = ({ data }) => {
                                 Number Urinal Seats
                               </label>
                               <input
-                                type="text"
+                                type="number"
                                 className="form-control"
                                 id="invoicenoInput"
                                 value={numberUrinalSeats}
@@ -1704,9 +1751,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={toiletAdequacy}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Safe</option>
                                 <option value={2}>Unsafe</option>
                               </select>
@@ -1737,9 +1782,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={bathroomAdequacy}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Safe</option>
                                 <option value={2}>Unsafe</option>
                               </select>
@@ -1779,9 +1822,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={toiletPitPosition}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Direct</option>
                                 <option value={2}>Offsite</option>
                                 <option value={3}>NA</option>
@@ -1823,9 +1864,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={drainCondition}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Direct</option>
                                 <option value={2}>Offsite</option>
                                 <option value={3}>NA</option>
@@ -1848,9 +1887,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={stagnationEvidence}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -1881,9 +1918,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={analCleansingMaterialMgt}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -1914,9 +1949,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={toiletCondition}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Sanitary</option>
                                 <option value={2}>Insanitary</option>
                               </select>
@@ -1956,9 +1989,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={toiletDischarge}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>On site</option>
                                 <option value={2}>Off site</option>
                               </select>
@@ -1980,9 +2011,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={containmentEmptied}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>On site</option>
                                 <option value={2}>Off site</option>
                               </select>
@@ -2021,9 +2050,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={sewerSystem}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Centralised</option>
                                 <option value={2}>Decentralised</option>
                               </select>
@@ -2054,9 +2081,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={easeYourselfWhere}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Neighbours place</option>
                                 <option value={2}>Bush</option>
                                 <option value={3}>Public toilet</option>
@@ -2090,9 +2115,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={desiltingFrequency}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Daily</option>
                                 <option value={2}>Weekly</option>
                                 <option value={3}>Monthly</option>
@@ -2106,7 +2129,9 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
                           {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesDrainType?.length != 0 ? (
+                            ?.PremisesDrainType?.length != 0 &&
+                          data?.submittedData?.LiquidWasteSection
+                            ?.PremisesDrainType?.length != undefined ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">Drain Type</label>
                               <Multiselect
@@ -2132,7 +2157,10 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
                           {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesEffluentManagement?.length != 0 ? (
+                            ?.PremisesEffluentManagement?.length != 0 &&
+                          data?.submittedData?.LiquidWasteSection
+                            ?.PremisesEffluentManagement?.length !=
+                            undefined ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Effluent Management
@@ -2160,7 +2188,10 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
                           {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesExcretaContainment?.length != 0 ? (
+                            ?.PremisesExcretaContainment?.length != 0 &&
+                          data?.submittedData?.LiquidWasteSection
+                            ?.PremisesExcretaContainment?.length !=
+                            undefined ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Excreta Containment
@@ -2188,7 +2219,10 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
                           {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesExcretaDisposalMethod?.length != 0 ? (
+                            ?.PremisesExcretaDisposalMethod?.length != 0 &&
+                          data?.submittedData?.LiquidWasteSection
+                            ?.PremisesExcretaDisposalMethod?.length !=
+                            undefined ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Excreta Disposal Method
@@ -2216,7 +2250,9 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
                           {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesGreyWaterDisposal?.length != 0 ? (
+                            ?.PremisesGreyWaterDisposal?.length != 0 &&
+                          data?.submittedData?.LiquidWasteSection
+                            ?.PremisesGreyWaterDisposal?.length != undefined ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Grey Water Disposal
@@ -2244,7 +2280,9 @@ const DataEdit = ({ data }) => {
                             <></>
                           )}
                           {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesToiletType?.length != 0 ? (
+                            ?.PremisesToiletType?.length != 0 &&
+                          data?.submittedData?.LiquidWasteSection
+                            ?.PremisesToiletType?.length != undefined ? (
                             <div className="col-lg-3 col-sm-6">
                               <label htmlFor="invoicenoInput">
                                 Toilet Type
@@ -2318,9 +2356,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={wasteServiceProviderRegistration}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -2370,9 +2406,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={wasteSortingAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -2405,9 +2439,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={wasteStorageReceptacleAvailability}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -2432,9 +2464,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={adequateWasteStorageReceptacle}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -2457,9 +2487,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={wasteCollectionType}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Communal container</option>
                                 <option value={2}>Door to door</option>
                                 <option value={3}>Not serviced</option>
@@ -2533,9 +2561,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={unservicedWasteDisposal}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Crude Dumping</option>
                                 <option value={2}>Burning</option>
                                 <option value={2}>Burying</option>
@@ -2567,9 +2593,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={wastePaymentEvidence}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -2599,9 +2623,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={containerVolume}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>10 Cubic</option>
                                 <option value={2}>12 Cubic</option>
                                 <option value={3}>14 Cubic</option>
@@ -2634,9 +2656,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={wasteProviderAccreditted}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>
@@ -2691,9 +2711,7 @@ const DataEdit = ({ data }) => {
                                 }}
                                 value={obnoxiousTradeExist}
                               >
-                                <option value="" selected>
-                                  Select
-                                </option>
+                                <option value="">Select</option>
                                 <option value={1}>Yes</option>
                                 <option value={2}>No</option>
                               </select>

@@ -39,6 +39,8 @@ const Dashboard = ({
   let ul = Cookies?.get("ul");
 
 
+  console.log(dashboardData);
+
   const [showLoading, setShowLoading] = useState(false);
 
   const [districtsData, setDistrictsData] = useState([]);

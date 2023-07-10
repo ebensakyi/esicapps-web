@@ -6,6 +6,14 @@ const put = async (req, res) => {
 
 
     console.log(req.body);
+    l
+
+    const basicInfoSection ={
+
+    }
+
+    const response = await prisma.inspection.update({ data });
+
 
     // const data = {
     //   id: req.body.id,
