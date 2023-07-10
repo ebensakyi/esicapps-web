@@ -15,7 +15,6 @@ import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
 
-  console.log(data);
   const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
   const [buildingPermitAvailability, setBuildingPermitAvailability] =
     useState();
