@@ -123,34 +123,7 @@ export const groupByWaterStorage = async (filterBy, filterValue) => {
 };
 
 export const groupByWaterSourceCondition = async (filterBy, filterValue) => {
-  // let summary = await prisma.waterSection.groupBy({
-  //   by: ["waterSourceConditionId"],
-
-  //   where:
-  //     filterBy == "undefined"
-  //       ? {
-  //           NOT: {
-  //             waterSourceConditionId: null,
-  //           },
-  //           inspectionTypeId: 2,
-  //           deleted: 0,
-  //         }
-  //       : {
-  //           NOT: {
-  //             waterSourceConditionId: null,
-  //           },
-  //           inspectionTypeId: 3,
-  //           [filterBy]: filterValue,
-  //           deleted: 0,
-  //         },
-
-  //   where: {
-  //     NOT: {
-  //       waterSourceConditionId: null,
-  //     },
-  //   },
-
-  // });
+ 
 
   let safeWaterSourceCount = await prisma.waterSection.count({
     where:
@@ -191,6 +164,48 @@ export const groupByWaterSourceCondition = async (filterBy, filterValue) => {
   ];
 };
 
+
+export const groupByWaterStorageCondition = async (filterBy, filterValue) => {
+ 
+
+  let safeWaterStorageCount = await prisma.waterSection.count({
+    where:
+      filterBy == "undefined"
+        ? {
+            deleted: 0,
+            waterStorageConditionId: 1,
+          
+          }
+        : {
+            deleted: 0,
+            waterStorageConditionId: 1,
+            Inspection: {
+              [filterBy]: filterValue,
+            },
+          },
+  });
+  let unsafeWaterStorageCount = await prisma.waterSection.count({
+    where:
+    filterBy == "undefined"
+      ? {
+          deleted: 0,
+          waterStorageConditionId: 2,
+        
+        }
+      : {
+          deleted: 0,
+          waterStorageConditionId: 2,
+          Inspection: {
+            [filterBy]: filterValue,
+          },
+        },
+  });
+
+  return [
+    { label: "Safe", value: safeWaterStorageCount },
+    { label: "Unsafe", value: unsafeWaterStorageCount },
+  ];
+};
 function toJson(data) {
   return JSON.parse(
     JSON.stringify(data, (_, v) =>

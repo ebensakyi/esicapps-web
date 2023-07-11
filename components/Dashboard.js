@@ -332,11 +332,11 @@ const Dashboard = ({
   };
 
   waterStorageConditionBarchartData = {
-    labels: dashboardData.water?.waterStorageConditionLabelArray,
+    labels: dashboardData?.waterStorageConditionSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.water?.waterStorageConditionCountArray,
+        data: dashboardData?.waterStorageConditionSummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
 
         borderColor: ["white"],

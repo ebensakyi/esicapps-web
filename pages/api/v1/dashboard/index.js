@@ -1,6 +1,6 @@
 import prisma from "../../../../prisma/db";
 import { getSession } from "../../../../utils/session-manager";
-import {groupByWaterSource, groupByWaterStorage,groupByWaterSourceCondition} from "./queries/water-query";
+import {groupByWaterSource, groupByWaterStorage,groupByWaterSourceCondition,groupByWaterStorageCondition} from "./queries/water-query";
 
 const post = async (req, res) => {
   try {
@@ -147,7 +147,8 @@ const get = async (req, res) => {
     let waterSourceTypeSummary = await groupByWaterSource(filterBy, filterValue);
     let waterStorageTypeSummary = await groupByWaterStorage(filterBy, filterValue);
 let waterSourceConditionSummary =  await groupByWaterSourceCondition(filterBy, filterValue);
-      
+let waterStorageConditionSummary =  await groupByWaterStorageCondition(filterBy, filterValue);
+
    
 
 
@@ -161,6 +162,7 @@ let waterSourceConditionSummary =  await groupByWaterSourceCondition(filterBy, f
   
     let dashboardData = {
       waterSourceConditionSummary,
+      waterStorageConditionSummary,
       waterSourceTypeSummary,
       waterStorageTypeSummary,
       baselineSummary,
