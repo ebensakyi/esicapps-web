@@ -1,6 +1,17 @@
 import prisma from "../../../../prisma/db";
 import { getSession } from "../../../../utils/session-manager";
-import {groupByWaterSource, groupByWaterStorage,groupByWaterSourceCondition,groupByWaterStorageCondition} from "./queries/water-query";
+import {
+  groupByWaterSource,
+  groupByWaterStorage,
+  groupByWaterSourceCondition,
+  groupByWaterStorageCondition,
+} from "./queries/water-query";
+import { toiletAdequacy, toiletCondition } from "./queries/liquid-waste-query";
+import {
+  wasteCollectorRegistration,
+  wasteReceptacle,
+  wasteSorting,
+} from "./queries/solid-waste-query";
 
 const post = async (req, res) => {
   try {
@@ -126,7 +137,7 @@ const get = async (req, res) => {
               [filterBy]: filterValue,
             },
     });
-  let followUpInspection = await prisma.followUpInspection.groupBy({
+    let followUpInspection = await prisma.followUpInspection.groupBy({
       by: ["inspectionFormId"],
       _count: {
         inspectionFormId: true,
@@ -141,26 +152,45 @@ const get = async (req, res) => {
             },
     });
 
-   
+    let waterSourceTypeSummary = await groupByWaterSource(
+      filterBy,
+      filterValue
+    );
+    let waterStorageTypeSummary = await groupByWaterStorage(
+      filterBy,
+      filterValue
+    );
+    let waterSourceConditionSummary = await groupByWaterSourceCondition(
+      filterBy,
+      filterValue
+    );
+    let waterStorageConditionSummary = await groupByWaterStorageCondition(
+      filterBy,
+      filterValue
+    );
 
+    let toiletAdequacySummary = await toiletAdequacy(filterBy, filterValue);
 
-    let waterSourceTypeSummary = await groupByWaterSource(filterBy, filterValue);
-    let waterStorageTypeSummary = await groupByWaterStorage(filterBy, filterValue);
-let waterSourceConditionSummary =  await groupByWaterSourceCondition(filterBy, filterValue);
-let waterStorageConditionSummary =  await groupByWaterStorageCondition(filterBy, filterValue);
+    let toiletConditionSummary = await toiletCondition(filterBy, filterValue);
 
-   
+    let wasteCollectorRegistrationSummary = await wasteCollectorRegistration(
+      filterBy,
+      filterValue
+    );
+    let wasteSortingSummary = await wasteSorting(filterBy, filterValue);
 
-
-
-
+    let wasteReceptacleSummary = await wasteReceptacle(filterBy, filterValue);
 
     let baselineSummary = await parseSummary(baselineInspection);
     let reinspectionSummary = await parseSummary(reInspection);
     let followupSummary = await parseSummary(followUpInspection);
 
-  
     let dashboardData = {
+      wasteReceptacleSummary,
+      wasteSortingSummary,
+      wasteCollectorRegistrationSummary,
+      toiletConditionSummary,
+      toiletAdequacySummary,
       waterSourceConditionSummary,
       waterStorageConditionSummary,
       waterSourceTypeSummary,

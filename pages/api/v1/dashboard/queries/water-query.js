@@ -1,3 +1,5 @@
+import prisma from "../../../../../prisma/db";
+
 export const groupByWaterSource = async (filterBy, filterValue) => {
   let summary;
 

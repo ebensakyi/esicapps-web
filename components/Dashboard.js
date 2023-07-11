@@ -359,11 +359,11 @@ const Dashboard = ({
   };
 
   toiletAdequacyBarchartData = {
-    labels: ["Adequate", "Inadequate"],
+    labels: dashboardData?.toiletAdequacySummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.lw?.toiletAdequacyArray,
+        data:  dashboardData?.toiletAdequacySummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -372,27 +372,24 @@ const Dashboard = ({
   };
 
   toiletConditionBarchartData = {
-    labels: ["Safe", "Unsafe"],
+    labels:  dashboardData?.toiletConditionSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.lw?.toiletConditionArray,
+        data:  dashboardData?.toiletConditionSummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
     ],
   };
-
+  
   wasteCollectorBarchartData = {
-    labels: [
-      "Registered With Waste Collector",
-      "Not Registered With Waste Collector",
-    ],
+    labels: dashboardData?.wasteCollectorRegistrationSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.sw?.wasteCollectorArray,
+        data: dashboardData?.wasteCollectorRegistrationSummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -401,24 +398,24 @@ const Dashboard = ({
   };
 
   wasteSortingBarchartData = {
-    labels: ["Waste Sorted", "Waste Not Sorted"],
+    labels:  dashboardData?.wasteSortingSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.sw?.wasteSortingArray,
+        data: dashboardData?.wasteSortingSummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
     ],
   };
-
+  
   approvedWasteReceptacleBarchartData = {
-    labels: ["Approved", "Unapproved"],
+    labels:  dashboardData?.wasteReceptacleSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.sw?.wasteReceptacleArray,
+        data:  dashboardData?.wasteReceptacleSummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
