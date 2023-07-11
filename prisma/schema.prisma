@@ -1109,7 +1109,7 @@ model BasicInfoSection {
 
 model BasicInfoSectionHistory {
   id                      String  @id @db.VarChar(255)
-  inspectionId            String   @db.VarChar(255)
+  inspectionId            String  @db.VarChar(255)
   userId                  Int
   communityId             Int?
   community               String? @db.VarChar(255)
@@ -1167,7 +1167,7 @@ model ResidentialPremisesInfoSection {
 
 model ResidentialPremisesInfoSectionHistory {
   id                                        String  @id @db.VarChar(255)
-  inspectionId                              String   @db.VarChar(255)
+  inspectionId                              String  @db.VarChar(255)
   User                                      User    @relation(fields: [userId], references: [id])
   drainsAvailabilityId                      Int
   toiletAvailabilityId                      Int?
@@ -1247,7 +1247,7 @@ model EateryPremisesInfoSection {
 
 model EateryPremisesInfoSectionHistory {
   id                                        String @id @db.VarChar(255)
-  inspectionId                              String  @db.VarChar(255)
+  inspectionId                              String @db.VarChar(255)
   User                                      User   @relation(fields: [userId], references: [id])
   facilityName                              String @db.VarChar(255)
   physicalStructureTypeId                   Int?
@@ -1409,7 +1409,7 @@ model HospitalityPremisesInfoSection {
 
 model HospitalityPremisesInfoSectionHistory {
   id                                        String            @id @db.VarChar(255)
-  inspectionId                              String             @db.VarChar(255)
+  inspectionId                              String            @db.VarChar(255)
   facilityName                              String            @db.VarChar(255)
   physicalStructureTypeId                   Int?
   drainsAvailabilityId                      Int?
@@ -1525,7 +1525,7 @@ model SanitaryPremisesInfoSection {
 
 model SanitaryPremisesInfoSectionHistory {
   id                                        String @id @db.VarChar(255)
-  inspectionId                              String  @db.VarChar(255)
+  inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   physicalStructureTypeId                   Int?
   sanitaryPremisesTypeId                    Int?
@@ -1631,7 +1631,7 @@ model MarketPremisesInfoSection {
 
 model MarketPremisesInfoSectionHistory {
   id                                        String @id @db.VarChar(255)
-  inspectionId                              String  @db.VarChar(255)
+  inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   marketPremisesTypeId                      Int?
   physicalStructureTypeId                   Int?
@@ -1762,7 +1762,7 @@ model InstitutionPremisesInfoSection {
 
 model InstitutionPremisesInfoSectionHistory {
   id                                        String @id @db.VarChar(255)
-  inspectionId                              String  @db.VarChar(255)
+  inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   institutionPremisesTypeId                 Int?
   institutionPremisesSubtypeId              Int?
@@ -1878,7 +1878,7 @@ model IndustryPremisesInfoSection {
 
 model IndustryPremisesInfoSectionHistory {
   id                                        String  @id @db.VarChar(255)
-  inspectionId                              String   @db.VarChar(255)
+  inspectionId                              String  @db.VarChar(255)
   facilityName                              String  @db.VarChar(255)
   industryPremisesTypeId                    Int?
   industryPremisesSubtypeId                 Int?
@@ -2116,7 +2116,7 @@ model LiquidWasteSection {
 
 model LiquidWasteSectionHistory {
   id                         String @id @db.VarChar(255)
-  inspectionId               String  @db.VarChar(255)
+  inspectionId               String @db.VarChar(255)
   userId                     Int
   numberToiletSeats          Int?
   numberUrinalSeats          Int?
@@ -2212,7 +2212,7 @@ model SolidWasteSection {
 
 model SolidWasteSectionHistory {
   id                                 String   @id @db.VarChar(255)
-  inspectionId                       String    @db.VarChar(255)
+  inspectionId                       String   @db.VarChar(255)
   userId                             Int
   wasteServiceProviderRegistrationId Int?
   wasteCollectorName                 String?
@@ -3059,6 +3059,8 @@ model FollowUpInspection {
 
   userId                  Int
   inspectionFormId        Int
+  districtId              Int
+  regionId                Int
   communityId             Int
   community               String  @db.VarChar(255)
   electoralAreaId         Int

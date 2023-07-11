@@ -38,8 +38,7 @@ const Dashboard = ({
   let regionId = Cookies?.get("r_id");
   let ul = Cookies?.get("ul");
 
-
-  console.log("dashboardData",dashboardData);
+  console.log("dashboardData", dashboardData);
 
   const [showLoading, setShowLoading] = useState(false);
 
@@ -148,7 +147,7 @@ const Dashboard = ({
     let published = query.published;
     let page = query.page;
 
- await returnFilterValue(filterBy);
+    await returnFilterValue(filterBy);
 
     router.push({
       pathname: path,
@@ -164,7 +163,7 @@ const Dashboard = ({
   };
 
   useEffect(() => {
-   // setDistrictsData(districts);
+    // setDistrictsData(districts);
   }, []);
 
   let baselinePieChartData,
@@ -183,11 +182,11 @@ const Dashboard = ({
   //  useEffect(() => {
 
   baselinePieChartData = {
-    labels: dashboardData.baselineFormsArray,
+    labels: dashboardData?.baselineSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.baselineCountArray,
+        data: dashboardData.baselineSummary.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -198,7 +197,6 @@ const Dashboard = ({
           "rgb(64, 80, 137)",
           "rgb(56, 162, 134)",
           "rgb(56, 21, 134)",
-
         ],
         borderColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -216,11 +214,11 @@ const Dashboard = ({
   };
 
   reinspectionPieChartData = {
-    labels: dashboardData.reinspectionFormArray,
+    labels: dashboardData.reinspectionSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.reinspectionCountArray,
+        data: dashboardData.reinspectionSummary.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -247,20 +245,11 @@ const Dashboard = ({
   };
 
   followupPieChartData = {
-    labels: [
-      "Residential",
-      "Eatery",
-      "Health",
-      "Hospitality",
-      "Institution",
-      "Industry",
-      "Markets & Lorry Parks",
-      "Sanitary",
-    ],
+    labels:dashboardData.followupSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.followUpCountArray,
+        data:dashboardData.followupSummary.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -287,11 +276,11 @@ const Dashboard = ({
   };
 
   actionsTakenBarchartData = {
-    labels: dashboardData.actionsTaken.map(x=>x.label),
+    labels: dashboardData.actionsTaken.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.actionsTaken.map(x=>x.value),
+        data: dashboardData.actionsTaken.map((x) => x.value),
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -308,11 +297,11 @@ const Dashboard = ({
   };
 
   waterSourceBarchartData = {
-    labels: dashboardData.water?.waterSourceTypeLabelArray,
+    labels: dashboardData?.waterSourceTypeSummary.map((x) => x.name),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.water?.waterSourceTypeCountArray,
+        data: dashboardData?.waterSourceTypeSummary.map((x) => x.count),
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -329,11 +318,11 @@ const Dashboard = ({
   };
 
   waterSourceConditionBarchartData = {
-    labels: dashboardData.water?.waterSourceConditionLabelArray,
+    labels: dashboardData?.waterSourceConditionSummary.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.water?.waterSourceConditionCountArray,
+        data: dashboardData?.waterSourceConditionSummary.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
 
         borderColor: ["white"],
@@ -437,13 +426,11 @@ const Dashboard = ({
     ],
   };
 
-
-
   // let nationalUser = districtId == "undefined" && regionId == "undefined";
   // let regionalUser = districtId == "undefined" && regionId != "undefined";
   // let districtUser = districtId != "undefined";
 
-  let nationalUser =ul == 1 
+  let nationalUser = ul == 1;
   let regionalUser = ul == 2;
   let districtUser = ul == 3;
   return (
@@ -467,7 +454,6 @@ const Dashboard = ({
             pauseOnHover
           />
           <div className="row row-cols-lg-auto g-3 align-items-center">
-            
             <div className="col-md-2">
               <label className="form-label mb-0">Select level</label>
 
@@ -490,9 +476,7 @@ const Dashboard = ({
                 }}
                 value={filterBy}
               >
-                <option value="" >
-                  Filter by{" "}
-                </option>
+                <option value="">Filter by </option>
                 <option hidden={!nationalUser} value="national">
                   National
                 </option>
@@ -547,7 +531,7 @@ const Dashboard = ({
             )}
             {filterBy == "districtId" ? (
               <>
-                {nationalUser? (
+                {nationalUser ? (
                   <div className="col-md-2">
                     <label className="form-label mb-0">Select region</label>
                     <select
@@ -707,9 +691,7 @@ const Dashboard = ({
                 ) : (
                   <></>
                 )}
-                {nationalUser||
-               regionalUser ||
-                districtUser ? (
+                {nationalUser || regionalUser || districtUser ? (
                   <div className="col-md-2">
                     <label className="form-label mb-0">Select district</label>
                     <select

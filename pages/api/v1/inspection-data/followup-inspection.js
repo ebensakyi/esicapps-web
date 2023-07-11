@@ -2,15 +2,24 @@ import prisma from "../../../../prisma/db";
 
 const post = async (req, res) => {
   try {
+    const user = await prisma.user.findFirst({
+      where: { id: Number(req.body.userId) },
+    });
+    const district = user.districtId;
+    const districtData = await prisma.district.findFirst({
+      where: { id: Number(district) },
+    });
+    let region = Number(districtData.regionId);
 
-    console.log(req.body);
+
     const data = {
       id: req.body.id,
 
       prevInspectionId: req.body.prevInspectionId,
       inspectionFormId: Number(req.body.inspectionFormId),
       premisesCode: req.body.premisesCode,
-
+      districtId: district,
+      regionId: region,
       userId: Number(req.body.userId),
       communityId:
         req.body.communityId == "null" ? null : Number(req.body.communityId),

@@ -1,5 +1,6 @@
 import prisma from "../../../../prisma/db";
 import { getSession } from "../../../../utils/session-manager";
+import {groupByWaterSource, groupByWaterStorage,groupByWaterSourceCondition} from "./queries/water-query";
 
 const post = async (req, res) => {
   try {
@@ -110,16 +111,67 @@ const get = async (req, res) => {
             },
     });
 
-    let baselineSummary = await parseBaselineSummary(baselineInspection);
+    const reInspection = await prisma.inspection.groupBy({
+      by: ["inspectionFormId"],
+      _count: {
+        inspectionFormId: true,
+      },
+      where:
+        filterBy == "undefined"
+          ? { inspectionTypeId: 2, deleted: 0 }
+          : {
+              inspectionTypeId: 2,
+              deleted: 0,
 
+              [filterBy]: filterValue,
+            },
+    });
+  let followUpInspection = await prisma.followUpInspection.groupBy({
+      by: ["inspectionFormId"],
+      _count: {
+        inspectionFormId: true,
+      },
+      where:
+        filterBy == "undefined"
+          ? { deleted: 0 }
+          : {
+              deleted: 0,
+
+              [filterBy]: filterValue,
+            },
+    });
+
+   
+
+
+    let waterSourceTypeSummary = await groupByWaterSource(filterBy, filterValue);
+    let waterStorageTypeSummary = await groupByWaterStorage(filterBy, filterValue);
+let waterSourceConditionSummary =  await groupByWaterSourceCondition(filterBy, filterValue);
+      
+   
+
+
+
+
+
+    let baselineSummary = await parseSummary(baselineInspection);
+    let reinspectionSummary = await parseSummary(reInspection);
+    let followupSummary = await parseSummary(followUpInspection);
+
+  
     let dashboardData = {
+      waterSourceConditionSummary,
+      waterSourceTypeSummary,
+      waterStorageTypeSummary,
       baselineSummary,
+      reinspectionSummary,
+      followupSummary,
       baselineCount,
       reInspectionCount,
       followUpCount,
       publishedCount,
       unPublishedCount,
-      inspectionSummary: [{ label: "", value: "" }],
+      // inspectionSummary: [{ label: "", value: "" }],
       actionsTaken: [
         {
           label: "Notice Served",
@@ -150,7 +202,7 @@ function toJson(data) {
   );
 }
 
-const parseBaselineSummary = async (baselineInspection) => {
+const parseSummary = async (baselineInspection) => {
   let data = [];
   const forms = [
     "Residential",
