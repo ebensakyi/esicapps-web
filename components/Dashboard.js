@@ -38,8 +38,6 @@ const Dashboard = ({
   let regionId = Cookies?.get("r_id");
   let ul = Cookies?.get("ul");
 
-  console.log("dashboardData", dashboardData);
-
   const [showLoading, setShowLoading] = useState(false);
 
   const [districtsData, setDistrictsData] = useState([]);
@@ -124,11 +122,11 @@ const Dashboard = ({
   };
 
   const handleFilter = async (e) => {
-    e.preventDefault();   
+    e.preventDefault();
 
- if (filterBy == "national" ) {
-      return router.push('/dashboard', undefined, { shallow: true });
- }
+    if (filterBy == "national") {
+      return router.push("/dashboard", undefined, { shallow: true });
+    }
     if (filterBy == "" || filterBy == null) {
       return toast.error("Please select a filter");
     }
@@ -249,11 +247,11 @@ const Dashboard = ({
   };
 
   followupPieChartData = {
-    labels:dashboardData?.followupSummary?.map((x) => x.label),
+    labels: dashboardData?.followupSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:dashboardData?.followupSummary?.map((x) => x.value),
+        data: dashboardData?.followupSummary?.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -367,7 +365,7 @@ const Dashboard = ({
     datasets: [
       {
         label: "# of submissions",
-        data:  dashboardData?.toiletAdequacySummary?.map((x) => x.value),
+        data: dashboardData?.toiletAdequacySummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -376,24 +374,28 @@ const Dashboard = ({
   };
 
   toiletConditionBarchartData = {
-    labels:  dashboardData?.toiletConditionSummary?.map((x) => x.label),
+    labels: dashboardData?.toiletConditionSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:  dashboardData?.toiletConditionSummary?.map((x) => x.value),
+        data: dashboardData?.toiletConditionSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
       },
     ],
   };
-  
+
   wasteCollectorBarchartData = {
-    labels: dashboardData?.wasteCollectorRegistrationSummary?.map((x) => x.label),
+    labels: dashboardData?.wasteCollectorRegistrationSummary?.map(
+      (x) => x.label
+    ),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData?.wasteCollectorRegistrationSummary?.map((x) => x.value),
+        data: dashboardData?.wasteCollectorRegistrationSummary?.map(
+          (x) => x.value
+        ),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -402,7 +404,7 @@ const Dashboard = ({
   };
 
   wasteSortingBarchartData = {
-    labels:  dashboardData?.wasteSortingSummary?.map((x) => x.label),
+    labels: dashboardData?.wasteSortingSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
@@ -413,13 +415,13 @@ const Dashboard = ({
       },
     ],
   };
-  
+
   approvedWasteReceptacleBarchartData = {
-    labels:  dashboardData?.wasteReceptacleSummary?.map((x) => x.label),
+    labels: dashboardData?.wasteReceptacleSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:  dashboardData?.wasteReceptacleSummary?.map((x) => x.value),
+        data: dashboardData?.wasteReceptacleSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
