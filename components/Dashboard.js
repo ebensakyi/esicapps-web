@@ -124,7 +124,11 @@ const Dashboard = ({
   };
 
   const handleFilter = async (e) => {
-    e.preventDefault();
+    e.preventDefault();   
+
+ if (filterBy == "national" ) {
+      return router.push('/dashboard', undefined, { shallow: true });
+ }
     if (filterBy == "" || filterBy == null) {
       return toast.error("Please select a filter");
     }
@@ -186,7 +190,7 @@ const Dashboard = ({
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.baselineSummary.map((x) => x.value),
+        data: dashboardData?.baselineSummary?.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -214,11 +218,11 @@ const Dashboard = ({
   };
 
   reinspectionPieChartData = {
-    labels: dashboardData.reinspectionSummary.map((x) => x.label),
+    labels: dashboardData?.reinspectionSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.reinspectionSummary.map((x) => x.value),
+        data: dashboardData?.reinspectionSummary?.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -245,11 +249,11 @@ const Dashboard = ({
   };
 
   followupPieChartData = {
-    labels:dashboardData.followupSummary.map((x) => x.label),
+    labels:dashboardData?.followupSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:dashboardData.followupSummary.map((x) => x.value),
+        data:dashboardData?.followupSummary?.map((x) => x.value),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -276,11 +280,11 @@ const Dashboard = ({
   };
 
   actionsTakenBarchartData = {
-    labels: dashboardData.actionsTaken.map((x) => x.label),
+    labels: dashboardData?.actionsTaken?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.actionsTaken.map((x) => x.value),
+        data: dashboardData?.actionsTaken?.map((x) => x.value),
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -297,11 +301,11 @@ const Dashboard = ({
   };
 
   waterSourceBarchartData = {
-    labels: dashboardData?.waterSourceTypeSummary.map((x) => x.name),
+    labels: dashboardData?.waterSourceTypeSummary?.map((x) => x.name),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData?.waterSourceTypeSummary.map((x) => x.count),
+        data: dashboardData?.waterSourceTypeSummary?.map((x) => x.count),
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",
@@ -318,11 +322,11 @@ const Dashboard = ({
   };
 
   waterSourceConditionBarchartData = {
-    labels: dashboardData?.waterSourceConditionSummary.map((x) => x.label),
+    labels: dashboardData?.waterSourceConditionSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData?.waterSourceConditionSummary.map((x) => x.value),
+        data: dashboardData?.waterSourceConditionSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
 
         borderColor: ["white"],
@@ -332,11 +336,11 @@ const Dashboard = ({
   };
 
   waterStorageConditionBarchartData = {
-    labels: dashboardData?.waterStorageConditionSummary.map((x) => x.label),
+    labels: dashboardData?.waterStorageConditionSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData?.waterStorageConditionSummary.map((x) => x.value),
+        data: dashboardData?.waterStorageConditionSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
 
         borderColor: ["white"],
@@ -359,11 +363,11 @@ const Dashboard = ({
   };
 
   toiletAdequacyBarchartData = {
-    labels: dashboardData?.toiletAdequacySummary.map((x) => x.label),
+    labels: dashboardData?.toiletAdequacySummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:  dashboardData?.toiletAdequacySummary.map((x) => x.value),
+        data:  dashboardData?.toiletAdequacySummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -372,11 +376,11 @@ const Dashboard = ({
   };
 
   toiletConditionBarchartData = {
-    labels:  dashboardData?.toiletConditionSummary.map((x) => x.label),
+    labels:  dashboardData?.toiletConditionSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:  dashboardData?.toiletConditionSummary.map((x) => x.value),
+        data:  dashboardData?.toiletConditionSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -385,11 +389,11 @@ const Dashboard = ({
   };
   
   wasteCollectorBarchartData = {
-    labels: dashboardData?.wasteCollectorRegistrationSummary.map((x) => x.label),
+    labels: dashboardData?.wasteCollectorRegistrationSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData?.wasteCollectorRegistrationSummary.map((x) => x.value),
+        data: dashboardData?.wasteCollectorRegistrationSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -398,11 +402,11 @@ const Dashboard = ({
   };
 
   wasteSortingBarchartData = {
-    labels:  dashboardData?.wasteSortingSummary.map((x) => x.label),
+    labels:  dashboardData?.wasteSortingSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData?.wasteSortingSummary.map((x) => x.value),
+        data: dashboardData?.wasteSortingSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,
@@ -411,11 +415,11 @@ const Dashboard = ({
   };
   
   approvedWasteReceptacleBarchartData = {
-    labels:  dashboardData?.wasteReceptacleSummary.map((x) => x.label),
+    labels:  dashboardData?.wasteReceptacleSummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data:  dashboardData?.wasteReceptacleSummary.map((x) => x.value),
+        data:  dashboardData?.wasteReceptacleSummary?.map((x) => x.value),
         backgroundColor: ["#38a286", "#c3103c"],
         borderColor: ["white"],
         borderWidth: 1,

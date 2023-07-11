@@ -20,11 +20,27 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   let userData = await getSession(req);
+  console.log("userData", userData);
+  let userLevel = userData?.userLevelId;
+
   let filterBy = req?.query?.filterBy;
   let filterValue = Number(req?.query?.filterValue);
 
-  let userLevel = userData?.userLevelId;
-  let from = new Date(req?.query?.from);
+  if (userLevel == 1 && (filterBy == "undefined" || filterBy == "")) {
+    filterBy = "undefined";
+  }
+  if (userLevel == 2 && (filterBy == "undefined" || filterBy == "")) {
+    filterBy = "regionId";
+    filterValue = userData.regionId;
+  }
+  if (userLevel == 3 && (filterBy == "undefined" || filterBy == "")) {
+    filterBy = "districtId";
+    filterValue = userData.districtId;
+  }
+
+  console.log("filterBy ", filterBy);
+
+  //let from = new Date(req?.query?.from);
 
   try {
     let baselineCount = await prisma.inspection.count({
