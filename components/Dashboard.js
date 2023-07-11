@@ -39,7 +39,7 @@ const Dashboard = ({
   let ul = Cookies?.get("ul");
 
 
-  console.log(dashboardData);
+  console.log("dashboardData",dashboardData);
 
   const [showLoading, setShowLoading] = useState(false);
 
@@ -287,11 +287,11 @@ const Dashboard = ({
   };
 
   actionsTakenBarchartData = {
-    labels: ["Hygiene education", "Notice served", "Criminal Summons"],
+    labels: dashboardData.actionsTaken.map(x=>x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.actionTakenCount,
+        data: dashboardData.actionsTaken.map(x=>x.value),
         backgroundColor: [
           "rgb(252, 241, 121)",
           "rgb(64, 80, 137)",

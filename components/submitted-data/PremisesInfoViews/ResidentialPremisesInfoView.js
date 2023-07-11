@@ -5,6 +5,7 @@ import Link from "next/link";
 const ResidentialPremisesInfoView = ({ data }) => {
   const router = useRouter();
 
+  console.log(data.submittedData);
   const query = router.query;
 
   

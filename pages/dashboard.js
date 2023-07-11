@@ -57,6 +57,10 @@ export async function getServerSideProps(context) {
   const dashboardData = await fetch(
     `${SERVER_BASE_URL}/api/v1/dashboard?session=${session}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
   ).then((res) => res.json());
+
+
+  console.log(dashboardData);
+
   const regions = await fetch(
     `${SERVER_BASE_URL}/api/v1/primary-data/region?session=${session}`
   ).then((res) => res.json());
