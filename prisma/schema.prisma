@@ -1132,7 +1132,9 @@ model BasicInfoSection {
 }
 
 model BasicInfoSectionHistory {
-  id                      String  @id @db.VarChar(255)
+    newId Int @id @default(autoincrement())
+
+  id                      String  @db.VarChar(255)
   inspectionId            String  @db.VarChar(255)
   userId                  Int
   communityId             Int?
@@ -1190,7 +1192,9 @@ model ResidentialPremisesInfoSection {
 }
 
 model ResidentialPremisesInfoSectionHistory {
-  id                                        String  @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String   @db.VarChar(255)
   inspectionId                              String  @db.VarChar(255)
   // User                                      User    @relation(fields: [userId], references: [id])
   drainsAvailabilityId                      Int
@@ -1270,7 +1274,9 @@ model EateryPremisesInfoSection {
 }
 
 model EateryPremisesInfoSectionHistory {
-  id                                        String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String  @db.VarChar(255)
   inspectionId                              String @db.VarChar(255)
   // User                                      User   @relation(fields: [userId], references: [id])
   facilityName                              String @db.VarChar(255)
@@ -1354,7 +1360,9 @@ model HealthPremisesInfoSection {
 }
 
 model HealthPremisesInfoSectionHistory {
-  id                                        String   @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String   @db.VarChar(255)
   inspectionId                              String   @db.VarChar(255)
   facilityName                              String   @db.VarChar(255)
   healthPremisesTypeId                      Int?
@@ -1432,7 +1440,9 @@ model HospitalityPremisesInfoSection {
 }
 
 model HospitalityPremisesInfoSectionHistory {
-  id                                        String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String  @db.VarChar(255)
   inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   physicalStructureTypeId                   Int?
@@ -1549,7 +1559,9 @@ model SanitaryPremisesInfoSection {
 }
 
 model SanitaryPremisesInfoSectionHistory {
-  id                                        String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String  @db.VarChar(255)
   inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   physicalStructureTypeId                   Int?
@@ -1655,7 +1667,9 @@ model MarketPremisesInfoSection {
 }
 
 model MarketPremisesInfoSectionHistory {
-  id                                        String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String  @db.VarChar(255)
   inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   marketPremisesTypeId                      Int?
@@ -1786,7 +1800,9 @@ model InstitutionPremisesInfoSection {
 }
 
 model InstitutionPremisesInfoSectionHistory {
-  id                                        String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String  @db.VarChar(255)
   inspectionId                              String @db.VarChar(255)
   facilityName                              String @db.VarChar(255)
   institutionPremisesTypeId                 Int?
@@ -1902,7 +1918,9 @@ model IndustryPremisesInfoSection {
 }
 
 model IndustryPremisesInfoSectionHistory {
-  id                                        String  @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                        String   @db.VarChar(255)
   inspectionId                              String  @db.VarChar(255)
   facilityName                              String  @db.VarChar(255)
   industryPremisesTypeId                    Int?
@@ -1980,7 +1998,9 @@ model LicencePermitSection {
 }
 
 model LicencePermitSectionHistory {
-  id                                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                   String @db.VarChar(255)
   inspectionId                         String @db.VarChar(255)
   userId                               Int
   buildingPermitAvailabilityId         Int?
@@ -2035,7 +2055,9 @@ model WaterSection {
 }
 
 model WaterSectionHistory {
-  id                                 String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                 String  @db.VarChar(255)
   inspectionId                       String @db.VarChar(255)
   userId                             Int
   waterSourceConditionId             Int?
@@ -2140,7 +2162,9 @@ model LiquidWasteSection {
 }
 
 model LiquidWasteSectionHistory {
-  id                         String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                         String  @db.VarChar(255)
   inspectionId               String @db.VarChar(255)
   userId                     Int
   numberToiletSeats          Int?
@@ -2236,7 +2260,9 @@ model SolidWasteSection {
 }
 
 model SolidWasteSectionHistory {
-  id                                 String   @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                                 String    @db.VarChar(255)
   inspectionId                       String   @db.VarChar(255)
   userId                             Int
   wasteServiceProviderRegistrationId Int?
@@ -2287,7 +2313,9 @@ model ConclusionSection {
 }
 
 model ConclusionSectionHistory {
-  id                    String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                    String  @db.VarChar(255)
   inspectionId          String @db.VarChar(255)
   userId                Int
   obnoxiousTradeExistId Int?
@@ -2322,7 +2350,9 @@ model PremisesWaterSources {
 }
 
 model PremisesWaterSourcesHistory {
-  id             String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id             String  @db.VarChar(255)
   inspectionId   String @db.VarChar(255)
   waterSectionId String @db.VarChar(255)
   waterSourceId  Int
@@ -2353,7 +2383,9 @@ model PremisesWaterTreatmentType {
 }
 
 model PremisesWaterTreatmentTypeHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   waterSectionId       String @db.VarChar(255)
   waterTreatmentTypeId Int
@@ -2384,7 +2416,9 @@ model PremisesWaterSupply {
 }
 
 model PremisesWaterSupplyHistory {
-  id                String   @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                String    @db.VarChar(255)
   inspectionId      String   @db.VarChar(255)
   waterSectionId    String   @db.VarChar(255)
   waterSupplyTypeId Int
@@ -2414,7 +2448,9 @@ model PremisesWaterStorage {
 }
 
 model PremisesWaterStorageHistory {
-  id                 String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                 String  @db.VarChar(255)
   inspectionId       String @db.VarChar(255)
   waterSectionId     String @db.VarChar(255)
   waterStorageTypeId Int
@@ -2446,7 +2482,9 @@ model PremisesUnsafeWaterStorage {
 }
 
 model PremisesUnsafeWaterStorageHistory {
-  id             String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id             String  @db.VarChar(255)
   inspectionId   String @db.VarChar(255)
   waterSectionId String @db.VarChar(255)
   deleted        Int?   @default(0)
@@ -2477,7 +2515,9 @@ model PremisesCommunalContainerCondition {
 }
 
 model PremisesCommunalContainerConditionHistory {
-  id                           String   @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                           String    @db.VarChar(255)
   inspectionId                 String   @db.VarChar(255)
   deleted                      Int?     @default(0)
   createdAt                    DateTime @default(now())
@@ -2508,7 +2548,9 @@ model PremisesDrinkingWaterSources {
 }
 
 model PremisesDrinkingWaterSourcesHistory {
-  id                    String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                    String  @db.VarChar(255)
   inspectionId          String @db.VarChar(255)
   waterSectionId        String @db.VarChar(255)
   drinkingWaterSourceId Int
@@ -2540,7 +2582,9 @@ model PremisesToiletType {
 }
 
 model PremisesToiletTypeHistory {
-  id           String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id           String  @db.VarChar(255)
   inspectionId String @db.VarChar(255)
 
   deleted              Int?     @default(0)
@@ -2573,7 +2617,9 @@ model PremisesEffluentManagement {
 }
 
 model PremisesEffluentManagementHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   effluentManagementId Int
   liquidWasteSectionId String @db.VarChar(255)
@@ -2604,7 +2650,9 @@ model PremisesExcretaDisposalMethod {
 }
 
 model PremisesExcretaDisposalMethodHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
 
@@ -2636,7 +2684,9 @@ model PremisesExcretaContainment {
 }
 
 model PremisesExcretaContainmentHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
 
@@ -2667,7 +2717,9 @@ model PremisesGreyWaterDisposal {
 }
 
 model PremisesGreyWaterDisposalHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
 
@@ -2698,7 +2750,9 @@ model PremisesWasteReceptacle {
 }
 
 model PremisesWasteReceptacleHistory {
-  id                     String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                     String  @db.VarChar(255)
   inspectionId           String @db.VarChar(255)
   solidWasteReceptacleId Int
 
@@ -2739,7 +2793,9 @@ model PremisesPestSigns {
 }
 
 model PremisesPestSignsHistory {
-  id                     String             @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                     String              @db.VarChar(255)
   pestSignId             Int
   deleted                Int?               @default(0)
   createdAt              DateTime           @default(now())
@@ -2767,7 +2823,9 @@ model PremisesAnimal {
 }
 
 model PremisesAnimalHistory {
-  id                               String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                               String  @db.VarChar(255)
   inspectionId                     String @db.VarChar(255)
   animalTypeId                     Int
   residentialPremisesInfoSectionId String @db.VarChar(255)
@@ -2797,7 +2855,9 @@ model PremisesDrainType {
 }
 
 model PremisesDrainTypeHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   drainTypeId          Int
   liquidWasteSectionId String @db.VarChar(255)
@@ -2828,7 +2888,9 @@ model PremisesDrainBadCondition {
 }
 
 model PremisesDrainBadConditionHistory {
-  id                   String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                   String  @db.VarChar(255)
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
   deleted              Int?   @default(0)
@@ -2858,7 +2920,9 @@ model PremisesHazardousWasteDisposal {
 }
 
 model PremisesHazardousWasteDisposalHistory {
-  id                             String @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                             String  @db.VarChar(255)
   inspectionId                   String @db.VarChar(255)
   hazardousWasteDisposalMethodId Int
   solidWasteSectionId            String @db.VarChar(255)
@@ -2889,7 +2953,9 @@ model PremisesActionTaken {
 }
 
 model PremisesActionTakenHistory {
-  id                     String             @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                     String              @db.VarChar(255)
   inspectionId           String             @db.VarChar(255)
   actionId               Int
   conclusionSectionId    String?            @db.VarChar(255)
@@ -2917,7 +2983,9 @@ model PremisesNuisanceDetected {
 }
 
 model PremisesNuisanceDetectedHistory {
-  id                     String             @id @db.VarChar(255)
+      newId Int @id @default(autoincrement())
+
+  id                     String              @db.VarChar(255)
   inspectionId           String             @db.VarChar(255)
   deleted                Int?               @default(0)
   createdAt              DateTime           @default(now())
@@ -3126,6 +3194,7 @@ model FollowUpInspection {
 }
 
 model FollowUpInspectionHistory {
+  
   id String @id @db.VarChar(255)
 
   prevInspectionId String? @unique @db.VarChar(255)

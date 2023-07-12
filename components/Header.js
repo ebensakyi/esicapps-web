@@ -158,7 +158,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div className="app-menu navbar-menu"y>
+      <div className="app-menu navbar-menu" y>
         <div className="navbar-brand-box">
           <a href="/dashboard" className="logo logo-dark">
             <span className="logo-sm">
@@ -193,7 +193,13 @@ const Header = () => {
               </li>
               <li className="nav-item active" hidden={!includesDashboard}>
                 <Link href="/dashboard">
-                  <a className="nav-link menu-link">
+                  <a
+                    className={
+                      router.pathname == "/dashboard"
+                        ? "nav-link menu-link active"
+                        : "nav-link menu-link"
+                    }
+                  >
                     <i className="ri-home-2-line" />
                     <span data-key="t-dashboards">Dashboard</span>
                   </a>
@@ -231,7 +237,7 @@ const Header = () => {
                             <Link href="/submitted-data/data?published=1&inspectionFormId=1&page=1">
                               <a
                                 className={
-                                  router.pathname == "/"
+                                  router.pathname == "/submitted-data/data"
                                     ? "nav-link active"
                                     : "nav-link"
                                 }
@@ -699,7 +705,13 @@ const Header = () => {
 
               <li className="nav-item">
                 <Link href="/map">
-                  <a className="nav-link menu-link">
+                  <a
+                    className={
+                      router.pathname == "/map"
+                        ? "nav-link menu-link active"
+                        : "nav-link menu-link"
+                    }
+                  >
                     <i className="ri-map-2-line" />
                     <span data-key="t-map">Map</span>
                   </a>
@@ -707,14 +719,26 @@ const Header = () => {
               </li>
 
               <li className="nav-item" hidden={!includesReports}>
-                <a className="nav-link menu-link" href="/report">
-                  <i className="ri-line-chart-line" />
-                  <span data-key="t-dashboards">Reports</span>
-                </a>
+                <Link href="/report">
+                  <a
+                    className={
+                      router.pathname == "/report"
+                        ? "nav-link menu-link active"
+                        : "nav-link menu-link"
+                    }
+                  >
+                    <i className="ri-line-chart-line" />
+                    <span data-key="t-dashboards">Reports</span>
+                  </a>
+                </Link>
               </li>
               <li className="nav-item" hidden={!includesSanitationReport}>
                 <Link href="/sanitation-reports">
-                  <a className="nav-link menu-link">
+                  <a className={
+                      router.pathname == "/sanitation-reports"
+                        ? "nav-link menu-link active"
+                        : "nav-link menu-link"
+                    }>
                     <i className="ri-bar-chart-box-line" />
                     <span data-key="t-landing">Sanitation Reports</span>
                   </a>
@@ -745,7 +769,7 @@ const Header = () => {
                         hidden={!includesBulkNotification}
                       >
                         <Link href="/messaging/notification/broadcast">
-                          <a className="nav-link"> Broadcast</a>
+                          <a className="nav-link" > Broadcast</a>
                         </Link>
                       </li>
                       <li

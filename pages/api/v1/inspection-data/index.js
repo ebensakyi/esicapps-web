@@ -1,230 +1,676 @@
 import prisma from "../../../../prisma/db";
 import moment from "moment";
 
-const put = async (req, res) => {
+let put = async (req, res) => {
   try {
-    let inspectionId = req.body.inspectionId;
+    // console.log(req?.body);
+    // console.log(" req?.body?.liquidWasteSection?.numberToiletSeats", req?.body?.liquidWasteSection?.numberToiletSeats);
 
-    const inspection = await prisma.inspection.findFirst({
+    let inspectionId = req?.body?.inspectionId;
+
+    let inspection = await prisma.inspection.findFirst({
       where: { id: inspectionId },
     });
-    const basicInfoSection = await prisma.basicInfoSection.findFirst({
+    let basicInfoSection = await prisma.basicInfoSection.findFirst({
       where: { inspectionId },
     });
-    const licencePermitSection = await prisma.licencePermitSection.findFirst({
+    let licencePermitSection = await prisma.licencePermitSection.findFirst({
       where: { inspectionId },
     });
-    const liquidWasteSection = await prisma.liquidWasteSection.findFirst({
+    let liquidWasteSection = await prisma.liquidWasteSection?.findFirst({
       where: { inspectionId },
     });
-    const solidWasteSection = await prisma.solidWasteSection.findFirst({
+    let solidWasteSection = await prisma.solidWasteSection.findFirst({
       where: { inspectionId },
     });
-    const waterSection = await prisma.waterSection.findFirst({
+    let waterSection = await prisma.waterSection.findFirst({
       where: { inspectionId },
     });
-    const conclusionSection = await prisma.conclusionSection.findFirst({
+    let conclusionSection = await prisma.conclusionSection.findFirst({
       where: { inspectionId },
     });
 
-    const residentialPremisesInfoSection =
+    let residentialPremisesInfoSection =
       await prisma.residentialPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const healthPremisesInfoSection =
+    let healthPremisesInfoSection =
       await prisma.healthPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const hospitalityPremisesInfoSection =
+    let hospitalityPremisesInfoSection =
       await prisma.hospitalityPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const sanitaryPremisesInfoSection =
+    let sanitaryPremisesInfoSection =
       await prisma.sanitaryPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const marketPremisesInfoSection =
+    let marketPremisesInfoSection =
       await prisma.marketPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const institutionPremisesInfoSection =
+    let institutionPremisesInfoSection =
       await prisma.institutionPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const industryPremisesInfoSection =
+    let industryPremisesInfoSection =
       await prisma.industryPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
-    const eateryPremisesInfoSection =
+    let eateryPremisesInfoSection =
       await prisma.eateryPremisesInfoSection.findFirst({
         where: { inspectionId },
       });
 
-    const premisesExcretaContainment =
-      await prisma.premisesExcretaContainment.findFirst({
+    let premisesExcretaContainment =
+      await prisma.premisesExcretaContainment.findMany({
         where: { inspectionId },
       });
-    const premisesGreyWaterDisposal =
-      await prisma.premisesGreyWaterDisposal.findFirst({
+    let premisesGreyWaterDisposal =
+      await prisma.premisesGreyWaterDisposal.findMany({
         where: { inspectionId },
       });
-    const premisesWasteReceptacle =
-      await prisma.premisesWasteReceptacle.findFirst({
+    let premisesWasteReceptacle = await prisma.premisesWasteReceptacle.findMany(
+      {
         where: { inspectionId },
-      });
-    const premisesPestSigns = await prisma.premisesPestSigns.findFirst({
+      }
+    );
+    let premisesPestSigns = await prisma.premisesPestSigns.findMany({
       where: { inspectionId },
     });
-    const premisesAnimal = await prisma.premisesAnimal.findFirst({
+    let premisesAnimal = await prisma.premisesAnimal.findMany({
       where: { inspectionId },
     });
-    const premisesDrainType = await prisma.premisesDrainType.findFirst({
+    let premisesDrainType = await prisma.premisesDrainType.findMany({
       where: { inspectionId },
     });
-    const premisesDrainBadCondition =
-      await prisma.premisesDrainBadCondition.findFirst({
+    let premisesDrainBadCondition =
+      await prisma.premisesDrainBadCondition.findMany({
         where: { inspectionId },
       });
-    const premisesHazardousWasteDisposal =
-      await prisma.premisesHazardousWasteDisposal.findFirst({
+    let premisesHazardousWasteDisposal =
+      await prisma.premisesHazardousWasteDisposal.findMany({
         where: { inspectionId },
       });
-    const premisesActionTaken = await prisma.premisesActionTaken.findFirst({
+    let premisesActionTaken = await prisma.premisesActionTaken.findMany({
       where: { inspectionId },
     });
-    const premisesNuisanceDetected =
-      await prisma.premisesNuisanceDetected.findFirst({
+
+    let premisesNuisanceDetected =
+      await prisma.premisesNuisanceDetected.findMany({
         where: { inspectionId },
       });
 
+    /////////////////Create History///////////////////
 
-/////////////////Create History///////////////////
-
-    await prisma.inspectionHistory.create({ data: inspection });
-    await prisma.basicInfoSectionHistory.create({ data: basicInfoSection });
-    await prisma.licencePermitSectionHistory.create({
-      data: licencePermitSection,
-    });
-    await prisma.liquidWasteSectionHistory.create({ data: liquidWasteSection });
-    await prisma.solidWasteSectionHistory.create({ data: solidWasteSection });
-    await prisma.waterSectionHistory.create({ data: waterSection });
-    await prisma.conclusionSectionHistory.create({ data: conclusionSection });
-
-    await prisma.residentialPremisesInfoSectionSectionHistory.create({
-      data: residentialPremisesInfoSection,
-    });
-    await prisma.eateryPremisesInfoSectionSectionHistory.create({
-      data: eateryPremisesInfoSection,
-    });
-    await prisma.healthPremisesInfoSectionSectionHistory.create({
-      data: healthPremisesInfoSection,
-    });
-    await prisma.hospitalityPremisesInfoSectionHistroy.create({
-      data: hospitalityPremisesInfoSection,
-    });
-    await prisma.sanitaryPremisesInfoSectionHistory.create({
-      data: sanitaryPremisesInfoSection,
-    });
-    await prisma.marketPremisesInfoSectionHistory.create({
-      data: marketPremisesInfoSection,
-    });
-    await prisma.institutionPremisesInfoSectionHistory.create({
-      data: institutionPremisesInfoSection,
-    });
-    await prisma.industryPremisesInfoSectionHistory.create({
-      data: industryPremisesInfoSection,
+    let inspectionHistory = await prisma.inspectionHistory.create({
+      data: inspection,
     });
 
-    await prisma.premisesExcretaContainmentHistory.create({
+    let historyId = inspectionHistory.historyId;
+
+    //////SPREAD HISTORY ID
+    licencePermitSection =
+      licencePermitSection != null
+        ? { ...licencePermitSection, historyId }
+        : null;
+
+    liquidWasteSection =
+      liquidWasteSection != null ? { ...liquidWasteSection, historyId } : null;
+    solidWasteSection =
+      solidWasteSection != null ? { ...solidWasteSection, historyId } : null;
+    basicInfoSection =
+      basicInfoSection != null ? { ...basicInfoSection, historyId } : null;
+    waterSection = waterSection != null ? { ...waterSection, historyId } : null;
+    conclusionSection =
+      conclusionSection != null ? { ...conclusionSection, historyId } : null;
+
+    residentialPremisesInfoSection =
+      residentialPremisesInfoSection != null
+        ? {
+            ...residentialPremisesInfoSection,
+            historyId,
+          }
+        : null;
+    eateryPremisesInfoSection =
+      eateryPremisesInfoSection != null
+        ? { ...eateryPremisesInfoSection, historyId }
+        : null;
+    healthPremisesInfoSection =
+      healthPremisesInfoSection != null
+        ? { ...healthPremisesInfoSection, historyId }
+        : null;
+    hospitalityPremisesInfoSection =
+      hospitalityPremisesInfoSection != null
+        ? {
+            ...hospitalityPremisesInfoSection,
+            historyId,
+          }
+        : null;
+    sanitaryPremisesInfoSection =
+      sanitaryPremisesInfoSection != null
+        ? { ...sanitaryPremisesInfoSection, historyId }
+        : null;
+    marketPremisesInfoSection =
+      marketPremisesInfoSection != null
+        ? { ...marketPremisesInfoSection, historyId }
+        : null;
+    institutionPremisesInfoSection =
+      institutionPremisesInfoSection != null
+        ? {
+            ...institutionPremisesInfoSection,
+            historyId,
+          }
+        : null;
+    industryPremisesInfoSection =
+      industryPremisesInfoSection != null
+        ? { ...industryPremisesInfoSection, historyId }
+        : null;
+
+    premisesExcretaContainment = premisesExcretaContainment?.map((d) => {
+      return { ...d, historyId };
+    });
+    premisesGreyWaterDisposal = premisesGreyWaterDisposal?.map((d) => {
+      return { ...d, historyId };
+    });
+    premisesWasteReceptacle = premisesWasteReceptacle?.map((d) => {
+      return { ...d, historyId };
+    });
+    premisesPestSigns = premisesPestSigns?.map((d) => {
+      return { ...d, historyId };
+    });
+    premisesAnimal = premisesAnimal?.map((d) => {
+      return { ...d, historyId };
+    });
+    premisesDrainType = premisesDrainType?.map((d) => {
+      return { ...d, historyId };
+    });
+
+    premisesHazardousWasteDisposal = premisesHazardousWasteDisposal?.map(
+      (d) => {
+        return { ...d, historyId };
+      }
+    );
+    premisesActionTaken = premisesActionTaken?.map((d) => {
+      return { ...d, historyId };
+    });
+
+    premisesNuisanceDetected = premisesNuisanceDetected?.map((d) => {
+      return { ...d, historyId };
+    });
+
+    ////CREATE HISTORY
+
+    if (basicInfoSection != null) {
+      await prisma.basicInfoSectionHistory.create({ data: basicInfoSection });
+    }
+    if (licencePermitSection != null) {
+      await prisma.licencePermitSectionHistory.create({
+        data: licencePermitSection,
+      });
+    }
+    if (liquidWasteSection != null) {
+      await prisma.liquidWasteSectionHistory.create({
+        data: liquidWasteSection,
+      });
+    }
+    if (solidWasteSection != null) {
+      await prisma.solidWasteSectionHistory.create({ data: solidWasteSection });
+    }
+    if (waterSection != null) {
+      await prisma.waterSectionHistory.create({ data: waterSection });
+    }
+
+    if (conclusionSection != null) {
+      await prisma.conclusionSectionHistory.create({ data: conclusionSection });
+    }
+    if (residentialPremisesInfoSection != null) {
+      await prisma.residentialPremisesInfoSectionHistory.create({
+        data: residentialPremisesInfoSection,
+      });
+    }
+    if (eateryPremisesInfoSection != null) {
+      await prisma.eateryPremisesInfoSectionHistory.create({
+        data: eateryPremisesInfoSection,
+      });
+    }
+    if (healthPremisesInfoSection != null) {
+      await prisma.healthPremisesInfoSectionHistory.create({
+        data: healthPremisesInfoSection,
+      });
+    }
+    if (hospitalityPremisesInfoSection != null) {
+      await prisma.hospitalityPremisesInfoSectionHistory.create({
+        data: hospitalityPremisesInfoSection,
+      });
+    }
+    if (sanitaryPremisesInfoSection != null) {
+      await prisma.sanitaryPremisesInfoSectionHistory.create({
+        data: sanitaryPremisesInfoSection,
+      });
+    }
+    if (marketPremisesInfoSection != null) {
+      await prisma.marketPremisesInfoSectionHistory.create({
+        data: marketPremisesInfoSection,
+      });
+    }
+    if (institutionPremisesInfoSection != null) {
+      await prisma.institutionPremisesInfoSectionHistory.create({
+        data: institutionPremisesInfoSection,
+      });
+    }
+    if (industryPremisesInfoSection != null) {
+      await prisma.industryPremisesInfoSectionHistory.create({
+        data: industryPremisesInfoSection,
+      });
+    }
+
+    await prisma.premisesExcretaContainmentHistory.createMany({
       data: premisesExcretaContainment,
     });
-    await prisma.premisesGreyWaterDisposalHistory.create({
+
+    await prisma.premisesGreyWaterDisposalHistory.createMany({
       data: premisesGreyWaterDisposal,
     });
-    await prisma.premisesWasteReceptacleHistory.create({
+    await prisma.premisesWasteReceptacleHistory.createMany({
       data: premisesWasteReceptacle,
     });
-    await prisma.premisesPestSignsHistory.create({ data: premisesPestSigns });
-    await prisma.premisesAnimalHistory.create({ data: premisesAnimal });
-    await prisma.premisesDrainTypeHistory.create({ data: premisesDrainType });
-    await prisma.premisesDrainBadConditionHistory.create({
+    await prisma.premisesPestSignsHistory.createMany({
+      data: premisesPestSigns,
+    });
+    await prisma.premisesAnimalHistory.createMany({ data: premisesAnimal });
+    await prisma.premisesDrainTypeHistory.createMany({
+      data: premisesDrainType,
+    });
+    await prisma.premisesDrainBadConditionHistory.createMany({
       data: premisesDrainBadCondition,
     });
-    await prisma.premisesHazardousWasteDisposalHistory.create({
+    await prisma.premisesHazardousWasteDisposalHistory.createMany({
       data: premisesHazardousWasteDisposal,
     });
-    await prisma.premisesActionTakenHistory.create({
+    await prisma.premisesActionTakenHistory.createMany({
       data: premisesActionTaken,
     });
-    await prisma.premisesNuisanceDetectedHistory.create({
+    await prisma.premisesNuisanceDetectedHistory.createMany({
       data: premisesNuisanceDetected,
     });
 
-    console.log("inspection", inspection);
-    console.log("bas", basicInfoSection);
+    let newBasicInfoSection = {
+      latitude: Number(req?.body?.basicInfoSection.latitude),
+      longitude: Number(req?.body?.basicInfoSection.longitude),
+      accuracy: req?.body?.basicInfoSection.accuracy,
+      respondentName: req?.body?.basicInfoSection.respondentName,
+      respondentPhoneNumber: req?.body?.basicInfoSection.respondentPhoneNumber,
+      // respondentDesignationId: Number(req?.body?.respondentDesignationId),
+    };
+   
+    let newLicencePermitSection = {
+      animalsPermitAvailabilityId:
+        req?.body?.licencePermitSection.animalsPermitAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.animalsPermitAvailability),
+      propertyRateAvailabilityId:
+        req?.body?.licencePermitSection.propertyRateAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.propertyRateAvailability),
+      buildingPermitAvailabilityId:
+        req?.body?.licencePermitSection.buildingPermitAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.buildingPermitAvailability),
+      businessLicenceAvailabilityId:
+        req?.body?.licencePermitSection.businessLicenceAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.businessLicenceAvailability),
+      habitationCertificateAvailabilityId:
+        req?.body?.licencePermitSection.habitationCertificateAvailability ==
+        undefined
+          ? null
+          : Number(
+              req?.body?.licencePermitSection.habitationCertificateAvailability
+            ),
+      operatingLicenceAvailabilityId:
+        req?.body?.licencePermitSection.operatingLicenceAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.operatingLicenceAvailability),
+      structurePermitAvailabilityId:
+        req?.body?.licencePermitSection.structurePermitAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.structurePermitAvailability),
+      fumigationCertificateAvailabilityId:
+        req?.body?.licencePermitSection.fumigationCertificateAvailability ==
+        undefined
+          ? null
+          : Number(
+              req?.body?.licencePermitSection.fumigationCertificateAvailability
+            ),
 
-    console.log(req.body);
+      gtaOperatingLicenceAvailabilityId:
+        req?.body?.licencePermitSection.gtaOperatingLicenceAvailability ==
+        undefined
+          ? null
+          : Number(
+              req?.body?.licencePermitSection.gtaOperatingLicenceAvailability
+            ),
+      suitabilityCertificateAvailabilityId:
+        req?.body?.licencePermitSection.suitabilityCertificateAvailability ==
+        undefined
+          ? null
+          : Number(
+              req?.body?.licencePermitSection.suitabilityCertificateAvailability
+            ),
+      waterAnalysisReportId:
+        req?.body?.licencePermitSection.waterAnalysisReport == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.waterAnalysisReport),
+      regGeneralCertAvailabilityId:
+        req?.body?.licencePermitSection.regGeneralCertAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.regGeneralCertAvailability),
+      pharmacyCertAvailabilityId:
+        req?.body?.licencePermitSection.pharmacyCertAvailability == undefined
+          ? null
+          : Number(req?.body?.licencePermitSection.pharmacyCertAvailability),
+    };
 
-    const newBasicInfoSection = {};
+    // waterSupply: selectedWaterSupply?.map((x) => x.value),
+    // waterSource: selectedWaterSource?.map((x) => x.value),
+    // waterStorage: selectedWaterStorage?.map((x) => x.value),
+    // waterTreatment: selectedWaterTreatment?.map((x) => x.value),
+    // drinkingWaterSource: selectedDrinkingWaterSource?.map((x) => x.value),
 
-    const response = await prisma.inspection.update({
+    let newWaterSection = {
+      waterStorageConditionId:
+        req?.body?.waterSection.waterStorageCondition == undefined
+          ? null
+          : Number(req?.body?.waterSection.waterStorageCondition),
+      waterFlowFrequencyId:
+        req?.body?.waterSection.waterFlowFrequency == undefined
+          ? null
+          : Number(req?.body?.waterSection.waterFlowFrequency),
+      waterSourceConditionId:
+        req?.body?.waterSection.waterSourceCondition == undefined
+          ? null
+          : Number(req?.body?.waterSection.waterSourceCondition),
+      //   safeDistanceWaterStorageSanitaryId:
+      // req?.body?.waterSection.safeDistanceWaterStorageSanitaryId ==undefined
+      //   ? null
+      //   : Number(req?.body?.safeDistanceWaterStorageSanitaryId),
+      // rating: req?.body?.rating == undefined ? null : Number(req?.body?.rating),
+    };
+
+    let newSolidWasteSection = {
+      wasteServiceProviderRegistrationId:
+        req?.body?.solidWasteSection.wasteServiceProviderRegistration == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.wasteServiceProviderRegistration),
+      wasteCollectorName:
+        req?.body?.solidWasteSection.wasteCollectorName == undefined
+          ? null
+          : req?.body?.solidWasteSection.wasteCollectorName,
+      wasteSortingAvailabilityId:
+        req?.body?.solidWasteSection.wasteSortingAvailability == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.wasteSortingAvailability),
+      wasteCollectionFrequencyId:
+        req?.body?.solidWasteSection.wasteCollectionFrequency == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.wasteCollectionFrequency),
+      approvedWasteStorageReceptacleId:
+        req?.body?.solidWasteSection.approvedWasteStorageReceptacle == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.approvedWasteStorageReceptacle),
+      adequateWasteStorageReceptacleId:
+        req?.body?.solidWasteSection.adequateWasteStorageReceptacle == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.adequateWasteStorageReceptacle),
+      wasteCollectionTypeId:
+        req?.body?.solidWasteSection.wasteCollectionType == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.wasteCollectionType),
+      unservicedWasteDisposalId:
+        req?.body?.solidWasteSection.unservicedWasteDisposal == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.unservicedWasteDisposal),
+      wastePaymentEvidenceId:
+        req?.body?.solidWasteSection.wastePaymentEvidence == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.wastePaymentEvidence),
+      wasteContainerVolumeId:
+        req?.body?.solidWasteSection.containerVolume == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.containerVolume),
+      wasteProviderAccredittedId:
+        req?.body?.solidWasteSection.wasteProviderAccreditted == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.wasteProviderAccreditted),
+      containerNumber:
+        req?.body?.solidWasteSection.containerNumber == undefined
+          ? null
+          : Number(req?.body?.solidWasteSection.containerNumber),
+      wasteServicePhoneNumber: req?.body?.solidWasteSection.wasteServicePhoneNumber,
+    };
+
+
+    let newLiquidWasteSection = {
+     
+
+      numberToiletSeats:
+        req?.body?.liquidWasteSection?.numberToiletSeats == undefined
+          ? null
+          : Number(req?.liquidWasteSection?.body?.numberToiletSeats),
+      toiletConditionId:
+        req?.body?.liquidWasteSection?.toiletCondition == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletCondition),
+
+      toiletDischargeId:
+        req?.body?.liquidWasteSection?.toiletDischarge == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletDischarge),
+      numberUrinalCubicle:
+        req?.body?.liquidWasteSection?.numberUrinalSeats == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.numberUrinalSeats),
+      bathroomAdequacyId:
+        req?.body?.liquidWasteSection?.bathroomAdequacy == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.bathroomAdequacy),
+
+      stagnationEvidenceId:
+        req?.body?.liquidWasteSection?.stagnationEvidence == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.stagnationEvidence),
+
+      containmentEmptiedId:
+        req?.body?.liquidWasteSection?.containmentEmptied == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.containmentEmptied),
+      sewerSystemId:
+        req?.body?.liquidWasteSection?.sewerSystem == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.sewerSystem),
+
+      // urinalCubicleConditionId:
+      //   req?.body?.urinalCubicleConditionId == undefined
+      //     ? null
+      //     : Number(req?.body?.urinalCubicleConditionId),
+      toiletAdequacyId:
+        req?.body?.liquidWasteSection?.toiletAdequacy == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletAdequacy),
+      urinalAdequacyId:
+        req?.body?.liquidWasteSection?.urinalAdequacy == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.urinalAdequacy),
+      urinalGenderSensivityId:
+        req?.body?.liquidWasteSection?.urinalGenderSensivity == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.urinalGenderSensivity),
+
+      effluentManagementReportId:
+        req?.body?.liquidWasteSection?.effluentManagementReport == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.effluentManagementReport),
+
+      toiletGenderSensivityId:
+        req?.body?.liquidWasteSection?.toiletGenderSensivity == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletGenderSensivity),
+      toiletDisabilityFriendlyId:
+        req?.body?.liquidWasteSection?.toiletDisabilityFriendly == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletDisabilityFriendly),
+      urinalDisabilityFriendlyId:
+        req?.body?.liquidWasteSection?.urinalDisabilityFriendly == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.urinalDisabilityFriendly),
+
+      toiletPitPositionId:
+        req?.body?.liquidWasteSection?.toiletPitPosition == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletPitPosition),
+
+      wasteWaterContainmentId:
+        req?.body?.liquidWasteSection?.wasteWaterContainment == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.wasteWaterContainment),
+      easeYourselfWhereId:
+        req?.body?.liquidWasteSection?.easeYourselfWhere == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.easeYourselfWhere),
+      areaSeweredId:
+        req?.body?.liquidWasteSection?.areaSewered == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.areaSewered),
+      facilityConnectedSewerId:
+        req?.body?.liquidWasteSection?.facilityConnectedSewer == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.facilityConnectedSewer),
+
+      bathroomConditionId:
+        req?.body?.liquidWasteSection?.bathroomCondition == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.bathroomCondition),
+
+      drainsConditionId:
+        req?.body?.liquidWasteSection?.drainsCondition == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.drainsCondition),
+      desiltingFrequencyId:
+        req?.body?.liquidWasteSection?.desiltingFrequency == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.desiltingFrequency),
+
+      // rating: req?.body?.rating == undefined ? null : Number(req?.body?.rating),
+      toiletHouseholdNumberId:
+        req?.body?.liquidWasteSection?.toiletHouseholdNumber == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.toiletHouseholdNumber),
+
+      separateStaffUrinalId:
+        req?.body?.liquidWasteSection?.separateStaffUrinal == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.separateStaffUrinal),
+
+      availToiletFaciltyMgtId:
+        req?.body?.liquidWasteSection?.availToiletFaciltyMgt == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.availToiletFaciltyMgt),
+
+      analCleansingMaterialMgtId:
+        req?.body?.liquidWasteSection?.analCleansingMaterialMgt == undefined
+          ? null
+          : Number(req?.body?.analCleansingMaterialMgt),
+
+      numberUrinalSeats:
+        req?.body?.liquidWasteSection?.numberUrinalSeats == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.numberUrinalSeats),
+
+      numberBathroomCubicle:
+        req?.body?.liquidWasteSection?.numberBathroomCubicle == undefined
+          ? null
+          : Number(req?.body?.liquidWasteSection?.numberBathroomCubicle),
+    };
+
+
+    let newConclusionSection = {
+      officerComment:
+        req?.body?.conclusionSection.officerComment == undefined ? null : req?.body?.conclusionSection.officerComment,
+
+      obnoxiousTradeExistId:
+        req?.body?.conclusionSection.obnoxiousTradeExist == undefined
+          ? null
+          : Number(req?.body?.conclusionSection.obnoxiousTradeExist),
+
+      obnoxiousTrade:
+        req?.body?.conclusionSection.obnoxiousTrade == undefined ? null : req?.body?.conclusionSection.obnoxiousTrade,
+
+     
+    };
+
+    await prisma.basicInfoSection.update({
+      where: {
+        inspectionId: inspectionId,
+      },
       data: newBasicInfoSection,
     });
 
-    // const data = {
-    //   id: req.body.id,
-    //   userId: Number(req.body.userId),
-    //   totalRating: Number(req.body.totalRating),
-    //   districtId: district,
-    //   regionId: region,
-    //   communityId: Number(req.body.communityId),
-    //   electoralAreaId: Number(req.body.electoralAreaId),
+    await prisma.licencePermitSection.update({
+      where: {
+        inspectionId: inspectionId,
+      },
+      data: newLicencePermitSection,
+    });
 
-    //   premisesCode: req.body.premisesCode,
-    //   inspectionFormId:
-    //     req.body.inspectionFormId == "null"
-    //       ? null
-    //       : Number(req.body.inspectionFormId),
-    //   prevInspectionId:
-    //     req.body.prevInspectionId == "null" || req.body.prevInspectionId == ""
-    //       ? null
-    //       : req.body.prevInspectionId,
-    //   inspectionTypeId:
-    //     req.body.inspectionTypeId == "null"
-    //       ? null
-    //       : Number(req.body.inspectionTypeId),
-    //   followUpDate: req.body.followUpDate == null ? "" : req.body.followUpDate,
-    //   doFollowUp:
-    //     req.body.doFollowUp == "null" ? 0 : Number(req.body.doFollowUp),
-    //   startedAt: new Date(req.body.startedAt),
-    //   completedAt: new Date(req.body.completedAt),
-    // };
+    await prisma.waterSection.update({
+      where: {
+        inspectionId: inspectionId,
+      },
+      data: newWaterSection,
+    });
 
-    // console.log(data);
+    await prisma.solidWasteSection.update({
+      where: {
+        inspectionId: inspectionId,
+      },
+      data: newSolidWasteSection,
+    });
 
-    // const response = await prisma.inspection.create({ data });
+    await prisma.liquidWasteSection?.update({
+      where: {
+        inspectionId: inspectionId,
+      },
+      data: newLiquidWasteSection,
+    });
 
-    // if (response) {
-    //   return res.status(200).json({ statusCode: 1, message: "Data saved" });
-    // }
+    await prisma.conclusionSection.update({
+      where: {
+        inspectionId: inspectionId,
+      },
+      data: newConclusionSection,
+    });
+
+   //TODO: update Premises Tables
+
+      return res.status(200).json({ statusCode: 1, message: "Data saved" });
+  
 
     // return res.status(500).json({ statusCode: 0, message: "Data skipped" });
   } catch (error) {
     console.log("Error: " + error);
-    // if (error.code === "P2002")
-    //   return res
-    //     .status(400)
-    //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
+   
     res.status(500).json({ statusCode: 0, message: "Data skipped" });
   }
 };
 
-const get = async (req, res) => {
+let get = async (req, res) => {
   try {
-    let userId = Number(req.query.userId);
+    let userId = Number(req?.query.userId);
     if (!userId) return res.status(200).json();
 
-    const response = await prisma.inspection.findMany({
+    let response = await prisma.inspection.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
@@ -235,13 +681,13 @@ const get = async (req, res) => {
 };
 
 export default (req, res) => {
-  req.method === "POST"
+  req?.method === "POST"
     ? post(req, res)
-    : req.method === "PUT"
+    : req?.method === "PUT"
     ? put(req, res)
-    : req.method === "DELETE"
+    : req?.method === "DELETE"
     ? console.log("DELETE")
-    : req.method === "GET"
+    : req?.method === "GET"
     ? get(req, res)
     : res.status(404).send("");
 };

@@ -15,8 +15,10 @@ import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
   console.log(data);
-
   const [userId, setUserId] = useState();
+  const [respondentName, setRespondentName] = useState();
+  const [respondentPhoneNumber, setRespondentPhoneNumber] = useState("");
+
   const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
   const [buildingPermitAvailability, setBuildingPermitAvailability] =
     useState();
@@ -116,6 +118,9 @@ const DataEdit = ({ data }) => {
   const [longitude, setLongitude] = useState();
   const [accuracy, setAccuracy] = useState();
 
+  const [wasteServicePhoneNumber,setWasteServicePhoneNumber] = useState()
+  const [wasteCollectionFrequency,setWasteCollectionFrequency]= useState()
+
   const router = useRouter();
 
   const query = router.query;
@@ -190,14 +195,15 @@ const DataEdit = ({ data }) => {
   };
 
   const handleUpdate = async (id) => {
-    console.log("inspectionId ", inspectionId);
     let data = {
       inspectionId: inspectionId,
       inspectionFormId: formId,
-      BasicInfoSection: {
+      basicInfoSection: {
         latitude: latitude,
         longitude: longitude,
         accuracy: accuracy,
+        respondentName: respondentName,
+        respondentPhoneNumber:respondentPhoneNumber
       },
 
       waterSection: {
@@ -234,8 +240,12 @@ const DataEdit = ({ data }) => {
         sewerSystem: sewerSystem,
         easeYourselfWhere: easeYourselfWhere,
         desiltingFrequency: desiltingFrequency,
-        wasteServiceProviderRegistration: wasteServiceProviderRegistration,
+      
+      },
+      solidWasteSection:{
+  wasteServiceProviderRegistration: wasteServiceProviderRegistration,
         wasteCollectorName: wasteCollectorName,
+        wasteServicePhoneNumber:wasteServicePhoneNumber,
         wasteSortingAvailability: wasteSortingAvailability,
         wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
         adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
@@ -244,6 +254,7 @@ const DataEdit = ({ data }) => {
         wastePaymentEvidence: wastePaymentEvidence,
         containerVolume: containerVolume,
         wasteProviderAccreditted: wasteProviderAccreditted,
+        wasteCollectionFrequency:wasteCollectionFrequency
       },
 
       conclusionSection: {
@@ -253,7 +264,7 @@ const DataEdit = ({ data }) => {
         officerComment: officerComment,
       },
       licencePermitSection: {
-        animalPermitAvailability: animalPermitAvailability,
+        animalPermitAvailability: animalPermitAvailability ,
         buildingPermitAvailability: buildingPermitAvailability,
         habitationCertificateAvailability: certificateHabitationAvailability,
         propertyRateAvailability: propertyRateAvailability,
@@ -368,6 +379,11 @@ const DataEdit = ({ data }) => {
   };
 
   useEffect(() => {
+    setWasteServicePhoneNumber( data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber)
+    setRespondentPhoneNumber(
+      data?.submittedData?.BasicInfoSection?.respondentPhoneNumber
+    );
+    setRespondentName(data?.submittedData?.BasicInfoSection?.respondentName);
     setUserId(data?.submittedData?.User.id);
     setCertificateHabitationAvailability(
       data?.submittedData?.LicencePermitSection
@@ -836,11 +852,10 @@ const DataEdit = ({ data }) => {
                               type="text"
                               className="form-control"
                               id="invoicenoInput"
-                              value={
-                                data?.submittedData?.BasicInfoSection
-                                  ?.respondentName
+                              onChange={(e) =>
+                                setRespondentName(e.target.value)
                               }
-                              readOnly="readOnly"
+                              value={respondentName}
                             />
                           </div>
                           <div className="col-lg-3 col-sm-6">
@@ -868,11 +883,10 @@ const DataEdit = ({ data }) => {
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
-                                value={
-                                  data?.submittedData?.BasicInfoSection
-                                    ?.respondentPhoneNumber
+                                onChange={(e) =>
+                                  setRespondentPhoneNumber(e.target.value)
                                 }
-                                readOnly="readOnly"
+                                value={respondentPhoneNumber}
                               />
                             </div>
                           ) : (
@@ -940,14 +954,14 @@ const DataEdit = ({ data }) => {
               </div>
             </div>
 
-            {formId == 1 ? <ResidentialPremisesInfoEdit data={data} /> : <></>}
-            {formId == 2 ? <EateryPremisesInfoEdit data={data} /> : <></>}
-            {formId == 3 ? <HealthPremisesInfoEdit data={data} /> : <></>}
-            {formId == 4 ? <HospitalityPremisesInfoEdit data={data} /> : <></>}
-            {formId == 5 ? <InstitutionPremisesInfoEdit data={data} /> : <></>}
-            {formId == 6 ? <IndustryPremisesInfoEdit data={data} /> : <></>}
-            {formId == 7 ? <MarketPremisesInfoEdit data={data} /> : <></>}
-            {formId == 8 ? <SanitaryPremisesInfoEdit data={data} /> : <></>}
+            {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 2 ? <EateryPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 3 ? <HealthPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 4 ? <HospitalityPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 5 ? <InstitutionPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 6 ? <IndustryPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 7 ? <MarketPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 8 ? <SanitaryPremisesInfoEdit data={data?.submittedData} /> : <></>}
             <div className="row">
               <div className="col-lg-12">
                 <div className="row mb-3">
@@ -2383,6 +2397,63 @@ const DataEdit = ({ data }) => {
                           ) : (
                             <></>
                           )}
+
+
+{data?.submittedData?.SolidWasteSection
+                            ?.wasteServicePhoneNumber != "" ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">
+                              Waste Collector Phone
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="invoicenoInput"
+                                value={wasteServicePhoneNumber}
+                                onChange={(e) => {
+                                  setWasteServicePhoneNumber(e.target.value);
+                                }}
+                              />
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+ {data?.submittedData?.SolidWasteSection
+                            ?.wasteCollectionFrequency != null ? (
+                            <div className="col-lg-3 col-sm-6">
+                              <label htmlFor="invoicenoInput">
+                                Waste Collection Frequency
+                              </label>
+                              {/* <input
+                                type="text"
+                                className="form-control"
+                                id="invoicenoInput"
+                                value={
+                                  data?.submittedData?.SolidWasteSection
+                                    ?.wasteSortingAvailability?.name
+                                }
+                              /> */}
+                              <select
+                                className="form-control"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  setWasteCollectionFrequency(e.target.value);
+                                }}
+                                value={wasteCollectionFrequency}
+                              >
+                                <option value="">Select</option>
+                                <option value={1}>Daily</option>
+                                <option value={2}>Weekly</option>
+                                <option value={3}>Forthnightly</option>
+                                <option value={4}>Monthly</option>
+                                <option value={5}>Intermittent</option>
+
+                              </select>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+
                           {data?.submittedData?.SolidWasteSection
                             ?.wasteSortingAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">

@@ -6,6 +6,8 @@ import { nanoid } from "nanoid";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Image from "next/image";
+import logo from "../../public/logo.png" 
 
 export default function Login() {
   const [email, setEmail] = useState();
@@ -141,7 +143,7 @@ export default function Login() {
                         />
                       </a>
                     </div>
-                    <p className="mt-3 fs-15 fw-medium">ESICApps</p>
+                    <p className="mt-3 fs-15 fw-medium"><Image height={200} width={400} src={logo}/></p>
                   </div>
                 </div>
               </div>
