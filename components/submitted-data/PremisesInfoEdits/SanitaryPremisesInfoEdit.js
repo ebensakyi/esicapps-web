@@ -148,11 +148,8 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-
-
-
-{data?.SanitaryPremisesInfoSection?.disinfectionFrequencyId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.disinfectionFrequencyId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Disinfection Frequency
@@ -171,11 +168,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.disinfestationQuarterlyId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.disinfestationQuarterlyId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Disinfestation Quarterly
+                          Disinfestation Quarterly
                         </label>
                         <input
                           type="text"
@@ -191,8 +188,8 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.protectiveClothingUsedId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.protectiveClothingUsedId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Protectective Clothing
@@ -211,11 +208,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.slaughterAreaAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.slaughterAreaAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Slaughter Area Availability
+                          Slaughter Area Availability
                         </label>
                         <input
                           type="text"
@@ -231,11 +228,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.storeRoomAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.storeRoomAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Store Room Availability
+                          Store Room Availability
                         </label>
                         <input
                           type="text"
@@ -251,11 +248,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.condemnationRoomAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.condemnationRoomAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Condemnation Room Availability
+                          Condemnation Room Availability
                         </label>
                         <input
                           type="text"
@@ -271,11 +268,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.cloakRoomAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.cloakRoomAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Cloak Room Availability
+                          Cloak Room Availability
                         </label>
                         <input
                           type="text"
@@ -291,11 +288,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.comfortRoomAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.comfortRoomAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Comfort Room Availability
+                          Comfort Room Availability
                         </label>
                         <input
                           type="text"
@@ -311,11 +308,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.wheelbathAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.wheelbathAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Wheel bath Availability
+                          Wheel bath Availability
                         </label>
                         <input
                           type="text"
@@ -331,11 +328,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.footbathAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.footbathAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Footbath Availability
+                          Footbath Availability
                         </label>
                         <input
                           type="text"
@@ -351,19 +348,18 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.leachateMgtId !=
+                    {data?.SanitaryPremisesInfoSection?.leachateMgtId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Leachate Management
+                          Leachate Management
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.leachateMgt?.name
+                            data?.SanitaryPremisesInfoSection?.leachateMgt?.name
                           }
                           readOnly="readOnly"
                         />
@@ -372,12 +368,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-
-{data?.SanitaryPremisesInfoSection?.safeHazardousWasteMgtId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.safeHazardousWasteMgtId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                       Safe Hazardous Waste Management
+                          Safe Hazardous Waste Management
                         </label>
                         <input
                           type="text"
@@ -393,19 +388,19 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.sextonManagementId !=
+                    {data?.SanitaryPremisesInfoSection?.sextonManagementId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Sexton Management
+                          Sexton Management
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.sextonManagement.name
+                            data?.SanitaryPremisesInfoSection?.sextonManagement
+                              .name
                           }
                           readOnly="readOnly"
                         />
@@ -413,19 +408,19 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.sextonOfficeId !=
+                    {data?.SanitaryPremisesInfoSection?.sextonOfficeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Sexton Office Availability
+                          Sexton Office Availability
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.sextonOffice?.name
+                            data?.SanitaryPremisesInfoSection?.sextonOffice
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -433,19 +428,17 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.properLayoutId !=
+                    {data?.SanitaryPremisesInfoSection?.properLayoutId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                       Proper Layout
-                        </label>
+                        <label htmlFor="invoicenoInput">Proper Layout</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.properLayout?.name
+                            data?.SanitaryPremisesInfoSection?.properLayout
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -453,11 +446,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.cremationPracticedId !=
+                    {data?.SanitaryPremisesInfoSection?.cremationPracticedId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Cremation Practiced
+                          Cremation Practiced
                         </label>
                         <input
                           type="text"
@@ -474,13 +467,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-
-
-{data?.SanitaryPremisesInfoSection?.workersOfficeAvailabilityId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.workersOfficeAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Workers Office Availability
+                          Workers Office Availability
                         </label>
                         <input
                           type="text"
@@ -496,11 +487,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.transferStationCapacity !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.transferStationCapacity != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Transfer Station Capacity
+                          Transfer Station Capacity
                         </label>
                         <input
                           type="text"
@@ -516,19 +507,16 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.numberContainer !=
+                    {data?.SanitaryPremisesInfoSection?.numberContainer !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                        Number Container
-                        </label>
+                        <label htmlFor="invoicenoInput">Number Container</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.numberContainer
+                            data?.SanitaryPremisesInfoSection?.numberContainer
                           }
                           readOnly="readOnly"
                         />
@@ -536,11 +524,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.containerAttendantName !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.containerAttendantName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Container Attendant Name
+                          Container Attendant Name
                         </label>
                         <input
                           type="text"
@@ -556,11 +544,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.containerAttendantPhoneNumber !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.containerAttendantPhoneNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Container Attendant Phone Number
+                          Container Attendant Phone Number
                         </label>
                         <input
                           type="text"
@@ -576,19 +564,18 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.SanitaryPremisesInfoSection?.numberWorkers !=
+                    {data?.SanitaryPremisesInfoSection?.numberWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                       Number of Workers
+                          Number of Workers
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.numberWorkers
+                            data?.SanitaryPremisesInfoSection?.numberWorkers
                           }
                           readOnly="readOnly"
                         />
@@ -597,19 +584,19 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-{data?.SanitaryPremisesInfoSection?.cremationPlatformId !=
+                    {data?.SanitaryPremisesInfoSection?.cremationPlatformId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Cremation Platform
+                          Cremation Platform
                         </label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection
-                              ?.cremationPlatform?.name
+                            data?.SanitaryPremisesInfoSection?.cremationPlatform
+                              ?.name
                           }
                           readOnly="readOnly"
                         />
@@ -617,11 +604,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                      {data?.SanitaryPremisesInfoSection?.sanitaryAshesDisposalId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.sanitaryAshesDisposalId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Sanitary Ashes Disposal
+                          Sanitary Ashes Disposal
                         </label>
                         <input
                           type="text"
@@ -637,11 +624,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                      {data?.SanitaryPremisesInfoSection?.numberCarcassHandlers !=
+                    {data?.SanitaryPremisesInfoSection?.numberCarcassHandlers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Number of Carcass Handlers
+                          Number of Carcass Handlers
                         </label>
                         <input
                           type="text"
@@ -657,11 +644,11 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                      {data?.SanitaryPremisesInfoSection?.numberCarcassHandlersMedicalCert !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection
+                      ?.numberCarcassHandlersMedicalCert != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Number Carcass Handlers Medically Certified
+                          Number Carcass Handlers Medically Certified
                         </label>
                         <input
                           type="text"
@@ -677,13 +664,6 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    
-
-
-
-
-
-
 
                     {data?.SanitaryPremisesInfoSection?.toiletAvailability !=
                     null ? (
@@ -881,20 +861,15 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                   
-                    {data?.SanitaryPremisesInfoSection?.siteFencedId !=
-                    null ? (
+                    {data?.SanitaryPremisesInfoSection?.siteFencedId != null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
-                          Is site fenced
-                        </label>
+                        <label htmlFor="invoicenoInput">Is site fenced</label>
                         <input
                           type="text"
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.SanitaryPremisesInfoSection?.siteFenced
-                              .name
+                            data?.SanitaryPremisesInfoSection?.siteFenced.name
                           }
                           readOnly="readOnly"
                         />
@@ -903,7 +878,6 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
                   </div>
-                 
                 </div>
               </div>
             </div>

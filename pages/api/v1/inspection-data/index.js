@@ -3,16 +3,50 @@ import moment from "moment";
 
 const put = async (req, res) => {
   try {
+let inspectionId = req.body.inspectionId;
 
+const inspection = await prisma.inspection.findFirst({ where: {id: inspectionId } });
+const basicInfoSection = await prisma.basicInfoSection.findFirst({ where: { inspectionId } });
+const licencePermitSection = await prisma.licencePermitSection.findFirst({ where: { inspectionId } });
+const liquidWasteSection = await prisma.liquidWasteSection.findFirst({ where: { inspectionId } });
+const solidWasteSection = await prisma.solidWasteSection.findFirst({ where: { inspectionId } });
+const waterSection = await prisma.waterSection.findFirst({ where: { inspectionId } });
+const conclusionSection = await prisma.conclusionSection.findFirst({ where: { inspectionId } });
+
+
+const residentialPremisesInfoSection = await prisma.residentialPremisesInfoSection.findFirst({ where: { inspectionId } });
+const healthPremisesInfoSection = await prisma.healthPremisesInfoSection.findFirst({ where: { inspectionId } });
+const hospitalityPremisesInfoSection = await prisma.hospitalityPremisesInfoSection.findFirst({ where: { inspectionId } });
+const sanitaryPremisesInfoSection = await prisma.sanitaryPremisesInfoSection.findFirst({ where: { inspectionId } });
+const marketPremisesInfoSection = await prisma.marketPremisesInfoSection.findFirst({ where: { inspectionId } });
+const institutionPremisesInfoSection = await prisma.institutionPremisesInfoSection.findFirst({ where: { inspectionId } });
+const industryPremisesInfoSection = await prisma.industryPremisesInfoSection.findFirst({ where: { inspectionId } });
+const premisesExcretaContainment = await prisma.premisesExcretaContainment.findFirst({ where: { inspectionId } });
+const premisesGreyWaterDisposal = await prisma.premisesGreyWaterDisposal.findFirst({ where: { inspectionId } });
+const premisesWasteReceptacle = await prisma.premisesWasteReceptacle.findFirst({ where: { inspectionId } });
+const premisesPestSigns = await prisma.premisesPestSigns.findFirst({ where: { inspectionId } });
+const premisesAnimal = await prisma.premisesAnimal.findFirst({ where: { inspectionId } });
+const premisesDrainType = await prisma.premisesDrainType.findFirst({ where: { inspectionId } });
+const premisesDrainBadCondition = await prisma.premisesDrainBadCondition.findFirst({ where: { inspectionId } });
+const premisesHazardousWasteDisposal = await prisma.premisesHazardousWasteDisposal.findFirst({ where: { inspectionId } });
+const premisesActionTaken = await prisma.premisesActionTaken.findFirst({ where: { inspectionId } });
+const premisesNuisanceDetected = await prisma.premisesNuisanceDetected.findFirst({ where: { inspectionId } });
+
+
+const x = await prisma.inspectionHistory.create({ data:inspection });
+
+
+
+console.log("inspection", inspection);
 
     console.log(req.body);
-    l
+    
 
-    const basicInfoSection ={
+    const newBasicInfoSection ={
 
     }
 
-    const response = await prisma.inspection.update({ data });
+    const response = await prisma.inspection.update({ data:newBasicInfoSection });
 
 
     // const data = {
