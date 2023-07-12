@@ -88,7 +88,7 @@ model Inspection {
 }
 
 model InspectionHistory {
-  newId   Int    @id @default(autoincrement())
+  historyId Int @id @default(autoincrement())
 
   id               String  @db.VarChar(255)
   prevInspectionId String? @db.VarChar(255)
@@ -112,44 +112,44 @@ model InspectionHistory {
   totalRating      Decimal? @db.Decimal(4, 2)
   updated          Int?     @default(0)
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  startedAt   DateTime
-  completedAt DateTime
-  // BasicInfoSectionHistory                   BasicInfoSectionHistory[]
-  // ResidentialPremisesInfoSectionHistory     ResidentialPremisesInfoSectionHistory[]
-  // EateryPremisesInfoSectionHistory          EateryPremisesInfoSectionHistory[]
-  // HealthPremisesInfoSectionHistory          HealthPremisesInfoSectionHistory[]
-  // HospitalityPremisesInfoSectionHistory     HospitalityPremisesInfoSectionHistory[]
-  // SanitaryPremisesInfoSectionHistory        SanitaryPremisesInfoSectionHistory[]
-  // MarketPremisesInfoSectionHistory          MarketPremisesInfoSectionHistory[]
-  // InstitutionPremisesInfoSectionHistory     InstitutionPremisesInfoSectionHistory[]
-  // IndustryPremisesInfoSectionHistory        IndustryPremisesInfoSectionHistory[]
-  // LicencePermitSectionHistory               LicencePermitSectionHistory[]
-  // WaterSectionHistory                       WaterSectionHistory[]
-  // LiquidWasteSectionHistory                 LiquidWasteSectionHistory[]
-  // SolidWasteSectionHistory                  SolidWasteSectionHistory[]
-  // ConclusionSectionHistory                  ConclusionSectionHistory[]
-  // PremisesWaterSourcesHistory               PremisesWaterSourcesHistory[]
-  // PremisesWaterTreatmentTypeHistory         PremisesWaterTreatmentTypeHistory[]
-  // PremisesWaterSupplyHistory                PremisesWaterSupplyHistory[]
-  // PremisesWaterStorageHistory               PremisesWaterStorageHistory[]
-  // PremisesUnsafeWaterStorageHistory         PremisesUnsafeWaterStorageHistory[]
-  // PremisesCommunalContainerConditionHistory PremisesCommunalContainerConditionHistory[]
-  // PremisesDrinkingWaterSourcesHistory       PremisesDrinkingWaterSourcesHistory[]
-  // PremisesToiletTypeHistory                 PremisesToiletTypeHistory[]
-  // PremisesEffluentManagementHistory         PremisesEffluentManagementHistory[]
-  // PremisesExcretaDisposalMethodHistory      PremisesExcretaDisposalMethodHistory[]
-  // PremisesExcretaContainmentHistory         PremisesExcretaContainmentHistory[]
-  // PremisesGreyWaterDisposalHistory          PremisesGreyWaterDisposalHistory[]
-  // PremisesWasteReceptacleHistory            PremisesWasteReceptacleHistory[]
-  // PremisesPestSignsHistory                  PremisesPestSignsHistory[]
-  // PremisesAnimalHistory                     PremisesAnimalHistory[]
-  // PremisesDrainTypeHistory                  PremisesDrainTypeHistory[]
-  // PremisesDrainBadConditionHistory          PremisesDrainBadConditionHistory[]
-  // PremisesHazardousWasteDisposalHistory     PremisesHazardousWasteDisposalHistory[]
-  // PremisesActionTakenHistory                PremisesActionTakenHistory[]
-  // PremisesNuisanceDetectedHistory           PremisesNuisanceDetectedHistory[]
+  createdAt                                 DateTime                                    @default(now())
+  updatedAt                                 DateTime                                    @updatedAt
+  startedAt                                 DateTime
+  completedAt                               DateTime
+  BasicInfoSectionHistory                   BasicInfoSectionHistory[]
+  ResidentialPremisesInfoSectionHistory     ResidentialPremisesInfoSectionHistory[]
+  EateryPremisesInfoSectionHistory          EateryPremisesInfoSectionHistory[]
+  HealthPremisesInfoSectionHistory          HealthPremisesInfoSectionHistory[]
+  HospitalityPremisesInfoSectionHistory     HospitalityPremisesInfoSectionHistory[]
+  SanitaryPremisesInfoSectionHistory        SanitaryPremisesInfoSectionHistory[]
+  MarketPremisesInfoSectionHistory          MarketPremisesInfoSectionHistory[]
+  InstitutionPremisesInfoSectionHistory     InstitutionPremisesInfoSectionHistory[]
+  IndustryPremisesInfoSectionHistory        IndustryPremisesInfoSectionHistory[]
+  LicencePermitSectionHistory               LicencePermitSectionHistory[]
+  WaterSectionHistory                       WaterSectionHistory[]
+  LiquidWasteSectionHistory                 LiquidWasteSectionHistory[]
+  SolidWasteSectionHistory                  SolidWasteSectionHistory[]
+  ConclusionSectionHistory                  ConclusionSectionHistory[]
+  PremisesWaterSourcesHistory               PremisesWaterSourcesHistory[]
+  PremisesWaterTreatmentTypeHistory         PremisesWaterTreatmentTypeHistory[]
+  PremisesWaterSupplyHistory                PremisesWaterSupplyHistory[]
+  PremisesWaterStorageHistory               PremisesWaterStorageHistory[]
+  PremisesUnsafeWaterStorageHistory         PremisesUnsafeWaterStorageHistory[]
+  PremisesCommunalContainerConditionHistory PremisesCommunalContainerConditionHistory[]
+  PremisesDrinkingWaterSourcesHistory       PremisesDrinkingWaterSourcesHistory[]
+  PremisesToiletTypeHistory                 PremisesToiletTypeHistory[]
+  PremisesEffluentManagementHistory         PremisesEffluentManagementHistory[]
+  PremisesExcretaDisposalMethodHistory      PremisesExcretaDisposalMethodHistory[]
+  PremisesExcretaContainmentHistory         PremisesExcretaContainmentHistory[]
+  PremisesGreyWaterDisposalHistory          PremisesGreyWaterDisposalHistory[]
+  PremisesWasteReceptacleHistory            PremisesWasteReceptacleHistory[]
+  PremisesPestSignsHistory                  PremisesPestSignsHistory[]
+  PremisesAnimalHistory                     PremisesAnimalHistory[]
+  PremisesDrainTypeHistory                  PremisesDrainTypeHistory[]
+  PremisesDrainBadConditionHistory          PremisesDrainBadConditionHistory[]
+  PremisesHazardousWasteDisposalHistory     PremisesHazardousWasteDisposalHistory[]
+  PremisesActionTakenHistory                PremisesActionTakenHistory[]
+  PremisesNuisanceDetectedHistory           PremisesNuisanceDetectedHistory[]
 }
 
 model InspectionForm {
@@ -1149,10 +1149,12 @@ model BasicInfoSectionHistory {
   respondentDesignationId Int
   deleted                 Int?    @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
   // User              User              @relation(fields: [userId], references: [id])
-  // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model ResidentialPremisesInfoSection {
@@ -1210,6 +1212,8 @@ model ResidentialPremisesInfoSectionHistory {
   updatedAt DateTime @updatedAt
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model EateryPremisesInfoSection {
@@ -1297,6 +1301,8 @@ model EateryPremisesInfoSectionHistory {
   updatedAt DateTime @updatedAt
 
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model HealthPremisesInfoSection {
@@ -1375,6 +1381,8 @@ model HealthPremisesInfoSectionHistory {
   updatedAt                                 DateTime @updatedAt
 
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model HospitalityPremisesInfoSection {
@@ -1448,10 +1456,12 @@ model HospitalityPremisesInfoSectionHistory {
   facilityCapacity                          Int?
   deleted                                   Int?   @default(0)
 
-  userId    Int
+  userId                 Int
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model SanitaryPremisesInfoSection {
@@ -1589,6 +1599,8 @@ model SanitaryPremisesInfoSectionHistory {
   updatedAt                        DateTime @updatedAt
 
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model MarketPremisesInfoSection {
@@ -1677,6 +1689,8 @@ model MarketPremisesInfoSectionHistory {
   updatedAt DateTime @updatedAt
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model InstitutionPremisesInfoSection {
@@ -1831,6 +1845,8 @@ model InstitutionPremisesInfoSectionHistory {
   updatedAt DateTime @updatedAt
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model IndustryPremisesInfoSection {
@@ -1918,6 +1934,8 @@ model IndustryPremisesInfoSectionHistory {
   updatedAt DateTime @updatedAt
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model LicencePermitSection {
@@ -1980,10 +1998,12 @@ model LicencePermitSectionHistory {
   regGeneralCertAvailabilityId         Int?
   pharmacyCertAvailabilityId           Int?
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model WaterSection {
@@ -2030,6 +2050,8 @@ model WaterSectionHistory {
   updatedAt DateTime @updatedAt
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model LiquidWasteSection {
@@ -2163,6 +2185,8 @@ model LiquidWasteSectionHistory {
   excretaDisposalMethodId Int?
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model SolidWasteSection {
@@ -2238,6 +2262,8 @@ model SolidWasteSectionHistory {
   updatedAt DateTime @updatedAt
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model ConclusionSection {
@@ -2273,7 +2299,8 @@ model ConclusionSectionHistory {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 /// /////////////////PREMISES MULTI SELECTIONS SECTION ///////////
@@ -2306,6 +2333,8 @@ model PremisesWaterSourcesHistory {
   userId    Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesWaterTreatmentType {
@@ -2335,6 +2364,8 @@ model PremisesWaterTreatmentTypeHistory {
   userId    Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesWaterSupply {
@@ -2360,9 +2391,11 @@ model PremisesWaterSupplyHistory {
   deleted           Int?     @default(0)
   createdAt         DateTime @default(now())
 
-  updatedAt DateTime @updatedAt
-  userId    Int
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesWaterStorage {
@@ -2387,10 +2420,12 @@ model PremisesWaterStorageHistory {
   waterStorageTypeId Int
   deleted            Int?   @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    Int
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesUnsafeWaterStorage {
@@ -2416,12 +2451,14 @@ model PremisesUnsafeWaterStorageHistory {
   waterSectionId String @db.VarChar(255)
   deleted        Int?   @default(0)
 
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-  userId               Int
-  waterStorageTypeId   Int?
-  unsafeWaterStorageId Int
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
+  waterStorageTypeId     Int?
+  unsafeWaterStorageId   Int
   // InspectionHistory    InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesCommunalContainerCondition {
@@ -2450,6 +2487,8 @@ model PremisesCommunalContainerConditionHistory {
   userId                       Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesDrinkingWaterSources {
@@ -2480,6 +2519,8 @@ model PremisesDrinkingWaterSourcesHistory {
   userId    Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesToiletType {
@@ -2510,6 +2551,8 @@ model PremisesToiletTypeHistory {
   userId               Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesEffluentManagement {
@@ -2535,11 +2578,13 @@ model PremisesEffluentManagementHistory {
   effluentManagementId Int
   liquidWasteSectionId String @db.VarChar(255)
 
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    Int
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesExcretaDisposalMethod {
@@ -2570,6 +2615,8 @@ model PremisesExcretaDisposalMethodHistory {
   userId                  Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesExcretaContainment {
@@ -2593,12 +2640,14 @@ model PremisesExcretaContainmentHistory {
   inspectionId         String @db.VarChar(255)
   liquidWasteSectionId String @db.VarChar(255)
 
-  deleted              Int?     @default(0)
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-  excretaContainmentId Int
-  userId               Int
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  excretaContainmentId   Int
+  userId                 Int
   // InspectionHistory    InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesGreyWaterDisposal {
@@ -2629,6 +2678,8 @@ model PremisesGreyWaterDisposalHistory {
   userId              Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesWasteReceptacle {
@@ -2651,12 +2702,14 @@ model PremisesWasteReceptacleHistory {
   inspectionId           String @db.VarChar(255)
   solidWasteReceptacleId Int
 
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  solidWasteSectionId String   @db.VarChar(255)
-  userId              Int
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  solidWasteSectionId    String             @db.VarChar(255)
+  userId                 Int
   // InspectionHistory   InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 // model PremisesWasteCollection {
@@ -2686,14 +2739,16 @@ model PremisesPestSigns {
 }
 
 model PremisesPestSignsHistory {
-  id           String   @id @db.VarChar(255)
-  pestSignId   Int
-  deleted      Int?     @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  userId       Int
-  inspectionId String   @db.VarChar(255)
+  id                     String             @id @db.VarChar(255)
+  pestSignId             Int
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
+  inspectionId           String             @db.VarChar(255)
   // InspectionHistory InspectionHistory? @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesAnimal {
@@ -2718,10 +2773,12 @@ model PremisesAnimalHistory {
   residentialPremisesInfoSectionId String @db.VarChar(255)
   deleted                          Int?   @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    Int
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+  InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesDrainType {
@@ -2751,6 +2808,8 @@ model PremisesDrainTypeHistory {
   userId    Int
 
   //InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesDrainBadCondition {
@@ -2775,10 +2834,12 @@ model PremisesDrainBadConditionHistory {
   deleted              Int?   @default(0)
   drainBadConditionId  Int
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    Int
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesHazardousWasteDisposal {
@@ -2808,6 +2869,8 @@ model PremisesHazardousWasteDisposalHistory {
   userId    Int
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesActionTaken {
@@ -2826,14 +2889,16 @@ model PremisesActionTaken {
 }
 
 model PremisesActionTakenHistory {
-  id                  String   @id @db.VarChar(255)
-  inspectionId        String   @db.VarChar(255)
-  actionId            Int
-  conclusionSectionId String?  @db.VarChar(255)
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  userId              Int
+  id                     String             @id @db.VarChar(255)
+  inspectionId           String             @db.VarChar(255)
+  actionId               Int
+  conclusionSectionId    String?            @db.VarChar(255)
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  userId                 Int
+   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model PremisesNuisanceDetected {
@@ -2852,14 +2917,16 @@ model PremisesNuisanceDetected {
 }
 
 model PremisesNuisanceDetectedHistory {
-  id                  String   @id @db.VarChar(255)
-  inspectionId        String   @db.VarChar(255)
-  deleted             Int?     @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  conclusionSectionId String   @db.VarChar(255)
-  nuisanceId          Int
-  userId              Int
+  id                     String             @id @db.VarChar(255)
+  inspectionId           String             @db.VarChar(255)
+  deleted                Int?               @default(0)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  conclusionSectionId    String             @db.VarChar(255)
+  nuisanceId             Int
+  userId                 Int
+ InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])
+  historyId Int
 }
 
 model FollowupPremisesActionTaken {

@@ -97,6 +97,9 @@ const put = async (req, res) => {
         where: { inspectionId },
       });
 
+
+/////////////////Create History///////////////////
+
     await prisma.inspectionHistory.create({ data: inspection });
     await prisma.basicInfoSectionHistory.create({ data: basicInfoSection });
     await prisma.licencePermitSectionHistory.create({

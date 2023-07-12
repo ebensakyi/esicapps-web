@@ -158,7 +158,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div className="app-menu navbar-menu">
+      <div className="app-menu navbar-menu"y>
         <div className="navbar-brand-box">
           <a href="/dashboard" className="logo logo-dark">
             <span className="logo-sm">
