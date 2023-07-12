@@ -19,7 +19,7 @@ const post = async (req, res) => {
       }
   
       return  res.status(500).json({ statusCode: 0, message: "Data skipped" });  } catch (error) {
-    // console.log("Error: " + error);
+     console.log("Error: " + error);
     // if (error.code === "P2002")
     //   return res
     //     .status(400)

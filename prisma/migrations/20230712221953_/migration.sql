@@ -844,6 +844,7 @@ CREATE TABLE "BasicInfoSection" (
 
 -- CreateTable
 CREATE TABLE "BasicInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -864,7 +865,7 @@ CREATE TABLE "BasicInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "BasicInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "BasicInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -893,6 +894,7 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "ResidentialPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainsAvailabilityId" INTEGER NOT NULL,
@@ -913,7 +915,7 @@ CREATE TABLE "ResidentialPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "ResidentialPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ResidentialPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -951,6 +953,7 @@ CREATE TABLE "EateryPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "EateryPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -980,7 +983,7 @@ CREATE TABLE "EateryPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "EateryPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EateryPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1016,6 +1019,7 @@ CREATE TABLE "HealthPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "HealthPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -1043,7 +1047,7 @@ CREATE TABLE "HealthPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "HealthPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "HealthPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1080,6 +1084,7 @@ CREATE TABLE "HospitalityPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "HospitalityPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -1108,7 +1113,7 @@ CREATE TABLE "HospitalityPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "HospitalityPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "HospitalityPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1165,6 +1170,7 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "SanitaryPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -1213,7 +1219,7 @@ CREATE TABLE "SanitaryPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "SanitaryPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "SanitaryPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1255,6 +1261,7 @@ CREATE TABLE "MarketPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "MarketPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -1288,7 +1295,7 @@ CREATE TABLE "MarketPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "MarketPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "MarketPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1355,6 +1362,7 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "InstitutionPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -1413,7 +1421,7 @@ CREATE TABLE "InstitutionPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "InstitutionPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "InstitutionPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1452,6 +1460,7 @@ CREATE TABLE "IndustryPremisesInfoSection" (
 
 -- CreateTable
 CREATE TABLE "IndustryPremisesInfoSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "facilityName" VARCHAR(255) NOT NULL,
@@ -1482,7 +1491,7 @@ CREATE TABLE "IndustryPremisesInfoSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "IndustryPremisesInfoSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "IndustryPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1513,6 +1522,7 @@ CREATE TABLE "LicencePermitSection" (
 
 -- CreateTable
 CREATE TABLE "LicencePermitSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1535,7 +1545,7 @@ CREATE TABLE "LicencePermitSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "LicencePermitSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "LicencePermitSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1557,6 +1567,7 @@ CREATE TABLE "WaterSection" (
 
 -- CreateTable
 CREATE TABLE "WaterSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1570,7 +1581,7 @@ CREATE TABLE "WaterSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "WaterSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "WaterSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1622,6 +1633,7 @@ CREATE TABLE "LiquidWasteSection" (
 
 -- CreateTable
 CREATE TABLE "LiquidWasteSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1665,7 +1677,7 @@ CREATE TABLE "LiquidWasteSectionHistory" (
     "excretaDisposalMethodId" INTEGER,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "LiquidWasteSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "LiquidWasteSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1699,6 +1711,7 @@ CREATE TABLE "SolidWasteSection" (
 
 -- CreateTable
 CREATE TABLE "SolidWasteSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1724,7 +1737,7 @@ CREATE TABLE "SolidWasteSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "SolidWasteSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "SolidWasteSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1745,6 +1758,7 @@ CREATE TABLE "ConclusionSection" (
 
 -- CreateTable
 CREATE TABLE "ConclusionSectionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1757,7 +1771,7 @@ CREATE TABLE "ConclusionSectionHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "ConclusionSectionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ConclusionSectionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1776,6 +1790,7 @@ CREATE TABLE "PremisesWaterSources" (
 
 -- CreateTable
 CREATE TABLE "PremisesWaterSourcesHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
@@ -1786,7 +1801,7 @@ CREATE TABLE "PremisesWaterSourcesHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesWaterSourcesHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesWaterSourcesHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1805,6 +1820,7 @@ CREATE TABLE "PremisesWaterTreatmentType" (
 
 -- CreateTable
 CREATE TABLE "PremisesWaterTreatmentTypeHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
@@ -1815,7 +1831,7 @@ CREATE TABLE "PremisesWaterTreatmentTypeHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesWaterTreatmentTypeHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesWaterTreatmentTypeHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1834,6 +1850,7 @@ CREATE TABLE "PremisesWaterSupply" (
 
 -- CreateTable
 CREATE TABLE "PremisesWaterSupplyHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
@@ -1844,7 +1861,7 @@ CREATE TABLE "PremisesWaterSupplyHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesWaterSupplyHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesWaterSupplyHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1863,6 +1880,7 @@ CREATE TABLE "PremisesWaterStorage" (
 
 -- CreateTable
 CREATE TABLE "PremisesWaterStorageHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
@@ -1873,7 +1891,7 @@ CREATE TABLE "PremisesWaterStorageHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesWaterStorageHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesWaterStorageHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1893,6 +1911,7 @@ CREATE TABLE "PremisesUnsafeWaterStorage" (
 
 -- CreateTable
 CREATE TABLE "PremisesUnsafeWaterStorageHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
@@ -1904,7 +1923,7 @@ CREATE TABLE "PremisesUnsafeWaterStorageHistory" (
     "unsafeWaterStorageId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesUnsafeWaterStorageHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesUnsafeWaterStorageHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1923,6 +1942,7 @@ CREATE TABLE "PremisesCommunalContainerCondition" (
 
 -- CreateTable
 CREATE TABLE "PremisesCommunalContainerConditionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -1933,7 +1953,7 @@ CREATE TABLE "PremisesCommunalContainerConditionHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesCommunalContainerConditionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesCommunalContainerConditionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1952,6 +1972,7 @@ CREATE TABLE "PremisesDrinkingWaterSources" (
 
 -- CreateTable
 CREATE TABLE "PremisesDrinkingWaterSourcesHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "waterSectionId" VARCHAR(255) NOT NULL,
@@ -1962,7 +1983,7 @@ CREATE TABLE "PremisesDrinkingWaterSourcesHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesDrinkingWaterSourcesHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesDrinkingWaterSourcesHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -1981,6 +2002,7 @@ CREATE TABLE "PremisesToiletType" (
 
 -- CreateTable
 CREATE TABLE "PremisesToiletTypeHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -1991,7 +2013,7 @@ CREATE TABLE "PremisesToiletTypeHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesToiletTypeHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesToiletTypeHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2010,6 +2032,7 @@ CREATE TABLE "PremisesEffluentManagement" (
 
 -- CreateTable
 CREATE TABLE "PremisesEffluentManagementHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "effluentManagementId" INTEGER NOT NULL,
@@ -2020,7 +2043,7 @@ CREATE TABLE "PremisesEffluentManagementHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesEffluentManagementHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesEffluentManagementHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2039,6 +2062,7 @@ CREATE TABLE "PremisesExcretaDisposalMethod" (
 
 -- CreateTable
 CREATE TABLE "PremisesExcretaDisposalMethodHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
@@ -2049,7 +2073,7 @@ CREATE TABLE "PremisesExcretaDisposalMethodHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesExcretaDisposalMethodHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesExcretaDisposalMethodHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2068,6 +2092,7 @@ CREATE TABLE "PremisesExcretaContainment" (
 
 -- CreateTable
 CREATE TABLE "PremisesExcretaContainmentHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
@@ -2078,7 +2103,7 @@ CREATE TABLE "PremisesExcretaContainmentHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesExcretaContainmentHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesExcretaContainmentHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2097,6 +2122,7 @@ CREATE TABLE "PremisesGreyWaterDisposal" (
 
 -- CreateTable
 CREATE TABLE "PremisesGreyWaterDisposalHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
@@ -2107,7 +2133,7 @@ CREATE TABLE "PremisesGreyWaterDisposalHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesGreyWaterDisposalHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesGreyWaterDisposalHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2126,6 +2152,7 @@ CREATE TABLE "PremisesWasteReceptacle" (
 
 -- CreateTable
 CREATE TABLE "PremisesWasteReceptacleHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "solidWasteReceptacleId" INTEGER NOT NULL,
@@ -2136,7 +2163,7 @@ CREATE TABLE "PremisesWasteReceptacleHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesWasteReceptacleHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesWasteReceptacleHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2154,6 +2181,7 @@ CREATE TABLE "PremisesPestSigns" (
 
 -- CreateTable
 CREATE TABLE "PremisesPestSignsHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "pestSignId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -2163,7 +2191,7 @@ CREATE TABLE "PremisesPestSignsHistory" (
     "inspectionId" VARCHAR(255) NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesPestSignsHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesPestSignsHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2182,6 +2210,7 @@ CREATE TABLE "PremisesAnimal" (
 
 -- CreateTable
 CREATE TABLE "PremisesAnimalHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "animalTypeId" INTEGER NOT NULL,
@@ -2192,7 +2221,7 @@ CREATE TABLE "PremisesAnimalHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesAnimalHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesAnimalHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2211,6 +2240,7 @@ CREATE TABLE "PremisesDrainType" (
 
 -- CreateTable
 CREATE TABLE "PremisesDrainTypeHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "drainTypeId" INTEGER NOT NULL,
@@ -2221,7 +2251,7 @@ CREATE TABLE "PremisesDrainTypeHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesDrainTypeHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesDrainTypeHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2240,6 +2270,7 @@ CREATE TABLE "PremisesDrainBadCondition" (
 
 -- CreateTable
 CREATE TABLE "PremisesDrainBadConditionHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
@@ -2250,7 +2281,7 @@ CREATE TABLE "PremisesDrainBadConditionHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesDrainBadConditionHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesDrainBadConditionHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2269,6 +2300,7 @@ CREATE TABLE "PremisesHazardousWasteDisposal" (
 
 -- CreateTable
 CREATE TABLE "PremisesHazardousWasteDisposalHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "hazardousWasteDisposalMethodId" INTEGER NOT NULL,
@@ -2279,7 +2311,7 @@ CREATE TABLE "PremisesHazardousWasteDisposalHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesHazardousWasteDisposalHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesHazardousWasteDisposalHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2298,6 +2330,7 @@ CREATE TABLE "PremisesActionTaken" (
 
 -- CreateTable
 CREATE TABLE "PremisesActionTakenHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "actionId" INTEGER NOT NULL,
@@ -2308,7 +2341,7 @@ CREATE TABLE "PremisesActionTakenHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesActionTakenHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesActionTakenHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
@@ -2327,6 +2360,7 @@ CREATE TABLE "PremisesNuisanceDetected" (
 
 -- CreateTable
 CREATE TABLE "PremisesNuisanceDetectedHistory" (
+    "newId" SERIAL NOT NULL,
     "id" VARCHAR(255) NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
@@ -2337,7 +2371,7 @@ CREATE TABLE "PremisesNuisanceDetectedHistory" (
     "userId" INTEGER NOT NULL,
     "historyId" INTEGER NOT NULL,
 
-    CONSTRAINT "PremisesNuisanceDetectedHistory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PremisesNuisanceDetectedHistory_pkey" PRIMARY KEY ("newId")
 );
 
 -- CreateTable
