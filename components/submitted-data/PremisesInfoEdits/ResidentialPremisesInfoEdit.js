@@ -26,18 +26,18 @@ const ResidentialPremisesInfoEdit = ({ data }) => {
 
 useEffect(() => {
   setToiletAvailability(
-    data?.submittedData?.ResidentialPremisesInfoSection?.toiletAvailability?.id
+    data?.ResidentialPremisesInfoSection?.toiletAvailability?.id
   );
-setBathroomAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.bathroomAvailability?.id)
-setDrainAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.drainsAvailability?.id)
-setHandWashingAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability?.id)
-setHouseHoldNumber(data?.submittedData?.ResidentialPremisesInfoSection?.householdNumber)
-setMaleNumber(data?.submittedData?.ResidentialPremisesInfoSection?.maleOccupantNumber)
-setFemaleNumber(data?.submittedData?.ResidentialPremisesInfoSection?.femaleOccupantNumber)
-setAnimalAvailability( data?.submittedData?.ResidentialPremisesInfoSection?.animalAvailability?.id) 
-setAnimalNumber(data?.submittedData?.ResidentialPremisesInfoSection?.animalNumber)
-setVaccinationProof( data?.submittedData?.ResidentialPremisesInfoSection?.vaccinationProof?.id)
-setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.animalSpaceCondition?.id)
+setBathroomAvailability( data?.ResidentialPremisesInfoSection?.bathroomAvailability?.id)
+setDrainAvailability( data?.ResidentialPremisesInfoSection?.drainsAvailability?.id)
+setHandWashingAvailability( data?.ResidentialPremisesInfoSection?.approvedHandwashingFacilityAvailability?.id)
+setHouseHoldNumber(data?.ResidentialPremisesInfoSection?.householdNumber)
+setMaleNumber(data?.ResidentialPremisesInfoSection?.maleOccupantNumber)
+setFemaleNumber(data?.ResidentialPremisesInfoSection?.femaleOccupantNumber)
+setAnimalAvailability( data?.ResidentialPremisesInfoSection?.animalAvailability?.id) 
+setAnimalNumber(data?.ResidentialPremisesInfoSection?.animalNumber)
+setVaccinationProof( data?.ResidentialPremisesInfoSection?.vaccinationProof?.id)
+setAnimalSpaceCondition( data?.ResidentialPremisesInfoSection?.animalSpaceCondition?.id)
 },[])
   return (
     <>
@@ -57,7 +57,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.toiletAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -82,7 +82,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.ResidentialPremisesInfoSection
+                            data?.ResidentialPremisesInfoSection
                               .toiletAvailability.name
                           }
                           readOnly="readOnly"
@@ -91,7 +91,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {/* {data?.submittedData?.ResidentialPremisesInfoSection != null ? (
+                    {/* {data?.ResidentialPremisesInfoSection != null ? (
                        <div className="col-lg-3 col-sm-6">
                          <label htmlFor="invoicenoInput">
                            Urinal facility availabilty
@@ -101,7 +101,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                            className="form-control bg-light border-0"
                            id="invoicenoInput"
                            value={
-                             data?.submittedData?.ResidentialPremisesInfoSection?.urinalAvailability?.name
+                             data?.ResidentialPremisesInfoSection?.urinalAvailability?.name
                            }
                            readOnly="readOnly"
                          />
@@ -109,7 +109,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                      ) : (
                        <></>
                      )} */}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.bathroomAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -134,7 +134,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.ResidentialPremisesInfoSection
+                            data?.ResidentialPremisesInfoSection
                               .bathroomAvailability.name
                           }
                           readOnly="readOnly"
@@ -143,7 +143,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.drainsAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -168,7 +168,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.submittedData?.ResidentialPremisesInfoSection
+                                   data?.ResidentialPremisesInfoSection
                                      ?.drainsAvailability?.name
                                  }
                                  readOnly="readOnly"
@@ -177,7 +177,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -202,7 +202,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.submittedData?.ResidentialPremisesInfoSection
+                                   data?.ResidentialPremisesInfoSection
                                      ?.approvedHandwashingFacilityAvailability
                                      ?.name
                                  }
@@ -212,7 +212,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.householdNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -225,7 +225,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                           value={householdNumber}
                           onChange={(e) => setHouseHoldNumber(e.target.value)}
                           //  value={
-                          //    data?.submittedData?.ResidentialPremisesInfoSection
+                          //    data?.ResidentialPremisesInfoSection
                           //      ?.householdNumber
                           //  }
                         />
@@ -233,7 +233,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.maleOccupantNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -246,7 +246,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                           value={maleNumber}
                           onChange={(e) => setMaleNumber(e.target.value)}
                           //  value={
-                          //    data?.submittedData?.ResidentialPremisesInfoSection
+                          //    data?.ResidentialPremisesInfoSection
                           //      ?.maleOccupantNumber
                           //  }
                         />
@@ -254,7 +254,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.femaleOccupantNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -267,7 +267,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                           value={femaleNumber}
                           onChange={(e) => setFemaleNumber(e.target.value)}
                           //  value={
-                          //    data?.submittedData?.ResidentialPremisesInfoSection
+                          //    data?.ResidentialPremisesInfoSection
                           //      ?.femaleOccupantNumber
                           //  }
                         />
@@ -275,7 +275,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.animalAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -301,7 +301,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.animalNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
@@ -312,7 +312,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                           value={animalNumber}
                           onChange={(e) => setAnimalNumber(e.target.value)}
                           //  value={
-                          //    data?.submittedData?.ResidentialPremisesInfoSection
+                          //    data?.ResidentialPremisesInfoSection
                           //      ?.animalNumber
                           //  }
                         />
@@ -321,11 +321,11 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                       <></>
                     )}
 
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.PremisesAnimal?.length != 0 ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animals</label>
-                        {data?.submittedData?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
+                        {data?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
                           (x) => (
                             <select
                               className="form-control"
@@ -365,7 +365,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                       <></>
                     )}
 
-                    {data?.submittedData?.ResidentialPremisesInfoSection
+                    {data?.ResidentialPremisesInfoSection
                       ?.vaccinationProof != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -390,7 +390,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                                  className="form-control bg-light border-0"
                                  id="invoicenoInput"
                                  value={
-                                   data?.submittedData?.ResidentialPremisesInfoSection
+                                   data?.ResidentialPremisesInfoSection
                                      ?.vaccinationProof?.name
                                  }
                                  readOnly="readOnly"
@@ -400,7 +400,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                       <></>
                     )}
                   </div>
-                  {data?.submittedData?.ResidentialPremisesInfoSection
+                  {data?.ResidentialPremisesInfoSection
                     ?.animalSpaceCondition != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -425,7 +425,7 @@ setAnimalSpaceCondition( data?.submittedData?.ResidentialPremisesInfoSection?.an
                                className="form-control bg-light border-0"
                                id="invoicenoInput"
                                value={
-                                 data?.submittedData?.ResidentialPremisesInfoSection
+                                 data?.ResidentialPremisesInfoSection
                                    ?.animalSpaceCondition.name
                                }
                                readOnly="readOnly"

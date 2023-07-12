@@ -28,7 +28,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.physicalStructureType
+                    {data?.SanitaryPremisesInfoSection?.physicalStructureType
                       ?.name != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -39,7 +39,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
                           readOnly="readOnly"
@@ -49,7 +49,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.sanitaryPremisesType
+                    {data?.SanitaryPremisesInfoSection?.sanitaryPremisesType
                       ?.name != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Subtype</label>
@@ -58,7 +58,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.sanitaryPremisesSubtypeId
                           }
                           readOnly="readOnly"
@@ -68,7 +68,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.SanitaryPremisesInfoSection
+                    {data?.SanitaryPremisesInfoSection
                       ?.sanitaryPremisesTypeId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises type</label>
@@ -77,7 +77,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.sanitaryPremisesType.name
                           }
                           readOnly="readOnly"
@@ -87,7 +87,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.staffChangingRoomId !=
+                    {data?.SanitaryPremisesInfoSection?.staffChangingRoomId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -98,7 +98,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection?.staffChangingRoom
+                            data?.SanitaryPremisesInfoSection?.staffChangingRoom
                               ?.name
                           }
                           readOnly="readOnly"
@@ -108,7 +108,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.ownershipTypeId !=
+                    {data?.SanitaryPremisesInfoSection?.ownershipTypeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Ownership Type</label>
@@ -117,7 +117,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection?.ownershipType
+                            data?.SanitaryPremisesInfoSection?.ownershipType
                               .name
                           }
                           readOnly="readOnly"
@@ -127,7 +127,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.sanitaryFacilityMgtId !=
+                    {data?.SanitaryPremisesInfoSection?.sanitaryFacilityMgtId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -138,7 +138,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.sanitaryFacilityMgt?.name
                           }
                           readOnly="readOnly"
@@ -151,7 +151,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
 
 
 
-{data?.submittedData?.SanitaryPremisesInfoSection?.disinfectionFrequencyId !=
+{data?.SanitaryPremisesInfoSection?.disinfectionFrequencyId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -162,7 +162,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.disinfectionFrequency.name
                           }
                           readOnly="readOnly"
@@ -171,7 +171,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.disinfestationQuarterlyId !=
+                     {data?.SanitaryPremisesInfoSection?.disinfestationQuarterlyId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -182,7 +182,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.disinfestationQuarterly.name
                           }
                           readOnly="readOnly"
@@ -191,7 +191,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.protectiveClothingUsedId !=
+                     {data?.SanitaryPremisesInfoSection?.protectiveClothingUsedId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -202,7 +202,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.protectiveClothing.name
                           }
                           readOnly="readOnly"
@@ -211,7 +211,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.slaughterAreaAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.slaughterAreaAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -222,7 +222,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.slaughterAreaAvailability.name
                           }
                           readOnly="readOnly"
@@ -231,7 +231,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.storeRoomAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.storeRoomAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -242,7 +242,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.storeRoomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -251,7 +251,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.condemnationRoomAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.condemnationRoomAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -262,7 +262,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.condemnationRoomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -271,7 +271,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.cloakRoomAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.cloakRoomAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -282,7 +282,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.cloakRoomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -291,7 +291,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.comfortRoomAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.comfortRoomAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -302,7 +302,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.comfortRoomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -311,7 +311,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.wheelbathAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.wheelbathAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -322,7 +322,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.wheelbathAvailability.name
                           }
                           readOnly="readOnly"
@@ -331,7 +331,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.footbathAvailabilityId !=
+                     {data?.SanitaryPremisesInfoSection?.footbathAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -342,7 +342,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.footbathAvailability?.name
                           }
                           readOnly="readOnly"
@@ -351,7 +351,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.leachateMgtId !=
+                     {data?.SanitaryPremisesInfoSection?.leachateMgtId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -362,7 +362,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.leachateMgt?.name
                           }
                           readOnly="readOnly"
@@ -373,7 +373,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     )}
 
 
-{data?.submittedData?.SanitaryPremisesInfoSection?.safeHazardousWasteMgtId !=
+{data?.SanitaryPremisesInfoSection?.safeHazardousWasteMgtId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -384,7 +384,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.safeHazardousWasteMgt?.name
                           }
                           readOnly="readOnly"
@@ -393,7 +393,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.sextonManagementId !=
+                     {data?.SanitaryPremisesInfoSection?.sextonManagementId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -404,7 +404,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.sextonManagement.name
                           }
                           readOnly="readOnly"
@@ -413,7 +413,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.sextonOfficeId !=
+                     {data?.SanitaryPremisesInfoSection?.sextonOfficeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -424,7 +424,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.sextonOffice?.name
                           }
                           readOnly="readOnly"
@@ -433,7 +433,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.properLayoutId !=
+                     {data?.SanitaryPremisesInfoSection?.properLayoutId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -444,7 +444,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.properLayout?.name
                           }
                           readOnly="readOnly"
@@ -453,7 +453,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.cremationPracticedId !=
+                     {data?.SanitaryPremisesInfoSection?.cremationPracticedId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -464,7 +464,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.cremationPracticed?.name
                           }
                           readOnly="readOnly"
@@ -476,7 +476,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
 
 
 
-{data?.submittedData?.SanitaryPremisesInfoSection?.workersOfficeAvailabilityId !=
+{data?.SanitaryPremisesInfoSection?.workersOfficeAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -487,7 +487,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.workersOfficeAvailability?.name
                           }
                           readOnly="readOnly"
@@ -496,7 +496,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.transferStationCapacity !=
+                     {data?.SanitaryPremisesInfoSection?.transferStationCapacity !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -507,7 +507,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.transferStationCapacity
                           }
                           readOnly="readOnly"
@@ -516,7 +516,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.numberContainer !=
+                     {data?.SanitaryPremisesInfoSection?.numberContainer !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -527,7 +527,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.numberContainer
                           }
                           readOnly="readOnly"
@@ -536,7 +536,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.containerAttendantName !=
+                     {data?.SanitaryPremisesInfoSection?.containerAttendantName !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -547,7 +547,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.containerAttendantName
                           }
                           readOnly="readOnly"
@@ -556,7 +556,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.containerAttendantPhoneNumber !=
+                     {data?.SanitaryPremisesInfoSection?.containerAttendantPhoneNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -567,7 +567,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.containerAttendantPhoneNumber
                           }
                           readOnly="readOnly"
@@ -576,7 +576,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                     {data?.submittedData?.SanitaryPremisesInfoSection?.numberWorkers !=
+                     {data?.SanitaryPremisesInfoSection?.numberWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -587,7 +587,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.numberWorkers
                           }
                           readOnly="readOnly"
@@ -597,7 +597,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-{data?.submittedData?.SanitaryPremisesInfoSection?.cremationPlatformId !=
+{data?.SanitaryPremisesInfoSection?.cremationPlatformId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -608,7 +608,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.cremationPlatform?.name
                           }
                           readOnly="readOnly"
@@ -617,7 +617,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                      {data?.submittedData?.SanitaryPremisesInfoSection?.sanitaryAshesDisposalId !=
+                      {data?.SanitaryPremisesInfoSection?.sanitaryAshesDisposalId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -628,7 +628,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.sanitaryAshesDisposal?.name
                           }
                           readOnly="readOnly"
@@ -637,7 +637,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                      {data?.submittedData?.SanitaryPremisesInfoSection?.numberCarcassHandlers !=
+                      {data?.SanitaryPremisesInfoSection?.numberCarcassHandlers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -648,7 +648,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.numberCarcassHandlers
                           }
                           readOnly="readOnly"
@@ -657,7 +657,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                      {data?.submittedData?.SanitaryPremisesInfoSection?.numberCarcassHandlersMedicalCert !=
+                      {data?.SanitaryPremisesInfoSection?.numberCarcassHandlersMedicalCert !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -668,7 +668,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.numberCarcassHandlersMedicalCert
                           }
                           readOnly="readOnly"
@@ -685,7 +685,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
 
 
 
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.toiletAvailability !=
+                    {data?.SanitaryPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -696,7 +696,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.toiletAvailability?.name
                           }
                           readOnly="readOnly"
@@ -705,7 +705,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.urinalAvailability !=
+                    {data?.SanitaryPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -716,7 +716,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
@@ -725,7 +725,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.bathroomAvailability !=
+                    {data?.SanitaryPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -736,7 +736,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -745,7 +745,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.drainsAvailability !=
+                    {data?.SanitaryPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -756,7 +756,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
@@ -765,7 +765,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection
+                    {data?.SanitaryPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -776,7 +776,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailability?.name
                           }
                           readOnly="readOnly"
@@ -785,7 +785,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.householdNumber !=
+                    {data?.SanitaryPremisesInfoSection?.householdNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -796,7 +796,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection?.householdNumber
+                            data?.SanitaryPremisesInfoSection?.householdNumber
                           }
                           readOnly="readOnly"
                         />
@@ -804,7 +804,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.maleOccupantNumber !=
+                    {data?.SanitaryPremisesInfoSection?.maleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -815,7 +815,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.maleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -824,7 +824,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.femaleOccupantNumber !=
+                    {data?.SanitaryPremisesInfoSection?.femaleOccupantNumber !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -835,7 +835,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.femaleOccupantNumber
                           }
                           readOnly="readOnly"
@@ -844,7 +844,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.animalAvailability !=
+                    {data?.SanitaryPremisesInfoSection?.animalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -855,7 +855,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection
+                            data?.SanitaryPremisesInfoSection
                               ?.animalAvailability?.name
                           }
                           readOnly="readOnly"
@@ -864,7 +864,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.animalNumber != null ? (
+                    {data?.SanitaryPremisesInfoSection?.animalNumber != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Animal number</label>
                         <input
@@ -872,7 +872,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection?.animalNumber
+                            data?.SanitaryPremisesInfoSection?.animalNumber
                           }
                           readOnly="readOnly"
                         />
@@ -882,7 +882,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                     )}
 
                    
-                    {data?.submittedData?.SanitaryPremisesInfoSection?.siteFencedId !=
+                    {data?.SanitaryPremisesInfoSection?.siteFencedId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -893,7 +893,7 @@ const SanitaryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.SanitaryPremisesInfoSection?.siteFenced
+                            data?.SanitaryPremisesInfoSection?.siteFenced
                               .name
                           }
                           readOnly="readOnly"

@@ -28,7 +28,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                  {data?.submittedData?.HospitalityPremisesInfoSection?.facilityName !=
+                  {data?.HospitalityPremisesInfoSection?.facilityName !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Facility Name</label>
@@ -37,7 +37,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HospitalityPremisesInfoSection?.facilityName
+                            data?.HospitalityPremisesInfoSection?.facilityName
                           }
                           readOnly="readOnly"
                         />
@@ -45,7 +45,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}{" "}
-                    {data?.submittedData?.HealthPremisesInfoSection
+                    {data?.HealthPremisesInfoSection
                       ?.healthPremisesType != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Type</label>
@@ -54,7 +54,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.healthPremisesType?.name
                           }
                           readOnly="readOnly"
@@ -64,7 +64,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
                   
-  {data?.submittedData?.HealthPremisesInfoSection?.physicalStructureTypeId
+  {data?.HealthPremisesInfoSection?.physicalStructureTypeId
                        != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -75,7 +75,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.physicalStructureType.name
                           }
                           readOnly="readOnly"
@@ -85,7 +85,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.toiletAvailability !=
+                    {data?.HealthPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -96,7 +96,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection?.toiletAvailability
+                            data?.HealthPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -105,7 +105,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.HealthPremisesInfoSection?.urinalAvailability !=
+                    {data?.HealthPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -116,7 +116,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection?.urinalAvailability
+                            data?.HealthPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -125,7 +125,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.HealthPremisesInfoSection?.bathroomAvailability !=
+                    {data?.HealthPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -136,7 +136,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -145,7 +145,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.HealthPremisesInfoSection?.drainsAvailability !=
+                    {data?.HealthPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -156,7 +156,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection?.drainsAvailability
+                            data?.HealthPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -165,7 +165,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.HealthPremisesInfoSection
+                    {data?.HealthPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailability != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -176,7 +176,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailability?.name
                           }
                           readOnly="readOnly"
@@ -186,7 +186,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.ehoAvailability !=
+                    {data?.HealthPremisesInfoSection?.ehoAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">EHO availabilty</label>
@@ -195,7 +195,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection?.ehoAvailability
+                            data?.HealthPremisesInfoSection?.ehoAvailability
                               ?.name
                           }
                           readOnly="readOnly"
@@ -204,7 +204,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.HealthPremisesInfoSection?.incineratorAvailability !=
+                    {data?.HealthPremisesInfoSection?.incineratorAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -215,7 +215,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.incineratorAvailability?.name
                           }
                           readOnly="readOnly"
@@ -225,7 +225,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.placentaPitAvailability !=
+                    {data?.HealthPremisesInfoSection?.placentaPitAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -236,7 +236,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.placentaPitAvailability?.name
                           }
                           readOnly="readOnly"
@@ -258,7 +258,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
 
 
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.healthPremisesTypeId !=
+                    {data?.HealthPremisesInfoSection?.healthPremisesTypeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -269,7 +269,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.healthPremisesType?.name
                           }
                           readOnly="readOnly"
@@ -279,7 +279,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.separateWardId !=
+                    {data?.HealthPremisesInfoSection?.separateWardId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -290,7 +290,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.separateWard?.name
                           }
                           readOnly="readOnly"
@@ -300,7 +300,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.ownershipTypeId !=
+                    {data?.HealthPremisesInfoSection?.ownershipTypeId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -311,7 +311,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.ownershipType?.name
                           }
                           readOnly="readOnly"
@@ -321,7 +321,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.embalmingAreaConditionId !=
+                    {data?.HealthPremisesInfoSection?.embalmingAreaConditionId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -332,7 +332,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.embalmingAreaCondition?.name
                           }
                           readOnly="readOnly"
@@ -342,7 +342,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.embalmingAreaAvailabilityId !=
+                    {data?.HealthPremisesInfoSection?.embalmingAreaAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -353,7 +353,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.embalmingAreaAvailability?.name
                           }
                           readOnly="readOnly"
@@ -363,7 +363,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.bodyTraysAdequateId !=
+                    {data?.HealthPremisesInfoSection?.bodyTraysAdequateId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -374,7 +374,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.bodyTraysAdequate?.name
                           }
                           readOnly="readOnly"
@@ -384,7 +384,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.coldRoomAvailabilityId !=
+                    {data?.HealthPremisesInfoSection?.coldRoomAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -395,7 +395,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.coldRoomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -405,7 +405,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                       <></>
                     )}
 
-                    {data?.submittedData?.HealthPremisesInfoSection?.coldRoomConditionId !=
+                    {data?.HealthPremisesInfoSection?.coldRoomConditionId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -416,7 +416,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.coldRoomCondition?.name
                           }
                           readOnly="readOnly"
@@ -427,7 +427,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                     )}
 
 
-{data?.submittedData?.HealthPremisesInfoSection?.numberWards !=
+{data?.HealthPremisesInfoSection?.numberWards !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -438,7 +438,7 @@ const HealthPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.HealthPremisesInfoSection
+                            data?.HealthPremisesInfoSection
                               ?.numberWards
                           }
                           readOnly="readOnly"

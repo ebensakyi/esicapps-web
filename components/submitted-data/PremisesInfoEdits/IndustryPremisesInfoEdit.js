@@ -26,7 +26,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.submittedData?.IndustryPremisesInfoSection?.facilityName != null ? (
+                    {data?.IndustryPremisesInfoSection?.facilityName != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Facility Name</label>
                         <input
@@ -34,14 +34,14 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection?.facilityName
+                            data?.IndustryPremisesInfoSection?.facilityName
                           }
                           readOnly="readOnly"
                         />
                       </div>
                     ) : (
                       <></>
-                    )} {data?.submittedData?.IndustryPremisesInfoSection
+                    )} {data?.IndustryPremisesInfoSection
                       ?.industryPremisesTypeId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Type</label>
@@ -50,7 +50,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.Type?.name
                           }
                           readOnly="readOnly"
@@ -59,7 +59,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.industryPremisesSubtypeId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -70,7 +70,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.Subtype?.name
                           }
                           readOnly="readOnly"
@@ -79,7 +79,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection?.toiletAvailability !=
+                    {data?.IndustryPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -90,7 +90,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.toiletAvailability?.name
                           }
                           readOnly="readOnly"
@@ -99,7 +99,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection?.urinalAvailability !=
+                    {data?.IndustryPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -110,7 +110,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.urinalAvailability?.name
                           }
                           readOnly="readOnly"
@@ -119,7 +119,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection?.bathroomAvailability !=
+                    {data?.IndustryPremisesInfoSection?.bathroomAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -130,7 +130,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -139,7 +139,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection?.drainsAvailability !=
+                    {data?.IndustryPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -150,7 +150,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
@@ -159,7 +159,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailabilityIndustry !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -171,7 +171,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailabilityIndustry
                               ?.name
                           }
@@ -183,7 +183,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     )}
 
                    
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.physicalStructureTypeId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -194,7 +194,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
                           readOnly="readOnly"
@@ -203,7 +203,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.otherIndustryFacility !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -215,7 +215,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.otherIndustryFacility
                              
                           }
@@ -225,7 +225,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.protectiveClothingUsedId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -237,7 +237,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.protectiveClothingUsed
                               ?.name
                           }
@@ -247,7 +247,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.productionRoomConditionId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -259,7 +259,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.productionRoomCondition
                               ?.name
                           }
@@ -269,7 +269,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.flyScreenNetAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -281,7 +281,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.flyScreenNetAvailability
                               ?.name
                           }
@@ -291,7 +291,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection
+                    {data?.IndustryPremisesInfoSection
                       ?.storeRoomAvailabilityId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -303,7 +303,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.storeRoomAvailability
                               ?.name
                           }
@@ -315,7 +315,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     )}
 
 
-                   {data?.submittedData?.IndustryPremisesInfoSection?.manufacturedServices !=
+                   {data?.IndustryPremisesInfoSection?.manufacturedServices !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -326,7 +326,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection?.manufacturedServices
+                            data?.IndustryPremisesInfoSection?.manufacturedServices
                           }
                           readOnly="readOnly"
                         />
@@ -334,7 +334,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection?.majorByProducts !=
+                    {data?.IndustryPremisesInfoSection?.majorByProducts !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -345,7 +345,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.majorByProducts
                           }
                           readOnly="readOnly"
@@ -354,7 +354,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.IndustryPremisesInfoSection?.numberWorkers !=
+                    {data?.IndustryPremisesInfoSection?.numberWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -365,7 +365,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.numberWorkers
                           }
                           readOnly="readOnly"
@@ -377,7 +377,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
 
 
 
-{data?.submittedData?.IndustryPremisesInfoSection?.byProductsStorageAreaCondId !=
+{data?.IndustryPremisesInfoSection?.byProductsStorageAreaCondId !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -388,7 +388,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.byProductsStorageAreaCond?.name
                           }
                           readOnly="readOnly"
@@ -397,7 +397,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )} 
-                     {data?.submittedData?.IndustryPremisesInfoSection?.numberFoodHandlers !=
+                     {data?.IndustryPremisesInfoSection?.numberFoodHandlers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -408,7 +408,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.numberFoodHandlers
                           }
                           readOnly="readOnly"
@@ -417,7 +417,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )} 
-                     {data?.submittedData?.IndustryPremisesInfoSection?.numberFoodHandlersCert !=
+                     {data?.IndustryPremisesInfoSection?.numberFoodHandlersCert !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -428,7 +428,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.numberFoodHandlersCert
                           }
                           readOnly="readOnly"
@@ -437,7 +437,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                     ) : (
                       <></>
                     )} 
-                     {data?.submittedData?.IndustryPremisesInfoSection?.numberWorkers !=
+                     {data?.IndustryPremisesInfoSection?.numberWorkers !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -448,7 +448,7 @@ const IndustryPremisesInfoEdit = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.IndustryPremisesInfoSection
+                            data?.IndustryPremisesInfoSection
                               ?.numberWorkers
                           }
                           readOnly="readOnly"
