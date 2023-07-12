@@ -27,7 +27,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.facilityName !=
+                    {data?.InstitutionPremisesInfoSection?.facilityName !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Facility Name</label>
@@ -36,7 +36,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection.facilityName
+                            data?.InstitutionPremisesInfoSection.facilityName
                           }
                           readOnly="readOnly"
                         />
@@ -44,7 +44,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.Type != null ? (
+                    {data?.InstitutionPremisesInfoSection?.Type != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Type</label>
                         <input
@@ -52,7 +52,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection.Type?.name
+                            data?.InstitutionPremisesInfoSection.Type?.name
                           }
                           readOnly="readOnly"
                         />
@@ -60,7 +60,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.Subtype != null ? (
+                    {data?.InstitutionPremisesInfoSection?.Subtype != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Subtype</label>
                         <input
@@ -68,7 +68,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection.Subtype?.name
+                            data?.InstitutionPremisesInfoSection.Subtype?.name
                           }
                           readOnly="readOnly"
                         />
@@ -76,7 +76,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.toiletAvailability !=
+                    {data?.InstitutionPremisesInfoSection?.toiletAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -87,7 +87,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               .toiletAvailability?.name
                           }
                           readOnly="readOnly"
@@ -96,7 +96,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.urinalAvailability !=
+                    {data?.InstitutionPremisesInfoSection?.urinalAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -107,7 +107,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               .urinalAvailability?.name
                           }
                           readOnly="readOnly"
@@ -116,7 +116,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection
+                    {data?.InstitutionPremisesInfoSection
                       ?.bathroomAvailabilityId != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -127,7 +127,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
                           readOnly="readOnly"
@@ -136,7 +136,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.drainsAvailability !=
+                    {data?.InstitutionPremisesInfoSection?.drainsAvailability !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -147,7 +147,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
                           readOnly="readOnly"
@@ -156,7 +156,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection
+                    {data?.InstitutionPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailabilityInstitution !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
@@ -168,7 +168,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailabilityInstitution
                               ?.name
                           }
@@ -178,7 +178,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection
+                    {data?.InstitutionPremisesInfoSection
                       ?.numberNonTeachingStaff != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -189,7 +189,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               ?.numberNonTeachingStaff
                           }
                           readOnly="readOnly"
@@ -198,7 +198,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection
+                    {data?.InstitutionPremisesInfoSection
                       ?.numberTeachingStaff != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -209,7 +209,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               .numberTeachingStaff
                           }
                           readOnly="readOnly"
@@ -218,7 +218,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection?.numberMaleStudents !=
+                    {data?.InstitutionPremisesInfoSection?.numberMaleStudents !=
                     null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -229,7 +229,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               ?.numberMaleStudents
                           }
                           readOnly="readOnly"
@@ -238,7 +238,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     ) : (
                       <></>
                     )}
-                    {data?.submittedData?.InstitutionPremisesInfoSection
+                    {data?.InstitutionPremisesInfoSection
                       ?.numberFemaleStudents != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -249,7 +249,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.submittedData?.InstitutionPremisesInfoSection
+                            data?.InstitutionPremisesInfoSection
                               .numberFemaleStudents
                           }
                           readOnly="readOnly"
@@ -260,7 +260,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     )}
                  
 
-                  {data?.submittedData?.InstitutionPremisesInfoSection?.ablutionSlabId !=
+                  {data?.InstitutionPremisesInfoSection?.ablutionSlabId !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Ablution Slab</label>
@@ -269,7 +269,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection?.ablutionSlab
+                          data?.InstitutionPremisesInfoSection?.ablutionSlab
                             ?.name
                         }
                         readOnly="readOnly"
@@ -279,7 +279,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     <></>
                   )}
 
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.ablutionSlabConditionId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -290,7 +290,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.ablutionSlabCondition?.name
                         }
                         readOnly="readOnly"
@@ -300,7 +300,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                     <></>
                   )}
 
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.animalSpaceAvailabilityId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -311,7 +311,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.animalSpaceAvailability?.name
                         }
                         readOnly="readOnly"
@@ -320,7 +320,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.animalSpaceConditionId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -331,7 +331,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.animalSpaceCondition?.name
                         }
                         readOnly="readOnly"
@@ -340,7 +340,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.cookedFoodStorageCondtionSafeId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -351,7 +351,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.cookedFoodStorageCondtionSafe?.name
                         }
                         readOnly="readOnly"
@@ -360,7 +360,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.uncookedFoodStorageCondtionSafeId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -371,7 +371,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.uncookedFoodStorageCondtionSafe?.name
                         }
                         readOnly="readOnly"
@@ -380,7 +380,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.foodVendorAvailabilityId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -391,7 +391,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.foodVendorAvailability?.name
                         }
                         readOnly="readOnly"
@@ -400,7 +400,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.kitchenAvailabilityId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -411,7 +411,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.kitchenAvailability?.name
                         }
                         readOnly="readOnly"
@@ -420,7 +420,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.physicalStructureTypeId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -431,7 +431,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.physicalStructureType?.name
                         }
                         readOnly="readOnly"
@@ -440,7 +440,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection?.shepClubExistenceId !=
+                  {data?.InstitutionPremisesInfoSection?.shepClubExistenceId !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -451,7 +451,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection?.shepClubExistence
+                          data?.InstitutionPremisesInfoSection?.shepClubExistence
                             ?.name
                         }
                         readOnly="readOnly"
@@ -460,7 +460,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.slaughterAreaAvailabilityId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -471,7 +471,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.slaughterAreaAvailability?.name
                         }
                         readOnly="readOnly"
@@ -480,7 +480,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.slaughterAreaCondition != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -491,7 +491,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.slaughterAreaCondition?.name
                         }
                         readOnly="readOnly"
@@ -500,7 +500,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection?.soundProofId !=
+                  {data?.InstitutionPremisesInfoSection?.soundProofId !=
                   null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">Sound Proof</label>
@@ -509,7 +509,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection?.soundProof?.name
+                          data?.InstitutionPremisesInfoSection?.soundProof?.name
                         }
                         readOnly="readOnly"
                       />
@@ -517,7 +517,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                   ) : (
                     <></>
                   )}
-                  {data?.submittedData?.InstitutionPremisesInfoSection
+                  {data?.InstitutionPremisesInfoSection
                     ?.protectiveClothingUsedId != null ? (
                     <div className="col-lg-3 col-sm-6">
                       <label htmlFor="invoicenoInput">
@@ -528,7 +528,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         className="form-control bg-light border-0"
                         id="invoicenoInput"
                         value={
-                          data?.submittedData?.InstitutionPremisesInfoSection
+                          data?.InstitutionPremisesInfoSection
                             ?.protectiveClothingUsed?.name
                         }
                         readOnly="readOnly"
