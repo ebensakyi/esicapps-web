@@ -253,24 +253,18 @@ const Dashboard = ({
         label: "# of submissions",
         data: dashboardData?.followupSummary?.map((x) => x.value),
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgb(252, 241, 121)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "#031D44",
+          "#04395E",
+          "#70A288",
+          "#DAB785",
+          "#D5896F",
+          "#EB5E55",
+          "#0D00A4",
+          "#C879FF",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgb(252, 241, 121)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "#fff",
+       
         ],
         borderWidth: 1,
       },
@@ -284,14 +278,17 @@ const Dashboard = ({
         label: "# of submissions",
         data: dashboardData?.actionsTaken?.map((x) => x.value),
         backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "#031D44",
+          "#04395E",
+          "#70A288",
+          "#DAB785",
+          "#D5896F",
+          "#EB5E55",
+          "#0D00A4",
+          "#C879FF",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
+         "#fff"
         ],
         borderWidth: 1,
       },
@@ -305,14 +302,17 @@ const Dashboard = ({
         label: "# of submissions",
         data: dashboardData?.waterSourceTypeSummary?.map((x) => x.count),
         backgroundColor: [
-          "rgb(252, 241, 121)",
-          "rgb(64, 80, 137)",
-          "rgb(56, 162, 134)",
+          "#031D44",
+          "#04395E",
+          "#70A288",
+          "#DAB785",
+          "#D5896F",
+          "#EB5E55",
+          "#0D00A4",
+          "#C879FF",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
+         "#fff"
         ],
         borderWidth: 1,
       },
@@ -325,7 +325,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.waterSourceConditionSummary?.map((x) => x.value),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
 
         borderColor: ["white"],
         borderWidth: 1,
@@ -339,7 +339,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.waterStorageConditionSummary?.map((x) => x.value),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
 
         borderColor: ["white"],
         borderWidth: 1,
@@ -348,12 +348,12 @@ const Dashboard = ({
   };
 
   toiletAvailabilityBarchartData = {
-    labels: ["Available", "Not Available"],
+    labels: dashboardData?.toiletAvailabilitySummary?.map((x) => x.label),
     datasets: [
       {
         label: "# of submissions",
-        data: dashboardData.lw?.toiletAvailabilityArray,
-        backgroundColor: ["#38a286", "#c3103c"],
+        data: dashboardData?.toiletAvailabilitySummary?.map((x) => x.value),
+        backgroundColor: ["#09814A", "#EA3546"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -366,7 +366,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.toiletAdequacySummary?.map((x) => x.value),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -379,7 +379,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.toiletConditionSummary?.map((x) => x.value),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -396,7 +396,7 @@ const Dashboard = ({
         data: dashboardData?.wasteCollectorRegistrationSummary?.map(
           (x) => x.value
         ),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -409,7 +409,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.wasteSortingSummary?.map((x) => x.value),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -422,7 +422,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.wasteReceptacleSummary?.map((x) => x.value),
-        backgroundColor: ["#38a286", "#c3103c"],
+        backgroundColor: ["#09814A", "#EA3546"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -968,14 +968,13 @@ const Dashboard = ({
         </>{" "}
         {/* end row */}
         <div className="row">
-          <div className="col-xl-7">
+          {/* <div className="col-xl-7">
             <div className="card">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">
                   INSPECTION SUMMARY
                 </h4>
               </div>
-              {/* end card header */}
               <div className="card-body">
                 <div className="table-responsive table-card">
                   <table className="table  table-hover table-nowrap align-middle mb-0  table-bordered table-nowrap align-middle mb-0">
@@ -987,9 +986,7 @@ const Dashboard = ({
                         <th scope="col" style={{ width: "16%" }}>
                           Reinspection
                         </th>
-                        {/* <th scope="col" style={{ width: "12%" }}>
-                        Follow Up
-                      </th> */}
+                       
                         <th scope="col" style={{ width: "12%" }}>
                           Published
                         </th>
@@ -1003,7 +1000,7 @@ const Dashboard = ({
                     </thead>
                     <tbody>
                       {" "}
-                      {dashboardData.allInspectionSummary?.map((a) => {
+                      {dashboardData.inspectionSummary?.map((a) => {
                         return (
                           <tr key={a.id}>
                             <td>{a.name}</td>
@@ -1017,11 +1014,7 @@ const Dashboard = ({
                                 {a.reinspectionCount}
                               </span>
                             </td>
-                            {/* <td>
-                            <span className="badge badge-soft-danger p-2">
-                              {a.followupCount}
-                            </span>
-                          </td>{" "} */}
+                           
                             <td>
                               <span className="badge badge-soft-success p-2">
                                 {a.publishedCount}
@@ -1033,31 +1026,140 @@ const Dashboard = ({
                               </span>
                             </td>
                             <td>
-                              {/* <span className="badge badge-soft-primary p-2"> */}
+                             
                               {a.inspectionCount}
-                              {/* </span> */}
                             </td>
                           </tr>
                         );
                       })}
                     </tbody>
-                    {/* end tbody */}
                   </table>
-                  {/* end table */}
                 </div>
-                {/* end table responsive */}
               </div>
-              {/* end card body */}
             </div>
-            {/* end card */}
+          </div> */}
+          <div className="row">
+            <div className="col-xl-4">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1">
+                    Baseline Submissions
+                  </h4>
+                 {/* <div className="flex-shrink-0">
+                     <div className="dropdown card-header-dropdown">
+                  <a
+                    className="text-reset dropdown-btn"
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="text-muted">
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
+                    </span>
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#">
+                      Download Report
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
+                    </a>
+                  </div>
+                </div> 
+                  </div>*/}
+                </div>
+                <div className="card-body">
+                  <Pie data={baselinePieChartData} />
+                </div>{" "}
+              </div>
+            </div>{" "}
+            <div className="col-xl-4">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1">
+                    Reinspection Submissions
+                  </h4>
+                  <div className="flex-shrink-0">
+                    {/* <div className="dropdown card-header-dropdown">
+                  <a
+                    className="text-reset dropdown-btn"
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="text-muted">
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
+                    </span>
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#">
+                      Download Report
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
+                    </a>
+                  </div>
+                </div> */}
+                  </div>
+                </div>
+                <div className="card-body">
+                  <Pie data={reinspectionPieChartData} />
+                </div>{" "}
+              </div>
+            </div>{" "}
+            <div className="col-xl-4">
+              <div className="card card-height-100">
+                <div className="card-header align-items-center d-flex">
+                  <h4 className="card-title mb-0 flex-grow-1">
+                    Follow-up Submissions
+                  </h4>
+                  <div className="flex-shrink-0">
+                    {/* <div className="dropdown card-header-dropdown">
+                  <a
+                    className="text-reset dropdown-btn"
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="text-muted">
+                      Report<i className="mdi mdi-chevron-down ms-1"></i>
+                    </span>
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <a className="dropdown-item" href="#">
+                      Download Report
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Export
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Import
+                    </a>
+                  </div>
+                </div> */}
+                  </div>
+                </div>
+                <div className="card-body">
+                  <Pie data={followupPieChartData} />
+                </div>{" "}
+              </div>
+            </div>
           </div>
-
           {/* end col */}
-          <div className="col-xl-5">
+          {/* <div className="col-xl-5">
             <div className="card card-height-100">
               <div className="card-header align-items-center d-flex">
                 <h4 className="card-title mb-0 flex-grow-1">Actions Taken</h4>
-                {/* <div className="flex-shrink-0">
+               <div className="flex-shrink-0">
                 <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"
@@ -1082,132 +1184,16 @@ const Dashboard = ({
                     </a>
                   </div>
                 </div>
-              </div> */}
+              </div> 
               </div>
               <div className="card-body">
                 <Pie data={actionsTakenBarchartData} />
               </div>{" "}
             </div>{" "}
-          </div>
+          </div> */}
         </div>{" "}
       </LoadingOverlay>
       {/* end row */}
-      <div className="row">
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Baseline Submissions
-              </h4>
-              <div className="flex-shrink-0">
-                {/* <div className="dropdown card-header-dropdown">
-                  <a
-                    className="text-reset dropdown-btn"
-                    href="#"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="text-muted">
-                      Report<i className="mdi mdi-chevron-down ms-1"></i>
-                    </span>
-                  </a>
-                  <div className="dropdown-menu dropdown-menu-end">
-                    <a className="dropdown-item" href="#">
-                      Download Report
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Export
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Import
-                    </a>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-            <div className="card-body">
-              <Pie data={baselinePieChartData} />
-            </div>{" "}
-          </div>
-        </div>{" "}
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Reinspection Submissions
-              </h4>
-              <div className="flex-shrink-0">
-                {/* <div className="dropdown card-header-dropdown">
-                  <a
-                    className="text-reset dropdown-btn"
-                    href="#"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="text-muted">
-                      Report<i className="mdi mdi-chevron-down ms-1"></i>
-                    </span>
-                  </a>
-                  <div className="dropdown-menu dropdown-menu-end">
-                    <a className="dropdown-item" href="#">
-                      Download Report
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Export
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Import
-                    </a>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-            <div className="card-body">
-              <Pie data={reinspectionPieChartData} />
-            </div>{" "}
-          </div>
-        </div>{" "}
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Follow-up Submissions
-              </h4>
-              <div className="flex-shrink-0">
-                {/* <div className="dropdown card-header-dropdown">
-                  <a
-                    className="text-reset dropdown-btn"
-                    href="#"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="text-muted">
-                      Report<i className="mdi mdi-chevron-down ms-1"></i>
-                    </span>
-                  </a>
-                  <div className="dropdown-menu dropdown-menu-end">
-                    <a className="dropdown-item" href="#">
-                      Download Report
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Export
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Import
-                    </a>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-            <div className="card-body">
-              <Pie data={followupPieChartData} />
-            </div>{" "}
-          </div>
-        </div>
-      </div>
       <div className="row">
         <div className="flex-grow-1">
           <h4 className="fs-16 mb-1">WATER</h4>
@@ -1219,6 +1205,11 @@ const Dashboard = ({
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
               <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
+              <div class="flex-shrink-0">
+                <button type="button" class="btn btn-soft-primary btn-sm">
+                  Export Chart
+                </button>
+              </div>
             </div>
 
             <div className="card-body">

@@ -48,7 +48,10 @@ export const wasteCollectorRegistration = async (filterBy, filterValue) => {
 
   return [
     { label: "Registered", value: wasteCollectorRegistered },
-    { label: "Not registered", value: wasteCollectorNotRegistered + wasteCollectorNotRegistered1},
+    {
+      label: "Not registered",
+      value: wasteCollectorNotRegistered + wasteCollectorNotRegistered1,
+    },
   ];
 };
 
@@ -105,58 +108,62 @@ export const wasteSorting = async (filterBy, filterValue) => {
   ];
 };
 
-
-
 export const wasteReceptacle = async (filterBy, filterValue) => {
-    let approvedWasteStorageReceptacle = await prisma.solidWasteSection.count({
-      where:
-        filterBy == "undefined"
-          ? {
-              deleted: 0,
-              approvedWasteStorageReceptacleId: 1,
-            }
-          : {
-              deleted: 0,
-              approvedWasteStorageReceptacleId: 1,
-              Inspection: {
-                [filterBy]: filterValue,
-              },
+  let approvedWasteStorageReceptacle = await prisma.solidWasteSection.count({
+    where:
+      filterBy == "undefined"
+        ? {
+            deleted: 0,
+            approvedWasteStorageReceptacleId: 1,
+          }
+        : {
+            deleted: 0,
+            approvedWasteStorageReceptacleId: 1,
+            Inspection: {
+              [filterBy]: filterValue,
             },
-    });
-    let unApprovedWasteStorageReceptacle = await prisma.solidWasteSection.count({
-      where:
-        filterBy == "undefined"
-          ? {
-              deleted: 0,
-              approvedWasteStorageReceptacleId: 2,
-            }
-          : {
-              deleted: 0,
-              approvedWasteStorageReceptacleId: 2,
-              Inspection: {
-                [filterBy]: filterValue,
-              },
+          },
+  });
+  let unApprovedWasteStorageReceptacle = await prisma.solidWasteSection.count({
+    where:
+      filterBy == "undefined"
+        ? {
+            deleted: 0,
+            approvedWasteStorageReceptacleId: 2,
+          }
+        : {
+            deleted: 0,
+            approvedWasteStorageReceptacleId: 2,
+            Inspection: {
+              [filterBy]: filterValue,
             },
-    });
-    let unApprovedWasteStorageReceptacle1 = await prisma.solidWasteSection.count({
-      where:
-        filterBy == "undefined"
-          ? {
-              deleted: 0,
-              approvedWasteStorageReceptacleId: null,
-            }
-          : {
-              deleted: 0,
-              approvedWasteStorageReceptacleId: null,
-              Inspection: {
-                [filterBy]: filterValue,
-              },
+          },
+  });
+  let unApprovedWasteStorageReceptacle1 = await prisma.solidWasteSection.count({
+    where:
+      filterBy == "undefined"
+        ? {
+            deleted: 0,
+            approvedWasteStorageReceptacleId: null,
+          }
+        : {
+            deleted: 0,
+            approvedWasteStorageReceptacleId: null,
+            Inspection: {
+              [filterBy]: filterValue,
             },
-    });
-  
-    return [
-      { label: "Approved Waste Receptacle", value: approvedWasteStorageReceptacle },
-      { label: "Unapproved Waste Receptacle", value: unApprovedWasteStorageReceptacle  },
-    ];
-  };
-  
+          },
+  });
+
+  return [
+    {
+      label: "Approved Waste Receptacle",
+      value: approvedWasteStorageReceptacle,
+    },
+    {
+      label: "Unapproved Waste Receptacle",
+      value: unApprovedWasteStorageReceptacle,
+    },
+  ];
+};
+

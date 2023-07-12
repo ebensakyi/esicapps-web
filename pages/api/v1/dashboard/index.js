@@ -6,12 +6,13 @@ import {
   groupByWaterSourceCondition,
   groupByWaterStorageCondition,
 } from "./queries/water-query";
-import { toiletAdequacy, toiletCondition } from "./queries/liquid-waste-query";
+import { toiletAdequacy, toiletCondition,toiletAvailability } from "./queries/liquid-waste-query";
 import {
   wasteCollectorRegistration,
   wasteReceptacle,
   wasteSorting,
 } from "./queries/solid-waste-query";
+// import { inspection } from "./queries/general-query";
 
 const post = async (req, res) => {
   try {
@@ -20,7 +21,6 @@ const post = async (req, res) => {
 
 const get = async (req, res) => {
   let userData = await getSession(req);
-  console.log("userData", userData);
   let userLevel = userData?.userLevelId;
 
   let filterBy = req?.query?.filterBy;
@@ -196,12 +196,17 @@ const get = async (req, res) => {
     let wasteSortingSummary = await wasteSorting(filterBy, filterValue);
 
     let wasteReceptacleSummary = await wasteReceptacle(filterBy, filterValue);
+    let toiletAvailabilitySummary = await toiletAvailability(filterBy,filterValue)
+    // let inspectionSummary = await inspection(filterBy, filterValue);
 
     let baselineSummary = await parseSummary(baselineInspection);
     let reinspectionSummary = await parseSummary(reInspection);
     let followupSummary = await parseSummary(followUpInspection);
 
+
     let dashboardData = {
+      // inspectionSummary,
+      toiletAvailabilitySummary,
       wasteReceptacleSummary,
       wasteSortingSummary,
       wasteCollectorRegistrationSummary,

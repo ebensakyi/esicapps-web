@@ -122,6 +122,278 @@ import prisma from "../../../../../prisma/db";
       { label: "Unsafe", value: unsafe },
     ];
   };
+
+  export const toiletAvailability = async (filterBy,filterValue) => {
+    let toiletAvailabilityCount1 =
+      await prisma.residentialPremisesInfoSection.count({
+         where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+       
+      });
+    let toiletAvailabilityCount2 = await prisma.eateryPremisesInfoSection.count({
+      where: filterBy == "undefined"
+      ? {
+          deleted: 0,
+          toiletAvailabilityId: 1,
+        }
+      : {
+          deleted: 0,
+          toiletAvailabilityId: 1,
+          Inspection: {
+            [filterBy]: filterValue,
+          },
+        },
+    });
+    let toiletAvailabilityCount3 = await prisma.healthPremisesInfoSection.count({
+      where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+    });
+    let toiletAvailabilityCount4 =
+      await prisma.hospitalityPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+    let toiletAvailabilityCount5 = await prisma.sanitaryPremisesInfoSection.count({
+      where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+          }
+    );
+    let toiletAvailabilityCount6 = await prisma.marketPremisesInfoSection.count({
+      where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+    });
+    let toiletAvailabilityCount7 =
+      await prisma.institutionPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+    let toiletAvailabilityCount8 = await prisma.industryPremisesInfoSection.count(
+      {
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 1,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      }
+    );
+    let toiletInavailabilityCount1 =
+      await prisma.residentialPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+    let toiletInavailabilityCount2 = await prisma.eateryPremisesInfoSection.count(
+      {
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      }
+    );
+    let toiletInavailabilityCount3 = await prisma.healthPremisesInfoSection.count(
+      {
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      }
+    );
+    let toiletInavailabilityCount4 =
+      await prisma.hospitalityPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+    let toiletInavailabilityCount5 =
+      await prisma.sanitaryPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+    let toiletInavailabilityCount6 = await prisma.marketPremisesInfoSection.count(
+      {
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      }
+    );
+    let toiletInavailabilityCount7 =
+      await prisma.institutionPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+    let toiletInavailabilityCount8 =
+      await prisma.industryPremisesInfoSection.count({
+          where: filterBy == "undefined"
+          ? {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+            }
+          : {
+              deleted: 0,
+              toiletAvailabilityId: 2,
+              Inspection: {
+                [filterBy]: filterValue,
+              },
+            },
+      });
+  
+    let toiletAvailabilityCount =
+      toiletAvailabilityCount1 +
+      toiletAvailabilityCount2 +
+      toiletAvailabilityCount3 +
+      toiletAvailabilityCount4 +
+      toiletAvailabilityCount5 +
+      toiletAvailabilityCount6 +
+      toiletAvailabilityCount7 +
+      toiletAvailabilityCount8;
+  
+    let toiletInavailabilityCount =
+      toiletInavailabilityCount1 +
+      toiletInavailabilityCount2 +
+      toiletInavailabilityCount3 +
+      toiletInavailabilityCount4 +
+      toiletInavailabilityCount5 +
+      toiletInavailabilityCount6 +
+      toiletInavailabilityCount7 +
+      toiletInavailabilityCount8;
+  
+    return [
+      { label: "Toilet Available", value: toiletAvailabilityCount },
+      { label: "Toilet Not Available", value: toiletInavailabilityCount },
+    ];
+  };
+  
+
   function toJson(data) {
     return JSON.parse(
       JSON.stringify(data, (_, v) =>

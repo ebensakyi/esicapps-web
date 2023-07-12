@@ -191,7 +191,7 @@ const Header = () => {
               <li className="menu-title">
                 <span data-key="t-menu">Menu</span>
               </li>
-              <li className="nav-item" hidden={!includesDashboard}>
+              <li className="nav-item active" hidden={!includesDashboard}>
                 <Link href="/dashboard">
                   <a className="nav-link menu-link">
                     <i className="ri-home-2-line" />
