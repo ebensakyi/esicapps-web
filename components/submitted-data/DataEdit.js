@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Multiselect from "multiselect-react-dropdown";
 
-import ResidentialPremisesInfoEdit from "./PremisesInfoEdits/ResidentialPremisesInfoEdit";
-import EateryPremisesInfoEdit from "./PremisesInfoEdits/EateryPremisesInfoEdit";
-import HealthPremisesInfoEdit from "./PremisesInfoEdits/HealthPremisesInfoEdit";
-import HospitalityPremisesInfoEdit from "./PremisesInfoEdits/HospitalityPremisesInfoEdit";
-import IndustryPremisesInfoEdit from "./PremisesInfoEdits/IndustryPremisesInfoEdit";
-import InstitutionPremisesInfoEdit from "./PremisesInfoEdits/InstitutionPremisesInfoEdit";
-import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEdit";
-import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
+// import ResidentialPremisesInfoEdit from "./PremisesInfoEdits/ResidentialPremisesInfoEdit";
+// import EateryPremisesInfoEdit from "./PremisesInfoEdits/EateryPremisesInfoEdit";
+// import HealthPremisesInfoEdit from "./PremisesInfoEdits/HealthPremisesInfoEdit";
+// import HospitalityPremisesInfoEdit from "./PremisesInfoEdits/HospitalityPremisesInfoEdit";
+// import IndustryPremisesInfoEdit from "./PremisesInfoEdits/IndustryPremisesInfoEdit";
+// import InstitutionPremisesInfoEdit from "./PremisesInfoEdits/InstitutionPremisesInfoEdit";
+// import SanitaryPremisesInfoEdit from "./PremisesInfoEdits/SanitaryPremisesInfoEdit";
+// import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
   console.log(data);
@@ -954,14 +954,14 @@ const DataEdit = ({ data }) => {
               </div>
             </div>
 
-            {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {/* {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 2 ? <EateryPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 3 ? <HealthPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 4 ? <HospitalityPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 5 ? <InstitutionPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 6 ? <IndustryPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 7 ? <MarketPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 8 ? <SanitaryPremisesInfoEdit data={data?.submittedData} /> : <></>}
+            {formId == 8 ? <SanitaryPremisesInfoEdit data={data?.submittedData} /> : <></>} */}
             <div className="row">
               <div className="col-lg-12">
                 <div className="row mb-3">

@@ -152,7 +152,6 @@ const User = ({ users, pagination, userTypes, userLevels, regions }) => {
       };
 
 
-      console.log(data);
 
       const response = await axios.post("/api/v1/account/user", data);
       router.replace(router.asPath);
