@@ -1,3 +1,5 @@
+import prisma from "../../../../../prisma/db";
+
 export const wasteCollectorRegistration = async (filterBy, filterValue) => {
   let wasteCollectorRegistered = await prisma.solidWasteSection.count({
     where:

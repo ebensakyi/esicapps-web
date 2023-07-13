@@ -38,7 +38,6 @@ const get = async (req, res) => {
     filterValue = userData.districtId;
   }
 
-  console.log("filterBy ", filterBy);
 
   //let from = new Date(req?.query?.from);
 
