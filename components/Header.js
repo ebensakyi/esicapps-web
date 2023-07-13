@@ -191,7 +191,7 @@ const Header = () => {
               <li className="menu-title">
                 <span data-key="t-menu">Menu</span>
               </li>
-              <li className="nav-item active" hidden={!includesDashboard}>
+              <li className="nav-item " hidden={!includesDashboard}>
                 <Link href="/dashboard">
                   <a
                     className={
@@ -843,6 +843,8 @@ const Header = () => {
                         Primary Data
                       </a>
                       <div className="collapse menu-dropdown" id="pd">
+                      <ul className="nav nav-sm flex-column">
+                    <li className="nav-item">
                         <li className="nav-item">
                           <a
                             href="#district"
@@ -998,6 +1000,8 @@ const Header = () => {
                             </a>
                           </li>
                         </li>
+                        </li>
+                        </ul>
                       </div>
                       <li
                         className="nav-item"
