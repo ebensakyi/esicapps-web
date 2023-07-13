@@ -105,7 +105,7 @@ const post = async (req, res) => {
         req.body.stagnationEvidenceId == "null"
           ? null
           : Number(req.body.stagnationEvidenceId),
-      rating: req.body.rating == "null" ? null : Number(req.body.rating),
+      rating: req.body.rating == "null" ? null :  Number(Math.ceil(req.body.rating)),
       toiletHouseholdNumberId:
         req.body.toiletHouseholdNumberId == "null"
           ? null

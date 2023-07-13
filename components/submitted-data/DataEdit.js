@@ -14,7 +14,6 @@ import Multiselect from "multiselect-react-dropdown";
 // import MarketPremisesInfoEdit from "./PremisesInfoEdits/MarketPremisesInfoEdit";
 
 const DataEdit = ({ data }) => {
-  console.log(data);
   const [userId, setUserId] = useState();
   const [respondentName, setRespondentName] = useState();
   const [respondentPhoneNumber, setRespondentPhoneNumber] = useState("");
@@ -280,6 +279,12 @@ const DataEdit = ({ data }) => {
       },
     };
     const response = await axios.put(`/api/v1/inspection-data`, data);
+
+    if (response.status == 200) {
+      router.push(
+        `/submitted-data/data?published=${published}&inspectionFormId=${formId}`
+      );
+    }
   };
 
   const onWaterSupplyRemove = (selected) => {

@@ -2096,6 +2096,7 @@ model WaterSectionHistory {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   isCompleted Int?     @default(1)
+  isSubmitted Int?     @default(1)
 
   // InspectionHistory InspectionHistory @relation(fields: [inspectionId], references: [id])
   InspectionHistory InspectionHistory @relation(fields: [historyId], references: [historyId])

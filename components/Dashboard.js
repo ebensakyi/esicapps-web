@@ -55,7 +55,7 @@ const Dashboard = ({
   const [to, setTo] = useState(null);
   const router = useRouter();
 
-  console.log("dashboardData",dashboardData);
+  console.log("dashboardData", dashboardData);
 
   // const getDashboard = async () => {
   //   try {
@@ -191,20 +191,18 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.baselineSummary?.map((x) => x.value),
-        backgroundColor: [
+        backgroundColor: [          "#DAB785",
+
+          "#70A288",
           "#F0386B",
           "#04395E",
-          "#70A288",
-          "#DAB785",
+
           "#D5896F",
           "#EB5E55",
           "#0D00A4",
           "#C879FF",
         ],
-        borderColor: [
-          "#fff",
-        
-        ],
+        borderColor: ["#fff"],
         borderWidth: 1,
       },
     ],
@@ -216,20 +214,18 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.reinspectionSummary?.map((x) => x.value),
-        backgroundColor: [
+        backgroundColor: [          "#DAB785",
+
+          "#70A288",
           "#F0386B",
           "#04395E",
-          "#70A288",
-          "#DAB785",
+
           "#D5896F",
           "#EB5E55",
           "#0D00A4",
           "#C879FF",
         ],
-        borderColor: [
-          "#fff",
-        
-        ],
+        borderColor: ["#fff"],
         borderWidth: 1,
       },
     ],
@@ -241,20 +237,18 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.followupSummary?.map((x) => x.value),
-        backgroundColor: [
+        backgroundColor: [          "#DAB785",
+
+          "#70A288",
           "#F0386B",
           "#04395E",
-          "#70A288",
-          "#DAB785",
+
           "#D5896F",
           "#EB5E55",
           "#0D00A4",
           "#C879FF",
         ],
-        borderColor: [
-          "#fff",
-       
-        ],
+        borderColor: ["#fff"],
         borderWidth: 1,
       },
     ],
@@ -266,19 +260,18 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.actionsTaken?.map((x) => x.value),
-        backgroundColor: [
+        backgroundColor: [          "#DAB785",
+
+          "#70A288",
           "#F0386B",
           "#04395E",
-          "#70A288",
-          "#DAB785",
+
           "#D5896F",
           "#EB5E55",
           "#0D00A4",
           "#C879FF",
         ],
-        borderColor: [
-         "#fff"
-        ],
+        borderColor: ["#fff"],
         borderWidth: 1,
       },
     ],
@@ -290,19 +283,18 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.waterSourceTypeSummary?.map((x) => x.count),
-        backgroundColor: [
+        backgroundColor: [          "#DAB785",
+
+          "#70A288",
           "#F0386B",
           "#04395E",
-          "#70A288",
-          "#DAB785",
+
           "#D5896F",
           "#EB5E55",
           "#0D00A4",
           "#C879FF",
         ],
-        borderColor: [
-         "#fff"
-        ],
+        borderColor: ["#fff"],
         borderWidth: 1,
       },
     ],
@@ -314,7 +306,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.waterSourceConditionSummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
 
         borderColor: ["white"],
         borderWidth: 1,
@@ -328,7 +320,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.waterStorageConditionSummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
 
         borderColor: ["white"],
         borderWidth: 1,
@@ -342,7 +334,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.toiletAvailabilitySummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -355,7 +347,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.toiletAdequacySummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -368,7 +360,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.toiletConditionSummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -385,7 +377,7 @@ const Dashboard = ({
         data: dashboardData?.wasteCollectorRegistrationSummary?.map(
           (x) => x.value
         ),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -398,7 +390,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.wasteSortingSummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -411,7 +403,7 @@ const Dashboard = ({
       {
         label: "# of submissions",
         data: dashboardData?.wasteReceptacleSummary?.map((x) => x.value),
-        backgroundColor: ["#09814A", "#EA3546"],
+        backgroundColor: ["#09814A", "#DB222A"],
         borderColor: ["white"],
         borderWidth: 1,
       },
@@ -1034,7 +1026,7 @@ const Dashboard = ({
                   <h4 className="card-title mb-0 flex-grow-1">
                     Baseline Submissions
                   </h4>
-                 {/* <div className="flex-shrink-0">
+                  {/* <div className="flex-shrink-0">
                      <div className="dropdown card-header-dropdown">
                   <a
                     className="text-reset dropdown-btn"

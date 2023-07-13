@@ -24,8 +24,8 @@ const post = async (req, res) => {
         req.body.safeDistanceWaterStorageSanitaryId == "null"
           ? null
           : Number(req.body.safeDistanceWaterStorageSanitaryId),
-      rating: req.body.rating == "null" ? null : Number(req.body.rating),
-    };
+          rating: req.body.rating == "null" ? null :  Number(Math.ceil(req.body.rating)),
+        };
 
 
     const response = await prisma.waterSection.create({ data });

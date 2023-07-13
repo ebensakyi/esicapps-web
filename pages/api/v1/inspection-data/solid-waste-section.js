@@ -23,7 +23,7 @@ const post = async (req, res) => {
       containerNumber: req.body.containerNumber == "null" ? null : Number(req.body.containerNumber),
 
       wasteServicePhoneNumber: req.body.wasteServicePhoneNumber   ,
-          rating: req.body.rating == "null" ? null : Number(req.body.rating),
+      rating: req.body.rating == "null" ? null :  Number(Math.ceil(req.body.rating)),
 
     };
 
