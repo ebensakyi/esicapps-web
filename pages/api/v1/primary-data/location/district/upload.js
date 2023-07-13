@@ -17,9 +17,8 @@ const post = async (req, res) => {
 
 
     form.parse(req, async function (err, fields, files) {
-      let regionId = Number(fields.regionId);
+      let regionId = Number(fields?.regionId);
 
-      console.log(regionId);
 
 
 

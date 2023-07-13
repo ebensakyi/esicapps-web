@@ -15,7 +15,7 @@ const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
     form.parse(req, async function (err, fields, files) {
-      let electoralAreaId = Number(fields.electoralAreaId);
+      let electoralAreaId = Number(fields?.electoralAreaId);
       let electoralArea = await prisma.electoralArea.findFirst({
         where: { id: electoralAreaId },
       });

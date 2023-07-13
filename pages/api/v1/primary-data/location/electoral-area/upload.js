@@ -9,13 +9,17 @@ export const config = {
   api: {
     bodyParser: false,
   },
+};const get = async (req, res) => {
+  try {
+    await csvUploader();
+  } catch (error) {}
 };
 const post = async (req, res) => {
   try {
     const form = new formidable.IncomingForm({ multiples: true });
 
     form.parse(req, async function (err, fields, files) {
-      let districtId = Number(fields.districtId);
+      let districtId = Number(fields?.districtId);
 
       let response = await csvUploader(files, districtId);
       
