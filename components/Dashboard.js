@@ -1192,11 +1192,11 @@ const Dashboard = ({
           <div className="card card-height-100">
             <div className="card-header align-items-center d-flex">
               <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
-              <div class="flex-shrink-0">
+              {/* <div class="flex-shrink-0">
                 <button type="button" class="btn btn-soft-primary btn-sm">
                   Export Chart
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="card-body">

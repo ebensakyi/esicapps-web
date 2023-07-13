@@ -3,8 +3,6 @@ import moment from "moment";
 
 const post = async (req, res) => {
   try {
-
-
     const user = await prisma.user.findFirst({
       where: { id: Number(req.body.userId) },
     });
@@ -17,7 +15,7 @@ const post = async (req, res) => {
     const data = {
       id: req.body.id,
       userId: Number(req.body.userId),
-      totalRating: Number(req.body.totalRating),
+      totalRating: Number(Math.ceil(req.body.totalRating)),
       districtId: district,
       regionId: region,
       communityId: Number(req.body.communityId),
@@ -41,6 +39,8 @@ const post = async (req, res) => {
         req.body.doFollowUp == "null" ? 0 : Number(req.body.doFollowUp),
       startedAt: new Date(req.body.startedAt),
       completedAt: new Date(req.body.completedAt),
+      isReinspected:
+        req.body.isReinspected == "null" ? 0 : Number(req.body.isReinspected),
     };
 
     console.log(data);
@@ -70,6 +70,8 @@ const get = async (req, res) => {
     const response = await prisma.inspection.findMany({
       where: { userId: userId, deleted: 0 },
     });
+
+    console.log(typeof response[0].isFollowedUp);
 
     return res.status(200).json(response);
   } catch (error) {

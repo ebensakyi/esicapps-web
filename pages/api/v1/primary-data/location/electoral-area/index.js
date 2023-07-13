@@ -64,9 +64,9 @@ const getSearchParams = async (req, searchText) => {
   let data = await getSession(req);
 
   let electoralArea =
-    data.user.electoralAreaId == null || isNaN(data.user.electoralAreaId)
+    data?.user?.electoralAreaId == null || isNaN(data?.user?.electoralAreaId)
       ? undefined
-      : Number(data.user.electoralAreaId);
+      : Number(data?.user?.electoralAreaId);
   if (searchText != "" && searchText != null) {
     return {
       where: {

@@ -143,7 +143,7 @@ export default function Login() {
                         />
                       </a>
                     </div>
-                    <p className="mt-3 fs-15 fw-medium"><Image height={200} width={400} src={logo}/></p>
+                    <p className="mt-3 fs-15 fw-medium"><Image height={100} width={200} src={logo}/></p>
                   </div>
                 </div>
               </div>

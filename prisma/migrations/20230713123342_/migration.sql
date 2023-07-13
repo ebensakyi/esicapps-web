@@ -20,6 +20,8 @@ CREATE TABLE "Inspection" (
     "isFollowedUp" INTEGER DEFAULT 0,
     "totalRating" DECIMAL(4,2),
     "updated" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "startedAt" TIMESTAMP(3) NOT NULL,
@@ -49,6 +51,8 @@ CREATE TABLE "InspectionHistory" (
     "deleted" INTEGER DEFAULT 0,
     "isReinspected" INTEGER DEFAULT 0,
     "isFollowedUp" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "totalRating" DECIMAL(4,2),
     "updated" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -836,6 +840,8 @@ CREATE TABLE "BasicInfoSection" (
     "respondentPhoneNumber" VARCHAR(255) NOT NULL,
     "respondentDesignationId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -861,6 +867,8 @@ CREATE TABLE "BasicInfoSectionHistory" (
     "respondentPhoneNumber" VARCHAR(255) NOT NULL,
     "respondentDesignationId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
@@ -886,6 +894,8 @@ CREATE TABLE "ResidentialPremisesInfoSection" (
     "vaccinationProofId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -911,6 +921,8 @@ CREATE TABLE "ResidentialPremisesInfoSectionHistory" (
     "vaccinationProofId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
@@ -945,6 +957,8 @@ CREATE TABLE "EateryPremisesInfoSection" (
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -979,6 +993,8 @@ CREATE TABLE "EateryPremisesInfoSectionHistory" (
     "approvedHandwashingFacilityAvailabilityId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
@@ -1011,6 +1027,8 @@ CREATE TABLE "HealthPremisesInfoSection" (
     "bodyTraysAdequateId" INTEGER,
     "coldRoomAvailabilityId" INTEGER,
     "coldRoomConditionId" INTEGER,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -1045,6 +1063,8 @@ CREATE TABLE "HealthPremisesInfoSectionHistory" (
     "coldRoomConditionId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "HealthPremisesInfoSectionHistory_pkey" PRIMARY KEY ("newId")
@@ -1076,6 +1096,8 @@ CREATE TABLE "HospitalityPremisesInfoSection" (
     "facilityCapacity" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -1108,6 +1130,8 @@ CREATE TABLE "HospitalityPremisesInfoSectionHistory" (
     "numberRooms" INTEGER,
     "facilityCapacity" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "userId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1160,6 +1184,8 @@ CREATE TABLE "SanitaryPremisesInfoSection" (
     "sanitaryAshesDisposalId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "numberCarcassHandlers" INTEGER,
     "numberCarcassHandlersMedicalCert" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1208,6 +1234,8 @@ CREATE TABLE "SanitaryPremisesInfoSectionHistory" (
     "numberContainer" INTEGER,
     "containerAttendantName" INTEGER,
     "containerAttendantPhoneNumber" INTEGER,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "numberWorkers" INTEGER,
     "cremationPlatformId" INTEGER,
     "sanitaryAshesDisposalId" INTEGER,
@@ -1253,6 +1281,8 @@ CREATE TABLE "MarketPremisesInfoSection" (
     "numberFoodVendors" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -1291,6 +1321,8 @@ CREATE TABLE "MarketPremisesInfoSectionHistory" (
     "numberFoodVendors" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
@@ -1354,6 +1386,8 @@ CREATE TABLE "InstitutionPremisesInfoSection" (
     "boardingHouseConditionId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -1417,6 +1451,8 @@ CREATE TABLE "InstitutionPremisesInfoSectionHistory" (
     "boardingHouseConditionId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
@@ -1450,6 +1486,8 @@ CREATE TABLE "IndustryPremisesInfoSection" (
     "numberFoodHandlers" INTEGER,
     "numberFoodHandlersCert" INTEGER,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "byProductsStorageAreaCondId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1487,6 +1525,8 @@ CREATE TABLE "IndustryPremisesInfoSectionHistory" (
     "userId" INTEGER NOT NULL,
     "byProductsStorageAreaCondId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "historyId" INTEGER NOT NULL,
@@ -1513,6 +1553,8 @@ CREATE TABLE "LicencePermitSection" (
     "waterAnalysisReportId" INTEGER,
     "regGeneralCertAvailabilityId" INTEGER,
     "pharmacyCertAvailabilityId" INTEGER,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1540,6 +1582,8 @@ CREATE TABLE "LicencePermitSectionHistory" (
     "waterAnalysisReportId" INTEGER,
     "regGeneralCertAvailabilityId" INTEGER,
     "pharmacyCertAvailabilityId" INTEGER,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1558,6 +1602,8 @@ CREATE TABLE "WaterSection" (
     "waterFlowFrequencyId" INTEGER,
     "safeDistanceWaterStorageSanitaryId" INTEGER,
     "rating" DECIMAL(4,2) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1579,6 +1625,7 @@ CREATE TABLE "WaterSectionHistory" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "WaterSectionHistory_pkey" PRIMARY KEY ("newId")
@@ -1620,6 +1667,8 @@ CREATE TABLE "LiquidWasteSection" (
     "desiltingFrequencyId" INTEGER,
     "rating" DECIMAL(4,2) NOT NULL,
     "toiletHouseholdNumberId" INTEGER,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1675,6 +1724,8 @@ CREATE TABLE "LiquidWasteSectionHistory" (
     "effluentManagementId" INTEGER,
     "excretaContainmentId" INTEGER,
     "excretaDisposalMethodId" INTEGER,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "LiquidWasteSectionHistory_pkey" PRIMARY KEY ("newId")
@@ -1702,6 +1753,8 @@ CREATE TABLE "SolidWasteSection" (
     "sanitaryContainerId" INTEGER,
     "rating" DECIMAL(4,2),
     "wasteServicePhoneNumber" TEXT,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1732,6 +1785,8 @@ CREATE TABLE "SolidWasteSectionHistory" (
     "sanitaryContainerId" INTEGER,
     "rating" DECIMAL(4,2),
     "wasteServicePhoneNumber" TEXT,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1752,6 +1807,8 @@ CREATE TABLE "ConclusionSection" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "ConclusionSection_pkey" PRIMARY KEY ("id")
 );
@@ -1769,6 +1826,8 @@ CREATE TABLE "ConclusionSectionHistory" (
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "ConclusionSectionHistory_pkey" PRIMARY KEY ("newId")
@@ -1781,6 +1840,8 @@ CREATE TABLE "PremisesWaterSources" (
     "waterSectionId" VARCHAR(255) NOT NULL,
     "waterSourceId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -1799,6 +1860,8 @@ CREATE TABLE "PremisesWaterSourcesHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterSourcesHistory_pkey" PRIMARY KEY ("newId")
@@ -1814,6 +1877,8 @@ CREATE TABLE "PremisesWaterTreatmentType" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesWaterTreatmentType_pkey" PRIMARY KEY ("id")
 );
@@ -1829,6 +1894,8 @@ CREATE TABLE "PremisesWaterTreatmentTypeHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterTreatmentTypeHistory_pkey" PRIMARY KEY ("newId")
@@ -1844,6 +1911,8 @@ CREATE TABLE "PremisesWaterSupply" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesWaterSupply_pkey" PRIMARY KEY ("id")
 );
@@ -1859,6 +1928,8 @@ CREATE TABLE "PremisesWaterSupplyHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterSupplyHistory_pkey" PRIMARY KEY ("newId")
@@ -1874,6 +1945,8 @@ CREATE TABLE "PremisesWaterStorage" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesWaterStorage_pkey" PRIMARY KEY ("id")
 );
@@ -1889,6 +1962,8 @@ CREATE TABLE "PremisesWaterStorageHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWaterStorageHistory_pkey" PRIMARY KEY ("newId")
@@ -1905,6 +1980,8 @@ CREATE TABLE "PremisesUnsafeWaterStorage" (
     "userId" INTEGER NOT NULL,
     "waterStorageTypeId" INTEGER,
     "unsafeWaterStorageId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesUnsafeWaterStorage_pkey" PRIMARY KEY ("id")
 );
@@ -1921,6 +1998,8 @@ CREATE TABLE "PremisesUnsafeWaterStorageHistory" (
     "userId" INTEGER NOT NULL,
     "waterStorageTypeId" INTEGER,
     "unsafeWaterStorageId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesUnsafeWaterStorageHistory_pkey" PRIMARY KEY ("newId")
@@ -1936,6 +2015,8 @@ CREATE TABLE "PremisesCommunalContainerCondition" (
     "solidWasteSectionId" VARCHAR(255) NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesCommunalContainerCondition_pkey" PRIMARY KEY ("id")
 );
@@ -1951,6 +2032,8 @@ CREATE TABLE "PremisesCommunalContainerConditionHistory" (
     "solidWasteSectionId" VARCHAR(255) NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesCommunalContainerConditionHistory_pkey" PRIMARY KEY ("newId")
@@ -1966,6 +2049,8 @@ CREATE TABLE "PremisesDrinkingWaterSources" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesDrinkingWaterSources_pkey" PRIMARY KEY ("id")
 );
@@ -1981,6 +2066,8 @@ CREATE TABLE "PremisesDrinkingWaterSourcesHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesDrinkingWaterSourcesHistory_pkey" PRIMARY KEY ("newId")
@@ -1996,6 +2083,8 @@ CREATE TABLE "PremisesToiletType" (
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "toiletTypeId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesToiletType_pkey" PRIMARY KEY ("id")
 );
@@ -2011,6 +2100,8 @@ CREATE TABLE "PremisesToiletTypeHistory" (
     "liquidWasteSectionId" VARCHAR(255) NOT NULL,
     "toiletTypeId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesToiletTypeHistory_pkey" PRIMARY KEY ("newId")
@@ -2026,6 +2117,8 @@ CREATE TABLE "PremisesEffluentManagement" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesEffluentManagement_pkey" PRIMARY KEY ("id")
 );
@@ -2041,6 +2134,8 @@ CREATE TABLE "PremisesEffluentManagementHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesEffluentManagementHistory_pkey" PRIMARY KEY ("newId")
@@ -2056,6 +2151,8 @@ CREATE TABLE "PremisesExcretaDisposalMethod" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaDisposalMethodId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesExcretaDisposalMethod_pkey" PRIMARY KEY ("id")
 );
@@ -2071,6 +2168,8 @@ CREATE TABLE "PremisesExcretaDisposalMethodHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaDisposalMethodId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesExcretaDisposalMethodHistory_pkey" PRIMARY KEY ("newId")
@@ -2086,6 +2185,8 @@ CREATE TABLE "PremisesExcretaContainment" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaContainmentId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesExcretaContainment_pkey" PRIMARY KEY ("id")
 );
@@ -2101,6 +2202,8 @@ CREATE TABLE "PremisesExcretaContainmentHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "excretaContainmentId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesExcretaContainmentHistory_pkey" PRIMARY KEY ("newId")
@@ -2116,6 +2219,8 @@ CREATE TABLE "PremisesGreyWaterDisposal" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "greyWaterDisposalId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesGreyWaterDisposal_pkey" PRIMARY KEY ("id")
 );
@@ -2131,6 +2236,8 @@ CREATE TABLE "PremisesGreyWaterDisposalHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "greyWaterDisposalId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesGreyWaterDisposalHistory_pkey" PRIMARY KEY ("newId")
@@ -2146,6 +2253,8 @@ CREATE TABLE "PremisesWasteReceptacle" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "solidWasteSectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesWasteReceptacle_pkey" PRIMARY KEY ("id")
 );
@@ -2161,6 +2270,8 @@ CREATE TABLE "PremisesWasteReceptacleHistory" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "solidWasteSectionId" VARCHAR(255) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesWasteReceptacleHistory_pkey" PRIMARY KEY ("newId")
@@ -2174,6 +2285,8 @@ CREATE TABLE "PremisesPestSigns" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "inspectionId" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "PremisesPestSigns_pkey" PRIMARY KEY ("id")
@@ -2190,6 +2303,8 @@ CREATE TABLE "PremisesPestSignsHistory" (
     "userId" INTEGER NOT NULL,
     "inspectionId" VARCHAR(255) NOT NULL,
     "historyId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesPestSignsHistory_pkey" PRIMARY KEY ("newId")
 );
@@ -2204,6 +2319,8 @@ CREATE TABLE "PremisesAnimal" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesAnimal_pkey" PRIMARY KEY ("id")
 );
@@ -2219,6 +2336,8 @@ CREATE TABLE "PremisesAnimalHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesAnimalHistory_pkey" PRIMARY KEY ("newId")
@@ -2234,6 +2353,8 @@ CREATE TABLE "PremisesDrainType" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesDrainType_pkey" PRIMARY KEY ("id")
 );
@@ -2249,6 +2370,8 @@ CREATE TABLE "PremisesDrainTypeHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesDrainTypeHistory_pkey" PRIMARY KEY ("newId")
@@ -2264,6 +2387,8 @@ CREATE TABLE "PremisesDrainBadCondition" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesDrainBadCondition_pkey" PRIMARY KEY ("id")
 );
@@ -2279,6 +2404,8 @@ CREATE TABLE "PremisesDrainBadConditionHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesDrainBadConditionHistory_pkey" PRIMARY KEY ("newId")
@@ -2294,6 +2421,8 @@ CREATE TABLE "PremisesHazardousWasteDisposal" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesHazardousWasteDisposal_pkey" PRIMARY KEY ("id")
 );
@@ -2309,6 +2438,8 @@ CREATE TABLE "PremisesHazardousWasteDisposalHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesHazardousWasteDisposalHistory_pkey" PRIMARY KEY ("newId")
@@ -2324,6 +2455,8 @@ CREATE TABLE "PremisesActionTaken" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesActionTaken_pkey" PRIMARY KEY ("id")
 );
@@ -2339,6 +2472,8 @@ CREATE TABLE "PremisesActionTakenHistory" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesActionTakenHistory_pkey" PRIMARY KEY ("newId")
@@ -2354,6 +2489,8 @@ CREATE TABLE "PremisesNuisanceDetected" (
     "conclusionSectionId" VARCHAR(255) NOT NULL,
     "nuisanceId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
 
     CONSTRAINT "PremisesNuisanceDetected_pkey" PRIMARY KEY ("id")
 );
@@ -2369,6 +2506,8 @@ CREATE TABLE "PremisesNuisanceDetectedHistory" (
     "conclusionSectionId" VARCHAR(255) NOT NULL,
     "nuisanceId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "historyId" INTEGER NOT NULL,
 
     CONSTRAINT "PremisesNuisanceDetectedHistory_pkey" PRIMARY KEY ("newId")
@@ -2536,6 +2675,8 @@ CREATE TABLE "FollowUpInspection" (
     "solidWasteRating" VARCHAR(255) NOT NULL,
     "liquidWasteRating" VARCHAR(255) NOT NULL,
     "totalRating" VARCHAR(255) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "obnoxiousTradeExistFollowUpId" INTEGER NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "officerComment" VARCHAR(255) NOT NULL,
@@ -2572,6 +2713,8 @@ CREATE TABLE "FollowUpInspectionHistory" (
     "solidWasteRating" VARCHAR(255) NOT NULL,
     "liquidWasteRating" VARCHAR(255) NOT NULL,
     "totalRating" VARCHAR(255) NOT NULL,
+    "isCompleted" INTEGER DEFAULT 1,
+    "isSubmitted" INTEGER DEFAULT 1,
     "obnoxiousTradeExistFollowUpHistoryId" INTEGER NOT NULL,
     "obnoxiousTrade" VARCHAR(255) NOT NULL,
     "officerComment" VARCHAR(255) NOT NULL,
