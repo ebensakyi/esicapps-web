@@ -8,7 +8,7 @@ export async function setSession(res, session,privileges) {
   const cookieValue = cookie.serialize("session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60*60,
+    maxAge: 60*60*5,
     sameSite: "strict",
     path: "/",
   });

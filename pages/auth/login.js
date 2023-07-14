@@ -39,25 +39,25 @@ export default function Login() {
 
 
         Cookies.set("r_id", regionId, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         Cookies.set("d_id", districtId, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         Cookies.set("vrip", response?.data?.privileges, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         Cookies.set("ul", userLevelId, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         Cookies.set("fullName", fullName, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         Cookies.set("region", region, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         Cookies.set("district", district, {
-          expires: 1 / 24,
+          expires: 1 / 24 * 5,
         });
         return router.replace("/dashboard");
       }
