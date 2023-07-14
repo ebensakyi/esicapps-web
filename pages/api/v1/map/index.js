@@ -4,13 +4,13 @@ const get = async (req, res) => {
   try {
     const data = await prisma.basicInfoSection.findMany({
       where: { deleted: 0 },
-      include: {
-        ElectoralArea: { include: { District: { include: { Region: true } } } },
+    //   include: {
+    //     ElectoralArea: { include: { District: { include: { Region: true } } } },
 
-      },
-      orderBy: {
-        id: "desc",
-      },
+    //   },
+    //   orderBy: {
+    //     id: "desc",
+    //   },
     });
 
     return res.status(200).json(data);
