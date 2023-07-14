@@ -1,5 +1,5 @@
 import prisma from "../../../../../prisma/db";
-import { send } from "../../../../../utils/send-sms";
+import { sendSMS } from "../../../../../utils/send-hubtel-sms";
 import { append_233 } from "../../../../../utils/append-233";
 import { getSession } from "../../../../../utils/session-manager";
 import { logActivity } from "../../../../../utils/log";
@@ -45,7 +45,7 @@ const post = async (req, res) => {
 
     for (let i = 0; i < userGroup.length; i++) {
       let phoneNumber = await append_233(userGroup[i].phoneNumber);
-      await send(phoneNumber, req.body.message);
+      await sendSMS(phoneNumber, req.body.message);
     }
 
    

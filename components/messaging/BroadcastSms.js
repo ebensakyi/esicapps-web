@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 const BroadcastSms = ({ regions, districts, messages }) => {
   const router = useRouter()
 
-  const [group, setGroup] = useState("");
-  const [recipient, setRecipient] = useState("");
+  const [recipientGroup, setRecipientGroup] = useState("");
+  const [recipientId, setRecipientId] = useState("");
 
   const [message, setMessage] = useState("");
 
@@ -19,17 +19,18 @@ const BroadcastSms = ({ regions, districts, messages }) => {
       let data = {
         message,
         sendingType: 2,
-        group,
-        recipient,
+        recipient: recipientGroup,
+        recipientId 
       };
       if (message == "") return toast.error("Message cannot be empty");
-      if (recipient == "") return toast.error("Recipient cannot be empty");
+      if (recipientId == ""||recipientGroup =="") return toast.error("Recipient cannot be empty");
 
       const response = await axios.post("/api/v1/messaging/sms/broadcast", data);
      router.push('/messaging/sms/broadcast')
 
-      setRecipient("")
-      setMessage("")
+     setRecipientId("");
+     setRecipientGroup("")
+     setMessage("");
       router.replace(router.asPath);
 
       return toast.success("Message sent");
@@ -113,28 +114,28 @@ const BroadcastSms = ({ regions, districts, messages }) => {
                   <div className="col-xxl-3 col-md-6">
                     <div>
                       <label htmlFor="readonlyInput" className="form-label">
-                        Group
+                        Recipient Group
                       </label>
 
                       <select
                         className="form-select"
                         id="inputGroupSelect02"
                         onChange={(e) => {
-                          setGroup(e.target.value);
+                          setRecipientGroup(e.target.value);
                         }}
-                        value={recipient}
+                        value={recipientGroup}
                       >
-                          <option value="">Choose...</option>
-                        <option key={1} value="1">
+                        <option value="">Choose...</option>
+                        <option key={1} value="districtId">
                           District
                         </option>
-                        <option key={2} value="2">
+                        <option key={2} value="regionId">
                           Region
                         </option>
                       </select>
                     </div>
                   </div>
-                  {group == 1 ? (
+                  {recipientGroup == "districtId" ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -145,13 +146,13 @@ const BroadcastSms = ({ regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={(e) => {
-                            setRecipient(e.target.value);
+                            setRecipientId(e.target.value);
                           }}
-                          value={recipient}
+                          value={recipientId}
                         >
                           <option value="">Choose...</option>
                           {districts.map((d) => (
-                            <option key={d.id} value={d.id+"$"+d.name}>
+                            <option key={d.id} value={d.id}>
                               {d.name}
                             </option>
                           ))}
@@ -161,7 +162,7 @@ const BroadcastSms = ({ regions, districts, messages }) => {
                   ) : (
                     ""
                   )}
-                  {group == 2 ? (
+                  {recipientGroup == "regionId" ? (
                     <div className="col-xxl-3 col-md-6">
                       <div>
                         <label htmlFor="readonlyInput" className="form-label">
@@ -172,12 +173,13 @@ const BroadcastSms = ({ regions, districts, messages }) => {
                           className="form-select"
                           id="inputGroupSelect02"
                           onChange={async (e) => {
-                            setRecipient(e.target.value);
+                            setRecipientId(e.target.value);
                           }}
+                          value={recipientId}
                         >
                           <option value="">Choose...</option>
                           {regions.map((region) => (
-                            <option value={region.id+"$"+region.name} key={region.id}>
+                            <option value={region.id} key={region.id}>
                               {region.name}
                             </option>
                           ))}
