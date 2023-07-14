@@ -605,7 +605,7 @@ let put = async (req, res) => {
           : Number(req?.body?.conclusionSection.obnoxiousTradeExist),
 
       obnoxiousTrade:
-        req?.body?.conclusionSection.obnoxiousTrade == undefined ? null : req?.body?.conclusionSection.obnoxiousTrade,
+        req?.body?.conclusionSection.obnoxiousTrade,
 
      
     };
