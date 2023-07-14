@@ -86,6 +86,7 @@ const get = async (req, res) => {
   try {
     let curPage = req.query.page;
     let searchText = req.query.searchText.trim();
+    
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage);
@@ -94,18 +95,7 @@ const get = async (req, res) => {
     });
 
     let community = await prisma.community.findMany({
-      where:
-        searchText != ""
-          ? {
-              deleted: 0,
-              districtId: district,
-            }
-          : {
-              name: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            },
+      where: getSearchParams(req, searchText).where,
       skip: skip,
       take: perPage,
       orderBy: {
