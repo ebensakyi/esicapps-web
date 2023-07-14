@@ -69,9 +69,8 @@ const AssignData = ({ districts, assignments }) => {
 
   const deleteAssignment = async (id) => {
     try {
-      
       const response = await axios.delete(`/api/v1/setup/assign-data`,{
-        id: id,
+        data: {id},
       }
       );
       router.replace(router.asPath);
@@ -120,7 +119,7 @@ const AssignData = ({ districts, assignments }) => {
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">DATA ASSIGNMENT</h5>
+              <h5 className="card-title mb-0">TRANSFER DATA OWNERSHIP </h5>
             </div>
             <div className="card-body">
               {/* <h6 className="card-title">Add Community</h6> */}
@@ -235,7 +234,7 @@ const AssignData = ({ districts, assignments }) => {
         <div className="col-sm-12 col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title mb-0">DATA ASSIGNMENTS</h5>
+              <h5 className="card-title mb-0">DATA OWNERSHIP TRANSFERS</h5>
             </div>
             <div className="card-body">
               <table

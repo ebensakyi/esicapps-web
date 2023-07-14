@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-const Map = ({data}) => {
+const Map = ({ data }) => {
   // useEffect(() => {
+    
+
   //     // Initialize the map when the component mounts
   //     const map = L.map('map').setView([51.505, -0.09], 13);
 
@@ -13,10 +15,10 @@ const Map = ({data}) => {
 
   //     // Add markers to the map
   //     L.marker([51.5, -0.09]).addTo(map);
-  //   }, []);
+  //  }, []);
 
-  const position = [7.967, -1.505]; // Replace with your desired coordinates
-  const coordinates = [7.967, -1.505];
+  const position = [7.967, -1.505];
+  // const coordinates = [7.967, -1.505];
   return (
     <MapContainer
       center={position}
@@ -28,11 +30,11 @@ const Map = ({data}) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
       />
-      <Marker position={coordinates}>
-        <Popup>
-          Residential
-        </Popup>
-      </Marker>
+      {data.map((point, index) => (
+        <Marker key={index} position={[point.latitude, point.longitude]}>
+          <Popup>{point.community}</Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 };

@@ -46,7 +46,8 @@ const get = async (req, res) => {
 
 const Delete = async (req, res) => {
   try {
-    console.log(req.body);
+    const { id } = req.body;
+    console.log(id);
 
     await prisma.assignData.update({
       where: {

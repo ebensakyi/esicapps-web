@@ -37,8 +37,8 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const messages = await fetch(
-    `${SERVER_BASE_URL}/api/v1/messaging/notification`
+  const data = await fetch(
+    `${SERVER_BASE_URL}/api/v1/map`
   ).then((res) => res.json());
 
 //   const data = await fetch(`${SERVER_BASE_URL}/api/v1/map?session=${session}`).then((res) =>
@@ -47,7 +47,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-     data : []
+     data 
     },
   };
 }
