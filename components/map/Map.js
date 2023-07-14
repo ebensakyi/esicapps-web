@@ -32,7 +32,7 @@ const Map = ({ data }) => {
       />
       {data.map((point, index) => (
         <Marker key={index} position={[point.latitude, point.longitude]}>
-          <Popup>{point.electoralArea}{"\n"}{point.community}{"\n"}{point.respondentName}{"\n"}{point.respondentPhoneNumber}{"\n"}</Popup>
+          <Popup>{point.electoralArea}{" | "}{point.community}{" | "}{point.respondentName}{" | "}{point.respondentPhoneNumber}{"\n"}</Popup>
         </Marker>
       ))}
     </MapContainer>
