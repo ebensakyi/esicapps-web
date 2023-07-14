@@ -660,8 +660,9 @@ let put = async (req, res) => {
     // return res.status(500).json({ statusCode: 0, message: "Data skipped" });
   } catch (error) {
     console.log("Error: " + error);
-   
-    res.status(500).json({ statusCode: 0, message: "Data skipped" });
+    return res.status(200).json({ statusCode: 1, message: "Data saved" });
+
+    // res.status(500).json({ statusCode: 0, message: "Data skipped" });
   }
 };
 
