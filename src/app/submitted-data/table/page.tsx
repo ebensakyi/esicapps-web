@@ -23,6 +23,8 @@ import ReactPaginate from "react-paginate";
 export default async function Page() {
     const data = await getSubmittedData()
 
+    
+
 
     const router = useRouter();
     const searchParams = useSearchParams()
@@ -53,8 +55,7 @@ export default async function Page() {
     const page = Number(searchParams.get('page'))
     const searchtext = Number(searchParams.get('searchText'))
 
-    // let formId = query.inspectionFormId;
-    // let published = query.published;
+
 
 
 

@@ -1,6 +1,5 @@
-import { prisma } from "../../../../../prisma/db";
-import { logActivity } from "../../../../../utils/log";
-import { getSession } from "../../../../../utils/session-manager";
+import { logActivity } from "../../../../../../utils/log";
+import { getSession } from "../../../../../../utils/session-manager";
 
 export async function POST(request: Request) {
   try {
@@ -29,6 +28,8 @@ export async function GET(request: Request) {
     let userId = userData?.id;
 
     await logActivity("Visited submitted data list", userId);
+
+
 
 //     let formId = Number(request?.query?.formId);
 //     let published = Number(request?.query?.published);

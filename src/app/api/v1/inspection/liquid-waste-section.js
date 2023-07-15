@@ -1,0 +1,172 @@
+import prisma from "../../../../prisma/db";
+
+const post = async (req, res) => {
+  try {
+    const data = {
+      id: req.body.id,
+
+      inspectionId: req.body.inspectionId,
+      userId: Number(req.body.userId),
+      numberToiletSeats:
+        req.body.numberToiletSeats == "null"
+          ? null
+          : Number(req.body.numberToiletSeats),
+      numberUrinalCubicle:
+        req.body.numberUrinalCubicle == "null"
+          ? null
+          : Number(req.body.numberUrinalCubicle),
+      urinalCubicleConditionId:
+        req.body.urinalCubicleConditionId == "null"
+          ? null
+          : Number(req.body.urinalCubicleConditionId),
+      toiletAdequacyId:
+        req.body.toiletAdequacyId == "null"
+          ? null
+          : Number(req.body.toiletAdequacyId),
+      urinalAdequacyId:
+        req.body.urinalAdequacyId == "null"
+          ? null
+          : Number(req.body.urinalAdequacyId),
+      urinalGenderSensivityId:
+        req.body.urinalGenderSensivityId == "null"
+          ? null
+          : Number(req.body.urinalGenderSensivityId),
+      effluentManagementReportId:
+        req.body.effluentManagementReportId == "null"
+          ? null
+          : Number(req.body.effluentManagementReportId),
+
+      toiletConditionId:
+        req.body.toiletConditionId == "null"
+          ? null
+          : Number(req.body.toiletConditionId),
+      toiletGenderSensivityId:
+        req.body.toiletGenderSensivityId == "null"
+          ? null
+          : Number(req.body.toiletGenderSensivityId),
+      toiletDisabilityFriendlyId:
+        req.body.toiletDisabilityFriendlyId == "null"
+          ? null
+          : Number(req.body.toiletDisabilityFriendlyId),
+      urinalDisabilityFriendlyId:
+        req.body.urinalDisabilityFriendlyId == "null"
+          ? null
+          : Number(req.body.urinalDisabilityFriendlyId),
+      toiletDischargeId:
+        req.body.toiletDischargeId == "null"
+          ? null
+          : Number(req.body.toiletDischargeId),
+      toiletPitPositionId:
+        req.body.toiletPitPositionId == "null"
+          ? null
+          : Number(req.body.toiletPitPositionId),
+      containmentEmptiedId:
+        req.body.containmentEmptiedId == "null"
+          ? null
+          : Number(req.body.containmentEmptiedId),
+      sewerSystemId:
+        req.body.sewerSystemId == "null"
+          ? null
+          : Number(req.body.sewerSystemId),
+      wasteWaterContainmentId:
+        req.body.wasteWaterContainmentId == "null"
+          ? null
+          : Number(req.body.wasteWaterContainmentId),
+      easeYourselfWhereId:
+        req.body.easeYourselfWhereId == "null"
+          ? null
+          : Number(req.body.easeYourselfWhereId),
+      areaSeweredId:
+        req.body.areaSeweredId == "null"
+          ? null
+          : Number(req.body.areaSeweredId),
+      facilityConnectedSewerId:
+        req.body.facilityConnectedSewerId == "null"
+          ? null
+          : Number(req.body.facilityConnectedSewerId),
+      bathroomAdequacyId:
+        req.body.bathroomAdequacyId == "null"
+          ? null
+          : Number(req.body.bathroomAdequacyId),
+      bathroomConditionId:
+        req.body.bathroomConditionId == "null"
+          ? null
+          : Number(req.body.bathroomConditionId),
+
+      drainsConditionId:
+        req.body.drainsConditionId == "null"
+          ? null
+          : Number(req.body.drainsConditionId),
+      desiltingFrequencyId:
+        req.body.desiltingFrequencyId == "null"
+          ? null
+          : Number(req.body.desiltingFrequencyId),
+      stagnationEvidenceId:
+        req.body.stagnationEvidenceId == "null"
+          ? null
+          : Number(req.body.stagnationEvidenceId),
+      rating: req.body.rating == "null" ? null :  Number(Math.ceil(req.body.rating)),
+      toiletHouseholdNumberId:
+        req.body.toiletHouseholdNumberId == "null"
+          ? null
+          : Number(req.body.toiletHouseholdNumberId),
+
+
+
+          separateStaffUrinalId: req.body.separateStaffUrinalId == "null" ? null : Number(req.body.separateStaffUrinalId),
+
+          availToiletFaciltyMgtId: req.body.availToiletFaciltyMgtId == "null" ? null : Number(req.body.availToiletFaciltyMgtId),
+
+          analCleansingMaterialMgtId: req.body.analCleansingMaterialMgtId == "null" ? null : Number(req.body.analCleansingMaterialMgtId),
+
+          numberUrinalSeats: req.body.numberUrinalSeats == "null" ? null : Number(req.body.numberUrinalSeats),
+
+          numberBathroomCubicle: req.body.numberBathroomCubicle == "null" ? null : Number(req.body.numberBathroomCubicle),
+
+          
+    };
+
+    
+
+    const response = await prisma.liquidWasteSection.create({ data });
+
+    if (response) {
+      return res.status(200).json({ statusCode: 1, message: "Data saved" });
+    }
+
+    return res.status(500).json({ statusCode: 0, message: "Data skipped" });
+  } catch (error) {
+ console.log("Error: " + error);
+    // if (error.code === "P2002")
+    //   return res
+    //     .status(400)
+    //     .json({ statusCode: 0, message: "dataVersion s should be unique" });
+    res.status(500).json({ statusCode: 0, message: "Data skipped" });
+  }
+};
+
+const get = async (req, res) => {
+  try {
+    let userId = Number(req.query.userId);
+    const response = await prisma.liquidWasteSection.findMany({
+      where: { userId: userId, deleted: 0 },
+    });
+
+    console.log("response", response);
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default (req, res) => {
+  req.method === "POST"
+    ? post(req, res)
+    : req.method === "PUT"
+    ? console.log("PUT")
+    : req.method === "DELETE"
+    ? console.log("DELETE")
+    : req.method === "GET"
+    ? get(req, res)
+    : res.status(404).send("");
+};

@@ -33,7 +33,7 @@ export const sendFCM = async (title: string, body: string, fcmId: string) => {
 };
 
 export const sendBulkFCM = async (title:string, body:string, fcmId:string) => {
-  let options = {
+  let options:any = {
     method: "POST",
     url: "https://fcm.googleapis.com/fcm/send",
     headers: {
