@@ -1,7 +1,4 @@
 import { prisma } from "../../../../../../prisma/db";
-import { FollowUpInspection } from "../../../../../../typings";
-import { logActivity } from "../../../../../../utils/log";
-import { getSession } from "../../../../../../utils/session-manager";
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +13,7 @@ export async function POST(request: Request) {
     });
     let region = Number(districtData?.regionId);
 
-    const data: FollowUpInspection = {
+    const data = {
       id: res.id,
 
       prevInspectionId: res.prevInspectionId,
@@ -59,7 +56,7 @@ export async function POST(request: Request) {
           : Number(res.isNuisanceObservedId),
     };
 
-    const response = await prisma.followUpInspection.create({ data });
+    const response = await prisma.followUpInspection.create( data );
 
     return new Response(
       JSON.stringify({

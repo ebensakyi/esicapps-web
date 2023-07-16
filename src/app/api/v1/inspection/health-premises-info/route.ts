@@ -5,6 +5,8 @@ import { getSession } from "../../../../../../utils/session-manager";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
+    console.log(res);
+    
 
     const data = {
         id: res.id,
@@ -64,7 +66,6 @@ export async function POST(request: Request) {
             ? null
             : Number(res.incineratorAvailabilityId),
   
-        ////////////////////////NEW/////////////
         embalmingAreaConditionId:
           res.embalmingAreaConditionId == "null"
             ? null
@@ -107,15 +108,17 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url)
+    const userId = Number(searchParams.get('userId'))
+
     const res = await request.json();
 
-    let userId = Number(req.query.userId);
     if (!userId) return res.status(200).json();
 
     const response = await prisma.healthPremisesInfoSection.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
-    return new Response(JSON.stringify([{data}]));
+    return new Response(JSON.stringify(response));
   } catch (error) {}
 }
