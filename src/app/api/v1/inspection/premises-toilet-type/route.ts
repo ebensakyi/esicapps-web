@@ -12,17 +12,20 @@ export async function POST(request: Request) {
 
       inspectionId: res.inspectionId,
       userId: Number(res.userId),
-      liquidWasteSectionId:
-        res.liquidWasteSectionId == "null" ? null : res.liquidWasteSectionId,
+      toiletTypeId:
+        res.toiletTypeId == "null" ? null : Number(res.toiletTypeId),
 
-      drainTypeId: res.drainTypeId == "null" ? null : Number(res.drainTypeId),
+      liquidWasteSectionId:
+        res.liquidWasteSectionId == "null"
+          ? null
+          : res.liquidWasteSectionId,
     };
 
-    const response = await prisma.premisesDrainType.create({ data });
+    const response = await prisma.premisesToiletType.create({ data });
 
     return NextResponse.json(response);
-  } catch (error: any) {
-    return NextResponse.json(error);
+  } catch (error) {
+    return NextResponse.json(error,{status:500});
   }
 }
 
@@ -35,12 +38,16 @@ export async function GET(request: Request) {
 
     if (!userId) return res.status(200).json();
 
-    const response = await prisma.premisesDrainType.findMany({
+    const response = await prisma.premisesToiletType.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
-    return NextResponse.json(response);
+    return NextResponse.json(response,{
+        status: 200,
+      });
   } catch (error) {
-    return NextResponse.json({ message: error });
+    return NextResponse.json(error,{
+        status: 500,
+      });
   }
 }

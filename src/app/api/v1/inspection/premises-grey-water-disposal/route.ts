@@ -8,17 +8,20 @@ export async function POST(request: Request) {
     const res = await request.json();
 
     const data = {
-      id: res.id,
+        id: res.id,
+  
+        inspectionId: res.inspectionId,
+        userId: Number(res.userId),
+        liquidWasteSectionId:
+          res.liquidWasteSectionId == "null" ? null : res.liquidWasteSectionId,
+  
+          greyWaterDisposalId:
+          res.greyWaterDisposalId == "null"
+            ? null
+            : Number(res.greyWaterDisposalId),
+      };
+      const response = await prisma.premisesGreyWaterDisposal.create({ data });
 
-      inspectionId: res.inspectionId,
-      userId: Number(res.userId),
-      liquidWasteSectionId:
-        res.liquidWasteSectionId == "null" ? null : res.liquidWasteSectionId,
-
-      drainTypeId: res.drainTypeId == "null" ? null : Number(res.drainTypeId),
-    };
-
-    const response = await prisma.premisesDrainType.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
@@ -35,7 +38,7 @@ export async function GET(request: Request) {
 
     if (!userId) return res.status(200).json();
 
-    const response = await prisma.premisesDrainType.findMany({
+    const response = await prisma.premisesGreyWaterDisposal.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
