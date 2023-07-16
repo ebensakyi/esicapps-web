@@ -42,10 +42,9 @@ export async function POST(request: Request) {
     const response = await prisma.basicInfoSection.create({ data });
 
     return new Response(
-      JSON.stringify({
-        action: 0,
-        message: [],
-      })
+      JSON.stringify(
+       response
+      )
     );
   } catch (error: any) {
     console.log(error);
@@ -60,7 +59,7 @@ export async function GET(request: Request) {
     const data = await prisma.basicInfoSection.findMany({
       where: { deleted: 0, userId: Number(res.userId) },
     });
-
-    return new Response(JSON.stringify([{data}]));
+ 
+    return new Response(JSON.stringify(data));
   } catch (error) {}
 }
