@@ -212,7 +212,7 @@ export async function POST(request: Request) {
           : Number(res.boardingHouseConditionId),
     };
     const response = await prisma.institutionPremisesInfoSection.create({
-      data,
+     data
     });
 
     return NextResponse.json(response);
