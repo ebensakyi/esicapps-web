@@ -46,7 +46,7 @@ export interface FollowUpInspection {
   regionId: number;
   userId: number;
   community: string;
-  electoralAreaId: number | null;
+  electoralAreaId: number;
   electoralArea: string;
   ghanaPostGps: string;
   latitude: string;
@@ -54,8 +54,8 @@ export interface FollowUpInspection {
   accuracy: string;
   respondentName: string;
   respondentPhoneNumber: string;
-  respondentDesignationId: number | null;
-  communityId: number | null;
+  respondentDesignationId: number;
+  communityId: number;
 
   waterRating: number;
   solidWasteRating: number;

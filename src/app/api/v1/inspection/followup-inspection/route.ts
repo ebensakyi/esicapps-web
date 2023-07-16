@@ -25,10 +25,9 @@ export async function POST(request: Request) {
       districtId: Number(district),
       regionId: region,
       userId: Number(res.userId),
-      communityId: res.communityId == "null" ? null : Number(res.communityId),
+      communityId: Number(res.communityId),
       community: res.community == "null" ? "" : res.community,
-      electoralAreaId:
-        res.electoralAreaId == "null" ? null : Number(res.electoralAreaId),
+      electoralAreaId: Number(res.electoralAreaId),
       electoralArea: res.electoralArea == "null" ? null : res.electoralArea,
       ghanaPostGps: res.ghanaPostGps == "null" ? "" : res.ghanaPostGps,
       latitude: res.latitude == "null" ? null : res.latitude,
@@ -38,16 +37,12 @@ export async function POST(request: Request) {
       respondentPhoneNumber:
         res.respondentPhoneNumber == "null" ? null : res.respondentPhoneNumber,
       respondentDesignationId:
-        res.respondentDesignationId == "null"
-          ? null
-          : Number(res.respondentDesignationId),
+       Number(res.respondentDesignationId),
 
-      waterRating: res.waterRating == "null" ? 0 : Number(res.waterRating),
-      solidWasteRating:
-        res.solidWasteRating == "null" ? 0 : Number(res.solidWasteRating),
-      liquidWasteRating:
-        res.liquidWasteRating == "null" ? 0 : Number(res.liquidWasteRating),
-      totalRating: res.totalRating == "null" ? 0 : Number(res.totalRating),
+      waterRating: Number(res.waterRating),
+      solidWasteRating: Number(res.solidWasteRating),
+      liquidWasteRating: Number(res.liquidWasteRating),
+      totalRating: Number(res.totalRating),
 
       officerComment: res.officerComment == "null" ? null : res.officerComment,
 
