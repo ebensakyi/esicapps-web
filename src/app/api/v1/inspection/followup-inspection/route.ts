@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     });
     let region = Number(districtData?.regionId);
 
-    const data = {
+    const data:any = {
       id: res.id,
 
       prevInspectionId: res.prevInspectionId,

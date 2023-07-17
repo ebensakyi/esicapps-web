@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    const data = {
+    const data:any = {
         id: res.id,
   
         inspectionId: res.inspectionId,
