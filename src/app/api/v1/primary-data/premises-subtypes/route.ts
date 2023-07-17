@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       inspectionFormId: res.data.inspectionFormId
 
     };
-    const response = await prisma.premisesS.create({ data });
+    const response = await prisma.premisesSubtype.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const data = await prisma.pestSign.findMany({
+    const data = await prisma.premisesSubtype.findMany({
       where: { deleted: 0 },
     });
 
