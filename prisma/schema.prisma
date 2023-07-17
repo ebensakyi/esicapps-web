@@ -164,9 +164,9 @@ model InspectionForm {
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
 
-  Service                   Service[]
-  Subtype                   Subtype[]
-  Type                      Type[]
+  PremisesService                   PremisesService[]
+  PremisesSubtype                   PremisesSubtype[]
+  PremisesType                      PremisesType[]
   Nuisance                  Nuisance[]
   RespondentDesignation     RespondentDesignation[]
   FollowUpInspection        FollowUpInspection[]
@@ -733,8 +733,8 @@ model Type {
   healthPremisesType             HealthPremisesInfoSection[]      @relation("healthPremisesType")
   hospitalityPremisesType        HospitalityPremisesInfoSection[] @relation("hospitalityPremisesType")
   sanitaryPremisesType           SanitaryPremisesInfoSection[]    @relation("sanitaryPremisesType")
-  Service                        Service[]
-  Subtype                        Subtype[]
+  PremisesService                        PremisesService[]
+  PremisesSubtype                        PremisesSubtype[]
   InspectionForm                 InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
@@ -743,7 +743,7 @@ model Type {
   @@unique([inspectionFormId, name], name: "inspectionFormName")
 }
 
-model Subtype {
+model PremisesSubtype {
   id                             Int                              @id @default(autoincrement())
   name                           String                           @db.VarChar(255)
   deleted                        Int?                             @default(0)
@@ -1261,7 +1261,7 @@ model EateryPremisesInfoSection {
   approvedHandwashingFacilityAvailability   YesNo?                 @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
   bathroomAvailability                      YesNo?                 @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?                 @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  eateryPremisesSubType                     Subtype?               @relation("eateryPremisesSubType", fields: [eateryPremisesSubTypeId], references: [id])
+  eateryPremisesSubType                     PremisesSubtype?               @relation("eateryPremisesSubType", fields: [eateryPremisesSubTypeId], references: [id])
   eateryPremisesType                        Type?                  @relation("eateryPremisesType", fields: [eateryPremisesTypeId], references: [id])
   firstAidAvailability                      YesNo?                 @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   toiletAvailability                        YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
@@ -1814,8 +1814,8 @@ model InstitutionPremisesInfoSection {
   User       User       @relation(fields: [userId], references: [id])
   Inspection Inspection @relation(fields: [inspectionId], references: [id])
 
-  Type    Type?    @relation(fields: [institutionPremisesTypeId], references: [id])
-  Subtype Subtype? @relation(fields: [institutionPremisesSubtypeId], references: [id])
+  PremisesType    PremisesType?    @relation(fields: [institutionPremisesTypeId], references: [id])
+  PremisesSubtype PremisesSubtype? @relation(fields: [institutionPremisesSubtypeId], references: [id])
 }
 
 model InstitutionPremisesInfoSectionHistory {
@@ -1934,8 +1934,8 @@ model IndustryPremisesInfoSection {
 
   protectiveClothingUsed YesNo? @relation("protectiveClothingUsed", fields: [protectiveClothingUsedId], references: [id])
 
-  Type    Type?    @relation(fields: [industryPremisesTypeId], references: [id])
-  Subtype Subtype? @relation(fields: [industryPremisesSubtypeId], references: [id])
+  PremisesType    PremisesType?    @relation(fields: [industryPremisesTypeId], references: [id])
+  PremisesSubtype PremisesSubtype? @relation(fields: [industryPremisesSubtypeId], references: [id])
 }
 
 model IndustryPremisesInfoSectionHistory {
