@@ -8,6 +8,7 @@ export async function POST(request: Request) {
     const res = await request.json();
     const data = {
       name: res.data.name,
+      inspectionFormId: res.data.inspectionFormId,
     };
     const response = await prisma.respondentDesignation.create({ data });
 
