@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { prisma } from "../../../../../../prisma/db";
 import { logActivity } from "../../../../../../utils/log";
 import { getSession } from "../../../../../../utils/session-manager";
@@ -41,14 +42,9 @@ export async function POST(request: Request) {
 
     const response = await prisma.basicInfoSection.create({ data });
 
-    return new Response(
-      JSON.stringify(
-       response
-      )
-    );
+    return NextResponse.json(response);
   } catch (error: any) {
-    console.log(error);
-    return new Response(JSON.stringify({ message: error.message }));
+    return NextResponse.json(error);
   }
 }
 
@@ -59,7 +55,9 @@ export async function GET(request: Request) {
     const data = await prisma.basicInfoSection.findMany({
       where: { deleted: 0, userId: Number(res.userId) },
     });
- 
-    return new Response(JSON.stringify(data));
-  } catch (error) {}
+
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json(error);
+  }
 }
