@@ -6,8 +6,12 @@ import { getSession } from "../../../../../../utils/session-manager";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
+    const data = {
+      name: res.data.name,
+      inspectionFormId: res.data.inspectionFormId
 
-  
+    };
+    const response = await prisma.ownershipType.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
@@ -17,10 +21,8 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const res = await request.json();
-
-    const data = await prisma.xxxxx.findMany({
-      where: { deleted: 0, userId: Number(res.userId) },
+    const data = await prisma.ownershipType.findMany({
+      where: { deleted: 0 },
     });
 
     return NextResponse.json(data);

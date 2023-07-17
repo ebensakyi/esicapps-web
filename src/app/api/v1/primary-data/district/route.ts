@@ -8,6 +8,8 @@ export async function POST(request: Request) {
     const res = await request.json();
     const data = {
       name: res.data.name,
+      regionId: res.regionId,
+      abbrv: res.abbrv,
     };
     const response = await prisma.district.create({ data });
 
