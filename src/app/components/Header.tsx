@@ -12,14 +12,14 @@ export default function Header() {
             {/* ======= Header ======= */}
             <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
-                    <a href="index.html" className="logo d-flex align-items-center">
+                    <Link href="/dashboard" className="logo d-flex align-items-center">
                         <img src="assets/img/logo.png" alt="" />
-                        <span className="d-none d-lg-block">NiceAdmin</span>
-                    </a>
+                        <span className="d-none d-lg-block">ESICApps</span>
+                    </Link>
                     <i className="bi bi-list toggle-sidebar-btn" />
                 </div>
                 {/* End Logo */}
-                <div className="search-bar">
+                {/* <div className="search-bar">
                     <form
                         className="search-form d-flex align-items-center"
                         method="POST"
@@ -35,7 +35,7 @@ export default function Header() {
                             <i className="bi bi-search" />
                         </button>
                     </form>
-                </div>
+                </div> */}
                 {/* End Search Bar */}
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
@@ -44,13 +44,11 @@ export default function Header() {
                                 <i className="bi bi-search" />
                             </a>
                         </li>
-                        {/* End Search Icon*/}
-                        <li className="nav-item dropdown">
+                        {/* <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-bell" />
                                 <span className="badge bg-primary badge-number">4</span>
                             </a>
-                            {/* End Notification Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                                 <li className="dropdown-header">
                                     You have 4 new notifications
@@ -111,15 +109,12 @@ export default function Header() {
                                     <a href="#">Show all notifications</a>
                                 </li>
                             </ul>
-                            {/* End Notification Dropdown Items */}
                         </li>
-                        {/* End Notification Nav */}
                         <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-chat-left-text" />
                                 <span className="badge bg-success badge-number">3</span>
                             </a>
-                            {/* End Messages Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                                 <li className="dropdown-header">
                                     You have 3 new messages
@@ -196,9 +191,7 @@ export default function Header() {
                                     <a href="#">Show all messages</a>
                                 </li>
                             </ul>
-                            {/* End Messages Dropdown Items */}
-                        </li>
-                        {/* End Messages Nav */}
+                        </li> */}
                         <li className="nav-item dropdown pe-3">
                             <a
                                 className="nav-link nav-profile d-flex align-items-center pe-0"
@@ -214,7 +207,6 @@ export default function Header() {
                                     K. Anderson
                                 </span>
                             </a>
-                            {/* End Profile Iamge Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
                                     <h6>Kevin Anderson</h6>
@@ -268,7 +260,6 @@ export default function Header() {
                             </ul>
                             {/* End Profile Dropdown Items */}
                         </li>
-                        {/* End Profile Nav */}
                     </ul>
                 </nav>
                 {/* End Icons Navigation */}
@@ -306,7 +297,7 @@ export default function Header() {
                             data-bs-parent="#sidebar-nav"
                         >
                             <li>
-                                <Link href="/submitted-data?id=1">
+                                <Link href="/submitted-data/table?id=1">
                                     <i className="bi bi-circle" />
                                     <span>Tables</span>
                                 </Link>
@@ -316,12 +307,13 @@ export default function Header() {
                                     <i className="bi bi-circle" />
                                     <span>Map</span>
                                 </Link>
-                            </li> <li>
+                            </li> 
+                            {/* <li>
                                 <Link href="components-alerts.html">
                                     <i className="bi bi-circle" />
                                     <span>Sanitary</span>
                                 </Link>
-                            </li>
+                            </li> */}
 
 
                         </ul>
@@ -448,7 +440,7 @@ export default function Header() {
                             <i className="bi bi-exclamation-triangle
 
 " />
-                            <span>Sanitary Reports</span>
+                            <span>Sanitation Reports</span>
                             <i className="bi bi-chevron-down ms-auto" />
                         </Link>
                         <ul

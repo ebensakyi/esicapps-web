@@ -7,21 +7,19 @@ import moment from "moment";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
- async function getSubmittedData() {
-    // Fetch data from external API
-    const res = await fetch(`/api/v1/submitted-data`)
+//  async function getSubmittedData() {
+//     const res = await fetch(`/api/v1/submitted-data`)
 
-    if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data')
-      }
+//     if (!res.ok) {
+//         throw new Error('Failed to fetch data')
+//       }
      
-      return res.json()
-}
+//       return res.json()
+// }
 
 
 export default async function Page() {
-    const data = await getSubmittedData()
+ //const data =  await getSubmittedData()
 
     
 
@@ -490,7 +488,7 @@ export default async function Page() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {data.inspection.map((dt: { id: React.Key | null | undefined; Inspection: { totalRating: number; InspectionType: { name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; id: number; }; prevInspectionId: any; premisesCode: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; startedAt: moment.MomentInput; completedAt: moment.MomentInput; createdAt: moment.MomentInput; isPublished: number; id: any; }; User: { otherNames: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; surname: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }; latitude: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; longitude: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; accuracy: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; Community: { ElectoralArea: { District: { Region: { name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }; }) => {
+                                                {/* {data.inspection.map(dt  => {
                                                     return (
                                                         <tr key={dt.id}>
                                                             <td>{handleRating(dt?.Inspection?.totalRating)}</td>
@@ -531,7 +529,6 @@ export default async function Page() {
                                                             <td>
                                                                 {dt?.User?.otherNames} {dt?.User?.surname}
                                                             </td>
-                                                            {/* <td>{dt?.ghanaPostGps}</td> */}
                                                             <td>
                                                                 {" "}
                                                                 <Link
@@ -605,10 +602,10 @@ export default async function Page() {
                                                             </td>
                                                         </tr>
                                                     );
-                                                })}
+                                                })} */}
                                             </tbody>
                                         </table>
-                                        <ReactPaginate
+                                        {/* <ReactPaginate
                                             marginPagesDisplayed={2}
                                             pageRangeDisplayed={5}
                                             previousLabel={"Previous"}
@@ -627,7 +624,7 @@ export default async function Page() {
                                             nextClassName={"page-item"}
                                             nextLinkClassName={"page-link"}
                                             activeClassName={"active"}
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
                             </div>

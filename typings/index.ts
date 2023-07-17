@@ -1,4 +1,4 @@
-export interface EateryInfo {
+export type EateryInfo = {
   id: string;
   inspectionId: string;
   userId: number;
