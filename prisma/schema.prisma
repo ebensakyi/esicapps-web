@@ -28,7 +28,7 @@ model Inspection {
   deleted                        Int?                            @default(0)
   isReinspected                  Int?                            @default(0)
   isFollowedUp                   Int?                            @default(0)
-  totalRating                    Int?                      
+  totalRating                    Int?
   updated                        Int?                            @default(0)
   isCompleted                    Int?                            @default(1)
   isSubmitted                    Int?                            @default(1)
@@ -102,18 +102,18 @@ model InspectionHistory {
   userId           Int
   inspectionFormId Int
   inspectionTypeId Int
-  isPublished      Int      @default(0)
-  rejected         Int      @default(-1)
+  isPublished      Int     @default(0)
+  rejected         Int     @default(-1)
   publishedById    Int?
-  followUpDate     String?  @db.VarChar(255)
+  followUpDate     String? @db.VarChar(255)
   doFollowUp       Int?
-  deleted          Int?     @default(0)
-  isReinspected    Int?     @default(0)
-  isFollowedUp     Int?     @default(0)
-  isCompleted      Int?     @default(1)
-  isSubmitted      Int?     @default(1)
-  totalRating     Int?
-  updated          Int?     @default(0)
+  deleted          Int?    @default(0)
+  isReinspected    Int?    @default(0)
+  isFollowedUp     Int?    @default(0)
+  isCompleted      Int?    @default(1)
+  isSubmitted      Int?    @default(1)
+  totalRating      Int?
+  updated          Int?    @default(0)
 
   createdAt                                 DateTime                                    @default(now())
   updatedAt                                 DateTime                                    @updatedAt
@@ -164,13 +164,13 @@ model InspectionForm {
   updatedAt  DateTime     @updatedAt
   Inspection Inspection[]
 
-  PremisesService                   PremisesService[]
-  PremisesSubtype                   PremisesSubtype[]
-  PremisesType                      PremisesType[]
+  PremisesSubtype           PremisesSubtype[]
+  PremisesType              PremisesType[]
   Nuisance                  Nuisance[]
   RespondentDesignation     RespondentDesignation[]
   FollowUpInspection        FollowUpInspection[]
   FollowUpInspectionHistory FollowUpInspectionHistory[]
+  PremisesService          PremisesService[]
 }
 
 model PasswordResetRequest {
@@ -722,7 +722,7 @@ model StructureType {
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
 }
 
-model Type {
+model PremisesType {
   id                             Int                              @id @default(autoincrement())
   name                           String                           @db.VarChar(255)
   deleted                        Int?                             @default(0)
@@ -733,15 +733,30 @@ model Type {
   healthPremisesType             HealthPremisesInfoSection[]      @relation("healthPremisesType")
   hospitalityPremisesType        HospitalityPremisesInfoSection[] @relation("hospitalityPremisesType")
   sanitaryPremisesType           SanitaryPremisesInfoSection[]    @relation("sanitaryPremisesType")
-  PremisesService                        PremisesService[]
-  PremisesSubtype                        PremisesSubtype[]
+  PremisesSubtype                PremisesSubtype[]
   InspectionForm                 InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
   MarketPremisesInfoSection      MarketPremisesInfoSection[]
+  PremisesService               PremisesService[]
 
   @@unique([inspectionFormId, name], name: "inspectionFormName")
 }
+
+model PremisesService {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  premisesTypeId           Int?
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  PremisesType     PremisesType?  @relation(fields: [premisesTypeId], references: [id])
+}
+
+
+
 
 model PremisesSubtype {
   id                             Int                              @id @default(autoincrement())
@@ -750,14 +765,14 @@ model PremisesSubtype {
   createdAt                      DateTime                         @default(now())
   updatedAt                      DateTime                         @updatedAt
   inspectionFormId               Int
-  typeId                         Int
+  premisesTypeId                 Int
   eateryPremisesSubType          EateryPremisesInfoSection[]      @relation("eateryPremisesSubType")
   InspectionForm                 InspectionForm                   @relation(fields: [inspectionFormId], references: [id])
-  PremisesType                           PremisesType                             @relation(fields: [typeId], references: [id])
+  PremisesType                   PremisesType                     @relation(fields: [premisesTypeId], references: [id])
   IndustryPremisesInfoSection    IndustryPremisesInfoSection[]
   InstitutionPremisesInfoSection InstitutionPremisesInfoSection[]
 
-  @@unique([typeId, name], name: "typeName")
+  @@unique([premisesTypeId, name], name: "typeName")
 }
 
 model ToiletPitPosition {
@@ -1094,18 +1109,6 @@ model Logs {
   User      User     @relation(fields: [userId], references: [id])
 }
 
-model Service {
-  id               Int            @id @default(autoincrement())
-  name             String         @db.VarChar(255)
-  deleted          Int?           @default(0)
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  inspectionFormId Int
-  typeId           Int?
-  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
-  Type             Type?          @relation(fields: [typeId], references: [id])
-}
-
 model BasicInfoSection {
   id                      String                 @id @db.VarChar(255)
   inspectionId            String                 @unique @db.VarChar(255)
@@ -1261,8 +1264,8 @@ model EateryPremisesInfoSection {
   approvedHandwashingFacilityAvailability   YesNo?                 @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
   bathroomAvailability                      YesNo?                 @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?                 @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  eateryPremisesSubType                     PremisesSubtype?               @relation("eateryPremisesSubType", fields: [eateryPremisesSubTypeId], references: [id])
-  eateryPremisesType                        PremisesType?                  @relation("eateryPremisesType", fields: [eateryPremisesTypeId], references: [id])
+  eateryPremisesSubType                     PremisesSubtype?       @relation("eateryPremisesSubType", fields: [eateryPremisesSubTypeId], references: [id])
+  eateryPremisesType                        PremisesType?          @relation("eateryPremisesType", fields: [eateryPremisesTypeId], references: [id])
   firstAidAvailability                      YesNo?                 @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   toiletAvailability                        YesNo?                 @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   urinalAvailability                        YesNo?                 @relation("urinalAvailability", fields: [urinalAvailabilityId], references: [id])
@@ -1355,7 +1358,7 @@ model HealthPremisesInfoSection {
   incineratorAvailability                   YesNo?   @relation("incineratorAvailability", fields: [incineratorAvailabilityId], references: [id])
   placentaPitAvailability                   YesNo?   @relation("placentaPitAvailability", fields: [placentaPitAvailabilityId], references: [id])
 
-  healthPremisesType PremisesType?          @relation("healthPremisesType", fields: [healthPremisesTypeId], references: [id])
+  healthPremisesType PremisesType?  @relation("healthPremisesType", fields: [healthPremisesTypeId], references: [id])
   ownershipType      OwnershipType? @relation(fields: [ownershipTypeId], references: [id])
   separateWard       YesNo?         @relation("separateWard", fields: [separateWardId], references: [id])
   toiletAvailability YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
@@ -1437,7 +1440,7 @@ model HospitalityPremisesInfoSection {
   approvedHandwashingFacilityAvailability   YesNo?         @relation("approvedHandwashingFacilityAvailability", fields: [approvedHandwashingFacilityAvailabilityId], references: [id])
   bathroomAvailability                      YesNo?         @relation("bathroomAvailability", fields: [bathroomAvailabilityId], references: [id])
   drainsAvailability                        YesNo?         @relation("drainsAvailability", fields: [drainsAvailabilityId], references: [id])
-  hospitalityPremisesType                   Type?          @relation("hospitalityPremisesType", fields: [hospitalityPremisesTypeId], references: [id])
+  hospitalityPremisesType                   PremisesType?  @relation("hospitalityPremisesType", fields: [hospitalityPremisesTypeId], references: [id])
   physicalStructureType                     StructureType? @relation(fields: [physicalStructureTypeId], references: [id])
   toiletAvailability                        YesNo?         @relation("toiletAvailability", fields: [toiletAvailabilityId], references: [id])
   uncookedFoodStorageCondtionSafe           YesNo?         @relation("uncookedFoodStorageCondtionSafe", fields: [uncookedFoodStorageCondtionSafeId], references: [id])
@@ -1559,7 +1562,7 @@ model SanitaryPremisesInfoSection {
   safeHazardousWasteMgt                   YesNo?                 @relation("safeHazardousWasteMgt", fields: [safeHazardousWasteMgtId], references: [id])
   sanitaryAshesDisposal                   SanitaryInsanitary?    @relation("sanitaryAshesDisposal", fields: [sanitaryAshesDisposalId], references: [id])
   sanitaryFacilityMgt                     YesNo?                 @relation("sanitaryFacilityMgt", fields: [sanitaryFacilityMgtId], references: [id])
-  sanitaryPremisesType                    Type?                  @relation("sanitaryPremisesType", fields: [sanitaryPremisesTypeId], references: [id])
+  sanitaryPremisesType                    PremisesType?          @relation("sanitaryPremisesType", fields: [sanitaryPremisesTypeId], references: [id])
   sextonManagement                        YesNo?                 @relation("sextonManagement", fields: [sextonManagementId], references: [id])
   sextonOffice                            YesNo?                 @relation("sextonOffice", fields: [sextonOfficeId], references: [id])
   slaughterAreaAvailability               YesNo?                 @relation("slaughterAreaAvailability", fields: [slaughterAreaAvailabilityId], references: [id])
@@ -1673,7 +1676,7 @@ model MarketPremisesInfoSection {
   firstAidAvailability                      YesNo?              @relation("firstAidAvailability", fields: [firstAidAvailabilityId], references: [id])
   generalSanitaryCondition                  SanitaryInsanitary? @relation("generalSanitaryCondition", fields: [generalSanitaryConditionId], references: [id])
 
-  marketPremisesType Type? @relation(fields: [marketPremisesTypeId], references: [id])
+  marketPremisesType PremisesType? @relation(fields: [marketPremisesTypeId], references: [id])
 
   User                  User                @relation(fields: [userId], references: [id])
   Inspection            Inspection          @relation(fields: [inspectionId], references: [id])
@@ -2225,7 +2228,7 @@ model LiquidWasteSectionHistory {
   wasteWaterContainmentId  Int?
   easeYourselfWhereId      Int?
   desiltingFrequencyId     Int?
-  rating                  Int?
+  rating                   Int?
   toiletHouseholdNumberId  Int?
 
   deleted                 Int?              @default(0)
@@ -2261,7 +2264,7 @@ model SolidWasteSection {
   containerServiceProviderName       Int?
   scheduleLiftingId                  Int?
   sanitaryContainerId                Int?
-  rating                           Int?
+  rating                             Int?
   wasteServicePhoneNumber            String?
   isCompleted                        Int?                             @default(1)
   isSubmitted                        Int?                             @default(1)
@@ -2310,7 +2313,7 @@ model SolidWasteSectionHistory {
   containerServiceProviderName       Int?
   scheduleLiftingId                  Int?
   sanitaryContainerId                Int?
-  rating                            Int?
+  rating                             Int?
   wasteServicePhoneNumber            String?
   isCompleted                        Int?     @default(1)
   isSubmitted                        Int?     @default(1)

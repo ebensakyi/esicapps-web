@@ -37,9 +37,9 @@ import { action } from "./action";
 import { pestSign } from "./pestSign";
 import { structureType } from "./structureType";
 import { toiletPitPosition } from "./toiletPitPosition";
-import { services } from "./services";
+import { services } from "./premisesServices";
 import { types } from "./types";
-import { subtypes } from "./subtypes";
+import { subtypes } from "./premisesSubtypes";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { derattingFrequency } from "./derattingFrequency";
 import { ownershipType } from "./ownershipType";
@@ -202,8 +202,8 @@ async function main() {
 
   await prisma.wasteWaterContainment.createMany({
     data: wasteWaterContainment,
-  }); await prisma.userType.createMany({
-    data: userType,
+  }); await prisma.userRole.createMany({
+    data: userRole,
   });
   await prisma.page.createMany({
     data: pages,
