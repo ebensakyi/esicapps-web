@@ -63,7 +63,6 @@ import { cleaningFrequency } from "./cleaningFrequency";
 import { desiltingFrequency } from "./desiltingFrequency";
 import { containerVolume } from "./containerVolume";
 import { toiletHouseholdNumber } from "./toiletHouseholdNumber";
-import { inspectionFormNuisances } from "./inspectionFormNuisances";
 
 import {messageType} from "./messageType";
 import {sendingType} from "./sendingType";
@@ -174,13 +173,13 @@ async function main() {
     data: toiletPitPosition,
   });
 
-  await prisma.service.createMany({
+  await prisma.premisesService.createMany({
     data: services,
   });
-  await prisma.type.createMany({
+  await prisma.premisesType.createMany({
     data: types,
   });
-  await prisma.subtype.createMany({
+  await prisma.premisesSubtype.createMany({
     data: subtypes,
   });
   await prisma.hazardousWasteDisposalMethod.createMany({
