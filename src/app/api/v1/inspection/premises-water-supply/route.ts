@@ -15,13 +15,15 @@ export async function POST(request: Request) {
       waterSectionId:
         res.waterSectionId == "null" ? null : res.waterSectionId,
 
-        waterStorageTypeId:
-        res.waterStorageTypeId == "null"
+        waterSupplyTypeId:
+        res.waterSupplyId == "null"
           ? null
-          : Number(res.waterStorageTypeId),
+          : Number(res.waterSupplyId),
     };
 
-    const response = await prisma.premisesWaterStorage.create({ data });
+    const response = await prisma.premisesWaterSupply.create({ data });
+
+
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(error,{status:500});

@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    const data:any = {
+    const data: any = {
       id: res.id,
       inspectionId: res.inspectionId,
       userId: Number(res.userId),
@@ -19,10 +19,6 @@ export async function POST(request: Request) {
         res.toiletAvailabilityId == "null"
           ? ""
           : Number(res.toiletAvailabilityId),
-      // urinalAvailabilityId:
-      //   res.urinalAvailabilityId == "null"
-      //     ? null
-      //     : Number(res.urinalAvailabilityId),
 
       bathroomAvailabilityId:
         res.bathroomAvailabilityId == "null"
@@ -32,8 +28,7 @@ export async function POST(request: Request) {
         res.approvedHandwashingFacilityAvailabilityId == "null"
           ? null
           : Number(res.approvedHandwashingFacilityAvailabilityId),
-      householdNumber:
-        Number(res.householdNumber) ,
+      householdNumber: Number(res.householdNumber),
       maleOccupantNumber:
         res.maleOccupantNumber == "null"
           ? null
@@ -63,8 +58,9 @@ export async function POST(request: Request) {
           : Number(res.vaccinationProofId),
     };
 
-
-    const response = await prisma.residentialPremisesInfoSection.create({ data });
+    const response = await prisma.residentialPremisesInfoSection.create({
+      data,
+    });
 
     return NextResponse.json(response);
   } catch (error) {
