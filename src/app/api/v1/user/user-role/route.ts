@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const data = {
       name: res.data.name,
     };
-    const response = await prisma.unservicedWasteDisposal.create({ data });
+    const response = await prisma.userRole.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const data = await prisma.unservicedWasteDisposal.findMany({
+    const data = await prisma.userRole.findMany({
       where: { deleted: 0 },
     });
 

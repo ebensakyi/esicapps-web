@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 import { userLevel} from "./userLevel";
 
-import { userType } from "./userType";
+import { userRole } from "./userRole";
 
 import { region } from "./region";
 import { inspectionForm } from "./inspectionForm";

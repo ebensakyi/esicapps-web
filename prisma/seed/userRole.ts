@@ -1,4 +1,4 @@
-export const userType = [
+export const userRole = [
   {
     name: "Super Administrator",
   },
