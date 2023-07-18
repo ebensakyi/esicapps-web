@@ -14,7 +14,7 @@ export default function Home() {
       let result = await signIn("credentials", {
         phoneNumber, password, 
         callbackUrl: `${window.location.origin}/` 
-       // callbackUrl: "http://127.0.0.1:3000/dashboard",
+       // callbackUrl: "http://127.0.0.1:3000/",
       });
 
       console.log("RES ",result);

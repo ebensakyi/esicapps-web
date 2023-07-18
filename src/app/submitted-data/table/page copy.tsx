@@ -301,7 +301,7 @@ export default async function Page() {
                             {/* Pills Tabs */}
                             <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=1"
+                                    <Link href="/submitted-data/table?formId=1"
                                         className={
                                             formId == 1
                                                 ? "nav-link active"
@@ -313,7 +313,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=2"
+                                    <Link href="/submitted-data/table?formId=2"
                                         className={
                                             formId == 2
                                                 ? "nav-link active"
@@ -326,7 +326,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=3"
+                                    <Link href="/submitted-data/table?formId=3"
                                         className={
                                             formId == 3
                                                 ? "nav-link active"
@@ -339,7 +339,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=4"
+                                    <Link href="/submitted-data/table?formId=4"
                                         className={
                                             formId == 4
                                                 ? "nav-link active"
@@ -352,7 +352,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=5"
+                                    <Link href="/submitted-data/table?formId=5"
                                         className={
                                             formId == 5
                                                 ? "nav-link active"
@@ -365,7 +365,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=6"
+                                    <Link href="/submitted-data/table?formId=6"
                                         className={
                                             formId == 6
                                                 ? "nav-link active"
@@ -378,7 +378,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=7"
+                                    <Link href="/submitted-data/table?formId=7"
                                         className={
                                             formId == 7
                                                 ? "nav-link active"
@@ -391,7 +391,7 @@ export default async function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <Link href="/submitted-data?formId=8"
+                                    <Link href="/submitted-data/table?formId=8"
                                         className={
                                             formId == 8
                                                 ? "nav-link active"
@@ -470,8 +470,8 @@ export default async function Page() {
                                                     <th scope="col">Rating </th>
                                                     <th scope="col">Type</th>
                                                     <th scope="col">Premises Code</th>
-                                                    <th scope="col">Start Date</th>
-                                                    <th scope="col">End Date</th>
+                                                    {/* <th scope="col">Start Date</th>
+                                                    <th scope="col">End Date</th> */}
                                                     <th scope="col">Inspection Officer</th>
                                                     {/* <th scope="col">GhanaPost GPS</th> */}
                                                     <th scope="col">Lat/Lng</th>

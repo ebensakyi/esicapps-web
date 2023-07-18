@@ -19,7 +19,8 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  // let userLevelId = Number(userData?.userLevelId);
+try {
+   // let userLevelId = Number(userData?.userLevelId);
   // let userRegion = Number(userData?.regionId);
   // let userDistrict = Number(userData?.districtId);
   // let userId = userData?.id;
@@ -124,28 +125,36 @@ export async function GET(request: Request) {
     // orderBy: {
     //   createdAt: "desc",
     // },
-    include: {
-      Inspection: {
-        include: {
-          InspectionType: true,
-        },
-      },
-      Community: {
-        include: {
-          ElectoralArea: {
-            include: {
-              District: {
-                include: {
-                  Region: true,
-                },
-              },
-            },
-          },
-        },
-      },
-      User: true,
-    },
+    // include: {
+    //   Inspection: {
+    //     include: {
+    //       InspectionType: true,
+    //     },
+    //   },
+    //   Community: {
+    //     include: {
+    //       ElectoralArea: {
+    //         include: {
+    //           District: {
+    //             include: {
+    //               Region: true,
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+     // User: true,
+   // },
   });
 
-  return new Response(JSON.stringify([{ me: "ooop" }]));
+  return new Response(JSON.stringify(response));
+} catch (error) {
+  console.log(error);
+  
+  return new Response(JSON.stringify(error));
+
+}
+
+ 
 }
