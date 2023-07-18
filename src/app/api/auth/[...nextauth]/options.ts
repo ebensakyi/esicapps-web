@@ -13,14 +13,14 @@ export const options: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         username: {
-          label: "Username:",
-          type: "text",
-          placeholder: "your-cool-username",
+          label: "Phone number:",
+          type: "tel",
+          placeholder: "Enter your phone number",
         },
         password: {
           label: "Password:",
           type: "password",
-          placeholder: "your-awesome-password",
+          placeholder: "Enter your password",
         },
       },
       async authorize(credentials) {
