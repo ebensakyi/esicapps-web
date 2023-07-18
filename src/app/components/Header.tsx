@@ -42,30 +42,30 @@ export default function Header() {
                                     className="rounded-circle"
                                 />
                                 <span className="d-none d-md-block dropdown-toggle ps-2">
-                                    {session?.user?.email}
+                                   {session?.user?.otherNames}  {session?.user?.surname}
                                 </span>
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
-                                    <h6> {session?.user?.otherNames}  {session?.user?.surname}</h6>
+                                    <h6>  {session?.user?.email}</h6>
                                     <span> {session?.user?.designation}</span>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a
+                                    <Link
                                         className="dropdown-item d-flex align-items-center"
-                                        href="users-profile.html"
+                                        href="/auth/profile"
                                     >
                                         <i className="bi bi-person" />
                                         <span>My Profile</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
-                                <li>
+                                {/* <li>
                                     <a
                                         className="dropdown-item d-flex align-items-center"
                                         href="users-profile.html"
@@ -76,8 +76,8 @@ export default function Header() {
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />
-                                </li>
-                                <li>
+                                </li> */}
+                                {/* <li>
                                     <a
                                         className="dropdown-item d-flex align-items-center"
                                         href="pages-faq.html"
@@ -85,7 +85,7 @@ export default function Header() {
                                         <i className="bi bi-question-circle" />
                                         <span>Need Help?</span>
                                     </a>
-                                </li>
+                                </li> */}
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
@@ -142,7 +142,7 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/submitted-data/map">
                                     <i className="bi bi-circle" />
                                     <span>Map</span>
                                 </Link>

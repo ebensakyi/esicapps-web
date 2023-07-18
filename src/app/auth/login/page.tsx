@@ -12,8 +12,9 @@ export default function Home() {
     e.preventDefault();
     try {
       let result = await signIn("credentials", {
-        phoneNumber, password, redirect: false,
-        callbackUrl: "http://127.0.0.1:3000/dashboard",
+        phoneNumber, password, 
+        callbackUrl: `${window.location.origin}/` 
+       // callbackUrl: "http://127.0.0.1:3000/dashboard",
       });
 
       console.log("RES ",result);
@@ -29,7 +30,7 @@ export default function Home() {
     <head>
      
     
-      <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+      <title>ESICApps</title>
       
     
       <link href="assets/img/favicon.png" rel="icon"/>

@@ -1,5 +1,4 @@
 import type { NextAuthOptions } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { randomBytes, randomUUID } from "crypto";
 
@@ -10,7 +9,8 @@ export const options: NextAuthOptions = {
     //     clientSecret: process.env.GITHUB_SECRET as string,
     // }),
     CredentialsProvider({
-      name: "Credentials",
+      id: 'credentials',
+      name: 'Credentials',
       credentials: {
         username: {
           label: "Phone number:",
@@ -24,12 +24,10 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
-        // This is where you need to retrieve user data
-        // to verify with credentials
-        // Docs: https://next-auth.js.org/configuration/providers/credentials
-        // const user = { id: "42", name: "aa", password: "aa" }
-
         const { phoneNumber, password } = credentials as any;
+
+        //AUTO LOGIN FORM
+
         const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -40,7 +38,7 @@ export const options: NextAuthOptions = {
           return user;
         } else return null;
 
-        // console.log("SHow request");
+        // CUSTOM LOGIN FORM
 
         // const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
         //   method: "POST",
@@ -74,5 +72,5 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
-  //pages: { signIn: "/auth/login" },
+//  pages: { signIn: "/auth/login" },
 };

@@ -12,6 +12,8 @@ export default function Home() {
         required: true,
         onUnauthenticated() {
             redirect('/api/auth/signin?callbackUrl=/dashboard')
+            //redirect('/auth/login?callbackUrl=/dashboard')
+
         }
     })
 
