@@ -559,33 +559,33 @@ export default function Header() {
                             <span>User guide</span>
                         </Link>
                     </li>
-                    <li className="nav-heading">Account Management</li>
+                    <li className="nav-heading">Account </li>
                     <li className="nav-item">
                         <Link className={
-                            pathname == "/account-management/user"
+                            pathname == "/user"
                                 ? "nav-link"
                                 : "nav-link collapsed"
-                        } href="/account-management/user">
+                        } href="/user">
                             <i className="bi bi-people" />
                             <span>Users</span>
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link className={
-                            pathname == "/account-management/role"
+                            pathname == "/user/role"
                                 ? "nav-link"
                                 : "nav-link collapsed"
-                        } href="/account-management/role">
+                        } href="/user/role">
                             <i className="bi bi-key" />
                             <span>Roles</span>
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link  className={
-                            pathname == "/account-management/log"
+                            pathname == "/user/log"
                                 ? "nav-link"
                                 : "nav-link collapsed"
-                        } href="/account-management/log">
+                        } href="/user/log">
                             <i className="bi bi-clock-history
 " />
                             <span>Logs</span>
