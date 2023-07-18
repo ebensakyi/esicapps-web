@@ -1,7 +1,7 @@
-import { prisma } from "../../../../../prisma/db";
-import { FollowUpNuisances } from "../../../../../../typings";
-import { logActivity } from "../../../../../utils/log";
-import { getSession } from "../../../../../utils/session-manager";
+import { prisma } from "@/prisma/db";
+import { FollowUpNuisances } from "@/typings";
+import { logActivity } from "@/utils/log";
+import { getSession } from "@/utils/session-manager";
 
 export async function POST(request: Request) {
   try {

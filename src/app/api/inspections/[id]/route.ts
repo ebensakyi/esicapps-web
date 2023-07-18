@@ -1,5 +1,5 @@
-import { logActivity } from "../../../../../utils/log";
-import { getSession } from "../../../../../utils/session-manager";
+import { logActivity } from "@/utils/log";
+import { getSession } from "@/utils/session-manager";
 
 export async function POST(request: Request) {
   try {
@@ -21,13 +21,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-    let userData = await getSession(request);
-    let userLevelId = Number(userData?.userLevelId);
-    let userRegion = Number(userData?.regionId);
-    let userDistrict = Number(userData?.districtId);
-    let userId = userData?.id;
+    // let userData = await getSession(request);
+    // let userLevelId = Number(userData?.userLevelId);
+    // let userRegion = Number(userData?.regionId);
+    // let userDistrict = Number(userData?.districtId);
+    // let userId = userData?.id;
 
-    await logActivity("Visited submitted data list", userId);
+  //  await logActivity("Visited submitted data list", userId);
 
 
 

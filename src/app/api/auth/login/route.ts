@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "@/prisma/db";
 import bcrypt from "bcryptjs";
 // import { destroySession, setSession } from "../../../../../utils/session-manager";
 import jwt from "jsonwebtoken";
