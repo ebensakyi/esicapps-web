@@ -10,13 +10,16 @@ export async function POST(request: Request) {
     let phoneNumber = res.phoneNumber;
     let password = res.password;
 
+    console.log(res);
+
     const user = await prisma.user.findFirst({
       where: {
-        phoneNumber,
+        phoneNumber: phoneNumber,
+        deleted: 0,
       },
     });
 
-console.log(user);
+    console.log(user);
 
     if (!user) {
       return NextResponse.json(null);
@@ -27,10 +30,9 @@ console.log(user);
     console.log(isValid);
 
     if (isValid) {
+      const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
-        const token = jwt.sign(user, process.env.TOKEN_SECRET??"");
-
-      return NextResponse.json({...user,token});
+      return NextResponse.json({ ...user, token });
     }
     return NextResponse.json(null);
   } catch (error: any) {

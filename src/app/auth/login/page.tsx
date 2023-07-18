@@ -8,13 +8,19 @@ import { signIn } from "next-auth/react";
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const login = async () => {
+  const login = async (e:any) => {
+    e.preventDefault();
     try {
       let result = await signIn("credentials", {
         phoneNumber, password, redirect: false,
         callbackUrl: "http://127.0.0.1:3000/dashboard",
       });
-    } catch (error) { }
+
+      console.log("RES ",result);
+      
+    } catch (error) { 
+      console.log(error);
+    }
   };
 
   return (
@@ -88,12 +94,12 @@ export default function Home() {
                               type="text"
                               name="username"
                               className="form-control"
-                              id="yourUsername"
+                              id="username"
                               required
                               onChange={(e) => setPhoneNumber(e.target.value)}
                             />
                             <div className="invalid-feedback">
-                              Please enter your username.
+                              Please enter your phone number.
                             </div>
                           </div>
                         </div>
@@ -111,15 +117,15 @@ export default function Home() {
                             </span>
                             <input
                               type="password"
-                              name="username"
+                              name="password"
                               className="form-control"
-                              id="yourUsername"
+                              id="password"
                               required
                               value={password}
                               onChange={(e) => setPassword(e.target.value)}
                             />
                             <div className="invalid-feedback">
-                              Please enter your username.
+                              Please enter your password.
                             </div>
                           </div>
                         </div>
@@ -144,7 +150,7 @@ export default function Home() {
                           <button
                             className="btn btn-primary w-100"
                             type="submit"
-                            onClick={() => login()}
+                            onClick={(e) => login(e)}
                           >
                             Login
                           </button>

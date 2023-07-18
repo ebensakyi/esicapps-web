@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from './components/Header'
 import { SessionProvider } from 'next-auth/react'
+import AuthProvider from './context/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -47,14 +48,11 @@ export default function RootLayout({
       <link href="assets/css/style.css" rel="stylesheet"></link>
       <body className={inter.className}>
 
-        <SessionProvider session={session}>
-          
+        <AuthProvider>
           <Header />
-
-
           {children}
+        </AuthProvider>
 
-        </SessionProvider>
 
         <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
 

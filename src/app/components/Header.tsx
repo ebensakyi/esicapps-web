@@ -47,8 +47,8 @@ export default function Header() {
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
-                                    <h6>Kevin Anderson</h6>
-                                    <span>Web Designer</span>
+                                    <h6> {session?.user?.otherNames}  {session?.user?.surname}</h6>
+                                    <span> {session?.user?.designation}</span>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />

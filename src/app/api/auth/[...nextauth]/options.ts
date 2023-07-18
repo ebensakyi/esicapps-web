@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { randomBytes, randomUUID } from "crypto";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -23,33 +24,44 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
-        // // This is where you need to retrieve user data
-        // // to verify with credentials
-        // // Docs: https://next-auth.js.org/configuration/providers/credentials
-        // const user = { id: "42", name: "Dave", password: "nextauth" }
+        // This is where you need to retrieve user data
+        // to verify with credentials
+        // Docs: https://next-auth.js.org/configuration/providers/credentials
+        // const user = { id: "42", name: "aa", password: "aa" }
 
-        // if (credentials?.username === user.name && credentials?.password === user.password) {
-        //     return user
-        // } else {
-        //     return null
-        // }
         const { phoneNumber, password } = credentials as any;
-
-        const res = await fetch("/api/auth/login", {
+        const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ phoneNumber, password }),
         });
-
         const user = res.json();
         if (res.ok && user) {
           return user;
         } else return null;
+
+        // console.log("SHow request");
+
+        // const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ phoneNumber, password }),
+        // });
+
+        // const user = res.json();
+
+        // if (res.ok && user) {
+        //   return user;
+        // } else return null;
       },
     }),
   ],
   session: {
     strategy: "jwt",
+    maxAge: 3 * 60 * 60, //3hrs
+    generateSessionToken: () => {
+      return randomUUID?.() ?? randomBytes(32).toString("hex");
+    },
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -62,5 +74,5 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
-  pages: { signIn: "/auth/login" },
+  //pages: { signIn: "/auth/login" },
 };
