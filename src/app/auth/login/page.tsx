@@ -10,8 +10,11 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const login = async () => {
     try {
-      let result = await signIn("credentials", { phoneNumber, password });
-    } catch (error) {}
+      let result = await signIn("credentials", {
+        phoneNumber, password, redirect: true,
+        callbackUrl: "/",
+      });
+    } catch (error) { }
   };
 
   return (
