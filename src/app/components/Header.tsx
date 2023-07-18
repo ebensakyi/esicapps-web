@@ -1,5 +1,6 @@
 "use client"
 
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -7,9 +8,11 @@ import React from 'react'
 export default function Header() {
     const pathname = usePathname()
 
+    const { data: session } = useSession()
+
     return (
+
         <>
-            {/* ======= Header ======= */}
             <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
                     <Link href="/dashboard" className="logo d-flex align-items-center">
@@ -18,25 +21,7 @@ export default function Header() {
                     </Link>
                     <i className="bi bi-list toggle-sidebar-btn" />
                 </div>
-                {/* End Logo */}
-                {/* <div className="search-bar">
-                    <form
-                        className="search-form d-flex align-items-center"
-                        method="POST"
-                        action="#"
-                    >
-                        <input
-                            type="text"
-                            name="query"
-                            placeholder="Search"
-                            title="Enter search keyword"
-                        />
-                        <button type="submit" title="Search">
-                            <i className="bi bi-search" />
-                        </button>
-                    </form>
-                </div> */}
-                {/* End Search Bar */}
+
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
                         <li className="nav-item d-block d-lg-none">
@@ -44,154 +29,7 @@ export default function Header() {
                                 <i className="bi bi-search" />
                             </a>
                         </li>
-                        {/* <li className="nav-item dropdown">
-                            <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                                <i className="bi bi-bell" />
-                                <span className="badge bg-primary badge-number">4</span>
-                            </a>
-                            <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                                <li className="dropdown-header">
-                                    You have 4 new notifications
-                                    <a href="#">
-                                        <span className="badge rounded-pill bg-primary p-2 ms-2">
-                                            View all
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-exclamation-circle text-warning" />
-                                    <div>
-                                        <h4>Lorem Ipsum</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>30 min. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-x-circle text-danger" />
-                                    <div>
-                                        <h4>Atque rerum nesciunt</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>1 hr. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-check-circle text-success" />
-                                    <div>
-                                        <h4>Sit rerum fuga</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>2 hrs. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-info-circle text-primary" />
-                                    <div>
-                                        <h4>Dicta reprehenderit</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>4 hrs. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="dropdown-footer">
-                                    <a href="#">Show all notifications</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                                <i className="bi bi-chat-left-text" />
-                                <span className="badge bg-success badge-number">3</span>
-                            </a>
-                            <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                                <li className="dropdown-header">
-                                    You have 3 new messages
-                                    <a href="#">
-                                        <span className="badge rounded-pill bg-primary p-2 ms-2">
-                                            View all
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="message-item">
-                                    <a href="#">
-                                        <img
-                                            src="assets/img/messages-1.jpg"
-                                            alt=""
-                                            className="rounded-circle"
-                                        />
-                                        <div>
-                                            <h4>Maria Hudson</h4>
-                                            <p>
-                                                Velit asperiores et ducimus soluta repudiandae labore
-                                                officia est ut...
-                                            </p>
-                                            <p>4 hrs. ago</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="message-item">
-                                    <a href="#">
-                                        <img
-                                            src="assets/img/messages-2.jpg"
-                                            alt=""
-                                            className="rounded-circle"
-                                        />
-                                        <div>
-                                            <h4>Anna Nelson</h4>
-                                            <p>
-                                                Velit asperiores et ducimus soluta repudiandae labore
-                                                officia est ut...
-                                            </p>
-                                            <p>6 hrs. ago</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="message-item">
-                                    <a href="#">
-                                        <img
-                                            src="assets/img/messages-3.jpg"
-                                            alt=""
-                                            className="rounded-circle"
-                                        />
-                                        <div>
-                                            <h4>David Muldon</h4>
-                                            <p>
-                                                Velit asperiores et ducimus soluta repudiandae labore
-                                                officia est ut...
-                                            </p>
-                                            <p>8 hrs. ago</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="dropdown-footer">
-                                    <a href="#">Show all messages</a>
-                                </li>
-                            </ul>
-                        </li> */}
+
                         <li className="nav-item dropdown pe-3">
                             <a
                                 className="nav-link nav-profile d-flex align-items-center pe-0"
@@ -204,7 +42,7 @@ export default function Header() {
                                     className="rounded-circle"
                                 />
                                 <span className="d-none d-md-block dropdown-toggle ps-2">
-                                    K. Anderson
+                                    {session?.user?.email}
                                 </span>
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -252,20 +90,22 @@ export default function Header() {
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a className="dropdown-item d-flex align-items-center" href="#">
+                                    {session ? <button className="dropdown-item d-flex align-items-center" onClick={()=>signOut()}>
                                         <i className="bi bi-box-arrow-right" />
                                         <span>Sign Out</span>
-                                    </a>
+                                    </button> : 
+                                    <button className="dropdown-item d-flex align-items-center" onClick={()=>signIn()}>
+                                        <i className="bi bi-box-arrow-right" />
+                                        <span>Sign In</span>
+                                    </button>}
+
                                 </li>
                             </ul>
-                            {/* End Profile Dropdown Items */}
                         </li>
                     </ul>
                 </nav>
-                {/* End Icons Navigation */}
             </header>
-            {/* End Header */}
-            {/* ======= Sidebar ======= */}
+
             <aside id="sidebar" className="sidebar">
                 <ul className="sidebar-nav" id="sidebar-nav">
                     <li className="nav-item">
@@ -278,7 +118,6 @@ export default function Header() {
                             <span>Dashboard</span>
                         </Link>
                     </li>
-                    {/* End Dashboard Nav */}
 
                     <li className="nav-item">
                         <Link
@@ -307,89 +146,13 @@ export default function Header() {
                                     <i className="bi bi-circle" />
                                     <span>Map</span>
                                 </Link>
-                            </li> 
-                            {/* <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Sanitary</span>
-                                </Link>
-                            </li> */}
+                            </li>
+
 
 
                         </ul>
                     </li>
-                    {/* <li className="nav-item">
-                        <Link
-                            className="nav-link collapsed"
-                            data-bs-target="#components-nav"
-                            data-bs-toggle="collapse"
-                            href="#"
-                        >
-                            <i className="bi bi-table" />
-                            <span>Submitted Data</span>
-                            <i className="bi bi-chevron-down ms-auto" />
-                        </Link>
-                        <ul
-                            id="components-nav"
-                            className="nav-content collapse "
-                            data-bs-parent="#sidebar-nav"
-                        >
-                            <li>
-                                <Link href="/submitted-data?id=1">
-                                    <i className="bi bi-circle" />
-                                    <span>Residential</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Eatery</span>
-                                </Link>
-                            </li> <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Health</span>
-                                </Link>
-                            </li> <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Hospitality</span>
-                                </Link>
-                            </li> <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Industry</span>
-                                </Link>
-                            </li> <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Institution</span>
-                                </Link>
-                            </li> <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Market</span>
-                                </Link>
-                            </li> <li>
-                                <Link href="components-alerts.html">
-                                    <i className="bi bi-circle" />
-                                    <span>Sanitary</span>
-                                </Link>
-                            </li>
 
-
-                        </ul>
-                    </li> */}
-                    {/* <li className="nav-item">
-                        <Link className={
-                            pathname == "/map"
-                                ? "nav-link"
-                                : "nav-link collapsed"
-                        } href="/map">
-                            <i className="bi bi-map" />
-                            <span>Map</span>
-                        </Link>
-                    </li> */}
                     <li className="nav-item">
                         <Link
                             className={
@@ -581,7 +344,7 @@ export default function Header() {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link  className={
+                        <Link className={
                             pathname == "/user/log"
                                 ? "nav-link"
                                 : "nav-link collapsed"
@@ -594,7 +357,6 @@ export default function Header() {
 
                 </ul>
             </aside>
-            {/* End Sidebar*/}
         </>
 
     )

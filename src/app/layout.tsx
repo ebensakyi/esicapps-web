@@ -48,6 +48,7 @@ export default function RootLayout({
       <body className={inter.className}>
 
         <SessionProvider session={session}>
+          
           <Header />
 
 
