@@ -15,15 +15,24 @@ async function getPages() {
 }
 
 
+async function getRoles() {
+  
+    let response = await fetch(`http://localhost:3000/api/user/role`);
+    return await response.json();
+
+}
+
+
 
 export default async function page() {
     const pages = await getPages()
+    const roles = await getRoles()
 
-    console.log(pages);
+    console.log(roles);
 
 
     return (
 
-        <Role data={pages} />
+        <Role pages={pages}  roles={roles} />
     )
 }

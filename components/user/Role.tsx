@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
 
-export default function Role(data: any) {
+export default function Role(pages: any, roles: any) {
     const router = useRouter();
 
     const [roleName, setRoleName] = useState("");
@@ -14,11 +14,11 @@ export default function Role(data: any) {
     const [roleId, setRoleId] = useState();
 
     const [isEditing, setIsEditing] = useState(0);
-    console.log(data);
+
+console.log(roles);
 
 
-
-    const pagesOptions = data.data.map((page: any) => {
+    const pagesOptions = pages.pages.map((page: any) => {
         return {
             value: page.id,
             label: page.name,
@@ -34,8 +34,8 @@ export default function Role(data: any) {
     const add = async (e: any) => {
         try {
             e.preventDefault();
-            console.log("ADD",selectedPages,roleName);
-            
+            console.log("ADD", selectedPages, roleName);
+
             if (selectedPages.length == 0)
                 return toast.error("Pages cannot be empty");
             if (roleName == "") return toast.error("Role name cannot be empty");
@@ -135,39 +135,39 @@ export default function Role(data: any) {
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Enter user roles</h5>
-                                    <div className=" mb-3">
-                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                            Role
-                                        </label>
-                                        <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Enter role name' value={roleName} onChange={(e)=>setRoleName(e.target.value)}/>
-                                        </div>
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Role
+                                    </label>
+                                    <div className="col-sm-12">
+                                        <input type="text" className="form-control" placeholder='Enter role name' value={roleName} onChange={(e) => setRoleName(e.target.value)} />
                                     </div>
-                                    <div className=" mb-3">
-                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                            Page
-                                        </label>
-                                        <div className="col-sm-12">
-                                            <Multiselect
-                                                options={pagesOptions}
-                                                selectedValues={selectedPages}
-                                                onSelect={onSelect}
-                                                onRemove={onRemove}
-                                                displayValue="label"
-                                            />
-                                            {/* <input type="text" className="form-control" placeholder='Select page(s)' /> */}
-                                        </div>
+                                </div>
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Page
+                                    </label>
+                                    <div className="col-sm-12">
+                                        <Multiselect
+                                            options={pagesOptions}
+                                            selectedValues={selectedPages}
+                                            onSelect={onSelect}
+                                            onRemove={onRemove}
+                                            displayValue="label"
+                                        />
+                                        {/* <input type="text" className="form-control" placeholder='Select page(s)' /> */}
                                     </div>
+                                </div>
 
 
-                                    <div className=" mb-3">
-                                        <div className="col-sm-10">
-                                            <button type="submit" className="btn btn-primary" onClick={(e)=>add(e)}>
-                                                Submit
-                                            </button>
-                                        </div>
+                                <div className=" mb-3">
+                                    <div className="col-sm-10">
+                                        <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
+                                            Submit
+                                        </button>
                                     </div>
-                               
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -181,44 +181,93 @@ export default function Role(data: any) {
                                             <th scope="col">Name</th>
 
                                             <th scope="col">Pages</th>
+                                            <th scope="col">Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
+                                        {roles.roles.map((role: any) => {
+                                            return (
+                                                <tr key={role.id}>
+                                                    <td>{role.name}</td>
+                                                    <div className="row" key={role.id}>
+                                                        {role.PageAccess.map((pa: any) => {
+                                                            return (
+                                                                <div key={role.id} className="col-md-3">
+                                                                    <span className="badge badge-outline-success">
+                                                                        {role.Page.name}
+                                                                    </span>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                    {/* <td>
+                                                        <div
+                                                            className="btn-group"
+                                                            role="group"
+                                                            aria-label="Button group with nested dropdown"
+                                                        >
+                                                            <div className="btn-group" role="group">
+                                                                <button
+                                                                    id="btnGroupDrop1"
+                                                                    type="button"
+                                                                    className="btn btn-primary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown"
+                                                                    aria-expanded="false"
+                                                                >
+                                                                    Actions
+                                                                </button>
+                                                                <ul
+                                                                    className="dropdown-menu"
+                                                                    aria-labelledby="btnGroupDrop1"
+                                                                >
+                                                                    <li>
+                                                                       
+                                                                        <button
+                                                                            className="dropdown-item btn btn-sm "
+                                                                            onClick={(e) => {
+                                                                                e.preventDefault();
+                                                                                setUserTypeName(ut.name);
+                                                                                let pageAcess = ut.PageAccess.map(
+                                                                                    (access) => {
+                                                                                        return {
+                                                                                            value: access.Page.id,
+                                                                                            label: access.Page.name,
+                                                                                        };
+                                                                                    }
+                                                                                );
+                                                                                setSelectedPages(pageAcess);
+                                                                                setIsEditing(1);
+                                                                                setUserTypeId(ut.id);
 
-                                        </tr>
-                                        <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
+                                                                                console.log("ut.id ", ut.id);
+                                                                            }}
+                                                                        >
+                                                                            Update
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button
+                                                                            className="dropdown-item btn btn-sm "
+                                                                            onClick={(e) => {
+                                                                                e.preventDefault();
 
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
+                                                                                deleteUserType(ut.id);
+                                                                            }}
+                                                                        >
+                                                                            Delete
+                                                                        </button>
+                                                                       
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </td> */}
+                                                </tr>
+                                            );
+                                        })}
 
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
