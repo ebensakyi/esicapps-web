@@ -1,120 +1,73 @@
 export const pages = [
   {
     name: "Dashboard",
-  
+    path: "/",
   },
   {
-    name: "Residential Data",
+    name: "Submitted Data",
+    path: "/submitted-data",
+  },
 
+  {
+    name: "Map",
+    path: "/submitted-data/map",
   },
   {
-    name: "Eatery Data",
-   
+    name: "General Reports",
+    path: "/reports/general",
   },
   {
-    name: "Health Data",
-   
-  },
-  {
-    name: "Hospitality Data",
-   
-  },
-  {
-    name: "Market Data",
-   
-  },
-  {
-    name: "Industry Data",
-   
-  },
-  {
-    name: "Institution Data",
-   
-  },
-  {
-    name: "Sanitary Data",
-  
-  },
-  {
-    name: "Reports",
+    name: "Custom Reports",
+    path: "/reports/custom",
   },
   {
     name: "Sanitation Report",
+    path: "/sanitation-reports",
+  },
+  {
+    name: "Sanitation Report Map",
+    path: "/sanitation-reports/map",
+  },
+  {
+    name: "SMS",
+    path: "/message/sms",
   },
   {
     name: "Notifications",
-   
-
+    path: "/message/notification",
   },
   {
-    name: "Single SMS",
-   
-
+    name: "District Primary Data",
+    path: "/primary-data/district",
   },
   {
-    name: "Bulk SMS",
-   
-
+    name: "Electoral Area Primary Data",
+    path: "/primary-data/electoral-area",
   },
   {
-    name: "Single Notification",
-   
-
+    name: "Community Primary Data",
+    path: "/primary-data/community",
   },
   {
-    name: "Bulk Notification",
-   
-  },
-  {
-    name: "Bulk Upload District Data",
-   
-  },
-  {
-    name: "Bulk Upload Electoral Area Data",
-   
-
-  },
-  {
-    name: "Bulk Upload Community Data",
-   
-
-  },
-  {
-    name: "Add Single District",
-   
-
-  },
-  {
-    name: "Add Single Electoral Area",
-   
-
-  },
-  {
-    name: "Add Single Community",
-   
-  },
-  {
-    name: "Transfer Data Ownership",
-   
+    name: "Data Transfer",
+    path: "/data-transfer"
   },
   {
     name: "User Guide",
-   
+    path:"/user-guide"
   },
-  {
-    name: "User",
-    
-  },
+ 
   {
     name: "User Log",
-   
+    path:"/user/log"
   },
   {
-    name: "User Type",
-   
+    name: "User Role",
+    path:"/user/role"
   },
   {
-    name: "Map",
-   
+    name: "User Actions",
+    path:"/user/page-actions"
   },
+ 
 ];

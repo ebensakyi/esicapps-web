@@ -67,48 +67,5 @@ export const pageAccess = [
     userTypeId: 1,
     pageId: 17,
   },
-  {
-    userTypeId: 1,
-    pageId: 18,
-  },
-  {
-    userTypeId: 1,
-    pageId: 19,
-  },
-  {
-    userTypeId: 1,
-    pageId: 20,
-  },
-  {
-    userTypeId: 1,
-    pageId: 21,
-  },
-  {
-    userTypeId: 1,
-    pageId: 22,
-  },
-  {
-    userTypeId: 1,
-    pageId: 23,
-  },
-  {
-    userTypeId: 1,
-    pageId: 24,
-  },
-  {
-    userTypeId: 1,
-    pageId: 25,
-  },
-  {
-    userTypeId: 1,
-    pageId: 26,
-  },
-  {
-    userTypeId: 1,
-    pageId: 27,
-  },
-  {
-    userTypeId: 1,
-    pageId: 28,
-  },
+ 
 ];
