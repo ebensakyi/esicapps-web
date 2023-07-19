@@ -1,9 +1,9 @@
-"use client";
+// "use client";
 
 // import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Header from './components/Header'
+import Header from '@/components/Header'
 import { SessionProvider } from 'next-auth/react'
 import AuthProvider from './context/AuthProvider';
 

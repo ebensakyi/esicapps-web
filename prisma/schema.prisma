@@ -341,12 +341,12 @@ model UserRole {
 model PageAccess {
   id         Int      @id @default(autoincrement())
   pageId     Int
-  userTypeId Int
+  userRoleId Int
   deleted    Int?     @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   Page       Page     @relation(fields: [pageId], references: [id])
-  UserRole   UserRole @relation(fields: [userTypeId], references: [id])
+  UserRole   UserRole @relation(fields: [userRoleId], references: [id])
 }
 
 model Page {
