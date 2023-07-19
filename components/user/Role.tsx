@@ -5,8 +5,9 @@ import Multiselect from "multiselect-react-dropdown";
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
+import { pages } from '../../prisma/seed/page';
 
-export default function Role(pages: any, roles: any) {
+export default function Role(data: any) {
     const router = useRouter();
 
     const [roleName, setRoleName] = useState("");
@@ -15,10 +16,10 @@ export default function Role(pages: any, roles: any) {
 
     const [isEditing, setIsEditing] = useState(0);
 
-console.log(roles);
+console.log(data);
 
 
-    const pagesOptions = pages.pages.map((page: any) => {
+    const pagesOptions = data.pages.map((page: any) => {
         return {
             value: page.id,
             label: page.name,
@@ -186,7 +187,7 @@ console.log(roles);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {roles.roles.map((role: any) => {
+                                        {data.roles.map((role: any) => {
                                             return (
                                                 <tr key={role.id}>
                                                     <td>{role.name}</td>

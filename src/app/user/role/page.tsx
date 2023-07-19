@@ -1,5 +1,6 @@
 
 import Role from "@/components/user/Role";
+import { Suspense } from "react";
 async function getPages() {
     // const res = await fetch(`http://localhost:3000/api/primary-data/pages`)
     // console.log(res.json());
@@ -28,11 +29,16 @@ export default async function page() {
     const pages = await getPages()
     const roles = await getRoles()
 
+    let data = {pages,roles}
+
     console.log(roles);
 
 
     return (
+<Suspense>
 
-        <Role pages={pages}  roles={roles} />
+     <Role data={data} />
+</Suspense>
+       
     )
 }

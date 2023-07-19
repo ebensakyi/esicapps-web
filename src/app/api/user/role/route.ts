@@ -34,7 +34,6 @@ export async function POST(request: Request) {
       // skipDuplicates: true,
     });
 
-    console.log("pageAccess", pageAccess);
 
     return NextResponse.json(pageAccess);
   } catch (error: any) {
