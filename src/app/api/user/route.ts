@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { generateCode } from "@/utils/generate-code";
+
+import bcrypt from "bcryptjs";
 
 export async function POST(request: Request) {
   try {
@@ -8,7 +11,7 @@ export async function POST(request: Request) {
 
     let password = await generateCode(4);
     const salt = bcrypt.genSaltSync(10);
-    let hashedPassword = await bcrypt.hashSync(password, salt);
+    let hashedPassword = bcrypt.hashSync(password, salt);
 
 
 
@@ -65,7 +68,7 @@ export async function GET(request: Request) {
       include: {
         Region: true,
         District: true,
-        UserType: true,
+        UserRole: true,
         UserLevel: true,
       },
       orderBy: {

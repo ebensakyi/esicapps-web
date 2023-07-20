@@ -1,12 +1,14 @@
 
-import Role from "@/src/app/components/user/User";
-import { Suspense } from "react";
+import User from "@/src/app/components/user/User";
+
 
 
 
 async function getRoles() {
 
     let response = await fetch(`http://localhost:3000/api/user/role`, { cache: 'no-store' });
+
+    console.log(response);
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -35,7 +37,7 @@ export default async function page() {
 
     return (
 
-        <Role data={data} />
+        <User data={data} />
 
     )
 }

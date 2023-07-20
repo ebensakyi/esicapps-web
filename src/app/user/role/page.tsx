@@ -5,7 +5,7 @@ import { Suspense } from "react";
 async function getPages() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/pages`);
-    
+
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -16,7 +16,7 @@ async function getPages() {
 
 async function getRoles() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user/role`,{ cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/user/role`, { cache: 'no-store' });
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -34,9 +34,7 @@ export default async function page() {
 
 
 
-    return (
+    return <Role data={data} />
 
-            <Role data={data} />
 
-    )
 }

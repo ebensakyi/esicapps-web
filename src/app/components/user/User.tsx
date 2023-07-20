@@ -1,6 +1,28 @@
+"use client"
 import Image from 'next/image'
+import { useState } from 'react';
 
-export default function User() {
+export default function User({ data }: any) {
+
+    const [userRole, setUserRole] = useState();
+    const [userId, setUserId] = useState();
+    const [selectedUserLevel, setSelectedUserLevel] = useState();
+
+    const [surname, setSurname] = useState("");
+    const [otherNames, setOtherNames] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [designation, setDesignation] = useState("");
+    const [region, setRegion] = useState("");
+    const [districts, setDistricts] = useState([]);
+    const [district, setDistrict] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
+
+    const [electoralArea, setElectoralArea] = useState();
+    const [showRegion, setShowRegion] = useState(false);
+    const [showDistrict, setShowDistrict] = useState(false);
+    const [searchText, setSearchText] = useState();
+
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -29,7 +51,7 @@ export default function User() {
                     Surname
                   </label> */}
                                         <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Surname' />
+                                            <input type="text" className="form-control" placeholder='Surname' onChange={(e) => setSurname(e.target.value)} value={surname} />
                                         </div>
                                     </div>
                                     <div className=" mb-3">
@@ -37,7 +59,7 @@ export default function User() {
                     Other name(s)
                   </label> */}
                                         <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Other names' />
+                                            <input type="text" className="form-control" placeholder='Other names' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
                                         </div>
                                     </div>
                                     <div className=" mb-3">
@@ -45,7 +67,7 @@ export default function User() {
                     Email
                   </label> */}
                                         <div className="col-sm-12">
-                                            <input type="email" className="form-control" placeholder='Email' />
+                                            <input type="email" className="form-control" placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} />
                                         </div>
                                     </div>
 
@@ -57,7 +79,7 @@ export default function User() {
                    Phone Number
                   </label> */}
                                         <div className="col-sm-12">
-                                            <input type="number" className="form-control" placeholder='Phone number' />
+                                            <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
                                         </div>
                                     </div>
                                     <div className=" mb-3">
@@ -65,20 +87,24 @@ export default function User() {
                     Designation/Role
                   </label> */}
                                         <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Designation/Position' />
+                                            <input type="text" className="form-control" placeholder='Designation/Position' onChange={(e) => setDesignation(e.target.value)} value={designation} />
                                         </div>
                                     </div>
                                     <div className=" mb-3">
                                         {/* <label className="col-sm-2 col-form-label">Select role</label> */}
                                         <div className="col-sm-12">
                                             <select
+                                                onChange={(e: any) => setUserRole(e.target.value)}
                                                 className="form-select"
                                                 aria-label="Default select example"
                                             >
+
                                                 <option >User role</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
+                                                {data.roles.map((role: any) => {
+                                                    return (
+                                                        <option value={role.id}>{role.name}</option>
+                                                    )
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -124,7 +150,7 @@ export default function User() {
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
                                             <button type="submit" className="btn btn-primary">
-                                                Submit Form
+                                                Submit
                                             </button>
                                         </div>
                                     </div>

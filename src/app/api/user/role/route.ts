@@ -56,13 +56,11 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    console.log(res);
 
     let selectedPages = res.selectedPages;
-    let userRoleId = res.userRoleId;
+    let userRoleId = res.roleId;
 
 
-    console.log("selectedPages==>",selectedPages);
     
 
     let pages = await selectedPages.map((page: { value: any }) => {
@@ -78,6 +76,7 @@ export async function PUT(request: Request) {
       },
     });
 
+
     await prisma.userRole.update({
       data: {
         name: res.roleName,
@@ -87,15 +86,17 @@ export async function PUT(request: Request) {
       },
     });
 
-    // const pageAccess = await prisma.pageAccess.createMany({
-    //   data: pages,
 
-    //   // data: {
-    //   //   userRoleId: userRoleId,
-    //   //   userTypeName: name,
-    //   // },
-    //   // skipDuplicates: true,
-    // });
+    
+    const pageAccess = await prisma.pageAccess.createMany({
+      data: pages,
+
+      // data: {
+      //   userRoleId: userRoleId,
+      //   userTypeName: name,
+      // },
+      // skipDuplicates: true,
+    });
 
     return NextResponse.json({});
   } catch (error) {
