@@ -2,13 +2,15 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Multiselect from "multiselect-react-dropdown";
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { pages } from '../../prisma/seed/page';
+import { pages } from '../../../../prisma/seed/page';
+import { pageAccess } from '../../../../prisma/seed/pageAccess';
 
-export default function Role(data: any) {
+export default function Role({ data }: any) {
     const router = useRouter();
+    const pathname = usePathname()
 
     const [roleName, setRoleName] = useState("");
     const [selectedPages, setSelectedPages] = useState([]);
@@ -16,7 +18,7 @@ export default function Role(data: any) {
 
     const [isEditing, setIsEditing] = useState(0);
 
-console.log(data);
+    console.log(data.roles);
 
 
     const pagesOptions = data.pages.map((page: any) => {
@@ -26,11 +28,7 @@ console.log(data);
         };
     });
 
-    // const pagesOptions = [{
-    //     value: 1, label: "Page A"
-    // }, {
-    //     value: 2, label: "Page B"
-    // }]
+
 
     const add = async (e: any) => {
         try {
@@ -50,8 +48,10 @@ console.log(data);
             const response = await axios.post("/api/user/role", data);
             setSelectedPages([]);
             setRoleName("");
+            console.log(response);
+
             if (response.status == 200) {
-                //router.replace(router.asPath);
+                router.push(pathname);
                 return toast.success("Role added");
             }
             if (response.status == 201) {
@@ -191,18 +191,18 @@ console.log(data);
                                             return (
                                                 <tr key={role.id}>
                                                     <td>{role.name}</td>
-                                                    <div className="row" key={role.id}>
-                                                        {role.PageAccess.map((pa: any) => {
-                                                            return (
-                                                                <div key={role.id} className="col-md-3">
-                                                                    <span className="badge badge-outline-success">
-                                                                        {role.Page.name}
-                                                                    </span>
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                    {/* <td>
+                                                    <td>
+                                                        <div className="row" key={role.id}>
+                                                            {role.PageAccess.map((pa: any) => {
+                                                                return (
+                                                                    <div key={pa.id} className="col-md-3">
+                                                                            {pa.Page?.name ?? ""}
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    </td>
+                                                    <td>
                                                         <div
                                                             className="btn-group"
                                                             role="group"
@@ -212,7 +212,7 @@ console.log(data);
                                                                 <button
                                                                     id="btnGroupDrop1"
                                                                     type="button"
-                                                                    className="btn btn-primary dropdown-toggle"
+                                                                    className="btn btn-success dropdown-toggle"
                                                                     data-bs-toggle="dropdown"
                                                                     aria-expanded="false"
                                                                 >
@@ -223,14 +223,14 @@ console.log(data);
                                                                     aria-labelledby="btnGroupDrop1"
                                                                 >
                                                                     <li>
-                                                                       
+
                                                                         <button
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-                                                                                setUserTypeName(ut.name);
-                                                                                let pageAcess = ut.PageAccess.map(
-                                                                                    (access) => {
+                                                                                setRoleName(role.name);
+                                                                                let pageAcess = role.PageAccess.map(
+                                                                                    (access: any) => {
                                                                                         return {
                                                                                             value: access.Page.id,
                                                                                             label: access.Page.name,
@@ -239,9 +239,8 @@ console.log(data);
                                                                                 );
                                                                                 setSelectedPages(pageAcess);
                                                                                 setIsEditing(1);
-                                                                                setUserTypeId(ut.id);
+                                                                                setRoleId(role.id);
 
-                                                                                console.log("ut.id ", ut.id);
                                                                             }}
                                                                         >
                                                                             Update
@@ -253,18 +252,18 @@ console.log(data);
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                deleteUserType(ut.id);
+                                                                                deleteRole(role.id);
                                                                             }}
                                                                         >
                                                                             Delete
                                                                         </button>
-                                                                       
+
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                        
-                                                    </td> */}
+
+                                                    </td>
                                                 </tr>
                                             );
                                         })}

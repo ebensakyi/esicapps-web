@@ -3,16 +3,16 @@
 // import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
+import Header from '@/src/app/components/Header'
 import { SessionProvider } from 'next-auth/react'
 import AuthProvider from './context/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
-// export const metadata: Metadata = {
-//   title: 'ESICApps',
-//   description: 'ESICApps',
-// }
+export const metadata: Metadata = {
+  title: 'ESICApps',
+  description: 'ESICApps',
+}
 
 
 
@@ -26,6 +26,7 @@ export default function RootLayout({
 
 
     <html lang="en">
+
 
 
       <link href="/assets/img/favicon.png" rel="icon" />

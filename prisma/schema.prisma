@@ -186,7 +186,7 @@ model PasswordResetRequest {
 model User {
   id           Int     @id @default(autoincrement())
   fcmId        String? @db.VarChar(255)
-  userTypeId   Int
+  userRoleId   Int
   surname      String  @db.VarChar(255)
   otherNames   String  @db.VarChar(255)
   email        String  @unique @db.VarChar(255)
@@ -238,7 +238,7 @@ model User {
   District                       District?                        @relation(fields: [districtId], references: [id])
   ElectoralArea                  ElectoralArea?                   @relation(fields: [electoralAreaId], references: [id])
   Region                         Region?                          @relation(fields: [regionId], references: [id])
-  UserRole                       UserRole?                        @relation(fields: [userTypeId], references: [id])
+  UserRole                       UserRole?                        @relation(fields: [userRoleId], references: [id])
   WaterSection                   WaterSection[]
   EateryPremisesInfoSection      EateryPremisesInfoSection[]
   HealthPremisesInfoSection      HealthPremisesInfoSection[]
@@ -374,13 +374,13 @@ model PageAction {
 
 model PageActionAccess {
   id           Int        @id @default(autoincrement())
-  userTypeId   Int
+  userRoleId   Int
   pageActionId Int
   deleted      Int?       @default(0)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   PageAction   PageAction @relation(fields: [pageActionId], references: [id])
-  UserRole     UserRole   @relation(fields: [userTypeId], references: [id])
+  UserRole     UserRole   @relation(fields: [userRoleId], references: [id])
 }
 
 // model PageAction {
