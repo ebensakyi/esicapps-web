@@ -17,7 +17,6 @@ export default function Home() {
        // callbackUrl: "http://127.0.0.1:3000/",
       });
 
-      console.log("RES ",result);
       
     } catch (error) { 
       console.log(error);

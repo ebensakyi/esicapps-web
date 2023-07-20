@@ -29,7 +29,6 @@ export async function GET(request: Request) {
     const session = await getServerSession(options);
 
 
-     console.log("SSEESSIIOONN",session);
     
 
     const { searchParams } = new URL(request.url);

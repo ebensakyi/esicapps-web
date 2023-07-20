@@ -32,7 +32,6 @@ export default function Role({ data }: any) {
     const add = async (e: any) => {
         try {
             e.preventDefault();
-            console.log("ADD", selectedPages, roleName);
 
             if (selectedPages.length == 0)
                 return toast.error("Pages cannot be empty");
@@ -89,7 +88,6 @@ export default function Role({ data }: any) {
     };
     const deleteRole = async (id: any) => {
         try {
-            console.log("ID==> ", id);
             const response = await axios.delete(
                 `/api/v1/permission/user-type/?id=${id}`
             );
