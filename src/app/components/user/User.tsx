@@ -1,28 +1,259 @@
 "use client"
 import Image from 'next/image'
 import { useState } from 'react';
+import { userLevel } from '../../../../prisma/seed/userLevel';
+import { district } from '../../../../prisma/seed/district';
+import axios from 'axios';
+import router from 'next/router';
+import { toast } from 'react-toastify';
+import { useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 export default function User({ data }: any) {
+    const searchParams = useSearchParams();
+    const { data: session } = useSession()
 
-    const [userRole, setUserRole] = useState();
+    const searchText = searchParams.get('searchText');
+    const formId = searchParams.get('formId');
+
+
+    const [userRole, setUserRole] = useState(0);
     const [userId, setUserId] = useState();
-    const [selectedUserLevel, setSelectedUserLevel] = useState();
+    const [selectedUserLevel, setSelectedUserLevel] = useState(0);
 
     const [surname, setSurname] = useState("");
     const [otherNames, setOtherNames] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [designation, setDesignation] = useState("");
-    const [region, setRegion] = useState("");
+    const [region, setRegion] = useState(0);
     const [districts, setDistricts] = useState([]);
-    const [district, setDistrict] = useState("");
+    const [district, setDistrict] = useState(0);
     const [isEditing, setIsEditing] = useState(false);
 
     const [electoralArea, setElectoralArea] = useState();
     const [showRegion, setShowRegion] = useState(false);
     const [showDistrict, setShowDistrict] = useState(false);
-    const [searchText, setSearchText] = useState();
+    // const [searchText, setSearchText] = useState();
 
+    
+
+    const getDistrictsByRegion = async (regionId: number) => {
+        try {
+            //e.preventDefault();
+            const response = await axios.get(
+                "/api/primary-data/district?regionId=" + regionId
+            );
+            setDistricts(response.data);
+        } catch (error) { }
+    };
+
+    // const handleExportAll = async () => {
+    //     try {
+
+    //       const response = await axios.post(
+    //         `/api/v1/submitted-data/data-to-excel`,
+    //         {
+    //           inspectionFormId: Number(formId),
+    //           fileName: handleExcelName(),
+    //           published,
+    //           exportType: 1,
+    //         }
+    //       );
+    //       if (response.status == 200) {
+    //         router.push(response.data);
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   };
+      const handleExportFiltered = async () => {
+        try {
+          const response = await axios.post(
+            `/api/v1/submitted-data/data-to-excel`,
+            {
+              searchText: searchText,
+              exportType: 2,
+            }
+          );
+          if (response.status == 200) {
+            router.push(response.data);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      const autoHandleSearch = (searchText:any) => {
+        try {
+          let currentUrl = router.pathname;
+          const path = router.pathname;
+          const query = router.query;
+    
+          let page =1// query.page;
+    
+          router.push({
+            pathname: path,
+            query: {
+              page,
+              searchText,
+            },
+          });
+          // router.push({
+          //   pathname: currentUrl,
+          //   query: `&searchText=${searchText}`,
+          // });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    
+      const handlePagination = (page:any) => {
+        const path = router.pathname;
+        const query = router.query;
+        query.page = page.selected + 1;
+        router.push({
+          pathname: path,
+          query: query,
+        });
+      };
+    
+      const addUser = async (e:any) => {
+        try {
+          e.preventDefault();
+    
+          if (surname == "") {
+            return toast.error("Surname cannot be empty");
+          }
+          if (otherNames == "") {
+            return toast.error("Other Names cannot be empty");
+          }
+          if (email == "") {
+            return toast.error("Email cannot be empty");
+          }
+          if (phoneNumber == "") {
+            return toast.error("PhoneNumber cannot be empty");
+          }
+          if (designation == "") {
+            return toast.error("Designation cannot be empty");
+          }
+          if (userRole == 0) {
+            return toast.error("User type cannot be empty");
+          }
+          if (selectedUserLevel == 2) {
+            if (region == null || region == 0) {
+              return toast.error("Region cannot be empty");
+            }
+          }
+          if (selectedUserLevel == 3) {
+            if (district == null || district == 0) {
+              return toast.error("District cannot be empty");
+            }
+          }
+    
+          let data = {
+            userRoleId: Number(userRole),
+            userLevelId: Number(selectedUserLevel),
+    
+            surname,
+            otherNames,
+            email,
+            phoneNumber,
+            designation,
+            region: Number(region), 
+            district: Number(district),
+          };
+    
+    
+    
+          const response = await axios.post("/api/v1/account/user", data);
+          router.replace(router.asPath);
+    
+          setSurname("");
+          setOtherNames("");
+          setEmail("");
+          setPhoneNumber("");
+          setDesignation("");
+          setUserRole(0);
+          setRegion(0);
+          setDistrict(0);
+          setSelectedUserLevel(0);
+    
+          return toast.success(response.data.message);
+        } catch (error:any) {
+          return toast.error(error.response.data.message);
+        }
+      };
+    
+      const updateUser = async (e:any) => {
+        try {
+          e.preventDefault();
+    
+          if (surname == "") {
+            return toast.error("Surname cannot be empty");
+          }
+          if (otherNames == "") {
+            return toast.error("Other Names cannot be empty");
+          }
+          if (email == "") {
+            return toast.error("Email cannot be empty");
+          }
+          if (phoneNumber == "") {
+            return toast.error("PhoneNumber cannot be empty");
+          }
+          if (designation == "") {
+            return toast.error("Designation cannot be empty");
+          }
+          if (userRole == 0) {
+            return toast.error("User type cannot be empty");
+          }
+          if (selectedUserLevel == 2) {
+            if (region == null || region == 0) {
+              return toast.error("Region cannot be empty");
+            }
+          }
+          if (selectedUserLevel == 3) {
+            if (district == null || district == 0) {
+              return toast.error("District cannot be empty");
+            }
+          }
+    
+          let data = {
+            userId,
+            userRoleId: Number(userRole),
+            userLevelId: Number(selectedUserLevel),
+            surname,
+            otherNames,
+            email,
+            phoneNumber,
+            designation,
+            region,
+            district,
+          };
+    
+          const response = await axios.put("/api/v1/account/user", data);
+          router.replace(router.asPath);
+    
+          setSurname("");
+          setOtherNames("");
+          setEmail("");
+          setPhoneNumber("");
+          setDesignation("");
+          setUserRole(0);
+          setRegion(0);
+          setDistrict(0);
+          setIsEditing(false);
+          setSelectedUserLevel(0);
+    
+          return toast.success(response.data.message);
+        } catch (error) {
+          console.log(error);
+          return toast.error("An error occurred while updating user");
+        }
+      };
+
+
+      let userLevel = session?.user?.userLevelId  ;
+      
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -99,7 +330,7 @@ export default function User({ data }: any) {
                                                 aria-label="Default select example"
                                             >
 
-                                                <option >User role</option>
+                                                <option >Select user role</option>
                                                 {data.roles.map((role: any) => {
                                                     return (
                                                         <option value={role.id}>{role.name}</option>
@@ -113,40 +344,119 @@ export default function User({ data }: any) {
                                             <select
                                                 className="form-select"
                                                 aria-label="Default select example"
+                                                onChange={(e: any) => {
+                                                    setSelectedUserLevel(e.target.value);
+
+                                                    if (selectedUserLevel == 1) {
+                                                        setRegion(0);
+                                                        setDistrict(0);
+                                                    }
+                                                    if (selectedUserLevel == 2) {
+                                                        setDistrict(0);
+                                                    }
+                                                    if (selectedUserLevel == 3) {
+                                                        getDistrictsByRegion(0);
+
+                                                        setRegion(0);
+                                                    }
+
+                                                }}
+                                                value={selectedUserLevel}
                                             >
-                                                <option >User level</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
+                                                <option >Select user level</option>
+                                                {data.userLevels.map((ul: any) => {
+                                                    return (
+                                                        <option key={ul.id} value={ul.id}>{ul.name}</option>
+                                                    )
+                                                })}
                                             </select>
                                         </div>
                                     </div>
+                                    {selectedUserLevel == 2 ?
+                                        <div className=" mb-3">
+                                            <div className="col-sm-12">
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                >
+                                                    <option >Select region</option>
+                                                    {data.regions.map((rg: any) => {
+                                                        return (
+                                                            <option key={rg.id} value={rg.id}>{rg.name}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div> : <></>}
+                                    {/* {selectedUserLevel == "3" ?
                                     <div className=" mb-3">
                                         <div className="col-sm-12">
                                             <select
                                                 className="form-select"
                                                 aria-label="Default select example"
                                             >
-                                                <option >Region</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
+                                                <option >Select district</option>
+                                                {data.districts.map((d: any) => {
+                                                    return (
+                                                        <option key={d.id} value={d.id}>{d.name}</option>
+                                                    )
+                                                })}
                                             </select>
                                         </div>
-                                    </div>
-                                    <div className=" mb-3">
-                                        <div className="col-sm-12">
-                                            <select
-                                                className="form-select"
-                                                aria-label="Default select example"
-                                            >
-                                                <option >District</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </div>:<></>} */}
+                                    {selectedUserLevel == 3 ? (
+                                        <>
+                                            {userLevel==1 ? (
+                                                <div className=" mb-3">
+                                                <div className="col-sm-12">
+                                                    <select
+                                                          className="form-select"
+                                                          aria-label="Default select example"
+                                                        onChange={async (e: any) => {
+                                                            //setFilterValue(e.target.value);
+                                                            setRegion(e.target.value);
+
+                                                            await getDistrictsByRegion(e.target.value);
+                                                        }}
+                                                        value={region}
+                                                    >
+                                                        {" "}
+                                                        <option selected>...Select region... </option>
+                                                        {data.regions?.map((data: any) => (
+                                                            <option key={data.id} value={data.id}>
+                                                                {data.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                           <div className=" mb-3">
+                                            <div className="col-sm-12">
+                                                <select
+                                                    className="form-control"
+                                                    aria-label="Default select example"
+                                                    onChange={(e: any) => {
+                                                        setDistrict(e.target.value);
+                                                    }}
+                                                    value={district}
+                                                >
+                                                    {" "}
+                                                    <option selected>...Select... </option>
+                                                    {districts?.map((data: any) => (
+                                                        <option key={data.id} value={data.id}>
+                                                            {data.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
                                             <button type="submit" className="btn btn-primary">

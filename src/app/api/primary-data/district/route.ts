@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getSession } from "@/utils/session-manager";
+import { useSession } from "next-auth/react";
 
 export async function POST(request: Request) {
   try {
@@ -21,8 +22,20 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+
+    const res = await request.json();
+
+    // const { data: session } = useSession()
+
+     console.log("SSEESSIIOONN",res);
+    
+
+    const { searchParams } = new URL(request.url);
+    const regionId = Number(searchParams.get('regionId'))
+
+
     const data = await prisma.district.findMany({
-      where: { deleted: 0 },
+      where: { deleted: 0,regionId:regionId },
     });
 
     return NextResponse.json(data);

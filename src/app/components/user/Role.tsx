@@ -47,10 +47,11 @@ export default function Role({ data }: any) {
             const response = await axios.post("/api/user/role", data);
             setSelectedPages([]);
             setRoleName("");
-            console.log(response);
 
             if (response.status == 200) {
-                router.push(pathname);
+                router.refresh()
+
+                //router.push(pathname);
                 return toast.success("Role added");
             }
             if (response.status == 201) {
@@ -78,7 +79,7 @@ export default function Role({ data }: any) {
             const response = await axios.put("/api/user/role", data);
             setSelectedPages([]);
             setRoleName("");
-            //router.replace(router.asPath);
+            router.refresh()
 
             return toast.success("User Type update");
         } catch (error) {
