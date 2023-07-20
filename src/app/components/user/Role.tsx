@@ -2,13 +2,24 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Multiselect from "multiselect-react-dropdown";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
 import { pages } from '../../../../prisma/seed/page';
 import { pageAccess } from '../../../../prisma/seed/pageAccess';
+import { useSession } from "next-auth/react";
+import { LOGIN_URL } from "@/config";
 
 export default function Role({ data }: any) {
+
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
+
+    
     const router = useRouter();
     const pathname = usePathname()
 

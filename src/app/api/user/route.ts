@@ -6,11 +6,13 @@ import { options } from "../auth/[...nextauth]/options";
 
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
+import { region } from '../../../../prisma/seed/region';
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
 
+console.log(res);
 
     let password: string  = await generateCode(4) as string;
     const salt = bcrypt.genSaltSync(10);
@@ -26,9 +28,12 @@ export async function POST(request: Request) {
       designation: res.designation,
       password: hashedPassword,
       tempPassword: password,
-      regionId: res.regionId,
-      districtId: res.districtId,
+      regionId: res.region==0?null:res.region,
+      districtId: res.district==0?null: res.district,
     };
+
+    console.log(data);
+    
     const user = await prisma.user.create({ data });
 
     return NextResponse.json(user);

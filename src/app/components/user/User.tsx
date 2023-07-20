@@ -5,7 +5,8 @@ import { userLevel } from '../../../../prisma/seed/userLevel';
 import { district } from '../../../../prisma/seed/district';
 import axios from 'axios';
 import router from 'next/router';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
@@ -18,18 +19,18 @@ export default function User({ data }: any) {
     const formId = searchParams.get('formId');
 
 
-    const [userRole, setUserRole] = useState(0);
+    const [userRole, setUserRole] = useState("");
     const [userId, setUserId] = useState();
-    const [selectedUserLevel, setSelectedUserLevel] = useState(0);
+    const [selectedUserLevel, setSelectedUserLevel] = useState("");
 
     const [surname, setSurname] = useState("");
     const [otherNames, setOtherNames] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [designation, setDesignation] = useState("");
-    const [region, setRegion] = useState(0);
+    const [region, setRegion] = useState("");
     const [districts, setDistricts] = useState([]);
-    const [district, setDistrict] = useState(0);
+    const [district, setDistrict] = useState("");
     const [isEditing, setIsEditing] = useState(false);
 
     const [electoralArea, setElectoralArea] = useState();
@@ -42,11 +43,16 @@ export default function User({ data }: any) {
     const getDistrictsByRegion = async (regionId: number) => {
         try {
             //e.preventDefault();
+
+            console.log("regionId $regionId",regionId);
+            
             const response = await axios.get(
                 "/api/primary-data/district?regionId=" + regionId
             );
             setDistricts(response.data);
-        } catch (error) { }
+        } catch (error) { 
+            console.log(error);
+        }
     };
 
     // const handleExportAll = async () => {
@@ -119,6 +125,9 @@ export default function User({ data }: any) {
         try {
             e.preventDefault();
 
+            console.log(">>>>>>>> ",userRole);
+            
+
             if (surname == "") {
                 return toast.error("Surname cannot be empty");
             }
@@ -134,16 +143,16 @@ export default function User({ data }: any) {
             if (designation == "") {
                 return toast.error("Designation cannot be empty");
             }
-            if (userRole == 0) {
-                return toast.error("User type cannot be empty");
+            if (userRole == "") {
+                return toast.error("User role cannot be empty");
             }
-            if (selectedUserLevel == 2) {
-                if (region == null || region == 0) {
+            if (selectedUserLevel == "2") {
+                if (region == null || region == "") {
                     return toast.error("Region cannot be empty");
                 }
             }
-            if (selectedUserLevel == 3) {
-                if (district == null || district == 0) {
+            if (selectedUserLevel == "3") {
+                if (district == null || district == "") {
                     return toast.error("District cannot be empty");
                 }
             }
@@ -160,6 +169,7 @@ export default function User({ data }: any) {
                 region: Number(region),
                 district: Number(district),
             };
+console.log(data);
 
 
 
@@ -171,10 +181,11 @@ export default function User({ data }: any) {
             setEmail("");
             setPhoneNumber("");
             setDesignation("");
-            setUserRole(0);
-            setRegion(0);
-            setDistrict(0);
-            setSelectedUserLevel(0);
+            setUserRole("");
+            setRegion("");
+            setDistrict("");
+        
+            setSelectedUserLevel("");
 
             return toast.success(response.data.message);
         } catch (error: any) {
@@ -201,16 +212,16 @@ export default function User({ data }: any) {
             if (designation == "") {
                 return toast.error("Designation cannot be empty");
             }
-            if (userRole == 0) {
-                return toast.error("User type cannot be empty");
+            if (userRole == "") {
+                return toast.error("User role cannot be empty");
             }
-            if (selectedUserLevel == 2) {
-                if (region == null || region == 0) {
+            if (selectedUserLevel == "2") {
+                if (region == null || region == "") {
                     return toast.error("Region cannot be empty");
                 }
             }
-            if (selectedUserLevel == 3) {
-                if (district == null || district == 0) {
+            if (selectedUserLevel == "3") {
+                if (district == null || district == "") {
                     return toast.error("District cannot be empty");
                 }
             }
@@ -236,11 +247,11 @@ export default function User({ data }: any) {
             setEmail("");
             setPhoneNumber("");
             setDesignation("");
-            setUserRole(0);
-            setRegion(0);
-            setDistrict(0);
+            setUserRole("");
+            setRegion("");
+            setDistrict("");
             setIsEditing(false);
-            setSelectedUserLevel(0);
+            setSelectedUserLevel("");
 
             return toast.success(response.data.message);
         } catch (error) {
@@ -254,6 +265,17 @@ export default function User({ data }: any) {
 
     return (
         <main id="main" className="main">
+              <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
             <div className="pagetitle">
                 <h1>USERS</h1>
                 {/* <nav>
@@ -326,6 +348,7 @@ export default function User({ data }: any) {
                                                 onChange={(e: any) => setUserRole(e.target.value)}
                                                 className="form-select"
                                                 aria-label="Default select example"
+                                                value={userRole}
                                             >
 
                                                 <option >Select user role</option>
@@ -344,19 +367,20 @@ export default function User({ data }: any) {
                                                 aria-label="Default select example"
                                                 onChange={(e: any) => {
                                                     setSelectedUserLevel(e.target.value);
+                                                    setRegion("");
+                                                    setDistrict("");
+                                                    // if (selectedUserLevel == "1") {
+                                                    //     setRegion("");
+                                                    //     setDistrict("");
+                                                    // }
+                                                    // if (selectedUserLevel == "2") {
+                                                    //     setDistrict("");
+                                                    // }
+                                                    // if (selectedUserLevel == "3") {
+                                                    //     //getDistrictsByRegion(0);
 
-                                                    if (selectedUserLevel == 1) {
-                                                        setRegion(0);
-                                                        setDistrict(0);
-                                                    }
-                                                    if (selectedUserLevel == 2) {
-                                                        setDistrict(0);
-                                                    }
-                                                    if (selectedUserLevel == 3) {
-                                                        getDistrictsByRegion(0);
-
-                                                        setRegion(0);
-                                                    }
+                                                    //     setRegion("");
+                                                    // }
 
                                                 }}
                                                 value={selectedUserLevel}
@@ -370,12 +394,19 @@ export default function User({ data }: any) {
                                             </select>
                                         </div>
                                     </div>
-                                    {selectedUserLevel == 2 ?
+                                    {selectedUserLevel == "2" ?
                                         <div className=" mb-3">
                                             <div className="col-sm-12">
                                                 <select
                                                     className="form-select"
                                                     aria-label="Default select example"
+                                                    onChange={async (e: any) => {
+                                                        //setFilterValue(e.target.value);
+                                                        setRegion(e.target.value);
+
+                                                        await getDistrictsByRegion(e.target.value);
+                                                    }}
+                                                    value={region}
                                                 >
                                                     <option >Select region</option>
                                                     {data.regions.map((rg: any) => {
@@ -402,9 +433,9 @@ export default function User({ data }: any) {
                                             </select>
                                         </div>
                                     </div>:<></>} */}
-                                    {selectedUserLevel == 3 ? (
+                                    {selectedUserLevel == "3" ? (
                                         <>
-                                            {userLevel == 1 ? (
+                                            {userLevel == "1" ? (
                                                 <div className=" mb-3">
                                                     <div className="col-sm-12">
                                                         <select
@@ -441,7 +472,6 @@ export default function User({ data }: any) {
                                                         }}
                                                         value={district}
                                                     >
-                                                        {" "}
                                                         <option >Select district </option>
                                                         {districts?.map((data: any) => (
                                                             <option key={data.id} value={data.id}>
@@ -471,102 +501,33 @@ export default function User({ data }: any) {
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Users List</h5>
-                                <table className="table table-bordered border-primary">
+                                <table className="table datatable table-striped ">
+
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
                                             <th scope="col">Phone</th>
                                             <th scope="col">E-mail</th>
-                                            <th scope="col">Role</th>
                                             <th scope="col">Level</th>
                                             <th scope="col">Region</th>
                                             <th scope="col">District</th>
+                                            <th scope="col">Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr> <tr>
-                                            <td>Brandon Jacob</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                            <td>Designer</td>
-                                        </tr>
+                                        {data.users.map((user:any) => (
+                                             <tr key={user.id}> 
+                                             <td>{user?.otherNames} {user?.surname}</td>
+                                             <td>{user?.phoneNumber}</td>
+                                             <td>{user?.email}</td>
+                                             <td>{user?.UserLevel?.name}</td>
+                                             <td>{user?.Region?.name}</td>
+                                             <td>{user?.District?.name}</td>
+                                         </tr>
+                                        ))}
+                                       
+                                       
                                     </tbody>
                                 </table>
                             </div>

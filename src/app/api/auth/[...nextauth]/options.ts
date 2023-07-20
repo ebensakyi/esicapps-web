@@ -1,6 +1,7 @@
 import type { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { randomBytes, randomUUID } from "crypto";
+import { SERVER_BASE_URL } from "@/config";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -13,7 +14,7 @@ export const options: NextAuthOptions = {
       id: 'credentials',
       name: 'credentials',
       credentials: {
-        username: {
+        phoneNumber: {
           label: "Phone number:",
           type: "tel",
           placeholder: "Enter your phone number",
@@ -27,9 +28,12 @@ export const options: NextAuthOptions = {
       async authorize(credentials) {
         const { phoneNumber, password } = credentials as any;
 
+        console.log("credentials",credentials);
+        
+
         //AUTO LOGIN FORM
 
-        const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
+        const res = await fetch(`${SERVER_BASE_URL}/api/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ phoneNumber, password }),
