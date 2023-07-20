@@ -7,7 +7,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-
     let selectedPages = res.selectedPages;
 
     const data = {
@@ -33,7 +32,6 @@ export async function POST(request: Request) {
       // skipDuplicates: true,
     });
 
-
     return NextResponse.json(pageAccess);
   } catch (error: any) {
     console.log(error);
@@ -50,6 +48,56 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json(error);
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const res = await request.json();
+    console.log(res);
+
+    let selectedPages = res.selectedPages;
+    let userRoleId = res.userRoleId;
+
+
+    console.log("selectedPages==>",selectedPages);
+    
+
+    let pages = await selectedPages.map((page: { value: any }) => {
+      return {
+        pageId: page.value,
+        userRoleId: userRoleId,
+      };
+    });
+
+    await prisma.pageAccess.deleteMany({
+      where: {
+        userRoleId: userRoleId,
+      },
+    });
+
+    await prisma.userRole.update({
+      data: {
+        name: res.roleName,
+      },
+      where: {
+        id: userRoleId,
+      },
+    });
+
+    // const pageAccess = await prisma.pageAccess.createMany({
+    //   data: pages,
+
+    //   // data: {
+    //   //   userRoleId: userRoleId,
+    //   //   userTypeName: name,
+    //   // },
+    //   // skipDuplicates: true,
+    // });
+
+    return NextResponse.json({});
   } catch (error) {
     return NextResponse.json(error);
   }

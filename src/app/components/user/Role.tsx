@@ -18,7 +18,6 @@ export default function Role({ data }: any) {
 
     const [isEditing, setIsEditing] = useState(0);
 
-    console.log(data.roles);
 
 
     const pagesOptions = data.pages.map((page: any) => {
@@ -76,7 +75,7 @@ export default function Role({ data }: any) {
                 selectedPages: selectedPages,
             };
 
-            const response = await axios.put("/api/v1/permission/user-type", data);
+            const response = await axios.put("/api/user/role", data);
             setSelectedPages([]);
             setRoleName("");
             //router.replace(router.asPath);
@@ -163,9 +162,29 @@ export default function Role({ data }: any) {
 
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
-                                        <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
+
+                                    {isEditing == 1 ? (
+                          <button
+                            className="btn btn-warning"
+                            onClick={(e) => {
+                              update(e, roleId);
+                            }}
+                          >
+                            Update
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-primary"
+                            onClick={(e) => {
+                              add(e);
+                            }}
+                          >
+                            Create
+                          </button>
+                        )}
+                                        {/* <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
                                             Submit
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
 

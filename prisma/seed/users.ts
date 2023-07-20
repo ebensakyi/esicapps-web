@@ -9,7 +9,7 @@ var hashx = bcrypt.hashSync("87654321", salt);
 
 export const users = [
   {
-    userTypeId: 1,
+    userRoleId: 1,
     surname: "Sakyi",
     otherNames: "Ebenezer Agyemang",
     email: "ebensakyi@gmail.com",
@@ -19,7 +19,7 @@ export const users = [
     designation: "Enterprise Admin",
   },
   {
-    userTypeId: 1,
+    userRoleId: 1,
     surname: "Oppong",
     otherNames: "Ebenezer",
     email: "oe@gmail.com",
@@ -31,7 +31,7 @@ export const users = [
   },
 
   // {
-  //   userTypeId: 2,
+  //   userRoleId: 2,
   //   surname: "National",
   //   otherNames: "Supervisor",
   //   email: "ns@gmail.com",
@@ -41,7 +41,7 @@ export const users = [
   //   designation: "Super Admin",
   // },
   // {
-  //   userTypeId: 3,
+  //   userRoleId: 3,
   //   surname: "Regional",
   //   otherNames: "Admin",
   //   email: "ra@gmail.com",
@@ -50,7 +50,7 @@ export const users = [
   //   regionId: 1,
   //   designation: "Admin",
   // }, {
-  //   userTypeId: 4,
+  //   userRoleId: 4,
   //   surname: "Regional",
   //   otherNames: "Supervisor",
   //   email: "rs@gmail.com",
@@ -61,7 +61,7 @@ export const users = [
   // },
 
   // {
-  //   userTypeId: 5,
+  //   userRoleId: 5,
   //   surname: "District",
   //   otherNames: "Admin",
   //   email: "da@gmail.com",
@@ -72,7 +72,7 @@ export const users = [
   //   designation: " Admin",
   // },
   // {
-  //   userTypeId: 6,
+  //   userRoleId: 6,
   //   surname: "District",
   //   otherNames: "Supervisor",
   //   email: "ds@gmail.com",
@@ -83,7 +83,7 @@ export const users = [
   //   designation: "Supervisor",
   // },
   // {
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "Doe",
   //   otherNames: "John",
   //   email: "fu@gmail.com",
@@ -94,7 +94,7 @@ export const users = [
   //   designation: "Field user",
   // },
   // {
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "District",
   //   otherNames: "User5",
   //   email: "districtuser4@gmail.com",
@@ -105,7 +105,7 @@ export const users = [
   //   designation: "Super Admin"
   // },
   // {
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "District",
   //   otherNames: "User6",
   //   email: "districtuser4@gmail.com",
@@ -116,7 +116,7 @@ export const users = [
   //   designation: "Super Admin"
   // },
   // {
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "District",
   //   otherNames: "User7",
   //   email: "districtuser4@gmail.com",
@@ -127,7 +127,7 @@ export const users = [
   //   designation: "Super Admin"
   // },
   // {
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "District",
   //   otherNames: "User8",
   //   email: "districtuser4@gmail.com",
@@ -138,7 +138,7 @@ export const users = [
   //   designation: "Super Admin"
   // },
   // {
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "District",
   //   otherNames: "User9",
   //   email: "districtuser4@gmail.com",
@@ -148,7 +148,7 @@ export const users = [
   //   districtId:3,
   //   designation: "Super Admin"
   // },{
-  //   userTypeId: 7,
+  //   userRoleId: 7,
   //   surname: "District",
   //   otherNames: "User10",
   //   email: "districtuser4@gmail.com",

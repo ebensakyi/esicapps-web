@@ -91,7 +91,7 @@ CREATE TABLE "PasswordResetRequest" (
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "fcmId" VARCHAR(255),
-    "userTypeId" INTEGER NOT NULL,
+    "userRoleId" INTEGER NOT NULL,
     "surname" VARCHAR(255) NOT NULL,
     "otherNames" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE "UserRole" (
 CREATE TABLE "PageAccess" (
     "id" SERIAL NOT NULL,
     "pageId" INTEGER NOT NULL,
-    "userTypeId" INTEGER NOT NULL,
+    "userRoleId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE "PageAccess" (
 CREATE TABLE "Page" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    "url" VARCHAR(255),
+    "path" VARCHAR(255),
     "icon" VARCHAR(255),
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -226,7 +226,7 @@ CREATE TABLE "PageAction" (
 -- CreateTable
 CREATE TABLE "PageActionAccess" (
     "id" SERIAL NOT NULL,
-    "userTypeId" INTEGER NOT NULL,
+    "userRoleId" INTEGER NOT NULL,
     "pageActionId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2748,6 +2748,12 @@ CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 CREATE UNIQUE INDEX "UserRole_name_key" ON "UserRole"("name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Page_name_key" ON "Page"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Page_path_key" ON "Page"("path");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Community_electoralAreaId_name_key" ON "Community"("electoralAreaId", "name");
 
 -- CreateIndex
@@ -2871,7 +2877,7 @@ ALTER TABLE "User" ADD CONSTRAINT "User_electoralAreaId_fkey" FOREIGN KEY ("elec
 ALTER TABLE "User" ADD CONSTRAINT "User_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserRole"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_userRoleId_fkey" FOREIGN KEY ("userRoleId") REFERENCES "UserRole"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "UserAddedByUser" ADD CONSTRAINT "UserAddedByUser_adderId_fkey" FOREIGN KEY ("adderId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -2892,13 +2898,13 @@ ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY 
 ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserRole"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_userRoleId_fkey" FOREIGN KEY ("userRoleId") REFERENCES "UserRole"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_pageActionId_fkey" FOREIGN KEY ("pageActionId") REFERENCES "PageAction"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userTypeId_fkey" FOREIGN KEY ("userTypeId") REFERENCES "UserRole"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PageActionAccess" ADD CONSTRAINT "PageActionAccess_userRoleId_fkey" FOREIGN KEY ("userRoleId") REFERENCES "UserRole"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Community" ADD CONSTRAINT "Community_electoralAreaId_fkey" FOREIGN KEY ("electoralAreaId") REFERENCES "ElectoralArea"("id") ON DELETE SET NULL ON UPDATE CASCADE;

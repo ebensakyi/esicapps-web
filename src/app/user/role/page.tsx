@@ -1,14 +1,11 @@
 
+import { SERVER_BASE_URL } from "@/config";
 import Role from "@/src/app/components/user/Role";
 import { Suspense } from "react";
 async function getPages() {
-    // const res = await fetch(`http://localhost:3000/api/primary-data/pages`)
-    // console.log(res.json());
 
-
-
-
-    let response = await fetch(`http://localhost:3000/api/primary-data/pages`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/pages`);
+    
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -19,7 +16,7 @@ async function getPages() {
 
 async function getRoles() {
 
-    let response = await fetch(`http://localhost:3000/api/user/role`,{ cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/user/role`,{ cache: 'no-store' });
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
