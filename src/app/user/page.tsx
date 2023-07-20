@@ -39,16 +39,16 @@ async function getRegion() {
 
 }
 
-async function getDistrict() {
+// async function getDistrict() {
 
-    let response = await fetch(`http://localhost:3000/api/primary-data/district`, { cache: 'no-store' });
+//     let response = await fetch(`http://localhost:3000/api/primary-data/district`, { cache: 'no-store' });
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return await response.json();
+//     if (!response.ok) {
+//         throw new Error('Failed to fetch data')
+//     }
+//     return await response.json();
 
-}
+// }
 
 async function getUsers() {
 
@@ -66,9 +66,9 @@ export default async function page() {
     const roles = await getRoles()
     const userLevels = await getUserLevel()
     const regions = await getRegion()
-    const districts = await getDistrict()
+    // const districts = await getDistrict()
 
-    let data = { users, roles, userLevels, regions, districts }
+    let data = { users, roles, userLevels, regions }
 
 
 

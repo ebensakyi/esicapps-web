@@ -28,17 +28,22 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    //const res = await request.json();
-    const session = await getServerSession(options);
     const { searchParams } = new URL(request.url);
     const selectedRegion = searchParams.get("regionId");
-    const selectedDistrict = searchParams.get("districtId");
+
+    console.log(searchParams);
+    
+
+
+    const selectedDistrict = searchParams.get("districtId");    const session = await getServerSession(options);
+
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
     let query = {};
+console.info(session?.user);
 
-    console.log("USERLEVEL ", userLevel);
+    console.info("CUR USERLEVEL.? ", userLevel);
 
     if (userLevel == 1) {
       query = { where: { deleted: 0, regionId: selectedRegion } };
@@ -52,6 +57,9 @@ export async function GET(request: Request) {
       //   levelValue = session?.user?.regionId
       // }
       query = { where: { deleted: 0, regionId: Number(userRegion) } };
+
+      console.log(query);
+      
     } else if (userLevel == 3) {
       // level = "districtId"
       // if (selectedDistrict == "undefined") {
@@ -65,8 +73,11 @@ export async function GET(request: Request) {
 
     const data = await prisma.district.findMany(query);
 
+    
+
     return NextResponse.json(data);
   } catch (error) {
+    console.log(error);
     return NextResponse.json(error);
   }
 }

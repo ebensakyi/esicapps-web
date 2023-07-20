@@ -28,7 +28,7 @@ export const options: NextAuthOptions = {
       async authorize(credentials) {
         const { phoneNumber, password } = credentials as any;
 
-        console.log("credentials",credentials);
+        console.log("credentials",`${SERVER_BASE_URL}/api/auth/login`);
         
 
         //AUTO LOGIN FORM

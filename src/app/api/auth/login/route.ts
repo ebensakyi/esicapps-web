@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,
-      },
+      },include:{Region:true,District:true}
     });
 
     console.log(user);

@@ -386,11 +386,23 @@ console.log(data);
                                                 value={selectedUserLevel}
                                             >
                                                 <option >Select user level</option>
-                                                {data.userLevels.map((ul: any) => {
+                                                <option hidden={userLevel!=1} value="1">
+                          National
+                        </option>
+                        <option hidden={userLevel!=1}  value="2">
+                          Region
+                        </option>
+                        <option
+                          hidden={userLevel!=1  && userLevel!=2 }
+                          value="3"
+                        >
+                          District
+                        </option>
+                                                {/* {data.userLevels.map((ul: any) => {
                                                     return (
                                                         <option key={ul.id} value={ul.id}>{ul.name}</option>
                                                     )
-                                                })}
+                                                })} */}
                                             </select>
                                         </div>
                                     </div>

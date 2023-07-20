@@ -12,7 +12,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-console.log(res);
 
     let password: string  = await generateCode(4) as string;
     const salt = bcrypt.genSaltSync(10);
@@ -32,7 +31,6 @@ console.log(res);
       districtId: res.district==0?null: res.district,
     };
 
-    console.log(data);
     
     const user = await prisma.user.create({ data });
 

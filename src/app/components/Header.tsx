@@ -47,7 +47,10 @@ export default function Header() {
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
-                                    <h6>  {session?.user?.email}</h6>
+                                    <h5>  {session?.user?.email}</h5>
+                                    <h6>  {session?.user?.Region?.name}</h6>
+                                    <h6>  {session?.user?.District?.name}</h6>
+
                                     <span> {session?.user?.designation}</span>
                                 </li>
                                 <li>
