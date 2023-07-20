@@ -238,7 +238,7 @@ model User {
   District                       District?                        @relation(fields: [districtId], references: [id])
   ElectoralArea                  ElectoralArea?                   @relation(fields: [electoralAreaId], references: [id])
   Region                         Region?                          @relation(fields: [regionId], references: [id])
-  UserRole                       UserRole?                        @relation(fields: [userRoleId], references: [id])
+  UserRole                       UserRole?                        @relation(fields: [userRoleId], references: [id], onDelete: Cascade)
   WaterSection                   WaterSection[]
   EateryPremisesInfoSection      EateryPremisesInfoSection[]
   HealthPremisesInfoSection      HealthPremisesInfoSection[]

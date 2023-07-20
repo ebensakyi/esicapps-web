@@ -89,12 +89,12 @@ export default function Role({ data }: any) {
     const deleteRole = async (id: any) => {
         try {
             const response = await axios.delete(
-                `/api/v1/permission/user-type/?id=${id}`
+                `/api/user/role/?id=${id}`
             );
 
             console.log(response);
             if (response.status == 200) {
-                //  router.replace(router.asPath);
+                 router.refresh()
                 return toast.success("User Type deleted");
             }
 

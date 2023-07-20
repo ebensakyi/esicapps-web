@@ -103,3 +103,29 @@ export async function PUT(request: Request) {
     return NextResponse.json(error);
   }
 }
+
+
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+
+    
+    const id = Number(searchParams.get("id"))
+
+
+    const data = await prisma.userRole.update({
+      where: {
+        id: id,
+      },
+      data: {
+        deleted: 1,
+      },
+    });
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log("error==> ", error);
+    
+    return NextResponse.json(error);
+  }
+}
