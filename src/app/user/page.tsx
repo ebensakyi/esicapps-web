@@ -21,7 +21,6 @@ async function getUserLevel() {
 
     let response = await fetch(`http://localhost:3000/api/primary-data/user-level`, { cache: 'no-store' });
 
-    console.log(response);
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -33,7 +32,6 @@ async function getRegion() {
 
     let response = await fetch(`http://localhost:3000/api/primary-data/region`, { cache: 'no-store' });
 
-    console.log(response);
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -45,7 +43,6 @@ async function getDistrict() {
 
     let response = await fetch(`http://localhost:3000/api/primary-data/district`, { cache: 'no-store' });
 
-    console.log(response);
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }

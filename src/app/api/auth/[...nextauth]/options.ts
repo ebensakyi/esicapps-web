@@ -1,4 +1,4 @@
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { randomBytes, randomUUID } from "crypto";
 
@@ -9,8 +9,9 @@ export const options: NextAuthOptions = {
     //     clientSecret: process.env.GITHUB_SECRET as string,
     // }),
     CredentialsProvider({
+      type: "credentials",
       id: 'credentials',
-      name: 'Credentials',
+      name: 'credentials',
       credentials: {
         username: {
           label: "Phone number:",
@@ -62,15 +63,23 @@ export const options: NextAuthOptions = {
     },
   },
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
-    },
-    async session({ session, token, user }) {
-      // Send properties to the client, like an access_token from a provider.
-      session.user = token;
+		async jwt({ token, user }) {
+			return { ...token, ...user };
+		},
+		async session({ session, token }: { session: Session; token: any }) {
+			return { ...session, user: token };
+		},
+	},
+  // callbacks: {
+  //   async jwt({ token, user }) {
+  //     return { ...token, ...user };
+  //   },
+  //   async session({ session, token, user }) {
+  //     // Send properties to the client, like an access_token from a provider.
+  //     session.user = token;
 
-      return session;
-    },
-  },
+  //     return session;
+  //   },
+  // },
 //  pages: { signIn: "/auth/login" },
 };

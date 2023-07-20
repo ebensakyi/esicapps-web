@@ -3,6 +3,8 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getSession } from "@/utils/session-manager";
 import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { options } from "../../auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
   try {
@@ -24,10 +26,10 @@ export async function GET(request: Request) {
   try {
 
     const res = await request.json();
+    const session = await getServerSession(options);
 
-    // const { data: session } = useSession()
 
-     console.log("SSEESSIIOONN",res);
+     console.log("SSEESSIIOONN",session);
     
 
     const { searchParams } = new URL(request.url);

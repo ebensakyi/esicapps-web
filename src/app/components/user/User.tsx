@@ -6,11 +6,12 @@ import { district } from '../../../../prisma/seed/district';
 import axios from 'axios';
 import router from 'next/router';
 import { toast } from 'react-toastify';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const { data: session } = useSession()
 
     const searchText = searchParams.get('searchText');
@@ -36,7 +37,7 @@ export default function User({ data }: any) {
     const [showDistrict, setShowDistrict] = useState(false);
     // const [searchText, setSearchText] = useState();
 
-    
+
 
     const getDistrictsByRegion = async (regionId: number) => {
         try {
@@ -67,193 +68,190 @@ export default function User({ data }: any) {
     //       console.log(error);
     //     }
     //   };
-      const handleExportFiltered = async () => {
+    const handleExportFiltered = async () => {
         try {
-          const response = await axios.post(
-            `/api/v1/submitted-data/data-to-excel`,
-            {
-              searchText: searchText,
-              exportType: 2,
+            const response = await axios.post(
+                `/api/v1/submitted-data/data-to-excel`,
+                {
+                    searchText: searchText,
+                    exportType: 2,
+                }
+            );
+            if (response.status == 200) {
+                router.push(response.data);
             }
-          );
-          if (response.status == 200) {
-            router.push(response.data);
-          }
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      };
-      const autoHandleSearch = (searchText:any) => {
+    };
+    // const autoHandleSearch = (searchText: any) => {
+    //     try {
+    //         let currentUrl = router.pathname;
+    //         const path = router.pathname;
+    //         const query = router.query;
+
+    //         let page = 1// query.page;
+
+    //         router.push({
+    //             pathname: path,
+    //             query: {
+    //                 page,
+    //                 searchText,
+    //             },
+    //         });
+          
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    // const handlePagination = (page: any) => {
+    //     const path = router.pathname;
+    //     const query = router.query;
+    //     query.page = page.selected + 1;
+    //     router.push({
+    //         pathname: path,
+    //         query: query,
+    //     });
+    // };
+
+    const addUser = async (e: any) => {
         try {
-          let currentUrl = router.pathname;
-          const path = router.pathname;
-          const query = router.query;
-    
-          let page =1// query.page;
-    
-          router.push({
-            pathname: path,
-            query: {
-              page,
-              searchText,
-            },
-          });
-          // router.push({
-          //   pathname: currentUrl,
-          //   query: `&searchText=${searchText}`,
-          // });
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    
-      const handlePagination = (page:any) => {
-        const path = router.pathname;
-        const query = router.query;
-        query.page = page.selected + 1;
-        router.push({
-          pathname: path,
-          query: query,
-        });
-      };
-    
-      const addUser = async (e:any) => {
-        try {
-          e.preventDefault();
-    
-          if (surname == "") {
-            return toast.error("Surname cannot be empty");
-          }
-          if (otherNames == "") {
-            return toast.error("Other Names cannot be empty");
-          }
-          if (email == "") {
-            return toast.error("Email cannot be empty");
-          }
-          if (phoneNumber == "") {
-            return toast.error("PhoneNumber cannot be empty");
-          }
-          if (designation == "") {
-            return toast.error("Designation cannot be empty");
-          }
-          if (userRole == 0) {
-            return toast.error("User type cannot be empty");
-          }
-          if (selectedUserLevel == 2) {
-            if (region == null || region == 0) {
-              return toast.error("Region cannot be empty");
+            e.preventDefault();
+
+            if (surname == "") {
+                return toast.error("Surname cannot be empty");
             }
-          }
-          if (selectedUserLevel == 3) {
-            if (district == null || district == 0) {
-              return toast.error("District cannot be empty");
+            if (otherNames == "") {
+                return toast.error("Other Names cannot be empty");
             }
-          }
-    
-          let data = {
-            userRoleId: Number(userRole),
-            userLevelId: Number(selectedUserLevel),
-    
-            surname,
-            otherNames,
-            email,
-            phoneNumber,
-            designation,
-            region: Number(region), 
-            district: Number(district),
-          };
-    
-    
-    
-          const response = await axios.post("/api/v1/account/user", data);
-          router.replace(router.asPath);
-    
-          setSurname("");
-          setOtherNames("");
-          setEmail("");
-          setPhoneNumber("");
-          setDesignation("");
-          setUserRole(0);
-          setRegion(0);
-          setDistrict(0);
-          setSelectedUserLevel(0);
-    
-          return toast.success(response.data.message);
-        } catch (error:any) {
-          return toast.error(error.response.data.message);
-        }
-      };
-    
-      const updateUser = async (e:any) => {
-        try {
-          e.preventDefault();
-    
-          if (surname == "") {
-            return toast.error("Surname cannot be empty");
-          }
-          if (otherNames == "") {
-            return toast.error("Other Names cannot be empty");
-          }
-          if (email == "") {
-            return toast.error("Email cannot be empty");
-          }
-          if (phoneNumber == "") {
-            return toast.error("PhoneNumber cannot be empty");
-          }
-          if (designation == "") {
-            return toast.error("Designation cannot be empty");
-          }
-          if (userRole == 0) {
-            return toast.error("User type cannot be empty");
-          }
-          if (selectedUserLevel == 2) {
-            if (region == null || region == 0) {
-              return toast.error("Region cannot be empty");
+            if (email == "") {
+                return toast.error("Email cannot be empty");
             }
-          }
-          if (selectedUserLevel == 3) {
-            if (district == null || district == 0) {
-              return toast.error("District cannot be empty");
+            if (phoneNumber == "") {
+                return toast.error("PhoneNumber cannot be empty");
             }
-          }
-    
-          let data = {
-            userId,
-            userRoleId: Number(userRole),
-            userLevelId: Number(selectedUserLevel),
-            surname,
-            otherNames,
-            email,
-            phoneNumber,
-            designation,
-            region,
-            district,
-          };
-    
-          const response = await axios.put("/api/v1/account/user", data);
-          router.replace(router.asPath);
-    
-          setSurname("");
-          setOtherNames("");
-          setEmail("");
-          setPhoneNumber("");
-          setDesignation("");
-          setUserRole(0);
-          setRegion(0);
-          setDistrict(0);
-          setIsEditing(false);
-          setSelectedUserLevel(0);
-    
-          return toast.success(response.data.message);
-        } catch (error) {
-          console.log(error);
-          return toast.error("An error occurred while updating user");
-        }
-      };
+            if (designation == "") {
+                return toast.error("Designation cannot be empty");
+            }
+            if (userRole == 0) {
+                return toast.error("User type cannot be empty");
+            }
+            if (selectedUserLevel == 2) {
+                if (region == null || region == 0) {
+                    return toast.error("Region cannot be empty");
+                }
+            }
+            if (selectedUserLevel == 3) {
+                if (district == null || district == 0) {
+                    return toast.error("District cannot be empty");
+                }
+            }
+
+            let data = {
+                userRoleId: Number(userRole),
+                userLevelId: Number(selectedUserLevel),
+
+                surname,
+                otherNames,
+                email,
+                phoneNumber,
+                designation,
+                region: Number(region),
+                district: Number(district),
+            };
 
 
-      let userLevel = session?.user?.userLevelId  ;
-      
+
+            const response = await axios.post("/api/user", data);
+            router.refresh()
+
+            setSurname("");
+            setOtherNames("");
+            setEmail("");
+            setPhoneNumber("");
+            setDesignation("");
+            setUserRole(0);
+            setRegion(0);
+            setDistrict(0);
+            setSelectedUserLevel(0);
+
+            return toast.success(response.data.message);
+        } catch (error: any) {
+            return toast.error(error.response.data.message);
+        }
+    };
+
+    const updateUser = async (e: any) => {
+        try {
+            e.preventDefault();
+
+            if (surname == "") {
+                return toast.error("Surname cannot be empty");
+            }
+            if (otherNames == "") {
+                return toast.error("Other Names cannot be empty");
+            }
+            if (email == "") {
+                return toast.error("Email cannot be empty");
+            }
+            if (phoneNumber == "") {
+                return toast.error("PhoneNumber cannot be empty");
+            }
+            if (designation == "") {
+                return toast.error("Designation cannot be empty");
+            }
+            if (userRole == 0) {
+                return toast.error("User type cannot be empty");
+            }
+            if (selectedUserLevel == 2) {
+                if (region == null || region == 0) {
+                    return toast.error("Region cannot be empty");
+                }
+            }
+            if (selectedUserLevel == 3) {
+                if (district == null || district == 0) {
+                    return toast.error("District cannot be empty");
+                }
+            }
+
+            let data = {
+                userId,
+                userRoleId: Number(userRole),
+                userLevelId: Number(selectedUserLevel),
+                surname,
+                otherNames,
+                email,
+                phoneNumber,
+                designation,
+                region,
+                district,
+            };
+
+            const response = await axios.put("/api/v1/account/user", data);
+            router.refresh()
+
+            setSurname("");
+            setOtherNames("");
+            setEmail("");
+            setPhoneNumber("");
+            setDesignation("");
+            setUserRole(0);
+            setRegion(0);
+            setDistrict(0);
+            setIsEditing(false);
+            setSelectedUserLevel(0);
+
+            return toast.success(response.data.message);
+        } catch (error) {
+            console.log(error);
+            return toast.error("An error occurred while updating user");
+        }
+    };
+
+
+    let userLevel = session?.user?.userLevelId
+
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -406,52 +404,52 @@ export default function User({ data }: any) {
                                     </div>:<></>} */}
                                     {selectedUserLevel == 3 ? (
                                         <>
-                                            {userLevel==1 ? (
+                                            {userLevel == 1 ? (
                                                 <div className=" mb-3">
+                                                    <div className="col-sm-12">
+                                                        <select
+                                                            className="form-select"
+                                                            aria-label="Default select example"
+                                                            onChange={async (e: any) => {
+                                                                //setFilterValue(e.target.value);
+                                                                setRegion(e.target.value);
+
+                                                                await getDistrictsByRegion(e.target.value);
+                                                            }}
+                                                            value={region}
+                                                        >
+                                                            {" "}
+                                                            <option >Select region </option>
+                                                            {data.regions?.map((data: any) => (
+                                                                <option key={data.id} value={data.id}>
+                                                                    {data.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            <div className=" mb-3">
                                                 <div className="col-sm-12">
                                                     <select
-                                                          className="form-select"
-                                                          aria-label="Default select example"
-                                                        onChange={async (e: any) => {
-                                                            //setFilterValue(e.target.value);
-                                                            setRegion(e.target.value);
-
-                                                            await getDistrictsByRegion(e.target.value);
+                                                        className="form-control"
+                                                        aria-label="Default select example"
+                                                        onChange={(e: any) => {
+                                                            setDistrict(e.target.value);
                                                         }}
-                                                        value={region}
+                                                        value={district}
                                                     >
                                                         {" "}
-                                                        <option selected>...Select region... </option>
-                                                        {data.regions?.map((data: any) => (
+                                                        <option >Select district </option>
+                                                        {districts?.map((data: any) => (
                                                             <option key={data.id} value={data.id}>
                                                                 {data.name}
                                                             </option>
                                                         ))}
                                                     </select>
                                                 </div>
-                                                </div>
-                                            ) : (
-                                                <></>
-                                            )}
-                                           <div className=" mb-3">
-                                            <div className="col-sm-12">
-                                                <select
-                                                    className="form-control"
-                                                    aria-label="Default select example"
-                                                    onChange={(e: any) => {
-                                                        setDistrict(e.target.value);
-                                                    }}
-                                                    value={district}
-                                                >
-                                                    {" "}
-                                                    <option selected>...Select... </option>
-                                                    {districts?.map((data: any) => (
-                                                        <option key={data.id} value={data.id}>
-                                                            {data.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
                                             </div>
                                         </>
                                     ) : (
@@ -459,7 +457,7 @@ export default function User({ data }: any) {
                                     )}
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
-                                            <button type="submit" className="btn btn-primary">
+                                            <button type="submit" className="btn btn-primary" onClick={(e) => addUser(e)}>
                                                 Submit
                                             </button>
                                         </div>
