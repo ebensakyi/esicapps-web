@@ -20,6 +20,9 @@ async function getFileType() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/file-type`);
 
+    console.log(response);
+    
+
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }

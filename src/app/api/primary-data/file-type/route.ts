@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getSession } from "@/utils/session-manager";
-import { title } from '../../../../../public/assets/vendor/chart.js/plugins/plugin.tooltip';
 
 export async function POST(request: Request) {
   try {

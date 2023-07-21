@@ -9,10 +9,11 @@ import { pages } from '../../../../prisma/seed/page';
 import { pageAccess } from '../../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
-import { fileType } from "@/prisma/seed/fileType";
-import { Descriptor } from '../../../../public/assets/vendor/chart.js/helpers/helpers.config.types';
+
 
 export default function Guide({ data }: any) {
+
+    
 
     const { data: session } = useSession({
         required: true,
@@ -29,6 +30,7 @@ export default function Guide({ data }: any) {
     const [fileType, setFileType] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [url, setUrl] = useState("");
 
     const [isEditing, setIsEditing] = useState(0);
 
@@ -43,21 +45,26 @@ export default function Guide({ data }: any) {
 
             if (title == "") return toast.error("Title cannot be empty");
             if (fileType == "") return toast.error("File type cannot be empty");
+            if (url == "") return toast.error("URL cannot be empty");
 
             let data = {
                 title,
-                fileType
+                fileType,
+                url,description
             };
 
-            const response = await axios.post("/api/user/role", data);
+            console.log(data);
+            
+            const response = await axios.post("/api/user/guide", data);
             setTitle("");
             setFileType("");
+            setUrl("");
+            setDescription("");
 
             if (response.status == 200) {
                 router.refresh()
 
-                //router.push(pathname);
-                return toast.success("Role added");
+                return toast.success("User guide added");
             }
             if (response.status == 201) {
                 return toast.error("Same name already exist");
@@ -72,7 +79,7 @@ export default function Guide({ data }: any) {
     const _delete = async (id: any) => {
         try {
             const response = await axios.delete(
-                `/api/user/role/?id=${id}`
+                `/api/user/guide/?id=${id}`
             );
 
             console.log(response);
@@ -127,19 +134,19 @@ export default function Guide({ data }: any) {
                                     value={fileType}
                                 >
                                     <option >Select file type </option>
-                                    {data?.fileType?.map((data: any) => (
+                                    {data?.fileTypes?.map((data: any) => (
                                         <option key={data.id} value={data.id}>
-                                            {data.name}
+                                            {data.title}
                                         </option>
                                     ))}
                                 </select>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Select file
+                                        Enter url
                                     </label>
                                     <div className="col-sm-12">
 
-                                        <input type="file" accept=".docx,.pdf,.ppt" className="form-control" placeholder='Select file' />
+                                        <input type="text" value={url} onChange={(e)=>setUrl(e.target.value)} className="form-control" placeholder='Enter full url to file' />
                                     </div>
                                 </div>
                                 <div className=" mb-3">
@@ -147,7 +154,7 @@ export default function Guide({ data }: any) {
                                         Description
                                     </label>
                                     <div className="col-sm-12">
-                                        <input type="text" className="form-control" placeholder='Enter description' value={description} onChange={(e: any) => setDescription(e.target.value)} />
+                                        <input type="text" className="form-control" value={description} onChange={(e)=>setDescription(e.target.value)} placeholder='Enter description' value={description} onChange={(e: any) => setDescription(e.target.value)} />
                                     </div>
                                 </div>
 
@@ -176,7 +183,7 @@ export default function Guide({ data }: any) {
                     <div className="col-lg-8">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Roles</h5>
+                                <h5 className="card-title">Guides</h5>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
