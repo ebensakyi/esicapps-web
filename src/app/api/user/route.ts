@@ -78,7 +78,7 @@ export async function GET(request: Request) {
     // let users;
 
     const data = await prisma.user.findMany({
-      where: { deleted: 0 },
+      // where: { deleted: 0 },
       include: {
         Region: true,
         District: true,
@@ -92,6 +92,82 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
+    return NextResponse.json(error);
+  }
+}
+
+
+
+
+export async function PUT(request: Request) {
+  try {
+    const res = await request.json();
+
+
+    let regionId = res.region;
+
+    if (regionId == null) {
+      const district = await prisma.district.findFirst({
+        where: { id: Number(res.district) },
+      });
+
+      regionId = district?.regionId;
+    }
+    
+
+    let id = res.userId;
+
+    const data = {
+      userRoleId: res.userRoleId,
+      userLevelId: res.userLevelId,
+      surname: res.surname,
+      otherNames: res.otherNames,
+      email: res.email,
+      phoneNumber: res.phoneNumber,
+      designation: res.designation,
+      regionId: res.regionId,
+      districtId: res.district,
+    };
+
+    await prisma.user.update({
+      data:data,
+      where: {
+        id: id,
+      },
+    });
+
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log(error);
+    
+    return NextResponse.json(error);
+  }
+}
+
+
+
+export async function DELETE(request: Request) {
+  try {
+    const res = await request.json();
+
+
+    let regionId = res.region;
+
+    let user:any = await prisma.user.findFirst({
+      where: { id: Number(res.id) },
+    });
+
+    await prisma.user.update({
+      where: { id: Number(res.id) },
+      data: { deleted: Math.abs(user?.deleted - 1) },
+    });
+
+
+    return NextResponse.json({});
+  } catch (error) {
+    console.log(error);
+    
     return NextResponse.json(error);
   }
 }

@@ -78,7 +78,7 @@ export default function Role({ data }: any) {
             e.preventDefault();
             if (selectedPages.length == 0)
                 return toast.error("Pages cannot be empty");
-            if (roleName == "") return toast.error("User type cannot be empty");
+            if (roleName == "") return toast.error("User role cannot be empty");
 
             let data = {
                 roleId: id,
@@ -91,7 +91,7 @@ export default function Role({ data }: any) {
             setRoleName("");
             router.refresh()
 
-            return toast.success("User Type update");
+            return toast.success("User role update");
         } catch (error) {
             console.log(error);
             return toast.error("An error occurred");
@@ -225,7 +225,8 @@ export default function Role({ data }: any) {
                                                             {role.PageAccess.map((pa: any) => {
                                                                 return (
                                                                     <div key={pa.id} className="col-md-3">
-                                                                            {pa.Page?.name ?? ""}
+                                                                         <span className="badge bg-primary"><i className="bi bi-check-circle me-1"></i>  {pa.Page?.name ?? ""}</span>
+                                                                           
                                                                     </div>
                                                                 );
                                                             })}

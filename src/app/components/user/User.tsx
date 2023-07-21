@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { userRole } from '../../../../prisma/seed/userRole';
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
@@ -49,7 +50,7 @@ export default function User({ data }: any) {
 
     const getDistrictsByRegion = async (regionId: number) => {
         try {
-console.log("getDistrictsByRegion");
+            console.log("getDistrictsByRegion");
 
 
             const response = await axios.get(
@@ -305,21 +306,108 @@ console.log("getDistrictsByRegion");
                     return toast.error("District cannot be empty");
                 }
             }
+            let data = {}
 
-            let data = {
-                userId,
-                userRoleId: Number(userRole),
-                userLevelId: Number(selectedUserLevel),
-                surname,
-                otherNames,
-                email,
-                phoneNumber,
-                designation,
-                region: selectedRegion,
-                district: selectedDistrict,
-            };
+            console.log("DATADTA ", loggedInUserLevel);
 
-            const response = await axios.put("/api/v1/user", data);
+
+            if (loggedInUserLevel == 1) {
+                if (selectedUserLevel == "1") {
+                    data = {
+                        userId: Number(userId),
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: null,
+                        district: null,
+                    };
+                }
+                if (selectedUserLevel == "2") {
+                    data = {
+                        userId: Number(userId),
+
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: Number(selectedRegion),
+                        district: null,
+                    };
+                }
+                if (selectedUserLevel == "3") {
+                    data = {
+                        userId: Number(userId),
+
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: null,
+                        district: Number(selectedDistrict),
+                    };
+                }
+            }
+
+            if (loggedInUserLevel == 2) {
+                if (selectedUserLevel == "2") {
+                    data = {
+                        userId: Number(userId),
+
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: Number(loggedInUserRegion),
+                        district: null,
+                    };
+                }
+                if (selectedUserLevel == "3") {
+                    data = {
+                        userId: Number(userId),
+
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: Number(loggedInUserRegion),
+                        district: Number(selectedDistrict),
+                    };
+                }
+            }
+
+            if (loggedInUserLevel == 3) {
+                data = {
+                    userId: Number(userId),
+
+                    userRoleId: Number(userRole),
+                    userLevelId: Number(selectedUserLevel),
+                    surname,
+                    otherNames,
+                    email,
+                    phoneNumber,
+                    designation,
+                    region: loggedInUserRegion,
+                    district: loggedInUserDistrict,
+                };
+            }
+            console.log(data);
+            const response = await axios.put("/api/user", data);
             router.refresh()
 
             setSurname("");
@@ -370,10 +458,10 @@ console.log("getDistrictsByRegion");
             {/* End Page Title */}
             <section className="section">
                 <div className="row">
-                    <div className="col-lg-4">
+                    <div className="col-lg-3">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Enter user details</h5>
+                                <h5 className="card-title">Enter user details{selectedUserLevel}</h5>
                                 {/* General Form Elements */}
                                 <form>
                                     <div className=" mb-3">
@@ -440,59 +528,67 @@ console.log("getDistrictsByRegion");
                                         </div>
                                     </div>
                                     {loggedInUserLevel != "3" ?
-                                    <div className=" mb-3">
-                                        <div className="col-sm-12">
-                                            <select
-                                                className="form-select"
-                                                aria-label="Default select example"
-                                                onChange={(e: any) => {
+                                        <div className=" mb-3">
+                                            <div className="col-sm-12">
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                    onChange={(e: any) => {
 
 
-                                                    setSelectedUserLevel(e.target.value);
-                                                    setSelectedRegion("");
-                                                    setSelectedDistrict("");
-                                                    if (selectedUserLevel == "1") {
+                                                        setSelectedUserLevel(e.target.value);
                                                         setSelectedRegion("");
                                                         setSelectedDistrict("");
-                                                    }
-                                                    // if (selectedUserLevel == "2") {
-                                                    //     setDistrict("");
-                                                    // }
+                                                        if (selectedUserLevel == "1") {
+                                                            setSelectedRegion("");
+                                                            setSelectedDistrict("");
+                                                        }
+                                                        // if (selectedUserLevel == "2") {
+                                                        //     setDistrict("");
+                                                        // }
 
-                                                    
-                                                    if (selectedUserLevel == "3") {
-                                                    console.log("selectedUserLevel...",selectedUserLevel);
 
-                                                        getDistrictsByRegion(loggedInUserRegion);
+                                                        if (selectedUserLevel == "2") {
+                                                            console.log("selectedUserLevel...", selectedUserLevel);
 
-                                                        setSelectedRegion("");
-                                                    }
+                                                            getDistrictsByRegion(loggedInUserRegion);
 
-                                                }}
-                                                value={selectedUserLevel}
-                                            >
-                                                <option >Select user level</option>
-                                                <option hidden={loggedInUserLevel != 1} value="1">
-                                                    National
-                                                </option>
-                                                <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
-                                                    Region
-                                                </option>
-                                                <option
-                                                    hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
-                                                    value="3"
+                                                            setSelectedRegion("");
+                                                        }
+
+                                                        if (selectedUserLevel == "3") {
+                                                            console.log("selectedUserLevel...", selectedUserLevel);
+
+                                                            getDistrictsByRegion(loggedInUserRegion);
+
+                                                            setSelectedRegion("");
+                                                        }
+
+                                                    }}
+                                                    value={selectedUserLevel}
                                                 >
-                                                    District
-                                                </option>
-                                                {/* {data.userLevels.map((ul: any) => {
+                                                    <option >Select user level</option>
+                                                    <option hidden={loggedInUserLevel != 1} value="1">
+                                                        National
+                                                    </option>
+                                                    <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
+                                                        Region
+                                                    </option>
+                                                    <option
+                                                        hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
+                                                        value="3"
+                                                    >
+                                                        District
+                                                    </option>
+                                                    {/* {data.userLevels.map((ul: any) => {
                                                     return (
                                                         <option key={ul.id} value={ul.id}>{ul.name}</option>
                                                     )
                                                 })} */}
-                                            </select>
-                                        </div>
-                                    </div>:<></>}
-                                    {(selectedUserLevel == "2" && loggedInUserLevel=="1") ?
+                                                </select>
+                                            </div>
+                                        </div> : <></>}
+                                    {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
                                         <div className=" mb-3">
                                             <div className="col-sm-12">
                                                 <select
@@ -585,9 +681,44 @@ console.log("getDistrictsByRegion");
                                     )}
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
-                                            <button type="submit" className="btn btn-primary" onClick={(e) => addUser(e)}>
-                                                Submit
-                                            </button>
+                                            {isEditing ? (
+                                                <>
+                                                    <button
+                                                        className="btn btn-danger"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+
+                                                            setIsEditing(false);
+
+                                                            setSurname("");
+                                                            setOtherNames("");
+                                                            setEmail("");
+                                                            setPhoneNumber("");
+                                                            setDesignation("");
+                                                            setUserRole("");
+                                                            setSelectedUserLevel("");
+                                                            setSelectedRegion("");
+                                                            setSelectedDistrict("");
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    {"  "} {"  "}
+                                                    <button
+                                                        className="btn btn-success"
+                                                        onClick={(e) => {
+                                                            updateUser(e);
+                                                        }}
+                                                    >
+                                                        Update
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <button type="submit" className="btn btn-primary" onClick={(e) => addUser(e)}>
+                                                    Submit
+                                                </button>
+                                            )}
+
                                         </div>
                                     </div>
                                 </form>
@@ -595,7 +726,7 @@ console.log("getDistrictsByRegion");
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-9">
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Users List</h5>
@@ -609,6 +740,8 @@ console.log("getDistrictsByRegion");
                                             <th scope="col">Level</th>
                                             <th scope="col">Region</th>
                                             <th scope="col">District</th>
+                                            <th scope="col">Status</th>
+
                                             <th scope="col">Action</th>
 
                                         </tr>
@@ -622,6 +755,113 @@ console.log("getDistrictsByRegion");
                                                 <td>{user?.UserLevel?.name}</td>
                                                 <td>{user?.Region?.name}</td>
                                                 <td>{user?.District?.name}</td>
+                                                <td>{user?.deleted == 1 ? <>              <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
+                                                </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
+                                                </>}</td>
+
+                                                <td>   <div
+                                                    className="btn-group"
+                                                    role="group"
+                                                    aria-label="Button group with nested dropdown"
+                                                >
+                                                    <div className="btn-group" role="group">
+                                                        <button
+                                                            id="btnGroupDrop1"
+                                                            type="button"
+                                                            className="btn btn-success dropdown-toggle"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
+                                                        >
+                                                            Actions
+                                                        </button>
+                                                        <ul
+                                                            className="dropdown-menu"
+                                                            aria-labelledby="btnGroupDrop1"
+                                                        >
+                                                            <li>
+
+                                                                <button
+                                                                    className="dropdown-item btn btn-sm "
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        setIsEditing(true);
+
+
+
+                                                                        setSurname(user.surname);
+                                                                        setOtherNames(user.otherNames);
+                                                                        setEmail(user.email);
+                                                                        setPhoneNumber(user.phoneNumber);
+                                                                        setDesignation(user.designation);
+                                                                        setUserRole(user.userRoleId);
+                                                                        setSelectedUserLevel(user.userLevelId);
+                                                                        setUserId(user.id);
+                                                                        setSelectedRegion(user.regionId);
+                                                                        setSelectedDistrict(user.districtId);
+
+
+                                                                        console.log("userRoleId ", user.userRoleId);
+                                                                        console.log("setSelectedUserLevel ", selectedUserLevel);
+
+
+                                                                        // let phoneNumber = user.phoneNumber;
+                                                                        // const response = await axios.put(
+                                                                        //     `/api/user`,
+                                                                        //     { phoneNumber }
+                                                                        // );
+                                                                        // router.refresh()
+                                                                    }}
+                                                                >
+                                                                    Edit
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    className="dropdown-item btn btn-sm "
+                                                                    onClick={async (e) => {
+                                                                        e.preventDefault();
+                                                                        let id = user.id;
+                                                                        const response = await axios.delete(
+                                                                            `/api/user`,
+                                                                            {
+                                                                                data: { id },
+                                                                            }
+                                                                        );
+                                                                        router.refresh()
+                                                                    }}
+
+                                                                >
+                                                                    Change Status
+                                                                </button>
+
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    className="dropdown-item btn btn-sm "
+                                                                    onClick={async(e) => {
+                                                                        try {
+                                                                             e.preventDefault();
+                                                                        let phoneNumber = user.phoneNumber;
+                                                                        const response = await axios.post(
+                                                                          `/api/user/reset-password`,
+                                                                          { phoneNumber }
+                                                                        );
+                                                                        router.refresh()
+                                                                        return toast.success("Password reset. User will receive one time password");
+
+                                                                        } catch (error) {
+                                                                            
+                                                                        }
+                                                                       
+                                                                    }}
+                                                                >
+                                                                    Reset Password
+                                                                </button>
+
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div></td>
                                             </tr>
                                         ))}
 
