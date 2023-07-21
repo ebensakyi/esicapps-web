@@ -15,6 +15,12 @@ export default function User({ data }: any) {
     const router = useRouter();
     const { data: session } = useSession()
 
+    const loggedInUserRegion = session?.user?.regionId;
+    const loggedInUserDistrict = session?.user?.districtId;
+    const loggedInUserLevel = session?.user?.userLevelId
+
+
+
     const searchText = searchParams.get('searchText');
     const formId = searchParams.get('formId');
 
@@ -28,9 +34,10 @@ export default function User({ data }: any) {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [designation, setDesignation] = useState("");
-    const [region, setRegion] = useState("");
+    const [selectedRegion, setSelectedRegion] = useState("");
+    const [selectedDistrict, setSelectedDistrict] = useState("");
+
     const [districts, setDistricts] = useState([]);
-    const [district, setDistrict] = useState("");
     const [isEditing, setIsEditing] = useState(false);
 
     const [electoralArea, setElectoralArea] = useState();
@@ -42,15 +49,14 @@ export default function User({ data }: any) {
 
     const getDistrictsByRegion = async (regionId: number) => {
         try {
-            //e.preventDefault();
+console.log("getDistrictsByRegion");
 
-            console.log("regionId $regionId",regionId);
-            
+
             const response = await axios.get(
                 "/api/primary-data/district?regionId=" + regionId
             );
             setDistricts(response.data);
-        } catch (error) { 
+        } catch (error) {
             console.log(error);
         }
     };
@@ -105,7 +111,7 @@ export default function User({ data }: any) {
     //                 searchText,
     //             },
     //         });
-          
+
     //     } catch (error) {
     //         console.log(error);
     //     }
@@ -125,8 +131,7 @@ export default function User({ data }: any) {
         try {
             e.preventDefault();
 
-            console.log(">>>>>>>> ",userRole);
-            
+
 
             if (surname == "") {
                 return toast.error("Surname cannot be empty");
@@ -147,29 +152,103 @@ export default function User({ data }: any) {
                 return toast.error("User role cannot be empty");
             }
             if (selectedUserLevel == "2") {
-                if (region == null || region == "") {
-                    return toast.error("Region cannot be empty");
-                }
+                // if (selectedRegion == null || selectedRegion == "") {
+                //     return toast.error("Region cannot be empty");
+                // }
             }
             if (selectedUserLevel == "3") {
-                if (district == null || district == "") {
+
+                if (selectedDistrict == null || selectedDistrict == "") {
                     return toast.error("District cannot be empty");
                 }
             }
 
-            let data = {
-                userRoleId: Number(userRole),
-                userLevelId: Number(selectedUserLevel),
+            let data = {}
+            if (loggedInUserLevel == 1) {
+                if (selectedUserLevel == "1") {
+                    data = {
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: null,
+                        district: null,
+                    };
+                }
+                if (selectedUserLevel == "2") {
+                    data = {
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: Number(selectedRegion),
+                        district: null,
+                    };
+                }
+                if (selectedUserLevel == "3") {
+                    data = {
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: null,
+                        district: Number(selectedDistrict),
+                    };
+                }
+            }
 
-                surname,
-                otherNames,
-                email,
-                phoneNumber,
-                designation,
-                region: Number(region),
-                district: Number(district),
-            };
-console.log(data);
+            if (loggedInUserLevel == 2) {
+                if (selectedUserLevel == "2") {
+                    data = {
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: Number(loggedInUserRegion),
+                        district: null,
+                    };
+                }
+                if (selectedUserLevel == "3") {
+                    data = {
+                        userRoleId: Number(userRole),
+                        userLevelId: Number(selectedUserLevel),
+                        surname,
+                        otherNames,
+                        email,
+                        phoneNumber,
+                        designation,
+                        region: Number(loggedInUserRegion),
+                        district: Number(selectedDistrict),
+                    };
+                }
+            }
+
+            if (loggedInUserLevel == 3) {
+                data = {
+                    userRoleId: Number(userRole),
+                    userLevelId: Number(selectedUserLevel),
+                    surname,
+                    otherNames,
+                    email,
+                    phoneNumber,
+                    designation,
+                    region: loggedInUserRegion,
+                    district: loggedInUserDistrict,
+                };
+            }
+            console.log(data);
 
 
 
@@ -182,9 +261,9 @@ console.log(data);
             setPhoneNumber("");
             setDesignation("");
             setUserRole("");
-            setRegion("");
-            setDistrict("");
-        
+            setSelectedRegion("");
+            setSelectedDistrict("");
+
             setSelectedUserLevel("");
 
             return toast.success(response.data.message);
@@ -216,12 +295,13 @@ console.log(data);
                 return toast.error("User role cannot be empty");
             }
             if (selectedUserLevel == "2") {
-                if (region == null || region == "") {
+                if (selectedRegion == null || selectedRegion == "") {
                     return toast.error("Region cannot be empty");
                 }
             }
             if (selectedUserLevel == "3") {
-                if (district == null || district == "") {
+
+                if (selectedDistrict == null || selectedDistrict == "") {
                     return toast.error("District cannot be empty");
                 }
             }
@@ -235,11 +315,11 @@ console.log(data);
                 email,
                 phoneNumber,
                 designation,
-                region,
-                district,
+                region: selectedRegion,
+                district: selectedDistrict,
             };
 
-            const response = await axios.put("/api/v1/account/user", data);
+            const response = await axios.put("/api/v1/user", data);
             router.refresh()
 
             setSurname("");
@@ -248,8 +328,8 @@ console.log(data);
             setPhoneNumber("");
             setDesignation("");
             setUserRole("");
-            setRegion("");
-            setDistrict("");
+            setSelectedRegion("");
+            setSelectedDistrict("");
             setIsEditing(false);
             setSelectedUserLevel("");
 
@@ -261,21 +341,20 @@ console.log(data);
     };
 
 
-    let userLevel = session?.user?.userLevelId
 
     return (
         <main id="main" className="main">
-              <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className="pagetitle">
                 <h1>USERS</h1>
                 {/* <nav>
@@ -360,44 +439,51 @@ console.log(data);
                                             </select>
                                         </div>
                                     </div>
+                                    {loggedInUserLevel != "3" ?
                                     <div className=" mb-3">
                                         <div className="col-sm-12">
                                             <select
                                                 className="form-select"
                                                 aria-label="Default select example"
                                                 onChange={(e: any) => {
+
+
                                                     setSelectedUserLevel(e.target.value);
-                                                    setRegion("");
-                                                    setDistrict("");
-                                                    // if (selectedUserLevel == "1") {
-                                                    //     setRegion("");
-                                                    //     setDistrict("");
-                                                    // }
+                                                    setSelectedRegion("");
+                                                    setSelectedDistrict("");
+                                                    if (selectedUserLevel == "1") {
+                                                        setSelectedRegion("");
+                                                        setSelectedDistrict("");
+                                                    }
                                                     // if (selectedUserLevel == "2") {
                                                     //     setDistrict("");
                                                     // }
-                                                    // if (selectedUserLevel == "3") {
-                                                    //     //getDistrictsByRegion(0);
 
-                                                    //     setRegion("");
-                                                    // }
+                                                    
+                                                    if (selectedUserLevel == "3") {
+                                                    console.log("selectedUserLevel...",selectedUserLevel);
+
+                                                        getDistrictsByRegion(loggedInUserRegion);
+
+                                                        setSelectedRegion("");
+                                                    }
 
                                                 }}
                                                 value={selectedUserLevel}
                                             >
                                                 <option >Select user level</option>
-                                                <option hidden={userLevel!=1} value="1">
-                          National
-                        </option>
-                        <option hidden={userLevel!=1}  value="2">
-                          Region
-                        </option>
-                        <option
-                          hidden={userLevel!=1  && userLevel!=2 }
-                          value="3"
-                        >
-                          District
-                        </option>
+                                                <option hidden={loggedInUserLevel != 1} value="1">
+                                                    National
+                                                </option>
+                                                <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
+                                                    Region
+                                                </option>
+                                                <option
+                                                    hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
+                                                    value="3"
+                                                >
+                                                    District
+                                                </option>
                                                 {/* {data.userLevels.map((ul: any) => {
                                                     return (
                                                         <option key={ul.id} value={ul.id}>{ul.name}</option>
@@ -405,8 +491,8 @@ console.log(data);
                                                 })} */}
                                             </select>
                                         </div>
-                                    </div>
-                                    {selectedUserLevel == "2" ?
+                                    </div>:<></>}
+                                    {(selectedUserLevel == "2" && loggedInUserLevel=="1") ?
                                         <div className=" mb-3">
                                             <div className="col-sm-12">
                                                 <select
@@ -414,11 +500,11 @@ console.log(data);
                                                     aria-label="Default select example"
                                                     onChange={async (e: any) => {
                                                         //setFilterValue(e.target.value);
-                                                        setRegion(e.target.value);
+                                                        setSelectedRegion(e.target.value);
 
                                                         await getDistrictsByRegion(e.target.value);
                                                     }}
-                                                    value={region}
+                                                    value={selectedRegion}
                                                 >
                                                     <option >Select region</option>
                                                     {data.regions.map((rg: any) => {
@@ -447,7 +533,7 @@ console.log(data);
                                     </div>:<></>} */}
                                     {selectedUserLevel == "3" ? (
                                         <>
-                                            {userLevel == "1" ? (
+                                            {loggedInUserLevel == "1" ? (
                                                 <div className=" mb-3">
                                                     <div className="col-sm-12">
                                                         <select
@@ -455,11 +541,11 @@ console.log(data);
                                                             aria-label="Default select example"
                                                             onChange={async (e: any) => {
                                                                 //setFilterValue(e.target.value);
-                                                                setRegion(e.target.value);
+                                                                setSelectedRegion(e.target.value);
 
                                                                 await getDistrictsByRegion(e.target.value);
                                                             }}
-                                                            value={region}
+                                                            value={selectedRegion}
                                                         >
                                                             {" "}
                                                             <option >Select region </option>
@@ -480,9 +566,9 @@ console.log(data);
                                                         className="form-control"
                                                         aria-label="Default select example"
                                                         onChange={(e: any) => {
-                                                            setDistrict(e.target.value);
+                                                            setSelectedDistrict(e.target.value);
                                                         }}
-                                                        value={district}
+                                                        value={selectedDistrict}
                                                     >
                                                         <option >Select district </option>
                                                         {districts?.map((data: any) => (
@@ -528,18 +614,18 @@ console.log(data);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.users.map((user:any) => (
-                                             <tr key={user.id}> 
-                                             <td>{user?.otherNames} {user?.surname}</td>
-                                             <td>{user?.phoneNumber}</td>
-                                             <td>{user?.email}</td>
-                                             <td>{user?.UserLevel?.name}</td>
-                                             <td>{user?.Region?.name}</td>
-                                             <td>{user?.District?.name}</td>
-                                         </tr>
+                                        {data.users.map((user: any) => (
+                                            <tr key={user.id}>
+                                                <td>{user?.otherNames} {user?.surname}</td>
+                                                <td>{user?.phoneNumber}</td>
+                                                <td>{user?.email}</td>
+                                                <td>{user?.UserLevel?.name}</td>
+                                                <td>{user?.Region?.name}</td>
+                                                <td>{user?.District?.name}</td>
+                                            </tr>
                                         ))}
-                                       
-                                       
+
+
                                     </tbody>
                                 </table>
                             </div>

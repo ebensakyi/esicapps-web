@@ -35,36 +35,25 @@ export async function GET(request: Request) {
     
 
 
-    const selectedDistrict = searchParams.get("districtId");    const session = await getServerSession(options);
+    const selectedDistrict = searchParams.get("districtId");   
+     const session = await getServerSession(options);
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
     let query = {};
-console.info(session?.user);
 
-    console.info("CUR USERLEVEL.? ", userLevel);
 
     if (userLevel == 1) {
-      query = { where: { deleted: 0, regionId: selectedRegion } };
-      // level = "regionId"
-      // if (selectedRegion == "undefined") {
-      //   levelValue = session?.user?.regionId
-      // }
+      query = { where: { deleted: 0, regionId: Number(selectedRegion) } };
+    
     } else if (userLevel == 2) {
-      // level = "regionId"
-      // if (selectedRegion == "undefined") {
-      //   levelValue = session?.user?.regionId
-      // }
+     
       query = { where: { deleted: 0, regionId: Number(userRegion) } };
 
-      console.log(query);
       
     } else if (userLevel == 3) {
-      // level = "districtId"
-      // if (selectedDistrict == "undefined") {
-      //   levelValue = session?.user?.districtId
-      // }
+  
       query = { where: { deleted: 0, id: Number(userDistrict) } };
     } else {
       query = { where: { deleted: 0 } };

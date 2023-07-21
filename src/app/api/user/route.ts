@@ -6,16 +6,30 @@ import { options } from "../auth/[...nextauth]/options";
 
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
-import { region } from '../../../../prisma/seed/region';
+import { region } from "../../../../prisma/seed/region";
+import { district } from "../../../../prisma/seed/district";
+import { userLevel } from "../../../../prisma/seed/userLevel";
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
+    const session = await getServerSession(options);
 
+    let loginUserLevel = session?.user?.userLevelId;
 
-    let password: string  = await generateCode(4) as string;
+    let password: string = (await generateCode(4)) as string;
     const salt = bcrypt.genSaltSync(10);
     let hashedPassword = bcrypt.hashSync(password, salt);
+
+    let regionId = res.region;
+
+    if (regionId == null) {
+      const district = await prisma.district.findFirst({
+        where: { id: Number(res.district) },
+      });
+
+      regionId = district?.regionId;
+    }
 
     const data = {
       userRoleId: res.userRoleId,
@@ -27,11 +41,12 @@ export async function POST(request: Request) {
       designation: res.designation,
       password: hashedPassword,
       tempPassword: password,
-      regionId: res.region==0?null:res.region,
-      districtId: res.district==0?null: res.district,
+      regionId: regionId,
+      districtId: res.district,
     };
 
-    
+    console.log("DATA ", data);
+
     const user = await prisma.user.create({ data });
 
     return NextResponse.json(user);
