@@ -1,11 +1,11 @@
 
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
-import Log from "@/src/app/components/user/Log";
 
 import { Suspense } from "react";
+import Guide from "../../components/user/Guide";
 async function getUserGuides() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user-guides`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/user/guide`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -15,7 +15,16 @@ async function getUserGuides() {
 }
 
 
+async function getFileType() {
 
+    let response = await fetch(`${SERVER_BASE_URL}/api/user/fil`);
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+
+}
 
 
 
@@ -31,7 +40,7 @@ export default async function page() {
 
 
 
-    return <Log data={data} />
+    return <Guide data={data} />
 
 
 }

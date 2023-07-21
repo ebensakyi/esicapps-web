@@ -319,7 +319,7 @@ export default function Header() {
                             pathname == "/map"
                                 ? "nav-link"
                                 : "nav-link collapsed"
-                        } href="/configure/user-guide">
+                        } href="/user/guide">
                             <i className="bi bi-book-half
 " />
                             <span>User guide</span>

@@ -7,32 +7,16 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    let selectedPages = res.selectedPages;
 
     const data = {
-      name: res.roleName,
+      title: res.title,
+      fileType: res.fileType,
     };
-    const role = await prisma.userRole.create({ data });
+    const ug = await prisma.userGuide.create({ data });
 
-    let pages = await selectedPages.map((page: any) => {
-      return {
-        pageId: page.value,
-        userRoleId: role.id,
-      };
-    });
+   
 
-    // console.log(pages);
-
-    const pageAccess = await prisma.pageAccess.createMany({
-      data: pages,
-
-      // data: {
-      //   userRoleId: role.id,
-      // },
-      // skipDuplicates: true,
-    });
-
-    return NextResponse.json(pageAccess);
+    return NextResponse.json(ug);
   } catch (error: any) {
     console.log(error);
 
@@ -42,9 +26,9 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const data = await prisma.userRole.findMany({
+    const data = await prisma.userGuide.findMany({
       where: { deleted: 0 },
-      include: { PageAccess: { include: { Page: true } } },
+     
     });
 
     return NextResponse.json(data);

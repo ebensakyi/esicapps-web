@@ -2574,18 +2574,29 @@ CREATE TABLE "ReportType" (
 );
 
 -- CreateTable
-CREATE TABLE "UserGuides" (
+CREATE TABLE "FileType" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
-    "action" INTEGER,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "FileType_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UserGuide" (
+    "id" SERIAL NOT NULL,
+    "title" VARCHAR(255) NOT NULL,
     "url" VARCHAR(255) NOT NULL,
     "description" TEXT,
+    "fileTypeId" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
-    CONSTRAINT "UserGuides_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "UserGuide_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -3990,7 +4001,10 @@ ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey"
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserGuides" ADD CONSTRAINT "UserGuides_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserGuide" ADD CONSTRAINT "UserGuide_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserGuide" ADD CONSTRAINT "UserGuide_fileTypeId_fkey" FOREIGN KEY ("fileTypeId") REFERENCES "FileType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "NotApplicable" ADD CONSTRAINT "NotApplicable_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -31,13 +31,6 @@ export default function Guide({ data }: any) {
 
 
 
-    const pagesOptions = data.pages.map((page: any) => {
-        return {
-            value: page.id,
-            label: page.name,
-        };
-    });
-
 
 
     const add = async (e: any) => {
@@ -116,7 +109,7 @@ export default function Guide({ data }: any) {
                                 <h5 className="card-title">Enter user roles</h5>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Role
+                                        Title
                                     </label>
                                     <div className="col-sm-12">
                                         <input type="text" className="form-control" placeholder='Enter role name' value={roleName} onChange={(e) => setRoleName(e.target.value)} />
@@ -170,22 +163,11 @@ export default function Guide({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.roles.map((role: any) => {
+                                        {data.guides.map((guide: any) => {
                                             return (
-                                                <tr key={role.id}>
-                                                    <td>{role.name}</td>
-                                                    <td>
-                                                        <div className="row" key={role.id}>
-                                                            {role.PageAccess.map((pa: any) => {
-                                                                return (
-                                                                    <div key={pa.id} className="col-md-3">
-                                                                         <span className="badge bg-primary"><i className="bi bi-check-circle me-1"></i>  {pa.Page?.name ?? ""}</span>
-                                                                           
-                                                                    </div>
-                                                                );
-                                                            })}
-                                                        </div>
-                                                    </td>
+                                                <tr key={guide.id}>
+                                                    <td>{guide.title}</td>
+                                                    
                                                     <td>
                                                         <div
                                                             className="btn-group"
@@ -212,18 +194,16 @@ export default function Guide({ data }: any) {
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-                                                                                setRoleName(role.name);
-                                                                                let pageAcess = role.PageAccess.map(
-                                                                                    (access: any) => {
-                                                                                        return {
-                                                                                            value: access.Page.id,
-                                                                                            label: access.Page.name,
-                                                                                        };
-                                                                                    }
-                                                                                );
-                                                                                setSelectedPages(pageAcess);
+                                                                                // setRoleName(role.name);
+                                                                                // let pageAcess = role.PageAccess.map(
+                                                                                //     (access: any) => {
+                                                                                //         return {
+                                                                                //             value: access.Page.id,
+                                                                                //             label: access.Page.name,
+                                                                                //         };
+                                                                                //     }
+                                                                               // );
                                                                                 setIsEditing(1);
-                                                                                setRoleId(role.id);
 
                                                                             }}
                                                                         >
@@ -236,7 +216,7 @@ export default function Guide({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                _delete(role.id);
+                                                                                _delete(guide.id);
                                                                             }}
                                                                         >
                                                                             Delete

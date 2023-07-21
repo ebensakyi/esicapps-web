@@ -72,6 +72,7 @@ import { formSectionImage } from "./formSectionImage";
 import { containerCondition } from "./containerCondition";
 import { pages } from "./page";
 import { pageAccess } from "./pageAccess";
+import { fileType } from "./fileType";
 
 async function main() {
 
@@ -305,7 +306,9 @@ async function main() {
     data: containerCondition,
   })
 
- 
+  await prisma.fileType.createMany({
+    data: fileType,
+  })
 }
 
 main()
