@@ -10,7 +10,7 @@ import { pageAccess } from '../../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 
-export default function Role({ data }: any) {
+export default function Guide({ data }: any) {
 
     const { data: session } = useSession({
         required: true,
@@ -73,31 +73,8 @@ export default function Role({ data }: any) {
         }
     };
 
-    const update = async (e: any, id: any) => {
-        try {
-            e.preventDefault();
-            if (selectedPages.length == 0)
-                return toast.error("Pages cannot be empty");
-            if (roleName == "") return toast.error("User role cannot be empty");
-
-            let data = {
-                roleId: id,
-                roleName,
-                selectedPages: selectedPages,
-            };
-
-            const response = await axios.put("/api/user/role", data);
-            setSelectedPages([]);
-            setRoleName("");
-            router.refresh()
-
-            return toast.success("User role update");
-        } catch (error) {
-            console.log(error);
-            return toast.error("An error occurred");
-        }
-    };
-    const deleteRole = async (id: any) => {
+  
+    const _delete = async (id: any) => {
         try {
             const response = await axios.delete(
                 `/api/user/role/?id=${id}`
@@ -115,19 +92,11 @@ export default function Role({ data }: any) {
             return toast.success("An error occurred while deleting");
         }
     };
-    const onRemove = (selected: any) => {
-        // setSelectedPages([selected.length - 1].value);
-        setSelectedPages(selected);
-
-    };
-    const onSelect = (selected: any) => {
-        // setSelectedPages(selected[selected.length - 1].value);
-        setSelectedPages(selected);
-    };
+  
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>ROLES</h1>
+                <h1>GUIDE</h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -155,17 +124,11 @@ export default function Role({ data }: any) {
                                 </div>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Page
+                                        Select file
                                     </label>
                                     <div className="col-sm-12">
-                                        <Multiselect
-                                            options={pagesOptions}
-                                            selectedValues={selectedPages}
-                                            onSelect={onSelect}
-                                            onRemove={onRemove}
-                                            displayValue="label"
-                                        />
-                                        {/* <input type="text" className="form-control" placeholder='Select page(s)' /> */}
+                                       
+                                        <input type="file" className="form-control" placeholder='Select file' />
                                     </div>
                                 </div>
 
@@ -173,16 +136,7 @@ export default function Role({ data }: any) {
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
 
-                                    {isEditing == 1 ? (
-                          <button
-                            className="btn btn-warning"
-                            onClick={(e) => {
-                              update(e, roleId);
-                            }}
-                          >
-                            Update
-                          </button>
-                        ) : (
+                                    
                           <button
                             className="btn btn-primary"
                             onClick={(e) => {
@@ -191,7 +145,7 @@ export default function Role({ data }: any) {
                           >
                             Add
                           </button>
-                        )}
+                        
                                         {/* <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
                                             Submit
                                         </button> */}
@@ -282,7 +236,7 @@ export default function Role({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                deleteRole(role.id);
+                                                                                _delete(role.id);
                                                                             }}
                                                                         >
                                                                             Delete

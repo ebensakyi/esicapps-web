@@ -41,7 +41,7 @@ export default function Log({ data }: any) {
             <section className="section">
                 <div className="row">
                   
-                    <div className="col-lg-8">
+                    <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Logs</h5>
@@ -59,7 +59,7 @@ export default function Log({ data }: any) {
                                         {data.logs.map((log: any) => {
                                             return (
                                                 <tr key={log.id}>
-                                                    <td>{log.name}</td>
+                                                    <td>{log.User.otherNames} {log.User.surname}</td>
                                                     <td>{log.activity}</td>
                                                     <td>{log.createdAt}</td>
                                                  

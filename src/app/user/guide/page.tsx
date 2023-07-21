@@ -3,9 +3,9 @@ import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
 import Log from "@/src/app/components/user/Log";
 
 import { Suspense } from "react";
-async function getLogs() {
+async function getUserGuides() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user/log`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/user-guides`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -22,9 +22,9 @@ async function getLogs() {
 export default async function page() {
   
 
-    const logs = await getLogs()
+    const guide = await getUserGuides()
 
-    let data = { logs }
+    let data = { guide }
 
     // console.log(data);
     

@@ -142,11 +142,11 @@ CREATE TABLE "Messaging" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255),
     "message" VARCHAR(2550) NOT NULL,
-    "recipient" TEXT,
-    "recipientId" INTEGER,
+    "recipientGroup" TEXT,
     "messageType" INTEGER,
     "sendingType" INTEGER,
     "sender" INTEGER NOT NULL,
+    "recipient" INTEGER NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -2577,13 +2577,13 @@ CREATE TABLE "ReportType" (
 CREATE TABLE "UserGuides" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
-    "fileType" INTEGER NOT NULL,
-    "action" INTEGER NOT NULL,
-    "link" VARCHAR(255) NOT NULL,
-    "description" TEXT NOT NULL,
+    "action" INTEGER,
+    "url" VARCHAR(255) NOT NULL,
+    "description" TEXT,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "UserGuides_pkey" PRIMARY KEY ("id")
 );
@@ -2889,10 +2889,13 @@ ALTER TABLE "UserAddedByUser" ADD CONSTRAINT "UserAddedByUser_addeeId_fkey" FORE
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_messageType_fkey" FOREIGN KEY ("messageType") REFERENCES "MessageType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sender") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_recipient_fkey" FOREIGN KEY ("recipient") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sender") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -3985,6 +3988,9 @@ ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_districtId_fkey"
 
 -- AddForeignKey
 ALTER TABLE "SanitationReport" ADD CONSTRAINT "SanitationReport_reportTypeId_fkey" FOREIGN KEY ("reportTypeId") REFERENCES "ReportType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserGuides" ADD CONSTRAINT "UserGuides_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "NotApplicable" ADD CONSTRAINT "NotApplicable_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

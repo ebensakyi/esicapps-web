@@ -214,7 +214,6 @@ model User {
   LicencePermitSection           LicencePermitSection[]
   LiquidWasteSection             LiquidWasteSection[]
   Logs                           Logs[]
-  sender                         Messaging[]                      @relation("sender")
   PasswordResetRequest           PasswordResetRequest[]
   PremisesActionTaken            PremisesActionTaken[]
   PremisesAnimal                 PremisesAnimal[]
@@ -265,6 +264,9 @@ model User {
   NotApplicable                      NotApplicable[]
   FollowupPremisesActionTaken        FollowupPremisesActionTaken[]
   FollowupPremisesNuisanceDetected   FollowupPremisesNuisanceDetected[]
+  UserGuides                         UserGuides[]
+  Sender                             Messaging[]                          @relation("sender")
+  Recipient                          Messaging[]                          @relation("recipient")
 }
 
 model UserAddedByUser {
@@ -290,22 +292,23 @@ model UserLevel {
 }
 
 model Messaging {
-  id          Int     @id @default(autoincrement())
-  title       String? @db.VarChar(255)
-  message     String  @db.VarChar(2550)
-  recipient   String?
-  recipientId Int?
+  id             Int     @id @default(autoincrement())
+  title          String? @db.VarChar(255)
+  message        String  @db.VarChar(2550)
+  recipientGroup String?
+  // recipientId Int?
 
   messageType Int?
   sendingType Int?
   sender      Int
-
+  recipient   Int
   deleted     Int?         @default(0)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   MessageType MessageType? @relation(fields: [messageType], references: [id])
-  Sender      User         @relation("sender", fields: [sender], references: [id])
   SendingType SendingType? @relation(fields: [sendingType], references: [id])
+  Recipient   User         @relation("recipient", fields: [recipient], references: [id])
+  Sender      User         @relation("sender", fields: [sender], references: [id])
 }
 
 model SendingType {
@@ -3162,16 +3165,17 @@ model ReportType {
 }
 
 model UserGuides {
-  id          Int    @id @default(autoincrement())
-  title       String @db.VarChar(255)
-  fileType    Int
-  action      Int
-  link        String @db.VarChar(255) //youtube,web link
-  description String @db.Text
+  id          Int     @id @default(autoincrement())
+  title       String  @db.VarChar(255)
+  action      Int?
+  url         String  @db.VarChar(255) //youtube,web link
+  description String? @db.Text
 
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
 
 model FormSectionImage {
