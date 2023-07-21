@@ -9,6 +9,8 @@ import { pages } from '../../../../prisma/seed/page';
 import { pageAccess } from '../../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
+import { fileType } from "@/prisma/seed/fileType";
+import { Descriptor } from '../../../../public/assets/vendor/chart.js/helpers/helpers.config.types';
 
 export default function Guide({ data }: any) {
 
@@ -19,13 +21,14 @@ export default function Guide({ data }: any) {
         }
     })
 
-    
+
     const router = useRouter();
     const pathname = usePathname()
 
-    const [roleName, setRoleName] = useState("");
     const [selectedPages, setSelectedPages] = useState([]);
-    const [roleId, setRoleId] = useState();
+    const [fileType, setFileType] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
     const [isEditing, setIsEditing] = useState(0);
 
@@ -37,19 +40,18 @@ export default function Guide({ data }: any) {
         try {
             e.preventDefault();
 
-            if (selectedPages.length == 0)
-                return toast.error("Pages cannot be empty");
-            if (roleName == "") return toast.error("Role name cannot be empty");
+
+            if (title == "") return toast.error("Title cannot be empty");
+            if (fileType == "") return toast.error("File type cannot be empty");
 
             let data = {
-                roleName,
-
-                selectedPages: selectedPages,
+                title,
+                fileType
             };
 
             const response = await axios.post("/api/user/role", data);
-            setSelectedPages([]);
-            setRoleName("");
+            setTitle("");
+            setFileType("");
 
             if (response.status == 200) {
                 router.refresh()
@@ -66,7 +68,7 @@ export default function Guide({ data }: any) {
         }
     };
 
-  
+
     const _delete = async (id: any) => {
         try {
             const response = await axios.delete(
@@ -75,7 +77,7 @@ export default function Guide({ data }: any) {
 
             console.log(response);
             if (response.status == 200) {
-                 router.refresh()
+                router.refresh()
                 return toast.success("User Type deleted");
             }
 
@@ -85,7 +87,7 @@ export default function Guide({ data }: any) {
             return toast.success("An error occurred while deleting");
         }
     };
-  
+
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -106,39 +108,62 @@ export default function Guide({ data }: any) {
                     <div className="col-lg-4">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Enter user roles</h5>
+                                <h5 className="card-title">Add Guide</h5>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Title
                                     </label>
                                     <div className="col-sm-12">
-                                        <input type="text" className="form-control" placeholder='Enter role name' value={roleName} onChange={(e) => setRoleName(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder='Enter title' value={title} onChange={(e: any) => setTitle(e.target.value)} />
                                     </div>
                                 </div>
+
+                                <select
+                                    className="form-control"
+                                    aria-label="Default select example"
+                                    onChange={(e: any) => {
+                                        setFileType(e.target.value);
+                                    }}
+                                    value={fileType}
+                                >
+                                    <option >Select file type </option>
+                                    {data?.fileType?.map((data: any) => (
+                                        <option key={data.id} value={data.id}>
+                                            {data.name}
+                                        </option>
+                                    ))}
+                                </select>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Select file
                                     </label>
                                     <div className="col-sm-12">
-                                       
-                                        <input type="file" className="form-control" placeholder='Select file' />
+
+                                        <input type="file" accept=".docx,.pdf,.ppt" className="form-control" placeholder='Select file' />
                                     </div>
                                 </div>
-
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Description
+                                    </label>
+                                    <div className="col-sm-12">
+                                        <input type="text" className="form-control" placeholder='Enter description' value={description} onChange={(e: any) => setDescription(e.target.value)} />
+                                    </div>
+                                </div>
 
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
 
-                                    
-                          <button
-                            className="btn btn-primary"
-                            onClick={(e) => {
-                              add(e);
-                            }}
-                          >
-                            Add
-                          </button>
-                        
+
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={(e) => {
+                                                add(e);
+                                            }}
+                                        >
+                                            Add
+                                        </button>
+
                                         {/* <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
                                             Submit
                                         </button> */}
@@ -167,7 +192,7 @@ export default function Guide({ data }: any) {
                                             return (
                                                 <tr key={guide.id}>
                                                     <td>{guide.title}</td>
-                                                    
+
                                                     <td>
                                                         <div
                                                             className="btn-group"
@@ -202,7 +227,7 @@ export default function Guide({ data }: any) {
                                                                                 //             label: access.Page.name,
                                                                                 //         };
                                                                                 //     }
-                                                                               // );
+                                                                                // );
                                                                                 setIsEditing(1);
 
                                                                             }}

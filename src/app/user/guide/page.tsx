@@ -3,6 +3,7 @@ import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
 
 import { Suspense } from "react";
 import Guide from "../../components/user/Guide";
+import { fileType } from '../../../../prisma/seed/fileType';
 async function getUserGuides() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/user/guide`);
@@ -17,7 +18,7 @@ async function getUserGuides() {
 
 async function getFileType() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user/fil`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/file-type`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -31,9 +32,10 @@ async function getFileType() {
 export default async function page() {
   
 
-    const guide = await getUserGuides()
+    const guides = await getUserGuides()
+    const fileTypes = await getFileType()
 
-    let data = { guide }
+    let data = { guides, fileTypes }
 
     // console.log(data);
     
