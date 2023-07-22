@@ -59,7 +59,6 @@ export async function GET(request: Request) {
   try {
     const session = await getServerSession(authOptions);
 
-    console.log(session?.user);
 
     const { searchParams } = new URL(request.url);
     const searchText = searchParams.get("searchText");
@@ -101,7 +100,6 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-console.log("put",res);
 
     let regionId = res.region;
 
@@ -109,7 +107,6 @@ console.log("put",res);
       const district = await prisma.district.findFirst({
         where: { id: Number(res.district) },
       });
-console.log(district);
 
 
 

@@ -13,13 +13,13 @@ export default function ElectoralArea({ data }: any) {
 
     const [searchText, setSearchText] = useState();
     const [electoralAreaName, setElectoralAreaName] = useState("");
-    const [communityId, setCommunityId] = useState("");
+
     const [electoralAreaId, setElectoralAreaId] = useState("");
     const [regionId, setRegionId] = useState("");
     const [districtId, setDistrictId] = useState("");
     const [districts, setDistricts] = useState([]);
 
-    const [communityFile, setCommunityFile ] = useState("");
+    const [communityFile, setCommunityFile] = useState("");
 
     const { data: session } = useSession({
         required: true,
@@ -32,12 +32,6 @@ export default function ElectoralArea({ data }: any) {
     const router = useRouter();
     const pathname = usePathname()
 
-    const [selectedPages, setSelectedPages] = useState([]);
-    const [fileType, setFileType] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [url, setUrl] = useState("");
-    const [guideId, setGuideId] = useState()
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -53,35 +47,33 @@ export default function ElectoralArea({ data }: any) {
         }
     };
 
-   
+
 
     const add = async (e: any) => {
         try {
             e.preventDefault();
 
 
-            if (title == "") return toast.error("Title cannot be empty");
-            if (url == "") return toast.error("URL cannot be empty");
+            if (electoralAreaName == "") return toast.error("Electoral Area Name cannot be empty");
+            if (districtId == "") return toast.error("URL cannot be empty");
 
-            if (fileType == "") return toast.error("File type cannot be empty");
 
             let data = {
-                title,
-                fileType,
-                url, description
+                electoralAreaName,
+                districtId,
+
             };
 
 
-            const response = await axios.post("/api/user/guide", data);
-            setTitle("");
-            setFileType("");
-            setUrl("");
-            setDescription("");
+            const response = await axios.post("/api/primary-data/electoral-area", data);
+            setElectoralAreaName("");
+            setDistrictId("");
+            setRegionId("");
 
             if (response.status == 200) {
                 router.refresh()
 
-                return toast.success("User guide added");
+                return toast.success("Electoral area added");
             }
             if (response.status == 201) {
                 return toast.error("Same name already exist");
@@ -95,23 +87,21 @@ export default function ElectoralArea({ data }: any) {
         try {
             e.preventDefault()
             let data = {
-                guideId,
-                title,
-                fileType,
-                url, description
+                electoralAreaName,
+                districtId,
+
             };
 
             const response = await axios.put(
-                `/api/user/guide`, data
+                "/api/primary-data/electoral-area", data
             );
 
             if (response.status == 200) {
-                setFileType("")
-                setTitle("");
-                setUrl("")
-                setDescription("");
+                setElectoralAreaName("")
+                setDistrictId("");
+
                 router.refresh()
-                return toast.success("User guide updated");
+                return toast.success("Electoral area updated");
             }
 
 
@@ -169,131 +159,48 @@ export default function ElectoralArea({ data }: any) {
                                     </div>
                                 </div>
                                 <div className=" mb-3">
-                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Region *
                                     </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={async(e: any) => {
-                                        setRegionId(e.target.value);
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setRegionId(e.target.value);
 
-                                      await  getDistrictsByRegion(e.target.value);
-                                    }}
-                                    value={regionId}
-                                >
-                                    <option >Select region * </option>
-                                    {data?.regions?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
-                              </div>
-                              
-                              <div className=" mb-3">
-                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                       District *
-                                    </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={async(e: any) => {
-                                        setDistrictId(e.target.value);
-                                    }}
-                                    value={districtId}
-                                >
-                                    <option >Select district * </option>
-                                    {districts?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
-                              </div>
-                             
-                              </div>
-                                <div className=" mb-3">
-                                    <div className="col-sm-10">
-
-
-                                        <div className=" mb-3">
-                                            <div className="col-sm-10">
-                                                {isEditing ? (
-                                                    <>
-                                                        <button
-                                                            className="btn btn-danger"
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-
-                                                                setIsEditing(false);
-
-                                                                setDescription("");
-                                                                setUrl("");
-                                                                setFileType("");
-                                                                setTitle("");
-
-                                                            }}
-                                                        >
-                                                            Cancel
-                                                        </button>
-                                                        {"  "} {"  "}
-                                                        <button
-                                                            className="btn btn-warning"
-                                                            onClick={(e) => {
-                                                                update(e);
-                                                            }}
-                                                        >
-                                                            Update
-                                                        </button>
-                                                    </>
-                                                ) : (
-                                                    <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
-                                                        Add
-                                                    </button>
-                                                )}
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                            await getDistrictsByRegion(e.target.value);
+                                        }}
+                                        value={regionId}
+                                    >
+                                        <option >Select region * </option>
+                                        {data?.regions?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Upload Bulk</h5>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Community File *
+                                        District *
                                     </label>
-                                    <div className="col-sm-12">
-                                        <input type="file" accept=".csv" className="form-control" placeholder='Enter community name' value={communityFile} onChange={(e: any) => setCommunityFile(e.target.value)} />
-                                    </div>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setDistrictId(e.target.value);
+                                        }}
+                                        value={districtId}
+                                    >
+                                        <option >Select district * </option>
+                                        {districts?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
-                                <div className=" mb-3">
-                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Electoral Area *
-                                    </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setFileType(e.target.value);
-                                    }}
-                                    value={fileType}
-                                >
-                                    <option >Select electoral area * </option>
-                                    {data?.electoralAreas?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.title}
-                                        </option>
-                                    ))}
-                                </select>
-                              </div>
-                              
 
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
@@ -310,10 +217,9 @@ export default function ElectoralArea({ data }: any) {
 
                                                                 setIsEditing(false);
 
-                                                                setDescription("");
-                                                                setUrl("");
-                                                                setFileType("");
-                                                                setTitle("");
+                                                                setElectoralAreaName("");
+                                                                setDistrictId("");
+
 
                                                             }}
                                                         >
@@ -339,33 +245,108 @@ export default function ElectoralArea({ data }: any) {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                <div className="col-lg-6">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Upload Bulk</h5>
+                            <div className=" mb-3">
+                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                    Community File *
+                                </label>
+                                <div className="col-sm-12">
+                                    <input type="file" accept=".csv" className="form-control" placeholder='Enter community name' value={communityFile} onChange={(e: any) => setCommunityFile(e.target.value)} />
+                                </div>
+                            </div>
+                            <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Region *
+                                    </label>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setRegionId(e.target.value);
+
+                                            await getDistrictsByRegion(e.target.value);
+                                        }}
+                                        value={regionId}
+                                    >
+                                        <option >Select region * </option>
+                                        {data?.regions?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        District *
+                                    </label>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setDistrictId(e.target.value);
+                                        }}
+                                        value={districtId}
+                                    >
+                                        <option >Select district * </option>
+                                        {districts?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+
+                            <div className=" mb-3">
+                                <div className="col-sm-10">
+
+
+                                    <div className=" mb-3">
+                                        <div className="col-sm-10">
+                                          
+                                                <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
+                                                    Upload
+                                                </button>
+                                           
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
                 <div className="row">
-                <div className="col-lg-12">
+                    <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Guides</h5>
+                                <h5 className="card-title">Electoral Area</h5>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Title</th>
+                                            <th scope="col">Name</th>
 
-                                            <th scope="col">URL</th>
-                                            <th scope="col">File Type</th>
+                                            <th scope="col">District</th>
                                             <th scope="col">Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data?.electoralAreas?.map((data: any) => {
+                                        {data?.electoralAreas.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
-                                                    {/* <td>{guide?.url}</td>
-                                                    <td>{guide?.FileType?.title}</td> */}
+                                                    <td>{data?.District.name}</td>
 
                                                     <td>
                                                         <div
@@ -412,7 +393,7 @@ export default function ElectoralArea({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                               // _delete(guide.id);
+                                                                                // _delete(guide.id);
                                                                             }}
                                                                         >
                                                                             Delete

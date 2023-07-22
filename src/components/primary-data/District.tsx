@@ -81,6 +81,7 @@ export default function District({ data }: any) {
                 districtId,
                 districtName,
                 regionId,
+                abbrv
             };
 
 
@@ -92,6 +93,7 @@ export default function District({ data }: any) {
                 setDistrictName("")
                 setDistrictId("");
                 setRegionId("")
+                setAbbrv("")
                 router.refresh()
                 return toast.success("District updated");
             }

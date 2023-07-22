@@ -3,6 +3,7 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { district } from "../../../../../prisma/seed/district";
 
 export async function POST(request: Request) {
   try {
@@ -33,16 +34,12 @@ export async function GET(request: Request) {
         ? undefined
         : Number(searchParams.get("regionId"));
 
-
     const session = await getServerSession(authOptions);
-
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
     let query = {};
-
-    console.log("userLeveluserLevel==> ", userLevel, Number(selectedRegion));
 
     if (userLevel == 1) {
       query = {
@@ -67,6 +64,34 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
+    console.log(error);
+    return NextResponse.json(error);
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const res = await request.json();
+    const session = await getServerSession(authOptions);
+
+    console.log("session =>", session);
+    let districtId = res.districtId;
+
+    const data = {
+      name: res.districtName,
+      regionId: Number(res.regionId),
+      abbrv: res.abbrv,
+    };
+
+    console.log(data);
+    
+    const response = await prisma.district.update({
+      where: { id: Number(districtId) },
+      data,
+    });
+
+    return NextResponse.json(response);
+  } catch (error: any) {
     console.log(error);
     return NextResponse.json(error);
   }
