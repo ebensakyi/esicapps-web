@@ -103,6 +103,7 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
+console.log("put",res);
 
     let regionId = res.region;
 
@@ -110,6 +111,9 @@ export async function PUT(request: Request) {
       const district = await prisma.district.findFirst({
         where: { id: Number(res.district) },
       });
+console.log(district);
+
+
 
       regionId = district?.regionId;
     }
@@ -125,7 +129,7 @@ export async function PUT(request: Request) {
       email: res.email,
       phoneNumber: res.phoneNumber,
       designation: res.designation,
-      regionId: res.regionId,
+      regionId: regionId,
       districtId: res.district,
     };
 

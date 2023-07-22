@@ -1,21 +1,15 @@
 "use client"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { pages } from '../../../../prisma/seed/page';
-import { pageAccess } from '../../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
-import { update } from '../../queries-controller/inspection';
-import { title } from '../../../../public/assets/vendor/chart.js/plugins/plugin.tooltip';
-import { fileType } from '../../../../prisma/seed/fileType';
 
 
 
-export default function Guide({ data }: any) {
+export default function Community({ data }: any) {
 
 
 
@@ -35,6 +29,7 @@ export default function Guide({ data }: any) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState("");
+    const [guideId, setGuideId] = useState()
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -78,21 +73,33 @@ export default function Guide({ data }: any) {
             return toast.error("An error occurred");
         }
     };
-    const update = async (id: any) => {
+    const update = async (e: any) => {
         try {
+            e.preventDefault()
+            let data = {
+                guideId,
+                title,
+                fileType,
+                url, description
+            };
+
             const response = await axios.put(
-                `/api/user/guide/?id=${id}`
+                `/api/user/guide`, data
             );
 
             if (response.status == 200) {
+                setFileType("")
+                setTitle("");
+                setUrl("")
+                setDescription("");
                 router.refresh()
-                return toast.success("User guide deleted");
+                return toast.success("User guide updated");
             }
 
 
-            return toast.error("An error occurred while deleting");
+            return toast.error("An error occurred while updating");
         } catch (error) {
-            return toast.error("An error occurred while deleting");
+            return toast.error("An error occurred while updating");
         }
     };
 
@@ -102,7 +109,6 @@ export default function Guide({ data }: any) {
                 `/api/user/guide/?id=${id}`
             );
 
-            console.log(response);
             if (response.status == 200) {
                 router.refresh()
                 return toast.success("User guide deleted");
@@ -175,8 +181,8 @@ export default function Guide({ data }: any) {
                                     </label>
                                     <div className="col-sm-12">
                                         <input type="text" className="form-control"
-                                         value={description} onChange={(e) => setDescription(e.target.value)}
-                                          placeholder='Enter description'  />
+                                            value={description} onChange={(e) => setDescription(e.target.value)}
+                                            placeholder='Enter description' />
                                     </div>
                                 </div>
 
@@ -184,44 +190,44 @@ export default function Guide({ data }: any) {
                                     <div className="col-sm-10">
 
 
-                                    <div className=" mb-3">
-                                        <div className="col-sm-10">
-                                            {isEditing ? (
-                                                <>
-                                                    <button
-                                                        className="btn btn-danger"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
+                                        <div className=" mb-3">
+                                            <div className="col-sm-10">
+                                                {isEditing ? (
+                                                    <>
+                                                        <button
+                                                            className="btn btn-danger"
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
 
-                                                            setIsEditing(false);
+                                                                setIsEditing(false);
 
-                                                            setDescription("");
-                                                            setUrl("");
-                                                            setFileType("");
-                                                            setTitle("");
-                                                           
-                                                        }}
-                                                    >
-                                                        Cancel
+                                                                setDescription("");
+                                                                setUrl("");
+                                                                setFileType("");
+                                                                setTitle("");
+
+                                                            }}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                        {"  "} {"  "}
+                                                        <button
+                                                            className="btn btn-warning"
+                                                            onClick={(e) => {
+                                                                update(e);
+                                                            }}
+                                                        >
+                                                            Update
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
+                                                        Add
                                                     </button>
-                                                    {"  "} {"  "}
-                                                    <button
-                                                        className="btn btn-success"
-                                                        onClick={(e) => {
-                                                            update(e);
-                                                        }}
-                                                    >
-                                                        Update
-                                                    </button>
-                                                </>
-                                            ) : (
-                                                <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
-                                                    Add
-                                                </button>
-                                            )}
+                                                )}
 
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
 
@@ -246,7 +252,7 @@ export default function Guide({ data }: any) {
                                     <tbody>
                                         {data.guides.map((guide: any) => {
                                             return (
-                                                <tr key={guide.id}>
+                                                <tr key={guide?.id}>
                                                     <td>{guide?.title}</td>
                                                     <td>{guide?.url}</td>
                                                     <td>{guide?.FileType?.title}</td>
@@ -277,19 +283,12 @@ export default function Guide({ data }: any) {
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
+                                                                                setGuideId(guide.id);
                                                                                 setTitle(guide.title)
                                                                                 setDescription(guide.description)
                                                                                 setUrl(guide.url)
                                                                                 setFileType(guide.fileTypeId)
-                                                                                // setRoleName(role.name);
-                                                                                // let pageAcess = role.PageAccess.map(
-                                                                                //     (access: any) => {
-                                                                                //         return {
-                                                                                //             value: access.Page.id,
-                                                                                //             label: access.Page.name,
-                                                                                //         };
-                                                                                //     }
-                                                                                // );
+
                                                                                 setIsEditing(true);
 
                                                                             }}

@@ -38,7 +38,7 @@ export default function Header() {
                                 data-bs-toggle="dropdown"
                             >
                                 <img
-                                    src="assets/img/profile-img.jpg"
+                                    src="../../assets/img/profile-img.jpg"
                                     alt="Profile"
                                     className="rounded-circle"
                                 />
@@ -265,19 +265,19 @@ export default function Header() {
                             data-bs-parent="#sidebar-nav"
                         >
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/primary-data/district">
                                     <i className="bi bi-circle" />
-                                    <span>Districts</span>
+                                    <span>District</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/primary-data/electoral-area">
                                     <i className="bi bi-circle" />
                                     <span>Electoral Area</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/primary-data/community">
                                     <i className="bi bi-circle" />
                                     <span>Community</span>
                                 </Link>

@@ -1,6 +1,6 @@
 
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
-import Role from "@/src/app/components/user/Role";
+import Role from "@/src/components/user/Role";
 
 import { Suspense } from "react";
 async function getPages() {

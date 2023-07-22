@@ -19,7 +19,6 @@ export async function POST(request: Request) {
       userId: Number(userId),
     };
 
-
     const ug = await prisma.userGuide.create({ data });
 
     return NextResponse.json(ug);
@@ -35,6 +34,40 @@ export async function GET(request: Request) {
     const data = await prisma.userGuide.findMany({
       where: { deleted: 0 },
       include: { FileType: true },
+      orderBy: {
+        id: "desc",
+      },
+    });
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json(error);
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const res = await request.json();
+    const session = await getServerSession(options);
+    const userId = session?.user?.id;
+
+
+    let id = Number(res.guideId);
+    const data = {
+      title: res.title,
+      fileTypeId: Number(res.fileType),
+      description: res.description,
+      url: res.url,
+      userId: Number(userId),
+    };
+
+    await prisma.userGuide.update({
+      data: data,
+      where: {
+        id: id,
+      },
     });
 
     return NextResponse.json(data);
@@ -51,13 +84,11 @@ export async function DELETE(request: Request) {
 
     const id = Number(searchParams.get("id"));
 
-    const data = await prisma.userRole.update({
+    const data = await prisma.userGuide.delete({
       where: {
         id: id,
       },
-      data: {
-        deleted: 1,
-      },
+     
     });
 
     return NextResponse.json(data);

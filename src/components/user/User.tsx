@@ -1,15 +1,15 @@
 "use client"
 import Image from 'next/image'
 import { useState } from 'react';
-import { userLevel } from '../../../../prisma/seed/userLevel';
-import { district } from '../../../../prisma/seed/district';
+import { userLevel } from '../../../prisma/seed/userLevel';
+import { district } from '../../../prisma/seed/district';
 import axios from 'axios';
 import router from 'next/router';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { userRole } from '../../../../prisma/seed/userRole';
+import { userRole } from '../../../prisma/seed/userRole';
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
@@ -193,6 +193,7 @@ export default function User({ data }: any) {
                     };
                 }
                 if (selectedUserLevel == "3") {
+                    
                     data = {
                         userRoleId: Number(userRole),
                         userLevelId: Number(selectedUserLevel),
@@ -249,14 +250,14 @@ export default function User({ data }: any) {
                     district: loggedInUserDistrict,
                 };
             }
-            console.log(data);
 
 
 
             const response = await axios.post("/api/user", data);
-            router.refresh()
 
-            setSurname("");
+          
+
+            if (response.status == 200) {  setSurname("");
             setOtherNames("");
             setEmail("");
             setPhoneNumber("");
@@ -266,10 +267,14 @@ export default function User({ data }: any) {
             setSelectedDistrict("");
 
             setSelectedUserLevel("");
+                router.refresh()
+                return toast.success("User added successfully");
 
-            return toast.success(response.data.message);
+            }
+
+
         } catch (error: any) {
-            return toast.error(error.response.data.message);
+            return toast.error("An error occurred");
         }
     };
 
@@ -308,7 +313,6 @@ export default function User({ data }: any) {
             }
             let data = {}
 
-            console.log("DATADTA ", loggedInUserLevel);
 
 
             if (loggedInUserLevel == 1) {
@@ -342,6 +346,8 @@ export default function User({ data }: any) {
                     };
                 }
                 if (selectedUserLevel == "3") {
+                    console.log("hererer");
+                    
                     data = {
                         userId: Number(userId),
 
@@ -406,11 +412,8 @@ export default function User({ data }: any) {
                     district: loggedInUserDistrict,
                 };
             }
-            console.log(data);
             const response = await axios.put("/api/user", data);
-            router.refresh()
-
-            setSurname("");
+            if (response.status == 200) { setSurname("");
             setOtherNames("");
             setEmail("");
             setPhoneNumber("");
@@ -421,7 +424,13 @@ export default function User({ data }: any) {
             setIsEditing(false);
             setSelectedUserLevel("");
 
-            return toast.success(response.data.message);
+                router.refresh()
+                return toast.success("User updated successfully");
+
+            }
+
+
+           
         } catch (error) {
             console.log(error);
             return toast.error("An error occurred while updating user");
@@ -458,160 +467,166 @@ export default function User({ data }: any) {
             {/* End Page Title */}
             <section className="section">
                 <div className="row">
-                    <div className="col-lg-3">
+                    <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Enter user details{selectedUserLevel}</h5>
+                                <h5 className="card-title">Enter user details</h5>
                                 {/* General Form Elements */}
                                 <form>
-                                    <div className=" mb-3">
-                                        {/* <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                    Surname
-                  </label> */}
-                                        <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Surname' onChange={(e) => setSurname(e.target.value)} value={surname} />
-                                        </div>
-                                    </div>
-                                    <div className=" mb-3">
-                                        {/* <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                    Other name(s)
-                  </label> */}
-                                        <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Other names' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
-                                        </div>
-                                    </div>
-                                    <div className=" mb-3">
-                                        {/* <label htmlFor="inputEmail" className="col-sm-12 col-form-label">
-                    Email
-                  </label> */}
-                                        <div className="col-sm-12">
-                                            <input type="email" className="form-control" placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} />
-                                        </div>
-                                    </div>
+                                    <div className="row">
 
-                                    <div className=" mb-3">
-                                        {/* <label
-                    htmlFor="inputNumber"
-                    className="col-sm-12 col-form-label"
-                  >
-                   Phone Number
-                  </label> */}
-                                        <div className="col-sm-12">
-                                            <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
-                                        </div>
-                                    </div>
-                                    <div className=" mb-3">
-                                        {/* <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                    Designation/Role
-                  </label> */}
-                                        <div className="col-sm-12">
-                                            <input type="text" className="form-control" placeholder='Designation/Position' onChange={(e) => setDesignation(e.target.value)} value={designation} />
-                                        </div>
-                                    </div>
-                                    <div className=" mb-3">
-                                        {/* <label className="col-sm-2 col-form-label">Select role</label> */}
-                                        <div className="col-sm-12">
-                                            <select
-                                                onChange={(e: any) => setUserRole(e.target.value)}
-                                                className="form-select"
-                                                aria-label="Default select example"
-                                                value={userRole}
-                                            >
-
-                                                <option >Select user role</option>
-                                                {data.roles.map((role: any) => {
-                                                    return (
-                                                        <option value={role.id}>{role.name}</option>
-                                                    )
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    {loggedInUserLevel != "3" ?
-                                        <div className=" mb-3">
+                                        <div className="col-sm-3 mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                Surname
+                                            </label>
                                             <div className="col-sm-12">
-                                                <select
-                                                    className="form-select"
-                                                    aria-label="Default select example"
-                                                    onChange={(e: any) => {
-
-
-                                                        setSelectedUserLevel(e.target.value);
-                                                        setSelectedRegion("");
-                                                        setSelectedDistrict("");
-                                                        if (selectedUserLevel == "1") {
-                                                            setSelectedRegion("");
-                                                            setSelectedDistrict("");
-                                                        }
-                                                        // if (selectedUserLevel == "2") {
-                                                        //     setDistrict("");
-                                                        // }
-
-
-                                                        if (selectedUserLevel == "2") {
-                                                            console.log("selectedUserLevel...", selectedUserLevel);
-
-                                                            getDistrictsByRegion(loggedInUserRegion);
-
-                                                            setSelectedRegion("");
-                                                        }
-
-                                                        if (selectedUserLevel == "3") {
-                                                            console.log("selectedUserLevel...", selectedUserLevel);
-
-                                                            getDistrictsByRegion(loggedInUserRegion);
-
-                                                            setSelectedRegion("");
-                                                        }
-
-                                                    }}
-                                                    value={selectedUserLevel}
-                                                >
-                                                    <option >Select user level</option>
-                                                    <option hidden={loggedInUserLevel != 1} value="1">
-                                                        National
-                                                    </option>
-                                                    <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
-                                                        Region
-                                                    </option>
-                                                    <option
-                                                        hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
-                                                        value="3"
-                                                    >
-                                                        District
-                                                    </option>
-                                                    {/* {data.userLevels.map((ul: any) => {
-                                                    return (
-                                                        <option key={ul.id} value={ul.id}>{ul.name}</option>
-                                                    )
-                                                })} */}
-                                                </select>
+                                                <input type="text" className="form-control" placeholder='Surname' onChange={(e) => setSurname(e.target.value)} value={surname} />
                                             </div>
-                                        </div> : <></>}
-                                    {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
-                                        <div className=" mb-3">
+                                        </div>
+                                        <div className="col-sm-3  mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                Other name(s)
+                                            </label>
+                                            <div className="col-sm-12">
+                                                <input type="text" className="form-control" placeholder='Other names' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-3  mb-3">
+                                            <label htmlFor="inputEmail" className="col-sm-12 col-form-label">
+                                                Email
+                                            </label>
+                                            <div className="col-sm-12">
+                                                <input type="email" className="form-control" placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} />
+                                            </div>
+                                        </div><div className="col-sm-3 mb-3">
+                                            <label
+                                                htmlFor="inputNumber"
+                                                className="col-sm-12 col-form-label"
+                                            >
+                                                Phone Number
+                                            </label>
+                                            <div className="col-sm-12">
+                                                <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-sm-3  mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                Designation/Role
+                                            </label>
+                                            <div className="col-sm-12">
+                                                <input type="text" className="form-control" placeholder='Designation/Position' onChange={(e) => setDesignation(e.target.value)} value={designation} />
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-3 mb-3">
+                                            <label className="col-sm-12 col-form-label">Select role</label>
                                             <div className="col-sm-12">
                                                 <select
+                                                    onChange={(e: any) => setUserRole(e.target.value)}
                                                     className="form-select"
                                                     aria-label="Default select example"
-                                                    onChange={async (e: any) => {
-                                                        //setFilterValue(e.target.value);
-                                                        setSelectedRegion(e.target.value);
-
-                                                        await getDistrictsByRegion(e.target.value);
-                                                    }}
-                                                    value={selectedRegion}
+                                                    value={userRole}
                                                 >
-                                                    <option >Select region</option>
-                                                    {data.regions.map((rg: any) => {
+
+                                                    <option >Select user role</option>
+                                                    {data.roles.map((role: any) => {
                                                         return (
-                                                            <option key={rg.id} value={rg.id}>{rg.name}</option>
+                                                            <option value={role.id}>{role.name}</option>
                                                         )
                                                     })}
                                                 </select>
                                             </div>
-                                        </div> : <></>}
-                                    {/* {selectedUserLevel == "3" ?
+                                        </div>  {loggedInUserLevel != "3" ?
+                                            <div className="col-sm-3  mb-3">
+                                                <label className="col-sm-12 col-form-label">Select user level</label>
+
+                                                <div className="col-sm-12">
+                                                    <select
+                                                        className="form-select"
+                                                        aria-label="Default select example"
+                                                        onChange={(e: any) => {
+
+
+                                                            setSelectedUserLevel(e.target.value);
+                                                            setSelectedRegion("");
+                                                            setSelectedDistrict("");
+                                                            if (selectedUserLevel == "1") {
+                                                                setSelectedRegion("");
+                                                                setSelectedDistrict("");
+                                                            }
+                                                            // if (selectedUserLevel == "2") {
+                                                            //     setDistrict("");
+                                                            // }
+
+
+                                                            if (selectedUserLevel == "2") {
+                                                                //console.log("selectedUserLevel...", selectedUserLevel);
+
+                                                                // getDistrictsByRegion(loggedInUserRegion);
+
+                                                                setSelectedRegion("");
+                                                            }
+
+                                                            if (selectedUserLevel == "3") {
+                                                                console.log("selectedUserLevel...", selectedUserLevel);
+
+                                                                // getDistrictsByRegion(loggedInUserRegion);
+
+                                                                setSelectedRegion("");
+                                                            }
+
+                                                        }}
+                                                        value={selectedUserLevel}
+                                                    >
+                                                        <option >Select user level</option>
+                                                        <option hidden={loggedInUserLevel != 1} value="1">
+                                                            National
+                                                        </option>
+                                                        <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
+                                                            Region
+                                                        </option>
+                                                        <option
+                                                            hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
+                                                            value="3"
+                                                        >
+                                                            District
+                                                        </option>
+                                                        {/* {data.userLevels.map((ul: any) => {
+                                                    return (
+                                                        <option key={ul.id} value={ul.id}>{ul.name}</option>
+                                                    )
+                                                })} */}
+                                                    </select>
+                                                </div>
+                                            </div> : <></>}
+                                        {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
+                                            <div className="col-sm-3 mb-3">
+                                                <label className="col-sm-12 col-form-label">Select region</label>
+
+                                                <div className="col-sm-12">
+                                                    <select
+                                                        className="form-select"
+                                                        aria-label="Default select example"
+                                                        onChange={async (e: any) => {
+                                                            //setFilterValue(e.target.value);
+                                                            setSelectedRegion(e.target.value);
+
+                                                            await getDistrictsByRegion(e.target.value);
+                                                        }}
+                                                        value={selectedRegion}
+                                                    >
+                                                        <option >Select region</option>
+                                                        {data.regions.map((rg: any) => {
+                                                            return (
+                                                                <option key={rg.id} value={rg.id}>{rg.name}</option>
+                                                            )
+                                                        })}
+                                                    </select>
+                                                </div>
+                                            </div> : <></>}
+                                        {/* {selectedUserLevel == "3" ?
                                     <div className=" mb-3">
                                         <div className="col-sm-12">
                                             <select
@@ -627,25 +642,51 @@ export default function User({ data }: any) {
                                             </select>
                                         </div>
                                     </div>:<></>} */}
-                                    {selectedUserLevel == "3" ? (
-                                        <>
-                                            {loggedInUserLevel == "1" ? (
-                                                <div className=" mb-3">
+                                        {selectedUserLevel == "3" ? (
+                                            <>
+                                                {loggedInUserLevel == "1" ? (
+                                                    <div className="col-sm-3  mb-3">
+                                                        <label className="col-sm-12 col-form-label">Select region</label>
+
+                                                        <div className="col-sm-12">
+                                                            <select
+                                                                className="form-select"
+                                                                aria-label="Default select example"
+                                                                onChange={async (e: any) => {
+                                                                    //setFilterValue(e.target.value);
+                                                                    setSelectedRegion(e.target.value);
+
+                                                                    await getDistrictsByRegion(e.target.value);
+                                                                }}
+                                                                value={selectedRegion}
+                                                            >
+                                                                {" "}
+                                                                <option >Select region </option>
+                                                                {data.regions?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                                <div className="col-sm-3  mb-3">
+                                                    <label className="col-sm-12 col-form-label">Select district</label>
+
                                                     <div className="col-sm-12">
                                                         <select
-                                                            className="form-select"
+                                                            className="form-control"
                                                             aria-label="Default select example"
-                                                            onChange={async (e: any) => {
-                                                                //setFilterValue(e.target.value);
-                                                                setSelectedRegion(e.target.value);
-
-                                                                await getDistrictsByRegion(e.target.value);
+                                                            onChange={(e: any) => {
+                                                                setSelectedDistrict(e.target.value);
                                                             }}
-                                                            value={selectedRegion}
+                                                            value={selectedDistrict}
                                                         >
-                                                            {" "}
-                                                            <option >Select region </option>
-                                                            {data.regions?.map((data: any) => (
+                                                            <option >Select district </option>
+                                                            {districts?.map((data: any) => (
                                                                 <option key={data.id} value={data.id}>
                                                                     {data.name}
                                                                 </option>
@@ -653,32 +694,12 @@ export default function User({ data }: any) {
                                                         </select>
                                                     </div>
                                                 </div>
-                                            ) : (
-                                                <></>
-                                            )}
-                                            <div className=" mb-3">
-                                                <div className="col-sm-12">
-                                                    <select
-                                                        className="form-control"
-                                                        aria-label="Default select example"
-                                                        onChange={(e: any) => {
-                                                            setSelectedDistrict(e.target.value);
-                                                        }}
-                                                        value={selectedDistrict}
-                                                    >
-                                                        <option >Select district </option>
-                                                        {districts?.map((data: any) => (
-                                                            <option key={data.id} value={data.id}>
-                                                                {data.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <></>
-                                    )}
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}</div>
+
+
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
                                             {isEditing ? (
@@ -705,7 +726,7 @@ export default function User({ data }: any) {
                                                     </button>
                                                     {"  "} {"  "}
                                                     <button
-                                                        className="btn btn-success"
+                                                        className="btn btn-warning"
                                                         onClick={(e) => {
                                                             updateUser(e);
                                                         }}
@@ -726,7 +747,7 @@ export default function User({ data }: any) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-9">
+                    <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Users List</h5>
@@ -819,15 +840,27 @@ export default function User({ data }: any) {
                                                                 <button
                                                                     className="dropdown-item btn btn-sm "
                                                                     onClick={async (e) => {
-                                                                        e.preventDefault();
-                                                                        let id = user.id;
-                                                                        const response = await axios.delete(
-                                                                            `/api/user`,
-                                                                            {
-                                                                                data: { id },
+                                                                        try {
+                                                                            e.preventDefault();
+                                                                            let id = user.id;
+                                                                            const response = await axios.delete(
+                                                                                `/api/user`,
+                                                                                {
+                                                                                    data: { id },
+                                                                                }
+                                                                            ); 
+                                                                            if (response.status == 200) {
+                                                                                router.refresh()
+                                                                                return toast.success("User status changed");
+
                                                                             }
-                                                                        );
-                                                                        router.refresh()
+
+
+                                                                        } catch (error) {
+                                                                            return toast.error("An error occurred");
+
+                                                                        }
+
                                                                     }}
 
                                                                 >
@@ -838,21 +871,21 @@ export default function User({ data }: any) {
                                                             <li>
                                                                 <button
                                                                     className="dropdown-item btn btn-sm "
-                                                                    onClick={async(e) => {
+                                                                    onClick={async (e) => {
                                                                         try {
-                                                                             e.preventDefault();
-                                                                        let phoneNumber = user.phoneNumber;
-                                                                        const response = await axios.post(
-                                                                          `/api/user/reset-password`,
-                                                                          { phoneNumber }
-                                                                        );
-                                                                        router.refresh()
-                                                                        return toast.success("Password reset. User will receive one time password");
+                                                                            e.preventDefault();
+                                                                            let phoneNumber = user.phoneNumber;
+                                                                            const response = await axios.post(
+                                                                                `/api/user/reset-password`,
+                                                                                { phoneNumber }
+                                                                            );
+                                                                            router.refresh()
+                                                                            return toast.success("Password reset. User will receive one time password");
 
                                                                         } catch (error) {
-                                                                            
+
                                                                         }
-                                                                       
+
                                                                     }}
                                                                 >
                                                                     Reset Password
