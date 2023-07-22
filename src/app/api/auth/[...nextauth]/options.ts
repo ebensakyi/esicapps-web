@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { randomBytes, randomUUID } from "crypto";
 import { SERVER_BASE_URL } from "@/config";
 
-export const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     // GitHubProvider({
     //     clientId: process.env.GITHUB_ID as string,
@@ -14,7 +14,7 @@ export const options: NextAuthOptions = {
       id: 'credentials',
       name: 'credentials',
       credentials: {
-        phoneNumber: {
+        username: {
           label: "Phone number:",
           type: "tel",
           placeholder: "Enter your phone number",
@@ -27,9 +27,6 @@ export const options: NextAuthOptions = {
       },
       async authorize(credentials) {
         const { phoneNumber, password } = credentials as any;
-
-        console.log("credentials",`${SERVER_BASE_URL}/api/auth/login`);
-        
 
         //AUTO LOGIN FORM
 
@@ -85,5 +82,5 @@ export const options: NextAuthOptions = {
   //     return session;
   //   },
   // },
- pages: { signIn: "/auth/login" },
+//  pages: { signIn: "/auth/login" },
 };

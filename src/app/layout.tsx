@@ -4,10 +4,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from '@/src/components/Header'
-import { SessionProvider } from 'next-auth/react'
-import AuthProvider from './context/AuthProvider';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NextAuthProvider from './context/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,9 +18,9 @@ export const metadata: Metadata = {
 
 
 export default function RootLayout({
-  children, session
+  children
 }: {
-  children: React.ReactNode, session: any
+  children: React.ReactNode
 }) {
 
   return (
@@ -50,22 +49,22 @@ export default function RootLayout({
 
       <link href="../../assets/css/style.css" rel="stylesheet"></link>
       <body className={inter.className}>
-
-        <AuthProvider>
-        <Header />
         <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <NextAuthProvider>
+          <Header />
+
           {children}
-        </AuthProvider>
+        </NextAuthProvider>
 
 
         <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>

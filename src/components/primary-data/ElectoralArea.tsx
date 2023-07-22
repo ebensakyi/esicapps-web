@@ -9,16 +9,15 @@ import { LOGIN_URL } from "@/config";
 
 
 
-export default function Community({ data }: any) {
+export default function ElectoralArea({ data }: any) {
 
     const [searchText, setSearchText] = useState();
-    const [communityName, setCommunityName] = useState("");
+    const [electoralAreaName, setElectoralAreaName] = useState("");
     const [communityId, setCommunityId] = useState("");
     const [electoralAreaId, setElectoralAreaId] = useState("");
     const [regionId, setRegionId] = useState("");
     const [districtId, setDistrictId] = useState("");
     const [districts, setDistricts] = useState([]);
-    const [electoralAreas, setElectoralAreas] = useState([]);
 
     const [communityFile, setCommunityFile ] = useState("");
 
@@ -54,21 +53,7 @@ export default function Community({ data }: any) {
         }
     };
 
-    const getElectoralAreaByDistrict = async (districtId: number) => {
-        try {
-            console.log("getElectoralAreaByDistrict");
-
-
-            const response = await axios.get(
-                "/api/primary-data/electoral-area?districtId=" + districtId
-            );
-            setElectoralAreas(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
+   
 
     const add = async (e: any) => {
         try {
@@ -157,7 +142,7 @@ export default function Community({ data }: any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>COMMUNITY</h1>
+                <h1>ELECTORAL AREA</h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -180,7 +165,7 @@ export default function Community({ data }: any) {
                                         Name *
                                     </label>
                                     <div className="col-sm-12">
-                                        <input type="text" className="form-control" placeholder='Enter community name' value={communityName} onChange={(e: any) => setCommunityName(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder='Enter electoral area name' value={electoralAreaName} onChange={(e: any) => setElectoralAreaName(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className=" mb-3">
@@ -215,7 +200,6 @@ export default function Community({ data }: any) {
                                     aria-label="Default select example"
                                     onChange={async(e: any) => {
                                         setDistrictId(e.target.value);
-                                        await getElectoralAreaByDistrict(e.target.value);
                                     }}
                                     value={districtId}
                                 >
@@ -227,25 +211,7 @@ export default function Community({ data }: any) {
                                     ))}
                                 </select>
                               </div>
-                              <div className=" mb-3">
-                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Electoral Area *
-                                    </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setElectoralAreaId(e.target.value);
-                                    }}
-                                    value={fileType}
-                                >
-                                    <option >Select electoral area * </option>
-                                    {electoralAreas?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
+                             
                               </div>
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
@@ -320,7 +286,7 @@ export default function Community({ data }: any) {
                                     value={fileType}
                                 >
                                     <option >Select electoral area * </option>
-                                    {electoralAreas?.map((data: any) => (
+                                    {data?.electoralAreas?.map((data: any) => (
                                         <option key={data.id} value={data.id}>
                                             {data.title}
                                         </option>
@@ -377,7 +343,6 @@ export default function Community({ data }: any) {
                             </div>
                         </div>
                     </div>
-                </div>
                 <div className="row">
                 <div className="col-lg-12">
                         <div className="card">
@@ -395,12 +360,12 @@ export default function Community({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.communities.map((guide: any) => {
+                                        {data?.electoralAreas?.map((data: any) => {
                                             return (
-                                                <tr key={guide?.id}>
-                                                    <td>{guide?.title}</td>
-                                                    <td>{guide?.url}</td>
-                                                    <td>{guide?.FileType?.title}</td>
+                                                <tr key={data?.id}>
+                                                    <td>{data?.name}</td>
+                                                    {/* <td>{guide?.url}</td>
+                                                    <td>{guide?.FileType?.title}</td> */}
 
                                                     <td>
                                                         <div
@@ -428,11 +393,11 @@ export default function Community({ data }: any) {
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-                                                                                setGuideId(guide.id);
-                                                                                setTitle(guide.title)
-                                                                                setDescription(guide.description)
-                                                                                setUrl(guide.url)
-                                                                                setFileType(guide.fileTypeId)
+                                                                                // setGuideId(guide.id);
+                                                                                // setTitle(guide.title)
+                                                                                // setDescription(guide.description)
+                                                                                // setUrl(guide.url)
+                                                                                // setFileType(guide.fileTypeId)
 
                                                                                 setIsEditing(true);
 
@@ -447,7 +412,7 @@ export default function Community({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                _delete(guide.id);
+                                                                               // _delete(guide.id);
                                                                             }}
                                                                         >
                                                                             Delete

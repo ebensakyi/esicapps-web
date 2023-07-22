@@ -2,18 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { generateCode } from "@/utils/generate-code";
-import { options } from "../auth/[...nextauth]/options";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
-import { region } from "../../../../prisma/seed/region";
-import { district } from "../../../../prisma/seed/district";
-import { userLevel } from "../../../../prisma/seed/userLevel";
+
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(options);
+    const session = await getServerSession(authOptions);
 
     let loginUserLevel = session?.user?.userLevelId;
 
@@ -59,9 +57,9 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(options);
+    const session = await getServerSession(authOptions);
 
-    // console.log(session?.user);
+    console.log(session?.user);
 
     const { searchParams } = new URL(request.url);
     const searchText = searchParams.get("searchText");

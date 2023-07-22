@@ -1,27 +1,26 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import { getSession } from "@/utils/session-manager";
-import { useSession } from "next-auth/react";
+import { authOptions } from "../../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
-import { options } from "../../auth/[...nextauth]/options";
-import jwt from "jsonwebtoken";
-import cookie from "cookie";
-import { district } from "../../../../../prisma/seed/district";
-import { region } from "../../../../../prisma/seed/region";
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
+    const session = await getServerSession(authOptions);
+
+    console.log("session =>", session);
+
     const data = {
-      name: res.data.name,
-      regionId: res.regionId,
+      name: res.districtName,
+      regionId: Number(res.regionId),
       abbrv: res.abbrv,
     };
     const response = await prisma.district.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
+    console.log(error);
     return NextResponse.json(error);
   }
 }
@@ -29,40 +28,42 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const selectedRegion = searchParams.get("regionId");
+    const selectedRegion =
+      searchParams.get("regionId") == null
+        ? undefined
+        : Number(searchParams.get("regionId"));
 
-    console.log(searchParams);
-    
 
+    const session = await getServerSession(authOptions);
 
-    const selectedDistrict = searchParams.get("districtId");   
-     const session = await getServerSession(options);
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
     let query = {};
 
+    console.log("userLeveluserLevel==> ", userLevel, Number(selectedRegion));
 
     if (userLevel == 1) {
-      query = { where: { deleted: 0, regionId: Number(selectedRegion) } };
-    
+      query = {
+        where: { deleted: 0, regionId: selectedRegion },
+        include: { Region: true },
+      };
     } else if (userLevel == 2) {
-     
-      query = { where: { deleted: 0, regionId: Number(userRegion) } };
-
-      
+      query = {
+        where: { deleted: 0, regionId: Number(userRegion) },
+        include: { Region: true },
+      };
     } else if (userLevel == 3) {
-  
-      query = { where: { deleted: 0, id: Number(userDistrict) } };
+      query = {
+        where: { deleted: 0, id: Number(userDistrict) },
+        include: { Region: true },
+      };
     } else {
       query = { where: { deleted: 0 } };
     }
 
-
     const data = await prisma.district.findMany(query);
-
-    
 
     return NextResponse.json(data);
   } catch (error) {
