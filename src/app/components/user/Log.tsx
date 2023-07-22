@@ -9,6 +9,7 @@ import { pages } from '../../../../prisma/seed/page';
 import { pageAccess } from '../../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
+import moment from "moment";
 
 export default function Log({ data }: any) {
 
@@ -19,10 +20,10 @@ export default function Log({ data }: any) {
         }
     })
 
-    
- 
 
-   
+
+
+
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -40,7 +41,7 @@ export default function Log({ data }: any) {
             {/* End Page Title */}
             <section className="section">
                 <div className="row">
-                  
+
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
@@ -61,8 +62,9 @@ export default function Log({ data }: any) {
                                                 <tr key={log.id}>
                                                     <td>{log.User.otherNames} {log.User.surname}</td>
                                                     <td>{log.activity}</td>
-                                                    <td>{log.createdAt}</td>
-                                                 
+                                                    <td> {moment(log.createdAt).format("MMM Do YYYY, h:mm:ss a")}
+                                                    </td>
+
                                                 </tr>
                                             );
                                         })}

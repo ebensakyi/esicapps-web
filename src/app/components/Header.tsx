@@ -11,8 +11,9 @@ export default function Header() {
     const { data: session } = useSession()
 
     return (
-
+ 
         <>
+        {session?.user?
             <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
                     <Link href="/" className="logo d-flex align-items-center">
@@ -68,27 +69,7 @@ export default function Header() {
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
-                                {/* <li>
-                                    <a
-                                        className="dropdown-item d-flex align-items-center"
-                                        href="users-profile.html"
-                                    >
-                                        <i className="bi bi-gear" />
-                                        <span>Account Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li> */}
-                                {/* <li>
-                                    <a
-                                        className="dropdown-item d-flex align-items-center"
-                                        href="pages-faq.html"
-                                    >
-                                        <i className="bi bi-question-circle" />
-                                        <span>Need Help?</span>
-                                    </a>
-                                </li> */}
+                              
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
@@ -107,8 +88,8 @@ export default function Header() {
                         </li>
                     </ul>
                 </nav>
-            </header>
-
+            </header>:<></>}
+            {session?.user?
             <aside id="sidebar" className="sidebar">
                 <ul className="sidebar-nav" id="sidebar-nav">
                     <li className="nav-item">
@@ -359,7 +340,7 @@ export default function Header() {
                     </li>
 
                 </ul>
-            </aside>
+            </aside>:<></>}
         </>
 
     )

@@ -5,7 +5,7 @@ import Role from "@/src/app/components/user/Role";
 import { Suspense } from "react";
 async function getPages() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/pages`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/pages`,{ cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')

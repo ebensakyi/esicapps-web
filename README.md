@@ -63,6 +63,6 @@ update "District"
 
 
 
-1.structure old data
-2. work on filters
-3. terst mobile app. create user from backend and use to login, download primary data and conduct inspection
+1. Add pagination and filter to user,logs 
+2. work on dashboard
+3. add search to user

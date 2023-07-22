@@ -432,7 +432,7 @@ export default function User({ data }: any) {
 
     return (
         <main id="main" className="main">
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -442,7 +442,7 @@ export default function User({ data }: any) {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-            />
+            /> */}
             <div className="pagetitle">
                 <h1>USERS</h1>
                 {/* <nav>
@@ -715,7 +715,7 @@ export default function User({ data }: any) {
                                                 </>
                                             ) : (
                                                 <button type="submit" className="btn btn-primary" onClick={(e) => addUser(e)}>
-                                                    Submit
+                                                    Add
                                                 </button>
                                             )}
 

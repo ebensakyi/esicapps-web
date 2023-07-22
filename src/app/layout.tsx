@@ -6,6 +6,8 @@ import { Inter } from 'next/font/google'
 import Header from '@/src/app/components/Header'
 import { SessionProvider } from 'next-auth/react'
 import AuthProvider from './context/AuthProvider';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -50,7 +52,18 @@ export default function RootLayout({
       <body className={inter.className}>
 
         <AuthProvider>
-          <Header />
+        <Header />
+        <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
           {children}
         </AuthProvider>
 

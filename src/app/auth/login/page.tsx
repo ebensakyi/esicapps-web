@@ -32,7 +32,7 @@ export default function Home() {
       <title>ESICApps</title>
       
     
-      <link href="assets/img/favicon.png" rel="icon"/>
+      <link href="../assets/img/favicon.png" rel="icon"/>
       <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
     
       <link href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -81,7 +81,7 @@ export default function Home() {
                       <form className="row g-3 needs-validation">
                         <div className="col-12">
                           <label htmlFor="yourUsername" className="form-label">
-                            Phone NUmber
+                            Phone Number
                           </label>
                           <div className="input-group has-validation">
                             <span

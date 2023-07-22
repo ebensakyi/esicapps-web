@@ -6,7 +6,7 @@ import Guide from "../../components/user/Guide";
 import { fileType } from '../../../../prisma/seed/fileType';
 async function getUserGuides() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user/guide`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/user/guide`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -18,7 +18,7 @@ async function getUserGuides() {
 
 async function getFileType() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/file-type`);
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/file-type`, { cache: 'no-store' });
 
     console.log(response);
     

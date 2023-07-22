@@ -1,6 +1,5 @@
 
 import User from "@/src/app/components/user/User";
-import { userLevel } from '../../../prisma/seed/userLevel';
 
 
 
