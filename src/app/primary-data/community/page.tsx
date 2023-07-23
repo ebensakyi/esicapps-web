@@ -13,27 +13,7 @@ async function getRegions() {
     return await response.json();
 
 }
-async function getDistricts() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return await response.json();
-
-}
-
-async function getElectoralAreas() {
-
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/electoral-area`, { cache: 'no-store' });
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return await response.json();
-
-}
 
 
 async function getCommunities() {
@@ -53,12 +33,10 @@ async function getCommunities() {
 export default async function page() {
   
     const regions = await getRegions()
-    const districts = await getDistricts()
-
-    const electoralAreas = await getElectoralAreas()
+  
     const communities = await getCommunities()
 
-    let data = {regions,districts, electoralAreas, communities }
+    let data = {regions, communities }
 
     // console.log(data);
     
