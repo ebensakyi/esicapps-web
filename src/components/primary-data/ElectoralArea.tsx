@@ -3,13 +3,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 
 
 
+
 export default function ElectoralArea({ data }: any) {
+    const formRef = useRef<HTMLFormElement>(null);
+
+    const [electoralAreaFile, setElectoralAreaFile] = useState("");
+    const [electoralAreaFileUrl, setElectoralAreaFileUrl] = useState("");
 
     const [searchText, setSearchText] = useState();
     const [electoralAreaName, setElectoralAreaName] = useState("");
@@ -126,6 +131,53 @@ export default function ElectoralArea({ data }: any) {
             return toast.error("An error occurred while deleting");
         } catch (error) {
             return toast.error("An error occurred while deleting");
+        }
+    };
+
+
+    const upload = async (e: any) => {
+        try {
+            e.preventDefault();
+            const formElement: any = formRef.current;
+
+
+            // if (!formElement) {
+            //     console.error("Form element not found");
+            //     return;
+            // }
+
+            let body = new FormData(formElement);
+            body.append("csvFile", electoralAreaFile);
+            body.append("districtId", districtId);
+
+            const response = await axios({
+                url: "/api/primary-data/electoral-area/upload",
+                method: "POST",
+                headers: {
+                    authorization: "A",
+                    "Content-Type": "text/csv",
+                },
+                data: body,
+            });
+
+            console.log(response);
+            
+
+            toast.success("Uploaded");
+
+            router.refresh()
+        } catch (error: any) {
+            console.log(error);
+            toast.error(error);
+        }
+    };
+
+    const uploadElectoralArea = (e: any) => {
+        if (e.target.files && e.target.files[0]) {
+            const i = e.target.files[0];
+
+            setElectoralAreaFile(i);
+            setElectoralAreaFileUrl(URL.createObjectURL(i));
         }
     };
 
@@ -248,19 +300,20 @@ export default function ElectoralArea({ data }: any) {
                             </div>
                         </div>
                     </div>
-                <div className="col-lg-6">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Upload Bulk</h5>
-                            <div className=" mb-3">
-                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                    Community File *
-                                </label>
-                                <div className="col-sm-12">
-                                    <input type="file" accept=".csv" className="form-control" placeholder='Enter community name' value={communityFile} onChange={(e: any) => setCommunityFile(e.target.value)} />
+                    <div className="col-lg-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Upload Bulk</h5>
+                                <form ref={formRef}>
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                         File *
+                                    </label>
+                                    <div className="col-sm-12">
+                                        <input type="file" accept=".csv" className="form-control" placeholder='Enter electoral area name' onChange={uploadElectoralArea} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className=" mb-3">
+                                <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Region *
                                     </label>
@@ -305,26 +358,27 @@ export default function ElectoralArea({ data }: any) {
                                 </div>
 
 
-                            <div className=" mb-3">
-                                <div className="col-sm-10">
+                                <div className=" mb-3">
+                                    <div className="col-sm-10">
 
 
-                                    <div className=" mb-3">
-                                        <div className="col-sm-10">
-                                          
-                                                <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
+                                        <div className=" mb-3">
+                                            <div className="col-sm-10">
+
+                                                <button type="submit" className="btn btn-primary" onClick={(e) => upload(e)}>
                                                     Upload
                                                 </button>
-                                           
 
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                </form>
 
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
@@ -335,8 +389,10 @@ export default function ElectoralArea({ data }: any) {
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
-
                                             <th scope="col">District</th>
+
+                                            <th scope="col">Region</th>
+
                                             <th scope="col">Action</th>
 
                                         </tr>
@@ -347,6 +403,7 @@ export default function ElectoralArea({ data }: any) {
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
                                                     <td>{data?.District.name}</td>
+                                                    <td>{data?.District.Region.name}</td>
 
                                                     <td>
                                                         <div
@@ -374,11 +431,14 @@ export default function ElectoralArea({ data }: any) {
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-                                                                                // setGuideId(guide.id);
-                                                                                // setTitle(guide.title)
-                                                                                // setDescription(guide.description)
-                                                                                // setUrl(guide.url)
-                                                                                // setFileType(guide.fileTypeId)
+                                                                                setElectoralAreaName(data.name);
+                                                                                setRegionId(data.District.Region.id);
+                                                                                setDistrictId(data.districtId);
+
+                                                                                console.log("data.regionId ", data.District.Region.id);
+                                                                                console.log("data.districtId ", data.districtId);
+
+
 
                                                                                 setIsEditing(true);
 

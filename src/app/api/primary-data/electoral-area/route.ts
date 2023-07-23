@@ -44,29 +44,43 @@ export async function GET(request: Request) {
     if (userLevel == 1) {
       query = {
         where: { deleted: 0, districtId: selectedDistrict },
-        include: { District: true },
+        include: {
+          District: {
+            include: {
+              Region: true,
+            },
+          },
+        },
       };
     } else if (userLevel == 2) {
       query = {
         where: { deleted: 0, districtId: Number(userRegion) },
-        include: { District: true },
+        include: {
+          District: {
+            include: {
+              Region: true,
+            },
+          },
+        },
       };
     } else if (userLevel == 3) {
       query = {
         where: { deleted: 0, id: Number(userDistrict) },
-        include: { District: true },
+        include: {
+          District: {
+            include: {
+              Region: true,
+            },
+          },
+        },
       };
     } else {
       query = { where: { deleted: 0 } };
     }
 
-    console.log("userLevel: ",userLevel);
-    
 
     const data = await prisma.electoralArea.findMany(query);
 
-    console.log(data);
-    
 
     return NextResponse.json(data);
   } catch (error) {
