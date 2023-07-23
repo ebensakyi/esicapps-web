@@ -5,7 +5,6 @@ import { getSession } from "@/utils/session-manager";
 import { district } from "../../../../../prisma/seed/district";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { electoralArea } from '../../../../../prisma/seed/electoralArea';
 
 export async function POST(request: Request) {
   try {
@@ -31,7 +30,7 @@ export async function GET(request: Request) {
     const selectedDistrict =
       searchParams.get("districtId") == null || ""
         ? undefined
-        : searchParams.get("districtId");
+        : Number(searchParams.get("districtId"));
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
@@ -81,6 +80,9 @@ export async function GET(request: Request) {
 
 
     const data = await prisma.electoralArea.findMany(query);
+
+    console.log("dataxxx ",data);
+    
 
 
     return NextResponse.json(data);

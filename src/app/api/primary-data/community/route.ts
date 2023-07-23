@@ -7,7 +7,8 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
     const data = {
-      name: res.data.name,
+      name: res.name,
+      electoralAreaId: res.electoralAreaId,
     };
     const response = await prisma.community.create({ data });
 

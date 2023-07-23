@@ -73,13 +73,16 @@ export default function Community({ data }: any) {
 
             if (communityName == "") return toast.error("Community Name cannot be empty");
             if (districtId == "") return toast.error("District cannot be empty");
+            if (electoralAreaId == "") return toast.error("Electoral area cannot be empty");
 
 
             let data = {
                 communityName,
                 districtId,
+                electoralAreaId
 
             };
+            console.log(data);
 
 
             const response = await axios.post("/api/primary-data/community", data);
@@ -90,7 +93,7 @@ export default function Community({ data }: any) {
             if (response.status == 200) {
                 router.refresh()
 
-                return toast.success("Community  added");
+                return toast.success("Community added");
             }
             if (response.status == 201) {
                 return toast.error("Same name already exist");
@@ -109,6 +112,8 @@ export default function Community({ data }: any) {
                 electoralAreaId
 
             };
+
+            
 
             const response = await axios.put(
                 "/api/primary-data/comunity", data
@@ -265,6 +270,8 @@ export default function Community({ data }: any) {
                                         aria-label="Default select example"
                                         onChange={async (e: any) => {
                                             setDistrictId(e.target.value);
+
+                                            getElectoralAreasByDistricts(e.target.value);
                                         }}
                                         value={districtId}
                                     >
@@ -286,7 +293,7 @@ export default function Community({ data }: any) {
                                         onChange={async (e: any) => {
                                             setElectoralAreaId(e.target.value);
                                         }}
-                                        value={districtId}
+                                        value={electoralAreaId}
                                     >
                                         <option >Select electoral area * </option>
                                         {electoralAreas?.map((data: any) => (
