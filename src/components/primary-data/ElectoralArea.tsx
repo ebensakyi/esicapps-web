@@ -60,7 +60,7 @@ export default function ElectoralArea({ data }: any) {
 
 
             if (electoralAreaName == "") return toast.error("Electoral Area Name cannot be empty");
-            if (districtId == "") return toast.error("URL cannot be empty");
+            if (districtId == "") return toast.error("District cannot be empty");
 
 
             let data = {
@@ -94,6 +94,7 @@ export default function ElectoralArea({ data }: any) {
             let data = {
                 electoralAreaName,
                 districtId,
+                electoralAreaId
 
             };
 
@@ -141,6 +142,12 @@ export default function ElectoralArea({ data }: any) {
             const formElement: any = formRef.current;
 
 
+
+
+            if (districtId == "") return toast.error("District cannot be empty");
+
+            if (electoralAreaFile == "") return toast.error("Electoral Area File cannot be empty");
+
             // if (!formElement) {
             //     console.error("Form element not found");
             //     return;
@@ -160,12 +167,15 @@ export default function ElectoralArea({ data }: any) {
                 data: body,
             });
 
-            console.log(response);
-            
+            setElectoralAreaName("");
+            setDistrictId("");
+            setRegionId("");            
+            if (response.status == 200) {
+                router.refresh()
 
-            toast.success("Uploaded");
+                return toast.success("Electoral areas uploaded");
+            }
 
-            router.refresh()
         } catch (error: any) {
             console.log(error);
             toast.error(error);
@@ -434,6 +444,7 @@ export default function ElectoralArea({ data }: any) {
                                                                                 setElectoralAreaName(data.name);
                                                                                 setRegionId(data.District.Region.id);
                                                                                 setDistrictId(data.districtId);
+                                                                                setElectoralAreaId(data.id)
 
                                                                                 console.log("data.regionId ", data.District.Region.id);
                                                                                 console.log("data.districtId ", data.districtId);

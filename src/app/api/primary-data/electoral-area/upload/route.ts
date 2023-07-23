@@ -30,13 +30,12 @@ export async function POST(request: Request) {
 
     const path = `./public/temp/${fileName}`;
 
-    console.log("fileName ====>", fileName);
 
     await writeFile(path, buffer);
 
     let response = await readCSV(path, districtId);
+console.log("response======> ", response);
 
-   // await fs.unlinkSync(path);
 
     return NextResponse.json({});
     // });
@@ -51,7 +50,6 @@ const readCSV = async (filePath: any, districtId: any) => {
     let data: any = [];
 
 
-    console.log("filePathfilePath", filePath);
 
     //Read file
     createReadStream(filePath)
@@ -68,7 +66,16 @@ const readCSV = async (filePath: any, districtId: any) => {
         await prisma.electoralArea.createMany({
           data: newData,
         });
+  fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error('Error deleting CSV file:', err);
+          return;
+        }
+        console.log('CSV file has been deleted successfully.');
       });
+      });
+    
+     /// await fs.unlinkSync(filePath);
     return data.length;
   } catch (error) {
     console.log("csvUploader ==>", error);

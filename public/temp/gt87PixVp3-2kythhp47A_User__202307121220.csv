@@ -1,5 +1,0 @@
-"id","fcmId","userTypeId","surname","otherNames","email","phoneNumber","designation","password","tempPassword","imagePath","regionId","districtId","electoralAreaId","loginTimes","passwordChanged","activated","deleted","createdAt","updatedAt","userLevelId"
-2,,1,Oppong,Ebenezer,oe@gmail.com,"0242260004",Enterprise Admin,$2a$10$95IM0z1NHStEpXox4Pasi.9H4tzV3vDoM/lW3In4XTAe/7TXYyY0a,,,,,,0,0,1,0,2023-07-07 15:36:08.435,2023-07-07 15:36:08.435,1
-1,,1,Sakyi,Ebenezer Agyemang,ebensakyi@gmail.com,"0543212322",Enterprise Admin,$2a$10$95IM0z1NHStEpXox4Pasi.IWsYjN7GAKXdZI4mt/XQUo9Gb/7zDD6,,"2023072ptKIGoRN1OgWN2OyTTaP.jpg",,,,0,0,1,0,2023-07-07 15:36:08.435,2023-07-08 20:26:41.697,1
-3,,2,Doe,John,ds@gfg.ds,"0547777777",f.o,$2a$10$O3vpiqE7mUDNGOW61I3eB.owcQTp1xNsIPnZpp.H.zqP6Nk5Bg3tW,"8179",,1,17,,0,0,1,0,2023-07-07 15:50:21.575,2023-07-10 22:25:54.504,3
-4,,2,Arnold,Trent Alexxn,at@gmail.com,"0548888888",fo,$2a$10$ZUX5PbgeRCtpgoiGt102OODFRNtBgogbwtseGe7IoqL5cNYtpExSa,"9281","202307Tf3B0XupW-op9q83dgCoX.jpg",1,7,,67,1,1,0,2023-07-07 15:51:28.987,2023-07-12 11:55:05.175,3

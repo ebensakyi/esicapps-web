@@ -2,13 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getSession } from "@/utils/session-manager";
-import { options } from "../../auth/[...nextauth]/options";
+import { authOptions } from "../../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(options);
+    const session = await getServerSession(authOptions);
+
+    console.log("sessxxxion",session);
+    
     const userId = session?.user?.id;
 
     const data = {
@@ -50,7 +53,7 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(options);
+    const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
 
 

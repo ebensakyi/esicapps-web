@@ -5,6 +5,7 @@ import { getSession } from "@/utils/session-manager";
 import { district } from "../../../../../prisma/seed/district";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
+import { electoralArea } from '../../../../../prisma/seed/electoralArea';
 
 export async function POST(request: Request) {
   try {
@@ -84,6 +85,26 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
+    console.error(error);
+    return NextResponse.json(error);
+  }
+}
+
+
+export async function PUT(request: Request) {
+  try {
+    const res = await request.json();
+
+    let id = res.electoralAreaId
+    const data = {
+      name: res.electoralAreaName,
+      districtId: Number(res.districtId),
+    };
+
+    const response = await prisma.electoralArea.update({where:{id}, data });
+
+    return NextResponse.json(response);
+  } catch (error: any) {
     console.error(error);
     return NextResponse.json(error);
   }
