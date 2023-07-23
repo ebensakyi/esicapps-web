@@ -10,7 +10,6 @@ export async function POST(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-    console.log("sessxxxion",session);
     
     const userId = session?.user?.id;
 

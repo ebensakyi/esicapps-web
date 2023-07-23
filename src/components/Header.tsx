@@ -228,21 +228,21 @@ export default function Header() {
                             data-bs-parent="#sidebar-nav"
                         >
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/messaging/sms">
                                     <i className="bi bi-circle" />
                                     <span>SMS</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/messaging/notification">
                                     <i className="bi bi-circle" />
                                     <span>Notifications</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href="components-alerts.html">
+                                <Link href="/messaging/custom">
                                     <i className="bi bi-circle" />
-                                    <span>Other data</span>
+                                    <span>Custom message</span>
                                 </Link>
                             </li>
                         </ul>

@@ -302,18 +302,18 @@ model Messaging {
   messageType         Int?
   sendingType         Int?
   sender              Int
-  individualRecipient Int?  
+  individualRecipient Int?
   regionId            Int?
 
-  deleted             Int?         @default(0)
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @updatedAt
-  MessageType         MessageType? @relation(fields: [messageType], references: [id])
-  SendingType         SendingType? @relation(fields: [sendingType], references: [id])
-  Recipient           User?        @relation("individualRecipient", fields: [individualRecipient], references: [id])
-  Sender              User         @relation("sender", fields: [sender], references: [id])
-  District            District?    @relation(fields: [districtId], references: [id])
-  Region              Region?       @relation(fields: [regionId], references: [id])
+  deleted     Int?         @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  MessageType MessageType? @relation(fields: [messageType], references: [id])
+  SendingType SendingType? @relation(fields: [sendingType], references: [id])
+  Recipient   User?        @relation("individualRecipient", fields: [individualRecipient], references: [id])
+  Sender      User         @relation("sender", fields: [sender], references: [id])
+  District    District?    @relation(fields: [districtId], references: [id])
+  Region      Region?      @relation(fields: [regionId], references: [id])
 }
 
 model SendingType {
