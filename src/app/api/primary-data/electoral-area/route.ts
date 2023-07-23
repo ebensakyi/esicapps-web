@@ -81,7 +81,6 @@ export async function GET(request: Request) {
 
     const data = await prisma.electoralArea.findMany(query);
 
-    console.log("dataxxx ",data);
     
 
 
@@ -108,6 +107,6 @@ export async function PUT(request: Request) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(error);
-    return NextResponse.json(error);
+    return NextResponse.json(error,{status:500});
   }
 }

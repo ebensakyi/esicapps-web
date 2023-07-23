@@ -7,17 +7,13 @@ import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
 
-// export const config = {
-//     api: {
-//       bodyParser: false,
-//     },
-//   };
+
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
 
     const file: File | null = data.get("csvFile") as unknown as File;
-    const districtId = Number(data?.get("districtId"));
+    const electoralAreaId = Number(data?.get("electoralAreaId"));
 
     if (!file) {
       return NextResponse.json({ success: false });
@@ -33,18 +29,17 @@ export async function POST(request: Request) {
 
     await writeFile(path, buffer);
 
-    let response = await readCSV(path, districtId);
+    let response = await readCSV(path, electoralAreaId);
 
 
     return NextResponse.json({});
-    // });
   } catch (error: any) {
     console.error(error);
-    return NextResponse.json(error);
+    return NextResponse.json(error,{status:500});
   }
 }
 
-const readCSV = async (filePath: any, districtId: any) => {
+const readCSV = async (filePath: any, electoralAreaId: any) => {
   try {
     let data: any = [];
 
@@ -60,9 +55,9 @@ const readCSV = async (filePath: any, districtId: any) => {
         data.push(row);
       })
       .on("end", async () => {
-        let newData = await formatData(data, districtId);
+        let newData = await formatData(data, electoralAreaId);
 
-        await prisma.electoralArea.createMany({
+        await prisma.community.createMany({
           data: newData,
         });
   fs.unlink(filePath, (err) => {
@@ -81,13 +76,15 @@ const readCSV = async (filePath: any, districtId: any) => {
   }
 };
 
-const formatData = async (data: any, districtId: any) => {
+const formatData = async (data: any, electoralAreaId: any) => {
   try {
     let newData = data.map((row: any) => ({
-      districtId: Number(districtId),
+      electoralAreaId: Number(electoralAreaId),
       name: row.name,
     }));
-    console.log("newdata =>", newData);
+
+    console.log(newData);
+    
 
     return newData;
   } catch (error) {
