@@ -266,7 +266,7 @@ model User {
   FollowupPremisesNuisanceDetected   FollowupPremisesNuisanceDetected[]
   UserGuide                          UserGuide[]
   Sender                             Messaging[]                          @relation("sender")
-  Recipient                          Messaging[]                          @relation("recipient")
+  Recipient                          Messaging[]                          @relation("individualRecipient")
 }
 
 model UserAddedByUser {
@@ -292,23 +292,28 @@ model UserLevel {
 }
 
 model Messaging {
-  id             Int     @id @default(autoincrement())
-  title          String? @db.VarChar(255)
-  message        String  @db.VarChar(2550)
-  recipientGroup String?
+  id         Int     @id @default(autoincrement())
+  title      String? @db.VarChar(255)
+  message    String  @db.VarChar(2550)
+  // recipientGroup String?
   // recipientId Int?
+  districtId Int?
 
-  messageType Int?
-  sendingType Int?
-  sender      Int
-  recipient   Int
-  deleted     Int?         @default(0)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  MessageType MessageType? @relation(fields: [messageType], references: [id])
-  SendingType SendingType? @relation(fields: [sendingType], references: [id])
-  Recipient   User         @relation("recipient", fields: [recipient], references: [id])
-  Sender      User         @relation("sender", fields: [sender], references: [id])
+  messageType         Int?
+  sendingType         Int?
+  sender              Int
+  individualRecipient Int?  
+  regionId            Int?
+
+  deleted             Int?         @default(0)
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  MessageType         MessageType? @relation(fields: [messageType], references: [id])
+  SendingType         SendingType? @relation(fields: [sendingType], references: [id])
+  Recipient           User?        @relation("individualRecipient", fields: [individualRecipient], references: [id])
+  Sender              User         @relation("sender", fields: [sender], references: [id])
+  District            District?    @relation(fields: [districtId], references: [id])
+  Region              Region?       @relation(fields: [regionId], references: [id])
 }
 
 model SendingType {
@@ -640,6 +645,7 @@ model Region {
   District   District[]
   User       User[]
   Inspection Inspection[]
+  Messaging  Messaging[]
 }
 
 model District {
@@ -656,6 +662,7 @@ model District {
   User             User[]
   SanitationReport SanitationReport[]
   Inspection       Inspection[]
+  Messaging        Messaging[]
 }
 
 model RespondentDesignation {
@@ -3180,14 +3187,14 @@ model UserGuide {
   title       String  @db.VarChar(255)
   url         String  @db.VarChar(255) //youtube,web link
   description String? @db.Text
-  fileTypeId Int
+  fileTypeId  Int
 
-  deleted    Int?     @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  User       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  FileType   FileType @relation(fields: [fileTypeId], references: [id])
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  FileType  FileType @relation(fields: [fileTypeId], references: [id])
 }
 
 model FormSectionImage {

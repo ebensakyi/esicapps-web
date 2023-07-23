@@ -142,11 +142,12 @@ CREATE TABLE "Messaging" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255),
     "message" VARCHAR(2550) NOT NULL,
-    "recipientGroup" TEXT,
+    "districtId" INTEGER,
     "messageType" INTEGER,
     "sendingType" INTEGER,
     "sender" INTEGER NOT NULL,
-    "recipient" INTEGER NOT NULL,
+    "individualRecipient" INTEGER,
+    "regionId" INTEGER,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -2903,10 +2904,16 @@ ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_messageType_fkey" FOREIGN KEY 
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sendingType_fkey" FOREIGN KEY ("sendingType") REFERENCES "SendingType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_recipient_fkey" FOREIGN KEY ("recipient") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_individualRecipient_fkey" FOREIGN KEY ("individualRecipient") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_sender_fkey" FOREIGN KEY ("sender") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "District"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Messaging" ADD CONSTRAINT "Messaging_regionId_fkey" FOREIGN KEY ("regionId") REFERENCES "Region"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PageAccess" ADD CONSTRAINT "PageAccess_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

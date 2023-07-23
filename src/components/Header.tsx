@@ -282,6 +282,12 @@ export default function Header() {
                                     <span>Community</span>
                                 </Link>
                             </li>
+                            <li>
+                                <Link href="/primary-data/other-data">
+                                    <i className="bi bi-circle" />
+                                    <span>Other data</span>
+                                </Link>
+                            </li>
                         </ul>
                     </li>
                     <li className="nav-item" >

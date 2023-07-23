@@ -1,10 +1,10 @@
 export const sendingType = [
   {
-    name: "Single",
+    name: "Individual",
   },
   {
-    name: "Broadcast",
+    name: "District",
   },
- 
-  
+  { name: "Region" },
+  { name: "Every one" },
 ];
