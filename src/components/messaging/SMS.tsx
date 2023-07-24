@@ -89,6 +89,7 @@ export default function SMS({ data }: any) {
         try {
             e.preventDefault()
             let data = {
+                messageId,
                 title,
                 message,
                 sendingType,

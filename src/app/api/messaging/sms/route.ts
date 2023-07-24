@@ -48,7 +48,6 @@ export async function POST(request: Request) {
         where: { districtId: Number(res.districtId) },
       });
 
-      console.log("LENGTH2====>", user.length);
       recipientCount = user.length;
 
       for (let i = 0; i < user.length; i++) {
@@ -64,7 +63,6 @@ export async function POST(request: Request) {
 
       recipientCount = user.length;
 
-      console.log("LENGTH3====>", user.length);
 
       for (let i = 0; i < user.length; i++) {
         await sendSMS(user[i]?.phoneNumber, res.message);
@@ -80,11 +78,94 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
-    console.log(error);
+    console.log("POST POST ====>",error);
 
     return NextResponse.json(error, { status: 500 });
   }
 }
+
+
+export async function PUT(request: Request) {
+    try {
+      const res = await request.json();
+      const session = await getServerSession(authOptions);
+  
+  
+      const userId = session?.user?.id;
+  
+      let recipientCount = 0;
+      let messageId = Number(res.messageId)
+
+      console.log(res);
+      
+
+  
+      const data = {
+        title: res.title,
+        message: res.message,
+        messageType: 2,
+        sendingType: Number(res.sendingType),
+        individualRecipient:
+          res.individualRecipient == undefined || ""
+            ? null
+            : Number(res.individualRecipient),
+        districtId:
+          res.districtId == undefined || "" ? null : Number(res.districtId),
+        regionId: res.regionId == undefined || "" ? null : Number(res.regionId),
+        sender: Number(userId),
+      };
+  
+  
+      if (res.sendingType == "1") {
+        const user = await prisma.user.findFirst({
+          where: { id: Number(res.individualRecipient) },
+        });      recipientCount = user?.length;
+  
+        await sendSMS(user?.phoneNumber, res.message);
+  
+  
+      }
+  
+      if (res.sendingType == "2") {
+        const user = await prisma.user.findMany({
+          where: { districtId: Number(res.districtId) },
+        });
+  
+        recipientCount = user.length;
+  
+        for (let i = 0; i < user.length; i++) {
+          await sendSMS(user[i]?.phoneNumber, res.message);
+  
+        }
+      }
+  
+      if (res.sendingType == "3") {
+        const user = await prisma.user.findMany({
+          where: { regionId: Number(res.regionId) },
+        });
+  
+        recipientCount = user.length;
+  
+  
+        for (let i = 0; i < user.length; i++) {
+          await sendSMS(user[i]?.phoneNumber, res.message);
+  
+        }
+      }
+  
+      if (recipientCount == 0) {
+        return NextResponse.json({ message: "Recipient list is empty" }, { status: 201 });
+      }
+  
+      const response = await prisma.messaging.update({ data,where:{id:messageId} });
+      return NextResponse.json(data);
+    } catch (error) {
+        console.log("PUT PUT ====>",error);
+  
+      return NextResponse.json(error);
+    }
+  }
+  
 
 export async function GET(request: Request) {
   try {

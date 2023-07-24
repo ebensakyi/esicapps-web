@@ -71,7 +71,10 @@ export async function POST(request: Request) {
     }
 
     if (recipientCount == 0) {
-      return NextResponse.json({ message: "Recipient list is empty" }, { status: 201 });
+      return NextResponse.json(
+        { message: "Recipient list is empty" },
+        { status: 201 }
+      );
     }
 
     const response = await prisma.messaging.create({ data });
@@ -89,7 +92,7 @@ export async function PUT(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-console.log("res==================>",res);
+    console.log("res==================>", res);
 
     const userId = session?.user?.id;
 
@@ -111,6 +114,7 @@ console.log("res==================>",res);
       sender: Number(userId),
     };
 
+    console.log("DATA ", data);
 
     if (res.sendingType == "1") {
       const user = await prisma.user.findFirst({
@@ -129,7 +133,9 @@ console.log("res==================>",res);
       recipientCount = user.length;
 
       for (let i = 0; i < user.length; i++) {
-        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
+        if (user[i]?.fcmId) {
+          await sendFCM(res.title, res.message, user[i]?.fcmId);
+        }
       }
     }
 
@@ -140,24 +146,30 @@ console.log("res==================>",res);
 
       recipientCount = user.length;
 
-
       for (let i = 0; i < user.length; i++) {
-        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
+        if (user[i]?.fcmId) {
+          await sendFCM(res.title, res.message, user[i]?.fcmId);
+        }
       }
     }
 
     if (recipientCount == 0) {
-      return NextResponse.json({ message: "Recipient list is empty" }, { status: 201 });
+      return NextResponse.json(
+        { message: "Recipient list is empty" },
+        { status: 201 }
+      );
     }
 
-    const response = await prisma.messaging.update({ data: data,
+    const response = await prisma.messaging.update({
+      data: data,
       where: {
         id: messageId,
-      }, });
+      },
+    });
 
     return NextResponse.json(response);
   } catch (error: any) {
-    console.log("error==================>",error);
+    console.log("error==================>", error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -166,7 +178,7 @@ console.log("res==================>",res);
 export async function GET(request: Request) {
   try {
     const data = await prisma.messaging.findMany({
-      where: { deleted: 0,messageType:1 },
+      where: { deleted: 0, messageType: 1 },
       include: {
         SendingType: true,
         District: true,

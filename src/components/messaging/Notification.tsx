@@ -57,11 +57,12 @@ export default function Notification({ data }: any) {
             let data = {
                 title,
                 message,
-                individualRecipient: individualRecipient.trim() == "" ? null : Number(individualRecipient.trim()),
+                individualRecipient: individualRecipient == "" ? null : Number(individualRecipient),
                 sendingType,
-                districtId: districtId.trim() == "" ? null : Number(districtId.trim()),
-                regionId: regionId.trim() == "" ? null : Number(regionId.trim()),
+                districtId: districtId == "" ? null : Number(districtId),
+                regionId: regionId == "" ? null : Number(regionId),
             };
+console.log(data);
 
 
             const response = await axios.post("/api/messaging/notification", data);
@@ -99,10 +100,10 @@ export default function Notification({ data }: any) {
                 messageId,
                 title,
                 message,
-                individualRecipient: individualRecipient.trim() == "" ? null : Number(individualRecipient.trim()),
+                individualRecipient: individualRecipient == "" ? null : Number(individualRecipient),
                 sendingType,
-                districtId: districtId.trim() == "" ? null : Number(districtId.trim()),
-                regionId: regionId.trim() == "" ? null : Number(regionId.trim()),
+                districtId: districtId == "" ? null : Number(districtId),
+                regionId: regionId == "" ? null : Number(regionId),
             };
 
 
@@ -123,6 +124,8 @@ export default function Notification({ data }: any) {
                 return toast.error(response.data.message);
             }
         } catch (error) {
+            console.log(error);
+            
             return toast.error("An error occurred while resending");
         }
     };
