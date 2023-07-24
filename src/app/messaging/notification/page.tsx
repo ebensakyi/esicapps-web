@@ -24,6 +24,16 @@ async function getSendingType() {
     return await response.json();
 
 }
+async function getUsers() {
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/user`, { cache: 'no-store' });    
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+
+}
 
 async function getRegions() {
 
@@ -54,8 +64,9 @@ export default async function page() {
     const sendingTypes = await getSendingType()
     const regions = await getRegions()
     const districts = await getDistricts()
+    const users = await getUsers()
 
-    let data = { notifications, sendingTypes, regions, districts }  
+    let data = { notifications, sendingTypes, regions, districts,users }  
 
     // console.log(data);
     

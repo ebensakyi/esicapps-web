@@ -9,8 +9,7 @@ import { pages } from '../../../prisma/seed/page';
 import { pageAccess } from '../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
-import { district } from '../../../prisma/seed/district';
-import { sendingType } from '../../../prisma/seed/sendingType';
+
 
 
 
@@ -36,7 +35,7 @@ export default function Notification({ data }: any) {
     const [districtId, setDistrictId] = useState("")
     const [messageId, setMessageId] = useState("")
 
-    const [individualRecepient,setIndividualRecepient]= useState("")
+    const [individualRecipient, setIndividualRecipient] = useState("")
     const [isEditing, setIsEditing] = useState(false);
 
 
@@ -49,17 +48,19 @@ export default function Notification({ data }: any) {
 
 
             if (title == "") return toast.error("Title cannot be empty");
-            if (sendingType == "") return toast.error("Sending type cannot be empty");
+            if (sendingType == "") return toast.error("Recipient type cannot be empty");
             if (message == "") return toast.error("Message cannot be empty");
-            if (regionId == "") return toast.error("Region cannot be empty");
-            if (districtId == "") return toast.error("District cannot be empty");
+            if (sendingType == "1" && individualRecipient == "") return toast.error("Recepient cannot be empty");
+            if (sendingType == "2" && districtId == "") return toast.error("District cannot be empty");
+            if (sendingType == "3" && regionId == "") return toast.error("Region cannot be empty");
 
             let data = {
                 title,
                 message,
+                individualRecipient: individualRecipient.trim() == "" ? null : Number(individualRecipient.trim()),
                 sendingType,
-                districtId,
-                regionId
+                districtId: districtId.trim() == "" ? null : Number(districtId.trim()),
+                regionId: regionId.trim() == "" ? null : Number(regionId.trim()),
             };
 
 
@@ -69,6 +70,7 @@ export default function Notification({ data }: any) {
             setMessage("");
             setRegionId("");
             setDistrictId("")
+            setIndividualRecipient("")
 
             if (response.status == 200) {
                 router.refresh()
@@ -76,7 +78,7 @@ export default function Notification({ data }: any) {
                 return toast.success("Message sent");
             }
             if (response.status == 201) {
-                return toast.error("Same name already exist");
+                return toast.error(response.data.message);
             }
         } catch (error) {
             console.log(error);
@@ -86,32 +88,42 @@ export default function Notification({ data }: any) {
     const update = async (e: any) => {
         try {
             e.preventDefault()
+            if (title == "") return toast.error("Title cannot be empty");
+            if (sendingType == "") return toast.error("Recipient type cannot be empty");
+            if (message == "") return toast.error("Message cannot be empty");
+            if (sendingType == "1" && individualRecipient == "") return toast.error("Recepient cannot be empty");
+            if (sendingType == "2" && districtId == "") return toast.error("District cannot be empty");
+            if (sendingType == "3" && regionId == "") return toast.error("Region cannot be empty");
+
             let data = {
+                messageId,
                 title,
                 message,
+                individualRecipient: individualRecipient.trim() == "" ? null : Number(individualRecipient.trim()),
                 sendingType,
-                districtId,
-                regionId
+                districtId: districtId.trim() == "" ? null : Number(districtId.trim()),
+                regionId: regionId.trim() == "" ? null : Number(regionId.trim()),
             };
 
-            const response = await axios.put(
-                `/api/messaging/notification`, data
-            );
+
+            const response = await axios.put("/api/messaging/notification", data);
+            setTitle("");
+            setSendingType("");
+            setMessage("");
+            setRegionId("");
+            setDistrictId("")
+            setIndividualRecipient("")
 
             if (response.status == 200) {
-                setTitle("");
-                setSendingType("");
-                setMessage("");
-                setRegionId("");
-                setDistrictId("");
                 router.refresh()
-                return toast.success("Message resent");
+
+                return toast.success("Message sent");
             }
-
-
-            return toast.error("An error occurred while updating");
+            if (response.status == 201) {
+                return toast.error(response.data.message);
+            }
         } catch (error) {
-            return toast.error("An error occurred while updating");
+            return toast.error("An error occurred while resending");
         }
     };
 
@@ -164,93 +176,95 @@ export default function Notification({ data }: any) {
                                 </div>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Enter url *
+                                        Recipient type *
                                     </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setSendingType(e.target.value);
-                                    }}
-                                    value={sendingType}
-                                >
-                                    <option >Select sending type * </option>
-                                    {data?.sendingTypes?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={(e: any) => {
+                                            setSendingType(e.target.value);
+                                        }}
+                                        value={sendingType}
+                                    >
+                                        <option >Select recipient type * </option>
+                                        {data?.sendingTypes?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
-                                {sendingType=="1"?
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        User*
-                                    </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setIndividualRecepient(e.target.value);
-                                    }}
-                                    value={individualRecepient}
-                                >
-                                    <option >Select user * </option>
-                                    {data?.users?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                </div>:<></>}
-                                {sendingType=="3"?
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Region *
-                                    </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setRegionId(e.target.value);
-                                    }}
-                                    value={regionId}
-                                >
-                                    <option >Select region * </option>
-                                    {data?.regions?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                </div>:<></>}
-                                {sendingType=="2"?
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        District *
-                                    </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setDistrictId(e.target.value);
-                                    }}
-                                    value={districtId}
-                                >
-                                    <option >Select district * </option>
-                                    {data?.districts?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                </div>:<></>}
+                                {sendingType == "1" ?
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            User*
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setIndividualRecipient(e.target.value);
+                                            }}
+                                            value={individualRecipient}
+                                        >
+                                            <option >Select user * </option>
+                                            {data?.users?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.otherNames} {data.surname} - {data.phoneNumber}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div> : <></>}
+                                {sendingType == "3" ?
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            Region *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setRegionId(e.target.value);
+                                            }}
+                                            value={regionId}
+                                        >
+                                            <option >Select region * </option>
+                                            {data?.regions?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div> : <></>}
+                                {sendingType == "2" ?
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            District *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setDistrictId(e.target.value);
+                                            }}
+                                            value={districtId}
+                                        >
+                                            <option >Select district * </option>
+                                            {data?.districts?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div> : <></>}
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Message
                                     </label>
                                     <div className="col-sm-12">
-                                        <textarea className="form-control" style={{ height: 100 }}></textarea>
+                                        <textarea className="form-control" style={{ height: 100 }} value={message} onChange={(e: any) => {
+                                            setMessage(e.target.value);
+                                        }}></textarea>
                                     </div>
                                 </div>
 
@@ -286,7 +300,7 @@ export default function Notification({ data }: any) {
                                                                 update(e);
                                                             }}
                                                         >
-                                                            Update
+                                                            Resend
                                                         </button>
                                                     </>
                                                 ) : (
@@ -313,7 +327,9 @@ export default function Notification({ data }: any) {
                                             <th scope="col">Title</th>
 
                                             <th scope="col">Message</th>
-                                            <th scope="col">Sending Type</th>
+                                            <th scope="col">Sent Type</th>
+                                            <th scope="col">Recepient</th>
+
                                             <th scope="col">Action</th>
 
                                         </tr>
@@ -324,8 +340,8 @@ export default function Notification({ data }: any) {
                                                 <tr key={data?.id}>
                                                     <td>{data?.title}</td>
                                                     <td>{data?.message}</td>
-                                                    <td>{data?.sendingType}</td>
-
+                                                    <td>{data?.SendingType.name}</td>
+                                                    <td>{data?.Region?.name}{data?.District?.name}{data?.Recipient?.otherNames} {data?.Recipient?.surname}</td>
                                                     <td>
                                                         <div
                                                             className="btn-group"
@@ -358,16 +374,16 @@ export default function Notification({ data }: any) {
                                                                                 setSendingType(data.sendingType)
                                                                                 setDistrictId(data.districtId);
 
-                                                                                setTitle("");
-                                                                                setSendingType("");
-                                                                                setMessage("");
-                                                                                setRegionId("");
+                                                                                // setTitle("");
+                                                                                // setSendingType("");
+                                                                                // setMessage("");
+                                                                                // setRegionId("");
 
                                                                                 setIsEditing(true);
 
                                                                             }}
                                                                         >
-                                                                            Edit
+                                                                            Resend
                                                                         </button>
                                                                     </li>
                                                                     <li>

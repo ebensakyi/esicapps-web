@@ -43,7 +43,6 @@ export async function POST(request: Request) {
       districtId: res.district,
     };
 
-    console.log("DATA ", data);
 
     const user = await prisma.user.create({ data });
 

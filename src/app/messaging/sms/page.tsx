@@ -1,8 +1,8 @@
 
 import {  SERVER_BASE_URL } from "@/config";
 
-import Guide from "../../../components/user/Guide";
-async function getSMSs() {
+import SMS from "@/src/components/messaging/SMS";
+async function getSms() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/messaging/sms`, { cache: 'no-store' });
 
@@ -17,6 +17,16 @@ async function getSMSs() {
 async function getSendingType() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/sending-type`, { cache: 'no-store' });    
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+
+}
+async function getUsers() {
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/user`, { cache: 'no-store' });    
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -50,19 +60,20 @@ async function getDistricts() {
 export default async function page() {
   
 
-    const sms = await getSMSs()
+    const sms = await getSms()
     const sendingTypes = await getSendingType()
     const regions = await getRegions()
     const districts = await getDistricts()
+    const users = await getUsers()
 
-    let data = { sms, sendingTypes, regions, districts }  
+    let data = { sms, sendingTypes, regions, districts,users }  
 
     // console.log(data);
     
 
 
 
-    return <Guide data={data} />
+    return <SMS data={data} />
 
 
 }

@@ -239,12 +239,12 @@ export default function Header() {
                                     <span>Notifications</span>
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link href="/messaging/custom">
                                     <i className="bi bi-circle" />
                                     <span>Custom message</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </li>
                     <li className="nav-heading">Configure</li>
