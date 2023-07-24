@@ -7,8 +7,14 @@ import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import Modal from 'react-modal'
 import { LOGIN_URL } from "@/config";
-import { animalType } from '../../../prisma/seed/animalType';
-import { cemeteryWorkers } from '../../../prisma/seed/cemeteryWorkers';
+import { constants } from "buffer";
+import { MyConstants } from "@/src/constants";
+import { effluentManagement } from '../../../prisma/seed/effluentManagement';
+import { sewerSystem } from '../../../prisma/seed/sewerSystem';
+import { waterSourceType } from '../../../prisma/seed/waterSourceType';
+import { waterStorageType } from '../../../prisma/seed/waterStorageType';
+import { waterSupplyType } from '../../../prisma/seed/waterSupplyType';
+import { waterTreatmentType } from '../../../prisma/seed/waterTreatmentType';
 
 
 export default function OtherData({ data }: any) {
@@ -49,7 +55,7 @@ export default function OtherData({ data }: any) {
 
 
 
-    const add = async (e: any, model: string) => {
+    const add = async (e: any, path: string) => {
         try {
             e.preventDefault();
 
@@ -63,7 +69,7 @@ export default function OtherData({ data }: any) {
             };
 
 
-            const response = await axios.post(`/api/primary-data/${model}`, data);
+            const response = await axios.post(`/api/primary-data/${path}`, data);
             setName("");
 
             if (response.status == 200) {
@@ -151,7 +157,7 @@ export default function OtherData({ data }: any) {
             {/* End Page Title */}
             <section className="section">
                 <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles}>
-                    {primaryData == 1 ?
+                    {primaryData == MyConstants.actions.id ?
                         <div className="card">
                             <div className="card-body">
                                 <h6 className="card-title">Action </h6>
@@ -230,7 +236,7 @@ export default function OtherData({ data }: any) {
                             </div>
                         </div>
                         :
-                        primaryData == 2 ?
+                        primaryData == MyConstants.animalTypes.id ?
                             <div className="card">
                                 <div className="card-body">
                                     <h6 className="card-title">Animal Types </h6>
@@ -308,7 +314,7 @@ export default function OtherData({ data }: any) {
                                     </table>
                                 </div>
                             </div> :
-                            primaryData == 3 ?
+                            primaryData == MyConstants.cemeteryWorkers.id ?
                                 <div className="card">
                                     <div className="card-body">
                                         <h6 className="card-title">Cemetery Workers </h6>
@@ -386,7 +392,3297 @@ export default function OtherData({ data }: any) {
                                         </table>
                                     </div>
                                 </div> :
-                                <></>
+                                primaryData == MyConstants.cleaningFrequencies.id ?
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h6 className="card-title">Cleaning Frequency </h6>
+                                            <div className="row gy-4">
+                                                <div className="col-xxl-4 col-md-8">
+                                                    <div>
+                                                        <label
+                                                            htmlFor="basiInput"
+                                                            className="form-label"
+                                                        >
+                                                            Name
+                                                        </label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            id="basiInput"
+                                                            value={name}
+                                                            onChange={(e) =>
+                                                                setName(
+                                                                    e.target.value
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-lg-4">
+                                                    <div>
+                                                        <label
+                                                            htmlFor="basiInput"
+                                                            className="form-label"
+                                                        >
+                                                            .
+                                                        </label>
+                                                        <div className="text-end">
+                                                            <button
+                                                                onClick={(e: any) => {
+                                                                    add(e, "actions");
+                                                                }}
+                                                                className="btn btn-primary"
+                                                            >
+                                                                Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-footer">
+                                            <table className="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        {/* <th scope="col">Id</th> */}
+                                                        <th scope="col">Name</th>
+
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {data?.cleaningFrequencies.map((data: any) => (
+                                                        <tr key={data.id}>
+                                                            {/* <th scope="row">{region.id}</th> */}
+                                                            <td>{data.name}</td>
+
+                                                            <td>
+                                                                <button className="badge bg-success" onClick={async () => {
+                                                                    setName(data.name)
+                                                                }}>
+                                                                    Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div> :
+                                    primaryData == MyConstants.communalContainerConditions.id ?
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h6 className="card-title">Communal Container Conditions </h6>
+                                                <div className="row gy-4">
+                                                    <div className="col-xxl-4 col-md-8">
+                                                        <div>
+                                                            <label
+                                                                htmlFor="basiInput"
+                                                                className="form-label"
+                                                            >
+                                                                Name
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                id="basiInput"
+                                                                value={name}
+                                                                onChange={(e) =>
+                                                                    setName(
+                                                                        e.target.value
+                                                                    )
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-lg-4">
+                                                        <div>
+                                                            <label
+                                                                htmlFor="basiInput"
+                                                                className="form-label"
+                                                            >
+                                                                .
+                                                            </label>
+                                                            <div className="text-end">
+                                                                <button
+                                                                    onClick={(e: any) => {
+                                                                        add(e, "actions");
+                                                                    }}
+                                                                    className="btn btn-primary"
+                                                                >
+                                                                    Add
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card-footer">
+                                                <table className="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            {/* <th scope="col">Id</th> */}
+                                                            <th scope="col">Name</th>
+
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {data?.communalContainerConditions.map((data: any) => (
+                                                            <tr key={data.id}>
+                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                <td>{data.name}</td>
+
+                                                                <td>
+                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                        setName(data.name)
+                                                                    }}>
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> :
+                                        primaryData == MyConstants.containerVolumes.id ?
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <h6 className="card-title">Container Volumes </h6>
+                                                    <div className="row gy-4">
+                                                        <div className="col-xxl-4 col-md-8">
+                                                            <div>
+                                                                <label
+                                                                    htmlFor="basiInput"
+                                                                    className="form-label"
+                                                                >
+                                                                    Name
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    id="basiInput"
+                                                                    value={name}
+                                                                    onChange={(e) =>
+                                                                        setName(
+                                                                            e.target.value
+                                                                        )
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-lg-4">
+                                                            <div>
+                                                                <label
+                                                                    htmlFor="basiInput"
+                                                                    className="form-label"
+                                                                >
+                                                                    .
+                                                                </label>
+                                                                <div className="text-end">
+                                                                    <button
+                                                                        onClick={(e: any) => {
+                                                                            add(e, "actions");
+                                                                        }}
+                                                                        className="btn btn-primary"
+                                                                    >
+                                                                        Add
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="card-footer">
+                                                    <table className="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                {/* <th scope="col">Id</th> */}
+                                                                <th scope="col">Name</th>
+
+                                                                <th scope="col">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {data?.containerVolumes.map((data: any) => (
+                                                                <tr key={data.id}>
+                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                    <td>{data.name}</td>
+
+                                                                    <td>
+                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                            setName(data.name)
+                                                                        }}>
+                                                                            Edit
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div> :
+                                            primaryData == MyConstants.derattingFrequencies.id ?
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <h6 className="card-title">Deratting Frequencies </h6>
+                                                        <div className="row gy-4">
+                                                            <div className="col-xxl-4 col-md-8">
+                                                                <div>
+                                                                    <label
+                                                                        htmlFor="basiInput"
+                                                                        className="form-label"
+                                                                    >
+                                                                        Name
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control"
+                                                                        id="basiInput"
+                                                                        value={name}
+                                                                        onChange={(e) =>
+                                                                            setName(
+                                                                                e.target.value
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-lg-4">
+                                                                <div>
+                                                                    <label
+                                                                        htmlFor="basiInput"
+                                                                        className="form-label"
+                                                                    >
+                                                                        .
+                                                                    </label>
+                                                                    <div className="text-end">
+                                                                        <button
+                                                                            onClick={(e: any) => {
+                                                                                add(e, "actions");
+                                                                            }}
+                                                                            className="btn btn-primary"
+                                                                        >
+                                                                            Add
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="card-footer">
+                                                        <table className="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    {/* <th scope="col">Id</th> */}
+                                                                    <th scope="col">Name</th>
+
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {data?.derattingFrequencies.map((data: any) => (
+                                                                    <tr key={data.id}>
+                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                        <td>{data.name}</td>
+
+                                                                        <td>
+                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                setName(data.name)
+                                                                            }}>
+                                                                                Edit
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div> :
+                                                primaryData == MyConstants.desiltingFrequencies.id ?
+                                                    <div className="card">
+                                                        <div className="card-body">
+                                                            <h6 className="card-title">Desilting Frequencies </h6>
+                                                            <div className="row gy-4">
+                                                                <div className="col-xxl-4 col-md-8">
+                                                                    <div>
+                                                                        <label
+                                                                            htmlFor="basiInput"
+                                                                            className="form-label"
+                                                                        >
+                                                                            Name
+                                                                        </label>
+                                                                        <input
+                                                                            type="text"
+                                                                            className="form-control"
+                                                                            id="basiInput"
+                                                                            value={name}
+                                                                            onChange={(e) =>
+                                                                                setName(
+                                                                                    e.target.value
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="col-lg-4">
+                                                                    <div>
+                                                                        <label
+                                                                            htmlFor="basiInput"
+                                                                            className="form-label"
+                                                                        >
+                                                                            .
+                                                                        </label>
+                                                                        <div className="text-end">
+                                                                            <button
+                                                                                onClick={(e: any) => {
+                                                                                    add(e, "actions");
+                                                                                }}
+                                                                                className="btn btn-primary"
+                                                                            >
+                                                                                Add
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="card-footer">
+                                                            <table className="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        {/* <th scope="col">Id</th> */}
+                                                                        <th scope="col">Name</th>
+
+                                                                        <th scope="col">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {data?.desiltingFrequencies.map((data: any) => (
+                                                                        <tr key={data.id}>
+                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                            <td>{data.name}</td>
+
+                                                                            <td>
+                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                    setName(data.name)
+                                                                                }}>
+                                                                                    Edit
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div> :
+                                                    primaryData == MyConstants.disinfectionFrequencies.id ?
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <h6 className="card-title">Disinfection Frequencies </h6>
+                                                                <div className="row gy-4">
+                                                                    <div className="col-xxl-4 col-md-8">
+                                                                        <div>
+                                                                            <label
+                                                                                htmlFor="basiInput"
+                                                                                className="form-label"
+                                                                            >
+                                                                                Name
+                                                                            </label>
+                                                                            <input
+                                                                                type="text"
+                                                                                className="form-control"
+                                                                                id="basiInput"
+                                                                                value={name}
+                                                                                onChange={(e) =>
+                                                                                    setName(
+                                                                                        e.target.value
+                                                                                    )
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="col-lg-4">
+                                                                        <div>
+                                                                            <label
+                                                                                htmlFor="basiInput"
+                                                                                className="form-label"
+                                                                            >
+                                                                                .
+                                                                            </label>
+                                                                            <div className="text-end">
+                                                                                <button
+                                                                                    onClick={(e: any) => {
+                                                                                        add(e, "actions");
+                                                                                    }}
+                                                                                    className="btn btn-primary"
+                                                                                >
+                                                                                    Add
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="card-footer">
+                                                                <table className="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            {/* <th scope="col">Id</th> */}
+                                                                            <th scope="col">Name</th>
+
+                                                                            <th scope="col">Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {data?.disinfectionFrequencies.map((data: any) => (
+                                                                            <tr key={data.id}>
+                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                <td>{data.name}</td>
+
+                                                                                <td>
+                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                        setName(data.name)
+                                                                                    }}>
+                                                                                        Edit
+                                                                                    </button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        ))}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div> :
+                                                        primaryData == MyConstants.drainBadConditions.id ?
+                                                            <div className="card">
+                                                                <div className="card-body">
+                                                                    <h6 className="card-title">Drain Bad Conditions </h6>
+                                                                    <div className="row gy-4">
+                                                                        <div className="col-xxl-4 col-md-8">
+                                                                            <div>
+                                                                                <label
+                                                                                    htmlFor="basiInput"
+                                                                                    className="form-label"
+                                                                                >
+                                                                                    Name
+                                                                                </label>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    className="form-control"
+                                                                                    id="basiInput"
+                                                                                    value={name}
+                                                                                    onChange={(e) =>
+                                                                                        setName(
+                                                                                            e.target.value
+                                                                                        )
+                                                                                    }
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="col-lg-4">
+                                                                            <div>
+                                                                                <label
+                                                                                    htmlFor="basiInput"
+                                                                                    className="form-label"
+                                                                                >
+                                                                                    .
+                                                                                </label>
+                                                                                <div className="text-end">
+                                                                                    <button
+                                                                                        onClick={(e: any) => {
+                                                                                            add(e, "actions");
+                                                                                        }}
+                                                                                        className="btn btn-primary"
+                                                                                    >
+                                                                                        Add
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="card-footer">
+                                                                    <table className="table table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                {/* <th scope="col">Id</th> */}
+                                                                                <th scope="col">Name</th>
+
+                                                                                <th scope="col">Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {data?.drainBadConditions.map((data: any) => (
+                                                                                <tr key={data.id}>
+                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                    <td>{data.name}</td>
+
+                                                                                    <td>
+                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                            setName(data.name)
+                                                                                        }}>
+                                                                                            Edit
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div> :
+                                                            primaryData == MyConstants.drainTypes.id ?
+                                                                <div className="card">
+                                                                    <div className="card-body">
+                                                                        <h6 className="card-title">Drain Types </h6>
+                                                                        <div className="row gy-4">
+                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                <div>
+                                                                                    <label
+                                                                                        htmlFor="basiInput"
+                                                                                        className="form-label"
+                                                                                    >
+                                                                                        Name
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control"
+                                                                                        id="basiInput"
+                                                                                        value={name}
+                                                                                        onChange={(e) =>
+                                                                                            setName(
+                                                                                                e.target.value
+                                                                                            )
+                                                                                        }
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div className="col-lg-4">
+                                                                                <div>
+                                                                                    <label
+                                                                                        htmlFor="basiInput"
+                                                                                        className="form-label"
+                                                                                    >
+                                                                                        .
+                                                                                    </label>
+                                                                                    <div className="text-end">
+                                                                                        <button
+                                                                                            onClick={(e: any) => {
+                                                                                                add(e, "actions");
+                                                                                            }}
+                                                                                            className="btn btn-primary"
+                                                                                        >
+                                                                                            Add
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="card-footer">
+                                                                        <table className="table table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                    <th scope="col">Name</th>
+
+                                                                                    <th scope="col">Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                {data?.drainTypes.map((data: any) => (
+                                                                                    <tr key={data.id}>
+                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                        <td>{data.name}</td>
+
+                                                                                        <td>
+                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                setName(data.name)
+                                                                                            }}>
+                                                                                                Edit
+                                                                                            </button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                ))}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div> :
+                                                                primaryData == MyConstants.drinkingWaterSourceTypes.id ?
+                                                                    <div className="card">
+                                                                        <div className="card-body">
+                                                                            <h6 className="card-title">Drinking Water Source </h6>
+                                                                            <div className="row gy-4">
+                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            htmlFor="basiInput"
+                                                                                            className="form-label"
+                                                                                        >
+                                                                                            Name
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control"
+                                                                                            id="basiInput"
+                                                                                            value={name}
+                                                                                            onChange={(e) =>
+                                                                                                setName(
+                                                                                                    e.target.value
+                                                                                                )
+                                                                                            }
+                                                                                        />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div className="col-lg-4">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            htmlFor="basiInput"
+                                                                                            className="form-label"
+                                                                                        >
+                                                                                            .
+                                                                                        </label>
+                                                                                        <div className="text-end">
+                                                                                            <button
+                                                                                                onClick={(e: any) => {
+                                                                                                    add(e, "actions");
+                                                                                                }}
+                                                                                                className="btn btn-primary"
+                                                                                            >
+                                                                                                Add
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="card-footer">
+                                                                            <table className="table table-striped">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                        <th scope="col">Name</th>
+
+                                                                                        <th scope="col">Action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    {data?.drinkingWaterSourceTypes.map((data: any) => (
+                                                                                        <tr key={data.id}>
+                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                            <td>{data.name}</td>
+
+                                                                                            <td>
+                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                    setName(data.name)
+                                                                                                }}>
+                                                                                                    Edit
+                                                                                                </button>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    ))}
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div> :
+                                                                    primaryData == MyConstants.waterSourceTypes.id ?
+                                                                    <div className="card">
+                                                                        <div className="card-body">
+                                                                            <h6 className="card-title"> Water Source Type </h6>
+                                                                            <div className="row gy-4">
+                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            htmlFor="basiInput"
+                                                                                            className="form-label"
+                                                                                        >
+                                                                                            Name
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control"
+                                                                                            id="basiInput"
+                                                                                            value={name}
+                                                                                            onChange={(e) =>
+                                                                                                setName(
+                                                                                                    e.target.value
+                                                                                                )
+                                                                                            }
+                                                                                        />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div className="col-lg-4">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            htmlFor="basiInput"
+                                                                                            className="form-label"
+                                                                                        >
+                                                                                            .
+                                                                                        </label>
+                                                                                        <div className="text-end">
+                                                                                            <button
+                                                                                                onClick={(e: any) => {
+                                                                                                    add(e, "actions");
+                                                                                                }}
+                                                                                                className="btn btn-primary"
+                                                                                            >
+                                                                                                Add
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="card-footer">
+                                                                            <table className="table table-striped">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                        <th scope="col">Name</th>
+
+                                                                                        <th scope="col">Action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    {data?.waterSourceTypes.map((data: any) => (
+                                                                                        <tr key={data.id}>
+                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                            <td>{data.name}</td>
+
+                                                                                            <td>
+                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                    setName(data.name)
+                                                                                                }}>
+                                                                                                    Edit
+                                                                                                </button>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    ))}
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div> :
+                                                                    primaryData == MyConstants.easeYourselfWheres.id ?
+                                                                        <div className="card">
+                                                                            <div className="card-body">
+                                                                                <h6 className="card-title">Ease Yourself Where </h6>
+                                                                                <div className="row gy-4">
+                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                        <div>
+                                                                                            <label
+                                                                                                htmlFor="basiInput"
+                                                                                                className="form-label"
+                                                                                            >
+                                                                                                Name
+                                                                                            </label>
+                                                                                            <input
+                                                                                                type="text"
+                                                                                                className="form-control"
+                                                                                                id="basiInput"
+                                                                                                value={name}
+                                                                                                onChange={(e) =>
+                                                                                                    setName(
+                                                                                                        e.target.value
+                                                                                                    )
+                                                                                                }
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div className="col-lg-4">
+                                                                                        <div>
+                                                                                            <label
+                                                                                                htmlFor="basiInput"
+                                                                                                className="form-label"
+                                                                                            >
+                                                                                                .
+                                                                                            </label>
+                                                                                            <div className="text-end">
+                                                                                                <button
+                                                                                                    onClick={(e: any) => {
+                                                                                                        add(e, "actions");
+                                                                                                    }}
+                                                                                                    className="btn btn-primary"
+                                                                                                >
+                                                                                                    Add
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="card-footer">
+                                                                                <table className="table table-striped">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                            <th scope="col">Name</th>
+
+                                                                                            <th scope="col">Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        {data?.easeYourselfWheres.map((data: any) => (
+                                                                                            <tr key={data.id}>
+                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                <td>{data.name}</td>
+
+                                                                                                <td>
+                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                        setName(data.name)
+                                                                                                    }}>
+                                                                                                        Edit
+                                                                                                    </button>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        ))}
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div> :
+
+primaryData == MyConstants.drinkingWaterSourceTypes.id ?
+<div className="card">
+    <div className="card-body">
+        <h6 className="card-title">Drinking Water Source </h6>
+        <div className="row gy-4">
+            <div className="col-xxl-4 col-md-8">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="basiInput"
+                        value={name}
+                        onChange={(e) =>
+                            setName(
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+            </div>
+
+            <div className="col-lg-4">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        .
+                    </label>
+                    <div className="text-end">
+                        <button
+                            onClick={(e: any) => {
+                                add(e, "actions");
+                            }}
+                            className="btn btn-primary"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="card-footer">
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    {/* <th scope="col">Id</th> */}
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {data?.drinkingWaterSourceTypes.map((data: any) => (
+                    <tr key={data.id}>
+                        {/* <th scope="row">{region.id}</th> */}
+                        <td>{data.name}</td>
+
+                        <td>
+                            <button className="badge bg-success" onClick={async () => {
+                                setName(data.name)
+                            }}>
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+</div> :
+primaryData == MyConstants.waterSourceTypes.id ?
+<div className="card">
+    <div className="card-body">
+        <h6 className="card-title"> Water Source Type </h6>
+        <div className="row gy-4">
+            <div className="col-xxl-4 col-md-8">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="basiInput"
+                        value={name}
+                        onChange={(e) =>
+                            setName(
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+            </div>
+
+            <div className="col-lg-4">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        .
+                    </label>
+                    <div className="text-end">
+                        <button
+                            onClick={(e: any) => {
+                                add(e, "actions");
+                            }}
+                            className="btn btn-primary"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="card-footer">
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    {/* <th scope="col">Id</th> */}
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {data?.waterSourceTypes.map((data: any) => (
+                    <tr key={data.id}>
+                        {/* <th scope="row">{region.id}</th> */}
+                        <td>{data.name}</td>
+
+                        <td>
+                            <button className="badge bg-success" onClick={async () => {
+                                setName(data.name)
+                            }}>
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+</div> :
+
+primaryData == MyConstants.waterStorageTypes.id ?
+<div className="card">
+    <div className="card-body">
+        <h6 className="card-title"> Water Storage Type </h6>
+        <div className="row gy-4">
+            <div className="col-xxl-4 col-md-8">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="basiInput"
+                        value={name}
+                        onChange={(e) =>
+                            setName(
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+            </div>
+
+            <div className="col-lg-4">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        .
+                    </label>
+                    <div className="text-end">
+                        <button
+                            onClick={(e: any) => {
+                                add(e, "actions");
+                            }}
+                            className="btn btn-primary"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="card-footer">
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    {/* <th scope="col">Id</th> */}
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {data?.waterStorageTypes.map((data: any) => (
+                    <tr key={data.id}>
+                        {/* <th scope="row">{region.id}</th> */}
+                        <td>{data.name}</td>
+
+                        <td>
+                            <button className="badge bg-success" onClick={async () => {
+                                setName(data.name)
+                            }}>
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+</div> :
+
+
+
+
+primaryData == MyConstants.waterSupplyTypes.id ?
+<div className="card">
+    <div className="card-body">
+        <h6 className="card-title"> Water Supply Type </h6>
+        <div className="row gy-4">
+            <div className="col-xxl-4 col-md-8">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="basiInput"
+                        value={name}
+                        onChange={(e) =>
+                            setName(
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+            </div>
+
+            <div className="col-lg-4">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        .
+                    </label>
+                    <div className="text-end">
+                        <button
+                            onClick={(e: any) => {
+                                add(e, "actions");
+                            }}
+                            className="btn btn-primary"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="card-footer">
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    {/* <th scope="col">Id</th> */}
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {data?.waterSupplyTypes.map((data: any) => (
+                    <tr key={data.id}>
+                        {/* <th scope="row">{region.id}</th> */}
+                        <td>{data.name}</td>
+
+                        <td>
+                            <button className="badge bg-success" onClick={async () => {
+                                setName(data.name)
+                            }}>
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+</div> :
+
+
+
+primaryData == MyConstants.waterTreatmentTypes.id ?
+<div className="card">
+    <div className="card-body">
+        <h6 className="card-title"> Water Treatment Type </h6>
+        <div className="row gy-4">
+            <div className="col-xxl-4 col-md-8">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="basiInput"
+                        value={name}
+                        onChange={(e) =>
+                            setName(
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+            </div>
+
+            <div className="col-lg-4">
+                <div>
+                    <label
+                        htmlFor="basiInput"
+                        className="form-label"
+                    >
+                        .
+                    </label>
+                    <div className="text-end">
+                        <button
+                            onClick={(e: any) => {
+                                add(e, "actions");
+                            }}
+                            className="btn btn-primary"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="card-footer">
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    {/* <th scope="col">Id</th> */}
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {data?.waterTreatmentTypes.map((data: any) => (
+                    <tr key={data.id}>
+                        {/* <th scope="row">{region.id}</th> */}
+                        <td>{data.name}</td>
+
+                        <td>
+                            <button className="badge bg-success" onClick={async () => {
+                                setName(data.name)
+                            }}>
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+</div> :
+
+
+
+
+
+                                                                        primaryData == MyConstants.effluentManagements.id ?
+                                                                            <div className="card">
+                                                                                <div className="card-body">
+                                                                                    <h6 className="card-title">Effluent Management </h6>
+                                                                                    <div className="row gy-4">
+                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                            <div>
+                                                                                                <label
+                                                                                                    htmlFor="basiInput"
+                                                                                                    className="form-label"
+                                                                                                >
+                                                                                                    Name
+                                                                                                </label>
+                                                                                                <input
+                                                                                                    type="text"
+                                                                                                    className="form-control"
+                                                                                                    id="basiInput"
+                                                                                                    value={name}
+                                                                                                    onChange={(e) =>
+                                                                                                        setName(
+                                                                                                            e.target.value
+                                                                                                        )
+                                                                                                    }
+                                                                                                />
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div className="col-lg-4">
+                                                                                            <div>
+                                                                                                <label
+                                                                                                    htmlFor="basiInput"
+                                                                                                    className="form-label"
+                                                                                                >
+                                                                                                    .
+                                                                                                </label>
+                                                                                                <div className="text-end">
+                                                                                                    <button
+                                                                                                        onClick={(e: any) => {
+                                                                                                            add(e, "actions");
+                                                                                                        }}
+                                                                                                        className="btn btn-primary"
+                                                                                                    >
+                                                                                                        Add
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="card-footer">
+                                                                                    <table className="table table-striped">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                <th scope="col">Name</th>
+
+                                                                                                <th scope="col">Action</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            {data?.effluentManagements.map((data: any) => (
+                                                                                                <tr key={data.id}>
+                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                    <td>{data.name}</td>
+
+                                                                                                    <td>
+                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                            setName(data.name)
+                                                                                                        }}>
+                                                                                                            Edit
+                                                                                                        </button>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            ))}
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div> :
+                                                                            primaryData == MyConstants.excretaContainments.id ?
+                                                                                <div className="card">
+                                                                                    <div className="card-body">
+                                                                                        <h6 className="card-title">Excreta Containment </h6>
+                                                                                        <div className="row gy-4">
+                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                <div>
+                                                                                                    <label
+                                                                                                        htmlFor="basiInput"
+                                                                                                        className="form-label"
+                                                                                                    >
+                                                                                                        Name
+                                                                                                    </label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        className="form-control"
+                                                                                                        id="basiInput"
+                                                                                                        value={name}
+                                                                                                        onChange={(e) =>
+                                                                                                            setName(
+                                                                                                                e.target.value
+                                                                                                            )
+                                                                                                        }
+                                                                                                    />
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div className="col-lg-4">
+                                                                                                <div>
+                                                                                                    <label
+                                                                                                        htmlFor="basiInput"
+                                                                                                        className="form-label"
+                                                                                                    >
+                                                                                                        .
+                                                                                                    </label>
+                                                                                                    <div className="text-end">
+                                                                                                        <button
+                                                                                                            onClick={(e: any) => {
+                                                                                                                add(e, "actions");
+                                                                                                            }}
+                                                                                                            className="btn btn-primary"
+                                                                                                        >
+                                                                                                            Add
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="card-footer">
+                                                                                        <table className="table table-striped">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                    <th scope="col">Name</th>
+
+                                                                                                    <th scope="col">Action</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                {data?.excretaContainments.map((data: any) => (
+                                                                                                    <tr key={data.id}>
+                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                        <td>{data.name}</td>
+
+                                                                                                        <td>
+                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                setName(data.name)
+                                                                                                            }}>
+                                                                                                                Edit
+                                                                                                            </button>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                ))}
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div> :
+                                                                                primaryData == MyConstants.excretaDisposals.id ?
+                                                                                    <div className="card">
+                                                                                        <div className="card-body">
+                                                                                            <h6 className="card-title">Excreta Disposals </h6>
+                                                                                            <div className="row gy-4">
+                                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                                    <div>
+                                                                                                        <label
+                                                                                                            htmlFor="basiInput"
+                                                                                                            className="form-label"
+                                                                                                        >
+                                                                                                            Name
+                                                                                                        </label>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            className="form-control"
+                                                                                                            id="basiInput"
+                                                                                                            value={name}
+                                                                                                            onChange={(e) =>
+                                                                                                                setName(
+                                                                                                                    e.target.value
+                                                                                                                )
+                                                                                                            }
+                                                                                                        />
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <div className="col-lg-4">
+                                                                                                    <div>
+                                                                                                        <label
+                                                                                                            htmlFor="basiInput"
+                                                                                                            className="form-label"
+                                                                                                        >
+                                                                                                            .
+                                                                                                        </label>
+                                                                                                        <div className="text-end">
+                                                                                                            <button
+                                                                                                                onClick={(e: any) => {
+                                                                                                                    add(e, "actions");
+                                                                                                                }}
+                                                                                                                className="btn btn-primary"
+                                                                                                            >
+                                                                                                                Add
+                                                                                                            </button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="card-footer">
+                                                                                            <table className="table table-striped">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                                        <th scope="col">Name</th>
+
+                                                                                                        <th scope="col">Action</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    {data?.excretaDisposals.map((data: any) => (
+                                                                                                        <tr key={data.id}>
+                                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                                            <td>{data.name}</td>
+
+                                                                                                            <td>
+                                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                                    setName(data.name)
+                                                                                                                }}>
+                                                                                                                    Edit
+                                                                                                                </button>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    ))}
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div> :
+                                                                                    primaryData == MyConstants.greyWaterDisposals.id ?
+                                                                                        <div className="card">
+                                                                                            <div className="card-body">
+                                                                                                <h6 className="card-title">Grey Water Disposals </h6>
+                                                                                                <div className="row gy-4">
+                                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                                        <div>
+                                                                                                            <label
+                                                                                                                htmlFor="basiInput"
+                                                                                                                className="form-label"
+                                                                                                            >
+                                                                                                                Name
+                                                                                                            </label>
+                                                                                                            <input
+                                                                                                                type="text"
+                                                                                                                className="form-control"
+                                                                                                                id="basiInput"
+                                                                                                                value={name}
+                                                                                                                onChange={(e) =>
+                                                                                                                    setName(
+                                                                                                                        e.target.value
+                                                                                                                    )
+                                                                                                                }
+                                                                                                            />
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div className="col-lg-4">
+                                                                                                        <div>
+                                                                                                            <label
+                                                                                                                htmlFor="basiInput"
+                                                                                                                className="form-label"
+                                                                                                            >
+                                                                                                                .
+                                                                                                            </label>
+                                                                                                            <div className="text-end">
+                                                                                                                <button
+                                                                                                                    onClick={(e: any) => {
+                                                                                                                        add(e, "actions");
+                                                                                                                    }}
+                                                                                                                    className="btn btn-primary"
+                                                                                                                >
+                                                                                                                    Add
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div className="card-footer">
+                                                                                                <table className="table table-striped">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                                            <th scope="col">Name</th>
+
+                                                                                                            <th scope="col">Action</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        {data?.greyWaterDisposals.map((data: any) => (
+                                                                                                            <tr key={data.id}>
+                                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                                <td>{data.name}</td>
+
+                                                                                                                <td>
+                                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                                        setName(data.name)
+                                                                                                                    }}>
+                                                                                                                        Edit
+                                                                                                                    </button>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        ))}
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </div> :
+                                                                                        primaryData == MyConstants.hazardousWasteDisposals.id ?
+                                                                                            <div className="card">
+                                                                                                <div className="card-body">
+                                                                                                    <h6 className="card-title">Hazardous Waste Disposals</h6>
+                                                                                                    <div className="row gy-4">
+                                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                                            <div>
+                                                                                                                <label
+                                                                                                                    htmlFor="basiInput"
+                                                                                                                    className="form-label"
+                                                                                                                >
+                                                                                                                    Name
+                                                                                                                </label>
+                                                                                                                <input
+                                                                                                                    type="text"
+                                                                                                                    className="form-control"
+                                                                                                                    id="basiInput"
+                                                                                                                    value={name}
+                                                                                                                    onChange={(e) =>
+                                                                                                                        setName(
+                                                                                                                            e.target.value
+                                                                                                                        )
+                                                                                                                    }
+                                                                                                                />
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div className="col-lg-4">
+                                                                                                            <div>
+                                                                                                                <label
+                                                                                                                    htmlFor="basiInput"
+                                                                                                                    className="form-label"
+                                                                                                                >
+                                                                                                                    .
+                                                                                                                </label>
+                                                                                                                <div className="text-end">
+                                                                                                                    <button
+                                                                                                                        onClick={(e: any) => {
+                                                                                                                            add(e, "actions");
+                                                                                                                        }}
+                                                                                                                        className="btn btn-primary"
+                                                                                                                    >
+                                                                                                                        Add
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div className="card-footer">
+                                                                                                    <table className="table table-striped">
+                                                                                                        <thead>
+                                                                                                            <tr>
+                                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                                <th scope="col">Name</th>
+
+                                                                                                                <th scope="col">Action</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            {data?.hazardousWasteDisposals.map((data: any) => (
+                                                                                                                <tr key={data.id}>
+                                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                                    <td>{data.name}</td>
+
+                                                                                                                    <td>
+                                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                                            setName(data.name)
+                                                                                                                        }}>
+                                                                                                                            Edit
+                                                                                                                        </button>
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            ))}
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            </div> :
+                                                                                            primaryData == MyConstants.inspectionFormNuisances.id ?
+                                                                                                <div className="card">
+                                                                                                    <div className="card-body">
+                                                                                                        <h6 className="card-title">Inspection Form Nuisances </h6>
+                                                                                                        <div className="row gy-4">
+                                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                                <div>
+                                                                                                                    <label
+                                                                                                                        htmlFor="basiInput"
+                                                                                                                        className="form-label"
+                                                                                                                    >
+                                                                                                                        Name
+                                                                                                                    </label>
+                                                                                                                    <input
+                                                                                                                        type="text"
+                                                                                                                        className="form-control"
+                                                                                                                        id="basiInput"
+                                                                                                                        value={name}
+                                                                                                                        onChange={(e) =>
+                                                                                                                            setName(
+                                                                                                                                e.target.value
+                                                                                                                            )
+                                                                                                                        }
+                                                                                                                    />
+                                                                                                                </div>
+                                                                                                            </div>
+
+                                                                                                            <div className="col-lg-4">
+                                                                                                                <div>
+                                                                                                                    <label
+                                                                                                                        htmlFor="basiInput"
+                                                                                                                        className="form-label"
+                                                                                                                    >
+                                                                                                                        .
+                                                                                                                    </label>
+                                                                                                                    <div className="text-end">
+                                                                                                                        <button
+                                                                                                                            onClick={(e: any) => {
+                                                                                                                                add(e, "actions");
+                                                                                                                            }}
+                                                                                                                            className="btn btn-primary"
+                                                                                                                        >
+                                                                                                                            Add
+                                                                                                                        </button>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div className="card-footer">
+                                                                                                        <table className="table table-striped">
+                                                                                                            <thead>
+                                                                                                                <tr>
+                                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                                    <th scope="col">Name</th>
+
+                                                                                                                    <th scope="col">Action</th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                                {data?.inspectionFormNuisances.map((data: any) => (
+                                                                                                                    <tr key={data.id}>
+                                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                                        <td>{data.name}</td>
+
+                                                                                                                        <td>
+                                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                                setName(data.name)
+                                                                                                                            }}>
+                                                                                                                                Edit
+                                                                                                                            </button>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                ))}
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div> :
+                                                                                                primaryData == MyConstants.nuisances.id ?
+                                                                                                    <div className="card">
+                                                                                                        <div className="card-body">
+                                                                                                            <h6 className="card-title">Nuisances </h6>
+                                                                                                            <div className="row gy-4">
+                                                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                                                    <div>
+                                                                                                                        <label
+                                                                                                                            htmlFor="basiInput"
+                                                                                                                            className="form-label"
+                                                                                                                        >
+                                                                                                                            Name
+                                                                                                                        </label>
+                                                                                                                        <input
+                                                                                                                            type="text"
+                                                                                                                            className="form-control"
+                                                                                                                            id="basiInput"
+                                                                                                                            value={name}
+                                                                                                                            onChange={(e) =>
+                                                                                                                                setName(
+                                                                                                                                    e.target.value
+                                                                                                                                )
+                                                                                                                            }
+                                                                                                                        />
+                                                                                                                    </div>
+                                                                                                                </div>
+
+                                                                                                                <div className="col-lg-4">
+                                                                                                                    <div>
+                                                                                                                        <label
+                                                                                                                            htmlFor="basiInput"
+                                                                                                                            className="form-label"
+                                                                                                                        >
+                                                                                                                            .
+                                                                                                                        </label>
+                                                                                                                        <div className="text-end">
+                                                                                                                            <button
+                                                                                                                                onClick={(e: any) => {
+                                                                                                                                    add(e, "actions");
+                                                                                                                                }}
+                                                                                                                                className="btn btn-primary"
+                                                                                                                            >
+                                                                                                                                Add
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div className="card-footer">
+                                                                                                            <table className="table table-striped">
+                                                                                                                <thead>
+                                                                                                                    <tr>
+                                                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                                                        <th scope="col">Name</th>
+
+                                                                                                                        <th scope="col">Action</th>
+                                                                                                                    </tr>
+                                                                                                                </thead>
+                                                                                                                <tbody>
+                                                                                                                    {data?.nuisances.map((data: any) => (
+                                                                                                                        <tr key={data.id}>
+                                                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                                                            <td>{data.name}</td>
+
+                                                                                                                            <td>
+                                                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                                                    setName(data.name)
+                                                                                                                                }}>
+                                                                                                                                    Edit
+                                                                                                                                </button>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                    ))}
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </div>
+                                                                                                    </div> :
+                                                                                                    primaryData == MyConstants.ownershipTypes.id ?
+                                                                                                        <div className="card">
+                                                                                                            <div className="card-body">
+                                                                                                                <h6 className="card-title">Ownership Types </h6>
+                                                                                                                <div className="row gy-4">
+                                                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                                                        <div>
+                                                                                                                            <label
+                                                                                                                                htmlFor="basiInput"
+                                                                                                                                className="form-label"
+                                                                                                                            >
+                                                                                                                                Name
+                                                                                                                            </label>
+                                                                                                                            <input
+                                                                                                                                type="text"
+                                                                                                                                className="form-control"
+                                                                                                                                id="basiInput"
+                                                                                                                                value={name}
+                                                                                                                                onChange={(e) =>
+                                                                                                                                    setName(
+                                                                                                                                        e.target.value
+                                                                                                                                    )
+                                                                                                                                }
+                                                                                                                            />
+                                                                                                                        </div>
+                                                                                                                    </div>
+
+                                                                                                                    <div className="col-lg-4">
+                                                                                                                        <div>
+                                                                                                                            <label
+                                                                                                                                htmlFor="basiInput"
+                                                                                                                                className="form-label"
+                                                                                                                            >
+                                                                                                                                .
+                                                                                                                            </label>
+                                                                                                                            <div className="text-end">
+                                                                                                                                <button
+                                                                                                                                    onClick={(e: any) => {
+                                                                                                                                        add(e, "actions");
+                                                                                                                                    }}
+                                                                                                                                    className="btn btn-primary"
+                                                                                                                                >
+                                                                                                                                    Add
+                                                                                                                                </button>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div className="card-footer">
+                                                                                                                <table className="table table-striped">
+                                                                                                                    <thead>
+                                                                                                                        <tr>
+                                                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                                                            <th scope="col">Name</th>
+
+                                                                                                                            <th scope="col">Action</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+                                                                                                                        {data?.ownershipTypes.map((data: any) => (
+                                                                                                                            <tr key={data.id}>
+                                                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                <td>{data.name}</td>
+
+                                                                                                                                <td>
+                                                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                                                        setName(data.name)
+                                                                                                                                    }}>
+                                                                                                                                        Edit
+                                                                                                                                    </button>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        ))}
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            </div>
+                                                                                                        </div> :
+                                                                                                        primaryData == MyConstants.pestSigns.id ?
+                                                                                                            <div className="card">
+                                                                                                                <div className="card-body">
+                                                                                                                    <h6 className="card-title">Pest Signs </h6>
+                                                                                                                    <div className="row gy-4">
+                                                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                                                            <div>
+                                                                                                                                <label
+                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                    className="form-label"
+                                                                                                                                >
+                                                                                                                                    Name
+                                                                                                                                </label>
+                                                                                                                                <input
+                                                                                                                                    type="text"
+                                                                                                                                    className="form-control"
+                                                                                                                                    id="basiInput"
+                                                                                                                                    value={name}
+                                                                                                                                    onChange={(e) =>
+                                                                                                                                        setName(
+                                                                                                                                            e.target.value
+                                                                                                                                        )
+                                                                                                                                    }
+                                                                                                                                />
+                                                                                                                            </div>
+                                                                                                                        </div>
+
+                                                                                                                        <div className="col-lg-4">
+                                                                                                                            <div>
+                                                                                                                                <label
+                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                    className="form-label"
+                                                                                                                                >
+                                                                                                                                    .
+                                                                                                                                </label>
+                                                                                                                                <div className="text-end">
+                                                                                                                                    <button
+                                                                                                                                        onClick={(e: any) => {
+                                                                                                                                            add(e, MyConstants.pestSigns.path);
+                                                                                                                                        }}
+                                                                                                                                        className="btn btn-primary"
+                                                                                                                                    >
+                                                                                                                                        Add
+                                                                                                                                    </button>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div className="card-footer">
+                                                                                                                    <table className="table table-striped">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                                                <th scope="col">Name</th>
+
+                                                                                                                                <th scope="col">Action</th>
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                            {data?.pestSigns.map((data: any) => (
+                                                                                                                                <tr key={data.id}>
+                                                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                    <td>{data.name}</td>
+
+                                                                                                                                    <td>
+                                                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                                                            setName(data.name)
+                                                                                                                                        }}>
+                                                                                                                                            Edit
+                                                                                                                                        </button>
+                                                                                                                                    </td>
+                                                                                                                                </tr>
+                                                                                                                            ))}
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </div>
+                                                                                                            </div> :
+                                                                                                            primaryData == MyConstants.premisesServices.id ?
+                                                                                                                <div className="card">
+                                                                                                                    <div className="card-body">
+                                                                                                                        <h6 className="card-title">Premises Subtypes </h6>
+                                                                                                                        <div className="row gy-4">
+                                                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                                                <div>
+                                                                                                                                    <label
+                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                        className="form-label"
+                                                                                                                                    >
+                                                                                                                                        Name
+                                                                                                                                    </label>
+                                                                                                                                    <input
+                                                                                                                                        type="text"
+                                                                                                                                        className="form-control"
+                                                                                                                                        id="basiInput"
+                                                                                                                                        value={name}
+                                                                                                                                        onChange={(e) =>
+                                                                                                                                            setName(
+                                                                                                                                                e.target.value
+                                                                                                                                            )
+                                                                                                                                        }
+                                                                                                                                    />
+                                                                                                                                </div>
+                                                                                                                            </div>
+
+                                                                                                                            <div className="col-lg-4">
+                                                                                                                                <div>
+                                                                                                                                    <label
+                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                        className="form-label"
+                                                                                                                                    >
+                                                                                                                                        .
+                                                                                                                                    </label>
+                                                                                                                                    <div className="text-end">
+                                                                                                                                        <button
+                                                                                                                                            onClick={(e: any) => {
+                                                                                                                                                add(e, MyConstants.premisesServices.path);
+                                                                                                                                            }}
+                                                                                                                                            className="btn btn-primary"
+                                                                                                                                        >
+                                                                                                                                            Add
+                                                                                                                                        </button>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div className="card-footer">
+                                                                                                                        <table className="table table-striped">
+                                                                                                                            <thead>
+                                                                                                                                <tr>
+                                                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                                                    <th scope="col">Name</th>
+
+                                                                                                                                    <th scope="col">Action</th>
+                                                                                                                                </tr>
+                                                                                                                            </thead>
+                                                                                                                            <tbody>
+                                                                                                                                {data?.cemeteryWorkers.map((data: any) => (
+                                                                                                                                    <tr key={data.id}>
+                                                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                        <td>{data.name}</td>
+
+                                                                                                                                        <td>
+                                                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                setName(data.name)
+                                                                                                                                            }}>
+                                                                                                                                                Edit
+                                                                                                                                            </button>
+                                                                                                                                        </td>
+                                                                                                                                    </tr>
+                                                                                                                                ))}
+                                                                                                                            </tbody>
+                                                                                                                        </table>
+                                                                                                                    </div>
+                                                                                                                </div> :
+                                                                                                                primaryData == MyConstants.premisesSubtypes.id ?
+                                                                                                                    <div className="card">
+                                                                                                                        <div className="card-body">
+                                                                                                                            <h6 className="card-title">Premises Subtypes </h6>
+                                                                                                                            <div className="row gy-4">
+                                                                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                                                                    <div>
+                                                                                                                                        <label
+                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                            className="form-label"
+                                                                                                                                        >
+                                                                                                                                            Name
+                                                                                                                                        </label>
+                                                                                                                                        <input
+                                                                                                                                            type="text"
+                                                                                                                                            className="form-control"
+                                                                                                                                            id="basiInput"
+                                                                                                                                            value={name}
+                                                                                                                                            onChange={(e) =>
+                                                                                                                                                setName(
+                                                                                                                                                    e.target.value
+                                                                                                                                                )
+                                                                                                                                            }
+                                                                                                                                        />
+                                                                                                                                    </div>
+                                                                                                                                </div>
+
+                                                                                                                                <div className="col-lg-4">
+                                                                                                                                    <div>
+                                                                                                                                        <label
+                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                            className="form-label"
+                                                                                                                                        >
+                                                                                                                                            .
+                                                                                                                                        </label>
+                                                                                                                                        <div className="text-end">
+                                                                                                                                            <button
+                                                                                                                                                onClick={(e: any) => {
+                                                                                                                                                    add(e, MyConstants.premisesServices.path);
+                                                                                                                                                }}
+                                                                                                                                                className="btn btn-primary"
+                                                                                                                                            >
+                                                                                                                                                Add
+                                                                                                                                            </button>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <div className="card-footer">
+                                                                                                                            <table className="table table-striped">
+                                                                                                                                <thead>
+                                                                                                                                    <tr>
+                                                                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                                                                        <th scope="col">Name</th>
+
+                                                                                                                                        <th scope="col">Action</th>
+                                                                                                                                    </tr>
+                                                                                                                                </thead>
+                                                                                                                                <tbody>
+                                                                                                                                    {data?.premisesSubtypes.map((data: any) => (
+                                                                                                                                        <tr key={data.id}>
+                                                                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                            <td>{data.name}</td>
+
+                                                                                                                                            <td>
+                                                                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                    setName(data.name)
+                                                                                                                                                }}>
+                                                                                                                                                    Edit
+                                                                                                                                                </button>
+                                                                                                                                            </td>
+                                                                                                                                        </tr>
+                                                                                                                                    ))}
+                                                                                                                                </tbody>
+                                                                                                                            </table>
+                                                                                                                        </div>
+                                                                                                                    </div> :
+                                                                                                                    primaryData == MyConstants.premisesTypes.id ?
+                                                                                                                        <div className="card">
+                                                                                                                            <div className="card-body">
+                                                                                                                                <h6 className="card-title">Premises Types </h6>
+                                                                                                                                <div className="row gy-4">
+                                                                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                                                                        <div>
+                                                                                                                                            <label
+                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                className="form-label"
+                                                                                                                                            >
+                                                                                                                                                Name
+                                                                                                                                            </label>
+                                                                                                                                            <input
+                                                                                                                                                type="text"
+                                                                                                                                                className="form-control"
+                                                                                                                                                id="basiInput"
+                                                                                                                                                value={name}
+                                                                                                                                                onChange={(e) =>
+                                                                                                                                                    setName(
+                                                                                                                                                        e.target.value
+                                                                                                                                                    )
+                                                                                                                                                }
+                                                                                                                                            />
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+
+                                                                                                                                    <div className="col-lg-4">
+                                                                                                                                        <div>
+                                                                                                                                            <label
+                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                className="form-label"
+                                                                                                                                            >
+                                                                                                                                                .
+                                                                                                                                            </label>
+                                                                                                                                            <div className="text-end">
+                                                                                                                                                <button
+                                                                                                                                                    onClick={(e: any) => {
+                                                                                                                                                        add(e, MyConstants.premisesTypes.path);
+                                                                                                                                                    }}
+                                                                                                                                                    className="btn btn-primary"
+                                                                                                                                                >
+                                                                                                                                                    Add
+                                                                                                                                                </button>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div className="card-footer">
+                                                                                                                                <table className="table table-striped">
+                                                                                                                                    <thead>
+                                                                                                                                        <tr>
+                                                                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                                                                            <th scope="col">Name</th>
+
+                                                                                                                                            <th scope="col">Action</th>
+                                                                                                                                        </tr>
+                                                                                                                                    </thead>
+                                                                                                                                    <tbody>
+                                                                                                                                        {data?.premisesTypes.map((data: any) => (
+                                                                                                                                            <tr key={data.id}>
+                                                                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                <td>{data.name}</td>
+
+                                                                                                                                                <td>
+                                                                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                        setName(data.name)
+                                                                                                                                                    }}>
+                                                                                                                                                        Edit
+                                                                                                                                                    </button>
+                                                                                                                                                </td>
+                                                                                                                                            </tr>
+                                                                                                                                        ))}
+                                                                                                                                    </tbody>
+                                                                                                                                </table>
+                                                                                                                            </div>
+                                                                                                                        </div> :
+                                                                                                                        primaryData == MyConstants.respondentDesignations.id ?
+                                                                                                                            <div className="card">
+                                                                                                                                <div className="card-body">
+                                                                                                                                    <h6 className="card-title">Respondent Designations </h6>
+                                                                                                                                    <div className="row gy-4">
+                                                                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                                                                            <div>
+                                                                                                                                                <label
+                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                    className="form-label"
+                                                                                                                                                >
+                                                                                                                                                    Name
+                                                                                                                                                </label>
+                                                                                                                                                <input
+                                                                                                                                                    type="text"
+                                                                                                                                                    className="form-control"
+                                                                                                                                                    id="basiInput"
+                                                                                                                                                    value={name}
+                                                                                                                                                    onChange={(e) =>
+                                                                                                                                                        setName(
+                                                                                                                                                            e.target.value
+                                                                                                                                                        )
+                                                                                                                                                    }
+                                                                                                                                                />
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+
+                                                                                                                                        <div className="col-lg-4">
+                                                                                                                                            <div>
+                                                                                                                                                <label
+                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                    className="form-label"
+                                                                                                                                                >
+                                                                                                                                                    .
+                                                                                                                                                </label>
+                                                                                                                                                <div className="text-end">
+                                                                                                                                                    <button
+                                                                                                                                                        onClick={(e: any) => {
+                                                                                                                                                            add(e, MyConstants.respondentDesignations.path);
+                                                                                                                                                        }}
+                                                                                                                                                        className="btn btn-primary"
+                                                                                                                                                    >
+                                                                                                                                                        Add
+                                                                                                                                                    </button>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div className="card-footer">
+                                                                                                                                    <table className="table table-striped">
+                                                                                                                                        <thead>
+                                                                                                                                            <tr>
+                                                                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                                                                <th scope="col">Name</th>
+
+                                                                                                                                                <th scope="col">Action</th>
+                                                                                                                                            </tr>
+                                                                                                                                        </thead>
+                                                                                                                                        <tbody>
+                                                                                                                                            {data?.respondentDesignations.map((data: any) => (
+                                                                                                                                                <tr key={data.id}>
+                                                                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                    <td>{data.name}</td>
+
+                                                                                                                                                    <td>
+                                                                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                            setName(data.name)
+                                                                                                                                                        }}>
+                                                                                                                                                            Edit
+                                                                                                                                                        </button>
+                                                                                                                                                    </td>
+                                                                                                                                                </tr>
+                                                                                                                                            ))}
+                                                                                                                                        </tbody>
+                                                                                                                                    </table>
+                                                                                                                                </div>
+                                                                                                                            </div> :
+                                                                                                                            primaryData == MyConstants.sewerSystems.id ?
+                                                                                                                            <div className="card">
+                                                                                                                                <div className="card-body">
+                                                                                                                                    <h6 className="card-title">Sewer systems </h6>
+                                                                                                                                    <div className="row gy-4">
+                                                                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                                                                            <div>
+                                                                                                                                                <label
+                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                    className="form-label"
+                                                                                                                                                >
+                                                                                                                                                    Name
+                                                                                                                                                </label>
+                                                                                                                                                <input
+                                                                                                                                                    type="text"
+                                                                                                                                                    className="form-control"
+                                                                                                                                                    id="basiInput"
+                                                                                                                                                    value={name}
+                                                                                                                                                    onChange={(e) =>
+                                                                                                                                                        setName(
+                                                                                                                                                            e.target.value
+                                                                                                                                                        )
+                                                                                                                                                    }
+                                                                                                                                                />
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+
+                                                                                                                                        <div className="col-lg-4">
+                                                                                                                                            <div>
+                                                                                                                                                <label
+                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                    className="form-label"
+                                                                                                                                                >
+                                                                                                                                                    .
+                                                                                                                                                </label>
+                                                                                                                                                <div className="text-end">
+                                                                                                                                                    <button
+                                                                                                                                                        onClick={(e: any) => {
+                                                                                                                                                            add(e, MyConstants.sewerSystems.path);
+                                                                                                                                                        }}
+                                                                                                                                                        className="btn btn-primary"
+                                                                                                                                                    >
+                                                                                                                                                        Add
+                                                                                                                                                    </button>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div className="card-footer">
+                                                                                                                                    <table className="table table-striped">
+                                                                                                                                        <thead>
+                                                                                                                                            <tr>
+                                                                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                                                                <th scope="col">Name</th>
+
+                                                                                                                                                <th scope="col">Action</th>
+                                                                                                                                            </tr>
+                                                                                                                                        </thead>
+                                                                                                                                        <tbody>
+                                                                                                                                            {data?.sewerSystems.map((data: any) => (
+                                                                                                                                                <tr key={data.id}>
+                                                                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                    <td>{data.name}</td>
+
+                                                                                                                                                    <td>
+                                                                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                            setName(data.name)
+                                                                                                                                                        }}>
+                                                                                                                                                            Edit
+                                                                                                                                                        </button>
+                                                                                                                                                    </td>
+                                                                                                                                                </tr>
+                                                                                                                                            ))}
+                                                                                                                                        </tbody>
+                                                                                                                                    </table>
+                                                                                                                                </div>
+                                                                                                                            </div> :
+                                                                                                                            primaryData == MyConstants.toiletHouseholdNumbers.id ?
+                                                                                                                                <div className="card">
+                                                                                                                                    <div className="card-body">
+                                                                                                                                        <h6 className="card-title">Toilet Household Number </h6>
+                                                                                                                                        <div className="row gy-4">
+                                                                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                                                                <div>
+                                                                                                                                                    <label
+                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                        className="form-label"
+                                                                                                                                                    >
+                                                                                                                                                        Name
+                                                                                                                                                    </label>
+                                                                                                                                                    <input
+                                                                                                                                                        type="text"
+                                                                                                                                                        className="form-control"
+                                                                                                                                                        id="basiInput"
+                                                                                                                                                        value={name}
+                                                                                                                                                        onChange={(e) =>
+                                                                                                                                                            setName(
+                                                                                                                                                                e.target.value
+                                                                                                                                                            )
+                                                                                                                                                        }
+                                                                                                                                                    />
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+
+                                                                                                                                            <div className="col-lg-4">
+                                                                                                                                                <div>
+                                                                                                                                                    <label
+                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                        className="form-label"
+                                                                                                                                                    >
+                                                                                                                                                        .
+                                                                                                                                                    </label>
+                                                                                                                                                    <div className="text-end">
+                                                                                                                                                        <button
+                                                                                                                                                            onClick={(e: any) => {
+                                                                                                                                                                add(e, MyConstants.toiletHouseholdNumbers.path);
+                                                                                                                                                            }}
+                                                                                                                                                            className="btn btn-primary"
+                                                                                                                                                        >
+                                                                                                                                                            Add
+                                                                                                                                                        </button>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                    <div className="card-footer">
+                                                                                                                                        <table className="table table-striped">
+                                                                                                                                            <thead>
+                                                                                                                                                <tr>
+                                                                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                                                                    <th scope="col">Name</th>
+
+                                                                                                                                                    <th scope="col">Action</th>
+                                                                                                                                                </tr>
+                                                                                                                                            </thead>
+                                                                                                                                            <tbody>
+                                                                                                                                                {data?.toiletHouseholdNumbers.map((data: any) => (
+                                                                                                                                                    <tr key={data.id}>
+                                                                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                        <td>{data.name}</td>
+
+                                                                                                                                                        <td>
+                                                                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                setName(data.name)
+                                                                                                                                                            }}>
+                                                                                                                                                                Edit
+                                                                                                                                                            </button>
+                                                                                                                                                        </td>
+                                                                                                                                                    </tr>
+                                                                                                                                                ))}
+                                                                                                                                            </tbody>
+                                                                                                                                        </table>
+                                                                                                                                    </div>
+                                                                                                                                </div> :
+                                                                                                                                primaryData == MyConstants.toiletPitPositions.id ?
+                                                                                                                                    <div className="card">
+                                                                                                                                        <div className="card-body">
+                                                                                                                                            <h6 className="card-title">Toilet Pit Positions </h6>
+                                                                                                                                            <div className="row gy-4">
+                                                                                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                                                                                    <div>
+                                                                                                                                                        <label
+                                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                                            className="form-label"
+                                                                                                                                                        >
+                                                                                                                                                            Name
+                                                                                                                                                        </label>
+                                                                                                                                                        <input
+                                                                                                                                                            type="text"
+                                                                                                                                                            className="form-control"
+                                                                                                                                                            id="basiInput"
+                                                                                                                                                            value={name}
+                                                                                                                                                            onChange={(e) =>
+                                                                                                                                                                setName(
+                                                                                                                                                                    e.target.value
+                                                                                                                                                                )
+                                                                                                                                                            }
+                                                                                                                                                        />
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+
+                                                                                                                                                <div className="col-lg-4">
+                                                                                                                                                    <div>
+                                                                                                                                                        <label
+                                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                                            className="form-label"
+                                                                                                                                                        >
+                                                                                                                                                            .
+                                                                                                                                                        </label>
+                                                                                                                                                        <div className="text-end">
+                                                                                                                                                            <button
+                                                                                                                                                                onClick={(e: any) => {
+                                                                                                                                                                    add(e, MyConstants.toiletPitPositions.path);
+                                                                                                                                                                }}
+                                                                                                                                                                className="btn btn-primary"
+                                                                                                                                                            >
+                                                                                                                                                                Add
+                                                                                                                                                            </button>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                        <div className="card-footer">
+                                                                                                                                            <table className="table table-striped">
+                                                                                                                                                <thead>
+                                                                                                                                                    <tr>
+                                                                                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                                                                                        <th scope="col">Name</th>
+
+                                                                                                                                                        <th scope="col">Action</th>
+                                                                                                                                                    </tr>
+                                                                                                                                                </thead>
+                                                                                                                                                <tbody>
+                                                                                                                                                    {data?.toiletPitPositions.map((data: any) => (
+                                                                                                                                                        <tr key={data.id}>
+                                                                                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                            <td>{data.name}</td>
+
+                                                                                                                                                            <td>
+                                                                                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                }}>
+                                                                                                                                                                    Edit
+                                                                                                                                                                </button>
+                                                                                                                                                            </td>
+                                                                                                                                                        </tr>
+                                                                                                                                                    ))}
+                                                                                                                                                </tbody>
+                                                                                                                                            </table>
+                                                                                                                                        </div>
+                                                                                                                                    </div> :
+                                                                                                                                    primaryData == MyConstants.unsafeToiletConditions.id ?
+                                                                                                                                        <div className="card">
+                                                                                                                                            <div className="card-body">
+                                                                                                                                                <h6 className="card-title">Unsafe Toilet Conditions </h6>
+                                                                                                                                                <div className="row gy-4">
+                                                                                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                                                                                        <div>
+                                                                                                                                                            <label
+                                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                                className="form-label"
+                                                                                                                                                            >
+                                                                                                                                                                Name
+                                                                                                                                                            </label>
+                                                                                                                                                            <input
+                                                                                                                                                                type="text"
+                                                                                                                                                                className="form-control"
+                                                                                                                                                                id="basiInput"
+                                                                                                                                                                value={name}
+                                                                                                                                                                onChange={(e) =>
+                                                                                                                                                                    setName(
+                                                                                                                                                                        e.target.value
+                                                                                                                                                                    )
+                                                                                                                                                                }
+                                                                                                                                                            />
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+
+                                                                                                                                                    <div className="col-lg-4">
+                                                                                                                                                        <div>
+                                                                                                                                                            <label
+                                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                                className="form-label"
+                                                                                                                                                            >
+                                                                                                                                                                .
+                                                                                                                                                            </label>
+                                                                                                                                                            <div className="text-end">
+                                                                                                                                                                <button
+                                                                                                                                                                    onClick={(e: any) => {
+                                                                                                                                                                        add(e, MyConstants.unsafeToiletConditions.path);
+                                                                                                                                                                    }}
+                                                                                                                                                                    className="btn btn-primary"
+                                                                                                                                                                >
+                                                                                                                                                                    Add
+                                                                                                                                                                </button>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                            <div className="card-footer">
+                                                                                                                                                <table className="table table-striped">
+                                                                                                                                                    <thead>
+                                                                                                                                                        <tr>
+                                                                                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                                                                                            <th scope="col">Name</th>
+
+                                                                                                                                                            <th scope="col">Action</th>
+                                                                                                                                                        </tr>
+                                                                                                                                                    </thead>
+                                                                                                                                                    <tbody>
+                                                                                                                                                        {data?.unsafeToiletConditions.map((data: any) => (
+                                                                                                                                                            <tr key={data.id}>
+                                                                                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                <td>{data.name}</td>
+
+                                                                                                                                                                <td>
+                                                                                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                    }}>
+                                                                                                                                                                        Edit
+                                                                                                                                                                    </button>
+                                                                                                                                                                </td>
+                                                                                                                                                            </tr>
+                                                                                                                                                        ))}
+                                                                                                                                                    </tbody>
+                                                                                                                                                </table>
+                                                                                                                                            </div>
+                                                                                                                                        </div> :primaryData == MyConstants.toiletTypes.id ?
+                                                                                                                                        <div className="card">
+                                                                                                                                            <div className="card-body">
+                                                                                                                                                <h6 className="card-title">Toliet type </h6>
+                                                                                                                                                <div className="row gy-4">
+                                                                                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                                                                                        <div>
+                                                                                                                                                            <label
+                                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                                className="form-label"
+                                                                                                                                                            >
+                                                                                                                                                                Name
+                                                                                                                                                            </label>
+                                                                                                                                                            <input
+                                                                                                                                                                type="text"
+                                                                                                                                                                className="form-control"
+                                                                                                                                                                id="basiInput"
+                                                                                                                                                                value={name}
+                                                                                                                                                                onChange={(e) =>
+                                                                                                                                                                    setName(
+                                                                                                                                                                        e.target.value
+                                                                                                                                                                    )
+                                                                                                                                                                }
+                                                                                                                                                            />
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+
+                                                                                                                                                    <div className="col-lg-4">
+                                                                                                                                                        <div>
+                                                                                                                                                            <label
+                                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                                className="form-label"
+                                                                                                                                                            >
+                                                                                                                                                                .
+                                                                                                                                                            </label>
+                                                                                                                                                            <div className="text-end">
+                                                                                                                                                                <button
+                                                                                                                                                                    onClick={(e: any) => {
+                                                                                                                                                                        add(e, MyConstants.toiletTypes.path);
+                                                                                                                                                                    }}
+                                                                                                                                                                    className="btn btn-primary"
+                                                                                                                                                                >
+                                                                                                                                                                    Add
+                                                                                                                                                                </button>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                            <div className="card-footer">
+                                                                                                                                                <table className="table table-striped">
+                                                                                                                                                    <thead>
+                                                                                                                                                        <tr>
+                                                                                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                                                                                            <th scope="col">Name</th>
+
+                                                                                                                                                            <th scope="col">Action</th>
+                                                                                                                                                        </tr>
+                                                                                                                                                    </thead>
+                                                                                                                                                    <tbody>
+                                                                                                                                                        {data?.unsafeToiletConditions.map((data: any) => (
+                                                                                                                                                            <tr key={data.id}>
+                                                                                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                <td>{data.name}</td>
+
+                                                                                                                                                                <td>
+                                                                                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                    }}>
+                                                                                                                                                                        Edit
+                                                                                                                                                                    </button>
+                                                                                                                                                                </td>
+                                                                                                                                                            </tr>
+                                                                                                                                                        ))}
+                                                                                                                                                    </tbody>
+                                                                                                                                                </table>
+                                                                                                                                            </div>
+                                                                                                                                        </div>:
+                                                                                                                                        primaryData == MyConstants.unsafeWaterStorages.id ?
+                                                                                                                                            <div className="card">
+                                                                                                                                                <div className="card-body">
+                                                                                                                                                    <h6 className="card-title">Unsafe Water Storage </h6>
+                                                                                                                                                    <div className="row gy-4">
+                                                                                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                                                                                            <div>
+                                                                                                                                                                <label
+                                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                                    className="form-label"
+                                                                                                                                                                >
+                                                                                                                                                                    Name
+                                                                                                                                                                </label>
+                                                                                                                                                                <input
+                                                                                                                                                                    type="text"
+                                                                                                                                                                    className="form-control"
+                                                                                                                                                                    id="basiInput"
+                                                                                                                                                                    value={name}
+                                                                                                                                                                    onChange={(e) =>
+                                                                                                                                                                        setName(
+                                                                                                                                                                            e.target.value
+                                                                                                                                                                        )
+                                                                                                                                                                    }
+                                                                                                                                                                />
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+
+                                                                                                                                                        <div className="col-lg-4">
+                                                                                                                                                            <div>
+                                                                                                                                                                <label
+                                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                                    className="form-label"
+                                                                                                                                                                >
+                                                                                                                                                                    .
+                                                                                                                                                                </label>
+                                                                                                                                                                <div className="text-end">
+                                                                                                                                                                    <button
+                                                                                                                                                                        onClick={(e: any) => {
+                                                                                                                                                                            add(e, MyConstants.unsafeWaterStorages.path);
+                                                                                                                                                                        }}
+                                                                                                                                                                        className="btn btn-primary"
+                                                                                                                                                                    >
+                                                                                                                                                                        Add
+                                                                                                                                                                    </button>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                                <div className="card-footer">
+                                                                                                                                                    <table className="table table-striped">
+                                                                                                                                                        <thead>
+                                                                                                                                                            <tr>
+                                                                                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                                                                                <th scope="col">Name</th>
+
+                                                                                                                                                                <th scope="col">Action</th>
+                                                                                                                                                            </tr>
+                                                                                                                                                        </thead>
+                                                                                                                                                        <tbody>
+                                                                                                                                                            {data?.unsafeWaterStorages.map((data: any) => (
+                                                                                                                                                                <tr key={data.id}>
+                                                                                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                    <td>{data.name}</td>
+
+                                                                                                                                                                    <td>
+                                                                                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                            setName(data.name)
+                                                                                                                                                                        }}>
+                                                                                                                                                                            Edit
+                                                                                                                                                                        </button>
+                                                                                                                                                                    </td>
+                                                                                                                                                                </tr>
+                                                                                                                                                            ))}
+                                                                                                                                                        </tbody>
+                                                                                                                                                    </table>
+                                                                                                                                                </div>
+                                                                                                                                            </div> :
+                                                                                                                                            primaryData == MyConstants.unservicedWasteDisposals.id ?
+                                                                                                                                                <div className="card">
+                                                                                                                                                    <div className="card-body">
+                                                                                                                                                        <h6 className="card-title">Unserviced Waste Disposals </h6>
+                                                                                                                                                        <div className="row gy-4">
+                                                                                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                <div>
+                                                                                                                                                                    <label
+                                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                                        className="form-label"
+                                                                                                                                                                    >
+                                                                                                                                                                        Name
+                                                                                                                                                                    </label>
+                                                                                                                                                                    <input
+                                                                                                                                                                        type="text"
+                                                                                                                                                                        className="form-control"
+                                                                                                                                                                        id="basiInput"
+                                                                                                                                                                        value={name}
+                                                                                                                                                                        onChange={(e) =>
+                                                                                                                                                                            setName(
+                                                                                                                                                                                e.target.value
+                                                                                                                                                                            )
+                                                                                                                                                                        }
+                                                                                                                                                                    />
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+
+                                                                                                                                                            <div className="col-lg-4">
+                                                                                                                                                                <div>
+                                                                                                                                                                    <label
+                                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                                        className="form-label"
+                                                                                                                                                                    >
+                                                                                                                                                                        .
+                                                                                                                                                                    </label>
+                                                                                                                                                                    <div className="text-end">
+                                                                                                                                                                        <button
+                                                                                                                                                                            onClick={(e: any) => {
+                                                                                                                                                                                add(e, MyConstants.unservicedWasteDisposals.path);
+                                                                                                                                                                            }}
+                                                                                                                                                                            className="btn btn-primary"
+                                                                                                                                                                        >
+                                                                                                                                                                            Add
+                                                                                                                                                                        </button>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div className="card-footer">
+                                                                                                                                                        <table className="table table-striped">
+                                                                                                                                                            <thead>
+                                                                                                                                                                <tr>
+                                                                                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                                                                                    <th scope="col">Name</th>
+
+                                                                                                                                                                    <th scope="col">Action</th>
+                                                                                                                                                                </tr>
+                                                                                                                                                            </thead>
+                                                                                                                                                            <tbody>
+                                                                                                                                                                {data?.unservicedWasteDisposals.map((data: any) => (
+                                                                                                                                                                    <tr key={data.id}>
+                                                                                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                        <td>{data.name}</td>
+
+                                                                                                                                                                        <td>
+                                                                                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                            }}>
+                                                                                                                                                                                Edit
+                                                                                                                                                                            </button>
+                                                                                                                                                                        </td>
+                                                                                                                                                                    </tr>
+                                                                                                                                                                ))}
+                                                                                                                                                            </tbody>
+                                                                                                                                                        </table>
+                                                                                                                                                    </div>
+                                                                                                                                                </div> :
+                                                                                                                                                primaryData == MyConstants.wasteStorageReceptacles.id ?
+                                                                                                                                                <div className="card">
+                                                                                                                                                    <div className="card-body">
+                                                                                                                                                        <h6 className="card-title"> Waste Storage Receptacle </h6>
+                                                                                                                                                        <div className="row gy-4">
+                                                                                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                <div>
+                                                                                                                                                                    <label
+                                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                                        className="form-label"
+                                                                                                                                                                    >
+                                                                                                                                                                        Name
+                                                                                                                                                                    </label>
+                                                                                                                                                                    <input
+                                                                                                                                                                        type="text"
+                                                                                                                                                                        className="form-control"
+                                                                                                                                                                        id="basiInput"
+                                                                                                                                                                        value={name}
+                                                                                                                                                                        onChange={(e) =>
+                                                                                                                                                                            setName(
+                                                                                                                                                                                e.target.value
+                                                                                                                                                                            )
+                                                                                                                                                                        }
+                                                                                                                                                                    />
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+
+                                                                                                                                                            <div className="col-lg-4">
+                                                                                                                                                                <div>
+                                                                                                                                                                    <label
+                                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                                        className="form-label"
+                                                                                                                                                                    >
+                                                                                                                                                                        .
+                                                                                                                                                                    </label>
+                                                                                                                                                                    <div className="text-end">
+                                                                                                                                                                        <button
+                                                                                                                                                                            onClick={(e: any) => {
+                                                                                                                                                                                add(e, MyConstants.wasteStorageReceptacles.path);
+                                                                                                                                                                            }}
+                                                                                                                                                                            className="btn btn-primary"
+                                                                                                                                                                        >
+                                                                                                                                                                            Add
+                                                                                                                                                                        </button>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div className="card-footer">
+                                                                                                                                                        <table className="table table-striped">
+                                                                                                                                                            <thead>
+                                                                                                                                                                <tr>
+                                                                                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                                                                                    <th scope="col">Name</th>
+
+                                                                                                                                                                    <th scope="col">Action</th>
+                                                                                                                                                                </tr>
+                                                                                                                                                            </thead>
+                                                                                                                                                            <tbody>
+                                                                                                                                                                {data?.wasteStorageReceptacles.map((data: any) => (
+                                                                                                                                                                    <tr key={data.id}>
+                                                                                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                        <td>{data.name}</td>
+
+                                                                                                                                                                        <td>
+                                                                                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                            }}>
+                                                                                                                                                                                Edit
+                                                                                                                                                                            </button>
+                                                                                                                                                                        </td>
+                                                                                                                                                                    </tr>
+                                                                                                                                                                ))}
+                                                                                                                                                            </tbody>
+                                                                                                                                                        </table>
+                                                                                                                                                    </div>
+                                                                                                                                                </div> :
+                                                                                                                                                primaryData == MyConstants.wasteCollectionFrequencies.id ?
+                                                                                                                                                    <div className="card">
+                                                                                                                                                        <div className="card-body">
+                                                                                                                                                            <h6 className="card-title">Waste Collection Frequencies </h6>
+                                                                                                                                                            <div className="row gy-4">
+                                                                                                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                    <div>
+                                                                                                                                                                        <label
+                                                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                                                            className="form-label"
+                                                                                                                                                                        >
+                                                                                                                                                                            Name
+                                                                                                                                                                        </label>
+                                                                                                                                                                        <input
+                                                                                                                                                                            type="text"
+                                                                                                                                                                            className="form-control"
+                                                                                                                                                                            id="basiInput"
+                                                                                                                                                                            value={name}
+                                                                                                                                                                            onChange={(e) =>
+                                                                                                                                                                                setName(
+                                                                                                                                                                                    e.target.value
+                                                                                                                                                                                )
+                                                                                                                                                                            }
+                                                                                                                                                                        />
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+
+                                                                                                                                                                <div className="col-lg-4">
+                                                                                                                                                                    <div>
+                                                                                                                                                                        <label
+                                                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                                                            className="form-label"
+                                                                                                                                                                        >
+                                                                                                                                                                            .
+                                                                                                                                                                        </label>
+                                                                                                                                                                        <div className="text-end">
+                                                                                                                                                                            <button
+                                                                                                                                                                                onClick={(e: any) => {
+                                                                                                                                                                                    add(e, MyConstants.wasteCollectionFrequencies.path);
+                                                                                                                                                                                }}
+                                                                                                                                                                                className="btn btn-primary"
+                                                                                                                                                                            >
+                                                                                                                                                                                Add
+                                                                                                                                                                            </button>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div className="card-footer">
+                                                                                                                                                            <table className="table table-striped">
+                                                                                                                                                                <thead>
+                                                                                                                                                                    <tr>
+                                                                                                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                                                                                                        <th scope="col">Name</th>
+
+                                                                                                                                                                        <th scope="col">Action</th>
+                                                                                                                                                                    </tr>
+                                                                                                                                                                </thead>
+                                                                                                                                                                <tbody>
+                                                                                                                                                                    {data?.wasteCollectionFrequencies.map((data: any) => (
+                                                                                                                                                                        <tr key={data.id}>
+                                                                                                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                            <td>{data.name}</td>
+
+                                                                                                                                                                            <td>
+                                                                                                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                                }}>
+                                                                                                                                                                                    Edit
+                                                                                                                                                                                </button>
+                                                                                                                                                                            </td>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                    ))}
+                                                                                                                                                                </tbody>
+                                                                                                                                                            </table>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div> :
+                                                                                                                                                    primaryData == MyConstants.wasteCollectionTypes.id ?
+                                                                                                                                                        <div className="card">
+                                                                                                                                                            <div className="card-body">
+                                                                                                                                                                <h6 className="card-title">Waste Collection Types </h6>
+                                                                                                                                                                <div className="row gy-4">
+                                                                                                                                                                    <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                        <div>
+                                                                                                                                                                            <label
+                                                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                                                className="form-label"
+                                                                                                                                                                            >
+                                                                                                                                                                                Name
+                                                                                                                                                                            </label>
+                                                                                                                                                                            <input
+                                                                                                                                                                                type="text"
+                                                                                                                                                                                className="form-control"
+                                                                                                                                                                                id="basiInput"
+                                                                                                                                                                                value={name}
+                                                                                                                                                                                onChange={(e) =>
+                                                                                                                                                                                    setName(
+                                                                                                                                                                                        e.target.value
+                                                                                                                                                                                    )
+                                                                                                                                                                                }
+                                                                                                                                                                            />
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+
+                                                                                                                                                                    <div className="col-lg-4">
+                                                                                                                                                                        <div>
+                                                                                                                                                                            <label
+                                                                                                                                                                                htmlFor="basiInput"
+                                                                                                                                                                                className="form-label"
+                                                                                                                                                                            >
+                                                                                                                                                                                .
+                                                                                                                                                                            </label>
+                                                                                                                                                                            <div className="text-end">
+                                                                                                                                                                                <button
+                                                                                                                                                                                    onClick={(e: any) => {
+                                                                                                                                                                                        add(e, "actions");
+                                                                                                                                                                                    }}
+                                                                                                                                                                                    className="btn btn-primary"
+                                                                                                                                                                                >
+                                                                                                                                                                                    Add
+                                                                                                                                                                                </button>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                            <div className="card-footer">
+                                                                                                                                                                <table className="table table-striped">
+                                                                                                                                                                    <thead>
+                                                                                                                                                                        <tr>
+                                                                                                                                                                            {/* <th scope="col">Id</th> */}
+                                                                                                                                                                            <th scope="col">Name</th>
+
+                                                                                                                                                                            <th scope="col">Action</th>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                    </thead>
+                                                                                                                                                                    <tbody>
+                                                                                                                                                                        {data?.wasteCollectionTypes.map((data: any) => (
+                                                                                                                                                                            <tr key={data.id}>
+                                                                                                                                                                                {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                                <td>{data.name}</td>
+
+                                                                                                                                                                                <td>
+                                                                                                                                                                                    <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                                    }}>
+                                                                                                                                                                                        Edit
+                                                                                                                                                                                    </button>
+                                                                                                                                                                                </td>
+                                                                                                                                                                            </tr>
+                                                                                                                                                                        ))}
+                                                                                                                                                                    </tbody>
+                                                                                                                                                                </table>
+                                                                                                                                                            </div>
+                                                                                                                                                        </div> :
+                                                                                                                                                        primaryData == MyConstants.wasteWaterContainments.id ?
+                                                                                                                                                            <div className="card">
+                                                                                                                                                                <div className="card-body">
+                                                                                                                                                                    <h6 className="card-title">Waste Water Containments </h6>
+                                                                                                                                                                    <div className="row gy-4">
+                                                                                                                                                                        <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                            <div>
+                                                                                                                                                                                <label
+                                                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                                                    className="form-label"
+                                                                                                                                                                                >
+                                                                                                                                                                                    Name
+                                                                                                                                                                                </label>
+                                                                                                                                                                                <input
+                                                                                                                                                                                    type="text"
+                                                                                                                                                                                    className="form-control"
+                                                                                                                                                                                    id="basiInput"
+                                                                                                                                                                                    value={name}
+                                                                                                                                                                                    onChange={(e) =>
+                                                                                                                                                                                        setName(
+                                                                                                                                                                                            e.target.value
+                                                                                                                                                                                        )
+                                                                                                                                                                                    }
+                                                                                                                                                                                />
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+
+                                                                                                                                                                        <div className="col-lg-4">
+                                                                                                                                                                            <div>
+                                                                                                                                                                                <label
+                                                                                                                                                                                    htmlFor="basiInput"
+                                                                                                                                                                                    className="form-label"
+                                                                                                                                                                                >
+                                                                                                                                                                                    .
+                                                                                                                                                                                </label>
+                                                                                                                                                                                <div className="text-end">
+                                                                                                                                                                                    <button
+                                                                                                                                                                                        onClick={(e: any) => {
+                                                                                                                                                                                            add(e, MyConstants.wasteWaterContainments.path);
+                                                                                                                                                                                        }}
+                                                                                                                                                                                        className="btn btn-primary"
+                                                                                                                                                                                    >
+                                                                                                                                                                                        Add
+                                                                                                                                                                                    </button>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                                                                                                                                                                <div className="card-footer">
+                                                                                                                                                                    <table className="table table-striped">
+                                                                                                                                                                        <thead>
+                                                                                                                                                                            <tr>
+                                                                                                                                                                                {/* <th scope="col">Id</th> */}
+                                                                                                                                                                                <th scope="col">Name</th>
+
+                                                                                                                                                                                <th scope="col">Action</th>
+                                                                                                                                                                            </tr>
+                                                                                                                                                                        </thead>
+                                                                                                                                                                        <tbody>
+                                                                                                                                                                            {data?.wasteWaterContainments.map((data: any) => (
+                                                                                                                                                                                <tr key={data.id}>
+                                                                                                                                                                                    {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                                    <td>{data.name}</td>
+
+                                                                                                                                                                                    <td>
+                                                                                                                                                                                        <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                            setName(data.name)
+                                                                                                                                                                                        }}>
+                                                                                                                                                                                            Edit
+                                                                                                                                                                                        </button>
+                                                                                                                                                                                    </td>
+                                                                                                                                                                                </tr>
+                                                                                                                                                                            ))}
+                                                                                                                                                                        </tbody>
+                                                                                                                                                                    </table>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div> :
+                                                                                                                                                            primaryData == MyConstants.waterFlowFrequencies.id ?
+                                                                                                                                                                <div className="card">
+                                                                                                                                                                    <div className="card-body">
+                                                                                                                                                                        <h6 className="card-title">Water Flow Frequency </h6>
+                                                                                                                                                                        <div className="row gy-4">
+                                                                                                                                                                            <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                                <div>
+                                                                                                                                                                                    <label
+                                                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                                                        className="form-label"
+                                                                                                                                                                                    >
+                                                                                                                                                                                        Name
+                                                                                                                                                                                    </label>
+                                                                                                                                                                                    <input
+                                                                                                                                                                                        type="text"
+                                                                                                                                                                                        className="form-control"
+                                                                                                                                                                                        id="basiInput"
+                                                                                                                                                                                        value={name}
+                                                                                                                                                                                        onChange={(e) =>
+                                                                                                                                                                                            setName(
+                                                                                                                                                                                                e.target.value
+                                                                                                                                                                                            )
+                                                                                                                                                                                        }
+                                                                                                                                                                                    />
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </div>
+
+                                                                                                                                                                            <div className="col-lg-4">
+                                                                                                                                                                                <div>
+                                                                                                                                                                                    <label
+                                                                                                                                                                                        htmlFor="basiInput"
+                                                                                                                                                                                        className="form-label"
+                                                                                                                                                                                    >
+                                                                                                                                                                                        .
+                                                                                                                                                                                    </label>
+                                                                                                                                                                                    <div className="text-end">
+                                                                                                                                                                                        <button
+                                                                                                                                                                                            onClick={(e: any) => {
+                                                                                                                                                                                                add(e, MyConstants.waterFlowFrequencies.path);
+                                                                                                                                                                                            }}
+                                                                                                                                                                                            className="btn btn-primary"
+                                                                                                                                                                                        >
+                                                                                                                                                                                            Add
+                                                                                                                                                                                        </button>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div className="card-footer">
+                                                                                                                                                                        <table className="table table-striped">
+                                                                                                                                                                            <thead>
+                                                                                                                                                                                <tr>
+                                                                                                                                                                                    {/* <th scope="col">Id</th> */}
+                                                                                                                                                                                    <th scope="col">Name</th>
+
+                                                                                                                                                                                    <th scope="col">Action</th>
+                                                                                                                                                                                </tr>
+                                                                                                                                                                            </thead>
+                                                                                                                                                                            <tbody>
+                                                                                                                                                                                {data?.waterFlowFrequencies.map((data: any) => (
+                                                                                                                                                                                    <tr key={data.id}>
+                                                                                                                                                                                        {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                                        <td>{data.name}</td>
+
+                                                                                                                                                                                        <td>
+                                                                                                                                                                                            <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                                            }}>
+                                                                                                                                                                                                Edit
+                                                                                                                                                                                            </button>
+                                                                                                                                                                                        </td>
+                                                                                                                                                                                    </tr>
+                                                                                                                                                                                ))}
+                                                                                                                                                                            </tbody>
+                                                                                                                                                                        </table>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div> :
+                                                                                                                                                                primaryData == MyConstants.waterFlowFrequencies.id ?
+                                                                                                                                                                    <div className="card">
+                                                                                                                                                                        <div className="card-body">
+                                                                                                                                                                            <h6 className="card-title">Water Flow Frequency </h6>
+                                                                                                                                                                            <div className="row gy-4">
+                                                                                                                                                                                <div className="col-xxl-4 col-md-8">
+                                                                                                                                                                                    <div>
+                                                                                                                                                                                        <label
+                                                                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                                                                            className="form-label"
+                                                                                                                                                                                        >
+                                                                                                                                                                                            Name
+                                                                                                                                                                                        </label>
+                                                                                                                                                                                        <input
+                                                                                                                                                                                            type="text"
+                                                                                                                                                                                            className="form-control"
+                                                                                                                                                                                            id="basiInput"
+                                                                                                                                                                                            value={name}
+                                                                                                                                                                                            onChange={(e) =>
+                                                                                                                                                                                                setName(
+                                                                                                                                                                                                    e.target.value
+                                                                                                                                                                                                )
+                                                                                                                                                                                            }
+                                                                                                                                                                                        />
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                </div>
+
+                                                                                                                                                                                <div className="col-lg-4">
+                                                                                                                                                                                    <div>
+                                                                                                                                                                                        <label
+                                                                                                                                                                                            htmlFor="basiInput"
+                                                                                                                                                                                            className="form-label"
+                                                                                                                                                                                        >
+                                                                                                                                                                                            .
+                                                                                                                                                                                        </label>
+                                                                                                                                                                                        <div className="text-end">
+                                                                                                                                                                                            <button
+                                                                                                                                                                                                onClick={(e: any) => {
+                                                                                                                                                                                                    add(e, MyConstants.waterFlowFrequencies.path);
+                                                                                                                                                                                                }}
+                                                                                                                                                                                                className="btn btn-primary"
+                                                                                                                                                                                            >
+                                                                                                                                                                                                Add
+                                                                                                                                                                                            </button>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div className="card-footer">
+                                                                                                                                                                            <table className="table table-striped">
+                                                                                                                                                                                <thead>
+                                                                                                                                                                                    <tr>
+                                                                                                                                                                                        {/* <th scope="col">Id</th> */}
+                                                                                                                                                                                        <th scope="col">Name</th>
+
+                                                                                                                                                                                        <th scope="col">Action</th>
+                                                                                                                                                                                    </tr>
+                                                                                                                                                                                </thead>
+                                                                                                                                                                                <tbody>
+                                                                                                                                                                                    {data?.waterFlowFrequencies.map((data: any) => (
+                                                                                                                                                                                        <tr key={data.id}>
+                                                                                                                                                                                            {/* <th scope="row">{region.id}</th> */}
+                                                                                                                                                                                            <td>{data.name}</td>
+
+                                                                                                                                                                                            <td>
+                                                                                                                                                                                                <button className="badge bg-success" onClick={async () => {
+                                                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                                                }}>
+                                                                                                                                                                                                    Edit
+                                                                                                                                                                                                </button>
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                    ))}
+                                                                                                                                                                                </tbody>
+                                                                                                                                                                            </table>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div> :
+
+                                                                                                                                                                    <></>
 
 
                     }
@@ -395,162 +3691,264 @@ export default function OtherData({ data }: any) {
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Add Single</h5>
+                                <h5 className="card-title"></h5>
 
                                 <div className="row g-3">
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 1)}>
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.actions.id)}>
                                             Action
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 2)}>
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.animalTypes.id)}>
                                             Animal Types
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 3)}>
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.cemeteryWorkers.id)}>
                                             Cemetery Workers
                                         </button>
                                     </div>
 
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 4)}>
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.cleaningFrequencies.id)}>
                                             Cleaning Frequencies
                                         </button>
                                     </div>
 
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 5)}>
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.communalContainerConditions.id)}>
                                             Container Conditions
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.containerVolumes.id)}>
                                             Container Volumes
                                         </button>
                                     </div>
-                                    <div className="col-md-2">
+                                    {/* <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 7)}>
+                                            Derrating Frequencies
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 8)}>
+                                            Disinfection Frequencies
+                                        </button>
+                                    </div> */}
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.drainBadConditions.id)}>
+                                            Drain Bad Conditions
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.drainTypes.id)}>
+                                            Drain Types
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.drinkingWaterSourceTypes.id)}>
+                                            Drinking Water Source
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.easeYourselfWheres.id)}>
+                                            Ease Yourself Where
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.effluentManagements.id)}>
+                                            Effluent Management
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.excretaContainments.id)}>
+                                            Excreta Containment
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.excretaDisposals.id)}>
+                                            Excreta Disposal
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.greyWaterDisposals.id)}>
+                                            Grey Water Disposal
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.hazardousWasteDisposals.id)}>
+                                            Hazardous Waste Disposal
+                                        </button>
+                                    </div>
+                                    {/* <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.inspectionFormNuisances.id)}>
+                                            Inspection Form Nuisances
+                                        </button>
+                                    </div> */}
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.nuisances.id)}>
+                                            Nuisances
+                                        </button>
+                                    </div>
+                                    {/* <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 20)}>
+                                        Nuisances
+                                        </button>
+                                    </div> */}
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.ownershipTypes.id)}>
+                                            Ownership Types
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.pestSigns.id)}>
+                                            Pest Signs
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.premisesServices.id)}>
+                                            Premises Services
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.premisesSubtypes.id)}>
+                                            Premises Subtypes
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.premisesTypes.id)}>
+                                            Premises Types
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.respondentDesignations.id)}>
+                                            Respondent Designations
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.sewerSystems.id)}>
+                                            Sewer Systems
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.toiletHouseholdNumbers.id)}>
+                                            Toilet Household Numbers
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.toiletPitPositions.id)}>
+                                            Toilet Pit Positions
                                         </button>
                                     </div>
                                     <div className="col-md-2">
 
-                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, 6)}>
-                                            XXXXXXXX
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.toiletTypes.id)}>
+                                            Toilet Types
                                         </button>
                                     </div>
-                                    
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.unsafeToiletConditions.id)}>
+                                            Unsafe Toilet Conditions
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.unsafeWaterStorages.id)}>
+                                            Unsafe Water Storages
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.unservicedWasteDisposals.id)}>
+                                            Unserviced Waste Disposals
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.wasteCollectionFrequencies.id)}>
+                                            Waste Collection Frequencies
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.wasteCollectionTypes.id)}>
+                                            Waste Collection Types
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.wasteStorageReceptacles.id)}>
+                                            Waste Storage Receptacles
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.wasteWaterContainments.id)}>
+                                            Waste Water Containments
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.waterFlowFrequencies.id)}>
+                                            Water Flow Frequencies
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.waterSourceTypes.id)}>
+                                            Water Source Types
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.waterStorageTypes.id)}>
+                                            Water Storage Types
+                                        </button>
+                                    </div>
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.waterSupplyTypes.id)}>
+                                            Water Supply Types
+                                        </button>
+                                    </div>
+
+                                    <div className="col-md-2">
+
+                                        <button type="submit" className="btn btn-primary" onClick={async (e: any) => openModal(e, MyConstants.waterTreatmentTypes.id)}>
+                                            Water Treatment Types
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
