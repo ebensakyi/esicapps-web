@@ -8,13 +8,15 @@ export async function POST(request: Request) {
     const res = await request.json();
 
     const data = {
-      name: res.data.name,
+      name: res.name,
     };
     const response = await prisma.action.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
-    return NextResponse.json(error);
+    console.error(error);
+    
+    return NextResponse.json(error,{status:500});
   }
 }
 
