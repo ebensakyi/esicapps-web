@@ -7,7 +7,7 @@ import { getSession } from "@/utils/session-manager";
 //   try {
 //     const res = await request.json();
 //     const data = {
-//       name: res.data.name,
+//       name: res.name,
 //     };
 //     const response = await prisma.yesNo.create({ data });
 

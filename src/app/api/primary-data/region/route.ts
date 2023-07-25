@@ -7,9 +7,9 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
     const data = {
-      name: res.data.name,
-      abbrv: res.data.abbrv,
-      code: res.data.code,
+      name: res.name,
+      abbrv: res.abbrv,
+      code: res.code,
     };
     const response = await prisma.region.create({ data });
 

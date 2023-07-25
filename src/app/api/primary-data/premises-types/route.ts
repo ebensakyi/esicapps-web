@@ -7,8 +7,8 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
     const data = {
-      name: res.data.name,
-      inspectionFormId: res.data.inspectionFormId
+      name: res.name,
+      inspectionFormId: res.inspectionFormId
 
     };
     const response = await prisma.premisesType.create({ data });
