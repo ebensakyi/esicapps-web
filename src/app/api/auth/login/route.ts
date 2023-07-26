@@ -22,19 +22,18 @@ export async function POST(request: Request) {
     console.log(user);
 
     if (!user) {
-      return NextResponse.json(null);
+      return NextResponse.json(null,{status:400});
     }
 
     let isValid = await bcrypt.compare(password, user.password);
 
-    console.log(isValid);
 
     if (isValid) {
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
       return NextResponse.json({ ...user, token });
     }
-    return NextResponse.json(null);
+    return NextResponse.json(null,{status:400});
   } catch (error: any) {
     console.log(error);
     return new Response(JSON.stringify({ message: error.message }));

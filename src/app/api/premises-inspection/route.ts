@@ -6,7 +6,7 @@ export async function GET(request: Request) {
     console.log(userId);
     
     
-    return NextResponse.json({ message: "This Workeddd", success: userId },{
+    return NextResponse.json({ message: "This Worked", success: userId },{
         status: 400,
       });
 

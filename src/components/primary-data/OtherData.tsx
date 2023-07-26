@@ -83,7 +83,7 @@ export default function OtherData({ data }: any) {
     };
 
 
-    
+
     const update = async (e: any, model: string) => {
         try {
             e.preventDefault()
@@ -192,6 +192,14 @@ export default function OtherData({ data }: any) {
                                                 .
                                             </label>
                                             <div className="text-end">
+                                                {isEditing?<button
+                                                    onClick={(e: any) => {
+                                                        update(e,MyConstants.actions.path);
+                                                    }}
+                                                    className="btn btn-warning"
+                                                >
+                                                    Update
+                                                </button>:
                                                 <button
                                                     onClick={(e: any) => {
                                                         add(e,MyConstants.actions.path);
@@ -199,7 +207,7 @@ export default function OtherData({ data }: any) {
                                                     className="btn btn-primary"
                                                 >
                                                     Add
-                                                </button>
+                                                </button>}
                                             </div>
                                         </div>
                                     </div>
@@ -224,6 +232,7 @@ export default function OtherData({ data }: any) {
                                                 <td>
                                                     <button className="badge bg-success" onClick={async () => {
                                                         setName(data.name)
+                                                        setIsEditing(true)
                                                     }}>
                                                         Edit
                                                     </button>
@@ -273,7 +282,7 @@ export default function OtherData({ data }: any) {
                                                 <div className="text-end">
                                                     <button
                                                         onClick={(e: any) => {
-                                                            add(e, "animalTypes");
+                                                            add(e, MyConstants.animalTypes.path);
                                                         }}
                                                         className="btn btn-primary"
                                                     >
@@ -351,7 +360,7 @@ export default function OtherData({ data }: any) {
                                                     <div className="text-end">
                                                         <button
                                                             onClick={(e: any) => {
-                                                                add(e, "actions");
+                                                                add(e, MyConstants.cemeteryWorkers.path);
                                                             }}
                                                             className="btn btn-primary"
                                                         >
@@ -429,7 +438,7 @@ export default function OtherData({ data }: any) {
                                                         <div className="text-end">
                                                             <button
                                                                 onClick={(e: any) => {
-                                                                    add(e, "actions");
+                                                                    add(e, MyConstants.cleaningFrequencies.path);
                                                                 }}
                                                                 className="btn btn-primary"
                                                             >
@@ -507,7 +516,7 @@ export default function OtherData({ data }: any) {
                                                             <div className="text-end">
                                                                 <button
                                                                     onClick={(e: any) => {
-                                                                        add(e, "actions");
+                                                                        add(e, MyConstants.communalContainerConditions.path);
                                                                     }}
                                                                     className="btn btn-primary"
                                                                 >
@@ -585,7 +594,7 @@ export default function OtherData({ data }: any) {
                                                                 <div className="text-end">
                                                                     <button
                                                                         onClick={(e: any) => {
-                                                                            add(e, "actions");
+                                                                            add(e, MyConstants.containerVolumes.path);
                                                                         }}
                                                                         className="btn btn-primary"
                                                                     >
@@ -663,7 +672,7 @@ export default function OtherData({ data }: any) {
                                                                     <div className="text-end">
                                                                         <button
                                                                             onClick={(e: any) => {
-                                                                                add(e, "actions");
+                                                                                add(e, MyConstants.derattingFrequencies.path);
                                                                             }}
                                                                             className="btn btn-primary"
                                                                         >
@@ -741,7 +750,7 @@ export default function OtherData({ data }: any) {
                                                                         <div className="text-end">
                                                                             <button
                                                                                 onClick={(e: any) => {
-                                                                                    add(e, "actions");
+                                                                                    add(e, MyConstants.desiltingFrequencies.path);
                                                                                 }}
                                                                                 className="btn btn-primary"
                                                                             >
@@ -819,7 +828,7 @@ export default function OtherData({ data }: any) {
                                                                             <div className="text-end">
                                                                                 <button
                                                                                     onClick={(e: any) => {
-                                                                                        add(e, "actions");
+                                                                                        add(e, MyConstants.disinfectionFrequencies.path);
                                                                                     }}
                                                                                     className="btn btn-primary"
                                                                                 >
@@ -897,7 +906,7 @@ export default function OtherData({ data }: any) {
                                                                                 <div className="text-end">
                                                                                     <button
                                                                                         onClick={(e: any) => {
-                                                                                            add(e, "actions");
+                                                                                            add(e, MyConstants.drainBadConditions.path);
                                                                                         }}
                                                                                         className="btn btn-primary"
                                                                                     >
@@ -975,7 +984,7 @@ export default function OtherData({ data }: any) {
                                                                                     <div className="text-end">
                                                                                         <button
                                                                                             onClick={(e: any) => {
-                                                                                                add(e, "actions");
+                                                                                                add(e, MyConstants.drainTypes.path);
                                                                                             }}
                                                                                             className="btn btn-primary"
                                                                                         >
@@ -1053,7 +1062,7 @@ export default function OtherData({ data }: any) {
                                                                                         <div className="text-end">
                                                                                             <button
                                                                                                 onClick={(e: any) => {
-                                                                                                    add(e, "actions");
+                                                                                                    add(e, MyConstants.drinkingWaterSourceTypes.path);
                                                                                                 }}
                                                                                                 className="btn btn-primary"
                                                                                             >
@@ -1131,7 +1140,7 @@ export default function OtherData({ data }: any) {
                                                                                             <div className="text-end">
                                                                                                 <button
                                                                                                     onClick={(e: any) => {
-                                                                                                        add(e, "actions");
+                                                                                                        add(e, MyConstants.waterSourceTypes.path);
                                                                                                     }}
                                                                                                     className="btn btn-primary"
                                                                                                 >
@@ -1209,7 +1218,7 @@ export default function OtherData({ data }: any) {
                                                                                                 <div className="text-end">
                                                                                                     <button
                                                                                                         onClick={(e: any) => {
-                                                                                                            add(e, "actions");
+                                                                                                            add(e, MyConstants.easeYourselfWheres.path);
                                                                                                         }}
                                                                                                         className="btn btn-primary"
                                                                                                     >
@@ -1288,7 +1297,7 @@ export default function OtherData({ data }: any) {
                                                                                                     <div className="text-end">
                                                                                                         <button
                                                                                                             onClick={(e: any) => {
-                                                                                                                add(e, "actions");
+                                                                                                                add(e, MyConstants.drinkingWaterSourceTypes.path);
                                                                                                             }}
                                                                                                             className="btn btn-primary"
                                                                                                         >
@@ -1366,7 +1375,7 @@ export default function OtherData({ data }: any) {
                                                                                                         <div className="text-end">
                                                                                                             <button
                                                                                                                 onClick={(e: any) => {
-                                                                                                                    add(e, "actions");
+                                                                                                                    add(e, MyConstants.waterSourceTypes.path);
                                                                                                                 }}
                                                                                                                 className="btn btn-primary"
                                                                                                             >
@@ -1445,7 +1454,7 @@ export default function OtherData({ data }: any) {
                                                                                                             <div className="text-end">
                                                                                                                 <button
                                                                                                                     onClick={(e: any) => {
-                                                                                                                        add(e, "actions");
+                                                                                                                        add(e, MyConstants.waterStorageTypes.path);
                                                                                                                     }}
                                                                                                                     className="btn btn-primary"
                                                                                                                 >
@@ -1527,7 +1536,7 @@ export default function OtherData({ data }: any) {
                                                                                                                 <div className="text-end">
                                                                                                                     <button
                                                                                                                         onClick={(e: any) => {
-                                                                                                                            add(e, "actions");
+                                                                                                                            add(e, MyConstants.waterSupplyTypes.path);
                                                                                                                         }}
                                                                                                                         className="btn btn-primary"
                                                                                                                     >
@@ -1608,7 +1617,7 @@ export default function OtherData({ data }: any) {
                                                                                                                     <div className="text-end">
                                                                                                                         <button
                                                                                                                             onClick={(e: any) => {
-                                                                                                                                add(e, "actions");
+                                                                                                                                add(e, MyConstants.waterTreatmentTypes.path);
                                                                                                                             }}
                                                                                                                             className="btn btn-primary"
                                                                                                                         >
@@ -1691,7 +1700,7 @@ export default function OtherData({ data }: any) {
                                                                                                                         <div className="text-end">
                                                                                                                             <button
                                                                                                                                 onClick={(e: any) => {
-                                                                                                                                    add(e, "actions");
+                                                                                                                                    add(e, MyConstants.effluentManagements.path);
                                                                                                                                 }}
                                                                                                                                 className="btn btn-primary"
                                                                                                                             >
@@ -1769,7 +1778,7 @@ export default function OtherData({ data }: any) {
                                                                                                                             <div className="text-end">
                                                                                                                                 <button
                                                                                                                                     onClick={(e: any) => {
-                                                                                                                                        add(e, "actions");
+                                                                                                                                        add(e, MyConstants.excretaContainments.path);
                                                                                                                                     }}
                                                                                                                                     className="btn btn-primary"
                                                                                                                                 >
@@ -1847,7 +1856,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                 <div className="text-end">
                                                                                                                                     <button
                                                                                                                                         onClick={(e: any) => {
-                                                                                                                                            add(e, "actions");
+                                                                                                                                            add(e, MyConstants.excretaDisposals.path);
                                                                                                                                         }}
                                                                                                                                         className="btn btn-primary"
                                                                                                                                     >
@@ -1925,7 +1934,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                     <div className="text-end">
                                                                                                                                         <button
                                                                                                                                             onClick={(e: any) => {
-                                                                                                                                                add(e, "actions");
+                                                                                                                                                add(e, MyConstants.greyWaterDisposals.path);
                                                                                                                                             }}
                                                                                                                                             className="btn btn-primary"
                                                                                                                                         >
@@ -2003,7 +2012,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                         <div className="text-end">
                                                                                                                                             <button
                                                                                                                                                 onClick={(e: any) => {
-                                                                                                                                                    add(e, "actions");
+                                                                                                                                                    add(e, MyConstants.hazardousWasteDisposals.path);
                                                                                                                                                 }}
                                                                                                                                                 className="btn btn-primary"
                                                                                                                                             >
@@ -2043,84 +2052,7 @@ export default function OtherData({ data }: any) {
                                                                                                                             </table>
                                                                                                                         </div>
                                                                                                                     </div> :
-                                                                                                                    primaryData == MyConstants.inspectionFormNuisances.id ?
-                                                                                                                        <div className="card">
-                                                                                                                            <div className="card-body">
-                                                                                                                                <h6 className="card-title">Inspection Form Nuisances </h6>
-                                                                                                                                <div className="row gy-4">
-                                                                                                                                    <div className="col-xxl-4 col-md-8">
-                                                                                                                                        <div>
-                                                                                                                                            <label
-                                                                                                                                                htmlFor="basiInput"
-                                                                                                                                                className="form-label"
-                                                                                                                                            >
-                                                                                                                                                Name
-                                                                                                                                            </label>
-                                                                                                                                            <input
-                                                                                                                                                type="text"
-                                                                                                                                                className="form-control"
-                                                                                                                                                id="basiInput"
-                                                                                                                                                value={name}
-                                                                                                                                                onChange={(e) =>
-                                                                                                                                                    setName(
-                                                                                                                                                        e.target.value
-                                                                                                                                                    )
-                                                                                                                                                }
-                                                                                                                                            />
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-
-                                                                                                                                    <div className="col-lg-4">
-                                                                                                                                        <div>
-                                                                                                                                            <label
-                                                                                                                                                htmlFor="basiInput"
-                                                                                                                                                className="form-label"
-                                                                                                                                            >
-                                                                                                                                                .
-                                                                                                                                            </label>
-                                                                                                                                            <div className="text-end">
-                                                                                                                                                <button
-                                                                                                                                                    onClick={(e: any) => {
-                                                                                                                                                        add(e, "actions");
-                                                                                                                                                    }}
-                                                                                                                                                    className="btn btn-primary"
-                                                                                                                                                >
-                                                                                                                                                    Add
-                                                                                                                                                </button>
-                                                                                                                                            </div>
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                            <div className="card-footer">
-                                                                                                                                <table className="table table-striped">
-                                                                                                                                    <thead>
-                                                                                                                                        <tr>
-                                                                                                                                            {/* <th scope="col">Id</th> */}
-                                                                                                                                            <th scope="col">Name</th>
-
-                                                                                                                                            <th scope="col">Action</th>
-                                                                                                                                        </tr>
-                                                                                                                                    </thead>
-                                                                                                                                    <tbody>
-                                                                                                                                        {data?.inspectionFormNuisances.map((data: any) => (
-                                                                                                                                            <tr key={data.id}>
-                                                                                                                                                {/* <th scope="row">{region.id}</th> */}
-                                                                                                                                                <td>{data.name}</td>
-
-                                                                                                                                                <td>
-                                                                                                                                                    <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                        setName(data.name)
-                                                                                                                                                    }}>
-                                                                                                                                                        Edit
-                                                                                                                                                    </button>
-                                                                                                                                                </td>
-                                                                                                                                            </tr>
-                                                                                                                                        ))}
-                                                                                                                                    </tbody>
-                                                                                                                                </table>
-                                                                                                                            </div>
-                                                                                                                        </div> :
+                                                                                                                  
                                                                                                                         primaryData == MyConstants.nuisances.id ?
                                                                                                                             <div className="card">
                                                                                                                                 <div className="card-body">
@@ -2159,7 +2091,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                                 <div className="text-end">
                                                                                                                                                     <button
                                                                                                                                                         onClick={(e: any) => {
-                                                                                                                                                            add(e, "actions");
+                                                                                                                                                            add(e, MyConstants.nuisances.path);
                                                                                                                                                         }}
                                                                                                                                                         className="btn btn-primary"
                                                                                                                                                     >
@@ -2237,7 +2169,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                                     <div className="text-end">
                                                                                                                                                         <button
                                                                                                                                                             onClick={(e: any) => {
-                                                                                                                                                                add(e, "actions");
+                                                                                                                                                                add(e, MyConstants.ownershipTypes.path);
                                                                                                                                                             }}
                                                                                                                                                             className="btn btn-primary"
                                                                                                                                                         >
@@ -2358,7 +2290,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                     primaryData == MyConstants.premisesServices.id ?
                                                                                                                                         <div className="card">
                                                                                                                                             <div className="card-body">
-                                                                                                                                                <h6 className="card-title">Premises Subtypes </h6>
+                                                                                                                                                <h6 className="card-title">Premises Services </h6>
                                                                                                                                                 <div className="row gy-4">
                                                                                                                                                     <div className="col-xxl-4 col-md-8">
                                                                                                                                                         <div>
@@ -2415,7 +2347,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                                         </tr>
                                                                                                                                                     </thead>
                                                                                                                                                     <tbody>
-                                                                                                                                                        {data?.cemeteryWorkers.map((data: any) => (
+                                                                                                                                                        {data?.premisesServices.map((data: any) => (
                                                                                                                                                             <tr key={data.id}>
                                                                                                                                                                 {/* <th scope="row">{region.id}</th> */}
                                                                                                                                                                 <td>{data.name}</td>
@@ -2471,7 +2403,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                                                 <div className="text-end">
                                                                                                                                                                     <button
                                                                                                                                                                         onClick={(e: any) => {
-                                                                                                                                                                            add(e, MyConstants.premisesServices.path);
+                                                                                                                                                                            add(e, MyConstants.premisesSubtypes.path);
                                                                                                                                                                         }}
                                                                                                                                                                         className="btn btn-primary"
                                                                                                                                                                     >
@@ -3038,7 +2970,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                                                                         </tr>
                                                                                                                                                                                     </thead>
                                                                                                                                                                                     <tbody>
-                                                                                                                                                                                        {data?.unsafeToiletConditions.map((data: any) => (
+                                                                                                                                                                                        {data?.toiletTypes.map((data: any) => (
                                                                                                                                                                                             <tr key={data.id}>
                                                                                                                                                                                                 {/* <th scope="row">{region.id}</th> */}
                                                                                                                                                                                                 <td>{data.name}</td>
@@ -3406,7 +3338,7 @@ export default function OtherData({ data }: any) {
                                                                                                                                                                                                                 <div className="text-end">
                                                                                                                                                                                                                     <button
                                                                                                                                                                                                                         onClick={(e: any) => {
-                                                                                                                                                                                                                            add(e, "actions");
+                                                                                                                                                                                                                            add(e,MyConstants.wasteCollectionTypes.path);
                                                                                                                                                                                                                         }}
                                                                                                                                                                                                                         className="btn btn-primary"
                                                                                                                                                                                                                     >

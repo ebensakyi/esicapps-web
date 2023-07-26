@@ -4,7 +4,7 @@ import OtherData from "@/src/components/primary-data/OtherData";
 
 
 async function getAction() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/action`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/action`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -14,7 +14,7 @@ async function getAction() {
 }
 
 async function getAnimalType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/animal-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/animal-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -24,7 +24,7 @@ async function getAnimalType() {
 }
 
 async function getCemeteryWorkers() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/cemetery-workers`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/cemetery-workers`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -34,7 +34,7 @@ async function getCemeteryWorkers() {
 }
 
 async function getCleaningFrequency() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/cleaning-frequency`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/cleaning-frequency`,);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -44,7 +44,7 @@ async function getCleaningFrequency() {
 }
 
 async function getCommunalContainerCondition() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/communal-container-condition`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/communal-container-condition`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -54,7 +54,7 @@ async function getCommunalContainerCondition() {
 }
 
 async function getContainerVolume() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/container-volume`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/container-volume`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -64,7 +64,7 @@ async function getContainerVolume() {
 }
 
 async function getDerattingFrequency() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/deratting-frequency`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/deratting-frequency`,);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -84,7 +84,7 @@ async function getDesiltingFrequency() {
 }
 
 async function getDisinfectionFrequency() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/disinfection-frequency`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/disinfection-frequency`,);
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -94,7 +94,7 @@ async function getDisinfectionFrequency() {
 }
 
 async function getDrainBadCondition() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/drain-bad-condition`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/drain-bad-condition`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -104,7 +104,7 @@ async function getDrainBadCondition() {
 }
 
 async function getDrainType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/drain-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/drain-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -114,7 +114,7 @@ async function getDrainType() {
 }
 
 async function getDrinkingWaterSourceType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/drinking-water-source-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/drinking-water-source-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -124,7 +124,7 @@ async function getDrinkingWaterSourceType() {
 }
 
 async function getEaseYourselfWhere() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/ease-yourself-where`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/ease-yourself-where`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -134,7 +134,7 @@ async function getEaseYourselfWhere() {
 }
 
 async function getEffluentManagement() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/effluent-management`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/effluent-management`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -144,7 +144,7 @@ async function getEffluentManagement() {
 }
 
 async function getExcretaContainment() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/excreta-containment`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/excreta-containment`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -154,7 +154,7 @@ async function getExcretaContainment() {
 }
 
 async function getExcretaDisposal() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/excreta-disposal`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/excreta-disposal`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -164,7 +164,7 @@ async function getExcretaDisposal() {
 }
 
 async function getGreyWaterDisposal() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/grey-water-disposal`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/grey-water-disposal`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -174,7 +174,7 @@ async function getGreyWaterDisposal() {
 }
 
 async function getHazardousWasteDisposal() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/hazardous-waste-disposal`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/hazardous-waste-disposal`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -183,18 +183,18 @@ async function getHazardousWasteDisposal() {
 
 }
 
-async function getInspectionFormNuisances() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/inspection-form-nuisances`, );
+// async function getInspectionFormNuisances() {
+//     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/inspection-form-nuisances`,{ cache: 'no-store' } );
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return await response.json();
+//     if (!response.ok) {
+//         throw new Error('Failed to fetch data')
+//     }
+//     return await response.json();
 
-}
+// }
 
 async function getNuisance() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/nuisance`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/nuisance`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -204,7 +204,7 @@ async function getNuisance() {
 }
 
 async function getOwnershipType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/ownership-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/ownership-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -215,7 +215,7 @@ async function getOwnershipType() {
 
 
 async function getPestSign() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/pest-sign`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/pest-sign`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -225,7 +225,7 @@ async function getPestSign() {
 }
 
 async function getPremisesService() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-service`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-service`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -235,7 +235,7 @@ async function getPremisesService() {
 }
 
 async function getPremisesSubtypes() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-subtypes`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-subtypes`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -245,7 +245,7 @@ async function getPremisesSubtypes() {
 }
 
 async function getPremisesTypes() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-types`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-types`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -256,7 +256,7 @@ async function getPremisesTypes() {
 
 
 async function getRespondentDesignation() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/respondent-designation`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/respondent-designation`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -266,7 +266,7 @@ async function getRespondentDesignation() {
 }
 
 async function getSewerSystem() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/sewer-system`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/sewer-system`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -276,7 +276,7 @@ async function getSewerSystem() {
 }
 
 async function getToiletHouseholdNumber() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/toilet-household-number`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/toilet-household-number`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -286,7 +286,7 @@ async function getToiletHouseholdNumber() {
 }
 
 async function getToiletPitPosition() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/toilet-pit-position`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/toilet-pit-position`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -296,7 +296,7 @@ async function getToiletPitPosition() {
 }
 
 async function getToiletType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/toilet-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/toilet-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -306,7 +306,7 @@ async function getToiletType() {
 }
 
 async function getUnsafeToiletCondition() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/unsafe-toilet-condition`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/unsafe-toilet-condition`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -316,7 +316,7 @@ async function getUnsafeToiletCondition() {
 }
 
 async function getUnsafeWaterStorage() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/unsafe-water-storage`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/unsafe-water-storage`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -326,7 +326,7 @@ async function getUnsafeWaterStorage() {
 }
 
 async function getUnservicedWasteDisposal() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/unserviced-waste-disposal`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/unserviced-waste-disposal`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -336,7 +336,7 @@ async function getUnservicedWasteDisposal() {
 }
 
 async function getWasteCollectionFrequency() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-collection-frequency`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-collection-frequency`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -346,7 +346,7 @@ async function getWasteCollectionFrequency() {
 }
 
 async function getWasteCollectionType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-collection-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-collection-type`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -356,7 +356,7 @@ async function getWasteCollectionType() {
 }
 
 async function getWasteStorageReceptacle() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-storage-receptacle`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-storage-receptacle`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -366,7 +366,7 @@ async function getWasteStorageReceptacle() {
 }
 
 async function getWasteWaterContainment() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-water-containment`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/waste-water-containment`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -376,7 +376,7 @@ async function getWasteWaterContainment() {
 }
 
 async function getWaterFlowFrequency() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-flow-frequency`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-flow-frequency`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -386,7 +386,7 @@ async function getWaterFlowFrequency() {
 }
 
 async function getWaterSourceType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-source-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-source-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -397,7 +397,7 @@ async function getWaterSourceType() {
 
 
 async function getWaterStorageType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-storage-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-storage-type`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -408,7 +408,7 @@ async function getWaterStorageType() {
 
 
 async function getWaterSupplyType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-supply-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-supply-type`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -418,7 +418,7 @@ async function getWaterSupplyType() {
 }
 
 async function getWaterTreatmentType() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-treatment-type`, );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/water-treatment-type`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -454,7 +454,7 @@ export default async function page() {
     const excretaDisposals = await getExcretaDisposal() //16
     const greyWaterDisposals = await getGreyWaterDisposal() //17
     const hazardousWasteDisposals = await getHazardousWasteDisposal() //18
-    const inspectionFormNuisances = await getInspectionFormNuisances() //19
+    // const inspectionFormNuisances = await getInspectionFormNuisances() //19
     const nuisances = await getNuisance() //20
 
     const ownershipTypes = await getOwnershipType() //21
@@ -481,7 +481,7 @@ export default async function page() {
     const waterTreatmentTypes = await getWaterTreatmentType() //42
 
 
-    let data = { actions, animalTypes, cemeteryWorkers, cleaningFrequencies, communalContainerConditions, containerVolumes, derattingFrequencies, desiltingFrequencies, disinfectionFrequencies, drainBadConditions, drainTypes, drinkingWaterSourceTypes, easeYourselfWheres, effluentManagements, excretaContainments, excretaDisposals, greyWaterDisposals, hazardousWasteDisposals, inspectionFormNuisances, nuisances, ownershipTypes, pestSigns, premisesServices, premisesSubtypes, premisesTypes, respondentDesignations, sewerSystems, toiletHouseholdNumbers, toiletPitPositions, toiletTypes, unsafeToiletConditions, unsafeWaterStorages, unservicedWasteDisposals, wasteCollectionFrequencies, wasteCollectionTypes, wasteStorageReceptacles, wasteWaterContainments, waterFlowFrequencies, waterSourceTypes, waterStorageTypes, waterSupplyTypes, waterTreatmentTypes }
+    let data = { actions, animalTypes, cemeteryWorkers, cleaningFrequencies, communalContainerConditions, containerVolumes, derattingFrequencies, desiltingFrequencies, disinfectionFrequencies, drainBadConditions, drainTypes, drinkingWaterSourceTypes, easeYourselfWheres, effluentManagements, excretaContainments, excretaDisposals, greyWaterDisposals, hazardousWasteDisposals, nuisances, ownershipTypes, pestSigns, premisesServices, premisesSubtypes, premisesTypes, respondentDesignations, sewerSystems, toiletHouseholdNumbers, toiletPitPositions, toiletTypes, unsafeToiletConditions, unsafeWaterStorages, unservicedWasteDisposals, wasteCollectionFrequencies, wasteCollectionTypes, wasteStorageReceptacles, wasteWaterContainments, waterFlowFrequencies, waterSourceTypes, waterStorageTypes, waterSupplyTypes, waterTreatmentTypes }
 
     // console.log(data);
 

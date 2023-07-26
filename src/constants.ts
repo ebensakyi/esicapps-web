@@ -1,5 +1,3 @@
-import path from "path";
-import { id } from '../public/assets/vendor/chart.js/plugins/plugin.tooltip';
 
 export const MyConstants = {
   actions: {
@@ -70,7 +68,7 @@ export const MyConstants = {
   },
 
   ownershipTypes: {
-    id:21,path:"ownership-types",
+    id:21,path:"ownership-type",
   },
   pestSigns: {
     id: 22,
@@ -102,7 +100,7 @@ export const MyConstants = {
   },
   toiletPitPositions: {
     id: 29,
-    path: "",
+    path: "toilet-pit-position",
   },
   toiletTypes: {
     id: 30,

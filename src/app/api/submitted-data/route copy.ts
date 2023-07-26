@@ -1,25 +1,27 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import { getSession } from "@/utils/session-manager";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    return NextResponse.json([]);
+    //   return new Response(
+    //     JSON.stringify({
+    //       action: 0,
+    //       message: ,
+    //     })
+    //   );
   } catch (error: any) {
     console.log(error);
-    return NextResponse.json(error);
+    return new Response(JSON.stringify({ message: error.message }));
   }
 }
 
 export async function GET(request: Request) {
   try {
+    //  const res = await request.json();
 
-
-    console.log("GETGETGETGET");
-    
     // let userLevelId = Number(userData?.userLevelId);
     // let userRegion = Number(userData?.regionId);
     // let userDistrict = Number(userData?.districtId);
@@ -28,15 +30,19 @@ export async function GET(request: Request) {
     // await logActivity("Visited submitted data list", userId);
 
     const { searchParams } = new URL(request.url);
-    const searchText = searchParams.get("searchText");
-    const formId = searchParams.get("formId");
-    const published = searchParams.get("published");
-    const filterBy = searchParams.get("filterBy");
-    const filterValue = searchParams.get("filterValue");
+    const searchText = searchParams.get("searchText") ?? "";
+
+    const formId = Number(searchParams.get("formId"));
+    console.log("FormID===>",searchParams);
+    
+    const published =
+      Number(searchParams.get("published"));
+    // const filterBy = searchParams.get("filterBy");
+    // const filterValue = searchParams.get("filterValue");
     const curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = 0; //Number((curPage - 1) * perPage) || 0;
 
     const response = await prisma.basicInfoSection.findMany({
       where:
@@ -102,7 +108,7 @@ export async function GET(request: Request) {
               ],
 
               Inspection: {
-                isPublished: published,
+                 isPublished: published,
                 formId,
               },
             }
@@ -139,9 +145,11 @@ export async function GET(request: Request) {
         User: true,
       },
     });
-    return NextResponse.json(response);
+
+    return NextResponse.json([]);
   } catch (error) {
-    
+    console.log("error:=> ", error);
+
     return NextResponse.json(error);
   }
 }

@@ -9,6 +9,9 @@ export const fileType = [
     title: "PPT",
   },
   {
-    title: "HTML",
+    title: "WEB PAGE",
+  },
+  {
+    title: "YOUTUBE",
   },
 ];

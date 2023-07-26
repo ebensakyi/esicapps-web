@@ -10,7 +10,6 @@ export async function POST(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-    
     const userId = session?.user?.id;
 
     const data = {
@@ -35,7 +34,15 @@ export async function GET(request: Request) {
   try {
     const data = await prisma.userGuide.findMany({
       where: { deleted: 0 },
-      include: { FileType: true },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        url: true,
+        fileTypeId:true,
+        createdAt:true
+      },
+      //include: { FileType: true },
       orderBy: {
         id: "desc",
       },
@@ -54,7 +61,6 @@ export async function PUT(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
-
 
     let id = Number(res.guideId);
     const data = {
@@ -90,7 +96,6 @@ export async function DELETE(request: Request) {
       where: {
         id: id,
       },
-     
     });
 
     return NextResponse.json(data);
