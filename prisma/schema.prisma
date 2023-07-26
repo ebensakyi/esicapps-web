@@ -170,6 +170,7 @@ model InspectionForm {
   RespondentDesignation     RespondentDesignation[]
   FollowUpInspection        FollowUpInspection[]
   FollowUpInspectionHistory FollowUpInspectionHistory[]
+  Service                   Service[]
   PremisesService           PremisesService[]
 }
 
@@ -751,6 +752,17 @@ model PremisesType {
   PremisesService                PremisesService[]
 
   @@unique([inspectionFormId, name], name: "inspectionFormName")
+}
+
+model Service {
+  id               Int            @id @default(autoincrement())
+  name             String         @db.VarChar(255)
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
+  premisesTypeId   Int?
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
 }
 
 model PremisesService {

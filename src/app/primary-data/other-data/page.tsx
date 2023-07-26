@@ -225,7 +225,7 @@ async function getPestSign() {
 }
 
 async function getPremisesService() {
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/premises-service`,{ cache: 'no-store' } );
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/services`,{ cache: 'no-store' } );
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')

@@ -63,3 +63,24 @@ export async function DELETE(request: Request) {
     return NextResponse.json(error);
   }
 }
+
+
+
+export async function GET(request: Request) {
+  try {
+
+    const { searchParams } = new URL(request.url);
+    const userId = Number(searchParams.get("userId"));
+
+    let user = await prisma.user.findFirst({
+      where: { id: userId, deleted: 0 },
+      include: { District: { include: { Region: true } } },
+    });
+
+
+    return NextResponse.json(user,{status: 200});
+  } catch (error) {
+    return NextResponse.json({status: 500});
+
+  }
+}

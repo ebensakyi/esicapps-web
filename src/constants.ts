@@ -76,7 +76,7 @@ export const MyConstants = {
   },
   premisesServices: {
     id: 23,
-    path: "premises-service",
+    path: "services",
   },
   premisesSubtypes: {
     id: 24,

@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       name: res.name,
       inspectionFormId: res.inspectionFormId,
     };
-    const response = await prisma.premisesService.create({
+    const response = await prisma.service.create({
       data,
     });
 
@@ -22,14 +22,13 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const res = await request.json();
 
-    const data = await prisma.premisesService.findMany({
+    const data = await prisma.service.findMany({
       where: { deleted: 0 },
     });
 
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json(error);
+    return NextResponse.json(error,{status:500});
   }
 }
