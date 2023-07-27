@@ -761,6 +761,8 @@ export default function User({ data }: any) {
                                             <th scope="col">Level</th>
                                             <th scope="col">Region</th>
                                             <th scope="col">District</th>
+                                            <th scope="col">Password</th>
+
                                             <th scope="col">Status</th>
 
                                             <th scope="col">Action</th>
@@ -776,6 +778,8 @@ export default function User({ data }: any) {
                                                 <td>{user?.UserLevel?.name}</td>
                                                 <td>{user?.Region?.name}</td>
                                                 <td>{user?.District?.name}</td>
+                                                <td>{user?.tempPassword}</td>
+
                                                 <td>{user?.deleted == 1 ? <>              <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
                                                 </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
                                                 </>}</td>

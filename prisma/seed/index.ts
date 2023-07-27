@@ -37,7 +37,7 @@ import { action } from "./action";
 import { pestSign } from "./pestSign";
 import { structureType } from "./structureType";
 import { toiletPitPosition } from "./toiletPitPosition";
-import { services } from "./premisesServices";
+import { services } from "./services";
 import { types } from "./types";
 import { subtypes } from "./premisesSubtypes";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
@@ -174,7 +174,7 @@ async function main() {
     data: toiletPitPosition,
   });
 
-  await prisma.premisesService.createMany({
+  await prisma.service.createMany({
     data: services,
   });
   await prisma.premisesType.createMany({

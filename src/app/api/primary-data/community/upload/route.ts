@@ -6,6 +6,7 @@ import formidable from "formidable";
 import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
+import { district } from '../../../../../../prisma/seed/district';
 
 
 export async function POST(request: Request) {
@@ -14,6 +15,8 @@ export async function POST(request: Request) {
 
     const file: File | null = data.get("csvFile") as unknown as File;
     const electoralAreaId = Number(data?.get("electoralAreaId"));
+    const districtId = Number(data?.get("districtId"));
+
 
     if (!file) {
       return NextResponse.json({ success: false });
@@ -29,7 +32,7 @@ export async function POST(request: Request) {
 
     await writeFile(path, buffer);
 
-    let response = await readCSV(path, electoralAreaId);
+    let response = await readCSV(path, electoralAreaId,districtId);
 
 
     return NextResponse.json({});
@@ -39,7 +42,7 @@ export async function POST(request: Request) {
   }
 }
 
-const readCSV = async (filePath: any, electoralAreaId: any) => {
+const readCSV = async (filePath: any, electoralAreaId: any,districtId: any) => {
   try {
     let data: any = [];
 
@@ -55,7 +58,7 @@ const readCSV = async (filePath: any, electoralAreaId: any) => {
         data.push(row);
       })
       .on("end", async () => {
-        let newData = await formatData(data, electoralAreaId);
+        let newData = await formatData(data, electoralAreaId,districtId);
 
         await prisma.community.createMany({
           data: newData,
@@ -76,10 +79,11 @@ const readCSV = async (filePath: any, electoralAreaId: any) => {
   }
 };
 
-const formatData = async (data: any, electoralAreaId: any) => {
+const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
   try {
     let newData = data.map((row: any) => ({
       electoralAreaId: Number(electoralAreaId),
+      districtId: Number(districtId),
       name: row.name,
     }));
 

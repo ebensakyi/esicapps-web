@@ -179,6 +179,7 @@ export default function Community({ data }: any) {
             let body = new FormData(formElement);
             body.append("csvFile", communityFile);
             body.append("electoralAreaId", electoralAreaId);
+            body.append("districtId", districtId);
 
             const response = await axios({
                 url: "/api/primary-data/community/upload",

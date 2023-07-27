@@ -577,6 +577,19 @@ CREATE TABLE "PremisesType" (
 );
 
 -- CreateTable
+CREATE TABLE "Service" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "deleted" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "inspectionFormId" INTEGER NOT NULL,
+    "premisesTypeId" INTEGER,
+
+    CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "PremisesService" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -2947,6 +2960,9 @@ ALTER TABLE "RespondentDesignation" ADD CONSTRAINT "RespondentDesignation_inspec
 
 -- AddForeignKey
 ALTER TABLE "PremisesType" ADD CONSTRAINT "PremisesType_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Service" ADD CONSTRAINT "Service_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesService" ADD CONSTRAINT "PremisesService_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
