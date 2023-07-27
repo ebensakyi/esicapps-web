@@ -29,6 +29,7 @@ export async function POST(request: Request) {
           : Number(res.isNuisanceObservedId),
      
     };
+    console.log(data);
 
     const response = await prisma.conclusionSection.create({ data });
 

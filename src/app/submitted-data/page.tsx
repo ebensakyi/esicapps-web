@@ -4,9 +4,10 @@ import { headers } from 'next/headers';
 import Data from '@/src/components/submitted-data/Data';
 import { SERVER_BASE_URL } from '@/config';
 
-async function getSubmittedData(searchParams:any) {
-    let {formId} = searchParams
-    let {published} = searchParams
+async function getSubmittedData(searchParams: any) {
+    
+    let { formId } = searchParams
+    let { published } = searchParams
     const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?formId=${formId}&published=${published}`)
 
     if (!res.ok) {
@@ -17,11 +18,10 @@ async function getSubmittedData(searchParams:any) {
 }
 
 
-export default async function page({searchParams}:any) {
+export default async function page({ searchParams }: any) {
     const submittedData = await getSubmittedData(searchParams)
 
-    console.log("submittedData===>",searchParams);
-    
+
 
     // const { data: session } = useSession()
 
@@ -43,7 +43,7 @@ export default async function page({searchParams}:any) {
 
 
 
-    let data = { submittedData }
+    let data = { submittedData:submittedData }
 
 
 

@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const searchText = searchParams.get("searchText") ?? "";
 
-    const formId = Number(searchParams.get("formId"));
+    const formId = Number(searchParams.get("formId")) || 1
     console.log("FormID===>", searchParams);
 
     const published = Number(searchParams.get("published"));
@@ -42,9 +42,14 @@ export async function GET(request: Request) {
 
     let perPage = 10;
     let skip = 0; //Number((curPage - 1) * perPage) || 0;
+    let count = 4
 
     const response = await prisma.inspection.findMany({
+      where: {
+        inspectionFormId:Number(formId),
+      },
       include: {
+        InspectionType:true,
         BasicInfoSection: {
           include: {
             Community: {
@@ -67,7 +72,9 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json([]);
+    return NextResponse.json( {response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage)});
   } catch (error) {
     console.log("error:=> ", error);
 

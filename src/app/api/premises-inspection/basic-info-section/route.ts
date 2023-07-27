@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       respondentDesignationId: Number(res.respondentDesignationId),
     };
 
-    console.log(">>>>>>>>>>", data);
+    console.log(data);
 
     const response = await prisma.basicInfoSection.create({ data });
 
