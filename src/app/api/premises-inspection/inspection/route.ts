@@ -45,6 +45,8 @@ export async function POST(request: Request) {
     const response = await prisma.inspection.create({ data });
     return NextResponse.json(response);
   } catch (error) {
+    console.log(error);
+
     return NextResponse.json(error, { status: 500 });
   }
 }

@@ -1,6 +1,7 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getSession } from "@/utils/session-manager";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
@@ -31,15 +32,12 @@ export async function POST(request: Request) {
 
     const response = await prisma.conclusionSection.create({ data });
 
-    return new Response(
-      JSON.stringify({
-        action: 0,
-        message: [],
-      })
-    );
+    return NextResponse.json(response);
+
   } catch (error: any) {
     console.log(error);
-    return new Response(JSON.stringify({ message: error.message }));
+    return NextResponse.json(error,{ status: 500 });
+
   }
 }
 
@@ -53,6 +51,10 @@ export async function GET(request: Request) {
     });
 
 
-    return new Response(JSON.stringify([{data}]));
-  } catch (error) {}
+    return NextResponse.json(data);
+
+  } catch (error) {
+    return NextResponse.json(error,{ status: 500 });
+
+  }
 }

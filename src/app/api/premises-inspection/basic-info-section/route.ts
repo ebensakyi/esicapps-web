@@ -7,6 +7,8 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
+    console.log(">>>>>>>>>>", res);
+
     let latitude = res.latitude;
     let longitude = res.longitude;
 
@@ -40,11 +42,15 @@ export async function POST(request: Request) {
       respondentDesignationId: Number(res.respondentDesignationId),
     };
 
+    console.log(">>>>>>>>>>", data);
+
     const response = await prisma.basicInfoSection.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
-    return NextResponse.json(error);
+    console.log(error);
+
+    return NextResponse.json(error, { status: 500 });
   }
 }
 
@@ -58,6 +64,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json(error);
+    return NextResponse.json(error,{ status: 500 });
   }
 }
