@@ -1,6 +1,7 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
+import { log } from "util";
 
 export async function POST(request: Request) {
   try {
@@ -30,7 +31,17 @@ export async function GET(request: Request) {
     // await logActivity("Visited submitted data list", userId);
 
     const { searchParams } = new URL(request.url);
-    const searchText = searchParams.get("searchText") ?? "";
+    
+    const searchText = searchParams.get("searchText")  == "undefined" ? "" : searchParams.get("searchText")
+
+
+ console.log("searchText====> ", searchText);
+
+    // console.log(( searchText != ""  && searchText != "undefined"));
+    
+    
+
+    
 
     const formId = Number(searchParams.get("formId")) || 1;
 
@@ -43,103 +54,119 @@ export async function GET(request: Request) {
     let skip = 0; //Number((curPage - 1) * perPage) || 0;
     let count = 4;
 
-    const response = await prisma.inspection.findMany({
-      where: {
-        inspectionFormId: Number(formId),
+    const response = await prisma.basicInfoSection.findMany({
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  ghanaPostGps: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  Inspection: {
+                    premisesCode: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      surname: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      otherNames: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    Community: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+
+               
+              ],
+
+              Inspection: {
+                isPublished: published,
+                inspectionFormId:formId,
+                // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
+                // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+              },
+            }
+          : {
+              Inspection: {
+                isPublished: published,
+                inspectionFormId:formId,
+
+                // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
+                // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+              },
+            },
+      skip: skip,
+      take: perPage,
+      orderBy: {
+        createdAt: "desc",
       },
       include: {
-        InspectionType: true,
-        BasicInfoSection: {
-          where:
-            searchText != ""
-              ? {
-                  OR: [
-                    {
-                      ghanaPostGps: {
-                        contains: searchText,
-                        mode: "insensitive",
-                      },
-                    },
-                    {
-                      Inspection: {
-                        premisesCode: {
-                          contains: searchText,
-                          mode: "insensitive",
-                        },
-                      },
-                    },
-                    {
-                      Inspection: {
-                        Region: {
-                          name: { contains: searchText, mode: "insensitive" },
-                        },
-                      },
-                    },
-                    {
-                      Inspection: {
-                        District: {
-                          name: { contains: searchText, mode: "insensitive" },
-                        },
-                      },
-                    },
-                    {
-                      Inspection: {
-                        User: {
-                          surname: {
-                            contains: searchText,
-                            mode: "insensitive",
-                          },
-                        },
-                      },
-                    },
-                    {
-                      Inspection: {
-                        User: {
-                          otherNames: {
-                            contains: searchText,
-                            mode: "insensitive",
-                          },
-                        },
-                      },
-                    },
-                    {
-                      Inspection: {
-                        Community: {
-                          name: { contains: searchText, mode: "insensitive" },
-                        },
-                      },
-                    },
-                    {
-                      Inspection: {
-                        ElectoralArea: {
-                          name: { contains: searchText, mode: "insensitive" },
-                        },
-                      },
-                    },
-                  ],
-                }
-              : {},
+        Inspection: {
           include: {
-            Community: {
+            InspectionType: true,
+          },
+        },
+        Community: {
+          include: {
+            ElectoralArea: {
               include: {
-                ElectoralArea: {
+                District: {
                   include: {
-                    District: {
-                      include: {
-                        Region: true,
-                      },
-                    },
+                    Region: true,
                   },
                 },
               },
             },
           },
         },
-
         User: true,
       },
     });
+      
+   
 
+    console.log(response);
+    
     return NextResponse.json({
       response,
       curPage: curPage,
@@ -150,4 +177,10 @@ export async function GET(request: Request) {
 
     return NextResponse.json(error);
   }
+}
+
+
+
+const qryWhere = async (searchText:string)=>{
+if(searchText)
 }

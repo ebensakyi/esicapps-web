@@ -13,6 +13,9 @@ async function getSubmittedData(searchParams: any) {
     let { from } = searchParams
     let { to } = searchParams
     let { searchText } = searchParams
+    let { page } = searchParams
+
+    
 
 
     const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`,{cache:"no-store"})
