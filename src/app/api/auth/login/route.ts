@@ -19,7 +19,12 @@ export async function POST(request: Request) {
       },include:{Region:true,District:true}
     });
 
-    console.log(user);
+    //console.log(user);
+
+    // if(user?.passwordChanged==0){
+    //   return NextResponse.redirect("/goto");
+       
+    // }
 
     if (!user) {
       return NextResponse.json(null,{status:400});

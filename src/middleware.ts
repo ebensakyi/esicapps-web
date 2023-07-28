@@ -7,4 +7,6 @@ export { default } from "next-auth/middleware"
 //  export const config = { matcher: ["/", "/user","/submitted-data"] }
 
 
+
+
 export const config = { matcher: ["/", "/user","/submitted-data","/data-transfer","/user","/user/role","/user/log"] }

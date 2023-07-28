@@ -5,12 +5,11 @@ import moment from "moment";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 
 export default async function Data({ data }: any) {
 
-    const inputRef = useRef(null);
 
 
     // const { data: session } = useSession()
@@ -24,6 +23,7 @@ export default async function Data({ data }: any) {
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
+    console.log(searchParams.get("page"));
 
 
 
@@ -112,8 +112,9 @@ export default async function Data({ data }: any) {
 
 
 
+
         router.push(
-            `${pathname}?formId=${formId}&published=1&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
+            `${pathname}?formId=${formId}&published=1&page=${page}`
 
         );
     };
@@ -242,16 +243,12 @@ export default async function Data({ data }: any) {
     //         console.log(error);
     //     }
     // };
-    const handleSearch = () => {
+    const autoHandleSearch = (searchText: any) => {
         try {
-            let _searchText: any = inputRef.current.value
-
-            console.log(searchText);
 
 
             router.push(
-                `${pathname}?formId=${formId}&published=${published}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
-
+                `${pathname}?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`,
             );
 
         } catch (error) {
@@ -291,49 +288,112 @@ export default async function Data({ data }: any) {
                             {/* <h5 className="card-title">Tables</h5> */}
                             {/* Pills Tabs */}
                             <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-
-                               
-                                <div className="text-center">
-                                    <input type="text"  placeholder='Enter search term'
-                                        ref={inputRef}
-                                        id="searchText"
-                                        name="searchText"
-                                    //  value={searchText}
-                                    //     onChange={(e: any) => {
-                                    //         setSearchText(e.target.value);
-                                    //         autoHandleSearch(e.target.value);
-                                    //     }}
-                                    />
-
-                             
-                                        {/* ?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText} */}
+                                <li className="nav-item" role="presentation">
+                                {/* ?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText} */}
 
 
-                                        <button
-                                            type="button"
-                                            className="btn btn-sm btn-primary btn-label waves-effect right waves-light "
-                                            onClick={handleSearch}
-                                        >
-                                            <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                                            Search
-                                        </button>{" "}
-                                   
-                                        {/* ?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText} */}
-
-
-                                        <button
-                                            type="button"
-                                            className="btn btn-sm btn-success btn-label waves-effect right waves-light "
-                                            onClick={handleExportAll}
-                                        >
-                                            <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                                            Export as excel
-                                        </button>{" "}
-                                </div>
-
-
-
-
+                                    <Link href={`/submitted-data/?published=1&formId=1&page=1&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`}
+                                        className={
+                                            formId == 1
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-selected="true"
+                                    >
+                                        Residential
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                <Link href={`/submitted-data/?published=1&formId=2&page=1&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`}
+                                        className={
+                                            formId == 2
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Eatery
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <Link href="/submitted-data/?formId=3&published=1&page=1"
+                                        className={
+                                            formId == 3
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Health
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <Link href="/submitted-data/?formId=4&published=1&page=1"
+                                        className={
+                                            formId == 4
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Hospitality
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <Link href="/submitted-data/?formId=5&published=1&page=1"
+                                        className={
+                                            formId == 5
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Institution
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <Link href="/submitted-data/?formId=6&published=1&page=1"
+                                        className={
+                                            formId == 6
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Industry
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <Link href="/submitted-data/?formId=7&published=1&page=1"
+                                        className={
+                                            formId == 7
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Market
+                                    </Link>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <Link href="/submitted-data/?formId=8&published=1&page=1"
+                                        className={
+                                            formId == 8
+                                                ? "nav-link active"
+                                                : "nav-link "
+                                        }
+                                        aria-controls="pills-contact"
+                                        aria-selected="false"
+                                    >
+                                        Sanitary
+                                    </Link>
+                                </li>
                             </ul>
                             {/* <div className="col-md-2">
                                 <label className="form-label mb-0">Select level</label>
@@ -391,7 +451,7 @@ export default async function Data({ data }: any) {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
-                                        {/* <div className="row">
+                                        <div className="row">
                                             <div className="col-md-3">
                                                 <button
                                                     type="button"
@@ -408,13 +468,13 @@ export default async function Data({ data }: any) {
                                                 </label>
                                                 <div className="col-sm-12">
                                                     <input type="text" className="form-control" placeholder='Enter search term' value={searchText}
-                                                        onChange={(e: any) => {
-                                                            setSearchText(e.target.value);
-                                                            autoHandleSearch(e.target.value);
-                                                        }} />
+                    onChange={(e:any) => {
+                      setSearchText(e.target.value);
+                       autoHandleSearch(e.target.value);
+                    }}/>
                                                 </div>
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </div>
                                     <div className="card-body">
                                         {/* <h5 className="card-title">Datatables</h5> */}

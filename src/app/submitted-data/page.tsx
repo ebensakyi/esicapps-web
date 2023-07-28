@@ -8,7 +8,14 @@ async function getSubmittedData(searchParams: any) {
     
     let { formId } = searchParams
     let { published } = searchParams
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?formId=${formId}&published=${published}`)
+    let { filterBy } = searchParams
+    let { filterValue } = searchParams
+    let { from } = searchParams
+    let { to } = searchParams
+    let { searchText } = searchParams
+
+
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`,{cache:"no-store"})
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')

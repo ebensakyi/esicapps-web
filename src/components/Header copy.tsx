@@ -326,68 +326,68 @@
 
 //                         </ul>
 //                     </li>
-//                     {/* <li className="nav-item">
-//                         <Link
-//                             className="nav-link collapsed"
-//                             data-bs-target="#components-nav"
-//                             data-bs-toggle="collapse"
-//                             href="#"
-//                         >
-//                             <i className="bi bi-table" />
-//                             <span>Submitted Data</span>
-//                             <i className="bi bi-chevron-down ms-auto" />
-//                         </Link>
-//                         <ul
-//                             id="components-nav"
-//                             className="nav-content collapse "
-//                             data-bs-parent="#sidebar-nav"
-//                         >
-//                             <li>
-//                                 <Link href="/submitted-data?id=1">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Residential</span>
-//                                 </Link>
-//                             </li>
-//                             <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Eatery</span>
-//                                 </Link>
-//                             </li> <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Health</span>
-//                                 </Link>
-//                             </li> <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Hospitality</span>
-//                                 </Link>
-//                             </li> <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Industry</span>
-//                                 </Link>
-//                             </li> <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Institution</span>
-//                                 </Link>
-//                             </li> <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Market</span>
-//                                 </Link>
-//                             </li> <li>
-//                                 <Link href="components-alerts.html">
-//                                     <i className="bi bi-circle" />
-//                                     <span>Sanitary</span>
-//                                 </Link>
-//                             </li>
+                    {/* <li className="nav-item">
+                        <Link
+                            className="nav-link collapsed"
+                            data-bs-target="#components-nav"
+                            data-bs-toggle="collapse"
+                            href="#"
+                        >
+                            <i className="bi bi-table" />
+                            <span>Submitted Data</span>
+                            <i className="bi bi-chevron-down ms-auto" />
+                        </Link>
+                        <ul
+                            id="components-nav"
+                            className="nav-content collapse "
+                            data-bs-parent="#sidebar-nav"
+                        >
+                            <li>
+                                <Link href="/submitted-data?id=1">
+                                    <i className="bi bi-circle" />
+                                    <span>Residential</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Eatery</span>
+                                </Link>
+                            </li> <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Health</span>
+                                </Link>
+                            </li> <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Hospitality</span>
+                                </Link>
+                            </li> <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Industry</span>
+                                </Link>
+                            </li> <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Institution</span>
+                                </Link>
+                            </li> <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Market</span>
+                                </Link>
+                            </li> <li>
+                                <Link href="components-alerts.html">
+                                    <i className="bi bi-circle" />
+                                    <span>Sanitary</span>
+                                </Link>
+                            </li>
 
 
-//                         </ul>
-//                     </li> */}
+                        </ul>
+                    </li> */}
 //                     {/* <li className="nav-item">
 //                         <Link className={
 //                             pathname == "/map"

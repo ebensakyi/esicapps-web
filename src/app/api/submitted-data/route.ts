@@ -32,8 +32,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const searchText = searchParams.get("searchText") ?? "";
 
-    const formId = Number(searchParams.get("formId")) || 1
-    console.log("FormID===>", searchParams);
+    const formId = Number(searchParams.get("formId")) || 1;
 
     const published = Number(searchParams.get("published"));
     // const filterBy = searchParams.get("filterBy");
@@ -42,15 +41,84 @@ export async function GET(request: Request) {
 
     let perPage = 10;
     let skip = 0; //Number((curPage - 1) * perPage) || 0;
-    let count = 4
+    let count = 4;
 
     const response = await prisma.inspection.findMany({
       where: {
-        inspectionFormId:Number(formId),
+        inspectionFormId: Number(formId),
       },
       include: {
-        InspectionType:true,
+        InspectionType: true,
         BasicInfoSection: {
+          where:
+            searchText != ""
+              ? {
+                  OR: [
+                    {
+                      ghanaPostGps: {
+                        contains: searchText,
+                        mode: "insensitive",
+                      },
+                    },
+                    {
+                      Inspection: {
+                        premisesCode: {
+                          contains: searchText,
+                          mode: "insensitive",
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        Region: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        District: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        User: {
+                          surname: {
+                            contains: searchText,
+                            mode: "insensitive",
+                          },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        User: {
+                          otherNames: {
+                            contains: searchText,
+                            mode: "insensitive",
+                          },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        Community: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        ElectoralArea: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                  ],
+                }
+              : {},
           include: {
             Community: {
               include: {
@@ -72,9 +140,11 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json( {response,
+    return NextResponse.json({
+      response,
       curPage: curPage,
-      maxPage: Math.ceil(count / perPage)});
+      maxPage: Math.ceil(count / perPage),
+    });
   } catch (error) {
     console.log("error:=> ", error);
 

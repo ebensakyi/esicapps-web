@@ -498,7 +498,8 @@ export default function User({ data }: any) {
                                             <div className="col-sm-12">
                                                 <input type="email" className="form-control" placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} />
                                             </div>
-                                        </div><div className="col-sm-3 mb-3">
+                                        </div>
+                                        <div className="col-sm-3 mb-3">
                                             <label
                                                 htmlFor="inputNumber"
                                                 className="col-sm-12 col-form-label"
