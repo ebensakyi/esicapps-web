@@ -114,7 +114,7 @@ export default async function Data({ data }: any) {
 
 
         router.push(
-            `${pathname}?formId=${formId}&published=1&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
+            `${pathname}?formId=${formId}&published=${published}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
 
         );
     };
@@ -287,115 +287,54 @@ export default async function Data({ data }: any) {
             <section className="section">
                 <div className="row">
                     <div className="col-lg-12">
-                        {/* <div className="card"> */}
-                        <div className="card-body">
-                            {/* <h5 className="card-title">Tables</h5> */}
-                            <div className="btn-group" role="group" aria-label="Basic example">
-                            <div className="col-md-4">
-                                    <div className="input-group mb-3">
-                                        <select
-                                            className="form-control"
-                                            aria-label="Default select example"
-                                            ref={publishingStatusRef}
-                                            id="publishingStatus"
-                                            name="publishingStatus"
-                                        >
-                                            <option value="" selected>
-                                                Filter by{" "}
-                                            </option>
-                                            <option value="1">
-                                                Published
-                                            </option>
-                                            <option value="0">
-                                                Unpublished
-                                            </option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="input-group mb-3">
-                                        <input type="text" className="form-control" placeholder='Enter search term' aria-label="Recipient's username" aria-describedby="basic-addon2" ref={searchTextRef}
-                                            id="searchText"
-                                            name="searchText" />
-                                        <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
-                                    </div>
-                                </div>
-                                
-                                <div className="col-md-4">
-                                    <div className="input-group mb-3">
-                                        <button
-                                            type="button"
-                                            className="btn btn-sm btn-success btn-label waves-effect right waves-light "
-                                            onClick={handleExportAll}
-                                        >
-                                            <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                                            Export as excel
-                                        </button>{" "}
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
-                            {/* <div className="col-md-2">
-                                <label className="form-label mb-0">Select level</label>
-
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e) => {
-                                        setFilterBy(e.target.value);
-
-                                        if (userLevel == 2) {
-                                            getDistrictsByRegion(userRegion);
-                                        }
-
-                                        if (userLevel == 3) {
-                                            getElectoralAreasByDistrict(userDistrict);
-                                        }
-                                        if (e.target.value == "national") {
-                                            setFilterValue("");
-                                        }
-                                    }}
-                                    value={filterBy}
-                                >
-                                    <option value="" selected>
-                                        Filter by{" "}
-                                    </option>
-                                    <option hidden={userLevel != 1} value="national">
-                                        All
-                                    </option>
-                                    <option hidden={userLevel != 1} value="regionId">
-                                        Region
-                                    </option>
-                                    <option hidden={userLevel != 1 && userLevel != 2} value="districtId">
-                                        District
-                                    </option>
-                                    <option
-                                        hidden={userLevel != 1 && userLevel != 2 && userLevel != 3}
-                                        value="electoralAreaId"
-                                    >
-                                        Electoral Area
-                                    </option>
-                                    <option
-                                        hidden={userLevel != 1 && userLevel != 2 && userLevel != 3}
-                                        value="communityId"
-                                    >
-                                        Community
-                                    </option>
-                                </select>
-                            </div> */}
-                        </div>
-                        {/* </div> */}
-
+                      
                         {/* End Page Title */}
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
+                                    <form className="row g-3">
+                            {/* <div className="col-md-2">
+                                <input type="text" className="form-control" placeholder="City" />
+                            </div> */}
+                            <div className="col-md-2">
+                                <select ref={publishingStatusRef}
+                                    id="publishingStatus"
+                                    name="publishingStatus" className="form-select input-group" >
+                                    <option value="" selected>
+                                        Filter by{" "}
+                                    </option>
+                                    <option value="1">
+                                        Published
+                                    </option>
+                                    <option value="0">
+                                        Unpublished
+                                    </option>
+                                </select>
+                            </div>
+                            <div className="col-md-2">
+                                <div className="input-group">
+                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                        id="searchText"
+                                        name="searchText" />
+                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                </div>
+
+                            </div>
+
+                            <div className="col-md-4">
+                                                <div className="input-group mb-3">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm btn-success  "
+                                                        onClick={handleExportAll}
+                                                    >
+                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                                        Export as excel
+                                                    </button>{" "}
+                                                </div>
+                                            </div>
+                        </form>
                                         {/* <div className="row">
                                             <div className="col-md-3">
                                                 <button

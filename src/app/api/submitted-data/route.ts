@@ -39,14 +39,86 @@ export async function GET(request: Request) {
     let filterValue = searchParams.get("filterValue");
     let curPage = Number(searchParams.get("page"));
 
-    let perPage = 10;
-    let skip = 0; //Number((curPage - 1) * perPage) || 0;
-    let count = 4;
+    let perPage = 2;
+    let skip = Number((curPage - 1) * perPage) || 0;
     let searchText =searchParams.get("searchText")?.toString()  == "undefined" ? "" : searchParams.get("searchText")?.toString()
 
 
- console.log("searchText====> ", searchText);
- console.log(typeof searchText);
+    let count = await prisma.basicInfoSection.count({
+      // where: getSearchParams(req, searchText).where,
+      where:
+        searchText != ""
+          ? {
+              OR: [
+               
+                {
+                  Inspection: {
+                    premisesCode: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      surname: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    User: {
+                      otherNames: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    Community: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  Inspection: {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+              ],
+
+              Inspection: {
+                isPublished: published,
+                inspectionFormId:formId,
+                // regionId: filterValue,
+                // districtId: filterValue,
+              },
+            }
+          : {
+              Inspection: {
+                inspectionFormId: formId,
+                isPublished: published,
+                // regionId: filterValue,
+                // districtId: filterValue,
+              },
+            },
+    });
  
 
     // console.log(( searchText != ""  && searchText != "undefined"));
