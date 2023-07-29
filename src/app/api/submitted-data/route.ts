@@ -1,7 +1,6 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
-import { log } from "util";
 
 export async function POST(request: Request) {
   try {
@@ -30,111 +29,102 @@ export async function GET(request: Request) {
 
     // await logActivity("Visited submitted data list", userId);
 
-    const { searchParams } = new URL(request.url);
-    
-    const searchText = searchParams.get("searchText")  == "undefined" ? "" : searchParams.get("searchText")
+    let { searchParams } = new URL(request.url);
+       
 
+    let formId = Number(searchParams.get("formId")) || 1;
 
- console.log("searchText====> ", searchText);
-
-    // console.log(( searchText != ""  && searchText != "undefined"));
-    
-    
-
-    
-
-    const formId = Number(searchParams.get("formId")) || 1;
-
-    const published = Number(searchParams.get("published"));
-    // const filterBy = searchParams.get("filterBy");
-    // const filterValue = searchParams.get("filterValue");
-    const curPage = Number(searchParams.get("page"));
+    let published = Number(searchParams.get("published"));
+    let filterBy = searchParams.get("filterBy");
+    let filterValue = searchParams.get("filterValue");
+    let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip = 0; //Number((curPage - 1) * perPage) || 0;
     let count = 4;
+    let searchText =searchParams.get("searchText")?.toString()  == "undefined" ? "" : searchParams.get("searchText")?.toString()
+
+
+ console.log("searchText====> ", searchText);
+ console.log(typeof searchText);
+ 
+
+    // console.log(( searchText != ""  && searchText != "undefined"));
 
     const response = await prisma.basicInfoSection.findMany({
       where:
-        searchText != ""
-          ? {
-              OR: [
-                {
-                  ghanaPostGps: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  Inspection: {
-                    premisesCode: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                },
-                {
-                  Inspection: {
-                    Region: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  Inspection: {
-                    District: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  Inspection: {
-                    User: {
-                      surname: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  Inspection: {
-                    User: {
-                      otherNames: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  Inspection: {
-                    Community: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  Inspection: {
-                    ElectoralArea: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-
-               
-              ],
-
-              Inspection: {
-                isPublished: published,
-                inspectionFormId:formId,
-                // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
-                // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
+      {
+        OR: [
+          {
+           
+              accuracy: {
+                contains: searchText,
+                mode: "insensitive",
               },
-            }
-          : {
+         
+          },
+          {
+            Inspection: {
+              premisesCode: {
+                contains: searchText,
+                mode: "insensitive",
+              },
+            },
+          },
+          {
+                Inspection: {
+                  Region: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              },
+              {
+                Inspection: {
+                  District: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              },
+              {
+                Inspection: {
+                  ElectoralArea: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              },
+              {
+                Inspection: {
+                  Community: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              },
+              {
+                Inspection: {
+                  User: {
+                    surname: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              },
+              {
+                Inspection: {
+                  User: {
+                    otherNames: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              },
+        ],
+      
+            
+
               Inspection: {
                 isPublished: published,
                 inspectionFormId:formId,
-
                 // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
                 // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
               },
             },
+         
       skip: skip,
       take: perPage,
       orderBy: {
@@ -181,6 +171,3 @@ export async function GET(request: Request) {
 
 
 
-const qryWhere = async (searchText:string)=>{
-if(searchText)
-}

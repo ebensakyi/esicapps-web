@@ -48,7 +48,7 @@ export default function RootLayout({
 
 
       <link href="../../assets/css/style.css" rel="stylesheet"></link>
-      <body className={inter.className}>
+      <body className={inter.className} >
         <ToastContainer
           position="top-right"
           autoClose={5000}

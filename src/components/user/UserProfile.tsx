@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { pages } from '../../../prisma/seed/page';
 import { pageAccess } from '../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
@@ -12,7 +12,9 @@ import { LOGIN_URL } from "@/config";
 
 
 
-export default function Profile({ data }: any) {
+export default function UserProfile({ data }: any) {
+
+
 
 
 
@@ -27,6 +29,7 @@ export default function Profile({ data }: any) {
     const router = useRouter();
     const pathname = usePathname()
 
+    const [userId, setUserId] = useState("")
     const [surname, setSurname] = useState("");
     const [otherNames, setOtherNames] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -35,10 +38,60 @@ export default function Profile({ data }: any) {
     const [newPassword, setNewPassword] = useState("");
 
 
+    useEffect(() => {
+        setSurname(data.userData.surname);
+        setOtherNames(data.userData.otherNames);
+        setEmail(data.userData.email);
+        setPhoneNumber(data.userData.phoneNumber);
+        setUserId(data.userData.userId);
+
+    })
 
 
+    const changePassword = async (e: any) => {
+        try {
+            e.preventDefault();
 
-    const updateUser = async (e: any) => {
+
+         
+            if (currentPassword == "") {
+                return toast.error("Current password cannot be empty");
+            }
+            if (newPassword == "") {
+                return toast.error("New password cannot be empty");
+            }
+            let data = {
+               
+                phoneNumber,
+                newPassword,
+                currentPassword,
+                changePassword: 1
+            };
+
+
+            const response = await axios.put("/api/auth/profile", data);
+
+            console.log(response);
+            
+          
+            setCurrentPassword("");
+            setNewPassword("");
+
+            if (response.status == 200) {
+                router.refresh()
+
+                return toast.success("Password updated");
+            }
+            if (response.status == 201) {
+                return toast.error("Wrong current user password");
+            }
+        } catch (error) {
+            console.log(error);
+            return toast.error("An error occurred");
+        }
+    };
+
+    const updateProfile = async (e: any) => {
         try {
             e.preventDefault();
 
@@ -55,19 +108,18 @@ export default function Profile({ data }: any) {
             if (phoneNumber == "") {
                 return toast.error("PhoneNumber cannot be empty");
             }
-            let  data = {
-               
+            let data = {
+                userId,
                 surname,
                 otherNames,
                 email,
                 phoneNumber,
-                newPassword,
-                currentPassword
-               
+                currentPassword,
+                changePassword: 0
             };
 
 
-            const response = await axios.post("/api/auth/profile", data);
+            const response = await axios.put("/api/auth/profile", data);
             setSurname("");
             setOtherNames("");
             setEmail("");
@@ -78,21 +130,21 @@ export default function Profile({ data }: any) {
             if (response.status == 200) {
                 router.refresh()
 
-                return toast.success("User guide added");
+                return toast.success("User profile update");
             }
             if (response.status == 201) {
-                return toast.error("Same name already exist");
+                return toast.error("Wrong current user password");
             }
         } catch (error) {
             console.log(error);
             return toast.error("An error occurred");
         }
     };
-   
+
 
     return (
         <main id="main" className="main">
-        {/* <ToastContainer
+            {/* <ToastContainer
             position="top-right"
             autoClose={5000}
             hideProgressBar={false}
@@ -103,9 +155,9 @@ export default function Profile({ data }: any) {
             draggable
             pauseOnHover
         /> */}
-        <div className="pagetitle">
-            <h1>USERS</h1>
-            {/* <nav>
+            <div className="pagetitle">
+                <h1>PROFILE</h1>
+                {/* <nav>
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                         <a href="index.html">Home</a>
@@ -114,16 +166,16 @@ export default function Profile({ data }: any) {
                     <li className="breadcrumb-item active">Elements</li>
                 </ol>
             </nav> */}
-        </div>
-        {/* End Page Title */}
-        <section className="section">
-            <div className="row">
-                <div className="col-lg-12">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Enter user details</h5>
-                            {/* General Form Elements */}
-                           
+            </div>
+            {/* End Page Title */}
+            <section className="section">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Enter user details</h5>
+                                {/* General Form Elements */}
+
                                 <div className="row">
 
                                     <div className="col-sm-3 mb-3">
@@ -161,6 +213,39 @@ export default function Profile({ data }: any) {
                                             <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
                                         </div>
                                     </div>
+                                   
+
+                                    <div className="row">
+                                        <div className="col-sm-4">
+
+
+                                            <button
+                                                className="btn btn-warning"
+                                                onClick={(e) => {
+                                                    updateProfile(e);
+                                                }}
+                                            >
+                                                Update Profile
+                                            </button>
+
+                                        </div>
+
+                                       
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Change Password</h5>
+                                {/* General Form Elements */}
+
+                                <div className="row">
+
+                                  
+                                  
                                     <div className="col-sm-3 mb-3">
                                         <label
                                             htmlFor="inputNumber"
@@ -169,7 +254,7 @@ export default function Profile({ data }: any) {
                                             Current Password
                                         </label>
                                         <div className="col-sm-12">
-                                            <input type="number" className="form-control" placeholder='Enter current password' onChange={(e) => setCurrentPassword(e.target.value)} value={currentPassword} />
+                                            <input type="text" className="form-control" placeholder='Enter current password' onChange={(e) => setCurrentPassword(e.target.value)} value={currentPassword} />
                                         </div>
                                     </div>
                                     <div className="col-sm-3 mb-3">
@@ -180,39 +265,42 @@ export default function Profile({ data }: any) {
                                             New Password
                                         </label>
                                         <div className="col-sm-12">
-                                            <input type="number" className="form-control" placeholder='Enter new password' onChange={(e) => setNewPassword(e.target.value)} value={newPassword} />
+                                            <input type="text" className="form-control" placeholder='Enter new password' onChange={(e) => setNewPassword(e.target.value)} value={newPassword} />
                                         </div>
                                     </div>
-                                </div>
-
-                                
-                                   
-                                          </div>
 
 
-                                <div className=" mb-3">
-                                    <div className="col-sm-10">
+                                  
                                        
-                                                
-                                                <button
-                                                    className="btn btn-warning"
-                                                    onClick={(e) => {
-                                                        updateUser(e);
-                                                    }}
-                                                >
-                                                    Update
-                                                </button>
-                                      
-                                    </div>
+                                    <div className="col-sm-3 mb-3">
+
+                                        <label
+                                            htmlFor="inputNumber"
+                                            className="col-sm-12 col-form-label"
+                                        >
+                                            .
+                                        </label>
+                                            <button
+                                                className="btn btn-success"
+                                                onClick={(e) => {
+                                                    changePassword(e);
+                                                }}
+                                            >
+                                                Update Password
+                                            </button>
+
+                                        </div>
+
+                               
+
                                 </div>
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-            
-        </section>
-    </main>
+
+            </section>
+        </main>
 
     )
 }

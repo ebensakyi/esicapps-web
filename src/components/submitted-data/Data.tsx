@@ -10,7 +10,8 @@ import { useRef, useState } from 'react';
 
 export default async function Data({ data }: any) {
 
-    const inputRef = useRef(null);
+    const searchTextRef = useRef(null);
+    const publishingStatusRef = useRef(null);
 
 
     // const { data: session } = useSession()
@@ -42,7 +43,7 @@ export default async function Data({ data }: any) {
     const [community, setCommunity] = useState("");
 
     const [filterValue, setFilterValue] = useState("");
-    const [filterBy, setFilterBy] = useState("");
+    const [filterBy, setFilterBy] = useState("1");
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
 
@@ -244,13 +245,13 @@ export default async function Data({ data }: any) {
     // };
     const handleSearch = () => {
         try {
-            let _searchText: any = inputRef.current.value
+            let _searchText: any = searchTextRef?.current.value
+            let _publishingStatus: any = publishingStatusRef?.current.value
 
-            console.log(searchText);
 
 
             router.push(
-                `${pathname}?formId=${formId}&published=${published}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
+                `${pathname}?formId=${formId}&published=${_publishingStatus}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
 
             );
 
@@ -289,38 +290,40 @@ export default async function Data({ data }: any) {
                         {/* <div className="card"> */}
                         <div className="card-body">
                             {/* <h5 className="card-title">Tables</h5> */}
-                            {/* Pills Tabs */}
-                            <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-
-                               
-                                <div className="text-center">
-                                    <input type="text"  placeholder='Enter search term'
-                                        ref={inputRef}
-                                        id="searchText"
-                                        name="searchText"
-                                    //  value={searchText}
-                                    //     onChange={(e: any) => {
-                                    //         setSearchText(e.target.value);
-                                    //         autoHandleSearch(e.target.value);
-                                    //     }}
-                                    />
-
-                             
-                                        {/* ?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText} */}
-
-
-                                        <button
-                                            type="button"
-                                            className="btn btn-sm btn-primary btn-label waves-effect right waves-light "
-                                            onClick={handleSearch}
+                            <div className="btn-group" role="group" aria-label="Basic example">
+                            <div className="col-md-4">
+                                    <div className="input-group mb-3">
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            ref={publishingStatusRef}
+                                            id="publishingStatus"
+                                            name="publishingStatus"
                                         >
-                                            <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                                            Search
-                                        </button>{" "}
-                                   
-                                        {/* ?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText} */}
+                                            <option value="" selected>
+                                                Filter by{" "}
+                                            </option>
+                                            <option value="1">
+                                                Published
+                                            </option>
+                                            <option value="0">
+                                                Unpublished
+                                            </option>
 
-
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="input-group mb-3">
+                                        <input type="text" className="form-control" placeholder='Enter search term' aria-label="Recipient's username" aria-describedby="basic-addon2" ref={searchTextRef}
+                                            id="searchText"
+                                            name="searchText" />
+                                        <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                    </div>
+                                </div>
+                                
+                                <div className="col-md-4">
+                                    <div className="input-group mb-3">
                                         <button
                                             type="button"
                                             className="btn btn-sm btn-success btn-label waves-effect right waves-light "
@@ -329,12 +332,14 @@ export default async function Data({ data }: any) {
                                             <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                                             Export as excel
                                         </button>{" "}
+                                    </div>
                                 </div>
 
 
 
 
-                            </ul>
+
+                            </div>
                             {/* <div className="col-md-2">
                                 <label className="form-label mb-0">Select level</label>
 
@@ -416,12 +421,12 @@ export default async function Data({ data }: any) {
                                             </div>
                                         </div> */}
                                     </div>
-                                    <div className="card-body">
+                                    <div className="card-body table-responsive">
                                         {/* <h5 className="card-title">Datatables</h5> */}
 
 
                                         {/* Table with stripped rows */}
-                                        <table className="table datatable">
+                                        <table className="table  datatable">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Rating </th>
@@ -451,14 +456,14 @@ export default async function Data({ data }: any) {
                                                             <tr key={dt.id}>
                                                                 <td>{handleRating(dt?.totalRating)}</td>
                                                                 <td>
-                                                                    {dt?.InspectionType?.name}
-                                                                    {dt?.InspectionType?.id == 2 ? (
+                                                                    {dt?.Inspection?.InspectionType?.name}
+                                                                    {dt?.Inspection?.InspectionType?.id == 2 ? (
                                                                         <span>
                                                                             <Link
                                                                                 href={{
                                                                                     pathname: `/submitted-data/data_view`,
                                                                                     query: {
-                                                                                        id: dt?.prevInspectionId,
+                                                                                        id: dt?.Inspection?.prevInspectionId,
                                                                                         inspectionFormId: formId,
                                                                                         published: published,
                                                                                     },
@@ -473,7 +478,7 @@ export default async function Data({ data }: any) {
                                                                         <></>
                                                                     )}
                                                                 </td>
-                                                                <td>{dt?.premisesCode}</td>
+                                                                <td>{dt?.Inspection?.premisesCode}</td>
                                                                 <td>{dt?.User.surname} {dt?.User.otherNames}</td>
                                                                 {/* <td>
                                                                 {moment(dt?.startedAt).format(
@@ -507,13 +512,13 @@ export default async function Data({ data }: any) {
                                                                         {/* </a> */}
                                                                     </Link>
                                                                 </td>
-                                                                <td>{dt?.BasicInfoSection?.accuracy}</td>
+                                                                <td>{dt?.accuracy}</td>
                                                                 <td>
-                                                                    {dt?.BasicInfoSection?.Community?.ElectoralArea?.District?.Region?.name}
+                                                                    {dt?.Community?.ElectoralArea?.District?.Region?.name}
                                                                 </td>
-                                                                <td>{dt?.BasicInfoSection?.Community?.ElectoralArea?.District?.name}</td>
-                                                                <td>{dt?.BasicInfoSection?.Community?.ElectoralArea?.name}</td>
-                                                                <td>{dt?.BasicInfoSection?.Community?.name}</td>{" "}
+                                                                <td>{dt?.Community?.ElectoralArea?.District?.name}</td>
+                                                                <td>{dt?.Community?.ElectoralArea?.name}</td>
+                                                                <td>{dt?.Community?.name}</td>{" "}
                                                                 <td>
                                                                     {moment(dt?.Inspection?.createdAt).format(
                                                                         "MMM Do YYYY, h:mm:ss a"

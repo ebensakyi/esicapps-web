@@ -3,24 +3,47 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Header() {
     const pathname = usePathname()
+    const [showDrawer,setShowDrawer]= useState(false)
 
     const { data: session } = useSession()
+
 
     return (
 
         <>
             {session?.user ?
                 <header id="header" className="header fixed-top d-flex align-items-center">
+                    {/* <button onClick={()=>{
+                        if(!showDrawer){
+                            document.body.classList.add("toggle-sidebar")
+                            setShowDrawer(true)
+                        }else{
+                            document.body.classList.remove("toggle-sidebar")
+                            setShowDrawer(false)
+                        }
+                        
+
+                    }}>Open</button> */}
                     <div className="d-flex align-items-center justify-content-between">
                         <Link href="/" className="logo d-flex align-items-center">
                             <img src="../../assets/img/logo.png" alt="" />
                             <span className="d-none d-lg-block">ESICApps</span>
                         </Link>
-                        <i className="bi bi-list toggle-sidebar-btn" />
+                        <i className="bi bi-list toggle-sidebar-btn" onClick={()=>{
+                        if(!showDrawer){
+                            document.body.classList.add("toggle-sidebar")
+                            setShowDrawer(true)
+                        }else{
+                            document.body.classList.remove("toggle-sidebar")
+                            setShowDrawer(false)
+                        }
+                        
+
+                    }}/>
                     </div>
 
                     <nav className="header-nav ms-auto">
