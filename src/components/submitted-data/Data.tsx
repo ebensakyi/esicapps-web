@@ -26,12 +26,6 @@ export default async function Data({ data }: any) {
     const searchtext = searchParams.get('searchText')
 
 
-
-
-
-
-
-
     const [searchText, setSearchText] = useState();
     const [districtsData, setDistrictsData] = useState([]);
     const [electoralAreasData, setElectoralAreasData] = useState([]);
@@ -67,17 +61,18 @@ export default async function Data({ data }: any) {
 
     const handleExportAll = async () => {
         try {
+            let searchText = searchParams.get('searchText')
             const response = await axios.post(
-                `/api/v1/submitted-data/data-to-excel`,
+                `/api/submitted-data`,
                 {
-                    inspectionFormId: Number(formId),
+                    formId: Number(formId),
                     fileName: handleExcelName(),
                     published,
-                    filterBy,
-                    filterValue,
                     searchText
                 }
             );
+
+
             if (response.status == 200) {
                 router.push(response.data);
             }
@@ -85,33 +80,10 @@ export default async function Data({ data }: any) {
             console.log(error);
         }
     };
-    // const handleExportFiltered = async () => {
-    //     try {
-    //         const response = await axios.post(
-    //             `/api/v1/submitted-data/data-to-excel`,
-    //             {
-    //                 inspectionFormId: Number(formId),
-    //                 fileName: handleExcelName(),
-    //                 published,
-    //                 filterBy,
-    //                 filterValue,
-    //                 exportType: 2,
-    //             }
-    //         );
-    //         if (response.status == 200) {
-    //             router.push(response.data);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+   
     const handlePagination = (page: any) => {
-        console.log(">>>>>>>>", page);
 
         page = page.selected == -1 ? 1 : page.selected + 1;
-
-
-
 
         router.push(
             `${pathname}?formId=${formId}&published=${published}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
@@ -181,72 +153,11 @@ export default async function Data({ data }: any) {
         }
     };
 
-    // const returnFilterValue = async (filterBy: string | undefined) => {
-    //     if (filterBy == "regionId") {
-    //         setFilterValue(region);
-    //         return region;
-    //     }
-    //     if (filterBy == "districtId") {
-    //         setFilterValue(district);
-    //         return district;
-    //     }
-    //     if (filterBy == "electoralAreaId") {
-    //         setFilterValue(electoralArea);
-    //         return electoralArea;
-    //     }
-    //     if (filterBy == "community") {
-    //         setFilterValue(community);
-    //         return community;
-    //     }
-    // };
-    // const handleFilter = async (e: { preventDefault: () => void; }) => {
-    //     e.preventDefault();
-
-
-
-
-    //     await returnFilterValue(filterBy);
-    //     router.push(
-    //         `${pathname}?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`,
-    //     );
-
-    // };
-
-    // const getDistrictsByRegion = async (regionId: string | undefined) => {
-    //     try {
-    //         const response = await axios.get(
-    //             "/api/v1/primary-data/district?regionId=" + regionId
-    //         );
-    //         setDistrictsData(response.data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-    // const getElectoralAreasByDistrict = async (districtId: string | undefined) => {
-    //     try {
-    //         const response = await axios.get(
-    //             "/api/v1/primary-data/electoral-area?districtId=" + districtId
-    //         );
-    //         setElectoralAreasData(response.data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-    // const getCommunitiesByElectoralArea = async (electoralAreaId: string) => {
-    //     try {
-    //         const response = await axios.get(
-    //             "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
-    //         );
-
-    //         setCommunitiesData(response.data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+   
     const handleSearch = () => {
         try {
-            let _searchText: any = searchTextRef?.current.value
-            let _publishingStatus: any = publishingStatusRef?.current.value
+            let _searchText: any = searchTextRef?.current?.value
+            let _publishingStatus: any = publishingStatusRef?.current?.value
 
 
 
@@ -287,54 +198,54 @@ export default async function Data({ data }: any) {
             <section className="section">
                 <div className="row">
                     <div className="col-lg-12">
-                      
+
                         {/* End Page Title */}
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
-                                    <form className="row g-3">
-                            {/* <div className="col-md-2">
+                                        <form className="row g-3">
+                                            {/* <div className="col-md-2">
                                 <input type="text" className="form-control" placeholder="City" />
                             </div> */}
-                            <div className="col-md-2">
-                                <select ref={publishingStatusRef}
-                                    id="publishingStatus"
-                                    name="publishingStatus" className="form-select input-group" >
-                                    <option value="" selected>
-                                        Filter by{" "}
-                                    </option>
-                                    <option value="1">
-                                        Published
-                                    </option>
-                                    <option value="0">
-                                        Unpublished
-                                    </option>
-                                </select>
-                            </div>
-                            <div className="col-md-2">
-                                <div className="input-group">
-                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
-                                        id="searchText"
-                                        name="searchText" />
-                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
-                                </div>
+                                            <div className="col-md-2">
+                                                <select ref={publishingStatusRef}
+                                                    id="publishingStatus"
+                                                    name="publishingStatus" className="form-select input-group" >
+                                                    <option value="" selected>
+                                                        Filter by{" "}
+                                                    </option>
+                                                    <option value="1">
+                                                        Published
+                                                    </option>
+                                                    <option value="0">
+                                                        Unpublished
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div className="col-md-2">
+                                                <div className="input-group mb-3">
+                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                                        id="searchText"
+                                                        name="searchText" />
+                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                                </div>
 
-                            </div>
+                                            </div>
 
-                            <div className="col-md-4">
+                                            <div className="col-md-4">
                                                 <div className="input-group mb-3">
                                                     <button
                                                         type="button"
                                                         className="btn btn-sm btn-success  "
                                                         onClick={handleExportAll}
                                                     >
-                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
                                                         Export as excel
-                                                    </button>{" "}
+                                                    </button>
                                                 </div>
                                             </div>
-                        </form>
+                                        </form>
                                         {/* <div className="row">
                                             <div className="col-md-3">
                                                 <button
@@ -376,7 +287,7 @@ export default async function Data({ data }: any) {
                                                     <th scope="col">Officer</th>
                                                     {/* <th scope="col">GhanaPost GPS</th> */}
                                                     <th scope="col">Lat/Lng</th>
-                                                    <th scope="col">GPS Accuracy</th>
+                                                    <th scope="col">Accuracy</th>
                                                     <th scope="col">Region</th>
                                                     <th scope="col">District</th>
                                                     <th scope="col">Electoral Area</th>
@@ -390,167 +301,165 @@ export default async function Data({ data }: any) {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    data?.submittedData?.response?.map(dt => {
-                                                        return (
-                                                            <tr key={dt.id}>
-                                                                <td>{handleRating(dt?.totalRating)}</td>
-                                                                <td>
-                                                                    {dt?.Inspection?.InspectionType?.name}
-                                                                    {dt?.Inspection?.InspectionType?.id == 2 ? (
-                                                                        <span>
+                                                    data?.submittedData?.response?.map(dt => (
+                                                        <tr key={dt.id}>
+                                                            <td>{handleRating(dt?.Inspection?.totalRating)}</td>
+                                                            <td>
+                                                                {dt?.Inspection?.InspectionType?.name}
+                                                                {dt?.Inspection?.InspectionType?.id == 2 ? (
+                                                                    <span>
+                                                                        <Link
+                                                                            href={{
+                                                                                pathname: `/submitted-data/data_view`,
+                                                                                query: {
+                                                                                    id: dt?.Inspection?.prevInspectionId,
+                                                                                    inspectionFormId: formId,
+                                                                                    published: published,
+                                                                                },
+                                                                            }}
+                                                                        >
+                                                                            {/* <a className="dropdown-item"> */}
+                                                                            <i className="ri-external-link-line align-bottom me-2 text-success" />
+                                                                            {/* </a> */}
+                                                                        </Link>
+                                                                    </span>
+                                                                ) : (
+                                                                    <></>
+                                                                )}
+                                                            </td>
+                                                            <td>{dt?.Inspection?.premisesCode}</td>
+                                                            <td>{dt?.User.surname} {dt?.User.otherNames}</td>
+                                                            {/* <td>
+        {moment(dt?.startedAt).format(
+            "MMM Do YYYY, h:mm:ss a"
+        )}
+    </td>
+    <td>
+        {moment(dt?.completedAt).format(
+            "MMM Do YYYY, h:mm:ss a"
+        )}
+    </td> */}
+
+                                                            <td>
+                                                                {" "}
+                                                                <Link
+                                                                    href={{
+                                                                        pathname: `http://www.google.com/maps/place/${dt?.BasicInfoSection?.latitude},${dt?.BasicInfoSection?.longitude}`,
+                                                                        query: {},
+                                                                    }}
+                                                                    passHref
+                                                                >
+                                                                    {/* <a
+        target="_blank"
+        rel="noopener noreferrer"
+        className="dropdown-item"
+    > */}
+                                                                    {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
+                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title={dt?.BasicInfoSection?.latitude + "," + dt?.BasicInfoSection?.longitude}>GPS</span>
+                                                                    {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
+                                                                    <i className="ri-external-link-line align-bottom me-2 text-success" />
+                                                                    {/* </a> */}
+                                                                </Link>
+                                                            </td>
+                                                            <td>{dt?.accuracy}</td>
+                                                            <td>
+                                                                {dt?.Community?.ElectoralArea?.District?.Region?.name}
+                                                            </td>
+                                                            <td>{dt?.Community?.ElectoralArea?.District?.name}</td>
+                                                            <td>{dt?.Community?.ElectoralArea?.name}</td>
+                                                            <td>{dt?.Community?.name}</td>{" "}
+                                                            <td>
+                                                                {moment(dt?.Inspection?.createdAt).format(
+                                                                    "MMM Do YYYY, h:mm:ss a"
+                                                                )}
+                                                            </td>
+                                                            <td>
+                                                                {dt?.Inspection?.isPublished == 0 ? (
+                                                                    <span className="badge bg-danger">Unpublished</span>
+                                                                ) : (
+                                                                    <span className="badge bg-success">Published</span>
+                                                                )}{" "}
+                                                            </td>
+                                                            <td>
+
+                                                                <div className="dropdown-item btn btn-sm " role="group">
+                                                                    <button
+                                                                        id="btnGroupDrop1"
+                                                                        type="button"
+                                                                        className="btn btn-success dropdown-toggle"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                        Actions
+                                                                    </button>
+                                                                    <ul
+                                                                        className="dropdown-menu"
+                                                                        aria-labelledby="btnGroupDrop1"
+                                                                    >
+                                                                        <li>
                                                                             <Link
+                                                                                className="dropdown-item btn btn-sm "
                                                                                 href={{
                                                                                     pathname: `/submitted-data/data_view`,
                                                                                     query: {
-                                                                                        id: dt?.Inspection?.prevInspectionId,
+                                                                                        id: dt?.Inspection?.id,
                                                                                         inspectionFormId: formId,
                                                                                         published: published,
                                                                                     },
                                                                                 }}
                                                                             >
-                                                                                {/* <a className="dropdown-item"> */}
-                                                                                <i className="ri-external-link-line align-bottom me-2 text-success" />
-                                                                                {/* </a> */}
+                                                                                View
                                                                             </Link>
-                                                                        </span>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                </td>
-                                                                <td>{dt?.Inspection?.premisesCode}</td>
-                                                                <td>{dt?.User.surname} {dt?.User.otherNames}</td>
-                                                                {/* <td>
-                                                                {moment(dt?.startedAt).format(
-                                                                    "MMM Do YYYY, h:mm:ss a"
-                                                                )}
+
+                                                                        </li>
+                                                                        <li>
+                                                                            <Link
+                                                                                className="dropdown-item btn btn-sm "
+                                                                                href={{
+                                                                                    pathname: `/submitted-data/data_edit`,
+                                                                                    query: {
+                                                                                        id: dt?.Inspection?.id,
+                                                                                        inspectionFormId: formId,
+                                                                                        published: published,
+                                                                                    },
+                                                                                }}
+                                                                            >
+                                                                                Edit
+                                                                            </Link>
+
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                                {/* <Link
+        href={{
+            pathname: `/submitted-data/data_view`,
+            query: {
+                id: dt?.Inspection?.id,
+                inspectionFormId: formId,
+                published: published,
+            },
+        }}
+    >
+            <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
+            View
+    </Link>
+    <Link
+        href={{
+            pathname: `/submitted-data/data_edit`,
+            query: {
+                id: dt?.Inspection?.id,
+                inspectionFormId: formId,
+                published: published,
+            },
+        }}
+    >
+            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
+            Edit
+    </Link> */}
                                                             </td>
-                                                            <td>
-                                                                {moment(dt?.completedAt).format(
-                                                                    "MMM Do YYYY, h:mm:ss a"
-                                                                )}
-                                                            </td> */}
-
-                                                                <td>
-                                                                    {" "}
-                                                                    <Link
-                                                                        href={{
-                                                                            pathname: `http://www.google.com/maps/place/${dt?.BasicInfoSection?.latitude},${dt?.BasicInfoSection?.longitude}`,
-                                                                            query: {},
-                                                                        }}
-                                                                        passHref
-                                                                    >
-                                                                        {/* <a
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="dropdown-item"
-                                                                    > */}
-                                                                        {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
-                                                                        <span data-bs-toggle="tooltip" data-bs-placement="top" title={dt?.BasicInfoSection?.latitude + "," + dt?.BasicInfoSection?.longitude}>GPS</span>
-                                                                        {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
-                                                                        <i className="ri-external-link-line align-bottom me-2 text-success" />
-                                                                        {/* </a> */}
-                                                                    </Link>
-                                                                </td>
-                                                                <td>{dt?.accuracy}</td>
-                                                                <td>
-                                                                    {dt?.Community?.ElectoralArea?.District?.Region?.name}
-                                                                </td>
-                                                                <td>{dt?.Community?.ElectoralArea?.District?.name}</td>
-                                                                <td>{dt?.Community?.ElectoralArea?.name}</td>
-                                                                <td>{dt?.Community?.name}</td>{" "}
-                                                                <td>
-                                                                    {moment(dt?.Inspection?.createdAt).format(
-                                                                        "MMM Do YYYY, h:mm:ss a"
-                                                                    )}
-                                                                </td>
-                                                                <td>
-                                                                    {dt?.Inspection?.isPublished == 0 ? (
-                                                                        <span className="badge bg-danger">Unpublished</span>
-                                                                    ) : (
-                                                                        <span className="badge bg-success">Published</span>
-                                                                    )}{" "}
-                                                                </td>
-                                                                <td>
-
-                                                                    <div className="dropdown-item btn btn-sm " role="group">
-                                                                        <button
-                                                                            id="btnGroupDrop1"
-                                                                            type="button"
-                                                                            className="btn btn-success dropdown-toggle"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false"
-                                                                        >
-                                                                            Actions
-                                                                        </button>
-                                                                        <ul
-                                                                            className="dropdown-menu"
-                                                                            aria-labelledby="btnGroupDrop1"
-                                                                        >
-                                                                            <li>
-                                                                                <Link
-                                                                                    className="dropdown-item btn btn-sm "
-                                                                                    href={{
-                                                                                        pathname: `/submitted-data/data_view`,
-                                                                                        query: {
-                                                                                            id: dt?.Inspection?.id,
-                                                                                            inspectionFormId: formId,
-                                                                                            published: published,
-                                                                                        },
-                                                                                    }}
-                                                                                >
-                                                                                    View
-                                                                                </Link>
-
-                                                                            </li>
-                                                                            <li>
-                                                                                <Link
-                                                                                    className="dropdown-item btn btn-sm "
-                                                                                    href={{
-                                                                                        pathname: `/submitted-data/data_edit`,
-                                                                                        query: {
-                                                                                            id: dt?.Inspection?.id,
-                                                                                            inspectionFormId: formId,
-                                                                                            published: published,
-                                                                                        },
-                                                                                    }}
-                                                                                >
-                                                                                    Edit
-                                                                                </Link>
-
-                                                                            </li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                    {/* <Link
-                                                                    href={{
-                                                                        pathname: `/submitted-data/data_view`,
-                                                                        query: {
-                                                                            id: dt?.Inspection?.id,
-                                                                            inspectionFormId: formId,
-                                                                            published: published,
-                                                                        },
-                                                                    }}
-                                                                >
-                                                                        <i className="ri-eye-fill align-bottom me-2 text-muted" />{" "}
-                                                                        View
-                                                                </Link>
-                                                                <Link
-                                                                    href={{
-                                                                        pathname: `/submitted-data/data_edit`,
-                                                                        query: {
-                                                                            id: dt?.Inspection?.id,
-                                                                            inspectionFormId: formId,
-                                                                            published: published,
-                                                                        },
-                                                                    }}
-                                                                >
-                                                                        <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
-                                                                        Edit
-                                                                </Link> */}
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
+                                                        </tr>
+                                                    ))}
                                             </tbody>
                                         </table>
                                         <ReactPaginate

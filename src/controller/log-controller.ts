@@ -1,4 +1,4 @@
-import { prisma } from "../prisma/db";
+import { prisma } from "../../prisma/db";
 
 export const logActivity = async (activity:string, userId:number) => {
   try {
