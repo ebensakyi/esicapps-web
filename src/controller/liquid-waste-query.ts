@@ -1,4 +1,5 @@
-import prisma from "../../../../../prisma/db";
+import {prisma} from "@/prisma/db";
+import { AnyLengthString } from "aws-sdk/clients/comprehend";
 
 // export const toiletAvailability = async (filterBy, filterValue) => {
     
@@ -41,7 +42,7 @@ import prisma from "../../../../../prisma/db";
 //     ];
 //   };
 
-  export const toiletAdequacy = async (filterBy, filterValue) => {
+  export const toiletAdequacy = async (filterBy:any, filterValue:any) => {
     
     let adequate = await prisma.liquidWasteSection.count({
       where:
@@ -82,7 +83,7 @@ import prisma from "../../../../../prisma/db";
     ];
   };
 
-  export const toiletCondition = async (filterBy, filterValue) => {
+  export const toiletCondition = async (filterBy:any, filterValue:any) => {
     
     let safe = await prisma.liquidWasteSection.count({
       where:
@@ -123,7 +124,7 @@ import prisma from "../../../../../prisma/db";
     ];
   };
 
-  export const toiletAvailability = async (filterBy,filterValue) => {
+  export const toiletAvailability = async (filterBy:any,filterValue:any) => {
     let toiletAvailabilityCount1 =
       await prisma.residentialPremisesInfoSection.count({
          where: filterBy == "undefined"
@@ -394,7 +395,7 @@ import prisma from "../../../../../prisma/db";
   };
   
 
-  function toJson(data) {
+  function toJson(data:any) {
     return JSON.parse(
       JSON.stringify(data, (_, v) =>
         typeof v === "bigint" ? `${v}n` : v

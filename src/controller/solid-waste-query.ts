@@ -1,6 +1,6 @@
-import prisma from "../../../../../prisma/db";
+import {prisma} from "@/prisma/db";
 
-export const wasteCollectorRegistration = async (filterBy, filterValue) => {
+export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) => {
   let wasteCollectorRegistered = await prisma.solidWasteSection.count({
     where:
       filterBy == "undefined"
@@ -57,7 +57,7 @@ export const wasteCollectorRegistration = async (filterBy, filterValue) => {
   ];
 };
 
-export const wasteSorting = async (filterBy, filterValue) => {
+export const wasteSorting = async (filterBy:any, filterValue:any) => {
   let wasteSorted = await prisma.solidWasteSection.count({
     where:
       filterBy == "undefined"
@@ -110,7 +110,7 @@ export const wasteSorting = async (filterBy, filterValue) => {
   ];
 };
 
-export const wasteReceptacle = async (filterBy, filterValue) => {
+export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
   let approvedWasteStorageReceptacle = await prisma.solidWasteSection.count({
     where:
       filterBy == "undefined"
