@@ -7,17 +7,24 @@ import { headers } from 'next/headers'
 async function getData() {
 
 
-  const res = await fetch(`${SERVER_BASE_URL}/api/dashboard`, {  cache: 'no-store', method: "GET",
-  headers: headers() })
+  const res = await fetch(`${SERVER_BASE_URL}/api/dashboard`, {
+    cache: 'no-store', method: "GET",
+    headers: headers()
+  })
 
   if (!res.ok) {
-      throw new Error('Failed to fetch data')
+    throw new Error('Failed to fetch data')
   }
 
-  return res.json()
+  return await res.json()
 }
 
-export default function page() {
-  return <Dashboard/>
-  
+export default async function page() {
+
+  const dashboard = await getData()
+  let data = { dashboard }
+
+
+  return <Dashboard data={data} />
+
 }

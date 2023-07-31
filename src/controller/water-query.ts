@@ -1,9 +1,16 @@
-import {prisma} from "@/prisma/db";
+import { prisma } from "@/prisma/db";
 
-export const groupByWaterSource = async (filterBy:any, filterValue:any) => {
+export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
   let summary;
 
-  if (filterBy == "undefined") {
+  console.log(filterBy);
+  console.log(filterValue);
+  
+  
+
+  if (filterBy == undefined) {
+    console.log("here");
+    
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "count"
 
@@ -13,6 +20,9 @@ export const groupByWaterSource = async (filterBy:any, filterValue:any) => {
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
 
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
+
+
+
   } else if (filterBy == "regionId") {
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "count"
@@ -62,10 +72,10 @@ export const groupByWaterSource = async (filterBy:any, filterValue:any) => {
   return toJson(summary);
 };
 
-export const groupByWaterStorage = async (filterBy:any, filterValue:any) => {
+export const groupByWaterStorage = async (filterBy: any, filterValue: any) => {
   let summary;
 
-  if (filterBy == "undefined") {
+  if (filterBy == undefined) {
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterStorage"."waterStorageTypeId","WaterStorageType"."name", COUNT("WaterSection"."id") AS "count"
 
@@ -124,16 +134,16 @@ export const groupByWaterStorage = async (filterBy:any, filterValue:any) => {
   return toJson(summary);
 };
 
-export const groupByWaterSourceCondition = async (filterBy:any, filterValue:any) => {
- 
-
+export const groupByWaterSourceCondition = async (
+  filterBy: any,
+  filterValue: any
+) => {
   let safeWaterSourceCount = await prisma.waterSection.count({
     where:
       filterBy == "undefined"
         ? {
             deleted: 0,
             waterSourceConditionId: 1,
-          
           }
         : {
             deleted: 0,
@@ -145,19 +155,18 @@ export const groupByWaterSourceCondition = async (filterBy:any, filterValue:any)
   });
   let unsafeWaterSourceCount = await prisma.waterSection.count({
     where:
-    filterBy == "undefined"
-      ? {
-          deleted: 0,
-          waterSourceConditionId: 2,
-        
-        }
-      : {
-          deleted: 0,
-          waterSourceConditionId: 2,
-          Inspection: {
-            [filterBy]: filterValue,
+      filterBy == "undefined"
+        ? {
+            deleted: 0,
+            waterSourceConditionId: 2,
+          }
+        : {
+            deleted: 0,
+            waterSourceConditionId: 2,
+            Inspection: {
+              [filterBy]: filterValue,
+            },
           },
-        },
   });
 
   return [
@@ -166,17 +175,16 @@ export const groupByWaterSourceCondition = async (filterBy:any, filterValue:any)
   ];
 };
 
-
-export const groupByWaterStorageCondition = async (filterBy:any, filterValue:any) => {
- 
-
+export const groupByWaterStorageCondition = async (
+  filterBy: any,
+  filterValue: any
+) => {
   let safeWaterStorageCount = await prisma.waterSection.count({
     where:
       filterBy == "undefined"
         ? {
             deleted: 0,
             waterStorageConditionId: 1,
-          
           }
         : {
             deleted: 0,
@@ -188,19 +196,18 @@ export const groupByWaterStorageCondition = async (filterBy:any, filterValue:any
   });
   let unsafeWaterStorageCount = await prisma.waterSection.count({
     where:
-    filterBy == "undefined"
-      ? {
-          deleted: 0,
-          waterStorageConditionId: 2,
-        
-        }
-      : {
-          deleted: 0,
-          waterStorageConditionId: 2,
-          Inspection: {
-            [filterBy]: filterValue,
+      filterBy == "undefined"
+        ? {
+            deleted: 0,
+            waterStorageConditionId: 2,
+          }
+        : {
+            deleted: 0,
+            waterStorageConditionId: 2,
+            Inspection: {
+              [filterBy]: filterValue,
+            },
           },
-        },
   });
 
   return [

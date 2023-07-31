@@ -7,7 +7,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    console.log(">>>>>>>>>>", res);
 
     let latitude = res.latitude;
     let longitude = res.longitude;
