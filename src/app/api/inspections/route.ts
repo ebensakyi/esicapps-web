@@ -18,7 +18,6 @@ export async function GET(request: Request) {
   try {
 
 
-    console.log("GETGETGETGET");
     
     // let userLevelId = Number(userData?.userLevelId);
     // let userRegion = Number(userData?.regionId);
@@ -27,13 +26,13 @@ export async function GET(request: Request) {
 
     // await logActivity("Visited submitted data list", userId);
 
-    const { searchParams } = new URL(request.url);
-    const searchText = searchParams.get("searchText");
-    const formId = searchParams.get("formId");
-    const published = searchParams.get("published");
+    let { searchParams } = new URL(request.url);
+    let searchText = searchParams.get("searchText");
+    let formId = searchParams.get("formId");
+    let published = searchParams.get("published");
     const filterBy = searchParams.get("filterBy");
     const filterValue = searchParams.get("filterValue");
-    const curPage = Number(searchParams.get("page"));
+    let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage) || 0;

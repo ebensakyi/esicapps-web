@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
 
     const { searchParams } = new URL(request.url);

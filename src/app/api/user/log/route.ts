@@ -14,7 +14,6 @@ export async function GET(request: Request) {
       where: { deleted: 0 },
       include: { User: true },
     });
-    console.log("logs");
 
     return NextResponse.json(logs);
   } catch (error) {

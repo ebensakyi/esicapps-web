@@ -10,7 +10,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    console.log(res);
     
 
     let formId = res.formId;
@@ -674,7 +673,7 @@ export async function GET(request: Request) {
     let filterValue = searchParams.get("filterValue");
     let curPage = Number(searchParams.get("page"));
 
-    let perPage = 2;
+    let perPage = 5;
     let skip = Number((curPage - 1) * perPage) || 0;
     let searchText =
       searchParams.get("searchText")?.toString() == "undefined"
