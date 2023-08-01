@@ -1,15 +1,5 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
 
-const MarketPremisesInfoView = ({ data }) => {
-
-  const router = useRouter();
-
-  const query = router.query;
-
-  let formId = query.inspectionFormId;
-  let published = query.published;
+const MarketPremisesInfoView = ({ data }:any) => {
 
   return (
     <>

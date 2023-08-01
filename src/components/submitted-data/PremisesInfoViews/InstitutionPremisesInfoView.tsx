@@ -1,13 +1,4 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-const InstitutionPremisesInfoView = ({ data }) => {
-  const router = useRouter();
-  const query = router.query;
-
-  let formId = query.inspectionFormId;
-  let published = query.published;
+const InstitutionPremisesInfoView = ({ data }:any) => {
 
   return (
     <>

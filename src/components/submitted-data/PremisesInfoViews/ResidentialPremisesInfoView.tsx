@@ -1,16 +1,6 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
 
-const ResidentialPremisesInfoView = ({ data }) => {
-  const router = useRouter();
+const ResidentialPremisesInfoView = ({ data }:any) => {
 
-  console.log("ResidentialPremisesInfoView: ",data);
-  const query = router.query;
-
-  
-  let formId = query.inspectionFormId;
-  let published = query.published;
 
 
   return (
@@ -235,7 +225,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">Animals</label>
                                {data?.ResidentialPremisesInfoSection?.PremisesAnimal.map(
-                                 (x) => (
+                                 (x:any) => (
                                    <input
                                      key={x.id}
                                      type="text"
