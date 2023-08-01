@@ -2,9 +2,11 @@ import Image from 'next/image'
 import Dashboard from '../components/dashboard/Dashboard'
 import { SERVER_BASE_URL } from '@/config'
 import { headers } from 'next/headers'
+import { getServerSession } from "next-auth";
+import { authOptions } from './api/auth/[...nextauth]/options';
 
 
-async function getData() {
+async function getDashboardData() {
 
 
   const res = await fetch(`${SERVER_BASE_URL}/api/dashboard`, {
@@ -19,12 +21,44 @@ async function getData() {
   return await res.json()
 }
 
-export default async function page() {
 
-  const dashboard = await getData()
-  let data = { dashboard }
+async function getRegions() {
+
+  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store' });
+
+  if (!response.ok) {
+      throw new Error('Failed to fetch data')
+  }
+  return await response.json();
+
+}
+
+async function getDistricts() {
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+
+}
+
+
+export default async function page() {
+  const session = await getServerSession(authOptions);
+
+  
+
+  const dashboardData = await getDashboardData()
+  const regions = await getRegions()
+  const districts = await getDistricts()
+
+  console.log(dashboardData);
+  
+
+  let data = {session, dashboardData, regions, districts }
 
 
   return <Dashboard data={data} />
-
 }

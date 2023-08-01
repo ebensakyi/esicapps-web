@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import { getSession } from "@/utils/session-manager";
+
 
 export async function POST(request: Request) {
   try {
