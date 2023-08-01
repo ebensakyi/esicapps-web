@@ -750,7 +750,7 @@ export default function User({ data }: any) {
                     </div>
                     <div className="col-lg-12">
                         <div className="card">
-                            <div className="card-body">
+                            <div className="card-body table-responsive">
                                 <h5 className="card-title">Users List</h5>
                                 <table className="table datatable table-striped ">
 
