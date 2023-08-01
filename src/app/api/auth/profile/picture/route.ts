@@ -5,7 +5,7 @@ import { generateCode } from "@/utils/generate-code";
 
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
-import { upload2S3, uploadFile, uploadS3 } from "@/utils/upload";
+import { upload2S3, uploadFile } from "@/utils/upload";
 import formidable from "formidable";
 
 export async function POST(request: Request) {

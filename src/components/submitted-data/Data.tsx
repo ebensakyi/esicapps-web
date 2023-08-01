@@ -542,7 +542,7 @@ export default async function Data({ data }: any) {
                                                                     <span>
                                                                         <Link
                                                                             href={{
-                                                                                pathname: `/submitted-data/data_view`,
+                                                                                pathname: `/submitted-data/data-view`,
                                                                                 query: {
                                                                                     id: dt?.Inspection?.prevInspectionId,
                                                                                     inspectionFormId: formId,
@@ -632,7 +632,7 @@ export default async function Data({ data }: any) {
                                                                             <Link
                                                                                 className="dropdown-item btn btn-sm "
                                                                                 href={{
-                                                                                    pathname: `/submitted-data/data_view`,
+                                                                                    pathname: `/submitted-data/data-view`,
                                                                                     query: {
                                                                                         id: dt?.Inspection?.id,
                                                                                         inspectionFormId: formId,

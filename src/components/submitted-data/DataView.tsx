@@ -2,6 +2,14 @@ import axios from 'axios';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
+import EateryPremisesInfoView from './PremisesInfoViews/EateryPremisesInfoView';
+import HealthPremisesInfoView from './PremisesInfoViews/HealthPremisesInfoView';
+import HospitalityPremisesInfoView from './PremisesInfoViews/HospitalityPremisesInfoView';
+import IndustryPremisesInfoView from './PremisesInfoViews/IndustryPremisesInfoView';
+import InstitutionPremisesInfoView from './PremisesInfoViews/InstitutionPremisesInfoView';
+import MarketPremisesInfoView from './PremisesInfoViews/MarketPremisesInfoView';
+import ResidentialPremisesInfoView from './PremisesInfoViews/ResidentialPremisesInfoView';
+import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoView';
 
 export default function DataView({data}:any) {
     const router = useRouter();

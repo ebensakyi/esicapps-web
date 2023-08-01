@@ -43,7 +43,6 @@ export async function GET(request: Request) {
     let regionId = session?.user?.regionId;
     let userLevel = session?.user?.userLevelId;
 
-    console.log("ul====>",userLevel);
     
 
     let { searchParams } = new URL(request.url);

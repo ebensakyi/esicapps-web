@@ -1,63 +1,94 @@
-import {prisma} from "@/prisma/db";
+import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../auth/[...nextauth]/options";
+import { inspectionForm } from '../../../../../prisma/seed/inspectionForm';
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-    try {
-    let userCookie = await getSession(req);
+  try {
+    const session = await getServerSession(authOptions);
+
+    // console.log("Session ", session);
+    let userId = session?.user?.id;
+
+    const res = await request.json();
+
+    let inspectionId = res.inspectionId;
 
     let inspection = await prisma.inspection.findFirst({
       where: {
-        id: req.body.id,
+        id: inspectionId,
       },
     });
-    let isPublished = inspection.isPublished;
+    let isPublished = inspection?.isPublished;
 
     await prisma.inspection.update({
       data: {
         isPublished: Math.abs(isPublished - 1),
-        publishedById: Number(userCookie.id),
+        publishedById: Number(userId),
       },
       where: {
-        id: req.body.id,
+        id:inspectionId
       },
     });
-    await logActivity(`Published inspection ${req.body.id}`, userCookie.id);
+    await logActivity(`Published inspection ${inspectionId}`, userId);
 
     res.status(200).json();
   } catch (error) {
     console.log(error);
   }
-};
-
+}
 
 export async function PUT(request: Request) {
-    try {
-    let userCookie = await getSession(req);
+  try {
+    let { searchParams } = new URL(request.url);
+    let inspectionId: any = searchParams.get("id")?.toString();
 
-   
+    const session = await getServerSession(authOptions);
+
+    // console.log("Session ", session);
+    let userId = session?.user?.id;
+    let surname = session?.user?.surname;
+    let districtId = session?.user?.districtId;
+    let regionId = session?.user?.regionId;
+    let userLevel = session?.user?.userLevelId;
+
     await prisma.inspection.update({
       data: {
         deleted: 1,
       },
       where: {
-        id: req.body.id,
+        id:inspectionId,
       },
     });
 
-    res.status(200).json();
+    return NextResponse.json(null, { status: 200 });
+
   } catch (error) {
-    console.log(error);
+    return NextResponse.json(error, { status: 500 });
   }
-};
+}
 
 export async function GET(request: Request) {
-    try {
-    let userObj = await getSession(req);
+  try {
+    const session = await getServerSession(authOptions);
 
-    let user = userObj?.id;
-    await logActivity(`Visited dataview page for ${req.query.id}`, user);
+    // console.log("Session ", session);
+    let userId = session?.user?.id;
+    let surname = session?.user?.surname;
+   
 
-    let inspectionId = req.query.id;
+    let { searchParams } = new URL(request.url);
+    let inspectionId: any = searchParams.get("id")?.toString();
+    let published: string | undefined = searchParams
+      .get("published")
+      ?.toString();
+
+    let inspectionFormId: string | undefined = searchParams
+      .get("inspectionFormId")
+      ?.toString();
+    await logActivity(`Visited dataview page for ${inspectionId}`, userId);
 
     const data = await prisma.inspection.findFirst({
       where: {
@@ -129,7 +160,7 @@ export async function GET(request: Request) {
             disinfestationFrequency: true,
             disinfection: true,
             disinfectionFrequency: true,
-            protectiveClothingUsed: true
+            protectiveClothingUsed: true,
           },
         },
         HealthPremisesInfoSection: {
@@ -151,7 +182,7 @@ export async function GET(request: Request) {
             embalmingAreaAvailability: true,
             bodyTraysAdequate: true,
             coldRoomAvailability: true,
-            coldRoomCondition: true
+            coldRoomCondition: true,
           },
         },
         HospitalityPremisesInfoSection: {
@@ -167,7 +198,7 @@ export async function GET(request: Request) {
             uncookedFoodStorageCondtionSafe: true,
             ////////
             designatedSmokingArea: true,
-            protectiveClothingUsed:true,
+            protectiveClothingUsed: true,
             firstAidAvailability: true,
             kitchenAvailability: true,
           },
@@ -362,7 +393,7 @@ export async function GET(request: Request) {
             PremisesHazardousWasteDisposal: {
               include: { HazardousWasteDisposalMethod: true },
             },
-          
+
             PremisesWasteReceptacle: {
               include: { SolidWasteReceptacle: true },
             },
@@ -386,10 +417,9 @@ export async function GET(request: Request) {
       },
     });
 
-    //return res.status(200).json({ statusCode: 1, data: dataVersion });
-    return res.status(200).json(data);
-  } catch (error) {
-    console.log("Error: " + error);
-  }
-};
+    return NextResponse.json(data, { status: 200 });
 
+  } catch (error) {
+    return NextResponse.json(error, { status: 500 });
+  }
+}
