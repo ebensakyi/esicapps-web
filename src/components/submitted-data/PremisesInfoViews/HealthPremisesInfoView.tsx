@@ -2,16 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const HealthPremisesInfoView = ({ data }) => {
-  const router = useRouter();
-
-  const query = router.query;
-
-  let formId = query.inspectionFormId;
-  let published = query.published;
-
-
-  console.log(data);
+const HealthPremisesInfoView = ({ data }:any) => {
 
   return (
     <>
@@ -40,7 +31,7 @@ const HealthPremisesInfoView = ({ data }) => {
                           value={
                             data?.HospitalityPremisesInfoSection?.facilityName
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -58,7 +49,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.healthPremisesType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -79,7 +70,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.physicalStructureType.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -100,7 +91,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -120,7 +111,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -140,7 +131,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -160,7 +151,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -180,7 +171,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -199,7 +190,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection?.ehoAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -219,7 +210,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.incineratorAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -240,7 +231,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.placentaPitAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -273,7 +264,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.healthPremisesType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -294,7 +285,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.separateWard?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -315,7 +306,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.ownershipType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -336,7 +327,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.embalmingAreaCondition?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -357,7 +348,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.embalmingAreaAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -378,7 +369,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.bodyTraysAdequate?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -399,7 +390,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.coldRoomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -420,7 +411,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.coldRoomCondition?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -442,7 +433,7 @@ const HealthPremisesInfoView = ({ data }) => {
                             data?.HealthPremisesInfoSection
                               ?.numberWards
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (

@@ -1,14 +1,8 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
+const EateryPremisesInfoView = ({ data }:any) => {
 
-const EateryPremisesInfoView = ({ data }) => {
-  const router = useRouter();
-
-  const query = router.query;
-
-  let formId = query.inspectionFormId;
-  let published = query.published;
+// const searchParams = useSearchParams()
+//   let formId = searchParams.get("inspectionFormId");
+//   let published = searchParams.get("published");
 
 
   return (
@@ -35,7 +29,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.EateryPremisesInfoSection.facilityName}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -55,7 +49,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -75,7 +69,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -95,7 +89,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -115,7 +109,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -135,7 +129,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -157,7 +151,7 @@ const EateryPremisesInfoView = ({ data }) => {
                               ?.approvedHandwashingFacilityAvailabilityEatery
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -178,7 +172,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.cookedFoodStorageCondtionSafe.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -198,7 +192,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.uncookedFoodStorageCondtionSafe.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -218,7 +212,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.designatedSmokingArea?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -238,7 +232,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.protectiveClothingUsed?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -258,7 +252,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.firstAidAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -278,7 +272,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection?.kitchenAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -297,7 +291,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.numberMaleWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -316,7 +310,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.numberFemaleWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -336,7 +330,7 @@ const EateryPremisesInfoView = ({ data }) => {
                             data?.EateryPremisesInfoSection
                               ?.numberFoodHandlingMedical
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -356,7 +350,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.numberFoodHandling
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -371,7 +365,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.EateryPremisesInfoSection?.numberRooms}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -391,7 +385,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.facilityCapacity
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -412,7 +406,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfestation?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -431,7 +425,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfestationFrequency?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -450,7 +444,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfection?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -470,7 +464,7 @@ const EateryPremisesInfoView = ({ data }) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfectionFrequency?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (

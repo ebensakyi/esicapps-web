@@ -1,14 +1,4 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-const IndustryPremisesInfoView = ({ data }) => {
-  const router = useRouter();
-
-  const query = router.query;
-
-  let formId = query.inspectionFormId;
-  let published = query.published;
+const IndustryPremisesInfoView = ({ data }:any) => {
 
   return (
     <>
@@ -36,7 +26,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                           value={
                             data?.IndustryPremisesInfoSection?.facilityName
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -53,7 +43,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.Type?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -73,7 +63,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.Subtype?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -93,7 +83,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.toiletAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -113,7 +103,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.urinalAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -133,7 +123,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -153,7 +143,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -175,7 +165,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                               ?.approvedHandwashingFacilityAvailabilityIndustry
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -197,7 +187,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -219,7 +209,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                               ?.otherIndustryFacility
                              
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -241,7 +231,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                               ?.protectiveClothingUsed
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -263,7 +253,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                               ?.productionRoomCondition
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -285,7 +275,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                               ?.flyScreenNetAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -307,7 +297,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                               ?.storeRoomAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -328,7 +318,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                           value={
                             data?.IndustryPremisesInfoSection?.manufacturedServices
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -348,7 +338,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.majorByProducts
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -368,7 +358,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -391,7 +381,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.byProductsStorageAreaCond?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -411,7 +401,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberFoodHandlers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -431,7 +421,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberFoodHandlersCert
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -451,7 +441,7 @@ const IndustryPremisesInfoView = ({ data }) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (

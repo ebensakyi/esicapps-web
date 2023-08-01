@@ -38,7 +38,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           value={
                             data?.InstitutionPremisesInfoSection.facilityName
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -54,7 +54,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           value={
                             data?.InstitutionPremisesInfoSection.Type?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -70,7 +70,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           value={
                             data?.InstitutionPremisesInfoSection.Subtype?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -90,7 +90,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               .toiletAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -110,7 +110,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               .urinalAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -130,7 +130,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -150,7 +150,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -172,7 +172,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                               ?.approvedHandwashingFacilityAvailabilityInstitution
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -192,7 +192,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               ?.numberNonTeachingStaff
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -212,7 +212,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               .numberTeachingStaff
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -232,7 +232,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               ?.numberMaleStudents
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -252,7 +252,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                             data?.InstitutionPremisesInfoSection
                               .numberFemaleStudents
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -272,7 +272,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection?.ablutionSlab
                             ?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -293,7 +293,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.ablutionSlabCondition?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -314,7 +314,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.animalSpaceAvailability?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -334,7 +334,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.animalSpaceCondition?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -354,7 +354,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.cookedFoodStorageCondtionSafe?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -374,7 +374,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.uncookedFoodStorageCondtionSafe?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -394,7 +394,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.foodVendorAvailability?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -414,7 +414,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.kitchenAvailability?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -434,7 +434,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.physicalStructureType?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -454,7 +454,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection?.shepClubExistence
                             ?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -474,7 +474,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.slaughterAreaAvailability?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -494,7 +494,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.slaughterAreaCondition?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -511,7 +511,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                         value={
                           data?.InstitutionPremisesInfoSection?.soundProof?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (
@@ -531,7 +531,7 @@ const InstitutionPremisesInfoView = ({ data }) => {
                           data?.InstitutionPremisesInfoSection
                             ?.protectiveClothingUsed?.name
                         }
-                        readOnly="readOnly"
+                        readOnly={true}
                       />
                     </div>
                   ) : (

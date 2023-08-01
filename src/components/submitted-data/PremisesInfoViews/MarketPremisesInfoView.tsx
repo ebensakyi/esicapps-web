@@ -35,7 +35,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.facilityName}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -53,7 +53,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection?.marketPremisesType
                               .name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -73,7 +73,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -93,7 +93,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -113,7 +113,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -133,7 +133,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -155,7 +155,7 @@ const MarketPremisesInfoView = ({ data }) => {
                               ?.approvedHandwashingFacilityAvailabilityMarket
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -176,7 +176,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection.firstAidAvailability
                               .name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -193,7 +193,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           value={
                             data?.MarketPremisesInfoSection.ownershipType.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -207,7 +207,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberStores}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -221,7 +221,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection.numberSheds}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -235,7 +235,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection.numberStalls}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -251,7 +251,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberTraders}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -270,7 +270,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberMeatShops
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -289,7 +289,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberColdStores
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -304,7 +304,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberMills}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -320,7 +320,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberChopbars}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -341,7 +341,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection?.derattingFrequency
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -361,7 +361,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection?.cleanupFrequency
                               ?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -380,7 +380,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberLorrySheds
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -398,7 +398,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberVehicles
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -414,7 +414,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberDrivers}
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -433,7 +433,7 @@ const MarketPremisesInfoView = ({ data }) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberFoodVendors
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -454,7 +454,7 @@ const MarketPremisesInfoView = ({ data }) => {
                             data?.MarketPremisesInfoSection
                               ?.generalSanitaryCondition?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (

@@ -45,7 +45,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      .toiletAvailability.name
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -63,7 +63,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                            value={
                              data?.ResidentialPremisesInfoSection?.urinalAvailability?.name
                            }
-                           readOnly="readOnly"
+                           readOnly={true}
                          />
                        </div>
                      ) : (
@@ -82,7 +82,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      .bathroomAvailability.name
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -102,7 +102,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.drainsAvailability?.name
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -124,7 +124,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                      ?.approvedHandwashingFacilityAvailability
                                      ?.name
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -143,7 +143,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.householdNumber
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -163,7 +163,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.maleOccupantNumber
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -183,7 +183,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.femaleOccupantNumber
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -203,7 +203,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.animalAvailability.name
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -223,7 +223,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.animalNumber
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -242,7 +242,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                      className="form-control bg-light border-0"
                                      id="invoicenoInput"
                                      value={x.AnimalType.name}
-                                     readOnly="readOnly"
+                                     readOnly={true}
                                    />
                                  )
                                )}
@@ -265,7 +265,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.vaccinationProof?.name
                                  }
-                                 readOnly="readOnly"
+                                 readOnly={true}
                                />
                              </div>
                            ) : (
@@ -286,7 +286,7 @@ const ResidentialPremisesInfoView = ({ data }) => {
                                  data?.ResidentialPremisesInfoSection
                                    ?.animalSpaceCondition.name
                                }
-                               readOnly="readOnly"
+                               readOnly={true}
                              />
                            </div>
                          ) : (

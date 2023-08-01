@@ -1,17 +1,22 @@
+import axios from 'axios';
 import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
 
-export default function DataView() {
+export default function DataView({data}:any) {
     const router = useRouter();
 
-    const query = router.query;
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
 
-    let formId = query.inspectionFormId;
-    let published = query.published;
+    const formId = Number(searchParams.get("formId"))
+    const published = Number(searchParams.get('published'))
+    const page = Number(searchParams.get('page'))
+    const searchtext = searchParams.get('searchText')
 
-    const publish = async (id) => {
+    const publish = async (id:any) => {
         try {
-            const response = await axios.post(`/api/v1/submitted-data/data-view`, {
+            const response = await axios.post(`/api/submitted-data/data-view`, {
                 id: id,
             });
             if (response.status == 200) {
@@ -30,7 +35,7 @@ export default function DataView() {
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
-        router.reload(window.location.pathname);
+        router.refresh();
     };
 
     const handleTitle = () => {
@@ -59,9 +64,9 @@ export default function DataView() {
         }
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id:any) => {
         try {
-            const response = await axios.put(`/api/v1/submitted-data/data-view`, {
+            const response = await axios.put(`/api/submitted-data/data-view`, {
                 id: id,
             });
             if (response.status == 200) {
@@ -619,7 +624,7 @@ export default function DataView() {
                                                                                             Water source
                                                                                         </label>
                                                                                         {data?.WaterSection?.PremisesWaterSources.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -641,7 +646,7 @@ export default function DataView() {
                                                                                             Water supply
                                                                                         </label>
                                                                                         {data?.WaterSection?.PremisesWaterSupply.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -682,7 +687,7 @@ export default function DataView() {
                                                                                             Water storage
                                                                                         </label>
                                                                                         {data?.WaterSection?.PremisesWaterStorage.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -724,7 +729,7 @@ export default function DataView() {
                                                                                             Water treatment type
                                                                                         </label>
                                                                                         {data?.WaterSection?.PremisesWaterTreatmentType?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -746,7 +751,7 @@ export default function DataView() {
                                                                                             Drinking water source
                                                                                         </label>
                                                                                         {data?.WaterSection?.PremisesDrinkingWaterSources?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1105,7 +1110,7 @@ export default function DataView() {
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="invoicenoInput">Drain Type</label>
                                                                                         {data?.LiquidWasteSection?.PremisesDrainType?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1127,7 +1132,7 @@ export default function DataView() {
                                                                                             Effluent Management
                                                                                         </label>
                                                                                         {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1149,7 +1154,7 @@ export default function DataView() {
                                                                                             Excreta Containment
                                                                                         </label>
                                                                                         {data?.LiquidWasteSection?.PremisesExcretaContainment.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1171,7 +1176,7 @@ export default function DataView() {
                                                                                             Excreta Disposal Method
                                                                                         </label>
                                                                                         {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1193,7 +1198,7 @@ export default function DataView() {
                                                                                             Grey Water Disposal
                                                                                         </label>
                                                                                         {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1215,7 +1220,7 @@ export default function DataView() {
                                                                                             Toilet Type
                                                                                         </label>
                                                                                         {data?.LiquidWasteSection?.PremisesToiletType?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1379,7 +1384,7 @@ export default function DataView() {
                                                                                             Waste Collection Receptacle
                                                                                         </label>
                                                                                         {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1523,7 +1528,7 @@ export default function DataView() {
                                                                                             Nuisance Observed
                                                                                         </label>
                                                                                         {data?.ConclusionSection?.PremisesNuisanceDetected?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1561,7 +1566,7 @@ export default function DataView() {
                                                                                             Action Taken
                                                                                         </label>
                                                                                         {data?.ConclusionSection?.PremisesActionTaken?.map(
-                                                                                            (x) => (
+                                                                                            (x:any) => (
                                                                                                 <input
                                                                                                     key={x.id}
                                                                                                     type="text"
@@ -1620,7 +1625,7 @@ export default function DataView() {
                                                                     </div>
 
                                                                     <div className="row gallery-wrapper">
-                                                                        {data?.InspectionPictures?.map((ip) => {
+                                                                        {data?.InspectionPictures?.map((ip:any) => {
                                                                             return (
                                                                                 <div
                                                                                     key={ip.id}

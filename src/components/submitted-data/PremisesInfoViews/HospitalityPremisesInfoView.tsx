@@ -1,14 +1,5 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
 
-const HospitalityPremisesInfoView = ({ data }) => {
-  const router = useRouter();
-
-  const query = router.query;
-
-  let formId = query.inspectionFormId;
-  let published = query.published;
+const HospitalityPremisesInfoView = ({ data }:any) => {
 
 
   return (
@@ -40,7 +31,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                           value={
                             data?.HospitalityPremisesInfoSection?.facilityName
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -58,7 +49,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.hospitalityPremisesType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -78,7 +69,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -98,7 +89,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.toiletAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -118,7 +109,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.urinalAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -138,7 +129,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -158,7 +149,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -178,7 +169,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -198,7 +189,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberMaleWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -218,7 +209,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFemaleWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -242,7 +233,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.cookedFoodStorageCondtionSafe?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -262,7 +253,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.uncookedFoodStorageCondtionSafe?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -282,7 +273,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.designatedSmokingArea?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -302,7 +293,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.protectiveClothingUsed?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -322,7 +313,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.firstAidAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -342,7 +333,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.kitchenAvailability?.name
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -362,7 +353,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberMaleWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -382,7 +373,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFemaleWorkers
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -402,7 +393,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFoodHandlingMedical
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -424,7 +415,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFoodHandling
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -446,7 +437,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberRooms
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
@@ -467,7 +458,7 @@ const HospitalityPremisesInfoView = ({ data }) => {
                             data?.HospitalityPremisesInfoSection
                               ?.facilityCapacity
                           }
-                          readOnly="readOnly"
+                          readOnly={true}
                         />
                       </div>
                     ) : (
