@@ -2,7 +2,6 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { inspectionForm } from '../../../../../prisma/seed/inspectionForm';
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -420,6 +419,8 @@ export async function GET(request: Request) {
     return NextResponse.json(data, { status: 200 });
 
   } catch (error) {
+    console.log(">>>>>>> ", error);
+    
     return NextResponse.json(error, { status: 500 });
   }
 }

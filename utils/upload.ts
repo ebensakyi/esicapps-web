@@ -1,9 +1,8 @@
 import fs from "fs";
-import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
 import AWS from "aws-sdk";
 
-export const uploadFile = async (file: File) => {
+export const saveFileOnDisk = async (file: File) => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -24,7 +23,7 @@ export const uploadFile = async (file: File) => {
   }
 };
 
-export const upload2S3 = async (fileName:any) => {
+export const upload2S3 = async (fileName:any,bucketName:any) => {
     try {
         AWS.config.update({
           accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -36,7 +35,7 @@ export const upload2S3 = async (fileName:any) => {
         var filePath = `./public/temp/${fileName}`;
     
         var params = {
-          Bucket: "esicapps-profile-images",
+          Bucket: bucketName,
           Body: fs.createReadStream(filePath),
           // Key: prefix + "/" + fileName,
           Key: fileName,

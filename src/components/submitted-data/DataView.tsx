@@ -1,3 +1,4 @@
+"use client"
 import axios from 'axios';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -11,7 +12,9 @@ import MarketPremisesInfoView from './PremisesInfoViews/MarketPremisesInfoView';
 import ResidentialPremisesInfoView from './PremisesInfoViews/ResidentialPremisesInfoView';
 import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoView';
 
-export default function DataView({data}:any) {
+export default function DataView({ data }: any) {
+    console.log(data);
+
     const router = useRouter();
 
     const pathname = usePathname()
@@ -22,7 +25,7 @@ export default function DataView({data}:any) {
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
-    const publish = async (id:any) => {
+    const publish = async (id: any) => {
         try {
             const response = await axios.post(`/api/submitted-data/data-view`, {
                 id: id,
@@ -72,7 +75,7 @@ export default function DataView({data}:any) {
         }
     };
 
-    const handleDelete = async (id:any) => {
+    const handleDelete = async (id: any) => {
         try {
             const response = await axios.put(`/api/submitted-data/data-view`, {
                 id: id,
@@ -89,7 +92,8 @@ export default function DataView({data}:any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>Data </h1>
+                <h1>                                                        DATA VIEW
+                </h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -110,39 +114,35 @@ export default function DataView({data}:any) {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
-
+                                        <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+                                            <div>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+                                                    onClick={() => downloadInspection()}
+                                                >
+                                                    <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                                    Download Inspection
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="card-body table-responsive">
                                         {/* <h5 className="card-title">Datatables</h5> */}
 
                                         <div className="row">
                                             <div className="col-12">
-                                                <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <button
-                                                            type="button"
-                                                            className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
-                                                            onClick={() => downloadInspection()}
-                                                        >
-                                                            <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                                                            Download Inspection
-                                                        </button>
-                                                    </div>
-                                                </div>
+
                                                 <div id="printableArea">
                                                     <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                                        DATA VIEW
                                                         <h4 className="mb-sm-0">{handleTitle()}</h4>
                                                         <div className="page-title-right">
                                                             <ol className="breadcrumb m-0">
                                                                 <li className="breadcrumb-item">
                                                                     <Link
                                                                         href={{
-                                                                            pathname: `/submitted-data/data`,
-                                                                            query: {
-                                                                                published: published,
-                                                                                inspectionFormId: formId,
-                                                                            },
+                                                                            pathname: `/submitted-data?formId=${formId}&published=${published}`,
+
                                                                         }}
                                                                     >
                                                                         Go to Data list
@@ -164,82 +164,87 @@ export default function DataView({data}:any) {
                                                                                 </h5>
                                                                             </div>
                                                                         </div>
-                                                                        {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
+
                                                                     </div>
-                                                                    <div className="card product">
+                                                                    <div className="card ">
                                                                         <div className="card-body">
-                                                                            <div className="row gy-3">
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">
-                                                                                        Premises Code
-                                                                                    </label>
+                                                                            <div className="row">
+
+                                                                            <div className="col-sm-3 mb-3">
+                                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Premises Code
+                                                                                </label>
+                                                                                <div className="col-sm-12">
+
                                                                                     <input
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
-                                                                                        id="invoicenoInput"
-                                                                                        value={data?.premisesCode}
+                                                                                        value={data?.submittedData?.premisesCode}
                                                                                         readOnly={true}
                                                                                     />
                                                                                 </div>
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">Region</label>
+                                                                            </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+Region</label>
+                                                                                <div className="col-sm-12">
+
                                                                                     <input
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
                                                                                         id="invoicenoInput"
                                                                                         value={
-                                                                                            data?.BasicInfoSection?.Community?.District
+                                                                                            data?.submittedData?.BasicInfoSection?.Community?.District
                                                                                                 ?.Region.name
                                                                                         }
                                                                                         readOnly={true}
                                                                                     />
                                                                                 </div>
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">District</label>
+                                                                            </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">District</label>
+                                                                                <div className="col-sm-12">
                                                                                     <input
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
                                                                                         id="invoicenoInput"
                                                                                         value={
-                                                                                            data?.BasicInfoSection?.Community != null
-                                                                                                ? data?.BasicInfoSection?.Community?.District
+                                                                                            data?.submittedData?.BasicInfoSection?.Community != null
+                                                                                                ? data?.submittedData?.BasicInfoSection?.Community?.District
                                                                                                     ?.name
                                                                                                 : ""
                                                                                         }
                                                                                         readOnly={true}
                                                                                     />
                                                                                 </div>
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">
-                                                                                        Electoral Area
-                                                                                    </label>
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        className="form-control bg-light border-0"
-                                                                                        id="invoicenoInput"
-                                                                                        value={data?.ElectoralArea?.name}
-                                                                                        readOnly={true}
-                                                                                    />
-                                                                                </div>
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">Community</label>
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        className="form-control bg-light border-0"
-                                                                                        id="invoicenoInput"
-                                                                                        value={data?.BasicInfoSection?.Community?.name}
-                                                                                        readOnly={true}
-                                                                                    />
-                                                                                </div>
-                                                                                {/* <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
+
+                                                                            </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Electoral Area
+                                                                                </label>
+                                                                                <div className="col-sm-12"> <input
+                                                                                    type="text"
+                                                                                    className="form-control bg-light border-0"
+                                                                                    id="invoicenoInput"
+                                                                                    value={data?.ElectoralArea?.name}
+                                                                                    readOnly={true}
+                                                                                /></div>
+
+                                                                            </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">Community</label>
+                                                                                <div className="col-sm-12"> <input
+                                                                                    type="text"
+                                                                                    className="form-control bg-light border-0"
+                                                                                    id="invoicenoInput"
+                                                                                    value={data?.BasicInfoSection?.Community?.name}
+                                                                                    readOnly={true}
+                                                                                /></div>
+
+                                                                            </div>
+                                                                            {/* <div className="col-lg-3 col-sm-6">
+                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               GhanaPost GPS
                             </label>
                             <input
@@ -250,77 +255,80 @@ export default function DataView({data}:any) {
                               readOnly={true}
                             />
                           </div> */}
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">
-                                                                                        Name of respondent
-                                                                                    </label>
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        className="form-control bg-light border-0"
-                                                                                        id="invoicenoInput"
-                                                                                        value={data?.BasicInfoSection?.respondentName}
-                                                                                        readOnly={true}
-                                                                                    />
-                                                                                </div>
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">
-                                                                                        Respondent designation
-                                                                                    </label>
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        className="form-control bg-light border-0"
-                                                                                        id="invoicenoInput"
-                                                                                        value={
-                                                                                            data?.BasicInfoSection?.RespondentDesignation
-                                                                                                ?.name
-                                                                                        }
-                                                                                        readOnly={true}
-                                                                                    />
-                                                                                </div>{" "}
-                                                                                <div className="col-lg-3 col-sm-6">
-                                                                                    <label htmlFor="invoicenoInput">
-                                                                                        Respondent phone number
-                                                                                    </label>
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        className="form-control bg-light border-0"
-                                                                                        id="invoicenoInput"
-                                                                                        value={
-                                                                                            data?.BasicInfoSection?.respondentPhoneNumber
-                                                                                        }
-                                                                                        readOnly={true}
-                                                                                    />
-                                                                                </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Name of respondent
+                                                                                </label>
+                                                                                <div className="col-sm-12"> <input
+                                                                                    type="text"
+                                                                                    className="form-control bg-light border-0"
+                                                                                    id="invoicenoInput"
+                                                                                    value={data?.BasicInfoSection?.respondentName}
+                                                                                    readOnly={true}
+                                                                                /></div>
+
+                                                                            </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Respondent designation
+                                                                                </label>
+                                                                                <div className="col-sm-12"> <input
+                                                                                    type="text"
+                                                                                    className="form-control bg-light border-0"
+                                                                                    id="invoicenoInput"
+                                                                                    value={
+                                                                                        data?.submittedData?.BasicInfoSection?.RespondentDesignation
+                                                                                            ?.name
+                                                                                    }
+                                                                                    readOnly={true}
+                                                                                /></div>
+
+                                                                            </div>{" "}
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Respondent phone number
+                                                                                </label>
+                                                                                <div className="col-sm-12"> <input
+                                                                                    type="text"
+                                                                                    className="form-control bg-light border-0"
+                                                                                    id="invoicenoInput"
+                                                                                    value={
+                                                                                        data?.submittedData?.BasicInfoSection?.respondentPhoneNumber
+                                                                                    }
+                                                                                    readOnly={true}
+                                                                                /></div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {/* end col */}
                                                             </div>
+                                                            {/* end col */}
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    {formId == 1 ? <ResidentialPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 2 ? <EateryPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 3 ? <HealthPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 4 ? <HospitalityPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 5 ? <InstitutionPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 6 ? <IndustryPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 7 ? <MarketPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 8 ? <SanitaryPremisesInfoView data={data} /> : <></>}
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">
-                                                                                    LICENCES & PERMITS SECTION
-                                                                                </h5>
-                                                                            </div>
+                                                {formId == 1 ? <ResidentialPremisesInfoView data={data} /> : <></>}
+                                                {formId == 2 ? <EateryPremisesInfoView data={data} /> : <></>}
+                                                {formId == 3 ? <HealthPremisesInfoView data={data} /> : <></>}
+                                                {formId == 4 ? <HospitalityPremisesInfoView data={data} /> : <></>}
+                                                {formId == 5 ? <InstitutionPremisesInfoView data={data} /> : <></>}
+                                                {formId == 6 ? <IndustryPremisesInfoView data={data} /> : <></>}
+                                                {formId == 7 ? <MarketPremisesInfoView data={data} /> : <></>}
+                                                {formId == 8 ? <SanitaryPremisesInfoView data={data} /> : <></>}
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="row mb-3">
+                                                            <div className="col-xl-12">
+                                                                <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="col-sm">
+                                                                        <div>
+                                                                            <h5 className="fs-14 mb-0">
+                                                                                LICENCES & PERMITS SECTION
+                                                                            </h5>
                                                                         </div>
-                                                                        {/* <div className="col-sm-auto">
+                                                                    </div>
+                                                                    {/* <div className="col-sm-auto">
                   <a
                     href="apps-ecommerce-products.html"
                     className="link-primary text-decoration-underline"
@@ -328,489 +336,501 @@ export default function DataView({data}:any) {
                     Continue Shopping
                   </a>
                 </div> */}
-                                                                    </div>
-                                                                    <div className="card product">
-                                                                        <div className="card-body">
-                                                                            <div className="row gy-3">
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.animalsPermitAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Animal permit
-                                                                                        </label>
+                                                                </div>
+                                                                <div className="card product">
+                                                                    <div className="card-body">
+                                                                        <div className="row gy-3">
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.animalsPermitAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Animal permit
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.animalsPermitAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.buildingPermitAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Building permit
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.buildingPermitAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Building permit
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.buildingPermitAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.habitationCertificateAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Certificate of habitation
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.habitationCertificateAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Certificate of habitation
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.habitationCertificateAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.propertyRateAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Property rate payment
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.propertyRateAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Property rate payment
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.propertyRateAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.suitabilityCertificateAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Suitability Certificate
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.suitabilityCertificateAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Suitability Certificate
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.suitabilityCertificateAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.structurePermitAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Structure permit
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.structurePermitAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Structure permit
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.structurePermitAvailability.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
 
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.fumigationCertificateAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Fumigation certificate
-                                                                                        </label>
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.fumigationCertificateAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Fumigation certificate
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.fumigationCertificateAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.businessLicenceAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Business operating permit
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.businessLicenceAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Business operating permit
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.businessLicenceAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.structurePermitAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Temporal structure permit
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.structurePermitAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Temporal structure permit
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.structurePermitAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection?.waterAnalysisReport !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water analysis report
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LicencePermitSection
-                                                                                                    ?.waterAnalysisReport?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection?.waterAnalysisReport !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water analysis report
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">  <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LicencePermitSection
+                                                                                                ?.waterAnalysisReport?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.regGeneralCertAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Registrar General operating certificate
-                                                                                        </label>
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.regGeneralCertAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Registrar General operating certificate
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.LicencePermitSection
+                                                                                                data?.submittedData?.LicencePermitSection
                                                                                                     ?.regGeneralCertAvailability.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
 
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.gtaOperatingLicenceAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Ghana Tourism Authority operating license
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LicencePermitSection
-                                                                                                    ?.gtaOperatingLicenceAvailability?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.gtaOperatingLicenceAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Ghana Tourism Authority operating license
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LicencePermitSection
+                                                                                                ?.gtaOperatingLicenceAvailability?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
 
-                                                                                {data?.LicencePermitSection
-                                                                                    ?.pharmacyCertAvailability != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            HEFRA/PHARMACY COUNCIL operating license
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LicencePermitSection
-                                                                                                    ?.pharmacyCertAvailability?.value
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                            </div>
+                                                                            {data?.submittedData?.LicencePermitSection
+                                                                                ?.pharmacyCertAvailability != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        HEFRA/PHARMACY COUNCIL operating license
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LicencePermitSection
+                                                                                                ?.pharmacyCertAvailability?.value
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {/* end col */}
                                                             </div>
+                                                            {/* end col */}
                                                         </div>
                                                     </div>
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">WATER SECTION</h5>
-                                                                            </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="row mb-3">
+                                                            <div className="col-xl-12">
+                                                                <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="col-sm">
+                                                                        <div>
+                                                                            <h5 className="fs-14 mb-0">WATER SECTION</h5>
                                                                         </div>
-                                                                        {/* <div className="col-sm-auto">
-                  <a
-                    href="apps-ecommerce-products.html"
-                    className="link-primary text-decoration-underline"
-                  >
-                    Continue Shopping
-                  </a>
-                </div> */}
                                                                     </div>
-                                                                    <div className="card product">
-                                                                        <div className="card-body">
-                                                                            <div className="row gy-3">
-                                                                                {data?.WaterSection?.PremisesWaterSources.length !=
-                                                                                    0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water source
-                                                                                        </label>
-                                                                                        {data?.WaterSection?.PremisesWaterSources.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.WaterSourceType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.WaterSection?.PremisesWaterSupply.length !=
-                                                                                    0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water supply
-                                                                                        </label>
-                                                                                        {data?.WaterSection?.PremisesWaterSupply.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.WaterSupplyType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.WaterSection?.waterSourceCondition != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water source condition
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.WaterSection?.waterSourceCondition?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
 
-                                                                                {data?.WaterSection?.PremisesWaterStorage.length !=
-                                                                                    0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water storage
-                                                                                        </label>
-                                                                                        {data?.WaterSection?.PremisesWaterStorage.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.WaterStorageType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.WaterSection?.waterStorageConditionSafe !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Safe Water storage receptacle condition
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.WaterSection?.waterStorageConditionSafe
-                                                                                                    .name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.WaterSection?.PremisesWaterTreatmentType
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water treatment type
-                                                                                        </label>
-                                                                                        {data?.WaterSection?.PremisesWaterTreatmentType?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.WaterTreatmentType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.WaterSection?.PremisesDrinkingWaterSources
-                                                                                    .length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Drinking water source
-                                                                                        </label>
-                                                                                        {data?.WaterSection?.PremisesDrinkingWaterSources?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.DrinkingWaterSourceType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.WaterSection?.WaterFlowFrequency != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Water flow frequency
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.WaterSection?.WaterFlowFrequency?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                            </div>
+                                                                </div>
+                                                                <div className="card product">
+                                                                    <div className="card-body">
+                                                                        <div className="row gy-3">
+                                                                            {data?.submittedData?.WaterSection?.PremisesWaterSources.length !=
+                                                                                0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label >
+                                                                                        Water source
+                                                                                    </label>
+                                                                                    {data?.submittedData?.WaterSection?.PremisesWaterSources.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.WaterSourceType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.WaterSection?.PremisesWaterSupply.length !=
+                                                                                0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water supply
+                                                                                    </label>
+                                                                                    {data?.submittedData?.WaterSection?.PremisesWaterSupply.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.WaterSupplyType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.WaterSection?.waterSourceCondition != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water source condition
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.WaterSection?.waterSourceCondition?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+
+                                                                            {data?.submittedData?.WaterSection?.PremisesWaterStorage.length !=
+                                                                                0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water storage
+                                                                                    </label>
+                                                                                    {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.WaterStorageType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.WaterSection?.waterStorageConditionSafe !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Safe Water storage receptacle condition
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.WaterSection?.waterStorageConditionSafe
+                                                                                                .name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water treatment type
+                                                                                    </label>
+                                                                                    {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.WaterTreatmentType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources
+                                                                                .length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Drinking water source
+                                                                                    </label>
+                                                                                    {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.DrinkingWaterSourceType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.WaterSection?.WaterFlowFrequency != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water flow frequency
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.WaterSection?.WaterFlowFrequency?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {/* end col */}
                                                             </div>
+                                                            {/* end col */}
                                                         </div>
                                                     </div>
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">LIQUID WASTE SECTION</h5>
-                                                                            </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="row mb-3">
+                                                            <div className="col-xl-12">
+                                                                <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="col-sm">
+                                                                        <div>
+                                                                            <h5 className="fs-14 mb-0">LIQUID WASTE SECTION</h5>
                                                                         </div>
-                                                                        {/* <div className="col-sm-auto">
+                                                                    </div>
+                                                                    {/* <div className="col-sm-auto">
                   <a
                     href="apps-ecommerce-products.html"
                     className="link-primary text-decoration-underline"
@@ -820,89 +840,89 @@ export default function DataView({data}:any) {
 
                   </a>
                 </div> */}
-                                                                    </div>
-                                                                    <div className="card product">
-                                                                        <div className="card-body">
-                                                                            <div className="row gy-3">
-                                                                                {data?.LiquidWasteSection?.numberToiletSeats !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Number Toilet Seats
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.numberToiletSeats
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.numberUrinalSeats !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Number Urinal Seats
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.numberUrinalSeats
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.toiletAdequacy != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Toilet Adequacy
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.toiletAdequacy?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.bathroomAdequacy !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Bathroom Adequacy
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.bathroomAdequacy
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {/* {data?.LiquidWasteSection?.separateStaffUrinal != null ? (
+                                                                </div>
+                                                                <div className="card product">
+                                                                    <div className="card-body">
+                                                                        <div className="row gy-3">
+                                                                            {data?.submittedData?.LiquidWasteSection?.numberToiletSeats !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Number Toilet Seats
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.numberToiletSeats
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.numberUrinalSeats !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Number Urinal Seats
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.numberUrinalSeats
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.toiletAdequacy != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Toilet Adequacy
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.bathroomAdequacy !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Bathroom Adequacy
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.bathroomAdequacy
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {/* {data?.LiquidWasteSection?.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
+                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
                           Separate Staff Urinal
                         </label>
                         <input
@@ -910,7 +930,7 @@ export default function DataView({data}:any) {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.LiquidWasteSection?.separateStaffUrinal.name
+                            data?.submittedData?.LiquidWasteSection?.separateStaffUrinal.name
                           }
                           readOnly={true}
                         />
@@ -918,697 +938,697 @@ export default function DataView({data}:any) {
                     ) : (
                       <></>
                     )} */}
-                                                                                {data?.LiquidWasteSection?.toiletPitPosition !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Toilet Pit Position
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.toiletPitPosition
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.drainsCondition != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Drains Condition
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.drainsCondition
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.stagnationEvidence !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Stagnation Evidence
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.stagnationEvidence
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.analCleansingMaterialMgt !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Anal Cleansing Material
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection
-                                                                                                    ?.analCleansingMaterialMgt?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.toiletCondition != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Toilet Condition
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.toiletCondition
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.toiletDischarge != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Toilet Discharge
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.toiletDischarge
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.containmentEmptied !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Containment Emptied
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.containmentEmptied
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.sewerSystem != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Sewer System
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.sewerSystem?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.EaseYourselfWhere !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Ease Yourself Where
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.EaseYourselfWhere
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.DesiltingFrequency !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Desilting Frequency
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.LiquidWasteSection?.DesiltingFrequency
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.PremisesDrainType
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">Drain Type</label>
-                                                                                        {data?.LiquidWasteSection?.PremisesDrainType?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.DrainType?.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.PremisesEffluentManagement
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Effluent Management
-                                                                                        </label>
-                                                                                        {data?.LiquidWasteSection?.PremisesEffluentManagement?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.EffluentManagement.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.PremisesExcretaContainment
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Excreta Containment
-                                                                                        </label>
-                                                                                        {data?.LiquidWasteSection?.PremisesExcretaContainment.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.ExcretaContainment.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection
-                                                                                    ?.PremisesExcretaDisposalMethod?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Excreta Disposal Method
-                                                                                        </label>
-                                                                                        {data?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.ExcretaDisposalMethod.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.PremisesGreyWaterDisposal
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Grey Water Disposal
-                                                                                        </label>
-                                                                                        {data?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.GreyWaterDisposal.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.LiquidWasteSection?.PremisesToiletType
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Toilet Type
-                                                                                        </label>
-                                                                                        {data?.LiquidWasteSection?.PremisesToiletType?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.ToiletType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                            </div>
+                                                                            {data?.submittedData?.LiquidWasteSection?.toiletPitPosition !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Toilet Pit Position
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.toiletPitPosition
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.drainsCondition != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Drains Condition
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.drainsCondition
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.stagnationEvidence !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Stagnation Evidence
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.stagnationEvidence
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.analCleansingMaterialMgt !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Anal Cleansing Material
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection
+                                                                                                ?.analCleansingMaterialMgt?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.toiletCondition != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Toilet Condition
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.toiletCondition
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.toiletDischarge != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Toilet Discharge
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.toiletDischarge
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.containmentEmptied !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Containment Emptied
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.containmentEmptied
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.sewerSystem != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Sewer System
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.sewerSystem?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Ease Yourself Where
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.DesiltingFrequency !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Desilting Frequency
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.LiquidWasteSection?.DesiltingFrequency
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.PremisesDrainType
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">Drain Type</label>
+                                                                                    {data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.DrainType?.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Effluent Management
+                                                                                    </label>
+                                                                                    {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.EffluentManagement.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Excreta Containment
+                                                                                    </label>
+                                                                                    {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.ExcretaContainment.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection
+                                                                                ?.PremisesExcretaDisposalMethod?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Excreta Disposal Method
+                                                                                    </label>
+                                                                                    {data?.submittedData?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.ExcretaDisposalMethod.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Grey Water Disposal
+                                                                                    </label>
+                                                                                    {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.GreyWaterDisposal.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.LiquidWasteSection?.PremisesToiletType
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Toilet Type
+                                                                                    </label>
+                                                                                    {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.ToiletType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {/* end col */}
                                                             </div>
+                                                            {/* end col */}
                                                         </div>
                                                     </div>
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
-                                                                            </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="row mb-3">
+                                                            <div className="col-xl-12">
+                                                                <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="col-sm">
+                                                                        <div>
+                                                                            <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="card product">
-                                                                        <div className="card-body">
-                                                                            <div className="row gy-3">
-                                                                                {data?.SolidWasteSection
-                                                                                    ?.wasteServiceProviderRegistration != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Service Provider Registration
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection
-                                                                                                    ?.wasteServiceProviderRegistration?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.wasteCollectorName !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Collector Name
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection?.wasteCollectorName
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.wasteSortingAvailability !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Sorting Availability
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection
-                                                                                                    ?.wasteSortingAvailability?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection
-                                                                                    ?.approvedWasteStorageReceptacle != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Approved Waste Storage Receptacle
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection
-                                                                                                    ?.approvedWasteStorageReceptacle?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection
-                                                                                    ?.adequateWasteStorageReceptacle != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Adequate Waste Storage Receptacle
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection
-                                                                                                    ?.adequateWasteStorageReceptacle?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.WasteCollectionType !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Collection Type
-                                                                                        </label>
+                                                                </div>
+                                                                <div className="card product">
+                                                                    <div className="card-body">
+                                                                        <div className="row gy-3">
+                                                                            {data?.submittedData?.SolidWasteSection
+                                                                                ?.wasteServiceProviderRegistration != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Service Provider Registration
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection
+                                                                                                ?.wasteServiceProviderRegistration?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.wasteCollectorName !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Collector Name
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection?.wasteCollectorName
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.SolidWasteSection?.wasteSortingAvailability !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Sorting Availability
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection
+                                                                                                ?.wasteSortingAvailability?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection
+                                                                                ?.approvedWasteStorageReceptacle != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Approved Waste Storage Receptacle
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection
+                                                                                                ?.approvedWasteStorageReceptacle?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection
+                                                                                ?.adequateWasteStorageReceptacle != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Adequate Waste Storage Receptacle
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection
+                                                                                                ?.adequateWasteStorageReceptacle?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.WasteCollectionType !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Collection Type
+                                                                                    </label>
 
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection?.WasteCollectionType
-                                                                                                    .name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.PremisesWasteReceptacle
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Collection Receptacle
-                                                                                        </label>
-                                                                                        {data?.SolidWasteSection?.PremisesWasteReceptacle?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x?.SolidWasteReceptacle?.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.UnservicedWasteDisposal !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Unserviced Waste Disposal
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection
-                                                                                                    ?.UnservicedWasteDisposal?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.wastePaymentEvidence !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Payment Evidence
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection?.wastePaymentEvidence
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.ContainerVolume != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Container Volume
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection?.ContainerVolume?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.SolidWasteSection?.wasteProviderAccreditted !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Waste Provider Accreditted
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.SolidWasteSection
-                                                                                                    ?.wasteProviderAccreditted?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                {/* end col */}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">
-                                                                                    ACTIONS & CONCLUSION SECTION
-                                                                                </h5>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="card product">
-                                                                        <div className="card-body">
-                                                                            <div className="row gy-3">
-                                                                                {data?.ConclusionSection?.obnoxiousTradeExist !=
-                                                                                    null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Obnoxious Trade Exist
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={
-                                                                                                data?.ConclusionSection?.obnoxiousTradeExist
-                                                                                                    ?.name
-                                                                                            }
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.ConclusionSection?.PremisesNuisanceDetected
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Nuisance Observed
-                                                                                        </label>
-                                                                                        {data?.ConclusionSection?.PremisesNuisanceDetected?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x?.Nuisance?.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.ConclusionSection?.officerComment != null ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Office Comment
-                                                                                        </label>
-                                                                                        <input
-                                                                                            type="text"
-                                                                                            className="form-control bg-light border-0"
-                                                                                            id="invoicenoInput"
-                                                                                            value={data?.ConclusionSection?.officerComment}
-                                                                                            readOnly={true}
-                                                                                        />
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                                {data?.ConclusionSection?.PremisesActionTaken
-                                                                                    ?.length != 0 ? (
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="invoicenoInput">
-                                                                                            Action Taken
-                                                                                        </label>
-                                                                                        {data?.ConclusionSection?.PremisesActionTaken?.map(
-                                                                                            (x:any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x?.Action?.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
-                                                                            </div>
-                                                                            <div className="col-lg-3 col-sm-6">
-                                                                                <label htmlFor="invoicenoInput">
-                                                                                    Reporting Officer
-                                                                                </label>
-                                                                                <input
-                                                                                    type="text"
-                                                                                    className="form-control bg-light border-0"
-                                                                                    id="invoicenoInput"
-                                                                                    value={`${data?.User?.otherNames} ${data?.User?.surname}`}
-                                                                                    readOnly={true}
-                                                                                />
-                                                                            </div>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection?.WasteCollectionType
+                                                                                                .name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Collection Receptacle
+                                                                                    </label>
+                                                                                    {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x?.SolidWasteReceptacle?.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.UnservicedWasteDisposal !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Unserviced Waste Disposal
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection
+                                                                                                ?.UnservicedWasteDisposal?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.wastePaymentEvidence !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Payment Evidence
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection?.wastePaymentEvidence
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.ContainerVolume != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Container Volume
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection?.ContainerVolume?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.SolidWasteSection?.wasteProviderAccreditted !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Provider Accreditted
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.SolidWasteSection
+                                                                                                ?.wasteProviderAccreditted?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            {/* end col */}
                                                         </div>
                                                     </div>
-                                                    {/* {data?.InspectionPictures.map((ip) => {
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="row mb-3">
+                                                            <div className="col-xl-12">
+                                                                <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="col-sm">
+                                                                        <div>
+                                                                            <h5 className="fs-14 mb-0">
+                                                                                ACTIONS & CONCLUSION SECTION
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="card product">
+                                                                    <div className="card-body">
+                                                                        <div className="row gy-3">
+                                                                            {data?.submittedData?.ConclusionSection?.obnoxiousTradeExist !=
+                                                                                null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Obnoxious Trade Exist
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.ConclusionSection?.obnoxiousTradeExist
+                                                                                                ?.name
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Nuisance Observed
+                                                                                    </label>
+                                                                                    {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x?.Nuisance?.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.ConclusionSection?.officerComment != null ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Office Comment
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={data?.submittedData?.ConclusionSection?.officerComment}
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                            {data?.submittedData?.ConclusionSection?.PremisesActionTaken
+                                                                                ?.length != 0 ? (
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Action Taken
+                                                                                    </label>
+                                                                                    {data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x?.Action?.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            ) : (
+                                                                                <></>
+                                                                            )}
+                                                                        </div>
+                                                                        <div className="col-lg-3 col-sm-6">
+                                                                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                Reporting Officer
+                                                                            </label>
+                                                                            <input
+                                                                                type="text"
+                                                                                className="form-control bg-light border-0"
+                                                                                id="invoicenoInput"
+                                                                                value={`${data?.submittedData?.User?.otherNames} ${data?.submittedData?.User?.surname}`}
+                                                                                readOnly={true}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {/* {data?.InspectionPictures.map((ip) => {
      return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
@@ -1620,108 +1640,108 @@ export default function DataView({data}:any) {
         </figcaption>
       </figure>
          })} */}
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">PICTURES</h5>
-                                                                            </div>
+                                                <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="row mb-3">
+                                                            <div className="col-xl-12">
+                                                                <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="col-sm">
+                                                                        <div>
+                                                                            <h5 className="fs-14 mb-0">PICTURES</h5>
                                                                         </div>
                                                                     </div>
+                                                                </div>
 
-                                                                    <div className="row gallery-wrapper">
-                                                                        {data?.InspectionPictures?.map((ip:any) => {
-                                                                            return (
-                                                                                <div
-                                                                                    key={ip.id}
-                                                                                    className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
-                                                                                    data-category="designing development"
-                                                                                >
-                                                                                    <div className="gallery-box card">
-                                                                                        <div className="gallery-container">
-                                                                                            <a
-                                                                                                className="image-popup"
-                                                                                                href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                                                                                                title=""
-                                                                                            >
-                                                                                                <img
-                                                                                                    className="gallery-img img-fluid mx-auto"
-                                                                                                    src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                                                                                                    alt=""
-                                                                                                />
-                                                                                                <div className="gallery-overlay">
-                                                                                                    <h5 className="overlay-caption">
-                                                                                                        {ip.FormSectionImage.name}
-                                                                                                    </h5>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </div>
+                                                                <div className="row gallery-wrapper">
+                                                                    {data?.submittedData?.InspectionPictures?.map((ip: any) => {
+                                                                        return (
+                                                                            <div
+                                                                                key={ip.id}
+                                                                                className="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                                                                                data-category="designing development"
+                                                                            >
+                                                                                <div className="gallery-box card">
+                                                                                    <div className="gallery-container">
+                                                                                        <Link
+                                                                                            className="image-popup"
+                                                                                            href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                                                                                            title=""
+                                                                                        >
+                                                                                            <img
+                                                                                                className="gallery-img img-fluid mx-auto"
+                                                                                                src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
+                                                                                                alt=""
+                                                                                            />
+                                                                                            <div className="gallery-overlay">
+                                                                                                <h5 className="overlay-caption">
+                                                                                                    {ip.FormSectionImage.name}
+                                                                                                </h5>
+                                                                                            </div>
+                                                                                        </Link>
+                                                                                    </div>
 
-                                                                                        <div className="box-content">
-                                                                                            <div className="d-flex align-items-center mt-1">
-                                                                                                <div className="flex-grow-1 text-muted">
-                                                                                                    <a
-                                                                                                        href=""
-                                                                                                        className="text-body text-truncate"
-                                                                                                    >
-                                                                                                        {ip.FormSectionImage.name}
-                                                                                                    </a>
-                                                                                                </div>
+                                                                                    <div className="box-content">
+                                                                                        <div className="d-flex align-items-center mt-1">
+                                                                                            <div className="flex-grow-1 text-muted">
+                                                                                                <Link
+                                                                                                    href=""
+                                                                                                    className="text-body text-truncate"
+                                                                                                >
+                                                                                                    {ip.FormSectionImage.name}
+                                                                                                </Link>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            );
-                                                                        })}
-                                                                    </div>
+                                                                            </div>
+                                                                        );
+                                                                    })}
                                                                 </div>
-                                                                <div className="col-sm-auto">
-                                                                    {data?.isPublished == 0 ? (
-                                                                        <button
-                                                                            className="btn btn-success"
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
+                                                            </div>
+                                                            <div className="col-sm-auto">
+                                                                {data?.isPublished == 0 ? (
+                                                                    <button
+                                                                        className="btn btn-success"
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault();
 
-                                                                                publish(data?.id);
-                                                                            }}
-                                                                        >
-                                                                            Publish
-                                                                        </button>
-                                                                    ) : (
-                                                                        <button
-                                                                            className="btn btn-danger"
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
-
-                                                                                publish(data?.id);
-                                                                            }}
-                                                                        >
-                                                                            Unpublish
-                                                                        </button>
-                                                                    )}
-                                                                </div>
-                                                                <div className="col-sm-auto">
-                                                                    <Link
-
-                                                                        href={{
-                                                                            pathname: `/submitted-data/data_edit`,
-                                                                            query: {
-                                                                                id: data?.id,
-                                                                                inspectionFormId: formId,
-                                                                                published: published,
-                                                                            },
+                                                                            publish(data?.id);
                                                                         }}
                                                                     >
-                                                                        <a className="btn btn-primary">
-                                                                            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "}
-                                                                            Edit
-                                                                        </a>
-                                                                    </Link>
-                                                                </div>
-                                                                {/* <div className="col-sm-auto">
+                                                                        Publish
+                                                                    </button>
+                                                                ) : (
+                                                                    <button
+                                                                        className="btn btn-danger"
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault();
+
+                                                                            publish(data?.id);
+                                                                        }}
+                                                                    >
+                                                                        Unpublish
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                            <div className="col-sm-auto">
+                                                                <Link
+
+                                                                    href={{
+                                                                        pathname: `/submitted-data/data_edit`,
+                                                                        query: {
+                                                                            id: data?.submittedData?.id,
+                                                                            inspectionFormId: formId,
+                                                                            published: published,
+                                                                        },
+                                                                    }}
+                                                                >
+                                                                    {/* <a className="btn btn-primary">
+                                                                            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "} */}
+                                                                    Edit
+                                                                    {/* </a> */}
+                                                                </Link>
+                                                            </div>
+                                                            {/* <div className="col-sm-auto">
                       <button
                         className="btn btn-primary"
                         onClick={(e) => {
@@ -1734,22 +1754,21 @@ export default function DataView({data}:any) {
                       </button>
                    
                   </div> */}
-                                                                <div className="col-sm-auto">
-                                                                    {data?.isPublished == 0 ? (
-                                                                        <button
-                                                                            className="btn btn-danger"
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
+                                                            <div className="col-sm-auto">
+                                                                {data?.isPublished == 0 ? (
+                                                                    <button
+                                                                        className="btn btn-danger"
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault();
 
-                                                                                handleDelete(data?.id);
-                                                                            }}
-                                                                        >
-                                                                            Delete
-                                                                        </button>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                </div>
+                                                                            handleDelete(data?.id);
+                                                                        }}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                ) : (
+                                                                    <></>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1760,11 +1779,12 @@ export default function DataView({data}:any) {
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+
+
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
+        </main >
     )
 }

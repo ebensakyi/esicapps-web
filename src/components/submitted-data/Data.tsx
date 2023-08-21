@@ -47,6 +47,7 @@ export default async function Data({ data }: any) {
 
 
 
+console.log(data);
 
 
 
@@ -576,7 +577,7 @@ export default async function Data({ data }: any) {
                                                                 {" "}
                                                                 <Link
                                                                     href={{
-                                                                        pathname: `http://www.google.com/maps/place/${dt?.BasicInfoSection?.latitude},${dt?.BasicInfoSection?.longitude}`,
+                                                                        pathname: `http://www.google.com/maps/place/${dt?.latitude},${dt?.longitude}`,
                                                                         query: {},
                                                                     }}
                                                                     passHref
@@ -587,7 +588,7 @@ export default async function Data({ data }: any) {
         className="dropdown-item"
     > */}
                                                                     {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
-                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title={dt?.BasicInfoSection?.latitude + "," + dt?.BasicInfoSection?.longitude}>GPS</span>
+                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title={dt?.latitude + "," + dt?.longitude}>GPS</span>
                                                                     {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
                                                                     <i className="ri-external-link-line align-bottom me-2 text-success" />
                                                                     {/* </a> */}
