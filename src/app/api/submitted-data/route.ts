@@ -738,7 +738,7 @@ export async function GET(request: Request) {
 
               Inspection: {
                 isPublished: published,
-                inspectionFormId: formId,
+                inspectionFormId: formId,deleted: 0,
                
               },
             }
@@ -746,7 +746,7 @@ export async function GET(request: Request) {
               Inspection: {
                 inspectionFormId: formId,
                 isPublished: published,
-               
+                deleted: 0,
               },
             },
     });
@@ -817,6 +817,7 @@ export async function GET(request: Request) {
         Inspection: {
           isPublished: published,
           inspectionFormId: formId,
+          deleted: 0,
           // regionId: filterValue!="undefined"? Number(filterValue):"undefined",
           // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
         },

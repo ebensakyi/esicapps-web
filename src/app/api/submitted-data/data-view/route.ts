@@ -13,7 +13,6 @@ export async function POST(request: Request) {
 
     const res = await request.json();
 
-    console.log(">>>>>>>>>>>>>>>",res);
     
 
     let inspectionId = res.id;
@@ -47,8 +46,15 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    let { searchParams } = new URL(request.url);
-    let inspectionId: any = searchParams.get("id")?.toString();
+    const res = await request.json();
+    let inspectionId = res.id;
+
+
+    // let { searchParams } = new URL(request.url);
+    // let inspectionId: any = searchParams.get("id")?.toString();
+
+    // console.log("inp=======>",searchParams);
+    
 
     const session = await getServerSession(authOptions);
 
@@ -86,23 +92,20 @@ export async function GET(request: Request) {
 
     let { searchParams } = new URL(request.url);
     let inspectionId: any = searchParams.get("id")?.toString();
-    let published: string | undefined = searchParams
-      .get("published")
-      ?.toString();
+    // let published: string | undefined = searchParams
+    //   .get("published")
+    //   ?.toString();
 
-    let inspectionFormId: string | undefined = searchParams
-      .get("inspectionFormId")
-      ?.toString();
+    // let inspectionFormId: string | undefined = searchParams
+    //   .get("inspectionFormId")
+    //   ?.toString();
     await logActivity(`Visited dataview page for ${inspectionId}`, userId);
 
-console.log("searchParamssearchParams==>",searchParams);
-
-    console.log("inspectionId===> ",inspectionId);
     
 
     const data = await prisma.inspection.findFirst({
       where: {
-        deleted: 0,
+        // deleted: 0,
 
         id: inspectionId,
       },

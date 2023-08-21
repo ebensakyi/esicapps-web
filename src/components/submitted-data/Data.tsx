@@ -546,7 +546,7 @@ console.log(data);
                                                                                 pathname: `/submitted-data/data-view`,
                                                                                 query: {
                                                                                     id: dt?.Inspection?.prevInspectionId,
-                                                                                    inspectionFormId: formId,
+                                                                                    formId: formId,
                                                                                     published: published,
                                                                                 },
                                                                             }}
@@ -636,7 +636,7 @@ console.log(data);
                                                                                     pathname: `/submitted-data/data-view`,
                                                                                     query: {
                                                                                         id: dt?.Inspection?.id,
-                                                                                        inspectionFormId: formId,
+                                                                                        formId: formId,
                                                                                         published: published,
                                                                                     },
                                                                                 }}
@@ -652,7 +652,7 @@ console.log(data);
                                                                                     pathname: `/submitted-data/data_edit`,
                                                                                     query: {
                                                                                         id: dt?.Inspection?.id,
-                                                                                        inspectionFormId: formId,
+                                                                                       formId: formId,
                                                                                         published: published,
                                                                                     },
                                                                                 }}
