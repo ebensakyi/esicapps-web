@@ -13,7 +13,10 @@ export async function POST(request: Request) {
 
     const res = await request.json();
 
-    let inspectionId = res.inspectionId;
+    console.log(">>>>>>>>>>>>>>>",res);
+    
+
+    let inspectionId = res.id;
 
     
 
@@ -35,7 +38,8 @@ export async function POST(request: Request) {
     });
     await logActivity(`Published inspection ${inspectionId}`, userId);
 
-    res.status(200).json();
+    return NextResponse.json({ status: 200 });
+
   } catch (error) {
     console.log(error);
   }

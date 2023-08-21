@@ -11,6 +11,7 @@ import InstitutionPremisesInfoView from './PremisesInfoViews/InstitutionPremises
 import MarketPremisesInfoView from './PremisesInfoViews/MarketPremisesInfoView';
 import ResidentialPremisesInfoView from './PremisesInfoViews/ResidentialPremisesInfoView';
 import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoView';
+import Image from 'next/image'
 
 export default function DataView({ data }: any) {
     console.log(data);
@@ -25,21 +26,35 @@ export default function DataView({ data }: any) {
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
-    const publish = async (id: any) => {
+    const handlePublish = async (id: any) => {
         try {
             const response = await axios.post(`/api/submitted-data/data-view`, {
                 id: id,
             });
             if (response.status == 200) {
+                
                 router.push(
-                    `/submitted-data/data?published=${published}&inspectionFormId=${formId}`
+                    `/submitted-data?published=${published}&formId=${formId}`
                 );
             }
         } catch (error) {
             console.log(error);
         }
     };
-
+  const handleDelete = async (id: any) => {
+        try {
+            const response = await axios.put(`/api/submitted-data/data-view`, {
+                id: id,
+            });
+            if (response.status == 200) {
+                router.push(
+                    `/submitted-data/data?published=${published}&formId=${formId}`
+                );
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const downloadInspection = async () => {
         const printContents = document.getElementById("printableArea").innerHTML;
         const originalContents = document.body.innerHTML;
@@ -75,20 +90,7 @@ export default function DataView({ data }: any) {
         }
     };
 
-    const handleDelete = async (id: any) => {
-        try {
-            const response = await axios.put(`/api/submitted-data/data-view`, {
-                id: id,
-            });
-            if (response.status == 200) {
-                router.push(
-                    `/submitted-data/data?published=${published}&inspectionFormId=${formId}`
-                );
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+  
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -227,7 +229,7 @@ Region</label>
                                                                                     type="text"
                                                                                     className="form-control bg-light border-0"
                                                                                     id="invoicenoInput"
-                                                                                    value={data?.ElectoralArea?.name}
+                                                                                    value={data?.submittedData?.ElectoralArea?.name}
                                                                                     readOnly={true}
                                                                                 /></div>
 
@@ -238,7 +240,7 @@ Region</label>
                                                                                     type="text"
                                                                                     className="form-control bg-light border-0"
                                                                                     id="invoicenoInput"
-                                                                                    value={data?.BasicInfoSection?.Community?.name}
+                                                                                    value={data?.submittedData?.BasicInfoSection?.Community?.name}
                                                                                     readOnly={true}
                                                                                 /></div>
 
@@ -263,7 +265,7 @@ Region</label>
                                                                                     type="text"
                                                                                     className="form-control bg-light border-0"
                                                                                     id="invoicenoInput"
-                                                                                    value={data?.BasicInfoSection?.respondentName}
+                                                                                    value={data?.submittedData?.BasicInfoSection?.respondentName}
                                                                                     readOnly={true}
                                                                                 /></div>
 
@@ -1662,25 +1664,27 @@ Region</label>
                                                                             >
                                                                                 <div className="gallery-box card">
                                                                                     <div className="gallery-container">
-                                                                                        <Link
+                                                                                        {/* <Link
                                                                                             className="image-popup"
                                                                                             href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
                                                                                             title=""
-                                                                                        >
-                                                                                            <img
+                                                                                        > */}
+                                                                                            <Image
                                                                                                 className="gallery-img img-fluid mx-auto"
                                                                                                 src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
                                                                                                 alt=""
+                                                                                                height="256"
+                                                                                                width="256"
                                                                                             />
                                                                                             <div className="gallery-overlay">
                                                                                                 <h5 className="overlay-caption">
                                                                                                     {ip.FormSectionImage.name}
                                                                                                 </h5>
                                                                                             </div>
-                                                                                        </Link>
+                                                                                        {/* </Link> */}
                                                                                     </div>
 
-                                                                                    <div className="box-content">
+                                                                                    {/* <div className="box-content">
                                                                                         <div className="d-flex align-items-center mt-1">
                                                                                             <div className="flex-grow-1 text-muted">
                                                                                                 <Link
@@ -1691,7 +1695,7 @@ Region</label>
                                                                                                 </Link>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
+                                                                                    </div> */}
                                                                                 </div>
                                                                             </div>
                                                                         );
@@ -1699,13 +1703,13 @@ Region</label>
                                                                 </div>
                                                             </div>
                                                             <div className="col-sm-auto">
-                                                                {data?.isPublished == 0 ? (
+                                                                {data?.submittedData?.isPublished == 0 ? (
                                                                     <button
                                                                         className="btn btn-success"
                                                                         onClick={(e) => {
                                                                             e.preventDefault();
 
-                                                                            publish(data?.id);
+                                                                            handlePublish(data?.submittedData?.id);
                                                                         }}
                                                                     >
                                                                         Publish
@@ -1716,7 +1720,7 @@ Region</label>
                                                                         onClick={(e) => {
                                                                             e.preventDefault();
 
-                                                                            publish(data?.id);
+                                                                            handlePublish(data?.submittedData?.id);
                                                                         }}
                                                                     >
                                                                         Unpublish
@@ -1724,8 +1728,24 @@ Region</label>
                                                                 )}
                                                             </div>
                                                             <div className="col-sm-auto">
-                                                                <Link
+                                                                {data?.submittedData?.isPublished == 0 ? (
+                                                                    <button
+                                                                        className="btn btn-danger"
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault();
 
+                                                                            handleDelete(data?.id);
+                                                                        }}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                ) : (
+                                                                    <></>
+                                                                )}
+                                                            </div>
+                                                            <div className="col-sm-auto">
+                                                                <Link
+  className="btn btn-primary"
                                                                     href={{
                                                                         pathname: `/submitted-data/data_edit`,
                                                                         query: {
@@ -1754,22 +1774,7 @@ Region</label>
                       </button>
                    
                   </div> */}
-                                                            <div className="col-sm-auto">
-                                                                {data?.isPublished == 0 ? (
-                                                                    <button
-                                                                        className="btn btn-danger"
-                                                                        onClick={(e) => {
-                                                                            e.preventDefault();
-
-                                                                            handleDelete(data?.id);
-                                                                        }}
-                                                                    >
-                                                                        Delete
-                                                                    </button>
-                                                                ) : (
-                                                                    <></>
-                                                                )}
-                                                            </div>
+                                                        
                                                         </div>
                                                     </div>
                                                 </div>

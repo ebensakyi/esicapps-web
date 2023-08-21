@@ -5,7 +5,7 @@ const nextConfig = {
     "@next/next/no-sync-scripts": "off",
   },
   images: {
-    domains: ["sanitation-reporter-images.s3.eu-west-2.amazonaws.com"],
+    domains: ['sanitation-reporter-images.s3.eu-west-2.amazonaws.com','esicapps-images.s3.eu-west-2.amazonaws.com'],
   },
   // async redirects() {
   //   return [
