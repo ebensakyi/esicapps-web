@@ -12,7 +12,7 @@ async function getSubmittedData(searchParams: any) {
     
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?inspectionId&published=${published}&formId=${formId}&page=${page}`,{cache:"no-store"})
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}&page=${page}`,{cache:"no-store"})
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')

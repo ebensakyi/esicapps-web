@@ -15,12 +15,14 @@ export async function POST(request: Request) {
 
     let inspectionId = res.inspectionId;
 
+    
+
     let inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
       },
     });
-    let isPublished = inspection?.isPublished;
+    let isPublished = inspection?.isPublished || 0;
 
     await prisma.inspection.update({
       data: {
@@ -88,6 +90,11 @@ export async function GET(request: Request) {
       .get("inspectionFormId")
       ?.toString();
     await logActivity(`Visited dataview page for ${inspectionId}`, userId);
+
+console.log("searchParamssearchParams==>",searchParams);
+
+    console.log("inspectionId===> ",inspectionId);
+    
 
     const data = await prisma.inspection.findFirst({
       where: {
