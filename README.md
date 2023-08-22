@@ -59,10 +59,10 @@ update "District"
    4. check paths  and block users if page is not accessible
 
 //// ***
-1. add searchval to export to xls
+////////////////////////
 
 
 
-1. Add pagination and filter to user,logs 
-2. work on dashboard
-3. add search to user
+1. Save premises multiselects
+2. force new user to change password
+3. google data studio dashboard

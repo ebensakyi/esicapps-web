@@ -3,14 +3,14 @@ import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { NextResponse } from "next/server";
-import { log } from 'util';
+import { log } from "util";
 
 export async function GET(request: Request) {
   try {
     const session = await getServerSession(authOptions);
 
     // console.log("Session ", session);
-    let userId  = session?.user?.id 
+    let userId = session?.user?.id;
     let surname = session?.user?.surname;
 
     let { searchParams } = new URL(request.url);
@@ -397,13 +397,11 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-    console.log("let inspectionId = res.id; ",res);
-    
-
+    console.log("let inspectionId = res.id; ", res);
 
     let inspectionId = res.inspectionId;
 
-//////////////////////////GET CURRENT DATA//////////////////////
+    //////////////////////////GET CURRENT DATA//////////////////////
     let inspection = await prisma.inspection.findFirst({
       where: { id: inspectionId },
     });
@@ -502,66 +500,75 @@ export async function PUT(request: Request) {
 
     let inspectionHistory = await prisma.inspectionHistory.create({
       data: inspection,
-    }as any);
+    } as any);
 
     let historyId: any = inspectionHistory.historyId;
 
     //////SPREAD HISTORY ID
     licencePermitSection =
       licencePermitSection != null
-        ? { ...licencePermitSection, historyId }as any
+        ? ({ ...licencePermitSection, historyId } as any)
         : null;
 
     liquidWasteSection =
-      liquidWasteSection != null ? { ...liquidWasteSection, historyId }as any : null;
+      liquidWasteSection != null
+        ? ({ ...liquidWasteSection, historyId } as any)
+        : null;
     solidWasteSection =
-      solidWasteSection != null ? { ...solidWasteSection, historyId }as any : null;
+      solidWasteSection != null
+        ? ({ ...solidWasteSection, historyId } as any)
+        : null;
     basicInfoSection =
-      basicInfoSection != null ? { ...basicInfoSection, historyId }as any : null;
-    waterSection = waterSection != null ? { ...waterSection, historyId }as any : null;
+      basicInfoSection != null
+        ? ({ ...basicInfoSection, historyId } as any)
+        : null;
+    waterSection =
+      waterSection != null ? ({ ...waterSection, historyId } as any) : null;
     conclusionSection =
-      conclusionSection != null ? { ...conclusionSection, historyId }as any : null;
+      conclusionSection != null
+        ? ({ ...conclusionSection, historyId } as any)
+        : null;
 
     residentialPremisesInfoSection =
       residentialPremisesInfoSection != null
-        ? {
+        ? ({
             ...residentialPremisesInfoSection,
             historyId,
-          }as any
+          } as any)
         : null;
     eateryPremisesInfoSection =
       eateryPremisesInfoSection != null
-        ? { ...eateryPremisesInfoSection, historyId }as any
+        ? ({ ...eateryPremisesInfoSection, historyId } as any)
         : null;
     healthPremisesInfoSection =
       healthPremisesInfoSection != null
-        ? { ...healthPremisesInfoSection, historyId }as any
+        ? ({ ...healthPremisesInfoSection, historyId } as any)
         : null;
     hospitalityPremisesInfoSection =
       hospitalityPremisesInfoSection != null
-        ? {
+        ? ({
             ...hospitalityPremisesInfoSection,
             historyId,
-          }as any
+          } as any)
         : null;
     sanitaryPremisesInfoSection =
       sanitaryPremisesInfoSection != null
-        ? { ...sanitaryPremisesInfoSection, historyId }as any
+        ? ({ ...sanitaryPremisesInfoSection, historyId } as any)
         : null;
     marketPremisesInfoSection =
       marketPremisesInfoSection != null
-        ? { ...marketPremisesInfoSection, historyId }as any
+        ? ({ ...marketPremisesInfoSection, historyId } as any)
         : null;
     institutionPremisesInfoSection =
       institutionPremisesInfoSection != null
-        ? {
+        ? ({
             ...institutionPremisesInfoSection,
             historyId,
-          }as any
+          } as any)
         : null;
     industryPremisesInfoSection =
       industryPremisesInfoSection != null
-        ? { ...industryPremisesInfoSection, historyId }as any
+        ? ({ ...industryPremisesInfoSection, historyId } as any)
         : null;
 
     premisesExcretaContainment = premisesExcretaContainment?.map((d) => {
@@ -599,101 +606,108 @@ export async function PUT(request: Request) {
     ///////////////////////SAVE HISTORY
 
     if (basicInfoSection != null) {
-      await prisma.basicInfoSectionHistory.create({ data: basicInfoSection }as any);
+      await prisma.basicInfoSectionHistory.create({
+        data: basicInfoSection,
+      } as any);
     }
     if (licencePermitSection != null) {
       await prisma.licencePermitSectionHistory.create({
         data: licencePermitSection,
-      }as any);
+      } as any);
     }
     if (liquidWasteSection != null) {
       await prisma.liquidWasteSectionHistory.create({
         data: liquidWasteSection,
-      }as any);
+      } as any);
     }
     if (solidWasteSection != null) {
-      await prisma.solidWasteSectionHistory.create({ data: solidWasteSection }as any);
+      await prisma.solidWasteSectionHistory.create({
+        data: solidWasteSection,
+      } as any);
     }
     if (waterSection != null) {
-      await prisma.waterSectionHistory.create({ data: waterSection }as any);
+      await prisma.waterSectionHistory.create({ data: waterSection } as any);
     }
 
     if (conclusionSection != null) {
-      await prisma.conclusionSectionHistory.create({ data: conclusionSection }as any);
+      await prisma.conclusionSectionHistory.create({
+        data: conclusionSection,
+      } as any);
     }
     if (residentialPremisesInfoSection != null) {
       await prisma.residentialPremisesInfoSectionHistory.create({
         data: residentialPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (eateryPremisesInfoSection != null) {
       await prisma.eateryPremisesInfoSectionHistory.create({
         data: eateryPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (healthPremisesInfoSection != null) {
       await prisma.healthPremisesInfoSectionHistory.create({
         data: healthPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (hospitalityPremisesInfoSection != null) {
       await prisma.hospitalityPremisesInfoSectionHistory.create({
         data: hospitalityPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (sanitaryPremisesInfoSection != null) {
       await prisma.sanitaryPremisesInfoSectionHistory.create({
         data: sanitaryPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (marketPremisesInfoSection != null) {
       await prisma.marketPremisesInfoSectionHistory.create({
         data: marketPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (institutionPremisesInfoSection != null) {
       await prisma.institutionPremisesInfoSectionHistory.create({
         data: institutionPremisesInfoSection,
-      }as any);
+      } as any);
     }
     if (industryPremisesInfoSection != null) {
       await prisma.industryPremisesInfoSectionHistory.create({
         data: industryPremisesInfoSection,
-      }as any);
+      } as any);
     }
 
     await prisma.premisesExcretaContainmentHistory.createMany({
       data: premisesExcretaContainment,
-    }as any);
+    } as any);
 
     await prisma.premisesGreyWaterDisposalHistory.createMany({
       data: premisesGreyWaterDisposal,
-    }as any);
+    } as any);
     await prisma.premisesWasteReceptacleHistory.createMany({
       data: premisesWasteReceptacle,
-    }as any);
+    } as any);
     await prisma.premisesPestSignsHistory.createMany({
       data: premisesPestSigns,
-    }as any);
-    await prisma.premisesAnimalHistory.createMany({ data: premisesAnimal }as any);
+    } as any);
+    await prisma.premisesAnimalHistory.createMany({
+      data: premisesAnimal,
+    } as any);
     await prisma.premisesDrainTypeHistory.createMany({
       data: premisesDrainType,
-    }as any);
+    } as any);
     await prisma.premisesDrainBadConditionHistory.createMany({
       data: premisesDrainBadCondition,
-    }as any);
+    } as any);
     await prisma.premisesHazardousWasteDisposalHistory.createMany({
       data: premisesHazardousWasteDisposal,
-    }as any);
+    } as any);
     await prisma.premisesActionTakenHistory.createMany({
       data: premisesActionTaken,
-    }as any);
+    } as any);
     await prisma.premisesNuisanceDetectedHistory.createMany({
       data: premisesNuisanceDetected,
-    }as any);
+    } as any);
 
-
-//////////////////////////PROCESS DATA FOR DATA UPDATE
+    //////////////////////////PREPARE DATA FOR DATA UPDATE
 
     let newBasicInfoSection = {
       latitude: Number(res?.basicInfoSection.latitude),
@@ -994,7 +1008,41 @@ export async function PUT(request: Request) {
 
       obnoxiousTrade: res?.conclusionSection.obnoxiousTrade,
     };
-/////////////////////////UPDATE DATA/////////////
+    /////////////////////////UPDATE DATA/////////////
+
+    console.log(newWaterSection);
+    
+
+    // await prisma.premisesExcretaContainment.createMany({
+    //   data: premisesExcretaContainment,
+    // } as any);
+
+    // await prisma.premisesGreyWaterDisposal.createMany({
+    //   data: premisesGreyWaterDisposal,
+    // } as any);
+    // await prisma.premisesWasteReceptacle.createMany({
+    //   data: premisesWasteReceptacle,
+    // } as any);
+    // await prisma.premisesPestSigns.createMany({
+    //   data: premisesPestSigns,
+    // } as any);
+    // await prisma.premisesAnimal.createMany({ data: premisesAnimal } as any);
+    // await prisma.premisesDrainType.createMany({
+    //   data: premisesDrainType,
+    // } as any);
+    // await prisma.premisesDrainBadCondition.createMany({
+    //   data: premisesDrainBadCondition,
+    // } as any);
+    // await prisma.premisesHazardousWasteDisposal.createMany({
+    //   data: premisesHazardousWasteDisposal,
+    // } as any);
+    // await prisma.premisesActionTaken.createMany({
+    //   data: premisesActionTaken,
+    // } as any);
+    // await prisma.premisesNuisanceDetected.createMany({
+    //   data: premisesNuisanceDetected,
+    // } as any);
+
     await prisma.basicInfoSection.update({
       where: {
         inspectionId: inspectionId,
@@ -1069,5 +1117,3 @@ export async function DELETE(request: Request) {
   //   return NextResponse.json(error, { status: 500 });
   // }
 }
-
-

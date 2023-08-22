@@ -15,11 +15,11 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react';
 import { LOGIN_URL } from '@/config';
 import Multiselect from 'multiselect-react-dropdown';
-import { inspectionForm } from '../../../prisma/seed/inspectionForm';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DataEdit({ data }: any) {
 
-    console.log(">>>>>>>>>>>>>>>>>>>", data);
 
 
     const { data: session } = useSession({
@@ -694,14 +694,17 @@ export default function DataEdit({ data }: any) {
             },
         };
   
+        console.log(data);
+        
        const response = await axios.put(`/api/submitted-data/data-edit`, data);
 
-        // if (response.status == 200) {
-        //     router.push(
-        //         `/submitted-data/data?published=${published}&formId=${formId}`
-        //     );
-        // }
-        console.log(data);
+        if (response.status == 200) {
+             toast.success("Data updated successfully");
+
+            router.push(
+                `/submitted-data?published=${published}&formId=${formId}`
+            );
+        }
         } catch (error) {
           console.log(error);
             

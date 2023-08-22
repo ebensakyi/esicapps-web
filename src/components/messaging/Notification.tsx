@@ -5,8 +5,7 @@ import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { pages } from '../../../prisma/seed/page';
-import { pageAccess } from '../../../prisma/seed/pageAccess';
+
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 
@@ -62,7 +61,6 @@ export default function Notification({ data }: any) {
                 districtId: districtId == "" ? null : Number(districtId),
                 regionId: regionId == "" ? null : Number(regionId),
             };
-console.log(data);
 
 
             const response = await axios.post("/api/messaging/notification", data);
