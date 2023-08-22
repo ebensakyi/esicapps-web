@@ -586,7 +586,7 @@ export default async function Page() {
                                                                 </Link>
                                                                 <Link
                                                                     href={{
-                                                                        pathname: `/submitted-data/data_edit`,
+                                                                        pathname: `/submitted-data/data-edit`,
                                                                         query: {
                                                                             id: dt?.Inspection?.id,
                                                                             inspectionFormId: formId,

@@ -21,7 +21,6 @@ async function getData() {
 
 export default async function page() {
     const userData = await getData();
-console.log("userData ",userData);
 
 
 

@@ -1,14 +1,23 @@
 "use client"
 import Link from 'next/link'
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import moment from "moment";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
+import { LOGIN_URL } from '@/config';
 
 
 export default async function Data({ data }: any) {
+
+
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
 
     const searchTextRef = useRef(null);
     const publishingStatusRef = useRef(null);
@@ -171,246 +180,246 @@ console.log(data);
             console.log(error);
         }
     };
-    let baselinePieChartData,
-        reinspectionPieChartData,
-        followupPieChartData,
-        actionsTakenBarchartData,
-        waterSourceBarchartData,
-        waterSourceConditionBarchartData,
-        waterStorageConditionBarchartData,
-        toiletAvailabilityBarchartData,
-        toiletConditionBarchartData,
-        toiletAdequacyBarchartData,
-        wasteCollectorBarchartData,
-        wasteSortingBarchartData,
-        approvedWasteReceptacleBarchartData;
+    // let baselinePieChartData,
+    //     reinspectionPieChartData,
+    //     followupPieChartData,
+    //     actionsTakenBarchartData,
+    //     waterSourceBarchartData,
+    //     waterSourceConditionBarchartData,
+    //     waterStorageConditionBarchartData,
+    //     toiletAvailabilityBarchartData,
+    //     toiletConditionBarchartData,
+    //     toiletAdequacyBarchartData,
+    //     wasteCollectorBarchartData,
+    //     wasteSortingBarchartData,
+    //     approvedWasteReceptacleBarchartData;
 
 
 
-    baselinePieChartData = {
-        labels: data?.dashboard?.baselineSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.baselineSummary?.map((x: any) => x.value),
-                backgroundColor: ["#DAB785",
+    // baselinePieChartData = {
+    //     labels: data?.dashboard?.baselineSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.baselineSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#DAB785",
 
-                    "#70A288",
-                    "#F0386B",
-                    "#04395E",
+    //                 "#70A288",
+    //                 "#F0386B",
+    //                 "#04395E",
 
-                    "#D5896F",
-                    "#EB5E55",
-                    "#0D00A4",
-                    "#C879FF",
-                ],
-                borderColor: ["#fff"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //                 "#D5896F",
+    //                 "#EB5E55",
+    //                 "#0D00A4",
+    //                 "#C879FF",
+    //             ],
+    //             borderColor: ["#fff"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    reinspectionPieChartData = {
-        labels: data?.dashboard?.reinspectionSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.reinspectionSummary?.map((x: any) => x.value),
-                backgroundColor: ["#DAB785",
+    // reinspectionPieChartData = {
+    //     labels: data?.dashboard?.reinspectionSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.reinspectionSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#DAB785",
 
-                    "#70A288",
-                    "#F0386B",
-                    "#04395E",
+    //                 "#70A288",
+    //                 "#F0386B",
+    //                 "#04395E",
 
-                    "#D5896F",
-                    "#EB5E55",
-                    "#0D00A4",
-                    "#C879FF",
-                ],
-                borderColor: ["#fff"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //                 "#D5896F",
+    //                 "#EB5E55",
+    //                 "#0D00A4",
+    //                 "#C879FF",
+    //             ],
+    //             borderColor: ["#fff"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    followupPieChartData = {
-        labels: data?.dashboard?.followupSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.followupSummary?.map((x: any) => x.value),
-                backgroundColor: ["#DAB785",
+    // followupPieChartData = {
+    //     labels: data?.dashboard?.followupSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.followupSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#DAB785",
 
-                    "#70A288",
-                    "#F0386B",
-                    "#04395E",
+    //                 "#70A288",
+    //                 "#F0386B",
+    //                 "#04395E",
 
-                    "#D5896F",
-                    "#EB5E55",
-                    "#0D00A4",
-                    "#C879FF",
-                ],
-                borderColor: ["#fff"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //                 "#D5896F",
+    //                 "#EB5E55",
+    //                 "#0D00A4",
+    //                 "#C879FF",
+    //             ],
+    //             borderColor: ["#fff"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    actionsTakenBarchartData = {
-        labels: data?.dashboard?.actionsTaken?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.actionsTaken?.map((x: any) => x.value),
-                backgroundColor: ["#DAB785",
+    // actionsTakenBarchartData = {
+    //     labels: data?.dashboard?.actionsTaken?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.actionsTaken?.map((x: any) => x.value),
+    //             backgroundColor: ["#DAB785",
 
-                    "#70A288",
-                    "#F0386B",
-                    "#04395E",
+    //                 "#70A288",
+    //                 "#F0386B",
+    //                 "#04395E",
 
-                    "#D5896F",
-                    "#EB5E55",
-                    "#0D00A4",
-                    "#C879FF",
-                ],
-                borderColor: ["#fff"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //                 "#D5896F",
+    //                 "#EB5E55",
+    //                 "#0D00A4",
+    //                 "#C879FF",
+    //             ],
+    //             borderColor: ["#fff"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    waterSourceBarchartData = {
-        labels: data?.dashboard?.waterSourceTypeSummary?.map((x: any) => x.name),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.waterSourceTypeSummary?.map((x: any) => x.count),
-                backgroundColor: ["#DAB785",
+    // waterSourceBarchartData = {
+    //     labels: data?.dashboard?.waterSourceTypeSummary?.map((x: any) => x.name),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.waterSourceTypeSummary?.map((x: any) => x.count),
+    //             backgroundColor: ["#DAB785",
 
-                    "#70A288",
-                    "#F0386B",
-                    "#04395E",
+    //                 "#70A288",
+    //                 "#F0386B",
+    //                 "#04395E",
 
-                    "#D5896F",
-                    "#EB5E55",
-                    "#0D00A4",
-                    "#C879FF",
-                ],
-                borderColor: ["#fff"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //                 "#D5896F",
+    //                 "#EB5E55",
+    //                 "#0D00A4",
+    //                 "#C879FF",
+    //             ],
+    //             borderColor: ["#fff"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    waterSourceConditionBarchartData = {
-        labels: data?.dashboard?.waterSourceConditionSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.waterSourceConditionSummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
+    // waterSourceConditionBarchartData = {
+    //     labels: data?.dashboard?.waterSourceConditionSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.waterSourceConditionSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
 
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    waterStorageConditionBarchartData = {
-        labels: data?.dashboard?.waterStorageConditionSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.waterStorageConditionSummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
+    // waterStorageConditionBarchartData = {
+    //     labels: data?.dashboard?.waterStorageConditionSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.waterStorageConditionSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
 
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    toiletAvailabilityBarchartData = {
-        labels: data?.dashboard?.toiletAvailabilitySummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.toiletAvailabilitySummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // toiletAvailabilityBarchartData = {
+    //     labels: data?.dashboard?.toiletAvailabilitySummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.toiletAvailabilitySummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    toiletAdequacyBarchartData = {
-        labels: data?.dashboard?.toiletAdequacySummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.toiletAdequacySummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // toiletAdequacyBarchartData = {
+    //     labels: data?.dashboard?.toiletAdequacySummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.toiletAdequacySummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    toiletConditionBarchartData = {
-        labels: data?.dashboard?.toiletConditionSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.toiletConditionSummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // toiletConditionBarchartData = {
+    //     labels: data?.dashboard?.toiletConditionSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.toiletConditionSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    wasteCollectorBarchartData = {
-        labels: data?.dashboard?.wasteCollectorRegistrationSummary?.map(
-            (x: any) => x.label
-        ),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.wasteCollectorRegistrationSummary?.map(
-                    (x: any) => x.value
-                ),
-                backgroundColor: ["#09814A", "#DB222A"],
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // wasteCollectorBarchartData = {
+    //     labels: data?.dashboard?.wasteCollectorRegistrationSummary?.map(
+    //         (x: any) => x.label
+    //     ),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.wasteCollectorRegistrationSummary?.map(
+    //                 (x: any) => x.value
+    //             ),
+    //             backgroundColor: ["#09814A", "#DB222A"],
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    wasteSortingBarchartData = {
-        labels: data?.dashboard?.wasteSortingSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.wasteSortingSummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // wasteSortingBarchartData = {
+    //     labels: data?.dashboard?.wasteSortingSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.wasteSortingSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    approvedWasteReceptacleBarchartData = {
-        labels: data?.dashboard?.wasteReceptacleSummary?.map((x: any) => x.label),
-        datasets: [
-            {
-                label: "# of submissions",
-                data: data?.dashboard?.wasteReceptacleSummary?.map((x: any) => x.value),
-                backgroundColor: ["#09814A", "#DB222A"],
-                borderColor: ["white"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // approvedWasteReceptacleBarchartData = {
+    //     labels: data?.dashboard?.wasteReceptacleSummary?.map((x: any) => x.label),
+    //     datasets: [
+    //         {
+    //             label: "# of submissions",
+    //             data: data?.dashboard?.wasteReceptacleSummary?.map((x: any) => x.value),
+    //             backgroundColor: ["#09814A", "#DB222A"],
+    //             borderColor: ["white"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
 
     return (
@@ -649,7 +658,7 @@ console.log(data);
                                                                             <Link
                                                                                 className="dropdown-item btn btn-sm "
                                                                                 href={{
-                                                                                    pathname: `/submitted-data/data_edit`,
+                                                                                    pathname: `/submitted-data/data-edit`,
                                                                                     query: {
                                                                                         id: dt?.Inspection?.id,
                                                                                        formId: formId,
@@ -679,7 +688,7 @@ console.log(data);
     </Link>
     <Link
         href={{
-            pathname: `/submitted-data/data_edit`,
+            pathname: `/submitted-data/data-edit`,
             query: {
                 id: dt?.Inspection?.id,
                 inspectionFormId: formId,

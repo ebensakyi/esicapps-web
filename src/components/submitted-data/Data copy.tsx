@@ -622,7 +622,7 @@ export default async function Data({ data }: any) {
                                                                                 <Link
                                                                                     className="dropdown-item btn btn-sm "
                                                                                     href={{
-                                                                                        pathname: `/submitted-data/data_edit`,
+                                                                                        pathname: `/submitted-data/data-edit`,
                                                                                         query: {
                                                                                             id: dt?.Inspection?.id,
                                                                                             inspectionFormId: formId,
@@ -652,7 +652,7 @@ export default async function Data({ data }: any) {
                                                                 </Link>
                                                                 <Link
                                                                     href={{
-                                                                        pathname: `/submitted-data/data_edit`,
+                                                                        pathname: `/submitted-data/data-edit`,
                                                                         query: {
                                                                             id: dt?.Inspection?.id,
                                                                             inspectionFormId: formId,

@@ -1,7 +1,7 @@
 "use client"
 import axios from 'axios';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
 import EateryPremisesInfoView from './PremisesInfoViews/EateryPremisesInfoView';
 import HealthPremisesInfoView from './PremisesInfoViews/HealthPremisesInfoView';
@@ -12,10 +12,18 @@ import MarketPremisesInfoView from './PremisesInfoViews/MarketPremisesInfoView';
 import ResidentialPremisesInfoView from './PremisesInfoViews/ResidentialPremisesInfoView';
 import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoView';
 import Image from 'next/image'
+import { useSession } from 'next-auth/react';
+import { LOGIN_URL } from '@/config';
 
 export default function DataView({ data }: any) {
-    console.log(data);
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
 
+    
     const router = useRouter();
 
     const pathname = usePathname()
@@ -1748,7 +1756,7 @@ export default function DataView({ data }: any) {
                                                                     <Link
                                                                         className="btn btn-primary"
                                                                         href={{
-                                                                            pathname: `/submitted-data/data_edit`,
+                                                                            pathname: `/submitted-data/data-edit`,
                                                                             query: {
                                                                                 id: data?.submittedData?.id,
                                                                                 inspectionFormId: formId,

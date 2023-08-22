@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
- // try {
+  try {
     const session = await getServerSession(authOptions);
 
     // console.log("Session ", session);
@@ -268,10 +268,10 @@ export async function GET(request: Request) {
 
       return NextResponse.json(dashboardData);
   
-  // } catch (error: any) {
-  //   console.log(error);
-  //   return NextResponse.json(error);
-  // }
+  } catch (error: any) {
+    console.log(error);
+    return NextResponse.json(error);
+  }
 }
 const parseSummary = async (baselineInspection: any) => {
   let data = [];
