@@ -19,6 +19,9 @@ import { inspectionForm } from '../../../prisma/seed/inspectionForm';
 
 export default function DataEdit({ data }: any) {
 
+    console.log(">>>>>>>>>>>>>>>>>>>", data);
+    
+
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
@@ -455,7 +458,7 @@ export default function DataEdit({ data }: any) {
                         },
                       }}
                     >
-                      <a className="dropdown-item">Go to Data list</a>
+                    Go to Data list
                     </Link>
                   </li>
                 </ol>
@@ -487,8 +490,7 @@ export default function DataEdit({ data }: any) {
                       <div className="card-body">
                         <div className="row gy-3">
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
-                              Premises Code
+                          <label htmlFor="inputText" className="col-sm-12 col-form-label">                              Premises Code
                             </label>
                             <input
                               type="text"
@@ -498,7 +500,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div>
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">Region</label>
+                          <label htmlFor="inputText" className="col-sm-12 col-form-label">Region</label>
                             <input
                               type="text"
                               className="form-control"
@@ -511,7 +513,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div>
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">District</label>
+                          <label htmlFor="inputText" className="col-sm-12 col-form-label">District</label>
                             <input
                               type="text"
                               className="form-control"
@@ -527,7 +529,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div>
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
+                          <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               Electoral Area
                             </label>
                             <input
@@ -539,7 +541,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div>
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">Community</label>
+                          <label htmlFor="inputText" className="col-sm-12 col-form-label">Community</label>
                             <input
                               type="text"
                               className="form-control"
@@ -552,7 +554,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div>
                           {/* <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
+                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               GhanaPost GPS
                             </label>
                             <input
@@ -564,7 +566,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div> */}
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
+                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               Name of respondent
                             </label>
                             <input
@@ -578,7 +580,7 @@ export default function DataEdit({ data }: any) {
                             />
                           </div>
                           <div className="col-lg-3 col-sm-6">
-                            <label htmlFor="invoicenoInput">
+                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               Respondent designation
                             </label>
                             <input
@@ -595,7 +597,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.BasicInfoSection
                             ?.respondentPhoneNumber != "" ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Respondent phone number
                               </label>
                               <input
@@ -614,7 +616,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.BasicInfoSection?.latitude !=
                           "" ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">Latitude</label>
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
                               <input
                                 type="number"
                                 className="form-control"
@@ -633,7 +635,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.BasicInfoSection?.longitude !=
                           "" ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">Longitude</label>
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Longitude</label>
                               <input
                                 type="number"
                                 className="form-control"
@@ -652,7 +654,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.BasicInfoSection?.accuracy !=
                           "" ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">Accuracy</label>
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Accuracy</label>
                               <input
                                 type="number"
                                 className="form-control"
@@ -700,7 +702,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.animalsPermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Animal permit
                               </label>
 
@@ -732,7 +734,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.buildingPermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Building permit
                               </label>
                               <select
@@ -763,7 +765,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.habitationCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Certificate of habitation
                               </label>
                               <select
@@ -796,7 +798,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.propertyRateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Property rate payment
                               </label>
                               <select
@@ -827,7 +829,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.suitabilityCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Suitability Certificate
                               </label>
                               <select
@@ -860,7 +862,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.structurePermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Structure permit
                               </label>
                               <select
@@ -894,7 +896,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.fumigationCertificateAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Fumigation certificate
                               </label>
 
@@ -929,7 +931,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.businessLicenceAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Business operating permit
                               </label>
                               <select
@@ -960,7 +962,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.structurePermitAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Temporal structure permit
                               </label>
                               <select
@@ -993,7 +995,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.waterAnalysisReport != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water analysis report
                               </label>
 
@@ -1027,7 +1029,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.regGeneralCertAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Registrar General operating certificate
                               </label>
 
@@ -1060,7 +1062,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.gtaOperatingLicenceAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Ghana Tourism Authority operating license
                               </label>
                               <select
@@ -1095,7 +1097,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LicencePermitSection
                             ?.pharmacyCertAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 HEFRA/PHARMACY COUNCIL operating license
                               </label>
                               <select
@@ -1157,7 +1159,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.PremisesWaterSources.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water source
                               </label>
 
@@ -1186,7 +1188,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.PremisesWaterSupply.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water supply
                               </label>
                               {/* {data?.submittedData?.WaterSection?.PremisesWaterSupply.map(
@@ -1214,7 +1216,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.waterSourceCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water source condition
                               </label>
                               <select
@@ -1245,7 +1247,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.PremisesWaterStorage.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water storage
                               </label>
 
@@ -1275,7 +1277,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.waterStorageConditionSafe != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water storage receptacle condition
                               </label>
                               <select
@@ -1306,7 +1308,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.PremisesWaterTreatmentType?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water treatment type
                               </label>
 
@@ -1335,7 +1337,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.PremisesDrinkingWaterSources.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Drinking water source
                               </label>
 
@@ -1364,7 +1366,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.WaterSection
                             ?.WaterFlowFrequency != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Water flow frequency
                               </label>
                               <select
@@ -1427,7 +1429,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.numberToiletSeats != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Number Toilet Seats
                               </label>
                               <input
@@ -1446,7 +1448,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.numberUrinalSeats != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Number Urinal Seats
                               </label>
                               <input
@@ -1465,7 +1467,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.toiletAdequacy != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Toilet Adequacy
                               </label>
                               {/* <input
@@ -1495,7 +1497,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.bathroomAdequacy != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Bathroom Adequacy
                               </label>
                               {/* <input
@@ -1525,7 +1527,7 @@ export default function DataEdit({ data }: any) {
                           )}
                           {/* {data?.submittedData?.LiquidWasteSection?.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
-                        <label htmlFor="invoicenoInput">
+                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
                           Separate Staff Urinal
                         </label>
                         <input
@@ -1544,7 +1546,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.toiletPitPosition != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Toilet Pit Position
                               </label>
                               <select
@@ -1576,7 +1578,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.drainsCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Drains Condition
                               </label>
                               {/* <input
@@ -1609,7 +1611,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.stagnationEvidence != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Stagnation Evidence
                               </label>
                               <select
@@ -1640,7 +1642,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.analCleansingMaterialMgt != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Anal Cleansing Material Management
                               </label>
                               <select
@@ -1671,7 +1673,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.toiletCondition != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Toilet Condition
                               </label>
                               <select
@@ -1702,7 +1704,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.toiletDischarge != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Toilet Discharge
                               </label>
                               {/* <input
@@ -1733,7 +1735,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.containmentEmptied != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Containment Emptied
                               </label>
                               <select
@@ -1764,7 +1766,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.sewerSystem != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Sewer System
                               </label>
                               {/* <input
@@ -1794,7 +1796,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.EaseYourselfWhere != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Ease Yourself Where
                               </label>
                               {/* <input
@@ -1826,7 +1828,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.LiquidWasteSection
                             ?.DesiltingFrequency != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Desilting Frequency
                               </label>
                               {/* <input
@@ -1866,7 +1868,7 @@ export default function DataEdit({ data }: any) {
                           data?.submittedData?.LiquidWasteSection
                             ?.PremisesDrainType?.length != undefined ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">Drain Type</label>
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Drain Type</label>
                               <Multiselect
                                 options={data.drainTypeOptions}
                                 selectedValues={selectedDrainType}
@@ -1895,7 +1897,7 @@ export default function DataEdit({ data }: any) {
                             ?.PremisesEffluentManagement?.length !=
                             undefined ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Effluent Management
                               </label>
                               <Multiselect
@@ -1926,7 +1928,7 @@ export default function DataEdit({ data }: any) {
                             ?.PremisesExcretaContainment?.length !=
                             undefined ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Excreta Containment
                               </label>
                               <Multiselect
@@ -1957,7 +1959,7 @@ export default function DataEdit({ data }: any) {
                             ?.PremisesExcretaDisposalMethod?.length !=
                             undefined ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Excreta Disposal Method
                               </label>
                               <Multiselect
@@ -1987,7 +1989,7 @@ export default function DataEdit({ data }: any) {
                           data?.submittedData?.LiquidWasteSection
                             ?.PremisesGreyWaterDisposal?.length != undefined ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Grey Water Disposal
                               </label>
                               <Multiselect
@@ -2017,7 +2019,7 @@ export default function DataEdit({ data }: any) {
                           data?.submittedData?.LiquidWasteSection
                             ?.PremisesToiletType?.length != undefined ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Toilet Type
                               </label>
                               {/* {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
@@ -2067,7 +2069,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.wasteServiceProviderRegistration != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Service Provider Registration
                               </label>
                               {/* <input
@@ -2100,7 +2102,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.wasteCollectorName != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Collector Name
                               </label>
                               <input
@@ -2121,7 +2123,7 @@ export default function DataEdit({ data }: any) {
 {data?.submittedData?.SolidWasteSection
                             ?.wasteServicePhoneNumber != "" ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               Waste Collector Phone
                               </label>
                               <input
@@ -2140,7 +2142,7 @@ export default function DataEdit({ data }: any) {
  {data?.submittedData?.SolidWasteSection
                             ?.wasteCollectionFrequency != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Collection Frequency
                               </label>
                               {/* <input
@@ -2176,7 +2178,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.wasteSortingAvailability != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Sorting Availability
                               </label>
                               {/* <input
@@ -2207,7 +2209,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.approvedWasteStorageReceptacle != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Approved Waste Storage Receptacle
                               </label>
                               {/* <input
@@ -2240,7 +2242,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.adequateWasteStorageReceptacle != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Adequate Waste Storage Receptacle
                               </label>
 
@@ -2265,7 +2267,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.WasteCollectionType != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Collection Type
                               </label>
 
@@ -2301,7 +2303,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.PremisesWasteReceptacle?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Collection Receptacle
                               </label>
                               {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
@@ -2330,7 +2332,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.UnservicedWasteDisposal != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Unserviced Waste Disposal
                               </label>
                               {/* <input
@@ -2363,7 +2365,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.wastePaymentEvidence != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Payment Evidence
                               </label>
                               {/* <input
@@ -2394,7 +2396,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.ContainerVolume != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Container Volume
                               </label>
                               {/* <input
@@ -2426,7 +2428,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.SolidWasteSection
                             ?.wasteProviderAccreditted != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Waste Provider Accreditted
                               </label>
                               {/* <input
@@ -2481,7 +2483,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.ConclusionSection
                             ?.obnoxiousTradeExist != null ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Obnoxious Trade Exist
                               </label>
                               {/* <input
@@ -2512,7 +2514,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.ConclusionSection
                             ?.PremisesNuisanceDetected?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Nuisance Observed
                               </label>
 
@@ -2541,7 +2543,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.ConclusionSection
                             ?.officerComment != "" ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Office Comment
                               </label>
                               <input
@@ -2560,7 +2562,7 @@ export default function DataEdit({ data }: any) {
                           {data?.submittedData?.ConclusionSection
                             ?.PremisesActionTaken?.length != 0 ? (
                             <div className="col-lg-3 col-sm-6">
-                              <label htmlFor="invoicenoInput">
+                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                 Action Taken
                               </label>
                               <Multiselect
@@ -2587,7 +2589,7 @@ export default function DataEdit({ data }: any) {
                           )}
                         </div>
                         <div className="col-lg-3 col-sm-6">
-                          <label htmlFor="invoicenoInput">
+                           <label htmlFor="inputText" className="col-sm-12 col-form-label">
                             Reporting Officer
                           </label>
                           <input
@@ -2628,7 +2630,7 @@ export default function DataEdit({ data }: any) {
                       </div>
                     </div>
 
-                    <div className="row gallery-wrapper">
+                    {/* <div className="row gallery-wrapper">
                       {data?.submittedData?.InspectionPictures?.map((ip) => {
                         return (
                           <div
@@ -2672,7 +2674,7 @@ export default function DataEdit({ data }: any) {
                           </div>
                         );
                       })}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="col-sm-auto">
                     {data?.submittedData?.isPublished == 0 ? (
