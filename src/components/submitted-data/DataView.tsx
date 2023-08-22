@@ -1759,7 +1759,7 @@ export default function DataView({ data }: any) {
                                                                             pathname: `/submitted-data/data-edit`,
                                                                             query: {
                                                                                 id: data?.submittedData?.id,
-                                                                                inspectionFormId: formId,
+                                                                                formId: formId,
                                                                                 published: published,
                                                                             },
                                                                         }}

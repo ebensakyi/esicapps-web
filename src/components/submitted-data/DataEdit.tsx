@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EateryPremisesInfoView from './PremisesInfoViews/EateryPremisesInfoView';
 import HealthPremisesInfoView from './PremisesInfoViews/HealthPremisesInfoView';
 import HospitalityPremisesInfoView from './PremisesInfoViews/HospitalityPremisesInfoView';
@@ -20,7 +20,7 @@ import { inspectionForm } from '../../../prisma/seed/inspectionForm';
 export default function DataEdit({ data }: any) {
 
     console.log(">>>>>>>>>>>>>>>>>>>", data);
-    
+
 
     const { data: session } = useSession({
         required: true,
@@ -31,38 +31,39 @@ export default function DataEdit({ data }: any) {
 
 
 
+    const [userId, setUserId] = useState();
 
     const [respondentName, setRespondentName] = useState();
     const [respondentPhoneNumber, setRespondentPhoneNumber] = useState("");
-  
+
     const [animalPermitAvailability, setAnimalPermitAvailability] = useState();
     const [buildingPermitAvailability, setBuildingPermitAvailability] =
-      useState();
+        useState();
     const [
-      certificateHabitationAvailability,
-      setCertificateHabitationAvailability,
+        certificateHabitationAvailability,
+        setCertificateHabitationAvailability,
     ] = useState();
     const [propertyRateAvailability, setPropertyRateAvailability] = useState();
     const [
-      suitabilityCertificateAvailability,
-      setSuitabilityCertificateAvailability,
+        suitabilityCertificateAvailability,
+        setSuitabilityCertificateAvailability,
     ] = useState();
     const [structurePermitAvailability, setStructurePermitAvailability] =
-      useState();
+        useState();
     const [
-      fumigationCertificateAvailability,
-      setFumigationCertificateAvailability,
+        fumigationCertificateAvailability,
+        setFumigationCertificateAvailability,
     ] = useState();
     const [businessPermitAvailability, setBusinessPermitAvailability] =
-      useState();
+        useState();
     const [tempStructurePermitAvailability, setTempStructurePermitAvailability] =
-      useState();
+        useState();
     const [waterAnalysisReportSafeUnsafe, setWaterAnalysisReportSafeUnsafe] =
-      useState();
+        useState();
     const [regGeneralCertAvailability, setRegGeneralCertAvailability] =
-      useState();
+        useState();
     const [gtaOperatingLicenceAvailability, setGtaOperatingLicenceAvailability] =
-      useState();
+        useState();
     const [pharmacyCertAvailability, setPharmacyCertAvailability] = useState();
     const [waterSourceCondition, setWaterSourceCondition] = useState();
     const [waterStorageCondition, setWaterStorageCondition] = useState();
@@ -79,13 +80,13 @@ export default function DataEdit({ data }: any) {
     const [easeYourselfWhere, setEaseYourselfWhere] = useState();
     const [desiltingFrequency, setDesiltingFrequency] = useState();
     const [
-      wasteServiceProviderRegistration,
-      setWasteServiceProviderRegistration,
+        wasteServiceProviderRegistration,
+        setWasteServiceProviderRegistration,
     ] = useState();
     const [wasteSortingAvailability, setWasteSortingAvailability] = useState();
     const [
-      wasteStorageReceptacleAvailability,
-      setApprovedWasteStorageReceptacleAvailability,
+        wasteStorageReceptacleAvailability,
+        setApprovedWasteStorageReceptacleAvailability,
     ] = useState();
     const [unservicedWasteDisposal, setUnservicedWasteDisposal] = useState();
     const [wastePaymentEvidence, setWastePaymentEvidence] = useState();
@@ -93,39 +94,39 @@ export default function DataEdit({ data }: any) {
     const [wasteProviderAccreditted, setWasteProviderAccreditted] = useState();
     const [obnoxiousTradeExist, setObnoxiousTradeExist] = useState();
     const [adequateWasteStorageReceptacle, setAdequateWasteStorageReceptacle] =
-      useState();
+        useState();
     const [numberToiletSeats, setNumberToiletSeats] = useState();
     // const [name, setName] = useState();
     // const [name, setName] = useState();
-  
+
     const [selectedWaterSupply, setSelectedWaterSupply] = useState([]);
     const [selectedWaterSource, setSelectedWaterSource] = useState([]);
     const [selectedWaterStorage, setSelectedWaterStorage] = useState([]);
-  
+
     const [selectedWaterTreatment, setSelectedWaterTreatment] = useState([]);
     const [selectedDrinkingWaterSource, setSelectedDrinkingWaterSource] =
-      useState([]);
+        useState([]);
     const [selectedDrainType, setSelectedDrainType] = useState([]);
     const [waterFlowFrequency, setWaterFlowFrequency] = useState();
     const [selectedEffluentManagement, setSelectedEffluentManagement] = useState(
-      []
+        []
     );
     const [selectedExcretaContainment, setSelectedExcretaContainment] = useState(
-      []
+        []
     );
     const [selectedExcretaDisposalMethod, setSelectedExcretaDisposalMethod] =
-      useState([]);
-  
+        useState([]);
+
     const [selectedGreyWaterDisposal, setSelectedGreyWaterDisposal] = useState(
-      []
+        []
     );
     const [selectedToiletType, setSelectedToiletType] = useState([]);
     const [selectedWasteReceptacle, setSelectedWasteReceptacle] = useState([]);
-  
+
     const [selectedNuisanceDetected, setSelectedNuisanceDetected] = useState([]);
     const [selectedAction, setSelectedAction] = useState([]);
     const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] =
-      useState([]);
+        useState([]);
     const [numberUrinalSeats, setNumberUrinalSeats] = useState();
     const [wasteCollectorName, setWasteCollectorName] = useState();
     const [wasteCollectionType, setWasteCollectionType] = useState();
@@ -133,12 +134,12 @@ export default function DataEdit({ data }: any) {
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
     const [accuracy, setAccuracy] = useState();
-  
-    const [wasteServicePhoneNumber,setWasteServicePhoneNumber] = useState()
-    const [wasteCollectionFrequency,setWasteCollectionFrequency]= useState()
+
+    const [wasteServicePhoneNumber, setWasteServicePhoneNumber] = useState()
+    const [wasteCollectionFrequency, setWasteCollectionFrequency] = useState()
 
 
-    
+
     const router = useRouter();
 
     const pathname = usePathname()
@@ -149,105 +150,432 @@ export default function DataEdit({ data }: any) {
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
-    const inspectionId = Number(searchParams.get("id"))
+    const inspectionId = searchParams.get("id")
 
 
 
-    const onWaterSupplyRemove = (selected:any) => {
+    useEffect(() => {
+        setWasteServicePhoneNumber( data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber)
+        setRespondentPhoneNumber(
+          data?.submittedData?.BasicInfoSection?.respondentPhoneNumber
+        );
+        setRespondentName(data?.submittedData?.BasicInfoSection?.respondentName);
+        setUserId(data?.submittedData?.User.id);
+        setCertificateHabitationAvailability(
+          data?.submittedData?.LicencePermitSection
+            ?.habitationCertificateAvailability?.id
+        );
+        setAnimalPermitAvailability(
+          data?.submittedData?.LicencePermitSection?.animalsPermitAvailability?.id
+        );
+    
+        setBuildingPermitAvailability(
+          data?.submittedData?.LicencePermitSection?.buildingPermitAvailability?.id
+        );
+    
+        setPropertyRateAvailability(
+          data?.submittedData?.LicencePermitSection?.propertyRateAvailability?.id
+        );
+    
+        setSuitabilityCertificateAvailability(
+          data?.submittedData?.LicencePermitSection
+            ?.suitabilityCertificateAvailability?.id
+        );
+    
+        setStructurePermitAvailability(
+          data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
+        );
+    
+        setFumigationCertificateAvailability(
+          data?.submittedData?.LicencePermitSection
+            ?.fumigationCertificateAvailability?.id
+        );
+    
+        setBusinessPermitAvailability(
+          data?.submittedData?.LicencePermitSection?.businessLicenceAvailability?.id
+        );
+    
+        setTempStructurePermitAvailability(
+          data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
+        );
+    
+        setWaterAnalysisReportSafeUnsafe(
+          data?.submittedData?.LicencePermitSection?.waterAnalysisReport?.id
+        );
+    
+        setRegGeneralCertAvailability(
+          data?.submittedData?.LicencePermitSection?.regGeneralCertAvailability?.id
+        );
+    
+        setGtaOperatingLicenceAvailability(
+          data?.submittedData?.LicencePermitSection?.gtaOperatingLicenceAvailability
+            ?.id
+        );
+        setPharmacyCertAvailability(
+          data?.submittedData?.LicencePermitSection?.pharmacyCertAvailability?.id
+        );
+    
+        setWaterSourceCondition(
+          data?.submittedData?.WaterSection?.waterSourceCondition?.id
+        );
+    
+        setWaterStorageCondition(
+          data?.submittedData?.WaterSection?.waterStorageConditionSafe?.id
+        );
+    
+        setWaterFlowFrequency(
+          data?.submittedData?.WaterSection?.WaterFlowFrequency?.id
+        );
+    
+        setNumberToiletSeats(
+          data?.submittedData?.LiquidWasteSection?.numberToiletSeats
+        );
+        setNumberUrinalSeats(
+          data?.submittedData?.LiquidWasteSection?.numberUrinalSeats
+        );
+        setToiletAdequacy(
+          data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.id
+        );
+    
+        setBathroomAdequacy(
+          data?.submittedData?.LiquidWasteSection?.bathroomAdequacy?.id
+        );
+    
+        setToiletPitPosition(
+          data?.submittedData?.LiquidWasteSection?.toiletPitPosition?.id
+        );
+    
+        setDrainCondition(
+          data?.submittedData?.LiquidWasteSection?.drainsCondition?.id
+        );
+    
+        setStagnationEvidence(
+          data?.submittedData?.LiquidWasteSection?.stagnationEvidence?.id
+        );
+        setAnalCleansingMaterialMgt(
+          data?.submittedData?.LiquidWasteSection?.analCleansingMaterialMgt?.id
+        );
+    
+        setToiletCondition(
+          data?.submittedData?.LiquidWasteSection?.toiletCondition?.id
+        );
+    
+        setToiletDischarge(
+          data?.submittedData?.LiquidWasteSection?.toiletDischarge?.id
+        );
+    
+        setContainmentEmptied(
+          data?.submittedData?.LiquidWasteSection?.containmentEmptied?.id
+        );
+    
+        setSewerSystem(data?.submittedData?.LiquidWasteSection?.sewerSystem?.id);
+        setEaseYourselfWhere(
+          data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere?.id
+        );
+    
+        setDesiltingFrequency(
+          data?.submittedData?.LiquidWasteSection?.DesiltingFrequency?.id
+        );
+    
+        setWasteServiceProviderRegistration(
+          data?.submittedData?.SolidWasteSection?.wasteServiceProviderRegistration
+            ?.id
+        );
+    
+        setWasteCollectorName(
+          data?.submittedData?.SolidWasteSection?.wasteCollectorName
+        );
+    
+        setWasteSortingAvailability(
+          data?.submittedData?.SolidWasteSection?.wasteSortingAvailability?.id
+        );
+    
+        setAdequateWasteStorageReceptacle(
+          data?.submittedData?.SolidWasteSection?.approvedWasteStorageReceptacle?.id
+        );
+    
+        setAdequateWasteStorageReceptacle(
+          data?.submittedData?.SolidWasteSection?.adequateWasteStorageReceptacle?.id
+        );
+    
+        setWasteCollectionType(
+          data?.submittedData?.SolidWasteSection?.WasteCollectionType?.id
+        );
+    
+        setUnservicedWasteDisposal(
+          data?.submittedData?.SolidWasteSection?.UnservicedWasteDisposal?.id
+        );
+    
+        setWastePaymentEvidence(
+          data?.submittedData?.SolidWasteSection?.wastePaymentEvidence?.id
+        );
+    
+        setContainerVolume(
+          data?.submittedData?.SolidWasteSection?.ContainerVolume?.id
+        );
+    
+        setWasteProviderAccreditted(
+          data?.submittedData?.SolidWasteSection?.wasteProviderAccreditted?.id
+        );
+    
+        setObnoxiousTradeExist(
+          data?.submittedData?.ConclusionSection?.obnoxiousTradeExist?.id
+        );
+    
+        setOfficerComment(data?.submittedData?.ConclusionSection?.officerComment);
+    
+        let premisesWaterSupply =
+          data?.submittedData?.WaterSection?.PremisesWaterSupply?.map((data:any) => {
+            return {
+              value: data.WaterSupplyType.id,
+              label: data.WaterSupplyType.name,
+            };
+          });
+    
+        setSelectedWaterSupply(premisesWaterSupply);
+    
+        let premisesWaterSource =
+          data?.submittedData?.WaterSection?.PremisesWaterSources?.map((data:any) => {
+            return {
+              value: data.WaterSourceType.id,
+              label: data.WaterSourceType.name,
+            };
+          });
+    
+        setSelectedWaterSource(premisesWaterSource);
+    
+        let premisesWaterTreatment =
+          data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
+            (data:any) => {
+              return {
+                value: data.WaterTreatmentType.id,
+                label: data.WaterTreatmentType.name,
+              };
+            }
+          );
+    
+        setSelectedWaterTreatment(premisesWaterTreatment);
+    
+        let premisesDrinkingWaterSource =
+          data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
+            (data:any) => {
+              return {
+                value: data.DrinkingWaterSourceType.id,
+                label: data.DrinkingWaterSourceType.name,
+              };
+            }
+          );
+    
+        setSelectedDrinkingWaterSource(premisesDrinkingWaterSource);
+    
+        let premisesDrainType =
+          data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map((data:any) => {
+            return {
+              value: data.DrainType.id,
+              label: data.DrainType.name,
+            };
+          });
+
+          
+    
+        setSelectedDrainType(premisesDrainType);
+    
+        let premisesEffluentManagement =
+          data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+            (data:any) => {
+              return {
+                value: data.EffluentManagement.id,
+                label: data.EffluentManagement.name,
+              };
+            }
+          );
+    
+        setSelectedEffluentManagement(premisesEffluentManagement);
+    
+        let premisesExcretaContainment =
+          data?.submittedData?.WaterSection?.PremisesExcretaContainment?.map(
+            (data:any) => {
+              return {
+                value: data.ExcretaContainment.id,
+                label: data.ExcretaContainment.name,
+              };
+            }
+          );
+    
+        setSelectedExcretaContainment(premisesExcretaContainment);
+    
+        let premisesGreyWaterDisposal =
+          data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+            (data:any) => {
+              return {
+                value: data.GreyWaterDisposal.id,
+                label: data.GreyWaterDisposal.name,
+              };
+            }
+          );
+    
+        setSelectedGreyWaterDisposal(premisesGreyWaterDisposal);
+    
+        let premisesToiletType =
+          data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
+            (data:any) => {
+              return {
+                value: data.ToiletType.id,
+                label: data.ToiletType.name,
+              };
+            }
+          );
+    
+        setSelectedToiletType(premisesToiletType);
+    
+        let premisesWasteReceptacle =
+          data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+            (data:any) => {
+              return {
+                value: data.SolidWasteReceptacle.id,
+                label: data.SolidWasteReceptacle.name,
+              };
+            }
+          );
+    
+        setSelectedWasteReceptacle(premisesWasteReceptacle);
+    
+        let premisesUnservicedWasteDisposal =
+          data?.submittedData?.SolidWasteSection?.PremisesUnservicedWasteDisposal?.map(
+            (data:any) => {
+              return {
+                value: data.UnservicedWasteDisposal.id,
+                label: data.UnservicedWasteDisposal.name,
+              };
+            }
+          );
+    
+        setSelectedUnservicedWasteDisposal(premisesUnservicedWasteDisposal);
+    
+        let premisesActionTaken =
+          data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
+            (data:any) => {
+              return {
+                value: data.Action.id,
+                label: data.Action.name,
+              };
+            }
+          );
+    
+        setSelectedAction(premisesActionTaken);
+    
+        let premisesNuisanceDetected =
+          data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
+            (data:any) => {
+              return {
+                value: data.Nuisance?.id,
+                label: data.Nuisance?.name,
+              };
+            }
+          );
+    
+        setSelectedNuisanceDetected(premisesNuisanceDetected);
+    
+        setAccuracy(data?.submittedData?.BasicInfoSection?.accuracy);
+        setLatitude(data?.submittedData?.BasicInfoSection?.latitude);
+        setLongitude(data?.submittedData?.BasicInfoSection?.longitude);
+      }, []);
+
+    const onWaterSupplyRemove = (selected: any) => {
         setSelectedWaterSupply(selected);
-      };
-      const onWaterSupplySelect = (selected:any) => {
+    };
+    const onWaterSupplySelect = (selected: any) => {
         setSelectedWaterSupply(selected);
-      };
-      const onWaterStorageRemove = (selected:any) => {
+    };
+    const onWaterStorageRemove = (selected: any) => {
         setSelectedWaterStorage(selected);
-      };
-      const onWaterStorageSelect = (selected:any) => {
+    };
+    const onWaterStorageSelect = (selected: any) => {
         setSelectedWaterStorage(selected);
-      };
-    
-      const onWaterSourcesRemove = (selected:any) => {
+    };
+
+    const onWaterSourcesRemove = (selected: any) => {
         setSelectedWaterSource(selected);
-      };
-      const onWaterSourcesSelect = (selected:any) => {
+    };
+    const onWaterSourcesSelect = (selected: any) => {
         setSelectedWaterSource(selected);
-      };
-    
-      const onWaterTreatmentRemove = (selected:any) => {
+    };
+
+    const onWaterTreatmentRemove = (selected: any) => {
         setSelectedWaterTreatment(selected);
-      };
-      const onWaterTreatmentSelect = (selected:any) => {
+    };
+    const onWaterTreatmentSelect = (selected: any) => {
         setSelectedWaterTreatment(selected);
-      };
-    
-      const onDrinkingWaterSourceRemove = (selected:any) => {
+    };
+
+    const onDrinkingWaterSourceRemove = (selected: any) => {
         setSelectedDrinkingWaterSource(selected);
-      };
-      const onDrinkingWaterSourceSelect = (selected:any) => {
+    };
+    const onDrinkingWaterSourceSelect = (selected: any) => {
         setSelectedDrinkingWaterSource(selected);
-      };
-    
-      const onDrainTypeRemove = (selected:any) => {
+    };
+
+    const onDrainTypeRemove = (selected: any) => {
         setSelectedDrainType(selected);
-      };
-      const onDrainTypeSelect = (selected:any) => {
+    };
+    const onDrainTypeSelect = (selected: any) => {
         setSelectedDrainType(selected);
-      };
-    
-      const onEffluentManagementRemove = (selected:any) => {
+    };
+
+    const onEffluentManagementRemove = (selected: any) => {
         setSelectedEffluentManagement(selected);
-      };
-      const onEffluentManagementSelect = (selected:any) => {
+    };
+    const onEffluentManagementSelect = (selected: any) => {
         setSelectedEffluentManagement(selected);
-      };
-    
-      const onExcretaContainmentRemove = (selected:any) => {
+    };
+
+    const onExcretaContainmentRemove = (selected: any) => {
         setSelectedExcretaContainment(selected);
-      };
-      const onExcretaContainmentSelect = (selected:any) => {
+    };
+    const onExcretaContainmentSelect = (selected: any) => {
         setSelectedExcretaContainment(selected);
-      };
-    
-      const onExcretaDisposalMethodRemove = (selected:any) => {
+    };
+
+    const onExcretaDisposalMethodRemove = (selected: any) => {
         setSelectedExcretaDisposalMethod(selected);
-      };
-      const onExcretaDisposalMethodSelect = (selected:any) => {
+    };
+    const onExcretaDisposalMethodSelect = (selected: any) => {
         setSelectedExcretaDisposalMethod(selected);
-      };
-      const onGreyWaterDisposalSelect = (selected:any) => {
+    };
+    const onGreyWaterDisposalSelect = (selected: any) => {
         setSelectedGreyWaterDisposal(selected);
-      };
-    
-      const onGreyWaterDisposalRemove = (selected:any) => {
+    };
+
+    const onGreyWaterDisposalRemove = (selected: any) => {
         setSelectedGreyWaterDisposal(selected);
-      };
-      const onToiletTypeSelect = (selected:any) => {
+    };
+    const onToiletTypeSelect = (selected: any) => {
         setSelectedToiletType(selected);
-      };
-      const onToiletTypeRemove = (selected:any) => {
+    };
+    const onToiletTypeRemove = (selected: any) => {
         setSelectedToiletType(selected);
-      };
-      const onWasteReceptacleSelect = (selected:any) => {
+    };
+    const onWasteReceptacleSelect = (selected: any) => {
         setSelectedWasteReceptacle(selected);
-      };
-      const onWasteReceptacleRemove = (selected:any) => {
+    };
+    const onWasteReceptacleRemove = (selected: any) => {
         setSelectedWasteReceptacle(selected);
-      };
-      const onUnservicedWasteDisposalSelect = (selected:any) => {
+    };
+    const onUnservicedWasteDisposalSelect = (selected: any) => {
         setSelectedUnservicedWasteDisposal(selected);
-      };
-      const onNuisanceDetectedSelect = (selected:any) => {
+    };
+    const onNuisanceDetectedSelect = (selected: any) => {
         setSelectedNuisanceDetected(selected);
-      };
-      const onNuisanceDetectedRemove = (selected:any) => {
+    };
+    const onNuisanceDetectedRemove = (selected: any) => {
         setSelectedNuisanceDetected(selected);
-      };
-      const onActionSelect = (selected:any) => {
+    };
+    const onActionSelect = (selected: any) => {
         setSelectedAction(selected);
-      };
-      const onActionRemove = (selected:any) => {
+    };
+    const onActionRemove = (selected: any) => {
         setSelectedAction(selected);
-      };
+    };
 
     const handlePublish = async (id: any) => {
         try {
@@ -265,7 +593,7 @@ export default function DataEdit({ data }: any) {
         }
     };
     const handleDelete = async (id: any) => {
-        
+
         try {
             const response = await axios.put(`/api/submitted-data/data-view`, {
                 id: id,
@@ -279,102 +607,112 @@ export default function DataEdit({ data }: any) {
             console.log(error);
         }
     };
-    const handleUpdate = async (id:any) => {
+    const handleUpdate = async (id: any) => {
+        try {
+        
         let data = {
-          inspectionId: inspectionId,
-          inspectionFormId: formId,
-          basicInfoSection: {
-            latitude: latitude,
-            longitude: longitude,
-            accuracy: accuracy,
-            respondentName: respondentName,
-            respondentPhoneNumber:respondentPhoneNumber
-          },
-    
-          waterSection: {
-            waterSupply: selectedWaterSupply?.map((x:any) => x.value),
-            waterSource: selectedWaterSource?.map((x:any) => x.value),
-            waterStorage: selectedWaterStorage?.map((x:any) => x.value),
-            waterTreatment: selectedWaterTreatment?.map((x:any) => x.value),
-            drinkingWaterSource: selectedDrinkingWaterSource?.map((x:any) => x.value),
-            waterSourceCondition: waterSourceCondition,
-            waterStorageCondition: waterStorageCondition,
-            waterFlowFrequency: waterFlowFrequency,
-          },
-          liquidWasteSection: {
-            drainType: selectedDrainType?.map((x:any) => x.value),
-            effluentManagement: selectedEffluentManagement?.map((x:any) => x.value),
-            excretaContainment: selectedExcretaContainment?.map((x:any) => x.value),
-            excretaDisposalMethod: selectedExcretaDisposalMethod?.map(
-              (x:any) => x.value
-            ),
-            greyWaterDisposal: selectedGreyWaterDisposal?.map((x:any) => x.value),
-            toiletType: selectedToiletType?.map((x:any) => x.value),
-            wasteReceptacle: selectedWasteReceptacle?.map((x:any) => x.value),
-            numberToiletSeats: numberToiletSeats,
-            numberUrinalSeats: numberUrinalSeats,
-            toiletAdequacy: toiletAdequacy,
-            bathroomAdequacy: bathroomAdequacy,
-            toiletPitPosition: toiletPitPosition,
-            drainCondition: drainCondition,
-            stagnationEvidence: stagnationEvidence,
-            analCleansingMaterialMgt: analCleansingMaterialMgt,
-            toiletCondition: toiletCondition,
-            toiletDischarge: toiletDischarge,
-            containmentEmptied: containmentEmptied,
-            sewerSystem: sewerSystem,
-            easeYourselfWhere: easeYourselfWhere,
-            desiltingFrequency: desiltingFrequency,
-          
-          },
-          solidWasteSection:{
-      wasteServiceProviderRegistration: wasteServiceProviderRegistration,
-            wasteCollectorName: wasteCollectorName,
-            wasteServicePhoneNumber:wasteServicePhoneNumber,
-            wasteSortingAvailability: wasteSortingAvailability,
-            wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
-            adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
-            wasteCollectionType: wasteCollectionType,
-            unservicedWasteDisposal: unservicedWasteDisposal,
-            wastePaymentEvidence: wastePaymentEvidence,
-            containerVolume: containerVolume,
-            wasteProviderAccreditted: wasteProviderAccreditted,
-            wasteCollectionFrequency:wasteCollectionFrequency
-          },
-    
-          conclusionSection: {
-            nuisanceDetected: selectedNuisanceDetected?.map((x:any) => x.value),
-            action: selectedAction?.map((x:any) => x.value),
-            obnoxiousTradeExist: obnoxiousTradeExist,
-            officerComment: officerComment,
-          },
-          licencePermitSection: {
-            animalPermitAvailability: animalPermitAvailability ,
-            buildingPermitAvailability: buildingPermitAvailability,
-            habitationCertificateAvailability: certificateHabitationAvailability,
-            propertyRateAvailability: propertyRateAvailability,
-            suitabilityCertificateAvailability: suitabilityCertificateAvailability,
-            structurePermitAvailability: structurePermitAvailability,
-            fumigationCertificateAvailability: fumigationCertificateAvailability,
-            businessPermitAvailability: businessPermitAvailability,
-            waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
-            regGeneralCertAvailability: regGeneralCertAvailability,
-            gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
-            pharmacyCertAvailability: pharmacyCertAvailability,
-          },
-        };
-        const response = await axios.put(`/api/v1/inspection-data`, data);
-    
-        if (response.status == 200) {
-          router.push(
-            `/submitted-data/data?published=${published}&formId=${formId}`
-          );
-        }
-      };
+            inspectionId: inspectionId,
+            inspectionFormId: formId,
+            basicInfoSection: {
+                latitude: latitude,
+                longitude: longitude,
+                accuracy: accuracy,
+                respondentName: respondentName,
+                respondentPhoneNumber: respondentPhoneNumber
+            },
 
-     
-    
-    
+            waterSection: {
+                waterSupply: selectedWaterSupply?.map((x: any) => x.value),
+                waterSource: selectedWaterSource?.map((x: any) => x.value),
+                waterStorage: selectedWaterStorage?.map((x: any) => x.value),
+                waterTreatment: selectedWaterTreatment?.map((x: any) => x.value),
+                drinkingWaterSource: selectedDrinkingWaterSource?.map((x: any) => x.value),
+                waterSourceCondition: waterSourceCondition,
+                waterStorageCondition: waterStorageCondition,
+                waterFlowFrequency: waterFlowFrequency,
+            },
+            liquidWasteSection: {
+                drainType: selectedDrainType?.map((x: any) => x.value),
+                effluentManagement: selectedEffluentManagement?.map((x: any) => x.value),
+                excretaContainment: selectedExcretaContainment?.map((x: any) => x.value),
+                excretaDisposalMethod: selectedExcretaDisposalMethod?.map(
+                    (x: any) => x.value
+                ),
+                greyWaterDisposal: selectedGreyWaterDisposal?.map((x: any) => x.value),
+                toiletType: selectedToiletType?.map((x: any) => x.value),
+                wasteReceptacle: selectedWasteReceptacle?.map((x: any) => x.value),
+                numberToiletSeats: numberToiletSeats,
+                numberUrinalSeats: numberUrinalSeats,
+                toiletAdequacy: toiletAdequacy,
+                bathroomAdequacy: bathroomAdequacy,
+                toiletPitPosition: toiletPitPosition,
+                drainCondition: drainCondition,
+                stagnationEvidence: stagnationEvidence,
+                analCleansingMaterialMgt: analCleansingMaterialMgt,
+                toiletCondition: toiletCondition,
+                toiletDischarge: toiletDischarge,
+                containmentEmptied: containmentEmptied,
+                sewerSystem: sewerSystem,
+                easeYourselfWhere: easeYourselfWhere,
+                desiltingFrequency: desiltingFrequency,
+
+            },
+            solidWasteSection: {
+                wasteServiceProviderRegistration: wasteServiceProviderRegistration,
+                wasteCollectorName: wasteCollectorName,
+                wasteServicePhoneNumber: wasteServicePhoneNumber,
+                wasteSortingAvailability: wasteSortingAvailability,
+                wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
+                adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
+                wasteCollectionType: wasteCollectionType,
+                unservicedWasteDisposal: unservicedWasteDisposal,
+                wastePaymentEvidence: wastePaymentEvidence,
+                containerVolume: containerVolume,
+                wasteProviderAccreditted: wasteProviderAccreditted,
+                wasteCollectionFrequency: wasteCollectionFrequency
+            },
+
+            conclusionSection: {
+                nuisanceDetected: selectedNuisanceDetected?.map((x: any) => x.value),
+                action: selectedAction?.map((x: any) => x.value),
+                obnoxiousTradeExist: obnoxiousTradeExist,
+                officerComment: officerComment,
+            },
+            licencePermitSection: {
+                animalPermitAvailability: animalPermitAvailability,
+                buildingPermitAvailability: buildingPermitAvailability,
+                habitationCertificateAvailability: certificateHabitationAvailability,
+                propertyRateAvailability: propertyRateAvailability,
+                suitabilityCertificateAvailability: suitabilityCertificateAvailability,
+                structurePermitAvailability: structurePermitAvailability,
+                fumigationCertificateAvailability: fumigationCertificateAvailability,
+                businessPermitAvailability: businessPermitAvailability,
+                waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
+                regGeneralCertAvailability: regGeneralCertAvailability,
+                gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
+                pharmacyCertAvailability: pharmacyCertAvailability,
+            },
+        };
+  
+       const response = await axios.put(`/api/submitted-data/data-edit`, data);
+
+        // if (response.status == 200) {
+        //     router.push(
+        //         `/submitted-data/data?published=${published}&formId=${formId}`
+        //     );
+        // }
+        console.log(data);
+        } catch (error) {
+          console.log(error);
+            
+        }
+       
+      
+    };
+
+
+
+
     const downloadInspection = async () => {
         const printContents = document.getElementById("printableArea").innerHTML;
         const originalContents = document.body.innerHTML;
@@ -428,56 +766,55 @@ export default function DataEdit({ data }: any) {
             </div>
             {/* End Page Title */}
             <section className="section">
-            <div className="row">
-        <div className="col-12">
-          <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-            <div>
-              <button
-                type="button"
-                className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
-                onClick={() => downloadInspection()}
-              >
-                <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                Download Inspection
-              </button>
-            </div>
-          </div>
-          <div id="printableArea">
-            <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-              DATA EDIT
-              <h4 className="mb-sm-0">{handleTitle()}</h4>
-              <div className="page-title-right">
-                <ol className="breadcrumb m-0">
-                  <li className="breadcrumb-item">
-                    <Link
-                      href={{
-                        pathname: `/submitted-data/data`,
-                        query: {
-                          published: published,
-                          inspectionFormId: formId,
-                        },
-                      }}
-                    >
-                    Go to Data list
-                    </Link>
-                  </li>
-                </ol>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">
-                            BASIC INFORMATION SECTION
-                          </h5>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <div>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+                                    onClick={() => downloadInspection()}
+                                >
+                                    <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                    Download Inspection
+                                </button>
+                            </div>
                         </div>
-                      </div>
-                      {/* <div className="col-sm-auto">
+                        <div id="printableArea">
+                            <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 className="mb-sm-0">{handleTitle()}</h4>
+                                <div className="page-title-right">
+                                    <ol className="breadcrumb m-0">
+                                        <li className="breadcrumb-item">
+                                            <Link
+                                                href={{
+                                                    pathname: `/submitted-data/data`,
+                                                    query: {
+                                                        published: published,
+                                                        inspectionFormId: formId,
+                                                    },
+                                                }}
+                                            >
+                                                Go to Data list
+                                            </Link>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">
+                                                            BASIC INFORMATION SECTION
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                {/* <div className="col-sm-auto">
                   <a
                     href="apps-ecommerce-products.html"
                     className="link-primary text-decoration-underline"
@@ -485,75 +822,73 @@ export default function DataEdit({ data }: any) {
                     Continue Shopping
                   </a>
                 </div> */}
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          <div className="col-lg-3 col-sm-6">
-                          <label htmlFor="inputText" className="col-sm-12 col-form-label">                              Premises Code
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={data?.submittedData?.premisesCode}
-                            />
-                          </div>
-                          <div className="col-lg-3 col-sm-6">
-                          <label htmlFor="inputText" className="col-sm-12 col-form-label">Region</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={
-                                data?.submittedData?.BasicInfoSection?.Community
-                                  ?.District?.Region.name
-                              }
-                             
-                            />
-                          </div>
-                          <div className="col-lg-3 col-sm-6">
-                          <label htmlFor="inputText" className="col-sm-12 col-form-label">District</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={
-                                data?.submittedData?.BasicInfoSection
-                                  ?.Community != null
-                                  ? data?.submittedData?.BasicInfoSection
-                                      ?.Community?.District?.name
-                                  : ""
-                              }
-                              
-                            />
-                          </div>
-                          <div className="col-lg-3 col-sm-6">
-                          <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                              Electoral Area
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={data?.submittedData?.ElectoralArea?.name}
-                              
-                            />
-                          </div>
-                          <div className="col-lg-3 col-sm-6">
-                          <label htmlFor="inputText" className="col-sm-12 col-form-label">Community</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={
-                                data?.submittedData?.BasicInfoSection?.Community
-                                  ?.name
-                              }
-                              
-                            />
-                          </div>
-                          {/* <div className="col-lg-3 col-sm-6">
+                                            </div>
+                                            <div className="card ">
+                                            <h5 className="card-title"></h5>
+
+                                                <div className="card-body">
+                                                    <div className="row gy-3">
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">Premises Code
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control bg-light border-0"
+                                                                value={data?.submittedData?.premisesCode}
+                                                                readOnly={true}
+                                                            />
+                                                        </div>
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">Region</label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control bg-light border-0"
+                                                                value={
+                                                                    data?.submittedData?.BasicInfoSection?.Community
+                                                                        ?.District?.Region.name
+                                                                }
+                                                                readOnly={true}
+                                                            />
+                                                        </div>
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">District</label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control bg-light border-0"
+                                                                value={
+                                                                    data?.submittedData?.BasicInfoSection
+                                                                        ?.Community != null
+                                                                        ? data?.submittedData?.BasicInfoSection
+                                                                            ?.Community?.District?.name
+                                                                        : ""
+                                                                }
+                                                                readOnly={true}
+                                                            />
+                                                        </div>
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                Electoral Area
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control bg-light border-0"
+                                                                value={data?.submittedData?.ElectoralArea?.name}
+                                                                readOnly={true}
+                                                            />
+                                                        </div>
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">Community</label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control bg-light border-0"
+                                                                value={
+                                                                    data?.submittedData?.BasicInfoSection?.Community
+                                                                        ?.name
+                                                                }
+                                                                readOnly={true}
+                                                            />
+                                                        </div>
+                                                        {/* <div className="col-lg-3 col-sm-6">
                              <label htmlFor="inputText" className="col-sm-12 col-form-label">
                               GhanaPost GPS
                             </label>
@@ -565,117 +900,118 @@ export default function DataEdit({ data }: any) {
                               
                             />
                           </div> */}
-                          <div className="col-lg-3 col-sm-6">
-                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                              Name of respondent
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              onChange={(e:any) =>
-                                setRespondentName(e.target.value)
-                              }
-                              value={respondentName}
-                            />
-                          </div>
-                          <div className="col-lg-3 col-sm-6">
-                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                              Respondent designation
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="invoicenoInput"
-                              value={
-                                data?.submittedData?.BasicInfoSection
-                                  ?.RespondentDesignation?.name
-                              }
-                              
-                            />
-                          </div>{" "}
-                          {data?.submittedData?.BasicInfoSection
-                            ?.respondentPhoneNumber != "" ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Respondent phone number
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="invoicenoInput"
-                                onChange={(e:any) =>
-                                  setRespondentPhoneNumber(e.target.value)
-                                }
-                                value={respondentPhoneNumber}
-                              />
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                Name of respondent
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                id="invoicenoInput"
+                                                                onChange={(e: any) =>
+                                                                    setRespondentName(e.target.value)
+                                                                }
+                                                                value={respondentName}  
+                                                            />
+                                                        </div>
+                                                        <div className="col-lg-3 col-sm-6">
+                                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                Respondent designation
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                id="invoicenoInput"
+                                                                value={
+                                                                    data?.submittedData?.BasicInfoSection
+                                                                        ?.RespondentDesignation?.name
+                                                                }
+                                                                readOnly={true}
+                                                            />
+                                                        </div>{" "}
+                                                        {data?.submittedData?.BasicInfoSection
+                                                            ?.respondentPhoneNumber != "" ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Respondent phone number
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    onChange={(e: any) =>
+                                                                        setRespondentPhoneNumber(e.target.value)
+                                                                    }
+                                                                    value={respondentPhoneNumber}
+                                                                   
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}{" "}
+                                                        {data?.submittedData?.BasicInfoSection?.latitude !=
+                                                            "" ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    onChange={(e: any) => setLatitude(e.target.value)}
+                                                                    value={latitude}
+                                                                // value={
+                                                                //   data?.submittedData?.BasicInfoSection
+                                                                //     ?.latitude
+                                                                // }
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}{" "}
+                                                        {data?.submittedData?.BasicInfoSection?.longitude !=
+                                                            "" ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Longitude</label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    onChange={(e: any) => setLongitude(e.target.value)}
+                                                                    value={longitude}
+                                                                // value={
+                                                                //   data?.submittedData?.BasicInfoSection
+                                                                //     ?.longitude
+                                                                // }
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}{" "}
+                                                        {data?.submittedData?.BasicInfoSection?.accuracy !=
+                                                            "" ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Accuracy</label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    onChange={(e: any) => setAccuracy(e.target.value)}
+                                                                    value={accuracy}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* end col */}
+                                    </div>
+                                </div>
                             </div>
-                          ) : (
-                            <></>
-                          )}{" "}
-                          {data?.submittedData?.BasicInfoSection?.latitude !=
-                          "" ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                id="invoicenoInput"
-                                onChange={(e:any) => setLatitude(e.target.value)}
-                                value={latitude}
-                                // value={
-                                //   data?.submittedData?.BasicInfoSection
-                                //     ?.latitude
-                                // }
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}{" "}
-                          {data?.submittedData?.BasicInfoSection?.longitude !=
-                          "" ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Longitude</label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                id="invoicenoInput"
-                                onChange={(e:any) => setLongitude(e.target.value)}
-                                value={longitude}
-                                // value={
-                                //   data?.submittedData?.BasicInfoSection
-                                //     ?.longitude
-                                // }
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}{" "}
-                          {data?.submittedData?.BasicInfoSection?.accuracy !=
-                          "" ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Accuracy</label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                id="invoicenoInput"
-                                onChange={(e:any) => setAccuracy(e.target.value)}
-                                value={accuracy}
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* end col */}
-                </div>
-              </div>
-            </div>
 
-            {/* {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {/* {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 2 ? <EateryPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 3 ? <HealthPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 4 ? <HospitalityPremisesInfoEdit data={data?.submittedData} /> : <></>}
@@ -683,42 +1019,44 @@ export default function DataEdit({ data }: any) {
             {formId == 6 ? <IndustryPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 7 ? <MarketPremisesInfoEdit data={data?.submittedData} /> : <></>}
             {formId == 8 ? <SanitaryPremisesInfoEdit data={data?.submittedData} /> : <></>} */}
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">
-                            LICENCES & PERMITS SECTION
-                          </h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          {data?.submittedData?.LicencePermitSection
-                            ?.animalsPermitAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Animal permit
-                              </label>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">
+                                                            LICENCES & PERMITS SECTION
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card ">
+                                            <h5 className="card-title"></h5>
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setAnimalPermitAvailability(e.target.value);
-                                }}
-                                value={animalPermitAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                <div className="card-body">
+                                                    <div className="row gy-3">
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.animalsPermitAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Animal permit
+                                                                </label>
+
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setAnimalPermitAvailability(e.target.value);
+                                                                    }}
+                                                                    value={animalPermitAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -727,29 +1065,29 @@ export default function DataEdit({ data }: any) {
                                     ?.animalsPermitAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.buildingPermitAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Building permit
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setBuildingPermitAvailability(e.target.value);
-                                }}
-                                value={buildingPermitAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.buildingPermitAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Building permit
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setBuildingPermitAvailability(e.target.value);
+                                                                    }}
+                                                                    value={buildingPermitAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -758,31 +1096,31 @@ export default function DataEdit({ data }: any) {
                                     ?.buildingPermitAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.habitationCertificateAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Certificate of habitation
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setCertificateHabitationAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={certificateHabitationAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.habitationCertificateAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Certificate of habitation
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setCertificateHabitationAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={certificateHabitationAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -791,29 +1129,29 @@ export default function DataEdit({ data }: any) {
                                     ?.habitationCertificateAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.propertyRateAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Property rate payment
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setPropertyRateAvailability(e.target.value);
-                                }}
-                                value={propertyRateAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.propertyRateAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Property rate payment
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setPropertyRateAvailability(e.target.value);
+                                                                    }}
+                                                                    value={propertyRateAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -822,31 +1160,31 @@ export default function DataEdit({ data }: any) {
                                     ?.propertyRateAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.suitabilityCertificateAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Suitability Certificate
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setSuitabilityCertificateAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={suitabilityCertificateAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.suitabilityCertificateAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Suitability Certificate
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setSuitabilityCertificateAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={suitabilityCertificateAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -855,31 +1193,31 @@ export default function DataEdit({ data }: any) {
                                     ?.suitabilityCertificateAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.structurePermitAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Structure permit
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setStructurePermitAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={structurePermitAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.structurePermitAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Structure permit
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setStructurePermitAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={structurePermitAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -888,33 +1226,33 @@ export default function DataEdit({ data }: any) {
                                     ?.structurePermitAvailability.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
 
-                          {data?.submittedData?.LicencePermitSection
-                            ?.fumigationCertificateAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Fumigation certificate
-                              </label>
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.fumigationCertificateAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Fumigation certificate
+                                                                </label>
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setFumigationCertificateAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={fumigationCertificateAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option>Available</option>
-                                <option>Not Available</option>
-                              </select>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setFumigationCertificateAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={fumigationCertificateAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option>Available</option>
+                                                                    <option>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -924,29 +1262,29 @@ export default function DataEdit({ data }: any) {
                                 }
                                 
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.businessLicenceAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Business operating permit
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setBusinessPermitAvailability(e.target.value);
-                                }}
-                                value={buildingPermitAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.businessLicenceAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Business operating permit
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setBusinessPermitAvailability(e.target.value);
+                                                                    }}
+                                                                    value={buildingPermitAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -955,31 +1293,31 @@ export default function DataEdit({ data }: any) {
                                     ?.businessLicenceAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.structurePermitAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Temporal structure permit
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setTempStructurePermitAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={tempStructurePermitAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Not Available</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.structurePermitAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Temporal structure permit
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setTempStructurePermitAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={tempStructurePermitAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Not Available</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -988,32 +1326,32 @@ export default function DataEdit({ data }: any) {
                                     ?.structurePermitAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.waterAnalysisReport != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water analysis report
-                              </label>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.waterAnalysisReport != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water analysis report
+                                                                </label>
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWaterAnalysisReportSafeUnsafe(
-                                    e.target.value
-                                  );
-                                }}
-                                value={waterAnalysisReportSafeUnsafe}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Safe</option>
-                                <option value={2}>Unsafe</option>
-                              </select>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWaterAnalysisReportSafeUnsafe(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={waterAnalysisReportSafeUnsafe}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Safe</option>
+                                                                    <option value={2}>Unsafe</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1022,30 +1360,30 @@ export default function DataEdit({ data }: any) {
                                     ?.waterAnalysisReport?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LicencePermitSection
-                            ?.regGeneralCertAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Registrar General operating certificate
-                              </label>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.regGeneralCertAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Registrar General operating certificate
+                                                                </label>
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setRegGeneralCertAvailability(e.target.value);
-                                }}
-                                value={regGeneralCertAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Unavailable</option>
-                              </select>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setRegGeneralCertAvailability(e.target.value);
+                                                                    }}
+                                                                    value={regGeneralCertAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Unavailable</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1054,33 +1392,33 @@ export default function DataEdit({ data }: any) {
                                     ?.regGeneralCertAvailability.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
 
-                          {data?.submittedData?.LicencePermitSection
-                            ?.gtaOperatingLicenceAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Ghana Tourism Authority operating license
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setGtaOperatingLicenceAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={gtaOperatingLicenceAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Unavailable</option>
-                              </select>
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.gtaOperatingLicenceAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Ghana Tourism Authority operating license
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setGtaOperatingLicenceAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={gtaOperatingLicenceAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Unavailable</option>
+                                                                </select>
 
-                              {/* <input
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1089,31 +1427,31 @@ export default function DataEdit({ data }: any) {
                                     ?.gtaOperatingLicenceAvailability?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
 
-                          {data?.submittedData?.LicencePermitSection
-                            ?.pharmacyCertAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                HEFRA/PHARMACY COUNCIL operating license
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setPharmacyCertAvailability(e.target.value);
-                                }}
-                                value={pharmacyCertAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Available</option>
-                                <option value={2}>Unavailable</option>
-                              </select>
+                                                        {data?.submittedData?.LicencePermitSection
+                                                            ?.pharmacyCertAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    HEFRA/PHARMACY COUNCIL operating license
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setPharmacyCertAvailability(e.target.value);
+                                                                    }}
+                                                                    value={pharmacyCertAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Available</option>
+                                                                    <option value={2}>Unavailable</option>
+                                                                </select>
 
-                              {/* <input
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1122,29 +1460,29 @@ export default function DataEdit({ data }: any) {
                                     ?.pharmacyCertAvailability?.value
                                 }
                               /> */}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* end col */}
+                                    </div>
+                                </div>
                             </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* end col */}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">WATER SECTION</h5>
-                        </div>
-                      </div>
-                      {/* <div className="col-sm-auto">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">WATER SECTION</h5>
+                                                    </div>
+                                                </div>
+                                                {/* <div className="col-sm-auto">
                   <a
                     href="apps-ecommerce-products.html"
                     className="link-primary text-decoration-underline"
@@ -1152,25 +1490,27 @@ export default function DataEdit({ data }: any) {
                     Continue Shopping
                   </a>
                 </div> */}
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          {data?.submittedData?.WaterSection
-                            ?.PremisesWaterSources.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water source
-                              </label>
+                                            </div>
+                                            <div className="card product">
+                                            <h5 className="card-title"></h5>
 
-                              <Multiselect
-                                options={data.waterSourcesOptions}
-                                selectedValues={selectedWaterSource}
-                                onSelect={onWaterSourcesSelect}
-                                onRemove={onWaterSourcesRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.WaterSection?.PremisesWaterSources.map(
+                                                <div className="card-body">
+                                                    <div className="row gy-3">
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.PremisesWaterSources.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water source
+                                                                </label>
+
+                                                                <Multiselect
+                                                                    options={data.waterSourcesOptions}
+                                                                    selectedValues={selectedWaterSource}
+                                                                    onSelect={onWaterSourcesSelect}
+                                                                    onRemove={onWaterSourcesRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.WaterSection?.PremisesWaterSources.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1181,17 +1521,17 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.WaterSection
-                            ?.PremisesWaterSupply.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water supply
-                              </label>
-                              {/* {data?.submittedData?.WaterSection?.PremisesWaterSupply.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.PremisesWaterSupply.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water supply
+                                                                </label>
+                                                                {/* {data?.submittedData?.WaterSection?.PremisesWaterSupply.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1202,36 +1542,36 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                              <Multiselect
-                                options={data.waterSupplyOptions}
-                                selectedValues={selectedWaterSupply}
-                                onSelect={onWaterSupplySelect}
-                                onRemove={onWaterSupplyRemove}
-                                displayValue="label"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.WaterSection
-                            ?.waterSourceCondition != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water source condition
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWaterSourceCondition(e.target.value);
-                                }}
-                                value={waterSourceCondition}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Safe</option>
-                                <option value={2}>Unsafe</option>
-                              </select>
-                              {/* <input
+                                                                <Multiselect
+                                                                    options={data.waterSupplyOptions}
+                                                                    selectedValues={selectedWaterSupply}
+                                                                    onSelect={onWaterSupplySelect}
+                                                                    onRemove={onWaterSupplyRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.waterSourceCondition != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water source condition
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWaterSourceCondition(e.target.value);
+                                                                    }}
+                                                                    value={waterSourceCondition}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Safe</option>
+                                                                    <option value={2}>Unsafe</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1239,27 +1579,27 @@ export default function DataEdit({ data }: any) {
                                   data?.submittedData?.WaterSection?.waterSourceCondition?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
 
-                          {data?.submittedData?.WaterSection
-                            ?.PremisesWaterStorage.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water storage
-                              </label>
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.PremisesWaterStorage.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water storage
+                                                                </label>
 
-                              <Multiselect
-                                options={data.waterStoragesOptions}
-                                selectedValues={selectedWaterStorage}
-                                onSelect={onWaterStorageSelect}
-                                onRemove={onWaterStorageRemove}
-                                displayValue="label"
-                              />
+                                                                <Multiselect
+                                                                    options={data.waterStoragesOptions}
+                                                                    selectedValues={selectedWaterStorage}
+                                                                    onSelect={onWaterStorageSelect}
+                                                                    onRemove={onWaterStorageRemove}
+                                                                    displayValue="label"
+                                                                />
 
-                              {/* {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
+                                                                {/* {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1270,29 +1610,29 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.WaterSection
-                            ?.waterStorageConditionSafe != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water storage receptacle condition
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWaterStorageCondition(e.target.value);
-                                }}
-                                value={waterStorageCondition}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Safe</option>
-                                <option value={2}>Unsafe</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.waterStorageConditionSafe != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water storage receptacle condition
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWaterStorageCondition(e.target.value);
+                                                                    }}
+                                                                    value={waterStorageCondition}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Safe</option>
+                                                                    <option value={2}>Unsafe</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1301,25 +1641,25 @@ export default function DataEdit({ data }: any) {
                                     .name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.WaterSection
-                            ?.PremisesWaterTreatmentType?.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water treatment type
-                              </label>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.PremisesWaterTreatmentType?.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water treatment type
+                                                                </label>
 
-                              <Multiselect
-                                options={data.waterTreatmentOptions}
-                                selectedValues={selectedWaterTreatment}
-                                onSelect={onWaterTreatmentSelect}
-                                onRemove={onWaterTreatmentRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
+                                                                <Multiselect
+                                                                    options={data.waterTreatmentOptions}
+                                                                    selectedValues={selectedWaterTreatment}
+                                                                    onSelect={onWaterTreatmentSelect}
+                                                                    onRemove={onWaterTreatmentRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1330,25 +1670,25 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.WaterSection
-                            ?.PremisesDrinkingWaterSources.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Drinking water source
-                              </label>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.PremisesDrinkingWaterSources.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Drinking water source
+                                                                </label>
 
-                              <Multiselect
-                                options={data.drinkingWaterSourceOptions}
-                                selectedValues={selectedDrinkingWaterSource}
-                                onSelect={onDrinkingWaterSourceSelect}
-                                onRemove={onDrinkingWaterSourceRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
+                                                                <Multiselect
+                                                                    options={data.drinkingWaterSourceOptions}
+                                                                    selectedValues={selectedDrinkingWaterSource}
+                                                                    onSelect={onDrinkingWaterSourceSelect}
+                                                                    onRemove={onDrinkingWaterSourceRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1359,29 +1699,29 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.WaterSection
-                            ?.WaterFlowFrequency != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Water flow frequency
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWaterFlowFrequency(e.target.value);
-                                }}
-                                value={waterFlowFrequency}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Regular</option>
-                                <option value={2}>Intermittent</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.WaterSection
+                                                            ?.WaterFlowFrequency != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Water flow frequency
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWaterFlowFrequency(e.target.value);
+                                                                    }}
+                                                                    value={waterFlowFrequency}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Regular</option>
+                                                                    <option value={2}>Intermittent</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1390,29 +1730,29 @@ export default function DataEdit({ data }: any) {
                                     ?.WaterFlowFrequency?.name
                                 }
                               /> */}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* end col */}
+                                    </div>
+                                </div>
                             </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* end col */}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">LIQUID WASTE SECTION</h5>
-                        </div>
-                      </div>
-                      {/* <div className="col-sm-auto">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">LIQUID WASTE SECTION</h5>
+                                                    </div>
+                                                </div>
+                                                {/* <div className="col-sm-auto">
                   <a
                     href="apps-ecommerce-products.html"
                     className="link-primary text-decoration-underline"
@@ -1422,55 +1762,57 @@ export default function DataEdit({ data }: any) {
 
                   </a>
                 </div> */}
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.numberToiletSeats != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Number Toilet Seats
-                              </label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                id="valueInput"
-                                value={numberToiletSeats}
-                                onChange={(e:any) =>
-                                  setNumberToiletSeats(e.target.value)
-                                }
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.numberUrinalSeats != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Number Urinal Seats
-                              </label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                id="invoicenoInput"
-                                value={numberUrinalSeats}
-                                onChange={() => {
-                                  setNumberUrinalSeats(e.target.value);
-                                }}
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.toiletAdequacy != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Toilet Adequacy
-                              </label>
-                              {/* <input
+                                            </div>
+                                            <div className="card">
+                                            <h5 className="card-title"></h5>
+
+                                                <div className="card-body">
+                                                    <div className="row gy-3">
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.numberToiletSeats != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Number Toilet Seats
+                                                                </label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control"
+                                                                    id="valueInput"
+                                                                    value={numberToiletSeats}
+                                                                    onChange={(e: any) =>
+                                                                        setNumberToiletSeats(e.target.value)
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.numberUrinalSeats != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Number Urinal Seats
+                                                                </label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    value={numberUrinalSeats}
+                                                                    onChange={() => {
+                                                                        setNumberUrinalSeats(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.toiletAdequacy != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Toilet Adequacy
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1478,29 +1820,29 @@ export default function DataEdit({ data }: any) {
                                   data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setToiletAdequacy(e.target.value);
-                                }}
-                                value={toiletAdequacy}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Safe</option>
-                                <option value={2}>Unsafe</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.bathroomAdequacy != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Bathroom Adequacy
-                              </label>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setToiletAdequacy(e.target.value);
+                                                                    }}
+                                                                    value={toiletAdequacy}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Safe</option>
+                                                                    <option value={2}>Unsafe</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.bathroomAdequacy != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Bathroom Adequacy
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1509,23 +1851,23 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setBathroomAdequacy(e.target.value);
-                                }}
-                                value={bathroomAdequacy}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Safe</option>
-                                <option value={2}>Unsafe</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {/* {data?.submittedData?.LiquidWasteSection?.separateStaffUrinal != null ? (
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setBathroomAdequacy(e.target.value);
+                                                                    }}
+                                                                    value={bathroomAdequacy}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Safe</option>
+                                                                    <option value={2}>Unsafe</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {/* {data?.submittedData?.LiquidWasteSection?.separateStaffUrinal != null ? (
                       <div className="col-lg-3 col-sm-6">
                          <label htmlFor="inputText" className="col-sm-12 col-form-label">
                           Separate Staff Urinal
@@ -1543,26 +1885,26 @@ export default function DataEdit({ data }: any) {
                     ) : (
                       <></>
                     )} */}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.toiletPitPosition != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Toilet Pit Position
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setToiletPitPosition(e.target.value);
-                                }}
-                                value={toiletPitPosition}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Direct</option>
-                                <option value={2}>Offsite</option>
-                                <option value={3}>NA</option>
-                              </select>
-                              {/* <input
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.toiletPitPosition != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Toilet Pit Position
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setToiletPitPosition(e.target.value);
+                                                                    }}
+                                                                    value={toiletPitPosition}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Direct</option>
+                                                                    <option value={2}>Offsite</option>
+                                                                    <option value={3}>NA</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1571,17 +1913,17 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.drainsCondition != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Drains Condition
-                              </label>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.drainsCondition != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Drains Condition
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1591,42 +1933,42 @@ export default function DataEdit({ data }: any) {
                                 }
                               /> */}
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setDrainCondition(e.target.value);
-                                }}
-                                value={drainCondition}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Direct</option>
-                                <option value={2}>Offsite</option>
-                                <option value={3}>NA</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.stagnationEvidence != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Stagnation Evidence
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setStagnationEvidence(e.target.value);
-                                }}
-                                value={stagnationEvidence}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setDrainCondition(e.target.value);
+                                                                    }}
+                                                                    value={drainCondition}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Direct</option>
+                                                                    <option value={2}>Offsite</option>
+                                                                    <option value={3}>NA</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.stagnationEvidence != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Stagnation Evidence
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setStagnationEvidence(e.target.value);
+                                                                    }}
+                                                                    value={stagnationEvidence}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1635,29 +1977,29 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.analCleansingMaterialMgt != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Anal Cleansing Material Management
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setAnalCleansingMaterialMgt(e.target.value);
-                                }}
-                                value={analCleansingMaterialMgt}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.analCleansingMaterialMgt != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Anal Cleansing Material Management
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setAnalCleansingMaterialMgt(e.target.value);
+                                                                    }}
+                                                                    value={analCleansingMaterialMgt}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1666,29 +2008,29 @@ export default function DataEdit({ data }: any) {
                                     ?.analCleansingMaterialMgt?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.toiletCondition != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Toilet Condition
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setToiletCondition(e.target.value);
-                                }}
-                                value={toiletCondition}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Sanitary</option>
-                                <option value={2}>Insanitary</option>
-                              </select>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.toiletCondition != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Toilet Condition
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setToiletCondition(e.target.value);
+                                                                    }}
+                                                                    value={toiletCondition}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Sanitary</option>
+                                                                    <option value={2}>Insanitary</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1697,17 +2039,17 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.toiletDischarge != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Toilet Discharge
-                              </label>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.toiletDischarge != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Toilet Discharge
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1716,41 +2058,41 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setToiletDischarge(e.target.value);
-                                }}
-                                value={toiletDischarge}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>On site</option>
-                                <option value={2}>Off site</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.containmentEmptied != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Containment Emptied
-                              </label>
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setContainmentEmptied(e.target.value);
-                                }}
-                                value={containmentEmptied}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>On site</option>
-                                <option value={2}>Off site</option>
-                              </select>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setToiletDischarge(e.target.value);
+                                                                    }}
+                                                                    value={toiletDischarge}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>On site</option>
+                                                                    <option value={2}>Off site</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.containmentEmptied != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Containment Emptied
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setContainmentEmptied(e.target.value);
+                                                                    }}
+                                                                    value={containmentEmptied}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>On site</option>
+                                                                    <option value={2}>Off site</option>
+                                                                </select>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1759,17 +2101,17 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.sewerSystem != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Sewer System
-                              </label>
-                              {/* <input
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.sewerSystem != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Sewer System
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1777,29 +2119,29 @@ export default function DataEdit({ data }: any) {
                                   data?.submittedData?.LiquidWasteSection?.sewerSystem?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setSewerSystem(e.target.value);
-                                }}
-                                value={sewerSystem}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Centralised</option>
-                                <option value={2}>Decentralised</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.EaseYourselfWhere != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Ease Yourself Where
-                              </label>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setSewerSystem(e.target.value);
+                                                                    }}
+                                                                    value={sewerSystem}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Centralised</option>
+                                                                    <option value={2}>Decentralised</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.EaseYourselfWhere != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Ease Yourself Where
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1808,30 +2150,30 @@ export default function DataEdit({ data }: any) {
                                     ?.name
 
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setEaseYourselfWhere(e.target.value);
-                                }}
-                                value={easeYourselfWhere}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Neighbours place</option>
-                                <option value={2}>Bush</option>
-                                <option value={3}>Public toilet</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.DesiltingFrequency != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Desilting Frequency
-                              </label>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setEaseYourselfWhere(e.target.value);
+                                                                    }}
+                                                                    value={easeYourselfWhere}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Neighbours place</option>
+                                                                    <option value={2}>Bush</option>
+                                                                    <option value={3}>Public toilet</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.DesiltingFrequency != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Desilting Frequency
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -1842,41 +2184,41 @@ export default function DataEdit({ data }: any) {
 
                               
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setDesiltingFrequency(e.target.value);
-                                }}
-                                value={desiltingFrequency}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Daily</option>
-                                <option value={2}>Weekly</option>
-                                <option value={3}>Monthly</option>
-                                <option value={4}>Quarterly</option>
-                                <option value={5}>Bi yearly</option>
-                                <option value={6}>Yearly</option>
-                                <option value={7}>None</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesDrainType?.length != 0 &&
-                          data?.submittedData?.LiquidWasteSection
-                            ?.PremisesDrainType?.length != undefined ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">Drain Type</label>
-                              <Multiselect
-                                options={data.drainTypeOptions}
-                                selectedValues={selectedDrainType}
-                                onSelect={onDrainTypeSelect}
-                                onRemove={onDrainTypeRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map(
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setDesiltingFrequency(e.target.value);
+                                                                    }}
+                                                                    value={desiltingFrequency}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Daily</option>
+                                                                    <option value={2}>Weekly</option>
+                                                                    <option value={3}>Monthly</option>
+                                                                    <option value={4}>Quarterly</option>
+                                                                    <option value={5}>Bi yearly</option>
+                                                                    <option value={6}>Yearly</option>
+                                                                    <option value={7}>None</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.PremisesDrainType?.length != 0 &&
+                                                            data?.submittedData?.LiquidWasteSection
+                                                                ?.PremisesDrainType?.length != undefined ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Drain Type</label>
+                                                                <Multiselect
+                                                                    options={data.drainTypeOptions}
+                                                                    selectedValues={selectedDrainType}
+                                                                    onSelect={onDrainTypeSelect}
+                                                                    onRemove={onDrainTypeRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1887,27 +2229,27 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesEffluentManagement?.length != 0 &&
-                          data?.submittedData?.LiquidWasteSection
-                            ?.PremisesEffluentManagement?.length !=
-                            undefined ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Effluent Management
-                              </label>
-                              <Multiselect
-                                options={data.effluentManagementOptions}
-                                selectedValues={selectedEffluentManagement}
-                                onSelect={onEffluentManagementSelect}
-                                onRemove={onEffluentManagementRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.PremisesEffluentManagement?.length != 0 &&
+                                                            data?.submittedData?.LiquidWasteSection
+                                                                ?.PremisesEffluentManagement?.length !=
+                                                            undefined ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Effluent Management
+                                                                </label>
+                                                                <Multiselect
+                                                                    options={data.effluentManagementOptions}
+                                                                    selectedValues={selectedEffluentManagement}
+                                                                    onSelect={onEffluentManagementSelect}
+                                                                    onRemove={onEffluentManagementRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1918,27 +2260,27 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesExcretaContainment?.length != 0 &&
-                          data?.submittedData?.LiquidWasteSection
-                            ?.PremisesExcretaContainment?.length !=
-                            undefined ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Excreta Containment
-                              </label>
-                              <Multiselect
-                                options={data.excretaContainmentOptions}
-                                selectedValues={selectedExcretaContainment}
-                                onSelect={onExcretaContainmentSelect}
-                                onRemove={onExcretaContainmentRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.PremisesExcretaContainment?.length != 0 &&
+                                                            data?.submittedData?.LiquidWasteSection
+                                                                ?.PremisesExcretaContainment?.length !=
+                                                            undefined ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Excreta Containment
+                                                                </label>
+                                                                <Multiselect
+                                                                    options={data.excretaContainmentOptions}
+                                                                    selectedValues={selectedExcretaContainment}
+                                                                    onSelect={onExcretaContainmentSelect}
+                                                                    onRemove={onExcretaContainmentRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1949,27 +2291,27 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesExcretaDisposalMethod?.length != 0 &&
-                          data?.submittedData?.LiquidWasteSection
-                            ?.PremisesExcretaDisposalMethod?.length !=
-                            undefined ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Excreta Disposal Method
-                              </label>
-                              <Multiselect
-                                options={data.excretaDisposalMethodOptions}
-                                selectedValues={selectedExcretaDisposalMethod}
-                                onSelect={onExcretaDisposalMethodSelect}
-                                onRemove={onExcretaDisposalMethodRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.PremisesExcretaDisposalMethod?.length != 0 &&
+                                                            data?.submittedData?.LiquidWasteSection
+                                                                ?.PremisesExcretaDisposalMethod?.length !=
+                                                            undefined ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Excreta Disposal Method
+                                                                </label>
+                                                                <Multiselect
+                                                                    options={data.excretaDisposalMethodOptions}
+                                                                    selectedValues={selectedExcretaDisposalMethod}
+                                                                    onSelect={onExcretaDisposalMethodSelect}
+                                                                    onRemove={onExcretaDisposalMethodRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -1980,26 +2322,26 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesGreyWaterDisposal?.length != 0 &&
-                          data?.submittedData?.LiquidWasteSection
-                            ?.PremisesGreyWaterDisposal?.length != undefined ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Grey Water Disposal
-                              </label>
-                              <Multiselect
-                                options={data.greyWaterDisposalOptions}
-                                selectedValues={selectedGreyWaterDisposal}
-                                onSelect={onGreyWaterDisposalSelect}
-                                onRemove={onGreyWaterDisposalRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.PremisesGreyWaterDisposal?.length != 0 &&
+                                                            data?.submittedData?.LiquidWasteSection
+                                                                ?.PremisesGreyWaterDisposal?.length != undefined ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Grey Water Disposal
+                                                                </label>
+                                                                <Multiselect
+                                                                    options={data.greyWaterDisposalOptions}
+                                                                    selectedValues={selectedGreyWaterDisposal}
+                                                                    onSelect={onGreyWaterDisposalSelect}
+                                                                    onRemove={onGreyWaterDisposalRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2010,19 +2352,19 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.LiquidWasteSection
-                            ?.PremisesToiletType?.length != 0 &&
-                          data?.submittedData?.LiquidWasteSection
-                            ?.PremisesToiletType?.length != undefined ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Toilet Type
-                              </label>
-                              {/* {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.LiquidWasteSection
+                                                            ?.PremisesToiletType?.length != 0 &&
+                                                            data?.submittedData?.LiquidWasteSection
+                                                                ?.PremisesToiletType?.length != undefined ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Toilet Type
+                                                                </label>
+                                                                {/* {data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2033,46 +2375,48 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                              <Multiselect
-                                options={data.toiletTypeOptions}
-                                selectedValues={selectedToiletType}
-                                onSelect={onToiletTypeSelect}
-                                onRemove={onToiletTypeRemove}
-                                displayValue="label"
-                              />
+                                                                <Multiselect
+                                                                    options={data.toiletTypeOptions}
+                                                                    selectedValues={selectedToiletType}
+                                                                    onSelect={onToiletTypeSelect}
+                                                                    onRemove={onToiletTypeRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* end col */}
+                                    </div>
+                                </div>
                             </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* end col */}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          {data?.submittedData?.SolidWasteSection
-                            ?.wasteServiceProviderRegistration != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Service Provider Registration
-                              </label>
-                              {/* <input
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">SOLID WASTE SECTION</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card product">
+                                            <h5 className="card-title"></h5>
+
+                                                <div className="card-body">
+                                                    <div className="row gy-3">
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wasteServiceProviderRegistration != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Service Provider Registration
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2081,107 +2425,71 @@ export default function DataEdit({ data }: any) {
                                     ?.wasteServiceProviderRegistration?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWasteServiceProviderRegistration(
-                                    e.target.value
-                                  );
-                                }}
-                                value={wasteServiceProviderRegistration}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.wasteCollectorName != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Collector Name
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="invoicenoInput"
-                                value={wasteCollectorName}
-                                onChange={(e:any) => {
-                                  setWasteCollectorName(e.target.value);
-                                }}
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWasteServiceProviderRegistration(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={wasteServiceProviderRegistration}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wasteCollectorName != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Collector Name
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    value={wasteCollectorName}
+                                                                    onChange={(e: any) => {
+                                                                        setWasteCollectorName(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
 
 
-{data?.submittedData?.SolidWasteSection
-                            ?.wasteServicePhoneNumber != "" ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                              Waste Collector Phone
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="invoicenoInput"
-                                value={wasteServicePhoneNumber}
-                                onChange={(e:any) => {
-                                  setWasteServicePhoneNumber(e.target.value);
-                                }}
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
- {data?.submittedData?.SolidWasteSection
-                            ?.wasteCollectionFrequency != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Collection Frequency
-                              </label>
-                              {/* <input
-                                type="text"
-                                className="form-control"
-                                id="invoicenoInput"
-                                value={
-                                  data?.submittedData?.SolidWasteSection
-                                    ?.wasteSortingAvailability?.name
-                                }
-                              /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWasteCollectionFrequency(e.target.value);
-                                }}
-                                value={wasteCollectionFrequency}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Daily</option>
-                                <option value={2}>Weekly</option>
-                                <option value={3}>Forthnightly</option>
-                                <option value={4}>Monthly</option>
-                                <option value={5}>Intermittent</option>
-
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {data?.submittedData?.SolidWasteSection
-                            ?.wasteSortingAvailability != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Sorting Availability
-                              </label>
-                              {/* <input
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wasteServicePhoneNumber != "" ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Collector Phone
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    value={wasteServicePhoneNumber}
+                                                                    onChange={(e: any) => {
+                                                                        setWasteServicePhoneNumber(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wasteCollectionFrequency != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Collection Frequency
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2190,29 +2498,65 @@ export default function DataEdit({ data }: any) {
                                     ?.wasteSortingAvailability?.name
                                 }
                               /> */}
-                              <select
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWasteCollectionFrequency(e.target.value);
+                                                                    }}
+                                                                    value={wasteCollectionFrequency}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Daily</option>
+                                                                    <option value={2}>Weekly</option>
+                                                                    <option value={3}>Forthnightly</option>
+                                                                    <option value={4}>Monthly</option>
+                                                                    <option value={5}>Intermittent</option>
+
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wasteSortingAvailability != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Sorting Availability
+                                                                </label>
+                                                                {/* <input
+                                type="text"
                                 className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWasteSortingAvailability(e.target.value);
-                                }}
-                                value={wasteSortingAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.approvedWasteStorageReceptacle != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Approved Waste Storage Receptacle
-                              </label>
-                              {/* <input
+                                id="invoicenoInput"
+                                value={
+                                  data?.submittedData?.SolidWasteSection
+                                    ?.wasteSortingAvailability?.name
+                                }
+                              /> */}
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWasteSortingAvailability(e.target.value);
+                                                                    }}
+                                                                    value={wasteSortingAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.approvedWasteStorageReceptacle != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Approved Waste Storage Receptacle
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2221,71 +2565,71 @@ export default function DataEdit({ data }: any) {
                                     ?.approvedWasteStorageReceptacle?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setApprovedWasteStorageReceptacleAvailability(
-                                    e.target.value
-                                  );
-                                }}
-                                value={wasteStorageReceptacleAvailability}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.adequateWasteStorageReceptacle != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Adequate Waste Storage Receptacle
-                              </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setApprovedWasteStorageReceptacleAvailability(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={wasteStorageReceptacleAvailability}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.adequateWasteStorageReceptacle != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Adequate Waste Storage Receptacle
+                                                                </label>
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setAdequateWasteStorageReceptacle(
-                                    e.target.value
-                                  );
-                                }}
-                                value={adequateWasteStorageReceptacle}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.WasteCollectionType != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Collection Type
-                              </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setAdequateWasteStorageReceptacle(
+                                                                            e.target.value
+                                                                        );
+                                                                    }}
+                                                                    value={adequateWasteStorageReceptacle}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.WasteCollectionType != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Collection Type
+                                                                </label>
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWasteCollectionType(e.target.value);
-                                }}
-                                value={wasteCollectionType}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Communal container</option>
-                                <option value={2}>Door to door</option>
-                                <option value={3}>Not serviced</option>
-                                <option value={4}>Communal Dump Site</option>
-                              </select>
-                              {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteCollection?.map(
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWasteCollectionType(e.target.value);
+                                                                    }}
+                                                                    value={wasteCollectionType}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Communal container</option>
+                                                                    <option value={2}>Door to door</option>
+                                                                    <option value={3}>Not serviced</option>
+                                                                    <option value={4}>Communal Dump Site</option>
+                                                                </select>
+                                                                {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteCollection?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2296,17 +2640,17 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.PremisesWasteReceptacle?.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Collection Receptacle
-                              </label>
-                              {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.PremisesWasteReceptacle?.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Collection Receptacle
+                                                                </label>
+                                                                {/* {data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2318,24 +2662,24 @@ export default function DataEdit({ data }: any) {
                                 )
                               )} */}
 
-                              <Multiselect
-                                options={data.wasteReceptacleOptions}
-                                selectedValues={selectedWasteReceptacle}
-                                onSelect={onWasteReceptacleSelect}
-                                onRemove={onWasteReceptacleRemove}
-                                displayValue="label"
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.UnservicedWasteDisposal != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Unserviced Waste Disposal
-                              </label>
-                              {/* <input
+                                                                <Multiselect
+                                                                    options={data.wasteReceptacleOptions}
+                                                                    selectedValues={selectedWasteReceptacle}
+                                                                    onSelect={onWasteReceptacleSelect}
+                                                                    onRemove={onWasteReceptacleRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.UnservicedWasteDisposal != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Unserviced Waste Disposal
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2345,30 +2689,30 @@ export default function DataEdit({ data }: any) {
                                 }
                               /> */}
 
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setUnservicedWasteDisposal(e.target.value);
-                                }}
-                                value={unservicedWasteDisposal}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Crude Dumping</option>
-                                <option value={2}>Burning</option>
-                                <option value={2}>Burying</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.wastePaymentEvidence != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Payment Evidence
-                              </label>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setUnservicedWasteDisposal(e.target.value);
+                                                                    }}
+                                                                    value={unservicedWasteDisposal}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Crude Dumping</option>
+                                                                    <option value={2}>Burning</option>
+                                                                    <option value={2}>Burying</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wastePaymentEvidence != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Payment Evidence
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2377,29 +2721,29 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWastePaymentEvidence(e.target.value);
-                                }}
-                                value={wastePaymentEvidence}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.ContainerVolume != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Container Volume
-                              </label>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWastePaymentEvidence(e.target.value);
+                                                                    }}
+                                                                    value={wastePaymentEvidence}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.ContainerVolume != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Container Volume
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2407,31 +2751,31 @@ export default function DataEdit({ data }: any) {
                                   data?.submittedData?.SolidWasteSection?.ContainerVolume?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setContainerVolume(e.target.value);
-                                }}
-                                value={containerVolume}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>10 Cubic</option>
-                                <option value={2}>12 Cubic</option>
-                                <option value={3}>14 Cubic</option>
-                                <option value={4}>20 and Above</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.SolidWasteSection
-                            ?.wasteProviderAccreditted != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Waste Provider Accreditted
-                              </label>
-                              {/* <input
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setContainerVolume(e.target.value);
+                                                                    }}
+                                                                    value={containerVolume}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>10 Cubic</option>
+                                                                    <option value={2}>12 Cubic</option>
+                                                                    <option value={3}>14 Cubic</option>
+                                                                    <option value={4}>20 and Above</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.SolidWasteSection
+                                                            ?.wasteProviderAccreditted != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Waste Provider Accreditted
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2440,53 +2784,55 @@ export default function DataEdit({ data }: any) {
                                     ?.wasteProviderAccreditted?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setWasteProviderAccreditted(e.target.value);
-                                }}
-                                value={wasteProviderAccreditted}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setWasteProviderAccreditted(e.target.value);
+                                                                    }}
+                                                                    value={wasteProviderAccreditted}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* end col */}
+                                    </div>
+                                </div>
                             </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* end col */}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">
-                            ACTIONS & CONCLUSION SECTION
-                          </h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card product">
-                      <div className="card-body">
-                        <div className="row gy-3">
-                          {data?.submittedData?.ConclusionSection
-                            ?.obnoxiousTradeExist != null ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Obnoxious Trade Exist
-                              </label>
-                              {/* <input
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">
+                                                            ACTIONS & CONCLUSION SECTION
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card product">
+                                            <h5 className="card-title"></h5>
+
+                                                <div className="card-body">
+                                                    <div className="row gy-3">
+                                                        {data?.submittedData?.ConclusionSection
+                                                            ?.obnoxiousTradeExist != null ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Obnoxious Trade Exist
+                                                                </label>
+                                                                {/* <input
                                 type="text"
                                 className="form-control"
                                 id="invoicenoInput"
@@ -2495,37 +2841,37 @@ export default function DataEdit({ data }: any) {
                                     ?.name
                                 }
                               /> */}
-                              <select
-                                className="form-control"
-                                aria-label="Default select example"
-                                onChange={(e:any) => {
-                                  setObnoxiousTradeExist(e.target.value);
-                                }}
-                                value={obnoxiousTradeExist}
-                              >
-                                <option value="">Select</option>
-                                <option value={1}>Yes</option>
-                                <option value={2}>No</option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.ConclusionSection
-                            ?.PremisesNuisanceDetected?.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Nuisance Observed
-                              </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setObnoxiousTradeExist(e.target.value);
+                                                                    }}
+                                                                    value={obnoxiousTradeExist}
+                                                                >
+                                                                    <option value="">Select</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
+                                                                </select>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.ConclusionSection
+                                                            ?.PremisesNuisanceDetected?.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Nuisance Observed
+                                                                </label>
 
-                              <Multiselect
-                                options={data.nuisanceDetectedOptions}
-                                selectedValues={selectedNuisanceDetected}
-                                onSelect={onNuisanceDetectedSelect}
-                                onRemove={onNuisanceDetectedRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
+                                                                <Multiselect
+                                                                    options={data.nuisanceDetectedOptions}
+                                                                    selectedValues={selectedNuisanceDetected}
+                                                                    onSelect={onNuisanceDetectedSelect}
+                                                                    onRemove={onNuisanceDetectedRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2536,43 +2882,43 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.ConclusionSection
-                            ?.officerComment != "" ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Office Comment
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="invoicenoInput"
-                                value={officerComment}
-                                onChange={(e:any) => {
-                                  setOfficerComment(e.target.value);
-                                }}
-                              />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {data?.submittedData?.ConclusionSection
-                            ?.PremisesActionTaken?.length != 0 ? (
-                            <div className="col-lg-3 col-sm-6">
-                               <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                Action Taken
-                              </label>
-                              <Multiselect
-                                options={data.actionOptions}
-                                selectedValues={selectedAction}
-                                onSelect={onActionSelect}
-                                onRemove={onActionRemove}
-                                displayValue="label"
-                              />
-                              {/* {data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.ConclusionSection
+                                                            ?.officerComment != "" ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Office Comment
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control"
+                                                                    id="invoicenoInput"
+                                                                    value={officerComment}
+                                                                    onChange={(e: any) => {
+                                                                        setOfficerComment(e.target.value);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {data?.submittedData?.ConclusionSection
+                                                            ?.PremisesActionTaken?.length != 0 ? (
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                    Action Taken
+                                                                </label>
+                                                                <Multiselect
+                                                                    options={data.actionOptions}
+                                                                    selectedValues={selectedAction}
+                                                                    onSelect={onActionSelect}
+                                                                    onRemove={onActionRemove}
+                                                                    displayValue="label"
+                                                                />
+                                                                {/* {data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
                                 (x) => (
                                   <input
                                     key={x.id}
@@ -2583,30 +2929,30 @@ export default function DataEdit({ data }: any) {
                                   />
                                 )
                               )} */}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                    <div className="col-lg-3 col-sm-6">
+                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                            Reporting Officer
+                                                        </label>
+                                                        <input
+                                                            disabled={true}
+                                                            type="text"
+                                                            className="form-control"
+                                                            id="invoicenoInput"
+                                                            value={`${data?.submittedData?.User?.otherNames} ${data?.submittedData?.User?.surname}`}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        <div className="col-lg-3 col-sm-6">
-                           <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                            Reporting Officer
-                          </label>
-                          <input
-                            disabled={true}
-                            type="text"
-                            className="form-control"
-                            id="invoicenoInput"
-                            value={`${data?.submittedData?.User?.otherNames} ${data?.submittedData?.User?.surname}`}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* {data?.submittedData?.InspectionPictures.map((ip) => {
+                            {/* {data?.submittedData?.InspectionPictures.map((ip) => {
      return <figure className="figure">
         <img
           src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
@@ -2618,19 +2964,19 @@ export default function DataEdit({ data }: any) {
         </figcaption>
       </figure>
          })} */}
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="row mb-3">
-                  <div className="col-xl-12">
-                    <div className="row align-items-center gy-3 mb-3">
-                      <div className="col-sm">
-                        <div>
-                          <h5 className="fs-14 mb-0">PICTURES</h5>
-                        </div>
-                      </div>
-                    </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row mb-3">
+                                        <div className="col-xl-12">
+                                            <div className="row align-items-center gy-3 mb-3">
+                                                <div className="col-sm">
+                                                    <div>
+                                                        <h5 className="fs-14 mb-0">PICTURES</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                    {/* <div className="row gallery-wrapper">
+                                            {/* <div className="row gallery-wrapper">
                       {data?.submittedData?.InspectionPictures?.map((ip) => {
                         return (
                           <div
@@ -2675,67 +3021,67 @@ export default function DataEdit({ data }: any) {
                         );
                       })}
                     </div> */}
-                  </div>
-                  <div className="col-sm-auto">
-                    {data?.submittedData?.isPublished == 0 ? (
-                      <button
-                        className="btn btn-success"
-                        onClick={(e:any) => {
-                          e.preventDefault();
+                                        </div>
+                                        <div className="col-sm-auto">
+                                            {data?.submittedData?.isPublished == 0 ? (
+                                                <button
+                                                    className="btn btn-success"
+                                                    onClick={(e: any) => {
+                                                        e.preventDefault();
 
-                          handlePublish(data?.submittedData?.id);
-                        }}
-                      >
-                        Publish
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-danger"
-                        onClick={(e:any) => {
-                          e.preventDefault();
+                                                        handlePublish(data?.submittedData?.id);
+                                                    }}
+                                                >
+                                                    Publish
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className="btn btn-danger"
+                                                    onClick={(e: any) => {
+                                                        e.preventDefault();
 
-                          handlePublish(data?.submittedData?.id);
-                        }}
-                      >
-                        Unpublish
-                      </button>
-                    )}
-                  </div>
-                  <div className="col-sm-auto">
-                    <button
-                      className="btn btn-primary"
-                      onClick={(e:any) => {
-                        e.preventDefault();
+                                                        handlePublish(data?.submittedData?.id);
+                                                    }}
+                                                >
+                                                    Unpublish
+                                                </button>
+                                            )}
+                                        </div>
+                                        <div className="col-sm-auto">
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={(e: any) => {
+                                                    e.preventDefault();
 
-                        handleUpdate(data?.submittedData?.id);
-                      }}
-                    >
-                      Update
-                    </button>
-                  </div>
+                                                    handleUpdate(data?.submittedData?.id);
+                                                }}
+                                            >
+                                                Update
+                                            </button>
+                                        </div>
 
-                  <div className="col-sm-auto">
-                    {data?.submittedData?.isPublished == 0 ? (
-                      <button
-                        className="btn btn-danger"
-                        onClick={(e:any) => {
-                          e.preventDefault();
+                                        <div className="col-sm-auto">
+                                            {data?.submittedData?.isPublished == 0 ? (
+                                                <button
+                                                    className="btn btn-danger"
+                                                    onClick={(e: any) => {
+                                                        e.preventDefault();
 
-                          handleDelete(data?.submittedData?.id);
-                        }}
-                      >
-                        Delete
-                      </button>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
+                                                        handleDelete(data?.submittedData?.id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            ) : (
+                                                <></>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
             </section>
         </main >
     )
