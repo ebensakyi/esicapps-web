@@ -167,43 +167,43 @@ export default function Header() {
                                             data-bs-parent="#sidebar-nav"
                                         >
                                             <li>
-                                            <Link href="/submitted-data?formId=1&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=1&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Residential</span>
                                                 </Link>
                                             </li>
                                             <li>
-                                            <Link href="/submitted-data?formId=2&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=2&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Eatery</span>
                                                 </Link>
                                             </li> <li>
-                                            <Link href="/submitted-data?formId=3&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=3&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Health</span>
                                                 </Link>
                                             </li> <li>
-                                            <Link href="/submitted-data?formId=4&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=4&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Hospitality</span>
                                                 </Link>
                                             </li> <li>
-                                            <Link href="/submitted-data?formId=5&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=5&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Industry</span>
                                                 </Link>
                                             </li> <li>
-                                            <Link href="/submitted-data?formId=6&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=6&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Institution</span>
                                                 </Link>
                                             </li> <li>
-                                            <Link href="/submitted-data?formId=7&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=7&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Market</span>
                                                 </Link>
                                             </li> <li>
-                                            <Link href="/submitted-data?formId=8&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                            <Link href="/submitted-data?formId=8&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                     <i className="bi bi-circle" />
                                                     <span>Sanitary</span>
                                                 </Link>
@@ -213,12 +213,7 @@ export default function Header() {
                                         </ul>
                                     </li>
                                 </li>
-                                <li>
-                                    <Link href="/submitted-data/map">
-                                        <i className="bi bi-circle" />
-                                        <span>Map</span>
-                                    </Link>
-                                </li>
+                              
 
 
 

@@ -463,6 +463,9 @@ console.log(data);
                                                     <option value="0">
                                                         Unpublished
                                                     </option>
+                                                    <option value="1">
+                                                        Deleted
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div className="col-md-2">

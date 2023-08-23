@@ -1078,76 +1078,76 @@ export async function PUT(request: Request) {
     data: newPremisesDrainType,
   } as any);
 
-  // ////delete
-  // await prisma.premisesExcretaContainment.deleteMany({
-  //   where: {
-  //     inspectionId,
-  //   },
-  // } as any);
+  ////delete
+  await prisma.premisesExcretaContainment.deleteMany({
+    where: {
+      inspectionId,
+    },
+  } as any);
 
-  // ////process data
-  // let newPremisesExcretaContainment =
-  //   res?.liquidWasteSection?.excretaContainment?.map((d: any) => {
-  //     return {
-  //       id: uuidv4(),
-  //       userId: userId,
-  //       inspectionId,
-  //       excretaContainmentId: d,
-  //       liquidWasteSectionId: liquidWasteSectionHistory.id,
-  //     };
-  //   });
+  ////process data
+  let newPremisesExcretaContainment =
+    res?.liquidWasteSection?.excretaContainment?.map((d: any) => {
+      return {
+        id: uuidv4(),
+        userId: userId,
+        inspectionId,
+        excretaContainmentId: d,
+        liquidWasteSectionId: liquidWasteSectionHistory.id,
+      };
+    });
 
-  // ///create new
-  // await prisma.premisesExcretaContainment.createMany({
-  //   data: newPremisesExcretaContainment,
-  // } as any);
+  ///create new
+  await prisma.premisesExcretaContainment.createMany({
+    data: newPremisesExcretaContainment,
+  } as any);
 
-  // ////delete
-  // await prisma.premisesGreyWaterDisposal.deleteMany({
-  //   where: {
-  //     inspectionId,
-  //   },
-  // } as any);
+  ////delete
+  await prisma.premisesGreyWaterDisposal.deleteMany({
+    where: {
+      inspectionId,
+    },
+  } as any);
 
-  // ////process data
-  // let newPremisesGreyWaterDisposal =
-  //   res?.liquidWasteSection?.greyWaterDisposal?.map((d: any) => {
-  //     return {
-  //       id: uuidv4(),
-  //       userId: userId,
-  //       inspectionId,
-  //       greyWaterDisposalId: d,
-  //       liquidWasteSectionId: liquidWasteSectionHistory.id,
-  //     };
-  //   });
-  // ///create new
-  // await prisma.premisesGreyWaterDisposal.createMany({
-  //   data: newPremisesGreyWaterDisposal,
-  // } as any);
+  ////process data
+  let newPremisesGreyWaterDisposal =
+    res?.liquidWasteSection?.greyWaterDisposal?.map((d: any) => {
+      return {
+        id: uuidv4(),
+        userId: userId,
+        inspectionId,
+        greyWaterDisposalId: d,
+        liquidWasteSectionId: liquidWasteSectionHistory.id,
+      };
+    });
+  ///create new
+  await prisma.premisesGreyWaterDisposal.createMany({
+    data: newPremisesGreyWaterDisposal,
+  } as any);
 
-  // ////delete
-  // await prisma.premisesWasteReceptacle.deleteMany({
-  //   where: {
-  //     inspectionId,
-  //   },
-  // } as any);
+  ////delete
+  await prisma.premisesWasteReceptacle.deleteMany({
+    where: {
+      inspectionId,
+    },
+  } as any);
 
-  // ////process data
-  // let newPremisesWasteReceptacle = res?.solidWasteSection?.wasteReceptacle?.map(
-  //   (d: any) => {
-  //     return {
-  //       id: uuidv4(),
-  //       userId: userId,
-  //       inspectionId,
-  //       solidWasteReceptacleId: d,
-  //       solidWasteSectionId: solidWasteSectionHistory.id,
-  //     };
-  //   }
-  // );
-  // ///create new
-  // await prisma.premisesWasteReceptacle.createMany({
-  //   data: newPremisesWasteReceptacle,
-  // } as any);
+  ////process data
+  let newPremisesWasteReceptacle = res?.solidWasteSection?.wasteReceptacle?.map(
+    (d: any) => {
+      return {
+        id: uuidv4(),
+        userId: userId,
+        inspectionId,
+        solidWasteReceptacleId: d,
+        solidWasteSectionId: solidWasteSectionHistory.id,
+      };
+    }
+  );
+  ///create new
+  await prisma.premisesWasteReceptacle.createMany({
+    data: newPremisesWasteReceptacle,
+  } as any);
 
   // ////delete
   // await prisma.premisesDrainBadCondition.deleteMany({
@@ -1171,56 +1171,56 @@ export async function PUT(request: Request) {
   // } as any);
 
 
-  // ////delete
-  // await prisma.premisesActionTaken.deleteMany({
-  //   where: {
-  //     inspectionId,
-  //   },
-  // } as any);
+  ////delete
+  await prisma.premisesActionTaken.deleteMany({
+    where: {
+      inspectionId,
+    },
+  } as any);
 
-  // ////process data
-  // let newPremisesActionTaken = res?.conclusionSection?.action?.map((d: any) => {
-  //   return {
-  //     id: uuidv4(),
-  //     userId: userId,
-  //     inspectionId,
-  //     actionId: d,
-  //     conclusionSectionId: conclusionSectionHistory.id,
-  //   };
-  // });
+  ////process data
+  let newPremisesActionTaken = res?.conclusionSection?.action?.map((d: any) => {
+    return {
+      id: uuidv4(),
+      userId: userId,
+      inspectionId,
+      actionId: d,
+      conclusionSectionId: conclusionSectionHistory.id,
+    };
+  });
 
-  // // ///create new
-  // await prisma.premisesActionTaken.createMany({
-  //   data: newPremisesActionTaken,
-  // } as any);
-
-
+  // ///create new
+  await prisma.premisesActionTaken.createMany({
+    data: newPremisesActionTaken,
+  } as any);
 
 
-  // ////delete
-  // await prisma.premisesNuisanceDetected.deleteMany({
-  //   where: {
-  //     inspectionId,
-  //   },
-  // } as any);
 
-  // ////process data
-  // let newPremisesNuisanceDetected = res?.conclusionSection?.nuisance?.map(
-  //   (d: any) => {
-  //     return {
-  //       id: uuidv4(),
-  //       userId: userId,
-  //       inspectionId,
-  //       nuisanceId: d,
-  //       conclusionSectionId: conclusionSectionHistory.id,
-  //     };
-  //   }
-  // );
 
-  // // ///create new
-  // await prisma.premisesNuisanceDetected.createMany({
-  //   data: newPremisesNuisanceDetected,
-  // } as any);
+  ////delete
+  await prisma.premisesNuisanceDetected.deleteMany({
+    where: {
+      inspectionId,
+    },
+  } as any);
+
+  ////process data
+  let newPremisesNuisanceDetected = res?.conclusionSection?.nuisanceDetected?.map(
+    (d: any) => {
+      return {
+        id: uuidv4(),
+        userId: userId,
+        inspectionId,
+        nuisanceId: d,
+        conclusionSectionId: conclusionSectionHistory.id,
+      };
+    }
+  );
+
+  // ///create new
+  await prisma.premisesNuisanceDetected.createMany({
+    data: newPremisesNuisanceDetected,
+  } as any);
 
   // await prisma.premisesAnimal.createMany({ data: premisesAnimal } as any);
 
