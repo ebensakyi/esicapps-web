@@ -127,6 +127,10 @@ export default function DataEdit({ data }: any) {
     const [selectedAction, setSelectedAction] = useState([]);
     const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] =
         useState([]);
+
+        const [selectedPremisesDrainBadCondition, setSelectedPremisesDrainBadCondition] =
+        useState([]);
+
     const [numberUrinalSeats, setNumberUrinalSeats] = useState();
     const [wasteCollectorName, setWasteCollectorName] = useState();
     const [wasteCollectionType, setWasteCollectionType] = useState();
@@ -393,7 +397,7 @@ export default function DataEdit({ data }: any) {
         setSelectedEffluentManagement(premisesEffluentManagement);
     
         let premisesExcretaContainment =
-          data?.submittedData?.WaterSection?.PremisesExcretaContainment?.map(
+          data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment?.map(
             (data:any) => {
               return {
                 value: data.ExcretaContainment.id,
@@ -658,6 +662,7 @@ export default function DataEdit({ data }: any) {
 
             },
             solidWasteSection: {
+                wasteReceptacle: selectedWasteReceptacle?.map((x: any) => x.value),
                 wasteServiceProviderRegistration: wasteServiceProviderRegistration,
                 wasteCollectorName: wasteCollectorName,
                 wasteServicePhoneNumber: wasteServicePhoneNumber,
