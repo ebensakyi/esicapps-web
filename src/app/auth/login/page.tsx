@@ -75,7 +75,7 @@ export default function Home() {
                           Login to Your Account
                         </h5>
                         <p className="text-center small">
-                          Enter your username &amp; password to login
+                          Enter your phone number &amp; password to login
                         </p>
                       </div>
                       <form className="row g-3 needs-validation">
