@@ -35,12 +35,13 @@ export async function PUT(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-    let userId = res.userId;
     let changePassword = res.changePassword;
+    let phoneNumber = res.phoneNumber;
+    console.log("res ==>", res);
 
     if (changePassword == 1) {
       let user = await prisma.user.findFirst({
-        where: { id: userId },
+        where: { phoneNumber: phoneNumber },
       });
 
       let isValid = await bcrypt.compare(res.currentPassword, user.password);
@@ -57,12 +58,13 @@ export async function PUT(request: Request) {
 
       const data = {
         password: hashedPassword,
+        passwordChanged:1
       };
 
       await prisma.user.update({
         data: data,
         where: {
-          id: userId,
+          id: user?.id,
         },
       });
 

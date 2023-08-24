@@ -2,7 +2,7 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Multiselect from "multiselect-react-dropdown";
-import { useRouter, usePathname, redirect } from 'next/navigation';
+import { useRouter, usePathname, redirect, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { pages } from '../../../prisma/seed/page';
@@ -14,7 +14,9 @@ import { LOGIN_URL } from "@/config";
 
 export default function UserProfile({ data }: any) {
 
+    const searchParams = useSearchParams()
 
+    const message = searchParams.get("message")
 
 
 
@@ -45,7 +47,9 @@ export default function UserProfile({ data }: any) {
         setPhoneNumber(data.userData.phoneNumber);
         setUserId(data.userData.userId);
 
-    })
+
+      
+    },[])
 
 
     const changePassword = async (e: any) => {
@@ -69,7 +73,7 @@ export default function UserProfile({ data }: any) {
             };
 
 
-            const response = await axios.put("/api/auth/profile", data);
+            const response = await axios.put("/api/user/profile", data);
 
             
           
@@ -236,6 +240,11 @@ export default function UserProfile({ data }: any) {
                                 </div>
                             </div>
                         </div>
+                        {message?  <div className="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                {message}
+                <button type="button" className="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>:<></>}
+                      
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Change Password</h5>

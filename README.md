@@ -63,6 +63,10 @@ update "District"
 
 
 
-1. Save premises multiselects
-2. force new user to change password
+1. Save premises multiselects - done
+2. force new user to change password - done
+
+
 3. google data studio dashboard
+4. forget password 
+5. show menus based on user

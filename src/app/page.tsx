@@ -4,6 +4,7 @@ import { SERVER_BASE_URL } from '@/config'
 import { headers } from 'next/headers'
 import { getServerSession } from "next-auth";
 import { authOptions } from './api/auth/[...nextauth]/options';
+import { redirect } from 'next/navigation';
 
 
 async function getDashboardData() {
@@ -50,6 +51,10 @@ export default async function page() {
 
   console.log("session===>",session);
   
+  if(session?.user?.passwordChanged==0){
+    redirect('/auth/profile?message=Change your default password')
+
+  }
 
 
 
