@@ -39,7 +39,6 @@ export default async function page() {
 
     let data = { regions, districts }
 
-    // console.log(data);
 
 
 

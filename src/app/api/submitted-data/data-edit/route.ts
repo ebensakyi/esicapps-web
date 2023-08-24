@@ -397,7 +397,6 @@ export async function PUT(request: Request) {
   // try {
   const res = await request.json();
 
-  console.log("let inspectionId = res.id; ", res);
 
   let inspectionId = res.inspectionId;
 

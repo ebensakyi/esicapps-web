@@ -122,7 +122,6 @@ export async function POST(request: Request) {
           ? null
           : Number(res.numberBathroomCubicle),
     };
-    console.log(data);
 
     const response = await prisma.liquidWasteSection.create({ data });
 

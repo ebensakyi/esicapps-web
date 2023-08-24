@@ -15,29 +15,30 @@ export async function POST(request: Request) {
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,
-      },include:{Region:true,District:true}
+      },
+      include: { Region: true, District: true },
     });
 
     //console.log(user);
 
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");
-       
+
     // }
 
     if (!user) {
-      return NextResponse.json(null,{status:400});
+      return NextResponse.json(null, { status: 400 });
     }
 
     let isValid = await bcrypt.compare(password, user.password);
 
-
     if (isValid) {
+    
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
       return NextResponse.json({ ...user, token });
     }
-    return NextResponse.json(null,{status:400});
+    return NextResponse.json(null, { status: 400 });
   } catch (error: any) {
     console.log(error);
     return new Response(JSON.stringify({ message: error.message }));

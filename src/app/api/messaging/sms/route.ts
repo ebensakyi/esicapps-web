@@ -78,7 +78,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
-    console.log("POST POST ====>",error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -160,7 +159,6 @@ export async function PUT(request: Request) {
       const response = await prisma.messaging.update({ data,where:{id:messageId} });
       return NextResponse.json(data);
     } catch (error) {
-        console.log("PUT PUT ====>",error);
   
       return NextResponse.json(error);
     }

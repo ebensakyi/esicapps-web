@@ -483,7 +483,6 @@ export default async function page() {
 
     let data = { actions, animalTypes, cemeteryWorkers, cleaningFrequencies, communalContainerConditions, containerVolumes, derattingFrequencies, desiltingFrequencies, disinfectionFrequencies, drainBadConditions, drainTypes, drinkingWaterSourceTypes, easeYourselfWheres, effluentManagements, excretaContainments, excretaDisposals, greyWaterDisposals, hazardousWasteDisposals, nuisances, ownershipTypes, pestSigns, premisesServices, premisesSubtypes, premisesTypes, respondentDesignations, sewerSystems, toiletHouseholdNumbers, toiletPitPositions, toiletTypes, unsafeToiletConditions, unsafeWaterStorages, unservicedWasteDisposals, wasteCollectionFrequencies, wasteCollectionTypes, wasteStorageReceptacles, wasteWaterContainments, waterFlowFrequencies, waterSourceTypes, waterStorageTypes, waterSupplyTypes, waterTreatmentTypes }
 
-    // console.log(data);
 
 
 

@@ -68,7 +68,6 @@ const readCSV = async (filePath: any, electoralAreaId: any,districtId: any) => {
           console.error('Error deleting CSV file:', err);
           return;
         }
-        console.log('CSV file has been deleted successfully.');
       });
       });
     
@@ -87,7 +86,6 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
       name: row.name,
     }));
 
-    console.log(newData);
     
 
     return newData;

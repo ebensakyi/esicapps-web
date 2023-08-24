@@ -5,7 +5,6 @@ import { logActivity } from "@/utils/log";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    console.log(res);
     
 
     const data = {

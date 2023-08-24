@@ -523,7 +523,6 @@ export default function Community({ data }: any) {
                                                                                 setCommunityId(data.id);
 
 
-                                                                                console.log(data?.ElectoralArea?.id);
 
                                                                                 setIsEditing(true);
 

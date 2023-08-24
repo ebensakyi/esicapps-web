@@ -60,7 +60,6 @@ export async function POST(request: Request) {
       wasteServicePhoneNumber: res.wasteServicePhoneNumber,
       rating: res.rating == "null" ? null : Number(Math.ceil(res.rating)),
     };
-    console.log(data);
 
     const response = await prisma.solidWasteSection.create({ data });
 

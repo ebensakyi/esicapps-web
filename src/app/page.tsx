@@ -27,7 +27,7 @@ async function getRegions() {
   let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store' });
 
   if (!response.ok) {
-      throw new Error('Failed to fetch data')
+    throw new Error('Failed to fetch data')
   }
   return await response.json();
 
@@ -35,12 +35,12 @@ async function getRegions() {
 
 async function getDistricts() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
+  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return await response.json();
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  return await response.json();
 
 }
 
@@ -48,16 +48,18 @@ async function getDistricts() {
 export default async function page() {
   const session = await getServerSession(authOptions);
 
+  console.log("session===>",session);
   
+
+
 
   const dashboardData = await getDashboardData()
   const regions = await getRegions()
   const districts = await getDistricts()
 
-  console.log(dashboardData);
-  
 
-  let data = {session, dashboardData, regions, districts }
+
+  let data = { session, dashboardData, regions, districts }
 
 
   return <Dashboard data={data} />

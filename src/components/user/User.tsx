@@ -50,7 +50,6 @@ export default function User({ data }: any) {
 
     const getDistrictsByRegion = async (regionId: number) => {
         try {
-            console.log("getDistrictsByRegion");
 
 
             const response = await axios.get(
@@ -346,7 +345,6 @@ export default function User({ data }: any) {
                     };
                 }
                 if (selectedUserLevel == "3") {
-                    console.log("hererer");
                     
                     data = {
                         userId: Number(userId),

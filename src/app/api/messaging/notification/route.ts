@@ -31,7 +31,6 @@ export async function POST(request: Request) {
       sender: Number(userId),
     };
 
-    console.log("userIduserIduserIduserIduserId", userId);
 
     if (res.sendingType == "1") {
       const user = await prisma.user.findFirst({
@@ -47,7 +46,6 @@ export async function POST(request: Request) {
         where: { districtId: Number(res.districtId) },
       });
 
-      console.log("LENGTH2====>", user.length);
       recipientCount = user.length;
 
       for (let i = 0; i < user.length; i++) {
@@ -62,7 +60,6 @@ export async function POST(request: Request) {
 
       recipientCount = user.length;
 
-      console.log("LENGTH3====>", user.length);
 
       for (let i = 0; i < user.length; i++) {
         let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
@@ -91,7 +88,6 @@ export async function PUT(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-    console.log("res==================>", res);
 
     const userId = session?.user?.id;
 
@@ -113,7 +109,6 @@ export async function PUT(request: Request) {
       sender: Number(userId),
     };
 
-    console.log("DATA ", data);
 
     if (res.sendingType == "1") {
       const user = await prisma.user.findFirst({
@@ -168,7 +163,6 @@ export async function PUT(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
-    console.log("error==================>", error);
 
     return NextResponse.json(error, { status: 500 });
   }

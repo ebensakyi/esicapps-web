@@ -26,7 +26,6 @@ export async function POST(request: Request) {
     }
 
     let isValid = await bcrypt.compare(oldPassword, user.password);
-    console.log("USER====>",isValid);
 
     if (isValid) {
       const salt = await bcrypt.genSaltSync(10);

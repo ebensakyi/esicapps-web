@@ -53,12 +53,10 @@ export async function PUT(request: Request) {
     // let { searchParams } = new URL(request.url);
     // let inspectionId: any = searchParams.get("id")?.toString();
 
-    // console.log("inp=======>",searchParams);
     
 
     const session = await getServerSession(authOptions);
 
-    // console.log("Session ", session);
     let userId = session?.user?.id;
     let surname = session?.user?.surname;
     let districtId = session?.user?.districtId;

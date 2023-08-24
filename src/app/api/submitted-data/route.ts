@@ -10,8 +10,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    
-
     let formId = res.formId;
     let published = res.published;
     let searchText = res.searchText;
@@ -216,7 +214,7 @@ export async function POST(request: Request) {
                 uncookedFoodStorageCondtionSafe: true,
                 urinalAvailability: true,
                 toiletAvailability: true,
-            
+
                 approvedHandwashingFacilityAvailability: true,
                 bathroomAvailability: true,
                 protectiveClothingUsed: true,
@@ -366,7 +364,7 @@ export async function POST(request: Request) {
                 PremisesHazardousWasteDisposal: {
                   include: { HazardousWasteDisposalMethod: true },
                 },
-                
+
                 PremisesWasteReceptacle: {
                   include: { SolidWasteReceptacle: true },
                 },
@@ -669,6 +667,8 @@ export async function GET(request: Request) {
     let formId = Number(searchParams.get("formId")) || 1;
 
     let published = Number(searchParams.get("published"));
+    // let deleted = Number(searchParams.get("deleted"));
+
     let filterBy = searchParams.get("filterBy");
     let filterValue = searchParams.get("filterValue");
     let curPage = Number(searchParams.get("page"));
@@ -738,8 +738,8 @@ export async function GET(request: Request) {
 
               Inspection: {
                 isPublished: published,
-                inspectionFormId: formId,deleted: 0,
-               
+                inspectionFormId: formId,
+                deleted: 0,
               },
             }
           : {
@@ -851,14 +851,12 @@ export async function GET(request: Request) {
       },
     });
 
-
     return NextResponse.json({
       response,
       curPage: curPage,
       maxPage: Math.ceil(count / perPage),
     });
   } catch (error) {
-    console.log("error:=> ", error);
 
     return NextResponse.json(error);
   }

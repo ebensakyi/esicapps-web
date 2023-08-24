@@ -19,8 +19,9 @@ export default async function Data({ data }: any) {
         }
     })
 
+  
     const searchTextRef = useRef(null);
-    const publishingStatusRef = useRef(null);
+    const filterRef = useRef(null);
 
 
     // const { data: session } = useSession()
@@ -31,6 +32,8 @@ export default async function Data({ data }: any) {
 
     const formId = Number(searchParams.get("formId"))
     const published = Number(searchParams.get('published'))
+    const deleted = Number(searchParams.get('deleted'))
+
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
@@ -53,10 +56,8 @@ export default async function Data({ data }: any) {
 
     var dateString = moment().format("DD-MM-yyyy-HH-mm-ss-a");
 
+  
 
-
-
-console.log(data);
 
 
 
@@ -96,7 +97,7 @@ console.log(data);
         page = page.selected == -1 ? 1 : page.selected + 1;
 
         router.push(
-            `${pathname}?formId=${formId}&published=${published}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
+            `${pathname}?formId=${formId}&published=${published}&deleted=${deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
 
         );
     };
@@ -167,12 +168,13 @@ console.log(data);
     const handleSearch = () => {
         try {
             let _searchText: any = searchTextRef?.current?.value
-            let _publishingStatus: any = publishingStatusRef?.current?.value
+            let _publishingStatus: any = filterRef?.current?.value
 
+            let _deleted: any = filterRef?.current?.value
 
 
             router.push(
-                `${pathname}?formId=${formId}&published=${_publishingStatus}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
+                `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
 
             );
 
@@ -435,6 +437,10 @@ console.log(data);
                         <li className="breadcrumb-item active">Data</li>
                     </ol>
                 </nav> */}
+
+
+
+
             </div>
             {/* End Page Title */}
             <section className="section">
@@ -451,9 +457,9 @@ console.log(data);
                                 <input type="text" className="form-control" placeholder="City" />
                             </div> */}
                                             <div className="col-md-2">
-                                                <select ref={publishingStatusRef}
-                                                    id="publishingStatus"
-                                                    name="publishingStatus" className="form-select input-group" >
+                                                <select ref={filterRef}
+                                                    id="filterRef"
+                                                    name="filterRef" className="form-select input-group" >
                                                     <option value="" selected>
                                                         Filter by{" "}
                                                     </option>
@@ -463,9 +469,9 @@ console.log(data);
                                                     <option value="0">
                                                         Unpublished
                                                     </option>
-                                                    <option value="1">
+                                                    {/* <option value="1">
                                                         Deleted
-                                                    </option>
+                                                    </option> */}
                                                 </select>
                                             </div>
                                             <div className="col-md-2">

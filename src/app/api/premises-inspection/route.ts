@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get('userId'))
-    console.log(userId);
     
     
     return NextResponse.json({ message: "This Worked", success: userId },{

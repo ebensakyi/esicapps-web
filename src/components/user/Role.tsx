@@ -103,7 +103,6 @@ export default function Role({ data }: any) {
                 `/api/user/role/?id=${id}`
             );
 
-            console.log(response);
             if (response.status == 200) {
                  router.refresh()
                 return toast.success("User Type deleted");

@@ -26,7 +26,6 @@ ChartJS.register(
 );
 export default function Dashboard({ data }: any) {
 
-  console.log(data);
 
   const [showLoading, setShowLoading] = useState(false);
 

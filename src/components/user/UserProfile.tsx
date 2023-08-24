@@ -71,7 +71,6 @@ export default function UserProfile({ data }: any) {
 
             const response = await axios.put("/api/auth/profile", data);
 
-            console.log(response);
             
           
             setCurrentPassword("");

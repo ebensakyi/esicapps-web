@@ -8,7 +8,6 @@ async function getRoles() {
 
     let response = await fetch(`http://localhost:3000/api/user/role`, { cache: 'no-store' });
 
-    console.log(response);
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }

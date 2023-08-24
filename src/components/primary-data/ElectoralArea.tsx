@@ -446,10 +446,7 @@ export default function ElectoralArea({ data }: any) {
                                                                                 setDistrictId(data.districtId);
                                                                                 setElectoralAreaId(data.id)
 
-                                                                                console.log("data.regionId ", data.District.Region.id);
-                                                                                console.log("data.districtId ", data.districtId);
-
-
+                                                                        
 
                                                                                 setIsEditing(true);
 

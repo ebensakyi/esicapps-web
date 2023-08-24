@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React from 'react'
+import React, { useState } from 'react'
 import EateryPremisesInfoView from './PremisesInfoViews/EateryPremisesInfoView';
 import HealthPremisesInfoView from './PremisesInfoViews/HealthPremisesInfoView';
 import HospitalityPremisesInfoView from './PremisesInfoViews/HospitalityPremisesInfoView';
@@ -14,6 +14,7 @@ import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoVi
 import Image from 'next/image'
 import { useSession } from 'next-auth/react';
 import { LOGIN_URL } from '@/config';
+import Modal from "react-modal";
 
 export default function DataView({ data }: any) {
     const { data: session } = useSession({
@@ -23,7 +24,24 @@ export default function DataView({ data }: any) {
         }
     })
 
-    
+
+    const [modalIsOpen, setIsOpen] = useState(false);
+    function openModal(e: any) {
+        e.preventDefault();
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // subtitle.style.color = "#f00";
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+
+
     const router = useRouter();
 
     const pathname = usePathname()
@@ -49,12 +67,13 @@ export default function DataView({ data }: any) {
             console.log(error);
         }
     };
-    const handleDelete = async (id: any) => {
-        
+    const handleDelete = async (id: any) => {        
+
         try {
             const response = await axios.put(`/api/submitted-data/data-view`, {
                 id: id,
             });
+            
             if (response.status == 200) {
                 router.push(
                     `/submitted-data?published=${published}&formId=${formId}`
@@ -98,6 +117,16 @@ export default function DataView({ data }: any) {
             console.log(error);
         }
     };
+    const customStyles = {
+        content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+        },
+    };
 
 
     return (
@@ -114,6 +143,49 @@ export default function DataView({ data }: any) {
                 <li className="breadcrumb-item active">Data</li>
             </ol>
         </nav> */}
+
+                <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Confirm deletion"
+                >
+                    <>
+
+
+                     
+
+                        <div className="alert alert-outline-danger alert-p" role="alert">
+                            <span className="alert-content">
+                            You are about to delete this inspection.<br/> Deleted inspection cannot be recovered.
+                                Click OK to proceed to delete or Cancel to dismiss
+                            </span>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="d-grid">
+                                    <button
+                                        onClick={(e) => {
+                                            handleDelete(data?.submittedData?.id);
+                                            closeModal();
+                                        }}
+                                        className="btn btn-success"
+                                    >
+                                        OK
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="d-grid">
+                                    <button onClick={closeModal} className="btn btn-danger">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                </Modal>
             </div>
             {/* End Page Title */}
             <section className="section">
@@ -1742,8 +1814,8 @@ export default function DataView({ data }: any) {
                                                                             className="btn btn-danger"
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-
-                                                                                handleDelete(data?.submittedData?.id);
+                                                                                openModal(e)
+                                                                                // handleDelete(data?.submittedData?.id);
                                                                             }}
                                                                         >
                                                                             Delete

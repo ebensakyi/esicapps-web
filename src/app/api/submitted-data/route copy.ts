@@ -33,7 +33,6 @@ export async function GET(request: Request) {
     const searchText = searchParams.get("searchText") ?? "";
 
     const formId = Number(searchParams.get("formId"));
-    console.log("FormID===>",searchParams);
     
     const published =
       Number(searchParams.get("published"));

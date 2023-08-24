@@ -23,7 +23,6 @@ export default async function Data({ data }: any) {
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
-    console.log(searchParams.get("page"));
 
 
 
@@ -105,13 +104,8 @@ export default async function Data({ data }: any) {
     //     }
     // };
     const handlePagination = (page: any) => {
-        console.log(">>>>>>>>", page);
 
         page = page.selected == -1 ? 1 : page.selected + 1;
-
-
-
-
 
         router.push(
             `${pathname}?formId=${formId}&published=1&page=${page}`

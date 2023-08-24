@@ -66,7 +66,6 @@ export async function POST(request: Request) {
             : Number(res.pharmacyCertAvailabilityId),
       };
 
-      console.log(data);
       
 
       const response = await prisma.licencePermitSection.create({ data });

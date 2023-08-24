@@ -10,7 +10,6 @@ export async function POST(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-    console.log("session =>", session);
 
     const data = {
       name: res.districtName,
@@ -74,7 +73,6 @@ export async function PUT(request: Request) {
     const res = await request.json();
     const session = await getServerSession(authOptions);
 
-    console.log("session =>", session);
     let districtId = res.districtId;
 
     const data = {
@@ -83,7 +81,6 @@ export async function PUT(request: Request) {
       abbrv: res.abbrv,
     };
 
-    console.log(data);
     
     const response = await prisma.district.update({
       where: { id: Number(districtId) },

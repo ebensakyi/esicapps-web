@@ -38,7 +38,6 @@ export default async function page() {
 
     let data = {regions, communities }
 
-    // console.log(data);
     
 
 

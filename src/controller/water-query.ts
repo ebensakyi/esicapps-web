@@ -3,13 +3,11 @@ import { prisma } from "@/prisma/db";
 export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
   let summary;
 
-  console.log(filterBy);
-  console.log(filterValue);
+
   
   
 
   if (filterBy == undefined) {
-    console.log("here");
     
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "count"

@@ -68,7 +68,6 @@ export default async function page() {
 
     let data = { notifications, sendingTypes, regions, districts,users }  
 
-    // console.log(data);
     
 
 

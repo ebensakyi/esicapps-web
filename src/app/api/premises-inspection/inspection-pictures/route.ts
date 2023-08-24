@@ -19,10 +19,6 @@ export async function POST(request: Request) {
 
     let fileName = await saveFileOnDisk(file);
 
-    console.log("inspectionId ",inspectionId);
-    console.log("formSectionImageId ",formSectionImageId);
-
-    console.log("fileName ",fileName);
 
     if (fileName != "0") {
       const data = {
