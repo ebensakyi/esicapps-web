@@ -33,8 +33,9 @@ export async function POST(request: Request) {
       );
     }
 
-   // return NextResponse.json(null, { status: 200 });
-   return NextResponse.redirect(new URL('/auth/reset-password',request.url));
+   return NextResponse.json(null, { status: 200 });
+
+   //return NextResponse.redirect(new URL('/auth/reset-password',request.url));
 
   } catch (error: any) {
     console.log(error);

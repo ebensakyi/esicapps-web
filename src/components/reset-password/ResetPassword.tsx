@@ -117,7 +117,7 @@ export default function ResetPassword() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Enter your phone number used "
+                            placeholder="Enter reset code "
                             required
                             value={resetCode}
                             onChange={(e) => setResetCode(e.target.value)}
@@ -140,7 +140,7 @@ export default function ResetPassword() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Enter your phone number used "
+                            placeholder="Enter new password "
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
