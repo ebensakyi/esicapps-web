@@ -1,4 +1,4 @@
-export const ownershipType = [
+export const ownership_type = [
     {
       name: "Private",
     },

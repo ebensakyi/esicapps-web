@@ -42,7 +42,7 @@ import { premisesTypes } from "./premisesTypes";
 import { subtypes } from "./premisesSubtypes";
 import { hazardousWasteDisposal } from "./hazardousWasteDisposal";
 import { derattingFrequency } from "./derattingFrequency";
-import { ownershipType } from "./ownershipType";
+import { ownership_type } from "./ownership_type";
 import { cemeteryWorkers } from "./cemeteryWorkers";
 import { wasteWaterContainment } from "./wasteWaterContainment";
 
@@ -191,7 +191,7 @@ async function main() {
     data: derattingFrequency,
   });
   await prisma.ownershipType.createMany({
-    data: ownershipType,
+    data: ownership_type,
   });
   await prisma.respondentDesignation.createMany({
     data: respondentDesignation,
