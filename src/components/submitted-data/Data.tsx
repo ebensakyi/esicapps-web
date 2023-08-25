@@ -9,7 +9,7 @@ import { useRef, useState } from 'react';
 import { LOGIN_URL } from '@/config';
 
 
-export default async function Data({ data }: any) {
+export default  function Data({ data }: any) {
 
 
    

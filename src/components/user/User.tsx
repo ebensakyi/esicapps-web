@@ -532,7 +532,7 @@ export default function User({ data }: any) {
                                                     <option >Select user role</option>
                                                     {data.roles.map((role: any) => {
                                                         return (
-                                                            <option value={role.id}>{role.name}</option>
+                                                            <option key={role.id} value={role.id}>{role.name}</option>
                                                         )
                                                     })}
                                                 </select>

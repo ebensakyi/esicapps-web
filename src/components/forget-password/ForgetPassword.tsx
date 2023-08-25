@@ -119,7 +119,7 @@ export default function ForgetPassword() {
                                             </div>
                                             <div className="col-12">
                                                 <p className="small mb-0">
-                                                    Don't have account?{" "}
+                                                    Don`t have account?{" "}
                                                     <Link href="/auth/login">
                                                         Login
                                                     </Link>
