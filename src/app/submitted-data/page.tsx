@@ -2,7 +2,7 @@ import Data from '@/src/components/submitted-data/Data';
 import { SERVER_BASE_URL } from '@/config';
 
 async function getSubmittedData(searchParams: any) {
-    
+
     let { formId } = searchParams
     let { published } = searchParams
     let { deleted } = searchParams
@@ -14,10 +14,10 @@ async function getSubmittedData(searchParams: any) {
     let { searchText } = searchParams
     let { page } = searchParams
 
-    
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?published=${published}&deleted=${deleted}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`,{cache:"no-store"})
+
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?published=${published}&deleted=${deleted}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`, { cache: "no-store" })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
@@ -52,7 +52,7 @@ export default async function page({ searchParams }: any) {
 
 
 
-    let data = { submittedData:submittedData }
+    let data = { submittedData: submittedData }
 
 
 

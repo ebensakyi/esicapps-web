@@ -18,6 +18,8 @@ export default function Log({ data }: any) {
     const searchParams = useSearchParams()
     const searchText = searchParams.get('searchText')
 
+    
+
 
     const { data: session } = useSession({
         required: true,
@@ -36,6 +38,24 @@ export default function Log({ data }: any) {
         );
     };
 
+    const handleExportAll = async () => {
+        try {
+            let searchText = searchParams.get('searchText')
+            const response = await axios.post(
+                `/api/user/log`,
+                {
+                    fileName:"Logs",
+                }
+            );
+
+
+            if (response.status == 200) {
+                router.push(response.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
     return (
@@ -59,7 +79,14 @@ export default function Log({ data }: any) {
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Logs</h5>
+                                <h5 className="card-title"> <button
+                                                        type="button"
+                                                        className="btn btn-sm btn-success  "
+                                                        onClick={handleExportAll}
+                                                    >
+                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                                        Export as excel
+                                                    </button></h5>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
@@ -71,7 +98,7 @@ export default function Log({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.logs.map((log: any) => {
+                                        {data.logs.response.map((log: any) => {
                                             return (
                                                 <tr key={log.id}>
                                                     <td>{log.User.otherNames} {log.User.surname}</td>
@@ -91,8 +118,8 @@ export default function Log({ data }: any) {
                                             previousLabel={"Previous"}
                                             nextLabel={"Next"}
                                             breakLabel={"..."}
-                                            initialPage={data.log.curPage - 1}
-                                            pageCount={data.log.maxPage}
+                                            initialPage={data.logs.curPage - 1}
+                                            pageCount={data.logs.maxPage}
                                             onPageChange={handlePagination}
                                             breakClassName={"page-item"}
                                             breakLinkClassName={"page-link"}

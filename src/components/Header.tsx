@@ -386,7 +386,7 @@ export default function Header() {
                         </li>
                         <li className="nav-item">
                             <Link className={
-                                pathname == "/map"
+                                pathname == "/user/guide"
                                     ? "nav-link"
                                     : "nav-link collapsed"
                             } href="/user/guide">
@@ -421,7 +421,7 @@ export default function Header() {
                                 pathname == "/user/log"
                                     ? "nav-link"
                                     : "nav-link collapsed"
-                            } href="/user/log">
+                            } href="/user/log?searchText=&page=1">
                                 <i className="bi bi-clock-history
 " />
                                 <span>Logs</span>

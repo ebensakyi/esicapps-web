@@ -92,6 +92,7 @@ export async function POST(request: Request) {
             },
 
       include: {
+        RespondentDesignation:true,
         Inspection: {
           include: {
             LicencePermitSection: {
@@ -472,7 +473,7 @@ export async function POST(request: Request) {
         "Premises Water Storage": data[
           i
         ]?.Inspection?.WaterSection?.PremisesWaterStorage?.map(
-          (data) => data?.WaterStorage?.name
+          (data) => data?.WaterStorageType?.name
         ).toString(),
         "Premises Water Supply": data[
           i
@@ -583,12 +584,12 @@ export async function POST(request: Request) {
 
         PremisesHazardousWasteDisposal: data[
           i
-        ]?.Inspection?.LiquidWasteSection?.PremisesHazardousWasteDisposal?.map(
+        ]?.Inspection?.SolidWasteSection?.PremisesHazardousWasteDisposal?.map(
           (data: any) => data?.HazardousWasteDisposalMethod?.name
         ).toString(),
         PremisesWasteReceptacle: data[
           i
-        ]?.Inspection?.LiquidWasteSection?.PremisesWasteReceptacle?.map(
+        ]?.Inspection?.SolidWasteSection?.PremisesWasteReceptacle?.map(
           (data: any) => data?.SolidWasteReceptacle?.name
         ).toString(),
 
