@@ -4,21 +4,25 @@ export const pages = [
     path: "/",
   },
   {
+    name: "Dashboard 2",
+    path: "/dashboard-2",
+  },
+  {
     name: "Submitted Data",
     path: "/submitted-data",
   },
 
   {
     name: "Map",
-    path: "/submitted-data/map",
+    path: "/map",
   },
   {
-    name: "General Reports",
-    path: "/reports/general",
+    name: "Reports",
+    path: "/reports",
   },
   {
-    name: "Custom Reports",
-    path: "/reports/custom",
+    name: "Reports 2",
+    path: "/reports-2",
   },
   {
     name: "Sanitation Report",
@@ -26,7 +30,7 @@ export const pages = [
   },
   {
     name: "Sanitation Report Map",
-    path: "/sanitation-reports/map",
+    path: "/sanitation-reports-map",
   },
   {
     name: "SMS",
@@ -58,16 +62,19 @@ export const pages = [
   },
  
   {
-    name: "User Log",
+    name: "Users",
+    path:"/user"
+  },
+  {
+    name: "Logs",
     path:"/user/log"
   },
   {
-    name: "User Role",
+    name: "Role",
     path:"/user/role"
   },
   {
-    name: "User Actions",
-    path:"/user/page-actions"
+    name: "Other data",
+    path: "/primary-data/other-data",
   },
- 
 ];
