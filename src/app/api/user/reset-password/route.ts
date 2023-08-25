@@ -1,6 +1,6 @@
 import { generateCode } from "@/utils/generate-code";
 import { getServerSession } from "next-auth";
-import { options } from "../../auth/[...nextauth]/options";
+import { authOptions } from "../../auth/[...nextauth]/options";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/prisma/db";
 import { sendSMS } from "@/utils/send-hubtel-sms";
@@ -11,7 +11,7 @@ import { logActivity } from "@/utils/log";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(options);
+    const session = await getServerSession(authOptions);
     let userId = session?.user?.id;
 
     let phoneNumber = res.phoneNumber;

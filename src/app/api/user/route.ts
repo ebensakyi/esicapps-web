@@ -6,6 +6,7 @@ import { authOptions } from "../auth/[...nextauth]/options";
 
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
+import { sendSMS } from "@/utils/send-hubtel-sms";
 
 
 export async function POST(request: Request) {
@@ -42,6 +43,8 @@ export async function POST(request: Request) {
       regionId: regionId,
       districtId: res.district,
     };
+  
+    await sendSMS(res.phoneNumber, `The temporal password for ESICApps App is ${password}`);
 
 
     const user = await prisma.user.create({ data });

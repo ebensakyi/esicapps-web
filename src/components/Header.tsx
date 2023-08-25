@@ -403,7 +403,7 @@ export default function Header() {
                             </Link>
                         </li>:<></>}
                         <li className="nav-heading">Account </li>
-                        {session.user.privileges.includes(16)? <li className="nav-item">
+                        {session.user.privileges.includes(15)? <li className="nav-item">
                             <Link className={
                                 pathname == "/user"
                                     ? "nav-link"
@@ -423,7 +423,7 @@ export default function Header() {
                                 <span>Roles</span>
                             </Link>
                         </li>:<></>}
-                       {session.user.privileges.includes(18)?  <li className="nav-item">
+                       {session.user.privileges.includes(16)?  <li className="nav-item">
                             <Link className={
                                 pathname == "/user/log"
                                     ? "nav-link"
