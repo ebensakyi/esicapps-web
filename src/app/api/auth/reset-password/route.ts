@@ -11,13 +11,33 @@ export async function POST(request: Request) {
     const res = await request.json();
 
     let phoneNumber = res.phoneNumber;
+    let resetCode = res.resetCode;
+    let password = res.password;
 
     const user = await prisma.user.findFirst({
       where: {
+        tempPassword: resetCode,
         phoneNumber: phoneNumber,
         deleted: 0,
       },
     });
+
+    if (user) {
+      const salt = bcrypt.genSaltSync(10);
+      let hashedPassword = bcrypt.hashSync(password, salt);
+
+      const data = {
+        password: hashedPassword,
+        passwordChanged: 1,
+      };
+
+      await prisma.user.update({
+        data: data,
+        where: {
+          id: user?.id,
+        },
+      });
+    }
 
     // console.log(user);
 
@@ -29,7 +49,7 @@ export async function POST(request: Request) {
     if (!user) {
       return NextResponse.json(
         {
-          message: "User Account not found.\nCheck phone number and try again",
+          message: "User Account not found.\nCheck phone number, reset code and try again",
         },
         { status: 201 }
       );

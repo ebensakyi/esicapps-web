@@ -2,24 +2,44 @@
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation"
 
 export default function ResetPassword() {
+  const router = useRouter()
+
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [resetCode, setResetCode] = useState("");
   const [password, setPassword] = useState("");
+
+  const searchParams = useSearchParams()
+
+  let _phoneNumber: any = searchParams.get("phoneNumber")
+
+  useEffect(() => {
+    if (_phoneNumber) {
+      setPhoneNumber(_phoneNumber)
+
+    }
+  }, [])
 
 
   const handleResetPassword = async (e: any) => {
     e.preventDefault();
     try {
 
-
-
       if (phoneNumber == "") {
         return toast.error("Phone number cannot be empty");
+      }
+      if (resetCode == "") {
+        return toast.error("Reset code cannot be empty");
+      }
+      if (password == "" || password.length < 8) {
+        return toast.error("Password cannot be empty or length less than 8");
       }
 
       let data = {
@@ -29,14 +49,19 @@ export default function ResetPassword() {
       };
 
 
-      const response = await axios.post("/api/auth/forget-password", data);
-      setPhoneNumber("");
+      const response = await axios.post("/api/auth/reset-password", data);
+
+
+      setResetCode("");
+      setPassword("")
+
 
 
 
       if (response.status == 200) {
         //redirect to reset password
-        return
+        return router.replace(`/auth/login?phoneNumber=${phoneNumber}`)
+
       }
       if (response.status == 201) {
         return toast.error(response.data.message);

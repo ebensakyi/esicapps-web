@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 
 export default function ForgetPassword() {
     const [phoneNumber, setPhoneNumber] = useState("");
-     const router = useRouter()
+    const router = useRouter()
 
 
     const handleForgetPassword = async (e: any) => {
@@ -31,18 +31,20 @@ export default function ForgetPassword() {
 
 
 
-            if (response.status == 200) {
-                console.log("redirect");
 
-                //redirect to reset password
-              router.replace(`/auth/reset-password?phoneNumber=${phoneNumber}`)
-            }
+
             if (response.status == 201) {
+
                 return toast.error(response.data.message);
 
             }
 
+            if (response.status == 200) {
+                 toast.success(`Password reset code sent to ${phoneNumber}`);
 
+                //redirect to reset password
+                router.replace(`/auth/reset-password?phoneNumber=${phoneNumber}`)
+            }
         } catch (error) {
             console.log(error);
         }
@@ -109,7 +111,7 @@ export default function ForgetPassword() {
                                             <div className="col-12">
                                                 <button
                                                     className="btn btn-primary w-100"
-                                                    type="button"
+                                                    type="submit"
                                                     onClick={(e) => handleForgetPassword(e)}
                                                 >
                                                     Submit
