@@ -61,13 +61,6 @@ update "District"
 //// ***
 ////////////////////////
 
-
-
-1. Save premises multiselects - done
-2. force new user to change password - done
-
-
-
-3. google data studio dashboard
-4. forget password 
-5. show menus based on user
+1. work on followup inspection with images
+2. work on data transfer
+3. work on app website
