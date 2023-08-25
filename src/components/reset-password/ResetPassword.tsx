@@ -23,7 +23,9 @@ export default function ResetPassword() {
       }
 
       let data = {
-        phoneNumber
+        phoneNumber,
+        resetCode,
+        password
       };
 
 

@@ -3,6 +3,8 @@ import { prisma } from "@/prisma/db";
 import bcrypt from "bcryptjs";
 // import { destroySession, setSession } from "../../../../../utils/session-manager";
 import jwt from "jsonwebtoken";
+import { sendSMS } from "@/utils/send-hubtel-sms";
+import { generateCode } from "@/utils/generate-code";
 
 export async function POST(request: Request) {
   try {
@@ -17,7 +19,7 @@ export async function POST(request: Request) {
       },
     });
 
-    console.log(user);
+    // console.log(user);
 
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");
@@ -33,10 +35,9 @@ export async function POST(request: Request) {
       );
     }
 
-   return NextResponse.json(null, { status: 200 });
-
+    return NextResponse.json(null, { status: 200 });
   } catch (error: any) {
     console.log(error);
-    return  NextResponse.json({ message: error.message });
+    return NextResponse.json({ message: error.message });
   }
 }

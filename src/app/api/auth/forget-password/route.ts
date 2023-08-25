@@ -3,6 +3,8 @@ import { prisma } from "@/prisma/db";
 import bcrypt from "bcryptjs";
 // import { destroySession, setSession } from "../../../../../utils/session-manager";
 import jwt from "jsonwebtoken";
+import { generateCode } from "@/utils/generate-code";
+import { sendSMS } from "@/utils/send-hubtel-sms";
 
 export async function POST(request: Request) {
   try {
@@ -32,6 +34,21 @@ export async function POST(request: Request) {
         { status: 201 }
       );
     }
+
+
+    let password: string = (await generateCode(4)) as string;
+
+    await prisma.user.update({
+      data: {
+        tempPassword: password,
+      },
+      where: {
+        id: user?.id,
+        deleted: 0,
+      },
+    });
+    await sendSMS(user?.phoneNumber, `Enter the reset code to reset your password ${password}`);
+
 
    return NextResponse.json(null, { status: 200 });
 

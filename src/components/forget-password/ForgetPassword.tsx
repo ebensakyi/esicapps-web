@@ -35,7 +35,7 @@ export default function ForgetPassword() {
                 console.log("redirect");
 
                 //redirect to reset password
-              router.replace('/auth/reset-password')
+              router.replace(`/auth/reset-password?phoneNumber=${phoneNumber}`)
             }
             if (response.status == 201) {
                 return toast.error(response.data.message);
