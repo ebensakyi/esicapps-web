@@ -2,7 +2,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Multiselect from "multiselect-react-dropdown";
-import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
 import { pages } from '../../../prisma/seed/page';
@@ -10,8 +9,15 @@ import { pageAccess } from '../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 import moment from "moment";
+import ReactPaginate from "react-paginate";
+import { redirect, useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function Log({ data }: any) {
+    const router = useRouter();
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const searchText = searchParams.get('searchText')
+
 
     const { data: session } = useSession({
         required: true,
@@ -20,7 +26,15 @@ export default function Log({ data }: any) {
         }
     })
 
+    const handlePagination = (page: any) => {
 
+        page = page.selected == -1 ? 1 : page.selected + 1;
+
+        router.push(
+            `${pathname}?searchText=${searchText}&page=${page}`
+
+        );
+    };
 
 
 
@@ -71,6 +85,26 @@ export default function Log({ data }: any) {
 
                                     </tbody>
                                 </table>
+                                <ReactPaginate
+                                            marginPagesDisplayed={2}
+                                            pageRangeDisplayed={5}
+                                            previousLabel={"Previous"}
+                                            nextLabel={"Next"}
+                                            breakLabel={"..."}
+                                            initialPage={data.log.curPage - 1}
+                                            pageCount={data.log.maxPage}
+                                            onPageChange={handlePagination}
+                                            breakClassName={"page-item"}
+                                            breakLinkClassName={"page-link"}
+                                            containerClassName={"pagination"}
+                                            pageClassName={"page-item"}
+                                            pageLinkClassName={"page-link"}
+                                            previousClassName={"page-item"}
+                                            previousLinkClassName={"page-link"}
+                                            nextClassName={"page-item"}
+                                            nextLinkClassName={"page-link"}
+                                            activeClassName={"active"}
+                                        />
                             </div>
                         </div>
                     </div>

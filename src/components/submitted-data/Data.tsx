@@ -12,13 +12,7 @@ import { LOGIN_URL } from '@/config';
 export default async function Data({ data }: any) {
 
 
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect(LOGIN_URL);
-        }
-    })
-
+   
   
     const searchTextRef = useRef(null);
     const filterRef = useRef(null);
