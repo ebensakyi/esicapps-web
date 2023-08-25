@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     let skip = Number((curPage - 1) * perPage) || 0;
 
     const response = await prisma.basicInfoSection.findMany({
-      where:
+      where :
         searchText != ""
           ? {
               OR: [
@@ -137,7 +137,7 @@ export async function GET(request: Request) {
         },
         User: true,
       },
-    });
+    } as any);
     return NextResponse.json(response);
   } catch (error) {
     
