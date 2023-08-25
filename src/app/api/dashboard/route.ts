@@ -34,11 +34,11 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session:any = await getServerSession(authOptions);
 
     // console.log("Session ", session);
-    let userId = session?.user?.id;
-    let surname = session?.user?.surname;
+    // let userId = session?.user?.id;
+    // let surname = session?.user?.surname;
     let districtId = session?.user?.districtId;
     let regionId = session?.user?.regionId;
     let userLevel = session?.user?.userLevelId;
