@@ -1,4 +1,4 @@
-export const types = [
+export const premisesTypes = [
   {
     id: 1,
     name: "Eating premises",
