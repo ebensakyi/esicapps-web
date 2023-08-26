@@ -117,7 +117,7 @@ export default function Header() {
             {session?.user ?
                 <aside id="sidebar" className="sidebar">
                     <ul className="sidebar-nav" id="sidebar-nav">
-                        {session.user.privileges.includes(1)?
+                        {session?.user?.privileges?.includes(1)?
                         <li className="nav-item">
 
                             <Link className={
@@ -129,7 +129,7 @@ export default function Header() {
                                 <span>Dashboard</span>
                             </Link>
                         </li>:<></>}
- {session.user.privileges.includes(3)?
+ {session?.user?.privileges?.includes(3)?
                         <li className="nav-item">
                             <Link
                                 className="nav-link collapsed"
@@ -244,14 +244,14 @@ export default function Header() {
                                 id="reports-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session.user.privileges.includes(5)?
+                            > {session?.user?.privileges?.includes(5)?
                                 <li>
                                     <Link href="components-alerts.html">
                                         <i className="bi bi-circle" />
                                         <span>General</span>
                                     </Link>
                                 </li>:<></>}
-                               {session.user.privileges.includes(6)?  <li>
+                               {session?.user?.privileges?.includes(6)?  <li>
                                     <Link href="components-alerts.html">
                                         <i className="bi bi-circle" />
                                         <span>Custom</span>
@@ -281,14 +281,14 @@ export default function Header() {
                                 id="san-reports-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session.user.privileges.includes(7)?
+                            > {session?.user?.privileges?.includes(7)?
                                 <li>
                                     <Link href="components-alerts.html">
                                         <i className="bi bi-circle" />
                                         <span>Table</span>
                                     </Link>
                                 </li>:<></>}
-                                 {session.user.privileges.includes(8)?
+                                 {session?.user?.privileges?.includes(8)?
                                 <li>
                                     <Link href="components-alerts.html">
                                         <i className="bi bi-circle" />
@@ -314,14 +314,14 @@ export default function Header() {
                                 id="messages-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session.user.privileges.includes(9)?
+                            > {session?.user?.privileges?.includes(9)?
                                 <li>
                                     <Link href="/messaging/sms">
                                         <i className="bi bi-circle" />
                                         <span>SMS</span>
                                     </Link>
                                 </li>:<></>}
-                               {session.user.privileges.includes(10)?  <li>
+                               {session?.user?.privileges?.includes(10)?  <li>
                                     <Link href="/messaging/notification">
                                         <i className="bi bi-circle" />
                                         <span>Notifications</span>
@@ -351,26 +351,26 @@ export default function Header() {
                                 id="config-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session.user.privileges.includes(11)?
+                            > {session?.user?.privileges?.includes(11)?
                                 <li>
                                     <Link href="/primary-data/district">
                                         <i className="bi bi-circle" />
                                         <span>District</span>
                                     </Link>
                                 </li>:<></>}
-                                {session.user.privileges.includes(12)? <li>
+                                {session?.user?.privileges?.includes(12)? <li>
                                     <Link href="/primary-data/electoral-area">
                                         <i className="bi bi-circle" />
                                         <span>Electoral Area</span>
                                     </Link>
                                 </li>:<></>}
-                                {session.user.privileges.includes(13)? <li>
+                                {session?.user?.privileges?.includes(13)? <li>
                                     <Link href="/primary-data/community">
                                         <i className="bi bi-circle" />
                                         <span>Community</span>
                                     </Link>
                                 </li>:<></>}
-                                {session.user.privileges.includes(19)? <li>
+                                {session?.user?.privileges?.includes(19)? <li>
                                     <Link href="/primary-data/other-data">
                                         <i className="bi bi-circle" />
                                         <span>Other data</span>
@@ -378,7 +378,7 @@ export default function Header() {
                                 </li>:<></>}
                             </ul>
                         </li>
-                         {session.user.privileges.includes(14)?
+                         {session?.user?.privileges?.includes(14)?
                         <li className="nav-item" >
                             <Link className={
                                 pathname == "/map"
@@ -390,7 +390,7 @@ export default function Header() {
                                 <span>Data Transfer</span>
                             </Link>
                         </li>:<></>}
-                         {session.user.privileges.includes(15)?
+                         {session?.user?.privileges?.includes(15)?
                         <li className="nav-item">
                             <Link className={
                                 pathname == "/user/guide"
@@ -403,7 +403,7 @@ export default function Header() {
                             </Link>
                         </li>:<></>}
                         <li className="nav-heading">Account </li>
-                        {session.user.privileges.includes(15)? <li className="nav-item">
+                        {session?.user?.privileges?.includes(16)? <li className="nav-item">
                             <Link className={
                                 pathname == "/user"
                                     ? "nav-link"
@@ -413,7 +413,7 @@ export default function Header() {
                                 <span>Users</span>
                             </Link>
                         </li>:<></>}
-                        {session.user.privileges.includes(17)? <li className="nav-item">
+                        {session?.user?.privileges?.includes(18)? <li className="nav-item">
                             <Link className={
                                 pathname == "/user/role"
                                     ? "nav-link"
@@ -423,7 +423,7 @@ export default function Header() {
                                 <span>Roles</span>
                             </Link>
                         </li>:<></>}
-                       {session.user.privileges.includes(16)?  <li className="nav-item">
+                       {session?.user?.privileges?.includes(17)?  <li className="nav-item">
                             <Link className={
                                 pathname == "/user/log"
                                     ? "nav-link"
