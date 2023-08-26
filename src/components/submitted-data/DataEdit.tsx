@@ -722,11 +722,11 @@ export default function DataEdit({ data }: any) {
 
 
     const downloadInspection = async () => {
-        const printContents:any = document.getElementById("printableArea").innerHTML;
-        const originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
+        // let printContents :any =  document.getElementById("printableArea").innerHTML ;
+        // const originalContents = document.body.innerHTML;
+        // document.body.innerHTML = printContents;
+        // window.print();
+        // document.body.innerHTML = originalContents;
         router.refresh();
     };
 
