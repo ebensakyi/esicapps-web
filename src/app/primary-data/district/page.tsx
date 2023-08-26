@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
 import District from "@/src/components/primary-data/District";

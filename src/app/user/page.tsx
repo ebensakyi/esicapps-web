@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 
 import User from "@/src/components/user/User";
 

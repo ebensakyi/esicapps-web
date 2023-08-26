@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 
 import {  SERVER_BASE_URL } from "@/config";
 import Community from "@/src/components/primary-data/Community";
