@@ -7,6 +7,7 @@ import Header from '@/src/components/Header'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from './context/AuthProvider';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,9 +29,9 @@ export default function RootLayout({
 
     <html lang="en">
 
+<head>
 
-
-      <link href="../../assets/img/favicon.png" rel="icon" />
+ <link href="../../assets/img/favicon.png" rel="icon" />
       <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
       <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -45,7 +46,16 @@ export default function RootLayout({
 
 
 
-      <link href="../../assets/css/style.css" rel="stylesheet"></link>
+      <link href="../../assets/css/style.css" rel="stylesheet"></link> 
+      
+        <Script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
+
+      <Script src="../../assets/vendor/tinymce/tinymce.min.js"/>
+      <Script src="../../assets/js/main.js"/>
+
+</head>
+
+     
       <body className={inter.className} >
         <ToastContainer
           position="top-right"
@@ -69,10 +79,7 @@ export default function RootLayout({
 
       </body>
 
-      <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-      <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
-      <script src="../../assets/js/main.js"></script>
+   
     </html>
   )
 }
