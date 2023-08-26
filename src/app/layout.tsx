@@ -39,10 +39,8 @@ export default function RootLayout({
       <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
       <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
       <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-      <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-      <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+
       <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-      <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
 
 
@@ -71,7 +69,6 @@ export default function RootLayout({
 
       </body>
 
-      <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
       <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
