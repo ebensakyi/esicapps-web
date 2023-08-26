@@ -14,7 +14,7 @@ import { userRole } from '../../../prisma/seed/userRole';
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const { data: session } = useSession()
+    const { data: session } :any= useSession()
 
     const loggedInUserRegion = session?.user?.regionId;
     const loggedInUserDistrict = session?.user?.districtId;
