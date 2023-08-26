@@ -63,7 +63,7 @@ export default function Home() {
                       href="index.html"
                       className="logo d-flex align-items-center w-auto"
                     >
-                      <img src="assets/img/logo.png" alt="" />
+                      <img src="../../assets/img/logo.png" alt="" />
                       <span className="d-none d-lg-block">ESICApps</span>
                     </a>
                   </div>
