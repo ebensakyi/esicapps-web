@@ -722,7 +722,7 @@ export default function DataEdit({ data }: any) {
 
 
     const downloadInspection = async () => {
-        const printContents = document.getElementById("printableArea").innerHTML;
+        const printContents:any = document.getElementById("printableArea").innerHTML;
         const originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;
         window.print();
@@ -1806,8 +1806,8 @@ export default function DataEdit({ data }: any) {
                                                                     className="form-control"
                                                                     id="invoicenoInput"
                                                                     value={numberUrinalSeats}
-                                                                    onChange={() => {
-                                                                        setNumberUrinalSeats(e.target.value);
+                                                                    onChange={(e:any) => {
+                                                                        setNumberUrinalSeats(e?.target.value);
                                                                     }}
                                                                 />
                                                             </div>

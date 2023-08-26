@@ -14,8 +14,8 @@ export default  function Data({ data }: any) {
 
    
   
-    const searchTextRef = useRef(null);
-    const filterRef = useRef(null);
+    const searchTextRef:any = useRef(null);
+    const filterRef:any = useRef(null);
 
 
     // const { data: session } = useSession()
@@ -546,7 +546,7 @@ export default  function Data({ data }: any) {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    data?.submittedData?.response?.map(dt => (
+                                                    data?.submittedData?.response?.map((dt : any) => (
                                                         <tr key={dt.id}>
                                                             <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                                                             <td>
