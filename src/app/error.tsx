@@ -1,5 +1,12 @@
 'use client'
-export default function Error() {
+ 
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error
+  reset: () => void
+}) {
   return (
 
     <main>

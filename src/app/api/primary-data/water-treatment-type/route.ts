@@ -24,6 +24,8 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
+    console.log("HERE IS THE ERROR ", error);
+    
     return NextResponse.json(error);
   }
 }
