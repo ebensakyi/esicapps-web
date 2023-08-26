@@ -433,7 +433,7 @@ async function getWaterTreatmentType() {
 
 
 
-export default async function page() {
+export default async function Page() {
 
     const actions = await getAction() //1
     const animalTypes = await getAnimalType() //2

@@ -30,7 +30,7 @@ async function getCommunities() {
 
 
 
-export default async function page() {
+export default async function Page() {
   
     const regions = await getRegions()
   

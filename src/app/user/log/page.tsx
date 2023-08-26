@@ -22,7 +22,7 @@ async function getLogs(searchParams: any) {
 
 
 
-export default async function page({ searchParams }: any) {
+export default async function Page({ searchParams }: any) {
 
 
     const logs = await getLogs(searchParams)

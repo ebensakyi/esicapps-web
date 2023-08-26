@@ -57,7 +57,7 @@ async function getDistricts() {
 
 }
 
-export default async function page() {
+export default async function Page() {
   
 
     const sms = await getSms()

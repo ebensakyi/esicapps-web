@@ -22,7 +22,7 @@ async function getSubmittedData(searchParams: any) {
 }
 
 
-export default async function page({ searchParams }: any) {
+export default async function Page({ searchParams }: any) {
     const submittedData = await getSubmittedData(searchParams)
 
 

@@ -59,7 +59,7 @@ async function getUsers() {
 }
 
 
-export default async function page() {
+export default async function Page() {
     const users = await getUsers()
     const roles = await getRoles()
     const userLevels = await getUserLevel()

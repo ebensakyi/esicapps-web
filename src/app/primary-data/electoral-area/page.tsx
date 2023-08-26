@@ -41,7 +41,7 @@ async function getElectoralAreas() {
 
 
 
-export default async function page() {
+export default async function Page() {
   
     const regions = await getRegions()
     const districts = await getDistricts()

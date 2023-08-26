@@ -27,7 +27,7 @@ async function getRoles() {
 
 
 
-export default async function page() {
+export default async function Page() {
   
 
     const pages = await getPages()

@@ -30,7 +30,7 @@ async function getFileType() {
 
 
 
-export default async function page() {
+export default async function Page() {
   
 
     const guides = await getUserGuides()

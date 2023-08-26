@@ -31,7 +31,7 @@ async function getDistricts() {
 }
 
 
-export default async function page() {
+export default async function Page() {
 
     const regions = await getRegions()
     const districts = await getDistricts()
