@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       const user = await prisma.user.findFirst({
         where: { id: Number(res.individualRecipient) },
       });
-      recipientCount = user?.length;
+      recipientCount = user?.length || 0
 
       let x = await sendFCM(res.title, res.message, user?.fcmId);
     }
