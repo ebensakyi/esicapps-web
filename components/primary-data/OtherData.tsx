@@ -7,14 +7,7 @@ import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import Modal from 'react-modal'
 import { LOGIN_URL } from "@/config";
-import { constants } from "buffer";
 import { MyConstants } from "@/src/constants";
-import { effluentManagement } from '../../prisma/seed/effluentManagement';
-import { sewerSystem } from '../../prisma/seed/sewerSystem';
-import { waterSourceType } from '../../prisma/seed/waterSourceType';
-import { waterStorageType } from '../../prisma/seed/waterStorageType';
-import { waterSupplyType } from '../../prisma/seed/waterSupplyType';
-import { waterTreatmentType } from '../../prisma/seed/waterTreatmentType';
 
 
 export default function OtherData({ data }: any) {

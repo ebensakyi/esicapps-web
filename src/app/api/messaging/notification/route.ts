@@ -4,7 +4,6 @@ import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { sendFCM } from "@/utils/send-fcm";
-import { region } from "../../../../../prisma/seed/region";
 
 export async function POST(request: Request) {
   try {

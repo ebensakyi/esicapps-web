@@ -3,8 +3,6 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { sendFCM } from "@/utils/send-fcm";
-import { region } from "../../../../../prisma/seed/region";
 import { sendSMS } from "@/utils/send-hubtel-sms";
 
 export async function POST(request: Request) {

@@ -6,7 +6,6 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
-import { LOGIN_URL } from '@/config';
 
 
 export default  function Data({ data }: any) {

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 
-import { district } from '../../../../../prisma/seed/district';
+
 
 export async function POST(request: Request) {
   try {

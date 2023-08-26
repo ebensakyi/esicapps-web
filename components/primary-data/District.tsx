@@ -6,7 +6,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
-import { district } from '../../prisma/seed/district';
 
 
 
