@@ -9,7 +9,7 @@ export default function Header() {
     const pathname = usePathname()
     const [showDrawer,setShowDrawer]= useState(false)
 
-    const { data: session } = useSession()
+    const { data: session } :any= useSession()
 
     
 
