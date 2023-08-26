@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 
 import { headers } from 'next/headers';
-import UserProfile from "@/components/user/UserProfile";
+import UserProfile from "@/src/components/user/UserProfile";
 
 import { SERVER_BASE_URL } from '@/config';
 

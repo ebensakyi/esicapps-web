@@ -1,7 +1,7 @@
 
 import {  SERVER_BASE_URL } from "@/config";
 
-import SMS from "@/components/messaging/SMS";
+import SMS from "@/src/components/messaging/SMS";
 async function getSms() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/messaging/sms`, { cache: 'no-store' });

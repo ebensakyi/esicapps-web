@@ -5,14 +5,15 @@ import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { pages } from '../../prisma/seed/page';
-import { pageAccess } from '../../prisma/seed/pageAccess';
+import { pages } from '../../../prisma/seed/page';
+import { pageAccess } from '../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 
 
 
-export default function Guide({ data }: any) {
+
+export default function SMS({ data }: any) {
 
 
 
@@ -27,13 +28,14 @@ export default function Guide({ data }: any) {
     const router = useRouter();
     const pathname = usePathname()
 
-    const [selectedPages, setSelectedPages] = useState([]);
-    const [fileType, setFileType] = useState("");
+    const [sendingType, setSendingType] = useState("");
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [url, setUrl] = useState("");
-    const [guideId, setGuideId] = useState()
+    const [message, setMessage] = useState("");
+    const [regionId, setRegionId] = useState("")
+    const [districtId, setDistrictId] = useState("")
+    const [messageId, setMessageId] = useState("")
 
+    const [individualRecipient, setIndividualRecipient] = useState("")
     const [isEditing, setIsEditing] = useState(false);
 
 
@@ -46,30 +48,37 @@ export default function Guide({ data }: any) {
 
 
             if (title == "") return toast.error("Title cannot be empty");
-            if (url == "") return toast.error("URL cannot be empty");
-
-            if (fileType == "") return toast.error("File type cannot be empty");
+            if (sendingType == "") return toast.error("Recipient type cannot be empty");
+            if (message == "") return toast.error("Message cannot be empty");
+            if (sendingType == "1" && individualRecipient == "") return toast.error("Recepient cannot be empty");
+            if (sendingType == "2" && districtId == "") return toast.error("District cannot be empty");
+            if (sendingType == "3" && regionId == "") return toast.error("Region cannot be empty");
 
             let data = {
                 title,
-                fileType,
-                url, description
+                message,
+                individualRecipient: individualRecipient.trim() == "" ? null : Number(individualRecipient.trim()),
+                sendingType,
+                districtId: districtId.trim() == "" ? null : Number(districtId.trim()),
+                regionId: regionId.trim() == "" ? null : Number(regionId.trim()),
             };
 
 
-            const response = await axios.post("/api/user/guide", data);
+            const response = await axios.post("/api/messaging/sms", data);
             setTitle("");
-            setFileType("");
-            setUrl("");
-            setDescription("");
+            setSendingType("");
+            setMessage("");
+            setRegionId("");
+            setDistrictId("")
+            setIndividualRecipient("")
 
             if (response.status == 200) {
                 router.refresh()
 
-                return toast.success("User guide added");
+                return toast.success("Message sent");
             }
             if (response.status == 201) {
-                return toast.error("Same name already exist");
+                return toast.error(response.data.message);
             }
         } catch (error) {
             console.log(error);
@@ -80,23 +89,26 @@ export default function Guide({ data }: any) {
         try {
             e.preventDefault()
             let data = {
-                guideId,
+                messageId,
                 title,
-                fileType,
-                url, description
+                message,
+                sendingType,
+                districtId,
+                regionId
             };
 
             const response = await axios.put(
-                `/api/user/guide`, data
+                `/api/messaging/sms`, data
             );
 
             if (response.status == 200) {
-                setFileType("")
                 setTitle("");
-                setUrl("")
-                setDescription("");
+                setSendingType("");
+                setMessage("");
+                setRegionId("");
+                setDistrictId("");
                 router.refresh()
-                return toast.success("User guide updated");
+                return toast.success("Message resent");
             }
 
 
@@ -109,12 +121,12 @@ export default function Guide({ data }: any) {
     const _delete = async (id: any) => {
         try {
             const response = await axios.delete(
-                `/api/user/guide/?id=${id}`
+                `/api/messaging/sms/?id=${id}`
             );
 
             if (response.status == 200) {
                 router.refresh()
-                return toast.success("User guide deleted");
+                return toast.success("Message deleted");
             }
 
 
@@ -127,7 +139,7 @@ export default function Guide({ data }: any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>GUIDE</h1>
+                <h1>SMS</h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -144,7 +156,7 @@ export default function Guide({ data }: any) {
                     <div className="col-lg-4">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Add Guide</h5>
+                                <h5 className="card-title">Send SMS</h5>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Title *
@@ -153,39 +165,97 @@ export default function Guide({ data }: any) {
                                         <input type="text" className="form-control" placeholder='Enter title' value={title} onChange={(e: any) => setTitle(e.target.value)} />
                                     </div>
                                 </div>
-
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setFileType(e.target.value);
-                                    }}
-                                    value={fileType}
-                                >
-                                    <option >Select file type * </option>
-                                    {data?.fileTypes?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.title}
-                                        </option>
-                                    ))}
-                                </select>
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Enter url *
+                                    Recipient type *
                                     </label>
-                                    <div className="col-sm-12">
-
-                                        <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control" placeholder='Enter full url to file' />
-                                    </div>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={(e: any) => {
+                                            setSendingType(e.target.value);
+                                        }}
+                                        value={sendingType}
+                                    >
+                                        <option >Select recipient type * </option>
+                                        {data?.sendingTypes?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
+                                {sendingType == "1" ?
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            User*
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setIndividualRecipient(e.target.value);
+                                            }}
+                                            value={individualRecipient}
+                                        >
+                                            <option >Select user * </option>
+                                            {data?.users?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.otherNames} {data.surname} - {data.phoneNumber}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div> : <></>}
+                                {sendingType == "3" ?
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            Region *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setRegionId(e.target.value);
+                                            }}
+                                            value={regionId}
+                                        >
+                                            <option >Select region * </option>
+                                            {data?.regions?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div> : <></>}
+                                {sendingType == "2" ?
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            District *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setDistrictId(e.target.value);
+                                            }}
+                                            value={districtId}
+                                        >
+                                            <option >Select district * </option>
+                                            {data?.districts?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div> : <></>}
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Description
+                                        Message
                                     </label>
                                     <div className="col-sm-12">
-                                        <input type="text" className="form-control"
-                                            value={description} onChange={(e) => setDescription(e.target.value)}
-                                            placeholder='Enter description' />
+                                        <textarea className="form-control" style={{ height: 100 }} value={message} onChange={(e: any) => {
+                                            setMessage(e.target.value);
+                                        }}></textarea>
                                     </div>
                                 </div>
 
@@ -204,10 +274,11 @@ export default function Guide({ data }: any) {
 
                                                                 setIsEditing(false);
 
-                                                                setDescription("");
-                                                                setUrl("");
-                                                                setFileType("");
                                                                 setTitle("");
+                                                                setSendingType("");
+                                                                setMessage("");
+                                                                setRegionId("");
+                                                                setDistrictId("");
 
                                                             }}
                                                         >
@@ -225,7 +296,7 @@ export default function Guide({ data }: any) {
                                                     </>
                                                 ) : (
                                                     <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
-                                                        Add
+                                                        Send
                                                     </button>
                                                 )}
 
@@ -240,26 +311,28 @@ export default function Guide({ data }: any) {
                     <div className="col-lg-8">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Guides</h5>
+                                <h5 className="card-title">SMS</h5>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col">Title</th>
 
-                                            <th scope="col">URL</th>
-                                            <th scope="col">File Type</th>
+                                            <th scope="col">Message</th>
+                                            <th scope="col">Sent Type</th>
+                                            <th scope="col">Recepient</th>
+
                                             <th scope="col">Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.guides.map((guide: any) => {
+                                        {data.sms.map((data: any) => {
                                             return (
-                                                <tr key={guide?.id}>
-                                                    <td>{guide?.title}</td>
-                                                    <td>{guide?.url}</td>
-                                                    <td>{guide?.FileType?.title}</td>
-
+                                                <tr key={data?.id}>
+                                                    <td>{data?.title}</td>
+                                                    <td>{data?.message}</td>
+                                                    <td>{data?.SendingType.name}</td>
+                                                    <td>{data?.Region?.name}{data?.District?.name}{data?.Recipient?.otherNames} {data?.Recipient?.surname}</td>
                                                     <td>
                                                         <div
                                                             className="btn-group"
@@ -286,11 +359,16 @@ export default function Guide({ data }: any) {
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-                                                                                setGuideId(guide.id);
-                                                                                setTitle(guide.title)
-                                                                                setDescription(guide.description)
-                                                                                setUrl(guide.url)
-                                                                                setFileType(guide.fileTypeId)
+                                                                                setMessageId(data.id);
+                                                                                setTitle(data.title)
+                                                                                setMessage(data.message)
+                                                                                setSendingType(data.sendingType)
+                                                                                setDistrictId(data.districtId);
+
+                                                                                // setTitle("");
+                                                                                // setSendingType("");
+                                                                                // setMessage("");
+                                                                                // setRegionId("");
 
                                                                                 setIsEditing(true);
 
@@ -305,7 +383,7 @@ export default function Guide({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                _delete(guide.id);
+                                                                                _delete(data.id);
                                                                             }}
                                                                         >
                                                                             Delete

@@ -1,5 +1,5 @@
 
-import ForgetPassword from "@/components/forget-password/ForgetPassword";
+import ForgetPassword from "@/src/components/forget-password/ForgetPassword";
 
 export default async function Page() {
 

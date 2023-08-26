@@ -1,6 +1,6 @@
 
 import {  SERVER_BASE_URL } from "@/config";
-import OtherData from "@/components/primary-data/OtherData";
+import OtherData from "@/src/components/primary-data/OtherData";
 
 
 async function getAction() {

@@ -1,4 +1,4 @@
-import Data from '@/components/submitted-data/Data';
+import Data from '@/src/components/submitted-data/Data';
 import { SERVER_BASE_URL } from '@/config';
 
 async function getSubmittedData(searchParams: any) {

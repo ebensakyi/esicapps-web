@@ -1,6 +1,6 @@
 
 import { SERVER_BASE_URL } from '@/config';
-import DataEdit from '@/components/submitted-data/DataEdit';
+import DataEdit from '@/src/components/submitted-data/DataEdit';
 
 async function getSubmittedData(searchParams: any) {
 

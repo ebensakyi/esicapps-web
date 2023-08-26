@@ -1,6 +1,6 @@
 
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
-import ElectoralArea from "@/components/primary-data/ElectoralArea";
+import ElectoralArea from "@/src/components/primary-data/ElectoralArea";
 import { headers } from "next/headers";
 
 
