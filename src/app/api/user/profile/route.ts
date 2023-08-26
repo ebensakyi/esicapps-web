@@ -9,7 +9,7 @@ import { getServerSession } from "next-auth";
 
 export async function GET(request: Request) {
   try {
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     // console.log("Session ", session);
     let userId = session?.user?.id;
@@ -33,17 +33,16 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     let changePassword = res.changePassword;
     let phoneNumber = res.phoneNumber;
-    console.log("res ==>", res);
-
-    if (changePassword == 1) {
-      let user = await prisma.user.findFirst({
+  let user: any = await prisma.user.findFirst({
         where: { phoneNumber: phoneNumber },
       });
 
+    if (changePassword == 1) {
+    
       let isValid = await bcrypt.compare(res.currentPassword, user.password);
 
       if (!isValid) {
@@ -58,7 +57,7 @@ export async function PUT(request: Request) {
 
       const data = {
         password: hashedPassword,
-        passwordChanged:1
+        passwordChanged: 1,
       };
 
       await prisma.user.update({
@@ -81,7 +80,7 @@ export async function PUT(request: Request) {
     await prisma.user.update({
       data: data,
       where: {
-        id: userId,
+        id: user?.id,
       },
     });
 
