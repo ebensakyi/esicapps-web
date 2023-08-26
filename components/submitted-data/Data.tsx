@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Link from 'next/link'
 import { redirect, useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import moment from "moment";
