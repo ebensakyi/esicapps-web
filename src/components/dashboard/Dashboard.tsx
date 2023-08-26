@@ -131,9 +131,9 @@ export default function Dashboard({ data }: any) {
     await returnFilterValue(filterBy);
 
     router.push({
-      pathname: path,
+      pathname,
       query: { published, page, filterBy, filterValue, from, to },
-    });
+    }as any);
 
 
   };
