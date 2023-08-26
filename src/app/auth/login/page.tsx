@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { SERVER_BASE_URL } from '../../../../config/index';
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -13,8 +14,8 @@ export default function Home() {
     try {
       let result = await signIn("credentials", {
         phoneNumber, password, 
-        callbackUrl: `${window.location.origin}/` 
-       // callbackUrl: "http://127.0.0.1:3000/",
+        callbackUrl:SERVER_BASE_URL
+       // callbackUrl: `${window.location.origin}/` 
       });
 
       
