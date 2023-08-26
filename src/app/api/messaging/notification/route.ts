@@ -9,7 +9,7 @@ import { region } from "../../../../../prisma/seed/region";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session:any = await getServerSession(authOptions);
 
 
     const userId = session?.user?.id;
@@ -86,7 +86,7 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
 
     const userId = session?.user?.id;

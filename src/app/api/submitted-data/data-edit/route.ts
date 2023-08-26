@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     // console.log("Session ", session);
     let userId = session?.user?.id;
@@ -361,7 +361,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     // console.log("Session ", session);
     let userId = session?.user?.id;
@@ -1283,7 +1283,7 @@ export async function DELETE(request: Request) {
   //   // let { searchParams } = new URL(request.url);
   //   // let inspectionId: any = searchParams.get("id")?.toString();
   //   // console.log("inp=======>",searchParams);
-  //   const session = await getServerSession(authOptions);
+  //   const session :any= await getServerSession(authOptions);
   //   // console.log("Session ", session);
   //   let userId = session?.user?.id;
   //   let surname = session?.user?.surname;

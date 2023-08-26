@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
     const selectedDistrict =
       searchParams.get("districtId") == null || ""
         ? undefined

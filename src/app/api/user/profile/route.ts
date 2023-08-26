@@ -9,7 +9,7 @@ import { getServerSession } from "next-auth";
 
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     // console.log("Session ", session);
     let userId = session?.user?.id;
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     let changePassword = res.changePassword;
     let phoneNumber = res.phoneNumber;

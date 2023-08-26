@@ -11,7 +11,7 @@ import { logActivity } from "@/utils/log";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
     let userId = session?.user?.id;
 
     let phoneNumber = res.phoneNumber;

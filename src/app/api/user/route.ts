@@ -12,7 +12,7 @@ import { sendSMS } from "@/utils/send-hubtel-sms";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     let loginUserLevel = session?.user?.userLevelId;
 
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    // const session = await getServerSession(authOptions);
+    // const session :any= await getServerSession(authOptions);
 
 
     const { searchParams } = new URL(request.url);

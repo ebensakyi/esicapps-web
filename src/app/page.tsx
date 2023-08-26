@@ -47,7 +47,7 @@ async function getDistricts() {
 
 
 export default async function page() {
-  const session = await getServerSession(authOptions);
+  const session :any= await getServerSession(authOptions);
 
   
   if(session?.user?.passwordChanged==0){

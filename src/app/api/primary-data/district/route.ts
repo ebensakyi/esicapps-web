@@ -8,7 +8,7 @@ import { district } from "../../../../../prisma/seed/district";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
 
     const data = {
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
         ? undefined
         : Number(searchParams.get("regionId"));
 
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
@@ -71,7 +71,7 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session = await getServerSession(authOptions);
+    const session :any= await getServerSession(authOptions);
 
     let districtId = res.districtId;
 
