@@ -84,11 +84,11 @@ export default function DataView({ data }: any) {
         }
     };
     const downloadInspection = async () => {
-        const printContents = document.getElementById("printableArea").innerHTML;
-        const originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
+        // const printContents = document.getElementById("printableArea").innerHTML;
+        // const originalContents = document.body.innerHTML;
+        // document.body.innerHTML = printContents;
+        // window.print();
+        // document.body.innerHTML = originalContents;
         router.refresh();
     };
 
