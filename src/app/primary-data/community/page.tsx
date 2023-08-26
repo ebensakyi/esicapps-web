@@ -1,6 +1,6 @@
 
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
-import Community from "@/src/components/primary-data/Community";
+import Community from "@/components/primary-data/Community";
 
 
 async function getRegions() {

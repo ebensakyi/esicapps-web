@@ -1,15 +1,15 @@
 "use client"
 import Image from 'next/image'
 import { useState } from 'react';
-import { userLevel } from '../../../prisma/seed/userLevel';
-import { district } from '../../../prisma/seed/district';
+import { userLevel } from '../../prisma/seed/userLevel';
+import { district } from '../../prisma/seed/district';
 import axios from 'axios';
 import router from 'next/router';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { userRole } from '../../../prisma/seed/userRole';
+import { userRole } from '../../prisma/seed/userRole';
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();

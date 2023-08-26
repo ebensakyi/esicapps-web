@@ -2,7 +2,7 @@
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
 
 import { Suspense } from "react";
-import Guide from "../../../components/user/Guide";
+import Guide from "../../../../components/user/Guide";
 async function getUserGuides() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/user/guide`, { cache: 'no-store' });

@@ -1,6 +1,6 @@
 
 import { LOGIN_URL, SERVER_BASE_URL } from "@/config";
-import Log from "@/src/components/user/Log";
+import Log from "@/components/user/Log";
 
 async function getLogs(searchParams: any) {
     let { searchText } = searchParams

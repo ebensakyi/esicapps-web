@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Dashboard from '../components/dashboard/Dashboard'
+import Dashboard from '../../components/dashboard/Dashboard'
 import { SERVER_BASE_URL } from '@/config'
 import { headers } from 'next/headers'
 import { getServerSession } from "next-auth";

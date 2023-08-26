@@ -1,18 +1,24 @@
 "use client"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { pages } from '../../../prisma/seed/page';
-import { pageAccess } from '../../../prisma/seed/pageAccess';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
+import { district } from '../../prisma/seed/district';
 
 
 
-export default function Guide({ data }: any) {
+export default function District({ data }: any) {
+
+    const [searchText, setSearchText] = useState();
+    const [region, setRegion] = useState("");
+
+    const [regionId, setRegionId] = useState("");
+    const [districtId, setDistrictId] = useState("");
+    const [districtName, setDistrictName] = useState("")
+    const [abbrv, setAbbrv] = useState("")
 
 
 
@@ -27,46 +33,38 @@ export default function Guide({ data }: any) {
     const router = useRouter();
     const pathname = usePathname()
 
-    const [selectedPages, setSelectedPages] = useState([]);
-    const [fileType, setFileType] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [url, setUrl] = useState("");
-    const [guideId, setGuideId] = useState()
+   
 
     const [isEditing, setIsEditing] = useState(false);
 
-
-
-
+   
 
     const add = async (e: any) => {
         try {
             e.preventDefault();
 
 
-            if (title == "") return toast.error("Title cannot be empty");
-            if (url == "") return toast.error("URL cannot be empty");
+            if (districtName == "") return toast.error("District name cannot be empty");
+            if (regionId == "") return toast.error("Region cannot be empty");
+            if (abbrv == "") return toast.error("District abbreviation cannot be empty");
 
-            if (fileType == "") return toast.error("File type cannot be empty");
 
             let data = {
-                title,
-                fileType,
-                url, description
+                districtName,
+                regionId,
+                abbrv
             };
 
 
-            const response = await axios.post("/api/user/guide", data);
-            setTitle("");
-            setFileType("");
-            setUrl("");
-            setDescription("");
-
+            const response = await axios.post("/api/primary-data/district", data);
+            setDistrictName("");
+            setRegionId("");
+            setAbbrv("");
+           
             if (response.status == 200) {
                 router.refresh()
 
-                return toast.success("User guide added");
+                return toast.success("District added");
             }
             if (response.status == 201) {
                 return toast.error("Same name already exist");
@@ -80,23 +78,24 @@ export default function Guide({ data }: any) {
         try {
             e.preventDefault()
             let data = {
-                guideId,
-                title,
-                fileType,
-                url, description
+                districtId,
+                districtName,
+                regionId,
+                abbrv
             };
 
+
             const response = await axios.put(
-                `/api/user/guide`, data
+                `/api/primary-data/district`, data
             );
 
             if (response.status == 200) {
-                setFileType("")
-                setTitle("");
-                setUrl("")
-                setDescription("");
+                setDistrictName("")
+                setDistrictId("");
+                setRegionId("")
+                setAbbrv("")
                 router.refresh()
-                return toast.success("User guide updated");
+                return toast.success("District updated");
             }
 
 
@@ -127,7 +126,7 @@ export default function Guide({ data }: any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>GUIDE</h1>
+                <h1>DISTRICT</h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -144,51 +143,47 @@ export default function Guide({ data }: any) {
                     <div className="col-lg-4">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Add Guide</h5>
-                                <div className=" mb-3">
+                                <h5 className="card-title">Add Single</h5>
+                                <div className="col-sm-12 mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Title *
+                                        Name *
                                     </label>
                                     <div className="col-sm-12">
-                                        <input type="text" className="form-control" placeholder='Enter title' value={title} onChange={(e: any) => setTitle(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder='Enter district name' value={districtName} onChange={(e: any) => setDistrictName(e.target.value)} />
                                     </div>
                                 </div>
-
+                                <div className="col-sm-12 mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Abbreviation *
+                                    </label>
+                                    <div className="col-sm-12">
+                                        <input type="text" className="form-control" placeholder='Enter district abbrv' value={abbrv} onChange={(e: any) => setAbbrv(e.target.value)} />
+                                    </div>
+                                </div>
+                                <div className="col-sm-12  mb-3">
+                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Region *
+                                    </label>
                                 <select
                                     className="form-control"
                                     aria-label="Default select example"
-                                    onChange={(e: any) => {
-                                        setFileType(e.target.value);
+                                    onChange={async(e: any) => {
+                                        setRegionId(e.target.value);
+
                                     }}
-                                    value={fileType}
+                                    value={regionId}
                                 >
-                                    <option >Select file type * </option>
-                                    {data?.fileTypes?.map((data: any) => (
+                                    <option >Select region * </option>
+                                    {data?.regions?.map((data: any) => (
                                         <option key={data.id} value={data.id}>
-                                            {data.title}
+                                            {data.name}
                                         </option>
                                     ))}
                                 </select>
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Enter url *
-                                    </label>
-                                    <div className="col-sm-12">
-
-                                        <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control" placeholder='Enter full url to file' />
-                                    </div>
-                                </div>
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Description
-                                    </label>
-                                    <div className="col-sm-12">
-                                        <input type="text" className="form-control"
-                                            value={description} onChange={(e) => setDescription(e.target.value)}
-                                            placeholder='Enter description' />
-                                    </div>
-                                </div>
-
+                              </div>
+                              
+                              
+                             
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
 
@@ -204,10 +199,9 @@ export default function Guide({ data }: any) {
 
                                                                 setIsEditing(false);
 
-                                                                setDescription("");
-                                                                setUrl("");
-                                                                setFileType("");
-                                                                setTitle("");
+                                                                setDistrictId("");
+                                                                setDistrictName("");
+                                                                setRegion("");
 
                                                             }}
                                                         >
@@ -237,28 +231,30 @@ export default function Guide({ data }: any) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-8">
+                   
+                
+                <div className="col-lg-8">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Guides</h5>
-                                <table className="table table-bordered">
+                                <h5 className="card-title">Districts</h5>
+                                <table className="table table-bordered" style={{height:100}}>
                                     <thead>
                                         <tr>
-                                            <th scope="col">Title</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Abbrv.</th>
 
-                                            <th scope="col">URL</th>
-                                            <th scope="col">File Type</th>
+                                            <th scope="col">Region</th>
                                             <th scope="col">Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.guides.map((guide: any) => {
+                                        {data.districts.map((data: any) => {
                                             return (
-                                                <tr key={guide?.id}>
-                                                    <td>{guide?.title}</td>
-                                                    <td>{guide?.url}</td>
-                                                    <td>{guide?.FileType?.title}</td>
+                                                <tr key={data?.id}>
+                                                    <td>{data?.name}</td>
+                                                    <td>{data?.abbrv}</td>
+                                                    <td>{data?.Region?.name}</td>
 
                                                     <td>
                                                         <div
@@ -286,12 +282,11 @@ export default function Guide({ data }: any) {
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
-                                                                                setGuideId(guide.id);
-                                                                                setTitle(guide.title)
-                                                                                setDescription(guide.description)
-                                                                                setUrl(guide.url)
-                                                                                setFileType(guide.fileTypeId)
-
+                                                                                setDistrictId(data.id);
+                                                                                setDistrictName(data.name)
+                                                                                setRegionId(data.regionId)
+                                                                                setAbbrv(data.abbrv)
+                                                                              
                                                                                 setIsEditing(true);
 
                                                                             }}
@@ -305,7 +300,7 @@ export default function Guide({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                _delete(guide.id);
+                                                                                _delete(data.id);
                                                                             }}
                                                                         >
                                                                             Delete

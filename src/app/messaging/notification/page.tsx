@@ -1,7 +1,7 @@
 
 import {  SERVER_BASE_URL } from "@/config";
 
-import Notification from "@/src/components/messaging/Notification";
+import Notification from "@/components/messaging/Notification";
 async function getNotifications() {
 
     let response = await fetch(`${SERVER_BASE_URL}/api/messaging/notification`, { cache: 'no-store' });

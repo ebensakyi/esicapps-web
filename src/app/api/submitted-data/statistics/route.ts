@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   try {
 
     const { searchParams } = new URL(request.url);
-    const userId = Number(searchParams.get("userId"));
+    const userId:any = Number(searchParams.get("userId"));
 
     const residentialBasicCount = await prisma.inspection.count({
       where: {
@@ -258,7 +258,7 @@ export async function GET(request: Request) {
       },
     ]);
   } catch (error) {
-    console.log("======>", error);
+    console.log("<======>", error);
 
     return NextResponse.json(error);
   }

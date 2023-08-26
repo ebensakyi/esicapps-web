@@ -3,7 +3,7 @@
 // import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Header from '@/src/components/Header'
+import Header from '@/components/Header'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from './context/AuthProvider';
