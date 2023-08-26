@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
 
     if (res.sendingType == "1") {
-      const user = await prisma.user.findFirst({
+      const user : any = await prisma.user.findFirst({
         where: { id: Number(res.individualRecipient) },
       });      recipientCount = user?.length;
 
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     }
 
     if (res.sendingType == "2") {
-      const user = await prisma.user.findMany({
+      const user : any = await prisma.user.findMany({
         where: { districtId: Number(res.districtId) },
       });
 
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     }
 
     if (res.sendingType == "3") {
-      const user = await prisma.user.findMany({
+      const user : any = await prisma.user.findMany({
         where: { regionId: Number(res.regionId) },
       });
 
@@ -116,7 +116,7 @@ export async function PUT(request: Request) {
   
   
       if (res.sendingType == "1") {
-        const user = await prisma.user.findFirst({
+        const user : any = await prisma.user.findFirst({
           where: { id: Number(res.individualRecipient) },
         });      recipientCount = user?.length;
   
@@ -126,7 +126,7 @@ export async function PUT(request: Request) {
       }
   
       if (res.sendingType == "2") {
-        const user = await prisma.user.findMany({
+        const user : any = await prisma.user.findMany({
           where: { districtId: Number(res.districtId) },
         });
   
@@ -139,7 +139,7 @@ export async function PUT(request: Request) {
       }
   
       if (res.sendingType == "3") {
-        const user = await prisma.user.findMany({
+        const user : any = await prisma.user.findMany({
           where: { regionId: Number(res.regionId) },
         });
   

@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     let resetCode = res.resetCode;
     let password = res.password;
 
-    const user = await prisma.user.findFirst({
+    const user : any = await prisma.user.findFirst({
       where: {
         tempPassword: resetCode,
         phoneNumber: phoneNumber,

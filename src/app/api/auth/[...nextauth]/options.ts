@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ phoneNumber, password }),
         });
-        const user = res.json();
+        const user : any = res.json();
         if (res.ok && user) {
           return user;
         } else return null;
@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
         //   body: JSON.stringify({ phoneNumber, password }),
         // });
 
-        // const user = res.json();
+        // const user : any = res.json();
 
         // if (res.ok && user) {
         //   return user;

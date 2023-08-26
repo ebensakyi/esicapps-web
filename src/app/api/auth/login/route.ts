@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     let phoneNumber = res.phoneNumber;
     let password = res.password;
 
-    const user = await prisma.user.findFirst({
+    const user : any = await prisma.user.findFirst({
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,

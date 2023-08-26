@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    const user = await prisma.user.findFirst({
+    const user : any = await prisma.user.findFirst({
       where: { id: Number(res.userId) },
     });
     const district = user?.districtId;

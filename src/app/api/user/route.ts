@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     await sendSMS(res.phoneNumber, `The temporal password for ESICApps App is ${password}`);
 
 
-    const user = await prisma.user.create({ data });
+    const user : any = await prisma.user.create({ data });
 
     return NextResponse.json(user);
   } catch (error: any) {
