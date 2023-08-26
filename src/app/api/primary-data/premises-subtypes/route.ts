@@ -6,7 +6,7 @@ import { logActivity } from "@/utils/log";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const data = {
+    const data:any = {
       name: res.name,
       inspectionFormId: res.inspectionFormId
 
