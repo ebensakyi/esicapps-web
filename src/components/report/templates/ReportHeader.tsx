@@ -11,6 +11,7 @@ const ReportHeader = ({ title, level }:any) => {
   const router = useRouter();
 
   const downloadInspection = async () => {
+
     const printContents = document.getElementById("printableArea").innerHTML;
     const originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;

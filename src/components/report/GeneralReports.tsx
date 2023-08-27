@@ -1,6 +1,31 @@
-import React from 'react'
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify';
+import ActionSummary from './templates/ActionSummary';
+import ApprovedWasteReceptacle from './templates/ApprovedWasteReceptacle';
+import DrainAvailability from './templates/DrainAvailability';
+import PremisesWaterCondition from './templates/PremisesWaterCondition';
+import SubmissionSummary from './templates/SubmissionSummary';
+import ToiletAdequacy from './templates/ToiletAdequacy';
+import ToiletAvailability from './templates/ToiletAvailability';
+import WasteCollectionType from './templates/WasteCollectionType';
+import WasteReceptacle from './templates/WasteReceptacle';
+import WaterSources from './templates/WaterSources';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
+import { LOGIN_URL } from '@/config';
 
 export default function GeneralReports() {
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
+
+    
     const router = useRouter();
     const [reportType, setReportType] = useState(null);
     const [submissionSummaryVisibility, setSubmissionSummaryVisibility] =
@@ -35,10 +60,10 @@ export default function GeneralReports() {
     const [electoralAreasData, setElectoralAreasData] = useState([]);
     const [communitiesData, setCommunitiesData] = useState([]);
   
-    const [region, setRegion] = useState();
-    const [district, setDistrict] = useState();
-    const [electoralArea, setElectoralArea] = useState();
-    const [community, setCommunity] = useState();
+    const [region, setRegion] = useState("");
+    const [district, setDistrict] = useState("");
+    const [electoralArea, setElectoralArea] = useState("");
+    const [community, setCommunity] = useState("");
   
     const [filterValue, setFilterValue] = useState(null);
   
@@ -56,40 +81,40 @@ export default function GeneralReports() {
     let formId = query.inspectionFormId;
     let published = query.published;
   
-    const handleUrl = async (report) => {
+    const handleUrl = async (report:any) => {
       if (report == 1) {
-        return "/api/v1/report/submission-summaries";
+        return "/api/report/submission-summaries";
       }
       if (report == 2) {
-        return "/api/v1/report/action-summaries";
+        return "/api/report/action-summaries";
       }
       if (report == 11) {
-        return "/api/v1/report/water-sources";
+        return "/api/report/water-sources";
       }
       if (report == 12) {
-        return "/api/v1/report/premises-water-condition";
+        return "/api/report/premises-water-condition";
       }
       if (report == 21) {
-        return "/api/v1/report/toilet-availability";
+        return "/api/report/toilet-availability";
       }
       if (report == 22) {
-        return "/api/v1/report/toilet-adequacy";
+        return "/api/report/toilet-adequacy";
       }
       if (report == 23) {
-        return "/api/v1/report/drain-availability";
+        return "/api/report/drain-availability";
       }
       if (report == 31) {
-        return "/api/v1/report/waste-collection-type";
+        return "/api/report/waste-collection-type";
       }
       if (report == 32) {
-        return "/api/v1/report/approved-waste-receptacle";
+        return "/api/report/approved-waste-receptacle";
       }
       if (report == 33) {
-        return "/api/v1/report/waste-receptacle";
+        return "/api/report/waste-receptacle";
       }
     };
   
-    const handleVisibility = async (report) => {
+    const handleVisibility = async (report:any) => {
       if (report == 1) {
         setSubmissionSummaryVisibility(true);
         setActionSummaryVisibility(false);
@@ -211,48 +236,48 @@ export default function GeneralReports() {
         setWasteReceptacleVisibility(true);
       }
     };
-    let nationalUser =ul == 1 
-    let regionalUser = ul == 2;
-    let districtUser = ul == 3;
+    let nationalUser:any =session?.user?.userTypeId == 1 
+    let regionalUser:any = ul == 2;
+    let districtUser :any = ul == 3;
   
   
-    const handleResetFilters = async () => {
-      if (loggedInUserType == 1 || loggedInUserType == 2) {
-        if (filterBy == null) {
-          setFilterBy("regionId");
-        }
+//     const handleResetFilters = async () => {
+//       if (loggedInUserType == 1 || loggedInUserType == 2) {
+//         if (filterBy == null) {
+//           setFilterBy("regionId");
+//         }
   
-        if (filterValue == null || filterValue == 0) {
-          setFilterValue(undefined);
-        }
-      }
-      if (loggedInUserType == 3 || loggedInUserType == 4) {
-        if (filterBy == null) {
-          setFilterBy("regionId");
-        }
+//         if (filterValue == null || filterValue == 0) {
+//           setFilterValue(undefined);
+//         }
+//       }
+//       if (loggedInUserType == 3 || loggedInUserType == 4) {
+//         if (filterBy == null) {
+//           setFilterBy("regionId");
+//         }
   
-        if (filterValue == null || filterValue == 0) {
-          setFilterValue(undefined);
-        }
-      }
-      if (loggedInUserType == 5 || loggedInUserType == 6) {
-        if (filterBy == null) {
-          setFilterBy("districtId");
-        }
+//         if (filterValue == null || filterValue == 0) {
+//           setFilterValue(undefined);
+//         }
+//       }
+//       if (loggedInUserType == 5 || loggedInUserType == 6) {
+//         if (filterBy == null) {
+//           setFilterBy("districtId");
+//         }
   
-        if (filterValue == null || filterValue == 0) {
-          setFilterValue(undefined);
-        }
-      }
-    };
+//         if (filterValue == null || filterValue == 0) {
+//           setFilterValue(undefined);
+//         }
+//       }
+//     };
   
-    const generateReport = async (e) => {
+    const generateReport = async (e:any) => {
       try {
         e.preventDefault();
   
   //     await handleResetFilters();
   
-        let data = {
+        let data:any = {
           reportType,
           filterBy,
           filterValue,
@@ -260,7 +285,7 @@ export default function GeneralReports() {
           to,
         };
   
-        let url = await handleUrl(reportType);
+        let url:any = await handleUrl(reportType);
   
         const response = await axios.post(url, data);
         if (response.status == 200) {
@@ -277,7 +302,7 @@ export default function GeneralReports() {
       }
     };
   
-    const returnFilterValue = async (filterBy) => {
+    const returnFilterValue = async (filterBy:any) => {
       if (filterBy == "regionId") {
         setFilterValue(region);
         return region;
@@ -295,7 +320,7 @@ export default function GeneralReports() {
         return community;
       }
     };
-    const handleFilter = async (e) => {
+    const handleFilter = async (e:any) => {
       e.preventDefault();
   
       const path = router.pathname;
@@ -322,30 +347,30 @@ export default function GeneralReports() {
       });
     };
   
-    const getDistrictsByRegion = async (regionId) => {
+    const getDistrictsByRegion = async (regionId:any) => {
       try {
         const response = await axios.get(
-          "/api/v1/primary-data/district?regionId=" + regionId
+          "/api/primary-data/district?regionId=" + regionId
         );
         setDistrictsData(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-    const getElectoralAreasByDistrict = async (districtId) => {
+    const getElectoralAreasByDistrict = async (districtId:any) => {
       try {
         const response = await axios.get(
-          "/api/v1/primary-data/electoral-area?districtId=" + districtId
+          "/api/primary-data/electoral-area?districtId=" + districtId
         );
         setElectoralAreasData(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-    const getCommunitiesByElectoralArea = async (electoralAreaId) => {
+    const getCommunitiesByElectoralArea = async (electoralAreaId:any) => {
       try {
         const response = await axios.get(
-          "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
+          "/api/primary-data/community?electoralAreaId=" + electoralAreaId
         );
   
         setCommunitiesData(response.data);
@@ -381,7 +406,7 @@ export default function GeneralReports() {
                       <label className="form-label mb-0">Report Type</label>
                       <select
                         className="form-control"
-                        onChange={(e) => {
+                        onChange={(e:any) => {
                           setReportType(e.target.value);
                         }}
                       >
@@ -416,7 +441,7 @@ export default function GeneralReports() {
                       <select
                         className="form-control"
                         aria-label="Default select example"
-                        onChange={(e) => {
+                        onChange={(e:any) => {
                           setFilterBy(e.target.value);
   
                         
@@ -463,7 +488,7 @@ export default function GeneralReports() {
                         <select
                           className="form-control"
                           aria-label="Default select example"
-                          onChange={async (e) => {
+                          onChange={async (e:any) => {
                             setFilterValue(e.target.value);
                             var id = e.nativeEvent.target.selectedIndex;
                             var text = e.nativeEvent.target[id].text;
@@ -474,7 +499,7 @@ export default function GeneralReports() {
                         >
                           {" "}
                           <option selected>Select region </option>
-                          {regions?.map((data) => (
+                          {regions?.map((data:any) => (
                             <option key={data.id} value={data.id}>
                               {data.name}
                             </option>
@@ -494,7 +519,7 @@ export default function GeneralReports() {
                             <select
                               className="form-control"
                               aria-label="Default select example"
-                              onChange={async (e) => {
+                              onChange={async (e:any) => {
                                 setFilterValue(e.target.value);
                                 var id = e.nativeEvent.target.selectedIndex;
                                 var text = e.nativeEvent.target[id].text;
@@ -506,7 +531,7 @@ export default function GeneralReports() {
                             >
                               {" "}
                               <option selected>Select region </option>
-                              {regions?.map((data) => (
+                              {regions?.map((data:any) => (
                                 <option key={data.id} value={data.id}>
                                   {data.name}
                                 </option>
@@ -523,7 +548,7 @@ export default function GeneralReports() {
                           <select
                             className="form-control"
                             aria-label="Default select example"
-                            onChange={(e) => {
+                            onChange={(e:any) => {
                               setFilterValue(e.target.value);
                               var id = e.nativeEvent.target.selectedIndex;
                               var text = e.nativeEvent.target[id].text;
@@ -534,7 +559,7 @@ export default function GeneralReports() {
                           >
                             {" "}
                             <option selected>Select district </option>
-                            {districtsData?.map((data) => (
+                            {districtsData?.map((data:any) => (
                               <option key={data.id} value={data.id}>
                                 {data.name}
                               </option>
@@ -556,7 +581,7 @@ export default function GeneralReports() {
                               className="form-control"
                               aria-label="Default select example"
                               value={region}
-                              onChange={async (e) => {
+                              onChange={async (e:any) => {
                                 setFilterValue(e.target.value);
                                 var id = e.nativeEvent.target.selectedIndex;
                                 var text = e.nativeEvent.target[id].text;
@@ -567,7 +592,7 @@ export default function GeneralReports() {
                             >
                               {" "}
                               <option selected>Select region </option>
-                              {regions?.map((data) => (
+                              {regions?.map((data:any) => (
                                 <option key={data.id} value={data.id}>
                                   {data.name}
                                 </option>
@@ -585,7 +610,7 @@ export default function GeneralReports() {
                             <select
                               className="form-control"
                               aria-label="Default select example"
-                              onChange={async (e) => {
+                              onChange={async (e:any) => {
                                 setFilterValue(e.target.value);
                                 var id = e.nativeEvent.target.selectedIndex;
                                 var text = e.nativeEvent.target[id].text;
@@ -597,7 +622,7 @@ export default function GeneralReports() {
                             >
                               {" "}
                               <option selected>Select district </option>
-                              {districtsData?.map((data) => (
+                              {districtsData?.map((data:any) => (
                                 <option key={data.id} value={data.id}>
                                   {data.name}
                                 </option>
@@ -614,7 +639,7 @@ export default function GeneralReports() {
                           <select
                             className=" form-control "
                             aria-label="Default select example"
-                            onChange={async (e) => {
+                            onChange={async (e:any) => {
                               setFilterValue(e.target.value);
                               var id = e.nativeEvent.target.selectedIndex;
                               var text = e.nativeEvent.target[id].text;
@@ -626,7 +651,7 @@ export default function GeneralReports() {
                           >
                             {" "}
                             <option selected> Select Electoral Area </option>
-                            {electoralAreasData?.map((data) => (
+                            {electoralAreasData?.map((data:any) => (
                               <option key={data.id} value={data.id}>
                                 {data.name}
                               </option>
@@ -647,7 +672,7 @@ export default function GeneralReports() {
                             <select
                               className="form-control"
                               aria-label="Default select example"
-                              onChange={async (e) => {
+                              onChange={async (e:any) => {
                                 setFilterValue(e.target.value);
                                 var id = e.nativeEvent.target.selectedIndex;
                                 var text = e.nativeEvent.target[id].text;
@@ -659,7 +684,7 @@ export default function GeneralReports() {
                             >
                               {" "}
                               <option selected>Select region </option>
-                              {regions?.map((data) => (
+                              {regions?.map((data:any) => (
                                 <option key={data.id} value={data.id}>
                                   {data.name}
                                 </option>
@@ -680,7 +705,7 @@ export default function GeneralReports() {
                             <select
                               className="form-control"
                               aria-label="Default select example"
-                              onChange={async (e) => {
+                              onChange={async (e:any) => {
                                 setFilterValue(e.target.value);
                                 var id = e.nativeEvent.target.selectedIndex;
                                 var text = e.nativeEvent.target[id].text;
@@ -692,7 +717,7 @@ export default function GeneralReports() {
                             >
                               {" "}
                               <option selected>Select district </option>
-                              {districtsData?.map((data) => (
+                              {districtsData?.map((data:any) => (
                                 <option key={data.id} value={data.id}>
                                   {data.name}
                                 </option>
@@ -709,7 +734,7 @@ export default function GeneralReports() {
                           <select
                             className=" form-control "
                             aria-label="Default select example"
-                            onChange={async (e) => {
+                            onChange={async (e:any) => {
                               setFilterValue(e.target.value);
   
                               var id = e.nativeEvent.target.selectedIndex;
@@ -723,7 +748,7 @@ export default function GeneralReports() {
                           >
                             {" "}
                             <option selected> Select Electoral Area </option>
-                            {electoralAreasData?.map((data) => (
+                            {electoralAreasData?.map((data:any) => (
                               <option key={data.id} value={data.id}>
                                 {data.name}
                               </option>
@@ -737,7 +762,7 @@ export default function GeneralReports() {
                           <select
                             className=" form-control "
                             aria-label="Default select example"
-                            onChange={(e) => {
+                            onChange={(e:any) => {
                               setFilterValue(e.target.value);
   
                               var id = e.nativeEvent.target.selectedIndex;
@@ -749,7 +774,7 @@ export default function GeneralReports() {
                           >
                             {" "}
                             <option selected>Select community </option>
-                            {communitiesData?.map((data) => (
+                            {communitiesData?.map((data:any) => (
                               <option key={data.id} value={data.id}>
                                 {data.name}
                               </option>
@@ -766,7 +791,7 @@ export default function GeneralReports() {
                       <input
                         type="date"
                         className="form-control"
-                        onChange={(e) => setFrom(e.target.value)}
+                        onChange={(e:any) => setFrom(e.target.value)}
                         value={from}
                       />
                     </div>
@@ -776,7 +801,7 @@ export default function GeneralReports() {
                       <input
                         type="date"
                         className="form-control"
-                        onChange={(e) => setTo(e.target.value)}
+                        onChange={(e:any) => setTo(e.target.value)}
                         value={to}
                       />
                     </div>
@@ -786,7 +811,7 @@ export default function GeneralReports() {
                       <button
                         type="submit"
                         className="form-control btn btn-primary"
-                        onClick={(e) => generateReport(e)}
+                        onClick={(e:any) => generateReport(e:any)}
                       >
                         Generate
                       </button>

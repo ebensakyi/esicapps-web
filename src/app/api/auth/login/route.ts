@@ -26,12 +26,10 @@ export async function POST(request: Request) {
       },
     });
 
-    console.log("pageAccess===>", pageAccess);
 
     let privileges = pageAccess?.map((d: any) => {
       return d.pageId;
     });
-    console.log("privileges===>", privileges);
 
     //console.log(user);
 

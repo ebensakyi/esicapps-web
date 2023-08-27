@@ -246,13 +246,13 @@ export default function Header() {
                                 data-bs-parent="#sidebar-nav"
                             > {session?.user?.privileges?.includes(5)?
                                 <li>
-                                    <Link href="components-alerts.html">
+                                    <Link href="/report/general">
                                         <i className="bi bi-circle" />
                                         <span>General</span>
                                     </Link>
                                 </li>:<></>}
                                {session?.user?.privileges?.includes(6)?  <li>
-                                    <Link href="components-alerts.html">
+                                    <Link href="#">
                                         <i className="bi bi-circle" />
                                         <span>Custom</span>
                                     </Link>
