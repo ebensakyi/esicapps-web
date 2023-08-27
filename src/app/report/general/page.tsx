@@ -1,6 +1,7 @@
 
 import { SERVER_BASE_URL } from '@/config';
 import GeneralReports from '@/src/components/report/GeneralReports';
+import { useSession } from 'next-auth/react';
 
 async function getCommunities() {
 
@@ -50,7 +51,11 @@ async function getForms() {
 }
 
 export default async function Page() {
+    const { data: session } = useSession()
 
+    
+
+    
     const communities = await getCommunities()
 
     const forms = await getForms()
@@ -59,7 +64,7 @@ export default async function Page() {
     const districts = await getDistricts()
 
 
-    let data:any = { regions: regions, districts: districts,}
+    let data:any = { regions, districts,communities, forms }
 
 
 

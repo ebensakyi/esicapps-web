@@ -699,7 +699,6 @@ export default function DataEdit({ data }: any) {
             },
         };
   
-        console.log(data);
         
        const response = await axios.put(`/api/submitted-data/data-edit`, data);
 
