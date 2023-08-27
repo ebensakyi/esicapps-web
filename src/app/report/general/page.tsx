@@ -23,10 +23,24 @@ async function getReports(searchParams: any) {
 
 
 export default async function Page({ searchParams }: any) {
-    const reports = await getReports(searchParams)
+
+const communities = await fetch(
+    `${SERVER_BASE_URL}/api/primary-data/community`
+  ).then((res) => res.json());
+
+  const inspectionForm = await fetch(
+    `${SERVER_BASE_URL}/api/primary-data/inspection-form`
+  ).then((res) => res.json());
+
+  const regions = await fetch(
+    `${SERVER_BASE_URL}/api/primary-data/region`
+  ).then((res) => res.json());
+  const districts = await fetch(
+    `${SERVER_BASE_URL}/api/primary-data/district`
+  ).then((res) => res.json());
 
 
-    let data = { reports }
+    let data = { communities,districts,regions,inspectionForm }
 
 
 
