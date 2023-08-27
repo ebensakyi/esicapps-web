@@ -1,7 +1,6 @@
 
 import { SERVER_BASE_URL } from '@/config';
 import GeneralReports from '@/src/components/report/GeneralReports';
-import { useSession } from 'next-auth/react';
 
 async function getCommunities() {
 
@@ -51,7 +50,6 @@ async function getForms() {
 }
 
 export default async function Page() {
-    const { data: session } = useSession()
 
     
 
