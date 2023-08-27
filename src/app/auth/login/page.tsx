@@ -14,8 +14,8 @@ export default function Home() {
     try {
       let result = await signIn("credentials", {
         phoneNumber, password, 
-        callbackUrl:SERVER_BASE_URL
-       // callbackUrl: `${window.location.origin}/` 
+        //callbackUrl:SERVER_BASE_URL
+        callbackUrl: `${window.location.origin}/` 
       });
 
       
