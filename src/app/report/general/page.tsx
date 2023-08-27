@@ -1,18 +1,33 @@
 
 import { SERVER_BASE_URL } from '@/config';
-import DataView from '@/src/components/submitted-data/DataView';
+import GeneralReports from '@/src/components/report/GeneralReports';
 
-async function getReports(searchParams: any) {
-    
-    let { formId } = searchParams
-    let { published } = searchParams
-    let { id } = searchParams
+async function getCommunities() {
 
 
-    
+
+    const res = await fetch(`${SERVER_BASE_URL}/api/primary-data/community`, { cache: "no-store" })
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
+async function getDistricts() {
+    const res = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: "no-store" })
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
+
+async function getRegions() {
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`,{cache:"no-store"})
+    const res = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: "no-store" })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
@@ -22,29 +37,33 @@ async function getReports(searchParams: any) {
 }
 
 
-export default async function Page({ searchParams }: any) {
-
-const communities = await fetch(
-    `${SERVER_BASE_URL}/api/primary-data/community`
-  ).then((res) => res.json());
-
-  const inspectionForm = await fetch(
-    `${SERVER_BASE_URL}/api/primary-data/inspection-form`
-  ).then((res) => res.json());
-
-  const regions = await fetch(
-    `${SERVER_BASE_URL}/api/primary-data/region`
-  ).then((res) => res.json());
-  const districts = await fetch(
-    `${SERVER_BASE_URL}/api/primary-data/district`
-  ).then((res) => res.json());
+async function getForms() {
 
 
-    let data = { communities,districts,regions,inspectionForm }
+    const res = await fetch(`${SERVER_BASE_URL}/api/primary-data/inspection-form`)
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
+
+export default async function Page() {
+
+    const communities = await getCommunities()
+
+    const forms = await getForms()
+
+    const regions = await getRegions()
+    const districts = await getDistricts()
+
+
+    let data:any = { regions: regions, districts: districts,}
 
 
 
-    return <DataView data={data} />
+    return <GeneralReports data={data} />
 
 
 }

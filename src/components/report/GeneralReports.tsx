@@ -1,6 +1,7 @@
+'use client'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import ActionSummary from './templates/ActionSummary';
@@ -17,7 +18,7 @@ import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { LOGIN_URL } from '@/config';
 
-export default function GeneralReports() {
+export default function GeneralReports({data}:any) {
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
@@ -65,21 +66,21 @@ export default function GeneralReports() {
     const [electoralArea, setElectoralArea] = useState("");
     const [community, setCommunity] = useState("");
   
-    const [filterValue, setFilterValue] = useState(null);
+    const [filterValue, setFilterValue] = useState("");
   
-    const [filterLabel, setFilterLabel] = useState(null);
+    const [filterLabel, setFilterLabel] = useState("");
   
-    const [filterBy, setFilterBy] = useState(null);
+    const [filterBy, setFilterBy] = useState("");
     const [from, setFrom] = useState(null);
     const [to, setTo] = useState(null);
   
     let districtId = Cookies?.get("d_id");
     let regionId = Cookies?.get("r_id");
     let ul = Cookies?.get("ul");
-    const query = router.query;
+    // const query = router.query;
   
-    let formId = query.inspectionFormId;
-    let published = query.published;
+    // let formId = query.inspectionFormId;
+    // let published = query.published;
   
     const handleUrl = async (report:any) => {
       if (report == 1) {
@@ -380,18 +381,9 @@ export default function GeneralReports() {
     };
   
     return (
+        <main id="main" className="main">
       <div className="row">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+       
         <div className="col-lg-12">
           <div className="col-sm-12 col-lg-12">
             <div className="card">
@@ -446,11 +438,11 @@ export default function GeneralReports() {
   
                         
                           if (regionalUser) {
-                            getDistrictsByRegion();
+                            getDistrictsByRegion("");
                           }
             
                           if (districtUser) {
-                            getElectoralAreasByDistrict();
+                            getElectoralAreasByDistrict("");
                           }
                         }}
                         value={filterBy}
@@ -499,7 +491,7 @@ export default function GeneralReports() {
                         >
                           {" "}
                           <option selected>Select region </option>
-                          {regions?.map((data:any) => (
+                          {data.regions?.map((data:any) => (
                             <option key={data.id} value={data.id}>
                               {data.name}
                             </option>
@@ -811,7 +803,7 @@ export default function GeneralReports() {
                       <button
                         type="submit"
                         className="form-control btn btn-primary"
-                        onClick={(e:any) => generateReport(e:any)}
+                        onClick={(e:any) => generateReport(e)}
                       >
                         Generate
                       </button>
@@ -877,6 +869,7 @@ export default function GeneralReports() {
           )}
         </div>
       </div>
+      </main>
     );
   };
   
