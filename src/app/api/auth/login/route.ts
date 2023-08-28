@@ -8,6 +8,9 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
+    console.log("res==> ", res);
+    
+
     let phoneNumber = res.phoneNumber;
     let password = res.password;
 
@@ -58,5 +61,5 @@ export async function POST(request: Request) {
 
 
 export async function GET(request: Request) {
-
+  
 }
