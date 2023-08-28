@@ -1,6 +1,7 @@
+'use client'
 import Image from "next/image";
 import moment from "moment";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const ReportHeader = ({ title, level }:any) => {
   var dateString = moment().format("DD/MM/yyyy HH:mm a");
@@ -37,9 +38,9 @@ const ReportHeader = ({ title, level }:any) => {
       <div className="card-header" style={{ margin: "auto" }}>
         <center>
           <Image
-            src="/assets/images/logo_.png"
+            src="/assets/img/logo.png"
             alt="title"
-            width={180}
+            width={120}
             height={100}
             quality={100}
           />

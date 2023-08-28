@@ -16,6 +16,7 @@ import WaterSources from './templates/WaterSources';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { LOGIN_URL } from '@/config';
+import { userLevel } from '../../../prisma/seed/userLevel';
 
 export default function GeneralReports({ data }: any) {
     const { data: session } = useSession({
@@ -242,10 +243,10 @@ export default function GeneralReports({ data }: any) {
     console.log(session);
 
 
-    let nationalUser: any =1// session?.user?.userTypeId == 1
-    let regionalUser: any =2// session?.user?.userTypeId == 2;
-    let districtUser: any =3// session?.user?.userTypeId == 3;
-let loggedInUserType =1;
+    let nationalUser: any = session?.user?.userLevelId == 1
+    let regionalUser: any = session?.user?.userLevelId == 2;
+    let districtUser: any = session?.user?.userLevelId == 3;
+// let loggedInUserType =1;
 
     //     const handleResetFilters = async () => {
     //       if (loggedInUserType == 1 || loggedInUserType == 2) {
@@ -294,6 +295,10 @@ let loggedInUserType =1;
             let url: any = await handleUrl(reportType);
 
             const response = await axios.post(url, data);
+
+            console.log(response);
+            
+
             if (response.status == 200) {
                 handleVisibility(reportType);
                 setReportData(response.data.data);
@@ -476,6 +481,7 @@ let loggedInUserType =1;
                                                     className="form-control"
                                                     aria-label="Default select example"
                                                     onChange={async (e: any) => {
+                                                        setRegion(e.target.value);
                                                         setFilterValue(e.target.value);
                                                         var id = e.nativeEvent.target.selectedIndex;
                                                         var text = e.nativeEvent.target[id].text;
@@ -507,6 +513,8 @@ let loggedInUserType =1;
                                                             className="form-control"
                                                             aria-label="Default select example"
                                                             onChange={async (e: any) => {
+                                                                setRegion(e.target.value);
+
                                                                 setFilterValue(e.target.value);
                                                                 var id = e.nativeEvent.target.selectedIndex;
                                                                 var text = e.nativeEvent.target[id].text;
@@ -536,6 +544,8 @@ let loggedInUserType =1;
                                                         className="form-control"
                                                         aria-label="Default select example"
                                                         onChange={(e: any) => {
+                                                            setDistrict(e.target.value);
+
                                                             setFilterValue(e.target.value);
                                                             var id = e.nativeEvent.target.selectedIndex;
                                                             var text = e.nativeEvent.target[id].text;
@@ -569,6 +579,8 @@ let loggedInUserType =1;
                                                             aria-label="Default select example"
                                                             value={region}
                                                             onChange={async (e: any) => {
+                                                                setRegion(e.target.value);
+
                                                                 setFilterValue(e.target.value);
                                                                 var id = e.nativeEvent.target.selectedIndex;
                                                                 var text = e.nativeEvent.target[id].text;
@@ -598,6 +610,8 @@ let loggedInUserType =1;
                                                             className="form-control"
                                                             aria-label="Default select example"
                                                             onChange={async (e: any) => {
+                                                                setDistrict(e.target.value);
+
                                                                 setFilterValue(e.target.value);
                                                                 var id = e.nativeEvent.target.selectedIndex;
                                                                 var text = e.nativeEvent.target[id].text;
@@ -627,6 +641,8 @@ let loggedInUserType =1;
                                                         className=" form-control "
                                                         aria-label="Default select example"
                                                         onChange={async (e: any) => {
+                                                            setElectoralArea(e.target.value);
+
                                                             setFilterValue(e.target.value);
                                                             var id = e.nativeEvent.target.selectedIndex;
                                                             var text = e.nativeEvent.target[id].text;
@@ -651,7 +667,7 @@ let loggedInUserType =1;
                                         )}
                                         {filterBy == "communityId" ? (
                                             <>
-                                                {loggedInUserType == 1 || loggedInUserType == 2 ? (
+                                                {nationalUser ||regionalUser ? (
                                                     <div className="col-md-2">
                                                         <label className="form-label mb-0">
                                                             Select region
@@ -660,6 +676,8 @@ let loggedInUserType =1;
                                                             className="form-control"
                                                             aria-label="Default select example"
                                                             onChange={async (e: any) => {
+                                                                setRegion(e.target.value);
+
                                                                 setFilterValue(e.target.value);
                                                                 var id = e.nativeEvent.target.selectedIndex;
                                                                 var text = e.nativeEvent.target[id].text;
@@ -681,10 +699,7 @@ let loggedInUserType =1;
                                                 ) : (
                                                     <></>
                                                 )}
-                                                {loggedInUserType == 1 ||
-                                                    loggedInUserType == 2 ||
-                                                    loggedInUserType == 3 ||
-                                                    loggedInUserType == 4 ? (
+                                               
                                                     <div className="col-md-2">
                                                         <label className="form-label mb-0">
                                                             Select district
@@ -693,6 +708,8 @@ let loggedInUserType =1;
                                                             className="form-control"
                                                             aria-label="Default select example"
                                                             onChange={async (e: any) => {
+                                                                setDistrict(e.target.value);
+
                                                                 setFilterValue(e.target.value);
                                                                 var id = e.nativeEvent.target.selectedIndex;
                                                                 var text = e.nativeEvent.target[id].text;
@@ -711,9 +728,7 @@ let loggedInUserType =1;
                                                             ))}
                                                         </select>
                                                     </div>
-                                                ) : (
-                                                    <></>
-                                                )}
+                                             
                                                 <div className="col-md-2">
                                                     <label className="form-label mb-0">
                                                         Select Electoral Area
@@ -722,6 +737,8 @@ let loggedInUserType =1;
                                                         className=" form-control "
                                                         aria-label="Default select example"
                                                         onChange={async (e: any) => {
+                                                            setElectoralArea(e.target.value);
+
                                                             setFilterValue(e.target.value);
 
                                                             var id = e.nativeEvent.target.selectedIndex;
@@ -750,6 +767,8 @@ let loggedInUserType =1;
                                                         className=" form-control "
                                                         aria-label="Default select example"
                                                         onChange={(e: any) => {
+                                                            setCommunity(e.target.value);
+
                                                             setFilterValue(e.target.value);
 
                                                             var id = e.nativeEvent.target.selectedIndex;
