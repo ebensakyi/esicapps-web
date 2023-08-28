@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams, redirect} from 'next/navigation';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import ActionSummary from './templates/ActionSummary';
@@ -14,7 +14,6 @@ import WasteCollectionType from './templates/WasteCollectionType';
 import WasteReceptacle from './templates/WasteReceptacle';
 import WaterSources from './templates/WaterSources';
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { LOGIN_URL } from '@/config';
 
 export default function GeneralReports({ data }: any) {
