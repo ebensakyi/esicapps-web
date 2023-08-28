@@ -12,14 +12,14 @@ export default function Home() {
     try {
       let result = await signIn("credentials", {
         phoneNumber, password, 
-        callbackUrl:"/auth/login"
+        callbackUrl:"/"
         //callbackUrl:SERVER_BASE_URL
        // callbackUrl: `${window.location.origin}/` 
       });
 
       
     } catch (error) { 
-      console.log(error);
+      console.log("error===>", error);
     }
   };
 

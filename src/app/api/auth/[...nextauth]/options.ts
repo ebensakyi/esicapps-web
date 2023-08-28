@@ -71,16 +71,6 @@ export const authOptions: NextAuthOptions = {
 			return { ...session, user: token };
 		},
 	},
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     return { ...token, ...user };
-  //   },
-  //   async session({ session, token, user }) {
-  //     // Send properties to the client, like an access_token from a provider.
-  //     session.user = token;
 
-  //     return session;
-  //   },
-  // },
   pages: { signIn: `/auth/login` },
 };
