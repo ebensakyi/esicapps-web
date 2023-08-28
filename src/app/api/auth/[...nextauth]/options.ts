@@ -82,5 +82,5 @@ export const authOptions: NextAuthOptions = {
   //     return session;
   //   },
   // },
-  pages: { signIn: `${SERVER_BASE_URL}/auth/login` },
+  pages: { signIn: `/auth/login` },
 };
