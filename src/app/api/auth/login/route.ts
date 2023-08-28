@@ -55,3 +55,8 @@ export async function POST(request: Request) {
     return new Response(JSON.stringify({ message: error.message }));
   }
 }
+
+
+export async function GET(request: Request) {
+
+}

@@ -1,10 +1,8 @@
 'use client';
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { SERVER_BASE_URL } from '../../../../config/index';
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
