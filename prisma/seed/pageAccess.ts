@@ -67,5 +67,8 @@ export const pageAccess = [
     userRoleId: 1,
     pageId: 17,
   },
- 
+  {
+    userRoleId: 1,
+    pageId: 18,
+  },
 ];

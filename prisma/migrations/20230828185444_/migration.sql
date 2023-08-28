@@ -181,6 +181,11 @@ CREATE TABLE "MessageType" (
 CREATE TABLE "UserRole" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "userUpdatesAllowed" INTEGER DEFAULT 0,
+    "userDeletionAllowed" INTEGER DEFAULT 0,
+    "inspectionUpdatesAllowed" INTEGER DEFAULT 0,
+    "inspectionPublishAllowed" INTEGER DEFAULT 0,
+    "inspectionDeletionAllowed" INTEGER DEFAULT 0,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

@@ -19,13 +19,21 @@ export default function Role({ data }: any) {
         }
     })
 
-    
+
     const router = useRouter();
     const pathname = usePathname()
 
     const [roleName, setRoleName] = useState("");
     const [selectedPages, setSelectedPages] = useState([]);
     const [roleId, setRoleId] = useState();
+
+    const [userUpdatesAllowed, setUserUpdatesAllowed] = useState(0);
+    const [userDeletionAllowed, setUserDeletionAllowed] = useState(0);
+    const [inspectionUpdatesAllowed, setInspectionUpdatesAllowed] = useState(0);
+    const [inspectionPublishAllowed, setInspectionPublishAllowed] = useState(0);
+    const [inspectionDeletionAllowed, setInspectionDeletionAllowed] = useState(0);
+
+
 
     const [isEditing, setIsEditing] = useState(0);
 
@@ -104,7 +112,7 @@ export default function Role({ data }: any) {
             );
 
             if (response.status == 200) {
-                 router.refresh()
+                router.refresh()
                 return toast.success("User Type deleted");
             }
 
@@ -152,6 +160,60 @@ export default function Role({ data }: any) {
                                         <input type="text" className="form-control" placeholder='Enter role name' value={roleName} onChange={(e) => setRoleName(e.target.value)} />
                                     </div>
                                 </div>
+                                <div className="mb-3">
+                                    <label className="col-sm-12 col-form-label">Allow publishing</label>
+                                    <div className="col-sm-12">
+                                        <select
+                                            onChange={(e: any) => setInspectionPublishAllowed(e.target.value)}
+                                            className="form-select"
+                                            aria-label="Default select example"
+                                            value={inspectionPublishAllowed}
+                                        >
+
+                                            <option >Select </option>
+
+                                            <option key={1} value={1}>Yes</option>
+                                            <option key={0} value={0}>No</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="mb-3">
+                                    <label className="col-sm-12 col-form-label">Allow inspection deletion</label>
+                                    <div className="col-sm-12">
+                                        <select
+                                            onChange={(e: any) => setInspectionDeletionAllowed(e.target.value)}
+                                            className="form-select"
+                                            aria-label="Default select example"
+                                            value={inspectionDeletionAllowed}
+                                        >
+
+                                            <option >Select </option>
+
+                                            <option key={1} value={1}>Yes</option>
+                                            <option key={0} value={0}>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className=" mb-3">
+                                    <label className="col-sm-12 col-form-label">Allow inspection update</label>
+                                    <div className="col-sm-12">
+                                        <select
+                                            onChange={(e: any) => setInspectionUpdatesAllowed(e.target.value)}
+                                            className="form-select"
+                                            aria-label="Default select example"
+                                            value={inspectionUpdatesAllowed}
+                                        >
+
+                                            <option >Select </option>
+
+                                            <option key={1} value={1}>Yes</option>
+                                            <option key={0} value={0}>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Page
@@ -172,25 +234,25 @@ export default function Role({ data }: any) {
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
 
-                                    {isEditing == 1 ? (
-                          <button
-                            className="btn btn-warning"
-                            onClick={(e) => {
-                              update(e, roleId);
-                            }}
-                          >
-                            Update
-                          </button>
-                        ) : (
-                          <button
-                            className="btn btn-primary"
-                            onClick={(e) => {
-                              add(e);
-                            }}
-                          >
-                            Add
-                          </button>
-                        )}
+                                        {isEditing == 1 ? (
+                                            <button
+                                                className="btn btn-warning"
+                                                onClick={(e) => {
+                                                    update(e, roleId);
+                                                }}
+                                            >
+                                                Update
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={(e) => {
+                                                    add(e);
+                                                }}
+                                            >
+                                                Add
+                                            </button>
+                                        )}
                                         {/* <button type="submit" className="btn btn-primary" onClick={(e) => add(e)}>
                                             Submit
                                         </button> */}
@@ -224,8 +286,8 @@ export default function Role({ data }: any) {
                                                             {role.PageAccess.map((pa: any) => {
                                                                 return (
                                                                     <div key={pa.id} className="col-md-3">
-                                                                         <span className="badge bg-primary"><i className="bi bi-check-circle me-1"></i>  {pa.Page?.name ?? ""}</span>
-                                                                           
+                                                                        <span className="badge bg-primary"><i className="bi bi-check-circle me-1"></i>  {pa.Page?.name ?? ""}</span>
+
                                                                     </div>
                                                                 );
                                                             })}

@@ -336,8 +336,14 @@ model MessageType {
 }
 
 model UserRole {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique @db.VarChar(255)
+  id                        Int    @id @default(autoincrement())
+  name                      String @unique @db.VarChar(255)
+  userUpdatesAllowed        Int?   @default(0)
+  userDeletionAllowed       Int?   @default(0)
+  inspectionUpdatesAllowed  Int?   @default(0)
+  inspectionPublishAllowed  Int?   @default(0)
+  inspectionDeletionAllowed Int?   @default(0)
+
   deleted   Int?     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -391,6 +397,18 @@ model PageActionAccess {
   PageAction   PageAction @relation(fields: [pageActionId], references: [id])
   UserRole     UserRole   @relation(fields: [userRoleId], references: [id])
 }
+
+// model PageActionsAllowed {
+//   id              Int  @id @default(autoincrement())
+//   deletionAllowed Int? @default(0)
+//   updateAllowed   Int? @default(0)
+
+//   deleted    Int?     @default(0)
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+//   UserRole   UserRole @relation(fields: [userRoleId], references: [id])
+//   userRoleId Int
+// }
 
 // model PageAction {
 //   id               Int                @id @default(autoincrement())
