@@ -16,7 +16,6 @@ import WaterSources from './templates/WaterSources';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { LOGIN_URL } from '@/config';
-import { userLevel } from '../../../prisma/seed/userLevel';
 
 export default function GeneralReports({ data }: any) {
     const { data: session } = useSession({

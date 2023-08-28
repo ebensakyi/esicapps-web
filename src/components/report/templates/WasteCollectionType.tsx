@@ -1,3 +1,5 @@
+'use client'
+
 import ReportHeader from "./ReportHeader";
 
 const WasteCollectionType = ({ data, level }:any) => {

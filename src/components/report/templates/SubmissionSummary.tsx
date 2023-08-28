@@ -1,3 +1,5 @@
+'use client'
+
 import ReportHeader from "./ReportHeader";
 
 const SubmissionSummary = ({ data, level }:any) => {
