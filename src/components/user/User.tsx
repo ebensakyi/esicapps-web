@@ -823,9 +823,7 @@ export default function User({ data }: any) {
                                                                         setSelectedRegion(user.regionId);
                                                                         setSelectedDistrict(user.districtId);
 
-
-                                                                        console.log("userRoleId ", user.userRoleId);
-                                                                        console.log("setSelectedUserLevel ", selectedUserLevel);
+;
 
 
                                                                         // let phoneNumber = user.phoneNumber;

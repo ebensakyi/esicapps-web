@@ -42,20 +42,28 @@ export async function GET(request: Request) {
     if (userLevel == 1) {
       query = {
         where: { deleted: 0, regionId: selectedRegion },
-        include: { Region: true },
+        include: { Region: true },  orderBy: {
+          name: "asc",
+        },
       };
     } else if (userLevel == 2) {
       query = {
         where: { deleted: 0, regionId: Number(userRegion) },
-        include: { Region: true },
+        include: { Region: true },  orderBy: {
+          name: "asc",
+        },
       };
     } else if (userLevel == 3) {
       query = {
         where: { deleted: 0, id: Number(userDistrict) },
-        include: { Region: true },
+        include: { Region: true },  orderBy: {
+          name: "asc",
+        },
       };
     } else {
-      query = { where: { deleted: 0 } };
+      query = { where: { deleted: 0 },  orderBy: {
+        name: "asc",
+      }, };
     }
 
     const data = await prisma.district.findMany(query);

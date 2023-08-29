@@ -8,11 +8,10 @@ import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { sendSMS } from "@/utils/send-hubtel-sms";
 
-
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     let loginUserLevel = session?.user?.userLevelId;
 
@@ -43,11 +42,13 @@ export async function POST(request: Request) {
       regionId: regionId,
       districtId: res.district,
     };
-  
-    await sendSMS(res.phoneNumber, `The temporal password for ESICApps App is ${password}`);
 
+    await sendSMS(
+      res.phoneNumber,
+      `The temporal password for ESICApps App is ${password}`
+    );
 
-    const user : any = await prisma.user.create({ data });
+    const user: any = await prisma.user.create({ data });
 
     return NextResponse.json(user);
   } catch (error: any) {
@@ -60,7 +61,6 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     // const session :any= await getServerSession(authOptions);
-
 
     const { searchParams } = new URL(request.url);
     const searchText = searchParams.get("searchText");
@@ -75,6 +75,22 @@ export async function GET(request: Request) {
     // let region = loggedInUserData?.regionId;
     // let district = loggedInUserData?.districtId;
     // let users;
+    if (districtId) {
+      const data = await prisma.user.findMany({
+        where: { districtId: Number(districtId) },
+        include: {
+          Region: true,
+          District: true,
+          UserRole: true,
+          UserLevel: true,
+        },
+        orderBy: {
+          id: "desc",
+        },
+      });
+
+      return NextResponse.json(data);
+    }
 
     const data = await prisma.user.findMany({
       // where: { deleted: 0 },
@@ -95,13 +111,9 @@ export async function GET(request: Request) {
   }
 }
 
-
-
-
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-
 
     let regionId = res.region;
 
@@ -110,11 +122,8 @@ export async function PUT(request: Request) {
         where: { id: Number(res.district) },
       });
 
-
-
       regionId = district?.regionId;
     }
-    
 
     let id = res.userId;
 
@@ -131,31 +140,27 @@ export async function PUT(request: Request) {
     };
 
     await prisma.user.update({
-      data:data,
+      data: data,
       where: {
         id: id,
       },
     });
 
-
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
-    
+
     return NextResponse.json(error);
   }
 }
-
-
 
 export async function DELETE(request: Request) {
   try {
     const res = await request.json();
 
-
     let regionId = res.region;
 
-    let user:any = await prisma.user.findFirst({
+    let user: any = await prisma.user.findFirst({
       where: { id: Number(res.id) },
     });
 
@@ -164,11 +169,10 @@ export async function DELETE(request: Request) {
       data: { deleted: Math.abs(user?.deleted - 1) },
     });
 
-
     return NextResponse.json({});
   } catch (error) {
     console.log(error);
-    
+
     return NextResponse.json(error);
   }
 }

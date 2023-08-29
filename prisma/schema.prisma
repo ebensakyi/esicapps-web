@@ -3293,8 +3293,10 @@ model FollowUpInspectionPictures {
 }
 
 model AssignData {
-  id        Int      @id @default(autoincrement())
-  deleted   Int?     @default(0)
+  id      Int  @id @default(autoincrement())
+  deleted Int? @default(0)
+  active  Int? @default(1)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

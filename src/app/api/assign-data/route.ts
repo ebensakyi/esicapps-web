@@ -34,30 +34,18 @@ export async function PUT(request: Request) {
 
     const userId = session?.user?.id;
 
-    // let recipientCount = 0;
-    // let messageId = res.messageId;
+    let assignData: any = await prisma.assignData.findFirst({
+      where: { id: Number(res.id) },
+    });
 
-    // const data = {
-    //   title: res.title,
-    //   message: res.message,
-    //   messageType: 1,
-    //   sendingType: Number(res.sendingType),
-    //   individualRecipient:
-    //     res.individualRecipient == undefined || ""
-    //       ? null
-    //       : Number(res.individualRecipient),
-    //   districtId:
-    //     res.districtId == undefined || "" ? null : Number(res.districtId),
-    //   regionId: res.regionId == undefined || "" ? null : Number(res.regionId),
-    //   sender: Number(userId),
-    // };
-
-    // const response = await prisma.messaging.update({
-    //   data: data,
-    //   where: {
-    //     id: messageId,
-    //   },
-    // });
+    if (res.status) {
+      await prisma.assignData.update({
+        where: {
+          id: Number(res?.id),
+        },
+        data: { deleted: Math.abs(assignData?.active - 1) },
+      });
+    }
 
     return NextResponse.json([]);
   } catch (error: any) {
@@ -93,4 +81,19 @@ export async function GET(request: Request) {
 
     return NextResponse.json(error);
   }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const res = await request.json();
+
+  
+
+    await prisma.assignData.delete({
+      where: {
+        id: Number(res?.id),
+      },
+    
+    });
+  } catch (error) {}
 }

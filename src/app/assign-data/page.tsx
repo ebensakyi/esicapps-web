@@ -4,7 +4,7 @@ import { SERVER_BASE_URL } from '@/config';
 import DataTransfer from '@/src/components/assign-data/AssignData';
 
 
-async function getForms() {
+async function getAssignData() {
 
 
     const res = await fetch(`${SERVER_BASE_URL}/api/assign-data`)
@@ -15,14 +15,27 @@ async function getForms() {
 
     return res.json()
 }
+async function getDistricts() {
 
+
+const res = await fetch(
+    `${SERVER_BASE_URL}/api/primary-data/district`
+  )
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+}
+
+return res.json()
+
+}
 export default async function Page() {
 
-    const forms = await getForms()
+    const assignments = await getAssignData()
+    const districts = await getDistricts()
 
 
 
-    let data: any = { forms }
+    let data: any = { assignments, districts }
 
 
 

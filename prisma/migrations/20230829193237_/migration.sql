@@ -2674,6 +2674,7 @@ CREATE TABLE "FollowUpInspectionPictures" (
 CREATE TABLE "AssignData" (
     "id" SERIAL NOT NULL,
     "deleted" INTEGER DEFAULT 0,
+    "active" INTEGER DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "assignedToId" INTEGER NOT NULL,
