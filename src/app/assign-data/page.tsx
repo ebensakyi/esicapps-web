@@ -7,7 +7,7 @@ import DataTransfer from '@/src/components/assign-data/AssignData';
 async function getForms() {
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/data-transfer`)
+    const res = await fetch(`${SERVER_BASE_URL}/api/assign-data`)
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
