@@ -17,11 +17,14 @@ export default function Data({ data }: any) {
             redirect(LOGIN_URL);
         }
     })
+    let userSession :any = session;
 
+
+   
 
     // let inspectionDeletionAllowed: any = session?.user?.UserRole?.inspectionDeletionAllowed
     // let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
-    let inspectionUpdatesAllowed: any = session?.user?.UserRole?.inspectionUpdatesAllowed
+    let inspectionUpdatesAllowed: any = userSession?.user?.UserRole?.inspectionUpdatesAllowed
 
     const searchTextRef: any = useRef(null);
     const filterRef: any = useRef(null);
