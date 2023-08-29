@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 
-
 export async function POST(request: Request) {
   try {
     const res = await request.json();
@@ -11,6 +10,9 @@ export async function POST(request: Request) {
 
     const data = {
       name: res.roleName,
+      inspectionDeletionAllowed: Number(res.inspectionDeletionAllowed),
+      inspectionPublishAllowed: Number(res.inspectionPublishAllowed),
+      inspectionUpdatesAllowed: Number(res.inspectionUpdatesAllowed),
     };
     const role = await prisma.userRole.create({ data });
 
@@ -60,9 +62,6 @@ export async function PUT(request: Request) {
     let selectedPages = res.selectedPages;
     let userRoleId = res.roleId;
 
-
-    
-
     let pages = await selectedPages.map((page: { value: any }) => {
       return {
         pageId: page.value,
@@ -76,7 +75,6 @@ export async function PUT(request: Request) {
       },
     });
 
-
     await prisma.userRole.update({
       data: {
         name: res.roleName,
@@ -86,8 +84,6 @@ export async function PUT(request: Request) {
       },
     });
 
-
-    
     const pageAccess = await prisma.pageAccess.createMany({
       data: pages,
 
@@ -104,14 +100,11 @@ export async function PUT(request: Request) {
   }
 }
 
-
 export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
 
-    
-    const id = Number(searchParams.get("id"))
-
+    const id = Number(searchParams.get("id"));
 
     const data = await prisma.userRole.update({
       where: {
@@ -125,7 +118,7 @@ export async function DELETE(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.log("error==> ", error);
-    
+
     return NextResponse.json(error);
   }
 }

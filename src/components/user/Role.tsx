@@ -58,8 +58,10 @@ export default function Role({ data }: any) {
 
             let data = {
                 roleName,
-
                 selectedPages: selectedPages,
+                inspectionDeletionAllowed,
+                inspectionPublishAllowed,
+                inspectionUpdatesAllowed
             };
 
             const response = await axios.post("/api/user/role", data);

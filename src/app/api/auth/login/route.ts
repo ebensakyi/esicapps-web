@@ -8,7 +8,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    console.log("res==> ", res);
     
 
     let phoneNumber = res.phoneNumber;
@@ -19,7 +18,7 @@ export async function POST(request: Request) {
         phoneNumber: phoneNumber,
         deleted: 0,
       },
-      include: { Region: true, District: true },
+      include: { Region: true, District: true,UserRole:true },
     });
 
     const pageAccess = await prisma.pageAccess.findMany({

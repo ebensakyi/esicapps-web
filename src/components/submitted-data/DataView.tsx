@@ -24,6 +24,10 @@ export default function DataView({ data }: any) {
         }
     })
 
+    let inspectionDeletionAllowed: any = session?.user?.UserRole?.inspectionDeletionAllowed
+    let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
+    let inspectionUpdatesAllowed: any = session?.user?.UserRole?.inspectionUpdatesAllowed
+
 
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal(e: any) {
@@ -1783,6 +1787,7 @@ export default function DataView({ data }: any) {
                                                                         })}
                                                                     </div>
                                                                 </div>
+                                                                {inspectionPublishAllowed?
                                                                 <div className="col-sm-auto">
                                                                     {data?.submittedData?.isPublished == 0 ? (
                                                                         <button
@@ -1807,7 +1812,8 @@ export default function DataView({ data }: any) {
                                                                             Unpublish
                                                                         </button>
                                                                     )}
-                                                                </div>
+                                                                </div>:<></>}
+                                                                {inspectionDeletionAllowed?
                                                                 <div className="col-sm-auto">
                                                                     {data?.submittedData?.isPublished == 0 ? (
                                                                         <button
@@ -1823,8 +1829,9 @@ export default function DataView({ data }: any) {
                                                                     ) : (
                                                                         <></>
                                                                     )}
-                                                                </div>
+                                                                </div>:<></>}
                                                                 <div className="col-sm-auto">
+                                                                    {inspectionUpdatesAllowed?
                                                                     <Link
                                                                         className="btn btn-primary"
                                                                         href={{
@@ -1840,7 +1847,7 @@ export default function DataView({ data }: any) {
                                                                             <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "} */}
                                                                         Edit
                                                                         {/* </a> */}
-                                                                    </Link>
+                                                                    </Link>:<></>}
                                                                 </div>
                                                                 {/* <div className="col-sm-auto">
                       <button

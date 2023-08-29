@@ -6,15 +6,25 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
+import { LOGIN_URL } from '@/config';
 
 
-export default  function Data({ data }: any) {
+export default function Data({ data }: any) {
+
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
 
 
-   
-  
-    const searchTextRef:any = useRef(null);
-    const filterRef:any = useRef(null);
+    // let inspectionDeletionAllowed: any = session?.user?.UserRole?.inspectionDeletionAllowed
+    // let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
+    let inspectionUpdatesAllowed: any = session?.user?.UserRole?.inspectionUpdatesAllowed
+
+    const searchTextRef: any = useRef(null);
+    const filterRef: any = useRef(null);
 
 
     // const { data: session } = useSession()
@@ -49,7 +59,7 @@ export default  function Data({ data }: any) {
 
     var dateString = moment().format("DD-MM-yyyy-HH-mm-ss-a");
 
-  
+
 
 
 
@@ -545,7 +555,7 @@ export default  function Data({ data }: any) {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    data?.submittedData?.response?.map((dt : any) => (
+                                                    data?.submittedData?.response?.map((dt: any) => (
                                                         <tr key={dt.id}>
                                                             <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                                                             <td>
@@ -657,19 +667,20 @@ export default  function Data({ data }: any) {
 
                                                                         </li>
                                                                         <li>
+                                                                            {inspectionUpdatesAllowed?
                                                                             <Link
                                                                                 className="dropdown-item btn btn-sm "
                                                                                 href={{
                                                                                     pathname: `/submitted-data/data-edit`,
                                                                                     query: {
                                                                                         id: dt?.Inspection?.id,
-                                                                                       formId: formId,
+                                                                                        formId: formId,
                                                                                         published: published,
                                                                                     },
                                                                                 }}
                                                                             >
                                                                                 Edit
-                                                                            </Link>
+                                                                            </Link>:<></>}
 
                                                                         </li>
 
