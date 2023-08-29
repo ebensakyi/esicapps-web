@@ -203,7 +203,6 @@ export async function POST(request: Request) {
       },
     ];
   
-    res.status(200).json({
-      data: report,
-    });
+    return report
+   
   };

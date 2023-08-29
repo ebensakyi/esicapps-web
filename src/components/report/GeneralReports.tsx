@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import { usePathname, useRouter, useSearchParams, redirect} from 'next/navigation';
+import { usePathname, useRouter, useSearchParams, redirect } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import ActionSummary from './templates/ActionSummary';
@@ -24,17 +24,15 @@ export default function GeneralReports({ data }: any) {
         }
     })
 
-
-
-
     const router = useRouter();
     const pathname = usePathname()
     const searchParams = useSearchParams()
 
     const [reportType, setReportType] = useState(null);
+
+    const [reportData, setReportData] = useState([]);
     const [submissionSummaryVisibility, setSubmissionSummaryVisibility] =
         useState(false);
-    const [reportData, setReportData] = useState([]);
     const [actionSummaryVisibility, setActionSummaryVisibility] = useState(false);
     const [waterSourceSummaryVisibility, setWaterSourceSummaryVisibility] =
         useState(false);
@@ -84,7 +82,7 @@ export default function GeneralReports({ data }: any) {
     // let published = query.published;
 
     const handleUrl = async (report: any) => {
-        if (report == 1) {
+        if (report == 1) {            
             return "/api/report/submission-summaries";
         }
         if (report == 2) {
@@ -244,7 +242,7 @@ export default function GeneralReports({ data }: any) {
     let nationalUser: any = session?.user?.userLevelId == 1
     let regionalUser: any = session?.user?.userLevelId == 2;
     let districtUser: any = session?.user?.userLevelId == 3;
-// let loggedInUserType =1;
+    // let loggedInUserType =1;
 
     //     const handleResetFilters = async () => {
     //       if (loggedInUserType == 1 || loggedInUserType == 2) {
@@ -289,17 +287,21 @@ export default function GeneralReports({ data }: any) {
                 from,
                 to,
             };
+            
 
             let url: any = await handleUrl(reportType);
 
             const response = await axios.post(url, data);
 
-            console.log(response);
-            
+            console.log("response==>",response);
+
 
             if (response.status == 200) {
                 handleVisibility(reportType);
-                setReportData(response.data.data);
+                console.log("response<==>",response.data);
+                //setReportData(response.data.data);
+
+                setReportData(response.data);
             }
 
             // router.replace(router.asPath);
@@ -332,7 +334,7 @@ export default function GeneralReports({ data }: any) {
     const handleFilter = async (e: any) => {
         e.preventDefault();
 
-    
+
 
         const formId = searchParams.get("formId")
         const published = searchParams.get('published')
@@ -665,7 +667,7 @@ export default function GeneralReports({ data }: any) {
                                         )}
                                         {filterBy == "communityId" ? (
                                             <>
-                                                {nationalUser ||regionalUser ? (
+                                                {nationalUser || regionalUser ? (
                                                     <div className="col-md-2">
                                                         <label className="form-label mb-0">
                                                             Select region
@@ -697,36 +699,36 @@ export default function GeneralReports({ data }: any) {
                                                 ) : (
                                                     <></>
                                                 )}
-                                               
-                                                    <div className="col-md-2">
-                                                        <label className="form-label mb-0">
-                                                            Select district
-                                                        </label>
-                                                        <select
-                                                            className="form-control"
-                                                            aria-label="Default select example"
-                                                            onChange={async (e: any) => {
-                                                                setDistrict(e.target.value);
 
-                                                                setFilterValue(e.target.value);
-                                                                var id = e.nativeEvent.target.selectedIndex;
-                                                                var text = e.nativeEvent.target[id].text;
+                                                <div className="col-md-2">
+                                                    <label className="form-label mb-0">
+                                                        Select district
+                                                    </label>
+                                                    <select
+                                                        className="form-control"
+                                                        aria-label="Default select example"
+                                                        onChange={async (e: any) => {
+                                                            setDistrict(e.target.value);
 
-                                                                setFilterLabel(text);
-                                                                await getElectoralAreasByDistrict(e.target.value);
-                                                            }}
-                                                            value={district}
-                                                        >
-                                                            {" "}
-                                                            <option selected>Select district </option>
-                                                            {districtsData?.map((data: any) => (
-                                                                <option key={data.id} value={data.id}>
-                                                                    {data.name}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    </div>
-                                             
+                                                            setFilterValue(e.target.value);
+                                                            var id = e.nativeEvent.target.selectedIndex;
+                                                            var text = e.nativeEvent.target[id].text;
+
+                                                            setFilterLabel(text);
+                                                            await getElectoralAreasByDistrict(e.target.value);
+                                                        }}
+                                                        value={district}
+                                                    >
+                                                        {" "}
+                                                        <option selected>Select district </option>
+                                                        {districtsData?.map((data: any) => (
+                                                            <option key={data.id} value={data.id}>
+                                                                {data.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+
                                                 <div className="col-md-2">
                                                     <label className="form-label mb-0">
                                                         Select Electoral Area
@@ -826,7 +828,7 @@ export default function GeneralReports({ data }: any) {
                         </div>
                     </div>
                     {submissionSummaryVisibility ? (
-                        <SubmissionSummary data={reportData} level={filterLabel}/>
+                        <SubmissionSummary data={reportData} level={filterLabel} />
                     ) : (
                         <></>
                     )}
