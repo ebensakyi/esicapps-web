@@ -24,9 +24,12 @@ export default function DataView({ data }: any) {
         }
     })
 
-    let inspectionDeletionAllowed: any = session?.user?.UserRole?.inspectionDeletionAllowed
-    let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
-    let inspectionUpdatesAllowed: any = session?.user?.UserRole?.inspectionUpdatesAllowed
+    let userSession :any = session;
+
+
+    let inspectionDeletionAllowed: any = userSession?.user?.UserRole?.inspectionDeletionAllowed
+    let inspectionPublishAllowed: any = userSession?.user?.UserRole?.inspectionPublishAllowed
+    let inspectionUpdatesAllowed: any = userSession?.user?.UserRole?.inspectionUpdatesAllowed
 
 
     const [modalIsOpen, setIsOpen] = useState(false);
