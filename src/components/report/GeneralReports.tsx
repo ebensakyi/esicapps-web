@@ -293,12 +293,10 @@ export default function GeneralReports({ data }: any) {
 
             const response = await axios.post(url, data);
 
-            console.log("response==>",response);
 
 
             if (response.status == 200) {
                 handleVisibility(reportType);
-                console.log("response<==>",response.data);
                 //setReportData(response.data.data);
 
                 setReportData(response.data);

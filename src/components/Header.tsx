@@ -381,13 +381,13 @@ export default function Header() {
                          {session?.user?.privileges?.includes(14)?
                         <li className="nav-item" >
                             <Link className={
-                                pathname == "/map"
+                                pathname == "/assign-data"
                                     ? "nav-link"
                                     : "nav-link collapsed"
-                            } href="/configure/data-transfer">
+                            } href="/assign-data">
                                 <i className="bi bi-arrow-left-right
 " />
-                                <span>Data Transfer</span>
+                                <span>Assign Data</span>
                             </Link>
                         </li>:<></>}
                          {session?.user?.privileges?.includes(15)?

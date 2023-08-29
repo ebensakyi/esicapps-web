@@ -2678,6 +2678,7 @@ CREATE TABLE "AssignData" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "assignedToId" INTEGER NOT NULL,
     "assignedFromId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "AssignData_pkey" PRIMARY KEY ("id")
 );
@@ -4060,6 +4061,9 @@ ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedToId_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_assignedFromId_fkey" FOREIGN KEY ("assignedFromId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AssignData" ADD CONSTRAINT "AssignData_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "FollowUpInspection" ADD CONSTRAINT "FollowUpInspection_inspectionFormId_fkey" FOREIGN KEY ("inspectionFormId") REFERENCES "InspectionForm"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

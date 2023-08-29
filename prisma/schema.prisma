@@ -268,6 +268,7 @@ model User {
   UserGuide                          UserGuide[]
   Sender                             Messaging[]                          @relation("sender")
   Recipient                          Messaging[]                          @relation("individualRecipient")
+  AssignData                         AssignData[]
 }
 
 model UserAddedByUser {
@@ -3302,6 +3303,8 @@ model AssignData {
 
   assignedFrom   User @relation("assignedFrom", fields: [assignedFromId], references: [id])
   assignedFromId Int
+  User           User @relation(fields: [userId], references: [id])
+  userId         Int
 }
 
 model FollowUpInspection {

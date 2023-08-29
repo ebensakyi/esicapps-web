@@ -53,8 +53,8 @@ export const pages = [
     path: "/primary-data/community",
   },
   {
-    name: "Data Transfer",
-    path: "/data-transfer"
+    name: "Assign Data",
+    path: "/data-assignment"
   },
   {
     name: "User Guide",
