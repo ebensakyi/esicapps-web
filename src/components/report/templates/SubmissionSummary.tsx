@@ -2,8 +2,10 @@
 
 import ReportHeader from "./ReportHeader";
 
-const SubmissionSummary = ({ data, level }:any) => {
-  const handleFormName = (formId:any) => {
+const SubmissionSummary = ({ data, level }: any) => {
+
+  
+  const handleFormName = (formId: any) => {
     try {
       if (formId == 1) {
         return `RESIDENTIAL PREMISES`;
@@ -30,7 +32,7 @@ const SubmissionSummary = ({ data, level }:any) => {
   let title = "SUBMISSION SUMMARY";
   return (
     <div className="card" id="printableArea">
-    <ReportHeader title={title} level={level} />
+      <ReportHeader title={title} level={level} />
       <div className="card-body">
         <div className="col-sm"></div>
         <br />
@@ -46,7 +48,7 @@ const SubmissionSummary = ({ data, level }:any) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((dt:any) => {
+            {data.map((dt: any) => {
               return (
                 <tr key={dt.id}>
                   {" "}

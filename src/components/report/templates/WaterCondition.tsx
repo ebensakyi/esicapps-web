@@ -11,7 +11,7 @@ import ReportHeader from "./ReportHeader";
 // Borehole
 // Mechanised Borehole
 // Not applicable
-const PremisesWaterCondition = ({ data,level }:any) => {
+const WaterCondition = ({ data,level }:any) => {
 
 
   let title = "WATER SOURCES CONDITION";
@@ -54,4 +54,4 @@ const PremisesWaterCondition = ({ data,level }:any) => {
   );
 };
 
-export default PremisesWaterCondition;
+export default WaterCondition;

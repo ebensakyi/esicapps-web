@@ -8,13 +8,15 @@ export async function POST(request: Request) {
 
      let report =   await getSubmissionSummary(res);
 
+     
+
     
        // await logActivity(`SubmissionSummary report generated`, userData.id);
         
   
       return NextResponse.json(report);
     } catch (error: any) {
-      console.log(error);
+      console.log("error==>", error);
   
       return NextResponse.json(error);
     }

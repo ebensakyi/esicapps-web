@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import ActionSummary from './templates/ActionSummary';
 import ApprovedWasteReceptacle from './templates/ApprovedWasteReceptacle';
 import DrainAvailability from './templates/DrainAvailability';
-import PremisesWaterCondition from './templates/PremisesWaterCondition';
+import WaterCondition from './templates/WaterCondition';
 import SubmissionSummary from './templates/SubmissionSummary';
 import ToiletAdequacy from './templates/ToiletAdequacy';
 import ToiletAvailability from './templates/ToiletAvailability';
@@ -94,7 +94,7 @@ export default function GeneralReports({ data }: any) {
             return "/api/report/water-sources";
         }
         if (report == 12) {
-            return "/api/report/premises-water-condition";
+            return "/api/report/water-condition";
         }
         if (report == 21) {
             return "/api/report/toilet-availability";
@@ -826,7 +826,7 @@ export default function GeneralReports({ data }: any) {
                         </div>
                     </div>
                     {submissionSummaryVisibility ? (
-                        <SubmissionSummary data={reportData} />
+                        <SubmissionSummary data={reportData} level={filterLabel}/>
                     ) : (
                         <></>
                     )}
@@ -841,7 +841,7 @@ export default function GeneralReports({ data }: any) {
                         <></>
                     )}
                     {waterConditionVisibility ? (
-                        <PremisesWaterCondition data={reportData} level={filterValue} />
+                        <WaterCondition data={reportData} level={filterValue} />
                     ) : (
                         <></>
                     )}
