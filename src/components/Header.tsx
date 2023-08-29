@@ -271,7 +271,7 @@ export default function Header() {
                                     <span>Map</span>
                                 </Link>
                             </li> : <></>}
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link
                                 className={
                                     pathname == "/reports/general" || pathname == "/reports/custom"
@@ -308,7 +308,7 @@ export default function Header() {
                                     </li> : <></>}
 
                             </ul>
-                        </li>
+                        </li> */}
                         <li className="nav-heading">Messages</li>
                         <li className="nav-item">
                             <Link
