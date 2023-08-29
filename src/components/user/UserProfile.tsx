@@ -83,7 +83,7 @@ export default function UserProfile({ data }: any) {
             if (response.status == 200) {
                 router.refresh()
 
-                return toast.success("Password updated");
+                return toast.success("Password changed.\nLogout and log back in to activate");
             }
             if (response.status == 201) {
                 return toast.error("Wrong current user password");
