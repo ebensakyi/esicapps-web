@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ import {
   LinearScale,
 } from "chart.js";
 import { Doughnut, Pie, Bar } from "react-chartjs-2";
+import { LOGIN_URL } from '@/config';
 
 
 ChartJS.register(
@@ -25,6 +26,12 @@ ChartJS.register(
   BarElement
 );
 export default function Dashboard({ data }: any) {
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+        redirect(LOGIN_URL);
+    }
+})
 
 
   const [showLoading, setShowLoading] = useState(false);
@@ -137,7 +144,6 @@ export default function Dashboard({ data }: any) {
 
 
   };
-  let ul = data?.session?.user?.userLevelId //Cookies?.get("ul");
 
   let baselinePieChartData,
     reinspectionPieChartData,
@@ -383,9 +389,13 @@ export default function Dashboard({ data }: any) {
 
 
 
-  let nationalUser = ul == 1;
-  let regionalUser = ul == 2;
-  let districtUser = ul == 3;
+
+  let userSession :any = session;
+
+
+  let nationalUser: any = userSession.user?.userLevelId == 1 ;
+  let regionalUser: any = userSession?.user?.userLevelId == 2;
+  let districtUser: any = userSession?.user?.userLevelId == 3;
 
   return (
     <main id="main" className="main">
@@ -1017,3 +1027,7 @@ export default function Dashboard({ data }: any) {
     </main>
   )
 }
+function redirect(LOGIN_URL: string) {
+  throw new Error('Function not implemented.');
+}
+

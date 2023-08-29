@@ -238,10 +238,12 @@ export default function GeneralReports({ data }: any) {
     };
     console.log(session);
 
+    let userSession :any = session;
 
-    let nationalUser: any = session?.user?.userLevelId == 1
-    let regionalUser: any = session?.user?.userLevelId == 2;
-    let districtUser: any = session?.user?.userLevelId == 3;
+
+    let nationalUser: any = userSession.user?.userLevelId == 1 ;
+    let regionalUser: any = userSession?.user?.userLevelId == 2;
+    let districtUser: any = userSession?.user?.userLevelId == 3;
     // let loggedInUserType =1;
 
     //     const handleResetFilters = async () => {
