@@ -38,17 +38,17 @@ export async function PUT(request: Request) {
       where: { id: Number(res.id) },
     });
 
-    if (res.status) {
-      await prisma.assignData.update({
-        where: {
-          id: Number(res?.id),
-        },
-        data: { deleted: Math.abs(assignData?.active - 1) },
-      });
-    }
+    await prisma.assignData.update({
+      where: {
+        id: Number(res?.id),
+      },
+      data: { deleted: Math.abs(assignData?.deleted - 1) },
+    });
 
-    return NextResponse.json([]);
+    return NextResponse.json({ status: 200 });
   } catch (error: any) {
+    console.log(error);
+
     return NextResponse.json(error, { status: 500 });
   }
 }
@@ -65,14 +65,13 @@ export async function GET(request: Request) {
       // });
 
       const data = await prisma.assignData.findFirst({
-        where: { assignedToId: Number(userId), deleted: 0 },
+        where: { assignedToId: Number(userId) },
       });
 
       return NextResponse.json(data);
     }
 
     const data = await prisma.assignData.findMany({
-      where: { deleted: 0 },
       include: { assignedFrom: true, assignedTo: true },
     });
     return NextResponse.json(data);
@@ -81,19 +80,4 @@ export async function GET(request: Request) {
 
     return NextResponse.json(error);
   }
-}
-
-export async function DELETE(request: Request) {
-  try {
-    const res = await request.json();
-
-  
-
-    await prisma.assignData.delete({
-      where: {
-        id: Number(res?.id),
-      },
-    
-    });
-  } catch (error) {}
 }

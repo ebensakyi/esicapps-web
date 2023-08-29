@@ -7,11 +7,11 @@ import React, { useState } from 'react'
 
 export default function Header() {
     const pathname = usePathname()
-    const [showDrawer,setShowDrawer]= useState(false)
+    const [showDrawer, setShowDrawer] = useState(false)
 
-    const { data: session } :any= useSession()
+    const { data: session }: any = useSession()
 
-    
+
 
 
     return (
@@ -35,17 +35,17 @@ export default function Header() {
                             <img src="../../assets/img/logo.png" alt="" />
                             <span className="d-none d-lg-block">ESICApps</span>
                         </Link>
-                        <i className="bi bi-list toggle-sidebar-btn" onClick={()=>{
-                        if(!showDrawer){
-                            document.body.classList.add("toggle-sidebar")
-                            setShowDrawer(true)
-                        }else{
-                            document.body.classList.remove("toggle-sidebar")
-                            setShowDrawer(false)
-                        }
-                        
+                        <i className="bi bi-list toggle-sidebar-btn" onClick={() => {
+                            if (!showDrawer) {
+                                document.body.classList.add("toggle-sidebar")
+                                setShowDrawer(true)
+                            } else {
+                                document.body.classList.remove("toggle-sidebar")
+                                setShowDrawer(false)
+                            }
 
-                    }}/>
+
+                        }} />
                     </div>
 
                     <nav className="header-nav ms-auto">
@@ -117,44 +117,44 @@ export default function Header() {
             {session?.user ?
                 <aside id="sidebar" className="sidebar">
                     <ul className="sidebar-nav" id="sidebar-nav">
-                        {session?.user?.privileges?.includes(1)?
-                        <li className="nav-item">
+                        {session?.user?.privileges?.includes(1) ?
+                            <li className="nav-item">
 
-                            <Link className={
-                                pathname == "/"
-                                    ? "nav-link"
-                                    : "nav-link collapsed"
-                            } href="/">
-                                <i className="bi bi-grid" />
-                                <span>Dashboard</span>
-                            </Link>
-                        </li>:<></>}
- {session?.user?.privileges?.includes(3)?
-                        <li className="nav-item">
-                            <Link
-                                className="nav-link collapsed"
-                                data-bs-target="#components-nav"
-                                data-bs-toggle="collapse"
-                                href="#"
-                            >
-                                <i className="bi bi-table" />
-                                <span>Submitted Data</span>
-                                <i className="bi bi-chevron-down ms-auto" />
-                            </Link>
-                            <ul
-                                id="components-nav"
-                                className="nav-content collapse "
-                                data-bs-parent="#sidebar-nav"
-                            >
+                                <Link className={
+                                    pathname == "/"
+                                        ? "nav-link"
+                                        : "nav-link collapsed"
+                                } href="/">
+                                    <i className="bi bi-grid" />
+                                    <span>Dashboard</span>
+                                </Link>
+                            </li> : <></>}
+                        {session?.user?.privileges?.includes(3) ?
+                            <li className="nav-item">
+                                <Link
+                                    className="nav-link collapsed"
+                                    data-bs-target="#components-nav"
+                                    data-bs-toggle="collapse"
+                                    href="#"
+                                >
+                                    <i className="bi bi-table" />
+                                    <span>Submitted Data</span>
+                                    <i className="bi bi-chevron-down ms-auto" />
+                                </Link>
+                                <ul
+                                    id="components-nav"
+                                    className="nav-content collapse "
+                                    data-bs-parent="#sidebar-nav"
+                                >
 
-                                <li>
-                                    {/* <Link href="/submitted-data?formId=1&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                    <li>
+                                        {/* <Link href="/submitted-data?formId=1&published=1&page=1&filterBy=&filterValue=&from&to=">
                                     <i className="bi bi-circle" />
                                     <span>Tables</span>
                                 </Link> */}
 
-                                    <li className="nav-item">
-                                        {/* <Link
+                                        <li className="nav-item">
+                                            {/* <Link
                                             className="nav-link collapsed"
                                             data-bs-target="#components-nav"
                                             data-bs-toggle="collapse"
@@ -164,67 +164,67 @@ export default function Header() {
                                             <span>Submitted Data</span>
                                             <i className="bi bi-chevron-down ms-auto" />
                                         </Link> */}
-                                        <ul
-                                            id="components-nav"
-                                            className="nav-content collapse "
-                                            data-bs-parent="#sidebar-nav"
-                                        >
-                                            <li>
-                                            <Link href="/submitted-data?formId=1&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Residential</span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                            <Link href="/submitted-data?formId=2&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Eatery</span>
-                                                </Link>
-                                            </li> <li>
-                                            <Link href="/submitted-data?formId=3&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Health</span>
-                                                </Link>
-                                            </li> <li>
-                                            <Link href="/submitted-data?formId=4&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Hospitality</span>
-                                                </Link>
-                                            </li> <li>
-                                            <Link href="/submitted-data?formId=5&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Industry</span>
-                                                </Link>
-                                            </li> <li>
-                                            <Link href="/submitted-data?formId=6&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Institution</span>
-                                                </Link>
-                                            </li> <li>
-                                            <Link href="/submitted-data?formId=7&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Market</span>
-                                                </Link>
-                                            </li> <li>
-                                            <Link href="/submitted-data?formId=8&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
-                                                    <i className="bi bi-circle" />
-                                                    <span>Sanitary</span>
-                                                </Link>
-                                            </li>
+                                            <ul
+                                                id="components-nav"
+                                                className="nav-content collapse "
+                                                data-bs-parent="#sidebar-nav"
+                                            >
+                                                <li>
+                                                    <Link href="/submitted-data?formId=1&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Residential</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/submitted-data?formId=2&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Eatery</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data?formId=3&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Health</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data?formId=4&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Hospitality</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data?formId=5&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Industry</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data?formId=6&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Institution</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data?formId=7&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Market</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data?formId=8&published=1&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Sanitary</span>
+                                                    </Link>
+                                                </li>
 
 
-                                        </ul>
+                                            </ul>
+                                        </li>
                                     </li>
-                                </li>
-                              
 
 
 
-                            </ul>
-                        </li>:<></>}
+
+                                </ul>
+                            </li> : <></>}
 
                         <li className="nav-item">
-                            
+
                             <Link
                                 className={
                                     pathname == "/reports/general" || pathname == "/reports/custom"
@@ -244,22 +244,33 @@ export default function Header() {
                                 id="reports-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session?.user?.privileges?.includes(5)?
+                            > {session?.user?.privileges?.includes(5) ?
                                 <li>
                                     <Link href="/report/general">
                                         <i className="bi bi-circle" />
                                         <span>General</span>
                                     </Link>
-                                </li>:<></>}
-                               {session?.user?.privileges?.includes(6)?  <li>
+                                </li> : <></>}
+                                {/* {session?.user?.privileges?.includes(6)?  <li>
                                     <Link href="#">
                                         <i className="bi bi-circle" />
                                         <span>Custom</span>
                                     </Link>
-                                </li>:<></>}
+                                </li>:<></>} */}
 
                             </ul>
                         </li>
+                        {session?.user?.privileges?.includes(4) ?
+                            <li className="nav-item" >
+                                <Link className={
+                                    pathname == "/map"
+                                        ? "nav-link"
+                                        : "nav-link collapsed"
+                                } href="/map">
+                                    <i className="bi bi-map" />
+                                    <span>Map</span>
+                                </Link>
+                            </li> : <></>}
                         <li className="nav-item">
                             <Link
                                 className={
@@ -281,20 +292,20 @@ export default function Header() {
                                 id="san-reports-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session?.user?.privileges?.includes(7)?
+                            > {session?.user?.privileges?.includes(7) ?
                                 <li>
                                     <Link href="components-alerts.html">
                                         <i className="bi bi-circle" />
                                         <span>Table</span>
                                     </Link>
-                                </li>:<></>}
-                                 {session?.user?.privileges?.includes(8)?
-                                <li>
-                                    <Link href="components-alerts.html">
-                                        <i className="bi bi-circle" />
-                                        <span>Map</span>
-                                    </Link>
-                                </li>:<></>}
+                                </li> : <></>}
+                                {session?.user?.privileges?.includes(8) ?
+                                    <li>
+                                        <Link href="components-alerts.html">
+                                            <i className="bi bi-circle" />
+                                            <span>Map</span>
+                                        </Link>
+                                    </li> : <></>}
 
                             </ul>
                         </li>
@@ -314,19 +325,19 @@ export default function Header() {
                                 id="messages-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session?.user?.privileges?.includes(9)?
+                            > {session?.user?.privileges?.includes(9) ?
                                 <li>
                                     <Link href="/messaging/sms">
                                         <i className="bi bi-circle" />
                                         <span>SMS</span>
                                     </Link>
-                                </li>:<></>}
-                               {session?.user?.privileges?.includes(10)?  <li>
+                                </li> : <></>}
+                                {session?.user?.privileges?.includes(10) ? <li>
                                     <Link href="/messaging/notification">
                                         <i className="bi bi-circle" />
                                         <span>Notifications</span>
                                     </Link>
-                                </li>:<></>}
+                                </li> : <></>}
                                 {/* <li>
                                 <Link href="/messaging/custom">
                                     <i className="bi bi-circle" />
@@ -351,59 +362,59 @@ export default function Header() {
                                 id="config-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#sidebar-nav"
-                            > {session?.user?.privileges?.includes(11)?
+                            > {session?.user?.privileges?.includes(11) ?
                                 <li>
                                     <Link href="/primary-data/district">
                                         <i className="bi bi-circle" />
                                         <span>District</span>
                                     </Link>
-                                </li>:<></>}
-                                {session?.user?.privileges?.includes(12)? <li>
+                                </li> : <></>}
+                                {session?.user?.privileges?.includes(12) ? <li>
                                     <Link href="/primary-data/electoral-area">
                                         <i className="bi bi-circle" />
                                         <span>Electoral Area</span>
                                     </Link>
-                                </li>:<></>}
-                                {session?.user?.privileges?.includes(13)? <li>
+                                </li> : <></>}
+                                {session?.user?.privileges?.includes(13) ? <li>
                                     <Link href="/primary-data/community">
                                         <i className="bi bi-circle" />
                                         <span>Community</span>
                                     </Link>
-                                </li>:<></>}
-                                {session?.user?.privileges?.includes(19)? <li>
+                                </li> : <></>}
+                                {session?.user?.privileges?.includes(19) ? <li>
                                     <Link href="/primary-data/other-data">
                                         <i className="bi bi-circle" />
                                         <span>Other data</span>
                                     </Link>
-                                </li>:<></>}
+                                </li> : <></>}
                             </ul>
                         </li>
-                         {session?.user?.privileges?.includes(14)?
-                        <li className="nav-item" >
-                            <Link className={
-                                pathname == "/assign-data"
-                                    ? "nav-link"
-                                    : "nav-link collapsed"
-                            } href="/assign-data">
-                                <i className="bi bi-arrow-left-right
+                        {session?.user?.privileges?.includes(14) ?
+                            <li className="nav-item" >
+                                <Link className={
+                                    pathname == "/assign-data"
+                                        ? "nav-link"
+                                        : "nav-link collapsed"
+                                } href="/assign-data">
+                                    <i className="bi bi-arrow-left-right
 " />
-                                <span>Assign Data</span>
-                            </Link>
-                        </li>:<></>}
-                         {session?.user?.privileges?.includes(15)?
-                        <li className="nav-item">
-                            <Link className={
-                                pathname == "/user/guide"
-                                    ? "nav-link"
-                                    : "nav-link collapsed"
-                            } href="/user/guide">
-                                <i className="bi bi-book-half
+                                    <span>Assign Data</span>
+                                </Link>
+                            </li> : <></>}
+                        {session?.user?.privileges?.includes(15) ?
+                            <li className="nav-item">
+                                <Link className={
+                                    pathname == "/user/guide"
+                                        ? "nav-link"
+                                        : "nav-link collapsed"
+                                } href="/user/guide">
+                                    <i className="bi bi-book-half
 " />
-                                <span>User guide</span>
-                            </Link>
-                        </li>:<></>}
+                                    <span>User guide</span>
+                                </Link>
+                            </li> : <></>}
                         <li className="nav-heading">Account </li>
-                        {session?.user?.privileges?.includes(16)? <li className="nav-item">
+                        {session?.user?.privileges?.includes(16) ? <li className="nav-item">
                             <Link className={
                                 pathname == "/user"
                                     ? "nav-link"
@@ -412,8 +423,8 @@ export default function Header() {
                                 <i className="bi bi-people" />
                                 <span>Users</span>
                             </Link>
-                        </li>:<></>}
-                        {session?.user?.privileges?.includes(18)? <li className="nav-item">
+                        </li> : <></>}
+                        {session?.user?.privileges?.includes(18) ? <li className="nav-item">
                             <Link className={
                                 pathname == "/user/role"
                                     ? "nav-link"
@@ -422,8 +433,8 @@ export default function Header() {
                                 <i className="bi bi-key" />
                                 <span>Roles</span>
                             </Link>
-                        </li>:<></>}
-                       {session?.user?.privileges?.includes(17)?  <li className="nav-item">
+                        </li> : <></>}
+                        {session?.user?.privileges?.includes(17) ? <li className="nav-item">
                             <Link className={
                                 pathname == "/user/log"
                                     ? "nav-link"
@@ -433,7 +444,7 @@ export default function Header() {
 " />
                                 <span>Logs</span>
                             </Link>
-                        </li>:<></>}
+                        </li> : <></>}
 
                     </ul>
                 </aside> : <></>}

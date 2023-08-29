@@ -278,7 +278,9 @@ export default function AssignData({ data }: any) {
                                                         <td>
                                                             {dt.assignedTo.surname} {dt.assignedTo.otherNames}
                                                         </td>
-                                                        <td>{dt.active == 1 ? "Active" : "Inactive"}</td>
+                                                        <td>{dt?.deleted == 1 ? <>              <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
+                                                        </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
+                                                        </>}</td>
                                                         <td>
                                                             <div className="btn-group" role="group">
                                                                 <button
@@ -294,7 +296,7 @@ export default function AssignData({ data }: any) {
                                                                     className="dropdown-menu"
                                                                     aria-labelledby="btnGroupDrop1"
                                                                 >
-                                                                    <li>
+                                                                    {/* <li>
 
                                                                         <button
                                                                             className="dropdown-item btn btn-sm "
@@ -304,18 +306,18 @@ export default function AssignData({ data }: any) {
 
 
 
-                                                                                // assignedToUser(dt.assignedTo.otherNames+" "+dt.assignedTo.surname);
-                                                                                // assignedFromUser(dt.assignedFrom.otherNames+" "+dt.assignedFrom.surname);
-                                                                                // assignedFromDistrict(dt.assignments);
-                                                                                // assignedToDistrict(data.assignments);
+                                                                                assignedToUser(dt.assignedTo.otherNames+" "+dt.assignedTo.surname);
+                                                                                assignedFromUser(dt.assignedFrom.otherNames+" "+dt.assignedFrom.surname);
+                                                                                assignedFromDistrict(dt.assignments);
+                                                                                assignedToDistrict(data.assignments);
                                                                              
 
                                                                             
                                                                             }}
                                                                         >
                                                                             Edit
-                                                                        </button>
-                                                                    </li>
+                                                                        </button> 
+                                                                    </li>*/}
                                                                     <li>
                                                                         <button
                                                                             className="dropdown-item btn btn-sm "
@@ -323,15 +325,15 @@ export default function AssignData({ data }: any) {
                                                                                 try {
                                                                                     e.preventDefault();
                                                                                     let id = dt.id;
-                                                                                    const response = await axios.delete(
+                                                                                    const response = await axios.put(
                                                                                         `/api/assign-data`,
-                                                                                        {
-                                                                                            data: { id },
-                                                                                        }
+
+                                                                                        { id },
+
                                                                                     );
                                                                                     if (response.status == 200) {
                                                                                         router.refresh()
-                                                                                        return toast.success("User status changed");
+                                                                                        return toast.success("Status changed");
 
                                                                                     }
 
@@ -356,8 +358,8 @@ export default function AssignData({ data }: any) {
                                                                                     e.preventDefault();
                                                                                     let id = dt.id;
                                                                                     const response = await axios.delete(
-                                                                                        `/api/assign-data`,
-                                                                                      
+                                                                                        `/api/assign-data/${dt.id}`,
+
                                                                                     );
                                                                                     router.refresh()
                                                                                     return toast.success("Assignment deleted");
