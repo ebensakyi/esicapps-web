@@ -3,13 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useSearchParams } from "next/navigation";
 
-export default function Home() {
+export default function Login() {
+  const searchParams = useSearchParams()
+
+  const error = searchParams.get("error")
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const login = async (e:any) => {
     e.preventDefault();
     try {
+      if(password==""||phoneNumber==""){
+
+        return toast.error("Login form cannot be empty");
+      }
       let result = await signIn("credentials", {
         phoneNumber, password, 
         callbackUrl:"/"
@@ -69,7 +79,12 @@ export default function Home() {
                   </div>
                   {/* End Logo */}
                   <div className="card mb-3">
-                    <div className="card-body">
+                 
+
+                    <div className="card-body"> {error=="CredentialsSignin" ? <div className="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                            Wrong phone number or password
+                            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div> : <></>}
                       <div className="pt-4 pb-2">
                         <h5 className="card-title text-center pb-0 fs-4">
                           Login to Your Account
@@ -96,7 +111,7 @@ export default function Home() {
                               className="form-control"
                               id="username"
                               required
-                              onChange={(e) => setPhoneNumber(e.target.value)}
+                              onChange={(e) => setPhoneNumber(e.target.value.trim())}
                             />
                             <div className="invalid-feedback">
                               Please enter your phone number.
@@ -122,14 +137,14 @@ export default function Home() {
                               id="password"
                               required
                               value={password}
-                              onChange={(e) => setPassword(e.target.value)}
+                              onChange={(e) => setPassword(e.target.value.trim())}
                             />
                             <div className="invalid-feedback">
                               Please enter your password.
                             </div>
                           </div>
                         </div>
-                        <div className="col-12">
+                        {/* <div className="col-12">
                           <div className="form-check">
                             <input
                               className="form-check-input"
@@ -145,11 +160,11 @@ export default function Home() {
                               Remember me
                             </label>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="col-12">
                           <button
                             className="btn btn-primary w-100"
-                            type="submit"
+                            type="button"
                             onClick={(e) => login(e)}
                           >
                             Login

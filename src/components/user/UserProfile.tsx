@@ -48,8 +48,8 @@ export default function UserProfile({ data }: any) {
         setUserId(data.userData.userId);
 
 
-      
-    },[])
+
+    }, [])
 
 
     const changePassword = async (e: any) => {
@@ -57,7 +57,7 @@ export default function UserProfile({ data }: any) {
             e.preventDefault();
 
 
-         
+
             if (currentPassword == "") {
                 return toast.error("Current password cannot be empty");
             }
@@ -65,7 +65,7 @@ export default function UserProfile({ data }: any) {
                 return toast.error("New password cannot be empty");
             }
             let data = {
-               
+
                 phoneNumber,
                 newPassword,
                 currentPassword,
@@ -75,8 +75,8 @@ export default function UserProfile({ data }: any) {
 
             const response = await axios.put("/api/user/profile", data);
 
-            
-          
+
+
             setCurrentPassword("");
             setNewPassword("");
 
@@ -216,7 +216,7 @@ export default function UserProfile({ data }: any) {
                                             <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
                                         </div>
                                     </div>
-                                   
+
 
                                     <div className="row">
                                         <div className="col-sm-4">
@@ -233,18 +233,18 @@ export default function UserProfile({ data }: any) {
 
                                         </div>
 
-                                       
+
 
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                        {message?  <div className="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
-                {message}
-                <button type="button" className="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>:<></>}
-                      
+                        {message ? <div className="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                            {message}
+                            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div> : <></>}
+
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Change Password</h5>
@@ -252,8 +252,8 @@ export default function UserProfile({ data }: any) {
 
                                 <div className="row">
 
-                                  
-                                  
+
+
                                     <div className="col-sm-3 mb-3">
                                         <label
                                             htmlFor="inputNumber"
@@ -278,8 +278,8 @@ export default function UserProfile({ data }: any) {
                                     </div>
 
 
-                                  
-                                       
+
+
                                     <div className="col-sm-3 mb-3">
 
                                         <label
@@ -288,18 +288,18 @@ export default function UserProfile({ data }: any) {
                                         >
                                             .
                                         </label>
-                                            <button
-                                                className="btn btn-success"
-                                                onClick={(e) => {
-                                                    changePassword(e);
-                                                }}
-                                            >
-                                                Update Password
-                                            </button>
+                                        <button
+                                            className="btn btn-success"
+                                            onClick={(e) => {
+                                                changePassword(e);
+                                            }}
+                                        >
+                                            Update Password
+                                        </button>
 
-                                        </div>
+                                    </div>
 
-                               
+
 
                                 </div>
                             </div>

@@ -33,13 +33,13 @@ export async function POST(request: Request) {
       where: {
         [filterBy]: filterValue,
   
-        createdAt:
-        res?.from != null ||  res?.to != null
-            ? {
-                gte: fromDate,
-                lte: toDate,
-              }
-            : {},
+        // createdAt:
+        // res?.from != null ||  res?.to != null
+        //     ? {
+        //         gte: fromDate,
+        //         lte: toDate,
+        //       }
+        //     : {},
       },
       by: ["inspectionFormId"],
       _count: {
