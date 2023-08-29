@@ -1,11 +1,11 @@
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from "@/config";
-import dynamic from "next/dynamic";
+//import dynamic from "next/dynamic";
 
-const Map = dynamic(() => import("@/src/components/map/Map"), {
-    ssr: false
-});
+// const Map = dynamic(() => import("@/src/components/map/Map"), {
+//     ssr: false
+// });
 
 
 async function getData() {
