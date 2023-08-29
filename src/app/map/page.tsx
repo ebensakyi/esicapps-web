@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from "@/config";
+import Map from "@/src/components/map/Map";
 //import dynamic from "next/dynamic";
 
 // const Map = dynamic(() => import("@/src/components/map/Map"), {
@@ -31,7 +32,7 @@ export default async function Page() {
 
 
 
-    return <Map data={data} />
+    return <Map data={data}/>
 
 
 }
