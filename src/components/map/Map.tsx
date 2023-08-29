@@ -25,22 +25,23 @@ const Map = ({ data }:any) => {
   const position = [7.967, -1.505];
   // const coordinates = [7.967, -1.505];
   return (
-    <MapContainer
-      center={position}
-      zoom={7}
-      scrollWheelZoom={false}
-      style={{ height: "800px" }}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-      />
-      {data?.mapData?.map((point:any, index:any) => (
-        <Marker key={index} position={[point.latitude, point.longitude]}>
-          <Popup>{point.electoralArea}{" | "}{point.community}{" | "}{point.respondentName}{" | "}{point.respondentPhoneNumber}{"\n"}</Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <></>
+    // <MapContainer
+    //   center={position}
+    //   zoom={7}
+    //   scrollWheelZoom={false}
+    //   style={{ height: "800px" }}
+    // >
+    //   <TileLayer
+    //     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    //     attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    //   />
+    //   {data?.mapData?.map((point:any, index:any) => (
+    //     <Marker key={index} position={[point.latitude, point.longitude]}>
+    //       <Popup>{point.electoralArea}{" | "}{point.community}{" | "}{point.respondentName}{" | "}{point.respondentPhoneNumber}{"\n"}</Popup>
+    //     </Marker>
+    //   ))}
+    // </MapContainer>
   );
 };
 
