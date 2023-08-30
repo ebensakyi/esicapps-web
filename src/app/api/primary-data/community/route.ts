@@ -38,8 +38,6 @@ export async function GET(request: Request) {
 
     if (districtId & mobile) {
 
-
-
       const data = await prisma.community.findMany({
         where: { deleted: 0, districtId: Number(districtId) },
       });

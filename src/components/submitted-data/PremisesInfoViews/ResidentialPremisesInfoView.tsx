@@ -24,7 +24,7 @@ console.log(data);
                      <div className="card product">
                        <div className="card-body">
                          <div className="row gy-3">
-                           {data?.submittedData?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
+                           {data?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Toilet facility availabilty
