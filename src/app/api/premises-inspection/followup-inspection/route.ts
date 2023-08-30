@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma/db";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
@@ -26,7 +27,6 @@ export async function POST(request: Request) {
       community: res.community == "null" ? "" : res.community,
       electoralAreaId: Number(res.electoralAreaId),
       electoralArea: res.electoralArea == "null" ? null : res.electoralArea,
-      ghanaPostGps: res.ghanaPostGps == "null" ? "" : res.ghanaPostGps,
       latitude: res.latitude == "null" ? null : res.latitude,
       longitude: res.longitude == "null" ? null : res.longitude,
       accuracy: res.accuracy == "null" ? null : res.accuracy,
@@ -36,10 +36,15 @@ export async function POST(request: Request) {
       respondentDesignationId:
        Number(res.respondentDesignationId),
 
-      waterRating: Number(res.waterRating),
-      solidWasteRating: Number(res.solidWasteRating),
-      liquidWasteRating: Number(res.liquidWasteRating),
-      totalRating: Number(res.totalRating),
+      // waterRating: Number(res.waterRating),
+      // solidWasteRating: Number(res.solidWasteRating),
+      // liquidWasteRating: Number(res.liquidWasteRating),
+      // totalRating: Number(res.totalRating),
+
+      waterRating:res.waterRating,
+      solidWasteRating: res.solidWasteRating,
+      liquidWasteRating:res.liquidWasteRating,
+      totalRating: res.totalRating,
 
       officerComment: res.officerComment == "null" ? null : res.officerComment,
 
@@ -55,16 +60,17 @@ export async function POST(request: Request) {
           ? null
           : Number(res.isNuisanceObservedId),
     };
+    
 
     const response = await prisma.followUpInspection.create( data );
 
-    return new Response(
-      JSON.stringify({
-        response,
-      })
-    );
+    // return  NextResponse.json(
+     
+    //     response
+     
+    // );
   } catch (error: any) {
-    return new Response(JSON.stringify({ message: error.message }));
+    return  NextResponse.json({ message: error.message });
   }
 }
 
