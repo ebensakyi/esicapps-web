@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import axios from 'axios';
 import Link from 'next/link';
@@ -91,11 +92,11 @@ export default function DataView({ data }: any) {
         }
     };
     const downloadInspection = async () => {
-        // const printContents = document.getElementById("printableArea").innerHTML;
-        // const originalContents = document.body.innerHTML;
-        // document.body.innerHTML = printContents;
-        // window.print();
-        // document.body.innerHTML = originalContents;
+        const printContents = document.getElementById("printableArea").innerHTML;
+        const originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
         router.refresh();
     };
 
@@ -398,14 +399,14 @@ export default function DataView({ data }: any) {
                                                         </div>
                                                     </div>
 
-                                                    {formId == 1 ? <ResidentialPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 2 ? <EateryPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 3 ? <HealthPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 4 ? <HospitalityPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 5 ? <InstitutionPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 6 ? <IndustryPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 7 ? <MarketPremisesInfoView data={data} /> : <></>}
-                                                    {formId == 8 ? <SanitaryPremisesInfoView data={data} /> : <></>}
+                                                    {formId == 1 ? <ResidentialPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 2 ? <EateryPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 3 ? <HealthPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 4 ? <HospitalityPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 5 ? <InstitutionPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 6 ? <IndustryPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 7 ? <MarketPremisesInfoView data={data?.submittedData} /> : <></>}
+                                                    {formId == 8 ? <SanitaryPremisesInfoView data={data?.submittedData} /> : <></>}
                                                     <div className="row">
                                                         <div className="col-lg-12">
                                                             <div className="row mb-3">

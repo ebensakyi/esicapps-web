@@ -42,10 +42,22 @@ export async function GET(request: Request) {
     let skip = Number((curPage - 1) * perPage) || 0;
 
     let query = {};
-
+    let count = 0 
     // const data = await prisma.electoralArea.findMany({
     //   where: { deleted: 0, districtId: Number(selectedDistrict) },
     // });
+
+    const districtId = Number(searchParams.get("districtId"));
+    const mobile = Number(searchParams.get("mobile"));
+
+    if (districtId & mobile) {
+
+      const data = await prisma.electoralArea.findMany({
+        where: { deleted: 0, districtId: Number(districtId) },
+      });
+      return NextResponse.json(data);
+
+    }
 
     if (userLevel == 1) {
       query = {
@@ -60,6 +72,7 @@ export async function GET(request: Request) {
           },
         },
       };
+       count = await prisma.electoralArea.count({ where: { deleted: 0, districtId: selectedDistrict },});
 
       
     } else if (userLevel == 2) {
@@ -75,6 +88,8 @@ export async function GET(request: Request) {
           },
         },
       };
+      count = await prisma.electoralArea.count({  where: { deleted: 0, districtId: Number(userRegion) },});
+
     } else if (userLevel == 3) {
       query = {
         where: { deleted: 0, id: Number(userDistrict) },
@@ -88,6 +103,8 @@ export async function GET(request: Request) {
           },
         },
       };
+      count = await prisma.electoralArea.count({   where: { deleted: 0, id: Number(userDistrict) },});
+
     } else {
       query = { where: { deleted: 0 } };
     }
@@ -95,7 +112,8 @@ export async function GET(request: Request) {
 
     const response = await prisma.electoralArea.findMany(query);
 
-    let count = response.length
+
+    
 
     return NextResponse.json({
       response,

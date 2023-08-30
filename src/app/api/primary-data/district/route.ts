@@ -7,8 +7,7 @@ import { getServerSession } from "next-auth";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session :any= await getServerSession(authOptions);
-
+    const session: any = await getServerSession(authOptions);
 
     const data = {
       name: res.districtName,
@@ -32,63 +31,77 @@ export async function GET(request: Request) {
         ? undefined
         : Number(searchParams.get("regionId"));
 
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
     let query = {};
 
-
     let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage) || 0;
-
-
+    let count = 0;
 
     if (userLevel == 1) {
       query = {
         where: { deleted: 0, regionId: selectedRegion },
         skip: skip,
         take: perPage,
-        include: { Region: true },  orderBy: {
+        include: { Region: true },
+        orderBy: {
           name: "asc",
         },
       };
+
+      count = await prisma.district.count({
+        where: { deleted: 0, regionId: selectedRegion },
+      });
     } else if (userLevel == 2) {
       query = {
         where: { deleted: 0, regionId: Number(userRegion) },
         skip: skip,
         take: perPage,
-        include: { Region: true },  orderBy: {
+        include: { Region: true },
+        orderBy: {
           name: "asc",
         },
       };
+      count = await prisma.district.count({
+        where: { deleted: 0, regionId: Number(userRegion) },
+      });
     } else if (userLevel == 3) {
       query = {
         where: { deleted: 0, id: Number(userDistrict) },
         skip: skip,
         take: perPage,
-        include: { Region: true },  orderBy: {
+        include: { Region: true },
+        orderBy: {
           name: "asc",
         },
       };
+      count = await prisma.district.count({
+        where: { deleted: 0, id: Number(userDistrict) },
+      });
     } else {
-      query = { where: { deleted: 0 },  orderBy: {
-        name: "asc",
-      }, };
+      query = {
+        where: { deleted: 0 },
+        orderBy: {
+          name: "asc",
+        },
+      };
     }
 
     const response = await prisma.district.findMany(query);
 
-    let count = response.length
 
     return NextResponse.json({
       response,
       curPage: curPage,
       maxPage: Math.ceil(count / perPage),
-    });  } catch (error) {
+    });
+  } catch (error) {
     console.log(error);
     return NextResponse.json(error);
   }
@@ -97,7 +110,7 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     let districtId = res.districtId;
 
@@ -107,7 +120,6 @@ export async function PUT(request: Request) {
       abbrv: res.abbrv,
     };
 
-    
     const response = await prisma.district.update({
       where: { id: Number(districtId) },
       data,

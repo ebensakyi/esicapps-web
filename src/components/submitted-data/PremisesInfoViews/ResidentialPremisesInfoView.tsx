@@ -1,6 +1,8 @@
+'use client'
 
 const ResidentialPremisesInfoView = ({ data }:any) => {
 
+console.log(data);
 
 
   return (
@@ -22,7 +24,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                      <div className="card product">
                        <div className="card-body">
                          <div className="row gy-3">
-                           {data?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
+                           {data?.submittedData?.ResidentialPremisesInfoSection?.toiletAvailability != null ? (
                              <div className="col-lg-3 col-sm-6">
                                <label htmlFor="invoicenoInput">
                                  Toilet facility availabilty
