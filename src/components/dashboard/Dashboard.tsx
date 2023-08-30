@@ -393,7 +393,7 @@ export default function Dashboard({ data }: any) {
   let userSession :any = session;
 
 
-  let nationalUser: any = userSession.user?.userLevelId == 1 ;
+  let nationalUser: any = userSession?.user?.userLevelId == 1 ;
   let regionalUser: any = userSession?.user?.userLevelId == 2;
   let districtUser: any = userSession?.user?.userLevelId == 3;
 
