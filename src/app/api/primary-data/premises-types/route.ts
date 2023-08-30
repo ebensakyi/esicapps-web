@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const data = await prisma.premisesSubtype.findMany({
+    const data = await prisma.premisesType.findMany({
       where: { deleted: 0 },
     });
 
