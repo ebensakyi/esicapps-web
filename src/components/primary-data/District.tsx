@@ -6,10 +6,14 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
+import ReactPaginate from "react-paginate";
 
 
 
 export default function District({ data }: any) {
+
+    console.log("dist ",data);
+    
 
     const [searchText, setSearchText] = useState();
     const [region, setRegion] = useState("");
@@ -120,6 +124,16 @@ export default function District({ data }: any) {
         } catch (error) {
             return toast.error("An error occurred while deleting");
         }
+    };
+
+    const handlePagination = (page: any) => {
+
+        page = page.selected == -1 ? 1 : page.selected + 1;
+
+        router.push(
+            `${pathname}?page=${page}&searchText=${searchText}`
+
+        );
     };
 
     return (
@@ -248,7 +262,7 @@ export default function District({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.districts.map((data: any) => {
+                                        {data?.districts?.response?.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
@@ -317,6 +331,26 @@ export default function District({ data }: any) {
 
                                     </tbody>
                                 </table>
+                                <ReactPaginate
+                                            marginPagesDisplayed={2}
+                                            pageRangeDisplayed={5}
+                                            previousLabel={"Previous"}
+                                            nextLabel={"Next"}
+                                            breakLabel={"..."}
+                                            initialPage={data.districts.curPage - 1}
+                                            pageCount={data.districts.maxPage}
+                                            onPageChange={handlePagination}
+                                            breakClassName={"page-item"}
+                                            breakLinkClassName={"page-link"}
+                                            containerClassName={"pagination"}
+                                            pageClassName={"page-item"}
+                                            pageLinkClassName={"page-link"}
+                                            previousClassName={"page-item"}
+                                            previousLinkClassName={"page-link"}
+                                            nextClassName={"page-item"}
+                                            nextLinkClassName={"page-link"}
+                                            activeClassName={"active"}
+                                        />
                             </div>
                         </div>
                     </div>

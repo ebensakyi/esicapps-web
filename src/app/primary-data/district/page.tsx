@@ -19,9 +19,10 @@ async function getRegions() {
     return await response.json();
 
 }
-async function getDistricts() {
+async function getDistricts(searchParams: any) {
+    let { page } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, {  cache: 'no-store', method: "GET",
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district?page=${page}`, {  cache: 'no-store', method: "GET",
     headers: headers() });
 
     if (!response.ok) {
@@ -32,10 +33,10 @@ async function getDistricts() {
 }
 
 
-export default async function Page() {
+export default async function Page({ searchParams }: any) {
 
     const regions = await getRegions()
-    const districts = await getDistricts()
+    const districts = await getDistricts(searchParams)
 
 
     let data = { regions, districts }

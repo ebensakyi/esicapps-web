@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
     const selectedDistrict =
       searchParams.get("districtId") == null || ""
         ? undefined
@@ -35,6 +35,12 @@ export async function GET(request: Request) {
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
+
+    let curPage = Number(searchParams.get("page"));
+
+    let perPage = 10;
+    let skip = Number((curPage - 1) * perPage) || 0;
+
     let query = {};
 
     // const data = await prisma.electoralArea.findMany({
@@ -44,6 +50,8 @@ export async function GET(request: Request) {
     if (userLevel == 1) {
       query = {
         where: { deleted: 0, districtId: selectedDistrict },
+        skip: skip,
+        take: perPage,
         include: {
           District: {
             include: {
@@ -52,9 +60,13 @@ export async function GET(request: Request) {
           },
         },
       };
+
+      
     } else if (userLevel == 2) {
       query = {
         where: { deleted: 0, districtId: Number(userRegion) },
+        skip: skip,
+        take: perPage,
         include: {
           District: {
             include: {
@@ -66,6 +78,8 @@ export async function GET(request: Request) {
     } else if (userLevel == 3) {
       query = {
         where: { deleted: 0, id: Number(userDistrict) },
+        skip: skip,
+        take: perPage,
         include: {
           District: {
             include: {
@@ -79,34 +93,36 @@ export async function GET(request: Request) {
     }
 
 
-    const data = await prisma.electoralArea.findMany(query);
+    const response = await prisma.electoralArea.findMany(query);
 
-    
+    let count = response.length
 
-
-    return NextResponse.json(data);
+    return NextResponse.json({
+      response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json(error);
   }
 }
 
-
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-    let id = res.electoralAreaId
+    let id = res.electoralAreaId;
     const data = {
       name: res.electoralAreaName,
       districtId: Number(res.districtId),
     };
 
-    const response = await prisma.electoralArea.update({where:{id}, data });
+    const response = await prisma.electoralArea.update({ where: { id }, data });
 
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(error);
-    return NextResponse.json(error,{status:500});
+    return NextResponse.json(error, { status: 500 });
   }
 }

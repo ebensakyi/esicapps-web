@@ -17,6 +17,7 @@ async function getRegions() {
 
 }
 async function getDistricts() {
+    
 
     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, {  cache: 'no-store', method: "GET",
     headers: headers() });
@@ -28,9 +29,9 @@ async function getDistricts() {
 
 }
 
-async function getElectoralAreas() {
-
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/electoral-area`, {  cache: 'no-store', method: "GET",
+async function getElectoralAreas(searchParams: any) {
+let { page } = searchParams
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/electoral-area?page=${page}`, {  cache: 'no-store', method: "GET",
     headers: headers() });
 
     if (!response.ok) {
@@ -42,12 +43,12 @@ async function getElectoralAreas() {
 
 
 
-export default async function Page() {
+export default async function Page({ searchParams }: any) {
   
     const regions = await getRegions()
     const districts = await getDistricts()
 
-    const electoralAreas = await getElectoralAreas()
+    const electoralAreas = await getElectoralAreas(searchParams)
 
     let data = {regions,districts, electoralAreas }
 

@@ -17,9 +17,10 @@ async function getRegions() {
 
 
 
-async function getCommunities() {
+async function getCommunities(searchParams: any) {
+    let { page } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/community`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/community?page=${page}`, { cache: 'no-store' });
     
 
     if (!response.ok) {
@@ -31,11 +32,11 @@ async function getCommunities() {
 
 
 
-export default async function Page() {
+export default async function Page({ searchParams }: any) {
   
     const regions = await getRegions()
   
-    const communities = await getCommunities()
+    const communities = await getCommunities(searchParams)
 
     let data = {regions, communities }
 

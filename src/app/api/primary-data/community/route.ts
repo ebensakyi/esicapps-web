@@ -30,6 +30,11 @@ export async function GET(request: Request) {
     const districtId = Number(searchParams.get("districtId"));
     const mobile = Number(searchParams.get("mobile"));
 
+    let curPage = Number(searchParams.get("page"));
+
+    let perPage = 10;
+    let skip = Number((curPage - 1) * perPage) || 0;
+
 
     if (districtId & mobile) {
 
@@ -41,7 +46,12 @@ export async function GET(request: Request) {
       return NextResponse.json(data);
 
     }
-    const data = await prisma.community.findMany({
+    const count = await prisma.community.count({
+      where: { deleted: 0 },
+     
+    });
+
+    const response = await prisma.community.findMany({
       where: { deleted: 0 },
       include: {
         ElectoralArea: {
@@ -54,9 +64,14 @@ export async function GET(request: Request) {
           },
         },
       },
+      skip: skip,
+      take: perPage,
     });
-    return NextResponse.json(data);
-
+    return NextResponse.json({
+      response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });
   } catch (error) {
     return NextResponse.json(error);
   }

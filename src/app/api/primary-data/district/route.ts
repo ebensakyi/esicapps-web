@@ -39,9 +39,19 @@ export async function GET(request: Request) {
     const userRegion = session?.user?.regionId;
     let query = {};
 
+
+    let curPage = Number(searchParams.get("page"));
+
+    let perPage = 10;
+    let skip = Number((curPage - 1) * perPage) || 0;
+
+
+
     if (userLevel == 1) {
       query = {
         where: { deleted: 0, regionId: selectedRegion },
+        skip: skip,
+        take: perPage,
         include: { Region: true },  orderBy: {
           name: "asc",
         },
@@ -49,6 +59,8 @@ export async function GET(request: Request) {
     } else if (userLevel == 2) {
       query = {
         where: { deleted: 0, regionId: Number(userRegion) },
+        skip: skip,
+        take: perPage,
         include: { Region: true },  orderBy: {
           name: "asc",
         },
@@ -56,6 +68,8 @@ export async function GET(request: Request) {
     } else if (userLevel == 3) {
       query = {
         where: { deleted: 0, id: Number(userDistrict) },
+        skip: skip,
+        take: perPage,
         include: { Region: true },  orderBy: {
           name: "asc",
         },
@@ -66,10 +80,15 @@ export async function GET(request: Request) {
       }, };
     }
 
-    const data = await prisma.district.findMany(query);
+    const response = await prisma.district.findMany(query);
 
-    return NextResponse.json(data);
-  } catch (error) {
+    let count = response.length
+
+    return NextResponse.json({
+      response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });  } catch (error) {
     console.log(error);
     return NextResponse.json(error);
   }

@@ -6,12 +6,16 @@ import axios from 'axios';
 import { useRef, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
+import ReactPaginate from "react-paginate";
 
 
 
 
 
 export default function Community({ data }: any) {
+
+
+
     const formRef = useRef<HTMLFormElement>(null);
 
     const [communityFileUrl, setCommunityFileUrl] = useState("");
@@ -212,6 +216,16 @@ export default function Community({ data }: any) {
             setCommunityFile(i);
             setCommunityFileUrl(URL.createObjectURL(i));
         }
+    };
+
+    const handlePagination = (page: any) => {
+
+        page = page.selected == -1 ? 1 : page.selected + 1;
+
+        router.push(
+            `${pathname}?page=${page}&searchText=${searchText}`
+
+        );
     };
 
     return (
@@ -462,7 +476,7 @@ export default function Community({ data }: any) {
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Electoral Area</h5>
+                                <h5 className="card-title">Communities</h5>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
@@ -478,7 +492,7 @@ export default function Community({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data?.communities.map((data: any) => {
+                                        {data?.communities?.response?.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
@@ -555,6 +569,26 @@ export default function Community({ data }: any) {
 
                                     </tbody>
                                 </table>
+                                <ReactPaginate
+                                            marginPagesDisplayed={2}
+                                            pageRangeDisplayed={5}
+                                            previousLabel={"Previous"}
+                                            nextLabel={"Next"}
+                                            breakLabel={"..."}
+                                            initialPage={data.communities.curPage - 1}
+                                            pageCount={data.communities.maxPage}
+                                            onPageChange={handlePagination}
+                                            breakClassName={"page-item"}
+                                            breakLinkClassName={"page-link"}
+                                            containerClassName={"pagination"}
+                                            pageClassName={"page-item"}
+                                            pageLinkClassName={"page-link"}
+                                            previousClassName={"page-item"}
+                                            previousLinkClassName={"page-link"}
+                                            nextClassName={"page-item"}
+                                            nextLinkClassName={"page-link"}
+                                            activeClassName={"active"}
+                                        />
                             </div>
                         </div>
                     </div>
