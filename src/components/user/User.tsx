@@ -760,7 +760,7 @@ export default function User({ data }: any) {
                                             <th scope="col">Level</th>
                                             <th scope="col">Region</th>
                                             <th scope="col">District</th>
-                                            <th scope="col">Password</th>
+                                            <th scope="col">OTP</th>
 
                                             <th scope="col">Status</th>
 

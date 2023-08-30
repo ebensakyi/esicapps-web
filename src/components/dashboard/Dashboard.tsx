@@ -869,7 +869,7 @@ export default function Dashboard({ data }: any) {
 " />
                       </div>
                       <div className="ps-3">
-                        <h6>145
+                        <h6>0
                         </h6>
 
                         <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
