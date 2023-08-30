@@ -231,10 +231,11 @@ export default function DataView({ data }: any) {
                                                             <ol className="breadcrumb m-0">
                                                                 <li className="breadcrumb-item">
                                                                     <Link
-                                                                        href={{
-                                                                            pathname: `/submitted-data?formId=${formId}&published=${published}`,
+                                                                    href="#"
+                                                                        // href={{
+                                                                        //     pathname: `/submitted-data?formId=${formId}&published=${published}`,
 
-                                                                        }}
+                                                                        // }}
                                                                     >
                                                                         Go to Data list
                                                                     </Link>

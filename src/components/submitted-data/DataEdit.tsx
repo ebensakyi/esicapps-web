@@ -862,13 +862,14 @@ export default function DataEdit({ data }: any) {
                                     <ol className="breadcrumb m-0">
                                         <li className="breadcrumb-item">
                                             <Link
-                                                href={{
-                                                    pathname: `/submitted-data/data`,
-                                                    query: {
-                                                        published: published,
-                                                        inspectionFormId: formId,
-                                                    },
-                                                }}
+                                            href="#"
+                                                // href={{
+                                                //     pathname: `/submitted-data/data`,
+                                                //     query: {
+                                                //         published: published,
+                                                //         inspectionFormId: formId,
+                                                //     },
+                                                // }}
                                             >
                                                 Go to Data list
                                             </Link>
