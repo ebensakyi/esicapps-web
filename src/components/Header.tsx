@@ -225,7 +225,7 @@ export default function Header() {
                             <li className="nav-item">
                                 <Link
                                     className="nav-link collapsed"
-                                    data-bs-target="#components-nav"
+                                    data-bs-target="#components-nav1"
                                     data-bs-toggle="collapse"
                                     href="#"
                                 >
@@ -234,7 +234,7 @@ export default function Header() {
                                     <i className="bi bi-chevron-down ms-auto" />
                                 </Link>
                                 <ul
-                                    id="components-nav"
+                                    id="components-nav1"
                                     className="nav-content collapse "
                                     data-bs-parent="#sidebar-nav"
                                 >
@@ -257,7 +257,7 @@ export default function Header() {
                                             <i className="bi bi-chevron-down ms-auto" />
                                         </Link> */}
                                             <ul
-                                                id="components-nav"
+                                                id="components-nav1"
                                                 className="nav-content collapse "
                                                 data-bs-parent="#sidebar-nav"
                                             >
