@@ -64,3 +64,7 @@ update "District"
 1. work on followup inspection with images
 2. work on data transfer
 3. work on app website
+
+
+
+1. log all activies

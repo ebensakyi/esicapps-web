@@ -442,7 +442,6 @@ export default function User({ data }: any) {
               
             );
 
-            console.log(response);
             
 
             if (response.status == 200) {
