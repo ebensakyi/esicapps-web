@@ -3,8 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
-import axios from 'axios';
-import { useState } from 'react';
+
 
 
 
@@ -48,7 +47,7 @@ export default function PrivacyPolicy({ data }: any) {
 
     <p>Effective Date: 1st August 2023</p>
 
-    <p>This Privacy Policy outlines how ESICApps ("we," "us," or "our") collects, uses, discloses, and secures personal and sensitive user data. By using ESICApps, you agree to the terms described in this policy.</p>
+    <p>This Privacy Policy outlines how ESICApps (`we,` `us,` or `our``) collects, uses, discloses, and secures personal and sensitive user data. By using ESICApps, you agree to the terms described in this policy.</p>
 
     <h2>1. Types of Personal and Sensitive User Data Collected</h2>
 
@@ -99,7 +98,7 @@ export default function PrivacyPolicy({ data }: any) {
 
     <p>We retain user data for as long as necessary to fulfill the purposes outlined in this policy. Users have the right to request access to their data and its deletion. Please contact us at esicapp2022@gmail.com for such requests.</p>
 
-    <h2>6. Children's Privacy</h2>
+    <h2>6. Children`s Privacy</h2>
 
     <p>Our app is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you believe your child has provided us with personal information, please contact us to have it removed.</p>
 
