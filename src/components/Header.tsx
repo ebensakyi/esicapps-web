@@ -510,7 +510,7 @@ export default function Header() {
                                 pathname == "/user"
                                     ? "nav-link"
                                     : "nav-link collapsed"
-                            } href="/user">
+                            } href="/user?page=1&searchText=">
                                 <i className="bi bi-people" />
                                 <span>Users</span>
                             </Link>

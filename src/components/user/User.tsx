@@ -1,15 +1,13 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react';
-import { userLevel } from '../../../prisma/seed/userLevel';
-import { district } from '../../../prisma/seed/district';
+import { useRef, useState } from 'react';
+
 import axios from 'axios';
-import router from 'next/router';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { userRole } from '../../../prisma/seed/userRole';
+import ReactPaginate from 'react-paginate';
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
@@ -20,10 +18,14 @@ export default function User({ data }: any) {
     const loggedInUserDistrict = session?.user?.districtId;
     const loggedInUserLevel = session?.user?.userLevelId
 
+    const pathname = usePathname()
 
+
+    const searchTextRef: any = useRef("");
+    const filterRef: any = useRef(null);
 
     const searchText = searchParams.get('searchText');
-    const formId = searchParams.get('formId');
+    const page = searchParams.get('page');
 
 
     const [userRole, setUserRole] = useState("");
@@ -101,36 +103,15 @@ export default function User({ data }: any) {
             console.log(error);
         }
     };
-    // const autoHandleSearch = (searchText: any) => {
-    //     try {
-    //         let currentUrl = router.pathname;
-    //         const path = router.pathname;
-    //         const query = router.query;
+    const handlePagination = (page: any) => {
 
-    //         let page = 1// query.page;
+        page = page.selected == -1 ? 1 : page.selected + 1;
 
-    //         router.push({
-    //             pathname: path,
-    //             query: {
-    //                 page,
-    //                 searchText,
-    //             },
-    //         });
+        router.push(
+            `${pathname}?page=${page}&searchText=${searchText}`
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // const handlePagination = (page: any) => {
-    //     const path = router.pathname;
-    //     const query = router.query;
-    //     query.page = page.selected + 1;
-    //     router.push({
-    //         pathname: path,
-    //         query: query,
-    //     });
-    // };
+        );
+    };
 
     const addUser = async (e: any) => {
         try {
@@ -441,6 +422,40 @@ export default function User({ data }: any) {
     };
 
 
+    const handleSearch = () => {
+        try {
+            let _searchText: any = searchTextRef?.current?.value
+           
+
+            router.push(
+                `${pathname}?searchText=${_searchText}&page=${page}`
+
+            );
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleExportAll = async () => {
+        try {
+            let searchText = searchParams.get('searchText')
+            const response = await axios.get(
+                `/api/user?exportFile=true`,
+              
+            );
+
+            console.log(response);
+            
+
+            if (response.status == 200) {
+                router.push(response.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     return (
         <main id="main" className="main">
@@ -470,6 +485,7 @@ export default function User({ data }: any) {
             {/* End Page Title */}
             <section className="section">
                 <div className="row">
+                
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
@@ -755,8 +771,32 @@ export default function User({ data }: any) {
                         <div className="card">
                             <div className="card-body table-responsive">
                                 <h5 className="card-title">Users List</h5>
-                                <table className="table datatable table-striped ">
+                                <div className="row">
+                                    <div className="col-md-4">
+                                                <div className="input-group mb-3">
+                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                                        id="searchText"
+                                                        name="searchText" />
+                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                                </div>
 
+                                            </div>
+                                            <div className="col-md-4">
+                                                <div className="input-group mb-3">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm btn-success  "
+                                                        onClick={handleExportAll}
+                                                    >
+                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                                        Export as excel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                </div>
+                                
+                                <table className="table datatable table-striped ">
+                                
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
@@ -774,7 +814,7 @@ export default function User({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.users.map((user: any) => (
+                                        {data.users.response.map((user: any) => (
                                             <tr key={user.id}>
                                                 <td>{user?.otherNames} {user?.surname}</td>
                                                 <td>{user?.phoneNumber}</td>
@@ -907,6 +947,26 @@ export default function User({ data }: any) {
 
                                     </tbody>
                                 </table>
+                                <ReactPaginate
+                                            marginPagesDisplayed={2}
+                                            pageRangeDisplayed={5}
+                                            previousLabel={"Previous"}
+                                            nextLabel={"Next"}
+                                            breakLabel={"..."}
+                                            initialPage={data.users.curPage - 1}
+                                            pageCount={data.users.maxPage}
+                                            onPageChange={handlePagination}
+                                            breakClassName={"page-item"}
+                                            breakLinkClassName={"page-link"}
+                                            containerClassName={"pagination"}
+                                            pageClassName={"page-item"}
+                                            pageLinkClassName={"page-link"}
+                                            previousClassName={"page-item"}
+                                            previousLinkClassName={"page-link"}
+                                            nextClassName={"page-item"}
+                                            nextLinkClassName={"page-link"}
+                                            activeClassName={"active"}
+                                        />
                             </div>
                         </div>
                     </div>

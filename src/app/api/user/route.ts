@@ -7,13 +7,18 @@ import { authOptions } from "../auth/[...nextauth]/options";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { sendSMS } from "@/utils/send-hubtel-sms";
+import { bool } from "sharp";
+import AWS from "aws-sdk";
+import fs from "fs";
 
+const XLSX = require("xlsx");
 export async function POST(request: Request) {
   try {
     const res = await request.json();
     const session: any = await getServerSession(authOptions);
 
     let loginUserLevel = session?.user?.userLevelId;
+    let fileUrl
 
     let password: string = (await generateCode(4)) as string;
     const salt = bcrypt.genSaltSync(10);
@@ -63,21 +68,57 @@ export async function GET(request: Request) {
     // const session :any= await getServerSession(authOptions);
 
     const { searchParams } = new URL(request.url);
-    const searchText = searchParams.get("searchText");
+    const searchText =
+      searchParams.get("searchText")?.toString() == undefined
+        ? ""
+        : searchParams.get("searchText")?.toString();
     const districtId = searchParams.get("districtId") || undefined;
+    let exportFile = searchParams.get("exportFile");
 
-    const page: any = searchParams.get("page") || 1;
+    let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((page - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage) || 0;
 
     // let userLevel = loggedInUserData?.userLevelId;
     // let region = loggedInUserData?.regionId;
     // let district = loggedInUserData?.districtId;
     // let users;
+
     if (districtId) {
-      const data = await prisma.user.findMany({
-        where: { districtId: Number(districtId) },
+      const response = await prisma.user.findMany({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+                districtId: Number(districtId),
+              }
+            : { districtId: Number(districtId) },
         include: {
           Region: true,
           District: true,
@@ -89,11 +130,91 @@ export async function GET(request: Request) {
         },
       });
 
-      return NextResponse.json(data);
+      const count = await prisma.user.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+                districtId: Number(districtId),
+              }
+            : { districtId: Number(districtId) },
+      });
+
+      if (exportFile) {
+        let url = await export2Excel(response);
+
+        return NextResponse.json(url);
+      }
+
+      return NextResponse.json({
+        response,
+        curPage: curPage,
+        maxPage: Math.ceil(count / perPage),
+      });
     }
 
-    const data = await prisma.user.findMany({
-      // where: { deleted: 0 },
+    const response = await prisma.user.findMany({
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  surname: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  otherNames: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  phoneNumber: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  email: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  District: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              ],
+            }
+          : {},
       include: {
         Region: true,
         District: true,
@@ -105,7 +226,59 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json(data);
+    const count = await prisma.user.count({
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  surname: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  otherNames: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  phoneNumber: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  email: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  District: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+              ],
+            }
+          : {},
+
+      orderBy: {
+        id: "desc",
+      },
+    });
+
+    if (exportFile) {
+      let url = await export2Excel(response);
+
+      return NextResponse.json(url);    }
+
+    return NextResponse.json({
+      response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });
   } catch (error) {
     return NextResponse.json(error);
   }
@@ -176,3 +349,66 @@ export async function DELETE(request: Request) {
     return NextResponse.json(error);
   }
 }
+
+const uploadFile = async (fileName: any) => {
+  try {
+    AWS.config.update({
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    });
+
+    var s3 = new AWS.S3();
+
+    var filePath = `./public/temp/${fileName}`;
+
+    var params = {
+      Bucket: "esicapps-exports",
+      Body: fs.createReadStream(filePath),
+      // Key: prefix + "/" + fileName,
+      Key: fileName,
+    };
+
+    let stored = await s3.upload(params).promise();
+
+    return stored.Location;
+  } catch (error) {
+    console.log("Upload File Error ", error);
+    return error;
+  }
+};
+
+const flattenArray = async (data: any) => {
+  let newData = [];
+
+  for (let i = 0; i < data?.length; i++) {
+    newData?.push({
+      Name: data[i]?.otherNames + data[i]?.surname,
+      "Phone Number": data[i]?.phoneNumber,
+      Email: data[i]?.email,
+      "User Level": data[i]?.UserLevel?.name,
+      "Region": data[i]?.Region?.name,
+      "District": data[i]?.District?.name,
+
+    });
+  }
+
+  return newData;
+};
+
+const export2Excel = async (data: any) => {
+  try {
+    let flatData = await flattenArray(data);
+
+    const workSheet = XLSX.utils.json_to_sheet(flatData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
+    let filePath = `./public/temp/users.xlsx`;
+    XLSX.writeFile(workBook, filePath);
+
+    let url = await uploadFile("users.xlsx");
+
+    return url;
+  } catch (error) {
+    console.log("error NextResponse=> ");
+  }
+};

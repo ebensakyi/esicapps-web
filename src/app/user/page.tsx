@@ -50,9 +50,11 @@ async function getRegion() {
 
 // }
 
-async function getUsers() {
+async function getUsers(searchParams: any) {
+    let { searchText } = searchParams
+    let { page } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/user?page=${page}&searchText=${searchText}`, { cache: 'no-store' });
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
@@ -61,8 +63,8 @@ async function getUsers() {
 }
 
 
-export default async function Page() {
-    const users = await getUsers()
+export default async function Page({ searchParams }: any) {
+    const users = await getUsers(searchParams)
     const roles = await getRoles()
     const userLevels = await getUserLevel()
     const regions = await getRegion()
