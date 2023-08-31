@@ -36,10 +36,11 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
-    let curPage = Number(searchParams.get("page"));
+    let curPage = Number(searchParams.get("page"))||0;
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+
 
     let query = {};
     let count = 0 

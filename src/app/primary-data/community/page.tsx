@@ -16,6 +16,18 @@ async function getRegions() {
 }
 
 
+async function getDistricts() {
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+
+}
+
+
 
 async function getCommunities(searchParams: any) {
     let { page } = searchParams
@@ -35,10 +47,11 @@ async function getCommunities(searchParams: any) {
 export default async function Page({ searchParams }: any) {
   
     const regions = await getRegions()
-  
+      const districts = await getDistricts()
+
     const communities = await getCommunities(searchParams)
 
-    let data = {regions, communities }
+    let data = {regions,districts, communities }
 
     
 

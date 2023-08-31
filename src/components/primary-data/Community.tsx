@@ -14,6 +14,9 @@ import ReactPaginate from "react-paginate";
 
 export default function Community({ data }: any) {
 
+    console.log("Data==>",data);
+    
+
 
 
     const formRef = useRef<HTMLFormElement>(null);
@@ -52,7 +55,7 @@ export default function Community({ data }: any) {
             const response = await axios.get(
                 "/api/primary-data/district?regionId=" + regionId
             );
-            setDistricts(response.data);
+            setDistricts(response.data.response);
         } catch (error) {
             console.log(error);
         }
@@ -65,8 +68,10 @@ export default function Community({ data }: any) {
                 "/api/primary-data/electoral-area?districtId=" + districtId
             );
 
+            console.log("EA",response.data);
+            
 
-            setElectoralAreas(response.data);
+            setElectoralAreas(response.data.response);
         } catch (error) {
             console.log(error);
         }

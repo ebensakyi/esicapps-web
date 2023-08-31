@@ -44,15 +44,12 @@ export async function GET(request: Request) {
 
     let curPage = Number(searchParams.get("page")) || 0
 
-    console.log("searchParams.get( ",searchParams.get("page"));
     
 
     let perPage = 10;
     let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
 
-    console.log(
-      'skip',skip
-    );
+  
     
     let count = 0;
 
