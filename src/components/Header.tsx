@@ -222,7 +222,98 @@ export default function Header() {
 
                                 </ul>
                             </li> : <></>}
+                            <li className="nav-item">
+                                <Link
+                                    className="nav-link collapsed"
+                                    data-bs-target="#components-nav"
+                                    data-bs-toggle="collapse"
+                                    href="#"
+                                >
+                                    <i className="bi bi-intersect" />
+                                    <span>Follow Ups</span>
+                                    <i className="bi bi-chevron-down ms-auto" />
+                                </Link>
+                                <ul
+                                    id="components-nav"
+                                    className="nav-content collapse "
+                                    data-bs-parent="#sidebar-nav"
+                                >
 
+                                    <li>
+                                        {/* <Link href="/submitted-data?formId=1&published=1&page=1&filterBy=&filterValue=&from&to=">
+                                    <i className="bi bi-circle" />
+                                    <span>Tables</span>
+                                </Link> */}
+
+                                        <li className="nav-item">
+                                            {/* <Link
+                                            className="nav-link collapsed"
+                                            data-bs-target="#components-nav"
+                                            data-bs-toggle="collapse"
+                                            href="#"
+                                        >
+                                            <i className="bi bi-table" />
+                                            <span>Submitted Data</span>
+                                            <i className="bi bi-chevron-down ms-auto" />
+                                        </Link> */}
+                                            <ul
+                                                id="components-nav"
+                                                className="nav-content collapse "
+                                                data-bs-parent="#sidebar-nav"
+                                            >
+                                                <li>
+                                                    <Link href="/submitted-data/follow-up?formId=1&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Residential</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/submitted-data/follow-up?formId=2&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Eatery</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data/follow-up?formId=3&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Health</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data/follow-up?formId=4&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Hospitality</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data/follow-up?formId=5&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Industry</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data/follow-up?formId=6&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Institution</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data/follow-up?formId=7&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Market</span>
+                                                    </Link>
+                                                </li> <li>
+                                                    <Link href="/submitted-data/follow-up?formId=8&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                        <i className="bi bi-circle" />
+                                                        <span>Sanitary</span>
+                                                    </Link>
+                                                </li>
+
+
+                                            </ul>
+                                        </li>
+                                    </li>
+
+
+
+
+                                </ul>
+                            </li> 
                         <li className="nav-item">
 
                             <Link

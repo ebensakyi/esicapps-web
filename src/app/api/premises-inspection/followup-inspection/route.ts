@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    const user : any = await prisma.user.findFirst({
+    const user: any = await prisma.user.findFirst({
       where: { id: Number(res.userId) },
     });
     const district = user?.districtId;
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     });
     let region = Number(districtData?.regionId);
 
-    const data:any = {
+    const data: any = {
       id: res.id,
 
       prevInspectionId: res.prevInspectionId,
@@ -33,17 +33,16 @@ export async function POST(request: Request) {
       respondentName: res.respondentName == "null" ? null : res.respondentName,
       respondentPhoneNumber:
         res.respondentPhoneNumber == "null" ? null : res.respondentPhoneNumber,
-      respondentDesignationId:
-       Number(res.respondentDesignationId),
+      respondentDesignationId: Number(res.respondentDesignationId),
 
       // waterRating: Number(res.waterRating),
       // solidWasteRating: Number(res.solidWasteRating),
       // liquidWasteRating: Number(res.liquidWasteRating),
       // totalRating: Number(res.totalRating),
 
-      waterRating:res.waterRating,
+      waterRating: res.waterRating,
       solidWasteRating: res.solidWasteRating,
-      liquidWasteRating:res.liquidWasteRating,
+      liquidWasteRating: res.liquidWasteRating,
       totalRating: res.totalRating,
 
       officerComment: res.officerComment == "null" ? null : res.officerComment,
@@ -60,17 +59,14 @@ export async function POST(request: Request) {
           ? null
           : Number(res.isNuisanceObservedId),
     };
-    
 
-    const response = await prisma.followUpInspection.create( data );
+    const response = await prisma.followUpInspection.create({ data });
 
-    // return  NextResponse.json(
-     
-    //     response
-     
-    // );
+    return  NextResponse.json(
+        response,{status:200}
+    );
   } catch (error: any) {
-    return  NextResponse.json({ message: error.message });
+    return NextResponse.json({ message: error.message });
   }
 }
 

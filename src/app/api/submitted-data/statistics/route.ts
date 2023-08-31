@@ -9,6 +9,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const userId:any = Number(searchParams.get("userId"));
 
+    
+
     const residentialBasicCount = await prisma.inspection.count({
       where: {
         deleted: 0,
@@ -142,35 +144,31 @@ export async function GET(request: Request) {
       },
     });
 
-    const residentialFollowUpCount = await prisma.inspection.count({
+    const residentialFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 1,
       },
     });
-    const eateryFollowUpCount = await prisma.inspection.count({
+    const eateryFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 2,
       },
     });
-    const healthFollowUpCount = await prisma.inspection.count({
+    const healthFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 3,
       },
     });
-    const hospitalityFollowUpCount = await prisma.inspection.count({
+    const hospitalityFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 4,
       },
     });
@@ -182,31 +180,80 @@ export async function GET(request: Request) {
         inspectionFormId: 5,
       },
     });
-    const industryFollowUpCount = await prisma.inspection.count({
+    const industryFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 6,
       },
     });
 
-    const marketFollowUpCount = await prisma.inspection.count({
+    const marketFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 7,
       },
     });
-    const sanitationFollowUpCount = await prisma.inspection.count({
+    const sanitationFollowUpCount = await prisma.followUpInspection.count({
       where: {
         deleted: 0,
         userId: userId,
-        inspectionTypeId: 3,
         inspectionFormId: 8,
       },
     });
+
+    console.log([
+      {
+        name: "Residential",
+        basicCount: residentialBasicCount,
+        reInspectionCount: residentialReInspectionCount,
+        followUpCount: residentialFollowUpCount,
+      },
+      {
+        name: "Eatery",
+        basicCount: eateryBasicCount,
+        reInspectionCount: eateryReInspectionCount,
+        followUpCount: eateryFollowUpCount,
+      },
+      {
+        name: "Health",
+        basicCount: healthBasicCount,
+        reInspectionCount: healthReInspectionCount,
+        followUpCount: healthFollowUpCount,
+      },
+      {
+        name: "Hospitality",
+        basicCount: hospitalityBasicCount,
+        reInspectionCount: hospitalityReInspectionCount,
+        followUpCount: hospitalityFollowUpCount,
+      },
+      {
+        name: "Institution",
+        basicCount: institutionBasicCount,
+        reInspectionCount: institutionReInspectionCount,
+        followUpCount: institutionFollowUpCount,
+      },
+      {
+        name: "Industry",
+        basicCount: industryBasicCount,
+        reInspectionCount: industryReInspectionCount,
+        followUpCount: industryFollowUpCount,
+      },
+      {
+        name: "Market",
+        basicCount: marketBasicCount,
+        reInspectionCount: marketReInspectionCount,
+        followUpCount: marketFollowUpCount,
+      },
+      {
+        name: "Sanitary",
+        basicCount: sanitationBasicCount,
+        reInspectionCount: sanitationReInspectionCount,
+        followUpCount: sanitationFollowUpCount,
+      },
+    ]);
+    
 
 
     return NextResponse.json([
