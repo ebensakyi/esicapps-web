@@ -1117,7 +1117,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.animalsPermitAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Animal permit
+                                                                    Animal permit availability
                                                                 </label>
 
                                                                 <select
@@ -1129,8 +1129,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={animalPermitAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1149,7 +1149,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.buildingPermitAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Building permit
+                                                                    Building permit availability
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1160,8 +1160,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={buildingPermitAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1180,7 +1180,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.habitationCertificateAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Certificate of habitation
+                                                                    Certificate of habitation avail.
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1193,8 +1193,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={certificateHabitationAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1213,7 +1213,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.propertyRateAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Property rate payment
+                                                                    Property rate payment availability
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1224,8 +1224,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={propertyRateAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1244,7 +1244,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.suitabilityCertificateAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Suitability Certificate
+                                                                    Suitability Certificate availability
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1257,8 +1257,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={suitabilityCertificateAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1277,7 +1277,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.structurePermitAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Structure permit
+                                                                    Structure permit availability
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1290,8 +1290,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={structurePermitAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1311,7 +1311,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.fumigationCertificateAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Fumigation certificate
+                                                                    Fumigation certificate availability
                                                                 </label>
 
                                                                 <select
@@ -1325,8 +1325,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={fumigationCertificateAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option>Available</option>
-                                                                    <option>Not Available</option>
+                                                                    <option>Yes</option>
+                                                                    <option>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1346,7 +1346,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.businessLicenceAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Business operating permit
+                                                                    Business operating permit availability
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1357,8 +1357,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={buildingPermitAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1377,7 +1377,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.structurePermitAvailability != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Temporal structure permit
+                                                                    Temporal structure permit availability
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1390,8 +1390,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={tempStructurePermitAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Not Available</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1456,8 +1456,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={regGeneralCertAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Unavailable</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
@@ -1490,8 +1490,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={gtaOperatingLicenceAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Unavailable</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
 
                                                                 {/* <input
@@ -1523,8 +1523,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={pharmacyCertAvailability}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Available</option>
-                                                                    <option value={2}>Unavailable</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
 
                                                                 {/* <input
