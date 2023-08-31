@@ -68,3 +68,5 @@ update "District"
 
 
 1. log all activies
+2. work on map
+3. work on notifications
