@@ -59,6 +59,9 @@ export async function GET(request: Request) {
 
     let userId = Number(searchParams.get("userId"));
 
+    console.log("userId===>",userId);
+    
+
     if (userId) {
       // const count = await prisma.assignData.count({
       //   where: { assignedToId: Number(req.query.userId) },

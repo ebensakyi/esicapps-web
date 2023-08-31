@@ -31,6 +31,10 @@ export async function GET(request: Request) {
         ? undefined
         : Number(searchParams.get("regionId"));
 
+
+        console.log("selrerdf ",selectedRegion);
+        
+
     const session: any = await getServerSession(authOptions);
 
     const userLevel = session?.user?.userLevelId;
@@ -38,10 +42,18 @@ export async function GET(request: Request) {
     const userRegion = session?.user?.regionId;
     let query = {};
 
-    let curPage = Number(searchParams.get("page"));
+    let curPage = Number(searchParams.get("page")) || 0
+
+    console.log("searchParams.get( ",searchParams.get("page"));
+    
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+
+    console.log(
+      'skip',skip
+    );
+    
     let count = 0;
 
     if (userLevel == 1) {
@@ -94,6 +106,13 @@ export async function GET(request: Request) {
     }
 
     const response = await prisma.district.findMany(query);
+
+    console.log({
+      response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });
+    
 
 
     return NextResponse.json({

@@ -55,7 +55,12 @@ export default function User({ data }: any) {
             const response = await axios.get(
                 "/api/primary-data/district?regionId=" + regionId
             );
-            setDistricts(response.data);
+
+            console.log(response.data);
+            
+
+
+            setDistricts(response.data.response);
         } catch (error) {
             console.log(error);
         }

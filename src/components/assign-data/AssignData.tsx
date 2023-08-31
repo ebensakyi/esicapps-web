@@ -16,6 +16,9 @@ import moment from "moment";
 export default function AssignData({ data }: any) {
     const router = useRouter();
 
+    console.log(data);
+    
+
     const [isEditing, setIsEditing] = useState(false);
     const [assignedFromUsers, setAssignedFromUsers] = useState([]);
 
@@ -147,7 +150,7 @@ export default function AssignData({ data }: any) {
                                                 }}
                                             >
                                                 <option selected>Select district of data owner</option>
-                                                {data.districts?.map((district: any) => (
+                                                {data?.districts?.response?.map((district: any) => (
                                                     <option key={district.id} value={district.id}>
                                                         {district.name}
                                                     </option>
@@ -189,7 +192,7 @@ export default function AssignData({ data }: any) {
                                                 }}
                                             >
                                                 <option selected>Select district of data receiver</option>
-                                                {data.districts?.map((district: any) => (
+                                                {data.districts?.response?.map((district: any) => (
                                                     <option key={district.id} value={district.id}>
                                                         {district.name}
                                                     </option>
