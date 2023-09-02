@@ -29,7 +29,12 @@ sudo rm -f -r  /var/www/html/dashboard.esicapps.org/* && cd ~/ && sudo rm -f -r 
 
 work on all publishing with  residential as template
 
+pm2 stop esicapps.org && pm2 delete esicapps.org
+ln -s /etc/nginx/sites-available/example.conf /etc/nginx/sites-enabled/
 
+
+
+sudo rm -f -r  /var/www/html/esicapps.org/* && cd ~/ && sudo rm -f -r  esicapps.org && git clone https://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@github.com/ebensakyi/esicapps.org.git && cd ~/esicapps.org  && sudo cp -r * /var/www/html/esicapps.org 
 
 1. Work on dashboard
 2. save  reinspection

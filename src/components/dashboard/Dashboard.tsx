@@ -402,14 +402,14 @@ export default function Dashboard({ data }: any) {
 
       <div className="pagetitle">
         <h1>Dashboard</h1>
-        <nav>
+        {/* <nav>
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
               <a href="index.html">Home</a>
             </li>
             <li className="breadcrumb-item active">Dashboard</li>
           </ol>
-        </nav>
+        </nav> */}
       </div><div className="row row-cols-lg-auto g-3 align-items-center">
         <div className="col-md-2">
           <label className="form-label mb-0">Select level</label>
