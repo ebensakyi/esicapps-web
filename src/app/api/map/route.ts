@@ -18,10 +18,10 @@ export async function GET(request: Request) {
   try {
     const data = await prisma.basicInfoSection.findMany({
       where: { deleted: 0 },
-    //   include: {
-    //     ElectoralArea: { include: { District: { include: { Region: true } } } },
+      include: {
+        Inspection: true
 
-    //   },
+      },
     //   orderBy: {
     //     id: "desc",
     //   },

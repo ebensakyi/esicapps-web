@@ -11,7 +11,7 @@ import Map from "@/src/components/map/Map";
 
 async function getData() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/map`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/map`, { next: { revalidate: 14400 } });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')

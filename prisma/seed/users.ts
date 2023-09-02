@@ -30,16 +30,17 @@ export const users = [
     designation: "Enterprise Admin",
   },
 
-  // {
-  //   userRoleId: 2,
-  //   surname: "National",
-  //   otherNames: "Supervisor",
-  //   email: "ns@gmail.com",
-  //   phoneNumber: "0541111111",
-  //   password: hash3,
-  //   regionId: 1,
-  //   designation: "Super Admin",
-  // },
+  {
+    userRoleId: 2,
+    surname: "Google",
+    otherNames: "Playstore",
+    email: "ns@gmail.com",
+    phoneNumber: "0541111111",
+    password: hash3,
+    districtId: 1,
+    passwordChanged:1,
+    designation: "Super Admin",
+  },
   // {
   //   userRoleId: 3,
   //   surname: "Regional",

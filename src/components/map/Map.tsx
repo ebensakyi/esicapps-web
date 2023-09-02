@@ -1,14 +1,32 @@
-// @ts-nocheck
+//// @ts-nocheck
 'use client'
-import { useState, useRef } from "react";
+import { useState, useRef, Key } from "react";
 import {
   GoogleMap,
   useLoadScript,
-  Marker,
+  MarkerF,
   Autocomplete,
+  MarkerClusterer,
 } from "@react-google-maps/api";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { LOGIN_URL } from "@/config";
 
-const Map = () => {
+// import   "/public/assets/img/rating_img/eatery_green.png" 
+
+
+const Map = ({ data }: any) => {
+
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect(LOGIN_URL);
+    }
+  })
+
+  console.log("data==>", data);
+
+
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [searchLngLat, setSearchLngLat] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -46,6 +64,8 @@ const Map = () => {
           setSelectedPlace(null);
           setSearchLngLat(null);
           setCurrentLocation({ lat: latitude, lng: longitude });
+
+
         },
         (error) => {
           console.log(error);
@@ -57,7 +77,7 @@ const Map = () => {
   };
 
   // on map load
-  const onMapLoad = (map) => {
+  const onMapLoad = (map: { controls: HTMLDivElement[][]; }) => {
     const controlDiv = document.createElement("div");
     const controlUI = document.createElement("div");
     controlUI.innerHTML = "Get Location";
@@ -99,55 +119,176 @@ const Map = () => {
         {/* search component  */}
 
 
-        <div class="card">
-          <div class="card-body">
-            {/* <h5 class="card-title">  */}
-            
-           
-            {/* </h5> */}
-
-            <div class="btn-group" role="group" aria-label="Basic example" >
-              <button type="button" class="btn btn-primary">Residential</button>
-
-              <button type="button" class="btn btn-primary">Eating & Drinking</button>
-              <button type="button" class="btn btn-primary">Hospitality</button>
-              <button type="button" class="btn btn-primary">Health</button>
-              <button type="button" class="btn btn-primary">Institution</button>
-              <button type="button" class="btn btn-primary">Industry</button>
-              <button type="button" class="btn btn-primary">Market</button>
-              <button type="button" class="btn btn-primary">Sanitary</button>
-
-            </div> 
+        {/* <div class="card">
+          <div class="card-body"> */}
+        {/* <h5 class="card-title">  */}
 
 
+        {/* </h5> */}
 
-          </div>
+        <div className="btn-group" role="group" aria-label="Basic example" >
+          <Autocomplete
+            onLoad={(autocomplete) => {
+              console.log("Autocomplete loaded:", autocomplete);
+              autocompleteRef.current = autocomplete;
+            }}
+            onPlaceChanged={handlePlaceChanged}
+            options={{ fields: ["address_components", "geometry", "name"] }}
+          >
+            <input type="text" className="form-control" placeholder="Search for a location" />
+          </Autocomplete><button type="button" className="btn btn-outline-primary">Residential</button>
+
+          <button type="button" className="btn btn-outline-primary">Eating & Drinking</button>
+          <button type="button" className="btn  btn-outline-primary">Hospitality</button>
+          <button type="button" className="btn  btn-outline-primary">Health</button>
+          <button type="button" className="btn  btn-outline-primary">Institution</button>
+          <button type="button" className="btn  btn-outline-primary">Industry</button>
+          <button type="button" className="btn  btn-outline-primary">Market</button>
+          <button type="button" className="btn  btn-outline-primary">Sanitary</button>
+
+          {/* </div> 
+
+
+
+          </div> */}
         </div>
- <Autocomplete
-              onLoad={(autocomplete) => {
-                console.log("Autocomplete loaded:", autocomplete);
-                autocompleteRef.current = autocomplete;
-              }}
-              onPlaceChanged={handlePlaceChanged}
-              options={{ fields: ["address_components", "geometry", "name"] }}
-            >
-              <input type="text" placeholder="Search for a location" />
-            </Autocomplete>
+
         <GoogleMap
-          zoom={currentLocation || selectedPlace ? 18 : 12}
+          zoom={currentLocation || selectedPlace ? 18 : 7.4}
           center={currentLocation || searchLngLat || center}
           mapContainerClassName="map"
-          mapContainerStyle={{ width: "90%", height: "900px", margin: "auto" }}
-          //onLoad={onMapLoad}
-        > 
-        <Marker position={center}/>
-       
-          {selectedPlace && <Marker position={searchLngLat} />}
-          {currentLocation && <Marker position={currentLocation} />}
+          mapContainerStyle={{ height: '80vh', width: '100%', margin: "auto" }}
+        //onLoad={onMapLoad}
+        >
+
+          {/* <MarkerClusterer
+      onClick={props.onMarkerClustererClick}
+      averageCenter
+      enableRetinaIcons
+      gridSize={60}
+    >
+      {props.markers.map(marker => (
+        <Marker
+          key={marker.photo_id}
+          position={{ lat: marker.latitude, lng: marker.longitude }}
+        />
+      ))}
+
+    </MarkerClusterer> */}
+
+          {data?.mapData?.map((pos) => (
+            <MarkerF
+              key={pos.id}
+              position={{ lat: Number(pos?.latitude), lng: Number(pos?.longitude) }}
+              title={pos?.community}
+              //label={pos?.community}
+              icon={definePointIcon(pos.Inspection.totalRating, pos.Inspection.inspectionFormId)}
+            />
+          ))}
+          {/* <Marker position={{lat: -0.009313, lng:9.445632}}/> */}
+
+
+
+          {/* {selectedPlace && <Marker position={searchLngLat} />} */}
+          {/* {currentLocation && <Marker position={currentLocation} />} */}
         </GoogleMap>
       </div>
     </main>
   );
 };
+
+
+function definePointIcon(score: number, form: number) {
+  if (scoreCalculation(score) == 'Good' && form == 2) {
+    return '/assets/img/rating_img/eatery_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 2) {
+    return '/assets/img/rating_img/eatery_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 2) {
+    return '/assets/img/rating_img/eatery_red.png'
+  }
+  else if (scoreCalculation(score) == 'Good' && form == 1) {
+    return '/assets/img/rating_img/residential_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 1) {
+    return '/assets/img/rating_img/residential_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 1) {
+    return '/assets/img/rating_img/residential_red.png'
+  }
+  else if (scoreCalculation(score) == 'Good' && form == 7) {
+    return '/assets/img/rating_img/market_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 7) {
+    return '/assets/img/rating_img/market_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 7) {
+    return '/assets/img/rating_img/market_red.png'
+  }
+  else if (scoreCalculation(score) == 'Good' && form == 5) {
+    return '/assets/img/rating_img/school_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 5) {
+    return '/assets/img/rating_img/school_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 5) {
+    return '/assets/img/rating_img/school_red.png'
+  }
+  else if (scoreCalculation(score) == 'Good' && form == 3) {
+    return '/assets/img/rating_img/health_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 3) {
+    return '/assets/img/rating_img/health_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 3) {
+    return '/assets/img/rating_img/health_red.png'
+  }
+  else if (scoreCalculation(score) == 'Good' && form == 6) {
+    return '/assets/img/rating_img/industry_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 6) {
+    return '/assets/img/rating_img/industry_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 6) {
+    return '/assets/img/rating_img/industry_red.png'
+  }
+  else if (scoreCalculation(score) == 'Good' && form == 4) {
+    return '/assets/img/rating_img/hospitality_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 4) {
+    return '/assets/img/rating_img/hospitality_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 4) {
+    return '/assets/img/rating_img/hospitality_red.png'
+  } else if (scoreCalculation(score) == 'Good' && form == 8) {
+    return '/assets/img/rating_img/sanitation_green.png'
+  }
+  else if (scoreCalculation(score) == 'Average' && form == 8) {
+    return '/assets/img/rating_img/sanitation_yellow.png'
+  }
+  else if (scoreCalculation(score) == 'Poor' && form == 8) {
+    return '/assets/img/rating_img/sanitation_red.png'
+  }
+  // else {
+  //   return '/img/poor.png'
+  // }
+}
+
+
+const scoreCalculation = (rating: number) => {
+  try {
+    if (rating >= 4) {
+      return "Good"
+    } else if (rating >= 3 && rating < 4) {
+      return "Average"
+    } else if (rating < 3) {
+      return "Poor"
+    } else {
+      return ""
+    }
+  } catch (error) { }
+};
+
 
 export default Map;
