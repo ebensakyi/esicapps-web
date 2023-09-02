@@ -16,21 +16,24 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const data = await prisma.basicInfoSection.findMany({
-      where: { deleted: 0 },
-      include: {
-        Inspection: true
+    let { searchParams } = new URL(request.url);
 
+    let formId = Number(searchParams.get("formId")) || undefined;
+
+
+    const data = await prisma.inspection.findMany({
+      where: {
+        isPublished: 1,
+        inspectionFormId: formId,
       },
-    //   orderBy: {
-    //     id: "desc",
-    //   },
+      include: {
+        BasicInfoSection: true,
+      },
     });
 
-    
+   
     return NextResponse.json(data);
   } catch (error) {
-    
     return NextResponse.json(error);
   }
 }

@@ -9,9 +9,10 @@ import Map from "@/src/components/map/Map";
 // });
 
 
-async function getData() {
+async function getData(searchParams: any) {
+    let { formId } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/map`, { next: { revalidate: 14400 } });
+    let response = await fetch(`${SERVER_BASE_URL}/api/map?formId=${formId}`, { next: { revalidate: 14400 } });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -20,10 +21,10 @@ async function getData() {
 
 }
 
-export default async function Page() {
+export default async function Page({ searchParams }: any) {
 
 
-    const mapData = await getData()
+    const mapData = await getData(searchParams)
 
 
     let data = { mapData }

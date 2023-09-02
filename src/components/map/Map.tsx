@@ -9,10 +9,8 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { LOGIN_URL } from "@/config";
-
-// import   "/public/assets/img/rating_img/eatery_green.png" 
 
 
 const Map = ({ data }: any) => {
@@ -23,7 +21,10 @@ const Map = ({ data }: any) => {
       redirect(LOGIN_URL);
     }
   })
-
+  const router = useRouter();
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  
   console.log("data==>", data);
 
 
@@ -46,7 +47,7 @@ const Map = ({ data }: any) => {
 
   // handle place change on search
   const handlePlaceChanged = () => {
-    const place = autocompleteRef.current.getPlace();
+    const place :any= autocompleteRef.current.getPlace();
     setSelectedPlace(place);
     setSearchLngLat({
       lat: place.geometry.location.lat(),
@@ -105,6 +106,19 @@ const Map = ({ data }: any) => {
     );
   };
 
+  const getMarkersByForm = (formId:any) => {
+    // let formId: any = formId?.current?.value
+    
+
+
+    router.push(
+        `${pathname}?formId=${formId}`
+
+    );
+
+  }
+
+
   return (
     <main id="main" className="main">
       <div
@@ -129,22 +143,22 @@ const Map = ({ data }: any) => {
         <div className="btn-group" role="group" aria-label="Basic example" >
           <Autocomplete
             onLoad={(autocomplete) => {
-              console.log("Autocomplete loaded:", autocomplete);
+              //console.log("Autocomplete loaded:", autocomplete);
               autocompleteRef.current = autocomplete;
             }}
             onPlaceChanged={handlePlaceChanged}
             options={{ fields: ["address_components", "geometry", "name"] }}
           >
             <input type="text" className="form-control" placeholder="Search for a location" />
-          </Autocomplete><button type="button" className="btn btn-outline-primary">Residential</button>
+          </Autocomplete><button type="button" className="btn btn-outline-primary"  onClick={(e)=>{getMarkersByForm(1)}}>Residential</button>
 
-          <button type="button" className="btn btn-outline-primary">Eating & Drinking</button>
-          <button type="button" className="btn  btn-outline-primary">Hospitality</button>
-          <button type="button" className="btn  btn-outline-primary">Health</button>
-          <button type="button" className="btn  btn-outline-primary">Institution</button>
-          <button type="button" className="btn  btn-outline-primary">Industry</button>
-          <button type="button" className="btn  btn-outline-primary">Market</button>
-          <button type="button" className="btn  btn-outline-primary">Sanitary</button>
+          <button type="button" className="btn btn-outline-primary" onClick={(e)=>{getMarkersByForm(2)}}>Eating & Drinking</button>
+          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(4)}}>Hospitality</button>
+          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(3)}}>Health</button>
+          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(5)}}>Institution</button>
+          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(6)}}>Industry</button>
+          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(7)}}>Market</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e)=>{getMarkersByForm(8)}}>Sanitary</button>
 
           {/* </div> 
 
@@ -176,13 +190,15 @@ const Map = ({ data }: any) => {
 
     </MarkerClusterer> */}
 
-          {data?.mapData?.map((pos) => (
+
+
+          {data?.mapData?.map((pos:any) => (
             <MarkerF
               key={pos.id}
-              position={{ lat: Number(pos?.latitude), lng: Number(pos?.longitude) }}
+              position={{ lat: Number(pos?.BasicInfoSection?.latitude), lng: Number(pos?.BasicInfoSection?.longitude) }}
               title={pos?.community}
               //label={pos?.community}
-              icon={definePointIcon(pos.Inspection.totalRating, pos.Inspection.inspectionFormId)}
+              icon={definePointIcon(pos?.totalRating, pos?.inspectionFormId)}
             />
           ))}
           {/* <Marker position={{lat: -0.009313, lng:9.445632}}/> */}
@@ -291,4 +307,16 @@ const scoreCalculation = (rating: number) => {
 };
 
 
+
+
+
+
 export default Map;
+
+
+
+
+
+
+
+
