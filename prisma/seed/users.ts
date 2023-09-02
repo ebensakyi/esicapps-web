@@ -39,6 +39,7 @@ export const users = [
     password: hash3,
     districtId: 1,
     passwordChanged:1,
+    userLevelId: 3,
     designation: "Super Admin",
   },
   // {
