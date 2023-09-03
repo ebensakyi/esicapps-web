@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const searchParams = useSearchParams()
 
   const error = searchParams.get("error")
@@ -31,6 +33,12 @@ export default function Login() {
     } catch (error) { 
       console.log("error===>", error);
     }
+  };
+
+  const handlePasswordVisibility = () => {
+    console.log("LOL");
+    
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -131,7 +139,7 @@ export default function Login() {
                               *
                             </span>
                             <input
-                              type="password"
+                              type={showPassword ? "text" : "password"}
                               name="password"
                               className="form-control"
                               id="password"
@@ -139,6 +147,14 @@ export default function Login() {
                               value={password}
                               onChange={(e) => setPassword(e.target.value.trim())}
                             />
+                             <button
+                                className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                                type="button"
+                                id="password-addon"
+                               onClick={() => handlePasswordVisibility()}
+                              >
+                                <i className="ri-eye-fill align-middle"></i>
+                              </button>
                             <div className="invalid-feedback">
                               Please enter your password.
                             </div>
