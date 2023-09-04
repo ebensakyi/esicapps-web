@@ -31,9 +31,7 @@ export async function GET(request: Request) {
         ? undefined
         : Number(searchParams.get("regionId"));
 
-
-        console.log("selrerdf ",selectedRegion);
-        
+    const get_all = Number(searchParams.get("get_all"));
 
     const session: any = await getServerSession(authOptions);
 
@@ -42,57 +40,87 @@ export async function GET(request: Request) {
     const userRegion = session?.user?.regionId;
     let query = {};
 
-    let curPage = Number(searchParams.get("page")) || 0
-
-    
+    let curPage = Number(searchParams.get("page")) || 0;
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+    let skip =
+      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
-  
-    
     let count = 0;
 
     if (userLevel == 1) {
-      query = {
-        where: { deleted: 0, regionId: selectedRegion },
-        skip: skip,
-        take: perPage,
-        include: { Region: true },
-        orderBy: {
-          name: "asc",
-        },
-      };
+      if (get_all == 1) {
+        query = {
+          where: { deleted: 0, regionId: selectedRegion },
 
-      count = await prisma.district.count({
-        where: { deleted: 0, regionId: selectedRegion },
-      });
+          include: { Region: true },
+          orderBy: {
+            name: "asc",
+          },
+        };
+      } else {
+        query = {
+          where: { deleted: 0, regionId: selectedRegion },
+          skip: skip,
+          take: perPage,
+          include: { Region: true },
+          orderBy: {
+            name: "asc",
+          },
+        };
+
+        count = await prisma.district.count({
+          where: { deleted: 0, regionId: selectedRegion },
+        });
+      }
     } else if (userLevel == 2) {
-      query = {
-        where: { deleted: 0, regionId: Number(userRegion) },
-        skip: skip,
-        take: perPage,
-        include: { Region: true },
-        orderBy: {
-          name: "asc",
-        },
-      };
-      count = await prisma.district.count({
-        where: { deleted: 0, regionId: Number(userRegion) },
-      });
+      if (get_all == 1) {
+        query = {
+          where: { deleted: 0, regionId: selectedRegion },
+
+          include: { Region: true },
+          orderBy: {
+            name: "asc",
+          },
+        };
+      } else {
+        query = {
+          where: { deleted: 0, regionId: Number(userRegion) },
+          skip: skip,
+          take: perPage,
+          include: { Region: true },
+          orderBy: {
+            name: "asc",
+          },
+        };
+        count = await prisma.district.count({
+          where: { deleted: 0, regionId: Number(userRegion) },
+        });
+      }
     } else if (userLevel == 3) {
-      query = {
-        where: { deleted: 0, id: Number(userDistrict) },
-        skip: skip,
-        take: perPage,
-        include: { Region: true },
-        orderBy: {
-          name: "asc",
-        },
-      };
-      count = await prisma.district.count({
-        where: { deleted: 0, id: Number(userDistrict) },
-      });
+      if (get_all == 1) {
+        query = {
+          where: { deleted: 0, regionId: selectedRegion },
+
+          include: { Region: true },
+          orderBy: {
+            name: "asc",
+          },
+        };
+      } else {
+        query = {
+          where: { deleted: 0, id: Number(userDistrict) },
+          skip: skip,
+          take: perPage,
+          include: { Region: true },
+          orderBy: {
+            name: "asc",
+          },
+        };
+        count = await prisma.district.count({
+          where: { deleted: 0, id: Number(userDistrict) },
+        });
+      }
     } else {
       query = {
         where: { deleted: 0 },
@@ -103,14 +131,6 @@ export async function GET(request: Request) {
     }
 
     const response = await prisma.district.findMany(query);
-
-    console.log({
-      response,
-      curPage: curPage,
-      maxPage: Math.ceil(count / perPage),
-    });
-    
-
 
     return NextResponse.json({
       response,

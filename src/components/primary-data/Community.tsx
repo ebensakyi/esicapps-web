@@ -53,7 +53,7 @@ export default function Community({ data }: any) {
         try {
 
             const response = await axios.get(
-                "/api/primary-data/district?regionId=" + regionId
+                `/api/primary-data/district?regionId= ${regionId}&get_all=1`
             );
             setDistricts(response.data.response);
         } catch (error) {

@@ -46,9 +46,11 @@ export default function ElectoralArea({ data }: any) {
         try {
 
             const response = await axios.get(
-                "/api/primary-data/district?regionId=" + regionId
+                `/api/primary-data/district?regionId= ${regionId}&get_all=1`
             );
-            setDistricts(response.data);
+
+
+            setDistricts(response.data.response);
         } catch (error) {
             console.log(error);
         }
