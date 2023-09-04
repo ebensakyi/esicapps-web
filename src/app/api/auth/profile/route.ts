@@ -75,6 +75,13 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
 
+    const stats = Number(searchParams.get("stats"));
+
+    if(stats == 1) {
+      return NextResponse.json({response: 666});
+
+    }
+
     let user = await prisma.user.findFirst({
       where: { id: userId, deleted: 0 },
       include: { District: { include: { Region: true } } },
