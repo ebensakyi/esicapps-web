@@ -75,3 +75,13 @@ update "District"
 1. log all activies
 2. work on map
 3. work on notifications
+
+
+
+
+
+ADJIRIGANO AND OTANO NOT LOADED UNDER ADMA
+
+KORLE DUDOR , Korle Gonno,KORLE WONKO,MAMPROBI,MLITSA GONNO,MUDOR,MUKOSE,NEW MAMPROBI,NGLESHIE under AMA
+
+KOTOBABI 

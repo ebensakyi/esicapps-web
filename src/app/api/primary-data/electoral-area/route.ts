@@ -31,6 +31,7 @@ export async function GET(request: Request) {
       searchParams.get("districtId") == null || ""
         ? undefined
         : Number(searchParams.get("districtId"));
+        const get_all = Number(searchParams.get("get_all"));
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
@@ -61,51 +62,98 @@ export async function GET(request: Request) {
     }
 
     if (userLevel == 1) {
-      query = {
-        where: { deleted: 0, districtId: selectedDistrict },
-        skip: skip,
-        take: perPage,
-        include: {
-          District: {
-            include: {
-              Region: true,
+      if (get_all == 1) {
+        query = {
+          where: { deleted: 0, districtId: selectedDistrict },
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
             },
           },
-        },
-      };
-       count = await prisma.electoralArea.count({ where: { deleted: 0, districtId: selectedDistrict },});
-
+        };
+  
+      }else{
+        query = {
+          where: { deleted: 0, districtId: selectedDistrict },
+          skip: skip,
+          take: perPage,
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
+        };
+         count = await prisma.electoralArea.count({ where: { deleted: 0, districtId: selectedDistrict },});
+  
+      }
+    
       
     } else if (userLevel == 2) {
-      query = {
-        where: { deleted: 0, districtId: Number(userRegion) },
-        skip: skip,
-        take: perPage,
-        include: {
-          District: {
-            include: {
-              Region: true,
+      if (get_all == 1) {
+        query = {
+          where: { deleted: 0, districtId: Number(userRegion) },
+        
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
             },
           },
-        },
-      };
-      count = await prisma.electoralArea.count({  where: { deleted: 0, districtId: Number(userRegion) },});
-
+        };
+  
+      }else{
+        query = {
+          where: { deleted: 0, districtId: Number(userRegion) },
+          skip: skip,
+          take: perPage,
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
+        };
+        count = await prisma.electoralArea.count({  where: { deleted: 0, districtId: Number(userRegion) },});
+  
+      }
+     
     } else if (userLevel == 3) {
-      query = {
-        where: { deleted: 0, id: Number(userDistrict) },
-        skip: skip,
-        take: perPage,
-        include: {
-          District: {
-            include: {
-              Region: true,
+      if (get_all == 1) {
+        query = {
+          where: { deleted: 0, id: Number(userDistrict) },
+       
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
             },
           },
-        },
-      };
-      count = await prisma.electoralArea.count({   where: { deleted: 0, id: Number(userDistrict) },});
-
+        };
+  
+      }else{
+        query = {
+          where: { deleted: 0, id: Number(userDistrict) },
+          skip: skip,
+          take: perPage,
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
+        };
+        count = await prisma.electoralArea.count({   where: { deleted: 0, id: Number(userDistrict) },});
+  
+      }
+     
     } else {
       query = { where: { deleted: 0 } };
     }

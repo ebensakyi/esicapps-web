@@ -55,7 +55,7 @@ export default function User({ data }: any) {
 
 
             const response = await axios.get(
-                "/api/primary-data/district?regionId=" + regionId
+                `/api/primary-data/district?regionId= ${regionId} &get_all=1`
             );            
 
 
