@@ -1,5 +1,6 @@
 import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 
 export async function GET(request: Request) {
@@ -204,7 +205,7 @@ console.log("userid = ", userId);
       },
     });
 
-    return NextResponse.json([
+    let response = NextResponse.json([
       {
         name: "Residential",
         basicCount: residentialBasicCount,
@@ -253,7 +254,10 @@ console.log("userid = ", userId);
         reInspectionCount: sanitationReInspectionCount,
         followUpCount: sanitationFollowUpCount,
       },
-    ]);
+    ],);
+    response.headers.set("cache", "no-store");
+
+    return response;
   } catch (error) {
     console.log("<======>", error);
 
