@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use client'
 import axios from 'axios';
 import { getSession, useSession } from 'next-auth/react';
@@ -470,15 +472,15 @@ export default function Dashboard({ data }: any) {
 
   return (
     <LoadingOverlay
-    active={downloading}
-    spinner
-    text="Loading. Please wait..."
-  >
-    <main id="main" className="main">
+      active={downloading}
+      spinner={true}
+      text="Loading. Please wait..."
+    >
+      <main id="main" className="main">
 
-      <div className="pagetitle">
-        <h1>Dashboard</h1>
-        {/* <nav>
+        <div className="pagetitle">
+          <h1>Dashboard</h1>
+          {/* <nav>
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
               <a href="index.html">Home</a>
@@ -486,173 +488,118 @@ export default function Dashboard({ data }: any) {
             <li className="breadcrumb-item active">Dashboard</li>
           </ol>
         </nav> */}
-      </div><div className="row row-cols-lg-auto g-3 align-items-center">
-        <div className="col-md-2">
-          <label className="form-label mb-0">Select level</label>
-
-          <select
-            className="form-control"
-            aria-label="Default select example"
-            onChange={(e: any) => {
-              setFilterBy(e.target.value);
-
-              if (regionalUser) {
-                getDistrictsByRegion(region);
-              }
-
-              if (districtUser) {
-                getElectoralAreasByDistrict(district);
-              }
-              if (e.target.value == "national") {
-                setFilterValue("");
-              }
-            }}
-            value={filterBy}
-          >
-            <option value="">Filter by </option>
-            <option hidden={!nationalUser} value="national">
-              National
-            </option>
-            <option hidden={!nationalUser} value="regionId">
-              Region
-            </option>
-            <option
-              hidden={!nationalUser && !regionalUser}
-              value="districtId"
-            >
-              District
-            </option>
-            <option
-              hidden={!nationalUser && !regionalUser && !districtUser}
-              value="electoralAreaId"
-            >
-              Electoral Area
-            </option>
-            <option
-              hidden={!nationalUser && !regionalUser && !districtUser}
-              value="communityId"
-            >
-              Community
-            </option>
-          </select>
-        </div>
-
-        {filterBy == "regionId" ? (
+        </div><div className="row row-cols-lg-auto g-3 align-items-center">
           <div className="col-md-2">
-            <label className="form-label mb-0">Select region</label>
+            <label className="form-label mb-0">Select level</label>
+
             <select
               className="form-control"
               aria-label="Default select example"
-              onChange={async (e: any) => {
-                setRegion(e.target.value);
+              onChange={(e: any) => {
+                setFilterBy(e.target.value);
 
-                setFilterValue(e.target.value);
+                if (regionalUser) {
+                  getDistrictsByRegion(region);
+                }
+
+                if (districtUser) {
+                  getElectoralAreasByDistrict(district);
+                }
+                if (e.target.value == "national") {
+                  setFilterValue("");
+                }
               }}
-              value={region}
+              value={filterBy}
             >
-              {" "}
-              <option selected>Select region </option>
-              {data.regions?.map((data: any) => (
-                <option key={data.id} value={data.id}>
-                  {data.name}
-                </option>
-              ))}
+              <option value="">Filter by </option>
+              <option hidden={!nationalUser} value="national">
+                National
+              </option>
+              <option hidden={!nationalUser} value="regionId">
+                Region
+              </option>
+              <option
+                hidden={!nationalUser && !regionalUser}
+                value="districtId"
+              >
+                District
+              </option>
+              <option
+                hidden={!nationalUser && !regionalUser && !districtUser}
+                value="electoralAreaId"
+              >
+                Electoral Area
+              </option>
+              <option
+                hidden={!nationalUser && !regionalUser && !districtUser}
+                value="communityId"
+              >
+                Community
+              </option>
             </select>
           </div>
-        ) : (
-          <></>
-        )}
-        {filterBy == "districtId" ? (
-          <>
-            {nationalUser ? (
-              <div className="col-md-2">
-                <label className="form-label mb-0">Select region</label>
-                <select
-                  className="form-control"
-                  aria-label="Default select example"
-                  onChange={async (e: any) => {
-                    setFilterValue(e.target.value);
-                    setRegion(e.target.value);
 
-                    await getDistrictsByRegion(e.target.value);
-                  }}
-                  value={region}
-                >
-                  {" "}
-                  <option selected>Select region </option>
-                  {data.regions?.map((data: any) => (
-                    <option key={data.id} value={data.id}>
-                      {data.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <></>
-            )}
+          {filterBy == "regionId" ? (
             <div className="col-md-2">
-              <label className="form-label mb-0">Select district</label>
+              <label className="form-label mb-0">Select region</label>
               <select
                 className="form-control"
                 aria-label="Default select example"
-                onChange={(e: any) => {
+                onChange={async (e: any) => {
+                  setRegion(e.target.value);
+
                   setFilterValue(e.target.value);
-                  setDistrict(e.target.value);
                 }}
-                value={district}
+                value={region}
               >
                 {" "}
-                <option selected>Filter by </option>
-                {districtsData?.map((data: any) => (
+                <option selected>Select region </option>
+                {data.regions?.map((data: any) => (
                   <option key={data.id} value={data.id}>
                     {data.name}
                   </option>
                 ))}
               </select>
             </div>
-          </>
-        ) : (
-          <></>
-        )}
-        {filterBy == "electoralAreaId" ? (
-          <>
-            {nationalUser ? (
-              <div className="col-md-2">
-                <label className="form-label mb-0">Select region</label>
-                <select
-                  className="form-control"
-                  aria-label="Default select example"
-                  value={region}
-                  onChange={async (e: any) => {
-                    setFilterValue(e.target.value);
-                    setRegion(e.target.value);
+          ) : (
+            <></>
+          )}
+          {filterBy == "districtId" ? (
+            <>
+              {nationalUser ? (
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select region</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async (e: any) => {
+                      setFilterValue(e.target.value);
+                      setRegion(e.target.value);
 
-                    await getDistrictsByRegion(e.target.value);
-                  }}
-                >
-                  {" "}
-                  <option selected>Filter by </option>
-                  {data.regions?.map((data: any) => (
-                    <option key={data.id} value={data.id}>
-                      {data.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <></>
-            )}
-            {nationalUser || regionalUser ? (
+                      await getDistrictsByRegion(e.target.value);
+                    }}
+                    value={region}
+                  >
+                    {" "}
+                    <option selected>Select region </option>
+                    {data.regions?.map((data: any) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="col-md-2">
                 <label className="form-label mb-0">Select district</label>
                 <select
                   className="form-control"
                   aria-label="Default select example"
-                  onChange={async (e: any) => {
+                  onChange={(e: any) => {
                     setFilterValue(e.target.value);
                     setDistrict(e.target.value);
-
-                    await getElectoralAreasByDistrict(e.target.value);
                   }}
                   value={district}
                 >
@@ -665,140 +612,195 @@ export default function Dashboard({ data }: any) {
                   ))}
                 </select>
               </div>
-            ) : (
-              <></>
-            )}
-            <div className="col-md-2">
-              <label className="form-label mb-0">
-                Select Electoral Area
-              </label>
-              <select
-                className=" form-control "
-                aria-label="Default select example"
-                onChange={async (e: any) => {
-                  setFilterValue(e.target.value);
-                  setElectoralArea(e.target.value);
+            </>
+          ) : (
+            <></>
+          )}
+          {filterBy == "electoralAreaId" ? (
+            <>
+              {nationalUser ? (
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select region</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    value={region}
+                    onChange={async (e: any) => {
+                      setFilterValue(e.target.value);
+                      setRegion(e.target.value);
 
-                  await getCommunitiesByElectoralArea(e.target.value);
-                }}
-                value={electoralArea}
-              >
-                {" "}
-                <option selected>Filter by </option>
-                {electoralAreasData?.map((data: any) => (
-                  <option key={data.id} value={data.id}>
-                    {data.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
-        {filterBy == "communityId" ? (
-          <>
-            {nationalUser || regionalUser ? (
+                      await getDistrictsByRegion(e.target.value);
+                    }}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {data.regions?.map((data: any) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              {nationalUser || regionalUser ? (
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select district</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async (e: any) => {
+                      setFilterValue(e.target.value);
+                      setDistrict(e.target.value);
+
+                      await getElectoralAreasByDistrict(e.target.value);
+                    }}
+                    value={district}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {districtsData?.map((data: any) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="col-md-2">
-                <label className="form-label mb-0">Select region</label>
+                <label className="form-label mb-0">
+                  Select Electoral Area
+                </label>
                 <select
-                  className="form-control"
+                  className=" form-control "
                   aria-label="Default select example"
                   onChange={async (e: any) => {
                     setFilterValue(e.target.value);
-                    setRegion(e.target.value);
+                    setElectoralArea(e.target.value);
 
-                    await getDistrictsByRegion(e.target.value);
+                    await getCommunitiesByElectoralArea(e.target.value);
                   }}
-                  value={region}
+                  value={electoralArea}
                 >
                   {" "}
                   <option selected>Filter by </option>
-                  {data.regions?.map((data: any) => (
+                  {electoralAreasData?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
                     </option>
                   ))}
                 </select>
               </div>
-            ) : (
-              <></>
-            )}
-            {nationalUser || regionalUser || districtUser ? (
+            </>
+          ) : (
+            <></>
+          )}
+          {filterBy == "communityId" ? (
+            <>
+              {nationalUser || regionalUser ? (
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select region</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async (e: any) => {
+                      setFilterValue(e.target.value);
+                      setRegion(e.target.value);
+
+                      await getDistrictsByRegion(e.target.value);
+                    }}
+                    value={region}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {data.regions?.map((data: any) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
+              {nationalUser || regionalUser || districtUser ? (
+                <div className="col-md-2">
+                  <label className="form-label mb-0">Select district</label>
+                  <select
+                    className="form-control"
+                    aria-label="Default select example"
+                    onChange={async (e: any) => {
+                      setFilterValue(e.target.value);
+                      setDistrict(e.target.value);
+                      await getElectoralAreasByDistrict(e.target.value);
+                    }}
+                    value={district}
+                  >
+                    {" "}
+                    <option selected>Filter by </option>
+                    {districtsData?.map((data: any) => (
+                      <option key={data.id} value={data.id}>
+                        {data.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="col-md-2">
-                <label className="form-label mb-0">Select district</label>
+                <label className="form-label mb-0">
+                  Select Electoral Area
+                </label>
                 <select
-                  className="form-control"
+                  className=" form-control "
                   aria-label="Default select example"
                   onChange={async (e: any) => {
                     setFilterValue(e.target.value);
-                    setDistrict(e.target.value);
-                    await getElectoralAreasByDistrict(e.target.value);
+                    setElectoralArea(e.target.value);
+
+                    await getCommunitiesByElectoralArea(e.target.value);
                   }}
-                  value={district}
+                  value={electoralArea}
+                >
+                  {" "}
+                  <option selected> Select Electoral Area </option>
+                  {electoralAreasData?.map((data: any) => (
+                    <option key={data.id} value={data.id}>
+                      {data.name}
+                    </option>
+                  ))}
+                </select>
+              </div>{" "}
+              <div className="col-md-2">
+                <label className="form-label mb-0">Select community</label>
+                <select
+                  className=" form-control "
+                  aria-label="Default select example"
+                  onChange={(e: any) => {
+                    setFilterValue(e.target.value);
+                    setCommunity(e.target.value);
+                  }}
+                  value={community}
                 >
                   {" "}
                   <option selected>Filter by </option>
-                  {districtsData?.map((data: any) => (
+                  {communitiesData?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
                     </option>
                   ))}
                 </select>
               </div>
-            ) : (
-              <></>
-            )}
-            <div className="col-md-2">
-              <label className="form-label mb-0">
-                Select Electoral Area
-              </label>
-              <select
-                className=" form-control "
-                aria-label="Default select example"
-                onChange={async (e: any) => {
-                  setFilterValue(e.target.value);
-                  setElectoralArea(e.target.value);
+            </>
+          ) : (
+            <></>
+          )}
 
-                  await getCommunitiesByElectoralArea(e.target.value);
-                }}
-                value={electoralArea}
-              >
-                {" "}
-                <option selected> Select Electoral Area </option>
-                {electoralAreasData?.map((data: any) => (
-                  <option key={data.id} value={data.id}>
-                    {data.name}
-                  </option>
-                ))}
-              </select>
-            </div>{" "}
-            <div className="col-md-2">
-              <label className="form-label mb-0">Select community</label>
-              <select
-                className=" form-control "
-                aria-label="Default select example"
-                onChange={(e: any) => {
-                  setFilterValue(e.target.value);
-                  setCommunity(e.target.value);
-                }}
-                value={community}
-              >
-                {" "}
-                <option selected>Filter by </option>
-                {communitiesData?.map((data: any) => (
-                  <option key={data.id} value={data.id}>
-                    {data.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
-
-        {/* <div className="col-md-12">
+          {/* <div className="col-md-12">
               <label className="form-label mb-0">Start Date</label>
               <input
                 type="date"
@@ -818,49 +820,49 @@ export default function Dashboard({ data }: any) {
               />
             </div> */}
 
-        <div className="col-12">
-          <label className="form-label mb-0">.</label>
-          <button
-            type="submit"
-            className="form-control btn btn-primary"
-            onClick={(e: any) => handleFilter(e)}
-          >
-            Filter
-          </button>
+          <div className="col-12">
+            <label className="form-label mb-0">.</label>
+            <button
+              type="submit"
+              className="form-control btn btn-primary"
+              onClick={(e: any) => handleFilter(e)}
+            >
+              Filter
+            </button>
+          </div>
         </div>
-      </div>
-      <br />
-      {/* End Page Title */}
-      <section className="section dashboard">
-        <div className="row">
-          {/* Left side columns */}
-          <div className="col-lg-12">
-            <div className="row">
-              {/* Sales Card */}
-              <div className="col-xxl-3 col-md-4">
-                <div className="card info-card revenue-card">
-                  <div className="filter">
+        <br />
+        {/* End Page Title */}
+        <section className="section dashboard">
+          <div className="row">
+            {/* Left side columns */}
+            <div className="col-lg-12">
+              <div className="row">
+                {/* Sales Card */}
+                <div className="col-xxl-3 col-md-4">
+                  <div className="card info-card revenue-card">
+                    <div className="filter">
 
 
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-down-left-square" />
-                      </div>
-                      <div className="ps-3">
-                        <h6>{data?.dashboardData?.baselineCount}  </h6>
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-down-left-square" />
+                        </div>
+                        <div className="ps-3">
+                          <h6>{data?.dashboardData?.baselineCount}  </h6>
 
-                        <span className="text-muted small pt-2 ps-1">BASELINE</span>
+                          <span className="text-muted small pt-2 ps-1">BASELINE</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* <div className="col-xxl-3 col-md-4">
+                {/* <div className="col-xxl-3 col-md-4">
               <div className="card info-card sales-card">
                
                 <div className="card-body">
@@ -882,302 +884,302 @@ export default function Dashboard({ data }: any) {
                 </div>
               </div>
             </div> */}
-              <div className="col-xxl-3 col-md-4">
-                <div className="card info-card customers-card">
+                <div className="col-xxl-3 col-md-4">
+                  <div className="card info-card customers-card">
 
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-counterclockwise
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-counterclockwise
 " />
-                      </div>
-                      <div className="ps-3">
-                        <h6> {data?.dashboardData?.reInspectionCount}
-                        </h6>
+                        </div>
+                        <div className="ps-3">
+                          <h6> {data?.dashboardData?.reInspectionCount}
+                          </h6>
 
-                        <span className="text-muted small pt-2 ps-1">REINSPECTION</span>
+                          <span className="text-muted small pt-2 ps-1">REINSPECTION</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-xxl-3 col-md-4">
-                <div className="card info-card sales-card">
-                  <div className="filter">
+                <div className="col-xxl-3 col-md-4">
+                  <div className="card info-card sales-card">
+                    <div className="filter">
 
 
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-left-right
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-left-right
 " />
-                      </div>
-                      <div className="ps-3">
-                        <h6> {data?.dashboardData?.followUpCount}
-                        </h6>
+                        </div>
+                        <div className="ps-3">
+                          <h6> {data?.dashboardData?.followUpCount}
+                          </h6>
 
-                        <span className="text-muted small pt-2 ps-1">FOLLOW-UP</span>
+                          <span className="text-muted small pt-2 ps-1">FOLLOW-UP</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-xxl-3 col-md-5">
-                <div className="card info-card sales-card">
-                  <div className="filter">
+                <div className="col-xxl-3 col-md-5">
+                  <div className="card info-card sales-card">
+                    <div className="filter">
 
 
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-left-right
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-left-right
 " />
-                      </div>
-                      <div className="ps-3">
-                        <h6>0
-                        </h6>
+                        </div>
+                        <div className="ps-3">
+                          <h6>0
+                          </h6>
 
-                        <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
+                          <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* end row */}
-              <div className="row">
-                <div className="flex-grow-1">
-                  <h4 className="fs-16 mb-1">WATER</h4>
-                  {/* <p className="text-muted mb-0">
+                {/* end row */}
+                <div className="row">
+                  <div className="flex-grow-1">
+                    <h4 className="fs-16 mb-1">WATER</h4>
+                    {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-                </div>
-                <div className="col-xl-4" ref={waterSourceRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(waterSourceRef.current, "water-source")
+                  </div>
+                  <div className="col-xl-4" ref={waterSourceRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(waterSourceRef.current, "water-source")
 
-                          }}>
-                          Export
-                        </button>
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Pie data={waterSourceBarchartData} />
                       </div>
                     </div>
+                  </div>
+                  <div className="col-xl-4" ref={waterSourceConditionRef}>
+                    <div className="card card-height-100">
 
-                    <div className="card-body">
-                      <Pie data={waterSourceBarchartData} />
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Condition Of Water Source
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(waterSourceConditionRef.current, "water-source-condition")
+
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Pie data={waterSourceConditionBarchartData} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4" ref={waterStorageConditionRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Water Storage Condition
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
+
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Bar data={waterStorageConditionBarchartData} />
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-4" ref={waterSourceConditionRef}>
-                  <div className="card card-height-100">
-
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Condition Of Water Source
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(waterSourceConditionRef.current, "water-source-condition")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Pie data={waterSourceConditionBarchartData} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4" ref={waterStorageConditionRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Water Storage Condition
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Bar data={waterStorageConditionBarchartData} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="flex-grow-1">
-                  <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
-                  {/* <p className="text-muted mb-0">
+                <div className="row">
+                  <div className="flex-grow-1">
+                    <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
+                    {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-                </div>
-                <div className="col-xl-4" ref={toiletAvailabilityRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Toilet Availability
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(toiletAvailabilityRef.current, "toilet-availability")
+                  </div>
+                  <div className="col-xl-4" ref={toiletAvailabilityRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Toilet Availability
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(toiletAvailabilityRef.current, "toilet-availability")
 
-                          }}>
-                          Export
-                        </button>
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Pie data={toiletAvailabilityBarchartData} />
                       </div>
                     </div>
+                  </div>
+                  <div className="col-xl-4" ref={toiletConditionRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(toiletConditionRef.current, "toilet-condition")
 
-                    <div className="card-body">
-                      <Pie data={toiletAvailabilityBarchartData} />
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Pie data={toiletConditionBarchartData} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4" ref={toiletAdequacyRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Adequacy Of Toilet
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(toiletAdequacyRef.current, "toilet-adequacy")
+
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Pie data={toiletAdequacyBarchartData} />
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-4" ref={toiletConditionRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(toiletConditionRef.current, "toilet-condition")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Pie data={toiletConditionBarchartData} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4" ref={toiletAdequacyRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Adequacy Of Toilet
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(toiletAdequacyRef.current, "toilet-adequacy")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Pie data={toiletAdequacyBarchartData} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="flex-grow-1">
-                  <h4 className="fs-16 mb-1">SOLID WASTE</h4>
-                  {/* <p className="text-muted mb-0">
+                <div className="row">
+                  <div className="flex-grow-1">
+                    <h4 className="fs-16 mb-1">SOLID WASTE</h4>
+                    {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-                </div>
-                <div className="col-xl-4" ref={wasteCollectorRegistrationRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Registered With A Waste Collector
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(wasteCollectorRegistrationRef.current, "waste-collector-registration")
+                  </div>
+                  <div className="col-xl-4" ref={wasteCollectorRegistrationRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Registered With A Waste Collector
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(wasteCollectorRegistrationRef.current, "waste-collector-registration")
 
-                          }}>
-                          Export
-                        </button>
+                            }}>
+                            Export
+                          </button>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="card-body">
-                      <Pie data={wasteCollectorBarchartData} />
+                      <div className="card-body">
+                        <Pie data={wasteCollectorBarchartData} />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-xl-4" ref={wasteSortingRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(wasteSortingRef.current, "waste-sorting")
+                  <div className="col-xl-4" ref={wasteSortingRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(wasteSortingRef.current, "waste-sorting")
 
-                          }}>
-                          Export
-                        </button>
+                            }}>
+                            Export
+                          </button>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="card-body">
-                      <Pie data={wasteSortingBarchartData} />
+                      <div className="card-body">
+                        <Pie data={wasteSortingBarchartData} />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-xl-4" ref={wasteStorageReceptacleRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Approved Waste Storage Receptacle
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(wasteStorageReceptacleRef.current, "waste-storage-receptacle")
+                  <div className="col-xl-4" ref={wasteStorageReceptacleRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Approved Waste Storage Receptacle
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(wasteStorageReceptacleRef.current, "waste-storage-receptacle")
 
-                          }}>
-                          Export
-                        </button>
+                            }}>
+                            Export
+                          </button>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="card-body">
-                      <Pie data={approvedWasteReceptacleBarchartData} />
+                      <div className="card-body">
+                        <Pie data={approvedWasteReceptacleBarchartData} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
     </LoadingOverlay>
   )
 }

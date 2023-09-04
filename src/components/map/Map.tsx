@@ -25,7 +25,6 @@ const Map = ({ data }: any) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   
-  console.log("data==>", data);
 
 
   const [selectedPlace, setSelectedPlace] = useState(null);
