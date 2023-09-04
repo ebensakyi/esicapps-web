@@ -1,21 +1,26 @@
 import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 
-
 export async function GET(request: Request) {
   try {
-    console.log(">>>>>>>>>get");
-    
-    const { searchParams } = new URL(request.url);
-    const userId: any = Number(searchParams.get("userId"));
-console.log("userid = ", userId);
+    let { searchParams } = new URL(request.url);
+
+    let formId = Number(searchParams.get("formId")) || undefined;
 
 
+    const data = await prisma.inspection.findMany({
+      where: {
+        isPublished: 1,
+        inspectionFormId: formId,
+      },
+      include: {
+        BasicInfoSection: true,
+      },
+    });
 
-    return NextResponse.json({})
+   
+    return NextResponse.json(data);
   } catch (error) {
-    console.log("<======>", error);
-
     return NextResponse.json(error);
   }
 }
