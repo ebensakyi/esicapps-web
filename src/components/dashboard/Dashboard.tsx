@@ -1,9 +1,13 @@
 'use client'
 import axios from 'axios';
 import { getSession, useSession } from 'next-auth/react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react'
+import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useRef, useState } from 'react'
 import { toast } from 'react-toastify';
+import LoadingOverlay from "react-loading-overlay";
+
+import html2canvas from "html2canvas";
+
 import {
   Chart as ChartJS,
   ArcElement,
@@ -29,11 +33,26 @@ export default function Dashboard({ data }: any) {
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
-        redirect(LOGIN_URL);
+      redirect(LOGIN_URL);
     }
-})
+  })
 
 
+  const waterSourceRef: any = useRef();
+  const waterSourceConditionRef: any = useRef();
+  const waterStorageConditionRef: any = useRef();
+
+  const toiletAvailabilityRef: any = useRef();
+  const toiletAdequacyRef: any = useRef();
+
+  const toiletConditionRef: any = useRef();
+  const wasteCollectorRegistrationRef: any = useRef();
+  const wasteSortingRef: any = useRef();
+  const wasteStorageReceptacleRef: any = useRef();
+
+
+
+  const [downloading, setDownloading] = useState<boolean>(false);
   const [showLoading, setShowLoading] = useState(false);
 
   const [districtsData, setDistrictsData] = useState([]);
@@ -140,7 +159,7 @@ export default function Dashboard({ data }: any) {
     router.push({
       pathname,
       query: { published, page, filterBy, filterValue, from, to },
-    }as any);
+    } as any);
 
 
   };
@@ -390,14 +409,71 @@ export default function Dashboard({ data }: any) {
 
 
 
-  let userSession :any = session;
+  let userSession: any = session;
 
 
-  let nationalUser: any = userSession?.user?.userLevelId == 1 ;
+  let nationalUser: any = userSession?.user?.userLevelId == 1;
   let regionalUser: any = userSession?.user?.userLevelId == 2;
   let districtUser: any = userSession?.user?.userLevelId == 3;
 
+
+  const exportAsImage = async (element: any, imageFileName: any) => {
+    setDownloading(true);
+    try {
+      const html: any = document.getElementsByTagName("html")[0];
+      const body: any = document.getElementsByTagName("body")[0];
+      let htmlWidth = html.clientWidth;
+      let bodyWidth = body.clientWidth;
+      const newWidth = element.scrollWidth - element.clientWidth;
+      if (newWidth > element.clientWidth) {
+        htmlWidth += newWidth;
+        bodyWidth += newWidth;
+      }
+      html.style.width = htmlWidth + "px";
+      body.style.width = bodyWidth + "px";
+      const canvas = await html2canvas(element, {
+        allowTaint: true,
+        useCORS: true,
+      });
+      const image = canvas.toDataURL("image/png", 1.0);
+      downloadImage(image, imageFileName);
+      html.style.width = null;
+      body.style.width = null;
+    } catch (error) {
+      console.log(error);
+
+      setDownloading(false);
+    }
+  };
+
+  const downloadImage = (blob: any, fileName: any) => {
+    try {
+      const fakeLink: any = window.document.createElement("a");
+      fakeLink.style = "display:none;";
+      fakeLink.download = fileName;
+
+      fakeLink.href = blob;
+
+      document.body.appendChild(fakeLink);
+      fakeLink.click();
+      document.body.removeChild(fakeLink);
+
+      fakeLink.remove();
+      setDownloading(false);
+      setDownloading(false);
+    } catch (error) {
+      setDownloading(false);
+    }
+  };
+
+
+
   return (
+    <LoadingOverlay
+    active={downloading}
+    spinner
+    text="Loading. Please wait..."
+  >
     <main id="main" className="main">
 
       <div className="pagetitle">
@@ -879,155 +955,229 @@ export default function Dashboard({ data }: any) {
                 </div>
               </div>
               {/* end row */}
-      <div className="row">
-        <div className="flex-grow-1">
-          <h4 className="fs-16 mb-1">WATER</h4>
-          {/* <p className="text-muted mb-0">
+              <div className="row">
+                <div className="flex-grow-1">
+                  <h4 className="fs-16 mb-1">WATER</h4>
+                  {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
-              {/* <div class="flex-shrink-0">
-                <button type="button" class="btn btn-soft-primary btn-sm">
-                  Export Chart
-                </button>
-              </div> */}
-            </div>
+                </div>
+                <div className="col-xl-4" ref={waterSourceRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(waterSourceRef.current, "water-source")
 
-            <div className="card-body">
-              <Pie data={waterSourceBarchartData} />
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Condition Of Water Source
-              </h4>
-            </div>
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
 
-            <div className="card-body">
-              <Pie data={waterSourceConditionBarchartData} />
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Water Storage Condition
-              </h4>
-            </div>
+                    <div className="card-body">
+                      <Pie data={waterSourceBarchartData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4" ref={waterSourceConditionRef}>
+                  <div className="card card-height-100">
 
-            <div className="card-body">
-              <Bar data={waterStorageConditionBarchartData} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="flex-grow-1">
-          <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
-          {/* <p className="text-muted mb-0">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">
+                        Condition Of Water Source
+                      </h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(waterSourceConditionRef.current, "water-source-condition")
+
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <Pie data={waterSourceConditionBarchartData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4" ref={waterStorageConditionRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">
+                        Water Storage Condition
+                      </h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
+
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <Bar data={waterStorageConditionBarchartData} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="flex-grow-1">
+                  <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
+                  {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Toilet Availability
-              </h4>
-            </div>
+                </div>
+                <div className="col-xl-4" ref={toiletAvailabilityRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">
+                        Toilet Availability
+                      </h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(toiletAvailabilityRef.current, "toilet-availability")
 
-            <div className="card-body">
-              <Pie data={toiletAvailabilityBarchartData} />
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
-            </div>
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
 
-            <div className="card-body">
-              <Pie data={toiletConditionBarchartData} />
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Adequacy Of Toilet
-              </h4>
-            </div>
+                    <div className="card-body">
+                      <Pie data={toiletAvailabilityBarchartData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4" ref={toiletConditionRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(toiletConditionRef.current, "toilet-condition")
 
-            <div className="card-body">
-              <Pie data={toiletAdequacyBarchartData} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="flex-grow-1">
-          <h4 className="fs-16 mb-1">SOLID WASTE</h4>
-          {/* <p className="text-muted mb-0">
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <Pie data={toiletConditionBarchartData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4" ref={toiletAdequacyRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">
+                        Adequacy Of Toilet
+                      </h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(toiletAdequacyRef.current, "toilet-adequacy")
+
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <Pie data={toiletAdequacyBarchartData} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="flex-grow-1">
+                  <h4 className="fs-16 mb-1">SOLID WASTE</h4>
+                  {/* <p className="text-muted mb-0">
                   Here`s what`s happening with ESICApps today.
                 </p> */}
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Registered With A Waste Collector
-              </h4>
-            </div>
+                </div>
+                <div className="col-xl-4" ref={wasteCollectorRegistrationRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">
+                        Registered With A Waste Collector
+                      </h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(wasteCollectorRegistrationRef.current, "waste-collector-registration")
 
-            <div className="card-body">
-              <Pie data={wasteCollectorBarchartData} />
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
-            </div>
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
 
-            <div className="card-body">
-              <Pie data={wasteSortingBarchartData} />
-            </div>
-          </div>
-        </div>
-        <div className="col-xl-4">
-          <div className="card card-height-100">
-            <div className="card-header align-items-center d-flex">
-              <h4 className="card-title mb-0 flex-grow-1">
-                Approved Waste Storage Receptacle
-              </h4>
-            </div>
+                    <div className="card-body">
+                      <Pie data={wasteCollectorBarchartData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4" ref={wasteSortingRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(wasteSortingRef.current, "waste-sorting")
 
-            <div className="card-body">
-              <Pie data={approvedWasteReceptacleBarchartData} />
-            </div>
-          </div>
-        </div>
-      </div>
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <Pie data={wasteSortingBarchartData} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4" ref={wasteStorageReceptacleRef}>
+                  <div className="card card-height-100">
+                    <div className="card-header align-items-center d-flex">
+                      <h4 className="card-title mb-0 flex-grow-1">
+                        Approved Waste Storage Receptacle
+                      </h4>
+                      <div className="flex-shrink-0">
+                        <button type="button" className="btn btn-primary btn-sm"
+                          onClick={async () => {
+                            await exportAsImage(wasteStorageReceptacleRef.current, "waste-storage-receptacle")
+
+                          }}>
+                          Export
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="card-body">
+                      <Pie data={approvedWasteReceptacleBarchartData} />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
         </div>
       </section>
     </main>
+    </LoadingOverlay>
   )
 }
-function redirect(LOGIN_URL: string) {
-  throw new Error('Function not implemented.');
-}
-
