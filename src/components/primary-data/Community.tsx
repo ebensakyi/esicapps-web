@@ -14,8 +14,8 @@ import ReactPaginate from "react-paginate";
 
 export default function Community({ data }: any) {
 
-    
-  const { data: session } = useSession({
+
+    const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
             redirect(LOGIN_URL);
@@ -23,7 +23,7 @@ export default function Community({ data }: any) {
     })
 
     const searchParams = useSearchParams();
-    const router = useRouter();    
+    const router = useRouter();
 
     const searchTextRef: any = useRef("");
 
@@ -44,7 +44,7 @@ export default function Community({ data }: any) {
 
     const [communityFile, setCommunityFile] = useState("");
 
-  
+
     const page = searchParams.get('page');
 
     const pathname = usePathname()
@@ -71,8 +71,7 @@ export default function Community({ data }: any) {
                 `/api/primary-data/electoral-area?districtId=${districtId}&get_all=1`
             );
 
-            console.log("EA",response.data);
-            
+
 
             setElectoralAreas(response.data.response);
         } catch (error) {
@@ -236,14 +235,14 @@ export default function Community({ data }: any) {
         );
     };
     const handleExportAll = async () => {
-       try {
+        try {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
                 `/api/primary-data/community?exportFile=true&searchText=${searchText}`,
-              
+
             );
 
-            
+
 
             if (response.status == 200) {
                 router.push(response.data);
@@ -256,7 +255,7 @@ export default function Community({ data }: any) {
     const handleSearch = () => {
         try {
             let _searchText: any = searchTextRef?.current?.value
-           
+
 
             router.push(
                 `${pathname}?searchText=${_searchText}&page=${page}`
@@ -520,28 +519,28 @@ export default function Community({ data }: any) {
                                 <h5 className="card-title">Communities</h5>
                                 <div className="row">
                                     <div className="col-md-4">
-                                                <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
-                                                        id="searchText"
-                                                        name="searchText" />
-                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
-                                                </div>
+                                        <div className="input-group mb-3">
+                                            <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                                id="searchText"
+                                                name="searchText" />
+                                            <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                        </div>
 
-                                            </div>
-                                            <div className="col-md-4">
-                                                <div className="input-group mb-3">
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-sm btn-success  "
-                                                        onClick={handleExportAll}
-                                                    >
-                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                                                        Export as excel
-                                                    </button>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div className="input-group mb-3">
+                                            <button
+                                                type="button"
+                                                className="btn btn-sm btn-success  "
+                                                onClick={handleExportAll}
+                                            >
+                                                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                                Export as excel
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                
+
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
@@ -635,25 +634,25 @@ export default function Community({ data }: any) {
                                     </tbody>
                                 </table>
                                 <ReactPaginate
-                                            marginPagesDisplayed={2}
-                                            pageRangeDisplayed={5}
-                                            previousLabel={"Previous"}
-                                            nextLabel={"Next"}
-                                            breakLabel={"..."}
-                                            initialPage={data.communities.curPage - 1}
-                                            pageCount={data.communities.maxPage}
-                                            onPageChange={handlePagination}
-                                            breakClassName={"page-item"}
-                                            breakLinkClassName={"page-link"}
-                                            containerClassName={"pagination"}
-                                            pageClassName={"page-item"}
-                                            pageLinkClassName={"page-link"}
-                                            previousClassName={"page-item"}
-                                            previousLinkClassName={"page-link"}
-                                            nextClassName={"page-item"}
-                                            nextLinkClassName={"page-link"}
-                                            activeClassName={"active"}
-                                        />
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    previousLabel={"Previous"}
+                                    nextLabel={"Next"}
+                                    breakLabel={"..."}
+                                    initialPage={data.communities.curPage - 1}
+                                    pageCount={data.communities.maxPage}
+                                    onPageChange={handlePagination}
+                                    breakClassName={"page-item"}
+                                    breakLinkClassName={"page-link"}
+                                    containerClassName={"pagination"}
+                                    pageClassName={"page-item"}
+                                    pageLinkClassName={"page-link"}
+                                    previousClassName={"page-item"}
+                                    previousLinkClassName={"page-link"}
+                                    nextClassName={"page-item"}
+                                    nextLinkClassName={"page-link"}
+                                    activeClassName={"active"}
+                                />
                             </div>
                         </div>
                     </div>
