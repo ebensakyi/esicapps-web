@@ -206,7 +206,6 @@ const flattenArray = async (data: any) => {
 
     });
   }
-  console.log("newdata===>",newData);
 
   return newData;
 };
