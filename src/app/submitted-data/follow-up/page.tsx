@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { SERVER_BASE_URL } from '@/config';
 import FollowUp from '@/src/components/submitted-data/FollowUp';
 
