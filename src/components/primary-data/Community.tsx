@@ -236,10 +236,10 @@ export default function Community({ data }: any) {
         );
     };
     const handleExportAll = async () => {
-        try {
+       try {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
-                `/api/primary-data/community?exportFile=true`,
+                `/api/primary-data/community?exportFile=true&searchText=${searchText}`,
               
             );
 
@@ -249,7 +249,7 @@ export default function Community({ data }: any) {
                 router.push(response.data);
             }
         } catch (error) {
-            console.log(error);
+            console.log("error==> ", error);
         }
     };
 

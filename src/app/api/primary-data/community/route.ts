@@ -31,6 +31,7 @@ export async function GET(request: Request) {
     const districtId = Number(searchParams.get("districtId"));
     const mobile = Number(searchParams.get("mobile"));
     let exportFile = searchParams.get("exportFile");
+    
 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
@@ -40,50 +41,15 @@ export async function GET(request: Request) {
     let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
 
-    if (districtId & mobile) {
+    if (districtId || mobile) {
       const data = await prisma.community.findMany({
         where: { deleted: 0, districtId: Number(districtId) },
       });
       return NextResponse.json(data);
     }
-
-    const count = await prisma.community.count({
-      where:
-        searchText != ""
-          ? {
-              OR: [
-                {
-                  name: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  ElectoralArea: {
-                    name: { contains: searchText, mode: "insensitive" },
-                  },
-                },
-                {
-                  ElectoralArea: {
-                    District: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  District: {
-                    Region: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-              ],
-              deleted: 0,
-            }
-          : { deleted: 0 },
-    });
+   
 
     const response = await prisma.community.findMany({
       where:
@@ -136,17 +102,55 @@ export async function GET(request: Request) {
     });
 
     if (exportFile) {
+      
       let url = await export2Excel(response);
 
       return NextResponse.json(url);
     }
-
+  const count = await prisma.community.count({
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  name: {
+                    contains: searchText,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  ElectoralArea: {
+                    name: { contains: searchText, mode: "insensitive" },
+                  },
+                },
+                {
+                  ElectoralArea: {
+                    District: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+                {
+                  District: {
+                    Region: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                },
+              ],
+              deleted: 0,
+            }
+          : { deleted: 0 },
+    });
     return NextResponse.json({
       response,
       curPage: curPage,
       maxPage: Math.ceil(count / perPage),
     });
   } catch (error) {
+
+    console.log(">>>>>>>>>>> ",error);
+    
     return NextResponse.json(error);
   }
 }
@@ -189,17 +193,20 @@ const export2Excel = async (data: any) => {
 };
 
 const flattenArray = async (data: any) => {
+  
   let newData = [];
 
   for (let i = 0; i < data?.length; i++) {
     newData?.push({
       Name: data[i]?.name,
       "Electoral Area": data[i]?.ElectoralArea.name,
-      District: data[i]?.District?.name,
+      District: data[i]?.ElectoralArea?.District?.name,
 
-      Region: data[i]?.Region?.name,
+      Region: data[i]?.ElectoralArea?.District?.Region?.name,
+
     });
   }
+  console.log("newdata===>",newData);
 
   return newData;
 };
