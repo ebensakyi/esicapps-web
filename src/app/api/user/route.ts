@@ -7,7 +7,6 @@ import { authOptions } from "../auth/[...nextauth]/options";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { sendSMS } from "@/utils/send-hubtel-sms";
-import { bool } from "sharp";
 import AWS from "aws-sdk";
 import fs from "fs";
 

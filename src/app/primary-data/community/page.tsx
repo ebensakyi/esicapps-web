@@ -31,8 +31,10 @@ async function getDistricts() {
 
 async function getCommunities(searchParams: any) {
     let { page } = searchParams
+    let { searchText } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/community?page=${page}`, { cache: 'no-store' });
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/community?page=${page}&searchText=${searchText}`, { cache: 'no-store' });
     
 
     if (!response.ok) {
