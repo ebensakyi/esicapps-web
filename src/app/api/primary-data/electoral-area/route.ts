@@ -57,15 +57,14 @@ export async function GET(request: Request) {
     //   where: { deleted: 0, districtId: Number(selectedDistrict) },
     // });
 
-    const districtId = Number(searchParams.get("districtId"));
-    const mobile = Number(searchParams.get("mobile"));
+    // const districtId = Number(searchParams.get("districtId"));
 
-    if (districtId & mobile) {
-      const data = await prisma.electoralArea.findMany({
-        where: { deleted: 0, districtId: Number(districtId) },
-      });
-      return NextResponse.json(data);
-    }
+    // if (districtId ) {
+    //   const data = await prisma.electoralArea.findMany({
+    //     where: { deleted: 0, districtId: Number(districtId) },
+    //   });
+    //   return NextResponse.json(data);
+    // }
 
     if (userLevel == 1) {
       if (exportFile) {

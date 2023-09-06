@@ -29,7 +29,6 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
-    const mobile = Number(searchParams.get("mobile"));
     let exportFile = searchParams.get("exportFile");
 
     const searchText =
@@ -43,12 +42,12 @@ export async function GET(request: Request) {
     let skip =
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
-    if (districtId || mobile) {
-      const data = await prisma.community.findMany({
-        where: { deleted: 0, districtId: Number(districtId) },
-      });
-      return NextResponse.json(data);
-    }
+    // if (districtId || mobile) {
+    //   const data = await prisma.community.findMany({
+    //     where: { deleted: 0, districtId: Number(districtId) },
+    //   });
+    //   return NextResponse.json(data);
+    // }
 
     if (exportFile) {
       const response = await prisma.community.findMany({
