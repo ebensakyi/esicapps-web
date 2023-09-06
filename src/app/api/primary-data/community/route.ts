@@ -31,7 +31,6 @@ export async function GET(request: Request) {
     const districtId = Number(searchParams.get("districtId"));
     const mobile = Number(searchParams.get("mobile"));
     let exportFile = searchParams.get("exportFile");
-    
 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
@@ -41,7 +40,8 @@ export async function GET(request: Request) {
     let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+    let skip =
+      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
     if (districtId || mobile) {
       const data = await prisma.community.findMany({
@@ -49,7 +49,30 @@ export async function GET(request: Request) {
       });
       return NextResponse.json(data);
     }
-   
+
+    if (exportFile) {
+      const response = await prisma.community.findMany({
+        where: { deleted: 0 },
+
+        include: {
+          ElectoralArea: {
+            include: {
+              District: {
+                include: {
+                  Region: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          name: "asc",
+        },
+      });
+      let url = await export2Excel(response);
+
+      return NextResponse.json(url);
+    }
 
     const response = await prisma.community.findMany({
       where:
@@ -97,17 +120,14 @@ export async function GET(request: Request) {
           },
         },
       },
+      orderBy: {
+        name: "asc",
+      },
       skip: skip,
       take: perPage,
     });
 
-    if (exportFile) {
-      
-      let url = await export2Excel(response);
-
-      return NextResponse.json(url);
-    }
-  const count = await prisma.community.count({
+    const count = await prisma.community.count({
       where:
         searchText != ""
           ? {
@@ -149,8 +169,6 @@ export async function GET(request: Request) {
     });
   } catch (error) {
 
-    console.log(">>>>>>>>>>> ",error);
-    
     return NextResponse.json(error);
   }
 }
@@ -193,7 +211,6 @@ const export2Excel = async (data: any) => {
 };
 
 const flattenArray = async (data: any) => {
-  
   let newData = [];
 
   for (let i = 0; i < data?.length; i++) {
@@ -203,7 +220,6 @@ const flattenArray = async (data: any) => {
       District: data[i]?.ElectoralArea?.District?.name,
 
       Region: data[i]?.ElectoralArea?.District?.Region?.name,
-
     });
   }
 
