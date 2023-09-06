@@ -21,9 +21,9 @@ async function getRegions() {
 }
 async function getDistricts(searchParams: any) {
     let { page } = searchParams
+    let { searchText } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district?page=${page}`, {  cache: 'no-store', method: "GET",
-    headers: headers() });
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district?page=${page}&searchText=${searchText}`, {  cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')

@@ -2,13 +2,14 @@ export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from "@/config";
 import User from "@/src/components/user/User";
+import { headers } from "next/headers";
 
 
 
 
 async function getRoles() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user/role`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/user/role`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -19,7 +20,7 @@ async function getRoles() {
 
 async function getUserLevel() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/user-level`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/user-level`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -30,7 +31,7 @@ async function getUserLevel() {
 
 async function getRegion() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -41,7 +42,7 @@ async function getRegion() {
 
 // async function getDistrict() {
 
-//     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
+//     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store',headers: headers() });
 
 //     if (!response.ok) {
 //         throw new Error('Failed to fetch data')
@@ -54,7 +55,7 @@ async function getUsers(searchParams: any) {
     let { searchText } = searchParams
     let { page } = searchParams
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user?page=${page}&searchText=${searchText}`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/user?page=${page}&searchText=${searchText}`, { cache: 'no-store',headers: headers() });
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }

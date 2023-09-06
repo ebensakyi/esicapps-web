@@ -1,6 +1,7 @@
 
 import { SERVER_BASE_URL } from '@/config';
 import DataEdit from '@/src/components/submitted-data/DataEdit';
+import { headers } from 'next/headers';
 
 async function getSubmittedData(searchParams: any) {
 
@@ -12,7 +13,7 @@ async function getSubmittedData(searchParams: any) {
 
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-edit?id=${id}&published=${published}&formId=${formId}`, { cache: "no-store" })
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-edit?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store',headers: headers() })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')

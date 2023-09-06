@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from '@/config';
 import FollowUp from '@/src/components/submitted-data/FollowUp';
+import { headers } from 'next/headers';
 
 async function getSubmittedData(searchParams: any) {
 
@@ -17,7 +18,7 @@ async function getSubmittedData(searchParams: any) {
 
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/follow-up?formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`, { cache: "no-store" })
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/follow-up?formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`, { cache: 'no-store',headers: headers() })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')

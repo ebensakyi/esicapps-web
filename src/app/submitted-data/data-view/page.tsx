@@ -1,18 +1,19 @@
 
 import { SERVER_BASE_URL } from '@/config';
 import DataView from '@/src/components/submitted-data/DataView';
+import { headers } from 'next/headers';
 
 async function getSubmittedData(searchParams: any) {
-    
+
     let { formId } = searchParams
     let { published } = searchParams
     let { id } = searchParams
 
 
-    
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`,{cache:"no-store"})
+
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store',headers: headers() })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
@@ -47,7 +48,7 @@ export default async function Page({ searchParams }: any) {
 
 
 
-    let data = { submittedData:submittedData }
+    let data = { submittedData: submittedData }
 
 
 
