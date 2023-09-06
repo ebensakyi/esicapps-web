@@ -7,16 +7,16 @@ export async function GET(request: Request) {
     
   
       const districtId = Number(searchParams.get("districtId"));
-  
+
       const data = await prisma.community.findMany({
         where: { deleted: 0, districtId: Number(districtId) },
       });
-      
+
   
-      return NextResponse.json({
+      return NextResponse.json(
         data,
        
-      });
+      );
     } catch (error) {
       console.error(error);
       return NextResponse.json(error);
