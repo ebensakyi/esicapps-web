@@ -1,7 +1,7 @@
 'use client'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter, usePathname, redirect } from 'next/navigation';
+import { useRouter, usePathname, redirect, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { useSession } from "next-auth/react";
@@ -12,6 +12,18 @@ import ReactPaginate from "react-paginate";
 
 
 export default function ElectoralArea({ data }: any) {
+
+  const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
+
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
+    const searchTextRef: any = useRef("");
 
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -27,16 +39,10 @@ export default function ElectoralArea({ data }: any) {
     const [districts, setDistricts] = useState([]);
 
     const [communityFile, setCommunityFile] = useState("");
+    const page = searchParams.get('page');
 
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect(LOGIN_URL);
-        }
-    })
+  
 
-
-    const router = useRouter();
     const pathname = usePathname()
 
 
@@ -203,6 +209,39 @@ export default function ElectoralArea({ data }: any) {
             `${pathname}?page=${page}&searchText=${searchText}`
 
         );
+    };
+
+    const handleExportAll = async () => {
+        try {
+            let searchText = searchParams.get('searchText')
+            const response = await axios.get(
+                `/api/primary-data/electoral-area?exportFile=true&searchText=${searchText}`,
+
+            );
+
+
+
+            if (response.status == 200) {
+                router.push(response.data);
+            }
+        } catch (error) {
+            console.log("error==> ", error);
+        }
+    };
+
+    const handleSearch = () => {
+        try {
+            let _searchText: any = searchTextRef?.current?.value
+
+
+            router.push(
+                `${pathname}?searchText=${_searchText}&page=${page}`
+
+            );
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -409,6 +448,29 @@ export default function ElectoralArea({ data }: any) {
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Electoral Area</h5>
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <div className="input-group mb-3">
+                                            <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                                id="searchText"
+                                                name="searchText" />
+                                            <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                        </div>
+
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div className="input-group mb-3">
+                                            <button
+                                                type="button"
+                                                className="btn btn-sm btn-success  "
+                                                onClick={handleExportAll}
+                                            >
+                                                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                                Export as excel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>

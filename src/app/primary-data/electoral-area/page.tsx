@@ -7,8 +7,10 @@ import { headers } from "next/headers";
 
 async function getRegions() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, {  cache: 'no-store', method: "GET",
-    headers: headers() });
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, {
+        cache: 'no-store', method: "GET",
+        headers: headers()
+    });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -17,10 +19,12 @@ async function getRegions() {
 
 }
 async function getDistricts() {
-    
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, {  cache: 'no-store', method: "GET",
-    headers: headers() });
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, {
+        cache: 'no-store', method: "GET",
+        headers: headers()
+    });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -30,9 +34,13 @@ async function getDistricts() {
 }
 
 async function getElectoralAreas(searchParams: any) {
-let { page } = searchParams
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/electoral-area?page=${page}`, {  cache: 'no-store', method: "GET",
-    headers: headers() });
+    let { page } = searchParams
+    let { searchText } = searchParams
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/electoral-area?page=${page}&searchText=${searchText}`, {
+        cache: 'no-store', method: "GET",
+        headers: headers()
+    });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -44,15 +52,15 @@ let { page } = searchParams
 
 
 export default async function Page({ searchParams }: any) {
-  
+
     const regions = await getRegions()
     const districts = await getDistricts()
 
     const electoralAreas = await getElectoralAreas(searchParams)
 
-    let data = {regions,districts, electoralAreas }
+    let data = { regions, districts, electoralAreas }
 
-    
+
 
 
 
