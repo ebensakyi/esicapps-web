@@ -8,12 +8,9 @@ import { sendFCM } from "@/utils/send-fcm";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const session:any = await getServerSession(authOptions);
-
+    const session: any = await getServerSession(authOptions);
 
     const userId = session?.user?.id;
-
-    
 
     let recipientCount = 0;
 
@@ -32,18 +29,17 @@ export async function POST(request: Request) {
       sender: Number(userId),
     };
 
-
     if (res.sendingType == "1") {
-      const user:any = await prisma.user.findFirst({
+      const user: any = await prisma.user.findFirst({
         where: { id: Number(res.individualRecipient) },
       });
-      recipientCount = user?.length 
+      recipientCount = user?.length;
 
       let x = await sendFCM(res.title, res.message, user?.fcmId);
     }
 
     if (res.sendingType == "2") {
-      const user :any= await prisma.user.findMany({
+      const user: any = await prisma.user.findMany({
         where: { districtId: Number(res.districtId) },
       });
 
@@ -55,21 +51,19 @@ export async function POST(request: Request) {
     }
 
     if (res.sendingType == "3") {
-      const user:any = await prisma.user.findMany({
+      const user: any = await prisma.user.findMany({
         where: { regionId: Number(res.regionId) },
       });
 
       recipientCount = user.length;
-
 
       for (let i = 0; i < user.length; i++) {
         let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
       }
     }
 
-
     if (res.sendingType == "4") {
-      const user :any= await prisma.user.findMany({
+      const user: any = await prisma.user.findMany({
         where: { deleted: 0 },
       });
 
@@ -99,13 +93,14 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    const session :any= await getServerSession(authOptions);
-
+    const session: any = await getServerSession(authOptions);
 
     const userId = session?.user?.id;
 
     let recipientCount = 0;
     let messageId = res.messageId;
+
+    console.log(res);
 
     const data = {
       title: res.title,
@@ -113,18 +108,24 @@ export async function PUT(request: Request) {
       messageType: 1,
       sendingType: Number(res.sendingType),
       individualRecipient:
-        res.individualRecipient == undefined || ""
+        res.individualRecipient == undefined || "" || null || 0
           ? null
           : Number(res.individualRecipient),
       districtId:
-        res.districtId == undefined || "" ? null : Number(res.districtId),
-      regionId: res.regionId == undefined || "" ? null : Number(res.regionId),
+        res.districtId == undefined || "" || null || 0
+          ? null
+          : Number(res.districtId),
+      regionId:
+        res.regionId == undefined || "" || null || 0
+          ? null
+          : Number(res.regionId),
       sender: Number(userId),
     };
 
+    console.log(data);
 
     if (res.sendingType == "1") {
-      const user:any = await prisma.user.findFirst({
+      const user: any = await prisma.user.findFirst({
         where: { id: Number(res.individualRecipient) },
       });
       recipientCount = user?.length;
@@ -133,7 +134,7 @@ export async function PUT(request: Request) {
     }
 
     if (res.sendingType == "2") {
-      const user : any = await prisma.user.findMany({
+      const user: any = await prisma.user.findMany({
         where: { districtId: Number(res.districtId) },
       });
 
@@ -147,7 +148,7 @@ export async function PUT(request: Request) {
     }
 
     if (res.sendingType == "3") {
-      const user : any = await prisma.user.findMany({
+      const user: any = await prisma.user.findMany({
         where: { regionId: Number(res.regionId) },
       });
 
@@ -157,6 +158,18 @@ export async function PUT(request: Request) {
         if (user[i]?.fcmId) {
           await sendFCM(res.title, res.message, user[i]?.fcmId);
         }
+      }
+    }
+
+    if (res.sendingType == "4") {
+      const user: any = await prisma.user.findMany({
+        where: { deleted: 0 },
+      });
+
+      recipientCount = user.length;
+
+      for (let i = 0; i < user.length; i++) {
+        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
       }
     }
 
@@ -176,6 +189,7 @@ export async function PUT(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
+    console.log(error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -183,7 +197,6 @@ export async function PUT(request: Request) {
 
 export async function GET(request: Request) {
   try {
-
     const data = await prisma.messaging.findMany({
       where: { deleted: 0, messageType: 1 },
       include: {
@@ -201,5 +214,3 @@ export async function GET(request: Request) {
     return NextResponse.json(error);
   }
 }
-
-
