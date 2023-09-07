@@ -1,6 +1,6 @@
+export const dynamic = "force-dynamic";
 import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
-
 export async function GET(request: Request) {
     try {
       const { searchParams } = new URL(request.url);

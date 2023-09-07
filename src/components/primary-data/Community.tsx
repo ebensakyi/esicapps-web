@@ -234,8 +234,10 @@ export default function Community({ data }: any) {
 
         );
     };
-    const handleExportAll = async () => {
+    const handleExportAll = async (e: any) => {
         try {
+            e.preventDefault()
+
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
                 `/api/primary-data/community?exportFile=true&searchText=${searchText}`,
@@ -529,10 +531,11 @@ export default function Community({ data }: any) {
                                     </div>
                                     <div className="col-md-4">
                                         <div className="input-group mb-3">
+
                                             <button
                                                 type="button"
                                                 className="btn btn-sm btn-success  "
-                                                onClick={handleExportAll}
+                                                onClick={(e: any) =>  handleExportAll(e) }
                                             >
                                                 <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
                                                 Export as excel

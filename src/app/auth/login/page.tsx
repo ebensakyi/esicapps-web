@@ -190,7 +190,7 @@ export default function Login() {
                           <p className="small mb-0">
                             Don`t have account?{" "}
                             <Link href="/auth/forget-password">
-                              Forget password
+                              Forgot password
                             </Link>
                           </p>
                         </div>
