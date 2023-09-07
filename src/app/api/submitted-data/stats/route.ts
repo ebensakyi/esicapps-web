@@ -1,4 +1,4 @@
-//// not working moved to profile
+export const dynamic = "force-dynamic";
 import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 
