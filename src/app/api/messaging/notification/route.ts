@@ -13,6 +13,8 @@ export async function POST(request: Request) {
 
     const userId = session?.user?.id;
 
+    
+
     let recipientCount = 0;
 
     const data = {
@@ -65,6 +67,18 @@ export async function POST(request: Request) {
       }
     }
 
+
+    if (res.sendingType == "4") {
+      const user :any= await prisma.user.findMany({
+        where: { deleted: 0 },
+      });
+
+      recipientCount = user.length;
+
+      for (let i = 0; i < user.length; i++) {
+        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
+      }
+    }
     if (recipientCount == 0) {
       return NextResponse.json(
         { message: "Recipient list is empty" },
@@ -169,6 +183,7 @@ export async function PUT(request: Request) {
 
 export async function GET(request: Request) {
   try {
+
     const data = await prisma.messaging.findMany({
       where: { deleted: 0, messageType: 1 },
       include: {
