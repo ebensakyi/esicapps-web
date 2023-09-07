@@ -199,7 +199,7 @@ export default function SMS({ data }: any) {
                                             value={individualRecipient}
                                         >
                                             <option >Select user * </option>
-                                            {data?.users?.map((data: any) => (
+                                            {data?.users?.response?.map((data: any) => (
                                                 <option key={data.id} value={data.id}>
                                                     {data.otherNames} {data.surname} - {data.phoneNumber}
                                                 </option>
@@ -241,7 +241,7 @@ export default function SMS({ data }: any) {
                                             value={districtId}
                                         >
                                             <option >Select district * </option>
-                                            {data?.districts?.map((data: any) => (
+                                            {data?.districts?.response?.map((data: any) => (
                                                 <option key={data.id} value={data.id}>
                                                     {data.name}
                                                 </option>
