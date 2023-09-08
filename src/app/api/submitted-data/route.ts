@@ -3,6 +3,8 @@ import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
 import AWS from "aws-sdk";
 import fs from "fs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 const XLSX = require("xlsx");
 
@@ -660,8 +662,10 @@ export async function GET(request: Request) {
     // let userRegion = Number(userData?.regionId);
     // let userDistrict = Number(userData?.districtId);
     // let userId = userData?.id;
+    const session: any = await getServerSession(authOptions);
 
-    // await logActivity("Visited submitted data list", userId);
+
+     await logActivity("Visited submitted data list", session?.user?.id);
 
     let { searchParams } = new URL(request.url);
 

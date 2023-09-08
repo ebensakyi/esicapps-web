@@ -11,6 +11,8 @@ export async function POST(request: Request) {
 
     const userId = session?.user?.id;
 
+
+    await logActivity("Assigned data to other user", userId);
     const data = {
       assignedToId: Number(res?.assignedToUser),
       assignedFromId: Number(res?.assignedFromUser),
@@ -59,7 +61,10 @@ export async function GET(request: Request) {
 
     let userId = Number(searchParams.get("userId"));
 
-    console.log("userId===>",userId);
+    const session: any = await getServerSession(authOptions);
+
+
+    await logActivity("Visited data assignment page", session?.user?.id);
     
 
     if (userId) {

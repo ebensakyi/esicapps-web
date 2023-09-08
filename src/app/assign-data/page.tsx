@@ -2,12 +2,13 @@ export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from '@/config';
 import DataTransfer from '@/src/components/assign-data/AssignData';
+import { headers } from 'next/headers';
 
 
 async function getAssignData() {
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/assign-data`)
+    const res = await fetch(`${SERVER_BASE_URL}/api/assign-data`, { cache: 'no-store',headers: headers() })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')

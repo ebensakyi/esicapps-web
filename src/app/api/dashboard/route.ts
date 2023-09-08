@@ -37,11 +37,14 @@ export async function GET(request: Request) {
     const session:any = await getServerSession(authOptions);
 
     // console.log("Session ", session);
-    // let userId = session?.user?.id;
+    let userId = session?.user?.id;
     // let surname = session?.user?.surname;
     let districtId = session?.user?.districtId;
     let regionId = session?.user?.regionId;
     let userLevel = session?.user?.userLevelId;
+
+
+    await logActivity("Visited dashboard page", userId);
 
     
 

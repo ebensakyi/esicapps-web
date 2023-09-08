@@ -49,7 +49,7 @@ export default function AssignData({ data }: any) {
 
 
 
-            setAssignedFromUsers(response.data);
+            setAssignedFromUsers(response?.data?.response);
         } catch (error) { }
     };
 
@@ -64,8 +64,9 @@ export default function AssignData({ data }: any) {
                 "/api/user?districtId=" + districtId
             );
 
+            console.log(response);
 
-            setAssignedToUsers(response.data);
+            setAssignedToUsers(response?.data?.response);
         } catch (error) { }
     };
 
