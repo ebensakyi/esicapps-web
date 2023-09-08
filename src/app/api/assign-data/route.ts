@@ -11,8 +11,8 @@ export async function POST(request: Request) {
 
     const userId = session?.user?.id;
 
+    await logActivity(`Assigned data from ${res?.assignedFromUser} to ${res?.assignedToUser}`, userId);
 
-    await logActivity("Assigned data to other user", userId);
     const data = {
       assignedToId: Number(res?.assignedToUser),
       assignedFromId: Number(res?.assignedFromUser),

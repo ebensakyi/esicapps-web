@@ -16,7 +16,6 @@ import moment from "moment";
 export default function AssignData({ data }: any) {
     const router = useRouter();
 
-    console.log(data);
     
 
     const [isEditing, setIsEditing] = useState(false);

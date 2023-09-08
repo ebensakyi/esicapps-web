@@ -3,15 +3,25 @@ import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 import AWS from "aws-sdk";
 import fs from "fs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/options";
+import { logActivity } from "@/utils/log";
 
 const XLSX = require("xlsx");
 export async function GET(request: Request) {
   try {
     let { searchParams } = new URL(request.url);
 
+    const session: any = await getServerSession(authOptions);
+
+    const userId = session?.user?.id;
+
+    await logActivity(`Visited user logs page`, userId);
+
+
     let curPage = Number(searchParams.get("page"));
 
-    let perPage = 5;
+    let perPage = 10;
     let skip = Number((curPage - 1) * perPage) || 0;
     let searchText =
       searchParams.get("searchText")?.toString() == "undefined"
