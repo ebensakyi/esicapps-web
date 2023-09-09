@@ -669,7 +669,7 @@ export default function Data({ data }: any) {
                                                                             </Link>
 
                                                                         </li>
-                                                                        <li>
+                                                                        {/* <li>
                                                                             {inspectionUpdatesAllowed?
                                                                             <Link
                                                                                 className="dropdown-item btn btn-sm "
@@ -685,7 +685,7 @@ export default function Data({ data }: any) {
                                                                                 Edit
                                                                             </Link>:<></>}
 
-                                                                        </li>
+                                                                        </li> */}
 
                                                                     </ul>
                                                                 </div>
