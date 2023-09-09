@@ -40,6 +40,8 @@ export default function Dashboard({ data }: any) {
   })
 
 
+  
+
   const waterSourceRef: any = useRef();
   const waterSourceConditionRef: any = useRef();
   const waterStorageConditionRef: any = useRef();
@@ -956,7 +958,34 @@ export default function Dashboard({ data }: any) {
                     </div>
                   </div>
                 </div>
+
+
                 {/* end row */}
+
+                <div className="row">
+                <div className="col-xl-12" ref={waterStorageConditionRef}>
+                    <div className="card card-height-100">
+                      <div className="card-header align-items-center d-flex">
+                        <h4 className="card-title mb-0 flex-grow-1">
+                          Inspection Submissions
+                        </h4>
+                        <div className="flex-shrink-0">
+                          <button type="button" className="btn btn-primary btn-sm"
+                            onClick={async () => {
+                              await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
+
+                            }}>
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="card-body">
+                        <Bar data={baselinePieChartData} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="row">
                   <div className="flex-grow-1">
                     <h4 className="fs-16 mb-1">WATER</h4>
