@@ -28,8 +28,9 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const districtId = Number(searchParams.get("districtId"));
+    const electoralAreaId = Number(searchParams.get("electoralAreaId"));
     let exportFile = searchParams.get("exportFile");
+    const get_all = Number(searchParams.get("get_all"));
 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
@@ -48,6 +49,17 @@ export async function GET(request: Request) {
     //   });
     //   return NextResponse.json(data);
     // }
+
+    if (get_all == 1) {
+      const response = await prisma.community.findMany({
+        where: { deleted: 0,electoralAreaId:electoralAreaId },
+      })
+
+      return NextResponse.json({
+        response,
+       
+      });
+      };
 
     if (exportFile) {
       const response = await prisma.community.findMany({

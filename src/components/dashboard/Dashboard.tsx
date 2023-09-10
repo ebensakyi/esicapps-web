@@ -40,9 +40,9 @@ export default function Dashboard({ data }: any) {
   })
 
 
-  
 
-  
+
+
 
   const waterSourceRef: any = useRef();
   const waterSourceConditionRef: any = useRef();
@@ -104,9 +104,12 @@ export default function Dashboard({ data }: any) {
   const getDistrictsByRegion = async (regionId: any) => {
     try {
       const response = await axios.get(
-        "/api/primary-data/district?regionId=" + regionId
+        "/api/primary-data/district?regionId=" + regionId + "&get_all=1"
       );
-      setDistrictsData(response.data);
+
+
+
+      setDistrictsData(response.data.response);
     } catch (error) {
       console.log(error);
     }
@@ -114,9 +117,9 @@ export default function Dashboard({ data }: any) {
   const getElectoralAreasByDistrict = async (districtId: any) => {
     try {
       const response = await axios.get(
-        "/api/primary-data/electoral-area?districtId=" + districtId
+        "/api/primary-data/electoral-area?districtId=" + districtId + "&get_all=1"
       );
-      setElectoralAreasData(response.data);
+      setElectoralAreasData(response.data.response);
     } catch (error) {
       console.log(error);
     }
@@ -124,10 +127,10 @@ export default function Dashboard({ data }: any) {
   const getCommunitiesByElectoralArea = async (electoralAreaId: any) => {
     try {
       const response = await axios.get(
-        "/api/v1/primary-data/community?electoralAreaId=" + electoralAreaId
+        "/api/primary-data/community?electoralAreaId=" + electoralAreaId + "&get_all=1"
       );
 
-      setCommunitiesData(response.data);
+      setCommunitiesData(response.data.response);
     } catch (error) {
       console.log(error);
     }
@@ -188,7 +191,7 @@ export default function Dashboard({ data }: any) {
 
 
 
-    submissionsChartData = {
+  submissionsChartData = {
     labels: data?.dashboardData?.baselineSummary?.map((x: any) => x.label),
     datasets: [
       {
@@ -997,7 +1000,7 @@ export default function Dashboard({ data }: any) {
                 {/* end row */}
 
                 <div className="row">
-                <div className="col-xl-12" ref={submissionsRef}>
+                  <div className="col-xl-12" ref={submissionsRef}>
                     <div className="card card-height-100">
                       <div className="card-header align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">
