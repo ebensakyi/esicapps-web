@@ -35,9 +35,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
 
-    const res = await request.json();
 
-    if (!userId) return res.status(200).json();
+    if (!userId) return NextResponse.json({});
 
     const response = await prisma.premisesHazardousWasteDisposal.findMany({
       where: { userId: userId, deleted: 0 },
@@ -48,7 +47,7 @@ export async function GET(request: Request) {
       });
   } catch (error) {
     return NextResponse.json(error,{
-        status: 400,
+        status: 500,
       });
   }
 }
