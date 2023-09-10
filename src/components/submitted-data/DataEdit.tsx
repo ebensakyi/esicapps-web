@@ -3044,15 +3044,15 @@ export default function DataEdit({ data }: any) {
                                 <div className="col-lg-12">
                                     <div className="row mb-3">
                                         <div className="col-xl-12">
-                                            <div className="row align-items-center gy-3 mb-3">
+                                            {/* <div className="row align-items-center gy-3 mb-3">
                                                 <div className="col-sm">
                                                     <div>
                                                         <h5 className="fs-14 mb-0">PICTURES</h5>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            {/* <div className="row gallery-wrapper">
+                                            </div> 
+                                            
+                                            <div className="row gallery-wrapper">
                       {data?.submittedData?.InspectionPictures?.map((ip) => {
                         return (
                           <div

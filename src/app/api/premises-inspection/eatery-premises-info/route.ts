@@ -1,6 +1,7 @@
 import { prisma } from "@/prisma/db";
 import { EateryInfo } from "@/typings";
 import { logActivity } from "@/utils/log";
+import { NextResponse } from "next/server";
 
 
 export async function POST(request: Request) {
@@ -116,15 +117,16 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const res = await request.json();
+    const { searchParams } = new URL(request.url);
+    const userId = Number(searchParams.get("userId"));
 
-    let userId = Number(res.userId);
-    if (!userId) return res.status(200).json();
+
+    if (!userId) return NextResponse.json({});
 
     const data = await prisma.eateryPremisesInfoSection.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
-    return new Response(JSON.stringify([{ data }]));
+    return  NextResponse.json(data);
   } catch (error) {}
 }

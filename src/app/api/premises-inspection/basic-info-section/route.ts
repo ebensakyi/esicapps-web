@@ -2,11 +2,9 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 
-
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-
 
     let latitude = res.latitude;
     let longitude = res.longitude;
@@ -41,7 +39,6 @@ export async function POST(request: Request) {
       respondentDesignationId: Number(res.respondentDesignationId),
     };
 
-
     const response = await prisma.basicInfoSection.create({ data });
 
     return NextResponse.json(response);
@@ -54,14 +51,20 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const res = await request.json();
+    const { searchParams } = new URL(request.url);
+    const userId = Number(searchParams.get("userId"));
+
+    if (!userId)
+      return NextResponse.json({
+        status: 200,
+      });
 
     const data = await prisma.basicInfoSection.findMany({
-      where: { deleted: 0, userId: Number(res.userId) },
+      where: { deleted: 0, userId: userId },
     });
 
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json(error,{ status: 500 });
+    return NextResponse.json(error, { status: 500 });
   }
 }

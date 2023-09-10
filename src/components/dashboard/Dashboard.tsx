@@ -42,6 +42,8 @@ export default function Dashboard({ data }: any) {
 
   
 
+  
+
   const waterSourceRef: any = useRef();
   const waterSourceConditionRef: any = useRef();
   const waterStorageConditionRef: any = useRef();
@@ -53,6 +55,7 @@ export default function Dashboard({ data }: any) {
   const wasteCollectorRegistrationRef: any = useRef();
   const wasteSortingRef: any = useRef();
   const wasteStorageReceptacleRef: any = useRef();
+  const submissionsRef: any = useRef();
 
 
 
@@ -168,7 +171,7 @@ export default function Dashboard({ data }: any) {
 
   };
 
-  let baselinePieChartData,
+  let submissionsChartData,
     reinspectionPieChartData,
     followupPieChartData,
     actionsTakenBarchartData,
@@ -185,22 +188,53 @@ export default function Dashboard({ data }: any) {
 
 
 
-  baselinePieChartData = {
+    submissionsChartData = {
     labels: data?.dashboardData?.baselineSummary?.map((x: any) => x.label),
     datasets: [
       {
-        label: "# of submissions",
+        label: "# of baseline submissions",
         data: data?.dashboardData?.baselineSummary?.map((x: any) => x.value),
-        backgroundColor: ["#DAB785",
-
-          "#70A288",
-          "#F0386B",
-          "#04395E",
-
-          "#D5896F",
-          "#EB5E55",
-          "#0D00A4",
-          "#C879FF",
+        backgroundColor: [
+          "#C15C76",
+          "#6876B6",
+          "#559CAD",
+          "#F6CB3C",
+          "#CC0000",
+          "#22BFAC",
+          "#7E06EF",
+          "#089DD9",
+        ],
+        borderColor: ["#fff"],
+        borderWidth: 1,
+      },
+      {
+        label: "# of reinspection submissions",
+        data: data?.dashboardData?.reinspectionSummary?.map((x: any) => x.value),
+        backgroundColor: [
+          "#A33E57",
+          "#3C477C",
+          "#427B8A",
+          "#F4C015",
+          "#A30000",
+          "#1C9C8D",
+          "#6905C7",
+          "#0681B1",
+        ],
+        borderColor: ["#fff"],
+        borderWidth: 1,
+      },
+      {
+        label: "# of followup submissions",
+        data: data?.dashboardData?.followupSummary?.map((x: any) => x.value),
+        backgroundColor: [
+          "#762D3F",
+          "#2E3760",
+          "#35626E",
+          "#D6A70A",
+          "#7A0000",
+          "#12685E",
+          "#4A048B",
+          "#045676",
         ],
         borderColor: ["#fff"],
         borderWidth: 1,
@@ -963,7 +997,7 @@ export default function Dashboard({ data }: any) {
                 {/* end row */}
 
                 <div className="row">
-                <div className="col-xl-12" ref={waterStorageConditionRef}>
+                <div className="col-xl-12" ref={submissionsRef}>
                     <div className="card card-height-100">
                       <div className="card-header align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">
@@ -972,7 +1006,7 @@ export default function Dashboard({ data }: any) {
                         <div className="flex-shrink-0">
                           <button type="button" className="btn btn-primary btn-sm"
                             onClick={async () => {
-                              await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
+                              await exportAsImage(submissionsRef.current, "submissions")
 
                             }}>
                             Export
@@ -981,7 +1015,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Bar data={baselinePieChartData} />
+                        <Bar data={submissionsChartData} />
                       </div>
                     </div>
                   </div>
@@ -1009,7 +1043,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={waterSourceBarchartData} />
+                        <Doughnut data={waterSourceBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1032,7 +1066,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={waterSourceConditionBarchartData} />
+                        <Doughnut data={waterSourceConditionBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1054,7 +1088,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Bar data={waterStorageConditionBarchartData} />
+                        <Doughnut data={waterStorageConditionBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1084,7 +1118,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={toiletAvailabilityBarchartData} />
+                        <Doughnut data={toiletAvailabilityBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1104,7 +1138,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={toiletConditionBarchartData} />
+                        <Doughnut data={toiletConditionBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1126,7 +1160,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={toiletAdequacyBarchartData} />
+                        <Doughnut data={toiletAdequacyBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1156,7 +1190,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={wasteCollectorBarchartData} />
+                        <Doughnut data={wasteCollectorBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1176,7 +1210,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={wasteSortingBarchartData} />
+                        <Doughnut data={wasteSortingBarchartData} />
                       </div>
                     </div>
                   </div>
@@ -1198,7 +1232,7 @@ export default function Dashboard({ data }: any) {
                       </div>
 
                       <div className="card-body">
-                        <Pie data={approvedWasteReceptacleBarchartData} />
+                        <Doughnut data={approvedWasteReceptacleBarchartData} />
                       </div>
                     </div>
                   </div>
