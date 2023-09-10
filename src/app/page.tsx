@@ -7,10 +7,15 @@ import { authOptions } from './api/auth/[...nextauth]/options';
 import { redirect } from 'next/navigation';
 
 
-async function getDashboardData() {
+async function getDashboardData(searchParams: any) {
+  let { filterBy } = searchParams
+  let { filterValue } = searchParams
+  let { from } = searchParams
+  let { to } = searchParams
 
 
-  const res = await fetch(`${SERVER_BASE_URL}/api/dashboard`, {
+
+  const res = await fetch(`${SERVER_BASE_URL}/api/dashboard?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`, {
     cache: 'no-store', method: "GET",
     headers: headers()
   })
@@ -46,18 +51,18 @@ async function getDistricts() {
 }
 
 
-export default async function Page() {
-  const session :any= await getServerSession(authOptions);
+export default async function Page({ searchParams }: any) {
+  const session: any = await getServerSession(authOptions);
 
-  
-  if(session?.user?.passwordChanged==0){
+
+  if (session?.user?.passwordChanged == 0) {
     redirect('/auth/profile?message=Change your default password')
 
   }
 
 
 
-  const dashboardData = await getDashboardData()
+  const dashboardData = await getDashboardData(searchParams)
   const regions = await getRegions()
   const districts = await getDistricts()
 
