@@ -140,7 +140,7 @@ export default function Dashboard({ data }: any) {
     e.preventDefault();
 
     if (filterBy == "national") {
-      return router.push("/dashboard");
+      return router.push("/");
     }
     if (filterBy == "" || filterBy == null) {
       return toast.error("Please select a filter");
@@ -1007,7 +1007,7 @@ export default function Dashboard({ data }: any) {
                           Inspection Submissions
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                          <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(submissionsRef.current, "submissions")
 
@@ -1015,6 +1015,7 @@ export default function Dashboard({ data }: any) {
                             Export
                           </button>
                         </div>
+                        
                       </div>
 
                       <div className="card-body">
@@ -1035,7 +1036,7 @@ export default function Dashboard({ data }: any) {
                       <div className="card-header align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(waterSourceRef.current, "water-source")
 
@@ -1058,7 +1059,7 @@ export default function Dashboard({ data }: any) {
                           Condition Of Water Source
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(waterSourceConditionRef.current, "water-source-condition")
 
@@ -1080,7 +1081,7 @@ export default function Dashboard({ data }: any) {
                           Water Storage Condition
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
 
@@ -1110,7 +1111,7 @@ export default function Dashboard({ data }: any) {
                           Toilet Availability
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(toiletAvailabilityRef.current, "toilet-availability")
 
@@ -1130,7 +1131,7 @@ export default function Dashboard({ data }: any) {
                       <div className="card-header align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(toiletConditionRef.current, "toilet-condition")
 
@@ -1152,7 +1153,7 @@ export default function Dashboard({ data }: any) {
                           Adequacy Of Toilet
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(toiletAdequacyRef.current, "toilet-adequacy")
 
@@ -1182,7 +1183,7 @@ export default function Dashboard({ data }: any) {
                           Registered With A Waste Collector
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(wasteCollectorRegistrationRef.current, "waste-collector-registration")
 
@@ -1202,7 +1203,7 @@ export default function Dashboard({ data }: any) {
                       <div className="card-header align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(wasteSortingRef.current, "waste-sorting")
 
@@ -1224,7 +1225,7 @@ export default function Dashboard({ data }: any) {
                           Approved Waste Storage Receptacle
                         </h4>
                         <div className="flex-shrink-0">
-                          <button type="button" className="btn btn-primary btn-sm"
+                        <button type="button" className="btn btn-outline-primary btn-sm"
                             onClick={async () => {
                               await exportAsImage(wasteStorageReceptacleRef.current, "waste-storage-receptacle")
 

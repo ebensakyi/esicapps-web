@@ -16,7 +16,7 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-
+        WHERE "WaterSourceType"."id" IS NOT NULL
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
 
 
@@ -67,6 +67,8 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
   }
 
+
+  
   return toJson(summary);
 };
 
