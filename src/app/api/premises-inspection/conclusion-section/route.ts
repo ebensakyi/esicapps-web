@@ -43,9 +43,12 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const res = await request.json();
+    const { searchParams } = new URL(request.url);
+    const userId = Number(searchParams.get("userId"));
 
-    let userId = Number(res.userId);
+
+    if (!userId) return NextResponse.json({});
+    
     const data = await prisma.conclusionSection.findMany({
       where: { userId: userId, deleted: 0 },
     });

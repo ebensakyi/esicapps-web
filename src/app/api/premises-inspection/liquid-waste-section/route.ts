@@ -136,9 +136,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
 
-    const res = await request.json();
 
-    if (!userId) return res.status(200).json();
+    if (!userId) return NextResponse.json({});
 
     const response = await prisma.liquidWasteSection.findMany({
       where: { userId: userId, deleted: 0 },

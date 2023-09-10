@@ -1,5 +1,6 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { NextResponse } from "next/server";
 
 
 export async function POST(request: Request) {
@@ -110,14 +111,16 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const userId = Number(searchParams.get('userId'))
 
-    const res = await request.json();
 
-    if (!userId) return res.status(200).json();
+
+    if (!userId) return NextResponse.json({});
 
     const response = await prisma.healthPremisesInfoSection.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
-    return new Response(JSON.stringify(response));
-  } catch (error) {}
+    return  NextResponse.json(response);
+  } catch (error) {
+    return NextResponse.json(error)
+  }
 }
