@@ -2484,7 +2484,7 @@ model PremisesWaterSupply {
   id                String          @id @db.VarChar(255)
   inspectionId      String          @db.VarChar(255)
   waterSectionId    String          @db.VarChar(255)
-  waterSupplyTypeId Int
+  waterSupplyId Int
   deleted           Int?            @default(0)
   createdAt         DateTime        @default(now())
   Inspection        Inspection      @relation(fields: [inspectionId], references: [id])
@@ -2494,7 +2494,7 @@ model PremisesWaterSupply {
   isSubmitted       Int?            @default(1)
   User              User            @relation(fields: [userId], references: [id])
   WaterSection      WaterSection    @relation(fields: [waterSectionId], references: [id])
-  WaterSupplyType   WaterSupplyType @relation(fields: [waterSupplyTypeId], references: [id])
+  WaterSupplyType   WaterSupplyType @relation(fields: [waterSupplyId], references: [id])
 }
 
 model PremisesWaterSupplyHistory {
@@ -2503,7 +2503,7 @@ model PremisesWaterSupplyHistory {
   id                String   @db.VarChar(255)
   inspectionId      String   @db.VarChar(255)
   waterSectionId    String   @db.VarChar(255)
-  waterSupplyTypeId Int
+  waterSupplyId Int
   deleted           Int?     @default(0)
   createdAt         DateTime @default(now())
 

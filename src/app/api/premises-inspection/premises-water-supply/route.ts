@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       waterSectionId:
         res.waterSectionId == "null" ? null : res.waterSectionId,
 
-        waterSupplyTypeId:
+        waterSupplyId:
         res.waterSupplyId == "null"
           ? null
           : Number(res.waterSupplyId),
@@ -38,7 +38,7 @@ export async function GET(request: Request) {
 
     if (!userId) return NextResponse.json({});
 
-    const response = await prisma.premisesWaterStorage.findMany({
+    const response = await prisma.premisesWaterSupply.findMany({
       where: { userId: userId, deleted: 0 },
     });
 
