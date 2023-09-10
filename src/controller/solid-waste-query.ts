@@ -12,7 +12,7 @@ export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) 
             deleted: 0,
             wasteServiceProviderRegistrationId: 1,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -27,7 +27,7 @@ export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) 
             deleted: 0,
             wasteServiceProviderRegistrationId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -43,7 +43,7 @@ export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) 
             deleted: 0,
             wasteServiceProviderRegistrationId: null,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -69,7 +69,7 @@ export const wasteSorting = async (filterBy:any, filterValue:any) => {
             deleted: 0,
             wasteSortingAvailabilityId: 1,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -84,7 +84,7 @@ export const wasteSorting = async (filterBy:any, filterValue:any) => {
             deleted: 0,
             wasteSortingAvailabilityId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -99,7 +99,7 @@ export const wasteSorting = async (filterBy:any, filterValue:any) => {
             deleted: 0,
             wasteSortingAvailabilityId: null,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -122,7 +122,7 @@ export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
             deleted: 0,
             approvedWasteStorageReceptacleId: 1,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -137,7 +137,7 @@ export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
             deleted: 0,
             approvedWasteStorageReceptacleId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });
@@ -152,7 +152,7 @@ export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
             deleted: 0,
             approvedWasteStorageReceptacleId: null,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
   });

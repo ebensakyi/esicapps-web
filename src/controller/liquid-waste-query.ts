@@ -56,7 +56,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAdequacyId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
     });
@@ -72,7 +72,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
             deleted: 0,
             toiletAdequacyId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
     });
@@ -97,7 +97,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletConditionId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
     });
@@ -113,7 +113,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
             deleted: 0,
             toiletAdequacyId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]: Number(filterValue),
             },
           },
     });
@@ -136,7 +136,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
        
@@ -151,7 +151,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           deleted: 0,
           toiletAvailabilityId: 1,
           Inspection: {
-            [filterBy]: filterValue,
+            [filterBy]: Number(filterValue),
           },
         },
     });
@@ -165,7 +165,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
     });
@@ -180,7 +180,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });
@@ -194,7 +194,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
           }
@@ -209,7 +209,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
     });
@@ -224,7 +224,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });
@@ -239,7 +239,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 1,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       }
@@ -255,7 +255,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });
@@ -270,7 +270,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       }
@@ -286,7 +286,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       }
@@ -302,7 +302,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });
@@ -317,7 +317,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });
@@ -332,7 +332,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       }
@@ -348,7 +348,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });
@@ -363,7 +363,7 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
               deleted: 0,
               toiletAvailabilityId: 2,
               Inspection: {
-                [filterBy]: filterValue,
+                [filterBy]: Number(filterValue),
               },
             },
       });

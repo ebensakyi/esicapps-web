@@ -47,21 +47,21 @@ export async function GET(request: Request) {
 
     let { searchParams } = new URL(request.url);
 
+    console.log(searchParams);
 
     let filterBy: any = searchParams.get("filterBy")?.toString();
-    let filterValue: any =
+    let filterValue: number = Number(
       searchParams.get("filterValue")?.toString()
-   
+    );
 
-    if (userLevel == 1 && filterBy == "undefined") {
+    if (userLevel == 1 && (filterBy == "undefined" || filterBy == "")) {
       filterBy = "undefined";
-      filterValue = "undefined"
     }
-    if (userLevel == 2) {
+    if (userLevel == 2 && (filterBy == "undefined" || filterBy == "")) {
       filterBy = "regionId";
       filterValue = regionId;
     }
-    if (userLevel == 3) {
+    if (userLevel == 3 && (filterBy == "undefined" || filterBy == "")) {
       filterBy = "districtId";
       filterValue = districtId;
     }
@@ -70,36 +70,34 @@ export async function GET(request: Request) {
       where:
         filterBy == "undefined"
           ? { inspectionTypeId: 1, deleted: 0 }
-          : { inspectionTypeId: 1, [filterBy]: Number(filterValue), deleted: 0 },
+          : { inspectionTypeId: 1, [filterBy]: filterValue, deleted: 0 },
     });
-
-    
 
     let reInspectionCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
           ? { inspectionTypeId: 2, deleted: 0 }
-          : { inspectionTypeId: 3, [filterBy]:  Number(filterValue), deleted: 0 },
+          : { inspectionTypeId: 3, [filterBy]: filterValue, deleted: 0 },
     });
-    let followUpCount = await prisma.followUpInspection.count({
+    let followUpCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
-          ? { deleted: 0 }
-          : {  [filterBy]:  Number(filterValue), deleted: 0 },
+          ? { inspectionTypeId: 3, deleted: 0 }
+          : { inspectionTypeId: 3, [filterBy]: filterValue, deleted: 0 },
     });
 
     let publishedCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
           ? { isPublished: 1, deleted: 0 }
-          : { isPublished: 1, deleted: 0, [filterBy]:  Number(filterValue) },
+          : { isPublished: 1, deleted: 0, [filterBy]: filterValue },
     });
 
     let unPublishedCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
           ? { isPublished: 0, deleted: 0 }
-          : { isPublished: 0, deleted: 0, [filterBy]:  Number(filterValue) },
+          : { isPublished: 0, deleted: 0, [filterBy]: filterValue },
     });
 
     let healthEducActionTakenCount = await prisma.premisesActionTaken.count({
@@ -111,7 +109,7 @@ export async function GET(request: Request) {
               deleted: 0,
               ConclusionSection: {
                 Inspection: {
-                  [filterBy]:  Number(filterValue),
+                  [filterBy]: filterValue,
                 },
               },
             },
@@ -126,7 +124,7 @@ export async function GET(request: Request) {
               deleted: 0,
               ConclusionSection: {
                 Inspection: {
-                  [filterBy]:  Number(filterValue),
+                  [filterBy]: filterValue,
                 },
               },
             },
@@ -141,7 +139,7 @@ export async function GET(request: Request) {
                 deleted: 0,
                 ConclusionSection: {
                   Inspection: {
-                    [filterBy]:  Number(filterValue),
+                    [filterBy]: filterValue,
                   },
                 },
               },
@@ -159,7 +157,7 @@ export async function GET(request: Request) {
               inspectionTypeId: 1,
               deleted: 0,
 
-              [filterBy]:  Number(filterValue),
+              [filterBy]: filterValue,
             },
     });
 
@@ -175,7 +173,7 @@ export async function GET(request: Request) {
               inspectionTypeId: 2,
               deleted: 0,
 
-              [filterBy]:  Number(filterValue),
+              [filterBy]: filterValue,
             },
     });
     let followUpInspection = await prisma.followUpInspection.groupBy({
@@ -189,7 +187,7 @@ export async function GET(request: Request) {
           : {
               deleted: 0,
 
-              [filterBy]:  Number(filterValue)
+              [filterBy]: filterValue,
             },
     });
 

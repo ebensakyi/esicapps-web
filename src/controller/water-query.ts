@@ -1,13 +1,12 @@
 import { prisma } from "@/prisma/db";
 
 export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
+
+
+try {
   let summary;
 
-
-  
-  
-
-  if (filterBy == undefined) {
+  if (filterBy == "undefined") {
     
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "count"
@@ -22,6 +21,7 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
 
 
   } else if (filterBy == "regionId") {
+    
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterSources"."waterSourceId","WaterSourceType"."name", COUNT("WaterSection"."id") AS "count"
 
@@ -29,7 +29,7 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."regionId" = ${filterValue}
+        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."regionId" = ${Number(filterValue)}
 
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
   } else if (filterBy == "districtId") {
@@ -40,7 +40,7 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."districtId" = ${filterValue}
+        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."districtId" =  ${Number(filterValue)}
 
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
   } else if (filterBy == "electoralAreaId") {
@@ -51,7 +51,7 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."electoralAreaId" = ${filterValue}
+        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."electoralAreaId" = ${Number(filterValue)}
 
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
   } else if (filterBy == "communityId") {
@@ -62,7 +62,7 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterSources"  ON "PremisesWaterSources"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterSourceType"  ON "PremisesWaterSources"."waterSourceId" = "WaterSourceType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."communityId" = ${filterValue}
+        WHERE "WaterSourceType"."id" IS NOT NULL AND "Inspection"."communityId" =  ${Number(filterValue)}
 
         GROUP BY "WaterSourceType"."name", "PremisesWaterSources"."waterSourceId" `;
   }
@@ -70,12 +70,19 @@ export const groupByWaterSource = async (filterBy: any, filterValue: any) => {
 
   
   return toJson(summary);
+} catch (error) {
+  console.log("groupByWaterSource==> ",error);
+  
+}
+
+  
 };
 
 export const groupByWaterStorage = async (filterBy: any, filterValue: any) => {
-  let summary;
+  try {
+      let summary;
 
-  if (filterBy == undefined) {
+  if (filterBy == "undefined") {
     summary =
       await prisma.$queryRaw`SELECT  "PremisesWaterStorage"."waterStorageTypeId","WaterStorageType"."name", COUNT("WaterSection"."id") AS "count"
 
@@ -93,7 +100,7 @@ export const groupByWaterStorage = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterStorage"  ON "PremisesWaterStorage"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterStorageType"  ON "PremisesWaterStorage"."waterStorageTypeId" = "WaterStorageType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-        WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."regionId" = ${filterValue}
+        WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."regionId" =  ${Number(filterValue)}
 
         GROUP BY "WaterStorageType"."name", "PremisesWaterStorage"."waterStorageTypeId" `;
   } else if (filterBy == "districtId") {
@@ -104,7 +111,7 @@ export const groupByWaterStorage = async (filterBy: any, filterValue: any) => {
       LEFT JOIN "PremisesWaterStorage"  ON "PremisesWaterStorage"."waterSectionId" = "WaterSection"."id"
       LEFT JOIN "WaterStorageType"  ON "PremisesWaterStorage"."waterStorageTypeId" = "WaterStorageType"."id"
       LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-      WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."districtId" = ${filterValue}
+      WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."districtId" =  ${Number(filterValue)}
 
       GROUP BY "WaterStorageType"."name", "PremisesWaterStorage"."waterStorageTypeId" `;
   } else if (filterBy == "electoralAreaId") {
@@ -115,7 +122,7 @@ export const groupByWaterStorage = async (filterBy: any, filterValue: any) => {
       LEFT JOIN "PremisesWaterStorage"  ON "PremisesWaterStorage"."waterSectionId" = "WaterSection"."id"
       LEFT JOIN "WaterStorageType"  ON "PremisesWaterStorage"."waterStorageTypeId" = "WaterStorageType"."id"
       LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-      WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."electoralAreaId" = ${filterValue}
+      WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."electoralAreaId" = ${Number(filterValue)}
 
       GROUP BY "WaterStorageType"."name", "PremisesWaterStorage"."waterStorageTypeId" `;
   } else if (filterBy == "communityId") {
@@ -126,12 +133,17 @@ export const groupByWaterStorage = async (filterBy: any, filterValue: any) => {
         LEFT JOIN "PremisesWaterStorage"  ON "PremisesWaterStorage"."waterSectionId" = "WaterSection"."id"
         LEFT JOIN "WaterStorageType"  ON "PremisesWaterStorage"."waterStorageTypeId" = "WaterStorageType"."id"
         LEFT JOIN "Inspection"  ON "Inspection"."id" = "WaterSection"."inspectionId"
-        WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."communityId" = ${filterValue}
+        WHERE "WaterStorageType"."id" IS NOT NULL AND "Inspection"."communityId" = ${Number(filterValue)}
 
         GROUP BY "WaterStorageType"."name", "PremisesWaterStorage"."waterStorageTypeId" `;
   }
 
   return toJson(summary);
+  } catch (error) {
+    console.log("groupByWaterStorage=> ",error);
+    
+  }
+
 };
 
 export const groupByWaterSourceCondition = async (
@@ -149,7 +161,7 @@ export const groupByWaterSourceCondition = async (
             deleted: 0,
             waterSourceConditionId: 1,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]:  Number(filterValue),
             },
           },
   });
@@ -164,7 +176,7 @@ export const groupByWaterSourceCondition = async (
             deleted: 0,
             waterSourceConditionId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]:  Number(filterValue),
             },
           },
   });
@@ -190,7 +202,7 @@ export const groupByWaterStorageCondition = async (
             deleted: 0,
             waterStorageConditionId: 1,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]:  Number(filterValue),
             },
           },
   });
@@ -205,7 +217,7 @@ export const groupByWaterStorageCondition = async (
             deleted: 0,
             waterStorageConditionId: 2,
             Inspection: {
-              [filterBy]: filterValue,
+              [filterBy]:  Number(filterValue),
             },
           },
   });

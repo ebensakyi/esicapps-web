@@ -825,6 +825,11 @@ h6 {
   background: #f6f6fe;
 }
 
+.dashboard .danger-card .card-icon {
+  color: #b90303;
+  background: #f6f6fe;
+}
+
 .dashboard .revenue-card .card-icon {
   color: #2eca6a;
   background: #e0f8e9;
