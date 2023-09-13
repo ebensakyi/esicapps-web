@@ -2481,31 +2481,31 @@ model PremisesWaterTreatmentTypeHistory {
 }
 
 model PremisesWaterSupply {
-  id                String          @id @db.VarChar(255)
-  inspectionId      String          @db.VarChar(255)
-  waterSectionId    String          @db.VarChar(255)
-  waterSupplyId Int
-  deleted           Int?            @default(0)
-  createdAt         DateTime        @default(now())
-  Inspection        Inspection      @relation(fields: [inspectionId], references: [id])
-  updatedAt         DateTime        @updatedAt
-  userId            Int
-  isCompleted       Int?            @default(1)
-  isSubmitted       Int?            @default(1)
-  User              User            @relation(fields: [userId], references: [id])
-  WaterSection      WaterSection    @relation(fields: [waterSectionId], references: [id])
-  WaterSupplyType   WaterSupplyType @relation(fields: [waterSupplyId], references: [id])
+  id              String          @id @db.VarChar(255)
+  inspectionId    String          @db.VarChar(255)
+  waterSectionId  String          @db.VarChar(255)
+  waterSupplyId   Int
+  deleted         Int?            @default(0)
+  createdAt       DateTime        @default(now())
+  Inspection      Inspection      @relation(fields: [inspectionId], references: [id])
+  updatedAt       DateTime        @updatedAt
+  userId          Int
+  isCompleted     Int?            @default(1)
+  isSubmitted     Int?            @default(1)
+  User            User            @relation(fields: [userId], references: [id])
+  WaterSection    WaterSection    @relation(fields: [waterSectionId], references: [id])
+  WaterSupplyType WaterSupplyType @relation(fields: [waterSupplyId], references: [id])
 }
 
 model PremisesWaterSupplyHistory {
   newId Int @id @default(autoincrement())
 
-  id                String   @db.VarChar(255)
-  inspectionId      String   @db.VarChar(255)
-  waterSectionId    String   @db.VarChar(255)
-  waterSupplyId Int
-  deleted           Int?     @default(0)
-  createdAt         DateTime @default(now())
+  id             String   @db.VarChar(255)
+  inspectionId   String   @db.VarChar(255)
+  waterSectionId String   @db.VarChar(255)
+  waterSupplyId  Int
+  deleted        Int?     @default(0)
+  createdAt      DateTime @default(now())
 
   updatedAt         DateTime          @updatedAt
   userId            Int
@@ -3170,11 +3170,8 @@ model FollowupPremisesNuisanceDetected {
 }
 
 model SanitationReport {
-  id           Int     @id @default(autoincrement())
-  fcmId        String? @db.VarChar(255)
-  fullName     String? @db.VarChar(255)
-  phoneNumber  String? @db.VarChar(255)
-  email        String? @db.VarChar(255)
+  id    Int     @id @default(autoincrement())
+
   community    String? @db.VarChar(255)
   image        String  @db.VarChar(255)
   districtId   Int?
@@ -3186,11 +3183,26 @@ model SanitationReport {
   longitude Decimal? @db.Decimal(11, 8)
   status    Int?     @default(0)
 
-  deleted    Int?        @default(0)
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  District   District?   @relation(fields: [districtId], references: [id])
-  ReportType ReportType? @relation(fields: [reportTypeId], references: [id])
+  deleted                Int?                 @default(0)
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+  District               District?            @relation(fields: [districtId], references: [id])
+  ReportType             ReportType?          @relation(fields: [reportTypeId], references: [id])
+  SanitationReportUser   SanitationReportUser @relation(fields: [sanitationReportUserId], references: [id])
+  sanitationReportUserId Int
+}
+
+model SanitationReportUser {
+  id          Int     @id @default(autoincrement())
+  fcmId       String? @db.VarChar(255)
+  fullName    String? @db.VarChar(255)
+  phoneNumber String? @db.VarChar(255)
+  email       String? @db.VarChar(255)
+
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  SanitationReport SanitationReport[]
 }
 
 model ReportType {
