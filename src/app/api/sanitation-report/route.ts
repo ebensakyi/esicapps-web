@@ -5,26 +5,18 @@ import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 
 export async function POST(request: Request) {
   try {
-    // fcmId: fields.fcmId,
-    // fullName: fields.fullName,
-    // email: fields.email,
-    // phoneNumber: fields.phoneNumber,
-    // description: fields.description,
-    // community: fields.community,
-
-    // districtId: Number(fields.district),
-    // latitude: Number(fields.latitude),
-    // longitude: Number(fields.longitude),
-    // reportTypeId: Number(fields.reportType),
-    // image: image,
+   
 
     const data = await request.formData();
 
+    console.log(data);
+    console.log(data.get("latitude"));
+
+
     const file: File | null = data.get("nuisancePicture") as unknown as File;
     const fcmId = data?.get("fcmId");
-    const fullName = data?.get("fullName");
-    const email = data?.get("email");
-    const phoneNumber = data?.get("phoneNumber");
+    const sanitationReportUserId = data?.get("userId");
+ 
     const description = data?.get("description");
 
     const reportType = data?.get("reportType");
@@ -39,16 +31,16 @@ export async function POST(request: Request) {
       const data = {
         fcmId: fcmId,
         imagePath: fileName,
-        fullName: fullName,
-        email: email,
-        phoneNumber: phoneNumber,
         description: description,
         reportType: reportType,
         latitude: latitude,
         longitude: longitude,
         communityLandmark: communityLandmark,
         placeMark: placeMark,
-
+        sanitationReportUserId:
+      sanitationReportUserId == "null"
+          ? null
+          : Number(sanitationReportUserId),
       };
 
       const ip = await prisma.sanitationReport.create({ data } as any);
@@ -59,7 +51,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   } catch (error) {
-    console.log(error);
+    console.log("error===>",error);
 
     return NextResponse.json(error, { status: 500 });
   }
