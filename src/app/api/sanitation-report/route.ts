@@ -9,8 +9,7 @@ export async function POST(request: Request) {
 
     const data = await request.formData();
 
-    console.log(data);
-    console.log(data.get("latitude"));
+  
 
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;

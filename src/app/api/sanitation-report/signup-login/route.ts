@@ -12,8 +12,9 @@ export async function POST(request: Request) {
 
     let phoneNumber = res.phoneNumber;
     let password = res.password;
+    let user;
 
-    const user: any = await prisma.sanitationReportUser.findFirst({
+    user = await prisma.sanitationReportUser.findFirst({
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,
@@ -21,7 +22,7 @@ export async function POST(request: Request) {
     });
 
     if (!user) {
-      const user: any = await prisma.sanitationReportUser.create({
+      user = await prisma.sanitationReportUser.create({
         data: {
           phoneNumber: phoneNumber,
         },
@@ -29,15 +30,10 @@ export async function POST(request: Request) {
       return NextResponse.json(null, { status: 400 });
     }
 
-    let isValid = await bcrypt.compare(password, user.password);
-
-    if (isValid) {
-      return NextResponse.json(user);
-    }
-    return NextResponse.json(null, { status: 400 });
+    return NextResponse.json(user);
   } catch (error: any) {
     console.log(error);
-    return new Response(JSON.stringify({ message: error.message }));
+    return NextResponse.json(error);
   }
 }
 
