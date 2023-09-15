@@ -9,16 +9,21 @@ export async function POST(request: Request) {
 
     const data = await request.formData();
 
+    console.log(data);
+    
   
 
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;
-    const fcmId = data?.get("fcmId");
     const sanitationReportUserId = data?.get("userId");
  
     const description = data?.get("description");
 
-    const reportType = data?.get("reportType");
+    const reportType = Number(data?.get("reportType"));
+    const districtId = Number(data?.get("districtId"));
+
+    
+
     const latitude = data?.get("latitude");
     const longitude = data?.get("longitude");
     const communityLandmark = data?.get("communityLandmark");
@@ -28,13 +33,13 @@ export async function POST(request: Request) {
 
     if (fileName != "0") {
       const data = {
-        fcmId: fcmId,
-        imagePath: fileName,
+        image: fileName,
         description: description,
-        reportType: reportType,
+        reportTypeId: reportType,
         latitude: latitude,
         longitude: longitude,
-        communityLandmark: communityLandmark,
+        districtId:districtId==0?null:districtId,
+        community: communityLandmark,
         placeMark: placeMark,
         sanitationReportUserId:
       sanitationReportUserId == "null"
