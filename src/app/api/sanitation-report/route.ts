@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     const latitude = data?.get("latitude");
     const longitude = data?.get("longitude");
     const communityLandmark = data?.get("communityLandmark");
-    const placeMark = data?.get("placeMark");
+    const address = data?.get("address");
 
     let fileName = await saveFileOnDisk(file);
 
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         longitude: longitude,
         districtId:districtId==0?null:districtId,
         community: communityLandmark,
-        placeMark: placeMark,
+        address: address,
         sanitationReportUserId:
       sanitationReportUserId == "null"
           ? null

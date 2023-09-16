@@ -170,6 +170,8 @@ export default function Header() {
 
                             </ul>
                         </li>
+
+
                         {session?.user?.privileges?.includes(3) ?
                             <li className="nav-item">
                                 <Link
@@ -441,6 +443,47 @@ export default function Header() {
 
                             </ul>
                         </li> */}
+                        <li className="nav-item">
+
+<Link
+    className={
+        pathname == "/sanitation-report/table"
+            ? "nav-link"
+            : "nav-link collapsed"
+    }
+    data-bs-target="#sanitation-report-nav"
+    data-bs-toggle="collapse"
+    href="#"
+>
+    <i className="bi bi-archive
+" />
+    <span>Sanitation report</span>
+    <i className="bi bi-chevron-down ms-auto" />
+</Link>
+<ul
+    id="sanitation-report-nav"
+    className="nav-content collapse "
+    data-bs-parent="#sanitation-report-nav"
+> 
+{/* {session?.user?.privileges?.includes(5) ? */}
+    <li>
+        <Link href="/sanitation-report/table">
+            <i className="bi bi-circle" />
+            <span>List</span>
+        </Link>
+    </li>
+     {/* : <></>} */}
+    {/* {session?.user?.privileges?.includes(6) ?  */}
+    <li>
+    <Link href="/sanitation-report/map">
+            <i className="bi bi-circle" />
+            <span>Map</span>
+        </Link>
+    </li>
+     {/* : <></>} */}
+
+</ul>
+</li>
                         <li className="nav-heading">Messages</li>
                         <li className="nav-item">
                             <Link

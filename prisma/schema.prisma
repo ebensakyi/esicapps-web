@@ -3173,6 +3173,7 @@ model SanitationReport {
   id    Int     @id @default(autoincrement())
 
   community    String? @db.VarChar(255)
+  address   String? @db.VarChar(255)
   image        String  @db.VarChar(255)
   districtId   Int?
   reportTypeId Int?
