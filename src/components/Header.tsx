@@ -150,15 +150,15 @@ export default function Header() {
                                 id="esicapps1-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#esicapps1-nav"
-                            > 
-                            {/* {session?.user?.privileges?.includes(5) ? */}
+                            >
+                                {/* {session?.user?.privileges?.includes(5) ? */}
                                 <li>
                                     <Link href="/esicapps1/dashboard">
                                         <i className="bi bi-circle" />
                                         <span>Dashboard</span>
                                     </Link>
                                 </li>
-                                 {/* : <></>} */}
+                                {/* : <></>} */}
                                 {/* {session?.user?.privileges?.includes(6) ?  */}
                                 <li>
                                     <Link href="/esicapps1/table">
@@ -166,7 +166,7 @@ export default function Header() {
                                         <span>Table</span>
                                     </Link>
                                 </li>
-                                 {/* : <></>} */}
+                                {/* : <></>} */}
 
                             </ul>
                         </li>
@@ -445,45 +445,45 @@ export default function Header() {
                         </li> */}
                         <li className="nav-item">
 
-<Link
-    className={
-        pathname == "/sanitation-report/table"
-            ? "nav-link"
-            : "nav-link collapsed"
-    }
-    data-bs-target="#sanitation-report-nav"
-    data-bs-toggle="collapse"
-    href="#"
->
-    <i className="bi bi-archive
+                            <Link
+                                className={
+                                    pathname == "/sanitation-report/table"
+                                        ? "nav-link"
+                                        : "nav-link collapsed"
+                                }
+                                data-bs-target="#sanitation-report-nav"
+                                data-bs-toggle="collapse"
+                                href="#"
+                            >
+                                <i className="bi bi-archive
 " />
-    <span>Sanitation report</span>
-    <i className="bi bi-chevron-down ms-auto" />
-</Link>
-<ul
-    id="sanitation-report-nav"
-    className="nav-content collapse "
-    data-bs-parent="#sanitation-report-nav"
-> 
-{/* {session?.user?.privileges?.includes(5) ? */}
-    <li>
-        <Link href="/sanitation-report/table">
-            <i className="bi bi-circle" />
-            <span>List</span>
-        </Link>
-    </li>
-     {/* : <></>} */}
-    {/* {session?.user?.privileges?.includes(6) ?  */}
-    <li>
-    <Link href="/sanitation-report/map">
-            <i className="bi bi-circle" />
-            <span>Map</span>
-        </Link>
-    </li>
-     {/* : <></>} */}
+                                <span>Sanitation report</span>
+                                <i className="bi bi-chevron-down ms-auto" />
+                            </Link>
+                            <ul
+                                id="sanitation-report-nav"
+                                className="nav-content collapse "
+                                data-bs-parent="#sanitation-report-nav"
+                            >
+                                {/* {session?.user?.privileges?.includes(5) ? */}
+                                <li>
+                                    <Link href="/sanitation-report/table">
+                                        <i className="bi bi-circle" />
+                                        <span>List</span>
+                                    </Link>
+                                </li>
+                                {/* : <></>} */}
+                                {/* {session?.user?.privileges?.includes(6) ?  */}
+                                <li>
+                                    <Link href="/sanitation-report/map">
+                                        <i className="bi bi-circle" />
+                                        <span>Map</span>
+                                    </Link>
+                                </li>
+                                {/* : <></>} */}
 
-</ul>
-</li>
+                            </ul>
+                        </li>
                         <li className="nav-heading">Messages</li>
                         <li className="nav-item">
                             <Link
