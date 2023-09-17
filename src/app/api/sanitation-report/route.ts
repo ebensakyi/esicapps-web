@@ -3,7 +3,6 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 
-
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
@@ -58,7 +57,10 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
 
-    let searchText = searchParams.get("searchText")=="undefined"?"": searchParams.get("searchText")
+    let searchText =
+      searchParams.get("searchText") == "undefined"
+        ? ""
+        : searchParams.get("searchText");
     let status = searchParams.get("status");
     const filterBy = searchParams.get("filterBy");
     const filterValue = searchParams.get("filterValue");
@@ -70,13 +72,8 @@ export async function GET(request: Request) {
     let skip =
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
-    console.log("searchText", searchText);
-
-    console.log(typeof searchText);
-
     const response = await prisma.sanitationReport.findMany({
       where:
-       
         searchText != ""
           ? {
               OR: [
@@ -102,6 +99,7 @@ export async function GET(request: Request) {
             },
       include: {
         District: true,
+        SanitationReportUser: true,
       },
       skip: skip,
       take: perPage,
@@ -134,13 +132,32 @@ export async function GET(request: Request) {
             },
     } as any);
 
-    console.log(count);
-
     return NextResponse.json({
       response,
       curPage: curPage,
       maxPage: Math.ceil(count / perPage),
     });
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json(error, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const res = await request.json();
+    await prisma.sanitationReport.update({
+      where: {
+        id: Number(res?.reportId),
+      },
+      data: {
+        status: Number(res?.reportStatus),
+        statusMessage: res?.statusMessage,
+      },
+    });
+
+    return NextResponse.json({});
   } catch (error) {
     console.log(error);
 

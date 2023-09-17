@@ -9,7 +9,8 @@ import { useRef, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 import ReactPaginate from "react-paginate";
-import Modal from "react-modal";
+import Image from 'next/image'
+import moment from "moment";
 
 
 
@@ -30,19 +31,16 @@ export default function SanitationReport({ data }: any) {
     const router = useRouter();
     const pathname = usePathname()
 
-    const [sendingType, setSendingType] = useState("");
-    const [title, setTitle] = useState("");
-    const [regionId, setRegionId] = useState("")
-    const [districtId, setDistrictId] = useState("")
-    const [messageId, setMessageId] = useState("")
 
-    const [individualRecipient, setIndividualRecipient] = useState("")
-    const [isEditing, setIsEditing] = useState(false);
-    const [searchText, setSearchText] = useState();
+
+    const [searchText, setSearchText] = useState("");
+    const [reportId, setReportId] = useState(null);
     const [description, setDescription] = useState("");
     const [reportStatus, setReportStatus] = useState("");
+
     const [statusMessage, setStatusMessage] = useState("");
     const [showForm, setShowForm] = useState(false);
+    const [imagePath, setImagePath] = useState("");
 
 
     const searchTextRef: any = useRef(null);
@@ -57,81 +55,16 @@ export default function SanitationReport({ data }: any) {
     const searchtext = searchParams.get('searchText')
 
 
-    const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal(e: any) {
-        e.preventDefault();
-        setIsOpen(true);
-    }
-
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        // subtitle.style.color = "#f00";
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-    const customStyles = {
-
-        content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            border: '1px solid #ccc',
-            background: '#fff',
-        },
-    };
-
-    const update = async (e: any) => {
-        try {
-            e.preventDefault()
-            if (title == "") return toast.error("Title cannot be empty");
-            if (sendingType == "") return toast.error("Recipient type cannot be empty");
-            if (sendingType == "1" && individualRecipient == "") return toast.error("Recepient cannot be empty");
-            if (sendingType == "2" && districtId == "") return toast.error("District cannot be empty");
-            if (sendingType == "3" && regionId == "") return toast.error("Region cannot be empty");
-
-            let data = {
-                messageId,
-                title,
-                individualRecipient: individualRecipient == "" ? null : Number(individualRecipient),
-                sendingType,
-                districtId: districtId == "" ? null : Number(districtId),
-                regionId: regionId == "" ? null : Number(regionId),
-            };
+   
 
 
-            const response = await axios.put("/api/messaging/notification", data);
-            setTitle("");
-            setSendingType("");
-            setRegionId("");
-            setDistrictId("")
-            setIndividualRecipient("")
-
-            if (response.status == 200) {
-                router.refresh()
-
-                return toast.success("Message sent");
-            }
-            if (response.status == 201) {
-                return toast.error(response.data.message);
-            }
-        } catch (error) {
-            console.log(error);
-
-            return toast.error("An error occurred while resending");
-        }
-    };
 
     const handlePagination = (page: any) => {
 
         page = page.selected == -1 ? 1 : page.selected + 1;
 
         router.push(
-            `${pathname}?page=${page}&searchText=${searchText}`
+            `${pathname}?page=${page}&searchText=${searchtext}`
 
         );
     };
@@ -175,11 +108,20 @@ export default function SanitationReport({ data }: any) {
     const handleStatusUpdate = async (id: any) => {
 
         try {
+            if (reportStatus == "") {
+                return toast.error("Report status cannot be empty");
+            }
+
             const response = await axios.put(`/api/sanitation-report`, {
-                id: id,
+                reportId:Number(reportId),
+                reportStatus,
+                statusMessage,
             });
 
             if (response.status == 200) {
+                setShowForm(false)
+                router.refresh()
+
                 // router.push(
                 //     `/submitted-data?published=${published}&formId=${formId}`
                 // );
@@ -192,96 +134,99 @@ export default function SanitationReport({ data }: any) {
         <main id="main" className="main">
             <div className="pagetitle">
                 <h1>REPORTS</h1>
-{showForm?
-                <div className="col-lg-4">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Update Report</h5>
-                                <div className=" mb-3">
-                                  
-                                    <div className="col-sm-12">
-                                        {description}
-                                    </div>
+                {showForm ?
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <Image
+                                        className="gallery-img img-fluid mx-auto"
+                                        src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
+                                        alt=""
+                                        height="256"
+                                        width="256"
+                                    />
                                 </div>
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                    Update status *
-                                    </label>
-                                    <select
-                                        className="form-control"
-                                        aria-label="Default select example"
-                                        onChange={(e: any) => {
-                                            setReportStatus(e.target.value);
-                                        }}
-                                        value={sendingType}
-                                    >
-                                        <option >Select status * </option>
+                            </div>
+                        </div>
+                        <div className="col-lg-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Update Report</h5>
+                                    <div className=" mb-3">
+
+                                        <div className="col-sm-12">
+                                            {description}
+                                        </div>
+                                    </div>
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            Update status *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setReportStatus(e.target.value);
+                                            }}
+                                            value={reportStatus}
+                                        >
+                                            <option >Select status * </option>
                                             <option key={1} value={1}>
-                                               Completed
+                                                Completed
                                             </option>
                                             <option key={2} value={2}>
-                                               In progress
+                                                In progress
                                             </option>
-                                    </select>
-                                </div>
-                               
-                              
-                                <div className=" mb-3">
-                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                        Status Message
-                                    </label>
-                                    <div className="col-sm-12">
-                                        <textarea className="form-control" style={{ height: 100 }} value={statusMessage} onChange={(e: any) => {
-                                            setStatusMessage(e.target.value);
-                                        }}></textarea>
+                                        </select>
                                     </div>
-                                </div>
-
-                                <div className=" mb-3">
-                                    <div className="col-sm-10">
 
 
-                                        <div className=" mb-3">
-                                            <div className="col-sm-10">
-                                                {isEditing ? (
-                                                    <>
-                                                        <button
-                                                            className="btn btn-danger"
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            Status Message
+                                        </label>
+                                        <div className="col-sm-12">
+                                            <textarea className="form-control" style={{ height: 100 }} value={statusMessage} onChange={(e: any) => {
+                                                setStatusMessage(e.target.value);
+                                            }}></textarea>
+                                        </div>
+                                    </div>
 
-                                                                setIsEditing(false);
+                                    <div className=" mb-3">
+                                        <div className="col-sm-10">
 
-                                                              
-                                                            }}
-                                                        >
-                                                            Cancel
-                                                        </button>
-                                                        {"  "} {"  "}
-                                                        <button
-                                                            className="btn btn-warning"
-                                                            onClick={(e) => {
-                                                                update(e);
-                                                            }}
-                                                        >
+
+                                            <div className=" mb-3">
+                                                <div className="col-sm-10">
+                                             
+                                                   
+                                                        <button type="submit" className="btn btn-success" onClick={(e) => handleStatusUpdate(e)}>
                                                             Update
-                                                        </button>
-                                                    </>
-                                                ) : (
-                                                    <button type="submit" className="btn btn-primary" onClick={(e) => handleStatusUpdate(e)}>
-                                                        Update
-                                                    </button>
-                                                )}
+                                                        </button>   <button
+                                                                className="btn btn-danger"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
 
+                                                                    setShowForm(false);
+
+
+                                                                }}
+                                                            >
+                                                                Cancel
+                                                            </button>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>:<></>
-}
+                    </div>
+                    : <></>
+                }
             </div>
             {/* End Page Title */}
             <section className="section">
@@ -340,11 +285,11 @@ export default function SanitationReport({ data }: any) {
                                 {/* <h5 className="card-title">Reports</h5> */}
                                 <table className="table table-bordered">
                                     <thead>
-                                        <tr>
+                                        <tr>                                            <th scope="col">Reported by</th>
+
                                             <th scope="col">District</th>
 
                                             <th scope="col">Community</th>
-                                            {/* <th scope="col">Description</th> */}
                                             <th scope="col">Status</th>
                                             <th scope="col">Reported at</th>
 
@@ -356,11 +301,14 @@ export default function SanitationReport({ data }: any) {
                                         {data?.reports?.response?.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
+                                                     <td>{data?.SanitationReportUser.phoneNumber}</td>
                                                     <td>{data?.District.name}</td>
                                                     <td>{data?.community}</td>
                                                     {/* <td>{data?.description}</td> */}
                                                     <td>{data?.status}</td>
-                                                    <td>{data?.createdAt}</td>
+                                                    <td>   {moment(data?.createdAt).format(
+                                                                "MMM Do YYYY, h:mm:ss a"
+                                                            )}</td>
 
                                                     <td>
                                                         <div
@@ -383,33 +331,22 @@ export default function SanitationReport({ data }: any) {
                                                                     aria-labelledby="btnGroupDrop1"
                                                                 >
                                                                     <li>
-                                                                      
+
                                                                         <button
                                                                             className="dropdown-item btn btn-sm "
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
                                                                                 setDescription(data?.description)
+                                                                                setImagePath(data?.image)
 
-                                                                                setMessageId(data.id);
+                                                                                setReportId(data.id);
                                                                                 setShowForm(true)
-                                                                                // setTitle(data.title)
-                                                                                // setMessage(data.message)
-                                                                                // setSendingType(data.sendingType)
-                                                                                // setDistrictId(data.districtId);
-
-                                                                                // console.log(data.districtId);
 
 
-                                                                                // setTitle("");
-                                                                                // setSendingType("");
-                                                                                // setMessage("");
-                                                                                // setRegionId("");
-
-                                                                                setIsEditing(true);
 
                                                                             }}
                                                                         >
-                                                                             View & Update status
+                                                                            View & Update status
                                                                         </button>
                                                                     </li>
 
