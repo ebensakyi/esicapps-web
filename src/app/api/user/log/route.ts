@@ -18,11 +18,13 @@ export async function GET(request: Request) {
 
     await logActivity(`Visited user logs page`, userId);
 
-
-    let curPage = Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))
+      ? 1
+      : Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+    let skip =
+      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
     let searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""

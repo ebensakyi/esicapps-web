@@ -12,8 +12,10 @@ import { LOGIN_URL } from "@/config";
 
 
 
+
 export default function SanitationReport({ data }: any) {
 
+console.log(data);
 
 
     const { data: session } = useSession({
@@ -91,7 +93,7 @@ export default function SanitationReport({ data }: any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>NOTIFICATION</h1>
+                <h1>REPORTS</h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -125,13 +127,13 @@ export default function SanitationReport({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.reports.map((data: any) => {
+                                        {data?.reports?.response?.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
-                                                    <td>{data?.title}</td>
-                                                    <td>{data?.message}</td>
-                                                    <td>{data?.SendingType.name}</td>
-                                                    <td>{data?.Region?.name}{data?.District?.name}{data?.Recipient?.otherNames} {data?.Recipient?.surname}</td>
+                                                    <td>{data?.District.name}</td>
+                                                    <td>{data?.community}</td>
+                                                    <td>{data?.description}</td>
+                                                    <td></td>
                                                     <td>
                                                         <div
                                                             className="btn-group"

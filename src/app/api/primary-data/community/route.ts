@@ -37,7 +37,7 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-    let curPage = Number(searchParams.get("page"));
+        let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip =

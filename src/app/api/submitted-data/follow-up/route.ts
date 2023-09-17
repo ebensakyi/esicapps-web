@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
     let filterBy = searchParams.get("filterBy");
     let filterValue = searchParams.get("filterValue");
-    let curPage = Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
     let perPage = 5;
     let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
@@ -64,7 +64,6 @@ export async function GET(request: Request) {
       },
     });
 
-    console.log(response);
     
     return NextResponse.json({
       response,

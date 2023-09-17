@@ -45,7 +45,7 @@ export async function GET(request: Request) {
     const userRegion = session?.user?.regionId;
     let exportFile = searchParams.get("exportFile");
 
-    let curPage = Number(searchParams.get("page")) || 0;
+    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip =

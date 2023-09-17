@@ -16,9 +16,6 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-
-
-    
     // let userLevelId = Number(userData?.userLevelId);
     // let userRegion = Number(userData?.regionId);
     // let userDistrict = Number(userData?.districtId);
@@ -32,13 +29,14 @@ export async function GET(request: Request) {
     let published = searchParams.get("published");
     const filterBy = searchParams.get("filterBy");
     const filterValue = searchParams.get("filterValue");
-    let curPage = Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+    let skip =
+      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
     const response = await prisma.basicInfoSection.findMany({
-      where :
+      where:
         searchText != ""
           ? {
               OR: [
@@ -140,7 +138,6 @@ export async function GET(request: Request) {
     } as any);
     return NextResponse.json(response);
   } catch (error) {
-    
     return NextResponse.json(error);
   }
 }

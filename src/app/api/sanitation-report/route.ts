@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
+import District from '../../../components/primary-data/District';
 
 export async function POST(request: Request) {
   try {
@@ -57,16 +58,58 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
 
-    let searchText = searchParams.get("searchText") || undefined
+    let searchText = searchParams.get("searchText") 
     let status = searchParams.get("status");
     const filterBy = searchParams.get("filterBy");
     const filterValue = searchParams.get("filterValue");
-    let curPage = Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
+
+
+    console.log("typeof", searchText);
+
+console.log(typeof searchText);
+
 
     const response = await prisma.sanitationReport.findMany({
+      where:
+        searchText != null
+          ? {
+              OR: [
+                {
+                  District: {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+                {
+                  description: { contains: searchText, mode: "insensitive" },
+                },
+              ],
+              deleted: 0,
+            }
+          : 
+          {
+              deleted: 0,
+            },
+      include: {
+        District:  true,
+         
+      
+      },
+      skip: skip,
+      take: perPage,
+      orderBy: {
+        createdAt: "desc",
+      },
+    } as any);
+
+
+    const count = await prisma.sanitationReport.count({
       where:
         searchText != ""
           ? {
@@ -88,17 +131,20 @@ export async function GET(request: Request) {
           : {
               deleted: 0,
             },
-      skip: skip,
-      take: perPage,
-      orderBy: {
-        createdAt: "desc",
-      },
-    }as any);
+    
+    } as any);
 
-    return NextResponse.json(response);
+    console.log(count);
+    
+
+    return NextResponse.json({
+      response,
+      curPage: curPage,
+      maxPage: Math.ceil(count / perPage),
+    });
   } catch (error) {
     console.log(error);
-    
+
     return NextResponse.json(error, { status: 500 });
   }
 }

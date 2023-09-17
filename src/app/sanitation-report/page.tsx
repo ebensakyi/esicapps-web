@@ -3,9 +3,11 @@ export const dynamic = "force-dynamic";
 import {  SERVER_BASE_URL } from "@/config";
 
 import SanitationReportList from "@/src/components/sanitation-report/SanitationReport";
-async function getSanitationReports() {
-
-    let response = await fetch(`${SERVER_BASE_URL}/api/sanitation-report`, { cache: 'no-store' });
+import { headers } from "next/headers";
+async function getSanitationReports(searchParams: any) {
+    let { searchText } = searchParams
+    let { page } = searchParams
+    let response = await fetch(`${SERVER_BASE_URL}/api/sanitation-report?page=${page}&searchText=${searchText}`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -14,10 +16,10 @@ async function getSanitationReports() {
 
 }
 
-export default async function Page() {
+export default async function Page({ searchParams }: any) {
   
 
-    const reports = await getSanitationReports()
+    const reports = await getSanitationReports(searchParams)
   
     
 
