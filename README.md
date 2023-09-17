@@ -66,17 +66,7 @@ update "District"
 //// ***
 ////////////////////////
 
-1. work on followup inspection with images
-2. work on data transfer
-3. work on app website
-
-
-
-1. log all activies
-2. work on map
-3. work on notifications
-
-
-
-
-
+1. export sanireports
+2. show sanireports update on mobile app
+3. delete sanireports
+4. send message to report sender
