@@ -3178,7 +3178,8 @@ model SanitationReport {
   districtId   Int?
   reportTypeId Int?
 
-  description String? @db.VarChar(255)
+  description String? @db.VarChar(500)
+  statusMessage String? @db.VarChar(500)
 
   latitude  Decimal? @db.Decimal(11, 8)
   longitude Decimal? @db.Decimal(11, 8)

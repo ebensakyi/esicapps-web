@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
-import District from '../../../components/primary-data/District';
+
 
 export async function POST(request: Request) {
   try {
@@ -58,24 +58,26 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
 
-    let searchText = searchParams.get("searchText") 
+    let searchText = searchParams.get("searchText")=="undefined"?"": searchParams.get("searchText")
     let status = searchParams.get("status");
     const filterBy = searchParams.get("filterBy");
     const filterValue = searchParams.get("filterValue");
-    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))
+      ? 1
+      : Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
+    let skip =
+      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
+    console.log("searchText", searchText);
 
-    console.log("typeof", searchText);
-
-console.log(typeof searchText);
-
+    console.log(typeof searchText);
 
     const response = await prisma.sanitationReport.findMany({
       where:
-        searchText != null
+       
+        searchText != ""
           ? {
               OR: [
                 {
@@ -89,17 +91,17 @@ console.log(typeof searchText);
                 {
                   description: { contains: searchText, mode: "insensitive" },
                 },
+                {
+                  community: { contains: searchText, mode: "insensitive" },
+                },
               ],
               deleted: 0,
             }
-          : 
-          {
+          : {
               deleted: 0,
             },
       include: {
-        District:  true,
-         
-      
+        District: true,
       },
       skip: skip,
       take: perPage,
@@ -107,7 +109,6 @@ console.log(typeof searchText);
         createdAt: "desc",
       },
     } as any);
-
 
     const count = await prisma.sanitationReport.count({
       where:
@@ -131,11 +132,9 @@ console.log(typeof searchText);
           : {
               deleted: 0,
             },
-    
     } as any);
 
     console.log(count);
-    
 
     return NextResponse.json({
       response,
