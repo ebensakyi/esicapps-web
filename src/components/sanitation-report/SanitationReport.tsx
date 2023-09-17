@@ -11,6 +11,7 @@ import { LOGIN_URL } from "@/config";
 import ReactPaginate from "react-paginate";
 import Image from 'next/image'
 import moment from "moment";
+import Link from "next/link";
 
 
 
@@ -55,7 +56,7 @@ export default function SanitationReport({ data }: any) {
     const searchtext = searchParams.get('searchText')
 
 
-   
+
 
 
 
@@ -113,7 +114,7 @@ export default function SanitationReport({ data }: any) {
             }
 
             const response = await axios.put(`/api/sanitation-report`, {
-                reportId:Number(reportId),
+                reportId: Number(reportId),
                 reportStatus,
                 statusMessage,
             });
@@ -199,22 +200,22 @@ export default function SanitationReport({ data }: any) {
 
                                             <div className=" mb-3">
                                                 <div className="col-sm-10">
-                                             
-                                                   
-                                                        <button type="submit" className="btn btn-success" onClick={(e) => handleStatusUpdate(e)}>
-                                                            Update
-                                                        </button>   <button
-                                                                className="btn btn-danger"
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-
-                                                                    setShowForm(false);
 
 
-                                                                }}
-                                                            >
-                                                                Cancel
-                                                            </button>
+                                                    <button type="submit" className="btn btn-success" onClick={(e) => handleStatusUpdate(e)}>
+                                                        Update
+                                                    </button>   <button
+                                                        className="btn btn-danger"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+
+                                                            setShowForm(false);
+
+
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
 
                                                 </div>
                                             </div>
@@ -301,14 +302,14 @@ export default function SanitationReport({ data }: any) {
                                         {data?.reports?.response?.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
-                                                     <td>{data?.SanitationReportUser.phoneNumber}</td>
+                                                    <td>{data?.SanitationReportUser.phoneNumber}</td>
                                                     <td>{data?.District.name}</td>
                                                     <td>{data?.community}</td>
                                                     {/* <td>{data?.description}</td> */}
                                                     <td>{data?.status}</td>
                                                     <td>   {moment(data?.createdAt).format(
-                                                                "MMM Do YYYY, h:mm:ss a"
-                                                            )}</td>
+                                                        "MMM Do YYYY, h:mm:ss a"
+                                                    )}</td>
 
                                                     <td>
                                                         <div
@@ -348,6 +349,24 @@ export default function SanitationReport({ data }: any) {
                                                                         >
                                                                             View & Update status
                                                                         </button>
+                                                                    </li>
+                                                                    <li>
+
+                                                                    <Link
+                                                                     className="dropdown-item btn btn-sm "
+                                                                    href={{
+                                                                        pathname: `http://www.google.com/maps/place/${data?.latitude},${data?.longitude}`,
+                                                                        query: {},
+                                                                    }}
+                                                                    passHref
+                                                                >
+                                                                   
+                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title={data?.latitude + "," + data?.longitude}>View on map</span>
+                                                                    {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
+                                                                    <i className="ri-external-link-line align-bottom me-2 text-success" />
+                                                                    {/* </a> */}
+                                                                </Link>
+                                                                        
                                                                     </li>
 
                                                                 </ul>
