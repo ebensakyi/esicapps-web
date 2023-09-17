@@ -77,7 +77,7 @@ export async function GET(request: Request) {
     let curPage = Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
 
     // let userLevel = loggedInUserData?.userLevelId;
     // let region = loggedInUserData?.regionId;

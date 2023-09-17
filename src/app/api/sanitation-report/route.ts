@@ -57,15 +57,48 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
 
+    let searchText = searchParams.get("searchText") || undefined
+    let status = searchParams.get("status");
+    const filterBy = searchParams.get("filterBy");
+    const filterValue = searchParams.get("filterValue");
+    let curPage = Number(searchParams.get("page"));
+
+    let perPage = 10;
+    let skip = Number((curPage - 1) * perPage) || 0;
+
     const response = await prisma.sanitationReport.findMany({
-      where: { deleted: 0 },
+      where:
+        searchText != ""
+          ? {
+              OR: [
+                {
+                  District: {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+                {
+                  description: { contains: searchText, mode: "insensitive" },
+                },
+              ],
+              deleted: 0,
+            }
+          : {
+              deleted: 0,
+            },
+      skip: skip,
+      take: perPage,
       orderBy: {
-        id: "desc",
+        createdAt: "desc",
       },
-    });
+    }as any);
 
     return NextResponse.json(response);
   } catch (error) {
+    console.log(error);
+    
     return NextResponse.json(error, { status: 500 });
   }
 }

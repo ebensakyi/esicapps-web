@@ -12,7 +12,7 @@ import { LOGIN_URL } from "@/config";
 
 
 
-export default function SanitationReportList({ data }: any) {
+export default function SanitationReport({ data }: any) {
 
 
 
@@ -125,7 +125,7 @@ export default function SanitationReportList({ data }: any) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.notifications.map((data: any) => {
+                                        {data.reports.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.title}</td>

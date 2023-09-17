@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     let curPage = Number(searchParams.get("page"));
 
     let perPage = 5;
-    let skip = Number((curPage - 1) * perPage) || 0;
+    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
     let searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""

@@ -447,7 +447,7 @@ export default function Header() {
 
                             <Link
                                 className={
-                                    pathname == "/sanitation-report/table"
+                                    pathname == "/sanitation-report"||  pathname == "/sanitation-report/map"
                                         ? "nav-link"
                                         : "nav-link collapsed"
                                 }
@@ -467,7 +467,7 @@ export default function Header() {
                             >
                                 {/* {session?.user?.privileges?.includes(5) ? */}
                                 <li>
-                                    <Link href="/sanitation-report/table">
+                                    <Link href="/sanitation-report">
                                         <i className="bi bi-circle" />
                                         <span>List</span>
                                     </Link>
