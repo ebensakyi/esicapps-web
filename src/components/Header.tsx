@@ -467,7 +467,7 @@ export default function Header() {
                             >
                                 {/* {session?.user?.privileges?.includes(5) ? */}
                                 <li>
-                                    <Link href="/sanitation-report">
+                                    <Link href="/sanitation-report?searchText=undefined&page=1">
                                         <i className="bi bi-circle" />
                                         <span>List</span>
                                     </Link>

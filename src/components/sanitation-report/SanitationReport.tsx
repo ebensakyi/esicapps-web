@@ -12,6 +12,7 @@ import ReactPaginate from "react-paginate";
 import Image from 'next/image'
 import moment from "moment";
 import Link from "next/link";
+import Modal from "react-modal";
 
 
 
@@ -43,6 +44,8 @@ export default function SanitationReport({ data }: any) {
     const [showForm, setShowForm] = useState(false);
     const [imagePath, setImagePath] = useState("");
 
+    const [sendSMS, setsendSMS] = useState(false);
+
 
     const searchTextRef: any = useRef(null);
     const filterRef: any = useRef(null);
@@ -56,6 +59,20 @@ export default function SanitationReport({ data }: any) {
     const searchtext = searchParams.get('searchText')
 
 
+    const [modalIsOpen, setIsOpen] = useState(false);
+    function openModal(e: any) {
+        e.preventDefault();
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // subtitle.style.color = "#f00";
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
 
 
@@ -117,6 +134,7 @@ export default function SanitationReport({ data }: any) {
                 reportId: Number(reportId),
                 reportStatus,
                 statusMessage,
+                sendSMS
             });
 
             if (response.status == 200) {
@@ -131,8 +149,78 @@ export default function SanitationReport({ data }: any) {
             console.log(error);
         }
     };
+    const handleDelete = async (e: any) => {
+        e.preventDefault()
+
+        console.log();
+
+        try {
+            const response = await axios.delete(`/api/sanitation-report/${reportId}`);
+
+            if (response.status == 200) {
+                // router.push(
+                //     `/submitted-data?published=${published}&formId=${formId}`
+                // );
+                router.refresh()
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const customStyles = {
+        content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+        },
+    };
     return (
         <main id="main" className="main">
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Confirm deletion"
+            >
+                <>
+
+
+
+
+                    <div className="alert alert-outline-danger alert-p" role="alert">
+                        <span className="alert-content">
+                            You are about to delete this report.<br /> Deleted report cannot be recovered.
+                            Click OK to proceed to delete or Cancel to dismiss
+                        </span>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="d-grid">
+                                <button
+                                    onClick={(e) => {
+                                        handleDelete(e);
+                                        closeModal();
+                                    }}
+                                    className="btn btn-success"
+                                >
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="d-grid">
+                                <button onClick={closeModal} className="btn btn-danger">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            </Modal>
             <div className="pagetitle">
                 <h1>REPORTS</h1>
                 {showForm ?
@@ -150,14 +238,20 @@ export default function SanitationReport({ data }: any) {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-5">
+                        <div className="col-lg-7">
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">Update Report</h5>
                                     <div className=" mb-3">
 
                                         <div className="col-sm-12">
-                                            {description}
+
+                                            <div className="alert alert-warning  fade show" role="alert">
+                                                <h4 className="alert-heading">Report</h4>
+                                                <p> {description}</p>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div className=" mb-3">
@@ -193,7 +287,17 @@ export default function SanitationReport({ data }: any) {
                                             }}></textarea>
                                         </div>
                                     </div>
+                                    <div className="form-check mb-3">
+                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
+                                            setsendSMS(!sendSMS)
+                                            console.log(sendSMS);
 
+
+                                        }} />
+                                        <label className="form-check-label" htmlFor="gridCheck1">
+                                            Send SMS to reporter
+                                        </label>
+                                    </div>
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
 
@@ -210,6 +314,8 @@ export default function SanitationReport({ data }: any) {
                                                             e.preventDefault();
 
                                                             setShowForm(false);
+
+
 
 
                                                         }}
@@ -248,14 +354,14 @@ export default function SanitationReport({ data }: any) {
                                                 Filter by{" "}
                                             </option>
                                             <option value="1">
-                                                Published
+                                                Completed
+                                            </option>
+                                            <option value="2">
+                                                In Progress
                                             </option>
                                             <option value="0">
-                                                Unpublished
+                                                Pending
                                             </option>
-                                            {/* <option value="1">
-                                                        Deleted
-                                                    </option> */}
                                         </select>
                                     </div>
                                     <div className="col-md-2">
@@ -306,7 +412,7 @@ export default function SanitationReport({ data }: any) {
                                                     <td>{data?.District.name}</td>
                                                     <td>{data?.community}</td>
                                                     {/* <td>{data?.description}</td> */}
-                                                    <td>{data?.status}</td>
+                                                    <td>{data?.status == 0 ? <span className="badge bg-primary">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}</td>
                                                     <td>   {moment(data?.createdAt).format(
                                                         "MMM Do YYYY, h:mm:ss a"
                                                     )}</td>
@@ -352,21 +458,37 @@ export default function SanitationReport({ data }: any) {
                                                                     </li>
                                                                     <li>
 
-                                                                    <Link
-                                                                     className="dropdown-item btn btn-sm "
-                                                                    href={{
-                                                                        pathname: `http://www.google.com/maps/place/${data?.latitude},${data?.longitude}`,
-                                                                        query: {},
-                                                                    }}
-                                                                    passHref
-                                                                >
-                                                                   
-                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title={data?.latitude + "," + data?.longitude}>View on map</span>
-                                                                    {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
-                                                                    <i className="ri-external-link-line align-bottom me-2 text-success" />
-                                                                    {/* </a> */}
-                                                                </Link>
-                                                                        
+                                                                        <Link
+                                                                            className="dropdown-item btn btn-sm "
+                                                                            href={{
+                                                                                pathname: `http://www.google.com/maps/place/${data?.latitude},${data?.longitude}`,
+                                                                                query: {},
+                                                                            }}
+                                                                            passHref
+                                                                        >
+
+                                                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title={data?.latitude + "," + data?.longitude}>View on map</span>
+                                                                            {/* {dt?.BasicInfoSection?.latitude},{dt?.BasicInfoSection?.longitude} */}
+                                                                            <i className="ri-external-link-line align-bottom me-2 text-success" />
+                                                                            {/* </a> */}
+                                                                        </Link>
+
+                                                                    </li>
+                                                                    <li>
+
+                                                                        <button
+                                                                            className="dropdown-item btn btn-sm "
+                                                                            onClick={(e) => {
+                                                                                e.preventDefault();
+                                                                                setReportId(data?.id);
+
+                                                                                openModal(e)
+
+
+                                                                            }}
+                                                                        >
+                                                                            Delete
+                                                                        </button>
                                                                     </li>
 
                                                                 </ul>
