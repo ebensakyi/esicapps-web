@@ -161,7 +161,7 @@ export async function PUT(request: Request) {
       },
       data: {
         status: Number(res?.reportStatus),
-        statusMessage: res?.statusMessage,
+        statusMessage: statusMessage,
       },
     });
 
