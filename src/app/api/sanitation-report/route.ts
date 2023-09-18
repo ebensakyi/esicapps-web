@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
+import { sendSMS } from "../../../../utils/send-hubtel-sms";
 
 export async function POST(request: Request) {
   try {
@@ -147,6 +148,13 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
+
+    let statuses = ["Pending", "Completed", "In progress"];
+    console.log(res);
+
+    let sendSMSReporter = res?.sendSMS;
+    let phoneNumber = res?.phoneNumber;
+    let statusMessage = res?.statusMessage;
     await prisma.sanitationReport.update({
       where: {
         id: Number(res?.reportId),
@@ -156,6 +164,13 @@ export async function PUT(request: Request) {
         statusMessage: res?.statusMessage,
       },
     });
+
+    if (sendSMSReporter) {
+      await sendSMS(
+        phoneNumber,
+        `Your reported nuisance is ${statuses[Number(res?.reportStatus)]}`
+      );
+    }
 
     return NextResponse.json({});
   } catch (error) {
