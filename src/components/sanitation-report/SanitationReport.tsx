@@ -1,7 +1,6 @@
 'use client'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { useRef, useState } from 'react';
@@ -45,7 +44,7 @@ export default function SanitationReport({ data }: any) {
     const [imagePath, setImagePath] = useState("");
 
     const [sendSMS, setsendSMS] = useState(false);
-
+    const [phoneNumber, setPhoneNumber] = useState("")
 
     const searchTextRef: any = useRef(null);
     const filterRef: any = useRef(null);
@@ -134,7 +133,8 @@ export default function SanitationReport({ data }: any) {
                 reportId: Number(reportId),
                 reportStatus,
                 statusMessage,
-                sendSMS
+                sendSMS,
+                phoneNumber
             });
 
             if (response.status == 200) {
@@ -447,6 +447,7 @@ export default function SanitationReport({ data }: any) {
                                                                                 setImagePath(data?.image)
 
                                                                                 setReportId(data.id);
+                                                                                setPhoneNumber(data?.SanitationReportUser?.phoneNumber)
                                                                                 setShowForm(true)
 
 
