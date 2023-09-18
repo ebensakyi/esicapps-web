@@ -149,7 +149,7 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-    let statuses = ["Pending", "Completed", "In progress"];
+    let statuses = ["pending", "resolved", "in progress"];
     console.log(res);
 
     let sendSMSReporter = res?.sendSMS;
