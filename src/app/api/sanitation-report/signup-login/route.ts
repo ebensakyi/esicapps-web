@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     console.log(res);
 
     let phoneNumber = res.phoneNumber;
-    let password = res.password;
+   
     let user;
 
     user = await prisma.sanitationReportUser.findFirst({
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
           phoneNumber: phoneNumber,
         },
       });
-      return NextResponse.json(null, { status: 400 });
+      return NextResponse.json(user);
     }
 
     return NextResponse.json(user);

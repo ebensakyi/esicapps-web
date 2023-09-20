@@ -67,6 +67,9 @@ export async function GET(request: Request) {
           sanitationReportUserId: userId,
           deleted:0
         },
+        orderBy:{
+          createdAt: "desc",
+        }
       });
       return NextResponse.json(response);
     }
