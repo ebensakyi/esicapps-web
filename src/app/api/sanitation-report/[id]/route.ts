@@ -22,3 +22,26 @@ export async function DELETE(
     return NextResponse.json(error);
   }
 }
+
+
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const id = params.id;
+
+    
+
+  let response =  await prisma.sanitationReport.findMany({
+      where: {
+        id: Number(id),
+      },
+    
+    });
+    return NextResponse.json(response);
+  } catch (error) {
+    console.log("error===>", error);
+    return NextResponse.json(error);
+  }
+}

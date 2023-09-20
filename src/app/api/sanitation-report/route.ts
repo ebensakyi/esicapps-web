@@ -57,6 +57,19 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
+    const userId = Number(searchParams.get("userId"));
+    console.log("userid ",userId);
+    
+
+    if (userId) {
+      let response = await prisma.sanitationReport.findMany({
+        where: {
+          sanitationReportUserId: userId,
+          deleted:0
+        },
+      });
+      return NextResponse.json(response);
+    }
 
     let searchText =
       searchParams.get("searchText") == "undefined"

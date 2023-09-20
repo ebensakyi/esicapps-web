@@ -32,7 +32,6 @@ export default function Community({ data }: any) {
 
     const [communityFileUrl, setCommunityFileUrl] = useState("");
 
-    const [searchText, setSearchText] = useState();
     const [communityName, setCommunityName] = useState("");
     const [communityId, setCommunityId] = useState("");
 
@@ -226,6 +225,7 @@ export default function Community({ data }: any) {
     };
 
     const handlePagination = (page: any) => {
+        let searchText = searchParams.get('searchText')
 
         page = page.selected == -1 ? 1 : page.selected + 1;
 

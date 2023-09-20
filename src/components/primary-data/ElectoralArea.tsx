@@ -30,7 +30,6 @@ export default function ElectoralArea({ data }: any) {
     const [electoralAreaFile, setElectoralAreaFile] = useState("");
     const [electoralAreaFileUrl, setElectoralAreaFileUrl] = useState("");
 
-    const [searchText, setSearchText] = useState();
     const [electoralAreaName, setElectoralAreaName] = useState("");
 
     const [electoralAreaId, setElectoralAreaId] = useState("");
@@ -202,6 +201,7 @@ export default function ElectoralArea({ data }: any) {
     };
 
     const handlePagination = (page: any) => {
+        let searchText = searchParams.get('searchText')
 
         page = page.selected == -1 ? 1 : page.selected + 1;
 

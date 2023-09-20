@@ -12,7 +12,6 @@ import ReactPaginate from "react-paginate";
 
 export default function District({ data }: any) {
 
-    console.log("dist ",data);
     
     const { data: session } = useSession({
         required: true,
@@ -24,7 +23,6 @@ export default function District({ data }: any) {
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    const [searchText, setSearchText] = useState();
     const [region, setRegion] = useState("");
 
     const [regionId, setRegionId] = useState("");
@@ -132,6 +130,9 @@ export default function District({ data }: any) {
     };
 
     const handlePagination = (page: any) => {
+        let searchText = searchParams.get('searchText')
+
+        
 
         page = page.selected == -1 ? 1 : page.selected + 1;
 

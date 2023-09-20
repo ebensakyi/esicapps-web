@@ -70,3 +70,5 @@ update "District"
 2. show sanireports update on mobile app
 3. delete sanireports
 4. send message to report sender
+
+1. show details on a modal in maps
