@@ -19,7 +19,6 @@ export async function POST(request: Request) {
     const districtId = Number(data?.get("districtId"));
     const reportCategoryId = Number(data?.get("reportCategoryId"));
 
-    console.log("reportCategoryId==> ",reportCategoryId);
     
 
     const latitude = data?.get("latitude");
