@@ -6,7 +6,11 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+
     const id = params.id;
+
+    console.log("ID==> ",id);
+    
 
     await prisma.sanitationReport.update({
       where: {
@@ -16,7 +20,7 @@ export async function DELETE(
         deleted:1
       }
     });
-    return NextResponse.json({});
+    return NextResponse.json(1);
   } catch (error) {
     console.log("error===>", error);
     return NextResponse.json(error);

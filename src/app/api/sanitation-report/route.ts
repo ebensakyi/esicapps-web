@@ -7,6 +7,8 @@ import { sendSMS } from "../../../../utils/send-hubtel-sms";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
+    console.log(data);
+    
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;
     const sanitationReportUserId = data?.get("userId");
@@ -15,6 +17,10 @@ export async function POST(request: Request) {
 
     const reportType = Number(data?.get("reportType"));
     const districtId = Number(data?.get("districtId"));
+    const reportCategoryId = Number(data?.get("reportCategoryId"));
+
+    console.log("reportCategoryId==> ",reportCategoryId);
+    
 
     const latitude = data?.get("latitude");
     const longitude = data?.get("longitude");
@@ -28,6 +34,7 @@ export async function POST(request: Request) {
         image: fileName,
         description: description,
         reportTypeId: reportType,
+        reportCategoryId:reportCategoryId,
         latitude: latitude,
         longitude: longitude,
         districtId: districtId == 0 ? null : districtId,

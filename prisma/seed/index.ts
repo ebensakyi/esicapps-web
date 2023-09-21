@@ -73,6 +73,7 @@ import { containerCondition } from "./containerCondition";
 import { pages } from "./page";
 import { pageAccess } from "./pageAccess";
 import { fileType } from "./fileType";
+import { reportCategory } from './reportCategory';
 
 async function main() {
 
@@ -308,6 +309,10 @@ async function main() {
 
   await prisma.fileType.createMany({
     data: fileType,
+  })
+
+  await prisma.reportCategory.createMany({
+    data: reportCategory,
   })
 }
 

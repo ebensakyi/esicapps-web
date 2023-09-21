@@ -539,19 +539,19 @@ export default function Header() {
                                 data-bs-parent="#sidebar-nav"
                             > {session?.user?.privileges?.includes(11) ?
                                 <li>
-                                    <Link href="/primary-data/district?page=1">
+                                    <Link href="/primary-data/district?page=1&searchText=undefined">
                                         <i className="bi bi-circle" />
                                         <span>District</span>
                                     </Link>
                                 </li> : <></>}
                                 {session?.user?.privileges?.includes(12) ? <li>
-                                    <Link href="/primary-data/electoral-area?page=1">
+                                    <Link href="/primary-data/electoral-area?page=1&searchText=undefined">
                                         <i className="bi bi-circle" />
                                         <span>Electoral Area</span>
                                     </Link>
                                 </li> : <></>}
                                 {session?.user?.privileges?.includes(13) ? <li>
-                                    <Link href="/primary-data/community?page=1">
+                                    <Link href="/primary-data/community?page=1&searchText=undefined">
                                         <i className="bi bi-circle" />
                                         <span>Community</span>
                                     </Link>

@@ -485,7 +485,7 @@ model Community {
 
 model ElectoralArea {
   id         Int          @id @default(autoincrement())
-  name       String       @unique @db.VarChar(255)
+  name       String       @db.VarChar(255)
   deleted    Int?         @default(0)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
@@ -494,6 +494,8 @@ model ElectoralArea {
   User       User[]
   Community  Community[]
   Inspection Inspection[]
+
+  @@unique([districtId, name], name: "electoralarea_un")
 }
 
 model ContainerVolume {
@@ -3170,16 +3172,16 @@ model FollowupPremisesNuisanceDetected {
 }
 
 model SanitationReport {
-  id    Int     @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  community    String? @db.VarChar(255)
-  address   String? @db.VarChar(255)
-  image        String  @db.VarChar(255)
-  districtId   Int?
-  reportTypeId Int?
-
-  description String? @db.VarChar(500)
-  statusMessage String? @db.VarChar(500)
+  community        String? @db.VarChar(255)
+  address          String? @db.VarChar(255)
+  image            String  @db.VarChar(255)
+  districtId       Int?
+  reportTypeId     Int?
+  reportCategoryId Int?
+  description      String? @db.VarChar(500)
+  statusMessage    String? @db.VarChar(500)
 
   latitude  Decimal? @db.Decimal(11, 8)
   longitude Decimal? @db.Decimal(11, 8)
@@ -3192,14 +3194,15 @@ model SanitationReport {
   ReportType             ReportType?          @relation(fields: [reportTypeId], references: [id])
   SanitationReportUser   SanitationReportUser @relation(fields: [sanitationReportUserId], references: [id])
   sanitationReportUserId Int
+  ReportCategory         ReportCategory?      @relation(fields: [reportCategoryId], references: [id])
 }
 
 model SanitationReportUser {
   id          Int     @id @default(autoincrement())
   fcmId       String? @db.VarChar(255)
   fullName    String? @db.VarChar(255)
-  phoneNumber String? @db.VarChar(255) @unique
-  email       String? @db.VarChar(255) @unique
+  phoneNumber String? @unique @db.VarChar(255)
+  email       String? @unique @db.VarChar(255)
 
   deleted          Int?               @default(0)
   createdAt        DateTime           @default(now())
@@ -3208,6 +3211,15 @@ model SanitationReportUser {
 }
 
 model ReportType {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  SanitationReport SanitationReport[]
+}
+
+model ReportCategory {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
   deleted          Int?               @default(0)
