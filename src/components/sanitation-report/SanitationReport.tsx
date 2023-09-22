@@ -87,13 +87,12 @@ export default function SanitationReport({ data }: any) {
     const handleExportAll = async () => {
         try {
             let searchText = searchParams.get('searchText')
-            const response = await axios.post(
-                `/api/sanitation-report`,
-                {
-
-                    searchText
-                }
+            const response = await axios.get(
+                `/api/sanitation-report/export?searchText=${searchText}`
             );
+
+            console.log(response);
+            
 
 
             if (response.status == 200) {
