@@ -60,8 +60,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
     const userId = searchParams.get("userId");
-    console.log("userId===>",userId);
-    
+
 
     if (userId != null) {
       let response = await prisma.sanitationReport.findMany({
@@ -81,16 +80,19 @@ export async function GET(request: Request) {
       searchParams.get("searchText") == "undefined"
         ? ""
         : searchParams.get("searchText");
-    let status = searchParams.get("status");
-    const filterBy = searchParams.get("filterBy");
-    const filterValue = searchParams.get("filterValue");
+    let status =
+      searchParams.get("status") == "2" ||
+      searchParams.get("status") == "1" ||
+      searchParams.get("status") == "0"
+        ? Number(searchParams.get("status"))
+        : undefined;
+        console.log("status===> ",status);
+        
+    // const filterBy = searchParams.get("filterBy");
+    // const filterValue = searchParams.get("filterValue");
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
       : Number(searchParams.get("page"));
-
-      console.log("curPage==> ",curPage);
-      
-      console.log("searchText==> ",searchText);
 
     let perPage = 10;
     let skip =
@@ -117,9 +119,11 @@ export async function GET(request: Request) {
                 },
               ],
               deleted: 0,
+              status: status,
             }
           : {
               deleted: 0,
+              status: status,
             },
       include: {
         District: true,
@@ -131,8 +135,6 @@ export async function GET(request: Request) {
         createdAt: "desc",
       },
     } as any);
-
-    console.log(response);
 
     const count = await prisma.sanitationReport.count({
       where:
@@ -155,9 +157,11 @@ export async function GET(request: Request) {
                 },
               ],
               deleted: 0,
+              status: status,
             }
           : {
               deleted: 0,
+              status: status,
             },
     } as any);
 

@@ -678,7 +678,7 @@ export async function GET(request: Request) {
     let filterValue = searchParams.get("filterValue");
     let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
-    let perPage = 5;
+    let perPage = 10;
     let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
     let searchText =
       searchParams.get("searchText")?.toString() == "undefined"

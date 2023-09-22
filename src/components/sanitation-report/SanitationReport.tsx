@@ -19,8 +19,6 @@ import Modal from "react-modal";
 
 export default function SanitationReport({ data }: any) {
 
-console.log(data);
-
 
     const { data: session } = useSession({
         required: true,
@@ -35,7 +33,6 @@ console.log(data);
 
 
 
-    const [searchText, setSearchText] = useState("");
     const [reportId, setReportId] = useState(null);
     const [description, setDescription] = useState("");
     const [reportStatus, setReportStatus] = useState("");
@@ -109,13 +106,11 @@ console.log(data);
     const handleSearch = () => {
         try {
             let _searchText: any = searchTextRef?.current?.value
-            let _publishingStatus: any = filterRef?.current?.value
-
-            let _deleted: any = filterRef?.current?.value
+            let status: any = filterRef?.current?.value
 
 
             router.push(
-                `${pathname}?searchText=${_searchText}`
+                `${pathname}?searchText=${_searchText}&status=${status}&page=${page}`
 
             );
 
@@ -354,6 +349,9 @@ console.log(data);
                                             name="filterRef" className="form-select input-group" >
                                             <option value="" selected>
                                                 Filter by{" "}
+                                            </option>
+                                            <option value="">
+                                                All
                                             </option>
                                             <option value="1">
                                                 Completed

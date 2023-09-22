@@ -8,7 +8,10 @@ async function getSanitationReports(searchParams: any) {
     try {
         let { searchText } = searchParams
         let { page } = searchParams
-        let response = await fetch(`${SERVER_BASE_URL}/api/sanitation-report?page=${page}&searchText=${searchText}`, { cache: 'no-store', headers: headers() });
+        let { status } = searchParams
+
+        
+        let response = await fetch(`${SERVER_BASE_URL}/api/sanitation-report?page=${page}&searchText=${searchText}&status=${status}`, { cache: 'no-store', headers: headers() });
 
         if (!response.ok) {
             throw new Error('Failed to fetch data')
