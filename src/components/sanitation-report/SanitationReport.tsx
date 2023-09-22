@@ -19,6 +19,7 @@ import Modal from "react-modal";
 
 export default function SanitationReport({ data }: any) {
 
+console.log(data);
 
 
     const { data: session } = useSession({
@@ -56,6 +57,7 @@ export default function SanitationReport({ data }: any) {
     const searchParams = useSearchParams()
 
     const searchtext = searchParams.get('searchText')
+    const page = searchParams.get('page');
 
 
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -509,8 +511,8 @@ export default function SanitationReport({ data }: any) {
                                     previousLabel={"Previous"}
                                     nextLabel={"Next"}
                                     breakLabel={"..."}
-                                    initialPage={data.reports.curPage - 1}
-                                    pageCount={data.reports.maxPage}
+                                    initialPage={data.reports?.curPage - 1}
+                                    pageCount={data.reports?.maxPage}
                                     onPageChange={handlePagination}
                                     breakClassName={"page-item"}
                                     breakLinkClassName={"page-link"}

@@ -21,6 +21,8 @@ export async function POST(request: Request) {
       include: { Region: true, District: true,UserRole:true },
     });
 
+    
+
     const pageAccess = await prisma.pageAccess.findMany({
       where: {
         userRoleId: user?.userRoleId,
@@ -33,7 +35,6 @@ export async function POST(request: Request) {
       return d.pageId;
     });
 
-    //console.log(user);
 
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");
@@ -45,6 +46,8 @@ export async function POST(request: Request) {
     }
 
     let isValid = await bcrypt.compare(password, user.password);
+
+    
 
     if (isValid) {
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");

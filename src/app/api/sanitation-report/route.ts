@@ -7,7 +7,6 @@ import { sendSMS } from "../../../../utils/send-hubtel-sms";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-    console.log(data);
     
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;
@@ -64,10 +63,9 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
     const userId = Number(searchParams.get("userId"));
-    console.log("userid ",userId);
     
 
-    if (userId) {
+    if (userId!=0) {
       let response = await prisma.sanitationReport.findMany({
         where: {
           sanitationReportUserId: userId,
@@ -77,6 +75,7 @@ export async function GET(request: Request) {
           createdAt: "desc",
         }
       });
+      
       return NextResponse.json(response);
     }
 
@@ -131,6 +130,9 @@ export async function GET(request: Request) {
       },
     } as any);
 
+    console.log(response);
+    
+
     const count = await prisma.sanitationReport.count({
       where:
         searchText != ""
@@ -146,6 +148,9 @@ export async function GET(request: Request) {
                 },
                 {
                   description: { contains: searchText, mode: "insensitive" },
+                },
+                {
+                  community: { contains: searchText, mode: "insensitive" },
                 },
               ],
               deleted: 0,
