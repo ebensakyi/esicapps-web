@@ -7,7 +7,6 @@ import { sendSMS } from "../../../../utils/send-hubtel-sms";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-    
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;
     const sanitationReportUserId = data?.get("userId");
@@ -17,8 +16,6 @@ export async function POST(request: Request) {
     const reportType = Number(data?.get("reportType"));
     const districtId = Number(data?.get("districtId"));
     const reportCategoryId = Number(data?.get("reportCategoryId"));
-
-    
 
     const latitude = data?.get("latitude");
     const longitude = data?.get("longitude");
@@ -32,7 +29,7 @@ export async function POST(request: Request) {
         image: fileName,
         description: description,
         reportTypeId: reportType,
-        reportCategoryId:reportCategoryId,
+        reportCategoryId: reportCategoryId,
         latitude: latitude,
         longitude: longitude,
         districtId: districtId == 0 ? null : districtId,
@@ -62,20 +59,21 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const districtId = Number(searchParams.get("districtId"));
-    const userId = Number(searchParams.get("userId"));
+    const userId = searchParams.get("userId");
+    console.log("userId===>",userId);
     
 
-    if (userId!=0) {
+    if (userId != null) {
       let response = await prisma.sanitationReport.findMany({
         where: {
-          sanitationReportUserId: userId,
-          deleted:0
+          sanitationReportUserId: Number(userId),
+          deleted: 0,
         },
-        orderBy:{
+        orderBy: {
           createdAt: "desc",
-        }
+        },
       });
-      
+
       return NextResponse.json(response);
     }
 
@@ -89,6 +87,10 @@ export async function GET(request: Request) {
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
       : Number(searchParams.get("page"));
+
+      console.log("curPage==> ",curPage);
+      
+      console.log("searchText==> ",searchText);
 
     let perPage = 10;
     let skip =
@@ -131,7 +133,6 @@ export async function GET(request: Request) {
     } as any);
 
     console.log(response);
-    
 
     const count = await prisma.sanitationReport.count({
       where:

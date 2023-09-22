@@ -414,7 +414,7 @@ console.log(data);
                                                     <td>{data?.District.name}</td>
                                                     <td>{data?.community}</td>
                                                     {/* <td>{data?.description}</td> */}
-                                                    <td>{data?.status == 0 ? <span className="badge bg-primary">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}</td>
+                                                    <td>{data?.status == 0 ? <span className="badge bg-danger">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}</td>
                                                     <td>   {moment(data?.createdAt).format(
                                                         "MMM Do YYYY, h:mm:ss a"
                                                     )}</td>
