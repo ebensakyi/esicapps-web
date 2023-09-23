@@ -240,7 +240,7 @@ export default function Community({ data }: any) {
 
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
-                `/api/primary-data/community?exportFile=true&searchText=${searchText}`,
+                `/api/primary-data/community/export?searchText=${searchText}`,
 
             );
 

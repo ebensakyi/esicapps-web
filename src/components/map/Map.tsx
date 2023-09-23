@@ -14,6 +14,7 @@ import { LOGIN_URL } from "@/config";
 import Modal from "react-modal";
 import Image from 'next/image'
 import moment from "moment";
+import { log } from "console";
 
 
 
@@ -54,6 +55,16 @@ const Map = ({ data }: any) => {
   const [rating, setRating] = useState(0);
 
 
+  // const [eaterySelected, setEaterySelected] = useState(false);
+  // const [residentialSelected, setResidentialSelected] = useState(false);
+  // const [healthSelected, setHealthSelected] = useState(false);
+  // const [hospitalitySelected, setHospitalitySelected] = useState(false);
+  // const [sanitarySelected, setSanitarySelected] = useState(false);
+  // const [marketSelected, setMarketSelected] = useState(false);
+  // const [industrySelected, setIndustrySelected] = useState(false);
+  // const [institutionSelected, setInstitutionSelected] = useState(false);
+
+
   // laod script for google map
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -65,6 +76,7 @@ const Map = ({ data }: any) => {
   // static lat and lng
   const center = { lat: 7.967, lng: -1.505 };
 
+  let formId = searchParams.get("formId")
   // handle place change on search
   const handlePlaceChanged = () => {
     const place: any = autocompleteRef.current.getPlace();
@@ -75,6 +87,13 @@ const Map = ({ data }: any) => {
     });
     setCurrentLocation(null);
   };
+
+
+  // const handleSelection=()=>{
+  //   if (form == 1) {
+  //     return '/assets/img/rating_img/eatery_green.png'
+  //   }
+  // }
 
   // get current location
   const handleGetLocationClick = () => {
@@ -339,14 +358,17 @@ const Map = ({ data }: any) => {
           >
             <input type="text" className="form-control" placeholder="Search for a location" />
           </Autocomplete>
-          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm(1) }}>Residential</button>
-          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm(2) }}>Eating & Drinking</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(4) }}>Hospitality</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(3) }}>Health</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(5) }}>Institution</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(6) }}>Industry</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(7) }}>Market</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(8) }}>Sanitary</button>
+          <button type="button" className={formId=="undefined"?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm() }}>All</button>
+
+          <button type="button" className={formId==1?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(1) }}>Residential</button>
+          <button type="button" className={formId==2?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(2) }}>Eating & Drinking</button>
+          <button type="button" className={formId==3?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(3) }}>Health</button>
+
+          <button type="button" className={formId==4?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(4) }}>Hospitality</button>
+          <button type="button" className={formId==5?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(5) }}>Institution</button>
+          <button type="button" className={formId==6?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(6) }}>Industry</button>
+          <button type="button" className={formId==7?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(7) }}>Market</button>
+          <button type="button" className={formId==8?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(8) }}>Sanitary</button>
 
           {/* </div> 
 

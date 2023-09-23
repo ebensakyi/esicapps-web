@@ -12,7 +12,7 @@ import ReactPaginate from 'react-paginate';
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const { data: session } :any= useSession()
+    const { data: session }: any = useSession()
 
     const loggedInUserRegion = session?.user?.regionId;
     const loggedInUserDistrict = session?.user?.districtId;
@@ -46,6 +46,8 @@ export default function User({ data }: any) {
     const [electoralArea, setElectoralArea] = useState();
     const [showRegion, setShowRegion] = useState(false);
     const [showDistrict, setShowDistrict] = useState(false);
+    const [showOtp, setShowOtp] = useState(false);
+
     // const [searchText, setSearchText] = useState();
 
 
@@ -56,7 +58,7 @@ export default function User({ data }: any) {
 
             const response = await axios.get(
                 `/api/primary-data/district?regionId= ${regionId} &get_all=1`
-            );            
+            );
 
 
             setDistricts(response.data.response);
@@ -175,7 +177,7 @@ export default function User({ data }: any) {
                     };
                 }
                 if (selectedUserLevel == "3") {
-                    
+
                     data = {
                         userRoleId: Number(userRole),
                         userLevelId: Number(selectedUserLevel),
@@ -237,18 +239,22 @@ export default function User({ data }: any) {
 
             const response = await axios.post("/api/user", data);
 
-          
+            if (response.status == 201) {
+                return toast.error("User's phone number already used.\nChange number and try again");
 
-            if (response.status == 200) {  setSurname("");
-            setOtherNames("");
-            setEmail("");
-            setPhoneNumber("");
-            setDesignation("");
-            setUserRole("");
-            setSelectedRegion("");
-            setSelectedDistrict("");
+            }
 
-            setSelectedUserLevel("");
+            if (response.status == 200) {
+                setSurname("");
+                setOtherNames("");
+                setEmail("");
+                setPhoneNumber("");
+                setDesignation("");
+                setUserRole("");
+                setSelectedRegion("");
+                setSelectedDistrict("");
+
+                setSelectedUserLevel("");
                 router.refresh()
                 return toast.success("User added successfully");
 
@@ -328,7 +334,7 @@ export default function User({ data }: any) {
                     };
                 }
                 if (selectedUserLevel == "3") {
-                    
+
                     data = {
                         userId: Number(userId),
 
@@ -394,16 +400,17 @@ export default function User({ data }: any) {
                 };
             }
             const response = await axios.put("/api/user", data);
-            if (response.status == 200) { setSurname("");
-            setOtherNames("");
-            setEmail("");
-            setPhoneNumber("");
-            setDesignation("");
-            setUserRole("");
-            setSelectedRegion("");
-            setSelectedDistrict("");
-            setIsEditing(false);
-            setSelectedUserLevel("");
+            if (response.status == 200) {
+                setSurname("");
+                setOtherNames("");
+                setEmail("");
+                setPhoneNumber("");
+                setDesignation("");
+                setUserRole("");
+                setSelectedRegion("");
+                setSelectedDistrict("");
+                setIsEditing(false);
+                setSelectedUserLevel("");
 
                 router.refresh()
                 return toast.success("User updated successfully");
@@ -411,7 +418,7 @@ export default function User({ data }: any) {
             }
 
 
-           
+
         } catch (error) {
             console.log(error);
             return toast.error("An error occurred while updating user");
@@ -422,7 +429,7 @@ export default function User({ data }: any) {
     const handleSearch = () => {
         try {
             let _searchText: any = searchTextRef?.current?.value
-           
+
 
             router.push(
                 `${pathname}?searchText=${_searchText}&page=${page}`
@@ -439,10 +446,10 @@ export default function User({ data }: any) {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
                 `/api/user?exportFile=true`,
-              
+
             );
 
-            
+
 
             if (response.status == 200) {
                 router.push(response.data);
@@ -481,7 +488,7 @@ export default function User({ data }: any) {
             {/* End Page Title */}
             <section className="section">
                 <div className="row">
-                
+
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
@@ -769,30 +776,30 @@ export default function User({ data }: any) {
                                 <h5 className="card-title">Users List</h5>
                                 <div className="row">
                                     <div className="col-md-4">
-                                                <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
-                                                        id="searchText"
-                                                        name="searchText" />
-                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
-                                                </div>
+                                        <div className="input-group mb-3">
+                                            <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                                id="searchText"
+                                                name="searchText" />
+                                            <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                        </div>
 
-                                            </div>
-                                            <div className="col-md-4">
-                                                <div className="input-group mb-3">
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-sm btn-success  "
-                                                        onClick={handleExportAll}
-                                                    >
-                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                                                        Export as excel
-                                                    </button>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div className="input-group mb-3">
+                                            <button
+                                                type="button"
+                                                className="btn btn-sm btn-success  "
+                                                onClick={handleExportAll}
+                                            >
+                                                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                                Export as excel
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                
+
                                 <table className="table datatable table-striped ">
-                                
+
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
@@ -818,9 +825,13 @@ export default function User({ data }: any) {
                                                 <td>{user?.UserLevel?.name}</td>
                                                 <td>{user?.Region?.name}</td>
                                                 <td>{user?.District?.name}</td>
-                                                <td>{user?.tempPassword}</td>
+                                                <td><span style={{ "cursor": "pointer" }}
+                                                    onClick={() => {
+                                                        setShowOtp(!showOtp)
+                                                    }}>{showOtp ? "****" : user?.tempPassword}</span></td>
 
-                                                <td>{user?.deleted == 1 ? <>              <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
+                                                <td>{user?.deleted == 1 ? <>
+                                                    <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
                                                 </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
                                                 </>}</td>
 
@@ -864,7 +875,7 @@ export default function User({ data }: any) {
                                                                         setSelectedRegion(user.regionId);
                                                                         setSelectedDistrict(user.districtId);
 
-;
+                                                                        ;
 
 
                                                                         // let phoneNumber = user.phoneNumber;
@@ -890,7 +901,7 @@ export default function User({ data }: any) {
                                                                                 {
                                                                                     data: { id },
                                                                                 }
-                                                                            ); 
+                                                                            );
                                                                             if (response.status == 200) {
                                                                                 router.refresh()
                                                                                 return toast.success("User status changed");
@@ -944,25 +955,25 @@ export default function User({ data }: any) {
                                     </tbody>
                                 </table>
                                 <ReactPaginate
-                                            marginPagesDisplayed={2}
-                                            pageRangeDisplayed={5}
-                                            previousLabel={"Previous"}
-                                            nextLabel={"Next"}
-                                            breakLabel={"..."}
-                                            initialPage={data.users.curPage - 1}
-                                            pageCount={data.users.maxPage}
-                                            onPageChange={handlePagination}
-                                            breakClassName={"page-item"}
-                                            breakLinkClassName={"page-link"}
-                                            containerClassName={"pagination"}
-                                            pageClassName={"page-item"}
-                                            pageLinkClassName={"page-link"}
-                                            previousClassName={"page-item"}
-                                            previousLinkClassName={"page-link"}
-                                            nextClassName={"page-item"}
-                                            nextLinkClassName={"page-link"}
-                                            activeClassName={"active"}
-                                        />
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    previousLabel={"Previous"}
+                                    nextLabel={"Next"}
+                                    breakLabel={"..."}
+                                    initialPage={data.users.curPage - 1}
+                                    pageCount={data.users.maxPage}
+                                    onPageChange={handlePagination}
+                                    breakClassName={"page-item"}
+                                    breakLinkClassName={"page-link"}
+                                    containerClassName={"pagination"}
+                                    pageClassName={"page-item"}
+                                    pageLinkClassName={"page-link"}
+                                    previousClassName={"page-item"}
+                                    previousLinkClassName={"page-link"}
+                                    nextClassName={"page-item"}
+                                    nextLinkClassName={"page-link"}
+                                    activeClassName={"active"}
+                                />
                             </div>
                         </div>
                     </div>

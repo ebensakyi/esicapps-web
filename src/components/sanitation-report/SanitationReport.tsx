@@ -86,7 +86,7 @@ export default function SanitationReport({ data }: any) {
         );
     };
 
-
+   
 
     const handleExportAll = useCallback(async () => {
         try {

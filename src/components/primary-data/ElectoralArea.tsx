@@ -215,7 +215,7 @@ export default function ElectoralArea({ data }: any) {
         try {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
-                `/api/primary-data/electoral-area?exportFile=true&searchText=${searchText}`,
+                `/api/primary-data/electoral-area/export/?searchText=${searchText}`,
 
             );
 

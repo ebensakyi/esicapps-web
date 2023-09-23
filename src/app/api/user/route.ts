@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const session: any = await getServerSession(authOptions);
 
     let loginUserLevel = session?.user?.userLevelId;
-    let fileUrl
+    let fileUrl;
 
     let password: string = (await generateCode(4)) as string;
     const salt = bcrypt.genSaltSync(10);
@@ -46,14 +46,23 @@ export async function POST(request: Request) {
       regionId: regionId,
       districtId: res.district,
     };
+    console.log(data);
+
+    let count = await prisma.user.count({
+      where: {
+        phoneNumber: res.phoneNumber,
+      },
+    });
+    if (count != 0) {
+      return NextResponse.json({message:"Phone number already used"},{status:201});
+    }
+
+    const user: any = await prisma.user.create({ data });
 
     await sendSMS(
       res.phoneNumber,
       `The temporal password for ESICApps App is ${password}`
     );
-
-    const user: any = await prisma.user.create({ data });
-
     return NextResponse.json(user);
   } catch (error: any) {
     console.log(error);
@@ -74,10 +83,13 @@ export async function GET(request: Request) {
     const districtId = searchParams.get("districtId") || undefined;
     let exportFile = searchParams.get("exportFile");
 
-    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))
+      ? 1
+      : Number(searchParams.get("page"));
 
     let perPage = 10;
-    let skip = Number((curPage - 1) * perPage)<0?0:  Number((curPage - 1) * perPage);
+    let skip =
+      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
     // let userLevel = loggedInUserData?.userLevelId;
     // let region = loggedInUserData?.regionId;
@@ -271,7 +283,8 @@ export async function GET(request: Request) {
     if (exportFile) {
       let url = await export2Excel(response);
 
-      return NextResponse.json(url);    }
+      return NextResponse.json(url);
+    }
 
     return NextResponse.json({
       response,
@@ -385,9 +398,8 @@ const flattenArray = async (data: any) => {
       "Phone Number": data[i]?.phoneNumber,
       Email: data[i]?.email,
       "User Level": data[i]?.UserLevel?.name,
-      "Region": data[i]?.Region?.name,
-      "District": data[i]?.District?.name,
-
+      Region: data[i]?.Region?.name,
+      District: data[i]?.District?.name,
     });
   }
 

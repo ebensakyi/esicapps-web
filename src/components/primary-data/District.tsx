@@ -146,7 +146,7 @@ export default function District({ data }: any) {
        try {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
-                `/api/primary-data/district?exportFile=true&searchText=${searchText}`,
+                `/api/primary-data/district/export?searchText=${searchText}`,
 
             );
 

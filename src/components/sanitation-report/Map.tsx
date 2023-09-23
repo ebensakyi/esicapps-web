@@ -47,7 +47,12 @@ const Map = ({ data }: any) => {
     libraries: ["places"],
   });
 
+
+
   if (!isLoaded) return <div>Loading....</div>;
+
+  let status = searchParams.get("status")
+
 
   // static lat and lng
   const center = { lat: 7.967, lng: -1.505 };
@@ -191,15 +196,15 @@ const Map = ({ data }: any) => {
                 </div>
                 <div className=" mb-3">
                   <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                   Status *
+                    Status *
                   </label>
-                  {reportStatus == 0 ? <span className="badge bg-danger">Pending</span> :reportStatus == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}
+                  {reportStatus == 0 ? <span className="badge bg-danger">Pending</span> : reportStatus == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}
                 </div>
 
 
-                
-              
-              
+
+
+
 
               </div>
             </div>
@@ -238,10 +243,10 @@ const Map = ({ data }: any) => {
           >
             <input type="text" className="form-control" placeholder="Search for a location" />
           </Autocomplete>
-          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm(undefined) }}>All</button>
-          <button type="button" className="btn btn-outline-danger" onClick={(e) => { getMarkersByForm(0) }}>Pending</button>
-          <button type="button" className="btn btn-outline-warning" onClick={(e) => { getMarkersByForm(2) }}>In progress</button>
-          <button type="button" className="btn  btn-outline-success" onClick={(e) => { getMarkersByForm(1) }}>Completed</button>
+          <button type="button" className={status == "undefined" ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(undefined) }}>All</button>
+          <button type="button" className={status == 0 ? "btn btn-outline-danger active" : "btn btn-outline-danger"} onClick={(e) => { getMarkersByForm(0) }}>Pending</button>
+          <button type="button" className={status == 2 ? "btn btn-outline-warning active" : "btn btn-outline-warning"} onClick={(e) => { getMarkersByForm(2) }}>In progress</button>
+          <button type="button" className={status == 1 ? "btn btn-outline-success active" : "btn btn-outline-success"} onClick={(e) => { getMarkersByForm(1) }}>Completed</button>
 
 
           {/* </div> 

@@ -177,11 +177,12 @@ update "District"
 
 
 
-1. show details on a modal in maps - in esicapps
+1. show details on a modal in maps - in esicapps - done
 2. login district user and regional users and check pages
-3. export data by filter
-4. add new pages to accessible pages
+3. export data by filter - done for reporter
+4. add new pages to accessible pages 
 5. add user restrictions even when url is typed
+6. optimize data selection in findMany. don't select all fields not needed
 
 
 33aa179,33ac760,33adfd1
