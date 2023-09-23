@@ -104,14 +104,11 @@ export default function Dashboard({ data }: any) {
   };
 
   const getDistrictsByRegion = async (regionId: any) => {
-    console.log("getDistrictsByRegion ", regionId);
 
     try {
       const response = await axios.get(
         `/api/primary-data/district?regionId=${regionId}&get_all=1`
       );
-
-
 
       setDistrictsData(response.data.response);
     } catch (error) {
@@ -144,8 +141,6 @@ export default function Dashboard({ data }: any) {
     try {
       e.preventDefault();
 
-      console.log("handle filter");
-
 
       if (filterBy == "national") {
         return router.push("/");
@@ -159,19 +154,21 @@ export default function Dashboard({ data }: any) {
       if (filterBy == "electoralAreaId" && electoralArea == null) {
         return toast.error("Please select electoral area");
       }
-      if (filterBy == "districtId" && district == null) {
+      if (filterBy == "districtId" && district == null || district=="") {
         return toast.error("Please select district");
       }
       if (filterBy == "regionId" && region == null) {
         return toast.error("Please select region");
       }
 
+
+      
+      
       setLoading(true)
 
       await returnFilterValue(filterBy);
       router.push(
         `${pathname}?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
-
       );
 
       setLoading(false);
@@ -517,6 +514,13 @@ console.log(error);
     }
   };
 
+  const handleFilterReset = ()=>{
+    router.push(
+      `${pathname}`
+
+    );
+  }
+
 
 
   return (
@@ -545,6 +549,9 @@ console.log(error);
             onChange={(e: any) => {
               setFilterBy(e.target.value);
               setRegion(null)
+              setDistrict(null)
+              setElectoralArea(null)
+              setCommunity(null)
 
               if (regionalUser) {
                 getDistrictsByRegion(region);
@@ -876,6 +883,16 @@ console.log(error);
             onClick={(e: any) => handleFilter(e)}
           >
             Filter
+          </button>
+        </div>
+        <div className="col-12">
+          <label className="form-label mb-0">.</label>
+          <button
+            type="submit"
+            className="form-control btn btn-danger"
+            onClick={(e: any) => handleFilterReset(e)}
+          >
+            Reset
           </button>
         </div>
       </div>

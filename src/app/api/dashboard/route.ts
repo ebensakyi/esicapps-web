@@ -48,7 +48,6 @@ export async function GET(request: Request) {
     let { searchParams } = new URL(request.url);
 
 
-    console.log(searchParams);
     
     
 
@@ -81,7 +80,7 @@ export async function GET(request: Request) {
 
     let sanitationReportsCount = await prisma.sanitationReport.count({
       where:
-        filterBy == "undefined"
+        filterBy == "undefined" ||  filterBy == "electoralAreaId" ||  filterBy == "communityId" 
           ? {  deleted: 0 }
           : {  [filterBy]: Number(filterValue), deleted: 0 },
     });

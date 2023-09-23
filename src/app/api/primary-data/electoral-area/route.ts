@@ -41,6 +41,14 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
+    // const userLevel = session?.user?.userLevelId;
+    // const userDistrict = session?.user?.districtId;
+    // const userRegion = session?.user?.regionId;
+
+    // const selectedRegion = searchParams.get("regionId");
+
+    let district = userDistrict || selectedDistrict;
+
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
       : Number(searchParams.get("page"));
@@ -102,9 +110,9 @@ export async function GET(request: Request) {
                     },
                   ],
                   deleted: 0,
-                  districtId: selectedDistrict,
+                  districtId: Number(selectedDistrict),
                 }
-              : { deleted: 0, districtId: selectedDistrict },
+              : { deleted: 0, districtId: Number(selectedDistrict) },
 
           skip: skip,
           take: perPage,
@@ -123,7 +131,7 @@ export async function GET(request: Request) {
     } else if (userLevel == 2) {
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, districtId: Number(userRegion) },
+          where: { deleted: 0, districtId: Number(district) },
 
           include: {
             District: {
@@ -134,8 +142,6 @@ export async function GET(request: Request) {
           },
         };
       } else {
-        console.log("here==>");
-
         query = {
           where:
             searchText != ""
@@ -163,7 +169,7 @@ export async function GET(request: Request) {
                   deleted: 0,
                   District: { regionId: Number(userRegion) },
                 }
-              : { deleted: 0, District: { regionId: Number(userRegion) }, },
+              : { deleted: 0, District: { regionId: Number(userRegion) } },
 
           skip: skip,
           take: perPage,
@@ -179,7 +185,7 @@ export async function GET(request: Request) {
         console.log(query);
 
         count = await prisma.electoralArea.count({
-          where:{ deleted: 0, District: { regionId: Number(userRegion) }, },
+          where: { deleted: 0, District: { regionId: Number(userRegion) } },
         });
       }
     } else if (userLevel == 3) {
