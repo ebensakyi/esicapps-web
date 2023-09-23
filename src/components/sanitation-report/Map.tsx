@@ -41,8 +41,6 @@ const Map = ({ data }: any) => {
   const [statusMessage, setStatusMessage] = useState("");
 
 
-  const [sendSMS, setsendSMS] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("")
   // laod script for google map
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -136,6 +134,8 @@ const Map = ({ data }: any) => {
     setIsOpen(true);
   }
 
+
+
   const customStyles = {
     content: {
       top: "50%",
@@ -176,13 +176,13 @@ const Map = ({ data }: any) => {
           <div className="col-lg-7">
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title">Update Report</h5>
+                <h5 className="card-title">Report</h5>
                 <div className=" mb-3">
 
                   <div className="col-sm-12">
 
                     <div className="alert alert-warning  fade show" role="alert">
-                      <h4 className="alert-heading">Report</h4>
+                      <h4 className="alert-heading">Description</h4>
                       <p> {description}</p>
 
                     </div>

@@ -20,18 +20,26 @@ export async function GET(request: Request) {
 
     let formId = Number(searchParams.get("formId")) || undefined;
 
-
     const data = await prisma.inspection.findMany({
       where: {
         isPublished: 1,
         inspectionFormId: formId,
       },
       include: {
+        InspectionPictures:true,
         BasicInfoSection: true,
+        District:true,
+        Region: true,
+
+        User: true,
+        Community:{
+          include: {
+            ElectoralArea: true,
+          },
+        }
       },
     });
 
-   
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(error);

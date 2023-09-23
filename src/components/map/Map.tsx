@@ -11,9 +11,14 @@ import {
 import { useSession } from "next-auth/react";
 import { redirect, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { LOGIN_URL } from "@/config";
+import Modal from "react-modal";
+import Image from 'next/image'
+import moment from "moment";
+
 
 
 const Map = ({ data }: any) => {
+
 
   const { data: session } = useSession({
     required: true,
@@ -24,7 +29,7 @@ const Map = ({ data }: any) => {
   const router = useRouter();
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  
+
 
 
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -32,6 +37,22 @@ const Map = ({ data }: any) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const autocompleteRef = useRef(null);
   const [address, setAddress] = useState("");
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const [imagePath1, setImagePath1] = useState("");
+  const [imagePath2, setImagePath2] = useState("");
+  const [imagePath3, setImagePath3] = useState("");
+  const [imagePath4, setImagePath4] = useState("");
+
+  const [submissionDate, setSubmissionDate] = useState(null);
+  const [officer, setOfficer] = useState("");
+  const [electoralArea, setElectoralArea] = useState("");
+  const [region, setRegion] = useState("");
+  const [district, setDistrict] = useState("");
+  const [community, setCommunity] = useState("");
+  const [rating, setRating] = useState(0);
+
 
   // laod script for google map
   const { isLoaded } = useLoadScript({
@@ -46,7 +67,7 @@ const Map = ({ data }: any) => {
 
   // handle place change on search
   const handlePlaceChanged = () => {
-    const place :any= autocompleteRef.current.getPlace();
+    const place: any = autocompleteRef.current.getPlace();
     setSelectedPlace(place);
     setSearchLngLat({
       lat: place.geometry.location.lat(),
@@ -75,6 +96,20 @@ const Map = ({ data }: any) => {
       console.log("Geolocation is not supported by this browser.");
     }
   };
+
+  const handleRating = (rating: number) => {
+    try {
+        if (rating >= 4) {
+            return <span className="badge bg-success">Good</span>;
+        } else if (rating >= 3 && rating < 4) {
+            return <span className="badge bg-warning">Average</span>;
+        } else if (rating < 3) {
+            return <span className="badge bg-danger">Poor</span>;
+        } else {
+            return <span className="badge bg-primary">Default</span>;
+        }
+    } catch (error) { }
+};
 
   // on map load
   const onMapLoad = (map: { controls: HTMLDivElement[][]; }) => {
@@ -105,21 +140,175 @@ const Map = ({ data }: any) => {
     );
   };
 
-  const getMarkersByForm = (formId:any) => {
+  const getMarkersByForm = (formId: any) => {
     // let formId: any = formId?.current?.value
-    
+
 
 
     router.push(
-        `${pathname}?formId=${formId}`
+      `${pathname}?formId=${formId}`
 
     );
 
   }
+  function closeModal() {
+    setIsOpen(false);
+  }
+  function openModal() {
+    setIsOpen(true);
+  }
 
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
 
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
   return (
     <main id="main" className="main">
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Report info"
+      >
+
+        <div className="row">
+         
+          
+          <div className="col-lg-10">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title"> Details </h5>
+                <div className=" mb-3">
+
+                  <div className="col-sm-12">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Value</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+
+                          <td>Officer</td>
+                          <td>{officer}</td>
+
+                        </tr>
+                        <tr>
+
+                          <td>Community</td>
+                          <td>{community}</td>
+
+                        </tr>
+                        <tr>
+
+                          <td>Electoral Area</td>
+                          <td>{electoralArea}</td>
+
+                        </tr>
+                        <tr>
+                          <td>District</td>
+                          <td>{district}</td>
+
+                        </tr>
+                        <tr>
+                          <td>Region</td>
+                          <td>{region}</td>
+
+                        </tr>
+                        <tr>
+                          <td>Date submitted</td>
+                          <td>{submissionDate}</td>
+
+                        </tr>
+                        <tr>
+                          <td>Rating</td>
+                          <td>{rating}</td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+          <div className="row">
+          {
+            imagePath1? <div className="col-lg-3">
+            {/* <div className="card">
+              <div className="card-body"> */}
+                <Image
+                  className="gallery-img img-fluid mx-auto"
+                  src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath1}`}
+                  alt=""
+                  height="128"
+                  width="128"
+                />
+              {/* </div>
+            </div> */}
+          </div>:<></>
+          }
+         
+          {
+            imagePath2? <div className="col-lg-3">
+            {/* <div className="card">
+              <div className="card-body"> */}
+                <Image
+                  className="gallery-img img-fluid mx-auto"
+                  src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath2}`}
+                  alt=""
+                  height="128"
+                  width="128"
+                />
+              {/* </div>
+            </div> */}
+          </div>:<></>
+          }
+         
+         {
+            imagePath3? <div className="col-lg-3">
+            {/* <div className="card">
+              <div className="card-body"> */}
+                <Image
+                  className="gallery-img img-fluid mx-auto"
+                  src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath3}`}
+                  alt=""
+                  height="128"
+                  width="128"
+                />
+              {/* </div>
+            </div> */}
+          </div>:<></>
+          }
+         
+          </div>
+        </div>
+
+
+      </Modal>
       <div
         style={{
           display: "flex",
@@ -149,15 +338,15 @@ const Map = ({ data }: any) => {
             options={{ fields: ["address_components", "geometry", "name"] }}
           >
             <input type="text" className="form-control" placeholder="Search for a location" />
-          </Autocomplete><button type="button" className="btn btn-outline-primary"  onClick={(e)=>{getMarkersByForm(1)}}>Residential</button>
-
-          <button type="button" className="btn btn-outline-primary" onClick={(e)=>{getMarkersByForm(2)}}>Eating & Drinking</button>
-          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(4)}}>Hospitality</button>
-          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(3)}}>Health</button>
-          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(5)}}>Institution</button>
-          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(6)}}>Industry</button>
-          <button type="button" className="btn  btn-outline-primary"  onClick={(e)=>{getMarkersByForm(7)}}>Market</button>
-          <button type="button" className="btn  btn-outline-primary" onClick={(e)=>{getMarkersByForm(8)}}>Sanitary</button>
+          </Autocomplete>
+          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm(1) }}>Residential</button>
+          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm(2) }}>Eating & Drinking</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(4) }}>Hospitality</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(3) }}>Health</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(5) }}>Institution</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(6) }}>Industry</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(7) }}>Market</button>
+          <button type="button" className="btn  btn-outline-primary" onClick={(e) => { getMarkersByForm(8) }}>Sanitary</button>
 
           {/* </div> 
 
@@ -191,13 +380,31 @@ const Map = ({ data }: any) => {
 
 
 
-          {data?.mapData?.map((pos:any) => (
+          {data?.mapData?.map((pos: any) => (
             <MarkerF
               key={pos.id}
               position={{ lat: Number(pos?.BasicInfoSection?.latitude), lng: Number(pos?.BasicInfoSection?.longitude) }}
               title={pos?.community}
               //label={pos?.community}
               icon={definePointIcon(pos?.totalRating, pos?.inspectionFormId)}
+              onClick={() => {
+
+                
+                setImagePath1(pos?.InspectionPictures[0]?.imagePath)
+                setImagePath2(pos?.InspectionPictures[1]?.imagePath)
+                setImagePath3(pos?.InspectionPictures[2]?.imagePath)
+                setImagePath4(pos?.InspectionPictures[3]?.imagePath)
+
+                setCommunity(pos?.BasicInfoSection?.community)
+                setDistrict(pos?.District.name)
+                setRegion(pos?.Region?.name)
+                setElectoralArea(pos?.Community?.ElectoralArea.name)
+                setOfficer(pos?.User?.otherNames + " " + pos?.User?.surname)
+                setSubmissionDate(moment(pos?.createdAt).format("MMM Do YYYY, h:mm:ss a"))
+                setRating(handleRating(pos?.totalRating))
+
+                openModal()
+              }}
             />
           ))}
           {/* <Marker position={{lat: -0.009313, lng:9.445632}}/> */}

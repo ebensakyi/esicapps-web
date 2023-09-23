@@ -12,6 +12,7 @@ import Image from 'next/image'
 import moment from "moment";
 import Link from "next/link";
 import Modal from "react-modal";
+import { useCallback } from 'react';
 
 
 
@@ -84,15 +85,17 @@ export default function SanitationReport({ data }: any) {
 
         );
     };
-    const handleExportAll = async () => {
+
+
+
+    const handleExportAll = useCallback(async () => {
         try {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
                 `/api/sanitation-report/export?searchText=${searchText}`
             );
 
-            console.log(response);
-            
+
 
 
             if (response.status == 200) {
@@ -101,7 +104,9 @@ export default function SanitationReport({ data }: any) {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, []);
+
+
     const handleSearch = () => {
         try {
             let _searchText: any = searchTextRef?.current?.value
@@ -378,7 +383,7 @@ export default function SanitationReport({ data }: any) {
                                             <button
                                                 type="button"
                                                 className="btn btn-sm btn-success  "
-                                                onClick={handleExportAll}
+                                                onClick={ handleExportAll}
                                             >
                                                 <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
                                                 Export as excel
@@ -391,11 +396,12 @@ export default function SanitationReport({ data }: any) {
                                 {/* <h5 className="card-title">Reports</h5> */}
                                 <table className="table table-bordered">
                                     <thead>
-                                        <tr>                                            <th scope="col">Reported by</th>
+                                        <tr>
+                                            <th scope="col">Reported by</th>
 
                                             <th scope="col">District</th>
 
-                                            <th scope="col">Community</th>
+                                            <th scope="col">Location</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Reported at</th>
 
