@@ -1,43 +1,58 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import { authOptions } from "../../../auth/[...nextauth]/options";
+
 import { getServerSession } from "next-auth";
+import { authOptions } from "../../../auth/[...nextauth]/options";
 import AWS from "aws-sdk";
 import fs from "fs";
 const XLSX = require("xlsx");
 
 
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const selectedRegion =
-      searchParams.get("regionId") == null
+    const session: any = await getServerSession(authOptions);
+    const selectedDistrict =
+      searchParams.get("districtId") == null || ""
         ? undefined
-        : Number(searchParams.get("regionId"));
-    let exportFile = searchParams.get("exportFile");
+        : Number(searchParams.get("districtId"));
 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
         : searchParams.get("searchText")?.toString();
 
-    const get_all = Number(searchParams.get("get_all"));
-
-    const session: any = await getServerSession(authOptions);
-    
-
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
+    let query = {};
+    let count = 0;
+    // const data = await prisma.electoralArea.findMany({
+    //   where: { deleted: 0, districtId: Number(selectedDistrict) },
+    // });
 
+    // const districtId = Number(searchParams.get("districtId"));
 
+    // if (districtId ) {
+    //   const data = await prisma.electoralArea.findMany({
+    //     where: { deleted: 0, districtId: Number(districtId) },
+    //   });
+    //   return NextResponse.json(data);
+    // }
 
     if (userLevel == 1) {
-        const response = await prisma.district.findMany({
-          where: { deleted: 0 },
-          include: { Region: true },
+        const response = await prisma.electoralArea.findMany({
+          where: { deleted: 0, districtId: selectedDistrict },
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
           orderBy: {
             name: "asc",
           },
@@ -46,11 +61,17 @@ export async function GET(request: Request) {
 
         return NextResponse.json(url);
       
-     
+    
     } else if (userLevel == 2) {
-        const response = await prisma.district.findMany({
-          where: { deleted: 0 },
-          include: { Region: true },
+        const response = await prisma.electoralArea.findMany({
+          where: { deleted: 0, districtId: Number(userRegion) },
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
           orderBy: {
             name: "asc",
           },
@@ -59,12 +80,17 @@ export async function GET(request: Request) {
 
         return NextResponse.json(url);
       
-   
-
+ 
     } else if (userLevel == 3) {
-        const response = await prisma.district.findMany({
-          where: { deleted: 0 },
-          include: { Region: true },
+        const response = await prisma.electoralArea.findMany({
+          where: { deleted: 0, districtId: Number(userDistrict) },
+          include: {
+            District: {
+              include: {
+                Region: true,
+              },
+            },
+          },
           orderBy: {
             name: "asc",
           },
@@ -72,15 +98,17 @@ export async function GET(request: Request) {
         let url = await export2Excel(response);
 
         return NextResponse.json(url);
-      
- 
-    } 
- 
+      }
+  
+    
+
+  
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(error);
   }
 }
+
 
 
 const export2Excel = async (data: any) => {
@@ -90,14 +118,14 @@ const export2Excel = async (data: any) => {
     const workSheet = XLSX.utils.json_to_sheet(flatData);
     const workBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
-    let filePath = `./public/temp/districts.xlsx`;
+    let filePath = `./public/temp/electoral-area.xlsx`;
     XLSX.writeFile(workBook, filePath);
 
-    let url = await uploadFile("districts.xlsx");
+    let url = await uploadFile("electoral-area.xlsx");
 
     return url;
   } catch (error) {
-    console.log("error NextResponse=> ");
+    console.log("error NextResponse=> ", error);
   }
 };
 
@@ -107,10 +135,9 @@ const flattenArray = async (data: any) => {
   for (let i = 0; i < data?.length; i++) {
     newData?.push({
       Name: data[i]?.name,
-      Abbreviation: data[i]?.abbrv,
-      // District: data[i]?.ElectoralArea?.District?.name,
+      District: data[i]?.District?.name,
 
-      Region: data[i]?.Region?.name,
+      Region: data[i]?.District?.Region?.name,
     });
   }
 

@@ -248,6 +248,7 @@ export default function Community({ data }: any) {
 
             if (response.status == 200) {
                 router.push(response.data);
+                router.refresh()
             }
         } catch (error) {
             console.log("error==> ", error);
@@ -535,7 +536,7 @@ export default function Community({ data }: any) {
                                             <button
                                                 type="button"
                                                 className="btn btn-sm btn-success  "
-                                                onClick={(e: any) =>  handleExportAll(e) }
+                                                onClick={(e: any) => handleExportAll(e)}
                                             >
                                                 <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
                                                 Export as excel

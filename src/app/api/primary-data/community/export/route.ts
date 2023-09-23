@@ -3,27 +3,25 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import AWS from "aws-sdk";
 import fs from "fs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../auth/[...nextauth]/options";
 const XLSX = require("xlsx");
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
+    const session: any = await getServerSession(authOptions);
+
     const electoralAreaId = Number(searchParams.get("electoralAreaId"));
+    const userLevel = session?.user?.userLevelId;
 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
         : searchParams.get("searchText")?.toString();
+    let url;
 
-        let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
-
-    let perPage = 10;
-    let skip =
-      Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
-
-   
-
-    
+    if (userLevel == 1) {
       const response = await prisma.community.findMany({
         where: { deleted: 0 },
 
@@ -42,13 +40,53 @@ export async function GET(request: Request) {
           name: "asc",
         },
       });
-      let url = await export2Excel(response);
+      url = await export2Excel(response);
+    } else if (userLevel == 2) {
+      const response = await prisma.community.findMany({
+        where: { deleted: 0 },
 
-      return NextResponse.json(url);
-    } catch (error) {
+        include: {
+          ElectoralArea: {
+            include: {
+              District: {
+                include: {
+                  Region: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          name: "asc",
+        },
+      });
+      url = await export2Excel(response);
+    } else if (userLevel == 3) {
+      const response = await prisma.community.findMany({
+        where: { deleted: 0 },
 
+        include: {
+          ElectoralArea: {
+            include: {
+              District: {
+                include: {
+                  Region: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          name: "asc",
+        },
+      });
+      url = await export2Excel(response);
     }
 
+    return NextResponse.json(url);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const export2Excel = async (data: any) => {
