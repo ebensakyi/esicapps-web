@@ -7,24 +7,6 @@ import AWS from "aws-sdk";
 import fs from "fs";
 const XLSX = require("xlsx");
 
-export async function POST(request: Request) {
-  try {
-    const res = await request.json();
-    const session: any = await getServerSession(authOptions);
-
-    const data = {
-      name: res.districtName,
-      regionId: Number(res.regionId),
-      abbrv: res.abbrv,
-    };
-    const response = await prisma.district.create({ data });
-
-    return NextResponse.json(response);
-  } catch (error: any) {
-    console.log(error);
-    return NextResponse.json(error);
-  }
-}
 
 export async function GET(request: Request) {
   try {
@@ -49,10 +31,8 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
-    console.log("userRegion==>",userRegion);
-    console.log("userLevel==>",userLevel);
 
-    let query = {};
+
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 

@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import AWS from "aws-sdk";
-import fs from "fs";
-const XLSX = require("xlsx");
 
 export async function POST(request: Request) {
   try {
@@ -29,7 +26,6 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const electoralAreaId = Number(searchParams.get("electoralAreaId"));
-    let exportFile = searchParams.get("exportFile");
     const get_all = Number(searchParams.get("get_all"));
 
     const searchText =
@@ -37,7 +33,9 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-        let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))
+      ? 1
+      : Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip =
@@ -52,37 +50,12 @@ export async function GET(request: Request) {
 
     if (get_all == 1) {
       const response = await prisma.community.findMany({
-        where: { deleted: 0,electoralAreaId:electoralAreaId },
-      })
+        where: { deleted: 0, electoralAreaId: electoralAreaId },
+      });
 
       return NextResponse.json({
         response,
-       
       });
-      };
-
-    if (exportFile) {
-      const response = await prisma.community.findMany({
-        where: { deleted: 0 },
-
-        include: {
-          ElectoralArea: {
-            include: {
-              District: {
-                include: {
-                  Region: true,
-                },
-              },
-            },
-          },
-        },
-        orderBy: {
-          name: "asc",
-        },
-      });
-      let url = await export2Excel(response);
-
-      return NextResponse.json(url);
     }
 
     const response = await prisma.community.findMany({
@@ -179,7 +152,6 @@ export async function GET(request: Request) {
       maxPage: Math.ceil(count / perPage),
     });
   } catch (error) {
-
     return NextResponse.json(error);
   }
 }
@@ -202,64 +174,3 @@ export async function PUT(request: Request) {
     return NextResponse.json(error);
   }
 }
-
-const export2Excel = async (data: any) => {
-  try {
-    let flatData = await flattenArray(data);
-
-    const workSheet = XLSX.utils.json_to_sheet(flatData);
-    const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
-    let filePath = `./public/temp/communities.xlsx`;
-    XLSX.writeFile(workBook, filePath);
-
-    let url = await uploadFile("communities.xlsx");
-
-    return url;
-  } catch (error) {
-    console.log("error NextResponse=> ");
-  }
-};
-
-const flattenArray = async (data: any) => {
-  let newData = [];
-
-  for (let i = 0; i < data?.length; i++) {
-    newData?.push({
-      Name: data[i]?.name,
-      "Electoral Area": data[i]?.ElectoralArea.name,
-      District: data[i]?.ElectoralArea?.District?.name,
-
-      Region: data[i]?.ElectoralArea?.District?.Region?.name,
-    });
-  }
-
-  return newData;
-};
-
-const uploadFile = async (fileName: any) => {
-  try {
-    AWS.config.update({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    });
-
-    var s3 = new AWS.S3();
-
-    var filePath = `./public/temp/${fileName}`;
-
-    var params = {
-      Bucket: "esicapps-exports",
-      Body: fs.createReadStream(filePath),
-      // Key: prefix + "/" + fileName,
-      Key: fileName,
-    };
-
-    let stored = await s3.upload(params).promise();
-
-    return stored.Location;
-  } catch (error) {
-    console.log("Upload File Error ", error);
-    return error;
-  }
-};
