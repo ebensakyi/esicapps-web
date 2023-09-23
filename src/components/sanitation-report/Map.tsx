@@ -11,6 +11,8 @@ import {
 import { useSession } from "next-auth/react";
 import { redirect, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { LOGIN_URL } from "@/config";
+import Modal from "react-modal";
+import Image from 'next/image'
 
 
 const Map = ({ data }: any) => {
@@ -25,14 +27,22 @@ const Map = ({ data }: any) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [searchLngLat, setSearchLngLat] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const autocompleteRef = useRef(null);
-  const [address, setAddress] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [reportId, setReportId] = useState(null);
+  const [description, setDescription] = useState("");
+  const [reportStatus, setReportStatus] = useState("");
 
+  const [statusMessage, setStatusMessage] = useState("");
+
+
+  const [sendSMS, setsendSMS] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("")
   // laod script for google map
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -107,7 +117,6 @@ const Map = ({ data }: any) => {
 
   const getMarkersByForm = (status: any) => {
     // let status: any = status?.current?.value
-console.log("status ",status);
 
     router.push(
       `${pathname}?status=${status}`
@@ -115,10 +124,90 @@ console.log("status ",status);
     );
 
   }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
 
 
   return (
     <main id="main" className="main">
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Report info"
+      >
+
+        <div className="row">
+          <div className="col-lg-3">
+            <div className="card">
+              <div className="card-body">
+                <Image
+                  className="gallery-img img-fluid mx-auto"
+                  src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
+                  alt=""
+                  height="256"
+                  width="256"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-7">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Update Report</h5>
+                <div className=" mb-3">
+
+                  <div className="col-sm-12">
+
+                    <div className="alert alert-warning  fade show" role="alert">
+                      <h4 className="alert-heading">Report</h4>
+                      <p> {description}</p>
+
+                    </div>
+
+                  </div>
+                </div>
+                <div className=" mb-3">
+                  <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                   Status *
+                  </label>
+                  {reportStatus == 0 ? <span className="badge bg-danger">Pending</span> :reportStatus == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}
+                </div>
+
+
+                
+              
+              
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </Modal>
       <div
         style={{
           display: "flex",
@@ -149,7 +238,7 @@ console.log("status ",status);
           >
             <input type="text" className="form-control" placeholder="Search for a location" />
           </Autocomplete>
-          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm() }}>All</button>
+          <button type="button" className="btn btn-outline-primary" onClick={(e) => { getMarkersByForm(undefined) }}>All</button>
           <button type="button" className="btn btn-outline-danger" onClick={(e) => { getMarkersByForm(0) }}>Pending</button>
           <button type="button" className="btn btn-outline-warning" onClick={(e) => { getMarkersByForm(2) }}>In progress</button>
           <button type="button" className="btn  btn-outline-success" onClick={(e) => { getMarkersByForm(1) }}>Completed</button>
@@ -167,6 +256,7 @@ console.log("status ",status);
           center={currentLocation || searchLngLat || center}
           mapContainerClassName="map"
           mapContainerStyle={{ height: '80vh', width: '100%', margin: "auto" }}
+
         //onLoad={onMapLoad}
         >
 
@@ -188,12 +278,19 @@ console.log("status ",status);
 
 
           {data?.mapData?.map((pos: any) => (
+
             <MarkerF
               key={pos.id}
-              position={{ lat: Number(pos?.mapData?.latitude), lng: Number(pos?.mapData?.longitude) }}
+              position={{ lat: Number(pos?.latitude), lng: Number(pos?.longitude) }}
               title={pos?.community}
               //label={pos?.community}
-              icon={definePointIcon(pos?.totalRating, pos?.inspectionFormId)}
+              icon={definePointIcon(pos?.status)}
+              onClick={() => {
+                setImagePath(pos?.image)
+                setDescription(pos?.description)
+                setReportStatus(pos?.status)
+                openModal()
+              }}
             />
           ))}
           {/* <Marker position={{lat: -0.009313, lng:9.445632}}/> */}
