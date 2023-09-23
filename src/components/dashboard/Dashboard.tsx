@@ -39,7 +39,10 @@ export default function Dashboard({ data }: any) {
     }
   })
 
+  // let userRegion = session?.user?.regionId
+  // let userDistrict = session?.user?.districtId
 
+  // console.log(session);
 
 
 
@@ -101,9 +104,11 @@ export default function Dashboard({ data }: any) {
   };
 
   const getDistrictsByRegion = async (regionId: any) => {
+    console.log("getDistrictsByRegion ", regionId);
+
     try {
       const response = await axios.get(
-        "/api/primary-data/district?regionId=" + regionId + "&get_all=1"
+        `/api/primary-data/district?regionId=${regionId}&get_all=1`
       );
 
 
@@ -136,42 +141,48 @@ export default function Dashboard({ data }: any) {
   };
 
   const handleFilter = async (e: any) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    if (filterBy == "national") {
-      return router.push("/");
-    }
-    if (filterBy == "" || filterBy == null) {
-      return toast.error("Please select a filter");
-    }
-    if (filterBy == "communityId" && community == null) {
-      return toast.error("Please select community");
-    }
-    if (filterBy == "electoralAreaId" && electoralArea == null) {
-      return toast.error("Please select electoral area");
-    }
-    if (filterBy == "districtId" && district == null) {
-      return toast.error("Please select district");
-    }
-    if (filterBy == "regionId" && region == null) {
-      return toast.error("Please select region");
-    }
+      console.log("handle filter");
 
-    setLoading(true)
+
+      if (filterBy == "national") {
+        return router.push("/");
+      }
+      if (filterBy == "" || filterBy == null) {
+        return toast.error("Please select a filter");
+      }
+      if (filterBy == "communityId" && community == null) {
+        return toast.error("Please select community");
+      }
+      if (filterBy == "electoralAreaId" && electoralArea == null) {
+        return toast.error("Please select electoral area");
+      }
+      if (filterBy == "districtId" && district == null) {
+        return toast.error("Please select district");
+      }
+      if (filterBy == "regionId" && region == null) {
+        return toast.error("Please select region");
+      }
+
+      setLoading(true)
+
+      await returnFilterValue(filterBy);
+      router.push(
+        `${pathname}?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
+
+      );
+
+      setLoading(false);
+    } catch (error) {
+console.log(error);
+
+    }
 
 
     // const published = Number(searchParams.get('published'))
 
-    await returnFilterValue(filterBy);
-
-
-
-    router.push(
-      `${pathname}?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
-
-    );
-
-    setLoading(false);
   };
 
   let submissionsChartData,
@@ -737,7 +748,7 @@ export default function Dashboard({ data }: any) {
         )}
         {filterBy == "communityId" ? (
           <>
-            {nationalUser || regionalUser ? (
+            {nationalUser ? (
               <div className="col-md-2">
                 <label className="form-label mb-0">Select region</label>
                 <select
@@ -874,38 +885,38 @@ export default function Dashboard({ data }: any) {
         <div className="row">
           {/* Left side columns */}
           <div className="col-lg-12">  <LoadingOverlay
-                active={loading}
-                spinner={true}
-                text="Loading. Please wait..."
-              >
+            active={loading}
+            spinner={true}
+            text="Loading. Please wait..."
+          >
             <div className="row">
               {/* Sales Card */}
-              
-             
-                <div className="col-xxl-3 col-md-4">
-                  <div className="card info-card revenue-card">
-                    <div className="filter">
 
 
-                    </div>
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        {/* Sales <span>| Today</span> */}
-                      </h5>
-                      <div className="d-flex align-items-center">
-                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i className="bi bi-arrow-down-left-square" />
-                        </div>
-                        <div className="ps-3">
-                          <h6>{data?.dashboardData?.baselineCount}  </h6>
+              <div className="col-xxl-3 col-md-4">
+                <div className="card info-card revenue-card">
+                  <div className="filter">
 
-                          <span className="text-muted small pt-2 ps-1">BASELINE</span>
-                        </div>
+
+                  </div>
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {/* Sales <span>| Today</span> */}
+                    </h5>
+                    <div className="d-flex align-items-center">
+                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i className="bi bi-arrow-down-left-square" />
+                      </div>
+                      <div className="ps-3">
+                        <h6>{data?.dashboardData?.baselineCount}  </h6>
+
+                        <span className="text-muted small pt-2 ps-1">BASELINE</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* <div className="col-xxl-3 col-md-4">
+              </div>
+              {/* <div className="col-xxl-3 col-md-4">
               <div className="card info-card sales-card">
                
                 <div className="card-body">
@@ -927,330 +938,330 @@ export default function Dashboard({ data }: any) {
                 </div>
               </div>
             </div> */}
-                <div className="col-xxl-3 col-md-4">
-                  <div className="card info-card customers-card">
+              <div className="col-xxl-3 col-md-4">
+                <div className="card info-card customers-card">
 
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        {/* Sales <span>| Today</span> */}
-                      </h5>
-                      <div className="d-flex align-items-center">
-                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i className="bi bi-arrow-counterclockwise
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {/* Sales <span>| Today</span> */}
+                    </h5>
+                    <div className="d-flex align-items-center">
+                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i className="bi bi-arrow-counterclockwise
 " />
-                        </div>
-                        <div className="ps-3">
-                          <h6> {data?.dashboardData?.reInspectionCount}
-                          </h6>
-
-                          <span className="text-muted small pt-2 ps-1">REINSPECTION</span>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-3 col-md-4">
-                  <div className="card info-card sales-card">
-                    <div className="filter">
+                      <div className="ps-3">
+                        <h6> {data?.dashboardData?.reInspectionCount}
+                        </h6>
 
-
-                    </div>
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        {/* Sales <span>| Today</span> */}
-                      </h5>
-                      <div className="d-flex align-items-center">
-                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i className="bi bi-arrow-left-right
-" />
-                        </div>
-                        <div className="ps-3">
-                          <h6> {data?.dashboardData?.followUpCount}
-                          </h6>
-
-                          <span className="text-muted small pt-2 ps-1">FOLLOW-UP</span>
-                        </div>
+                        <span className="text-muted small pt-2 ps-1">REINSPECTION</span>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-3 col-md-5">
-                  <div className="card info-card danger-card">
-                    <div className="filter">
-
-
-                    </div>
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        {/* Sales <span>| Today</span> */}
-                      </h5>
-                      <div className="d-flex align-items-center">
-                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i className="bi bi-trash
-" />
-                        </div>
-                        <div className="ps-3">
-                          <h6>0
-                          </h6>
-
-                          <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </LoadingOverlay>
-
-
-              {/* end row */}
-
-              <div className="row">
-                <div className="col-xl-12" ref={submissionsRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Inspection Submissions
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(submissionsRef.current, "submissions")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-
-                    </div>
-
-                    <div className="card-body">
-                      <Bar data={submissionsChartData} />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="flex-grow-1">
-                  <h4 className="fs-16 mb-1">WATER</h4>
-                  {/* <p className="text-muted mb-0">
-                  Here`s what`s happening with ESICApps today.
-                </p> */}
-                </div>
-                <div className="col-xl-4" ref={waterSourceRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(waterSourceRef.current, "water-source")
+              <div className="col-xxl-3 col-md-4">
+                <div className="card info-card sales-card">
+                  <div className="filter">
 
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
 
-                    <div className="card-body">
-                      <Doughnut data={waterSourceBarchartData} />
-                    </div>
                   </div>
-                </div>
-                <div className="col-xl-4" ref={waterSourceConditionRef}>
-                  <div className="card card-height-100">
-
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Condition Of Water Source
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(waterSourceConditionRef.current, "water-source-condition")
-
-                          }}>
-                          Export
-                        </button>
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {/* Sales <span>| Today</span> */}
+                    </h5>
+                    <div className="d-flex align-items-center">
+                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i className="bi bi-arrow-left-right
+" />
                       </div>
-                    </div>
+                      <div className="ps-3">
+                        <h6> {data?.dashboardData?.followUpCount}
+                        </h6>
 
-                    <div className="card-body">
-                      <Doughnut data={waterSourceConditionBarchartData} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4" ref={waterStorageConditionRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Water Storage Condition
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
-
-                          }}>
-                          Export
-                        </button>
+                        <span className="text-muted small pt-2 ps-1">FOLLOW-UP</span>
                       </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Doughnut data={waterStorageConditionBarchartData} />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="flex-grow-1">
-                  <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
-                  {/* <p className="text-muted mb-0">
-                  Here`s what`s happening with ESICApps today.
-                </p> */}
-                </div>
-                <div className="col-xl-4" ref={toiletAvailabilityRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Toilet Availability
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(toiletAvailabilityRef.current, "toilet-availability")
+              <div className="col-xxl-3 col-md-5">
+                <div className="card info-card danger-card">
+                  <div className="filter">
 
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
 
-                    <div className="card-body">
-                      <Doughnut data={toiletAvailabilityBarchartData} />
-                    </div>
                   </div>
-                </div>
-                <div className="col-xl-4" ref={toiletConditionRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(toiletConditionRef.current, "toilet-condition")
-
-                          }}>
-                          Export
-                        </button>
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {/* Sales <span>| Today</span> */}
+                    </h5>
+                    <div className="d-flex align-items-center">
+                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i className="bi bi-trash
+" />
                       </div>
-                    </div>
+                      <div className="ps-3">
+                        <h6>{data?.dashboardData?.sanitationReportsCount}
+                        </h6>
 
-                    <div className="card-body">
-                      <Doughnut data={toiletConditionBarchartData} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4" ref={toiletAdequacyRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Adequacy Of Toilet
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(toiletAdequacyRef.current, "toilet-adequacy")
-
-                          }}>
-                          Export
-                        </button>
+                        <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
                       </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Doughnut data={toiletAdequacyBarchartData} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="flex-grow-1">
-                  <h4 className="fs-16 mb-1">SOLID WASTE</h4>
-                  {/* <p className="text-muted mb-0">
-                  Here`s what`s happening with ESICApps today.
-                </p> */}
-                </div>
-                <div className="col-xl-4" ref={wasteCollectorRegistrationRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Registered With A Waste Collector
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(wasteCollectorRegistrationRef.current, "waste-collector-registration")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Doughnut data={wasteCollectorBarchartData} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4" ref={wasteSortingRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(wasteSortingRef.current, "waste-sorting")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Doughnut data={wasteSortingBarchartData} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4" ref={wasteStorageReceptacleRef}>
-                  <div className="card card-height-100">
-                    <div className="card-header align-items-center d-flex">
-                      <h4 className="card-title mb-0 flex-grow-1">
-                        Approved Waste Storage Receptacle
-                      </h4>
-                      <div className="flex-shrink-0">
-                        <button type="button" className="btn btn-outline-primary btn-sm"
-                          onClick={async () => {
-                            await exportAsImage(wasteStorageReceptacleRef.current, "waste-storage-receptacle")
-
-                          }}>
-                          Export
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="card-body">
-                      <Doughnut data={approvedWasteReceptacleBarchartData} />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </LoadingOverlay>
 
-      
+
+            {/* end row */}
+
+            <div className="row">
+              <div className="col-xl-12" ref={submissionsRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Inspection Submissions
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(submissionsRef.current, "submissions")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+
+                  </div>
+
+                  <div className="card-body">
+                    <Bar data={submissionsChartData} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="flex-grow-1">
+                <h4 className="fs-16 mb-1">WATER</h4>
+                {/* <p className="text-muted mb-0">
+                  Here`s what`s happening with ESICApps today.
+                </p> */}
+              </div>
+              <div className="col-xl-4" ref={waterSourceRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">Water Source Type</h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(waterSourceRef.current, "water-source")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={waterSourceBarchartData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4" ref={waterSourceConditionRef}>
+                <div className="card card-height-100">
+
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Condition Of Water Source
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(waterSourceConditionRef.current, "water-source-condition")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={waterSourceConditionBarchartData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4" ref={waterStorageConditionRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Water Storage Condition
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(waterStorageConditionRef.current, "water-storage-condition")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={waterStorageConditionBarchartData} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="flex-grow-1">
+                <h4 className="fs-16 mb-1">LIQUID WASTE</h4>
+                {/* <p className="text-muted mb-0">
+                  Here`s what`s happening with ESICApps today.
+                </p> */}
+              </div>
+              <div className="col-xl-4" ref={toiletAvailabilityRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Toilet Availability
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(toiletAvailabilityRef.current, "toilet-availability")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={toiletAvailabilityBarchartData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4" ref={toiletConditionRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">Toilet Condition</h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(toiletConditionRef.current, "toilet-condition")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={toiletConditionBarchartData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4" ref={toiletAdequacyRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Adequacy Of Toilet
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(toiletAdequacyRef.current, "toilet-adequacy")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={toiletAdequacyBarchartData} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="flex-grow-1">
+                <h4 className="fs-16 mb-1">SOLID WASTE</h4>
+                {/* <p className="text-muted mb-0">
+                  Here`s what`s happening with ESICApps today.
+                </p> */}
+              </div>
+              <div className="col-xl-4" ref={wasteCollectorRegistrationRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Registered With A Waste Collector
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(wasteCollectorRegistrationRef.current, "waste-collector-registration")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={wasteCollectorBarchartData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4" ref={wasteSortingRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">Waste Sorting</h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(wasteSortingRef.current, "waste-sorting")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={wasteSortingBarchartData} />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4" ref={wasteStorageReceptacleRef}>
+                <div className="card card-height-100">
+                  <div className="card-header align-items-center d-flex">
+                    <h4 className="card-title mb-0 flex-grow-1">
+                      Approved Waste Storage Receptacle
+                    </h4>
+                    <div className="flex-shrink-0">
+                      <button type="button" className="btn btn-outline-primary btn-sm"
+                        onClick={async () => {
+                          await exportAsImage(wasteStorageReceptacleRef.current, "waste-storage-receptacle")
+
+                        }}>
+                        Export
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="card-body">
+                    <Doughnut data={approvedWasteReceptacleBarchartData} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </section>
     </main>
 

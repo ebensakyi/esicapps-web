@@ -597,17 +597,18 @@ model PestSign {
 }
 
 model Region {
-  id         Int          @id @default(autoincrement())
-  name       String       @db.VarChar(255)
-  abbrv      String       @unique @db.VarChar(10)
-  code       String       @unique @db.VarChar(2)
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  District   District[]
-  Inspection Inspection[]
-  Messaging  Messaging[]
-  User       User[]
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  abbrv            String             @unique @db.VarChar(10)
+  code             String             @unique @db.VarChar(2)
+  deleted          Int?               @default(0)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  District         District[]
+  Inspection       Inspection[]
+  Messaging        Messaging[]
+  User             User[]
+  SanitationReport SanitationReport[]
 }
 
 model District {
@@ -2956,25 +2957,28 @@ model FollowupPremisesNuisanceDetected {
 }
 
 model SanitationReport {
-  id                     Int                  @id @default(autoincrement())
-  community              String?              @db.VarChar(255)
-  image                  String?              @db.VarChar(255)
-  districtId             Int?
+  id         Int     @id @default(autoincrement())
+  community  String? @db.VarChar(255)
+  image      String? @db.VarChar(255)
+  districtId Int?
+  regionId   Int?
+
   reportTypeId           Int?
-  description            String?              @db.VarChar(1000)
-  latitude               Decimal              @db.Decimal(11, 8)
-  longitude              Decimal              @db.Decimal(11, 8)
-  status                 Int                  @default(0)
+  description            String?               @db.VarChar(1000)
+  latitude               Decimal               @db.Decimal(11, 8)
+  longitude              Decimal               @db.Decimal(11, 8)
+  status                 Int                   @default(0)
   sanitationReportUserId Int?
-  deleted                Int?                 @default(0)
-  createdAt              DateTime             @default(now())
-  updatedAt              DateTime             @updatedAt
-  address                String?              @db.VarChar
-  statusMessage          String?              @db.VarChar
+  deleted                Int?                  @default(0)
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+  address                String?               @db.VarChar
+  statusMessage          String?               @db.VarChar
   reportCategoryId       Int?
-  ReportCategory         ReportCategory?      @relation(fields: [reportCategoryId], references: [id])
-  District               District?            @relation(fields: [districtId], references: [id])
+  ReportCategory         ReportCategory?       @relation(fields: [reportCategoryId], references: [id])
+  District               District?             @relation(fields: [districtId], references: [id])
   SanitationReportUser   SanitationReportUser? @relation(fields: [sanitationReportUserId], references: [id])
+  Region                 Region?                @relation(fields: [regionId], references: [id])
 }
 
 model SanitationReportUser {

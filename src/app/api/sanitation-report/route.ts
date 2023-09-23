@@ -22,6 +22,14 @@ export async function POST(request: Request) {
     const communityLandmark = data?.get("communityLandmark");
     const address = data?.get("address");
 
+    let district = await prisma.district.findFirst({
+      where: {
+        id: Number(districtId),
+      },
+    });
+
+    let region = Number(district?.regionId)
+
     let fileName = await saveFileOnDisk(file);
 
     if (fileName != "0") {
@@ -33,6 +41,7 @@ export async function POST(request: Request) {
         latitude: latitude,
         longitude: longitude,
         districtId: districtId == 0 ? null : districtId,
+        regionId: region,
         community: communityLandmark,
         address: address,
         sanitationReportUserId:
@@ -61,7 +70,6 @@ export async function GET(request: Request) {
     const districtId = Number(searchParams.get("districtId"));
     const userId = searchParams.get("userId");
 
-
     if (userId != null) {
       let response = await prisma.sanitationReport.findMany({
         where: {
@@ -86,8 +94,7 @@ export async function GET(request: Request) {
       searchParams.get("status") == "0"
         ? Number(searchParams.get("status"))
         : undefined;
-        console.log("status===> ",status);
-        
+
     // const filterBy = searchParams.get("filterBy");
     // const filterValue = searchParams.get("filterValue");
     let curPage = Number.isNaN(Number(searchParams.get("page")))

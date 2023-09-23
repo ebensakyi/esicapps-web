@@ -4,7 +4,6 @@ import { logActivity } from "@/utils/log";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 
-
 export async function POST(request: Request) {
   try {
     const res = await request.json();
@@ -26,12 +25,18 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+    const session: any = await getServerSession(authOptions);
     const { searchParams } = new URL(request.url);
-    const selectedRegion =
-      searchParams.get("regionId") == null
-        ? undefined
-        : Number(searchParams.get("regionId"));
 
+    const userLevel = session?.user?.userLevelId;
+    const userDistrict = session?.user?.districtId;
+    const userRegion = session?.user?.regionId;
+
+    const selectedRegion = searchParams.get("regionId");
+
+    let region = userRegion || selectedRegion;
+
+ 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
@@ -39,19 +44,11 @@ export async function GET(request: Request) {
 
     const get_all = Number(searchParams.get("get_all"));
 
-    const session: any = await getServerSession(authOptions);
-    
-
-    const userLevel = session?.user?.userLevelId;
-    const userDistrict = session?.user?.districtId;
-    const userRegion = session?.user?.regionId;
-
-    console.log("userRegion==>",userRegion);
-    console.log("userLevel==>",userLevel);
-
     let query = {};
 
-    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))
+      ? 1
+      : Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip =
@@ -60,10 +57,9 @@ export async function GET(request: Request) {
     let count = 0;
 
     if (userLevel == 1) {
-      
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, regionId: selectedRegion },
+          where: { deleted: 0, regionId: Number(region) },
 
           include: { Region: true },
           orderBy: {
@@ -75,27 +71,27 @@ export async function GET(request: Request) {
           where:
             searchText != ""
               ? {
-                OR: [
-                  {
-                    name: {
-                      contains: searchText,
-                      mode: "insensitive",
+                  OR: [
+                    {
+                      name: {
+                        contains: searchText,
+                        mode: "insensitive",
+                      },
                     },
-                  },
-                  {
-                    abbrv: { contains: searchText, mode: "insensitive" },
-                  },
+                    {
+                      abbrv: { contains: searchText, mode: "insensitive" },
+                    },
 
-                  {
-                    Region: {
-                      name: { contains: searchText, mode: "insensitive" },
+                    {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
                     },
-                  },
-                ],
+                  ],
                   deleted: 0,
-                  regionId: selectedRegion,
+                  regionId: region,
                 }
-              : { deleted: 0, regionId: selectedRegion },
+              : { deleted: 0, regionId: Number(region)  },
 
           skip: skip,
           take: perPage,
@@ -106,14 +102,16 @@ export async function GET(request: Request) {
         };
 
         count = await prisma.district.count({
-          where: { deleted: 0, regionId: selectedRegion },
+          where: { deleted: 0, regionId: Number(region) },
         });
       }
     } else if (userLevel == 2) {
-     
+      console.log("userLevel==>", userLevel);
+      console.log("selectedRegion==>", region);
+
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, regionId: selectedRegion },
+          where: { deleted: 0, regionId: Number(region)  },
 
           include: { Region: true },
           orderBy: {
@@ -154,20 +152,16 @@ export async function GET(request: Request) {
             name: "asc",
           },
         };
+        console.log(query);
 
-        
         count = await prisma.district.count({
           where: { deleted: 0, regionId: Number(userRegion) },
-        });      console.log("query==",query);
-
+        });
       }
-
-
     } else if (userLevel == 3) {
-     
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, regionId: selectedRegion },
+          where: { deleted: 0, regionId: region },
 
           include: { Region: true },
           orderBy: {
@@ -179,27 +173,27 @@ export async function GET(request: Request) {
           where:
             searchText != ""
               ? {
-                OR: [
-                  {
-                    name: {
-                      contains: searchText,
-                      mode: "insensitive",
+                  OR: [
+                    {
+                      name: {
+                        contains: searchText,
+                        mode: "insensitive",
+                      },
                     },
-                  },
-                  {
-                    abbrv: { contains: searchText, mode: "insensitive" },
-                  },
+                    {
+                      abbrv: { contains: searchText, mode: "insensitive" },
+                    },
 
-                  {
-                    Region: {
-                      name: { contains: searchText, mode: "insensitive" },
+                    {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
                     },
-                  },
-                ],
+                  ],
                   deleted: 0,
-                  regionId: Number(userDistrict),
+                  districtId: Number(userDistrict),
                 }
-              : { deleted: 0, regionId: Number(userDistrict) },
+              : { deleted: 0, districtId: Number(userDistrict) },
 
           skip: skip,
           take: perPage,
@@ -259,4 +253,3 @@ export async function PUT(request: Request) {
     return NextResponse.json(error);
   }
 }
-

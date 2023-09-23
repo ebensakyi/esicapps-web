@@ -48,6 +48,10 @@ export async function GET(request: Request) {
     let { searchParams } = new URL(request.url);
 
 
+    console.log(searchParams);
+    
+    
+
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any =
       searchParams.get("filterValue")?.toString()
@@ -57,7 +61,7 @@ export async function GET(request: Request) {
       filterBy = "undefined";
       filterValue = "undefined"
     }
-    if (userLevel == 2) {
+    if (userLevel == 2 && filterBy == "undefined") {
       filterBy = "regionId";
       filterValue = regionId;
     }
@@ -65,6 +69,8 @@ export async function GET(request: Request) {
       filterBy = "districtId";
       filterValue = districtId;
     }
+   
+
 
     let baselineCount = await prisma.inspection.count({
       where:
@@ -73,6 +79,17 @@ export async function GET(request: Request) {
           : { inspectionTypeId: 1, [filterBy]: Number(filterValue), deleted: 0 },
     });
 
+    let sanitationReportsCount = await prisma.sanitationReport.count({
+      where:
+        filterBy == "undefined"
+          ? {  deleted: 0 }
+          : {  [filterBy]: Number(filterValue), deleted: 0 },
+    });
+    // console.log("filterBy==> ",filterBy);
+    // console.log("filterValue==> ",filterValue);
+
+    // console.log("baselineCount==>",baselineCount);
+    
     
 
     let reInspectionCount = await prisma.inspection.count({
@@ -251,6 +268,7 @@ export async function GET(request: Request) {
       followUpCount,
       publishedCount,
       unPublishedCount,
+      sanitationReportsCount,
       // inspectionSummary: [{ label: "", value: "" }],
       actionsTaken: [
         {

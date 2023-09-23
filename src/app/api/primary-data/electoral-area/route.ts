@@ -41,7 +41,9 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
-    let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
+    let curPage = Number.isNaN(Number(searchParams.get("page")))
+      ? 1
+      : Number(searchParams.get("page"));
 
     let perPage = 10;
     let skip =
@@ -63,7 +65,6 @@ export async function GET(request: Request) {
     // }
 
     if (userLevel == 1) {
-    
       if (get_all == 1) {
         query = {
           where: { deleted: 0, districtId: selectedDistrict },
@@ -120,7 +121,6 @@ export async function GET(request: Request) {
         });
       }
     } else if (userLevel == 2) {
-    
       if (get_all == 1) {
         query = {
           where: { deleted: 0, districtId: Number(userRegion) },
@@ -134,34 +134,36 @@ export async function GET(request: Request) {
           },
         };
       } else {
+        console.log("here==>");
+
         query = {
           where:
             searchText != ""
               ? {
-                OR: [
-                  {
-                    name: {
-                      contains: searchText,
-                      mode: "insensitive",
+                  OR: [
+                    {
+                      name: {
+                        contains: searchText,
+                        mode: "insensitive",
+                      },
                     },
-                  },
-                  {
-                    District: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                  {
-                    District: {
-                      Region: {
+                    {
+                      District: {
                         name: { contains: searchText, mode: "insensitive" },
                       },
                     },
-                  },
-                ],
+                    {
+                      District: {
+                        Region: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                  ],
                   deleted: 0,
-                  districtId: Number(userRegion),
+                  District: { regionId: Number(userRegion) },
                 }
-              : { deleted: 0, districtId: Number(userRegion) },
+              : { deleted: 0, District: { regionId: Number(userRegion) }, },
 
           skip: skip,
           take: perPage,
@@ -173,12 +175,14 @@ export async function GET(request: Request) {
             },
           },
         };
+
+        console.log(query);
+
         count = await prisma.electoralArea.count({
-          where: { deleted: 0, districtId: Number(userRegion) },
+          where:{ deleted: 0, District: { regionId: Number(userRegion) }, },
         });
       }
     } else if (userLevel == 3) {
-     
       if (get_all == 1) {
         query = {
           where: { deleted: 0, id: Number(userDistrict) },
@@ -196,26 +200,26 @@ export async function GET(request: Request) {
           where:
             searchText != ""
               ? {
-                OR: [
-                  {
-                    name: {
-                      contains: searchText,
-                      mode: "insensitive",
+                  OR: [
+                    {
+                      name: {
+                        contains: searchText,
+                        mode: "insensitive",
+                      },
                     },
-                  },
-                  {
-                    District: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                  {
-                    District: {
-                      Region: {
+                    {
+                      District: {
                         name: { contains: searchText, mode: "insensitive" },
                       },
                     },
-                  },
-                ],
+                    {
+                      District: {
+                        Region: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                  ],
                   deleted: 0,
                   districtId: Number(userDistrict),
                 }
@@ -232,32 +236,33 @@ export async function GET(request: Request) {
           },
         };
         count = await prisma.electoralArea.count({
-          where: searchText != ""
-          ? {
-            OR: [
-              {
-                name: {
-                  contains: searchText,
-                  mode: "insensitive",
-                },
-              },
-              {
-                District: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              },
-              {
-                District: {
-                  Region: {
-                    name: { contains: searchText, mode: "insensitive" },
-                  },
-                },
-              },
-            ],
-              deleted: 0,
-              districtId: Number(userDistrict),
-            } :{ deleted: 0,
-              districtId: Number(userDistrict),}
+          where:
+            searchText != ""
+              ? {
+                  OR: [
+                    {
+                      name: {
+                        contains: searchText,
+                        mode: "insensitive",
+                      },
+                    },
+                    {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                    {
+                      District: {
+                        Region: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                  ],
+                  deleted: 0,
+                  districtId: Number(userDistrict),
+                }
+              : { deleted: 0, districtId: Number(userDistrict) },
         });
       }
     } else {
@@ -295,4 +300,3 @@ export async function PUT(request: Request) {
     return NextResponse.json(error, { status: 500 });
   }
 }
-
