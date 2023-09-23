@@ -71,4 +71,4 @@ update "District"
 3. delete sanireports
 4. send message to report sender
 
-1. show details on a modal in maps
+1. show details on a modal in maps - in esicapps
