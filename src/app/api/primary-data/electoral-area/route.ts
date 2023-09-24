@@ -41,6 +41,9 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
+
+    
+
     // const userLevel = session?.user?.userLevelId;
     // const userDistrict = session?.user?.districtId;
     // const userRegion = session?.user?.regionId;
@@ -48,6 +51,14 @@ export async function GET(request: Request) {
     // const selectedRegion = searchParams.get("regionId");
 
     let district = userDistrict || selectedDistrict;
+
+
+
+    console.log("searchParams===> ",searchParams);
+
+    console.log("district===> ",district);
+    console.log("userLevel===> ",userLevel);
+
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
@@ -110,9 +121,9 @@ export async function GET(request: Request) {
                     },
                   ],
                   deleted: 0,
-                  districtId: Number(selectedDistrict),
+                  districtId: Number(district),
                 }
-              : { deleted: 0, districtId: Number(selectedDistrict) },
+              : { deleted: 0, districtId: Number(district) },
 
           skip: skip,
           take: perPage,
@@ -125,7 +136,7 @@ export async function GET(request: Request) {
           },
         };
         count = await prisma.electoralArea.count({
-          where: { deleted: 0, districtId: selectedDistrict },
+          where: { deleted: 0, districtId: district },
         });
       }
     } else if (userLevel == 2) {
@@ -182,7 +193,6 @@ export async function GET(request: Request) {
           },
         };
 
-        console.log(query);
 
         count = await prisma.electoralArea.count({
           where: { deleted: 0, District: { regionId: Number(userRegion) } },
@@ -191,7 +201,7 @@ export async function GET(request: Request) {
     } else if (userLevel == 3) {
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, id: Number(userDistrict) },
+          where: { deleted: 0, districtId: Number(userDistrict) },
 
           include: {
             District: {
@@ -274,6 +284,10 @@ export async function GET(request: Request) {
     } else {
       query = { where: { deleted: 0 } };
     }
+
+
+    console.log(query);
+    
 
     const response = await prisma.electoralArea.findMany(query);
 

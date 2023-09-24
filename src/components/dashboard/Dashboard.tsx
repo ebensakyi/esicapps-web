@@ -154,7 +154,7 @@ export default function Dashboard({ data }: any) {
       if (filterBy == "electoralAreaId" && electoralArea == null) {
         return toast.error("Please select electoral area");
       }
-      if (filterBy == "districtId" && district == null || district=="") {
+      if (filterBy == "districtId" && district == null || district == "") {
         return toast.error("Please select district");
       }
       if (filterBy == "regionId" && region == null) {
@@ -162,8 +162,8 @@ export default function Dashboard({ data }: any) {
       }
 
 
-      
-      
+
+
       setLoading(true)
 
       await returnFilterValue(filterBy);
@@ -173,7 +173,7 @@ export default function Dashboard({ data }: any) {
 
       setLoading(false);
     } catch (error) {
-console.log(error);
+      console.log(error);
 
     }
 
@@ -514,7 +514,12 @@ console.log(error);
     }
   };
 
-  const handleFilterReset = ()=>{
+  const handleFilterReset = () => {
+    setRegion(null)
+    setDistrict(null)
+    setElectoralArea(null)
+    setCommunity(null)
+
     router.push(
       `${pathname}`
 
@@ -781,7 +786,7 @@ console.log(error);
             ) : (
               <></>
             )}
-            {nationalUser || regionalUser || districtUser ? (
+            {nationalUser || regionalUser  ? (
               <div className="col-md-2">
                 <label className="form-label mb-0">Select district</label>
                 <select

@@ -84,8 +84,7 @@ export async function GET(request: Request) {
           ? {  deleted: 0 }
           : {  [filterBy]: Number(filterValue), deleted: 0 },
     });
-    // console.log("filterBy==> ",filterBy);
-    // console.log("filterValue==> ",filterValue);
+
 
     // console.log("baselineCount==>",baselineCount);
     
@@ -95,8 +94,11 @@ export async function GET(request: Request) {
       where:
         filterBy == "undefined"
           ? { inspectionTypeId: 2, deleted: 0 }
-          : { inspectionTypeId: 3, [filterBy]:  Number(filterValue), deleted: 0 },
+          : { inspectionTypeId: 2, [filterBy]:  Number(filterValue), deleted: 0 },
     });
+    console.log("filterBy==> ",filterBy);
+    console.log("filterValue==> ",filterValue);
+
     let followUpCount = await prisma.followUpInspection.count({
       where:
         filterBy == "undefined"
