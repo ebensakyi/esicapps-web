@@ -48,8 +48,8 @@ export async function GET(request: Request) {
     let { searchParams } = new URL(request.url);
 
 
-    
-    console.log("searchParams==> ",searchParams);
+    console.log("searchParams<<<===>>> ",searchParams);
+
 
 
     let filterBy: any = searchParams.get("filterBy")?.toString();
@@ -65,7 +65,7 @@ export async function GET(request: Request) {
       filterBy = "regionId";
       filterValue = regionId;
     }
-    if (userLevel == 3) {
+    if (userLevel == 3 && filterBy == "undefined") {
       filterBy = "districtId";
       filterValue = districtId;
     }

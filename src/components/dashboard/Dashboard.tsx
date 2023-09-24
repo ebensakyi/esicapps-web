@@ -163,15 +163,11 @@ export default function Dashboard({ data }: any) {
 
 
 
-      console.log("FILTERVAL ", filterValue);
-      console.log("FILTERBY ", filterBy);
 
       setLoading(true)
 
      let val = await returnFilterValue(filterBy);
 
-     console.log("VAL==> ",val);
-     
 
       router.push(
         `${pathname}?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
@@ -211,48 +207,52 @@ export default function Dashboard({ data }: any) {
       {
         label: "# of baseline submissions",
         data: data?.dashboardData?.baselineSummary?.map((x: any) => x.value),
-        backgroundColor: [
-          "#C15C76",
-          "#6876B6",
-          "#559CAD",
-          "#F6CB3C",
-          "#CC0000",
-          "#22BFAC",
-          "#7E06EF",
-          "#089DD9",
-        ],
+        backgroundColor:   "#22BFAC",
+        
+        // [
+        //   "#C15C76",
+        //   "#6876B6",
+        //   "#559CAD",
+        //   "#F6CB3C",
+        //   "#CC0000",
+        //   "#22BFAC",
+        //   "#7E06EF",
+        //   "#089DD9",
+        // ],
         borderColor: ["#fff"],
         borderWidth: 1,
       },
       {
         label: "# of reinspection submissions",
         data: data?.dashboardData?.reinspectionSummary?.map((x: any) => x.value),
-        backgroundColor: [
-          "#A33E57",
-          "#3C477C",
-          "#427B8A",
-          "#F4C015",
-          "#A30000",
-          "#1C9C8D",
-          "#6905C7",
-          "#0681B1",
-        ],
+        backgroundColor:  "#A33E57",
+        // [
+        //   "#A33E57",
+        //   "#3C477C",
+        //   "#427B8A",
+        //   "#F4C015",
+        //   "#A30000",
+        //   "#1C9C8D",
+        //   "#6905C7",
+        //   "#0681B1",
+        // ],
         borderColor: ["#fff"],
         borderWidth: 1,
       },
       {
         label: "# of followup submissions",
         data: data?.dashboardData?.followupSummary?.map((x: any) => x.value),
-        backgroundColor: [
-          "#762D3F",
-          "#2E3760",
-          "#35626E",
-          "#D6A70A",
-          "#7A0000",
-          "#12685E",
-          "#4A048B",
-          "#045676",
-        ],
+        backgroundColor:   "#045676",
+        // [
+        //   "#762D3F",
+        //   "#2E3760",
+        //   "#35626E",
+        //   "#D6A70A",
+        //   "#7A0000",
+        //   "#12685E",
+        //   "#4A048B",
+        //   "#045676",
+        // ],
         borderColor: ["#fff"],
         borderWidth: 1,
       },
@@ -577,7 +577,7 @@ export default function Dashboard({ data }: any) {
             }}
             value={filterBy}
           >
-            <option value="">Filter by </option>
+            <option value={""}>Filter by </option>
             <option hidden={!nationalUser} value="national">
               National
             </option>
@@ -619,7 +619,7 @@ export default function Dashboard({ data }: any) {
               value={region}
             >
               {" "}
-              <option >Select region </option>
+              <option value={""}>Select region </option>
               {data.regions?.map((data: any) => (
                 <option key={data.id} value={data.id}>
                   {data.name}
@@ -647,7 +647,7 @@ export default function Dashboard({ data }: any) {
                   value={region}
                 >
                   {" "}
-                  <option >Select region </option>
+                  <option value={""}>Select region </option>
                   {data.regions?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
@@ -670,7 +670,7 @@ export default function Dashboard({ data }: any) {
                 value={district}
               >
                 {" "}
-                <option >Select </option>
+                <option value={""}>Select </option>
                 {districtsData?.map((data: any) => (
                   <option key={data.id} value={data.id}>
                     {data.name}
@@ -699,7 +699,7 @@ export default function Dashboard({ data }: any) {
                   }}
                 >
                   {" "}
-                  <option >Select </option>
+                  <option value={""}>Select </option>
                   {data.regions?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
@@ -725,7 +725,7 @@ export default function Dashboard({ data }: any) {
                   value={district}
                 >
                   {" "}
-                  <option >Select </option>
+                  <option value={""}>Select </option>
                   {districtsData?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
@@ -752,7 +752,7 @@ export default function Dashboard({ data }: any) {
                 value={electoralArea}
               >
                 {" "}
-                <option >Select </option>
+                <option value={""}>Select </option>
                 {electoralAreasData?.map((data: any) => (
                   <option key={data.id} value={data.id}>
                     {data.name}
@@ -781,7 +781,7 @@ export default function Dashboard({ data }: any) {
                   value={region}
                 >
                   {" "}
-                  <option >Select </option>
+                  <option value={""}>Select </option>
                   {data.regions?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
@@ -806,7 +806,7 @@ export default function Dashboard({ data }: any) {
                   value={district}
                 >
                   {" "}
-                  <option >Select </option>
+                  <option value={""}>Select </option>
                   {districtsData?.map((data: any) => (
                     <option key={data.id} value={data.id}>
                       {data.name}
@@ -833,7 +833,7 @@ export default function Dashboard({ data }: any) {
                 value={electoralArea}
               >
                 {" "}
-                <option > Select  </option>
+                <option value={""}> Select  </option>
                 {electoralAreasData?.map((data: any) => (
                   <option key={data.id} value={data.id}>
                     {data.name}
@@ -853,7 +853,7 @@ export default function Dashboard({ data }: any) {
                 value={community}
               >
                 {" "}
-                <option >Select </option>
+                <option value={""}>Select </option>
                 {communitiesData?.map((data: any) => (
                   <option key={data.id} value={data.id}>
                     {data.name}

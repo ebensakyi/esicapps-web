@@ -24,7 +24,9 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url);   
+    
+
     const session: any = await getServerSession(authOptions);
     const selectedDistrict =
       searchParams.get("districtId") == null || ""
@@ -42,7 +44,7 @@ export async function GET(request: Request) {
     const userRegion = session?.user?.regionId;
 
 
-    
+
 
     // const userLevel = session?.user?.userLevelId;
     // const userDistrict = session?.user?.districtId;
