@@ -52,8 +52,7 @@ async function getDistricts() {
 
 
 export default async function Page({ searchParams }: any) {
-  const session: any = await getServerSession(authOptions);
-
+  const session: any = await getServerSession(authOptions);  
 
   if (session?.user?.passwordChanged == 0) {
     redirect('/auth/profile?message=Change your default password')

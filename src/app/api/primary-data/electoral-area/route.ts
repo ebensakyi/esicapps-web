@@ -54,10 +54,10 @@ export async function GET(request: Request) {
 
 
 
-    console.log("searchParams===> ",searchParams);
+    // console.log("searchParams===> ",searchParams);
 
-    console.log("district===> ",district);
-    console.log("userLevel===> ",userLevel);
+    // console.log("district===> ",district);
+    // console.log("userLevel===> ",userLevel);
 
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))

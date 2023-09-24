@@ -49,7 +49,8 @@ export async function GET(request: Request) {
 
 
     
-    
+    console.log("searchParams==> ",searchParams);
+
 
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any =

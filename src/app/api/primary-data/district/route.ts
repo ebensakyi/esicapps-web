@@ -26,6 +26,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
+    
     const { searchParams } = new URL(request.url);
 
     const userLevel = session?.user?.userLevelId;
@@ -35,6 +36,9 @@ export async function GET(request: Request) {
     const selectedRegion = searchParams.get("regionId");
 
     let region = userRegion || selectedRegion;
+
+
+    
 
  
     const searchText =
@@ -106,9 +110,6 @@ export async function GET(request: Request) {
         });
       }
     } else if (userLevel == 2) {
-      console.log("userLevel==>", userLevel);
-      console.log("selectedRegion==>", region);
-
       if (get_all == 1) {
         query = {
           where: { deleted: 0, regionId: Number(region)  },

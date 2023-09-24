@@ -163,10 +163,16 @@ export default function Dashboard({ data }: any) {
 
 
 
+      console.log("FILTERVAL ", filterValue);
+      console.log("FILTERBY ", filterBy);
 
       setLoading(true)
 
-      await returnFilterValue(filterBy);
+     let val = await returnFilterValue(filterBy);
+
+     console.log("VAL==> ",val);
+     
+
       router.push(
         `${pathname}?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
       );
@@ -786,7 +792,7 @@ export default function Dashboard({ data }: any) {
             ) : (
               <></>
             )}
-            {nationalUser || regionalUser  ? (
+            {nationalUser || regionalUser ? (
               <div className="col-md-2">
                 <label className="form-label mb-0">Select district</label>
                 <select
