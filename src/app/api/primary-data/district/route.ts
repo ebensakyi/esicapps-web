@@ -26,8 +26,10 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
-    
+
     const { searchParams } = new URL(request.url);
+
+    console.log("searchParams<<==> ", searchParams);
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
@@ -37,10 +39,6 @@ export async function GET(request: Request) {
 
     let region = userRegion || selectedRegion;
 
-
-    
-
- 
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
@@ -59,6 +57,9 @@ export async function GET(request: Request) {
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
     let count = 0;
+
+    console.log("searchText== ", searchText);
+    console.log("region== ", region);
 
     if (userLevel == 1) {
       if (get_all == 1) {
@@ -93,9 +94,18 @@ export async function GET(request: Request) {
                     },
                   ],
                   deleted: 0,
-                  regionId: region,
+                  regionId:
+                  Number(region) == 0 || Number(region) == undefined || Number.isNaN(Number(region))
+                  ? undefined
+                  : Number(region),
                 }
-              : { deleted: 0, regionId: Number(region)  },
+              : {
+                  deleted: 0,
+                  regionId:
+                  Number(region) == 0 || Number(region) == undefined || Number.isNaN(Number(region))
+                  ? undefined
+                  : Number(region),
+                },
 
           skip: skip,
           take: perPage,
@@ -106,13 +116,20 @@ export async function GET(request: Request) {
         };
 
         count = await prisma.district.count({
-          where: { deleted: 0, regionId: Number(region) },
+          where: {
+            deleted: 0,
+            regionId:
+            Number(region) == 0 || Number(region) == undefined || Number.isNaN(Number(region))
+            ? undefined
+            : Number(region),
+           
+          },
         });
       }
     } else if (userLevel == 2) {
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, regionId: Number(region)  },
+          where: { deleted: 0, regionId: Number(region) },
 
           include: { Region: true },
           orderBy: {

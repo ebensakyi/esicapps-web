@@ -24,8 +24,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);   
-    
+    const { searchParams } = new URL(request.url);
 
     const session: any = await getServerSession(authOptions);
     const selectedDistrict =
@@ -43,9 +42,6 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
-
-
-
     // const userLevel = session?.user?.userLevelId;
     // const userDistrict = session?.user?.districtId;
     // const userRegion = session?.user?.regionId;
@@ -54,13 +50,10 @@ export async function GET(request: Request) {
 
     let district = userDistrict || selectedDistrict;
 
-
-
     // console.log("searchParams===> ",searchParams);
 
-    // console.log("district===> ",district);
+    console.log("district===> ", district);
     // console.log("userLevel===> ",userLevel);
-
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
@@ -100,8 +93,7 @@ export async function GET(request: Request) {
       } else {
         query = {
           where:
-            searchText != ""
-              ? {
+            {
                   OR: [
                     {
                       name: {
@@ -123,11 +115,17 @@ export async function GET(request: Request) {
                     },
                   ],
                   deleted: 0,
-                  districtId: Number(district),
+                  districtId:
+                  Number(district) == 0 || Number(district) == undefined || Number.isNaN(Number(district))
+                      ? undefined
+                      : Number(district),
                 }
-              : { deleted: 0, districtId: Number(district) },
+            ,
 
           skip: skip,
+          orderBy: {
+            name: "asc",
+          },
           take: perPage,
           include: {
             District: {
@@ -138,7 +136,13 @@ export async function GET(request: Request) {
           },
         };
         count = await prisma.electoralArea.count({
-          where: { deleted: 0, districtId: district },
+          where: {
+            deleted: 0,
+            districtId:
+            Number(district) == 0 || Number(district) == undefined || Number.isNaN(Number(district))
+            ? undefined
+            : Number(district),
+          },
         });
       }
     } else if (userLevel == 2) {
@@ -194,7 +198,6 @@ export async function GET(request: Request) {
             },
           },
         };
-
 
         count = await prisma.electoralArea.count({
           where: { deleted: 0, District: { regionId: Number(userRegion) } },
@@ -287,9 +290,7 @@ export async function GET(request: Request) {
       query = { where: { deleted: 0 } };
     }
 
-
     console.log(query);
-    
 
     const response = await prisma.electoralArea.findMany(query);
 
