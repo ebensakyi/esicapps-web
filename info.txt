@@ -184,6 +184,8 @@ update "District"
 5. add user restrictions even when url is typed
 6. optimize data selection in findMany. don't select all fields not needed
 
+WORK ON REPORTS FOR VARIOUS USERS
+
 
 33aa179,33ac760,33adfd1
 0593940099
