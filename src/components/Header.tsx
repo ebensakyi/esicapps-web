@@ -213,7 +213,7 @@ export default function Header() {
                                                 data-bs-parent="#sidebar-nav"
                                             >
                                                 <li>
-                                                    <Link href="/submitted-data?formId=1&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=1&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Residential</span>
                                                     </Link>

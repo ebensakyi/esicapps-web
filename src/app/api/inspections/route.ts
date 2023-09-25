@@ -1,7 +1,9 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { getServerSession } from "next-auth";
 
 import { NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
   try {
@@ -16,19 +18,21 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    // let userLevelId = Number(userData?.userLevelId);
-    // let userRegion = Number(userData?.regionId);
-    // let userDistrict = Number(userData?.districtId);
-    // let userId = userData?.id;
+    const session: any = await getServerSession(authOptions);
 
     // await logActivity("Visited submitted data list", userId);
 
     let { searchParams } = new URL(request.url);
     let searchText = searchParams.get("searchText");
     let formId = searchParams.get("formId");
-    let published = searchParams.get("published");
+    let published = searchParams.get("published")
     const filterBy = searchParams.get("filterBy");
     const filterValue = searchParams.get("filterValue");
+
+
+
+
+
     let curPage = Number.isNaN(Number(searchParams.get("page")))?1: Number(searchParams.get("page"));
 
     let perPage = 10;

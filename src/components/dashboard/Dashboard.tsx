@@ -912,7 +912,8 @@ export default function Dashboard({ data }: any) {
       <section className="section dashboard">
         <div className="row">
           {/* Left side columns */}
-          <div className="col-lg-12">  <LoadingOverlay
+          <div className="col-lg-12"> 
+           <LoadingOverlay
             active={loading}
             spinner={true}
             text="Loading. Please wait..."

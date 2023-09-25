@@ -48,7 +48,6 @@ export async function GET(request: Request) {
     let { searchParams } = new URL(request.url);
 
 
-    console.log("searchParams<<<===>>> ",searchParams);
 
 
 
@@ -97,8 +96,7 @@ export async function GET(request: Request) {
           ? { inspectionTypeId: 2, deleted: 0 }
           : { inspectionTypeId: 2, [filterBy]:  Number(filterValue), deleted: 0 },
     });
-    console.log("filterBy==> ",filterBy);
-    console.log("filterValue==> ",filterValue);
+
 
     let followUpCount = await prisma.followUpInspection.count({
       where:
