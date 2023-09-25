@@ -42,7 +42,7 @@ export default function SanitationReport({ data }: any) {
     const [showForm, setShowForm] = useState(false);
     const [imagePath, setImagePath] = useState("");
 
-    const [sendSMS, setsendSMS] = useState(false);
+    const [sendSMS, setSendSMS] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("")
 
     const searchTextRef: any = useRef(null);
@@ -290,8 +290,7 @@ export default function SanitationReport({ data }: any) {
                                     </div>
                                     <div className="form-check mb-3">
                                         <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
-                                            setsendSMS(!sendSMS)
-                                            console.log(sendSMS);
+                                            setSendSMS(!sendSMS)
 
 
                                         }} />
