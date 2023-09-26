@@ -24,6 +24,9 @@ export default function GeneralReports({ data }: any) {
         }
     })
 
+    console.log(data);
+    
+
     const router = useRouter();
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -236,12 +239,11 @@ export default function GeneralReports({ data }: any) {
             setWasteReceptacleVisibility(true);
         }
     };
-    console.log(session);
 
     let userSession :any = session;
 
 
-    let nationalUser: any = userSession.user?.userLevelId == 1 ;
+    let nationalUser: any = userSession?.user?.userLevelId == 1 ;
     let regionalUser: any = userSession?.user?.userLevelId == 2;
     let districtUser: any = userSession?.user?.userLevelId == 3;
     // let loggedInUserType =1;

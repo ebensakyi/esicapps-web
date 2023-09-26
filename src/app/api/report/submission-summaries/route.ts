@@ -58,6 +58,9 @@ export async function POST(request: Request) {
   
       // },
     });
+
+    console.log(report);
+    
   
     return report
   };
