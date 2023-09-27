@@ -2967,6 +2967,7 @@ model SanitationReport {
   description            String?               @db.VarChar(1000)
   latitude               Decimal               @db.Decimal(11, 8)
   longitude              Decimal               @db.Decimal(11, 8)
+  accuracy               String?               @db.VarChar
   status                 Int                   @default(0)
   sanitationReportUserId Int?
   deleted                Int?                  @default(0)
@@ -2978,7 +2979,7 @@ model SanitationReport {
   ReportCategory         ReportCategory?       @relation(fields: [reportCategoryId], references: [id])
   District               District?             @relation(fields: [districtId], references: [id])
   SanitationReportUser   SanitationReportUser? @relation(fields: [sanitationReportUserId], references: [id])
-  Region                 Region?                @relation(fields: [regionId], references: [id])
+  Region                 Region?               @relation(fields: [regionId], references: [id])
 }
 
 model SanitationReportUser {
