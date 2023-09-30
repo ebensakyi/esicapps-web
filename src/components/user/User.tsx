@@ -828,7 +828,7 @@ export default function User({ data }: any) {
                                                 <td><span style={{ "cursor": "pointer" }}
                                                     onClick={() => {
                                                         setShowOtp(!showOtp)
-                                                    }}>{showOtp ? "****" : user?.tempPassword}</span></td>
+                                                    }}>{!showOtp ? "****" : user?.tempPassword}</span></td>
 
                                                 <td>{user?.deleted == 1 ? <>
                                                     <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
@@ -942,6 +942,31 @@ export default function User({ data }: any) {
                                                                     }}
                                                                 >
                                                                     Reset Password
+                                                                </button>
+
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    className="dropdown-item btn btn-sm "
+                                                                    onClick={async (e) => {
+                                                                        try {
+                                                                            e.preventDefault();
+                                                                            let userId = user.id;
+                                                                            const response = await axios.delete(
+                                                                                `/api/user`, {
+                                                                                data: { userId },
+                                                                            }
+                                                                            );
+                                                                            router.refresh()
+                                                                            return toast.success("User deleted");
+
+                                                                        } catch (error) {
+
+                                                                        }
+
+                                                                    }}
+                                                                >
+                                                                    Delete
                                                                 </button>
 
                                                             </li>

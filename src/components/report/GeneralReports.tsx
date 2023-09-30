@@ -353,9 +353,9 @@ export default function GeneralReports({ data }: any) {
     const getDistrictsByRegion = async (regionId: any) => {
         try {
             const response = await axios.get(
-                "/api/primary-data/district?regionId=" + regionId
+                `/api/primary-data/district?regionId=${regionId}&get_all=1`
             );
-            setDistrictsData(response.data);
+            setDistrictsData(response?.data?.response);
         } catch (error) {
             console.log(error);
         }
@@ -363,9 +363,9 @@ export default function GeneralReports({ data }: any) {
     const getElectoralAreasByDistrict = async (districtId: any) => {
         try {
             const response = await axios.get(
-                "/api/primary-data/electoral-area?districtId=" + districtId
+                `/api/primary-data/electoral-area?districtId=${districtId}&get_all=1`
             );
-            setElectoralAreasData(response.data);
+            setElectoralAreasData(response?.data?.response);
         } catch (error) {
             console.log(error);
         }
@@ -373,7 +373,7 @@ export default function GeneralReports({ data }: any) {
     const getCommunitiesByElectoralArea = async (electoralAreaId: any) => {
         try {
             const response = await axios.get(
-                "/api/primary-data/community?electoralAreaId=" + electoralAreaId
+                `/api/primary-data/community?electoralAreaId=${electoralAreaId}&get_all=1`
             );
 
             setCommunitiesData(response.data);

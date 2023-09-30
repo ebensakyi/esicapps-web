@@ -3,6 +3,7 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { generateCode } from "@/utils/generate-code";
 import { authOptions } from "../auth/[...nextauth]/options";
+import { v4 as uuidv4 } from "uuid";
 
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
@@ -46,7 +47,6 @@ export async function POST(request: Request) {
       regionId: regionId,
       districtId: res.district,
     };
-    console.log(data);
 
     let count = await prisma.user.count({
       where: {
@@ -54,7 +54,10 @@ export async function POST(request: Request) {
       },
     });
     if (count != 0) {
-      return NextResponse.json({message:"Phone number already used"},{status:201});
+      return NextResponse.json(
+        { message: "Phone number already used" },
+        { status: 201 }
+      );
     }
 
     const user: any = await prisma.user.create({ data });
@@ -128,8 +131,9 @@ export async function GET(request: Request) {
                   },
                 ],
                 districtId: Number(districtId),
+                deleted: 0,
               }
-            : { districtId: Number(districtId) },
+            : { districtId: Number(districtId), deleted: 0 },
         include: {
           Region: true,
           District: true,
@@ -172,8 +176,9 @@ export async function GET(request: Request) {
                   },
                 ],
                 districtId: Number(districtId),
+                deleted: 0,
               }
-            : { districtId: Number(districtId) },
+            : { districtId: Number(districtId), deleted: 0 },
       });
 
       if (exportFile) {
@@ -224,8 +229,9 @@ export async function GET(request: Request) {
                   },
                 },
               ],
+              deleted: 0,
             }
-          : {},
+          : { deleted: 0 },
       include: {
         Region: true,
         District: true,
@@ -272,8 +278,9 @@ export async function GET(request: Request) {
                   },
                 },
               ],
+              deleted: 0,
             }
-          : {},
+          : { deleted: 0 },
 
       orderBy: {
         id: "desc",
@@ -342,16 +349,21 @@ export async function PUT(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const res = await request.json();
+    console.log(res);
 
-    let regionId = res.region;
+    let userId = res.userId;
 
     let user: any = await prisma.user.findFirst({
-      where: { id: Number(res.id) },
+      where: { id: Number(userId) },
     });
 
+    let updatedPhoneNumber = user?.phoneNumber+"-deleted-" + uuidv4();
     await prisma.user.update({
-      where: { id: Number(res.id) },
-      data: { deleted: Math.abs(user?.deleted - 1) },
+      where: { id: Number(userId) },
+      data: {
+        deleted: Math.abs(user?.deleted - 1),
+        phoneNumber: updatedPhoneNumber,
+      },
     });
 
     return NextResponse.json({});
