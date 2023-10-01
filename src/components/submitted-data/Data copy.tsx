@@ -10,7 +10,6 @@ import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
 import { LOGIN_URL } from '@/config';
 import { toast } from 'react-toastify';
-import LoadingOverlay from "react-loading-overlay";
 
 export default function Data({ data }: any) {
 
