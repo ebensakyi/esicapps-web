@@ -152,12 +152,12 @@ export default function Header() {
                                 data-bs-parent="#esicapps1-nav"
                             >
                                 {/* {session?.user?.privileges?.includes(5) ? */}
-                                <li>
+                                {/* <li>
                                     <Link href="/esicapps1/dashboard">
                                         <i className="bi bi-circle" />
                                         <span>Dashboard</span>
                                     </Link>
-                                </li>
+                                </li> */}
                                 {/* : <></>} */}
                                 {/* {session?.user?.privileges?.includes(6) ?  */}
                                 <li>
