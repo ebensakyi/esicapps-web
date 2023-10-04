@@ -14,7 +14,8 @@ import { LOGIN_URL } from "@/config";
 import Modal from "react-modal";
 import Image from 'next/image'
 import moment from "moment";
-import { log } from "console";
+import Link from 'next/link'
+
 
 
 
@@ -53,6 +54,11 @@ const Map = ({ data }: any) => {
   const [district, setDistrict] = useState("");
   const [community, setCommunity] = useState("");
   const [rating, setRating] = useState(0);
+
+  const [inspectionId, setInspectionId] = useState("");
+  const [inspectionFormId, setInspectionFormId] = useState("");
+  const [published, setPublished] = useState(0);
+
 
 
   // const [eaterySelected, setEaterySelected] = useState(false);
@@ -118,17 +124,17 @@ const Map = ({ data }: any) => {
 
   const handleRating = (rating: number) => {
     try {
-        if (rating >= 4) {
-            return <span className="badge bg-success">Good</span>;
-        } else if (rating >= 3 && rating < 4) {
-            return <span className="badge bg-warning">Average</span>;
-        } else if (rating < 3) {
-            return <span className="badge bg-danger">Poor</span>;
-        } else {
-            return <span className="badge bg-primary">Default</span>;
-        }
+      if (rating >= 4) {
+        return <span className="badge bg-success">Good</span>;
+      } else if (rating >= 3 && rating < 4) {
+        return <span className="badge bg-warning">Average</span>;
+      } else if (rating < 3) {
+        return <span className="badge bg-danger">Poor</span>;
+      } else {
+        return <span className="badge bg-primary">Default</span>;
+      }
     } catch (error) { }
-};
+  };
 
   // on map load
   const onMapLoad = (map: { controls: HTMLDivElement[][]; }) => {
@@ -203,8 +209,8 @@ const Map = ({ data }: any) => {
       >
 
         <div className="row">
-         
-          
+
+
           <div className="col-lg-10">
             <div className="card">
               <div className="card-body">
@@ -260,6 +266,24 @@ const Map = ({ data }: any) => {
                           <td>{rating}</td>
 
                         </tr>
+                        <tr>
+                          <td>View more details</td>
+                          <td> <Link
+                            href={{
+                              pathname: `/submitted-data/data-view`,
+                              query: {
+                                id: inspectionId,
+                                formId: inspectionFormId,
+                                published: published,
+                              },
+                            }}
+                          >
+                            {/* <a className="dropdown-item"> */}
+                          View details  <i className="ri-external-link-line align-bottom me-2 text-success" />
+                            {/* </a> */}
+                          </Link></td>
+
+                        </tr>
                       </tbody>
                     </table>
 
@@ -275,9 +299,9 @@ const Map = ({ data }: any) => {
             </div>
           </div>
           <div className="row">
-          {
-            imagePath1? <div className="col-lg-3">
-            {/* <div className="card">
+            {
+              imagePath1 ? <div className="col-lg-3">
+                {/* <div className="card">
               <div className="card-body"> */}
                 <Image
                   className="gallery-img img-fluid mx-auto"
@@ -286,14 +310,14 @@ const Map = ({ data }: any) => {
                   height="128"
                   width="128"
                 />
-              {/* </div>
+                {/* </div>
             </div> */}
-          </div>:<></>
-          }
-         
-          {
-            imagePath2? <div className="col-lg-3">
-            {/* <div className="card">
+              </div> : <></>
+            }
+
+            {
+              imagePath2 ? <div className="col-lg-3">
+                {/* <div className="card">
               <div className="card-body"> */}
                 <Image
                   className="gallery-img img-fluid mx-auto"
@@ -302,14 +326,14 @@ const Map = ({ data }: any) => {
                   height="128"
                   width="128"
                 />
-              {/* </div>
+                {/* </div>
             </div> */}
-          </div>:<></>
-          }
-         
-         {
-            imagePath3? <div className="col-lg-3">
-            {/* <div className="card">
+              </div> : <></>
+            }
+
+            {
+              imagePath3 ? <div className="col-lg-3">
+                {/* <div className="card">
               <div className="card-body"> */}
                 <Image
                   className="gallery-img img-fluid mx-auto"
@@ -318,11 +342,28 @@ const Map = ({ data }: any) => {
                   height="128"
                   width="128"
                 />
-              {/* </div>
+                {/* </div>
             </div> */}
-          </div>:<></>
-          }
-         
+              </div> : <></>
+            }
+
+            {
+              imagePath4 ? <div className="col-lg-3">
+                {/* <div className="card">
+              <div className="card-body"> */}
+                <Image
+                  className="gallery-img img-fluid mx-auto"
+                  src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath4}`}
+                  alt=""
+                  height="128"
+                  width="128"
+                />
+                {/* </div>
+            </div> */}
+              </div> : <></>
+            }
+
+
           </div>
         </div>
 
@@ -358,17 +399,17 @@ const Map = ({ data }: any) => {
           >
             <input type="text" className="form-control" placeholder="Search for a location" />
           </Autocomplete>
-          <button type="button" className={formId=="undefined"?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm() }}>All</button>
+          <button type="button" className={formId == "undefined" ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm() }}>All</button>
 
-          <button type="button" className={formId==1?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(1) }}>Residential</button>
-          <button type="button" className={formId==2?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(2) }}>Eating & Drinking</button>
-          <button type="button" className={formId==3?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(3) }}>Health</button>
+          <button type="button" className={formId == 1 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(1) }}>Residential</button>
+          <button type="button" className={formId == 2 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(2) }}>Eating & Drinking</button>
+          <button type="button" className={formId == 3 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(3) }}>Health</button>
 
-          <button type="button" className={formId==4?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(4) }}>Hospitality</button>
-          <button type="button" className={formId==5?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(5) }}>Institution</button>
-          <button type="button" className={formId==6?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(6) }}>Industry</button>
-          <button type="button" className={formId==7?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(7) }}>Market</button>
-          <button type="button" className={formId==8?"btn btn-outline-primary active":"btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(8) }}>Sanitary</button>
+          <button type="button" className={formId == 4 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(4) }}>Hospitality</button>
+          <button type="button" className={formId == 5 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(5) }}>Institution</button>
+          <button type="button" className={formId == 6 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(6) }}>Industry</button>
+          <button type="button" className={formId == 7 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(7) }}>Market</button>
+          <button type="button" className={formId == 8 ? "btn btn-outline-primary active" : "btn btn-outline-primary"} onClick={(e) => { getMarkersByForm(8) }}>Sanitary</button>
 
           {/* </div> 
 
@@ -411,7 +452,9 @@ const Map = ({ data }: any) => {
               icon={definePointIcon(pos?.totalRating, pos?.inspectionFormId)}
               onClick={() => {
 
-                
+                setInspectionId(pos?.id)
+                setInspectionFormId(pos?.inspectionFormId)
+
                 setImagePath1(pos?.InspectionPictures[0]?.imagePath)
                 setImagePath2(pos?.InspectionPictures[1]?.imagePath)
                 setImagePath3(pos?.InspectionPictures[2]?.imagePath)
