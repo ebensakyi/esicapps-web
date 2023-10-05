@@ -267,7 +267,7 @@ const Map = ({ data }: any) => {
 
                         </tr>
                         <tr>
-                          <td>View more details</td>
+                          <td>View more</td>
                           <td> <Link
                             href={{
                               pathname: `/submitted-data/data-view`,
