@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       },
     });
 
-    let region = Number(district?.regionId)
+    let region = Number(district?.regionId);
 
     let fileName = await saveFileOnDisk(file);
 
@@ -50,7 +50,22 @@ export async function POST(request: Request) {
             : Number(sanitationReportUserId),
       };
 
+      let reportCount = await prisma.sanitationReport.count({
+        where: {
+          image: fileName,
+          description: description,
+          reportTypeId: reportType,
+          reportCategoryId: reportCategoryId,
+          latitude: latitude,
+          longitude: longitude,
+        },
+      } as any);
+      if (reportCount != 0) {
+        return NextResponse.json({});
+      }
+
       const ip = await prisma.sanitationReport.create({ data } as any);
+
       await upload2S3(fileName, "esicapps-images");
 
       return NextResponse.json({ data: fileName }, { status: 200 });
