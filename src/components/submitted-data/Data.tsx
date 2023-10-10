@@ -88,7 +88,7 @@ export default function Data({ data }: any) {
         try {
             let searchText = searchParams.get('searchText')
             const response = await axios.post(
-                `/api/submitted-data`,
+                `/api/submitted-data/export`,
                 {
                     formId: Number(formId),
                     fileName: handleExcelName(),
