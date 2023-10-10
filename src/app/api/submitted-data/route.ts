@@ -9,12 +9,7 @@ import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function GET(request: Request) {
   try {
-    //  const res = await request.json();
 
-    // let userLevelId = Number(userData?.userLevelId);
-    // let userRegion = Number(userData?.regionId);
-    // let userDistrict = Number(userData?.districtId);
-    // let userId = userData?.id;
     const session: any = await getServerSession(authOptions);
 
 
