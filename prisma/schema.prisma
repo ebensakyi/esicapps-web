@@ -285,7 +285,7 @@ model Messaging {
   sender              Int
   individualRecipient Int?
   regionId            Int?
-  isViewed            Boolean      @default(false)
+  isViewed            Int?      @default(0)
   deleted             Int?         @default(0)
   createdAt           DateTime     @default(now())
   updatedAt           DateTime     @updatedAt

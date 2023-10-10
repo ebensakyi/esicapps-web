@@ -8,7 +8,17 @@ import { sendFCM } from "@/utils/send-fcm";
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
+    console.log(res);
+
     const session: any = await getServerSession(authOptions);
+    const data = await prisma.messaging.update({
+      where: {
+        id: res?.msgId,
+      },
+      data: {
+        isViewed: 1,
+      },
+    });
 
     return NextResponse.json({});
   } catch (error: any) {
@@ -26,10 +36,10 @@ export async function GET(request: Request) {
       where: { id: userId },
     });
 
-
     const data = await prisma.messaging.findMany({
       where: {
-        deleted: 0,messageType: 1,
+        deleted: 0,
+        messageType: 1,
         OR: [
           { districtId: user?.districtId },
           { sendingType: 4 },

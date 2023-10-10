@@ -122,7 +122,6 @@ export async function PUT(request: Request) {
       sender: Number(userId),
     };
 
-    console.log(data);
 
     if (res.sendingType == "1") {
       const user: any = await prisma.user.findFirst({
