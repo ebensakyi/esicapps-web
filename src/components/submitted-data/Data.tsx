@@ -87,6 +87,7 @@ export default function Data({ data }: any) {
     const handleExportAll = async () => {
         try {
             let searchText = searchParams.get('searchText')
+            
             const response = await axios.get(
                 `/api/submitted-data/export?formId=${formId}&published=${published}&searchText=${searchText}&fileName=${handleExcelName()}`,
 
