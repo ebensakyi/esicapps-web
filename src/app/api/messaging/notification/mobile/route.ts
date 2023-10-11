@@ -9,10 +9,10 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-    const session: any = await getServerSession(authOptions);
+    // const session: any = await getServerSession(authOptions);
     const data = await prisma.messaging.update({
       where: {
-        id: res?.msgId,
+        id: Number(res?.msgId),
       },
       data: {
         isViewed: 1,
@@ -21,6 +21,8 @@ export async function PUT(request: Request) {
 
     return NextResponse.json({});
   } catch (error: any) {
+    console.log(error);
+    
     return NextResponse.json(error, { status: 500 });
   }
 }
