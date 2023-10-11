@@ -8,7 +8,6 @@ import { sendFCM } from "@/utils/send-fcm";
 export async function PUT(request: Request) {
   try {
     const res = await request.json();
-    console.log(res);
 
     const session: any = await getServerSession(authOptions);
     const data = await prisma.messaging.update({

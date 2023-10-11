@@ -1,5 +1,5 @@
 // @ts-nocheck
-
+export const dynamic = 'force-dynamic'
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
