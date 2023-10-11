@@ -30,16 +30,13 @@ export async function POST(request: Request) {
 
     const path = `./public/temp/${fileName}`;
 
-
     await writeFile(path, buffer);
 
     let response = await readCSV(path, districtId);
 
-
     return NextResponse.json({});
     // });
   } catch (error: any) {
-    console.error(error);
     return NextResponse.json(error);
   }
 }
@@ -47,8 +44,6 @@ export async function POST(request: Request) {
 const readCSV = async (filePath: any, districtId: any) => {
   try {
     let data: any = [];
-
-
 
     //Read file
     createReadStream(filePath)
@@ -62,18 +57,10 @@ const readCSV = async (filePath: any, districtId: any) => {
       .on("end", async () => {
         let newData = await formatData(data, districtId);
 
-        await prisma.electoralArea.createMany({
-          data: newData,
-        });
-  fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error('Error deleting CSV file:', err);
-          return;
-        }
+        await insertData(newData, filePath);
       });
-      });
-    
-     /// await fs.unlinkSync(filePath);
+
+    /// await fs.unlinkSync(filePath);
     return data.length;
   } catch (error) {
     console.log("csvUploader ==>", error);
@@ -90,5 +77,29 @@ const formatData = async (data: any, districtId: any) => {
     return newData;
   } catch (error) {
     console.log(error);
+  }
+};
+
+const insertData = async (data: any, filePath: any) => {
+  try {
+    console.log("insertDatainsertData", );
+    let x = await prisma.electoralArea.createMany({
+      data: data,
+    });
+    console.log("X", x);
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Error deleting CSV file:", err);
+        return;
+      }
+    });
+  } catch (error) {
+    console.log(`>>>>ERROR<<<<< ${error}`);
+
+    return NextResponse.json(
+      { message: "Name of electoral isn't unique" },
+      { status: 500 }
+    );
   }
 };

@@ -150,9 +150,6 @@ export default function ElectoralArea({ data }: any) {
             e.preventDefault();
             const formElement: any = formRef.current;
 
-
-
-
             if (districtId == "") return toast.error("District cannot be empty");
 
             if (electoralAreaFile == "") return toast.error("Electoral Area File cannot be empty");
@@ -178,7 +175,9 @@ export default function ElectoralArea({ data }: any) {
 
             setElectoralAreaName("");
             setDistrictId("");
-            setRegionId("");            
+            setRegionId("");    
+            
+            
             if (response.status == 200) {
                 router.refresh()
 
@@ -187,7 +186,7 @@ export default function ElectoralArea({ data }: any) {
 
         } catch (error: any) {
             console.log(error);
-            toast.error(error);
+            toast.error("Name of an electoral area already exists in list");
         }
     };
 

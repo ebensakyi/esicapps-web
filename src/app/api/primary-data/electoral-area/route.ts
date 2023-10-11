@@ -54,7 +54,6 @@ export async function GET(request: Request) {
 
     // console.log("searchParams===> ",searchParams);
 
-    console.log("district===> ", district);
     // console.log("userLevel===> ",userLevel);
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))
@@ -292,7 +291,6 @@ export async function GET(request: Request) {
       query = { where: { deleted: 0 } };
     }
 
-    console.log(query);
 
     const response = await prisma.electoralArea.findMany(query);
 
