@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
@@ -913,6 +915,8 @@ export async function GET(request: Request) {
       maxPage: Math.ceil(count / perPage),
     });
   } catch (error) {
+    console.log(error);
+    
     return NextResponse.json(error);
   }
 }

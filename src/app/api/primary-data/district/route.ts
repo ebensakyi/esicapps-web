@@ -29,7 +29,6 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url);
 
-    console.log("searchParams<<==> ", searchParams);
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
@@ -58,8 +57,7 @@ export async function GET(request: Request) {
 
     let count = 0;
 
-    console.log("searchText== ", searchText);
-    console.log("region== ", region);
+
 
     if (userLevel == 1) {
       if (get_all == 1) {
@@ -170,7 +168,6 @@ export async function GET(request: Request) {
             name: "asc",
           },
         };
-        console.log(query);
 
         count = await prisma.district.count({
           where: { deleted: 0, regionId: Number(userRegion) },
