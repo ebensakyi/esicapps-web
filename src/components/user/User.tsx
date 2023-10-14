@@ -858,7 +858,7 @@ export default function User({ data }: any) {
 
                                                                 <button
                                                                     className="dropdown-item btn btn-sm "
-                                                                    onClick={(e) => {
+                                                                    onClick={async(e) =>  {
                                                                         e.preventDefault();
                                                                         setIsEditing(true);
 
@@ -875,7 +875,7 @@ export default function User({ data }: any) {
                                                                         setSelectedRegion(user.regionId);
                                                                         setSelectedDistrict(user.districtId);
 
-                                                                        ;
+                                                                     await   getDistrictsByRegion(user.regionId)
 
 
                                                                         // let phoneNumber = user.phoneNumber;
