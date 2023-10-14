@@ -241,6 +241,8 @@ export async function GET(request: Request) {
       orderBy: {
         id: "desc",
       },
+      skip: skip,
+      take: perPage,
     });
 
     const count = await prisma.user.count({
