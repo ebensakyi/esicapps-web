@@ -164,10 +164,10 @@ export default function Dashboard({ data }: any) {
 
 
 
-      setLoading(true)
 
      let val = await returnFilterValue(filterBy);
 
+      setLoading(true)
 
       router.push(
         `${pathname}?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`
@@ -909,7 +909,7 @@ export default function Dashboard({ data }: any) {
       </div>
       <br />
       {/* End Page Title */}
-      <section className="section dashboard">
+      <section className="section dashboard" >
         <div className="row">
           {/* Left side columns */}
           <div className="col-lg-12"> 
