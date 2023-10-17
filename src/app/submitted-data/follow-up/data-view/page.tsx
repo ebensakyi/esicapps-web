@@ -1,6 +1,5 @@
 
 import { SERVER_BASE_URL } from '@/config';
-import DataView from '@/src/components/submitted-data/DataView';
 import FollowUpView from '@/src/components/submitted-data/FollowUpView';
 import { headers } from 'next/headers';
 
@@ -14,8 +13,9 @@ async function getSubmittedData(searchParams: any) {
 
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store',headers: headers() })
+    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/follow-up-view?id=${id}&formId=${formId}`, { cache: 'no-store',headers: headers() })
 
+    
     if (!res.ok) {
         throw new Error('Failed to fetch data')
     }

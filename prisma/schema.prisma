@@ -253,6 +253,7 @@ model User {
   adder                              UserAddedByUser[]                    @relation("adder")
   UserGuide                          UserGuide[]
   WaterSection                       WaterSection[]
+  FollowUpInspection                 FollowUpInspection[]
 }
 
 model UserAddedByUser {
@@ -421,32 +422,34 @@ model CleaningFrequency {
 }
 
 model Community {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(255)
-  electoralAreaId  Int?
-  districtId       Int?
-  deleted          Int?               @default(0)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  BasicInfoSection BasicInfoSection[]
-  District         District?          @relation(fields: [districtId], references: [id])
-  ElectoralArea    ElectoralArea?     @relation(fields: [electoralAreaId], references: [id])
-  Inspection       Inspection[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  electoralAreaId    Int?
+  districtId         Int?
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  BasicInfoSection   BasicInfoSection[]
+  District           District?            @relation(fields: [districtId], references: [id])
+  ElectoralArea      ElectoralArea?       @relation(fields: [electoralAreaId], references: [id])
+  Inspection         Inspection[]
+  FollowUpInspection FollowUpInspection[]
 
   @@unique([electoralAreaId, name], name: "electoralAreaIdIdentifier")
 }
 
 model ElectoralArea {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique @db.VarChar(255)
-  deleted    Int?         @default(0)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  districtId Int
-  Community  Community[]
-  District   District     @relation(fields: [districtId], references: [id])
-  Inspection Inspection[]
-  User       User[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @unique @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  districtId         Int
+  Community          Community[]
+  District           District             @relation(fields: [districtId], references: [id])
+  Inspection         Inspection[]
+  User               User[]
+  FollowUpInspection FollowUpInspection[]
 
   @@unique([name, districtId], name: "electoralarea_un", map: "electoralarea_un")
 }
@@ -598,35 +601,37 @@ model PestSign {
 }
 
 model Region {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(255)
-  abbrv            String             @unique @db.VarChar(10)
-  code             String             @unique @db.VarChar(2)
-  deleted          Int?               @default(0)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  District         District[]
-  Inspection       Inspection[]
-  Messaging        Messaging[]
-  User             User[]
-  SanitationReport SanitationReport[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  abbrv              String               @unique @db.VarChar(10)
+  code               String               @unique @db.VarChar(2)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  District           District[]
+  Inspection         Inspection[]
+  Messaging          Messaging[]
+  User               User[]
+  SanitationReport   SanitationReport[]
+  FollowUpInspection FollowUpInspection[]
 }
 
 model District {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(255)
-  abbrv            String?            @unique @db.VarChar(255)
-  deleted          Int?               @default(0)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  regionId         Int
-  Community        Community[]
-  Region           Region             @relation(fields: [regionId], references: [id])
-  ElectoralArea    ElectoralArea[]
-  Inspection       Inspection[]
-  Messaging        Messaging[]
-  User             User[]
-  SanitationReport SanitationReport[]
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  abbrv              String?              @unique @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  regionId           Int
+  Community          Community[]
+  Region             Region               @relation(fields: [regionId], references: [id])
+  ElectoralArea      ElectoralArea[]
+  Inspection         Inspection[]
+  Messaging          Messaging[]
+  User               User[]
+  SanitationReport   SanitationReport[]
+  FollowUpInspection FollowUpInspection[]
 }
 
 model RespondentDesignation {
@@ -3139,6 +3144,11 @@ model FollowUpInspection {
   obnoxiousTradeExistFollowUp   YesNo                        @relation("obnoxiousTradeExistFollowUp", fields: [obnoxiousTradeExistFollowUpId], references: [id])
   Inspection                    Inspection?                  @relation(fields: [prevInspectionId], references: [id])
   FollowUpInspectionPictures    FollowUpInspectionPictures[]
+  User                          User                         @relation(fields: [userId], references: [id])
+  Region                        Region                       @relation(fields: [regionId], references: [id])
+  District                      District                     @relation(fields: [districtId], references: [id])
+  Community                     Community                    @relation(fields: [communityId], references: [id])
+  ElectoralArea                 ElectoralArea                @relation(fields: [electoralAreaId], references: [id])
 }
 
 model FollowUpInspectionHistory {

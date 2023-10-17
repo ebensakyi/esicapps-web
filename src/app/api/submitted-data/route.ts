@@ -7,7 +7,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 
-
 // export async function POST(request: Request) {
 //   try {
 //     const res = await request.json();
@@ -664,7 +663,6 @@ export async function GET(request: Request) {
     // let userId = userData?.id;
     const session: any = await getServerSession(authOptions);
 
-
     let userId = session?.user?.id;
     // let surname = session?.user?.surname;
     let districtId = session?.user?.districtId;
@@ -675,33 +673,23 @@ export async function GET(request: Request) {
 
     let { searchParams } = new URL(request.url);
 
-
-
-
-
     let filterBy: any = searchParams.get("filterBy")?.toString();
-    let filterValue: any =
-      searchParams.get("filterValue")?.toString()
-   
+    let filterValue: any = searchParams.get("filterValue")?.toString();
 
-    if (userLevel == 1 && filterBy == "undefined"||filterBy == "") {
+    if ((userLevel == 1 && filterBy == "undefined") || filterBy == "") {
       filterBy = "undefined";
-      filterValue = "undefined"
+      filterValue = "undefined";
     }
-    if (userLevel == 2 && filterBy == "undefined"||filterBy == "") {
+    if ((userLevel == 2 && filterBy == "undefined") || filterBy == "") {
       filterBy = "regionId";
       filterValue = regionId;
     }
-    if (userLevel == 3 && filterBy == "undefined"||filterBy == "") {
+    if ((userLevel == 3 && filterBy == "undefined") || filterBy == "") {
       filterBy = "districtId";
       filterValue = districtId;
     }
-   
-
-
 
     await logActivity("Visited submitted data list", session?.user?.id);
-
 
     let formId = Number(searchParams.get("formId")) || 1;
 
@@ -724,11 +712,8 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-  
-
-    console.log("filterValue ",filterValue);
-    console.log("filterBy ",filterBy);
-    
+    console.log("filterValue ", filterValue);
+    console.log("filterBy ", filterBy);
 
     let count = await prisma.basicInfoSection.count({
       // where: getSearchParams(req, searchText).where,
@@ -792,7 +777,9 @@ export async function GET(request: Request) {
             inspectionFormId: formId,
             deleted: 0,
             [filterBy]:
-            (filterValue == "undefined"||filterValue=="") ?undefined  :Number(filterValue) ,
+              filterValue == "undefined" || filterValue == ""
+                ? undefined
+                : Number(filterValue),
           },
         },
       // : {
@@ -874,7 +861,9 @@ export async function GET(request: Request) {
           deleted: 0,
 
           [filterBy]:
-            (filterValue == "undefined"||filterValue=="") ?undefined  :Number(filterValue) ,
+            filterValue == "undefined" || filterValue == ""
+              ? undefined
+              : Number(filterValue),
           // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
         },
       },
@@ -916,7 +905,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.log(error);
-    
+
     return NextResponse.json(error);
   }
 }

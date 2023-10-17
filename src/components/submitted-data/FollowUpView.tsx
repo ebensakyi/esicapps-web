@@ -220,7 +220,7 @@ export default function FollowUpView({ data }: any) {
                                                 <div id="printableArea">
                                                     <div className="page-title-box d-sm-flex align-items-center justify-content-between">
                                                         <h4 className="mb-sm-0">{handleTitle()}</h4>
-                                                        <div className="page-title-right">
+                                                        {/* <div className="page-title-right">
                                                             <ol className="breadcrumb m-0">
                                                                 <li className="breadcrumb-item">
                                                                     <Link
@@ -234,7 +234,7 @@ export default function FollowUpView({ data }: any) {
                                                                     </Link>
                                                                 </li>
                                                             </ol>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
 
                                                     <div className="row">
@@ -279,7 +279,7 @@ export default function FollowUpView({ data }: any) {
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.submittedData?.BasicInfoSection?.Community?.District
+                                                                                                data?.submittedData?.District
                                                                                                     ?.Region.name
                                                                                             }
                                                                                             readOnly={true}
@@ -294,8 +294,8 @@ export default function FollowUpView({ data }: any) {
                                                                                             className="form-control bg-light border-0"
                                                                                             id="invoicenoInput"
                                                                                             value={
-                                                                                                data?.submittedData?.BasicInfoSection?.Community != null
-                                                                                                    ? data?.submittedData?.BasicInfoSection?.Community?.District
+                                                                                                data?.submittedData?.District != null
+                                                                                                    ? data?.submittedData?.District
                                                                                                         ?.name
                                                                                                     : ""
                                                                                             }
@@ -323,7 +323,7 @@ export default function FollowUpView({ data }: any) {
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
                                                                                         id="invoicenoInput"
-                                                                                        value={data?.submittedData?.BasicInfoSection?.Community?.name}
+                                                                                        value={data?.submittedData?.Community?.name}
                                                                                         readOnly={true}
                                                                                     /></div>
 
@@ -337,22 +337,21 @@ export default function FollowUpView({ data }: any) {
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
                                                                                         id="invoicenoInput"
-                                                                                        value={data?.submittedData?.BasicInfoSection?.respondentName}
+                                                                                        value={data?.submittedData?.respondentName}
                                                                                         readOnly={true}
                                                                                     /></div>
 
                                                                                 </div>
                                                                                 <div className="col-lg-3 col-sm-6">
                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                        Respondent designation
+                                                                                       Water Rating
                                                                                     </label>
                                                                                     <div className="col-sm-12"> <input
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
                                                                                         id="invoicenoInput"
                                                                                         value={
-                                                                                            data?.submittedData?.BasicInfoSection?.RespondentDesignation
-                                                                                                ?.name
+                                                                                            data?.submittedData?.waterRating
                                                                                         }
                                                                                         readOnly={true}
                                                                                     /></div>
@@ -360,14 +359,64 @@ export default function FollowUpView({ data }: any) {
                                                                                 </div>{" "}
                                                                                 <div className="col-lg-3 col-sm-6">
                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                        Respondent phone number
+                                                                                    Solid Waste Rating
                                                                                     </label>
                                                                                     <div className="col-sm-12"> <input
                                                                                         type="text"
                                                                                         className="form-control bg-light border-0"
                                                                                         id="invoicenoInput"
                                                                                         value={
-                                                                                            data?.submittedData?.BasicInfoSection?.respondentPhoneNumber
+                                                                                            data?.submittedData?.solidWasteRating
+
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    /></div>
+
+                                                                                </div>
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Liquid Waste Rating
+                                                                                    </label>
+                                                                                    <div className="col-sm-12"> <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.liquidWasteRating
+
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    /></div>
+
+                                                                                </div>
+
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Obnoxious Trade
+                                                                                    </label>
+                                                                                    <div className="col-sm-12"> <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.obnoxiousTrade
+
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    /></div>
+
+                                                                                </div>
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                   Officer Comment
+                                                                                    </label>
+                                                                                    <div className="col-sm-12"> <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.officerComment
+
                                                                                         }
                                                                                         readOnly={true}
                                                                                     /></div>
