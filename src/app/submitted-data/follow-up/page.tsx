@@ -31,18 +31,9 @@ async function getSubmittedData(searchParams: any) {
 export default async function Page({ searchParams }: any) {
     const followUpData = await getSubmittedData(searchParams)
 
-
-
     // const { data: session } = useSession()
 
-
-
- 
-
-
     let data = { followUpData: followUpData }
-
-
 
     return <FollowUp data={data} />
 

@@ -18,10 +18,10 @@ export default function FollowUp({ data }: any) {
             redirect(LOGIN_URL);
         }
     })
-    let userSession :any = session;
+    let userSession: any = session;
 
 
-   
+
 
     // let inspectionDeletionAllowed: any = session?.user?.UserRole?.inspectionDeletionAllowed
     // let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
@@ -45,7 +45,7 @@ export default function FollowUp({ data }: any) {
 
 
     const [searchText, setSearchText] = useState();
-   
+
 
     const [filterValue, setFilterValue] = useState("");
     const [filterBy, setFilterBy] = useState("1");
@@ -179,8 +179,8 @@ export default function FollowUp({ data }: any) {
             console.log(error);
         }
     };
-   
-   
+
+
 
 
     return (
@@ -215,8 +215,8 @@ export default function FollowUp({ data }: any) {
                                             {/* <div className="col-md-2">
                                 <input type="text" className="form-control" placeholder="City" />
                             </div> */}
-                                          
-                                            
+
+
 
                                             <div className="col-md-4">
                                                 <div className="input-group mb-3">
@@ -264,14 +264,15 @@ export default function FollowUp({ data }: any) {
                                         <table className="table  datatable">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Premises Code </th>
+                                                    <th scope="col">Premises Code </th>
                                                     <th scope="col">Community </th>
                                                     <th scope="col">Electoral Area</th>
                                                     <th scope="col">Respondent</th>
 
                                                     <th scope="col">Phone</th>
-                                                  
+
                                                     <th scope="col">Date</th>
+                                                    <th scope="col">View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -290,8 +291,40 @@ export default function FollowUp({ data }: any) {
                                                                     "MMM Do YYYY, h:mm:ss a"
                                                                 )}
                                                             </td>
-                                                           
-                                                           
+                                                            <td>
+                                                                <div className="dropdown-item btn btn-sm " role="group">
+                                                                    <button
+                                                                        id="btnGroupDrop1"
+                                                                        type="button"
+                                                                        className="btn btn-success dropdown-toggle"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                        Actions
+                                                                    </button>
+                                                                    <ul
+                                                                        className="dropdown-menu"
+                                                                        aria-labelledby="btnGroupDrop1"
+                                                                    >
+                                                                        <li>
+                                                                            <Link
+                                                                                className="dropdown-item btn btn-sm "
+                                                                                href={{
+                                                                                    pathname: `/submitted-data/follow-up/data-view`,
+                                                                                    query: {
+                                                                                        id: dt?.id,
+                                                                                        // formId: formId,
+                                                                                    },
+                                                                                }}
+                                                                            >
+                                                                                View
+                                                                            </Link>
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+
                                                         </tr>
                                                     ))}
                                             </tbody>
