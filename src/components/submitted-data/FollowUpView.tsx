@@ -241,7 +241,7 @@ export default function FollowUpView({ data }: any) {
                                                         <div className="col-lg-12">
                                                             <div className="row mb-3">
                                                                 <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
+                                                                    {/* <div className="row align-items-center gy-3 mb-3">
                                                                         <div className="col-sm">
                                                                             <div>
                                                                                 <h5 className="fs-14 mb-0">
@@ -250,7 +250,7 @@ export default function FollowUpView({ data }: any) {
                                                                             </div>
                                                                         </div>
 
-                                                                    </div>
+                                                                    </div> */}
                                                                     <div className="card ">
                                                                         <div className="card-body">
                                                                             <div className="row">
@@ -492,7 +492,7 @@ export default function FollowUpView({ data }: any) {
                                                                         })}
                                                                     </div>
                                                                 </div>
-                                                                {inspectionPublishAllowed ?
+                                                                {/* {inspectionPublishAllowed ?
                                                                     <div className="col-sm-auto">
                                                                         {data?.submittedData?.isPublished == 0 ? (
                                                                             <button
@@ -517,7 +517,7 @@ export default function FollowUpView({ data }: any) {
                                                                                 Unpublish
                                                                             </button>
                                                                         )}
-                                                                    </div> : <></>}
+                                                                    </div> : <></>} */}
                                                                 {inspectionDeletionAllowed ?
                                                                     <div className="col-sm-auto">
                                                                         {data?.submittedData?.isPublished == 0 ? (
@@ -535,7 +535,7 @@ export default function FollowUpView({ data }: any) {
                                                                             <></>
                                                                         )}
                                                                     </div> : <></>}
-                                                                <div className="col-sm-auto">
+                                                                {/* <div className="col-sm-auto">
                                                                     {inspectionUpdatesAllowed ?
                                                                         <Link
                                                                             className="btn btn-primary"
@@ -548,12 +548,10 @@ export default function FollowUpView({ data }: any) {
                                                                                 },
                                                                             }}
                                                                         >
-                                                                            {/* <a className="btn btn-primary">
-                                                                            <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "} */}
+                                                                         
                                                                             Edit
-                                                                            {/* </a> */}
                                                                         </Link> : <></>}
-                                                                </div>
+                                                                </div> */}
 
                                                             </div>
                                                         </div>

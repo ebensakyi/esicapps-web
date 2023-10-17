@@ -78,6 +78,9 @@ export async function GET(request: Request) {
         },
         ElectoralArea: true,
         Community: true,
+        FollowUpInspectionPictures: {
+          include: { FormSectionImage: true },
+        },
       },
     });
 
