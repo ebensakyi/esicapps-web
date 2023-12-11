@@ -137,14 +137,13 @@ export default function Header() {
                                         ? "nav-link"
                                         : "nav-link collapsed"
                                 }
-                                data-bs-target="#esicapps1-nav"
-                                data-bs-toggle="collapse"
+                              
                                 href="/esicapps1/table"
                             >
                                 <i className="bi bi-archive
 " />
                                 <span>ESICApps 1</span>
-                                <i className="bi bi-chevron-down ms-auto" />
+                               
                             </Link>
                             {/* <ul
                                 id="esicapps1-nav"
