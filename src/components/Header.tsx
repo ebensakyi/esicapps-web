@@ -146,29 +146,21 @@ export default function Header() {
                                 <span>ESICApps 1</span>
                                 <i className="bi bi-chevron-down ms-auto" />
                             </Link>
-                            <ul
+                            {/* <ul
                                 id="esicapps1-nav"
                                 className="nav-content collapse "
                                 data-bs-parent="#esicapps1-nav"
                             >
-                                {/* {session?.user?.privileges?.includes(5) ? */}
-                                {/* <li>
-                                    <Link href="/esicapps1/dashboard">
-                                        <i className="bi bi-circle" />
-                                        <span>Dashboard</span>
-                                    </Link>
-                                </li> */}
-                                {/* : <></>} */}
-                                {/* {session?.user?.privileges?.includes(6) ?  */}
+                            
                                 <li>
                                     <Link href="/esicapps1/table">
                                         <i className="bi bi-circle" />
                                         <span>Table</span>
                                     </Link>
                                 </li>
-                                {/* : <></>} */}
+                              
 
-                            </ul>
+                            </ul> */}
                         </li>
 
 
