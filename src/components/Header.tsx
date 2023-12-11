@@ -133,7 +133,7 @@ export default function Header() {
 
                             <Link
                                 className={
-                                    pathname == "/esicapps1/general"
+                                    pathname == "/esicapps1/table"
                                         ? "nav-link"
                                         : "nav-link collapsed"
                                 }
