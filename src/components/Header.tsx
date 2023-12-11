@@ -139,7 +139,7 @@ export default function Header() {
                                 }
                                 data-bs-target="#esicapps1-nav"
                                 data-bs-toggle="collapse"
-                                href="#"
+                                href="/esicapps1/table"
                             >
                                 <i className="bi bi-archive
 " />
