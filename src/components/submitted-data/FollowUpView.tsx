@@ -241,7 +241,7 @@ export default function FollowUpView({ data }: any) {
                                                         <div className="col-lg-12">
                                                             <div className="row mb-3">
                                                                 <div className="col-xl-12">
-                                                                    {/* <div className="row align-items-center gy-3 mb-3">
+                                                                    <div className="row align-items-center gy-3 mb-3">
                                                                         <div className="col-sm">
                                                                             <div>
                                                                                 <h5 className="fs-14 mb-0">
@@ -250,7 +250,7 @@ export default function FollowUpView({ data }: any) {
                                                                             </div>
                                                                         </div>
 
-                                                                    </div> */}
+                                                                    </div>
                                                                     <div className="card ">
                                                                         <div className="card-body">
                                                                             <div className="row">
@@ -431,11 +431,125 @@ export default function FollowUpView({ data }: any) {
                                                         </div>
                                                     </div>
 
-
                                                     <div className="row">
                                                         <div className="col-lg-12">
                                                             <div className="row mb-3">
                                                                 <div className="col-xl-12">
+                                                                    <div className="row align-items-center gy-3 mb-3">
+                                                                        <div className="col-sm">
+                                                                            <div>
+                                                                                <h5 className="fs-14 mb-0">
+                                                                                    ACTIONS & CONCLUSION SECTION
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="card product">
+                                                                        <div className="card-body">
+                                                                            <div className="row gy-3">
+                                                                                {data?.submittedData?.ConclusionSection?.obnoxiousTradeExist !=
+                                                                                    null ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                            Obnoxious Trade Exist
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control bg-light border-0"
+                                                                                            id="invoicenoInput"
+                                                                                            value={
+                                                                                                data?.submittedData?.ConclusionSection?.obnoxiousTradeExist
+                                                                                                    ?.name
+                                                                                            }
+                                                                                            readOnly={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
+                                                                                {data?.submittedData?.FollowupPremisesNuisanceDetected
+                                                                                    ?.length != 0 ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                            Nuisance Observed
+                                                                                        </label>
+                                                                                        {data?.submittedData?.FollowupPremisesNuisanceDetected?.map(
+                                                                                            (x: any) => (
+                                                                                                <input
+                                                                                                    key={x.id}
+                                                                                                    type="text"
+                                                                                                    className="form-control bg-light border-0"
+                                                                                                    id="invoicenoInput"
+                                                                                                    value={x?.Nuisance?.name}
+                                                                                                    readOnly={true}
+                                                                                                />
+                                                                                            )
+                                                                                        )}
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
+                                                                                {data?.submittedData?.officerComment != null ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                            Office Comment
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control bg-light border-0"
+                                                                                            id="invoicenoInput"
+                                                                                            value={data?.submittedData?.officerComment}
+                                                                                            readOnly={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
+                                                                                {data?.submittedData?.PremisesActionTaken
+                                                                                    ?.length != 0 ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                            Action Taken
+                                                                                        </label>
+                                                                                        {data?.submittedData?.PremisesActionTaken?.map(
+                                                                                            (x: any) => (
+                                                                                                <input
+                                                                                                    key={x.id}
+                                                                                                    type="text"
+                                                                                                    className="form-control bg-light border-0"
+                                                                                                    id="invoicenoInput"
+                                                                                                    value={x?.Action?.name}
+                                                                                                    readOnly={true}
+                                                                                                />
+                                                                                            )
+                                                                                        )}
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
+                                                                            </div>
+                                                                            <div className="col-lg-3 col-sm-6">
+                                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                    Reporting Officer
+                                                                                </label>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    className="form-control bg-light border-0"
+                                                                                    id="invoicenoInput"
+                                                                                    value={`${data?.submittedData?.User?.otherNames} ${data?.submittedData?.User?.surname}`}
+                                                                                    readOnly={true}
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-lg-12">
+                                                            <div className="row mb-3">
+                                                                {/* <div className="col-xl-12">
                                                                     <div className="row align-items-center gy-3 mb-3">
                                                                         <div className="col-sm">
                                                                             <div>
@@ -454,11 +568,7 @@ export default function FollowUpView({ data }: any) {
                                                                                 >
                                                                                     <div className="gallery-box card">
                                                                                         <div className="gallery-container">
-                                                                                            {/* <Link
-                                                                                            className="image-popup"
-                                                                                            href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                                                                                            title=""
-                                                                                        > */}
+                                                                                         
                                                                                             <Image
                                                                                                 className="gallery-img img-fluid mx-auto"
                                                                                                 src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
@@ -471,27 +581,15 @@ export default function FollowUpView({ data }: any) {
                                                                                                     {ip.FormSectionImage.name}
                                                                                                 </h5>
                                                                                             </div>
-                                                                                            {/* </Link> */}
                                                                                         </div>
 
-                                                                                        {/* <div className="box-content">
-                                                                                        <div className="d-flex align-items-center mt-1">
-                                                                                            <div className="flex-grow-1 text-muted">
-                                                                                                <Link
-                                                                                                    href=""
-                                                                                                    className="text-body text-truncate"
-                                                                                                >
-                                                                                                    {ip.FormSectionImage.name}
-                                                                                                </Link>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> */}
+                                                                                     
                                                                                     </div>
                                                                                 </div>
                                                                             );
                                                                         })}
                                                                     </div>
-                                                                </div>
+                                                                </div> */}
                                                                 {/* {inspectionPublishAllowed ?
                                                                     <div className="col-sm-auto">
                                                                         {data?.submittedData?.isPublished == 0 ? (
