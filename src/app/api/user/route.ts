@@ -94,6 +94,18 @@ export async function GET(request: Request) {
     let skip =
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
+      const q =
+      searchParams.get("q");
+      if(q){
+        const response = await prisma.user.findMany({where:{deleted:0}})
+
+
+      return NextResponse.json({
+        response,
+       
+      });
+      }
+
     // let userLevel = loggedInUserData?.userLevelId;
     // let region = loggedInUserData?.regionId;
     // let district = loggedInUserData?.districtId;

@@ -5,8 +5,7 @@ import Multiselect from "multiselect-react-dropdown";
 import { useRouter, usePathname, redirect } from 'next/navigation';
 import axios from 'axios';
 import { useState } from 'react';
-import { pages } from '../../../prisma/seed/page';
-import { pageAccess } from '../../../prisma/seed/pageAccess';
+
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 
@@ -47,7 +46,7 @@ export default function SMS({ data }: any) {
             e.preventDefault();
 
 
-            if (title == "") return toast.error("Title cannot be empty");
+            // if (title == "") return toast.error("Title cannot be empty");
             if (sendingType == "") return toast.error("Recipient type cannot be empty");
             if (message == "") return toast.error("Message cannot be empty");
             if (sendingType == "1" && individualRecipient == "") return toast.error("Recepient cannot be empty");
@@ -55,7 +54,7 @@ export default function SMS({ data }: any) {
             if (sendingType == "3" && regionId == "") return toast.error("Region cannot be empty");
 
             let data = {
-                title,
+                title:"",
                 message,
                 individualRecipient: individualRecipient.trim() == "" ? null : Number(individualRecipient.trim()),
                 sendingType,
@@ -90,7 +89,7 @@ export default function SMS({ data }: any) {
             e.preventDefault()
             let data = {
                 messageId,
-                title,
+                title:"",
                 message,
                 sendingType,
                 districtId,
@@ -157,14 +156,14 @@ export default function SMS({ data }: any) {
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Send SMS</h5>
-                                <div className=" mb-3">
+                                {/* <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Title *
                                     </label>
                                     <div className="col-sm-12">
                                         <input type="text" className="form-control" placeholder='Enter title' value={title} onChange={(e: any) => setTitle(e.target.value)} />
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                     Recipient type *
@@ -315,7 +314,7 @@ export default function SMS({ data }: any) {
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Title</th>
+                                            {/* <th scope="col">Title</th> */}
 
                                             <th scope="col">Message</th>
                                             <th scope="col">Sent Type</th>
@@ -329,7 +328,7 @@ export default function SMS({ data }: any) {
                                         {data.sms.map((data: any) => {
                                             return (
                                                 <tr key={data?.id}>
-                                                    <td>{data?.title}</td>
+                                                    {/* <td>{data?.title}</td> */}
                                                     <td>{data?.message}</td>
                                                     <td>{data?.SendingType.name}</td>
                                                     <td>{data?.Region?.name}{data?.District?.name}{data?.Recipient?.otherNames} {data?.Recipient?.surname}</td>
