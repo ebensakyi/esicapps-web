@@ -78,18 +78,79 @@ const readCSV = async (filePath: any, electoralAreaId: any,districtId: any) => {
   }
 };
 
-const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
-  try {
-    let newData = data.map((row: any) => ({
-      electoralAreaId: Number(electoralAreaId),
-      districtId: Number(districtId),
-      name: row.name,
-    }));
+// const formatData1 = async (data: any, electoralAreaId: any, districtId: any) => {
+//   try {
+//     let newData = data
+//     .filter((row: any) => row.name.trim() !== '')
+//     .map((row: any) => ({
+//       electoralAreaId: Number(electoralAreaId),
+//       districtId: Number(districtId),
+//       name: row.name,
+//     }));
 
+//     console.log(newData);
     
 
-    return newData;
+//     return newData
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+
+const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
+  try {
+    const newData:any = [];
+    const processedNames = new Set<string>();
+    
+    data.forEach((row: any) => {
+      const trimmedName = row.name.trim();
+    
+      if (trimmedName !== '' && !processedNames.has(trimmedName)) {
+        processedNames.add(trimmedName);
+    
+        newData.push({
+          electoralAreaId: Number(electoralAreaId),
+          districtId: Number(districtId),
+          name: trimmedName,
+        });
+      } else {
+        // console.log(`Duplicate or empty name found: "${trimmedName}"`);
+
+        return newData
+        // You can add more specific handling or return a message as needed
+      }
+    });
+    
+    // console.log('Processing completed:', newData);
+    return newData
   } catch (error) {
     console.log(error);
   }
 };
+
+
+
+
+// async function importData() {
+//   var filePath = `./public/temp/${fileName}`;
+//   const rows: any[] = [];
+//   fs.createReadStream(filePath)
+//     .pipe(parse({ delimiter: "," }))
+//     .on("data", (row: any) => {
+//       // Trim empty cells
+//       const trimmedRow = Object.fromEntries(
+//         Object.entries(row).map(([key, value]) => [key, value.trim()])
+//       );
+//       rows.push(trimmedRow);
+//     })
+//     .on("end", async () => {
+//       for (const row of rows) {
+//         await prisma.community.create({
+//           data: row,
+//         });
+//       }
+//       console.log("Data import completed.");
+//       await prisma.$disconnect();
+//     });
+// }

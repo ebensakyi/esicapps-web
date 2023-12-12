@@ -23,6 +23,7 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.1.2",
     "cookie": "^0.5.0",
+    "csv-parser": "^3.0.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "fast-csv": "^4.3.6",
