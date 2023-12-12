@@ -32,7 +32,7 @@ async function getSendingType() {
 }
 async function getUsers() {
 
-    let response = await fetch(`${SERVER_BASE_URL}/api/user`, { cache: 'no-store' });
+    let response = await fetch(`${SERVER_BASE_URL}/api/user?q=1`, { cache: 'no-store' });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
