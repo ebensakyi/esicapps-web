@@ -30,7 +30,15 @@ export async function POST(request: Request) {
 
     let response = await readCSV(path, electoralAreaId, districtId);
 
-    return NextResponse.json({});
+    console.log("ressss==>", response);
+    if (response == 0) {
+      return NextResponse.json(
+        { message: "Data exist", data: "existingRecord" },
+        { status: 202 }
+      );
+    }
+
+    // return NextResponse.json({});
   } catch (error: any) {
     console.error(error);
     return NextResponse.json(error, { status: 500 });
@@ -59,38 +67,27 @@ const readCSV = async (
       .on("end", async () => {
         let newData = await formatData(data, electoralAreaId, districtId);
 
-        for (const data of newData) {
-          const existingRecord = await prisma.community.findMany({
-            where: {
-              // electoralAreaId_name_key: {
-              electoralAreaId: Number(data.electoralAreaId),
-              name: data.name,
-              // },
-            },
-          });
+        // for (const data of newData) {
+        //   const existingRecord = await prisma.community.findMany({
+        //     where: {
+        //       // electoralAreaId_name_key: {
+        //       electoralAreaId: Number(data.electoralAreaId),
+        //       name: data.name,
+        //       // },
+        //     },
+        //   });
 
-          if (existingRecord) {
-            console.log("existingRecord==>", existingRecord);
+        //   if (existingRecord) {
+        //     console.log("existingRecord==>", existingRecord);
 
-            return NextResponse.json(
-              { message: "Data exist", data: existingRecord },
-              { status: 202 }
-            );
+        //     return existingRecord;
 
-            // Update the existing record
-            // await prisma.community.update({
-            //   where: { id: existingRecord.id },
-            //   data: {
-            //     districtId: data.districtId,
-            //     // Add other fields to update as needed
-            //   },
-            // });
-          } else {
+        //   } else {
             await prisma.community.createMany({
               data: newData,
             });
-          }
-        }
+         // }
+        // }
         fs.unlink(filePath, (err) => {
           if (err) {
             console.error("Error deleting CSV file:", err);

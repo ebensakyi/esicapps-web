@@ -203,6 +203,9 @@ export default function Community({ data }: any) {
             setCommunityName("");
             setDistrictId("");
             setRegionId("");
+
+            console.log("response.status==> ",response.status);
+            
             if (response.status == 200) {
                 router.refresh()
 
@@ -211,7 +214,7 @@ export default function Community({ data }: any) {
             if (response.status == 202) {
                 router.refresh()
 
-                return toast.success("Communities uploaded");
+                return toast.error("Some already Communities exist. Please check and try again");
             }
         } catch (error: any) {
             console.log(error);
