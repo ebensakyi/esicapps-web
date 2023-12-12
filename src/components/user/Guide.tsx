@@ -247,7 +247,7 @@ export default function Guide({ data }: any) {
                                             <th scope="col">Title</th>
 
                                             <th scope="col">URL</th>
-                                            <th scope="col">File Type</th>
+                                            {/* <th scope="col">File Type</th> */}
                                             <th scope="col">Action</th>
 
                                         </tr>
@@ -258,7 +258,7 @@ export default function Guide({ data }: any) {
                                                 <tr key={guide?.id}>
                                                     <td>{guide?.title}</td>
                                                     <td>{guide?.url}</td>
-                                                    <td>{guide?.FileType?.title}</td>
+                                                    {/* <td>{guide?.FileType?.title}</td> */}
 
                                                     <td>
                                                         <div
