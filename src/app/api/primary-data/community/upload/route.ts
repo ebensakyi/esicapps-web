@@ -6,8 +6,6 @@ import formidable from "formidable";
 import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
-import { district } from '../../../../../../prisma/seed/district';
-
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +14,6 @@ export async function POST(request: Request) {
     const file: File | null = data.get("csvFile") as unknown as File;
     const electoralAreaId = Number(data?.get("electoralAreaId"));
     const districtId = Number(data?.get("districtId"));
-
 
     if (!file) {
       return NextResponse.json({ success: false });
@@ -29,49 +26,80 @@ export async function POST(request: Request) {
 
     const path = `./public/temp/${fileName}`;
 
-
     await writeFile(path, buffer);
 
-    let response = await readCSV(path, electoralAreaId,districtId);
-
+    let response = await readCSV(path, electoralAreaId, districtId);
 
     return NextResponse.json({});
   } catch (error: any) {
     console.error(error);
-    return NextResponse.json(error,{status:500});
+    return NextResponse.json(error, { status: 500 });
   }
 }
 
-const readCSV = async (filePath: any, electoralAreaId: any,districtId: any) => {
+const readCSV = async (
+  filePath: any,
+  electoralAreaId: any,
+  districtId: any
+) => {
   try {
     let data: any = [];
-
-
 
     //Read file
     createReadStream(filePath)
       .pipe(parse({ headers: true }))
       .on("error", (error) => {
+        console.log(">>>>>>>>>>>>>> error");
+
         throw error.message;
       })
       .on("data", (row) => {
         data.push(row);
       })
       .on("end", async () => {
-        let newData = await formatData(data, electoralAreaId,districtId);
+        let newData = await formatData(data, electoralAreaId, districtId);
 
-        await prisma.community.createMany({
-          data: newData,
-        });
-  fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error('Error deleting CSV file:', err);
-          return;
+        for (const data of newData) {
+          const existingRecord = await prisma.community.findMany({
+            where: {
+              // electoralAreaId_name_key: {
+              electoralAreaId: Number(data.electoralAreaId),
+              name: data.name,
+              // },
+            },
+          });
+
+          if (existingRecord) {
+            console.log("existingRecord==>", existingRecord);
+
+            return NextResponse.json(
+              { message: "Data exist", data: existingRecord },
+              { status: 202 }
+            );
+
+            // Update the existing record
+            // await prisma.community.update({
+            //   where: { id: existingRecord.id },
+            //   data: {
+            //     districtId: data.districtId,
+            //     // Add other fields to update as needed
+            //   },
+            // });
+          } else {
+            await prisma.community.createMany({
+              data: newData,
+            });
+          }
         }
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error("Error deleting CSV file:", err);
+            return;
+          }
+        });
       });
-      });
-    
-     /// await fs.unlinkSync(filePath);
+
+    /// await fs.unlinkSync(filePath);
     return data.length;
   } catch (error) {
     console.log("csvUploader ==>", error);
@@ -89,7 +117,6 @@ const readCSV = async (filePath: any, electoralAreaId: any,districtId: any) => {
 //     }));
 
 //     console.log(newData);
-    
 
 //     return newData
 //   } catch (error) {
@@ -97,40 +124,36 @@ const readCSV = async (filePath: any, electoralAreaId: any,districtId: any) => {
 //   }
 // };
 
-
 const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
   try {
-    const newData:any = [];
+    const newData: any = [];
     const processedNames = new Set<string>();
-    
+
     data.forEach((row: any) => {
       const trimmedName = row.name.trim();
-    
-      if (trimmedName !== '' && !processedNames.has(trimmedName)) {
+
+      if (trimmedName !== "" && !processedNames.has(trimmedName)) {
         processedNames.add(trimmedName);
-    
+
         newData.push({
           electoralAreaId: Number(electoralAreaId),
           districtId: Number(districtId),
           name: trimmedName,
         });
       } else {
-        // console.log(`Duplicate or empty name found: "${trimmedName}"`);
+        console.log(`Duplicate or empty name found: "${trimmedName}"`);
 
-        return newData
+        return newData;
         // You can add more specific handling or return a message as needed
       }
     });
-    
-    // console.log('Processing completed:', newData);
-    return newData
+
+    console.log("Processing completed:", newData);
+    return newData;
   } catch (error) {
     console.log(error);
   }
 };
-
-
-
 
 // async function importData() {
 //   var filePath = `./public/temp/${fileName}`;

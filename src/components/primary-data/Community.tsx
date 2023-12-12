@@ -208,7 +208,11 @@ export default function Community({ data }: any) {
 
                 return toast.success("Communities uploaded");
             }
+            if (response.status == 202) {
+                router.refresh()
 
+                return toast.success("Communities uploaded");
+            }
         } catch (error: any) {
             console.log(error);
             toast.error(error);
