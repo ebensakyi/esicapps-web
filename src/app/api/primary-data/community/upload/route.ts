@@ -138,7 +138,7 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
           name: trimmedName,
         });
       } else {
-        console.log(`Duplicate or empty name found: "${trimmedName}"`);
+      //  console.log(`Duplicate or empty name found: "${trimmedName}"`);
 
         return newData;
         // You can add more specific handling or return a message as needed
