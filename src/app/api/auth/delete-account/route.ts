@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 export async function POST(request: Request) {
   try {
   const res = await request.json();
-  console.log("res");
 
   let phoneNumber = res.phoneNumber;
 
@@ -19,6 +18,7 @@ export async function POST(request: Request) {
       },
     });
 
+    
    
     if (!user) {
       return NextResponse.json(
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       },
       data: {
         deleted: 1,
-        phoneNumber: phoneNumber+"-deleted-" + uuidv4()
+        phoneNumber: phoneNumber+"+deleted-" + uuidv4()
       },
     });
 
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     return NextResponse.json({});
 
   } catch (error: any) {
-    console.log(error);
+    console.log("ERR==> Error: " + error.message);
     return NextResponse.json({ message: error.message });
   }
 }
