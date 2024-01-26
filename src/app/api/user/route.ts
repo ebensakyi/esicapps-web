@@ -16,12 +16,10 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
     const session: any = await getServerSession(authOptions);
-    if(!session) {
+    if (!session) {
       return;
     }
 
-    console.log(res);
-    
 
     // let loginUserLevel = session?.user?.userLevelId;
     // let fileUrl;
@@ -82,13 +80,22 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    // const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
+
+    let userId = session?.user?.id;
+    // let surname = session?.user?.surname;
+    let loginUserDistrictId = session?.user?.districtId;
+    let loginUserRegionId = session?.user?.regionId;
+    let loginUserLevel = session?.user?.userLevelId;
 
     const { searchParams } = new URL(request.url);
     const searchText =
       searchParams.get("searchText")?.toString() == undefined
         ? ""
         : searchParams.get("searchText")?.toString();
+
+        console.log(">>>>>>>>>>>>>searchParams ",searchParams);
+        
     const districtId = searchParams.get("districtId") || undefined;
     let exportFile = searchParams.get("exportFile");
 
@@ -100,17 +107,14 @@ export async function GET(request: Request) {
     let skip =
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
-      const q =
-      searchParams.get("q");
-      if(q){
-        const response = await prisma.user.findMany({where:{deleted:0}})
-
+    const q = searchParams.get("q");
+    if (q) {
+      const response = await prisma.user.findMany({ where: { deleted: 0 } });
 
       return NextResponse.json({
         response,
-       
       });
-      }
+    }
 
     // let userLevel = loggedInUserData?.userLevelId;
     // let region = loggedInUserData?.regionId;
@@ -198,6 +202,201 @@ export async function GET(request: Request) {
               }
             : { districtId: Number(districtId), deleted: 0 },
       });
+
+      if (exportFile) {
+        let url = await export2Excel(response);
+
+        return NextResponse.json(url);
+      }
+
+      return NextResponse.json({
+        response,
+        curPage: curPage,
+        maxPage: Math.ceil(count / perPage),
+      });
+    }
+    if (loginUserLevel == 2) {
+      const count = await prisma.user.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+                regionId: Number(loginUserRegionId),
+                deleted: 0,
+              }
+            : { regionId: Number(loginUserRegionId), deleted: 0 },
+      });
+
+      const response = await prisma.user.findMany({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+                regionId: Number(loginUserRegionId),
+                deleted: 0,
+              }
+            : { regionId: Number(loginUserRegionId), deleted: 0 },
+        include: {
+          Region: true,
+          District: true,
+          UserRole: true,
+          UserLevel: true,
+        },
+        orderBy: {
+          id: "desc",
+        },
+      });
+
+      if (exportFile) {
+        let url = await export2Excel(response);
+
+        return NextResponse.json(url);
+      }
+
+      return NextResponse.json({
+        response,
+        curPage: curPage,
+        maxPage: Math.ceil(count / perPage),
+      });
+    }
+
+    if (loginUserLevel == 3) {
+console.log("searchText===> ",searchText);
+
+
+      const count = await prisma.user.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+                districtId: Number(loginUserDistrictId),
+                deleted: 0,
+              }
+            : { districtId: Number(loginUserDistrictId), deleted: 0 },
+      });
+
+      const response = await prisma.user.findMany({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    surname: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    otherNames: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    phoneNumber: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    email: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+                districtId: Number(loginUserDistrictId),
+                deleted: 0,
+              }
+            : { districtId: Number(loginUserDistrictId), deleted: 0 },
+        include: {
+          Region: true,
+          District: true,
+          UserRole: true,
+          UserLevel: true,
+        },
+        orderBy: {
+          id: "desc",
+        },
+      });
+
+
+      
 
       if (exportFile) {
         let url = await export2Excel(response);
@@ -377,7 +576,7 @@ export async function DELETE(request: Request) {
       where: { id: Number(userId) },
     });
 
-    let updatedPhoneNumber = user?.phoneNumber+"-deleted-" + uuidv4();
+    let updatedPhoneNumber = user?.phoneNumber + "-deleted-" + uuidv4();
     await prisma.user.update({
       where: { id: Number(userId) },
       data: {

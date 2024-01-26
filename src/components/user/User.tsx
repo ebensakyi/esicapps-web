@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname, redirect } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import ReactPaginate from 'react-paginate';
 
@@ -14,9 +14,11 @@ export default function User({ data }: any) {
     const router = useRouter();
     const { data: session }: any = useSession()
 
+
     const loggedInUserRegion = session?.user?.regionId;
     const loggedInUserDistrict = session?.user?.districtId;
     const loggedInUserLevel = session?.user?.userLevelId
+    const [exporting, setExporting] = useState(false);
 
     const pathname = usePathname()
 
@@ -102,6 +104,16 @@ export default function User({ data }: any) {
             console.log(error);
         }
     };
+
+
+    const handleFilterReset = () => {
+    
+
+        router.push(
+            `${pathname}?page=${page}&searchText=`
+
+        );
+    }
     const handlePagination = (page: any) => {
 
         page = page.selected == -1 ? 1 : page.selected + 1;
@@ -272,15 +284,15 @@ export default function User({ data }: any) {
             if (otherNames == "") {
                 return toast.error("First Name cannot be empty");
             }
-            if (email == "") {
-                return toast.error("Email cannot be empty");
-            }
+            // if (email == "") {
+            //     return toast.error("Email cannot be empty");
+            // }
             if (phoneNumber == "") {
                 return toast.error("PhoneNumber cannot be empty");
             }
-            if (designation == "") {
-                return toast.error("Designation cannot be empty");
-            }
+            // if (designation == "") {
+            //     return toast.error("Designation cannot be empty");
+            // }
             if (userRole == "") {
                 return toast.error("User role cannot be empty");
             }
@@ -439,18 +451,24 @@ export default function User({ data }: any) {
 
     const handleExportAll = async () => {
         try {
+            setExporting(true);
             let searchText = searchParams.get('searchText')
+            console.log(`searchText==> ${searchText}`);
+            
             const response = await axios.get(
-                `/api/user?exportFile=true`,
+                `/api/user?exportFile=true&searchText=${searchText}`,
 
             );
+            setExporting(false)
 
 
 
             if (response.status == 200) {
-                router.push(response.data);
-            }
+                router.replace(response.data);
+               
+            } 
         } catch (error) {
+            setExporting(false)
             console.log(error);
         }
     };
@@ -568,7 +586,6 @@ export default function User({ data }: any) {
                                                 </select>
                                             </div>
                                         </div>
-                                        {loggedInUserLevel != "3" ?
                                             <div className="col-sm-3  mb-3">
                                                 <label className="col-sm-12 col-form-label">Select user level</label>
 
@@ -630,7 +647,7 @@ export default function User({ data }: any) {
                                                 })} */}
                                                     </select>
                                                 </div>
-                                            </div> : <></>}
+                                            </div> 
                                         {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
                                             <div className="col-sm-3 mb-3">
                                                 <label className="col-sm-12 col-form-label">Select region</label>
@@ -703,6 +720,7 @@ export default function User({ data }: any) {
                                                 ) : (
                                                     <></>
                                                 )}
+                                                 {loggedInUserLevel != "1" ?
                                                 <div className="col-sm-3  mb-3">
                                                     <label className="col-sm-12 col-form-label">Select district</label>
 
@@ -723,7 +741,7 @@ export default function User({ data }: any) {
                                                             ))}
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div>:<></>}
                                             </>
                                         ) : (
                                             <></>
@@ -791,15 +809,28 @@ export default function User({ data }: any) {
                                         </div>
 
                                     </div>
+                                    <div className="col-2">
+                                                {/* <label className="form-label mb-0">.</label> */}
+                                                <button
+                                                    type="submit"
+                                                    className="form-control btn btn-danger"
+                                                    onClick={(e: any) => handleFilterReset()}
+                                                >
+                                                    Reset
+                                                </button>
+                                            </div>
+
                                     <div className="col-md-4">
                                         <div className="input-group mb-3">
                                             <button
                                                 type="button"
                                                 className="btn btn-sm btn-success  "
-                                                onClick={handleExportAll}
+                                                onClick={()=>handleExportAll()}
                                             >
                                                 <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                                                Export as excel
+                                              
+                                                {exporting ? 'Exporting...' : 'Export as Excel'}
+
                                             </button>
                                         </div>
                                     </div>
@@ -811,7 +842,7 @@ export default function User({ data }: any) {
                                         <tr>
                                             <th scope="col">Name</th>
                                             <th scope="col">Phone</th>
-                                            <th scope="col">E-mail</th>
+                                            {/* <th scope="col">E-mail</th> */}
                                             <th scope="col">Level</th>
                                             <th scope="col">Region</th>
                                             <th scope="col">District</th>
@@ -828,7 +859,7 @@ export default function User({ data }: any) {
                                             <tr key={user.id}>
                                                 <td>{user?.otherNames} {user?.surname}</td>
                                                 <td>{user?.phoneNumber}</td>
-                                                <td>{user?.email}</td>
+                                                {/* <td>{user?.email}</td> */}
                                                 <td>{user?.UserLevel?.name}</td>
                                                 <td>{user?.Region?.name}</td>
                                                 <td>{user?.District?.name}</td>
@@ -873,7 +904,7 @@ export default function User({ data }: any) {
 
                                                                         setSurname(user.surname);
                                                                         setOtherNames(user.otherNames);
-                                                                        setEmail(user.email);
+                                                                        // setEmail(user.email);
                                                                         setPhoneNumber(user.phoneNumber);
                                                                         setDesignation(user.designation);
                                                                         setUserRole(user.userRoleId);
