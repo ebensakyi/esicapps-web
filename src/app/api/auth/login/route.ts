@@ -42,11 +42,17 @@ export async function POST(request: Request) {
     let isValid = await bcrypt.compare(password, user.password);
 
     if (isValid) {
+  
+
       await prisma.user.update({
         where: {
           id: user?.id,
         },
-        data: { loginTimes: user.loginTimes + 1 },
+        data: {
+          loginTimes: {
+            increment: 1, 
+          },
+        },
       });
 
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");

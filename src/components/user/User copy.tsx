@@ -124,11 +124,15 @@ export default function User({ data }: any) {
             if (otherNames == "") {
                 return toast.error("First name cannot be empty");
             }
-
+            if (email == "") {
+                return toast.error("Email cannot be empty");
+            }
             if (phoneNumber == "") {
                 return toast.error("PhoneNumber cannot be empty");
             }
-
+            if (designation == "") {
+                return toast.error("Designation cannot be empty");
+            }
             if (userRole == "") {
                 return toast.error("User role cannot be empty");
             }
@@ -220,7 +224,7 @@ export default function User({ data }: any) {
             if (loggedInUserLevel == 3) {
                 data = {
                     userRoleId: Number(userRole),
-                    userLevelId: Number(loggedInUserLevel),
+                    userLevelId: Number(selectedUserLevel),
                     surname,
                     otherNames,
                     email,
@@ -493,13 +497,13 @@ export default function User({ data }: any) {
                                 <form>
                                     <div className="row">
 
-
+                                        
                                         <div className="col-sm-3  mb-3">
                                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                                 First name
                                             </label>
                                             <div className="col-sm-12">
-                                                <input type="text" className="form-control" placeholder=' First name' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
+                                                <input type="text" className="form-control" placeholder='Other names' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
                                             </div>
                                         </div>
                                         <div className="col-sm-3 mb-3">
@@ -507,7 +511,7 @@ export default function User({ data }: any) {
                                                 Last name
                                             </label>
                                             <div className="col-sm-12">
-                                                <input type="text" className="form-control" placeholder='Last name' onChange={(e) => setSurname(e.target.value)} value={surname} />
+                                                <input type="text" className="form-control" placeholder='Surname' onChange={(e) => setSurname(e.target.value)} value={surname} />
                                             </div>
                                         </div>
                                         {/* <div className="col-sm-3  mb-3">
@@ -529,7 +533,7 @@ export default function User({ data }: any) {
                                                 <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
                                             </div>
                                         </div>
-
+                                  
                                         {/* <div className="col-sm-3  mb-3">
                                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                                 Designation/Role
@@ -550,25 +554,14 @@ export default function User({ data }: any) {
 
                                                     <option >Select user role</option>
                                                     {data.roles.map((role: any) => {
-                                                        if (loggedInUserLevel == 3) {
-                                                            if ((role.id == 2 || role.id == 6)) {
-                                                                return (
-                                                                    <option key={role.id} value={role.id}>
-                                                                        {role.name}
-                                                                    </option>
-                                                                );
-                                                            }
-                                                            return;
-
-                                                        }
-
-                                                        return <option key={role.id} value={role.id}>{role.name}</option>
-
+                                                        return (
+                                                            <option key={role.id} value={role.id}>{role.name}</option>
+                                                        )
                                                     })}
                                                 </select>
                                             </div>
-                                        </div>
-                                        {loggedInUserLevel != "3" ?
+                                        </div> 
+                                         {loggedInUserLevel != "3" ?
                                             <div className="col-sm-3  mb-3">
                                                 <label className="col-sm-12 col-form-label">Select user level</label>
 
@@ -865,7 +858,7 @@ export default function User({ data }: any) {
 
                                                                 <button
                                                                     className="dropdown-item btn btn-sm "
-                                                                    onClick={async (e) => {
+                                                                    onClick={async(e) =>  {
                                                                         e.preventDefault();
                                                                         setIsEditing(true);
 
@@ -882,7 +875,7 @@ export default function User({ data }: any) {
                                                                         setSelectedRegion(user.regionId);
                                                                         setSelectedDistrict(user.districtId);
 
-                                                                        await getDistrictsByRegion(user.regionId)
+                                                                     await   getDistrictsByRegion(user.regionId)
 
 
                                                                         // let phoneNumber = user.phoneNumber;

@@ -16,6 +16,12 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
     const session: any = await getServerSession(authOptions);
+    if(!session) {
+      return;
+    }
+
+    console.log(res);
+    
 
     // let loginUserLevel = session?.user?.userLevelId;
     // let fileUrl;
