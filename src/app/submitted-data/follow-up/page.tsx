@@ -27,13 +27,25 @@ async function getSubmittedData(searchParams: any) {
     return res.json()
 }
 
+async function getRegions() {
+
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store' });
+  
+    if (!response.ok) {
+      throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+  
+  }
+  
 
 export default async function Page({ searchParams }: any) {
     const followUpData = await getSubmittedData(searchParams)
+    const regions = await getRegions()
 
     // const { data: session } = useSession()
 
-    let data = { followUpData: followUpData }
+    let data = { followUpData: followUpData ,regions}
 
     return <FollowUp data={data} />
 

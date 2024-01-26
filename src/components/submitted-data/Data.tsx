@@ -252,9 +252,7 @@ export default function Data({ data }: any) {
         try {
             e.preventDefault();
 
-            console.log("filterBy=> ", filterBy);
-            console.log("filterValue==> ", filterValue);
-
+        
 
             if (filterBy == "national") {
                 return router.push("/");
@@ -358,26 +356,7 @@ export default function Data({ data }: any) {
                     </div>
 
                 </div>
-                {/* <div className="row mb-3 breadcrumb">
-                  <legend className="col-form-label col-sm-2 pt-0">Checkboxes</legend>
-                  <div className="col-sm-10">
-
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" id="gridCheck1"/>
-                      <label className="form-check-label" for="gridCheck1">
-                        Example checkbox
-                      </label>
-                    </div>
-
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" id="gridCheck2" checked/>
-                      <label className="form-check-label" for="gridCheck2">
-                        Example checkbox 2
-                      </label>
-                    </div>
-
-                  </div>
-                </div> */}
+            
 
 
 

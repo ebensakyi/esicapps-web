@@ -296,43 +296,43 @@ export default function Header() {
                                             data-bs-parent="#sidebar-nav"
                                         >
                                             <li>
-                                                <Link href="/submitted-data/follow-up?formId=1&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=1&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Residential</span>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="/submitted-data/follow-up?formId=2&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=2&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Eatery</span>
                                                 </Link>
                                             </li> <li>
-                                                <Link href="/submitted-data/follow-up?formId=3&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=3&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Health</span>
                                                 </Link>
                                             </li> <li>
-                                                <Link href="/submitted-data/follow-up?formId=4&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=4&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Hospitality</span>
                                                 </Link>
                                             </li> <li>
-                                                <Link href="/submitted-data/follow-up?formId=5&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=5&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Industry</span>
                                                 </Link>
                                             </li> <li>
-                                                <Link href="/submitted-data/follow-up?formId=6&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=6&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Institution</span>
                                                 </Link>
                                             </li> <li>
-                                                <Link href="/submitted-data/follow-up?formId=7&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=7&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Market</span>
                                                 </Link>
                                             </li> <li>
-                                                <Link href="/submitted-data/follow-up?formId=8&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                <Link href="/submitted-data/follow-up?formId=8&deleted=0&page=1">
                                                     <i className="bi bi-circle" />
                                                     <span>Sanitary</span>
                                                 </Link>

@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
 import { LOGIN_URL } from '@/config';
+import { toast } from 'react-toastify';
 
 
 
@@ -21,7 +22,9 @@ export default function FollowUp({ data }: any) {
     let userSession: any = session;
 
 
-
+    let nationalUser: any = userSession?.user?.userLevelId == 1;
+    let regionalUser: any = userSession?.user?.userLevelId == 2;
+    let districtUser: any = userSession?.user?.userLevelId == 3;
 
     // let inspectionDeletionAllowed: any = session?.user?.UserRole?.inspectionDeletionAllowed
     // let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
@@ -29,6 +32,7 @@ export default function FollowUp({ data }: any) {
 
     const searchTextRef: any = useRef(null);
     const filterRef: any = useRef(null);
+    const [loading, setLoading] = useState(false);
 
 
     // const { data: session } = useSession()
@@ -42,9 +46,16 @@ export default function FollowUp({ data }: any) {
 
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
-
+    const [region, setRegion] = useState("");
+    const [district, setDistrict] = useState("");
+    const [electoralArea, setElectoralArea] = useState("");
+    const [community, setCommunity] = useState("");
 
     const [searchText, setSearchText] = useState();
+    const [districtsData, setDistrictsData] = useState([]);
+    const [electoralAreasData, setElectoralAreasData] = useState([]);
+    const [communitiesData, setCommunitiesData] = useState([]);
+    const [isPublished, setIsPublished] = useState("");
 
 
     const [filterValue, setFilterValue] = useState("");
@@ -98,6 +109,73 @@ export default function FollowUp({ data }: any) {
             `${pathname}?formId=${formId}&deleted=${deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
 
         );
+    };
+    const handleFilter = async (e: any) => {
+        try {
+            e.preventDefault();
+
+
+
+
+            if (filterBy == "national") {
+                return router.push("/");
+            }
+            if (filterBy == "" || filterBy == "") {
+                return toast.error("Please select a filter");
+            }
+            if (filterBy == "communityId" && community == "") {
+                return toast.error("Please select community");
+            }
+            if (filterBy == "electoralAreaId" && electoralArea == "") {
+                console.log("filterBy == electoralAreaId");
+                
+                return toast.error("Please select electoral area");
+            }
+            if (filterBy == "districtId" && district == "") {
+                console.log("filterBy == districtId");
+
+                return toast.error("Please select districtt");
+            }
+            if (filterBy == "regionId" && region == "") {
+                return toast.error("Please select region");
+            }
+
+
+
+
+            setLoading(true)
+
+            let val = await returnFilterValue(filterBy);
+
+
+            router.push(
+                `${pathname}?filterBy=${filterBy}&published=${isPublished}&filterValue=${filterValue}&from=${from}&to=${to}`
+            );
+
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+    const returnFilterValue = async (filterBy: any) => {
+        if (filterBy == "regionId") {
+            setFilterValue(region);
+            return region;
+        }
+        if (filterBy == "districtId") {
+            setFilterValue(district);
+            return district;
+        }
+        if (filterBy == "electoralAreaId") {
+            setFilterValue(electoralArea);
+            return electoralArea;
+        }
+        if (filterBy == "community") {
+            setFilterValue(community);
+            return community;
+        }
     };
 
     const handleRating = (rating: number) => {
@@ -162,6 +240,39 @@ export default function FollowUp({ data }: any) {
         }
     };
 
+    const getDistrictsByRegion = async (regionId: any) => {
+
+        try {
+            const response = await axios.get(
+                `/api/primary-data/district?regionId=${regionId}&get_all=1`
+            );
+
+            setDistrictsData(response.data.response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const getElectoralAreasByDistrict = async (districtId: any) => {
+        try {
+            const response = await axios.get(
+                "/api/primary-data/electoral-area?districtId=" + districtId + "&get_all=1"
+            );
+            setElectoralAreasData(response.data.response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const getCommunitiesByElectoralArea = async (electoralAreaId: any) => {
+        try {
+            const response = await axios.get(
+                "/api/primary-data/community?electoralAreaId=" + electoralAreaId + "&get_all=1"
+            );
+
+            setCommunitiesData(response.data.response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleSearch = () => {
         try {
@@ -179,6 +290,17 @@ export default function FollowUp({ data }: any) {
             console.log(error);
         }
     };
+    const handleFilterReset = () => {
+        setRegion("")
+        setDistrict("")
+        setElectoralArea("")
+        setCommunity("")
+
+        router.push(
+            `${pathname}`
+
+        );
+    }
 
 
 
@@ -197,7 +319,27 @@ export default function FollowUp({ data }: any) {
                     </ol>
                 </nav> */}
 
+<br/>
+<div className=" mb-3">
 
+<div className="row align-items-right gy-3 mb-3">
+
+    <div className="col-md-4">
+        <div className="input-group mb-3">
+            <button
+                type="button"
+                className="btn btn-sm btn-success  "
+                onClick={() => handleExportAll()}
+            >
+                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                Export as excel
+            </button>
+        </div>
+    </div>
+
+</div>
+
+</div>
 
 
             </div>
@@ -211,6 +353,387 @@ export default function FollowUp({ data }: any) {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
+                                    <div className="row row-cols-lg-auto g-3 align-items-center">
+                                            <div className="col-md-2">
+                                                <label className="form-label mb-0">Publishing status</label>
+
+                                                <select ref={filterRef}
+                                                    id="filterRef"
+                                                    name="filterRef" className="form-select input-group" onChange={(e: any) => {
+                                                        setIsPublished(e.target.value)
+                                                    }}>
+                                                    <option value="undefined" selected>
+                                                        Show all
+                                                    </option>
+                                                    <option value="1">
+                                                        Published
+                                                    </option>
+                                                    <option value="0">
+                                                        Unpublished
+                                                    </option>
+                                                    {/* <option value="1">
+                                                        Deleted
+                                                    </option> */}
+                                                </select>
+                                            </div>
+                                            <div className="col-md-2">
+                                                <label className="form-label mb-0">Select level</label>
+
+                                                <select
+                                                    className="form-control"
+                                                    aria-label="Default select example"
+                                                    onChange={(e: any) => {
+                                                        setFilterBy(e.target.value);
+                                                        setRegion("")
+                                                        setDistrict("")
+                                                        setElectoralArea("")
+                                                        setCommunity("")
+
+                                                        if (regionalUser) {
+                                                            getDistrictsByRegion(region);
+                                                        }
+
+                                                        if (districtUser) {
+                                                            getElectoralAreasByDistrict(district);
+                                                        }
+                                                        if (e.target.value == "national") {
+                                                            setFilterValue("");
+                                                        }
+                                                    }}
+                                                    value={filterBy}
+                                                >
+                                                    <option value={""}>Filter by </option>
+                                                    <option hidden={!nationalUser} value="national">
+                                                        National
+                                                    </option>
+                                                    <option hidden={!nationalUser} value="regionId">
+                                                        Region
+                                                    </option>
+                                                    <option
+                                                        hidden={!nationalUser && !regionalUser}
+                                                        value="districtId"
+                                                    >
+                                                        District
+                                                    </option>
+                                                    <option
+                                                        hidden={!nationalUser && !regionalUser && !districtUser}
+                                                        value="electoralAreaId"
+                                                    >
+                                                        Electoral Area
+                                                    </option>
+                                                    <option
+                                                        hidden={!nationalUser && !regionalUser && !districtUser}
+                                                        value="communityId"
+                                                    >
+                                                        Community
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            {filterBy == "regionId" ? (
+                                                <div className="col-md-2">
+                                                    <label className="form-label mb-0">Select region</label>
+                                                    <select
+                                                        className="form-control"
+                                                        aria-label="Default select example"
+                                                        onChange={async (e: any) => {
+                                                            setRegion(e.target.value);
+
+                                                            setFilterValue(e.target.value);
+                                                        }}
+                                                        value={region}
+                                                    >
+                                                        {" "}
+                                                        <option value={""}>Select region </option>
+                                                        {data.regions?.map((data: any) => (
+                                                            <option key={data.id} value={data.id}>
+                                                                {data.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {filterBy == "districtId" ? (
+                                                <>
+                                                    {nationalUser ? (
+                                                        <div className="col-md-2">
+                                                            <label className="form-label mb-0">Select region</label>
+                                                            <select
+                                                                className="form-control"
+                                                                aria-label="Default select example"
+                                                                onChange={async (e: any) => {
+                                                                    setFilterValue(e.target.value);
+                                                                    setRegion(e.target.value);
+
+                                                                    await getDistrictsByRegion(e.target.value);
+                                                                }}
+                                                                value={region}
+                                                            >
+                                                                {" "}
+                                                                <option value={""}>Select region </option>
+                                                                {data.regions?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    <div className="col-md-2">
+                                                        <label className="form-label mb-0">Select district</label>
+                                                        <select
+                                                            className="form-control"
+                                                            aria-label="Default select example"
+                                                            onChange={(e: any) => {
+                                                                setFilterValue(e.target.value);
+                                                                setDistrict(e.target.value);
+                                                            }}
+                                                            value={district}
+                                                        >
+                                                            {" "}
+                                                            <option value={""}>Select </option>
+                                                            {districtsData?.map((data: any) => (
+                                                                <option key={data.id} value={data.id}>
+                                                                    {data.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {filterBy == "electoralAreaId" ? (
+                                                <>
+                                                    {nationalUser ? (
+                                                        <div className="col-md-2">
+                                                            <label className="form-label mb-0">Select region</label>
+                                                            <select
+                                                                className="form-control"
+                                                                aria-label="Default select example"
+                                                                value={region}
+                                                                onChange={async (e: any) => {
+                                                                    setFilterValue(e.target.value);
+                                                                    setRegion(e.target.value);
+
+                                                                    await getDistrictsByRegion(e.target.value);
+                                                                }}
+                                                            >
+                                                                {" "}
+                                                                <option value={""}>Select </option>
+                                                                {data.regions?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    {nationalUser || regionalUser ? (
+                                                        <div className="col-md-2">
+                                                            <label className="form-label mb-0">Select district</label>
+                                                            <select
+                                                                className="form-control"
+                                                                aria-label="Default select example"
+                                                                onChange={async (e: any) => {
+                                                                    setFilterValue(e.target.value);
+                                                                    setDistrict(e.target.value);
+
+                                                                    await getElectoralAreasByDistrict(e.target.value);
+                                                                }}
+                                                                value={district}
+                                                            >
+                                                                {" "}
+                                                                <option value={""}>Select </option>
+                                                                {districtsData?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    <div className="col-md-2">
+                                                        <label className="form-label mb-0">
+                                                            Select Electoral Area
+                                                        </label>
+                                                        <select
+                                                            className=" form-control "
+                                                            aria-label="Default select example"
+                                                            onChange={async (e: any) => {
+                                                                setFilterValue(e.target.value);
+                                                                setElectoralArea(e.target.value);
+
+                                                                await getCommunitiesByElectoralArea(e.target.value);
+                                                            }}
+                                                            value={electoralArea}
+                                                        >
+                                                            {" "}
+                                                            <option value={""}>Select </option>
+                                                            {electoralAreasData?.map((data: any) => (
+                                                                <option key={data.id} value={data.id}>
+                                                                    {data.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {filterBy == "communityId" ? (
+                                                <>
+                                                    {nationalUser ? (
+                                                        <div className="col-md-2">
+                                                            <label className="form-label mb-0">Select region</label>
+                                                            <select
+                                                                className="form-control"
+                                                                aria-label="Default select example"
+                                                                onChange={async (e: any) => {
+                                                                    setFilterValue(e.target.value);
+                                                                    setRegion(e.target.value);
+
+                                                                    await getDistrictsByRegion(e.target.value);
+                                                                }}
+                                                                value={region}
+                                                            >
+                                                                {" "}
+                                                                <option value={""}>Select </option>
+                                                                {data.regions?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    {nationalUser || regionalUser ? (
+                                                        <div className="col-md-2">
+                                                            <label className="form-label mb-0">Select district</label>
+                                                            <select
+                                                                className="form-control"
+                                                                aria-label="Default select example"
+                                                                onChange={async (e: any) => {
+                                                                    setFilterValue(e.target.value);
+                                                                    setDistrict(e.target.value);
+                                                                    await getElectoralAreasByDistrict(e.target.value);
+                                                                }}
+                                                                value={district}
+                                                            >
+                                                                {" "}
+                                                                <option value={""}>Select </option>
+                                                                {districtsData?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    <div className="col-md-2">
+                                                        <label className="form-label mb-0">
+                                                            Select Electoral Area
+                                                        </label>
+                                                        <select
+                                                            className=" form-control "
+                                                            aria-label="Default select example"
+                                                            onChange={async (e: any) => {
+                                                                setFilterValue(e.target.value);
+                                                                setElectoralArea(e.target.value);
+
+                                                                await getCommunitiesByElectoralArea(e.target.value);
+                                                            }}
+                                                            value={electoralArea}
+                                                        >
+                                                            {" "}
+                                                            <option value={""}> Select  </option>
+                                                            {electoralAreasData?.map((data: any) => (
+                                                                <option key={data.id} value={data.id}>
+                                                                    {data.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>{" "}
+                                                    <div className="col-md-2">
+                                                        <label className="form-label mb-0">Select community</label>
+                                                        <select
+                                                            className=" form-control "
+                                                            aria-label="Default select example"
+                                                            onChange={(e: any) => {
+                                                                setFilterValue(e.target.value);
+                                                                setCommunity(e.target.value);
+                                                            }}
+                                                            value={community}
+                                                        >
+                                                            {" "}
+                                                            <option value={""}>Select </option>
+                                                            {communitiesData?.map((data: any) => (
+                                                                <option key={data.id} value={data.id}>
+                                                                    {data.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )}
+
+                                            {/* <div className="col-md-12">
+              <label className="form-label mb-0">Start Date</label>
+              <input
+                type="date"
+                className="form-control"
+                onChange={(e) => setFrom(e.target.value)}
+                value={from}
+              />
+            </div>
+            <div className="col-md-12">
+              <label className="form-label mb-0">End Date</label>
+
+              <input
+                type="date"
+                className="form-control"
+                onChange={(e) => setTo(e.target.value)}
+                value={to}
+              />
+            </div> */}
+
+                                            <div className="col-12">
+                                                <label className="form-label mb-0">.</label>
+                                                <button
+                                                    type="submit"
+                                                    className="form-control btn btn-primary"
+                                                    onClick={(e: any) => handleFilter(e)}
+                                                >
+                                                    Filter
+                                                </button>
+                                            </div>
+                                            <div className="col-12">
+                                                <label className="form-label mb-0">.</label>
+                                                <button
+                                                    type="submit"
+                                                    className="form-control btn btn-danger"
+                                                    onClick={(e: any) => handleFilterReset()}
+                                                >
+                                                    Reset
+                                                </button>
+                                            </div>
+
+                                        </div>
                                         <form className="row g-3">
                                             {/* <div className="col-md-2">
                                 <input type="text" className="form-control" placeholder="City" />
@@ -218,19 +741,9 @@ export default function FollowUp({ data }: any) {
 
 
 
-                                            <div className="col-md-4">
-                                                <div className="input-group mb-3">
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-sm btn-success  "
-                                                        onClick={handleExportAll}
-                                                    >
-                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                                                        Export as excel
-                                                    </button>
-                                                </div>
-                                            </div>
+                                           
                                         </form>
+                                        <br/><br/>
                                         {/* <div className="row">
                                             <div className="col-md-3">
                                                 <button
@@ -255,6 +768,7 @@ export default function FollowUp({ data }: any) {
                                                 </div>
                                             </div>
                                         </div> */}
+
                                     </div>
                                     <div className="card-body table-responsive">
                                         {/* <h5 className="card-title">Datatables</h5> */}
