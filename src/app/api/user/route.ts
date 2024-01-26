@@ -94,7 +94,6 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-        console.log(">>>>>>>>>>>>>searchParams ",searchParams);
         
     const districtId = searchParams.get("districtId") || undefined;
     let exportFile = searchParams.get("exportFile");
