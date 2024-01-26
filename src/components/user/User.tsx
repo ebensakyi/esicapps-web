@@ -107,7 +107,7 @@ export default function User({ data }: any) {
 
 
     const handleFilterReset = () => {
-    
+
 
         router.push(
             `${pathname}?page=${page}&searchText=`
@@ -454,7 +454,7 @@ export default function User({ data }: any) {
             setExporting(true);
             let searchText = searchParams.get('searchText')
             console.log(`searchText==> ${searchText}`);
-            
+
             const response = await axios.get(
                 `/api/user?exportFile=true&searchText=${searchText}`,
 
@@ -465,8 +465,8 @@ export default function User({ data }: any) {
 
             if (response.status == 200) {
                 router.replace(response.data);
-               
-            } 
+
+            }
         } catch (error) {
             setExporting(false)
             console.log(error);
@@ -586,68 +586,68 @@ export default function User({ data }: any) {
                                                 </select>
                                             </div>
                                         </div>
-                                            <div className="col-sm-3  mb-3">
-                                                <label className="col-sm-12 col-form-label">Select user level</label>
+                                        <div className="col-sm-3  mb-3">
+                                            <label className="col-sm-12 col-form-label">Select user level</label>
 
-                                                <div className="col-sm-12">
-                                                    <select
-                                                        className="form-select"
-                                                        aria-label="Default select example"
-                                                        onChange={(e: any) => {
+                                            <div className="col-sm-12">
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                    onChange={(e: any) => {
 
 
-                                                            setSelectedUserLevel(e.target.value);
+                                                        setSelectedUserLevel(e.target.value);
+                                                        setSelectedRegion("");
+                                                        setSelectedDistrict("");
+                                                        if (selectedUserLevel == "1") {
                                                             setSelectedRegion("");
                                                             setSelectedDistrict("");
-                                                            if (selectedUserLevel == "1") {
-                                                                setSelectedRegion("");
-                                                                setSelectedDistrict("");
-                                                            }
-                                                            // if (selectedUserLevel == "2") {
-                                                            //     setDistrict("");
-                                                            // }
+                                                        }
+                                                        // if (selectedUserLevel == "2") {
+                                                        //     setDistrict("");
+                                                        // }
 
 
-                                                            if (selectedUserLevel == "2") {
-                                                                //console.log("selectedUserLevel...", selectedUserLevel);
+                                                        if (selectedUserLevel == "2") {
+                                                            //console.log("selectedUserLevel...", selectedUserLevel);
 
-                                                                // getDistrictsByRegion(loggedInUserRegion);
+                                                            // getDistrictsByRegion(loggedInUserRegion);
 
-                                                                setSelectedRegion("");
-                                                            }
+                                                            setSelectedRegion("");
+                                                        }
 
-                                                            if (selectedUserLevel == "3") {
-                                                                console.log("selectedUserLevel...", selectedUserLevel);
+                                                        if (selectedUserLevel == "3") {
+                                                            console.log("selectedUserLevel...", selectedUserLevel);
 
-                                                                // getDistrictsByRegion(loggedInUserRegion);
+                                                            // getDistrictsByRegion(loggedInUserRegion);
 
-                                                                setSelectedRegion("");
-                                                            }
+                                                            setSelectedRegion("");
+                                                        }
 
-                                                        }}
-                                                        value={selectedUserLevel}
+                                                    }}
+                                                    value={selectedUserLevel}
+                                                >
+                                                    <option >Select user level</option>
+                                                    <option hidden={loggedInUserLevel != 1} value="1">
+                                                        National
+                                                    </option>
+                                                    <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
+                                                        Region
+                                                    </option>
+                                                    <option
+                                                        hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
+                                                        value="3"
                                                     >
-                                                        <option >Select user level</option>
-                                                        <option hidden={loggedInUserLevel != 1} value="1">
-                                                            National
-                                                        </option>
-                                                        <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
-                                                            Region
-                                                        </option>
-                                                        <option
-                                                            hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
-                                                            value="3"
-                                                        >
-                                                            District
-                                                        </option>
-                                                        {/* {data.userLevels.map((ul: any) => {
+                                                        District
+                                                    </option>
+                                                    {/* {data.userLevels.map((ul: any) => {
                                                     return (
                                                         <option key={ul.id} value={ul.id}>{ul.name}</option>
                                                     )
                                                 })} */}
-                                                    </select>
-                                                </div>
-                                            </div> 
+                                                </select>
+                                            </div>
+                                        </div>
                                         {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
                                             <div className="col-sm-3 mb-3">
                                                 <label className="col-sm-12 col-form-label">Select region</label>
@@ -720,28 +720,28 @@ export default function User({ data }: any) {
                                                 ) : (
                                                     <></>
                                                 )}
-                                                 {loggedInUserLevel != "1" ?
-                                                <div className="col-sm-3  mb-3">
-                                                    <label className="col-sm-12 col-form-label">Select district</label>
+                                                {loggedInUserLevel != "1" ?
+                                                    <div className="col-sm-3  mb-3">
+                                                        <label className="col-sm-12 col-form-label">Select district</label>
 
-                                                    <div className="col-sm-12">
-                                                        <select
-                                                            className="form-control"
-                                                            aria-label="Default select example"
-                                                            onChange={(e: any) => {
-                                                                setSelectedDistrict(e.target.value);
-                                                            }}
-                                                            value={selectedDistrict}
-                                                        >
-                                                            <option >Select district </option>
-                                                            {districts?.map((data: any) => (
-                                                                <option key={data.id} value={data.id}>
-                                                                    {data.name}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    </div>
-                                                </div>:<></>}
+                                                        <div className="col-sm-12">
+                                                            <select
+                                                                className="form-control"
+                                                                aria-label="Default select example"
+                                                                onChange={(e: any) => {
+                                                                    setSelectedDistrict(e.target.value);
+                                                                }}
+                                                                value={selectedDistrict}
+                                                            >
+                                                                <option >Select district </option>
+                                                                {districts?.map((data: any) => (
+                                                                    <option key={data.id} value={data.id}>
+                                                                        {data.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </div> : <></>}
                                             </>
                                         ) : (
                                             <></>
@@ -810,25 +810,25 @@ export default function User({ data }: any) {
 
                                     </div>
                                     <div className="col-2">
-                                                {/* <label className="form-label mb-0">.</label> */}
-                                                <button
-                                                    type="submit"
-                                                    className="form-control btn btn-danger"
-                                                    onClick={(e: any) => handleFilterReset()}
-                                                >
-                                                    Reset
-                                                </button>
-                                            </div>
+                                        {/* <label className="form-label mb-0">.</label> */}
+                                        <button
+                                            type="submit"
+                                            className="form-control btn btn-danger"
+                                            onClick={(e: any) => handleFilterReset()}
+                                        >
+                                            Reset
+                                        </button>
+                                    </div>
 
                                     <div className="col-md-4">
                                         <div className="input-group mb-3">
                                             <button
                                                 type="button"
                                                 className="btn btn-sm btn-success  "
-                                                onClick={()=>handleExportAll()}
+                                                onClick={() => handleExportAll()}
                                             >
                                                 <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                                              
+
                                                 {exporting ? 'Exporting...' : 'Export as Excel'}
 
                                             </button>
@@ -842,8 +842,9 @@ export default function User({ data }: any) {
                                         <tr>
                                             <th scope="col">Name</th>
                                             <th scope="col">Phone</th>
-                                            {/* <th scope="col">E-mail</th> */}
                                             <th scope="col">Level</th>
+                                            <th scope="col">Role</th>
+
                                             <th scope="col">Region</th>
                                             <th scope="col">District</th>
                                             <th scope="col">OTP</th>
@@ -861,6 +862,8 @@ export default function User({ data }: any) {
                                                 <td>{user?.phoneNumber}</td>
                                                 {/* <td>{user?.email}</td> */}
                                                 <td>{user?.UserLevel?.name}</td>
+                                                <td>{user?.UserRole?.name}</td>
+
                                                 <td>{user?.Region?.name}</td>
                                                 <td>{user?.District?.name}</td>
                                                 <td><span style={{ "cursor": "pointer" }}

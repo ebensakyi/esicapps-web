@@ -20,7 +20,6 @@ export async function POST(request: Request) {
       return;
     }
 
-
     // let loginUserLevel = session?.user?.userLevelId;
     // let fileUrl;
 
@@ -94,7 +93,6 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-        
     const districtId = searchParams.get("districtId") || undefined;
     let exportFile = searchParams.get("exportFile");
 
@@ -115,10 +113,32 @@ export async function GET(request: Request) {
       });
     }
 
+    if (exportFile) {
+      skip = 0;
+    }
+
     // let userLevel = loggedInUserData?.userLevelId;
     // let region = loggedInUserData?.regionId;
     // let district = loggedInUserData?.districtId;
     // let users;
+
+    const whereConditions: any =
+      searchText !== ""
+        ? {
+            OR: [
+              { surname: { contains: searchText, mode: "insensitive" } },
+              { otherNames: { contains: searchText, mode: "insensitive" } },
+              { phoneNumber: { contains: searchText, mode: "insensitive" } },
+              { email: { contains: searchText, mode: "insensitive" } },
+              {
+                District: {
+                  name: { contains: searchText, mode: "insensitive" },
+                },
+              },
+            ],
+            deleted: 0,
+          }
+        : { deleted: 0 };
 
     if (districtId) {
       const response = await prisma.user.findMany({
@@ -214,308 +234,228 @@ export async function GET(request: Request) {
         maxPage: Math.ceil(count / perPage),
       });
     }
-    if (loginUserLevel == 2) {
-      const count = await prisma.user.count({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    surname: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    otherNames: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    phoneNumber: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    email: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-                regionId: Number(loginUserRegionId),
-                deleted: 0,
-              }
-            : { regionId: Number(loginUserRegionId), deleted: 0 },
-      });
+    if (loginUserLevel == 1) {
+      const count = await prisma.user.count({ where: whereConditions });
 
       const response = await prisma.user.findMany({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    surname: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    otherNames: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    phoneNumber: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    email: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-                regionId: Number(loginUserRegionId),
-                deleted: 0,
-              }
-            : { regionId: Number(loginUserRegionId), deleted: 0 },
+        where: whereConditions,
         include: {
           Region: true,
           District: true,
           UserRole: true,
           UserLevel: true,
         },
-        orderBy: {
-          id: "desc",
-        },
+        orderBy: { id: "desc" },
+        skip: exportFile ? undefined : skip,
+        take: exportFile ? undefined : perPage,
       });
 
       if (exportFile) {
-        let url = await export2Excel(response);
-
+        const exportResponse = await prisma.user.findMany({
+          where: whereConditions,
+          include: {
+            Region: true,
+            District: true,
+            UserRole: true,
+            UserLevel: true,
+          },
+          orderBy: { id: "desc" },
+        });
+        const url = await export2Excel(exportResponse);
         return NextResponse.json(url);
       }
 
       return NextResponse.json({
         response,
-        curPage: curPage,
+        curPage,
         maxPage: Math.ceil(count / perPage),
       });
+    }
+
+    if (loginUserLevel == 2) {
+      const count = await prisma.user.count({ where: { ...whereConditions, regionId: Number(loginUserRegionId) }, });
+
+      const response = await prisma.user.findMany({
+        where: { ...whereConditions, regionId: Number(loginUserRegionId) },
+        include: {
+          Region: true,
+          District: true,
+          UserRole: true,
+          UserLevel: true,
+        },
+        orderBy: { id: "desc" },
+        skip: exportFile ? undefined : skip,
+        take: exportFile ? undefined : perPage,
+      });
+
+      if (exportFile) {
+        const exportResponse = await prisma.user.findMany({
+          where: { ...whereConditions, regionId: Number(loginUserRegionId) },
+          include: {
+            Region: true,
+            District: true,
+            UserRole: true,
+            UserLevel: true,
+          },
+          orderBy: { id: "desc" },
+        });
+        const url = await export2Excel(exportResponse);
+        return NextResponse.json(url);
+      }
+
+      return NextResponse.json({
+        response,
+        curPage,
+        maxPage: Math.ceil(count / perPage),
+      });
+     
     }
 
     if (loginUserLevel == 3) {
-console.log("searchText===> ",searchText);
-
-
-      const count = await prisma.user.count({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    surname: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    otherNames: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    phoneNumber: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    email: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-                districtId: Number(loginUserDistrictId),
-                deleted: 0,
-              }
-            : { districtId: Number(loginUserDistrictId), deleted: 0 },
-      });
+      const count = await prisma.user.count({ where:  { ...whereConditions, districtId: Number(loginUserDistrictId) }, });
 
       const response = await prisma.user.findMany({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    surname: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    otherNames: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    phoneNumber: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    email: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-                districtId: Number(loginUserDistrictId),
-                deleted: 0,
-              }
-            : { districtId: Number(loginUserDistrictId), deleted: 0 },
+        where:  { ...whereConditions, districtId: Number(loginUserDistrictId) },
         include: {
           Region: true,
           District: true,
           UserRole: true,
           UserLevel: true,
         },
-        orderBy: {
-          id: "desc",
-        },
+        orderBy: { id: "desc" },
+        skip: exportFile ? undefined : skip,
+        take: exportFile ? undefined : perPage,
       });
 
-
-      
-
       if (exportFile) {
-        let url = await export2Excel(response);
-
+        const exportResponse = await prisma.user.findMany({
+          where: { ...whereConditions, districtId: Number(loginUserDistrictId) },
+          include: {
+            Region: true,
+            District: true,
+            UserRole: true,
+            UserLevel: true,
+          },
+          orderBy: { id: "desc" },
+        });
+        const url = await export2Excel(exportResponse);
         return NextResponse.json(url);
       }
 
       return NextResponse.json({
         response,
-        curPage: curPage,
+        curPage,
         maxPage: Math.ceil(count / perPage),
       });
+     
     }
 
-    const response = await prisma.user.findMany({
-      where:
-        searchText != ""
-          ? {
-              OR: [
-                {
-                  surname: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  otherNames: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  phoneNumber: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  email: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  District: {
-                    name: { contains: searchText, mode: "insensitive" },
-                  },
-                },
-              ],
-              deleted: 0,
-            }
-          : { deleted: 0 },
-      include: {
-        Region: true,
-        District: true,
-        UserRole: true,
-        UserLevel: true,
-      },
-      orderBy: {
-        id: "desc",
-      },
-      skip: skip,
-      take: perPage,
-    });
+    // const response = await prisma.user.findMany({
+    //   where:
+    //     searchText != ""
+    //       ? {
+    //           OR: [
+    //             {
+    //               surname: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               otherNames: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               phoneNumber: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               email: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               District: {
+    //                 name: { contains: searchText, mode: "insensitive" },
+    //               },
+    //             },
+    //           ],
+    //           deleted: 0,
+    //         }
+    //       : { deleted: 0 },
+    //   include: {
+    //     Region: true,
+    //     District: true,
+    //     UserRole: true,
+    //     UserLevel: true,
+    //   },
+    //   orderBy: {
+    //     id: "desc",
+    //   },
+    //   skip: skip,
+    //   take: perPage,
+    // });
 
-    const count = await prisma.user.count({
-      where:
-        searchText != ""
-          ? {
-              OR: [
-                {
-                  surname: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  otherNames: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  phoneNumber: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  email: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  District: {
-                    name: { contains: searchText, mode: "insensitive" },
-                  },
-                },
-              ],
-              deleted: 0,
-            }
-          : { deleted: 0 },
+    // const count = await prisma.user.count({
+    //   where:
+    //     searchText != ""
+    //       ? {
+    //           OR: [
+    //             {
+    //               surname: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               otherNames: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               phoneNumber: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               email: {
+    //                 contains: searchText,
+    //                 mode: "insensitive",
+    //               },
+    //             },
+    //             {
+    //               District: {
+    //                 name: { contains: searchText, mode: "insensitive" },
+    //               },
+    //             },
+    //           ],
+    //           deleted: 0,
+    //         }
+    //       : { deleted: 0 },
 
-      orderBy: {
-        id: "desc",
-      },
-    });
+    //   orderBy: {
+    //     id: "desc",
+    //   },
+    // });
 
-    if (exportFile) {
-      let url = await export2Excel(response);
+    // if (exportFile) {
+    //   let url = await export2Excel(response);
 
-      return NextResponse.json(url);
-    }
+    //   return NextResponse.json(url);
+    // }
 
-    return NextResponse.json({
-      response,
-      curPage: curPage,
-      maxPage: Math.ceil(count / perPage),
-    });
+    // return NextResponse.json({
+    //   response,
+    //   curPage: curPage,
+    //   maxPage: Math.ceil(count / perPage),
+    // });
   } catch (error) {
     return NextResponse.json(error);
   }
