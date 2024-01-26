@@ -8,20 +8,16 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    
-
     let phoneNumber = res.phoneNumber;
     let password = res.password;
 
-    const user : any = await prisma.user.findFirst({
+    let user: any = await prisma.user.findFirst({
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,
       },
-      include: { Region: true, District: true,UserRole:true },
+      include: { Region: true, District: true, UserRole: true },
     });
-
-    
 
     const pageAccess = await prisma.pageAccess.findMany({
       where: {
@@ -30,11 +26,9 @@ export async function POST(request: Request) {
       },
     });
 
-
     let privileges = pageAccess?.map((d: any) => {
       return d.pageId;
     });
-
 
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");
@@ -47,9 +41,14 @@ export async function POST(request: Request) {
 
     let isValid = await bcrypt.compare(password, user.password);
 
-    
-
     if (isValid) {
+      await prisma.user.update({
+        where: {
+          id: user?.id,
+        },
+        data: { loginTimes: user.loginTimes + 1 },
+      });
+
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
       return NextResponse.json({ ...user, token, privileges });
@@ -61,7 +60,4 @@ export async function POST(request: Request) {
   }
 }
 
-
-export async function GET(request: Request) {
-  
-}
+export async function GET(request: Request) {}
