@@ -1,4 +1,4 @@
-import { AWS_S3_URL } from '@/config';
+import { AWS_S3_PROFILE_IMAGES_URL, AWS_S3_URL } from '@/config';
 import Image from 'next/image';
 
 interface AvatarImageProps {
@@ -16,7 +16,8 @@ const AvatarImage: React.FC<AvatarImageProps> = ({
   height,
   width,
 }) => {
-  const src = imagePath ? `${AWS_S3_URL}${imagePath}` : defaultImagePath;
+  const src = imagePath ? `${AWS_S3_PROFILE_IMAGES_URL}${imagePath}` : defaultImagePath;
+  
 
   return <Image src={src} alt={alt} height={height} width={width} />;
 };

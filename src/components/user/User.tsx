@@ -886,7 +886,7 @@ export default function User({ data }: any) {
                                     <tbody>
                                         {data.users.response.map((user: any) => (
                                             <tr key={user.id}>
-                                                <td><AvatarImage defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={24} width={24}/></td>
+                                                <td><AvatarImage imagePath={user?.imagePath} defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={32} width={32}/></td>
                                                 <td>{user?.otherNames} {user?.surname}</td>
                                                 <td>{user?.phoneNumber}</td>
                                                 {/* <td>{user?.email}</td> */}

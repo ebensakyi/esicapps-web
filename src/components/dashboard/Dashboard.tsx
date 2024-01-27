@@ -866,7 +866,7 @@ export default function Dashboard({ data }: any) {
           <></>
         )}
 
-        {/* <div className="col-md-12">
+        <div className="col-md-12">
               <label className="form-label mb-0">Start Date</label>
               <input
                 type="date"
@@ -884,7 +884,7 @@ export default function Dashboard({ data }: any) {
                 onChange={(e) => setTo(e.target.value)}
                 value={to}
               />
-            </div> */}
+            </div>
 
         <div className="col-12">
           <label className="form-label mb-0">.</label>

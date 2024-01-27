@@ -47,21 +47,18 @@ export async function GET(request: Request) {
 
     let { searchParams } = new URL(request.url);
 
+
+
+
+
     let filterBy: any = searchParams.get("filterBy")?.toString();
-    let filterValue: any = searchParams.get("filterValue")?.toString();
-
-    // let startDate: any = searchParams.get("from");
-    // let endDate: any = searchParams.get("to");
-
-    let startDateParam = searchParams.get("from");
-    let endDateParam = searchParams.get("to");
-
-    let startDate = startDateParam ? new Date(startDateParam) : null;
-    let endDate = endDateParam ? new Date(endDateParam) : null;
+    let filterValue: any =
+      searchParams.get("filterValue")?.toString()
+   
 
     if (userLevel == 1 && filterBy == "undefined") {
       filterBy = "undefined";
-      filterValue = "undefined";
+      filterValue = "undefined"
     }
     if (userLevel == 2 && filterBy == "undefined") {
       filterBy = "regionId";
@@ -71,78 +68,54 @@ export async function GET(request: Request) {
       filterBy = "districtId";
       filterValue = districtId;
     }
+   
 
-    // let baselineCount = await prisma.inspection.count({
-    //   where:
-    //     filterBy == "undefined"
-    //       ? { inspectionTypeId: 1, deleted: 0 }
-    //       : { inspectionTypeId: 1, [filterBy]: Number(filterValue), deleted: 0 },
-    // });
 
     let baselineCount = await prisma.inspection.count({
-      where: {
-        inspectionTypeId: 1,
-        deleted: 0,
-        ...(filterBy !== "undefined" && {
-          [filterBy]: Number(filterValue),
-        }),
-        // createdAt: {
-        //   gte: startDate,
-        //   lte: endDate,
-        // },
-
-        // ...(startDate && {
-        //   createdAt: {
-        //     gte: startDate,
-        //   },
-        // }),
-        // ...(endDate && {
-        //   createdAt: {
-        //     lte: endDate,
-        //   },
-        // }),
-      },
+      where:
+        filterBy == "undefined"
+          ? { inspectionTypeId: 1, deleted: 0 }
+          : { inspectionTypeId: 1, [filterBy]: Number(filterValue), deleted: 0 },
     });
 
     let sanitationReportsCount = await prisma.sanitationReport.count({
       where:
-        filterBy == "undefined" ||
-        filterBy == "electoralAreaId" ||
-        filterBy == "communityId"
-          ? { deleted: 0 }
-          : { [filterBy]: Number(filterValue), deleted: 0 },
+        filterBy == "undefined" ||  filterBy == "electoralAreaId" ||  filterBy == "communityId" 
+          ? {  deleted: 0 }
+          : {  [filterBy]: Number(filterValue), deleted: 0 },
     });
+
+
+    
+    
 
     let reInspectionCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
           ? { inspectionTypeId: 2, deleted: 0 }
-          : {
-              inspectionTypeId: 2,
-              [filterBy]: Number(filterValue),
-              deleted: 0,
-            },
+          : { inspectionTypeId: 2, [filterBy]:  Number(filterValue), deleted: 0 },
     });
+
 
     let followUpCount = await prisma.followUpInspection.count({
       where:
         filterBy == "undefined"
           ? { deleted: 0 }
-          : { [filterBy]: Number(filterValue), deleted: 0 },
+          : {  [filterBy]:  Number(filterValue), deleted: 0 },
     });
 
     let publishedCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
           ? { isPublished: 1, deleted: 0 }
-          : { isPublished: 1, deleted: 0, [filterBy]: Number(filterValue) },
+          : { isPublished: 1, deleted: 0, [filterBy]:  Number(filterValue) },
     });
 
     let unPublishedCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
           ? { isPublished: 0, deleted: 0 }
-          : { isPublished: 0, deleted: 0, [filterBy]: Number(filterValue) },
+          : { isPublished: 0, deleted: 0, [filterBy]:  Number(filterValue) },
     });
 
     let healthEducActionTakenCount = await prisma.premisesActionTaken.count({
@@ -154,7 +127,7 @@ export async function GET(request: Request) {
               deleted: 0,
               ConclusionSection: {
                 Inspection: {
-                  [filterBy]: Number(filterValue),
+                  [filterBy]:  Number(filterValue),
                 },
               },
             },
@@ -169,7 +142,7 @@ export async function GET(request: Request) {
               deleted: 0,
               ConclusionSection: {
                 Inspection: {
-                  [filterBy]: Number(filterValue),
+                  [filterBy]:  Number(filterValue),
                 },
               },
             },
@@ -184,7 +157,7 @@ export async function GET(request: Request) {
                 deleted: 0,
                 ConclusionSection: {
                   Inspection: {
-                    [filterBy]: Number(filterValue),
+                    [filterBy]:  Number(filterValue),
                   },
                 },
               },
@@ -202,7 +175,7 @@ export async function GET(request: Request) {
               inspectionTypeId: 1,
               deleted: 0,
 
-              [filterBy]: Number(filterValue),
+              [filterBy]:  Number(filterValue),
             },
     });
 
@@ -218,7 +191,7 @@ export async function GET(request: Request) {
               inspectionTypeId: 2,
               deleted: 0,
 
-              [filterBy]: Number(filterValue),
+              [filterBy]:  Number(filterValue),
             },
     });
     let followUpInspection = await prisma.followUpInspection.groupBy({
@@ -232,7 +205,7 @@ export async function GET(request: Request) {
           : {
               deleted: 0,
 
-              [filterBy]: Number(filterValue),
+              [filterBy]:  Number(filterValue)
             },
     });
 
