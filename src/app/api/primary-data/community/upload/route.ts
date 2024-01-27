@@ -2,7 +2,6 @@ import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 import { createReadStream } from "fs";
 import { parse } from "fast-csv";
-import formidable from "formidable";
 import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";

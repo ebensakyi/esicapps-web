@@ -90,7 +90,34 @@ const Map = ({ data }: any) => {
     }
   };
 
- 
+  // on map load
+  const onMapLoad = (map: { controls: HTMLDivElement[][]; }) => {
+    const controlDiv = document.createElement("div");
+    const controlUI = document.createElement("div");
+    controlUI.innerHTML = "Get Location";
+    controlUI.style.backgroundColor = "white";
+    controlUI.style.color = "black";
+    controlUI.style.border = "2px solid #ccc";
+    controlUI.style.borderRadius = "3px";
+    controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+    controlUI.style.cursor = "pointer";
+    controlUI.style.marginBottom = "22px";
+    controlUI.style.textAlign = "center";
+    controlUI.style.width = "100%";
+    controlUI.style.padding = "8px 0";
+    controlUI.addEventListener("click", handleGetLocationClick);
+    controlDiv.appendChild(controlUI);
+
+    // const centerControl = new window.google.maps.ControlPosition(
+    //   window.google.maps.ControlPosition.TOP_CENTER,
+    //   0,
+    //   10
+    // );
+
+    map.controls[window.google.maps.ControlPosition.TOP_CENTER].push(
+      controlDiv
+    );
+  };
 
   const getMarkersByForm = (status: any) => {
     // let status: any = status?.current?.value
@@ -129,7 +156,7 @@ const Map = ({ data }: any) => {
 
 
   return (
-    <main id="main" className="main" >
+    <main id="main" className="main">
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -169,7 +196,9 @@ const Map = ({ data }: any) => {
                   </div>
                 </div>
                 <div className=" mb-3">
-               
+                  {/* <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                    District
+                  </label> */}
                   {district}
                 </div>
                 <div className=" mb-3">
@@ -202,10 +231,20 @@ const Map = ({ data }: any) => {
           gap: "20px",
         }}
       >
-    
+        {/* search component  */}
+
+
+        {/* <div class="card">
+          <div class="card-body"> */}
+        {/* <h5 class="card-title">  */}
+
+
+        {/* </h5> */}
+
         <div className="btn-group" role="group" aria-label="Basic example" >
           <Autocomplete
             onLoad={(autocomplete) => {
+              //console.log("Autocomplete loaded:", autocomplete);
               autocompleteRef.current = autocomplete;
             }}
             onPlaceChanged={handlePlaceChanged}
@@ -235,7 +274,21 @@ const Map = ({ data }: any) => {
         //onLoad={onMapLoad}
         >
 
-      
+          {/* <MarkerClusterer
+      onClick={props.onMarkerClustererClick}
+      averageCenter
+      enableRetinaIcons
+      gridSize={60}
+    >
+      {props.markers.map(marker => (
+        <Marker
+          key={marker.photo_id}
+          position={{ lat: marker.latitude, lng: marker.longitude }}
+        />
+      ))}
+
+    </MarkerClusterer> */}
+
 
 
           {data?.mapData?.map((pos: any) => (
@@ -255,7 +308,12 @@ const Map = ({ data }: any) => {
               }}
             />
           ))}
-         
+          {/* <Marker position={{lat: -0.009313, lng:9.445632}}/> */}
+
+
+
+          {/* {selectedPlace && <Marker position={searchLngLat} />} */}
+          {/* {currentLocation && <Marker position={currentLocation} />} */}
         </GoogleMap>
       </div>
 

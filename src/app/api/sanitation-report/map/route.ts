@@ -1,7 +1,9 @@
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { getServerSession } from "next-auth";
 
 import { NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
   try {
@@ -16,28 +18,70 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+    const session: any = await getServerSession(authOptions);
+
+    let userId = session?.user?.id;
+    // let surname = session?.user?.surname;
+    let loginUserDistrictId = session?.user?.districtId;
+    let loginUserRegionId = session?.user?.regionId;
+    let loginUserLevel = session?.user?.userLevelId;
     let { searchParams } = new URL(request.url);
 
     let status =
-    searchParams.get("status") == "2" ||
-    searchParams.get("status") == "1" ||
-    searchParams.get("status") == "0"
-      ? Number(searchParams.get("status"))
-      : undefined;
+      searchParams.get("status") == "2" ||
+      searchParams.get("status") == "1" ||
+      searchParams.get("status") == "0"
+        ? Number(searchParams.get("status"))
+        : undefined;
 
+        
 
-    const data = await prisma.sanitationReport.findMany({
-      where: {
-        deleted: 0,
-        status: status,
-      },
-      include: {
-        District: true,
-      },
-    });
+    if (loginUserLevel == 3) {
+      const data = await prisma.sanitationReport.findMany({
+        where: {
+          deleted: 0,
+          status: status,
+          districtId: Number(loginUserDistrictId),
+        },
+        include: {
+          District: true,
+        },
+      });
 
-  
-    return NextResponse.json(data);
+      
+
+      return NextResponse.json(data);
+    }
+    if (loginUserLevel == 2) {
+      const data = await prisma.sanitationReport.findMany({
+        where: {
+          deleted: 0,
+          status: status,
+          regionId: Number(loginUserRegionId),
+        },
+        include: {
+          District: true,
+        },
+        
+      });
+      return NextResponse.json(data);
+    }
+    if (loginUserLevel == 1) {
+      const data = await prisma.sanitationReport.findMany({
+        where: {
+          deleted: 0,
+          status: status,
+        },
+        include: {
+          District: true,
+        },
+       
+      });
+      return NextResponse.json(data);
+    }
+
+    return NextResponse.json({});
+
   } catch (error) {
     console.log(error);
 
