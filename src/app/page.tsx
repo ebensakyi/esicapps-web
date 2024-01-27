@@ -13,10 +13,12 @@ async function getDashboardData(searchParams: any) {
   let { from } = searchParams
   let { to } = searchParams
 
+  
+
 
 
   const res = await fetch(`${SERVER_BASE_URL}/api/dashboard?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`, {
-    cache: 'no-store', method: "GET",
+    cache: 'no-store', 
     headers: headers()
   })
 

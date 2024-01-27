@@ -42,19 +42,25 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
 //     ];
 //   };
 
-  export const toiletAdequacy = async (filterBy:any, filterValue:any) => {
+  export const toiletAdequacy = async (filterBy:any, filterValue:any,startDate:any,endDate: any) => {
     
     let adequate = await prisma.liquidWasteSection.count({
       where:
         filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAdequacyId: 1,
+              toiletAdequacyId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             
             }
           : {
               deleted: 0,
-              toiletAdequacyId: 1,
+              toiletAdequacyId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -65,12 +71,18 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
       filterBy == "undefined"
         ? {
             deleted: 0,
-            toiletAdequacyId: 2,
+            toiletAdequacyId: 2, createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           
           }
         : {
             deleted: 0,
-            toiletAdequacyId: 2,
+            toiletAdequacyId: 2, createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -83,19 +95,25 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
     ];
   };
 
-  export const toiletCondition = async (filterBy:any, filterValue:any) => {
+  export const toiletCondition = async (filterBy:any, filterValue:any,startDate:any,endDate: any) => {
     
     let safe = await prisma.liquidWasteSection.count({
       where:
         filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletConditionId: 1,
+              toiletConditionId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             
             }
           : {
               deleted: 0,
-              toiletConditionId: 1,
+              toiletConditionId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -106,12 +124,18 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
       filterBy == "undefined"
         ? {
             deleted: 0,
-            toiletAdequacyId: 2,
+            toiletAdequacyId: 2, createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           
           }
         : {
             deleted: 0,
-            toiletAdequacyId: 2,
+            toiletAdequacyId: 2, createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -124,13 +148,16 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
     ];
   };
 
-  export const toiletAvailability = async (filterBy:any,filterValue:any) => {
+  export const toiletAvailability = async (filterBy:any,filterValue:any,startDate:any,endDate: any) => {
     let toiletAvailabilityCount1 =
       await prisma.residentialPremisesInfoSection.count({
          where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
@@ -145,11 +172,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
       where: filterBy == "undefined"
       ? {
           deleted: 0,
-          toiletAvailabilityId: 1,
+          toiletAvailabilityId: 1, createdAt: {
+            gte: startDate,
+            lte: endDate,
+          },
         }
       : {
           deleted: 0,
-          toiletAvailabilityId: 1,
+          toiletAvailabilityId: 1, createdAt: {
+            gte: startDate,
+            lte: endDate,
+          },
           Inspection: {
             [filterBy]: Number(filterValue),
           },
@@ -159,11 +192,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
       where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -174,11 +213,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -188,11 +233,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
       where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -203,11 +254,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
       where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -218,11 +275,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -233,11 +296,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 1,
+              toiletAvailabilityId: 1, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -249,11 +318,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -264,11 +339,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -280,11 +361,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -296,11 +383,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -311,11 +404,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -326,11 +425,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -342,11 +447,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },
@@ -357,11 +468,17 @@ import { AnyLengthString } from "aws-sdk/clients/comprehend";
           where: filterBy == "undefined"
           ? {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             }
           : {
               deleted: 0,
-              toiletAvailabilityId: 2,
+              toiletAvailabilityId: 2, createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               Inspection: {
                 [filterBy]: Number(filterValue),
               },

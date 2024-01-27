@@ -1,16 +1,27 @@
-import {prisma} from "@/prisma/db";
+import { prisma } from "@/prisma/db";
 
-export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) => {
+export const wasteCollectorRegistration = async (
+  filterBy: any,
+  filterValue: any,
+  startDate: any,
+  endDate: any
+) => {
   let wasteCollectorRegistered = await prisma.solidWasteSection.count({
     where:
       filterBy == "undefined"
         ? {
             deleted: 0,
-            wasteServiceProviderRegistrationId: 1,
+            wasteServiceProviderRegistrationId: 1,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            wasteServiceProviderRegistrationId: 1,
+            wasteServiceProviderRegistrationId: 1,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -21,11 +32,17 @@ export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) 
       filterBy == "undefined"
         ? {
             deleted: 0,
-            wasteServiceProviderRegistrationId: 2,
+            wasteServiceProviderRegistrationId: 2,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            wasteServiceProviderRegistrationId: 2,
+            wasteServiceProviderRegistrationId: 2,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -37,11 +54,17 @@ export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) 
       filterBy == "undefined"
         ? {
             deleted: 0,
-            wasteServiceProviderRegistrationId: null,
+            wasteServiceProviderRegistrationId: null,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            wasteServiceProviderRegistrationId: null,
+            wasteServiceProviderRegistrationId: null,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -57,17 +80,28 @@ export const wasteCollectorRegistration = async (filterBy:any, filterValue:any) 
   ];
 };
 
-export const wasteSorting = async (filterBy:any, filterValue:any) => {
+export const wasteSorting = async (
+  filterBy: any,
+  filterValue: any,
+  startDate: any,
+  endDate: any
+) => {
   let wasteSorted = await prisma.solidWasteSection.count({
     where:
       filterBy == "undefined"
         ? {
             deleted: 0,
-            wasteSortingAvailabilityId: 1,
+            wasteSortingAvailabilityId: 1,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            wasteSortingAvailabilityId: 1,
+            wasteSortingAvailabilityId: 1,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -78,11 +112,17 @@ export const wasteSorting = async (filterBy:any, filterValue:any) => {
       filterBy == "undefined"
         ? {
             deleted: 0,
-            wasteSortingAvailabilityId: 2,
+            wasteSortingAvailabilityId: 2,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            wasteSortingAvailabilityId: 2,
+            wasteSortingAvailabilityId: 2,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -93,11 +133,17 @@ export const wasteSorting = async (filterBy:any, filterValue:any) => {
       filterBy == "undefined"
         ? {
             deleted: 0,
-            wasteSortingAvailabilityId: null,
+            wasteSortingAvailabilityId: null,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            wasteSortingAvailabilityId: null,
+            wasteSortingAvailabilityId: null,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -110,17 +156,28 @@ export const wasteSorting = async (filterBy:any, filterValue:any) => {
   ];
 };
 
-export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
+export const wasteReceptacle = async (
+  filterBy: any,
+  filterValue: any,
+  startDate: any,
+  endDate: any
+) => {
   let approvedWasteStorageReceptacle = await prisma.solidWasteSection.count({
     where:
       filterBy == "undefined"
         ? {
             deleted: 0,
-            approvedWasteStorageReceptacleId: 1,
+            approvedWasteStorageReceptacleId: 1,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            approvedWasteStorageReceptacleId: 1,
+            approvedWasteStorageReceptacleId: 1,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -131,11 +188,17 @@ export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
       filterBy == "undefined"
         ? {
             deleted: 0,
-            approvedWasteStorageReceptacleId: 2,
+            approvedWasteStorageReceptacleId: 2,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            approvedWasteStorageReceptacleId: 2,
+            approvedWasteStorageReceptacleId: 2,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -146,11 +209,17 @@ export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
       filterBy == "undefined"
         ? {
             deleted: 0,
-            approvedWasteStorageReceptacleId: null,
+            approvedWasteStorageReceptacleId: null,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
           }
         : {
             deleted: 0,
-            approvedWasteStorageReceptacleId: null,
+            approvedWasteStorageReceptacleId: null,createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
             Inspection: {
               [filterBy]: Number(filterValue),
             },
@@ -168,4 +237,3 @@ export const wasteReceptacle = async (filterBy:any, filterValue:any) => {
     },
   ];
 };
-

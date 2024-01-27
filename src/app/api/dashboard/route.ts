@@ -47,17 +47,49 @@ export async function GET(request: Request) {
 
     let { searchParams } = new URL(request.url);
 
+    console.log(searchParams);
+
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
 
     // let startDate: any = searchParams.get("from");
     // let endDate: any = searchParams.get("to");
 
-    let startDateParam = searchParams.get("from");
-    let endDateParam = searchParams.get("to");
+    let startDateParam: any = searchParams.get("from");
+    let endDateParam: any = searchParams.get("to");
 
-    let startDate = startDateParam ? new Date(startDateParam) : null;
-    let endDate = endDateParam ? new Date(endDateParam) : null;
+    // let startDate =
+    //   startDateParam != "undefined" ? new Date(startDateParam).toISOString() : undefined;
+    // let endDate = endDateParam != "undefined"? new Date(endDateParam).toISOString() : undefined;
+
+    const earliestDate = await prisma.inspection.findMany({
+      orderBy: {
+        createdAt: "asc",
+      },
+      select: { createdAt: true },
+      take: 1,
+    });
+
+    const latestDate = await prisma.inspection.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: { createdAt: true },
+
+      take: 1,
+    });
+
+    let startDate =
+      startDateParam == "undefined"||startDateParam =='null'
+        ? earliestDate[0].createdAt
+        : new Date(startDateParam).toISOString();
+    let endDate =
+      endDateParam == "undefined"|| endDateParam == 'null'
+        ? latestDate[0].createdAt
+        : new Date(endDateParam).toISOString();
+
+    console.log("startDate =====> ", startDate);
+    console.log("endDate =====> ", endDate);
 
     if (userLevel == 1 && filterBy == "undefined") {
       filterBy = "undefined";
@@ -79,6 +111,9 @@ export async function GET(request: Request) {
     //       : { inspectionTypeId: 1, [filterBy]: Number(filterValue), deleted: 0 },
     // });
 
+    console.log("st==> ", startDate);
+    console.log("ed ===>", endDate);
+
     let baselineCount = await prisma.inspection.count({
       where: {
         inspectionTypeId: 1,
@@ -86,109 +121,190 @@ export async function GET(request: Request) {
         ...(filterBy !== "undefined" && {
           [filterBy]: Number(filterValue),
         }),
-        // createdAt: {
-        //   gte: startDate,
-        //   lte: endDate,
-        // },
-
-        // ...(startDate && {
-        //   createdAt: {
-        //     gte: startDate,
-        //   },
-        // }),
-        // ...(endDate && {
-        //   createdAt: {
-        //     lte: endDate,
-        //   },
-        // }),
+        createdAt: {
+          gte: startDate,
+          lte: endDate,
+        },
       },
     });
 
+    // let sanitationReportsCount = await prisma.sanitationReport.count({
+    //   where:
+    //     filterBy == "undefined" ||
+    //     filterBy == "electoralAreaId" ||
+    //     filterBy == "communityId"
+    //       ? { deleted: 0 }
+    //       : { [filterBy]: Number(filterValue), deleted: 0 },
+    // });
+
     let sanitationReportsCount = await prisma.sanitationReport.count({
-      where:
-        filterBy == "undefined" ||
-        filterBy == "electoralAreaId" ||
-        filterBy == "communityId"
-          ? { deleted: 0 }
-          : { [filterBy]: Number(filterValue), deleted: 0 },
+      where: {
+        deleted: 0,
+        ...(filterBy &&
+        filterBy !== "undefined" &&
+        filterBy !== "electoralAreaId" &&
+        filterBy !== "communityId"
+          ? { [filterBy]: Number(filterValue) }
+          : {}),
+        createdAt: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
     });
 
     let reInspectionCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
-          ? { inspectionTypeId: 2, deleted: 0 }
+          ? {
+              inspectionTypeId: 2,
+              deleted: 0,
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
+            }
           : {
               inspectionTypeId: 2,
               [filterBy]: Number(filterValue),
               deleted: 0,
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
             },
     });
 
     let followUpCount = await prisma.followUpInspection.count({
       where:
         filterBy == "undefined"
-          ? { deleted: 0 }
-          : { [filterBy]: Number(filterValue), deleted: 0 },
+          ? {
+              deleted: 0,
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
+            }
+          : {
+              [filterBy]: Number(filterValue),
+              deleted: 0,
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
+            },
     });
 
     let publishedCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
-          ? { isPublished: 1, deleted: 0 }
-          : { isPublished: 1, deleted: 0, [filterBy]: Number(filterValue) },
+          ? {
+              isPublished: 1,
+              deleted: 0,
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
+            }
+          : {
+              isPublished: 1,
+              deleted: 0,
+              [filterBy]: Number(filterValue),
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
+            },
     });
 
     let unPublishedCount = await prisma.inspection.count({
       where:
         filterBy == "undefined"
-          ? { isPublished: 0, deleted: 0 }
-          : { isPublished: 0, deleted: 0, [filterBy]: Number(filterValue) },
-    });
-
-    let healthEducActionTakenCount = await prisma.premisesActionTaken.count({
-      where:
-        filterBy == "undefined"
-          ? { actionId: 1, deleted: 0 }
-          : {
-              actionId: 1,
+          ? {
+              isPublished: 0,
               deleted: 0,
-              ConclusionSection: {
-                Inspection: {
-                  [filterBy]: Number(filterValue),
-                },
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
+            }
+          : {
+              isPublished: 0,
+              deleted: 0,
+              [filterBy]: Number(filterValue),
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
               },
             },
     });
 
-    let noticeServedActionTakenCount = await prisma.premisesActionTaken.count({
-      where:
-        filterBy == "undefined"
-          ? { actionId: 2, deleted: 0 }
-          : {
-              actionId: 2,
-              deleted: 0,
-              ConclusionSection: {
-                Inspection: {
-                  [filterBy]: Number(filterValue),
-                },
-              },
-            },
+    // let healthEducActionTakenCount = await prisma.premisesActionTaken.count({
+    //   where:
+    //     filterBy == "undefined"
+    //       ? { actionId: 1, deleted: 0 }
+    //       : {
+    //           actionId: 1,
+    //           deleted: 0,
+    //           ConclusionSection: {
+    //             Inspection: {
+    //               [filterBy]: Number(filterValue),
+    //             },
+    //           },
+    //         },
+    // });
+
+    // let noticeServedActionTakenCount = await prisma.premisesActionTaken.count({
+    //   where:
+    //     filterBy == "undefined"
+    //       ? { actionId: 2, deleted: 0 }
+    //       : {
+    //           actionId: 2,
+    //           deleted: 0,
+    //           ConclusionSection: {
+    //             Inspection: {
+    //               [filterBy]: Number(filterValue),
+    //             },
+    //           },
+    //         },
+    // });
+    // let criminalSummonsActionTakenCount =
+    //   await prisma.premisesActionTaken.count({
+    //     where:
+    //       filterBy == "undefined"
+    //         ? { actionId: 3, deleted: 0 }
+    //         : {
+    //             actionId: 3,
+    //             deleted: 0,
+    //             ConclusionSection: {
+    //               Inspection: {
+    //                 [filterBy]: Number(filterValue),
+    //               },
+    //             },
+    //           },
+    //   });
+
+    let healthEducActionTakenCount = await getCountByActionId(prisma, {
+      actionId: 1,
+      filterBy,
+      filterValue,
+      startDate,
+      endDate,
     });
-    let criminalSummonsActionTakenCount =
-      await prisma.premisesActionTaken.count({
-        where:
-          filterBy == "undefined"
-            ? { actionId: 3, deleted: 0 }
-            : {
-                actionId: 3,
-                deleted: 0,
-                ConclusionSection: {
-                  Inspection: {
-                    [filterBy]: Number(filterValue),
-                  },
-                },
-              },
-      });
+    let noticeServedActionTakenCount = await getCountByActionId(prisma, {
+      actionId: 2,
+      filterBy,
+      filterValue,
+      startDate,
+      endDate,
+    });
+    let criminalSummonsActionTakenCount = await getCountByActionId(prisma, {
+      actionId: 3,
+      filterBy,
+      filterValue,
+      startDate,
+      endDate,
+    });
 
     const baselineInspection = await prisma.inspection.groupBy({
       by: ["inspectionFormId"],
@@ -197,11 +313,17 @@ export async function GET(request: Request) {
       },
       where:
         filterBy == "undefined"
-          ? { inspectionTypeId: 1, deleted: 0 }
+          ? { inspectionTypeId: 1, deleted: 0, createdAt: {
+            gte: startDate,
+            lte: endDate,
+          }, }
           : {
               inspectionTypeId: 1,
               deleted: 0,
-
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               [filterBy]: Number(filterValue),
             },
     });
@@ -213,11 +335,17 @@ export async function GET(request: Request) {
       },
       where:
         filterBy == "undefined"
-          ? { inspectionTypeId: 2, deleted: 0 }
+          ? { inspectionTypeId: 2, deleted: 0, createdAt: {
+            gte: startDate,
+            lte: endDate,
+          }, }
           : {
               inspectionTypeId: 2,
               deleted: 0,
-
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               [filterBy]: Number(filterValue),
             },
     });
@@ -228,45 +356,51 @@ export async function GET(request: Request) {
       },
       where:
         filterBy == "undefined"
-          ? { deleted: 0 }
+          ? { deleted: 0, createdAt: {
+            gte: startDate,
+            lte: endDate,
+          }, }
           : {
               deleted: 0,
-
+              createdAt: {
+                gte: startDate,
+                lte: endDate,
+              },
               [filterBy]: Number(filterValue),
             },
     });
 
     let waterSourceTypeSummary = await groupByWaterSource(
       filterBy,
-      filterValue
+      filterValue,startDate,endDate
     );
     let waterStorageTypeSummary = await groupByWaterStorage(
       filterBy,
-      filterValue
+      filterValue,startDate,endDate
     );
     let waterSourceConditionSummary = await groupByWaterSourceCondition(
       filterBy,
-      filterValue
+      filterValue,startDate,endDate
     );
     let waterStorageConditionSummary = await groupByWaterStorageCondition(
       filterBy,
-      filterValue
+      filterValue,startDate,endDate
     );
 
-    let toiletAdequacySummary = await toiletAdequacy(filterBy, filterValue);
+    let toiletAdequacySummary = await toiletAdequacy(filterBy, filterValue,startDate,endDate);
 
-    let toiletConditionSummary = await toiletCondition(filterBy, filterValue);
+    let toiletConditionSummary = await toiletCondition(filterBy, filterValue,startDate,endDate);
 
     let wasteCollectorRegistrationSummary = await wasteCollectorRegistration(
       filterBy,
-      filterValue
+      filterValue,startDate,endDate
     );
-    let wasteSortingSummary = await wasteSorting(filterBy, filterValue);
+    let wasteSortingSummary = await wasteSorting(filterBy, filterValue,startDate,endDate);
 
-    let wasteReceptacleSummary = await wasteReceptacle(filterBy, filterValue);
+    let wasteReceptacleSummary = await wasteReceptacle(filterBy, filterValue,startDate,endDate);
     let toiletAvailabilitySummary = await toiletAvailability(
       filterBy,
-      filterValue
+      filterValue,startDate,endDate
     );
     // let inspectionSummary = await inspection(filterBy, filterValue);
 
@@ -340,3 +474,48 @@ const parseSummary = async (baselineInspection: any) => {
   }
   return data;
 };
+
+interface PremisesActionTakenFilter {
+  actionId: number;
+  filterBy: string;
+  filterValue: number;
+  startDate?: any;
+  endDate?: any;
+}
+
+async function getCountByActionId(
+  prisma: any,
+  {
+    actionId,
+    filterBy,
+    filterValue,
+    startDate,
+    endDate,
+  }: PremisesActionTakenFilter
+) {
+  return await prisma.premisesActionTaken.count({
+    where:
+      filterBy === "undefined"
+        ? {
+            actionId,
+            deleted: 0,
+            createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
+          }
+        : {
+            actionId,
+            deleted: 0,
+            ConclusionSection: {
+              Inspection: {
+                [filterBy]: Number(filterValue),
+              },
+            },
+            createdAt: {
+              gte: startDate,
+              lte: endDate,
+            },
+          },
+  });
+}
