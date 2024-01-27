@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams, useRouter, usePathname, redirect } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import ReactPaginate from 'react-paginate';
+import { AWS_S3_URL } from '@/config';
+import AvatarImage from '../AvatarImage';
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
@@ -718,28 +720,28 @@ export default function User({ data }: any) {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        {districts.length!=0?
-                                                        <div className="col-sm-3  mb-3">
-                                                            <label className="col-sm-12 col-form-label">Select district</label>
+                                                        {districts.length != 0 ?
+                                                            <div className="col-sm-3  mb-3">
+                                                                <label className="col-sm-12 col-form-label">Select district</label>
 
-                                                            <div className="col-sm-12">
-                                                                <select
-                                                                    className="form-control"
-                                                                    aria-label="Default select example"
-                                                                    onChange={(e: any) => {
-                                                                        setSelectedDistrict(e.target.value);
-                                                                    }}
-                                                                    value={selectedDistrict}
-                                                                >
-                                                                    <option >Select district </option>
-                                                                    {districts?.map((data: any) => (
-                                                                        <option key={data.id} value={data.id}>
-                                                                            {data.name}
-                                                                        </option>
-                                                                    ))}
-                                                                </select>
-                                                            </div>
-                                                        </div>:<></>}
+                                                                <div className="col-sm-12">
+                                                                    <select
+                                                                        className="form-control"
+                                                                        aria-label="Default select example"
+                                                                        onChange={(e: any) => {
+                                                                            setSelectedDistrict(e.target.value);
+                                                                        }}
+                                                                        value={selectedDistrict}
+                                                                    >
+                                                                        <option >Select district </option>
+                                                                        {districts?.map((data: any) => (
+                                                                            <option key={data.id} value={data.id}>
+                                                                                {data.name}
+                                                                            </option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+                                                            </div> : <></>}
                                                     </>
                                                 ) : (
                                                     <></>
@@ -864,6 +866,8 @@ export default function User({ data }: any) {
 
                                     <thead>
                                         <tr>
+                                            <th scope="col">Image</th>
+
                                             <th scope="col">Name</th>
                                             <th scope="col">Phone</th>
                                             <th scope="col">Level</th>
@@ -882,6 +886,7 @@ export default function User({ data }: any) {
                                     <tbody>
                                         {data.users.response.map((user: any) => (
                                             <tr key={user.id}>
+                                                <td><AvatarImage defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={24} width={24}/></td>
                                                 <td>{user?.otherNames} {user?.surname}</td>
                                                 <td>{user?.phoneNumber}</td>
                                                 {/* <td>{user?.email}</td> */}

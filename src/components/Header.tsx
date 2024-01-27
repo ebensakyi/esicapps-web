@@ -63,7 +63,7 @@ export default function Header() {
                                     data-bs-toggle="dropdown"
                                 >
                                     <img
-                                        src="../../assets/img/profile-img.jpg"
+                                        src="../../assets/img/profile-img.png"
                                         alt="Profile"
                                         className="rounded-circle"
                                     />
