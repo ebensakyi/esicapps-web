@@ -2,7 +2,6 @@
 
 const ResidentialPremisesInfoView = ({ data }:any) => {
 
-console.log(data);
 
 
   return (

@@ -215,7 +215,6 @@ export async function PUT(request: Request) {
     const res = await request.json();
 
     let statuses = ["pending", "resolved", "in progress"];
-    console.log(res);
 
     let sendSMSReporter = res?.sendSMS;
     let phoneNumber = res?.phoneNumber;

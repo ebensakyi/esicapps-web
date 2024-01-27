@@ -24,7 +24,6 @@ export default function GeneralReports({ data }: any) {
         }
     })
 
-    console.log(data);
     
 
     const router = useRouter();

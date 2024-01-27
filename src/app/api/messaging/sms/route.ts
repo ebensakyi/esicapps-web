@@ -93,7 +93,6 @@ export async function PUT(request: Request) {
       let recipientCount = 0;
       let messageId = Number(res.messageId)
 
-      console.log(res);
       
 
   
