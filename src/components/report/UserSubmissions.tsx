@@ -19,14 +19,13 @@ export default function UserSubmissions({ data }: any) {
     })
 
 
-    console.log(data);
-    
 
     const router = useRouter();
     const pathname = usePathname()
     const searchParams = useSearchParams()
 
     const [reportType, setReportType] = useState(null);
+    const [exporting, setExporting] = useState(false);
 
     const [reportData, setReportData] = useState([]);
 
@@ -190,6 +189,28 @@ export default function UserSubmissions({ data }: any) {
             return toast.error("An error occurred");
         }
     };
+    const handleExportAll = async () => {
+        try {
+            setExporting(true);
+            let searchText = searchParams.get('searchText')
+
+            const response = await axios.get(
+                `/api/report/user-submissions?exportFile=true&searchText=${searchText}`,
+
+            );
+            setExporting(false)
+
+
+
+            if (response.status == 200) {
+                router.replace(response.data);
+
+            }
+        } catch (error) {
+            setExporting(false)
+            console.log(error);
+        }
+    };
 
     const returnFilterValue = async (filterBy: any) => {
         if (filterBy == "regionId") {
@@ -262,10 +283,24 @@ export default function UserSubmissions({ data }: any) {
         <main id="main" className="main">
 
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12"><div className="col-md-4">
+                                        <div className="input-group mb-3">
+                                            <button
+                                                type="button"
+                                                className="btn btn-sm btn-success  "
+                                                onClick={() => handleExportAll()}
+                                            >
+                                                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+
+                                                {exporting ? 'Exporting...' : 'Export as Excel'}
+
+                                            </button>
+                                        </div>
+                                    </div>
                             <div className="card">
+                            
                                 <div className="card-body table-responsive">
-                                    <h5 className="card-title">Users Submissions</h5>
+                                    <h5 className="card-title">USER SUBMISSIONS</h5>
                                     <table className="table datatable table-striped ">
 
                                         <thead>
@@ -291,9 +326,9 @@ export default function UserSubmissions({ data }: any) {
                                                     <td>{user.Region?.name}</td>
                                                     <td>{user.District?.name}</td>
                                                     <td>
-                                                        {/* {user?.Inspection.length!=0 ? moment(user?.Inspection[0]?.createdAt).format(
-                                                            "MMM Do YYYY, h:mm:ss a"
-                                                        ) : ""} */}
+                                                        {user?.Inspection.length!=0 ? moment(user?.Inspection[0]?.createdAt).format(
+                                                            "Do MMM YYYY, h:mm:ss a"
+                                                        ) : ""}
                                                     </td>
 
                                                     <td>{user._count.Inspection}</td>
