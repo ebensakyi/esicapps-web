@@ -112,6 +112,7 @@ const Map = ({ data }: any) => {
           setCurrentLocation({ lat: latitude, lng: longitude });
 
 
+
         },
         (error) => {
           console.log(error);
@@ -467,6 +468,8 @@ const Map = ({ data }: any) => {
                 setOfficer(pos?.User?.otherNames + " " + pos?.User?.surname)
                 setSubmissionDate(moment(pos?.createdAt).format("MMM Do YYYY, h:mm:ss a"))
                 setRating(handleRating(pos?.totalRating))
+
+              
 
                 openModal()
               }}

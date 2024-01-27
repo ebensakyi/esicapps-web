@@ -56,7 +56,7 @@ export default function User({ data }: any) {
 
     const getDistrictsByRegion = async (regionId: number) => {
         try {
-
+            setDistricts([])
 
             const response = await axios.get(
                 `/api/primary-data/district?regionId= ${regionId} &get_all=1`
@@ -544,7 +544,7 @@ export default function User({ data }: any) {
                                                 Phone Number
                                             </label>
                                             <div className="col-sm-12">
-                                                <input type="number" className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
+                                                <input type="tel" maxLength={10} className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
                                             </div>
                                         </div>
 
@@ -692,35 +692,59 @@ export default function User({ data }: any) {
                                         {selectedUserLevel == "3" ? (
                                             <>
                                                 {loggedInUserLevel == "1" ? (
-                                                    <div className="col-sm-3  mb-3">
-                                                        <label className="col-sm-12 col-form-label">Select region</label>
+                                                    <>
+                                                        <div className="col-sm-3  mb-3">
+                                                            <label className="col-sm-12 col-form-label">Select region</label>
 
-                                                        <div className="col-sm-12">
-                                                            <select
-                                                                className="form-select"
-                                                                aria-label="Default select example"
-                                                                onChange={async (e: any) => {
-                                                                    //setFilterValue(e.target.value);
-                                                                    setSelectedRegion(e.target.value);
+                                                            <div className="col-sm-12">
+                                                                <select
+                                                                    className="form-select"
+                                                                    aria-label="Default select example"
+                                                                    onChange={async (e: any) => {
+                                                                        //setFilterValue(e.target.value);
+                                                                        setSelectedRegion(e.target.value);
 
-                                                                    await getDistrictsByRegion(e.target.value);
-                                                                }}
-                                                                value={selectedRegion}
-                                                            >
-                                                                {" "}
-                                                                <option >Select region </option>
-                                                                {data.regions?.map((data: any) => (
-                                                                    <option key={data.id} value={data.id}>
-                                                                        {data.name}
-                                                                    </option>
-                                                                ))}
-                                                            </select>
+                                                                        await getDistrictsByRegion(e.target.value);
+                                                                    }}
+                                                                    value={selectedRegion}
+                                                                >
+                                                                    {" "}
+                                                                    <option >Select region </option>
+                                                                    {data.regions?.map((data: any) => (
+                                                                        <option key={data.id} value={data.id}>
+                                                                            {data.name}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        {districts.length!=0?
+                                                        <div className="col-sm-3  mb-3">
+                                                            <label className="col-sm-12 col-form-label">Select district</label>
+
+                                                            <div className="col-sm-12">
+                                                                <select
+                                                                    className="form-control"
+                                                                    aria-label="Default select example"
+                                                                    onChange={(e: any) => {
+                                                                        setSelectedDistrict(e.target.value);
+                                                                    }}
+                                                                    value={selectedDistrict}
+                                                                >
+                                                                    <option >Select district </option>
+                                                                    {districts?.map((data: any) => (
+                                                                        <option key={data.id} value={data.id}>
+                                                                            {data.name}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
+                                                        </div>:<></>}
+                                                    </>
                                                 ) : (
                                                     <></>
                                                 )}
-                                                {loggedInUserLevel != "1" ?
+                                                {/* {loggedInUserLevel != "1" ?
                                                     <div className="col-sm-3  mb-3">
                                                         <label className="col-sm-12 col-form-label">Select district</label>
 
@@ -741,7 +765,7 @@ export default function User({ data }: any) {
                                                                 ))}
                                                             </select>
                                                         </div>
-                                                    </div> : <></>}
+                                                    </div> : <></>} */}
                                             </>
                                         ) : (
                                             <></>
