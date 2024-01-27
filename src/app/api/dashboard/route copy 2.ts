@@ -209,38 +209,38 @@ export async function GET(request: Request) {
             },
     });
 
-    let waterSourceTypeSummary = await groupByWaterSource(
-      filterBy,
-      filterValue
-    );
-    let waterStorageTypeSummary = await groupByWaterStorage(
-      filterBy,
-      filterValue
-    );
-    let waterSourceConditionSummary = await groupByWaterSourceCondition(
-      filterBy,
-      filterValue
-    );
-    let waterStorageConditionSummary = await groupByWaterStorageCondition(
-      filterBy,
-      filterValue
-    );
+    // let waterSourceTypeSummary = await groupByWaterSource(
+    //   filterBy,
+    //   filterValue
+    // );
+    // let waterStorageTypeSummary = await groupByWaterStorage(
+    //   filterBy,
+    //   filterValue
+    // );
+    // let waterSourceConditionSummary = await groupByWaterSourceCondition(
+    //   filterBy,
+    //   filterValue
+    // );
+    // let waterStorageConditionSummary = await groupByWaterStorageCondition(
+    //   filterBy,
+    //   filterValue
+    // );
 
-    let toiletAdequacySummary = await toiletAdequacy(filterBy, filterValue);
+    // let toiletAdequacySummary = await toiletAdequacy(filterBy, filterValue);
 
-    let toiletConditionSummary = await toiletCondition(filterBy, filterValue);
+    // let toiletConditionSummary = await toiletCondition(filterBy, filterValue);
 
-    let wasteCollectorRegistrationSummary = await wasteCollectorRegistration(
-      filterBy,
-      filterValue
-    );
-    let wasteSortingSummary = await wasteSorting(filterBy, filterValue);
+    // let wasteCollectorRegistrationSummary = await wasteCollectorRegistration(
+    //   filterBy,
+    //   filterValue
+    // );
+    // let wasteSortingSummary = await wasteSorting(filterBy, filterValue);
 
-    let wasteReceptacleSummary = await wasteReceptacle(filterBy, filterValue);
-    let toiletAvailabilitySummary = await toiletAvailability(
-      filterBy,
-      filterValue
-    );
+    // let wasteReceptacleSummary = await wasteReceptacle(filterBy, filterValue);
+    // let toiletAvailabilitySummary = await toiletAvailability(
+    //   filterBy,
+    //   filterValue
+    // );
     // let inspectionSummary = await inspection(filterBy, filterValue);
 
     let baselineSummary = await parseSummary(baselineInspection);
@@ -249,16 +249,16 @@ export async function GET(request: Request) {
 
     let dashboardData = {
       // inspectionSummary,
-      toiletAvailabilitySummary,
-      wasteReceptacleSummary,
-      wasteSortingSummary,
-      wasteCollectorRegistrationSummary,
-      toiletConditionSummary,
-      toiletAdequacySummary,
-      waterSourceConditionSummary,
-      waterStorageConditionSummary,
-      waterSourceTypeSummary,
-      waterStorageTypeSummary,
+      // toiletAvailabilitySummary,
+      // wasteReceptacleSummary,
+      // wasteSortingSummary,
+      // wasteCollectorRegistrationSummary,
+      // toiletConditionSummary,
+      // toiletAdequacySummary,
+      // waterSourceConditionSummary,
+      // waterStorageConditionSummary,
+      // waterSourceTypeSummary,
+      // waterStorageTypeSummary,
       baselineSummary,
       reinspectionSummary,
       followupSummary,
