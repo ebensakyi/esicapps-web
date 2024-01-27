@@ -375,7 +375,6 @@ export default function Notification({ data }: any) {
                                                                                 setSendingType(data.sendingType)
                                                                                 setDistrictId(data.districtId);
 
-                                                                                console.log(data.districtId);
                                                                                 
 
                                                                                 // setTitle("");

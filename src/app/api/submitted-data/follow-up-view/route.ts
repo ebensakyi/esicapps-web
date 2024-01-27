@@ -84,7 +84,6 @@ export async function GET(request: Request) {
       },
     });
 
-    console.log(data);
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {

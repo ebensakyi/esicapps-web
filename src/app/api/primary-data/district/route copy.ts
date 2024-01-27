@@ -137,7 +137,6 @@ export async function GET(request: Request) {
 
     const response = await prisma.district.findMany(query);
 
-     console.log("count===> ",count);
     
 
 

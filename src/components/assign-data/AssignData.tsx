@@ -63,7 +63,6 @@ export default function AssignData({ data }: any) {
                 "/api/user?districtId=" + districtId
             );
 
-            console.log(response);
 
             setAssignedToUsers(response?.data?.response);
         } catch (error) { }

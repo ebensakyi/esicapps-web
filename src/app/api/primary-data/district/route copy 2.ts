@@ -35,7 +35,6 @@ export async function GET(request: Request) {
 
     const session: any = await getServerSession(authOptions);
 
-    console.log("session=>",session);
     
 
     const userLevel = session?.user?.userLevelId;
@@ -50,7 +49,6 @@ export async function GET(request: Request) {
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
     let count = 0;
-      console.log("userlevel==>",userLevel);
 
     if (userLevel == 1) {
 

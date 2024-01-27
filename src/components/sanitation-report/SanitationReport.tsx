@@ -153,7 +153,6 @@ export default function SanitationReport({ data }: any) {
     const handleDelete = async (e: any) => {
         e.preventDefault()
 
-        console.log();
 
         try {
             const response = await axios.delete(`/api/sanitation-report/${reportId}`);

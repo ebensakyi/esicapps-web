@@ -455,7 +455,6 @@ export default function User({ data }: any) {
         try {
             setExporting(true);
             let searchText = searchParams.get('searchText')
-            console.log(`searchText==> ${searchText}`);
 
             const response = await axios.get(
                 `/api/user?exportFile=true&searchText=${searchText}`,
@@ -619,7 +618,6 @@ export default function User({ data }: any) {
                                                         }
 
                                                         if (selectedUserLevel == "3") {
-                                                            console.log("selectedUserLevel...", selectedUserLevel);
 
                                                             // getDistrictsByRegion(loggedInUserRegion);
 

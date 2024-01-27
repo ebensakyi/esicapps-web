@@ -204,7 +204,6 @@ export default function Community({ data }: any) {
             setDistrictId("");
             setRegionId("");
 
-            console.log("response.status==> ",response.status);
             
             if (response.status == 200) {
                 router.refresh()

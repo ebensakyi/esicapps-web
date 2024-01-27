@@ -36,7 +36,6 @@ export default function Login() {
   };
 
   const handlePasswordVisibility = () => {
-    console.log("LOL");
     
     setShowPassword(!showPassword);
   };

@@ -9,14 +9,12 @@ export async function GET(request: Request) {
 
     const districtId = Number(searchParams.get("districtId"));
 
-    console.log("districtId ", districtId);
     
 
     const data = await prisma.electoralArea.findMany({
       where: { deleted: 0, districtId: Number(districtId) },
     });
 
-    console.log("dax", data);
     
     return NextResponse.json(data);
   } catch (error) {

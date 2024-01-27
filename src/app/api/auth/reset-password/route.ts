@@ -39,7 +39,6 @@ export async function POST(request: Request) {
       });
     }
 
-    // console.log(user);
 
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");

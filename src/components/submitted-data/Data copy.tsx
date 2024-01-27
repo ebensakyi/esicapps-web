@@ -259,9 +259,7 @@ export default function Data({ data }: any) {
         try {
             e.preventDefault();
 
-            console.log("filterBy=> ",filterBy);
-            console.log("filterValue==> ",filterValue);
-
+   
 
             if (filterBy == "national") {
                 return router.push("/");

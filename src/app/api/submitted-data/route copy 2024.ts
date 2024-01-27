@@ -712,8 +712,7 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-    console.log("filterValue ", filterValue);
-    console.log("filterBy ", filterBy);
+
 
     let count = await prisma.basicInfoSection.count({
       // where: getSearchParams(req, searchText).where,

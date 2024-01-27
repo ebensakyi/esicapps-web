@@ -50,7 +50,6 @@ export async function DELETE(
   try {
     const res = await request.json();
 
-    console.log(res);
     
     const password = res.password;
     const phoneNumber = res.phoneNumber;

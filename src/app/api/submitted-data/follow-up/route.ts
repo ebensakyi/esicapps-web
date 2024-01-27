@@ -25,9 +25,6 @@ export async function GET(request: Request) {
     let regionId = session?.user?.regionId;
     let userLevel = session?.user?.userLevelId;
 
-    console.log("districtId===> ",districtId);
-    console.log("regionId===> ",regionId);
-    console.log("userLevel===> ",userLevel);
 
 
     await logActivity("Visited follow-up page", userId);
@@ -37,8 +34,7 @@ export async function GET(request: Request) {
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
 
-    console.log("filterBy===> ",filterBy);
-    console.log("filterValue===> ",filterValue);
+
 
 
     if ((userLevel == 1 && filterBy == "undefined") || filterBy == "") {
@@ -155,12 +151,7 @@ export async function GET(request: Request) {
       //   },
     });
 
-    console.log("count ",count);
-    console.log("districtID ",districtId);
 
-console.log("filterBy  ",filterBy);
-console.log("filterValue  ",filterValue);
-console.log("userLevel  ",userLevel);
 
     // console.log(( searchText != ""  && searchText != "undefined"));
 

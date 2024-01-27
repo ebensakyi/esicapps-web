@@ -82,11 +82,9 @@ const formatData = async (data: any, districtId: any) => {
 
 const insertData = async (data: any, filePath: any) => {
   try {
-    console.log("insertDatainsertData", );
     let x = await prisma.electoralArea.createMany({
       data: data,
     });
-    console.log("X", x);
 
     fs.unlink(filePath, (err) => {
       if (err) {

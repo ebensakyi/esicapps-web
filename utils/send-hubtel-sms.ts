@@ -16,7 +16,6 @@ export const sendSMS = (phone:string, message:string) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
       })
       .catch(function (error) {
         console.error(error);

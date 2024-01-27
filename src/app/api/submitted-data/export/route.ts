@@ -43,7 +43,6 @@ export async function GET(request: Request) {
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
-    console.log("published==> ", published);
 
     let query = {};
     let count = 0;

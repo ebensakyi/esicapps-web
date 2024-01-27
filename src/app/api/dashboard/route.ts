@@ -47,7 +47,6 @@ export async function GET(request: Request) {
 
     let { searchParams } = new URL(request.url);
 
-    console.log(searchParams);
 
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
@@ -88,9 +87,7 @@ export async function GET(request: Request) {
         ? latestDate[0].createdAt
         : new Date(endDateParam).toISOString();
 
-    console.log("startDate =====> ", startDate);
-    console.log("endDate =====> ", endDate);
-
+   
     if (userLevel == 1 && filterBy == "undefined") {
       filterBy = "undefined";
       filterValue = "undefined";
@@ -111,8 +108,6 @@ export async function GET(request: Request) {
     //       : { inspectionTypeId: 1, [filterBy]: Number(filterValue), deleted: 0 },
     // });
 
-    console.log("st==> ", startDate);
-    console.log("ed ===>", endDate);
 
     let baselineCount = await prisma.inspection.count({
       where: {

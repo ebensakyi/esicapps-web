@@ -29,7 +29,6 @@ export async function POST(request: Request) {
 
     let response = await readCSV(path, electoralAreaId, districtId);
 
-    console.log("ressss==>", response);
     if (response == 0) {
       return NextResponse.json(
         { message: "Data exist", data: "existingRecord" },
@@ -56,7 +55,6 @@ const readCSV = async (
     createReadStream(filePath)
       .pipe(parse({ headers: true }))
       .on("error", (error) => {
-        console.log(">>>>>>>>>>>>>> error");
 
         throw error.message;
       })
@@ -144,7 +142,6 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
       }
     });
 
-    console.log("Processing completed:", newData);
     return newData;
   } catch (error) {
     console.log(error);

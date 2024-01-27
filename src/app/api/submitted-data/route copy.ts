@@ -721,11 +721,6 @@ export async function GET(request: Request) {
       filterValue = districtId;
     }
 
-    console.log("curPage  ", curPage);
-    console.log("skip ", skip);
-    console.log("filter by ", filterBy);
-
-    console.log("filter val ", filterValue);
 
     let count = await prisma.basicInfoSection.count({
       // where: getSearchParams(req, searchText).where,
@@ -900,7 +895,6 @@ export async function GET(request: Request) {
       },
     });
 
-    console.log(response);
 
     return NextResponse.json({
       response,

@@ -25,7 +25,6 @@ export const sendFCM = async (title: string, body: string, fcmId: string) => {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
     })
     .catch(function (error) {
       console.error(error);
@@ -56,7 +55,6 @@ export const sendBulkFCM = async (title:string, body:string, fcmId:string) => {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
     })
     .catch(function (error) {
       console.error(error);

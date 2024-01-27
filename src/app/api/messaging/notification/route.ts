@@ -100,7 +100,6 @@ export async function PUT(request: Request) {
     let recipientCount = 0;
     let messageId = res.messageId;
 
-    console.log(res);
 
     const data = {
       title: res.title,

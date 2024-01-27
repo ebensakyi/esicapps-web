@@ -8,7 +8,6 @@ export async function GET(request: Request) {
   
       const districtId = Number(searchParams.get("districtId"));
 
-      console.log(districtId);
       
 
       const data = await prisma.community.findMany({

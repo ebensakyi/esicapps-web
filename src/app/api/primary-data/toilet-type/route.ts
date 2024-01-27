@@ -10,7 +10,6 @@ export async function POST(request: Request) {
       name: res.name,
     };
 
-    console.log(data);
     
     const response = await prisma.toiletType.create({ data });
 
