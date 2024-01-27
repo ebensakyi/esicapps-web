@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@prisma/client": "^5.4.2",
     "@types/react": "18.2.15",
