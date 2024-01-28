@@ -129,7 +129,7 @@ export default function Header() {
                                     <span>Dashboard</span>
                                 </Link>
                             </li> : <></>}
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
 
                             <Link
                                 className={
@@ -145,22 +145,8 @@ export default function Header() {
                                 <span>ESICApps 1</span>
                                
                             </Link>
-                            {/* <ul
-                                id="esicapps1-nav"
-                                className="nav-content collapse "
-                                data-bs-parent="#esicapps1-nav"
-                            >
                             
-                                <li>
-                                    <Link href="/esicapps1/table">
-                                        <i className="bi bi-circle" />
-                                        <span>Table</span>
-                                    </Link>
-                                </li>
-                              
-
-                            </ul> */}
-                        </li>
+                        </li> */}
 
 
                         {session?.user?.privileges?.includes(3) ?

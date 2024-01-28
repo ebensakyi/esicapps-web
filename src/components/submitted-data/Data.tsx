@@ -23,6 +23,7 @@ export default function Data({ data }: any) {
     let userSession: any = session;
 
 
+    
 
     let nationalUser: any = userSession?.user?.userLevelId == 1;
     let regionalUser: any = userSession?.user?.userLevelId == 2;
@@ -87,7 +88,7 @@ export default function Data({ data }: any) {
     const handleExportAll = async () => {
         try {
             let searchText = searchParams.get('searchText')
-            
+
             const response = await axios.get(
                 `/api/submitted-data/export?formId=${formId}&published=${published}&searchText=${searchText}&fileName=${handleExcelName()}`,
 
@@ -252,7 +253,7 @@ export default function Data({ data }: any) {
         try {
             e.preventDefault();
 
-        
+
 
             if (filterBy == "national") {
                 return router.push("/");
@@ -284,6 +285,7 @@ export default function Data({ data }: any) {
             router.push(
                 `${pathname}?filterBy=${filterBy}&published=${isPublished}&filterValue=${filterValue}&from=${from}&to=${to}`
             );
+
 
             setLoading(false);
         } catch (error) {
@@ -356,7 +358,7 @@ export default function Data({ data }: any) {
                     </div>
 
                 </div>
-            
+
 
 
 
@@ -809,6 +811,8 @@ export default function Data({ data }: any) {
                                         <table className="table  datatable">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col">Form </th>
+
                                                     <th scope="col">Rating </th>
                                                     <th scope="col">Type</th>
                                                     <th scope="col">Code</th>
@@ -833,6 +837,8 @@ export default function Data({ data }: any) {
                                                 {
                                                     data?.submittedData?.response?.map((dt: any) => (
                                                         <tr key={dt.id}>
+                                                            <td>{dt?.Inspection?.InspectionForm?.name}</td>
+
                                                             <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                                                             <td>
                                                                 {dt?.Inspection?.InspectionType?.name}

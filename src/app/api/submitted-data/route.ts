@@ -232,6 +232,8 @@ export async function GET(request: Request) {
         Inspection: {
           include: {
             InspectionType: true,
+            InspectionForm: true,
+
             Region: true,
           },
         },

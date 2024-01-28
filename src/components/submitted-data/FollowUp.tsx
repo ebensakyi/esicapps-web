@@ -83,13 +83,9 @@ export default function FollowUp({ data }: any) {
     const handleExportAll = async () => {
         try {
             let searchText = searchParams.get('searchText')
-            const response = await axios.post(
-                `/api/submitted-data/follow-up`,
-                {
-                    formId: Number(formId),
-                    fileName: handleExcelName(),
-                    searchText
-                }
+            const response = await axios.get(
+                `/api/submitted-data/follow-up/export?formId=${formId}&searchText=${searchText}&fileName=${handleExcelName()}`,
+
             );
 
 
@@ -128,7 +124,7 @@ export default function FollowUp({ data }: any) {
             }
             if (filterBy == "electoralAreaId" && electoralArea == "") {
                 console.log("filterBy == electoralAreaId");
-                
+
                 return toast.error("Please select electoral area");
             }
             if (filterBy == "districtId" && district == "") {
@@ -308,7 +304,7 @@ export default function FollowUp({ data }: any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>Data </h1>
+                <h1>Follow up Data </h1>
                 {/* <nav>
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -319,27 +315,27 @@ export default function FollowUp({ data }: any) {
                     </ol>
                 </nav> */}
 
-<br/>
-<div className=" mb-3">
+                <br />
+                <div className=" mb-3">
 
-<div className="row align-items-right gy-3 mb-3">
+                    <div className="row align-items-right gy-3 mb-3">
 
-    <div className="col-md-4">
-        <div className="input-group mb-3">
-            <button
-                type="button"
-                className="btn btn-sm btn-success  "
-                onClick={() => handleExportAll()}
-            >
-                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                Export as excel
-            </button>
-        </div>
-    </div>
+                        <div className="col-md-4">
+                            <div className="input-group mb-3">
+                                <button
+                                    type="button"
+                                    className="btn btn-sm btn-success  "
+                                    onClick={() => handleExportAll()}
+                                >
+                                    <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                    Export as excel
+                                </button>
+                            </div>
+                        </div>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
 
             </div>
@@ -353,7 +349,7 @@ export default function FollowUp({ data }: any) {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
-                                    <div className="row row-cols-lg-auto g-3 align-items-center">
+                                        <div className="row row-cols-lg-auto g-3 align-items-center">
                                             <div className="col-md-2">
                                                 <label className="form-label mb-0">Publishing status</label>
 
@@ -741,9 +737,9 @@ export default function FollowUp({ data }: any) {
 
 
 
-                                           
+
                                         </form>
-                                        <br/><br/>
+                                        <br /><br />
                                         {/* <div className="row">
                                             <div className="col-md-3">
                                                 <button
@@ -778,12 +774,15 @@ export default function FollowUp({ data }: any) {
                                         <table className="table  datatable">
                                             <thead>
                                                 <tr>
+                                                <th scope="col">Form </th>
+
                                                     <th scope="col">Premises Code </th>
                                                     <th scope="col">Community </th>
                                                     <th scope="col">Electoral Area</th>
                                                     <th scope="col">Respondent</th>
 
                                                     <th scope="col">Phone</th>
+                                                    <th scope="col">Officer</th>
 
                                                     <th scope="col">Date</th>
                                                     <th scope="col">View</th>
@@ -793,12 +792,15 @@ export default function FollowUp({ data }: any) {
                                                 {
                                                     data?.followUpData?.response?.map((dt: any) => (
                                                         <tr key={dt.id}>
+                                                            <td>{dt?.InspectionForm?.name}</td>
+
                                                             <td>{dt?.premisesCode}</td>
                                                             <td>{dt?.community}</td>
 
                                                             <td>{dt?.electoralArea}</td>
                                                             <td>{dt?.respondentName}</td>
                                                             <td>{dt?.respondentPhoneNumber}</td>
+                                                            <td>{dt?.User?.surname}{" "} {dt?.User?.otherNames}</td>
 
                                                             <td>
                                                                 {moment(dt?.createdAt).format(

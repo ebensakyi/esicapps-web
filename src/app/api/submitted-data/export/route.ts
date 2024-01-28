@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     const formId =
       searchParams.get("formId")?.toString() == "undefined"
         ? undefined
-        :  Number(searchParams.get("formId")?.toString());
+        : Number(searchParams.get("formId")?.toString());
 
     const published =
       searchParams.get("published")?.toString() == "undefined"
@@ -42,10 +42,6 @@ export async function GET(request: Request) {
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
-
-
-    let query = {};
-    let count = 0;
 
     if (userLevel == 1) {
       let response = await prisma.basicInfoSection.findMany({
@@ -425,10 +421,12 @@ export async function GET(request: Request) {
         },
       } as any);
 
-      let url = await export2Excel(response,fileName);
+      let url = await export2Excel(response, fileName);
 
       return NextResponse.json(url);
-    } else if (userLevel == 2) {
+    }
+
+    if (userLevel == 2) {
       let response = await prisma.basicInfoSection.findMany({
         where:
           searchText != ""
@@ -503,6 +501,8 @@ export async function GET(request: Request) {
             : {
                 deleted: 0,
                 Inspection: {
+                  regionId: Number(userRegion),
+
                   isPublished: published,
                   inspectionFormId: formId,
                 },
@@ -806,10 +806,12 @@ export async function GET(request: Request) {
         },
       } as any);
 
-      let url = await export2Excel(response,fileName);
+      let url = await export2Excel(response, fileName);
 
       return NextResponse.json(url);
-    } else if (userLevel == 3) {
+    }
+
+    if (userLevel == 3) {
       const response = await prisma.basicInfoSection.findMany({
         where:
           searchText != ""
@@ -886,6 +888,8 @@ export async function GET(request: Request) {
                 Inspection: {
                   isPublished: published,
                   inspectionFormId: formId,
+                  districtId: Number(userDistrict),
+
                 },
               },
 
@@ -1187,7 +1191,7 @@ export async function GET(request: Request) {
         },
       } as any);
 
-      let url = await export2Excel(response,fileName);
+      let url = await export2Excel(response, fileName);
 
       return NextResponse.json(url);
     }
@@ -1197,7 +1201,7 @@ export async function GET(request: Request) {
   }
 }
 
-const export2Excel = async (data: any,fileName:any) => {
+const export2Excel = async (data: any, fileName: any) => {
   try {
     let flatData = await flattenArray(data);
 
@@ -1255,8 +1259,8 @@ const flattenArray = async (data: any) => {
         data[i]?.Inspection?.LicencePermitSection
           ?.habitationCertificateAvailability?.name,
       "Operating Licence Availability":
-        data[i]?.Inspection?.LicencePermitSection
-          ?.operatingLicenceAvailability?.name,
+        data[i]?.Inspection?.LicencePermitSection?.operatingLicenceAvailability
+          ?.name,
       "Property Rate Availability":
         data[i]?.Inspection?.LicencePermitSection?.propertyRateAvailability
           ?.name,
@@ -1318,8 +1322,7 @@ const flattenArray = async (data: any) => {
       "Toilet Adequate":
         data[i]?.Inspection?.LiquidWasteSection?.toiletAdequacy?.name,
       "Anal Cleansing Material Mgt":
-        data[i]?.Inspection?.LiquidWasteSection?.analCleansingMaterialMgt
-          ?.name,
+        data[i]?.Inspection?.LiquidWasteSection?.analCleansingMaterialMgt?.name,
       "Area Sewered":
         data[i]?.Inspection?.LiquidWasteSection?.areaSewered?.name,
       "Toilet Facilty Mgt Available":
@@ -1374,8 +1377,7 @@ const flattenArray = async (data: any) => {
       "Toilet Condition":
         data[i]?.Inspection?.LiquidWasteSection?.toiletCondition?.name,
       "Toilet Disability Friendly":
-        data[i]?.Inspection?.LiquidWasteSection?.toiletDisabilityFriendly
-          ?.name,
+        data[i]?.Inspection?.LiquidWasteSection?.toiletDisabilityFriendly?.name,
       "Toilet Discharge":
         data[i]?.Inspection?.LiquidWasteSection?.toiletDischarge?.name,
       "Toilet Pit Position":
@@ -1383,14 +1385,12 @@ const flattenArray = async (data: any) => {
 
       ///SOLID WASTE
       "Waste Service Provider Registration":
-        data[i]?.Inspection?.SolidWasteSection
-          ?.wasteServiceProviderRegistration?.name,
+        data[i]?.Inspection?.SolidWasteSection?.wasteServiceProviderRegistration
+          ?.name,
       "Waste Sorting Availability":
-        data[i]?.Inspection?.SolidWasteSection?.wasteSortingAvailability
-          ?.name,
+        data[i]?.Inspection?.SolidWasteSection?.wasteSortingAvailability?.name,
       "Waste Collection Frequency":
-        data[i]?.Inspection?.SolidWasteSection?.wasteCollectionFrequency
-          ?.name,
+        data[i]?.Inspection?.SolidWasteSection?.wasteCollectionFrequency?.name,
       "Approved Waste Storage Receptacle":
         data[i]?.Inspection?.SolidWasteSection?.approvedWasteStorageReceptacle
           ?.name,
@@ -1406,8 +1406,7 @@ const flattenArray = async (data: any) => {
       "Container Volume":
         data[i]?.Inspection?.SolidWasteSection?.ContainerVolume?.name,
       "Waste Provider Accreditted":
-        data[i]?.Inspection?.SolidWasteSection?.wasteProviderAccreditted
-          ?.name,
+        data[i]?.Inspection?.SolidWasteSection?.wasteProviderAccreditted?.name,
 
       PremisesHazardousWasteDisposal: data[
         i
@@ -1423,8 +1422,7 @@ const flattenArray = async (data: any) => {
       ///CONCLUSION
       "Obnoxious Trade ":
         data[i]?.Inspection?.ConclusionSection?.obnoxiousTrade,
-      "Officer Comment":
-        data[i]?.Inspection?.ConclusionSection?.officerComment,
+      "Officer Comment": data[i]?.Inspection?.ConclusionSection?.officerComment,
       Nuisance: data[
         i
       ]?.Inspection?.ConclusionSection?.PremisesNuisanceDetected?.map(

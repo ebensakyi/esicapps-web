@@ -230,6 +230,7 @@ export async function GET(request: Request) {
         createdAt: "desc",
       },
       include: {
+        InspectionForm:true,
         // Inspection: {
         //   include: {
         //     InspectionType: true,

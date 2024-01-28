@@ -17,6 +17,9 @@ export async function POST(request: Request) {
 
     let inspectionId = res.id;
 
+
+    
+
     
 
     let inspection = await prisma.inspection.findFirst({

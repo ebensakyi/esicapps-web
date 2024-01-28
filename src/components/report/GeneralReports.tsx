@@ -24,7 +24,7 @@ export default function GeneralReports({ data }: any) {
         }
     })
 
-    
+
 
     const router = useRouter();
     const pathname = usePathname()
@@ -84,7 +84,7 @@ export default function GeneralReports({ data }: any) {
     // let published = query.published;
 
     const handleUrl = async (report: any) => {
-        if (report == 1) {            
+        if (report == 1) {
             return "/api/report/submission-summaries";
         }
         if (report == 2) {
@@ -239,10 +239,10 @@ export default function GeneralReports({ data }: any) {
         }
     };
 
-    let userSession :any = session;
+    let userSession: any = session;
 
 
-    let nationalUser: any = userSession?.user?.userLevelId == 1 ;
+    let nationalUser: any = userSession?.user?.userLevelId == 1;
     let regionalUser: any = userSession?.user?.userLevelId == 2;
     let districtUser: any = userSession?.user?.userLevelId == 3;
     // let loggedInUserType =1;
@@ -283,6 +283,13 @@ export default function GeneralReports({ data }: any) {
 
             //     await handleResetFilters();
 
+
+
+            if (filterBy == "") {
+                return toast.error("Please select filter level");
+
+            }
+
             let data: any = {
                 reportType,
                 filterBy,
@@ -290,7 +297,7 @@ export default function GeneralReports({ data }: any) {
                 from,
                 to,
             };
-            
+
 
             let url: any = await handleUrl(reportType);
 
@@ -448,7 +455,7 @@ export default function GeneralReports({ data }: any) {
                                                 }}
                                                 value={filterBy}
                                             >
-                                                <option selected value="regionId">
+                                                <option selected value={""}>
                                                     Filter by{" "}
                                                 </option>
                                                 <option hidden={!nationalUser} value="regionId">
