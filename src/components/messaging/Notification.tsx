@@ -131,7 +131,9 @@ export default function Notification({ data }: any) {
     const _delete = async (id: any) => {
         try {
             const response = await axios.delete(
-                `/api/messaging/notification/?id=${id}`
+                `/api/messaging/notification/`, {
+                    data: { id },
+                }
             );
 
             if (response.status == 200) {

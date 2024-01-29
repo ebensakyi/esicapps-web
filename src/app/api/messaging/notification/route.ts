@@ -212,3 +212,25 @@ export async function GET(request: Request) {
     return NextResponse.json(error);
   }
 }
+
+
+export async function DELETE(request: Request) {
+  try {
+    const res = await request.json();
+    let id = Number(res.id)
+
+    const data = await prisma.messaging.update({
+      where: { id: id },
+      data: {
+        deleted: 1,
+     
+      },
+    });
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json(error);
+  }
+}
