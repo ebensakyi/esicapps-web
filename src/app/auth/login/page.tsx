@@ -16,7 +16,7 @@ export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const login = async (e: any) => {
-    e.preventDefault();
+  //  e.preventDefault();
     try {
       if (password == "" || phoneNumber == "") {
 
