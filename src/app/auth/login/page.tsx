@@ -18,24 +18,24 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const login = async (e: any) => {
     e.preventDefault();
-    try {
+  //  try {
       if (password == "" || phoneNumber == "") {
 
         return toast.error("Login form cannot be empty");
       }
       let result = await signIn("credentials", {
         phoneNumber, password,
-       // callbackUrl: "/"
-       callbackUrl:SERVER_BASE_URL
+       callbackUrl: "/"
+       // callbackUrl:SERVER_BASE_URL
         // callbackUrl: `${window.location.origin}/` 
       });
       console.log("RESULT ",result);
       
 
 
-    } catch (error) {
-      console.log("error===>", error);
-    }
+    // } catch (error) {
+    //   console.log("error===>", error);
+    // }
   };
 
   const handlePasswordVisibility = () => {
