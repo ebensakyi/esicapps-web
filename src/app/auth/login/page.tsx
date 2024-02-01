@@ -5,7 +5,6 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
-import { SERVER_BASE_URL } from "@/config";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,24 +17,24 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const login = async (e: any) => {
     e.preventDefault();
-  //  try {
+    try {
       if (password == "" || phoneNumber == "") {
 
         return toast.error("Login form cannot be empty");
       }
       let result = await signIn("credentials", {
         phoneNumber, password,
-       callbackUrl: "/"
-       // callbackUrl:SERVER_BASE_URL
+        callbackUrl: "/"
+        //callbackUrl:SERVER_BASE_URL
         // callbackUrl: `${window.location.origin}/` 
       });
       console.log("RESULT ",result);
       
 
 
-    // } catch (error) {
-    //   console.log("error===>", error);
-    // }
+    } catch (error) {
+      console.log("error===>", error);
+    }
   };
 
   const handlePasswordVisibility = () => {

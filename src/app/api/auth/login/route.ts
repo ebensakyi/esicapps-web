@@ -18,13 +18,20 @@ export async function POST(request: Request) {
       },
       include: { Region: true, District: true, UserRole: true },
     });
+    console.log("user response1 ====> ", user);
 
+    if (!user) {
+      return NextResponse.json(null, { status: 400 });
+    }
+
+    
     const pageAccess = await prisma.pageAccess.findMany({
       where: {
         userRoleId: user?.userRoleId,
         deleted: 0,
       },
     });
+    console.log("user response2 ====> ", pageAccess);
 
     let privileges = pageAccess?.map((d: any) => {
       return d.pageId;
@@ -35,29 +42,27 @@ export async function POST(request: Request) {
 
     // }
 
-    if (!user) {
-      return NextResponse.json(null, { status: 400 });
-    }
-
     let isValid = await bcrypt.compare(password, user.password);
 
     if (isValid) {
-  
-
       await prisma.user.update({
         where: {
           id: user?.id,
         },
         data: {
           loginTimes: {
-            increment: 1, 
+            increment: 1,
           },
         },
       });
 
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
-      return NextResponse.json({ ...user, token, privileges });
+      let response = { ...user, token, privileges };
+
+      console.log("user response ====> ", response);
+
+      return NextResponse.json(response);
     }
     return NextResponse.json(null, { status: 400 });
   } catch (error: any) {
