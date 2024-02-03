@@ -5,7 +5,10 @@ import { SERVER_BASE_URL } from "@/config";
 
 export const authOptions: NextAuthOptions = {
   providers: [
-
+    // GitHubProvider({
+    //     clientId: process.env.GITHUB_ID as string,
+    //     clientSecret: process.env.GITHUB_SECRET as string,
+    // }),
     CredentialsProvider({
       type: "credentials",
       id: 'credentials',
@@ -37,6 +40,19 @@ export const authOptions: NextAuthOptions = {
           return user;
         } else return null;
 
+        // CUSTOM LOGIN FORM
+
+        // const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ phoneNumber, password }),
+        // });
+
+        // const user : any = res.json();
+
+        // if (res.ok && user) {
+        //   return user;
+        // } else return null;
       },
     }),
   ],
@@ -49,13 +65,9 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
 		async jwt({ token, user }) {
-      console.log({ ...token, ...user});
-      
 			return { ...token, ...user };
 		},
 		async session({ session, token }: { session: Session; token: any }) {
-      console.log({ ...session, user: token });
-      
 			return { ...session, user: token };
 		},
 	},
