@@ -32,9 +32,9 @@ export const authOptions: NextAuthOptions = {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ phoneNumber, password }),
         });
-        const user : any = res.json();
+        const user : any = await res.json();
 
-        console.log("USER OPTIONS ==> " + user);
+        console.log( user);
         
         if (res.ok && user) {
           return user;
