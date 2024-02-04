@@ -29,56 +29,56 @@ export async function POST(request: Request) {
       sender: Number(userId),
     };
 
-    if (res.sendingType == "1") {
-      const user: any = await prisma.user.findFirst({
-        where: { id: Number(res.individualRecipient) },
-      });
-      recipientCount = user?.length;
+    // if (res.sendingType == "1") {
+    //   const user: any = await prisma.user.findFirst({
+    //     where: { id: Number(res.individualRecipient) },
+    //   });
+    //   recipientCount = user?.length;
 
-      let x = await sendFCM(res.title, res.message, user?.fcmId);
-    }
+    //   let x = await sendFCM(res.title, res.message, user?.fcmId);
+    // }
 
-    if (res.sendingType == "2") {
-      const user: any = await prisma.user.findMany({
-        where: { districtId: Number(res.districtId) },
-      });
+    // if (res.sendingType == "2") {
+    //   const user: any = await prisma.user.findMany({
+    //     where: { districtId: Number(res.districtId) },
+    //   });
 
-      recipientCount = user.length;
+    //   recipientCount = user.length;
 
-      for (let i = 0; i < user.length; i++) {
-        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
-      }
-    }
+    //   for (let i = 0; i < user.length; i++) {
+    //     let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
+    //   }
+    // }
 
-    if (res.sendingType == "3") {
-      const user: any = await prisma.user.findMany({
-        where: { regionId: Number(res.regionId) },
-      });
+    // if (res.sendingType == "3") {
+    //   const user: any = await prisma.user.findMany({
+    //     where: { regionId: Number(res.regionId) },
+    //   });
 
-      recipientCount = user.length;
+    //   recipientCount = user.length;
 
-      for (let i = 0; i < user.length; i++) {
-        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
-      }
-    }
+    //   for (let i = 0; i < user.length; i++) {
+    //     let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
+    //   }
+    // }
 
-    if (res.sendingType == "4") {
-      const user: any = await prisma.user.findMany({
-        where: { deleted: 0 },
-      });
+    // if (res.sendingType == "4") {
+    //   const user: any = await prisma.user.findMany({
+    //     where: { deleted: 0 },
+    //   });
 
-      recipientCount = user.length;
+    //   recipientCount = user.length;
 
-      for (let i = 0; i < user.length; i++) {
-        let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
-      }
-    }
-    if (recipientCount == 0) {
-      return NextResponse.json(
-        { message: "Recipient list is empty" },
-        { status: 201 }
-      );
-    }
+    //   for (let i = 0; i < user.length; i++) {
+    //     let x = await sendFCM(res.title, res.message, user[i]?.fcmId);
+    //   }
+    // }
+    // if (recipientCount == 0) {
+    //   return NextResponse.json(
+    //     { message: "Recipient list is empty" },
+    //     { status: 201 }
+    //   );
+    // }
 
     const response = await prisma.messaging.create({ data });
 
