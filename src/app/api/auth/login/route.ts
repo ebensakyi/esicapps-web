@@ -69,10 +69,15 @@ export async function POST(request: Request) {
       const token = await jwt.sign(user, TOKEN_SECRET);
 
 
-      console.log("JWT SIGNED TOKEN======> ",token);
       
 
       let response = { ...user, token, privileges };
+
+      console.log("USER====> ",user);
+      console.log("TOKEN====> ",token);
+      console.log("PREIVILEGES====> ",privileges);
+
+      console.log("JRESPONSE ======> ",response);
 
 
       return NextResponse.json(response);
