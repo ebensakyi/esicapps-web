@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     let fcmId = res.fcmId;
 
 
-      const user = await prisma.user.update({
+      const fcm = await prisma.fcm.update({
         where: { id: Number(userId) },
         data: { fcmId: fcmId },
       });

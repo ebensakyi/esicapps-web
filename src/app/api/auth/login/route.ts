@@ -5,26 +5,44 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export async function POST(request: Request) {
-
   try {
     const res = await request.json();
 
     let phoneNumber = res.phoneNumber;
     let password = res.password;
 
+
     let user: any = await prisma.user.findFirst({
+
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,
       },
-      include: { Region: true, District: true, UserRole: true },
+      include: {
+        // surname: true,
+        // otherNames: true,
+        // email: true,
+        // phoneNumber: true,
+        // password: true,
+        // tempPassword: true,
+        // imagePath: true,
+        // regionId: true,
+        // districtId: true,
+        // electoralAreaId: true,
+        // loginTimes: true,
+        // passwordChanged: true,
+        // activated: true,
+        // deleted: true,
+        Region: true,
+        District: true,
+        UserRole: true,
+      },
     });
 
     if (!user) {
       return NextResponse.json(null, { status: 400 });
     }
 
-    
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");
 
@@ -44,30 +62,18 @@ export async function POST(request: Request) {
         },
       });
 
+      const pageAccess = await prisma.pageAccess.findMany({
+        where: {
+          userRoleId: user?.userRoleId,
+          deleted: 0,
+        },
+      });
 
-
-
-    const pageAccess = await prisma.pageAccess.findMany({
-      where: {
-        userRoleId: user?.userRoleId,
-        deleted: 0,
-      },
-    });
-
-    
-
-    let privileges =await pageAccess?.map((d: any) => {
-      return d.pageId;
-    });
-
-
-
-
+      let privileges = await pageAccess?.map((d: any) => {
+        return d.pageId;
+      });
 
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
-
-
-      
 
       let response = { ...user, token, privileges };
 
@@ -76,7 +82,6 @@ export async function POST(request: Request) {
       // console.log("PREIVILEGES====> ",privileges);
 
       // console.log("JRESPONSE ======> ",response);
-
 
       return NextResponse.json(response);
     }
