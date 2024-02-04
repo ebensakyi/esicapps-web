@@ -18,7 +18,6 @@ export async function POST(request: Request) {
       },
       include: { Region: true, District: true, UserRole: true },
     });
-    console.log("user response1 ====> ", user);
 
     if (!user) {
       return NextResponse.json(null, { status: 400 });
@@ -31,7 +30,6 @@ export async function POST(request: Request) {
         deleted: 0,
       },
     });
-    console.log("user response2 ====> ", pageAccess);
 
     let privileges = pageAccess?.map((d: any) => {
       return d.pageId;
