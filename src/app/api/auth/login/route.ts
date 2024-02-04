@@ -58,7 +58,6 @@ export async function POST(request: Request) {
 
       let response = { ...user, token, privileges };
 
-      console.log("user response ====> ", response);
 
       return NextResponse.json(response);
     }
