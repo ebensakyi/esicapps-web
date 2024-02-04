@@ -28,7 +28,7 @@ export default function Login() {
         //callbackUrl:SERVER_BASE_URL
         // callbackUrl: `${window.location.origin}/` 
       });
-      console.log("RESULT ",result);
+      console.log("RESULT==> ",result);
       
 
 
