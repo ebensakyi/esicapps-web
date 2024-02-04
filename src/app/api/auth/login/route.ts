@@ -57,7 +57,7 @@ export async function POST(request: Request) {
 
     
 
-    let privileges = pageAccess?.map((d: any) => {
+    let privileges =await pageAccess?.map((d: any) => {
       return d.pageId;
     });
 
@@ -66,7 +66,11 @@ export async function POST(request: Request) {
 
 
       //const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
-      const token = jwt.sign(user, TOKEN_SECRET);
+      const token = await jwt.sign(user, TOKEN_SECRET);
+
+
+      console.log("JWT SIGNED TOKEN======> ",token);
+      
 
       let response = { ...user, token, privileges };
 
