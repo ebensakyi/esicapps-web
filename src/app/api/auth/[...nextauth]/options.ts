@@ -33,6 +33,9 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify({ phoneNumber, password }),
         });
         const user : any = res.json();
+
+        console.log("USER OPTIONS ==> " + user);
+        
         if (res.ok && user) {
           return user;
         } else return null;
