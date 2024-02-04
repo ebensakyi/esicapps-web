@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export async function POST(request: Request) {
- let TOKEN_SECRET = "eyJ1c2VyIjp7ImlkIjoxLCJmY21JZCI6bnVsbCwidXNlclR5cGVJZCI6MSwic3VybmFtZSI6IlNha3lpIiwib3RoZXJOYW1lcyI6IkViZW5lemVyIEFneWVtYW5nIiwiZW1haWwiOiJlYmVuc2FreWlAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwNTQzMjEyMzIyIiwiZGVzaWduYXRpb24iOiJFbnRlcnByaXNlIEFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkY2kxZjN2SHcxV3NzL0tJQldDZS4yTzNRLno2b0h4d2NLSWtSb1Q4MUY5MWE2QTVWUEF3ankiLCJ0ZW1wUGFzc3dvcmQiOm51bGwsImltYWdlUGF0aCI6bnVsbCwicmVnaW9uSWQiOm51bGwsImRpc3RyaWN0SWQiOm51bGwsImVsZWN0b3JhbEFyZWFJZCI6bnVsbC"
 
   try {
     const res = await request.json();
@@ -65,8 +64,7 @@ export async function POST(request: Request) {
 
 
 
-      //const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
-      const token = await jwt.sign(user, TOKEN_SECRET);
+      const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
 
       
