@@ -180,7 +180,6 @@ model PasswordResetRequest {
 
 model User {
   id                                 Int                                  @id @default(autoincrement())
-  fcmId                              String?                              @db.VarChar(255)
   userRoleId                         Int
   surname                            String                               @db.VarChar(255)
   otherNames                         String                               @db.VarChar(255)
