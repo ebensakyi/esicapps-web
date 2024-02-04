@@ -17,7 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const login = async (e: any) => {
   //  e.preventDefault();
-    try {
+  //  try {
       if (password == "" || phoneNumber == "") {
 
         return toast.error("Login form cannot be empty");
@@ -32,9 +32,9 @@ export default function Login() {
       
 
 
-    } catch (error) {
-      console.log("error===>", error);
-    }
+    // } catch (error) {
+    //   console.log("error===>", error);
+    // }
   };
 
   const handlePasswordVisibility = () => {
