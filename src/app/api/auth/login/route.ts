@@ -24,17 +24,6 @@ export async function POST(request: Request) {
     }
 
     
-    const pageAccess = await prisma.pageAccess.findMany({
-      where: {
-        userRoleId: user?.userRoleId,
-        deleted: 0,
-      },
-    });
-
-    let privileges = pageAccess?.map((d: any) => {
-      return d.pageId;
-    });
-
     // if(user?.passwordChanged==0){
     //   return NextResponse.redirect("/goto");
 
@@ -53,6 +42,27 @@ export async function POST(request: Request) {
           },
         },
       });
+
+
+
+
+    const pageAccess = await prisma.pageAccess.findMany({
+      where: {
+        userRoleId: user?.userRoleId,
+        deleted: 0,
+      },
+    });
+
+    console.log("pageAccess ",pageAccess);
+    
+
+    let privileges = pageAccess?.map((d: any) => {
+      return d.pageId;
+    });
+
+
+
+    
 
       const token = jwt.sign(user, process.env.TOKEN_SECRET ?? "");
 
