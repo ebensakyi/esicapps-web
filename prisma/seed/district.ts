@@ -23,10 +23,6 @@ export const district = [
   {  name: "Ayawaso West", abbrv: "AYWMA", regionId: 1},
   {  name: "Ga Central", abbrv: "GACMA", regionId: 1},
   {  name: "Ga East", abbrv: "GAEMA", regionId: 1},
-
-
-
-
   {  name: "Ga North", abbrv: "GANMA", regionId: 1},
   {  name: "Ga South", abbrv: "GASMA", regionId: 1},
   { name: "Ga West", abbrv: "GAWMA", regionId: 1},
