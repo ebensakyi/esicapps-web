@@ -570,7 +570,7 @@ export default function User({ data }: any) {
                                                     <option >Select user role</option>
                                                     {data.roles.map((role: any) => {
                                                         if (loggedInUserLevel == 3) {
-                                                            if ((role.id == 2 || role.id == 6)) {
+                                                            if ((role.id == 2 || role.id == 4)) {
                                                                 return (
                                                                     <option key={role.id} value={role.id}>
                                                                         {role.name}
