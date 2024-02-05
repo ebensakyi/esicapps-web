@@ -557,6 +557,7 @@ export default function User({ data }: any) {
                                                 <input type="text" className="form-control" placeholder='Designation/Position' onChange={(e) => setDesignation(e.target.value)} value={designation} />
                                             </div>
                                         </div> */}
+                                       
                                         <div className="col-sm-3 mb-3">
                                             <label className="col-sm-12 col-form-label">Select role</label>
                                             <div className="col-sm-12">
@@ -587,6 +588,7 @@ export default function User({ data }: any) {
                                                 </select>
                                             </div>
                                         </div>
+                                        {!loggedInUserDistrict?
                                         <div className="col-sm-3  mb-3">
                                             <label className="col-sm-12 col-form-label">Select user level</label>
 
@@ -647,7 +649,7 @@ export default function User({ data }: any) {
                                                 })} */}
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div>:<></>}
                                         {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
                                             <div className="col-sm-3 mb-3">
                                                 <label className="col-sm-12 col-form-label">Select region</label>
