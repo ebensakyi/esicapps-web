@@ -9,6 +9,18 @@ export const userRole = [
     inspectionDeletionAllowed: 1
   },
   {
-    name: "Mobile User",
+    name: "REHO",
+  },
+  {
+    name: "MEHO",
+  },
+  {
+    name: "DEHO",
+  },
+  {
+    name: "Focal",
+  },
+  {
+    name: "Field / Mobile User",
   },
 ];
