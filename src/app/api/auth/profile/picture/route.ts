@@ -7,7 +7,7 @@ import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 import formidable from "formidable";
 
 export async function POST(request: Request) {
-  try {
+  //try {
     const data = await request.formData();
 
     const file: File | null = data.get("imageFile") as unknown as File;
@@ -25,11 +25,12 @@ export async function POST(request: Request) {
       if (user) {
         await prisma.userImage.update({
           data,
-          where: { id: Number(userId) },
+          where: { userId: Number(userId) },
         });
       } else {
         await prisma.userImage.create({
           data: {
+            id:1,
             imagePath: fileName,
             userId: userId,
           },
@@ -42,11 +43,11 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
-  } catch (error) {
-    console.log(error);
+  // } catch (error) {
+  //   console.log(error);
 
-    return NextResponse.json(error, { status: 500 });
-  }
+  //   return NextResponse.json(error, { status: 500 });
+  // }
 }
 
 export async function DELETE(request: Request) {
