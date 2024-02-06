@@ -188,7 +188,6 @@ model User {
   designation                        String                               @db.VarChar(255)
   password                           String                               @db.VarChar(255)
   tempPassword                       String?                              @db.VarChar(255)
-  imagePath                          String?                              @db.VarChar(255)
   regionId                           Int?
   districtId                         Int?
   electoralAreaId                    Int?
@@ -255,6 +254,17 @@ model User {
   WaterSection                       WaterSection[]
   FollowUpInspection                 FollowUpInspection[]
   Fcm                                Fcm?
+  UserImage                          UserImage?
+}
+
+model UserImage {
+  id        Int      @id @default(autoincrement())
+  imagePath String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
 }
 
 model Fcm {

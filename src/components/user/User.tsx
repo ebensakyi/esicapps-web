@@ -520,37 +520,8 @@ export default function User({ data }: any) {
     };
 
     return (
-        <main id="main" className="main">
-            {/* <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            /> */}
-            <div className="pagetitle">
-                <h1>USERS</h1>
-
-
-                {/* <nav>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li className="breadcrumb-item">Forms</li>
-                        <li className="breadcrumb-item active">Elements</li>
-                    </ol>
-                </nav> */}
-            </div>
-            {/* End Page Title */}
-            <section className="section">
-
-
-            <Modal
+        <>
+          <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
@@ -558,9 +529,6 @@ export default function User({ data }: any) {
                     contentLabel="Confirm deletion"
                 >
                     <>
-
-
-                     
 
                         <div className="alert alert-outline-danger alert-p" role="alert">
                             <span className="alert-content">
@@ -594,8 +562,40 @@ export default function User({ data }: any) {
                         </div>
                     </>
                 </Modal>
-                <div className="row">
+           <main id="main" className="main">
+             
+            {/* <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            /> */}
+            <div className="pagetitle">
+                <h1>USERS</h1>
 
+
+                {/* <nav>
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li className="breadcrumb-item">Forms</li>
+                        <li className="breadcrumb-item active">Elements</li>
+                    </ol>
+                </nav> */}
+            </div>
+            {/* End Page Title */}
+            <section className="section">
+
+
+          
+                <div className="row">
+             
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-body">
@@ -1169,6 +1169,8 @@ export default function User({ data }: any) {
             </section>
         </main>
 
+        </>
+     
 
     )
 }
