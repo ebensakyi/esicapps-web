@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const res = await request.json();
     
 
-    let userId = res.userId;
+    let userId = Number(res.userId);
     let fcmId = res.fcmId;
 
 
