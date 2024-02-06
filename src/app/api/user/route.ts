@@ -273,7 +273,9 @@ export async function GET(request: Request) {
     }
 
     if (loginUserLevel == 2) {
-      const count = await prisma.user.count({ where: { ...whereConditions, regionId: Number(loginUserRegionId) }, });
+      const count = await prisma.user.count({
+        where: { ...whereConditions, regionId: Number(loginUserRegionId) },
+      });
 
       const response = await prisma.user.findMany({
         where: { ...whereConditions, regionId: Number(loginUserRegionId) },
@@ -308,14 +310,15 @@ export async function GET(request: Request) {
         curPage,
         maxPage: Math.ceil(count / perPage),
       });
-     
     }
 
     if (loginUserLevel == 3) {
-      const count = await prisma.user.count({ where:  { ...whereConditions, districtId: Number(loginUserDistrictId) }, });
+      const count = await prisma.user.count({
+        where: { ...whereConditions, districtId: Number(loginUserDistrictId) },
+      });
 
       const response = await prisma.user.findMany({
-        where:  { ...whereConditions, districtId: Number(loginUserDistrictId) },
+        where: { ...whereConditions, districtId: Number(loginUserDistrictId) },
         include: {
           Region: true,
           District: true,
@@ -329,7 +332,10 @@ export async function GET(request: Request) {
 
       if (exportFile) {
         const exportResponse = await prisma.user.findMany({
-          where: { ...whereConditions, districtId: Number(loginUserDistrictId) },
+          where: {
+            ...whereConditions,
+            districtId: Number(loginUserDistrictId),
+          },
           include: {
             Region: true,
             District: true,
@@ -347,7 +353,6 @@ export async function GET(request: Request) {
         curPage,
         maxPage: Math.ceil(count / perPage),
       });
-     
     }
 
     // const response = await prisma.user.findMany({
@@ -462,41 +467,60 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  try {
-    const res = await request.json();
+   try {
+  const res = await request.json();
 
-    let regionId = res.region;
+  let regionId = res.region;
 
-    if (regionId == null) {
-      const district = await prisma.district.findFirst({
-        where: { id: Number(res.district) },
-      });
+  let userId = res?.userId;
+  let changeStatus = res.changeStatus;
+  let status = res.status;;
 
-      regionId = district?.regionId;
-    }
-
-    let id = res.userId;
-
-    const data = {
-      userRoleId: res.userRoleId,
-      userLevelId: res.userLevelId,
-      surname: res.surname,
-      otherNames: res.otherNames,
-      email: res.email,
-      phoneNumber: res.phoneNumber,
-      designation: res.designation,
-      regionId: regionId,
-      districtId: res.district,
-    };
-
-    await prisma.user.update({
-      data: data,
+  console.log(res);
+  
+  if (changeStatus) {
+    let user = await prisma.user.update({
+      data: { activated: status},
       where: {
-        id: id,
+        id: userId,
       },
     });
 
-    return NextResponse.json(data);
+    console.log("user  ", user);
+
+    return NextResponse.json({});
+  }
+
+  if (regionId == null) {
+    const district = await prisma.district.findFirst({
+      where: { id: Number(res.district) },
+    });
+
+    regionId = district?.regionId;
+  }
+
+  let id = res.userId;
+
+  const data = {
+    userRoleId: res.userRoleId,
+    userLevelId: res.userLevelId,
+    surname: res.surname,
+    otherNames: res.otherNames,
+    email: res.email,
+    phoneNumber: res.phoneNumber,
+    designation: res.designation,
+    regionId: regionId,
+    districtId: res.district,
+  };
+
+  await prisma.user.update({
+    data: data,
+    where: {
+      id: id,
+    },
+  });
+
+  return NextResponse.json(data);
   } catch (error) {
     console.log(error);
 

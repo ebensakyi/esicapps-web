@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/react';
 import ReactPaginate from 'react-paginate';
 import { AWS_S3_URL } from '@/config';
 import AvatarImage from '../AvatarImage';
+import Modal from "react-modal";
 
 export default function User({ data }: any) {
     const searchParams = useSearchParams();
@@ -53,6 +54,22 @@ export default function User({ data }: any) {
     const [showOtp, setShowOtp] = useState(false);
 
     // const [searchText, setSearchText] = useState();
+
+    const [modalIsOpen, setIsOpen] = useState(false);
+    function openModal(e: any) {
+        e.preventDefault();
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // subtitle.style.color = "#f00";
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
 
 
 
@@ -475,6 +492,33 @@ export default function User({ data }: any) {
     };
 
 
+    const handleDelete = async () => {        
+
+        try {
+          
+            const response = await axios.delete(
+                `/api/user`, {
+                data: { userId },
+            }
+            );
+            router.refresh()
+            return toast.success("User deleted");
+
+        } catch (error) {
+
+        }
+    };
+    const customStyles = {
+        content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+        },
+    };
+
     return (
         <main id="main" className="main">
             {/* <ToastContainer
@@ -490,6 +534,8 @@ export default function User({ data }: any) {
             /> */}
             <div className="pagetitle">
                 <h1>USERS</h1>
+
+
                 {/* <nav>
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
@@ -502,6 +548,52 @@ export default function User({ data }: any) {
             </div>
             {/* End Page Title */}
             <section className="section">
+
+
+            <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Confirm deletion"
+                >
+                    <>
+
+
+                     
+
+                        <div className="alert alert-outline-danger alert-p" role="alert">
+                            <span className="alert-content">
+                            You are about to delete this user.<br/> Deleted user cannot be recovered.
+                                Click OK to proceed to delete or Cancel to dismiss
+                            </span>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="d-grid">
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            handleDelete()
+
+                                            closeModal();
+                                        }}
+                                        className="btn btn-success"
+                                    >
+                                        OK
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="d-grid">
+                                    <button onClick={closeModal} className="btn btn-danger">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                </Modal>
                 <div className="row">
 
                     <div className="col-lg-12">
@@ -557,7 +649,7 @@ export default function User({ data }: any) {
                                                 <input type="text" className="form-control" placeholder='Designation/Position' onChange={(e) => setDesignation(e.target.value)} value={designation} />
                                             </div>
                                         </div> */}
-                                       
+
                                         <div className="col-sm-3 mb-3">
                                             <label className="col-sm-12 col-form-label">Select role</label>
                                             <div className="col-sm-12">
@@ -571,7 +663,7 @@ export default function User({ data }: any) {
                                                     <option >Select user role</option>
                                                     {data.roles.map((role: any) => {
                                                         if (loggedInUserLevel == 3) {
-                                                            if (( role.id == 7)) {
+                                                            if ((role.id == 7)) {
                                                                 return (
                                                                     <option key={role.id} value={role.id}>
                                                                         {role.name}
@@ -588,68 +680,68 @@ export default function User({ data }: any) {
                                                 </select>
                                             </div>
                                         </div>
-                                        {!loggedInUserDistrict?
-                                        <div className="col-sm-3  mb-3">
-                                            <label className="col-sm-12 col-form-label">Select user level</label>
+                                        {!loggedInUserDistrict ?
+                                            <div className="col-sm-3  mb-3">
+                                                <label className="col-sm-12 col-form-label">Select user level</label>
 
-                                            <div className="col-sm-12">
-                                                <select
-                                                    className="form-select"
-                                                    aria-label="Default select example"
-                                                    onChange={(e: any) => {
+                                                <div className="col-sm-12">
+                                                    <select
+                                                        className="form-select"
+                                                        aria-label="Default select example"
+                                                        onChange={(e: any) => {
 
 
-                                                        setSelectedUserLevel(e.target.value);
-                                                        setSelectedRegion("");
-                                                        setSelectedDistrict("");
-                                                        if (selectedUserLevel == "1") {
+                                                            setSelectedUserLevel(e.target.value);
                                                             setSelectedRegion("");
                                                             setSelectedDistrict("");
-                                                        }
-                                                        // if (selectedUserLevel == "2") {
-                                                        //     setDistrict("");
-                                                        // }
+                                                            if (selectedUserLevel == "1") {
+                                                                setSelectedRegion("");
+                                                                setSelectedDistrict("");
+                                                            }
+                                                            // if (selectedUserLevel == "2") {
+                                                            //     setDistrict("");
+                                                            // }
 
 
-                                                        if (selectedUserLevel == "2") {
-                                                            //console.log("selectedUserLevel...", selectedUserLevel);
+                                                            if (selectedUserLevel == "2") {
+                                                                //console.log("selectedUserLevel...", selectedUserLevel);
 
-                                                            // getDistrictsByRegion(loggedInUserRegion);
+                                                                // getDistrictsByRegion(loggedInUserRegion);
 
-                                                            setSelectedRegion("");
-                                                        }
+                                                                setSelectedRegion("");
+                                                            }
 
-                                                        if (selectedUserLevel == "3") {
+                                                            if (selectedUserLevel == "3") {
 
-                                                            // getDistrictsByRegion(loggedInUserRegion);
+                                                                // getDistrictsByRegion(loggedInUserRegion);
 
-                                                            setSelectedRegion("");
-                                                        }
+                                                                setSelectedRegion("");
+                                                            }
 
-                                                    }}
-                                                    value={selectedUserLevel}
-                                                >
-                                                    <option >Select user level</option>
-                                                    <option hidden={loggedInUserLevel != 1} value="1">
-                                                        National
-                                                    </option>
-                                                    <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
-                                                        Region
-                                                    </option>
-                                                    <option
-                                                        hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
-                                                        value="3"
+                                                        }}
+                                                        value={selectedUserLevel}
                                                     >
-                                                        District
-                                                    </option>
-                                                    {/* {data.userLevels.map((ul: any) => {
+                                                        <option >Select user level</option>
+                                                        <option hidden={loggedInUserLevel != 1} value="1">
+                                                            National
+                                                        </option>
+                                                        <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
+                                                            Region
+                                                        </option>
+                                                        <option
+                                                            hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
+                                                            value="3"
+                                                        >
+                                                            District
+                                                        </option>
+                                                        {/* {data.userLevels.map((ul: any) => {
                                                     return (
                                                         <option key={ul.id} value={ul.id}>{ul.name}</option>
                                                     )
                                                 })} */}
-                                                </select>
-                                            </div>
-                                        </div>:<></>}
+                                                    </select>
+                                                </div>
+                                            </div> : <></>}
                                         {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
                                             <div className="col-sm-3 mb-3">
                                                 <label className="col-sm-12 col-form-label">Select region</label>
@@ -886,7 +978,7 @@ export default function User({ data }: any) {
                                     <tbody>
                                         {data.users.response.map((user: any) => (
                                             <tr key={user.id}>
-                                                <td><AvatarImage imagePath={user?.imagePath} defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={32} width={32}/></td>
+                                                <td><AvatarImage imagePath={user?.imagePath} defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={32} width={32} /></td>
                                                 <td>{user?.otherNames} {user?.surname}</td>
                                                 <td>{user?.phoneNumber}</td>
                                                 {/* <td>{user?.email}</td> */}
@@ -900,7 +992,7 @@ export default function User({ data }: any) {
                                                         setShowOtp(!showOtp)
                                                     }}>{!showOtp ? "****" : user?.tempPassword}</span></td>
 
-                                                <td>{user?.deleted == 1 ? <>
+                                                <td>{user?.activated == 0 ? <>
                                                     <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
                                                 </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
                                                 </>}</td>
@@ -966,12 +1058,24 @@ export default function User({ data }: any) {
                                                                         try {
                                                                             e.preventDefault();
                                                                             let id = user.id;
-                                                                            const response = await axios.delete(
-                                                                                `/api/user`,
-                                                                                {
-                                                                                    data: { id },
-                                                                                }
-                                                                            );
+
+
+                                                                            let data = {
+                                                                                userId: Number(id),
+                                                                                changeStatus: 1,
+                                                                                status: Math.abs(Number(user.activated) - 1),
+
+                                                                            };
+
+
+
+
+                                                                            const response = await axios.put("/api/user", data);
+
+
+
+
+
                                                                             if (response.status == 200) {
                                                                                 router.refresh()
                                                                                 return toast.success("User status changed");
@@ -1019,20 +1123,9 @@ export default function User({ data }: any) {
                                                                 <button
                                                                     className="dropdown-item btn btn-sm "
                                                                     onClick={async (e) => {
-                                                                        try {
-                                                                            e.preventDefault();
-                                                                            let userId = user.id;
-                                                                            const response = await axios.delete(
-                                                                                `/api/user`, {
-                                                                                data: { userId },
-                                                                            }
-                                                                            );
-                                                                            router.refresh()
-                                                                            return toast.success("User deleted");
 
-                                                                        } catch (error) {
-
-                                                                        }
+                                                                        setUserId(user?.id);
+                                                                        openModal(e)
 
                                                                     }}
                                                                 >
