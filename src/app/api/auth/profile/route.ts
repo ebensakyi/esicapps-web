@@ -316,10 +316,17 @@ export async function GET(request: Request) {
       ]);
     }
 
-    let user = await prisma.user.findFirst({
+    let _user = await prisma.user.findFirst({
       where: { id: userId, deleted: 0 },
-      include: { District: { include: { Region: true } } },
+      include: { District: { include: { Region: true } },UserImage:true },
     });
+    let user =  {
+      ..._user,
+      imagePath: _user?.UserImage?.imagePath
+    };
+
+    console.log(user);
+    
 
     return NextResponse.json(user, { status: 200 });
   } catch (error) {

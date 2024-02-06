@@ -20,7 +20,7 @@ export async function POST(request: Request) {
         data: {
           fcmId: fcmId,
         },
-        where: { id: Number(userId) },
+        where: { userId: Number(userId) },
       });
     } else {
       await prisma.fcm.create({
