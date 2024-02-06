@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 
-
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
@@ -24,16 +23,16 @@ export async function POST(request: Request) {
         where: { userId: Number(userId) },
       });
       if (user) {
-   await prisma.userImage.update({
+        await prisma.userImage.update({
           data,
           where: { id: Number(userId) },
         });
       } else {
-       await prisma.userImage.create({
-          data:{
+        await prisma.userImage.create({
+          data: {
             imagePath: fileName,
-            userId: userId
-          }
+            userId: userId,
+          },
         });
       }
 

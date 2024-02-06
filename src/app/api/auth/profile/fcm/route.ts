@@ -12,10 +12,26 @@ export async function POST(request: Request) {
     let fcmId = res.fcmId;
 
 
-      const fcm = await prisma.fcm.update({
+    const user = await prisma.fcm.findFirst({
+      where: { userId: Number(userId) },
+    });
+    if (user) {
+      await prisma.fcm.update({
+        data: {
+          fcmId: fcmId,
+        },
         where: { id: Number(userId) },
-        data: { fcmId: fcmId },
       });
+    } else {
+      await prisma.fcm.create({
+        data: {
+          fcmId: fcmId,
+          userId: userId,
+        },
+      });
+    }
+
+
    
 
     return NextResponse.json( { status: 200 });
