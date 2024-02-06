@@ -917,42 +917,53 @@ export default function User({ data }: any) {
                         <div className="card">
                             <div className="card-body table-responsive">
                                 <h5 className="card-title">Users List</h5>
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <div className="input-group mb-3">
-                                            <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
-                                                id="searchText"
-                                                name="searchText" />
-                                            <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
-                                        </div>
+                                <div className="container">
+  <div className="row justify-content-end">
+    <div className="col-md-4">
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Enter search term"
+          ref={searchTextRef}
+          id="searchText"
+          name="searchText"
+        />
+        <span className="input-group-text" id="basic-addon2">
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"
+          >
+            <i className="bi bi-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div className="col-2">
+      <button
+        type="submit"
+        className="form-control btn btn-danger"
+        onClick={(e: any) => handleFilterReset()}
+      >
+        Reset
+      </button>
+    </div>
+    <div className="col-md-4">
+      <div className="input-group mb-3">
+        <button
+          type="button"
+          className="btn btn-sm btn-success"
+          onClick={() => handleExportAll()}
+        >
+          <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+          {exporting ? 'Exporting...' : 'Export as Excel'}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-                                    </div>
-                                    <div className="col-2">
-                                        {/* <label className="form-label mb-0">.</label> */}
-                                        <button
-                                            type="submit"
-                                            className="form-control btn btn-danger"
-                                            onClick={(e: any) => handleFilterReset()}
-                                        >
-                                            Reset
-                                        </button>
-                                    </div>
-
-                                    <div className="col-md-4">
-                                        <div className="input-group mb-3">
-                                            <button
-                                                type="button"
-                                                className="btn btn-sm btn-success  "
-                                                onClick={() => handleExportAll()}
-                                            >
-                                                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-
-                                                {exporting ? 'Exporting...' : 'Export as Excel'}
-
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <table className="table datatable table-striped ">
 
