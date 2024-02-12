@@ -3,7 +3,7 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 
 export async function POST(request: Request) {
-  try {
+  //try {
     const res = await request.json();
 
     const data = {
@@ -12,14 +12,17 @@ export async function POST(request: Request) {
       electoralAreaId: Number(res.electoralAreaId),
     };
 
+    console.log(data);
+    
+
     const response = await prisma.community.create({ data });
 
     return NextResponse.json(response);
-  } catch (error: any) {
-    console.log(error);
+  // } catch (error: any) {
+  //   console.log(error);
 
-    return NextResponse.json(error, { status: 500 });
-  }
+  //   return NextResponse.json(error, { status: 500 });
+  // }
 }
 
 export async function GET(request: Request) {

@@ -303,7 +303,7 @@ export default function Community({ data }: any) {
                                         Name *
                                     </label>
                                     <div className="col-sm-12">
-                                        <input type="text" className="form-control" placeholder='Enter electoral area name' value={communityName} onChange={(e: any) => setCommunityName(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder='Enter name' value={communityName} onChange={(e: any) => setCommunityName(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className=" mb-3">
