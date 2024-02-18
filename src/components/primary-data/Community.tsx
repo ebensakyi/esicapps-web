@@ -122,10 +122,11 @@ export default function Community({ data }: any) {
             let data = {
                 communityName,
                 communityId,
-                electoralAreaId
-
+                electoralAreaId,
+                districtId,
             };
 
+console.log(data);
 
 
             const response = await axios.put(
@@ -571,7 +572,7 @@ export default function Community({ data }: any) {
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
                                                     <td>{data?.ElectoralArea?.name}</td>
-                                                    <td>{data?.ElectoralArea.District?.name}</td>
+                                                    <td>{data?.District?.name}</td>
                                                     <td>{data?.ElectoralArea.District?.Region?.name}</td>
 
                                                     <td>
@@ -604,7 +605,7 @@ export default function Community({ data }: any) {
 
                                                                                 setCommunityName(data.name);
                                                                                 setRegionId(data?.ElectoralArea.District?.Region.id);
-                                                                                setDistrictId(data.ElectoralArea.District?.id);
+                                                                                setDistrictId(data?.District?.id);
                                                                                 await getElectoralAreasByDistrict(data.ElectoralArea.District?.id)
 
                                                                                 setElectoralAreaId(data.ElectoralArea.id)

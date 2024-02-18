@@ -4,20 +4,17 @@ import { logActivity } from "@/utils/log";
 
 export async function POST(request: Request) {
   //try {
-    const res = await request.json();
+  const res = await request.json();
 
-    const data = {
-      name: res.communityName,
-      districtId: Number(res.districtId),
-      electoralAreaId: Number(res.electoralAreaId),
-    };
+  const data = {
+    name: res.communityName,
+    districtId: Number(res.districtId),
+    electoralAreaId: Number(res.electoralAreaId),
+  };
 
-    console.log(data);
-    
+  const response = await prisma.community.create({ data });
 
-    const response = await prisma.community.create({ data });
-
-    return NextResponse.json(response);
+  return NextResponse.json(response);
   // } catch (error: any) {
   //   console.log(error);
 
@@ -97,6 +94,7 @@ export async function GET(request: Request) {
           : { deleted: 0 },
 
       include: {
+        District: true,
         ElectoralArea: {
           include: {
             District: {
@@ -164,10 +162,20 @@ export async function PUT(request: Request) {
     const res = await request.json();
 
     let id = res.communityId;
-    const data = {
-      name: res.communityName,
-      electoralAreaId: Number(res.electoralAreaId),
-    };
+    let districtId = res.districtId;
+    let data = {};
+    if (districtId) {
+      data = {
+        name: res.communityName,
+        electoralAreaId: Number(res.electoralAreaId),
+        districtId: Number(res.districtId),
+      };
+    } else {
+      data = {
+        name: res.communityName,
+        electoralAreaId: Number(res.electoralAreaId),
+      };
+    }
 
     const response = await prisma.community.update({ where: { id }, data });
 

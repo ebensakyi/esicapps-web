@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  try {
+ try {
     const session: any = await getServerSession(authOptions);
 
     const { searchParams } = new URL(request.url);
@@ -240,7 +240,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json(error);
+   // return NextResponse.json(error);
   }
 }
 
