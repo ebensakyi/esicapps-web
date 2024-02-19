@@ -175,6 +175,14 @@ const MyConstants = {
   
 export default function OtherData({ data }: any) {
 
+
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect(LOGIN_URL);
+        }
+    })
+
     // const [searchText, setSearchText] = useState();
     // const [region, setRegion] = useState("");
     const customStyles = {
@@ -187,19 +195,14 @@ export default function OtherData({ data }: any) {
             transform: 'translate(-50%, -50%)',
         },
     };
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
+
     const [isOpen, setIsOpen] = useState(false)
     const [primaryData, setPrimaryData] = useState(0)
 
 
-
-
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect(LOGIN_URL);
-        }
-    })
+    
 
 
     const router = useRouter();
@@ -244,6 +247,7 @@ export default function OtherData({ data }: any) {
         try {
             e.preventDefault()
             let data = {
+                id,
                 name,
 
             };
@@ -388,6 +392,7 @@ export default function OtherData({ data }: any) {
                                                 <td>
                                                     <button className="badge bg-success" onClick={async () => {
                                                         setName(data.name)
+                                                        setId(data.id)
                                                         setIsEditing(true)
                                                     }}>
                                                         Edit
@@ -468,6 +473,7 @@ export default function OtherData({ data }: any) {
                                                     <td>
                                                         <button className="badge bg-success" onClick={async () => {
                                                             setName(data.name)
+                                                            setId(data.id)
                                                         }}>
                                                             Edit
                                                         </button>
@@ -546,6 +552,7 @@ export default function OtherData({ data }: any) {
                                                         <td>
                                                             <button className="badge bg-success" onClick={async () => {
                                                                 setName(data.name)
+                                                                setId(data.id)
                                                             }}>
                                                                 Edit
                                                             </button>
@@ -624,6 +631,7 @@ export default function OtherData({ data }: any) {
                                                             <td>
                                                                 <button className="badge bg-success" onClick={async () => {
                                                                     setName(data.name)
+                                                                    setId(data.id)
                                                                 }}>
                                                                     Edit
                                                                 </button>
@@ -702,6 +710,8 @@ export default function OtherData({ data }: any) {
                                                                 <td>
                                                                     <button className="badge bg-success" onClick={async () => {
                                                                         setName(data.name)
+
+                                                                        setId(data.id)
                                                                     }}>
                                                                         Edit
                                                                     </button>
@@ -779,7 +789,8 @@ export default function OtherData({ data }: any) {
 
                                                                     <td>
                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                            setName(data.name)
+                                                                            setName(data.name);
+                                                                            setId(data.id)
                                                                         }}>
                                                                             Edit
                                                                         </button>
@@ -857,7 +868,8 @@ export default function OtherData({ data }: any) {
 
                                                                         <td>
                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                setName(data.name)
+                                                                                setName(data.name);
+                                                                                setId(data.id)
                                                                             }}>
                                                                                 Edit
                                                                             </button>
@@ -936,6 +948,7 @@ export default function OtherData({ data }: any) {
                                                                             <td>
                                                                                 <button className="badge bg-success" onClick={async () => {
                                                                                     setName(data.name)
+                                                                                    setId(data.id)
                                                                                 }}>
                                                                                     Edit
                                                                                 </button>
@@ -1013,7 +1026,8 @@ export default function OtherData({ data }: any) {
 
                                                                                 <td>
                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                        setName(data.name)
+                                                                                        setName(data.name);
+                                                                                        setId(data.id)
                                                                                     }}>
                                                                                         Edit
                                                                                     </button>
@@ -1091,7 +1105,8 @@ export default function OtherData({ data }: any) {
 
                                                                                     <td>
                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                            setName(data.name)
+                                                                                            setName(data.name);
+                                                                                            setId(data.id)
                                                                                         }}>
                                                                                             Edit
                                                                                         </button>
@@ -1169,7 +1184,7 @@ export default function OtherData({ data }: any) {
 
                                                                                         <td>
                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                setName(data.name)
+                                                                                                setName(data.name); setId(data.id)
                                                                                             }}>
                                                                                                 Edit
                                                                                             </button>
@@ -1247,7 +1262,7 @@ export default function OtherData({ data }: any) {
 
                                                                                             <td>
                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                    setName(data.name)
+                                                                                                    setName(data.name); setId(data.id)
                                                                                                 }}>
                                                                                                     Edit
                                                                                                 </button>
@@ -1325,7 +1340,8 @@ export default function OtherData({ data }: any) {
 
                                                                                                 <td>
                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                        setName(data.name)
+                                                                                                        setName(data.name);
+                                                                                                        setId(data.id)
                                                                                                     }}>
                                                                                                         Edit
                                                                                                     </button>
@@ -1403,7 +1419,8 @@ export default function OtherData({ data }: any) {
 
                                                                                                     <td>
                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                            setName(data.name)
+                                                                                                            setName(data.name);
+                                                                                                            setId(data.id)
                                                                                                         }}>
                                                                                                             Edit
                                                                                                         </button>
@@ -1482,7 +1499,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                         <td>
                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                setName(data.name)
+                                                                                                                setName(data.name); setId(data.id)
                                                                                                             }}>
                                                                                                                 Edit
                                                                                                             </button>
@@ -1560,7 +1577,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                             <td>
                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                    setName(data.name)
+                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                 }}>
                                                                                                                     Edit
                                                                                                                 </button>
@@ -1639,7 +1656,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                 <td>
                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                        setName(data.name)
+                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                     }}>
                                                                                                                         Edit
                                                                                                                     </button>
@@ -1721,7 +1738,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                     <td>
                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                            setName(data.name)
+                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                         }}>
                                                                                                                             Edit
                                                                                                                         </button>
@@ -1802,7 +1819,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                         <td>
                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                setName(data.name)
+                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                             }}>
                                                                                                                                 Edit
                                                                                                                             </button>
@@ -1885,7 +1902,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                             <td>
                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                    setName(data.name)
+                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                 }}>
                                                                                                                                     Edit
                                                                                                                                 </button>
@@ -1963,7 +1980,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                 <td>
                                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                                        setName(data.name)
+                                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                                     }}>
                                                                                                                                         Edit
                                                                                                                                     </button>
@@ -2041,7 +2058,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                     <td>
                                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                                            setName(data.name)
+                                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                                         }}>
                                                                                                                                             Edit
                                                                                                                                         </button>
@@ -2119,7 +2136,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                         <td>
                                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                setName(data.name)
+                                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                                             }}>
                                                                                                                                                 Edit
                                                                                                                                             </button>
@@ -2197,7 +2214,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                             <td>
                                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                    setName(data.name)
+                                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                                 }}>
                                                                                                                                                     Edit
                                                                                                                                                 </button>
@@ -2276,7 +2293,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                     <td>
                                                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                            setName(data.name)
+                                                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                                                         }}>
                                                                                                                                                             Edit
                                                                                                                                                         </button>
@@ -2354,7 +2371,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                         <td>
                                                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                setName(data.name)
+                                                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                                                             }}>
                                                                                                                                                                 Edit
                                                                                                                                                             </button>
@@ -2432,7 +2449,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                             <td>
                                                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                                                 }}>
                                                                                                                                                                     Edit
                                                                                                                                                                 </button>
@@ -2510,7 +2527,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                 <td>
                                                                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                                                                     }}>
                                                                                                                                                                         Edit
                                                                                                                                                                     </button>
@@ -2588,7 +2605,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                     <td>
                                                                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                            setName(data.name)
+                                                                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                                                                         }}>
                                                                                                                                                                             Edit
                                                                                                                                                                         </button>
@@ -2666,7 +2683,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                         <td>
                                                                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                                                                             }}>
                                                                                                                                                                                 Edit
                                                                                                                                                                             </button>
@@ -2744,7 +2761,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                             <td>
                                                                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                                                                 }}>
                                                                                                                                                                                     Edit
                                                                                                                                                                                 </button>
@@ -2822,7 +2839,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                 <td>
                                                                                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                                                                                     }}>
                                                                                                                                                                                         Edit
                                                                                                                                                                                     </button>
@@ -2900,7 +2917,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                     <td>
                                                                                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                            setName(data.name)
+                                                                                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                                                                                         }}>
                                                                                                                                                                                             Edit
                                                                                                                                                                                         </button>
@@ -2978,7 +2995,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                         <td>
                                                                                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                                                                                             }}>
                                                                                                                                                                                                 Edit
                                                                                                                                                                                             </button>
@@ -3056,7 +3073,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                             <td>
                                                                                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                                                                                 }}>
                                                                                                                                                                                                     Edit
                                                                                                                                                                                                 </button>
@@ -3133,7 +3150,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                 <td>
                                                                                                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                                                                                                     }}>
                                                                                                                                                                                                         Edit
                                                                                                                                                                                                     </button>
@@ -3211,7 +3228,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                     <td>
                                                                                                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                            setName(data.name)
+                                                                                                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                                                                                                         }}>
                                                                                                                                                                                                             Edit
                                                                                                                                                                                                         </button>
@@ -3289,7 +3306,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                         <td>
                                                                                                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                                                                                                             }}>
                                                                                                                                                                                                                 Edit
                                                                                                                                                                                                             </button>
@@ -3367,7 +3384,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                             <td>
                                                                                                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                                                                                                 }}>
                                                                                                                                                                                                                     Edit
                                                                                                                                                                                                                 </button>
@@ -3445,7 +3462,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                                 <td>
                                                                                                                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                                                                                                                     }}>
                                                                                                                                                                                                                         Edit
                                                                                                                                                                                                                     </button>
@@ -3523,7 +3540,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                                     <td>
                                                                                                                                                                                                                         <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                            setName(data.name)
+                                                                                                                                                                                                                            setName(data.name); setId(data.id)
                                                                                                                                                                                                                         }}>
                                                                                                                                                                                                                             Edit
                                                                                                                                                                                                                         </button>
@@ -3601,7 +3618,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                                         <td>
                                                                                                                                                                                                                             <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                                setName(data.name)
+                                                                                                                                                                                                                                setName(data.name); setId(data.id)
                                                                                                                                                                                                                             }}>
                                                                                                                                                                                                                                 Edit
                                                                                                                                                                                                                             </button>
@@ -3679,7 +3696,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                                             <td>
                                                                                                                                                                                                                                 <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                                    setName(data.name)
+                                                                                                                                                                                                                                    setName(data.name); setId(data.id)
                                                                                                                                                                                                                                 }}>
                                                                                                                                                                                                                                     Edit
                                                                                                                                                                                                                                 </button>
@@ -3757,7 +3774,7 @@ export default function OtherData({ data }: any) {
 
                                                                                                                                                                                                                                 <td>
                                                                                                                                                                                                                                     <button className="badge bg-success" onClick={async () => {
-                                                                                                                                                                                                                                        setName(data.name)
+                                                                                                                                                                                                                                        setName(data.name); setId(data.id)
                                                                                                                                                                                                                                     }}>
                                                                                                                                                                                                                                         Edit
                                                                                                                                                                                                                                     </button>
