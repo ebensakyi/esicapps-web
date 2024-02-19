@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from './api/auth/[...nextauth]/options';
 import { redirect } from 'next/navigation';
 
-
 async function getDashboardData(searchParams: any) {
   let { filterBy } = searchParams
   let { filterValue } = searchParams
@@ -32,7 +31,7 @@ async function getDashboardData(searchParams: any) {
 
 async function getRegions() {
 
-  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store' });
+  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store',  headers: headers() });
 
   if (!response.ok) {
     throw new Error('Failed to fetch data')
@@ -43,7 +42,7 @@ async function getRegions() {
 
 async function getDistricts() {
 
-  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store' });
+  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store',  headers: headers() });
 
   if (!response.ok) {
     throw new Error('Failed to fetch data')

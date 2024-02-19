@@ -126,7 +126,6 @@ export default function Community({ data }: any) {
                 districtId,
             };
 
-console.log(data);
 
 
             const response = await axios.put(
