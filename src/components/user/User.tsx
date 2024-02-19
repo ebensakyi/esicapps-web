@@ -52,6 +52,7 @@ export default function User({ data }: any) {
     const [showRegion, setShowRegion] = useState(false);
     const [showDistrict, setShowDistrict] = useState(false);
     const [showOtp, setShowOtp] = useState(false);
+    const [sendSMS, setSendSMS] = useState(false);
 
     // const [searchText, setSearchText] = useState();
 
@@ -183,6 +184,7 @@ export default function User({ data }: any) {
                         userLevelId: Number(selectedUserLevel),
                         surname,
                         otherNames,
+                        sendSMS,
                         email,
                         phoneNumber,
                         designation,
@@ -195,7 +197,8 @@ export default function User({ data }: any) {
                         userRoleId: Number(userRole),
                         userLevelId: Number(selectedUserLevel),
                         surname,
-                        otherNames,
+                        otherNames, sendSMS,
+
                         email,
                         phoneNumber,
                         designation,
@@ -209,7 +212,8 @@ export default function User({ data }: any) {
                         userRoleId: Number(userRole),
                         userLevelId: Number(selectedUserLevel),
                         surname,
-                        otherNames,
+                        otherNames, sendSMS,
+
                         email,
                         phoneNumber,
                         designation,
@@ -225,7 +229,8 @@ export default function User({ data }: any) {
                         userRoleId: Number(userRole),
                         userLevelId: Number(selectedUserLevel),
                         surname,
-                        otherNames,
+                        otherNames, sendSMS,
+
                         email,
                         phoneNumber,
                         designation,
@@ -239,6 +244,8 @@ export default function User({ data }: any) {
                         userLevelId: Number(selectedUserLevel),
                         surname,
                         otherNames,
+                         sendSMS,
+
                         email,
                         phoneNumber,
                         designation,
@@ -254,6 +261,8 @@ export default function User({ data }: any) {
                     userLevelId: Number(loggedInUserLevel),
                     surname,
                     otherNames,
+                     sendSMS,
+
                     email,
                     phoneNumber,
                     designation,
@@ -492,10 +501,10 @@ export default function User({ data }: any) {
     };
 
 
-    const handleDelete = async () => {        
+    const handleDelete = async () => {
 
         try {
-          
+
             const response = await axios.delete(
                 `/api/user`, {
                 data: { userId },
@@ -521,50 +530,50 @@ export default function User({ data }: any) {
 
     return (
         <>
-          <Modal
-                    isOpen={modalIsOpen}
-                    onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
-                    style={customStyles}
-                    contentLabel="Confirm deletion"
-                >
-                    <>
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Confirm deletion"
+            >
+                <>
 
-                        <div className="alert alert-outline-danger alert-p" role="alert">
-                            <span className="alert-content">
-                            You are about to delete this user.<br/> Deleted user cannot be recovered.
-                                Click OK to proceed to delete or Cancel to dismiss
-                            </span>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="d-grid">
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            handleDelete()
+                    <div className="alert alert-outline-danger alert-p" role="alert">
+                        <span className="alert-content">
+                            You are about to delete this user.<br /> Deleted user cannot be recovered.
+                            Click OK to proceed to delete or Cancel to dismiss
+                        </span>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="d-grid">
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        handleDelete()
 
-                                            closeModal();
-                                        }}
-                                        className="btn btn-success"
-                                    >
-                                        OK
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="d-grid">
-                                    <button onClick={closeModal} className="btn btn-danger">
-                                        Cancel
-                                    </button>
-                                </div>
+                                        closeModal();
+                                    }}
+                                    className="btn btn-success"
+                                >
+                                    OK
+                                </button>
                             </div>
                         </div>
-                    </>
-                </Modal>
-           <main id="main" className="main">
-             
-            {/* <ToastContainer
+                        <div className="col-md-6">
+                            <div className="d-grid">
+                                <button onClick={closeModal} className="btn btn-danger">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            </Modal>
+            <main id="main" className="main">
+
+                {/* <ToastContainer
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -575,11 +584,11 @@ export default function User({ data }: any) {
                 draggable
                 pauseOnHover
             /> */}
-            <div className="pagetitle">
-                <h1>USERS</h1>
+                <div className="pagetitle">
+                    <h1>USERS</h1>
 
 
-                {/* <nav>
+                    {/* <nav>
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                             <a href="index.html">Home</a>
@@ -588,40 +597,40 @@ export default function User({ data }: any) {
                         <li className="breadcrumb-item active">Elements</li>
                     </ol>
                 </nav> */}
-            </div>
-            {/* End Page Title */}
-            <section className="section">
+                </div>
+                {/* End Page Title */}
+                <section className="section">
 
 
-          
-                <div className="row">
-             
-                    <div className="col-lg-12">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Enter user details</h5>
-                                {/* General Form Elements */}
-                                <form>
-                                    <div className="row">
+
+                    <div className="row">
+
+                        <div className="col-lg-12">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Enter user details</h5>
+                                    {/* General Form Elements */}
+                                    <form>
+                                        <div className="row">
 
 
-                                        <div className="col-sm-3  mb-3">
-                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                First name
-                                            </label>
-                                            <div className="col-sm-12">
-                                                <input type="text" className="form-control" placeholder=' First name' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
+                                            <div className="col-sm-3  mb-3">
+                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                    First name
+                                                </label>
+                                                <div className="col-sm-12">
+                                                    <input type="text" className="form-control" placeholder=' First name' onChange={(e) => setOtherNames(e.target.value)} value={otherNames} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-sm-3 mb-3">
-                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                Last name
-                                            </label>
-                                            <div className="col-sm-12">
-                                                <input type="text" className="form-control" placeholder='Last name' onChange={(e) => setSurname(e.target.value)} value={surname} />
+                                            <div className="col-sm-3 mb-3">
+                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                    Last name
+                                                </label>
+                                                <div className="col-sm-12">
+                                                    <input type="text" className="form-control" placeholder='Last name' onChange={(e) => setSurname(e.target.value)} value={surname} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        {/* <div className="col-sm-3  mb-3">
+                                            {/* <div className="col-sm-3  mb-3">
                                             <label htmlFor="inputEmail" className="col-sm-12 col-form-label">
                                                 Email
                                             </label>
@@ -629,19 +638,19 @@ export default function User({ data }: any) {
                                                 <input type="email" className="form-control" placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} />
                                             </div>
                                         </div> */}
-                                        <div className="col-sm-3 mb-3">
-                                            <label
-                                                htmlFor="inputNumber"
-                                                className="col-sm-12 col-form-label"
-                                            >
-                                                Phone Number
-                                            </label>
-                                            <div className="col-sm-12">
-                                                <input type="tel" maxLength={10} className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
+                                            <div className="col-sm-3 mb-3">
+                                                <label
+                                                    htmlFor="inputNumber"
+                                                    className="col-sm-12 col-form-label"
+                                                >
+                                                    Phone Number
+                                                </label>
+                                                <div className="col-sm-12">
+                                                    <input type="tel" maxLength={10} className="form-control" placeholder='Phone number' onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {/* <div className="col-sm-3  mb-3">
+                                            {/* <div className="col-sm-3  mb-3">
                                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                                 Designation/Role
                                             </label>
@@ -650,124 +659,124 @@ export default function User({ data }: any) {
                                             </div>
                                         </div> */}
 
-                                        <div className="col-sm-3 mb-3">
-                                            <label className="col-sm-12 col-form-label">Select role</label>
-                                            <div className="col-sm-12">
-                                                <select
-                                                    onChange={(e: any) => setUserRole(e.target.value)}
-                                                    className="form-select"
-                                                    aria-label="Default select example"
-                                                    value={userRole}
-                                                >
-
-                                                    <option >Select user role</option>
-                                                    {data.roles.map((role: any) => {
-                                                        if (loggedInUserLevel == 3) {
-                                                            if ((role.id == 7)) {
-                                                                return (
-                                                                    <option key={role.id} value={role.id}>
-                                                                        {role.name}
-                                                                    </option>
-                                                                );
-                                                            }
-                                                            return;
-
-                                                        }
-
-                                                        return <option key={role.id} value={role.id}>{role.name}</option>
-
-                                                    })}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        {!loggedInUserDistrict ?
-                                            <div className="col-sm-3  mb-3">
-                                                <label className="col-sm-12 col-form-label">Select user level</label>
-
+                                            <div className="col-sm-3 mb-3">
+                                                <label className="col-sm-12 col-form-label">Select role</label>
                                                 <div className="col-sm-12">
                                                     <select
+                                                        onChange={(e: any) => setUserRole(e.target.value)}
                                                         className="form-select"
                                                         aria-label="Default select example"
-                                                        onChange={(e: any) => {
+                                                        value={userRole}
+                                                    >
+
+                                                        <option >Select user role</option>
+                                                        {data.roles.map((role: any) => {
+                                                            if (loggedInUserLevel == 3) {
+                                                                if ((role.id == 7)) {
+                                                                    return (
+                                                                        <option key={role.id} value={role.id}>
+                                                                            {role.name}
+                                                                        </option>
+                                                                    );
+                                                                }
+                                                                return;
+
+                                                            }
+
+                                                            return <option key={role.id} value={role.id}>{role.name}</option>
+
+                                                        })}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {!loggedInUserDistrict ?
+                                                <div className="col-sm-3  mb-3">
+                                                    <label className="col-sm-12 col-form-label">Select user level</label>
+
+                                                    <div className="col-sm-12">
+                                                        <select
+                                                            className="form-select"
+                                                            aria-label="Default select example"
+                                                            onChange={(e: any) => {
 
 
-                                                            setSelectedUserLevel(e.target.value);
-                                                            setSelectedRegion("");
-                                                            setSelectedDistrict("");
-                                                            if (selectedUserLevel == "1") {
+                                                                setSelectedUserLevel(e.target.value);
                                                                 setSelectedRegion("");
                                                                 setSelectedDistrict("");
-                                                            }
-                                                            // if (selectedUserLevel == "2") {
-                                                            //     setDistrict("");
-                                                            // }
+                                                                if (selectedUserLevel == "1") {
+                                                                    setSelectedRegion("");
+                                                                    setSelectedDistrict("");
+                                                                }
+                                                                // if (selectedUserLevel == "2") {
+                                                                //     setDistrict("");
+                                                                // }
 
 
-                                                            if (selectedUserLevel == "2") {
-                                                                //console.log("selectedUserLevel...", selectedUserLevel);
+                                                                if (selectedUserLevel == "2") {
+                                                                    //console.log("selectedUserLevel...", selectedUserLevel);
 
-                                                                // getDistrictsByRegion(loggedInUserRegion);
+                                                                    // getDistrictsByRegion(loggedInUserRegion);
 
-                                                                setSelectedRegion("");
-                                                            }
+                                                                    setSelectedRegion("");
+                                                                }
 
-                                                            if (selectedUserLevel == "3") {
+                                                                if (selectedUserLevel == "3") {
 
-                                                                // getDistrictsByRegion(loggedInUserRegion);
+                                                                    // getDistrictsByRegion(loggedInUserRegion);
 
-                                                                setSelectedRegion("");
-                                                            }
+                                                                    setSelectedRegion("");
+                                                                }
 
-                                                        }}
-                                                        value={selectedUserLevel}
-                                                    >
-                                                        <option >Select user level</option>
-                                                        <option hidden={loggedInUserLevel != 1} value="1">
-                                                            National
-                                                        </option>
-                                                        <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
-                                                            Region
-                                                        </option>
-                                                        <option
-                                                            hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
-                                                            value="3"
+                                                            }}
+                                                            value={selectedUserLevel}
                                                         >
-                                                            District
-                                                        </option>
-                                                        {/* {data.userLevels.map((ul: any) => {
+                                                            <option >Select user level</option>
+                                                            <option hidden={loggedInUserLevel != 1} value="1">
+                                                                National
+                                                            </option>
+                                                            <option hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2} value="2">
+                                                                Region
+                                                            </option>
+                                                            <option
+                                                                hidden={loggedInUserLevel != 1 && loggedInUserLevel != 2}
+                                                                value="3"
+                                                            >
+                                                                District
+                                                            </option>
+                                                            {/* {data.userLevels.map((ul: any) => {
                                                     return (
                                                         <option key={ul.id} value={ul.id}>{ul.name}</option>
                                                     )
                                                 })} */}
-                                                    </select>
-                                                </div>
-                                            </div> : <></>}
-                                        {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
-                                            <div className="col-sm-3 mb-3">
-                                                <label className="col-sm-12 col-form-label">Select region</label>
+                                                        </select>
+                                                    </div>
+                                                </div> : <></>}
+                                            {(selectedUserLevel == "2" && loggedInUserLevel == "1") ?
+                                                <div className="col-sm-3 mb-3">
+                                                    <label className="col-sm-12 col-form-label">Select region</label>
 
-                                                <div className="col-sm-12">
-                                                    <select
-                                                        className="form-select"
-                                                        aria-label="Default select example"
-                                                        onChange={async (e: any) => {
-                                                            //setFilterValue(e.target.value);
-                                                            setSelectedRegion(e.target.value);
+                                                    <div className="col-sm-12">
+                                                        <select
+                                                            className="form-select"
+                                                            aria-label="Default select example"
+                                                            onChange={async (e: any) => {
+                                                                //setFilterValue(e.target.value);
+                                                                setSelectedRegion(e.target.value);
 
-                                                            await getDistrictsByRegion(e.target.value);
-                                                        }}
-                                                        value={selectedRegion}
-                                                    >
-                                                        <option >Select region</option>
-                                                        {data.regions.map((rg: any) => {
-                                                            return (
-                                                                <option key={rg.id} value={rg.id}>{rg.name}</option>
-                                                            )
-                                                        })}
-                                                    </select>
-                                                </div>
-                                            </div> : <></>}
-                                        {/* {selectedUserLevel == "3" ?
+                                                                await getDistrictsByRegion(e.target.value);
+                                                            }}
+                                                            value={selectedRegion}
+                                                        >
+                                                            <option >Select region</option>
+                                                            {data.regions.map((rg: any) => {
+                                                                return (
+                                                                    <option key={rg.id} value={rg.id}>{rg.name}</option>
+                                                                )
+                                                            })}
+                                                        </select>
+                                                    </div>
+                                                </div> : <></>}
+                                            {/* {selectedUserLevel == "3" ?
                                     <div className=" mb-3">
                                         <div className="col-sm-12">
                                             <select
@@ -783,62 +792,62 @@ export default function User({ data }: any) {
                                             </select>
                                         </div>
                                     </div>:<></>} */}
-                                        {selectedUserLevel == "3" ? (
-                                            <>
-                                                {loggedInUserLevel == "1" ? (
-                                                    <>
-                                                        <div className="col-sm-3  mb-3">
-                                                            <label className="col-sm-12 col-form-label">Select region</label>
-
-                                                            <div className="col-sm-12">
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    onChange={async (e: any) => {
-                                                                        //setFilterValue(e.target.value);
-                                                                        setSelectedRegion(e.target.value);
-
-                                                                        await getDistrictsByRegion(e.target.value);
-                                                                    }}
-                                                                    value={selectedRegion}
-                                                                >
-                                                                    {" "}
-                                                                    <option >Select region </option>
-                                                                    {data.regions?.map((data: any) => (
-                                                                        <option key={data.id} value={data.id}>
-                                                                            {data.name}
-                                                                        </option>
-                                                                    ))}
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        {districts.length != 0 ?
+                                            {selectedUserLevel == "3" ? (
+                                                <>
+                                                    {loggedInUserLevel == "1" ? (
+                                                        <>
                                                             <div className="col-sm-3  mb-3">
-                                                                <label className="col-sm-12 col-form-label">Select district</label>
+                                                                <label className="col-sm-12 col-form-label">Select region</label>
 
                                                                 <div className="col-sm-12">
                                                                     <select
-                                                                        className="form-control"
+                                                                        className="form-select"
                                                                         aria-label="Default select example"
-                                                                        onChange={(e: any) => {
-                                                                            setSelectedDistrict(e.target.value);
+                                                                        onChange={async (e: any) => {
+                                                                            //setFilterValue(e.target.value);
+                                                                            setSelectedRegion(e.target.value);
+
+                                                                            await getDistrictsByRegion(e.target.value);
                                                                         }}
-                                                                        value={selectedDistrict}
+                                                                        value={selectedRegion}
                                                                     >
-                                                                        <option >Select district </option>
-                                                                        {districts?.map((data: any) => (
+                                                                        {" "}
+                                                                        <option >Select region </option>
+                                                                        {data.regions?.map((data: any) => (
                                                                             <option key={data.id} value={data.id}>
                                                                                 {data.name}
                                                                             </option>
                                                                         ))}
                                                                     </select>
                                                                 </div>
-                                                            </div> : <></>}
-                                                    </>
-                                                ) : (
-                                                    <></>
-                                                )}
-                                                {/* {loggedInUserLevel != "1" ?
+                                                            </div>
+                                                            {districts.length != 0 ?
+                                                                <div className="col-sm-3  mb-3">
+                                                                    <label className="col-sm-12 col-form-label">Select district</label>
+
+                                                                    <div className="col-sm-12">
+                                                                        <select
+                                                                            className="form-control"
+                                                                            aria-label="Default select example"
+                                                                            onChange={(e: any) => {
+                                                                                setSelectedDistrict(e.target.value);
+                                                                            }}
+                                                                            value={selectedDistrict}
+                                                                        >
+                                                                            <option >Select district </option>
+                                                                            {districts?.map((data: any) => (
+                                                                                <option key={data.id} value={data.id}>
+                                                                                    {data.name}
+                                                                                </option>
+                                                                            ))}
+                                                                        </select>
+                                                                    </div>
+                                                                </div> : <></>}
+                                                        </>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    {/* {loggedInUserLevel != "1" ?
                                                     <div className="col-sm-3  mb-3">
                                                         <label className="col-sm-12 col-form-label">Select district</label>
 
@@ -860,328 +869,337 @@ export default function User({ data }: any) {
                                                             </select>
                                                         </div>
                                                     </div> : <></>} */}
-                                            </>
-                                        ) : (
-                                            <></>
-                                        )}</div>
-
-
-                                    <div className=" mb-3">
-                                        <div className="col-sm-10">
-                                            {isEditing ? (
-                                                <>
-                                                    <button
-                                                        className="btn btn-danger"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-
-                                                            setIsEditing(false);
-
-                                                            setSurname("");
-                                                            setOtherNames("");
-                                                            setEmail("");
-                                                            setPhoneNumber("");
-                                                            setDesignation("");
-                                                            setUserRole("");
-                                                            setSelectedUserLevel("");
-                                                            setSelectedRegion("");
-                                                            setSelectedDistrict("");
-                                                        }}
-                                                    >
-                                                        Cancel
-                                                    </button>
-                                                    {"  "} {"  "}
-                                                    <button
-                                                        className="btn btn-warning"
-                                                        onClick={(e) => {
-                                                            updateUser(e);
-                                                        }}
-                                                    >
-                                                        Update
-                                                    </button>
                                                 </>
                                             ) : (
-                                                <button type="submit" className="btn btn-primary" onClick={(e) => addUser(e)}>
-                                                    Add
-                                                </button>
-                                            )}
+                                                <></>
+                                            )}</div>
+                                        <div className="form-check mb-3">
+                                            <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
+                                                setSendSMS(!sendSMS)
 
+
+                                            }} />
+                                            <label className="form-check-label" htmlFor="gridCheck1">
+                                                Send OTP to user
+                                            </label>
                                         </div>
-                                    </div>
-                                </form>
-                                {/* End General Form Elements */}
+
+                                        <div className=" mb-3">
+                                            <div className="col-sm-10">
+                                                {isEditing ? (
+                                                    <>
+                                                        <button
+                                                            className="btn btn-danger"
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+
+                                                                setIsEditing(false);
+
+                                                                setSurname("");
+                                                                setOtherNames("");
+                                                                setEmail("");
+                                                                setPhoneNumber("");
+                                                                setDesignation("");
+                                                                setUserRole("");
+                                                                setSelectedUserLevel("");
+                                                                setSelectedRegion("");
+                                                                setSelectedDistrict("");
+                                                            }}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                        {"  "} {"  "}
+                                                        <button
+                                                            className="btn btn-warning"
+                                                            onClick={(e) => {
+                                                                updateUser(e);
+                                                            }}
+                                                        >
+                                                            Update
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <button type="submit" className="btn btn-primary" onClick={(e) => addUser(e)}>
+                                                        Add
+                                                    </button>
+                                                )}
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {/* End General Form Elements */}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="card">
-                            <div className="card-body table-responsive">
-                                <h5 className="card-title">Users List</h5>
-                                <div className="container">
-  <div className="row justify-content-end">
-    <div className="col-md-4">
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter search term"
-          ref={searchTextRef}
-          id="searchText"
-          name="searchText"
-        />
-        <span className="input-group-text" id="basic-addon2">
-          <button
-            type="button"
-            onClick={handleSearch}
-            className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"
-          >
-            <i className="bi bi-search"></i>
-          </button>
-        </span>
-      </div>
-    </div>
-    <div className="col-2">
-      <button
-        type="submit"
-        className="form-control btn btn-danger"
-        onClick={(e: any) => handleFilterReset()}
-      >
-        Reset
-      </button>
-    </div>
-    <div className="col-md-4">
-      <div className="input-group mb-3">
-        <button
-          type="button"
-          className="btn btn-sm btn-success"
-          onClick={() => handleExportAll()}
-        >
-          <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-          {exporting ? 'Exporting...' : 'Export as Excel'}
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-                                <table className="table datatable table-striped ">
-
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Image</th>
-
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Level</th>
-                                            <th scope="col">Role</th>
-
-                                            <th scope="col">Region</th>
-                                            <th scope="col">District</th>
-                                            <th scope="col">OTP</th>
-
-                                            <th scope="col">Status</th>
-
-                                            <th scope="col">Action</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {data.users.response.map((user: any) => (
-                                            <tr key={user.id}>
-                                                <td><AvatarImage imagePath={user?.imagePath} defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={32} width={32} /></td>
-                                                <td>{user?.otherNames} {user?.surname}</td>
-                                                <td>{user?.phoneNumber}</td>
-                                                {/* <td>{user?.email}</td> */}
-                                                <td>{user?.UserLevel?.name}</td>
-                                                <td>{user?.UserRole?.name}</td>
-
-                                                <td>{user?.Region?.name}</td>
-                                                <td>{user?.District?.name}</td>
-                                                <td><span style={{ "cursor": "pointer" }}
-                                                    onClick={() => {
-                                                        setShowOtp(!showOtp)
-                                                    }}>{!showOtp ? "****" : user?.tempPassword}</span></td>
-
-                                                <td>{user?.activated == 0 ? <>
-                                                    <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
-                                                </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
-                                                </>}</td>
-
-                                                <td>   <div
-                                                    className="btn-group"
-                                                    role="group"
-                                                    aria-label="Button group with nested dropdown"
-                                                >
-                                                    <div className="btn-group" role="group">
+                        <div className="col-lg-12">
+                            <div className="card">
+                                <div className="card-body table-responsive">
+                                    <h5 className="card-title">Users List</h5>
+                                    <div className="container">
+                                        <div className="row justify-content-end">
+                                            <div className="col-md-4">
+                                                <div className="input-group mb-3">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter search term"
+                                                        ref={searchTextRef}
+                                                        id="searchText"
+                                                        name="searchText"
+                                                    />
+                                                    <span className="input-group-text" id="basic-addon2">
                                                         <button
-                                                            id="btnGroupDrop1"
                                                             type="button"
-                                                            className="btn btn-success dropdown-toggle"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-expanded="false"
+                                                            onClick={handleSearch}
+                                                            className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"
                                                         >
-                                                            Actions
+                                                            <i className="bi bi-search"></i>
                                                         </button>
-                                                        <ul
-                                                            className="dropdown-menu"
-                                                            aria-labelledby="btnGroupDrop1"
-                                                        >
-                                                            <li>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="col-2">
+                                                <button
+                                                    type="submit"
+                                                    className="form-control btn btn-danger"
+                                                    onClick={(e: any) => handleFilterReset()}
+                                                >
+                                                    Reset
+                                                </button>
+                                            </div>
+                                            <div className="col-md-4">
+                                                <div className="input-group mb-3">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm btn-success"
+                                                        onClick={() => handleExportAll()}
+                                                    >
+                                                        <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                                        {exporting ? 'Exporting...' : 'Export as Excel'}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                                <button
-                                                                    className="dropdown-item btn btn-sm "
-                                                                    onClick={async (e) => {
-                                                                        e.preventDefault();
-                                                                        setIsEditing(true);
 
+                                    <table className="table datatable table-striped ">
 
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Image</th>
 
-                                                                        setSurname(user.surname);
-                                                                        setOtherNames(user.otherNames);
-                                                                        // setEmail(user.email);
-                                                                        setPhoneNumber(user.phoneNumber);
-                                                                        setDesignation(user.designation);
-                                                                        setUserRole(user.userRoleId);
-                                                                        setSelectedUserLevel(user.userLevelId);
-                                                                        setUserId(user.id);
-                                                                        setSelectedRegion(user.regionId);
-                                                                        setSelectedDistrict(user.districtId);
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Level</th>
+                                                <th scope="col">Role</th>
 
-                                                                        await getDistrictsByRegion(user.regionId)
+                                                <th scope="col">Region</th>
+                                                <th scope="col">District</th>
+                                                <th scope="col">OTP</th>
 
+                                                <th scope="col">Status</th>
 
-                                                                        // let phoneNumber = user.phoneNumber;
-                                                                        // const response = await axios.put(
-                                                                        //     `/api/user`,
-                                                                        //     { phoneNumber }
-                                                                        // );
-                                                                        // router.refresh()
-                                                                    }}
-                                                                >
-                                                                    Edit
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button
-                                                                    className="dropdown-item btn btn-sm "
-                                                                    onClick={async (e) => {
-                                                                        try {
+                                                <th scope="col">Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {data.users.response.map((user: any) => (
+                                                <tr key={user.id}>
+                                                    <td><AvatarImage imagePath={user?.imagePath} defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={32} width={32} /></td>
+                                                    <td>{user?.otherNames} {user?.surname}</td>
+                                                    <td>{user?.phoneNumber}</td>
+                                                    {/* <td>{user?.email}</td> */}
+                                                    <td>{user?.UserLevel?.name}</td>
+                                                    <td>{user?.UserRole?.name}</td>
+
+                                                    <td>{user?.Region?.name}</td>
+                                                    <td>{user?.District?.name}</td>
+                                                    <td><span style={{ "cursor": "pointer" }}
+                                                        onClick={() => {
+                                                            setShowOtp(!showOtp)
+                                                        }}>{!showOtp ? "****" : user?.tempPassword}</span></td>
+
+                                                    <td>{user?.activated == 0 ? <>
+                                                        <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
+                                                    </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>
+                                                    </>}</td>
+
+                                                    <td>   <div
+                                                        className="btn-group"
+                                                        role="group"
+                                                        aria-label="Button group with nested dropdown"
+                                                    >
+                                                        <div className="btn-group" role="group">
+                                                            <button
+                                                                id="btnGroupDrop1"
+                                                                type="button"
+                                                                className="btn btn-success dropdown-toggle"
+                                                                data-bs-toggle="dropdown"
+                                                                aria-expanded="false"
+                                                            >
+                                                                Actions
+                                                            </button>
+                                                            <ul
+                                                                className="dropdown-menu"
+                                                                aria-labelledby="btnGroupDrop1"
+                                                            >
+                                                                <li>
+
+                                                                    <button
+                                                                        className="dropdown-item btn btn-sm "
+                                                                        onClick={async (e) => {
                                                                             e.preventDefault();
-                                                                            let id = user.id;
-
-
-                                                                            let data = {
-                                                                                userId: Number(id),
-                                                                                changeStatus: 1,
-                                                                                status: Math.abs(Number(user.activated) - 1),
-
-                                                                            };
+                                                                            setIsEditing(true);
 
 
 
+                                                                            setSurname(user.surname);
+                                                                            setOtherNames(user.otherNames);
+                                                                            // setEmail(user.email);
+                                                                            setPhoneNumber(user.phoneNumber);
+                                                                            setDesignation(user.designation);
+                                                                            setUserRole(user.userRoleId);
+                                                                            setSelectedUserLevel(user.userLevelId);
+                                                                            setUserId(user.id);
+                                                                            setSelectedRegion(user.regionId);
+                                                                            setSelectedDistrict(user.districtId);
 
-                                                                            const response = await axios.put("/api/user", data);
+                                                                            await getDistrictsByRegion(user.regionId)
+
+
+                                                                            // let phoneNumber = user.phoneNumber;
+                                                                            // const response = await axios.put(
+                                                                            //     `/api/user`,
+                                                                            //     { phoneNumber }
+                                                                            // );
+                                                                            // router.refresh()
+                                                                        }}
+                                                                    >
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button
+                                                                        className="dropdown-item btn btn-sm "
+                                                                        onClick={async (e) => {
+                                                                            try {
+                                                                                e.preventDefault();
+                                                                                let id = user.id;
+
+
+                                                                                let data = {
+                                                                                    userId: Number(id),
+                                                                                    changeStatus: 1,
+                                                                                    status: Math.abs(Number(user.activated) - 1),
+
+                                                                                };
+
+
+
+
+                                                                                const response = await axios.put("/api/user", data);
 
 
 
 
 
-                                                                            if (response.status == 200) {
-                                                                                router.refresh()
-                                                                                return toast.success("User status changed");
+                                                                                if (response.status == 200) {
+                                                                                    router.refresh()
+                                                                                    return toast.success("User status changed");
+
+                                                                                }
+
+
+                                                                            } catch (error) {
+                                                                                return toast.error("An error occurred");
 
                                                                             }
 
+                                                                        }}
 
-                                                                        } catch (error) {
-                                                                            return toast.error("An error occurred");
+                                                                    >
+                                                                        Change Status
+                                                                    </button>
 
-                                                                        }
+                                                                </li>
+                                                                <li>
+                                                                    <button
+                                                                        className="dropdown-item btn btn-sm "
+                                                                        onClick={async (e) => {
+                                                                            try {
+                                                                                e.preventDefault();
+                                                                                let phoneNumber = user.phoneNumber;
+                                                                                const response = await axios.post(
+                                                                                    `/api/user/reset-password`,
+                                                                                    { phoneNumber }
+                                                                                );
+                                                                                router.refresh()
+                                                                                return toast.success("Password reset. User will receive one time password");
 
-                                                                    }}
+                                                                            } catch (error) {
 
-                                                                >
-                                                                    Change Status
-                                                                </button>
+                                                                            }
 
-                                                            </li>
-                                                            <li>
-                                                                <button
-                                                                    className="dropdown-item btn btn-sm "
-                                                                    onClick={async (e) => {
-                                                                        try {
-                                                                            e.preventDefault();
-                                                                            let phoneNumber = user.phoneNumber;
-                                                                            const response = await axios.post(
-                                                                                `/api/user/reset-password`,
-                                                                                { phoneNumber }
-                                                                            );
-                                                                            router.refresh()
-                                                                            return toast.success("Password reset. User will receive one time password");
+                                                                        }}
+                                                                    >
+                                                                        Reset Password
+                                                                    </button>
 
-                                                                        } catch (error) {
+                                                                </li>
+                                                                <li>
+                                                                    <button
+                                                                        className="dropdown-item btn btn-sm "
+                                                                        onClick={async (e) => {
 
-                                                                        }
+                                                                            setUserId(user?.id);
+                                                                            openModal(e)
 
-                                                                    }}
-                                                                >
-                                                                    Reset Password
-                                                                </button>
+                                                                        }}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
 
-                                                            </li>
-                                                            <li>
-                                                                <button
-                                                                    className="dropdown-item btn btn-sm "
-                                                                    onClick={async (e) => {
-
-                                                                        setUserId(user?.id);
-                                                                        openModal(e)
-
-                                                                    }}
-                                                                >
-                                                                    Delete
-                                                                </button>
-
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div></td>
-                                            </tr>
-                                        ))}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                                </tr>
+                                            ))}
 
 
-                                    </tbody>
-                                </table>
-                                <ReactPaginate
-                                    marginPagesDisplayed={2}
-                                    pageRangeDisplayed={5}
-                                    previousLabel={"Previous"}
-                                    nextLabel={"Next"}
-                                    breakLabel={"..."}
-                                    initialPage={data.users.curPage - 1}
-                                    pageCount={data.users.maxPage}
-                                    onPageChange={handlePagination}
-                                    breakClassName={"page-item"}
-                                    breakLinkClassName={"page-link"}
-                                    containerClassName={"pagination"}
-                                    pageClassName={"page-item"}
-                                    pageLinkClassName={"page-link"}
-                                    previousClassName={"page-item"}
-                                    previousLinkClassName={"page-link"}
-                                    nextClassName={"page-item"}
-                                    nextLinkClassName={"page-link"}
-                                    activeClassName={"active"}
-                                />
+                                        </tbody>
+                                    </table>
+                                    <ReactPaginate
+                                        marginPagesDisplayed={2}
+                                        pageRangeDisplayed={5}
+                                        previousLabel={"Previous"}
+                                        nextLabel={"Next"}
+                                        breakLabel={"..."}
+                                        initialPage={data.users.curPage - 1}
+                                        pageCount={data.users.maxPage}
+                                        onPageChange={handlePagination}
+                                        breakClassName={"page-item"}
+                                        breakLinkClassName={"page-link"}
+                                        containerClassName={"pagination"}
+                                        pageClassName={"page-item"}
+                                        pageLinkClassName={"page-link"}
+                                        previousClassName={"page-item"}
+                                        previousLinkClassName={"page-link"}
+                                        nextClassName={"page-item"}
+                                        nextLinkClassName={"page-link"}
+                                        activeClassName={"active"}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
+                </section>
+            </main>
 
         </>
-     
+
 
     )
 }

@@ -64,11 +64,13 @@ export async function POST(request: Request) {
     }
 
     const user: any = await prisma.user.create({ data });
+    if (res.sendSMS) {
+      await sendSMS(
+        res.phoneNumber,
+        `The temporal password for ESICApps App is ${password}`
+      );
+    }
 
-    await sendSMS(
-      res.phoneNumber,
-      `The temporal password for ESICApps App is ${password}`
-    );
     return NextResponse.json(user);
   } catch (error: any) {
     console.log(error);
@@ -467,60 +469,56 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
-   try {
-  const res = await request.json();
+  try {
+    const res = await request.json();
 
-  let regionId = res.region;
+    let regionId = res.region;
 
-  let userId = res?.userId;
-  let changeStatus = res.changeStatus;
-  let status = res.status;;
+    let userId = res?.userId;
+    let changeStatus = res.changeStatus;
+    let status = res.status;
 
-  console.log(res);
-  
-  if (changeStatus) {
-    let user = await prisma.user.update({
-      data: { activated: status},
+    if (changeStatus) {
+      let user = await prisma.user.update({
+        data: { activated: status },
+        where: {
+          id: userId,
+        },
+      });
+
+      return NextResponse.json({});
+    }
+
+    if (regionId == null) {
+      const district = await prisma.district.findFirst({
+        where: { id: Number(res.district) },
+      });
+
+      regionId = district?.regionId;
+    }
+
+    let id = res.userId;
+
+    const data = {
+      userRoleId: res.userRoleId,
+      userLevelId: res.userLevelId,
+      surname: res.surname,
+      otherNames: res.otherNames,
+      email: res.email,
+      phoneNumber: res.phoneNumber,
+      designation: res.designation,
+      regionId: regionId,
+      districtId: res.district,
+    };
+
+    await prisma.user.update({
+      data: data,
       where: {
-        id: userId,
+        id: id,
       },
     });
 
-    console.log("user  ", user);
-
-    return NextResponse.json({});
-  }
-
-  if (regionId == null) {
-    const district = await prisma.district.findFirst({
-      where: { id: Number(res.district) },
-    });
-
-    regionId = district?.regionId;
-  }
-
-  let id = res.userId;
-
-  const data = {
-    userRoleId: res.userRoleId,
-    userLevelId: res.userLevelId,
-    surname: res.surname,
-    otherNames: res.otherNames,
-    email: res.email,
-    phoneNumber: res.phoneNumber,
-    designation: res.designation,
-    regionId: regionId,
-    districtId: res.district,
-  };
-
-  await prisma.user.update({
-    data: data,
-    where: {
-      id: id,
-    },
-  });
-
-  return NextResponse.json(data);
+    return NextResponse.json(data);
   } catch (error) {
     console.log(error);
 
