@@ -889,7 +889,6 @@ export async function GET(request: Request) {
                   isPublished: published,
                   inspectionFormId: formId,
                   districtId: Number(userDistrict),
-
                 },
               },
 
@@ -1236,9 +1235,9 @@ const flattenArray = async (data: any) => {
 
       Community: data[i]?.community,
       "Ghana Post GPS": data[i]?.ghanaPostGps,
-      Latitude: data[i]?.latitude,
-      Longitude: data[i]?.longitude,
-      Accuracy: data[i]?.accuracy,
+      "Latitude": data[i]?.latitude.toString(),
+      "Longitude": data[i]?.longitude.toString(),
+      "Accuracy": data[i]?.accuracy,
       "Respondent Name": data[i]?.respondentName,
       "Respondent Designation": data[i]?.RespondentDesignation?.name,
 
