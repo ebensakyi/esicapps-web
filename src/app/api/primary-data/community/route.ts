@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
   //try {
@@ -24,10 +26,18 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+    const session: any = await getServerSession(authOptions);
+
     const { searchParams } = new URL(request.url);
     const electoralAreaId = Number(searchParams.get("electoralAreaId"));
     const get_all = Number(searchParams.get("get_all"));
 
+
+    const userLevel = session?.user?.userLevelId;
+    const userDistrict = session?.user?.districtId;
+    const userRegion = session?.user?.regionId;
+    let  response
+    let count
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
@@ -57,8 +67,7 @@ export async function GET(request: Request) {
         response,
       });
     }
-
-    const response = await prisma.community.findMany({
+    if (userLevel == 1) {   response = await prisma.community.findMany({
       where:
         searchText != ""
           ? {
@@ -111,8 +120,7 @@ export async function GET(request: Request) {
       skip: skip,
       take: perPage,
     });
-
-    const count = await prisma.community.count({
+    count = await prisma.community.count({
       where:
         searchText != ""
           ? {
@@ -147,6 +155,226 @@ export async function GET(request: Request) {
             }
           : { deleted: 0 },
     });
+    }else if (userLevel == 2) {
+       response = await prisma.community.findMany({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+               deleted: 0, 
+              }
+            : { deleted: 0,  },
+  
+        include: {
+          District: true,
+          ElectoralArea: {
+            include: {
+              District: {
+                include: {
+                  Region: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          name: "asc",
+        },
+        skip: skip,
+        take: perPage,
+      });
+      count = await prisma.community.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+                deleted: 0,
+              }
+            : { deleted: 0 },
+      });
+    }else if (userLevel == 3) {
+       response = await prisma.community.findMany({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+                deleted: 0,
+                districtId: Number(userDistrict)
+              }
+            : { deleted: 0, districtId: Number(userDistrict) },
+  
+        include: {
+          District: true,
+          ElectoralArea: {
+            include: {
+              District: {
+                include: {
+                  Region: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          name: "asc",
+        },
+        skip: skip,
+        take: perPage,
+      });
+      count = await prisma.community.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+                deleted: 0,
+              }
+            : { deleted: 0 },
+      });
+    }else{
+      count = await prisma.community.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+                deleted: 0,
+              }
+            : { deleted: 0 },
+      });
+    }
+
+  
+
+  
     return NextResponse.json({
       response,
       curPage: curPage,

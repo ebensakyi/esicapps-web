@@ -36,6 +36,7 @@ export async function GET(request: Request) {
 
     const selectedRegion = searchParams.get("regionId");
 
+
     let region = userRegion || selectedRegion;
 
     const searchText =
@@ -57,7 +58,10 @@ export async function GET(request: Request) {
 
     let count = 0;
 
-
+console.log("userLevel ",userLevel);
+console.log("userDistrict ",userDistrict);
+console.log("userRegion ",userRegion);
+console.log("get_all ",get_all);
 
     if (userLevel == 1) {
       if (get_all == 1) {
@@ -206,9 +210,9 @@ export async function GET(request: Request) {
                     },
                   ],
                   deleted: 0,
-                  districtId: Number(userDistrict),
+                  id: Number(userDistrict),
                 }
-              : { deleted: 0, districtId: Number(userDistrict) },
+              : { deleted: 0, id: Number(userDistrict) },
 
           skip: skip,
           take: perPage,
@@ -223,7 +227,7 @@ export async function GET(request: Request) {
       }
     } else {
       query = {
-        where: { deleted: 0 },
+        where: { deleted: 0 , id: Number(userDistrict)},
         include: { Region: true },
         orderBy: {
           name: "asc",
