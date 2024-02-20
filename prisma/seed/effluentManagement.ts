@@ -16,6 +16,9 @@ export const effluentManagement = [
   }, {
     name: "Open Space",
   },
+  {
+    name: "Cesspit emptiers",
+  },
 
    
 ];
