@@ -114,12 +114,12 @@ export default function District({ data }: any) {
     const _delete = async (id: any) => {
         try {
             const response = await axios.delete(
-                `/api/user/guide/?id=${id}`
+                `/api/primary-data/district?id=${id}`
             );
 
             if (response.status == 200) {
                 router.refresh()
-                return toast.success("User guide deleted");
+                return toast.success("District deleted");
             }
 
 

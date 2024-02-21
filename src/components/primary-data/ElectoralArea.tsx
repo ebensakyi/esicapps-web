@@ -126,23 +126,23 @@ export default function ElectoralArea({ data }: any) {
         }
     };
 
-    const _delete = async (id: any) => {
-        try {
-            const response = await axios.delete(
-                `/api/user/guide/?id=${id}`
-            );
+    // const _delete = async (id: any) => {
+    //     try {
+    //         const response = await axios.delete(
+    //             `/api/user/guide/?id=${id}`
+    //         );
 
-            if (response.status == 200) {
-                router.refresh()
-                return toast.success("User guide deleted");
-            }
+    //         if (response.status == 200) {
+    //             router.refresh()
+    //             return toast.success("User guide deleted");
+    //         }
 
 
-            return toast.error("An error occurred while deleting");
-        } catch (error) {
-            return toast.error("An error occurred while deleting");
-        }
-    };
+    //         return toast.error("An error occurred while deleting");
+    //     } catch (error) {
+    //         return toast.error("An error occurred while deleting");
+    //     }
+    // };
 
 
     const upload = async (e: any) => {
