@@ -1053,7 +1053,7 @@ export default function DataView({ data }: any) {
                                                                                 {data?.submittedData?.LiquidWasteSection?.drainsCondition != null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                            Drains Condition
+                                                                                           Are Drains Conditions Good
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
@@ -1151,7 +1151,7 @@ export default function DataView({ data }: any) {
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                            Containment Emptied
+                                                                                            Containment Emptied 
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"

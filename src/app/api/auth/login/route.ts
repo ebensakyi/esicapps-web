@@ -64,11 +64,7 @@ export async function POST(request: Request) {
 
       let response = { ...user, token, privileges };
 
-      // console.log("USER====> ",user);
-      // console.log("TOKEN====> ",token);
-      // console.log("PREIVILEGES====> ",privileges);
 
-      // console.log("JRESPONSE ======> ",response);
 
       return NextResponse.json(response);
     }

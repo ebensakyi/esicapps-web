@@ -782,11 +782,12 @@ model PremisesSubtype {
 }
 
 model ToiletPitPosition {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  deleted   Int?     @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  LiquidWasteSection LiquidWasteSection[]
 }
 
 model ToiletHouseholdNumber {
@@ -1036,7 +1037,6 @@ model YesNo {
   toiletDisabilityFriendly                           LiquidWasteSection[]             @relation("toiletDisabilityFriendly")
   toiletDischarge                                    LiquidWasteSection[]             @relation("toiletDischarge")
   toiletGenderSensivity                              LiquidWasteSection[]             @relation("toiletGenderSensivity")
-  toiletPitPosition                                  LiquidWasteSection[]             @relation("toiletPitPosition")
   urinalAdequacy                                     LiquidWasteSection[]             @relation("urinalAdequacy")
   urinalDisabilityFriendly                           LiquidWasteSection[]             @relation("urinalDisabilityFriendly")
   urinalGenderSensivity                              LiquidWasteSection[]             @relation("urinalGenderSensivity")
@@ -2119,7 +2119,7 @@ model LiquidWasteSection {
   toiletDischarge               YesNo?                          @relation("toiletDischarge", fields: [toiletDischargeId], references: [id])
   toiletGenderSensivity         YesNo?                          @relation("toiletGenderSensivity", fields: [toiletGenderSensivityId], references: [id])
   ToiletHouseholdNumber         ToiletHouseholdNumber?          @relation(fields: [toiletHouseholdNumberId], references: [id])
-  toiletPitPosition             YesNo?                          @relation("toiletPitPosition", fields: [toiletPitPositionId], references: [id])
+  // ToiletPitPosition             ToiletPitPosition?              @relation("toiletPitPosition", fields: [toiletPitPositionId], references: [id])
   urinalAdequacy                YesNo?                          @relation("urinalAdequacy", fields: [urinalAdequacyId], references: [id])
   urinalCubicleCondition        SanitaryInsanitary?             @relation("urinalCubicleCondition", fields: [urinalCubicleConditionId], references: [id])
   urinalDisabilityFriendly      YesNo?                          @relation("urinalDisabilityFriendly", fields: [urinalDisabilityFriendlyId], references: [id])
@@ -2133,6 +2133,8 @@ model LiquidWasteSection {
   PremisesExcretaDisposalMethod PremisesExcretaDisposalMethod[]
   PremisesGreyWaterDisposal     PremisesGreyWaterDisposal[]
   PremisesToiletType            PremisesToiletType[]
+  toiletPitPosition             ToiletPitPosition?              @relation(fields: [toiletPitPositionId], references: [id])
+
 }
 
 model LiquidWasteSectionHistory {
