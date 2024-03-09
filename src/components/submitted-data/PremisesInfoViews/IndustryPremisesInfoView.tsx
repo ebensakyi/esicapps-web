@@ -41,7 +41,7 @@ const IndustryPremisesInfoView = ({ data }:any) => {
                           id="invoicenoInput"
                           value={
                             data?.IndustryPremisesInfoSection
-                              ?.Type?.name
+                              ?.PremisesType?.name
                           }
                           readOnly={true}
                         />
@@ -61,7 +61,7 @@ const IndustryPremisesInfoView = ({ data }:any) => {
                           id="invoicenoInput"
                           value={
                             data?.IndustryPremisesInfoSection
-                              ?.Subtype?.name
+                              ?.PremisesSubtype?.name
                           }
                           readOnly={true}
                         />

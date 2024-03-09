@@ -211,12 +211,12 @@ export default function Header() {
                                                         <span>Hospitality</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=5&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=6&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Industry</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=6&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=5&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Institution</span>
                                                     </Link>

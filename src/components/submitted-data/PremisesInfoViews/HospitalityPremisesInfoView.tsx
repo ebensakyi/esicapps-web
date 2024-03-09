@@ -339,7 +339,7 @@ const HospitalityPremisesInfoView = ({ data }:any) => {
                     ) : (
                       <></>
                     )}
-                    {data?.HospitalityPremisesInfoSection
+                    {/* {data?.HospitalityPremisesInfoSection
                       ?.numberMaleWorkers != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
@@ -378,7 +378,7 @@ const HospitalityPremisesInfoView = ({ data }:any) => {
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {data?.HospitalityPremisesInfoSection
                       ?.numberFoodHandlingMedical != null ? (
                       <div className="col-lg-3 col-sm-6">

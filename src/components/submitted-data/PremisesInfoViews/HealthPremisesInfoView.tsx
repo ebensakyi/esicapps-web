@@ -20,8 +20,8 @@ const HealthPremisesInfoView = ({ data }:any) => {
               <div className="card product">
                 <div className="card-body">
                   <div className="row gy-3">
-                  {data?.HospitalityPremisesInfoSection?.facilityName !=
-                    null ? (
+                  {/* {data?.HospitalityPremisesInfoSection?.facilityName !=
+                    null ? ( */}
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Facility Name</label>
                         <input
@@ -29,14 +29,14 @@ const HealthPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.HospitalityPremisesInfoSection?.facilityName
+                            data?.HealthPremisesInfoSection?.facilityName
                           }
                           readOnly={true}
                         />
                       </div>
-                    ) : (
+                    {/* ) : (
                       <></>
-                    )}{" "}
+                    )}{" "} */}
                     {data?.HealthPremisesInfoSection
                       ?.healthPremisesType != null ? (
                       <div className="col-lg-3 col-sm-6">
