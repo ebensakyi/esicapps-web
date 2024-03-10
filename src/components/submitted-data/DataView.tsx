@@ -706,7 +706,7 @@ export default function DataView({ data }: any) {
                                                                                             id="invoicenoInput"
                                                                                             value={
                                                                                                 data?.submittedData?.LicencePermitSection
-                                                                                                    ?.pharmacyCertAvailability?.value
+                                                                                                    ?.pharmacyCertAvailability?.name
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
