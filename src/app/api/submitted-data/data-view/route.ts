@@ -6,21 +6,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     // console.log("Session ", session);
     let userId = session?.user?.id;
 
     const res = await request.json();
 
-    
-
     let inspectionId = res.id;
-
-
-    
-
-    
 
     let inspection = await prisma.inspection.findFirst({
       where: {
@@ -35,13 +28,12 @@ export async function POST(request: Request) {
         publishedById: Number(userId),
       },
       where: {
-        id:inspectionId
+        id: inspectionId,
       },
     });
     await logActivity(`Published inspection ${inspectionId}`, userId);
 
     return NextResponse.json({ status: 200 });
-
   } catch (error) {
     console.log(error);
   }
@@ -52,13 +44,10 @@ export async function PUT(request: Request) {
     const res = await request.json();
     let inspectionId = res.id;
 
-
     // let { searchParams } = new URL(request.url);
     // let inspectionId: any = searchParams.get("id")?.toString();
 
-    
-
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     let userId = session?.user?.id;
     let surname = session?.user?.surname;
@@ -71,12 +60,11 @@ export async function PUT(request: Request) {
         deleted: 1,
       },
       where: {
-        id:inspectionId,
+        id: inspectionId,
       },
     });
 
     return NextResponse.json(null, { status: 200 });
-
   } catch (error) {
     return NextResponse.json(error, { status: 500 });
   }
@@ -84,12 +72,11 @@ export async function PUT(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const session :any= await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
 
     // console.log("Session ", session);
     let userId = session?.user?.id;
     let surname = session?.user?.surname;
-   
 
     let { searchParams } = new URL(request.url);
     let inspectionId: any = searchParams.get("id")?.toString();
@@ -101,8 +88,6 @@ export async function GET(request: Request) {
     //   .get("inspectionFormId")
     //   ?.toString();
     await logActivity(`Visited dataview page for ${inspectionId}`, userId);
-
-    
 
     const data = await prisma.inspection.findFirst({
       where: {
@@ -432,10 +417,9 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json(data, { status: 200 });
-
   } catch (error) {
     console.log(">>>>>>> ", error);
-    
+
     return NextResponse.json(error, { status: 500 });
   }
 }

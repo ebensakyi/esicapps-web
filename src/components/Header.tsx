@@ -196,37 +196,37 @@ export default function Header() {
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link href="/submitted-data?formId=2&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=2&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Eatery</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=3&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=3&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Health</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=4&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=4&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Hospitality</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=6&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=6&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Industry</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=5&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=5&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Institution</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=7&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=7&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Market</span>
                                                     </Link>
                                                 </li> <li>
-                                                    <Link href="/submitted-data?formId=8&published=0&deleted=0&page=1&filterBy=&filterValue=&from&to=">
+                                                    <Link href="/submitted-data?formId=8&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from&to=">
                                                         <i className="bi bi-circle" />
                                                         <span>Sanitary</span>
                                                     </Link>

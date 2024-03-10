@@ -43,6 +43,8 @@ export async function GET(request: Request) {
     if ((userLevel == 3 && filterBy == "undefined") || filterBy == "") {
       filterBy = "districtId";
       filterValue = districtId;
+
+      
     }
 
     await logActivity("Visited submitted data list", session?.user?.id);
@@ -146,6 +148,8 @@ export async function GET(request: Request) {
       //     },
       //   },
     });
+
+
 
     // console.log(( searchText != ""  && searchText != "undefined"));
 
