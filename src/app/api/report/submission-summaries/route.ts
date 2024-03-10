@@ -34,6 +34,7 @@ export async function POST(request: Request) {
     const report = await prisma.inspection.groupBy({
       where: {
         [filterBy]: filterValue,
+        deleted:0
   
         // createdAt:
         // res?.from != null ||  res?.to != null

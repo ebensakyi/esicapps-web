@@ -26,15 +26,19 @@ export async function GET(request: Request) {
     let userLevel = session?.user?.userLevelId;
 
 
+    let { searchParams } = new URL(request.url);
+
 
     await logActivity("Visited follow-up page", userId);
 
-    let { searchParams } = new URL(request.url);
 
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
 
 
+
+
+ 
 
 
     if ((userLevel == 1 && filterBy == "undefined") || filterBy == "") {
@@ -45,16 +49,12 @@ export async function GET(request: Request) {
       filterBy = "regionId";
       filterValue = regionId;
     }
-    if (userLevel == 3) {
-
-      if(filterBy == "undefined" || filterBy == ""){
-         filterBy = "districtId";
-      filterValue = districtId;
-      }
-      console.error("Wwe must me here");
-      
-     
+    if ((userLevel == 3 && filterBy == "undefined") || filterBy == "") {
+      filterBy = "districtId";
+      filterValue = districtId;      
     }
+//?formId=1&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from=&to=&searchText=undefined
+
 
     await logActivity("Visited submitted data list", session?.user?.id);
 
@@ -151,6 +151,10 @@ export async function GET(request: Request) {
       //   },
     });
 
+    console.log("FORM ID=====> " + formId);
+    
+    console.log("filterValue=====> " + filterValue);
+    console.log("filterBy=====> " + filterBy);
 
 
     // console.log(( searchText != ""  && searchText != "undefined"));
