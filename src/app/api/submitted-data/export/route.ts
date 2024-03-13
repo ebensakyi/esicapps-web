@@ -1273,8 +1273,6 @@ const export2Excel = async (data: any, fileName: any, formId: any) => {
 };
 
 const flattenArray = async (data: any, PremisesInfo: any) => {
-  console.log("data[0].[PremisesInfo].facilityName)=>>>=> ", data[0]);
-
   let newData = [];
 
   for (let i = 0; i < data?.length; i++) {
@@ -1525,8 +1523,13 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
     } else if (
       data[i]?.Inspection?.PremisesInfo === "HospitalityPremisesInfoSection"
     ) {
+console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspection?.[PremisesInfo]?.facilityName);
+
+
       newDataItem = {
         ...newDataItem,
+        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
+
         "Hospitality Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.hospitalityPremisesType?.name,
         "Physical Structure Type":
@@ -1551,6 +1554,8 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
     ) {
       newDataItem = {
         ...newDataItem,
+        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
+
         "Health Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.healthPremisesType?.name,
         "EHO AAvailability":
@@ -1572,6 +1577,8 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
     ) {
       newDataItem = {
         ...newDataItem,
+        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
+
         "By Products Storage Area Cond":
           data[i]?.Inspection?.[PremisesInfo]?.byProductsStorageAreaCond?.name,
         "Production Room Condition":
@@ -1592,6 +1599,8 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
     ) {
       newDataItem = {
         ...newDataItem,
+        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
+
         "Hospitality Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.ablutionSlabCondition?.name,
         "Physical Structure Type":
@@ -1626,6 +1635,8 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
     ) {
       newDataItem = {
         ...newDataItem,
+        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
+
         "Market Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.marketPremisesType?.name,
         "Ownership Type":
