@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from '@/config';
-import GeneralReports from '@/src/components/report/GeneralReports';
 import UserSubmissions from '@/src/components/report/UserSubmissions';
 import { headers } from 'next/headers'
 

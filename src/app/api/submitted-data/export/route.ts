@@ -145,6 +145,16 @@ export async function GET(request: Request) {
                   pharmacyCertAvailability: true,
                 },
               },
+              ResidentialPremisesInfoSection: {
+                include: {
+                  toiletAvailability: true,
+                  drainsAvailability: true,
+                  animalAvailability: true,
+
+                  approvedHandwashingFacilityAvailability: true,
+                  bathroomAvailability: true,
+                },
+              },
               EateryPremisesInfoSection: {
                 include: {
                   toiletAvailability: true,
@@ -421,7 +431,7 @@ export async function GET(request: Request) {
         },
       } as any);
 
-      let url = await export2Excel(response, fileName);
+      let url = await export2Excel(response, fileName, formId);
 
       return NextResponse.json(url);
     }
@@ -530,6 +540,16 @@ export async function GET(request: Request) {
                   pharmacyCertAvailability: true,
                 },
               },
+              ResidentialPremisesInfoSection: {
+                include: {
+                  toiletAvailability: true,
+                  drainsAvailability: true,
+                  animalAvailability: true,
+
+                  approvedHandwashingFacilityAvailability: true,
+                  bathroomAvailability: true,
+                },
+              },
               EateryPremisesInfoSection: {
                 include: {
                   toiletAvailability: true,
@@ -806,7 +826,7 @@ export async function GET(request: Request) {
         },
       } as any);
 
-      let url = await export2Excel(response, fileName);
+      let url = await export2Excel(response, fileName, formId);
 
       return NextResponse.json(url);
     }
@@ -914,6 +934,16 @@ export async function GET(request: Request) {
                   pharmacyCertAvailability: true,
                 },
               },
+              ResidentialPremisesInfoSection: {
+                include: {
+                  toiletAvailability: true,
+                  drainsAvailability: true,
+                  animalAvailability: true,
+
+                  approvedHandwashingFacilityAvailability: true,
+                  bathroomAvailability: true,
+                },
+              },
               EateryPremisesInfoSection: {
                 include: {
                   toiletAvailability: true,
@@ -1013,7 +1043,6 @@ export async function GET(request: Request) {
                   slaughterAreaAvailability: true,
                   slaughterAreaCondition: true,
                   soundProof: true,
-                  uncookedFoodStorageCondtionSafe: true,
                   urinalAvailability: true,
                   toiletAvailability: true,
 
@@ -1190,7 +1219,7 @@ export async function GET(request: Request) {
         },
       } as any);
 
-      let url = await export2Excel(response, fileName);
+      let url = await export2Excel(response, fileName, formId);
 
       return NextResponse.json(url);
     }
@@ -1200,9 +1229,34 @@ export async function GET(request: Request) {
   }
 }
 
-const export2Excel = async (data: any, fileName: any) => {
+const export2Excel = async (data: any, fileName: any, formId: any) => {
   try {
-    let flatData = await flattenArray(data);
+    let premises = "";
+    if (formId == 1) {
+      premises = "ResidentialPremisesInfoSection";
+    }
+    if (formId == 2) {
+      premises = "EateryPremisesInfoSection";
+    }
+    if (formId == 3) {
+      premises = "HealthPremisesInfoSection";
+    }
+    if (formId == 4) {
+      premises = "HospitalityPremisesInfoSection";
+    }
+    if (formId == 5) {
+      premises = "InstitutionPremisesInfoSection";
+    }
+    if (formId == 6) {
+      premises = "IndustryPremisesInfoSection";
+    }
+    if (formId == 7) {
+      premises = "MarketPremisesInfoSection";
+    }
+    if (formId == 8) {
+      premises = "SanitaryPremisesInfoSection";
+    }
+    let flatData = await flattenArray(data, premises);
 
     const workSheet = XLSX.utils.json_to_sheet(flatData);
     const workBook = XLSX.utils.book_new();
@@ -1218,28 +1272,37 @@ const export2Excel = async (data: any, fileName: any) => {
   }
 };
 
-const flattenArray = async (data: any) => {
+const flattenArray = async (data: any, PremisesInfo: any) => {
+  console.log("data[0].[PremisesInfo].facilityName)=>>>=> ", data[0]);
+
   let newData = [];
 
   for (let i = 0; i < data?.length; i++) {
-    newData?.push({
+    let newDataItem: any = {
       "Inspection Id": data[i]?.inspectionId,
       "Inspection Date": data[i]?.Inspection?.createdAt,
-
       "Inspection Officer": `${data[i]?.User?.surname} ${data[i]?.User?.otherNames}`,
       "Premises Code": data[i]?.Inspection?.premisesCode,
       "Premises Rating": data[i]?.Inspection?.totalRating,
       Region: data[i]?.Community?.District?.Region?.name,
       District: data[i]?.Community?.District?.name,
       "Electoral Area": data[i]?.electoralArea,
-
       Community: data[i]?.community,
       "Ghana Post GPS": data[i]?.ghanaPostGps,
-      "Latitude": data[i]?.latitude.toString(),
-      "Longitude": data[i]?.longitude.toString(),
-      "Accuracy": data[i]?.accuracy,
+      Latitude: data[i]?.latitude.toString(),
+      Longitude: data[i]?.longitude.toString(),
+      Accuracy: data[i]?.accuracy,
       "Respondent Name": data[i]?.respondentName,
       "Respondent Designation": data[i]?.RespondentDesignation?.name,
+
+      "Drains Availability":
+        data[i]?.Inspection?.[PremisesInfo]?.drainsAvailability?.name,
+      "Toilet Availability":
+        data[i]?.Inspection?.[PremisesInfo]?.toiletAvailability?.name,
+      "Urinal Availability":
+        data[i]?.Inspection?.[PremisesInfo]?.urinalAvailability?.name,
+      "Bathroom Availability":
+        data[i]?.Inspection?.[PremisesInfo]?.bathroomAvailability?.name,
 
       "Animals Permit Availability":
         data[i]?.Inspection?.LicencePermitSection?.animalsPermitAvailability
@@ -1247,7 +1310,6 @@ const flattenArray = async (data: any) => {
       "Building Permit Availability":
         data[i]?.Inspection?.LicencePermitSection?.buildingPermitAvailability
           ?.name,
-
       "Business Licence Availability":
         data[i]?.Inspection?.LicencePermitSection?.businessLicenceAvailability
           ?.name,
@@ -1280,7 +1342,6 @@ const flattenArray = async (data: any) => {
       "Pharmacy Cert Availability":
         data[i]?.Inspection?.LicencePermitSection?.pharmacyCertAvailability
           ?.name,
-
       "Water Flow Frequency":
         data[i]?.Inspection?.WaterSection?.WaterFlowFrequency?.name,
       "Water Storage Condition Safe":
@@ -1315,9 +1376,6 @@ const flattenArray = async (data: any) => {
       ]?.Inspection?.WaterSection?.PremisesWaterTreatmentType?.map(
         (data: any) => data?.WaterTreatmentType?.name
       ).toString(),
-
-      ///LIQUID  WASTE
-
       "Toilet Adequate":
         data[i]?.Inspection?.LiquidWasteSection?.toiletAdequacy?.name,
       "Anal Cleansing Material Mgt":
@@ -1341,7 +1399,6 @@ const flattenArray = async (data: any) => {
       ]?.Inspection?.LiquidWasteSection?.PremisesEffluentManagement?.map(
         (data: any) => data?.EffluentManagement?.name
       ).toString(),
-
       "Premises Excreta Disposal Method": data[
         i
       ]?.Inspection?.LiquidWasteSection?.PremisesExcretaDisposalMethod?.map(
@@ -1362,7 +1419,6 @@ const flattenArray = async (data: any) => {
       ]?.Inspection?.LiquidWasteSection?.PremisesToiletType?.map(
         (data: any) => data?.ToiletType?.name
       ).toString(),
-
       "Facility Connected Sewer":
         data[i]?.Inspection?.LiquidWasteSection?.facilityConnectedSewer?.name,
       "Bathroom Condition":
@@ -1381,8 +1437,6 @@ const flattenArray = async (data: any) => {
         data[i]?.Inspection?.LiquidWasteSection?.toiletDischarge?.name,
       "Toilet Pit Position":
         data[i]?.Inspection?.LiquidWasteSection?.toiletPitPosition?.name,
-
-      ///SOLID WASTE
       "Waste Service Provider Registration":
         data[i]?.Inspection?.SolidWasteSection?.wasteServiceProviderRegistration
           ?.name,
@@ -1406,7 +1460,6 @@ const flattenArray = async (data: any) => {
         data[i]?.Inspection?.SolidWasteSection?.ContainerVolume?.name,
       "Waste Provider Accreditted":
         data[i]?.Inspection?.SolidWasteSection?.wasteProviderAccreditted?.name,
-
       PremisesHazardousWasteDisposal: data[
         i
       ]?.Inspection?.SolidWasteSection?.PremisesHazardousWasteDisposal?.map(
@@ -1417,10 +1470,7 @@ const flattenArray = async (data: any) => {
       ]?.Inspection?.SolidWasteSection?.PremisesWasteReceptacle?.map(
         (data: any) => data?.SolidWasteReceptacle?.name
       ).toString(),
-
-      ///CONCLUSION
-      "Obnoxious Trade ":
-        data[i]?.Inspection?.ConclusionSection?.obnoxiousTrade,
+      "Obnoxious Trade": data[i]?.Inspection?.ConclusionSection?.obnoxiousTrade,
       "Officer Comment": data[i]?.Inspection?.ConclusionSection?.officerComment,
       Nuisance: data[
         i
@@ -1432,7 +1482,229 @@ const flattenArray = async (data: any) => {
       ]?.Inspection?.ConclusionSection?.PremisesActionTaken?.map(
         (data: any) => data?.Action?.name
       ).toString(),
-    });
+    };
+
+    if (data[i]?.Inspection?.PremisesInfo === "EateryPremisesInfoSection") {
+      newDataItem = {
+        ...newDataItem,
+        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
+
+        "Approved Handwashing Facility Availability":
+          data[i]?.Inspection?.[PremisesInfo]
+            ?.approvedHandwashingFacilityAvailability?.name,
+        "Animal Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.animalAvailability?.name,
+
+        "Eatery Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.eateryPremisesType?.name,
+
+        "Eatery Premises Sub Type":
+          data[i]?.Inspection?.[PremisesInfo]?.eateryPremisesSubType?.name,
+        "First Aid Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.firstAidAvailability?.name,
+        "Kitchen Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.kitchenAvailability?.name,
+        "Physical Structure Type":
+          data[i]?.Inspection?.[PremisesInfo]?.physicalStructureType?.name,
+        "Cooked Food Storage Condtion Safe":
+          data[i]?.Inspection?.[PremisesInfo]?.cookedFoodStorageCondtionSafe
+            ?.name,
+        "Uncooked Food Storage Condtion Safe":
+          data[i]?.Inspection?.[PremisesInfo]?.uncookedFoodStorageCondtionSafe
+            ?.name,
+        Disinfestation:
+          data[i]?.Inspection?.[PremisesInfo]?.disinfestation?.name,
+        "Disinfestation Frequency":
+          data[i]?.Inspection?.[PremisesInfo]?.disinfestationFrequency?.name,
+        Disinfection: data[i]?.Inspection?.[PremisesInfo]?.disinfection?.name,
+        "Disinfection Frequency":
+          data[i]?.Inspection?.[PremisesInfo]?.disinfectionFrequency?.name,
+        "Protective Clothing Used":
+          data[i]?.Inspection?.[PremisesInfo]?.protectiveClothingUsed?.name,
+      };
+    } else if (
+      data[i]?.Inspection?.PremisesInfo === "HospitalityPremisesInfoSection"
+    ) {
+      newDataItem = {
+        ...newDataItem,
+        "Hospitality Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.hospitalityPremisesType?.name,
+        "Physical Structure Type":
+          data[i]?.Inspection?.[PremisesInfo]?.physicalStructureType?.name,
+        "Cooked Food Storage Condtion Safe":
+          data[i]?.Inspection?.[PremisesInfo]?.cookedFoodStorageCondtionSafe
+            ?.name,
+        "Uncooked Food Storage Condtion Safe":
+          data[i]?.Inspection?.[PremisesInfo]?.uncookedFoodStorageCondtionSafe
+            ?.name,
+        "Designated Smoking Area":
+          data[i]?.Inspection?.[PremisesInfo]?.designatedSmokingArea?.name,
+        "Unprotective Clothing Used":
+          data[i]?.Inspection?.[PremisesInfo]?.protectiveClothingUsed?.name,
+        "First Aid Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.firstAidAvailability?.name,
+        "Kitchen Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.kitchenAvailability?.name,
+      };
+    } else if (
+      data[i]?.Inspection?.PremisesInfo === "HealthPremisesInfoSection"
+    ) {
+      newDataItem = {
+        ...newDataItem,
+        "Health Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.healthPremisesType?.name,
+        "EHO AAvailability":
+          data[i]?.Inspection?.[PremisesInfo]?.ehoAvailability?.name,
+        "Incinerator Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.incineratorAvailability?.name,
+        "Placenta Pit Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.placentaPitAvailability?.name,
+        "Separate Ward": data[i]?.Inspection?.PremisesInfo?.separateWard?.name,
+        "Ownership Type":
+          data[i]?.Inspection?.[PremisesInfo]?.ownershipType?.name,
+        "Embalming Area Condition":
+          data[i]?.Inspection?.[PremisesInfo]?.embalmingAreaCondition?.name,
+        "Embalming Area Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.embalmingAreaAvailability?.name,
+      };
+    } else if (
+      data[i]?.Inspection?.PremisesInfo === "IndustryPremisesInfoSection"
+    ) {
+      newDataItem = {
+        ...newDataItem,
+        "By Products Storage Area Cond":
+          data[i]?.Inspection?.[PremisesInfo]?.byProductsStorageAreaCond?.name,
+        "Production Room Condition":
+          data[i]?.Inspection?.[PremisesInfo]?.productionRoomCondition?.name,
+        "Staff Changing Room":
+          data[i]?.Inspection?.[PremisesInfo]?.staffChangingRoom?.name,
+        "Uncooked Food Storage Condtion Safe":
+          data[i]?.Inspection?.[PremisesInfo]?.storeRoomAvailability?.name,
+        "Designated Smoking Area":
+          data[i]?.Inspection?.[PremisesInfo]?.flyScreenNetAvailability?.name,
+        "Protective Clothing Used":
+          data[i]?.Inspection?.[PremisesInfo]?.protectiveClothingUsed?.name,
+        "First Aid Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.firstAidAvailability?.name,
+      };
+    } else if (
+      data[i]?.Inspection?.PremisesInfo === "InstitutionPremisesInfoSection"
+    ) {
+      newDataItem = {
+        ...newDataItem,
+        "Hospitality Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.ablutionSlabCondition?.name,
+        "Physical Structure Type":
+          data[i]?.Inspection?.[PremisesInfo]?.ablutionSlab?.name,
+        "Cooked Food Storage Condtion Safe":
+          data[i]?.Inspection?.[PremisesInfo]?.animalSpaceAvailability?.name,
+        "Animal Space Condition":
+          data[i]?.Inspection?.[PremisesInfo]?.animalSpaceCondition?.name,
+
+        "First Aid Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.firstAidAvailability?.name,
+        "Premises Subtype":
+          data[i]?.Inspection?.[PremisesInfo]?.PremisesSubtype?.name,
+        "Premises type":
+          data[i]?.Inspection?.[PremisesInfo]?.PremisesType?.name,
+        "Kitchen Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.kitchenAvailability?.name,
+
+        "Shep Club Existence":
+          data[i]?.Inspection?.[PremisesInfo]?.shepClubExistence?.name,
+        "Slaughter Area Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.slaughterAreaAvailability?.name,
+        "Slaughter Area Condition":
+          data[i]?.Inspection?.[PremisesInfo]?.slaughterAreaCondition?.name,
+        "Sound Proof": data[i]?.Inspection?.[PremisesInfo]?.soundProof?.name,
+        UncookedFoodStorageCondtionSafe:
+          data[i]?.Inspection?.[PremisesInfo]?.uncookedFoodStorageCondtionSafe
+            ?.name,
+      };
+    } else if (
+      data[i]?.Inspection?.PremisesInfo === "MarketPremisesInfoSection"
+    ) {
+      newDataItem = {
+        ...newDataItem,
+        "Market Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.marketPremisesType?.name,
+        "Ownership Type":
+          data[i]?.Inspection?.[PremisesInfo]?.ownershipType?.name,
+        "Deratting Frequency":
+          data[i]?.Inspection?.[PremisesInfo]?.derattingFrequency?.name,
+        "Cleanup Frequency":
+          data[i]?.Inspection?.[PremisesInfo]?.uncookedFoodStorageCondtionSafe
+            ?.name,
+        "Physical Structure Type":
+          data[i]?.Inspection?.[PremisesInfo]?.physicalStructureType?.name,
+        "General Sanitary Condition":
+          data[i]?.Inspection?.[PremisesInfo]?.generalSanitaryCondition?.name,
+      };
+    } else if (
+      data[i]?.Inspection?.PremisesInfo === "SanitaryPremisesInfoSection"
+    ) {
+      newDataItem = {
+        ...newDataItem,
+        "Market Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.marketPremisesType?.name,
+        "Ownership Type":
+          data[i]?.Inspection?.[PremisesInfo]?.ownershipType?.name,
+
+        "Disinfestation Frequency":
+          data[i]?.Inspection?.[PremisesInfo]?.disinfestationFrequency?.name,
+        Disinfection: data[i]?.Inspection?.[PremisesInfo]?.disinfection?.name,
+        "Disinfection Frequency":
+          data[i]?.Inspection?.[PremisesInfo]?.disinfectionFrequency?.name,
+        "Physical Structure Type":
+          data[i]?.Inspection?.[PremisesInfo]?.physicalStructureType?.name,
+        "Sanitary Premises Type":
+          data[i]?.Inspection?.[PremisesInfo]?.sanitaryPremisesType?.name,
+        "Staff Changing Room":
+          data[i]?.Inspection?.[PremisesInfo]?.staffChangingRoom?.name,
+        "Sanitary Facility Mgt":
+          data[i]?.Inspection?.[PremisesInfo]?.sanitaryFacilityMgt?.name,
+        "Disinfestation Quarterly":
+          data[i]?.Inspection?.[PremisesInfo]?.disinfestationQuarterly?.name,
+        "Protective Clothing":
+          data[i]?.Inspection?.[PremisesInfo]?.protectiveClothing?.name,
+        "Slaughter Area Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.slaughterAreaAvailability?.name,
+        "Store Room Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.storeRoomAvailability?.name,
+        "Condemnation Room Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.condemnationRoomAvailability
+            ?.name,
+        "Cloak Room Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.cloakRoomAvailability?.name,
+        "Comfort Room Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.comfortRoomAvailability?.name,
+        "Wheel bath Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.wheelbathAvailability?.name,
+        "Footbath Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.footbathAvailability?.name,
+        "Leachate Mgt": data[i]?.Inspection?.[PremisesInfo]?.leachateMgt?.name,
+
+        "Safe Hazardous Waste Mgt":
+          data[i]?.Inspection?.[PremisesInfo]?.safeHazardousWasteMgt?.name,
+        "Sexton Management":
+          data[i]?.Inspection?.[PremisesInfo]?.sextonManagement?.name,
+        "Sexton Office":
+          data[i]?.Inspection?.[PremisesInfo]?.sextonOffice?.name,
+        "Proper Layout":
+          data[i]?.Inspection?.[PremisesInfo]?.properLayout?.name,
+        "Cremation Practiced":
+          data[i]?.Inspection?.[PremisesInfo]?.cremationPracticed?.name,
+        "Workers Office Availability":
+          data[i]?.Inspection?.[PremisesInfo]?.workersOfficeAvailability?.name,
+        "Cremation Platform":
+          data[i]?.Inspection?.[PremisesInfo]?.cremationPlatform?.name,
+        "Sanitary Ashes Disposal":
+          data[i]?.Inspection?.[PremisesInfo]?.sanitaryAshesDisposal?.name,
+        "Site Fenced": data[i]?.Inspection?.[PremisesInfo]?.siteFenced?.name,
+      };
+    }
+
+    newData?.push(newDataItem);
   }
 
   return newData;
