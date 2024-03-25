@@ -1482,7 +1482,7 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
       ).toString(),
     };
 
-    if (data[i]?.Inspection?.PremisesInfo === "EateryPremisesInfoSection") {
+    if (PremisesInfo === "EateryPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
         "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
@@ -1521,9 +1521,8 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
           data[i]?.Inspection?.[PremisesInfo]?.protectiveClothingUsed?.name,
       };
     } else if (
-      data[i]?.Inspection?.PremisesInfo === "HospitalityPremisesInfoSection"
+     PremisesInfo === "HospitalityPremisesInfoSection"
     ) {
-console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspection?.[PremisesInfo]?.facilityName);
 
 
       newDataItem = {
@@ -1550,7 +1549,7 @@ console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspec
           data[i]?.Inspection?.[PremisesInfo]?.kitchenAvailability?.name,
       };
     } else if (
-      data[i]?.Inspection?.PremisesInfo === "HealthPremisesInfoSection"
+      PremisesInfo === "HealthPremisesInfoSection"
     ) {
       newDataItem = {
         ...newDataItem,
@@ -1573,7 +1572,7 @@ console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspec
           data[i]?.Inspection?.[PremisesInfo]?.embalmingAreaAvailability?.name,
       };
     } else if (
-      data[i]?.Inspection?.PremisesInfo === "IndustryPremisesInfoSection"
+   PremisesInfo === "IndustryPremisesInfoSection"
     ) {
       newDataItem = {
         ...newDataItem,
@@ -1595,7 +1594,7 @@ console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspec
           data[i]?.Inspection?.[PremisesInfo]?.firstAidAvailability?.name,
       };
     } else if (
-      data[i]?.Inspection?.PremisesInfo === "InstitutionPremisesInfoSection"
+   PremisesInfo === "InstitutionPremisesInfoSection"
     ) {
       newDataItem = {
         ...newDataItem,
@@ -1631,7 +1630,7 @@ console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspec
             ?.name,
       };
     } else if (
-      data[i]?.Inspection?.PremisesInfo === "MarketPremisesInfoSection"
+   PremisesInfo === "MarketPremisesInfoSection"
     ) {
       newDataItem = {
         ...newDataItem,
@@ -1652,7 +1651,7 @@ console.log("data[i]?.Inspection?.[PremisesInfo]?.facilityName ",data[i]?.Inspec
           data[i]?.Inspection?.[PremisesInfo]?.generalSanitaryCondition?.name,
       };
     } else if (
-      data[i]?.Inspection?.PremisesInfo === "SanitaryPremisesInfoSection"
+    PremisesInfo === "SanitaryPremisesInfoSection"
     ) {
       newDataItem = {
         ...newDataItem,

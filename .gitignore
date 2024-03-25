@@ -25,12 +25,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+# vercel
+.vercel
 
 # local env files
 .env*.local
 .env
-
-# vercel
-.vercel
-
-.README.md
