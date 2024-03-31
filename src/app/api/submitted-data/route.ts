@@ -7,8 +7,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 
-
-
 export async function GET(request: Request) {
   try {
     //  const res = await request.json();
@@ -43,8 +41,6 @@ export async function GET(request: Request) {
     if ((userLevel == 3 && filterBy == "undefined") || filterBy == "") {
       filterBy = "districtId";
       filterValue = districtId;
-
-      
     }
 
     await logActivity("Visited submitted data list", session?.user?.id);
@@ -69,8 +65,6 @@ export async function GET(request: Request) {
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
         : searchParams.get("searchText")?.toString();
-
-  
 
     let count = await prisma.basicInfoSection.count({
       // where: getSearchParams(req, searchText).where,
@@ -148,8 +142,6 @@ export async function GET(request: Request) {
       //     },
       //   },
     });
-
-
 
     // console.log(( searchText != ""  && searchText != "undefined"));
 
@@ -270,3 +262,48 @@ export async function GET(request: Request) {
     return NextResponse.json(error);
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const session: any = await getServerSession(authOptions);
+
+    let userId = session?.user?.id;
+
+    const res = await request.json();
+    let inspectionsIds = res.selectedInspections;
+
+    console.log(res);
+    
+
+    inspectionsIds.map(async (id: any) => {
+      let inspection = await prisma.inspection.findFirst({
+        where: {
+          id: id,
+        },
+      });
+      let isPublished = inspection?.isPublished || 0;
+
+      await prisma.inspection.update({
+        data: {
+          isPublished: Math.abs(isPublished - 1),
+          publishedById: Number(userId),
+        },
+        where: {
+          id: id,
+        },
+      });
+    });
+
+    // let inspectionId = res.id;
+
+    await logActivity(`Published inspection ${inspectionsIds}`, userId);
+
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.log(error);
+  }
+}
+// GANMA0101-240331-2X7J5NB8TB
+// GANMA0101-240331-G6HXAYUABE
+// GANMA0101-240331-XYS53YNY2D	Opoku Richard	GPS	4.4	Greater Accra Region	Ga North	ABENSU	Abensu Tigopole	Mar 31st 2024, 1:38:26 pm	Unpublished
+// GANMA0101-240331-E76QFTNTPB	Opoku Richard

@@ -23,7 +23,7 @@ export default function Data({ data }: any) {
     let userSession: any = session;
 
 
-
+    
 
     let nationalUser: any = userSession?.user?.userLevelId == 1;
     let regionalUser: any = userSession?.user?.userLevelId == 2;
@@ -68,7 +68,6 @@ export default function Data({ data }: any) {
     const [loading, setLoading] = useState(false);
 
     const [isPublished, setIsPublished] = useState("");
-    const [selectedInspections, setSelectedInspections] = useState([]);
 
     var dateString = moment().format("DD-MM-yyyy-HH-mm-ss-a");
 
@@ -310,40 +309,6 @@ export default function Data({ data }: any) {
     }
 
 
-    const filterByPublishing = async (isPublished) => {
-
-        router.push(
-            `${pathname}?filterBy=${filterBy}&published=${isPublished}&filterValue=${filterValue}&from=${from}&to=${to}`
-        );
-    }
-
-
-    const handleInspectionSelected = (value) => {
-        if (selectedInspections.includes(value)) {
-          // If inspection is already selected, remove it
-          setSelectedInspections(selectedInspections.filter(item => item !== value));
-        } else {
-          // If inspection is not selected, add it
-          setSelectedInspections([...selectedInspections, value]);
-        }
-      };
-
-
-
-      const handlePublishInspectionSelected = async () => {
-        try {
-            const response = await axios.post(`/api/submitted-data`, {
-                selectedInspections,
-            });
-            
-            // if (response.status == 200) {
-            //     router.refresh()
-              
-            // }
-        } catch (error) {
-            console.log(error);
-        }
-      };
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -375,50 +340,26 @@ export default function Data({ data }: any) {
 
                 <div className=" mb-3">
 
+                    <div className="row align-items-right gy-3 mb-3">
 
-                    <div className="col-md-4">
-                        <div className="input-group mb-3">
-                            <button
-                                type="button"
-                                className="btn btn-sm btn-success  "
-                                onClick={() => handleExportAll()}
-                            >
-                                <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
-                                Export as excel
-                            </button>
+                        <div className="col-md-4">
+                            <div className="input-group mb-3">
+                                <button
+                                    type="button"
+                                    className="btn btn-sm btn-success  "
+                                    onClick={() => handleExportAll()}
+                                >
+                                    <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
+                                    Export as excel
+                                </button>
+                            </div>
                         </div>
+
                     </div>
-
-                    <div className="col-md-2">
-                        <div className="input-group mb-3">
-                            {/* <label className="form-label mb-0">Publishing status</label> */}
-
-                            <select ref={filterRef}
-                                id="filterRef"
-                                name="filterRef" className="form-select input-group" onChange={(e: any) => {
-
-                                    e.preventDefault();
-                                    setIsPublished(e.target.value)
-                                    filterByPublishing(e.target.value);
-                                }}>
-                                <option value="undefined" >
-                                    Show all
-                                </option>
-                                <option value="1">
-                                    Published
-                                </option>
-                                <option value="0">
-                                    Unpublished
-                                </option>
-                                {/* <option value="1">
-                                                        Deleted
-                                                    </option> */}
-                            </select>
-                        </div>
-                    </div>
-
 
                 </div>
+
+
 
 
             </div>
@@ -434,25 +375,28 @@ export default function Data({ data }: any) {
                                 <div className="card">
                                     <div className="card-header">
                                         <div className="row row-cols-lg-auto g-3 align-items-center">
-                                            {/* <div className="col-md-2">
-                                <input type="text" className="form-control" placeholder="City" />
-                            </div> */}
+                                            <div className="col-md-2">
+                                                <label className="form-label mb-0">Publishing status</label>
 
-
-                                            <div className="col-md-4">
-                                                <label className="form-label mb-0">.</label>
-
-                                                <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
-                                                        id="searchText"
-                                                        name="searchText" />
-                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
-                                                </div>
-
+                                                <select ref={filterRef}
+                                                    id="filterRef"
+                                                    name="filterRef" className="form-select input-group" onChange={(e: any) => {
+                                                        setIsPublished(e.target.value)
+                                                    }}>
+                                                    <option value="undefined" selected>
+                                                        Show all
+                                                    </option>
+                                                    <option value="1">
+                                                        Published
+                                                    </option>
+                                                    <option value="0">
+                                                        Unpublished
+                                                    </option>
+                                                    {/* <option value="1">
+                                                        Deleted
+                                                    </option> */}
+                                                </select>
                                             </div>
-
-
-
                                             <div className="col-md-2">
                                                 <label className="form-label mb-0">Select level</label>
 
@@ -814,22 +758,50 @@ export default function Data({ data }: any) {
                                         <br />
 
 
+                                        <form className="row g-3">
+                                            {/* <div className="col-md-2">
+                                <input type="text" className="form-control" placeholder="City" />
+                            </div> */}
+
+                                            <div className="col-md-2">
+                                                <div className="input-group mb-3">
+                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                                        id="searchText"
+                                                        name="searchText" />
+                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                                </div>
+
+                                            </div>
 
 
-{selectedInspections.length!=0?
-                                        <div className="row">
+
+                                        </form>
+
+
+                                        {/* <div className="row">
                                             <div className="col-md-3">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-sm btn-warning btn-label waves-effect right waves-light "
-                                                    onClick={handlePublishInspectionSelected}
+                                                    className="btn btn-sm btn-success btn-label waves-effect right waves-light rounded-pill"
+                                                    onClick={handleExportAll}
                                                 >
-                                                    <i className="bi bi-list-check label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-                                                    Publish selected
+                                                    <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                                    Export as excel
                                                 </button>{" "}
                                             </div>
-                                           
-                                        </div>:<></>}
+                                            <div className="col-sm-3 mb-3">
+                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                    Search
+                                                </label>
+                                                <div className="col-sm-12">
+                                                    <input type="text" className="form-control" placeholder='Enter search term' value={searchText}
+                                                        onChange={(e: any) => {
+                                                            setSearchText(e.target.value);
+                                                            autoHandleSearch(e.target.value);
+                                                        }} />
+                                                </div>
+                                            </div>
+                                        </div> */}
                                     </div>
                                     <div className="card-body table-responsive">
                                         {/* <h5 className="card-title">Datatables</h5> */}
@@ -839,8 +811,8 @@ export default function Data({ data }: any) {
                                         <table className="table  datatable">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Select </th>
                                                     <th scope="col">Form </th>
+
                                                     <th scope="col">Rating </th>
                                                     <th scope="col">Type</th>
                                                     <th scope="col">Code</th>
@@ -865,12 +837,6 @@ export default function Data({ data }: any) {
                                                 {
                                                     data?.submittedData?.response?.map((dt: any) => (
                                                         <tr key={dt.id}>
-                                                            <td><input type="checkbox" onChange={(e) => {
-                                                                // e.preventDefault()
-                                                                handleInspectionSelected(dt.Inspection.id)
-
-                                                                
-                                                            }}  disabled={dt?.Inspection?.isPublished} /></td>
                                                             <td>{dt?.Inspection?.InspectionForm?.name}</td>
 
                                                             <td>{handleRating(dt?.Inspection?.totalRating)}</td>

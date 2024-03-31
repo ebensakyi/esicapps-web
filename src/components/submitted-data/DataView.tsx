@@ -61,7 +61,7 @@ export default function DataView({ data }: any) {
     const searchtext = searchParams.get('searchText')
 
     const handlePublish = async (id: any) => {
-       // try {
+        try {
             const response = await axios.post(`/api/submitted-data/data-view`, {
                 id: id,
             });
@@ -71,9 +71,9 @@ export default function DataView({ data }: any) {
                     `/submitted-data?published=${published}&formId=${formId}`
                 );
             }
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        } catch (error) {
+            console.log(error);
+        }
     };
     const handleDelete = async (id: any) => {        
 
