@@ -300,7 +300,7 @@ export default function UserSubmissions({ data }: any) {
                             <div className="card">
                             
                                 <div className="card-body table-responsive">
-                                    <h5 className="card-title">USER SUBMISSIONS</h5>
+                                    <h5 className="card-title">USER SUBMISSIONS(Includes deleted Inspections)</h5>
                                     <table className="table datatable table-striped ">
 
                                         <thead>

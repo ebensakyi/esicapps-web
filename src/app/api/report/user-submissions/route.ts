@@ -23,6 +23,7 @@ export async function GET(request: Request) {
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
 
+
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
       : Number(searchParams.get("page"));
@@ -30,18 +31,7 @@ export async function GET(request: Request) {
     let skip =
       Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
 
-    // if ((loginUserLevel == 1 && filterBy == "undefined") || filterBy == "") {
-    //   filterBy = "undefined";
-    //   filterValue = "undefined";
-    // }
-    // if ((loginUserLevel == 2 && filterBy == "undefined") || filterBy == "") {
-    //   filterBy = "regionId";
-    //   filterValue = regionId;
-    // }
-    // if ((loginUserLevel == 3 && filterBy == "undefined") || filterBy == "") {
-    //   filterBy = "districtId";
-    //   filterValue = districtId;
-    // }
+  
 
     if (loginUserLevel == 3) {
       let count = await prisma.user.count({
@@ -51,14 +41,20 @@ export async function GET(request: Request) {
         },
       });
 
-    
+      
 
       const response = await prisma.user.findMany({
-        where: { districtId: Number(loginUserDistrictId) },
+        where: {
+          districtId: Number(loginUserDistrictId),
+         
+        },
         include: {
           Region: true,
           District: true,
           Inspection: {
+            where: {
+              deleted: 0
+            },
             select: {
               createdAt: true,
             },
@@ -77,6 +73,8 @@ export async function GET(request: Request) {
           createdAt: "desc",
         },
       });
+
+
 
       if (exportFile) {
         const url = await export2Excel(response);
@@ -134,8 +132,6 @@ export async function GET(request: Request) {
       });
     }
 
-
-
     if (loginUserLevel == 1) {
       let count = await prisma.user.count({
         where: {
@@ -166,7 +162,6 @@ export async function GET(request: Request) {
         },
       });
 
-      
       if (exportFile) {
         const url = await export2Excel(response);
         return NextResponse.json(url);
@@ -215,14 +210,13 @@ const flattenArray = async (data: any) => {
       Region: data[i]?.Region?.name,
       District: data[i]?.District?.name,
       "Last Submission Date": data[i]?.Inspection[0]?.createdAt,
-      Submissions: data[i]?._count?.Inspection
+      Submissions: data[i]?._count?.Inspection,
     });
   }
-console.log(newData);
+  console.log(newData);
 
   return newData;
 };
-
 
 const uploadFile = async (fileName: any) => {
   try {
