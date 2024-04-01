@@ -12,20 +12,25 @@ export async function POST(request: Request) {
 
       inspectionId: res.inspectionId,
       userId: Number(res.userId),
-      liquidWasteSectionId:
-        res.liquidWasteSectionId == "null" ? null : res.liquidWasteSectionId,
+      solidWasteSectionId:
+        res.solidWasteSectionId == "null" ? null : res.solidWasteSectionId,
 
-      greyWaterDisposalId:
-        res.greyWaterDisposalId == "null"
+        hazardousWasteDisposalMethodId:
+        res.hazardousWasteDisposalId == "null"
           ? null
-          : Number(res.greyWaterDisposalId),
+          : Number(res.hazardousWasteDisposalId),
     };
+    console.log("hazardousWasteDisposalMethodId===> ",data);
+
     const response = await prisma.premisesHazardousWasteDisposal.create({
       data,
     });
+    console.log("hazardousWasteDisposalMethodId res===> ",response);
 
     return NextResponse.json(response);
   } catch (error: any) {
+    console.log("error=============> ",error);
+    
     return NextResponse.json(error);
   }
 }

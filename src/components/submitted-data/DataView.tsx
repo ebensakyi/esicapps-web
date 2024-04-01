@@ -135,7 +135,19 @@ export default function DataView({ data }: any) {
             transform: "translate(-50%, -50%)",
         },
     };
-
+    const handleRating = (rating: number) => {
+        try {
+            if (rating >= 4) {
+                return <span className="badge bg-success">Good</span>;
+            } else if (rating >= 3 && rating < 4) {
+                return <span className="badge bg-warning">Average</span>;
+            } else if (rating < 3) {
+                return <span className="badge bg-danger">Poor</span>;
+            } else {
+                return <span className="badge bg-primary">Default</span>;
+            }
+        } catch (error) { }
+    };
 
     return (
         <main id="main" className="main">
@@ -261,7 +273,16 @@ export default function DataView({ data }: any) {
                                                                     <div className="card ">
                                                                         <div className="card-body">
                                                                             <div className="row">
+                                                                            <div className="col-sm-3 mb-3">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                       Rating
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
 
+                                                                                      {handleRating(data?.submittedData?.totalRating)} 
+                                                                                           
+                                                                                    </div>
+                                                                                </div>
                                                                                 <div className="col-sm-3 mb-3">
                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                                                                         Premises Code
@@ -800,8 +821,7 @@ export default function DataView({ data }: any) {
                                                                                     <></>
                                                                                 )}
 
-                                                                                {data?.submittedData?.WaterSection?.PremisesWaterStorage.length !=
-                                                                                    0 ? (
+                                                                                
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                                                                             Water storage
@@ -819,9 +839,7 @@ export default function DataView({ data }: any) {
                                                                                             )
                                                                                         )}
                                                                                     </div>
-                                                                                ) : (
-                                                                                    <></>
-                                                                                )}
+                                                                              
                                                                                 {data?.submittedData?.WaterSection?.waterStorageConditionSafe !=
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
@@ -992,6 +1010,26 @@ export default function DataView({ data }: any) {
                                                                                 ) : (
                                                                                     <></>
                                                                                 )}
+                                                                                 {data?.submittedData?.LiquidWasteSection?.numberBathroomCubicle !=
+                                                                                    null ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                           Number of Bathroom Cubicle
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control bg-light border-0"
+                                                                                            id="invoicenoInput"
+                                                                                            value={
+                                                                                                data?.submittedData?.LiquidWasteSection?.numberBathroomCubicle
+                                                                                                 
+                                                                                            }
+                                                                                            readOnly={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
                                                                                 {data?.submittedData?.LiquidWasteSection?.bathroomAdequacy !=
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
@@ -1004,6 +1042,27 @@ export default function DataView({ data }: any) {
                                                                                             id="invoicenoInput"
                                                                                             value={
                                                                                                 data?.submittedData?.LiquidWasteSection?.bathroomAdequacy
+                                                                                                    ?.name
+                                                                                            }
+                                                                                            readOnly={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
+
+{data?.submittedData?.LiquidWasteSection?.bathroomCondition !=
+                                                                                    null ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                            Bathroom Condition
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control bg-light border-0"
+                                                                                            id="invoicenoInput"
+                                                                                            value={
+                                                                                                data?.submittedData?.LiquidWasteSection?.bathroomCondition
                                                                                                     ?.name
                                                                                             }
                                                                                             readOnly={true}
@@ -1053,7 +1112,7 @@ export default function DataView({ data }: any) {
                                                                                 {data?.submittedData?.LiquidWasteSection?.drainsCondition != null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                           Are Drains Conditions Good
+                                                                                           Are Drains In Good Conditions
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
