@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import AWS from "aws-sdk";
 import fs from "fs";
 import { authOptions } from "../../auth/[...nextauth]/options";
+import path from "path";
 const XLSX = require("xlsx");
 
 export async function GET(request: Request) {
@@ -20,7 +21,8 @@ export async function GET(request: Request) {
         : Number(searchParams.get("districtId"));
 
     const searchText =
-      searchParams.get("searchText")?.toString() == "undefined"
+      searchParams.get("searchText")?.toString() == "undefined" ||
+      searchParams.get("searchText")?.toString() == "null"
         ? ""
         : searchParams.get("searchText")?.toString();
 
@@ -1292,6 +1294,7 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
       Accuracy: data[i]?.accuracy,
       "Respondent Name": data[i]?.respondentName,
       "Respondent Designation": data[i]?.RespondentDesignation?.name,
+      "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
 
       "Drains Availability":
         data[i]?.Inspection?.[PremisesInfo]?.drainsAvailability?.name,
@@ -1520,14 +1523,12 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
         "Protective Clothing Used":
           data[i]?.Inspection?.[PremisesInfo]?.protectiveClothingUsed?.name,
       };
-    } else if (
-     PremisesInfo === "HospitalityPremisesInfoSection"
-    ) {
 
 
+      
+    } else if (PremisesInfo === "HospitalityPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
-        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
 
         "Hospitality Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.hospitalityPremisesType?.name,
@@ -1548,12 +1549,9 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
         "Kitchen Availability":
           data[i]?.Inspection?.[PremisesInfo]?.kitchenAvailability?.name,
       };
-    } else if (
-      PremisesInfo === "HealthPremisesInfoSection"
-    ) {
+    } else if (PremisesInfo === "HealthPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
-        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
 
         "Health Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.healthPremisesType?.name,
@@ -1571,12 +1569,9 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
         "Embalming Area Availability":
           data[i]?.Inspection?.[PremisesInfo]?.embalmingAreaAvailability?.name,
       };
-    } else if (
-   PremisesInfo === "IndustryPremisesInfoSection"
-    ) {
+    } else if (PremisesInfo === "IndustryPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
-        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
 
         "By Products Storage Area Cond":
           data[i]?.Inspection?.[PremisesInfo]?.byProductsStorageAreaCond?.name,
@@ -1593,12 +1588,9 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
         "First Aid Availability":
           data[i]?.Inspection?.[PremisesInfo]?.firstAidAvailability?.name,
       };
-    } else if (
-   PremisesInfo === "InstitutionPremisesInfoSection"
-    ) {
+    } else if (PremisesInfo === "InstitutionPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
-        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
 
         "Hospitality Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.ablutionSlabCondition?.name,
@@ -1629,12 +1621,9 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
           data[i]?.Inspection?.[PremisesInfo]?.uncookedFoodStorageCondtionSafe
             ?.name,
       };
-    } else if (
-   PremisesInfo === "MarketPremisesInfoSection"
-    ) {
+    } else if (PremisesInfo === "MarketPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
-        "Facility Name": data[i]?.Inspection?.[PremisesInfo]?.facilityName,
 
         "Market Premises Type":
           data[i]?.Inspection?.[PremisesInfo]?.marketPremisesType?.name,
@@ -1650,9 +1639,7 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
         "General Sanitary Condition":
           data[i]?.Inspection?.[PremisesInfo]?.generalSanitaryCondition?.name,
       };
-    } else if (
-    PremisesInfo === "SanitaryPremisesInfoSection"
-    ) {
+    } else if (PremisesInfo === "SanitaryPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
         "Market Premises Type":
@@ -1740,9 +1727,20 @@ const uploadFile = async (fileName: any) => {
 
     let stored = await s3.upload(params).promise();
 
+    deleteFile(filePath);
     return stored.Location;
   } catch (error) {
     console.log("Upload File Error ", error);
     return error;
   }
+};
+
+const deleteFile = (filePath: any) => {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error("Error deleting file:", err);
+      return;
+    }
+   // console.log("File deleted successfully");
+  });
 };

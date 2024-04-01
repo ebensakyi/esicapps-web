@@ -272,7 +272,6 @@ export async function POST(request: Request) {
     const res = await request.json();
     let inspectionsIds = res.selectedInspections;
 
-    console.log(res);
     
 
     inspectionsIds.map(async (id: any) => {
