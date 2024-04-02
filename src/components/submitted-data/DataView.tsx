@@ -412,6 +412,40 @@ export default function DataView({ data }: any) {
                                                                                     /></div>
 
                                                                                 </div>
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control bg-light border-0"
+
+
+                                                                    id="invoicenoInput"
+                                                                    value={ data?.submittedData?.BasicInfoSection?.latitude}
+                                                                    readOnly={true}
+                                                                />
+                                                            </div>
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Longitude</label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control bg-light border-0"
+
+                                                                    id="invoicenoInput"
+                                                                    value={ data?.submittedData?.BasicInfoSection?.longitude}
+                                                                    readOnly={true}
+                                                                />
+                                                            </div>
+                                                            <div className="col-lg-3 col-sm-6">
+                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Accuracy</label>
+                                                                <input
+                                                                    type="number"
+                                                                    className="form-control bg-light border-0"
+
+                                                                    id="invoicenoInput"
+                                                                    value={ data?.submittedData?.BasicInfoSection?.accuracy}
+                                                                    readOnly={true}
+                                                                />
+                                                            </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -844,7 +878,7 @@ export default function DataView({ data }: any) {
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                            Safe Water storage receptacle condition
+                                                                                        Is Water storage receptacle condition safe?
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"

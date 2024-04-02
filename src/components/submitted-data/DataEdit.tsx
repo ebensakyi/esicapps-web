@@ -1694,7 +1694,7 @@ export default function DataEdit({ data }: any) {
                                                             ?.waterStorageConditionSafe != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                    Water storage receptacle condition
+                                                                   Is Water storage receptacle condition safe?
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1705,8 +1705,8 @@ export default function DataEdit({ data }: any) {
                                                                     value={waterStorageCondition}
                                                                 >
                                                                     <option value="">Select</option>
-                                                                    <option value={1}>Safe</option>
-                                                                    <option value={2}>Unsafe</option>
+                                                                    <option value={1}>Yes</option>
+                                                                    <option value={2}>No</option>
                                                                 </select>
                                                                 {/* <input
                                 type="text"
