@@ -29,7 +29,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.EateryPremisesInfoSection.facilityName}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -49,7 +49,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -69,7 +69,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -89,7 +89,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -109,7 +109,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -129,7 +129,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -151,7 +151,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                               ?.approvedHandwashingFacilityAvailabilityEatery
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -172,7 +172,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.cookedFoodStorageCondtionSafe.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -192,7 +192,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.uncookedFoodStorageCondtionSafe.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -212,7 +212,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.designatedSmokingArea?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -232,7 +232,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.protectiveClothingUsed?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -252,7 +252,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.firstAidAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -272,7 +272,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection?.kitchenAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -291,7 +291,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.numberMaleWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -310,7 +310,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.numberFemaleWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -330,7 +330,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                             data?.EateryPremisesInfoSection
                               ?.numberFoodHandlingMedical
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -350,7 +350,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.numberFoodHandling
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -365,7 +365,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.EateryPremisesInfoSection?.numberRooms}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -385,7 +385,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.facilityCapacity
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -406,7 +406,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfestation?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -425,7 +425,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfestationFrequency?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -444,7 +444,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfection?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -464,7 +464,7 @@ const EateryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.EateryPremisesInfoSection?.disinfectionFrequency?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (

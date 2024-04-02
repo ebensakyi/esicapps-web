@@ -3,14 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import EateryPremisesInfoView from './PremisesInfoViews/EateryPremisesInfoView';
-import HealthPremisesInfoView from './PremisesInfoViews/HealthPremisesInfoView';
-import HospitalityPremisesInfoView from './PremisesInfoViews/HospitalityPremisesInfoView';
-import IndustryPremisesInfoView from './PremisesInfoViews/IndustryPremisesInfoView';
-import InstitutionPremisesInfoView from './PremisesInfoViews/InstitutionPremisesInfoView';
-import MarketPremisesInfoView from './PremisesInfoViews/MarketPremisesInfoView';
-import ResidentialPremisesInfoView from './PremisesInfoViews/ResidentialPremisesInfoView';
-import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoView';
+
 import Image from 'next/image'
 import { useSession } from 'next-auth/react';
 import { LOGIN_URL } from '@/config';
@@ -18,6 +11,14 @@ import Multiselect from 'multiselect-react-dropdown';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
+import ResidentialPremisesInfoEdit from './PremisesInfoEdits/ResidentialPremisesInfoEdit';
+import EateryPremisesInfoEdit from './PremisesInfoEdits/EateryPremisesInfoEdit';
+import HealthPremisesInfoEdit from './PremisesInfoEdits/HealthPremisesInfoEdit';
+import HospitalityPremisesInfoEdit from './PremisesInfoEdits/HospitalityPremisesInfoEdit';
+import InstitutionPremisesInfoEdit from './PremisesInfoEdits/InstitutionPremisesInfoEdit';
+import IndustryPremisesInfoEdit from './PremisesInfoEdits/IndustryPremisesInfoEdit';
+import MarketPremisesInfoEdit from './PremisesInfoEdits/MarketPremisesInfoEdit';
+import SanitaryPremisesInfoEdit from './PremisesInfoEdits/SanitaryPremisesInfoEdit';
 
 export default function DataEdit({ data }: any) {
 
@@ -1087,14 +1088,14 @@ export default function DataEdit({ data }: any) {
                                 </div>
                             </div>
 
-                            {/* {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 2 ? <EateryPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 3 ? <HealthPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 4 ? <HospitalityPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 5 ? <InstitutionPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 6 ? <IndustryPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 7 ? <MarketPremisesInfoEdit data={data?.submittedData} /> : <></>}
-            {formId == 8 ? <SanitaryPremisesInfoEdit data={data?.submittedData} /> : <></>} */}
+                            {formId == 1 ? <ResidentialPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 2 ? <EateryPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 3 ? <HealthPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 4 ? <HospitalityPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 5 ? <InstitutionPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 6 ? <IndustryPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 7 ? <MarketPremisesInfoEdit data={data?.submittedData} /> : <></>}
+                            {formId == 8 ? <SanitaryPremisesInfoEdit data={data?.submittedData} /> : <></>}
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="row mb-3">

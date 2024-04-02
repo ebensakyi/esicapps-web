@@ -26,7 +26,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.IndustryPremisesInfoSection?.facilityName
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -43,7 +43,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.PremisesType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -63,7 +63,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.PremisesSubtype?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -83,7 +83,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.toiletAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -103,7 +103,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.urinalAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -123,7 +123,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -143,7 +143,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -165,7 +165,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                               ?.approvedHandwashingFacilityAvailabilityIndustry
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -187,7 +187,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -209,7 +209,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                               ?.otherIndustryFacility
                              
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -231,7 +231,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                               ?.protectiveClothingUsed
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -253,7 +253,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                               ?.productionRoomCondition
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -275,7 +275,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                               ?.flyScreenNetAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -297,7 +297,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                               ?.storeRoomAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -318,7 +318,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.IndustryPremisesInfoSection?.manufacturedServices
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -338,7 +338,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.majorByProducts
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -358,7 +358,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -381,7 +381,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.byProductsStorageAreaCond?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -401,7 +401,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberFoodHandlers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -421,7 +421,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberFoodHandlersCert
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -441,7 +441,7 @@ const IndustryPremisesInfoEdit = ({ data }:any) => {
                             data?.IndustryPremisesInfoSection
                               ?.numberWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (

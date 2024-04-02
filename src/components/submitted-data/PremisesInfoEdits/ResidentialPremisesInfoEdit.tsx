@@ -1,6 +1,6 @@
 'use client'
 
-const ResidentialPremisesInfoView = ({ data }:any) => {
+const ResidentialPremisesInfoEdit = ({ data }:any) => {
 
 
 
@@ -36,7 +36,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      .toiletAvailability.name
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -54,7 +54,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                            value={
                              data?.ResidentialPremisesInfoSection?.urinalAvailability?.name
                            }
-                           readOnly={true}
+                           
                          />
                        </div>
                      ) : (
@@ -73,7 +73,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      .bathroomAvailability.name
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -93,7 +93,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.drainsAvailability?.name
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -115,7 +115,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                      ?.approvedHandwashingFacilityAvailability
                                      ?.name
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -134,7 +134,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.householdNumber
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -154,7 +154,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.maleOccupantNumber
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -174,7 +174,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.femaleOccupantNumber
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -194,7 +194,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.animalAvailability.name
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -214,7 +214,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.animalNumber
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -233,7 +233,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                      className="form-control bg-light border-0"
                                      id="invoicenoInput"
                                      value={x.AnimalType.name}
-                                     readOnly={true}
+                                     
                                    />
                                  )
                                )}
@@ -256,7 +256,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                    data?.ResidentialPremisesInfoSection
                                      ?.vaccinationProof?.name
                                  }
-                                 readOnly={true}
+                                 
                                />
                              </div>
                            ) : (
@@ -277,7 +277,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                  data?.ResidentialPremisesInfoSection
                                    ?.animalSpaceCondition.name
                                }
-                               readOnly={true}
+                               
                              />
                            </div>
                          ) : (
@@ -294,4 +294,4 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
   );
 };
 
-export default ResidentialPremisesInfoView;
+export default ResidentialPremisesInfoEdit;

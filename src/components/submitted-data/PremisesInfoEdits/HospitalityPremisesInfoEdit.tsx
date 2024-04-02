@@ -31,7 +31,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.HospitalityPremisesInfoSection?.facilityName
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -49,7 +49,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.hospitalityPremisesType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -69,7 +69,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.physicalStructureType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -89,7 +89,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.toiletAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -109,7 +109,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.urinalAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -129,7 +129,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -149,7 +149,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -169,7 +169,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -189,7 +189,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberMaleWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -209,7 +209,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFemaleWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -233,7 +233,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.cookedFoodStorageCondtionSafe?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -253,7 +253,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.uncookedFoodStorageCondtionSafe?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -273,7 +273,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.designatedSmokingArea?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -293,7 +293,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.protectiveClothingUsed?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -313,7 +313,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.firstAidAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -333,7 +333,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.kitchenAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -353,7 +353,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberMaleWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -373,7 +373,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFemaleWorkers
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -393,7 +393,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFoodHandlingMedical
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -415,7 +415,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberFoodHandling
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -437,7 +437,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.numberRooms
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -458,7 +458,7 @@ const HospitalityPremisesInfoEdit = ({ data }:any) => {
                             data?.HospitalityPremisesInfoSection
                               ?.facilityCapacity
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (

@@ -1,4 +1,4 @@
-const InstitutionPremisesInfoView = ({ data }:any) => {
+const InstitutionPremisesInfoEdit = ({ data }:any) => {
 
   return (
     <>
@@ -29,7 +29,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.InstitutionPremisesInfoSection.facilityName
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -45,7 +45,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.InstitutionPremisesInfoSection.Type?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -61,7 +61,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.InstitutionPremisesInfoSection.Subtype?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -81,7 +81,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               .toiletAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -101,7 +101,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               .urinalAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -121,7 +121,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -141,7 +141,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               ?.drainsAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -163,7 +163,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                               ?.approvedHandwashingFacilityAvailabilityInstitution
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -183,7 +183,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               ?.numberNonTeachingStaff
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -203,7 +203,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               .numberTeachingStaff
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -223,7 +223,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               ?.numberMaleStudents
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -243,7 +243,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                             data?.InstitutionPremisesInfoSection
                               .numberFemaleStudents
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -263,7 +263,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection?.ablutionSlab
                             ?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -284,7 +284,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.ablutionSlabCondition?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -305,7 +305,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.animalSpaceAvailability?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -325,7 +325,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.animalSpaceCondition?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -345,7 +345,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.cookedFoodStorageCondtionSafe?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -365,7 +365,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.uncookedFoodStorageCondtionSafe?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -385,7 +385,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.foodVendorAvailability?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -405,7 +405,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.kitchenAvailability?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -425,7 +425,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.physicalStructureType?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -445,7 +445,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection?.shepClubExistence
                             ?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -465,7 +465,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.slaughterAreaAvailability?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -485,7 +485,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.slaughterAreaCondition?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -502,7 +502,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                         value={
                           data?.InstitutionPremisesInfoSection?.soundProof?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -522,7 +522,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           data?.InstitutionPremisesInfoSection
                             ?.protectiveClothingUsed?.name
                         }
-                        readOnly={true}
+                        
                       />
                     </div>
                   ) : (
@@ -539,4 +539,4 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
   );
 };
 
-export default InstitutionPremisesInfoView;
+export default InstitutionPremisesInfoEdit;

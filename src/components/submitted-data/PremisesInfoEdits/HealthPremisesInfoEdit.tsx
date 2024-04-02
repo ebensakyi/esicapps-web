@@ -31,7 +31,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                           value={
                             data?.HealthPremisesInfoSection?.facilityName
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     {/* ) : (
@@ -49,7 +49,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.healthPremisesType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -70,7 +70,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.physicalStructureType.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -91,7 +91,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -111,7 +111,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -131,7 +131,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -151,7 +151,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -171,7 +171,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.approvedHandwashingFacilityAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -190,7 +190,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection?.ehoAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -210,7 +210,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.incineratorAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -231,7 +231,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.placentaPitAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -264,7 +264,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.healthPremisesType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -285,7 +285,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.separateWard?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -306,7 +306,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.ownershipType?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -327,7 +327,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.embalmingAreaCondition?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -348,7 +348,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.embalmingAreaAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -369,7 +369,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.bodyTraysAdequate?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -390,7 +390,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.coldRoomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -411,7 +411,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.coldRoomCondition?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -433,7 +433,7 @@ const HealthPremisesInfoEdit = ({ data }:any) => {
                             data?.HealthPremisesInfoSection
                               ?.numberWards
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (

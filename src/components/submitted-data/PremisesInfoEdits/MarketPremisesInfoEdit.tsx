@@ -1,5 +1,5 @@
 
-const MarketPremisesInfoView = ({ data }:any) => {
+const MarketPremisesInfoEdit = ({ data }:any) => {
 
   return (
     <>
@@ -25,7 +25,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.facilityName}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -43,7 +43,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection?.marketPremisesType
                               .name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -63,7 +63,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection?.toiletAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -83,7 +83,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection?.urinalAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -103,7 +103,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection
                               ?.bathroomAvailability?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -123,7 +123,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection?.drainsAvailability
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -145,7 +145,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                               ?.approvedHandwashingFacilityAvailabilityMarket
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -166,7 +166,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection.firstAidAvailability
                               .name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -183,7 +183,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.MarketPremisesInfoSection.ownershipType.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -197,7 +197,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberStores}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -211,7 +211,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection.numberSheds}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -225,7 +225,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection.numberStalls}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -241,7 +241,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberTraders}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -260,7 +260,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberMeatShops
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -279,7 +279,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberColdStores
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -294,7 +294,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberMills}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -310,7 +310,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberChopbars}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -331,7 +331,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection?.derattingFrequency
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -351,7 +351,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection?.cleanupFrequency
                               ?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -370,7 +370,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberLorrySheds
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -388,7 +388,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberVehicles
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -404,7 +404,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={data?.MarketPremisesInfoSection?.numberDrivers}
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -423,7 +423,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                           value={
                             data?.MarketPremisesInfoSection?.numberFoodVendors
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -444,7 +444,7 @@ const MarketPremisesInfoView = ({ data }:any) => {
                             data?.MarketPremisesInfoSection
                               ?.generalSanitaryCondition?.name
                           }
-                          readOnly={true}
+                          
                         />
                       </div>
                     ) : (
@@ -461,4 +461,4 @@ const MarketPremisesInfoView = ({ data }:any) => {
   );
 };
 
-export default MarketPremisesInfoView;
+export default MarketPremisesInfoEdit;
