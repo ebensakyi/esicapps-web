@@ -19,9 +19,11 @@ import InstitutionPremisesInfoEdit from './PremisesInfoEdits/InstitutionPremises
 import IndustryPremisesInfoEdit from './PremisesInfoEdits/IndustryPremisesInfoEdit';
 import MarketPremisesInfoEdit from './PremisesInfoEdits/MarketPremisesInfoEdit';
 import SanitaryPremisesInfoEdit from './PremisesInfoEdits/SanitaryPremisesInfoEdit';
+import { toiletAvailability } from '../../controller/liquid-waste-query';
 
 export default function DataEdit({ data }: any) {
 
+console.log(data);
 
 
     const { data: session } = useSession({
@@ -143,7 +145,7 @@ export default function DataEdit({ data }: any) {
 
     const [wasteServicePhoneNumber, setWasteServicePhoneNumber] = useState()
     const [wasteCollectionFrequency, setWasteCollectionFrequency] = useState()
-
+const [toiletAvailability, setToiletAvailability] = useState()
 
 
     const router = useRouter();
@@ -485,6 +487,35 @@ export default function DataEdit({ data }: any) {
         setAccuracy(data?.submittedData?.BasicInfoSection?.accuracy);
         setLatitude(data?.submittedData?.BasicInfoSection?.latitude);
         setLongitude(data?.submittedData?.BasicInfoSection?.longitude);
+
+if(formId==1){
+setToiletAvailability(data?.submittedData?.ResidentialPremisesInfoSection.toiletAvailabilityId)
+    
+}
+if(formId==1){
+    
+}
+if(formId==1){
+    
+}
+if(formId==1){
+    
+}
+if(formId==1){
+    
+}
+if(formId==1){
+    
+}if(formId==1){
+    
+}
+if(formId==1){
+    
+}
+
+       // setToiletAvailability(data?.submittedData)
+
+
       }, []);
 
     const onWaterSupplyRemove = (selected: any) => {
@@ -848,7 +879,7 @@ export default function DataEdit({ data }: any) {
                             <div>
                                 <button
                                     type="button"
-                                    className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+                                    className="btn btn-danger btn-label waves-effect right waves-light"
                                     onClick={() => downloadInspection()}
                                 >
                                     <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
