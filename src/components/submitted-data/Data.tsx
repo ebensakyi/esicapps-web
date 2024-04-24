@@ -10,9 +10,10 @@ import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
 import { LOGIN_URL } from '@/config';
 import { toast } from 'react-toastify';
+import Modal from "react-modal";
 
 
-export default function Data({ data }: any)   {
+export default function Data({ data }: any) {
 
     const { data: session } = useSession({
         required: true,
@@ -55,6 +56,7 @@ export default function Data({ data }: any)   {
     const [districtsData, setDistrictsData] = useState([]);
     const [electoralAreasData, setElectoralAreasData] = useState([]);
     const [communitiesData, setCommunitiesData] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const [region, setRegion] = useState("");
     const [district, setDistrict] = useState("");
@@ -97,8 +99,8 @@ export default function Data({ data }: any)   {
 
 
             if (response.status == 200) {
-               router.push(response.data);
-               router.refresh()
+                router.push(response.data);
+                router.refresh()
             }
         } catch (error) {
             console.log(error);
@@ -313,7 +315,7 @@ export default function Data({ data }: any)   {
 
     const filterByPublishing = async (isPublished) => {
         setLoading(true);
-        
+
         router.push(
             `${pathname}?filterBy=${filterBy}&formId=${formId}&published=${isPublished}&filterValue=${filterValue}&from=${from}&to=${to}`
         );
@@ -352,12 +354,116 @@ export default function Data({ data }: any)   {
 
         }
     };
+
+    const handleDeleteInspectionSelected = async () => {
+        try {
+
+            setLoading(true);
+            const response = await axios.delete(`/api/submitted-data`, {
+                data: selectedInspections,
+            });
+            setLoading(false)
+            setSelectedInspections([])
+            setIsOpen(false);
+            if (response.status == 200) {
+                toast.success("Inspection published");
+                router.refresh()
+                return
+            }
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+
+        }
+    };
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    const customStyles = {
+        content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+        },
+    };
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // subtitle.style.color = "#f00";
+    }
     return (
         <main id="main" className="main">
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Report info"
+            >
+
+                <div className="row">
+
+
+                    <div className="col-lg-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title"> Alert </h5>
+                                <div className=" mb-3">
+
+                                    <div className="col-sm-12">
+                                        <p>Are you sure you want to delete the selected inspection(s)?<br/> Deleted inspections cannot be restored</p>
+
+                                    </div>
+                                </div>
+                                <div className="row">
+    <div className="col">
+        <button
+            type="button"
+            className="btn btn-sm btn-danger btn-label waves-effect right waves-light"
+            onClick={handleDeleteInspectionSelected}
+        >
+            <i className="bi bi-trash label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+            Yes 
+        </button>
+    </div>
+    <div className="col">
+        <button
+            type="button"
+            className="btn btn-sm btn-primary btn-label waves-effect right waves-light"
+            onClick={() => {
+                setIsOpen(false)
+            }}
+        >
+            <i className="bi bi-cancel label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+            No Cancel
+        </button>
+    </div>
+</div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </Modal>
             <div className="pagetitle">
                 <h1>Data </h1>
                 <br />
-               
+
 
                 <div className=" mb-3">
 
@@ -811,7 +917,16 @@ export default function Data({ data }: any)   {
                                                         Publish selected
                                                     </button>{" "}
                                                 </div>
-
+                                                <div className="col-md-3">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm btn-danger btn-label waves-effect right waves-light "
+                                                        onClick={setIsOpen}
+                                                    >
+                                                        <i className="bi bi-trash label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                                        Delete selected
+                                                    </button>{" "}
+                                                </div>
                                             </div> : <></>}
                                     </div>
                                     <div className="card-body table-responsive">
@@ -974,10 +1089,10 @@ export default function Data({ data }: any)   {
                                                                                 </Link>
 
                                                                             </li>
-                                                                           
+
                                                                         </ul>
                                                                     </div>
-                                                                  
+
                                                                 </td>
                                                             </tr>
                                                         ))}

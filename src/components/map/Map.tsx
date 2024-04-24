@@ -61,15 +61,6 @@ const Map = ({ data }: any) => {
 
 
 
-  // const [eaterySelected, setEaterySelected] = useState(false);
-  // const [residentialSelected, setResidentialSelected] = useState(false);
-  // const [healthSelected, setHealthSelected] = useState(false);
-  // const [hospitalitySelected, setHospitalitySelected] = useState(false);
-  // const [sanitarySelected, setSanitarySelected] = useState(false);
-  // const [marketSelected, setMarketSelected] = useState(false);
-  // const [industrySelected, setIndustrySelected] = useState(false);
-  // const [institutionSelected, setInstitutionSelected] = useState(false);
-
 
   // laod script for google map
   const { isLoaded } = useLoadScript({

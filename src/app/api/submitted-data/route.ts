@@ -302,6 +302,42 @@ export async function POST(request: Request) {
     console.log(error);
   }
 }
+
+
+
+
+export async function DELETE(request: Request) {
+  try {
+    const session: any = await getServerSession(authOptions);
+
+    let userId = session?.user?.id;
+
+    const res = await request.json();    console.log("res====> ",res);
+
+    let inspectionsIds = res;
+
+    
+
+    inspectionsIds.map(async (id: any) => {
+
+      await prisma.inspection.update({
+        data: {
+          deleted:1
+        },
+        where: {
+          id: id,
+        },
+      });
+    });
+
+
+    // await logActivity(`Published inspection ${inspectionsIds}`, userId);
+
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.log(error);
+  }
+}
 // GANMA0101-240331-2X7J5NB8TB
 // GANMA0101-240331-G6HXAYUABE
 // GANMA0101-240331-XYS53YNY2D	Opoku Richard	GPS	4.4	Greater Accra Region	Ga North	ABENSU	Abensu Tigopole	Mar 31st 2024, 1:38:26 pm	Unpublished
