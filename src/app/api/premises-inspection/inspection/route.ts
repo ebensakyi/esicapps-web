@@ -7,6 +7,8 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
+    
+
     const user : any = await prisma.user.findFirst({
       where: { id: Number(res.userId) },
     });
@@ -17,6 +19,7 @@ export async function POST(request: Request) {
     let region = Number(districtData?.regionId);
 
     const data: any = {
+      isDemo: Number(res.isDemo),
       id: res.id,
       userId: Number(res.userId),
       totalRating: Number(Math.ceil(res.totalRating)),

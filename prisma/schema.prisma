@@ -10,6 +10,7 @@ datasource db {
 }
 
 model Inspection {
+  isDemo                             Int?  @default(1)
   id                                 String                               @id @db.VarChar(255)
   prevInspectionId                   String?                              @unique @db.VarChar(255)
   premisesCode                       String?                              @db.VarChar(255)
@@ -2116,7 +2117,7 @@ model LiquidWasteSection {
   toiletAdequacy                YesNo?                          @relation("toiletAdequacy", fields: [toiletAdequacyId], references: [id])
   toiletCondition               SanitaryInsanitary?             @relation("toiletCondition", fields: [toiletConditionId], references: [id])
   toiletDisabilityFriendly      YesNo?                          @relation("toiletDisabilityFriendly", fields: [toiletDisabilityFriendlyId], references: [id])
-  toiletDischarge               ToiletDischarge?               @relation(fields: [toiletDischargeId], references: [id])
+  toiletDischarge               ToiletDischarge?                @relation(fields: [toiletDischargeId], references: [id])
   toiletGenderSensivity         YesNo?                          @relation("toiletGenderSensivity", fields: [toiletGenderSensivityId], references: [id])
   ToiletHouseholdNumber         ToiletHouseholdNumber?          @relation(fields: [toiletHouseholdNumberId], references: [id])
   // ToiletPitPosition             ToiletPitPosition?              @relation("toiletPitPosition", fields: [toiletPitPositionId], references: [id])
