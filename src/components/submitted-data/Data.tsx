@@ -947,6 +947,7 @@ export default function Data({ data }: any) {
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Select </th>
+                                                        <th scope="col">Kind </th>
                                                         <th scope="col">Form </th>
                                                         <th scope="col">Rating </th>
                                                         <th scope="col">Type</th>
@@ -978,8 +979,12 @@ export default function Data({ data }: any) {
 
 
                                                                 }} disabled={dt?.Inspection?.isPublished} /></td>
+                                                                <td>  {dt?.Inspection?.isDemo == 2 ? (
+                                                                        <span className="badge bg-danger">Demo</span>
+                                                                    ) : (
+                                                                        <span className="badge bg-primary">Actual</span>
+                                                                    )}{" "}</td>
                                                                 <td>{dt?.Inspection?.InspectionForm?.name}</td>
-
                                                                 <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                                                                 <td>
                                                                     {dt?.Inspection?.InspectionType?.name}
