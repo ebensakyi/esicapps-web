@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios';
 import { usePathname, useRouter, useSearchParams, redirect } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 
 import { useSession } from 'next-auth/react';
@@ -28,6 +28,7 @@ export default function UserSubmissions({ data }: any) {
     const [exporting, setExporting] = useState(false);
 
     const [reportData, setReportData] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
 
 
     const [level, setLevel] = useState();
@@ -51,10 +52,12 @@ export default function UserSubmissions({ data }: any) {
     const [to, setTo] = useState("");
 
 
-    // const query = router.query;
+    useEffect(() => {
+        const url = `${pathname}/?searchText=${searchValue}`;
+        router.push(url);
+      }, [searchValue]);
 
-    // let formId = query.inspectionFormId;
-    // let published = query.published;
+      
 
     const handleUrl = async (report: any) => {
         if (report == 1) {
@@ -301,6 +304,17 @@ export default function UserSubmissions({ data }: any) {
                             
                                 <div className="card-body table-responsive">
                                     <h5 className="card-title">USER SUBMISSIONS(Includes deleted Inspections)</h5>
+                                    <div className="mb-6 position-relative col-lg-4">
+                                <input
+                                  type="text"
+                                  className="form-control required"
+                                  placeholder="Search by user's name"
+                                value={searchValue}
+                                onChange={(e:any) => {
+                                  setSearchValue(e.target.value);
+                                }}
+                                />
+                              </div>
                                     <table className="table datatable table-striped ">
 
                                         <thead>
