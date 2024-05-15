@@ -12,16 +12,14 @@ export async function GET(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
 
-    let userId = session?.user?.id;
-    // let surname = session?.user?.surname;
     let loginUserDistrictId = session?.user?.districtId;
     let loginUserRegionId = session?.user?.regionId;
     let loginUserLevel = session?.user?.userLevelId;
     let { searchParams } = new URL(request.url);
     let exportFile = searchParams.get("exportFile");
 
-    let filterBy: any = searchParams.get("filterBy")?.toString();
-    let filterValue: any = searchParams.get("filterValue")?.toString();
+    // let filterBy: any = searchParams.get("filterBy")?.toString();
+    let searchTerm: any = searchParams.get("searchText")?.toString();    
 
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))
@@ -38,6 +36,27 @@ export async function GET(request: Request) {
         where: {
           districtId: Number(loginUserDistrictId),
           deleted: 0,
+          OR: [
+            {
+              // Search by user's name
+              surname: {
+                contains: searchTerm,
+              },
+            },
+            {
+              // Search by user's name
+              otherNames: {
+                contains: searchTerm,
+              },
+            },
+            {
+              // Search by user's email
+              email: {
+                contains: searchTerm,
+              },
+            },
+            // Add more fields to search here if needed
+          ],
         },
       });
 
@@ -46,7 +65,27 @@ export async function GET(request: Request) {
       const response = await prisma.user.findMany({
         where: {
           districtId: Number(loginUserDistrictId),
-         
+          OR: [
+            {
+              // Search by user's name
+              surname: {
+                contains: searchTerm,
+              },
+            },
+            {
+              // Search by user's name
+              otherNames: {
+                contains: searchTerm,
+              },
+            },
+            {
+              // Search by user's email
+              email: {
+                contains: searchTerm,
+              },
+            },
+            // Add more fields to search here if needed
+          ],
         },
         include: {
           Region: true,
@@ -73,6 +112,7 @@ export async function GET(request: Request) {
           createdAt: "desc",
         },
       });
+      
 
 
 
@@ -89,15 +129,41 @@ export async function GET(request: Request) {
     }
 
     if (loginUserLevel == 2) {
-      let count = await prisma.user.count({
+      const count = await prisma.user.count({
         where: {
           regionId: Number(loginUserRegionId),
           deleted: 0,
+          OR: [
+            {
+              surname: {
+                contains: searchTerm,
+              },
+            },
+            {
+              otherNames: {
+                contains: searchTerm,
+              },
+            },
+          ],
         },
       });
+      
       const response = await prisma.user.findMany({
-        where: { regionId: Number(loginUserRegionId) },
-
+        where: {
+          regionId: Number(loginUserRegionId),
+          OR: [
+            {
+              surname: {
+                contains: searchTerm,
+              },
+            },
+            {
+              otherNames: {
+                contains: searchTerm,
+              },
+            },
+          ],
+        },
         include: {
           Region: true,
           District: true,
@@ -120,7 +186,7 @@ export async function GET(request: Request) {
           createdAt: "desc",
         },
       });
-
+      
       if (exportFile) {
         const url = await export2Excel(response);
         return NextResponse.json(url);
@@ -133,12 +199,39 @@ export async function GET(request: Request) {
     }
 
     if (loginUserLevel == 1) {
-      let count = await prisma.user.count({
+      const count = await prisma.user.count({
         where: {
           deleted: 0,
+          OR: [
+            {
+              surname: {
+                contains: searchTerm,
+              },
+            },
+            {
+              otherNames: {
+                contains: searchTerm,
+              },
+            },
+          ],
         },
       });
+      
       const response = await prisma.user.findMany({
+        where: {
+          OR: [
+            {
+              surname: {
+                contains: searchTerm,
+              },
+            },
+            {
+              otherNames: {
+                contains: searchTerm,
+              },
+            },
+          ],
+        },
         include: {
           Region: true,
           District: true,
@@ -161,7 +254,7 @@ export async function GET(request: Request) {
           createdAt: "desc",
         },
       });
-
+      
       if (exportFile) {
         const url = await export2Excel(response);
         return NextResponse.json(url);

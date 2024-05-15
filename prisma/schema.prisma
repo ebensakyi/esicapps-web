@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Inspection {
-  isDemo                             Int?  @default(1)
+  isDemo                             Int?                                 @default(1)
   id                                 String                               @id @db.VarChar(255)
   prevInspectionId                   String?                              @unique @db.VarChar(255)
   premisesCode                       String?                              @db.VarChar(255)
@@ -198,6 +198,7 @@ model User {
   deleted                            Int?                                 @default(0)
   createdAt                          DateTime                             @default(now())
   updatedAt                          DateTime                             @updatedAt
+  lastResetDate                      DateTime?
   userLevelId                        Int
   assignedFrom                       AssignData[]                         @relation("assignedFrom")
   assignedTo                         AssignData[]                         @relation("assignedTo")

@@ -24,18 +24,16 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
- try {
+  try {
     const session: any = await getServerSession(authOptions);
 
     const { searchParams } = new URL(request.url);
-
 
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
     const selectedRegion = searchParams.get("regionId");
-
 
     let region = userRegion || selectedRegion;
 
@@ -58,15 +56,12 @@ export async function GET(request: Request) {
 
     let count = 0;
 
-console.log("userLevel ",userLevel);
-console.log("userDistrict ",userDistrict);
-console.log("userRegion ",userRegion);
-console.log("get_all ",get_all);
 
     if (userLevel == 1) {
       if (get_all == 1) {
+        
         query = {
-          where: { deleted: 0, regionId: Number(region) },
+          where: { deleted: 0},
 
           include: { Region: true },
           orderBy: {
@@ -97,16 +92,20 @@ console.log("get_all ",get_all);
                   ],
                   deleted: 0,
                   regionId:
-                  Number(region) == 0 || Number(region) == undefined || Number.isNaN(Number(region))
-                  ? undefined
-                  : Number(region),
+                    Number(region) == 0 ||
+                    Number(region) == undefined ||
+                    Number.isNaN(Number(region))
+                      ? undefined
+                      : Number(region),
                 }
               : {
                   deleted: 0,
                   regionId:
-                  Number(region) == 0 || Number(region) == undefined || Number.isNaN(Number(region))
-                  ? undefined
-                  : Number(region),
+                    Number(region) == 0 ||
+                    Number(region) == undefined ||
+                    Number.isNaN(Number(region))
+                      ? undefined
+                      : Number(region),
                 },
 
           skip: skip,
@@ -121,10 +120,11 @@ console.log("get_all ",get_all);
           where: {
             deleted: 0,
             regionId:
-            Number(region) == 0 || Number(region) == undefined || Number.isNaN(Number(region))
-            ? undefined
-            : Number(region),
-           
+              Number(region) == 0 ||
+              Number(region) == undefined ||
+              Number.isNaN(Number(region))
+                ? undefined
+                : Number(region),
           },
         });
       }
@@ -227,13 +227,16 @@ console.log("get_all ",get_all);
       }
     } else {
       query = {
-        where: { deleted: 0 , id: Number(userDistrict)},
+        where: { deleted: 0, id: Number(userDistrict) },
         include: { Region: true },
         orderBy: {
           name: "asc",
         },
       };
     }
+
+    console.log("qry", query);
+    
 
     const response = await prisma.district.findMany(query);
 
@@ -244,7 +247,7 @@ console.log("get_all ",get_all);
     });
   } catch (error) {
     console.log(error);
-   // return NextResponse.json(error);
+    // return NextResponse.json(error);
   }
 }
 

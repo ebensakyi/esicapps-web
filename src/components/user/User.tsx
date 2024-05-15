@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams, useRouter, usePathname, redirect } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import ReactPaginate from 'react-paginate';
-import { AWS_S3_URL } from '@/config';
 import AvatarImage from '../AvatarImage';
 import Modal from "react-modal";
 
@@ -26,10 +25,10 @@ export default function User({ data }: any) {
     const pathname = usePathname()
 
 
-    const searchTextRef: any = useRef("");
-    const filterRef: any = useRef(null);
+    // const searchTextRef: any = useRef("");
+    // const filterRef: any = useRef(null);
 
-    const searchText = searchParams.get('searchText');
+    // const searchText = searchParams.get('searchText');
     const page = searchParams.get('page');
 
 
@@ -54,7 +53,7 @@ export default function User({ data }: any) {
     const [showOtp, setShowOtp] = useState(false);
     const [sendSMS, setSendSMS] = useState(false);
 
-    // const [searchText, setSearchText] = useState();
+ const [searchText, setSearchText] = useState("");
 
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal(e: any) {
@@ -72,6 +71,11 @@ export default function User({ data }: any) {
     }
 
 
+
+    useEffect(() => {
+        const url = `${pathname}/?searchText=${searchText}&page=${page}`;
+        router.push(url);
+      }, [searchText]);
 
 
     const getDistrictsByRegion = async (regionId: number) => {
@@ -462,20 +466,20 @@ export default function User({ data }: any) {
     };
 
 
-    const handleSearch = () => {
-        try {
-            let _searchText: any = searchTextRef?.current?.value
+    // const handleSearch = () => {
+    //     try {
+    //         let _searchText: any = searchTextRef?.current?.value
 
 
-            router.push(
-                `${pathname}?searchText=${_searchText}&page=${page}`
+    //         router.push(
+    //             `${pathname}?searchText=${_searchText}&page=${page}`
 
-            );
+    //         );
 
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     const handleExportAll = async () => {
         try {
@@ -943,11 +947,13 @@ export default function User({ data }: any) {
                                                         type="text"
                                                         className="form-control"
                                                         placeholder="Enter search term"
-                                                        ref={searchTextRef}
-                                                        id="searchText"
-                                                        name="searchText"
+                                                        
+                                                        value={searchText}
+                                                        onChange={(e: any) => {
+                                                          setSearchText(e.target.value);
+                                                        }}
                                                     />
-                                                    <span className="input-group-text" id="basic-addon2">
+                                                    {/* <span className="input-group-text" id="basic-addon2">
                                                         <button
                                                             type="button"
                                                             onClick={handleSearch}
@@ -955,7 +961,7 @@ export default function User({ data }: any) {
                                                         >
                                                             <i className="bi bi-search"></i>
                                                         </button>
-                                                    </span>
+                                                    </span> */}
                                                 </div>
                                             </div>
                                             <div className="col-2">

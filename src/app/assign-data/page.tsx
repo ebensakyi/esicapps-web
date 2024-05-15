@@ -21,7 +21,7 @@ async function getDistricts() {
 
 const res = await fetch(
     `${SERVER_BASE_URL}/api/primary-data/district`
-  )
+  , { cache: 'no-store',headers: headers() })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
 }
