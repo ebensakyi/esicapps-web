@@ -12,7 +12,7 @@ import InstitutionPremisesInfoView from './PremisesInfoViews/InstitutionPremises
 import MarketPremisesInfoView from './PremisesInfoViews/MarketPremisesInfoView';
 import ResidentialPremisesInfoView from './PremisesInfoViews/ResidentialPremisesInfoView';
 import SanitaryPremisesInfoView from './PremisesInfoViews/SanitaryPremisesInfoView';
-import Image from 'next/image'
+import moment from "moment";
 import { useSession } from 'next-auth/react';
 import { LOGIN_URL } from '@/config';
 import Modal from "react-modal";
@@ -301,6 +301,22 @@ export default function DataView({ data }: any) {
 
                                                                                         {handleRating(data?.submittedData?.totalRating)}
 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col-sm-3 mb-3">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Submission Date
+                                                                                    </label>
+                                                                                    <div className="col-sm-12">
+                                                                                 
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control bg-light border-0"
+                                                                                            value={moment(data?.submittedData?.createdAt).format(
+                                                                                                "MMM Do YYYY, h:mm:ss a"
+                                                                                            )}
+                                                                                            readOnly={true}
+                                                                                        />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-3 mb-3">

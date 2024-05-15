@@ -1154,6 +1154,10 @@ export default function User({ data }: any) {
                                                                     </button>
 
                                                                 </li>
+
+                                                                {/*  //uncomment to make functional
+
+                                                                
                                                                 <li>
                                                                     <button
                                                                         className="dropdown-item btn btn-sm "
@@ -1167,7 +1171,7 @@ export default function User({ data }: any) {
                                                                         Delete
                                                                     </button>
 
-                                                                </li>
+                                                                </li> */}
                                                             </ul>
                                                         </div>
                                                     </div></td>
