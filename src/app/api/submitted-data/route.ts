@@ -271,20 +271,21 @@ export async function POST(request: Request) {
 
     const res = await request.json();
     let inspectionsIds = res.selectedInspections;
+    let publishStatus = Number(res.publishStatus);
 
     
 
     inspectionsIds.map(async (id: any) => {
-      let inspection = await prisma.inspection.findFirst({
-        where: {
-          id: id,
-        },
-      });
-      let isPublished = inspection?.isPublished || 0;
+      // let inspection = await prisma.inspection.findFirst({
+      //   where: {
+      //     id: id,
+      //   },
+      // });
+      // let isPublished = inspection?.isPublished || 0;
 
       await prisma.inspection.update({
         data: {
-          isPublished: Math.abs(isPublished - 1),
+          isPublished: publishStatus,
           publishedById: Number(userId),
         },
         where: {

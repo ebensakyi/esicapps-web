@@ -307,7 +307,7 @@ export default function UserSubmissions({ data }: any) {
                                             <tr>
                                                 {/* <th>ID</th> */}
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Phone Number</th>
+                                                {/* <th scope="col">Phone Number</th> */}
                                                 <th scope="col">Region</th>
                                                 <th scope="col">District</th>
                                                 <th scope="col">Last Submission Date</th>
@@ -322,7 +322,7 @@ export default function UserSubmissions({ data }: any) {
                                                 <tr key={user.id}>
                                                     {/* <td>{user.id}</td> */}
                                                     <td>{user.otherNames}{" "}{user.surname}</td>
-                                                    <td>{user.phoneNumber}</td>
+                                                    {/* <td>{user.phoneNumber}</td> */}
                                                     <td>{user.Region?.name}</td>
                                                     <td>{user.District?.name}</td>
                                                     <td>

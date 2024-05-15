@@ -16,8 +16,22 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react';
 import { LOGIN_URL } from '@/config';
 import Modal from "react-modal";
+import PhotoAlbum from "react-photo-album";
+
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
+// import optional lightbox plugins
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+
 
 export default function DataView({ data }: any) {
+    const [index, setIndex] = useState(-1);
+
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
@@ -25,7 +39,7 @@ export default function DataView({ data }: any) {
         }
     })
 
-    let userSession :any = session;
+    let userSession: any = session;
 
 
     let inspectionDeletionAllowed: any = userSession?.user?.UserRole?.inspectionDeletionAllowed
@@ -60,6 +74,12 @@ export default function DataView({ data }: any) {
     const page = Number(searchParams.get('page'))
     const searchtext = searchParams.get('searchText')
 
+
+    const photos = data?.submittedData?.InspectionPictures?.map(ip => ({
+        src: "https://esicapps-images.s3.eu-west-2.amazonaws.com/" + `${ip.imagePath}`,
+        width: 600, height: 600
+    }));
+
     const handlePublish = async (id: any) => {
         try {
             const response = await axios.post(`/api/submitted-data/data-view`, {
@@ -75,13 +95,13 @@ export default function DataView({ data }: any) {
             console.log(error);
         }
     };
-    const handleDelete = async (id: any) => {        
+    const handleDelete = async (id: any) => {
 
         try {
             const response = await axios.put(`/api/submitted-data/data-view`, {
                 id: id,
             });
-            
+
             if (response.status == 200) {
                 router.push(
                     `/submitted-data?published=${published}&formId=${formId}`
@@ -174,11 +194,11 @@ export default function DataView({ data }: any) {
                     <>
 
 
-                     
+
 
                         <div className="alert alert-outline-danger alert-p" role="alert">
                             <span className="alert-content">
-                            You are about to delete this inspection.<br/> Deleted inspection cannot be recovered.
+                                You are about to delete this inspection.<br /> Deleted inspection cannot be recovered.
                                 Click OK to proceed to delete or Cancel to dismiss
                             </span>
                         </div>
@@ -217,11 +237,11 @@ export default function DataView({ data }: any) {
                             <div className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
-                                        <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+                                        <div className="page-title-box d-sm-flex align-items-right justify-content-between">
                                             <div>
                                                 <button
                                                     type="button"
-                                                    className="btn btn-danger btn-label waves-effect right waves-light rounded-pill"
+                                                    className="btn  btn-danger btn-sm btn-label waves-effect right waves-light"
                                                     onClick={() => downloadInspection()}
                                                 >
                                                     <i className="ri-file-pdf-line label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
@@ -242,14 +262,14 @@ export default function DataView({ data }: any) {
                                                         <div className="page-title-right">
                                                             <ol className="breadcrumb m-0">
                                                                 <li className="breadcrumb-item">
-                                                                    <Link
-                                                                    href="#"
-                                                                        // href={{
-                                                                        //     pathname: `/submitted-data?formId=${formId}&published=${published}`,
+                                                                    <Link className="link-primary  btn btn-outline-primary btn-sm"
+                                                                        href={"/submitted-data?formId=" + formId + "&deleted=0&page=1"}
+                                                                    // href={{
+                                                                    //     pathname: `/submitted-data?formId=${formId}&published=${published}`,
 
-                                                                        // }}
+                                                                    // }}
                                                                     >
-                                                                        Go to Data list
+                                                                        Go back
                                                                     </Link>
                                                                 </li>
                                                             </ol>
@@ -273,14 +293,14 @@ export default function DataView({ data }: any) {
                                                                     <div className="card ">
                                                                         <div className="card-body">
                                                                             <div className="row">
-                                                                            <div className="col-sm-3 mb-3">
+                                                                                <div className="col-sm-3 mb-3">
                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                       Rating
+                                                                                        Rating
                                                                                     </label>
                                                                                     <div className="col-sm-12">
 
-                                                                                      {handleRating(data?.submittedData?.totalRating)} 
-                                                                                           
+                                                                                        {handleRating(data?.submittedData?.totalRating)}
+
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-3 mb-3">
@@ -413,39 +433,39 @@ export default function DataView({ data }: any) {
 
                                                                                 </div>
                                                                                 <div className="col-lg-3 col-sm-6">
-                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
-                                                                <input
-                                                                    type="number"
-                                                                    className="form-control bg-light border-0"
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        className="form-control bg-light border-0"
 
 
-                                                                    id="invoicenoInput"
-                                                                    value={ data?.submittedData?.BasicInfoSection?.latitude}
-                                                                    readOnly={true}
-                                                                />
-                                                            </div>
-                                                            <div className="col-lg-3 col-sm-6">
-                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Longitude</label>
-                                                                <input
-                                                                    type="number"
-                                                                    className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={data?.submittedData?.BasicInfoSection?.latitude}
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">Longitude</label>
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        className="form-control bg-light border-0"
 
-                                                                    id="invoicenoInput"
-                                                                    value={ data?.submittedData?.BasicInfoSection?.longitude}
-                                                                    readOnly={true}
-                                                                />
-                                                            </div>
-                                                            <div className="col-lg-3 col-sm-6">
-                                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">Accuracy</label>
-                                                                <input
-                                                                    type="number"
-                                                                    className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={data?.submittedData?.BasicInfoSection?.longitude}
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">Accuracy</label>
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        className="form-control bg-light border-0"
 
-                                                                    id="invoicenoInput"
-                                                                    value={ data?.submittedData?.BasicInfoSection?.accuracy}
-                                                                    readOnly={true}
-                                                                />
-                                                            </div>
+                                                                                        id="invoicenoInput"
+                                                                                        value={data?.submittedData?.BasicInfoSection?.accuracy}
+                                                                                        readOnly={true}
+                                                                                    />
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -855,30 +875,30 @@ export default function DataView({ data }: any) {
                                                                                     <></>
                                                                                 )}
 
-                                                                                
-                                                                                    <div className="col-lg-3 col-sm-6">
-                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                            Water storage
-                                                                                        </label>
-                                                                                        {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
-                                                                                            (x: any) => (
-                                                                                                <input
-                                                                                                    key={x.id}
-                                                                                                    type="text"
-                                                                                                    className="form-control bg-light border-0"
-                                                                                                    id="invoicenoInput"
-                                                                                                    value={x.WaterStorageType.name}
-                                                                                                    readOnly={true}
-                                                                                                />
-                                                                                            )
-                                                                                        )}
-                                                                                    </div>
-                                                                              
+
+                                                                                <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Water storage
+                                                                                    </label>
+                                                                                    {data?.submittedData?.WaterSection?.PremisesWaterStorage.map(
+                                                                                        (x: any) => (
+                                                                                            <input
+                                                                                                key={x.id}
+                                                                                                type="text"
+                                                                                                className="form-control bg-light border-0"
+                                                                                                id="invoicenoInput"
+                                                                                                value={x.WaterStorageType.name}
+                                                                                                readOnly={true}
+                                                                                            />
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+
                                                                                 {data?.submittedData?.WaterSection?.waterStorageConditionSafe !=
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                        Is Water storage receptacle condition safe?
+                                                                                            Is Water storage receptacle condition safe?
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
@@ -1044,11 +1064,11 @@ export default function DataView({ data }: any) {
                                                                                 ) : (
                                                                                     <></>
                                                                                 )}
-                                                                                 {data?.submittedData?.LiquidWasteSection?.numberBathroomCubicle !=
+                                                                                {data?.submittedData?.LiquidWasteSection?.numberBathroomCubicle !=
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                           Number of Bathroom Cubicle
+                                                                                            Number of Bathroom Cubicle
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
@@ -1056,7 +1076,7 @@ export default function DataView({ data }: any) {
                                                                                             id="invoicenoInput"
                                                                                             value={
                                                                                                 data?.submittedData?.LiquidWasteSection?.numberBathroomCubicle
-                                                                                                 
+
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
@@ -1085,7 +1105,7 @@ export default function DataView({ data }: any) {
                                                                                     <></>
                                                                                 )}
 
-{data?.submittedData?.LiquidWasteSection?.bathroomCondition !=
+                                                                                {data?.submittedData?.LiquidWasteSection?.bathroomCondition !=
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
@@ -1146,7 +1166,7 @@ export default function DataView({ data }: any) {
                                                                                 {data?.submittedData?.LiquidWasteSection?.drainsCondition != null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                           Are Drains In Good Conditions
+                                                                                            Are Drains In Good Conditions
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
@@ -1244,7 +1264,7 @@ export default function DataView({ data }: any) {
                                                                                     null ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                            Containment Emptied 
+                                                                                            Containment Emptied
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
@@ -1838,7 +1858,20 @@ export default function DataView({ data }: any) {
                                                                     </div>
 
                                                                     <div className="row gallery-wrapper">
-                                                                        {data?.submittedData?.InspectionPictures?.map((ip: any) => {
+                                                                        <>
+                                                                            <PhotoAlbum photos={photos} layout="rows" targetRowHeight={150} onClick={({ index }) => setIndex(index)} />
+
+                                                                            <Lightbox
+                                                                                slides={photos}
+                                                                                open={index >= 0}
+                                                                                index={index}
+                                                                                close={() => setIndex(-1)}
+                                                                                // enable optional lightbox plugins
+                                                                                plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+                                                                                />
+                                                                        </>
+
+                                                                        {/* {data?.submittedData?.InspectionPictures?.map((ip: any) => {
                                                                             return (
                                                                                 <div
                                                                                     key={ip.id}
@@ -1847,11 +1880,7 @@ export default function DataView({ data }: any) {
                                                                                 >
                                                                                     <div className="gallery-box card">
                                                                                         <div className="gallery-container">
-                                                                                            {/* <Link
-                                                                                            className="image-popup"
-                                                                                            href={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
-                                                                                            title=""
-                                                                                        > */}
+                                                                                           
                                                                                             <Image
                                                                                                 className="gallery-img img-fluid mx-auto"
                                                                                                 src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip.imagePath}`}
@@ -1864,88 +1893,76 @@ export default function DataView({ data }: any) {
                                                                                                     {ip.FormSectionImage.name}
                                                                                                 </h5>
                                                                                             </div>
-                                                                                            {/* </Link> */}
                                                                                         </div>
 
-                                                                                        {/* <div className="box-content">
-                                                                                        <div className="d-flex align-items-center mt-1">
-                                                                                            <div className="flex-grow-1 text-muted">
-                                                                                                <Link
-                                                                                                    href=""
-                                                                                                    className="text-body text-truncate"
-                                                                                                >
-                                                                                                    {ip.FormSectionImage.name}
-                                                                                                </Link>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> */}
+                                                                                      
                                                                                     </div>
                                                                                 </div>
                                                                             );
-                                                                        })}
+                                                                        })} */}
                                                                     </div>
                                                                 </div>
-                                                                {inspectionPublishAllowed?
-                                                                <div className="col-sm-auto">
-                                                                    {data?.submittedData?.isPublished == 0 ? (
-                                                                        <button
-                                                                            className="btn btn-success"
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
+                                                                {inspectionPublishAllowed ?
+                                                                    <div className="col-sm-auto">
+                                                                        {data?.submittedData?.isPublished == 0 ? (
+                                                                            <button
+                                                                                className="btn btn-success"
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
 
-                                                                                handlePublish(data?.submittedData?.id);
-                                                                            }}
-                                                                        >
-                                                                            Publish
-                                                                        </button>
-                                                                    ) : (
-                                                                        <button
-                                                                            className="btn btn-danger"
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
+                                                                                    handlePublish(data?.submittedData?.id);
+                                                                                }}
+                                                                            >
+                                                                                Publish
+                                                                            </button>
+                                                                        ) : (
+                                                                            <button
+                                                                                className="btn btn-danger"
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
 
-                                                                                handlePublish(data?.submittedData?.id);
+                                                                                    handlePublish(data?.submittedData?.id);
+                                                                                }}
+                                                                            >
+                                                                                Unpublish
+                                                                            </button>
+                                                                        )}
+                                                                    </div> : <></>}
+                                                                {inspectionDeletionAllowed ?
+                                                                    <div className="col-sm-auto">
+                                                                        {data?.submittedData?.isPublished == 0 ? (
+                                                                            <button
+                                                                                className="btn btn-danger"
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                    openModal(e)
+                                                                                    // handleDelete(data?.submittedData?.id);
+                                                                                }}
+                                                                            >
+                                                                                Delete
+                                                                            </button>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
+                                                                    </div> : <></>}
+                                                                <div className="col-sm-auto">
+                                                                    {inspectionUpdatesAllowed ?
+                                                                        <Link
+                                                                            className="btn btn-primary"
+                                                                            href={{
+                                                                                pathname: `/submitted-data/data-edit`,
+                                                                                query: {
+                                                                                    id: data?.submittedData?.id,
+                                                                                    formId: formId,
+                                                                                    published: published,
+                                                                                },
                                                                             }}
                                                                         >
-                                                                            Unpublish
-                                                                        </button>
-                                                                    )}
-                                                                </div>:<></>}
-                                                                {inspectionDeletionAllowed?
-                                                                <div className="col-sm-auto">
-                                                                    {data?.submittedData?.isPublished == 0 ? (
-                                                                        <button
-                                                                            className="btn btn-danger"
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
-                                                                                openModal(e)
-                                                                                // handleDelete(data?.submittedData?.id);
-                                                                            }}
-                                                                        >
-                                                                            Delete
-                                                                        </button>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                </div>:<></>}
-                                                                <div className="col-sm-auto">
-                                                                    {inspectionUpdatesAllowed?
-                                                                    <Link
-                                                                        className="btn btn-primary"
-                                                                        href={{
-                                                                            pathname: `/submitted-data/data-edit`,
-                                                                            query: {
-                                                                                id: data?.submittedData?.id,
-                                                                                formId: formId,
-                                                                                published: published,
-                                                                            },
-                                                                        }}
-                                                                    >
-                                                                        {/* <a className="btn btn-primary">
+                                                                            {/* <a className="btn btn-primary">
                                                                             <i className="ri-edit-fill align-bottom me-2 text-muted" />{" "} */}
-                                                                        Edit
-                                                                        {/* </a> */}
-                                                                    </Link>:<></>}
+                                                                            Edit
+                                                                            {/* </a> */}
+                                                                        </Link> : <></>}
                                                                 </div>
                                                                 {/* <div className="col-sm-auto">
                       <button

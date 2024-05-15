@@ -23,7 +23,7 @@ import { toiletAvailability } from '../../controller/liquid-waste-query';
 
 export default function DataEdit({ data }: any) {
 
-console.log(data);
+    console.log(data);
 
 
     const { data: session } = useSession({
@@ -132,7 +132,7 @@ console.log(data);
     const [selectedUnservicedWasteDisposal, setSelectedUnservicedWasteDisposal] =
         useState([]);
 
-        const [selectedPremisesDrainBadCondition, setSelectedPremisesDrainBadCondition] =
+    const [selectedPremisesDrainBadCondition, setSelectedPremisesDrainBadCondition] =
         useState([]);
 
     const [numberUrinalSeats, setNumberUrinalSeats] = useState();
@@ -145,7 +145,7 @@ console.log(data);
 
     const [wasteServicePhoneNumber, setWasteServicePhoneNumber] = useState()
     const [wasteCollectionFrequency, setWasteCollectionFrequency] = useState()
-const [toiletAvailability, setToiletAvailability] = useState()
+    const [toiletAvailability, setToiletAvailability] = useState()
 
 
     const router = useRouter();
@@ -163,360 +163,360 @@ const [toiletAvailability, setToiletAvailability] = useState()
 
 
     useEffect(() => {
-        setWasteServicePhoneNumber( data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber)
+        setWasteServicePhoneNumber(data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber)
         setRespondentPhoneNumber(
-          data?.submittedData?.BasicInfoSection?.respondentPhoneNumber
+            data?.submittedData?.BasicInfoSection?.respondentPhoneNumber
         );
         setRespondentName(data?.submittedData?.BasicInfoSection?.respondentName);
         setUserId(data?.submittedData?.User.id);
         setCertificateHabitationAvailability(
-          data?.submittedData?.LicencePermitSection
-            ?.habitationCertificateAvailability?.id
+            data?.submittedData?.LicencePermitSection
+                ?.habitationCertificateAvailability?.id
         );
         setAnimalPermitAvailability(
-          data?.submittedData?.LicencePermitSection?.animalsPermitAvailability?.id
+            data?.submittedData?.LicencePermitSection?.animalsPermitAvailability?.id
         );
-    
+
         setBuildingPermitAvailability(
-          data?.submittedData?.LicencePermitSection?.buildingPermitAvailability?.id
+            data?.submittedData?.LicencePermitSection?.buildingPermitAvailability?.id
         );
-    
+
         setPropertyRateAvailability(
-          data?.submittedData?.LicencePermitSection?.propertyRateAvailability?.id
+            data?.submittedData?.LicencePermitSection?.propertyRateAvailability?.id
         );
-    
+
         setSuitabilityCertificateAvailability(
-          data?.submittedData?.LicencePermitSection
-            ?.suitabilityCertificateAvailability?.id
+            data?.submittedData?.LicencePermitSection
+                ?.suitabilityCertificateAvailability?.id
         );
-    
+
         setStructurePermitAvailability(
-          data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
+            data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
         );
-    
+
         setFumigationCertificateAvailability(
-          data?.submittedData?.LicencePermitSection
-            ?.fumigationCertificateAvailability?.id
+            data?.submittedData?.LicencePermitSection
+                ?.fumigationCertificateAvailability?.id
         );
-    
+
         setBusinessPermitAvailability(
-          data?.submittedData?.LicencePermitSection?.businessLicenceAvailability?.id
+            data?.submittedData?.LicencePermitSection?.businessLicenceAvailability?.id
         );
-    
+
         setTempStructurePermitAvailability(
-          data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
+            data?.submittedData?.LicencePermitSection?.structurePermitAvailability?.id
         );
-    
+
         setWaterAnalysisReportSafeUnsafe(
-          data?.submittedData?.LicencePermitSection?.waterAnalysisReport?.id
+            data?.submittedData?.LicencePermitSection?.waterAnalysisReport?.id
         );
-    
+
         setRegGeneralCertAvailability(
-          data?.submittedData?.LicencePermitSection?.regGeneralCertAvailability?.id
+            data?.submittedData?.LicencePermitSection?.regGeneralCertAvailability?.id
         );
-    
+
         setGtaOperatingLicenceAvailability(
-          data?.submittedData?.LicencePermitSection?.gtaOperatingLicenceAvailability
-            ?.id
+            data?.submittedData?.LicencePermitSection?.gtaOperatingLicenceAvailability
+                ?.id
         );
         setPharmacyCertAvailability(
-          data?.submittedData?.LicencePermitSection?.pharmacyCertAvailability?.id
+            data?.submittedData?.LicencePermitSection?.pharmacyCertAvailability?.id
         );
-    
+
         setWaterSourceCondition(
-          data?.submittedData?.WaterSection?.waterSourceCondition?.id
+            data?.submittedData?.WaterSection?.waterSourceCondition?.id
         );
-    
+
         setWaterStorageCondition(
-          data?.submittedData?.WaterSection?.waterStorageConditionSafe?.id
+            data?.submittedData?.WaterSection?.waterStorageConditionSafe?.id
         );
-    
+
         setWaterFlowFrequency(
-          data?.submittedData?.WaterSection?.WaterFlowFrequency?.id
+            data?.submittedData?.WaterSection?.WaterFlowFrequency?.id
         );
-    
+
         setNumberToiletSeats(
-          data?.submittedData?.LiquidWasteSection?.numberToiletSeats
+            data?.submittedData?.LiquidWasteSection?.numberToiletSeats
         );
         setNumberUrinalSeats(
-          data?.submittedData?.LiquidWasteSection?.numberUrinalSeats
+            data?.submittedData?.LiquidWasteSection?.numberUrinalSeats
         );
         setToiletAdequacy(
-          data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.id
+            data?.submittedData?.LiquidWasteSection?.toiletAdequacy?.id
         );
-    
+
         setBathroomAdequacy(
-          data?.submittedData?.LiquidWasteSection?.bathroomAdequacy?.id
+            data?.submittedData?.LiquidWasteSection?.bathroomAdequacy?.id
         );
-    
+
         setToiletPitPosition(
-          data?.submittedData?.LiquidWasteSection?.toiletPitPosition?.id
+            data?.submittedData?.LiquidWasteSection?.toiletPitPosition?.id
         );
-    
+
         setDrainCondition(
-          data?.submittedData?.LiquidWasteSection?.drainsCondition?.id
+            data?.submittedData?.LiquidWasteSection?.drainsCondition?.id
         );
-    
+
         setStagnationEvidence(
-          data?.submittedData?.LiquidWasteSection?.stagnationEvidence?.id
+            data?.submittedData?.LiquidWasteSection?.stagnationEvidence?.id
         );
         setAnalCleansingMaterialMgt(
-          data?.submittedData?.LiquidWasteSection?.analCleansingMaterialMgt?.id
+            data?.submittedData?.LiquidWasteSection?.analCleansingMaterialMgt?.id
         );
-    
+
         setToiletCondition(
-          data?.submittedData?.LiquidWasteSection?.toiletCondition?.id
+            data?.submittedData?.LiquidWasteSection?.toiletCondition?.id
         );
-    
+
         setToiletDischarge(
-          data?.submittedData?.LiquidWasteSection?.toiletDischarge?.id
+            data?.submittedData?.LiquidWasteSection?.toiletDischarge?.id
         );
-    
+
         setContainmentEmptied(
-          data?.submittedData?.LiquidWasteSection?.containmentEmptied?.id
+            data?.submittedData?.LiquidWasteSection?.containmentEmptied?.id
         );
-    
+
         setSewerSystem(data?.submittedData?.LiquidWasteSection?.sewerSystem?.id);
         setEaseYourselfWhere(
-          data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere?.id
+            data?.submittedData?.LiquidWasteSection?.EaseYourselfWhere?.id
         );
-    
-        setDesiltingFrequency(
-          data?.submittedData?.LiquidWasteSection?.DesiltingFrequency?.id
-        );
-    
-        setWasteServiceProviderRegistration(
-          data?.submittedData?.SolidWasteSection?.wasteServiceProviderRegistration
-            ?.id
-        );
-    
-        setWasteCollectorName(
-          data?.submittedData?.SolidWasteSection?.wasteCollectorName
-        );
-    
-        setWasteSortingAvailability(
-          data?.submittedData?.SolidWasteSection?.wasteSortingAvailability?.id
-        );
-    
-        setAdequateWasteStorageReceptacle(
-          data?.submittedData?.SolidWasteSection?.approvedWasteStorageReceptacle?.id
-        );
-    
-        setAdequateWasteStorageReceptacle(
-          data?.submittedData?.SolidWasteSection?.adequateWasteStorageReceptacle?.id
-        );
-    
-        setWasteCollectionType(
-          data?.submittedData?.SolidWasteSection?.WasteCollectionType?.id
-        );
-    
-        setUnservicedWasteDisposal(
-          data?.submittedData?.SolidWasteSection?.UnservicedWasteDisposal?.id
-        );
-    
-        setWastePaymentEvidence(
-          data?.submittedData?.SolidWasteSection?.wastePaymentEvidence?.id
-        );
-    
-        setContainerVolume(
-          data?.submittedData?.SolidWasteSection?.ContainerVolume?.id
-        );
-    
-        setWasteProviderAccreditted(
-          data?.submittedData?.SolidWasteSection?.wasteProviderAccreditted?.id
-        );
-    
-        setObnoxiousTradeExist(
-          data?.submittedData?.ConclusionSection?.obnoxiousTradeExist?.id
-        );
-    
-        setOfficerComment(data?.submittedData?.ConclusionSection?.officerComment);
-    
-        let premisesWaterSupply =
-          data?.submittedData?.WaterSection?.PremisesWaterSupply?.map((data:any) => {
-            return {
-              value: data.WaterSupplyType.id,
-              label: data.WaterSupplyType.name,
-            };
-          });
-    
-        setSelectedWaterSupply(premisesWaterSupply);
-    
-        let premisesWaterSource =
-          data?.submittedData?.WaterSection?.PremisesWaterSources?.map((data:any) => {
-            return {
-              value: data.WaterSourceType.id,
-              label: data.WaterSourceType.name,
-            };
-          });
-    
-        setSelectedWaterSource(premisesWaterSource);
-    
-        let premisesWaterTreatment =
-          data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
-            (data:any) => {
-              return {
-                value: data.WaterTreatmentType.id,
-                label: data.WaterTreatmentType.name,
-              };
-            }
-          );
-    
-        setSelectedWaterTreatment(premisesWaterTreatment);
-    
-        let premisesDrinkingWaterSource =
-          data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
-            (data:any) => {
-              return {
-                value: data.DrinkingWaterSourceType.id,
-                label: data.DrinkingWaterSourceType.name,
-              };
-            }
-          );
-    
-        setSelectedDrinkingWaterSource(premisesDrinkingWaterSource);
-    
-        let premisesDrainType =
-          data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map((data:any) => {
-            return {
-              value: data.DrainType.id,
-              label: data.DrainType.name,
-            };
-          });
 
-          
-    
+        setDesiltingFrequency(
+            data?.submittedData?.LiquidWasteSection?.DesiltingFrequency?.id
+        );
+
+        setWasteServiceProviderRegistration(
+            data?.submittedData?.SolidWasteSection?.wasteServiceProviderRegistration
+                ?.id
+        );
+
+        setWasteCollectorName(
+            data?.submittedData?.SolidWasteSection?.wasteCollectorName
+        );
+
+        setWasteSortingAvailability(
+            data?.submittedData?.SolidWasteSection?.wasteSortingAvailability?.id
+        );
+
+        setAdequateWasteStorageReceptacle(
+            data?.submittedData?.SolidWasteSection?.approvedWasteStorageReceptacle?.id
+        );
+
+        setAdequateWasteStorageReceptacle(
+            data?.submittedData?.SolidWasteSection?.adequateWasteStorageReceptacle?.id
+        );
+
+        setWasteCollectionType(
+            data?.submittedData?.SolidWasteSection?.WasteCollectionType?.id
+        );
+
+        setUnservicedWasteDisposal(
+            data?.submittedData?.SolidWasteSection?.UnservicedWasteDisposal?.id
+        );
+
+        setWastePaymentEvidence(
+            data?.submittedData?.SolidWasteSection?.wastePaymentEvidence?.id
+        );
+
+        setContainerVolume(
+            data?.submittedData?.SolidWasteSection?.ContainerVolume?.id
+        );
+
+        setWasteProviderAccreditted(
+            data?.submittedData?.SolidWasteSection?.wasteProviderAccreditted?.id
+        );
+
+        setObnoxiousTradeExist(
+            data?.submittedData?.ConclusionSection?.obnoxiousTradeExist?.id
+        );
+
+        setOfficerComment(data?.submittedData?.ConclusionSection?.officerComment);
+
+        let premisesWaterSupply =
+            data?.submittedData?.WaterSection?.PremisesWaterSupply?.map((data: any) => {
+                return {
+                    value: data.WaterSupplyType.id,
+                    label: data.WaterSupplyType.name,
+                };
+            });
+
+        setSelectedWaterSupply(premisesWaterSupply);
+
+        let premisesWaterSource =
+            data?.submittedData?.WaterSection?.PremisesWaterSources?.map((data: any) => {
+                return {
+                    value: data.WaterSourceType.id,
+                    label: data.WaterSourceType.name,
+                };
+            });
+
+        setSelectedWaterSource(premisesWaterSource);
+
+        let premisesWaterTreatment =
+            data?.submittedData?.WaterSection?.PremisesWaterTreatmentType?.map(
+                (data: any) => {
+                    return {
+                        value: data.WaterTreatmentType.id,
+                        label: data.WaterTreatmentType.name,
+                    };
+                }
+            );
+
+        setSelectedWaterTreatment(premisesWaterTreatment);
+
+        let premisesDrinkingWaterSource =
+            data?.submittedData?.WaterSection?.PremisesDrinkingWaterSources?.map(
+                (data: any) => {
+                    return {
+                        value: data.DrinkingWaterSourceType.id,
+                        label: data.DrinkingWaterSourceType.name,
+                    };
+                }
+            );
+
+        setSelectedDrinkingWaterSource(premisesDrinkingWaterSource);
+
+        let premisesDrainType =
+            data?.submittedData?.LiquidWasteSection?.PremisesDrainType?.map((data: any) => {
+                return {
+                    value: data.DrainType.id,
+                    label: data.DrainType.name,
+                };
+            });
+
+
+
         setSelectedDrainType(premisesDrainType);
-    
+
         let premisesEffluentManagement =
-          data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
-            (data:any) => {
-              return {
-                value: data.EffluentManagement.id,
-                label: data.EffluentManagement.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.LiquidWasteSection?.PremisesEffluentManagement?.map(
+                (data: any) => {
+                    return {
+                        value: data.EffluentManagement.id,
+                        label: data.EffluentManagement.name,
+                    };
+                }
+            );
+
         setSelectedEffluentManagement(premisesEffluentManagement);
-    
+
         let premisesExcretaContainment =
-          data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment?.map(
-            (data:any) => {
-              return {
-                value: data.ExcretaContainment.id,
-                label: data.ExcretaContainment.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.LiquidWasteSection?.PremisesExcretaContainment?.map(
+                (data: any) => {
+                    return {
+                        value: data.ExcretaContainment.id,
+                        label: data.ExcretaContainment.name,
+                    };
+                }
+            );
+
         setSelectedExcretaContainment(premisesExcretaContainment);
-    
+
         let premisesGreyWaterDisposal =
-          data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
-            (data:any) => {
-              return {
-                value: data.GreyWaterDisposal.id,
-                label: data.GreyWaterDisposal.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.LiquidWasteSection?.PremisesGreyWaterDisposal?.map(
+                (data: any) => {
+                    return {
+                        value: data.GreyWaterDisposal.id,
+                        label: data.GreyWaterDisposal.name,
+                    };
+                }
+            );
+
         setSelectedGreyWaterDisposal(premisesGreyWaterDisposal);
-    
+
         let premisesToiletType =
-          data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
-            (data:any) => {
-              return {
-                value: data.ToiletType.id,
-                label: data.ToiletType.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.LiquidWasteSection?.PremisesToiletType?.map(
+                (data: any) => {
+                    return {
+                        value: data.ToiletType.id,
+                        label: data.ToiletType.name,
+                    };
+                }
+            );
+
         setSelectedToiletType(premisesToiletType);
-    
+
         let premisesWasteReceptacle =
-          data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
-            (data:any) => {
-              return {
-                value: data.SolidWasteReceptacle.id,
-                label: data.SolidWasteReceptacle.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.SolidWasteSection?.PremisesWasteReceptacle?.map(
+                (data: any) => {
+                    return {
+                        value: data.SolidWasteReceptacle.id,
+                        label: data.SolidWasteReceptacle.name,
+                    };
+                }
+            );
+
         setSelectedWasteReceptacle(premisesWasteReceptacle);
-    
+
         let premisesUnservicedWasteDisposal =
-          data?.submittedData?.SolidWasteSection?.PremisesUnservicedWasteDisposal?.map(
-            (data:any) => {
-              return {
-                value: data.UnservicedWasteDisposal.id,
-                label: data.UnservicedWasteDisposal.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.SolidWasteSection?.PremisesUnservicedWasteDisposal?.map(
+                (data: any) => {
+                    return {
+                        value: data.UnservicedWasteDisposal.id,
+                        label: data.UnservicedWasteDisposal.name,
+                    };
+                }
+            );
+
         setSelectedUnservicedWasteDisposal(premisesUnservicedWasteDisposal);
-    
+
         let premisesActionTaken =
-          data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
-            (data:any) => {
-              return {
-                value: data.Action.id,
-                label: data.Action.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.ConclusionSection?.PremisesActionTaken?.map(
+                (data: any) => {
+                    return {
+                        value: data.Action.id,
+                        label: data.Action.name,
+                    };
+                }
+            );
+
         setSelectedAction(premisesActionTaken);
-    
+
         let premisesNuisanceDetected =
-          data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
-            (data:any) => {
-              return {
-                value: data.Nuisance?.id,
-                label: data.Nuisance?.name,
-              };
-            }
-          );
-    
+            data?.submittedData?.ConclusionSection?.PremisesNuisanceDetected?.map(
+                (data: any) => {
+                    return {
+                        value: data.Nuisance?.id,
+                        label: data.Nuisance?.name,
+                    };
+                }
+            );
+
         setSelectedNuisanceDetected(premisesNuisanceDetected);
-    
+
         setAccuracy(data?.submittedData?.BasicInfoSection?.accuracy);
         setLatitude(data?.submittedData?.BasicInfoSection?.latitude);
         setLongitude(data?.submittedData?.BasicInfoSection?.longitude);
 
-if(formId==1){
-setToiletAvailability(data?.submittedData?.ResidentialPremisesInfoSection.toiletAvailabilityId)
-    
-}
-if(formId==1){
-    
-}
-if(formId==1){
-    
-}
-if(formId==1){
-    
-}
-if(formId==1){
-    
-}
-if(formId==1){
-    
-}if(formId==1){
-    
-}
-if(formId==1){
-    
-}
+        if (formId == 1) {
+            setToiletAvailability(data?.submittedData?.ResidentialPremisesInfoSection.toiletAvailabilityId)
 
-       // setToiletAvailability(data?.submittedData)
+        }
+        if (formId == 1) {
+
+        }
+        if (formId == 1) {
+
+        }
+        if (formId == 1) {
+
+        }
+        if (formId == 1) {
+
+        }
+        if (formId == 1) {
+
+        } if (formId == 1) {
+
+        }
+        if (formId == 1) {
+
+        }
+
+        // setToiletAvailability(data?.submittedData)
 
 
-      }, []);
+    }, []);
 
     const onWaterSupplyRemove = (selected: any) => {
         setSelectedWaterSupply(selected);
@@ -646,108 +646,108 @@ if(formId==1){
     };
     const handleUpdate = async (id: any) => {
         try {
-        
-        let data = {
-            inspectionId: inspectionId,
-            inspectionFormId: formId,
-            basicInfoSection: {
-                latitude: latitude,
-                longitude: longitude,
-                accuracy: accuracy,
-                respondentName: respondentName,
-                respondentPhoneNumber: respondentPhoneNumber
-            },
 
-            waterSection: {
-                waterSupply: selectedWaterSupply?.map((x: any) => x.value),
-                waterSource: selectedWaterSource?.map((x: any) => x.value),
-                waterStorage: selectedWaterStorage?.map((x: any) => x.value),
-                waterTreatment: selectedWaterTreatment?.map((x: any) => x.value),
-                drinkingWaterSource: selectedDrinkingWaterSource?.map((x: any) => x.value),
-                waterSourceCondition: waterSourceCondition,
-                waterStorageCondition: waterStorageCondition,
-                waterFlowFrequency: waterFlowFrequency,
-            },
-            liquidWasteSection: {
-                drainType: selectedDrainType?.map((x: any) => x.value),
-                effluentManagement: selectedEffluentManagement?.map((x: any) => x.value),
-                excretaContainment: selectedExcretaContainment?.map((x: any) => x.value),
-                excretaDisposalMethod: selectedExcretaDisposalMethod?.map(
-                    (x: any) => x.value
-                ),
-                greyWaterDisposal: selectedGreyWaterDisposal?.map((x: any) => x.value),
-                toiletType: selectedToiletType?.map((x: any) => x.value),
-                wasteReceptacle: selectedWasteReceptacle?.map((x: any) => x.value),
-                numberToiletSeats: numberToiletSeats,
-                numberUrinalSeats: numberUrinalSeats,
-                toiletAdequacy: toiletAdequacy,
-                bathroomAdequacy: bathroomAdequacy,
-                toiletPitPosition: toiletPitPosition,
-                drainCondition: drainCondition,
-                stagnationEvidence: stagnationEvidence,
-                analCleansingMaterialMgt: analCleansingMaterialMgt,
-                toiletCondition: toiletCondition,
-                toiletDischarge: toiletDischarge,
-                containmentEmptied: containmentEmptied,
-                sewerSystem: sewerSystem,
-                easeYourselfWhere: easeYourselfWhere,
-                desiltingFrequency: desiltingFrequency,
+            let data = {
+                inspectionId: inspectionId,
+                inspectionFormId: formId,
+                basicInfoSection: {
+                    latitude: latitude,
+                    longitude: longitude,
+                    accuracy: accuracy,
+                    respondentName: respondentName,
+                    respondentPhoneNumber: respondentPhoneNumber
+                },
 
-            },
-            solidWasteSection: {
-                wasteReceptacle: selectedWasteReceptacle?.map((x: any) => x.value),
-                wasteServiceProviderRegistration: wasteServiceProviderRegistration,
-                wasteCollectorName: wasteCollectorName,
-                wasteServicePhoneNumber: wasteServicePhoneNumber,
-                wasteSortingAvailability: wasteSortingAvailability,
-                wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
-                adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
-                wasteCollectionType: wasteCollectionType,
-                unservicedWasteDisposal: unservicedWasteDisposal,
-                wastePaymentEvidence: wastePaymentEvidence,
-                containerVolume: containerVolume,
-                wasteProviderAccreditted: wasteProviderAccreditted,
-                wasteCollectionFrequency: wasteCollectionFrequency
-            },
+                waterSection: {
+                    waterSupply: selectedWaterSupply?.map((x: any) => x.value),
+                    waterSource: selectedWaterSource?.map((x: any) => x.value),
+                    waterStorage: selectedWaterStorage?.map((x: any) => x.value),
+                    waterTreatment: selectedWaterTreatment?.map((x: any) => x.value),
+                    drinkingWaterSource: selectedDrinkingWaterSource?.map((x: any) => x.value),
+                    waterSourceCondition: waterSourceCondition,
+                    waterStorageCondition: waterStorageCondition,
+                    waterFlowFrequency: waterFlowFrequency,
+                },
+                liquidWasteSection: {
+                    drainType: selectedDrainType?.map((x: any) => x.value),
+                    effluentManagement: selectedEffluentManagement?.map((x: any) => x.value),
+                    excretaContainment: selectedExcretaContainment?.map((x: any) => x.value),
+                    excretaDisposalMethod: selectedExcretaDisposalMethod?.map(
+                        (x: any) => x.value
+                    ),
+                    greyWaterDisposal: selectedGreyWaterDisposal?.map((x: any) => x.value),
+                    toiletType: selectedToiletType?.map((x: any) => x.value),
+                    wasteReceptacle: selectedWasteReceptacle?.map((x: any) => x.value),
+                    numberToiletSeats: numberToiletSeats,
+                    numberUrinalSeats: numberUrinalSeats,
+                    toiletAdequacy: toiletAdequacy,
+                    bathroomAdequacy: bathroomAdequacy,
+                    toiletPitPosition: toiletPitPosition,
+                    drainCondition: drainCondition,
+                    stagnationEvidence: stagnationEvidence,
+                    analCleansingMaterialMgt: analCleansingMaterialMgt,
+                    toiletCondition: toiletCondition,
+                    toiletDischarge: toiletDischarge,
+                    containmentEmptied: containmentEmptied,
+                    sewerSystem: sewerSystem,
+                    easeYourselfWhere: easeYourselfWhere,
+                    desiltingFrequency: desiltingFrequency,
 
-            conclusionSection: {
-                nuisanceDetected: selectedNuisanceDetected?.map((x: any) => x.value),
-                action: selectedAction?.map((x: any) => x.value),
-                obnoxiousTradeExist: obnoxiousTradeExist,
-                officerComment: officerComment,
-            },
-            licencePermitSection: {
-                animalPermitAvailability: animalPermitAvailability,
-                buildingPermitAvailability: buildingPermitAvailability,
-                habitationCertificateAvailability: certificateHabitationAvailability,
-                propertyRateAvailability: propertyRateAvailability,
-                suitabilityCertificateAvailability: suitabilityCertificateAvailability,
-                structurePermitAvailability: structurePermitAvailability,
-                fumigationCertificateAvailability: fumigationCertificateAvailability,
-                businessPermitAvailability: businessPermitAvailability,
-                waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
-                regGeneralCertAvailability: regGeneralCertAvailability,
-                gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
-                pharmacyCertAvailability: pharmacyCertAvailability,
-            },
-        };
-  
-        
-       const response = await axios.put(`/api/submitted-data/data-edit`, data);
+                },
+                solidWasteSection: {
+                    wasteReceptacle: selectedWasteReceptacle?.map((x: any) => x.value),
+                    wasteServiceProviderRegistration: wasteServiceProviderRegistration,
+                    wasteCollectorName: wasteCollectorName,
+                    wasteServicePhoneNumber: wasteServicePhoneNumber,
+                    wasteSortingAvailability: wasteSortingAvailability,
+                    wasteStorageReceptacleAvailability: wasteStorageReceptacleAvailability,
+                    adequateWasteStorageReceptacle: adequateWasteStorageReceptacle,
+                    wasteCollectionType: wasteCollectionType,
+                    unservicedWasteDisposal: unservicedWasteDisposal,
+                    wastePaymentEvidence: wastePaymentEvidence,
+                    containerVolume: containerVolume,
+                    wasteProviderAccreditted: wasteProviderAccreditted,
+                    wasteCollectionFrequency: wasteCollectionFrequency
+                },
 
-        if (response.status == 200) {
-             toast.success("Data updated successfully");
+                conclusionSection: {
+                    nuisanceDetected: selectedNuisanceDetected?.map((x: any) => x.value),
+                    action: selectedAction?.map((x: any) => x.value),
+                    obnoxiousTradeExist: obnoxiousTradeExist,
+                    officerComment: officerComment,
+                },
+                licencePermitSection: {
+                    animalPermitAvailability: animalPermitAvailability,
+                    buildingPermitAvailability: buildingPermitAvailability,
+                    habitationCertificateAvailability: certificateHabitationAvailability,
+                    propertyRateAvailability: propertyRateAvailability,
+                    suitabilityCertificateAvailability: suitabilityCertificateAvailability,
+                    structurePermitAvailability: structurePermitAvailability,
+                    fumigationCertificateAvailability: fumigationCertificateAvailability,
+                    businessPermitAvailability: businessPermitAvailability,
+                    waterAnalysisReportSafe: waterAnalysisReportSafeUnsafe,
+                    regGeneralCertAvailability: regGeneralCertAvailability,
+                    gtaOperatingLicenceAvailability: gtaOperatingLicenceAvailability,
+                    pharmacyCertAvailability: pharmacyCertAvailability,
+                },
+            };
 
-            router.push(
-                `/submitted-data?published=${published}&formId=${formId}`
-            );
-        }
+
+            const response = await axios.put(`/api/submitted-data/data-edit`, data);
+
+            if (response.status == 200) {
+                toast.success("Data updated successfully");
+
+                router.push(
+                    `/submitted-data?published=${published}&formId=${formId}`
+                );
+            }
         } catch (error) {
-          console.log(error);
-            
+            console.log(error);
+
         }
-       
-      
+
+
     };
 
 
@@ -829,11 +829,11 @@ if(formId==1){
                     <>
 
 
-                     
+
 
                         <div className="alert alert-outline-danger alert-p" role="alert">
                             <span className="alert-content">
-                            You are about to delete this inspection.<br/> Deleted inspection cannot be recovered.
+                                You are about to delete this inspection.<br /> Deleted inspection cannot be recovered.
                                 Click OK to proceed to delete or Cancel to dismiss
                             </span>
                         </div>
@@ -894,16 +894,17 @@ if(formId==1){
                                     <ol className="breadcrumb m-0">
                                         <li className="breadcrumb-item">
                                             <Link
-                                            href="#"
-                                                // href={{
-                                                //     pathname: `/submitted-data/data`,
-                                                //     query: {
-                                                //         published: published,
-                                                //         inspectionFormId: formId,
-                                                //     },
-                                                // }}
+                                         className="link-primary  btn btn-outline-primary btn-sm"
+                                                href={"/submitted-data?formId=" + formId + "&deleted=0&page=1"}
+                                            // href={{
+                                            //     pathname: `/submitted-data?formId=${formId}&deleted=0&page=1`,
+                                            //     // query: {
+                                            //     //     published: published,
+                                            //     //     inspectionFormId: formId,
+                                            //     // },
+                                            // }}
                                             >
-                                                Go to Data list
+                                                Go Back
                                             </Link>
                                         </li>
                                     </ol>
@@ -932,7 +933,7 @@ if(formId==1){
                 </div> */}
                                             </div>
                                             <div className="card ">
-                                            <h5 className="card-title"></h5>
+                                                <h5 className="card-title"></h5>
 
                                                 <div className="card-body">
                                                     <div className="row gy-3">
@@ -1019,7 +1020,7 @@ if(formId==1){
                                                                 onChange={(e: any) =>
                                                                     setRespondentName(e.target.value)
                                                                 }
-                                                                value={respondentName}  
+                                                                value={respondentName}
                                                             />
                                                         </div>
                                                         <div className="col-lg-3 col-sm-6">
@@ -1051,7 +1052,7 @@ if(formId==1){
                                                                         setRespondentPhoneNumber(e.target.value)
                                                                     }
                                                                     value={respondentPhoneNumber}
-                                                                   
+
                                                                 />
                                                             </div>
                                                         ) : (
@@ -1141,7 +1142,7 @@ if(formId==1){
                                                 </div>
                                             </div>
                                             <div className="card ">
-                                            <h5 className="card-title"></h5>
+                                                <h5 className="card-title"></h5>
 
                                                 <div className="card-body">
                                                     <div className="row gy-3">
@@ -1600,7 +1601,7 @@ if(formId==1){
                 </div> */}
                                             </div>
                                             <div className="card product">
-                                            <h5 className="card-title"></h5>
+                                                <h5 className="card-title"></h5>
 
                                                 <div className="card-body">
                                                     <div className="row gy-3">
@@ -1726,7 +1727,7 @@ if(formId==1){
                                                             ?.waterStorageConditionSafe != null ? (
                                                             <div className="col-lg-3 col-sm-6">
                                                                 <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                   Is Water storage receptacle condition safe?
+                                                                    Is Water storage receptacle condition safe?
                                                                 </label>
                                                                 <select
                                                                     className="form-control"
@@ -1872,7 +1873,7 @@ if(formId==1){
                 </div> */}
                                             </div>
                                             <div className="card">
-                                            <h5 className="card-title"></h5>
+                                                <h5 className="card-title"></h5>
 
                                                 <div className="card-body">
                                                     <div className="row gy-3">
@@ -1906,7 +1907,7 @@ if(formId==1){
                                                                     className="form-control"
                                                                     id="invoicenoInput"
                                                                     value={numberUrinalSeats}
-                                                                    onChange={(e:any) => {
+                                                                    onChange={(e: any) => {
                                                                         setNumberUrinalSeats(e?.target.value);
                                                                     }}
                                                                 />
@@ -2514,7 +2515,7 @@ if(formId==1){
                                                 </div>
                                             </div>
                                             <div className="card product">
-                                            <h5 className="card-title"></h5>
+                                                <h5 className="card-title"></h5>
 
                                                 <div className="card-body">
                                                     <div className="row gy-3">
@@ -2930,7 +2931,7 @@ if(formId==1){
                                                 </div>
                                             </div>
                                             <div className="card product">
-                                            <h5 className="card-title"></h5>
+                                                <h5 className="card-title"></h5>
 
                                                 <div className="card-body">
                                                     <div className="row gy-3">

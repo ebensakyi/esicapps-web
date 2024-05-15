@@ -340,6 +340,28 @@ export default function Data({ data }: any) {
             setLoading(true);
             const response = await axios.post(`/api/submitted-data`, {
                 selectedInspections,
+                publishStatus:1
+            });
+            setLoading(false)
+            setSelectedInspections([])
+            if (response.status == 200) {
+                toast.success("Inspection published");
+                router.refresh()
+                return
+            }
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+
+        }
+    };
+
+    const handleUnPublishInspectionSelected = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post(`/api/submitted-data`, {
+                selectedInspections,
+                publishStatus:0
             });
             setLoading(false)
             setSelectedInspections([])
@@ -461,7 +483,7 @@ export default function Data({ data }: any) {
 
             </Modal>
             <div className="pagetitle">
-                <h1>Data </h1>
+                <h1>{handleTitle()} </h1>
                 <br />
 
 
@@ -921,6 +943,16 @@ export default function Data({ data }: any) {
                                                     <button
                                                         type="button"
                                                         className="btn btn-sm btn-danger btn-label waves-effect right waves-light "
+                                                        onClick={handleUnPublishInspectionSelected}
+                                                    >
+                                                        <i className="bi bi-list-check label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                                        Unpublish selected
+                                                    </button>{" "}
+                                                </div>
+                                                <div className="col-md-3">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm btn-danger btn-label waves-effect right waves-light "
                                                         onClick={setIsOpen}
                                                     >
                                                         <i className="bi bi-trash label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
@@ -951,14 +983,14 @@ export default function Data({ data }: any) {
                                                         <th scope="col">Form </th>
                                                         <th scope="col">Rating </th>
                                                         <th scope="col">Type</th>
-                                                        <th scope="col">Code</th>
+                                                        {/* <th scope="col">Code</th> */}
                                                         {/* <th scope="col">Start Date</th>
                                                     <th scope="col">End Date</th> */}
                                                         <th scope="col">Officer</th>
                                                         {/* <th scope="col">GhanaPost GPS</th> */}
                                                         <th scope="col">Lat/Lng</th>
                                                         <th scope="col">Accuracy</th>
-                                                        <th scope="col">Region</th>
+                                                        {/* <th scope="col">Region</th> */}
                                                         <th scope="col">District</th>
                                                         <th scope="col">Electoral Area</th>
                                                         <th scope="col">Community</th>
@@ -973,12 +1005,18 @@ export default function Data({ data }: any) {
                                                     {
                                                         data?.submittedData?.response?.map((dt: any) => (
                                                             <tr key={dt.id}>
-                                                                <td><input type="checkbox" onChange={(e) => {
+                                                                 <td><input type="checkbox" onChange={(e) => {
                                                                     // e.preventDefault()
                                                                     handleInspectionSelected(dt.Inspection.id)
 
 
-                                                                }} disabled={dt?.Inspection?.isPublished} /></td>
+                                                                }}  /></td>
+                                                                {/* <td><input type="checkbox" onChange={(e) => {
+                                                                    // e.preventDefault()
+                                                                    handleInspectionSelected(dt.Inspection.id)
+
+
+                                                                }} disabled={dt?.Inspection?.isPublished} /></td> */}
                                                                 <td>  {dt?.Inspection?.isDemo == 2 ? (
                                                                         <span className="badge bg-danger">Demo</span>
                                                                     ) : (
@@ -1009,7 +1047,7 @@ export default function Data({ data }: any) {
                                                                         <></>
                                                                     )}
                                                                 </td>
-                                                                <td>{dt?.Inspection?.premisesCode}</td>
+                                                                {/* <td>{dt?.Inspection?.premisesCode}</td> */}
                                                                 <td>{dt?.User.surname} {dt?.User.otherNames}</td>
                                                                 {/* <td>
         {moment(dt?.startedAt).format(
@@ -1044,9 +1082,9 @@ export default function Data({ data }: any) {
                                                                     </Link>
                                                                 </td>
                                                                 <td>{dt?.accuracy}</td>
-                                                                <td>
+                                                                {/* <td>
                                                                     {dt?.Inspection?.Region?.name}
-                                                                </td>
+                                                                </td> */}
                                                                 <td>{dt?.Community?.ElectoralArea?.District?.name}</td>
                                                                 <td>{dt?.Community?.ElectoralArea?.name}</td>
                                                                 <td>{dt?.Community?.name}</td>{" "}
