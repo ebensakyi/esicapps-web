@@ -29,7 +29,7 @@ model Inspection {
   deleted                            Int?                                 @default(0)
   isReinspected                      Int?                                 @default(0)
   isFollowedUp                       Int?                                 @default(0)
-  totalRating                        Int?
+  totalRating                         Decimal?               @db.Decimal(2, 1)
   updated                            Int?                                 @default(0)
   isCompleted                        Int?                                 @default(1)
   isSubmitted                        Int?                                 @default(1)
@@ -109,7 +109,7 @@ model InspectionHistory {
   isFollowedUp                              Int?                                        @default(0)
   isCompleted                               Int?                                        @default(1)
   isSubmitted                               Int?                                        @default(1)
-  totalRating                               Int?
+  totalRating                               String?
   updated                                   Int?                                        @default(0)
   createdAt                                 DateTime                                    @default(now())
   updatedAt                                 DateTime                                    @updatedAt
@@ -2013,7 +2013,7 @@ model WaterSection {
   waterStorageConditionId            Int?
   waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
-  rating                             Int?
+  rating                               Decimal?               @db.Decimal(2, 1)
   isCompleted                        Int?                           @default(1)
   isSubmitted                        Int?                           @default(1)
   deleted                            Int?                           @default(0)
@@ -2042,7 +2042,7 @@ model WaterSectionHistory {
   waterStorageConditionId            Int?
   waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
-  rating                             Int?
+  rating                             String?
   deleted                            Int?              @default(0)
   createdAt                          DateTime          @default(now())
   updatedAt                          DateTime          @updatedAt
@@ -2085,7 +2085,7 @@ model LiquidWasteSection {
   wasteWaterContainmentId       Int?
   easeYourselfWhereId           Int?
   desiltingFrequencyId          Int?
-  rating                        Int?
+  rating                        Decimal ?              @db.Decimal(2, 1)
   toiletHouseholdNumberId       Int?
   isCompleted                   Int?                            @default(1)
   isSubmitted                   Int?                            @default(1)
@@ -2172,7 +2172,7 @@ model LiquidWasteSectionHistory {
   wasteWaterContainmentId    Int?
   easeYourselfWhereId        Int?
   desiltingFrequencyId       Int?
-  rating                     Int?
+  rating                     String?
   toiletHouseholdNumberId    Int?
   deleted                    Int?              @default(0)
   createdAt                  DateTime          @default(now())
@@ -2206,7 +2206,7 @@ model SolidWasteSection {
   containerServiceProviderName       Int?
   scheduleLiftingId                  Int?
   sanitaryContainerId                Int?
-  rating                             Int?
+  rating                             Decimal?               @db.Decimal(2, 1)
   wasteServicePhoneNumber            String?
   isCompleted                        Int?                                 @default(1)
   isSubmitted                        Int?                                 @default(1)
@@ -2252,7 +2252,7 @@ model SolidWasteSectionHistory {
   containerServiceProviderName       Int?
   scheduleLiftingId                  Int?
   sanitaryContainerId                Int?
-  rating                             Int?
+  rating                             String?
   wasteServicePhoneNumber            String?
   isCompleted                        Int?              @default(1)
   isSubmitted                        Int?              @default(1)
