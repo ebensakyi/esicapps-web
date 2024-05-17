@@ -6,7 +6,14 @@ import { logActivity } from "@/utils/log";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
+    // 'id': obj.id.toString(),
+    // 'inspectionId': obj.inspectionId.toString(),
+    // 'userId': obj.userId.toString(),
+    // 'liquidWasteSectionId': obj.liquidWasteSectionId.toString(),
+    // 'excretaDisposalMethodId': obj.excretaDisposalMethodId.toString(),
 
+
+    
     const data:any = {
         id: res.id,
   
@@ -26,7 +33,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
-    return NextResponse.json(error);
+    return NextResponse.json(error,{ status: 500 });
   }
 }
 
