@@ -35,7 +35,7 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                     ) : (
                       <></>
                     )}
-                    {data?.InstitutionPremisesInfoSection?.Type != null ? (
+                    {data?.InstitutionPremisesInfoSection?.PremisesType != null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">Premises Type</label>
                         <input
@@ -43,7 +43,24 @@ const InstitutionPremisesInfoView = ({ data }:any) => {
                           className="form-control bg-light border-0"
                           id="invoicenoInput"
                           value={
-                            data?.InstitutionPremisesInfoSection.Type?.name
+                            data?.InstitutionPremisesInfoSection.PremisesType?.name
+                          }
+                          readOnly={true}
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+{data?.InstitutionPremisesInfoSection?.PremisesSubtype != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Premises SubType</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={
+                            data?.InstitutionPremisesInfoSection?.PremisesSubtype?.name
                           }
                           readOnly={true}
                         />

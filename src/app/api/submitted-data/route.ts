@@ -313,7 +313,7 @@ export async function DELETE(request: Request) {
 
     let userId = session?.user?.id;
 
-    const res = await request.json();    console.log("res====> ",res);
+    const res = await request.json();    
 
     let inspectionsIds = res;
 

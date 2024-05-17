@@ -1,8 +1,9 @@
-const EateryPremisesInfoView = ({ data }:any) => {
+const EateryPremisesInfoView = ({ data }: any) => {
 
-// const searchParams = useSearchParams()
-//   let formId = searchParams.get("inspectionFormId");
-//   let published = searchParams.get("published");
+
+  // const searchParams = useSearchParams()
+  //   let formId = searchParams.get("inspectionFormId");
+  //   let published = searchParams.get("published");
 
 
   return (
@@ -35,8 +36,37 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     ) : (
                       <></>
                     )}
+                    {data?.EateryPremisesInfoSection?.eateryPremisesType?.name != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Premises Type</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data?.EateryPremisesInfoSection?.eateryPremisesType?.name}
+                          readOnly={true}
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+                    {data?.EateryPremisesInfoSection?.eateryPremisesSubType?.name != null ? (
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="invoicenoInput">Premises Subtype</label>
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0"
+                          id="invoicenoInput"
+                          value={data?.EateryPremisesInfoSection?.eateryPremisesSubType?.name}
+                          readOnly={true}
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     {data?.EateryPremisesInfoSection?.physicalStructureType?.name !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Physical Structure Type
@@ -56,7 +86,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.toiletAvailability !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Toilet facility availabilty
@@ -76,7 +106,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.urinalAvailability !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Urinal facility availabilty
@@ -96,7 +126,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.bathroomAvailability !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Bathroom facility availabilty
@@ -116,7 +146,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.drainsAvailability !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Drains availabilty
@@ -137,7 +167,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     )}
                     {data?.EateryPremisesInfoSection
                       ?.approvedHandwashingFacilityAvailabilityEatery !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Handwashing facility availabilty
@@ -199,7 +229,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.designatedSmokingAreaId !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Designated Smoking Area
@@ -239,7 +269,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.firstAidAvailabilityId !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           First Aid Availability
@@ -259,7 +289,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.kitchenAvailabilityId !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Kitchen Availability
@@ -279,7 +309,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.numberMaleWorkers !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of male workers
@@ -298,7 +328,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
                     {data?.EateryPremisesInfoSection?.numberFemaleWorkers !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of female workers
@@ -338,7 +368,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     )}
 
                     {data?.EateryPremisesInfoSection?.numberFoodHandling !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Number of food Handling Staff
@@ -373,7 +403,7 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     )}
 
                     {data?.EateryPremisesInfoSection?.facilityCapacity !=
-                    null ? (
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
                           Facility capacity
@@ -393,11 +423,11 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     )}
 
 
-{data?.EateryPremisesInfoSection?.disinfestationId !=
-                    null ? (
+                    {data?.EateryPremisesInfoSection?.disinfestationId !=
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Disinfestation done
+                          Disinfestation done
                         </label>
                         <input
                           type="text"
@@ -412,11 +442,11 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     ) : (
                       <></>
                     )}
-                     {data?.EateryPremisesInfoSection?.disinfestationFrequencyId !=
-                    null ? (
+                    {data?.EateryPremisesInfoSection?.disinfestationFrequencyId !=
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Disinfestation Frequency
+                          Disinfestation Frequency
                         </label>
                         <input
                           type="text"
@@ -431,11 +461,11 @@ const EateryPremisesInfoView = ({ data }:any) => {
                     ) : (
                       <></>
                     )}
-                     {data?.EateryPremisesInfoSection?.disinfectionId !=
-                    null ? (
+                    {data?.EateryPremisesInfoSection?.disinfectionId !=
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Disinfection done?
+                          Disinfection done?
                         </label>
                         <input
                           type="text"
@@ -451,11 +481,11 @@ const EateryPremisesInfoView = ({ data }:any) => {
                       <></>
                     )}
 
-{data?.EateryPremisesInfoSection?.disinfectionFrequencyId !=
-                    null ? (
+                    {data?.EateryPremisesInfoSection?.disinfectionFrequencyId !=
+                      null ? (
                       <div className="col-lg-3 col-sm-6">
                         <label htmlFor="invoicenoInput">
-                        Disinfection Frequency
+                          Disinfection Frequency
                         </label>
                         <input
                           type="text"
