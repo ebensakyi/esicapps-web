@@ -17,7 +17,7 @@ export async function POST(request: Request) {
           ? null
           : Number(res.wasteServiceProviderRegistrationId),
       wasteCollectorName:
-        res.wasteCollectorName == "null" ? null : res.wasteCollectorName,
+        res.containerServiceProviderName == "null" ? null : res.containerServiceProviderName,
       wasteSortingAvailabilityId:
         res.wasteSortingAvailabilityId == "null"
           ? null

@@ -7,7 +7,7 @@ import moment from "moment";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
-import { useRef, useState } from 'react';
+import { useRef, useState,useEffect } from 'react';
 import { LOGIN_URL } from '@/config';
 import { toast } from 'react-toastify';
 import Modal from "react-modal";
@@ -34,7 +34,7 @@ export default function Data({ data }: any) {
     // let inspectionPublishAllowed: any = session?.user?.UserRole?.inspectionPublishAllowed
     let inspectionUpdatesAllowed: any = userSession?.user?.UserRole?.inspectionUpdatesAllowed
 
-    const searchTextRef: any = useRef(null);
+    // const searchTextRef: any = useRef(null);
     const filterRef: any = useRef(null);
 
 
@@ -49,10 +49,10 @@ export default function Data({ data }: any) {
     const deleted = Number(searchParams.get('deleted'))
 
     const page = Number(searchParams.get('page'))
-    const searchtext = searchParams.get('searchText')
+    // const searchtext = searchParams.get('searchText')
 
 
-    const [searchText, setSearchText] = useState();
+    // const [searchText, setSearchText] = useState();
     const [districtsData, setDistrictsData] = useState([]);
     const [electoralAreasData, setElectoralAreasData] = useState([]);
     const [communitiesData, setCommunitiesData] = useState([]);
@@ -75,7 +75,15 @@ export default function Data({ data }: any) {
     var dateString = moment().format("DD-MM-yyyy-HH-mm-ss-a");
 
 
+    const [searchValue, setSearchValue] = useState('');
 
+
+    useEffect(() => {
+       // `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
+
+      const url = `${pathname}?formId=${formId}&published=${published}&searchText=${searchValue}&fileName=${handleExcelName()}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`;
+      router.push(url);
+    }, [searchValue]);
 
 
 
@@ -93,7 +101,7 @@ export default function Data({ data }: any) {
             let searchText = searchParams.get('searchText')
 
             const response = await axios.get(
-                `/api/submitted-data/export?formId=${formId}&published=${published}&searchText=${searchText}&fileName=${handleExcelName()}`,
+                `/api/submitted-data/export?formId=${formId}&published=${published}&searchText=${searchValue}&fileName=${handleExcelName()}`,
 
             );
 
@@ -112,7 +120,7 @@ export default function Data({ data }: any) {
         page = page.selected == -1 ? 1 : page.selected + 1;
 
         router.push(
-            `${pathname}?formId=${formId}&published=${published}&deleted=${deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`
+            `${pathname}?formId=${formId}&published=${published}&deleted=${deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchValue}`
 
         );
     };
@@ -180,23 +188,23 @@ export default function Data({ data }: any) {
     };
 
 
-    const handleSearch = () => {
-        try {
-            let _searchText: any = searchTextRef?.current?.value
-            let _publishingStatus: any = filterRef?.current?.value
+    // const handleSearch = () => {
+    //     try {
+    //         let _searchText: any = searchTextRef?.current?.value
+    //         let _publishingStatus: any = filterRef?.current?.value
 
-            let _deleted: any = filterRef?.current?.value
+    //         let _deleted: any = filterRef?.current?.value
 
 
-            router.push(
-                `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
+    //         router.push(
+    //             `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
 
-            );
+    //         );
 
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
 
 
@@ -554,10 +562,12 @@ export default function Data({ data }: any) {
                                                 <label className="form-label mb-0">.</label>
 
                                                 <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
-                                                        id="searchText"
-                                                        name="searchText" />
-                                                    <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                                    <input type="text" className="form-control" placeholder='Enter search term'   value={searchValue}
+                                onChange={(e:any) => {
+                                  setSearchValue(e.target.value);
+                                 // autoHandleSearch(e.target.value)
+                                }} />
+                                                    {/* <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span> */}
                                                 </div>
 
                                             </div>

@@ -918,6 +918,8 @@ export async function GET(request: Request) {
           RespondentDesignation: true,
           Inspection: {
             include: {
+              InspectionPictures: true,
+
               LicencePermitSection: {
                 include: {
                   animalsPermitAvailability: true,
@@ -1283,7 +1285,8 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
       "Inspection Date": data[i]?.Inspection?.createdAt,
       "Inspection Officer": `${data[i]?.User?.surname} ${data[i]?.User?.otherNames}`,
       "Premises Code": data[i]?.Inspection?.premisesCode,
-      "Premises Rating": data[i]?.Inspection?.totalRating,
+      "Premises Rating": data[i]?.Inspection?.totalRating.toString(),
+
       Region: data[i]?.Community?.District?.Region?.name,
       District: data[i]?.Community?.District?.name,
       "Electoral Area": data[i]?.electoralArea,
@@ -1441,6 +1444,10 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
       "Waste Service Provider Registration":
         data[i]?.Inspection?.SolidWasteSection?.wasteServiceProviderRegistration
           ?.name,
+      "Waste Collector Name":
+        data[i]?.Inspection?.SolidWasteSection?.wasteCollectorName,
+      "Waste Collector Phone Number":
+        data[i]?.Inspection?.SolidWasteSection?.wasteServicePhoneNumber,
       "Waste Sorting Availability":
         data[i]?.Inspection?.SolidWasteSection?.wasteSortingAvailability?.name,
       "Waste Collection Frequency":
@@ -1483,6 +1490,10 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
       ]?.Inspection?.ConclusionSection?.PremisesActionTaken?.map(
         (data: any) => data?.Action?.name
       ).toString(),
+
+      Pictures: data[i]?.Inspection?.InspectionPictures?.map(
+        (data: any) => "https://esicapps-images.s3.eu-west-2.amazonaws.com/"+data?.imagePath
+      ).toString(),
     };
 
     if (PremisesInfo === "EateryPremisesInfoSection") {
@@ -1523,9 +1534,6 @@ const flattenArray = async (data: any, PremisesInfo: any) => {
         "Protective Clothing Used":
           data[i]?.Inspection?.[PremisesInfo]?.protectiveClothingUsed?.name,
       };
-
-
-      
     } else if (PremisesInfo === "HospitalityPremisesInfoSection") {
       newDataItem = {
         ...newDataItem,
@@ -1741,6 +1749,6 @@ const deleteFile = (filePath: any) => {
       console.error("Error deleting file:", err);
       return;
     }
-   // console.log("File deleted successfully");
+    // console.log("File deleted successfully");
   });
 };

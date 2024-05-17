@@ -29,7 +29,7 @@ model Inspection {
   deleted                            Int?                                 @default(0)
   isReinspected                      Int?                                 @default(0)
   isFollowedUp                       Int?                                 @default(0)
-  totalRating                         Decimal?               @db.Decimal(2, 1)
+  totalRating                        Decimal?                             @db.Decimal(2, 1)
   updated                            Int?                                 @default(0)
   isCompleted                        Int?                                 @default(1)
   isSubmitted                        Int?                                 @default(1)
@@ -2013,7 +2013,7 @@ model WaterSection {
   waterStorageConditionId            Int?
   waterFlowFrequencyId               Int?
   safeDistanceWaterStorageSanitaryId Int?
-  rating                               Decimal?               @db.Decimal(2, 1)
+  rating                             Decimal?                       @db.Decimal(2, 1)
   isCompleted                        Int?                           @default(1)
   isSubmitted                        Int?                           @default(1)
   deleted                            Int?                           @default(0)
@@ -2085,7 +2085,7 @@ model LiquidWasteSection {
   wasteWaterContainmentId       Int?
   easeYourselfWhereId           Int?
   desiltingFrequencyId          Int?
-  rating                        Decimal ?              @db.Decimal(2, 1)
+  rating                        Decimal?                        @db.Decimal(2, 1)
   toiletHouseholdNumberId       Int?
   isCompleted                   Int?                            @default(1)
   isSubmitted                   Int?                            @default(1)
@@ -2206,7 +2206,7 @@ model SolidWasteSection {
   containerServiceProviderName       Int?
   scheduleLiftingId                  Int?
   sanitaryContainerId                Int?
-  rating                             Decimal?               @db.Decimal(2, 1)
+  rating                             Decimal?                             @db.Decimal(2, 1)
   wasteServicePhoneNumber            String?
   isCompleted                        Int?                                 @default(1)
   isSubmitted                        Int?                                 @default(1)

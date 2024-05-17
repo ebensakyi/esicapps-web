@@ -30,6 +30,8 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 
 export default function DataView({ data }: any) {
+    console.log(data);
+    
     const [index, setIndex] = useState(-1);
 
     const { data: session } = useSession({
@@ -1538,6 +1540,25 @@ export default function DataView({ data }: any) {
                                                                                             id="invoicenoInput"
                                                                                             value={
                                                                                                 data?.submittedData?.SolidWasteSection?.wasteCollectorName
+                                                                                            }
+                                                                                            readOnly={true}
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <></>
+                                                                                )}
+                                                                                 {data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber !=
+                                                                                    "" ? (
+                                                                                    <div className="col-lg-3 col-sm-6">
+                                                                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Waste Service Phone Number
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="text"
+                                                                                            className="form-control bg-light border-0"
+                                                                                            id="invoicenoInput"
+                                                                                            value={
+                                                                                                data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber
                                                                                             }
                                                                                             readOnly={true}
                                                                                         />
