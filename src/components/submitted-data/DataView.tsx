@@ -31,7 +31,7 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 export default function DataView({ data }: any) {
     console.log(data);
-    
+
     const [index, setIndex] = useState(-1);
 
     const { data: session } = useSession({
@@ -277,6 +277,45 @@ export default function DataView({ data }: any) {
                                                             </ol>
                                                         </div>
                                                     </div>
+{data?.submittedData.prevInspectionId!=null || data?.submittedData.FollowUpInspection!=null?
+                                                    <div className="row">
+                                                        <div className="col-lg-12">
+                                                            <div className="row mb-3">
+                                                                <div className="col-xl-12">
+                                                                    <div className="row align-items-center gy-3 mb-3">
+                                                                        <div className="col-sm">
+                                                                            <div>
+                                                                                <h5 className="fs-14 mb-0">
+                                                                                    REINSPECTIONS &  FOLLOW UPS
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div className="card ">
+                                                                        <div className="card-body">
+                                                                            <div className="row">
+                                                                                <table>
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Inspection Id</th>
+                                                                                            <th>Type</th>
+                                                                                            <th>View</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {/* end col */}
+                                                            </div>
+                                                        </div>
+                                                    </div>:<></>}
 
                                                     <div className="row">
                                                         <div className="col-lg-12">
@@ -310,7 +349,7 @@ export default function DataView({ data }: any) {
                                                                                         Submission Date
                                                                                     </label>
                                                                                     <div className="col-sm-12">
-                                                                                 
+
                                                                                         <input
                                                                                             type="text"
                                                                                             className="form-control bg-light border-0"
@@ -394,18 +433,7 @@ export default function DataView({ data }: any) {
                                                                                     /></div>
 
                                                                                 </div>
-                                                                                {/* <div className="col-lg-3 col-sm-6">
-                             <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                              GhanaPost GPS
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control bg-light border-0"
-                              id="invoicenoInput"
-                              value={data?.BasicInfoSection?.ghanaPostGps}
-                              readOnly={true}
-                            />
-                          </div> */}
+
                                                                                 <div className="col-lg-3 col-sm-6">
                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                                                                         Name of respondent
@@ -492,7 +520,6 @@ export default function DataView({ data }: any) {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     {formId == 1 ? <ResidentialPremisesInfoView data={data?.submittedData} /> : <></>}
                                                     {formId == 2 ? <EateryPremisesInfoView data={data?.submittedData} /> : <></>}
                                                     {formId == 3 ? <HealthPremisesInfoView data={data?.submittedData} /> : <></>}
@@ -1547,11 +1574,11 @@ export default function DataView({ data }: any) {
                                                                                 ) : (
                                                                                     <></>
                                                                                 )}
-                                                                                 {data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber !=
+                                                                                {data?.submittedData?.SolidWasteSection?.wasteServicePhoneNumber !=
                                                                                     "" ? (
                                                                                     <div className="col-lg-3 col-sm-6">
                                                                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                                                        Waste Service Phone Number
+                                                                                            Waste Service Phone Number
                                                                                         </label>
                                                                                         <input
                                                                                             type="text"
@@ -1905,7 +1932,7 @@ export default function DataView({ data }: any) {
                                                                                 close={() => setIndex(-1)}
                                                                                 // enable optional lightbox plugins
                                                                                 plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-                                                                                />
+                                                                            />
                                                                         </>
 
                                                                         {/* {data?.submittedData?.InspectionPictures?.map((ip: any) => {

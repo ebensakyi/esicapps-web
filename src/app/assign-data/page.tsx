@@ -8,7 +8,7 @@ import { headers } from 'next/headers';
 async function getAssignData() {
 
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/assign-data`, { cache: 'no-store',headers: headers() })
+    const res = await fetch(`${SERVER_BASE_URL}/api/assign-data`, { cache: 'no-store', headers: headers() })
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
@@ -19,14 +19,14 @@ async function getAssignData() {
 async function getDistricts() {
 
 
-const res = await fetch(
-    `${SERVER_BASE_URL}/api/primary-data/district`
-  , { cache: 'no-store',headers: headers() })
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-}
+    const res = await fetch(
+        `${SERVER_BASE_URL}/api/primary-data/district?get_all=1`
+        , { cache: 'no-store', headers: headers() })
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
 
-return res.json()
+    return res.json()
 
 }
 export default async function Page() {

@@ -97,6 +97,9 @@ export async function GET(request: Request) {
       },
 
       include: {
+        currentInspection:true,
+        prevInspection:true,
+        FollowUpInspection:true,
         User: true,
         ElectoralArea: true,
 
