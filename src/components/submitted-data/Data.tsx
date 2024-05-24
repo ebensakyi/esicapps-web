@@ -1027,7 +1027,7 @@ export default function Data({ data }: any) {
 
 
                                                                 }} disabled={dt?.Inspection?.isPublished} /></td> */}
-                                                                <td>  {dt?.Inspection?.isDemo == 2 ? (
+                                                                <td>  {dt?.Inspection?.inspectionKind == 2 ? (
                                                                         <span className="badge bg-danger">Demo</span>
                                                                     ) : (
                                                                         <span className="badge bg-primary">Actual</span>
