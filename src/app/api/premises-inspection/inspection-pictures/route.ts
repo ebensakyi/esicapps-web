@@ -1,38 +1,36 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import { upload2S3, saveFileOnDisk } from "@/utils/upload";
+import { uploadBase64Image } from "@/utils/upload-base64";
 
 export async function POST(request: Request) {
   try {
+    const formData = await request.formData();
 
-
-
-    const data = await request.formData();
-
-    const file: File | null = data.get("imageFile") as unknown as File;
-    const inspectionId = data?.get("inspectionId");
-
-    const formSectionImageId = data?.get("formSectionImageId");
-
+    console.log("FORM DATA", formData);
     
 
-    let fileName = await saveFileOnDisk(file);
+    // const file: File | null = data.get("imageFile") as unknown as File;
+    const inspectionId = formData?.get("inspectionId");
+
+    const formSectionImageId = formData?.get("formSectionImageId");
+    let encodedImage: string = formData?.get("encodedImage")?.toString() ?? "";
 
 
-    if (fileName != "0") {
-      const data = {
-        inspectionId: inspectionId,
-        imagePath: fileName,
-        formSectionImageId:
-          formSectionImageId == "null" ? 1 : Number(formSectionImageId),
-      };
+    // let fileName = await uploadBase64toS3(buffer);
 
-      const ip = await prisma.inspectionPictures.create({ data } as any);
-      await upload2S3(fileName,"esicapps-images");
+    let fileName = await uploadBase64Image(encodedImage, "esicapps-images");
 
-      return NextResponse.json({ data: fileName }, { status: 200 });
-    }
+    const data = {
+      inspectionId: inspectionId,
+      imagePath: fileName,
+      formSectionImageId:
+        formSectionImageId == "null" ? 1 : Number(formSectionImageId),
+    };
+
+    const ip = await prisma.inspectionPictures.create({ data } as any);
+
+    return NextResponse.json({ data: fileName }, { status: 200 });
 
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   } catch (error) {
