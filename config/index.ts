@@ -8,3 +8,5 @@ export const LOGIN_URL = dev ? "/auth/login" : "https://dashboard.esicapps.org/a
 export const AWS_S3_URL ="https://esicapps-images.s3.eu-west-2.amazonaws.com/" 
 
 export const AWS_S3_PROFILE_IMAGES_URL ="https://esicapps-profile-images.s3.eu-west-2.amazonaws.com/"
+
+export const AWS_S3_ESICAPPS_IMAGES =  "esicapps-images"
