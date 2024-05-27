@@ -1,36 +1,38 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
-import { uploadBase64Image } from "@/utils/upload-base64";
-import { AWS_S3_ESICAPPS_IMAGES } from "@/config";
+import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 
 export async function POST(request: Request) {
   try {
 
-    const res = await request.json();
+
+
+    const data = await request.formData();
+
+    const file: File | null = data.get("imageFile") as unknown as File;
+    const inspectionId = data?.get("inspectionId");
+
+    const formSectionImageId = data?.get("formSectionImageId");
+
     
 
-    // const file: File | null = data.get("imageFile") as unknown as File;
-    const inspectionId = res?.inspectionId;
-
-    const formSectionImageId = res.formSectionImageId;
-    let encodedImage: string = res.encodedImage;
+    let fileName = await saveFileOnDisk(file);
 
 
-    // let fileName = await uploadBase64toS3(buffer);
+    if (fileName != "0") {
+      const data = {
+        inspectionId: inspectionId,
+        imagePath: fileName,
+        formSectionImageId:
+          formSectionImageId == "null" ? 1 : Number(formSectionImageId),
+      };
 
-    let fileName = await uploadBase64Image(encodedImage,AWS_S3_ESICAPPS_IMAGES);
+      const ip = await prisma.inspectionPictures.create({ data } as any);
+      await upload2S3(fileName,"esicapps-images");
 
-    const data = {
-      inspectionId: inspectionId,
-      imagePath: fileName,
-      formSectionImageId:
-        formSectionImageId == "null" ? 1 : Number(formSectionImageId),
-    };
-
-    const ip = await prisma.inspectionPictures.create({ data } as any);
-
-    return NextResponse.json({ data: fileName }, { status: 200 });
+      return NextResponse.json({ data: fileName }, { status: 200 });
+    }
 
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   } catch (error) {
