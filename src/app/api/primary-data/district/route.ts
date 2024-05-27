@@ -235,7 +235,7 @@ export async function GET(request: Request) {
       };
     }
 
-    console.log("qry", query);
+  
     
 
     const response = await prisma.district.findMany(query);

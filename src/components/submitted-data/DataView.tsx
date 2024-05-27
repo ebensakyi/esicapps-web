@@ -30,7 +30,6 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 
 export default function DataView({ data }: any) {
-    console.log(data);
 
     const [index, setIndex] = useState(-1);
 

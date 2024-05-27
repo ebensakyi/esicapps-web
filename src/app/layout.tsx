@@ -25,8 +25,7 @@ export default function RootLayout({
 
   return (
 
-
-    <html lang="en">
+ <html lang="en">
 
       <head>
 
@@ -80,5 +79,6 @@ export default function RootLayout({
 
 
     </html>
+   
   )
 }

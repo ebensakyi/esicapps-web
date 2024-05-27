@@ -3,6 +3,7 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { uploadBase64Image } from "@/utils/upload-base64";
 import { AWS_S3_ESICAPPS_IMAGES } from "@/config";
+// import { AWS_S3_ESICAPPS_IMAGES } from "@/config";
 
 export async function POST(request: Request) {
   try {
@@ -32,7 +33,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ data: fileName }, { status: 200 });
 
-    return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   } catch (error) {
     console.log(error);
 
