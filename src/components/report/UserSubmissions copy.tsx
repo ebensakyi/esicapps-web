@@ -719,8 +719,8 @@ export default function UserSubmissions({ data }: any) {
                                         previousLabel={"Previous"}
                                         nextLabel={"Next"}
                                         breakLabel={"..."}
-                                        initialPage={data.userSubmissions.curPage - 1}
-                                        pageCount={data.userSubmissions.maxPage}
+                                        initialPage={data?.userSubmissions?.curPage - 1}
+                                        pageCount={data?.userSubmissions?.maxPage}
                                         onPageChange={handlePagination}
                                         breakClassName={"page-item"}
                                         breakLinkClassName={"page-link"}

@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma/db";
+import { logger } from "@/logger";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
@@ -16,6 +17,8 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
     } catch (error) {
       console.log("error===>", error);
+      logger.error("AssignData",error);
+
       return NextResponse.json(error);
 
     }

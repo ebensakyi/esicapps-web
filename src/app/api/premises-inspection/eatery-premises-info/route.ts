@@ -1,3 +1,4 @@
+import { logger } from "@/logger";
 import { prisma } from "@/prisma/db";
 import { EateryInfo } from "@/typings";
 import { logActivity } from "@/utils/log";
@@ -111,6 +112,8 @@ export async function POST(request: Request) {
     );
   } catch (error: any) {
     console.log(error);
+    logger.error("EATERY==>",error);
+
     return new Response(JSON.stringify({ message: error.message }));
   }
 }
@@ -128,5 +131,8 @@ export async function GET(request: Request) {
     });
 
     return  NextResponse.json(data);
-  } catch (error) {}
+  } catch (error) {
+    logger.error("EATERY==>",error);
+
+  }
 }

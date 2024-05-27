@@ -985,8 +985,8 @@ export default function User({ data }: any) {
                                     previousLabel={"Previous"}
                                     nextLabel={"Next"}
                                     breakLabel={"..."}
-                                    initialPage={data.users.curPage - 1}
-                                    pageCount={data.users.maxPage}
+                                    initialPage={data?.users?.curPage - 1}
+                                    pageCount={data?.users?.maxPage}
                                     onPageChange={handlePagination}
                                     breakClassName={"page-item"}
                                     breakLinkClassName={"page-link"}

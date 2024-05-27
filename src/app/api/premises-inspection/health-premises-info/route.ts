@@ -1,3 +1,4 @@
+import { logger } from "@/logger";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
@@ -102,6 +103,8 @@ export async function POST(request: Request) {
     );
   } catch (error: any) {
     console.log(error);
+    logger.error("HEALTH_PREM_NUIS==>",error);
+
     return new Response(JSON.stringify({ message: error.message }));
   }
 }
@@ -121,6 +124,8 @@ export async function GET(request: Request) {
 
     return  NextResponse.json(response);
   } catch (error) {
+    logger.error("HEALTH_PREM_NUIS==>",error);
+
     return NextResponse.json(error)
   }
 }

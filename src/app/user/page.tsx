@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from "@/config";
+import { logger } from "@/logger";
 import User from "@/src/components/user/User";
 import { headers } from "next/headers";
 
@@ -8,35 +9,49 @@ import { headers } from "next/headers";
 
 
 async function getRoles() {
-
-    let response = await fetch(`${SERVER_BASE_URL}/api/user/role`, { cache: 'no-store',headers: headers() });
+try {
+     let response = await fetch(`${SERVER_BASE_URL}/api/user/role`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
     return await response.json();
+} catch (error) {
+    
+}
+   
 
 }
 
 async function getUserLevel() {
-
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/user-level`, { cache: 'no-store',headers: headers() });
+try {
+     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/user-level`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
     return await response.json();
+} catch (error) {
+    logger.error("getUserLevel==>",error);
+
+}
+   
 
 }
 
 async function getRegion() {
-
-    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store',headers: headers() });
+try {
+     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
     return await response.json();
+} catch (error) {
+    logger.error("getRegion==>",error);
+
+}
+   
 
 }
 
@@ -52,14 +67,20 @@ async function getRegion() {
 // }
 
 async function getUsers(searchParams: any) {
-    let { searchText } = searchParams
-    let { page } = searchParams
-
+    try {
+          let { page } = searchParams
+let { searchText } = searchParams
     let response = await fetch(`${SERVER_BASE_URL}/api/user?page=${page}&searchText=${searchText}`, { cache: 'no-store',headers: headers() });
     if (!response.ok) {
         throw new Error('Failed to fetch data')
     }
     return await response.json();
+    } catch (error) {
+        logger.error("getUsers==>",error);
+
+    }
+    
+  
 
 }
 

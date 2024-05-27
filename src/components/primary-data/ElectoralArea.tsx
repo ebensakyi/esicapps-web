@@ -560,8 +560,8 @@ export default function ElectoralArea({ data }: any) {
                                             previousLabel={"Previous"}
                                             nextLabel={"Next"}
                                             breakLabel={"..."}
-                                            initialPage={data.electoralAreas.curPage - 1}
-                                            pageCount={data.electoralAreas.maxPage}
+                                            initialPage={data?.electoralAreas?.curPage - 1}
+                                            pageCount={data?.electoralAreas?.maxPage}
                                             onPageChange={handlePagination}
                                             breakClassName={"page-item"}
                                             breakLinkClassName={"page-link"}

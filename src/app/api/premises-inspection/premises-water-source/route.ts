@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { logger } from "@/logger";
 
 
 export async function POST(request: Request) {
@@ -24,6 +25,8 @@ export async function POST(request: Request) {
     const response = await prisma.premisesWaterSources.create({ data });
     return NextResponse.json(response);
   } catch (error) {
+    logger.error("PREM_WATER_SOURCE`==>",error);
+
     return NextResponse.json(error,{status:500});
   }
 }

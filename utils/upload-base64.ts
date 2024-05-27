@@ -45,7 +45,6 @@ import AWS from "aws-sdk";
 //     let stored = await s3.upload(params).promise();
 
 //     console.log("STORE ",stored);
-    
 
 //     return stored.Location;
 //   } catch (error) {
@@ -54,30 +53,31 @@ import AWS from "aws-sdk";
 //   }
 // };
 
-
-export const uploadBase64Image = async (base64String:string, bucketName:any) => {
-  
+export const uploadBase64Image = async (
+  base64String: string,
+  bucketName: any
+) => {
   AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   });
-const fileName = `${Date.now()}.jpg`
+  const fileName = `${Date.now()}.jpg`;
   var s3 = new AWS.S3();
-  const buffer = Buffer.from(base64String, 'base64');
+  const buffer = Buffer.from(base64String, "base64");
   const params = {
     Bucket: bucketName,
-    Key:fileName ,
-        Body: buffer,
-    ContentEncoding: 'base64', // required for base64
-    ContentType: 'image/jpeg', // adjust if your image is a different type
+    Key: fileName,
+    Body: buffer,
+    ContentEncoding: "base64", // required for base64
+    ContentType: "image/jpeg", // adjust if your image is a different type
   };
 
   try {
     const data = await s3.upload(params).promise();
-    
-    return fileName; // URL of the uploaded image
+
+    return fileName; 
   } catch (error) {
-    console.error('Error uploading image:', error);
+    console.error("Error uploading image:", error);
     throw error;
   }
 };

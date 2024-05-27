@@ -20,6 +20,7 @@ import {
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/options";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -28,6 +29,8 @@ export async function POST(request: Request) {
     return NextResponse.json([]);
   } catch (error: any) {
     console.log(error);
+    logger.error("Dashboard==>",error);
+
     return NextResponse.json(error);
   }
 }
@@ -444,6 +447,8 @@ export async function GET(request: Request) {
     return NextResponse.json(dashboardData);
   } catch (error: any) {
     console.log(error);
+    logger.error("Dashboard==>",error);
+
     return NextResponse.json(error);
   }
 }

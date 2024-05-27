@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +13,8 @@ export async function POST(request: Request) {
     return NextResponse.json([]);
   } catch (error: any) {
     console.log(error);
+    logger.error("Inspection==>",error);
+
     return NextResponse.json(error);
   }
 }
@@ -142,6 +145,8 @@ export async function GET(request: Request) {
     } as any);
     return NextResponse.json(response);
   } catch (error) {
+    logger.error("Inspection==>",error);
+
     return NextResponse.json(error);
   }
 }

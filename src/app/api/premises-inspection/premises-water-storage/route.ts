@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -22,6 +23,8 @@ export async function POST(request: Request) {
     const response = await prisma.premisesWaterStorage.create({ data });
     return NextResponse.json(response);
   } catch (error) {
+    logger.error("PREM_WATER_STORAGE`==>",error);
+
     return NextResponse.json(error, { status: 500 });
   }
 }
@@ -41,6 +44,8 @@ export async function GET(request: Request) {
       status: 200,
     });
   } catch (error) {
+    logger.error("PREM_WATER_STORAGE`==>",error);
+
     return NextResponse.json(error, {
       status: 500,
     });

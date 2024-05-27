@@ -1157,8 +1157,8 @@ export default function Data({ data }: any) {
                                             previousLabel={"Previous"}
                                             nextLabel={"Next"}
                                             breakLabel={"..."}
-                                            initialPage={data.submittedData.curPage - 1}
-                                            pageCount={data.submittedData.maxPage}
+                                            initialPage={data?.submittedData?.curPage - 1}
+                                            pageCount={data?.submittedData?.maxPage}
                                             onPageChange={handlePagination}
                                             breakClassName={"page-item"}
                                             breakLinkClassName={"page-link"}

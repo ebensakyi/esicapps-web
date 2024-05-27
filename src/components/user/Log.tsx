@@ -118,8 +118,8 @@ export default function Log({ data }: any) {
                                             previousLabel={"Previous"}
                                             nextLabel={"Next"}
                                             breakLabel={"..."}
-                                            initialPage={data.logs.curPage - 1}
-                                            pageCount={data.logs.maxPage}
+                                            initialPage={data?.logs?.curPage - 1}
+                                            pageCount={data?.logs?.maxPage}
                                             onPageChange={handlePagination}
                                             breakClassName={"page-item"}
                                             breakLinkClassName={"page-link"}

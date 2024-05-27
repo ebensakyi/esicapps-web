@@ -851,8 +851,8 @@ export default function FollowUp({ data }: any) {
                                             previousLabel={"Previous"}
                                             nextLabel={"Next"}
                                             breakLabel={"..."}
-                                            initialPage={data.followUpData.curPage - 1}
-                                            pageCount={data.followUpData.maxPage}
+                                            initialPage={data?.followUpData?.curPage - 1}
+                                            pageCount={data?.followUpData?.maxPage}
                                             onPageChange={handlePagination}
                                             breakClassName={"page-item"}
                                             breakLinkClassName={"page-link"}

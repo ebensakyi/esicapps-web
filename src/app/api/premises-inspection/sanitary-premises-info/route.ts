@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { logger } from "@/logger";
 
 
 export async function POST(request: Request) {
@@ -164,6 +165,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error) {
+    logger.error("SANI_PREMISES`==>",error);
+
     return NextResponse.json(error, { status: 500 });
   }
 }
@@ -184,6 +187,8 @@ export async function GET(request: Request) {
       status: 200,
     });
   } catch (error) {
+    logger.error("SANI_PREMISES`==>",error);
+
     return NextResponse.json(error, {
       status: 500,
     });

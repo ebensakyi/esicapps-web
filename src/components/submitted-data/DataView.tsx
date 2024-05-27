@@ -276,45 +276,45 @@ export default function DataView({ data }: any) {
                                                             </ol>
                                                         </div>
                                                     </div>
-{data?.submittedData.prevInspectionId!=null || data?.submittedData.FollowUpInspection!=null?
-                                                    <div className="row">
-                                                        <div className="col-lg-12">
-                                                            <div className="row mb-3">
-                                                                <div className="col-xl-12">
-                                                                    <div className="row align-items-center gy-3 mb-3">
-                                                                        <div className="col-sm">
-                                                                            <div>
-                                                                                <h5 className="fs-14 mb-0">
-                                                                                    REINSPECTIONS &  FOLLOW UPS
-                                                                                </h5>
+                                                    {data?.submittedData?.prevInspectionId != null || data?.submittedData?.FollowUpInspection != null ?
+                                                        <div className="row">
+                                                            <div className="col-lg-12">
+                                                                <div className="row mb-3">
+                                                                    <div className="col-xl-12">
+                                                                        <div className="row align-items-center gy-3 mb-3">
+                                                                            <div className="col-sm">
+                                                                                <div>
+                                                                                    <h5 className="fs-14 mb-0">
+                                                                                        REINSPECTIONS &  FOLLOW UPS
+                                                                                    </h5>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div className="card ">
+                                                                            <div className="card-body">
+                                                                                <div className="row">
+                                                                                    <table>
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Inspection Id</th>
+                                                                                                <th>Type</th>
+                                                                                                <th>View</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+
+                                                                                        </tbody>
+                                                                                    </table>
+
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
-                                                                    <div className="card ">
-                                                                        <div className="card-body">
-                                                                            <div className="row">
-                                                                                <table>
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Inspection Id</th>
-                                                                                            <th>Type</th>
-                                                                                            <th>View</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-
-                                                                                    </tbody>
-                                                                                </table>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                    {/* end col */}
                                                                 </div>
-                                                                {/* end col */}
                                                             </div>
-                                                        </div>
-                                                    </div>:<></>}
+                                                        </div> : <></>}
 
                                                     <div className="row">
                                                         <div className="col-lg-12">

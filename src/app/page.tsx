@@ -5,44 +5,58 @@ import { headers } from 'next/headers'
 import { getServerSession } from "next-auth";
 import { authOptions } from './api/auth/[...nextauth]/options';
 import { redirect } from 'next/navigation';
+import { logger } from '@/logger';
 
 async function getDashboardData(searchParams: any) {
-  let { filterBy } = searchParams
-  let { filterValue } = searchParams
-  let { from } = searchParams
-  let { to } = searchParams
-
-  
-
+  try {
+    let { filterBy } = searchParams
+    let { filterValue } = searchParams
+    let { from } = searchParams
+    let { to } = searchParams
 
 
-  const res = await fetch(`${SERVER_BASE_URL}/api/dashboard?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`, {
-    cache: 'no-store', 
-    headers: headers()
-  })
+    const res = await fetch(`${SERVER_BASE_URL}/api/dashboard?filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`, {
+      cache: 'no-store',
+      headers: headers()
+    })
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    if (!res.ok) {
+      logger.error("getDashboardData==>",SERVER_BASE_URL);
+
+      throw new Error('Failed to fetch data')
+    }
+
+    return await res.json()
+  } catch (error) {
+    logger.error("getDashboardData==>", error);
+
   }
 
-  return await res.json()
 }
 
 
 async function getRegions() {
+  try {
+    let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store', headers: headers() });
 
-  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/region`, { cache: 'no-store',  headers: headers() });
+    if (!response.ok) {
+      logger.error("getDashboardData==>", response);
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
+      throw new Error('Failed to fetch data')
+    }
+    return await response.json();
+
+  } catch (error) {
+    logger.error("Dashboard==>", error);
+
   }
-  return await response.json();
+
 
 }
 
 async function getDistricts() {
 
-  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store',  headers: headers() });
+  let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/district`, { cache: 'no-store', headers: headers() });
 
   if (!response.ok) {
     throw new Error('Failed to fetch data')
@@ -53,7 +67,7 @@ async function getDistricts() {
 
 
 export default async function Page({ searchParams }: any) {
-  const session: any = await getServerSession(authOptions);  
+  const session: any = await getServerSession(authOptions);
 
   if (session?.user?.passwordChanged == 0) {
     redirect('/auth/profile?message=Change your default password')

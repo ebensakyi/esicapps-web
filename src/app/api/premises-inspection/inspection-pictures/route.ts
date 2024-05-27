@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   } catch (error) {
     console.log(error);
+    logger.error("INSPECTION_PICTURES==>",error);
 
     return NextResponse.json(error, { status: 500 });
   }

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
+import { logger } from "@/logger";
 
 
 export async function POST(request: Request) {
@@ -22,6 +23,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
+    logger.error("PREM_DRAIN_TYPE==>",error);
+
     return NextResponse.json(error);
   }
 }
@@ -40,6 +43,8 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response);
   } catch (error) {
+    logger.error("PREM_DRAIN_TYPE==>",error);
+
     return NextResponse.json(error,{status:500});
   }
 }

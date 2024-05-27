@@ -1,3 +1,4 @@
+import { logger } from "@/logger";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 
@@ -36,6 +37,8 @@ export async function POST(request: Request) {
 
   } catch (error: any) {
     console.log(error);
+    logger.error("CONCLUSION==>",error);
+
     return NextResponse.json(error,{ status: 500 });
 
   }
@@ -57,6 +60,8 @@ export async function GET(request: Request) {
     return NextResponse.json(data);
 
   } catch (error) {
+    logger.error("CONCLUSION==>",error);
+
     return NextResponse.json(error,{ status: 500 });
 
   }

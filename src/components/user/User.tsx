@@ -1011,7 +1011,7 @@ export default function User({ data }: any) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {data.users.response.map((user: any) => (
+                                            {data?.users?.response?.map((user: any) => (
                                                 <tr key={user.id}>
                                                     <td><AvatarImage imagePath={user?.imagePath} defaultImagePath={'/assets/img/profile-img.png'} alt={''} height={32} width={32} /></td>
                                                     <td>{user?.otherNames} {user?.surname}</td>
@@ -1187,8 +1187,8 @@ export default function User({ data }: any) {
                                         previousLabel={"Previous"}
                                         nextLabel={"Next"}
                                         breakLabel={"..."}
-                                        initialPage={data.users.curPage - 1}
-                                        pageCount={data.users.maxPage}
+                                        initialPage={data?.users?.curPage - 1}
+                                        pageCount={data?.users?.maxPage}
                                         onPageChange={handlePagination}
                                         breakClassName={"page-item"}
                                         breakLinkClassName={"page-link"}

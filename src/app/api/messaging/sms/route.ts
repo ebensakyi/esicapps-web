@@ -4,6 +4,7 @@ import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { sendSMS } from "@/utils/send-hubtel-sms";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -76,6 +77,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error: any) {
+    logger.error("Messaging==>",error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -177,6 +179,7 @@ export async function GET(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
+    logger.error("Messaging==>",error);
 
     return NextResponse.json(error);
   }

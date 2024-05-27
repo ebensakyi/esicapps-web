@@ -4,6 +4,7 @@ import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +13,9 @@ export async function POST(request: Request) {
     return NextResponse.json([]);
   } catch (error: any) {
     console.log(error);
+
+    logger.error("Map==>",error);
+
     return NextResponse.json(error);
   }
 }
@@ -101,6 +105,8 @@ export async function GET(request: Request) {
       return NextResponse.json(data);
     }
   } catch (error) {
+    logger.error("Map==>",error);
+
     return NextResponse.json(error);
   }
 }

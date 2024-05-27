@@ -1,4 +1,5 @@
 import { logActivity } from "@/utils/log";
+import { logger } from "@/logger";
 
 
 export async function POST(request: Request) {
@@ -16,6 +17,8 @@ export async function POST(request: Request) {
    
   } catch (error: any) {
     console.log(error);
+    logger.error("Inspection==>",error);
+
     return new Response(JSON.stringify({ message: error.message }));
   }
 }

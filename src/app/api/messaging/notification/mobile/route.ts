@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
+import { logger } from "@/logger";
 
 export async function PUT(request: Request) {
   try {
@@ -18,7 +19,8 @@ export async function PUT(request: Request) {
     return NextResponse.json({});
   } catch (error: any) {
     console.log(error);
-    
+    logger.error("Messaging==>",error);
+
     return NextResponse.json(error, { status: 500 });
   }
 }
@@ -55,6 +57,7 @@ export async function GET(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
+    logger.error("Messaging==>",error);
 
     return NextResponse.json(error);
   }

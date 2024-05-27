@@ -1,3 +1,4 @@
+import { logger } from "@/logger";
 import { prisma } from "@/prisma/db";
 import { FollowUpAction } from "@/typings";
 import { logActivity } from "@/utils/log";
@@ -12,8 +13,6 @@ export async function POST(request: Request) {
   
         inspectionId: res.inspectionId,
         userId: Number(res.userId),
-       
-  
         actionId:  Number(res.actionId),
       };
   
@@ -27,6 +26,8 @@ export async function POST(request: Request) {
       })
     );
   } catch (error: any) {
+    logger.error("FOLLOWUP_PREM==>",error);
+
     return new Response(JSON.stringify({ message: error.message }));
   }
 }
@@ -40,5 +41,8 @@ export async function GET(request: Request) {
       });
 
     return new Response(JSON.stringify([{ data }]));
-  } catch (error) {}
+  } catch (error) {
+    logger.error("FOLLOWUP_PREM==>",error);
+
+  }
 }

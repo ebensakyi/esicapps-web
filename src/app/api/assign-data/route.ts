@@ -5,6 +5,7 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -26,7 +27,7 @@ export async function POST(request: Request) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.log(error);
-
+    logger.error("AssignData",error);
     return NextResponse.json(error, { status: 500 });
   }
 }
@@ -52,6 +53,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ status: 200 });
   } catch (error: any) {
     console.log(error);
+    logger.error("AssignData",error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -87,6 +89,7 @@ export async function GET(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
+    logger.error("AssignData",error);
 
     return NextResponse.json(error);
   }

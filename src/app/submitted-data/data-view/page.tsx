@@ -1,17 +1,14 @@
 
 import { SERVER_BASE_URL } from '@/config';
+import { logger } from '@/logger';
 import DataView from '@/src/components/submitted-data/DataView';
 import { headers } from 'next/headers';
 
 async function getSubmittedData(searchParams: any) {
-
-    let { formId } = searchParams
+    try {
+         let { formId } = searchParams
     let { published } = searchParams
     let { id } = searchParams
-
-
-
-
 
     const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store',headers: headers() })
 
@@ -20,6 +17,12 @@ async function getSubmittedData(searchParams: any) {
     }
 
     return res.json()
+    } catch (error) {
+        logger.error("getSubmittedData==>",error);
+
+    }
+
+   
 }
 
 

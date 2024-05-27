@@ -1,8 +1,10 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
+import { logger } from "@/logger";
 
 export async function GET(request: Request) {
   try {
@@ -63,6 +65,7 @@ export async function GET(request: Request) {
     return NextResponse.json([]);
   } catch (error) {
     console.log(error);
+    logger.error("AssignData",error);
 
     return NextResponse.json(error);
   }

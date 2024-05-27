@@ -12,7 +12,7 @@ import ReactPaginate from "react-paginate";
 
 export default function District({ data }: any) {
 
-    
+
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
@@ -29,21 +29,21 @@ export default function District({ data }: any) {
     const [districtId, setDistrictId] = useState("");
     const [districtName, setDistrictName] = useState("")
     const [abbrv, setAbbrv] = useState("")
-    
+
     const searchTextRef: any = useRef("");
 
     const page = searchParams.get('page');
 
 
-   
+
 
     const pathname = usePathname()
 
-   
+
 
     const [isEditing, setIsEditing] = useState(false);
 
-   
+
 
     const add = async (e: any) => {
         try {
@@ -66,7 +66,7 @@ export default function District({ data }: any) {
             setDistrictName("");
             setRegionId("");
             setAbbrv("");
-           
+
             if (response.status == 200) {
                 router.refresh()
 
@@ -132,7 +132,7 @@ export default function District({ data }: any) {
     const handlePagination = (page: any) => {
         let searchText = searchParams.get('searchText')
 
-        
+
 
         page = page.selected == -1 ? 1 : page.selected + 1;
 
@@ -143,7 +143,7 @@ export default function District({ data }: any) {
     };
 
     const handleExportAll = async () => {
-       try {
+        try {
             let searchText = searchParams.get('searchText')
             const response = await axios.get(
                 `/api/primary-data/district/export?searchText=${searchText}`,
@@ -214,29 +214,29 @@ export default function District({ data }: any) {
                                     </div>
                                 </div>
                                 <div className="col-sm-12  mb-3">
-                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Region *
                                     </label>
-                                <select
-                                    className="form-control"
-                                    aria-label="Default select example"
-                                    onChange={async(e: any) => {
-                                        setRegionId(e.target.value);
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setRegionId(e.target.value);
 
-                                    }}
-                                    value={regionId}
-                                >
-                                    <option >Select region * </option>
-                                    {data?.regions?.map((data: any) => (
-                                        <option key={data.id} value={data.id}>
-                                            {data.name}
-                                        </option>
-                                    ))}
-                                </select>
-                              </div>
-                              
-                              
-                             
+                                        }}
+                                        value={regionId}
+                                    >
+                                        <option >Select region * </option>
+                                        {data?.regions?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+
+
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
 
@@ -284,9 +284,9 @@ export default function District({ data }: any) {
                             </div>
                         </div>
                     </div>
-                   
-                
-                <div className="col-lg-8">
+
+
+                    <div className="col-lg-8">
                         <div className="card">
                             <div className="card-body">
                                 <h5 className="card-title">Districts</h5>
@@ -313,7 +313,7 @@ export default function District({ data }: any) {
                                         </div>
                                     </div>
                                 </div>
-                                <table className="table table-bordered" style={{height:100}}>
+                                <table className="table table-bordered" style={{ height: 100 }}>
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
@@ -362,7 +362,7 @@ export default function District({ data }: any) {
                                                                                 setDistrictName(data.name)
                                                                                 setRegionId(data.regionId)
                                                                                 setAbbrv(data.abbrv)
-                                                                              
+
                                                                                 setIsEditing(true);
 
                                                                             }}
@@ -395,25 +395,25 @@ export default function District({ data }: any) {
                                     </tbody>
                                 </table>
                                 <ReactPaginate
-                                            marginPagesDisplayed={2}
-                                            pageRangeDisplayed={5}
-                                            previousLabel={"Previous"}
-                                            nextLabel={"Next"}
-                                            breakLabel={"..."}
-                                            initialPage={data.districts.curPage - 1}
-                                            pageCount={data.districts.maxPage}
-                                            onPageChange={handlePagination}
-                                            breakClassName={"page-item"}
-                                            breakLinkClassName={"page-link"}
-                                            containerClassName={"pagination"}
-                                            pageClassName={"page-item"}
-                                            pageLinkClassName={"page-link"}
-                                            previousClassName={"page-item"}
-                                            previousLinkClassName={"page-link"}
-                                            nextClassName={"page-item"}
-                                            nextLinkClassName={"page-link"}
-                                            activeClassName={"active"}
-                                        />
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    previousLabel={"Previous"}
+                                    nextLabel={"Next"}
+                                    breakLabel={"..."}
+                                    initialPage={data?.districts?.curPage - 1}
+                                    pageCount={data?.districts?.maxPage}
+                                    onPageChange={handlePagination}
+                                    breakClassName={"page-item"}
+                                    breakLinkClassName={"page-link"}
+                                    containerClassName={"pagination"}
+                                    pageClassName={"page-item"}
+                                    pageLinkClassName={"page-link"}
+                                    previousClassName={"page-item"}
+                                    previousLinkClassName={"page-link"}
+                                    nextClassName={"page-item"}
+                                    nextLinkClassName={"page-link"}
+                                    activeClassName={"active"}
+                                />
                             </div>
                         </div>
                     </div>

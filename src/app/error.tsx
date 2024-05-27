@@ -1,10 +1,11 @@
 'use client'
  
+
 export default function Error({
   error,
   reset,
 }: {
-  error: Error
+  error: Error & { digest?: string }
   reset: () => void
 }) {
   return (
@@ -13,11 +14,12 @@ export default function Error({
       <div className="container">
         <section className="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
           <h1>ERROR</h1>
-          {/* <h2>An error occured on the requested page</h2> */}
-          <h2>{error.message}</h2>
+          {/* <h2>{error.message}</h2>
           <a className="btn" href="/">
             Back to home
-          </a>
+          </a> */}
+            <h2>Something went wrong!</h2>
+      <button onClick={() => reset()}>Try again</button>
           <img
             src="../../assets/img/error.svg"
             width={128}

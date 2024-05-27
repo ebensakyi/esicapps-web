@@ -649,8 +649,8 @@ export default function Community({ data }: any) {
                                     previousLabel={"Previous"}
                                     nextLabel={"Next"}
                                     breakLabel={"..."}
-                                    initialPage={data.communities.curPage - 1}
-                                    pageCount={data.communities.maxPage}
+                                    initialPage={data?.communities?.curPage - 1}
+                                    pageCount={data?.communities?.maxPage}
                                     onPageChange={handlePagination}
                                     breakClassName={"page-item"}
                                     breakLinkClassName={"page-link"}
