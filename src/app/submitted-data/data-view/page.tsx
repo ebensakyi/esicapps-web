@@ -6,23 +6,23 @@ import { headers } from 'next/headers';
 
 async function getSubmittedData(searchParams: any) {
     try {
-         let { formId } = searchParams
-    let { published } = searchParams
-    let { id } = searchParams
+        let { formId } = searchParams
+        let { published } = searchParams
+        let { id } = searchParams
 
-    const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store',headers: headers() })
+        const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store', headers: headers() })
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch data')
-    }
+        if (!res.ok) {
+            throw new Error('Failed to fetch data')
+        }
 
-    return res.json()
+        return res.json()
     } catch (error) {
-        logger.error("getSubmittedData==>",error);
+        logger.error("getSubmittedData==>", error);
 
     }
 
-   
+
 }
 
 

@@ -3,6 +3,7 @@ import { logActivity } from "@/utils/log";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { NextResponse } from "next/server";
+import { logger } from "@/logger";
 
 export async function POST(request: Request) {
   try {
@@ -74,9 +75,7 @@ export async function GET(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
 
-    // console.log("Session ", session);
     let userId = session?.user?.id;
-    let surname = session?.user?.surname;
 
     let { searchParams } = new URL(request.url);
     let inspectionId: any = searchParams.get("id")?.toString();
@@ -87,19 +86,22 @@ export async function GET(request: Request) {
     // let inspectionFormId: string | undefined = searchParams
     //   .get("inspectionFormId")
     //   ?.toString();
+
+    console.log(">>>>>>>>searchParams<<<<<<<<", searchParams);
+    logger.info(inspectionId);
+
     await logActivity(`Visited dataview page for ${inspectionId}`, userId);
 
     const data = await prisma.inspection.findFirst({
       where: {
-        // deleted: 0,
-
+        deleted: 0,
         id: inspectionId,
       },
 
       include: {
-        currentInspection:true,
-        prevInspection:true,
-        FollowUpInspection:true,
+        currentInspection: true,
+        prevInspection: true,
+        FollowUpInspection: true,
         User: true,
         ElectoralArea: true,
 

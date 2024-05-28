@@ -27,11 +27,9 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
-// import { logger } from '@/logger';
 
 
 export default function DataView({ data }: any) {
-    console.log(data)
 
     const [index, setIndex] = useState(-1);
 
@@ -1898,7 +1896,18 @@ export default function DataView({ data }: any) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                  
+                                                    {/* {data?.InspectionPictures.map((ip) => {
+     return <figure className="figure">
+        <img
+          src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${ip}`}
+          className="figure-img img-fluid rounded"
+          alt="..."
+        />
+        <figcaption className="figure-caption">
+          A caption for the above image.
+        </figcaption>
+      </figure>
+         })} */}
                                                     <div className="row">
                                                         <div className="col-lg-12">
                                                             <div className="row mb-3">
