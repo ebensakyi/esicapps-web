@@ -3134,7 +3134,7 @@ model AssignData {
 model FollowUpInspection {
   id                            String                       @id @db.VarChar(255)
   prevInspectionId              String?                      @unique @db.VarChar(255)
-  prevFollowUpId                String?                      @unique @db.VarChar(255)
+  prevFollowUpId                String?                      @db.VarChar(255)
   premisesCode                  String?                      @db.VarChar(255)
   userId                        Int
   inspectionFormId              Int
@@ -3160,7 +3160,7 @@ model FollowUpInspection {
   obnoxiousTradeExistFollowUpId Int
   obnoxiousTrade                String                       @db.VarChar(255)
   officerComment                String                       @db.VarChar(255)
-  nextFollowUpDate              String                       @db.VarChar(50)
+  nextFollowUpDate              String?                     @db.VarChar(50)
   isNuisanceObservedId          Int?
   updated                       Int?                         @default(0)
   deleted                       Int?                         @default(0)

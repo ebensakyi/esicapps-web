@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 
 import { SERVER_BASE_URL } from '@/config';
 import { logger } from '@/logger';
@@ -10,6 +11,7 @@ async function getSubmittedData(searchParams: any) {
         let { published } = searchParams
         let { id } = searchParams
 
+
         const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data/data-view?id=${id}&published=${published}&formId=${formId}`, { cache: 'no-store', headers: headers() })
 
         if (!res.ok) {
@@ -18,7 +20,7 @@ async function getSubmittedData(searchParams: any) {
 
         return res.json()
     } catch (error) {
-        logger.error("getSubmittedData==>", error);
+        logger.error("getSubmittedData<==>", error);
 
     }
 
