@@ -16,6 +16,7 @@ import moment from "moment";
 export default function AssignData({ data }: any) {
     const router = useRouter();
 
+    console.log(data);
     
 
     const [isEditing, setIsEditing] = useState(false);
@@ -96,6 +97,11 @@ export default function AssignData({ data }: any) {
                 assignedToUser,
             };
             const response = await axios.post("/api/assign-data", data);
+
+            if (response.status == 201) {
+               return toast.error("User already has data assigned to him/her.\nDelete that assignment first");
+            }
+
             toast.success(response.data.message);
             setAssignedFromUser("");
             setAssignedToUser("");
@@ -275,10 +281,13 @@ export default function AssignData({ data }: any) {
                                                             )}
                                                         </td>
                                                         <td>
-                                                            {dt.assignedFrom.surname} {dt.assignedFrom.otherNames}
+                                                            {dt.assignedFrom.surname} {dt.assignedFrom.otherNames}<br/>
+                                                            {dt.assignedFrom.District.name}
                                                         </td>
                                                         <td>
-                                                            {dt.assignedTo.surname} {dt.assignedTo.otherNames}
+                                                            {dt.assignedTo.surname} {dt.assignedTo.otherNames}<br/>
+                                                            {dt.assignedTo.District.name}
+
                                                         </td>
                                                         <td>{dt?.deleted == 1 ? <>              <span className="badge bg-danger"><i className="bi bi-check-circle me-1"></i> Inactive</span>
                                                         </> : <>              <span className="badge bg-success"><i className="bi bi-check-circle me-1"></i> Active</span>

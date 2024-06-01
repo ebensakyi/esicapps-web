@@ -14,20 +14,30 @@ export async function POST(request: Request) {
 
     const userId = session?.user?.id;
 
-    await logActivity(`Assigned data from ${res?.assignedFromUser} to ${res?.assignedToUser}`, userId);
+    await logActivity(
+      `Assigned data from ${res?.assignedFromUser} to ${res?.assignedToUser}`,
+      userId
+    );
+
+    let hasAssigned: any = await prisma.assignData.count({
+      where: { assignedToId: Number(res.assignedToUser) },
+    });
+
+    if (hasAssigned) {
+      return NextResponse.json({}, { status: 201 });
+    }
 
     const data = {
       assignedToId: Number(res?.assignedToUser),
       assignedFromId: Number(res?.assignedFromUser),
       userId: userId,
     };
-
     const response = await prisma.assignData.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
     console.log(error);
-    logger.error("AssignData",error);
+    logger.error("AssignData", error);
     return NextResponse.json(error, { status: 500 });
   }
 }
@@ -53,7 +63,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ status: 200 });
   } catch (error: any) {
     console.log(error);
-    logger.error("AssignData",error);
+    logger.error("AssignData", error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -67,15 +77,10 @@ export async function GET(request: Request) {
 
     const session: any = await getServerSession(authOptions);
 
-
     await logActivity("Visited data assignment page", session?.user?.id);
-    
 
+    //MOBILE USER CHECK IF THERES ASSIGNMENT
     if (userId) {
-      // const count = await prisma.assignData.count({
-      //   where: { assignedToId: Number(req.query.userId) },
-      // });
-
       const data = await prisma.assignData.findFirst({
         where: { assignedToId: Number(userId) },
       });
@@ -83,13 +88,25 @@ export async function GET(request: Request) {
       return NextResponse.json(data);
     }
 
+    //ALL DATA ASSIGNMENT ON WEB
     const data = await prisma.assignData.findMany({
-      include: { assignedFrom: true, assignedTo: true },
+      include: {
+        assignedFrom: {
+          include: {
+            District: true,
+          },
+        },
+        assignedTo: {
+          include: {
+            District: true,
+          },
+        },
+      },
     });
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
-    logger.error("AssignData",error);
+    logger.error("AssignData", error);
 
     return NextResponse.json(error);
   }

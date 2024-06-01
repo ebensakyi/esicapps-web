@@ -6,6 +6,9 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
 
+    console.log(res);
+    
+
     const user: any = await prisma.user.findFirst({
       where: { id: Number(res.userId) },
     });
@@ -14,6 +17,7 @@ export async function POST(request: Request) {
       where: { id: Number(district) },
     });
     let region = Number(districtData?.regionId);
+
 
     const data: any = {
       id: res.id,
@@ -60,6 +64,8 @@ export async function POST(request: Request) {
           ? null
           : Number(res.isNuisanceObservedId),
     };
+
+    
 
     const response = await prisma.followUpInspection.create({ data });
 

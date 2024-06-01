@@ -11,15 +11,17 @@ export async function GET(request: Request) {
     let { searchParams } = new URL(request.url);
     
 
-    let userId = Number(searchParams.get("userId"));
+    let dataOwnerUserId = Number(searchParams.get("userId"));
+
+    
 
     const session: any = await getServerSession(authOptions);
 
     await logActivity("Visited data assignment page", session?.user?.id);
 
-    if (userId) {
+    if (dataOwnerUserId) {
       const _data = await prisma.inspection.findMany({
-       // where: { userId: Number(userId) },
+      where: { userId: Number(dataOwnerUserId) },
         include: {
           InspectionForm: true,
           InspectionPictures: true,
@@ -44,6 +46,7 @@ export async function GET(request: Request) {
         districtName: item.District.name,
         electoralAreaName: item.ElectoralArea.name,
         communityName: item.Community.name,
+        premisesCode: item.premisesCode,
         createdAt: item.createdAt,
         facilityName:
           [
@@ -55,14 +58,15 @@ export async function GET(request: Request) {
             item.IndustryPremisesInfoSection?.facilityName,
             item.InstitutionPremisesInfoSection?.facilityName,
             item.MarketPremisesInfoSection?.facilityName,
-          ].find((name) => name) ?? "Residential Premises", // Get the first non-null facilityName
+          ].find((name) => name) ?? "Residential Premises", 
         inspectionId: item.id,
       }));
+      
 
       return NextResponse.json(data);
     }
 
-    return NextResponse.json([]);
+    return NextResponse.json([],{status:201});
   } catch (error) {
     console.log(error);
     logger.error("AssignData",error);

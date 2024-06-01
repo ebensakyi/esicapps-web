@@ -69,6 +69,7 @@ export async function GET(request: Request) {
     const response = await prisma.inspection.findMany({
       where: { userId: userId, deleted: 0 },
     });
+console.log(response);
 
     return NextResponse.json(response, {
       status: 200,
