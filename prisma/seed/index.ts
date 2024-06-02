@@ -224,7 +224,7 @@ async function main() {
   await prisma.user.createMany({
     data: users,
   });
-  await prisma.animalType.createMany({
+  await prisma.animal.createMany({
     data: animalType,
   });
 
