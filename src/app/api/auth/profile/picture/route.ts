@@ -30,7 +30,6 @@ export async function POST(request: Request) {
       } else {
         await prisma.userImage.create({
           data: {
-            id:1,
             imagePath: fileName,
             userId: userId,
           },
