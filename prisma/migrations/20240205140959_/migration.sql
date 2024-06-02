@@ -265,14 +265,14 @@ CREATE TABLE "Action" (
 );
 
 -- CreateTable
-CREATE TABLE "AnimalType" (
+CREATE TABLE "Animal" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "deleted" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "AnimalType_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Animal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -3967,7 +3967,7 @@ ALTER TABLE "PremisesPestSigns" ADD CONSTRAINT "PremisesPestSigns_userId_fkey" F
 ALTER TABLE "PremisesPestSignsHistory" ADD CONSTRAINT "PremisesPestSignsHistory_historyId_fkey" FOREIGN KEY ("historyId") REFERENCES "InspectionHistory"("historyId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_animalTypeId_fkey" FOREIGN KEY ("animalTypeId") REFERENCES "AnimalType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_animalTypeId_fkey" FOREIGN KEY ("animalTypeId") REFERENCES "Animal"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PremisesAnimal" ADD CONSTRAINT "PremisesAnimal_inspectionId_fkey" FOREIGN KEY ("inspectionId") REFERENCES "Inspection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -134,7 +134,7 @@ export async function GET(request: Request) {
           include: {
             PremisesAnimal: {
               include: {
-                AnimalType: true,
+                Animal: true,
               },
             },
             animalAvailability: true,

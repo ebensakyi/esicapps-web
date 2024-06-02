@@ -232,7 +232,7 @@ const ResidentialPremisesInfoView = ({ data }:any) => {
                                      type="text"
                                      className="form-control bg-light border-0"
                                      id="invoicenoInput"
-                                     value={x.AnimalType.name}
+                                     value={x.Animal.name}
                                      readOnly={true}
                                    />
                                  )

@@ -1,5 +1,6 @@
 import { logger } from "@/logger";
 import { prisma } from "@/prisma/db";
+import { convertStringToArray } from "@/utils/array-converter";
 import { logActivity } from "@/utils/log";
 
 import { NextResponse } from "next/server";
@@ -48,17 +49,32 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
+    const inspectionIds = searchParams.get("inspectionIds");
+
+    const array = convertStringToArray(inspectionIds);
+
+    if (!userId) {
+      return NextResponse.json({ status: 200 });
+    }
+
+    const whereClause: {
+      userId: number;
+      deleted: number;
+      inspectionId?: { in: string[] };
+    } = { userId: userId, deleted: 0 };
+
+    if (array.length > 0) {
+      whereClause.inspectionId = { in: array };
+    }
 
 
-    if (!userId) return NextResponse.json({});
-    
-    const data = await prisma.conclusionSection.findMany({
-      where: { userId: userId, deleted: 0 },
+    const response = await prisma.conclusionSection.findMany({
+      where: whereClause,
     });
 
-
-    return NextResponse.json(data);
-
+    return NextResponse.json(response, {
+      status: 200,
+    });
   } catch (error) {
     logger.error("CONCLUSION==>",error);
 

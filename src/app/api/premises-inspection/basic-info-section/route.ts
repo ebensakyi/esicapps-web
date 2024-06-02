@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { logger } from "@/logger";
+import { convertStringToArray } from "@/utils/array-converter";
 
 export async function POST(request: Request) {
   try {
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.log(error);
-    logger.error("BASIC_INFO==>",error);
+    logger.error("BASIC_INFO==>", error);
 
     return NextResponse.json(error, { status: 500 });
   }
@@ -55,20 +56,34 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
+    const inspectionIds = searchParams.get("inspectionIds");
 
-    if (!userId)
-      return NextResponse.json({
-        status: 200,
-      });
+    const array = convertStringToArray(inspectionIds);
 
-    const data = await prisma.basicInfoSection.findMany({
-      where: { deleted: 0, userId: userId },
+    if (!userId) {
+      return NextResponse.json({ status: 200 });
+    }
+
+    const whereClause: {
+      userId: number;
+      deleted: number;
+      inspectionId?: { in: string[] };
+    } = { userId: userId, deleted: 0 };
+
+    if (array.length > 0) {
+      whereClause.inspectionId = { in: array };
+    }
+
+
+    const response = await prisma.basicInfoSection.findMany({
+      where: whereClause,
     });
 
-    return NextResponse.json(data);
-  } catch (error) {
-    logger.error("BASIC_INFO==>",error);
-
-    return NextResponse.json(error, { status: 500 });
+    return NextResponse.json(response, {
+      status: 200,
+    });
+  } catch (error: any) {
+    logger.error("BASIC_INFO==>", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

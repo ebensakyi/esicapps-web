@@ -410,7 +410,7 @@ model Action {
   PremisesActionTaken         PremisesActionTaken[]
 }
 
-model AnimalType {
+model Animal {
   id             Int              @id @default(autoincrement())
   name           String           @db.VarChar(255)
   deleted        Int?             @default(0)
@@ -2768,7 +2768,7 @@ model PremisesPestSignsHistory {
 model PremisesAnimal {
   id                               String                         @id @db.VarChar(255)
   inspectionId                     String                         @db.VarChar(255)
-  animalTypeId                     Int
+  animalId                     Int
   residentialPremisesInfoSectionId String                         @db.VarChar(255)
   deleted                          Int?                           @default(0)
   createdAt                        DateTime                       @default(now())
@@ -2776,7 +2776,7 @@ model PremisesAnimal {
   userId                           Int
   isCompleted                      Int?                           @default(1)
   isSubmitted                      Int?                           @default(1)
-  AnimalType                       AnimalType                     @relation(fields: [animalTypeId], references: [id])
+  Animal                       Animal                     @relation(fields: [animalId], references: [id])
   Inspection                       Inspection                     @relation(fields: [inspectionId], references: [id])
   ResidentialPremisesInfoSection   ResidentialPremisesInfoSection @relation(fields: [residentialPremisesInfoSectionId], references: [id])
   User                             User                           @relation(fields: [userId], references: [id])
@@ -2786,7 +2786,7 @@ model PremisesAnimalHistory {
   newId                            Int               @id @default(autoincrement())
   id                               String            @db.VarChar(255)
   inspectionId                     String            @db.VarChar(255)
-  animalTypeId                     Int
+  animalId                     Int
   residentialPremisesInfoSectionId String            @db.VarChar(255)
   deleted                          Int?              @default(0)
   createdAt                        DateTime          @default(now())

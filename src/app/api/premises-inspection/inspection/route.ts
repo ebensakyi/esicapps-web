@@ -2,15 +2,13 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { logger } from "@/logger";
-
+import { convertStringToArray } from "@/utils/array-converter";
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
 
-    
-
-    const user : any = await prisma.user.findFirst({
+    const user: any = await prisma.user.findFirst({
       where: { id: Number(res.userId) },
     });
     const district = user?.districtId;
@@ -20,10 +18,10 @@ export async function POST(request: Request) {
     let region = Number(districtData?.regionId);
 
     const data: any = {
-      inspectionKind: Number(res.isDemo)?? Number(res.inspectionKind),
+      inspectionKind: Number(res.isDemo) ?? Number(res.inspectionKind),
       id: res.id,
       userId: Number(res.userId),
-      totalRating: Number(Math.ceil(res.totalRating)),
+      totalRating: Number(res.totalRating),
       districtId: district,
       regionId: region,
       communityId: Number(res.communityId),
@@ -50,35 +48,45 @@ export async function POST(request: Request) {
     return NextResponse.json(response);
   } catch (error) {
     console.log(error);
-    logger.error("INSPECTION_PREM==>",error);
+    logger.error("INSPECTION_PREM==>", error);
 
     return NextResponse.json(error, { status: 500 });
   }
 }
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
+    const inspectionIds = searchParams.get("inspectionIds");
+
+    let array = convertStringToArray(inspectionIds);
 
 
-    if (!userId) return  NextResponse.json( {
-      status: 200,
-    });
+    if (!userId) {
+      return NextResponse.json({
+        status: 200,
+      });
+    }
+
+    let whereClause: { userId: number, deleted: number, id?: { in: string[] } } = { userId: userId, deleted: 0 };
+    if (array.length > 0) {
+      whereClause.id = { in: array };
+    }
+
 
     const response = await prisma.inspection.findMany({
-      where: { userId: userId, deleted: 0 },
+      where: whereClause,
     });
-console.log(response);
 
     return NextResponse.json(response, {
       status: 200,
     });
   } catch (error) {
-    logger.error("INSPECTION_PREM==>",error);
+    logger.error("INSPECTION_PREM==>", error);
 
     return NextResponse.json(error, {
       status: 500,
     });
   }
 }
+

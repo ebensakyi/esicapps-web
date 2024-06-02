@@ -44,7 +44,7 @@ export async function GET(request: Request) {
     if (!userId) return NextResponse.json({});
 
     const response = await prisma.premisesHazardousWasteDisposal.findMany({
-      where: { userId: userId, deleted: 0 },
+      where: {  deleted: 0 },
     });
 
     return NextResponse.json(response,{

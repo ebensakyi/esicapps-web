@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const data = {
       name: res.name,
     };
-    const response = await prisma.animalType.create({ data });
+    const response = await prisma.animal.create({ data });
 
     return NextResponse.json(response);
   } catch (error: any) {
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const data = await prisma.animalType.findMany({
+    const data = await prisma.animal.findMany({
       where: { deleted: 0 },
     });
 
@@ -37,7 +37,7 @@ export async function PUT(request: Request) {
     const data = {
       name: res.name,
     };
-    const response = await prisma.animalType.update({
+    const response = await prisma.animal.update({
       where: {
         id: Number(res?.id),
       },

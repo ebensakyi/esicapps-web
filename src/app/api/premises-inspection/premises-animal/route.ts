@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { logger } from "@/logger";
+import { convertStringToArray } from "@/utils/array-converter";
 
 
 export async function POST(request: Request) {
@@ -35,16 +36,32 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = Number(searchParams.get("userId"));
+    const inspectionIds = searchParams.get("inspectionIds");
 
-    const res = await request.json();
+    const array = convertStringToArray(inspectionIds);
 
-    if (!userId) return res.status(200).json();
+    if (!userId) {
+      return NextResponse.json({ status: 200 });
+    }
+
+    const whereClause: {
+      userId: number;
+      deleted: number;
+      inspectionId?: { in: string[] };
+    } = { userId: userId, deleted: 0 };
+
+    if (array.length > 0) {
+      whereClause.inspectionId = { in: array };
+    }
+
 
     const response = await prisma.premisesAnimal.findMany({
-      where: { userId: userId, deleted: 0 },
+      where: whereClause,
     });
 
-    return NextResponse.json(response);
+    return NextResponse.json(response, {
+      status: 200,
+    });
   } catch (error) {
     logger.error("PREM_ANIMAL==>",error);
 

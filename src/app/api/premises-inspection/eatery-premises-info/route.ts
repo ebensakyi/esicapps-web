@@ -1,6 +1,7 @@
 import { logger } from "@/logger";
 import { prisma } from "@/prisma/db";
 import { EateryInfo } from "@/typings";
+import { convertStringToArray } from "@/utils/array-converter";
 import { logActivity } from "@/utils/log";
 import { NextResponse } from "next/server";
 
@@ -120,17 +121,35 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = Number(searchParams.get("userId"));
-
-
-    if (!userId) return NextResponse.json({});
-
-    const data = await prisma.eateryPremisesInfoSection.findMany({
-      where: { userId: userId, deleted: 0 },
-    });
-
-    return  NextResponse.json(data);
+  
+      const { searchParams } = new URL(request.url);
+      const userId = Number(searchParams.get("userId"));
+      const inspectionIds = searchParams.get("inspectionIds");
+  
+      const array = convertStringToArray(inspectionIds);
+  
+      if (!userId) {
+        return NextResponse.json({ status: 200 });
+      }
+  
+      const whereClause: {
+        userId: number;
+        deleted: number;
+        inspectionId?: { in: string[] };
+      } = { userId: userId, deleted: 0 };
+  
+      if (array.length > 0) {
+        whereClause.inspectionId = { in: array };
+      }
+  
+  
+      const response = await prisma.eateryPremisesInfoSection.findMany({
+        where: whereClause,
+      });
+  
+      return NextResponse.json(response, {
+        status: 200,
+      });
   } catch (error) {
     logger.error("EATERY==>",error);
 

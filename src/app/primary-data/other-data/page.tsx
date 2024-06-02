@@ -15,7 +15,7 @@ async function getAction() {
 
 }
 
-async function getAnimalType() {
+async function getAnimal() {
     let response = await fetch(`${SERVER_BASE_URL}/api/primary-data/animal-type`, { cache: 'no-store',headers: headers() });
 
     if (!response.ok) {
@@ -438,7 +438,7 @@ async function getWaterTreatmentType() {
 export default async function Page() {
 
     const actions = await getAction() //1
-    const animalTypes = await getAnimalType() //2
+    const animalTypes = await getAnimal() //2
 
     const cemeteryWorkers = await getCemeteryWorkers() //3
     const cleaningFrequencies = await getCleaningFrequency()//4
