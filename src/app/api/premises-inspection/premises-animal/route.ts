@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     const userId = Number(searchParams.get("userId"));
     const inspectionIds = searchParams.get("inspectionIds");
 
-    const array = convertStringToArray(inspectionIds);
+   const array = inspectionIds ? convertStringToArray(inspectionIds) : [];
 
     if (!userId) {
       return NextResponse.json({ status: 200 });

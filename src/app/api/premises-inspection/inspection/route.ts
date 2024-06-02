@@ -59,7 +59,7 @@ export async function GET(request: Request) {
     const userId = Number(searchParams.get("userId"));
     const inspectionIds = searchParams.get("inspectionIds");
 
-    let array = convertStringToArray(inspectionIds);
+    const array = inspectionIds ? convertStringToArray(inspectionIds) : [];
 
 
     if (!userId) {
