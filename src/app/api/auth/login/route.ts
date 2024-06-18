@@ -12,14 +12,45 @@ export async function POST(request: Request) {
     let password = res.password;
 
 
-    let user: any = await prisma.user.findFirst({
+    // let user: any = await prisma.user.findFirst({
 
+    //   where: {
+    //     phoneNumber: phoneNumber,
+    //     deleted: 0,
+    //   },
+    //   include: {
+
+    //     Region: true,
+    //     District: true,
+    //     UserRole: true,
+    //   },
+    // });
+
+    let user = await prisma.user.findFirst({
       where: {
         phoneNumber: phoneNumber,
         deleted: 0,
       },
-      include: {
-
+      select: {
+        id: true,
+        userRoleId: true,
+        surname: true,
+        otherNames: true,
+        email: true,
+        phoneNumber: true,
+        designation: true,
+        password: true,
+        tempPassword: true,
+        regionId: true,
+        districtId: true,
+        electoralAreaId: true,
+        loginTimes: true,
+        passwordChanged: true,
+        activated: true,
+        deleted: true,
+        createdAt: true,
+        updatedAt: true,
+        userLevelId: true,
         Region: true,
         District: true,
         UserRole: true,
