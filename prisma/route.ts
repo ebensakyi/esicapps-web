@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     let region = Number(districtData?.regionId);
 
     const data: any = {
-      inspectionKind: Number(res?.isDemo)||Number(res?.inspectionKind),
+      inspectionKind:Number(res?.inspectionKind),
       id: res.id,
       userId: Number(res.userId),
       totalRating: Number(Math.ceil(res.totalRating)),
