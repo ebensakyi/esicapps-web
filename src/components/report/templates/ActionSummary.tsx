@@ -12,6 +12,8 @@ const ActionSummary = ({ data,level }:any) => {
         return `Notice Served`;
       } else if (id == 3) {
         return `Criminal Summons`;
+       } else if (id == 4) {
+        return `Abated`;
       }
     } catch (error) {
       console.log(error);
