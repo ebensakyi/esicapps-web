@@ -3,11 +3,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, usePathname, redirect, useSearchParams } from 'next/navigation';
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 import ReactPaginate from "react-paginate";
-import moment from "moment";
 
 
 
@@ -23,6 +22,7 @@ export default function ElectoralArea({ data }: any) {
     const searchParams = useSearchParams();
     const router = useRouter();
 
+    const searchTextRef: any = useRef("");
 
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -36,9 +36,9 @@ export default function ElectoralArea({ data }: any) {
     const [districtId, setDistrictId] = useState("");
     const [districts, setDistricts] = useState([]);
 
+    const [communityFile, setCommunityFile] = useState("");
     const page = searchParams.get('page');
 
-    const [searchText, setSearchText] = useState("");
 
 
     const pathname = usePathname()
@@ -60,64 +60,29 @@ export default function ElectoralArea({ data }: any) {
         }
     };
 
-    useEffect(() => {
-        setDistrictId(loggedInUserDistrict);
-        setRegionId(loggedInUserRegion);
 
-        const url = `${pathname}/?searchText=${searchText}&page=${page}`;
-        router.push(url);
-
-    }, [loggedInUserLevel, searchText]);
 
     const add = async (e: any) => {
         try {
             e.preventDefault();
 
-
-
-            let data = {}
-            if (loggedInUserLevel == 1) {
-                data = {
-
-                    regionId: regionId,
-                    districtId: districtId,
-                    electoralAreaName: electoralAreaName
-
-                }
-
-            }
-
-            if (loggedInUserLevel == 2) {
-                data = {
-
-                    regionId: loggedInUserRegion,
-                    districtId: districtId,
-                    electoralAreaName: electoralAreaName
-
-                }
-
-            }
-
-            if (loggedInUserLevel == 3) {
-
-                data = {
-
-                    electoralAreaName: electoralAreaName,
-                    regionId: loggedInUserRegion,
-                    districtId: loggedInUserDistrict,
-                };
-
-
-            }
-
-
-
-            ////////////
-
+            let data
             if (electoralAreaName == "") return toast.error("Electoral Area Name cannot be empty");
-            if (districtId == "") return toast.error("District cannot be empty");
+            if (districtId == "" ) return toast.error("District cannot be empty");
 
 
+            data = {
+                electoralAreaName,
+                districtId,
+
+            };
+            if (loggedInUserLevel == 3) {
+                data = {
+                    electoralAreaName,
+                    loggedInUserDistrict,
+
+                };
+            }
 
             const response = await axios.post("/api/primary-data/electoral-area", data);
             setElectoralAreaName("");
@@ -141,7 +106,7 @@ export default function ElectoralArea({ data }: any) {
         try {
             e.preventDefault()
 
-
+            
             let data = {
                 electoralAreaName,
                 districtId,
@@ -270,20 +235,20 @@ export default function ElectoralArea({ data }: any) {
         }
     };
 
-    // const handleSearch = () => {
-    //     try {
-    //         let _searchText: any = searchTextRef?.current?.value
+    const handleSearch = () => {
+        try {
+            let _searchText: any = searchTextRef?.current?.value
 
 
-    //         router.push(
-    //             `${pathname}?searchText=${_searchText}&page=${page}`
+            router.push(
+                `${pathname}?searchText=${_searchText}&page=${page}`
 
-    //         );
+            );
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <main id="main" className="main">
@@ -314,53 +279,53 @@ export default function ElectoralArea({ data }: any) {
                                         <input type="text" className="form-control" placeholder='Enter electoral area name' value={electoralAreaName} onChange={(e: any) => setElectoralAreaName(e.target.value)} />
                                     </div>
                                 </div>
-                                {loggedInUserLevel != 3 ?
-                                    <div>
-                                        <div className=" mb-3">
-                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                Region *
-                                            </label>
-                                            <select
-                                                className="form-control"
-                                                aria-label="Default select example"
-                                                onChange={async (e: any) => {
-                                                    setRegionId(e.target.value);
+                                {loggedInUserLevel!=3? 
+                                <div>
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        Region *
+                                    </label>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setRegionId(e.target.value);
 
-                                                    await getDistrictsByRegion(e.target.value);
-                                                }}
-                                                value={regionId}
-                                            >
-                                                <option >Select region * </option>
-                                                {data?.regions?.map((data: any) => (
-                                                    <option key={data.id} value={data.id}>
-                                                        {data.name}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
+                                            await getDistrictsByRegion(e.target.value);
+                                        }}
+                                        value={regionId}
+                                    >
+                                        <option >Select region * </option>
+                                        {data?.regions?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
 
-                                        <div className=" mb-3">
-                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                District *
-                                            </label>
-                                            <select
-                                                className="form-control"
-                                                aria-label="Default select example"
-                                                onChange={async (e: any) => {
-                                                    setDistrictId(e.target.value);
-                                                }}
-                                                value={districtId}
-                                            >
-                                                <option >Select district * </option>
-                                                {districts?.map((data: any) => (
-                                                    <option key={data.id} value={data.id}>
-                                                        {data.name}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div></div> : <></>
-                                }
-
+                                <div className=" mb-3">
+                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                        District *
+                                    </label>
+                                    <select
+                                        className="form-control"
+                                        aria-label="Default select example"
+                                        onChange={async (e: any) => {
+                                            setDistrictId(e.target.value);
+                                        }}
+                                        value={districtId}
+                                    >
+                                        <option >Select district * </option>
+                                        {districts?.map((data: any) => (
+                                            <option key={data.id} value={data.id}>
+                                                {data.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div></div>:<></>
+}
+                               
                                 <div className=" mb-3">
                                     <div className="col-sm-10">
 
@@ -420,52 +385,51 @@ export default function ElectoralArea({ data }: any) {
                                             <input type="file" accept=".csv" className="form-control" placeholder='Enter electoral area name' onChange={uploadElectoralArea} />
                                         </div>
                                     </div>
-                                    {loggedInUserLevel != 3 ?
-                                        <div>
-                                            <div className=" mb-3">
-                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                    Region *
-                                                </label>
-                                                <select
-                                                    className="form-control"
-                                                    aria-label="Default select example"
-                                                    onChange={async (e: any) => {
-                                                        setRegionId(e.target.value);
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            Region *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={async (e: any) => {
+                                                setRegionId(e.target.value);
 
-                                                        await getDistrictsByRegion(e.target.value);
-                                                    }}
-                                                    value={regionId}
-                                                >
-                                                    <option >Select region * </option>
-                                                    {data?.regions?.map((data: any) => (
-                                                        <option key={data.id} value={data.id}>
-                                                            {data.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
+                                                await getDistrictsByRegion(e.target.value);
+                                            }}
+                                            value={regionId}
+                                        >
+                                            <option >Select region * </option>
+                                            {data?.regions?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
 
-                                            <div className=" mb-3">
-                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                    District *
-                                                </label>
-                                                <select
-                                                    className="form-control"
-                                                    aria-label="Default select example"
-                                                    onChange={async (e: any) => {
-                                                        setDistrictId(e.target.value);
-                                                    }}
-                                                    value={districtId}
-                                                >
-                                                    <option >Select district * </option>
-                                                    {districts?.map((data: any) => (
-                                                        <option key={data.id} value={data.id}>
-                                                            {data.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div></div> : <></>
-                                    }
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            District *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={async (e: any) => {
+                                                setDistrictId(e.target.value);
+                                            }}
+                                            value={districtId}
+                                        >
+                                            <option >Select district * </option>
+                                            {districts?.map((data: any) => (
+                                                <option key={data.id} value={data.id}>
+                                                    {data.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+
                                     <div className=" mb-3">
                                         <div className="col-sm-10">
 
@@ -496,12 +460,10 @@ export default function ElectoralArea({ data }: any) {
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="input-group mb-3">
-                                            <input type="text" className="form-control" placeholder='Enter search term'
+                                            <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
                                                 id="searchText"
-                                                value={searchText}
-                                                onChange={(e: any) => {
-                                                    setSearchText(e.target.value);
-                                                }} />
+                                                name="searchText" />
+                                            <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
                                         </div>
 
                                     </div>
@@ -525,7 +487,6 @@ export default function ElectoralArea({ data }: any) {
                                             <th scope="col">District</th>
 
                                             <th scope="col">Region</th>
-                                            <th scope="col">Added On</th>
 
                                             <th scope="col">Action</th>
 
@@ -538,9 +499,6 @@ export default function ElectoralArea({ data }: any) {
                                                     <td>{data?.name}</td>
                                                     <td>{data?.District.name}</td>
                                                     <td>{data?.District.Region.name}</td>
-                                                    <td>  {moment(data?.createdAt).format(
-                                                        "MMM Do YYYY, h:mm:ss a"
-                                                    )}</td>
 
                                                     <td>
                                                         <div

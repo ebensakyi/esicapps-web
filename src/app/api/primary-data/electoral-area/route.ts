@@ -10,6 +10,9 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
+
+    console.log(res);
+    
     const data = {
       name: res.electoralAreaName,
       districtId: Number(res.districtId),

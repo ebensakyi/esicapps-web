@@ -29,14 +29,14 @@ export async function POST(request: Request) {
 
     let response = await readCSV(path, electoralAreaId, districtId);
 
-    if (response == 0) {
-      return NextResponse.json(
-        { message: "Data exist", data: "existingRecord" },
-        { status: 202 }
-      );
-    }
+    // if (response == 0) {
+    //   return NextResponse.json(
+    //     { message: "Data exist", data: "existingRecord" },
+    //     { status: 202 }
+    //   );
+    // }
 
-    // return NextResponse.json({});
+   return NextResponse.json({});
   } catch (error: any) {
     console.error(error);
     return NextResponse.json(error, { status: 500 });
@@ -64,22 +64,9 @@ const readCSV = async (
       .on("end", async () => {
         let newData = await formatData(data, electoralAreaId, districtId);
 
-        // for (const data of newData) {
-        //   const existingRecord = await prisma.community.findMany({
-        //     where: {
-        //       // electoralAreaId_name_key: {
-        //       electoralAreaId: Number(data.electoralAreaId),
-        //       name: data.name,
-        //       // },
-        //     },
-        //   });
+        data = newData
 
-        //   if (existingRecord) {
-        //     console.log("existingRecord==>", existingRecord);
-
-        //     return existingRecord;
-
-        //   } else {
+       
             await prisma.community.createMany({
               data: newData,
             });
@@ -100,23 +87,7 @@ const readCSV = async (
   }
 };
 
-// const formatData1 = async (data: any, electoralAreaId: any, districtId: any) => {
-//   try {
-//     let newData = data
-//     .filter((row: any) => row.name.trim() !== '')
-//     .map((row: any) => ({
-//       electoralAreaId: Number(electoralAreaId),
-//       districtId: Number(districtId),
-//       name: row.name,
-//     }));
 
-//     console.log(newData);
-
-//     return newData
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
   try {
@@ -148,25 +119,3 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
   }
 };
 
-// async function importData() {
-//   var filePath = `./public/temp/${fileName}`;
-//   const rows: any[] = [];
-//   fs.createReadStream(filePath)
-//     .pipe(parse({ delimiter: "," }))
-//     .on("data", (row: any) => {
-//       // Trim empty cells
-//       const trimmedRow = Object.fromEntries(
-//         Object.entries(row).map(([key, value]) => [key, value.trim()])
-//       );
-//       rows.push(trimmedRow);
-//     })
-//     .on("end", async () => {
-//       for (const row of rows) {
-//         await prisma.community.create({
-//           data: row,
-//         });
-//       }
-//       console.log("Data import completed.");
-//       await prisma.$disconnect();
-//     });
-// }
