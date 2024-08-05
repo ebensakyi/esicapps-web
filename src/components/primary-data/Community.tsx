@@ -139,7 +139,7 @@ export default function Community({ data }: any) {
             if (electoralAreaId == "") return toast.error("Electoral area cannot be empty");
 
 
-          
+
 
 
             const response = await axios.post("/api/primary-data/community", data);
@@ -193,23 +193,23 @@ export default function Community({ data }: any) {
         }
     };
 
-    // const _delete = async (id: any) => {
-    //     try {
-    //         const response = await axios.delete(
-    //             `/api/user/guide/?id=${id}`
-    //         );
+    const deleteCommunity = async (id: any) => {
+        try {
+            const response = await axios.delete(
+                `/api/primary-data/community?id=${id}`
+            );
 
-    //         if (response.status == 200) {
-    //             router.refresh()
-    //             return toast.success("User guide deleted");
-    //         }
+            if (response.status == 200) {
+                router.refresh()
+                return toast.success("Community deleted");
+            }
 
 
-    //         return toast.error("An error occurred while deleting");
-    //     } catch (error) {
-    //         return toast.error("An error occurred while deleting");
-    //     }
-    // };
+            return toast.error("An error occurred while deleting");
+        } catch (error) {
+            return toast.error("An error occurred while deleting");
+        }
+    };
 
 
     const uploadCommunity = async (e: any) => {
@@ -244,12 +244,14 @@ export default function Community({ data }: any) {
                 },
                 data: body,
             });
-            setCommunityName("");
-            setDistrictId("");
-            setRegionId("");
+
 
 
             if (response.status == 200) {
+                setCommunityName("");
+                setElectoralAreaId("");
+                setDistrictId("");
+                setRegionId("");
                 router.refresh()
 
                 return toast.success("Communities uploaded");
@@ -351,51 +353,51 @@ export default function Community({ data }: any) {
                                     </div>
                                 </div>
                                 {loggedInUserLevel != 3 ?
-                                        <div>
-                                            <div className=" mb-3">
-                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                    Region *
-                                                </label>
-                                                <select
-                                                    className="form-control"
-                                                    aria-label="Default select example"
-                                                    onChange={async (e: any) => {
-                                                        setRegionId(e.target.value);
+                                    <div>
+                                        <div className=" mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                Region *
+                                            </label>
+                                            <select
+                                                className="form-control"
+                                                aria-label="Default select example"
+                                                onChange={async (e: any) => {
+                                                    setRegionId(e.target.value);
 
-                                                        await getDistrictsByRegion(e.target.value);
-                                                    }}
-                                                    value={regionId}
-                                                >
-                                                    <option >Select region * </option>
-                                                    {data?.regions?.map((data: any) => (
-                                                        <option key={data.id} value={data.id}>
-                                                            {data.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
+                                                    await getDistrictsByRegion(e.target.value);
+                                                }}
+                                                value={regionId}
+                                            >
+                                                <option >Select region * </option>
+                                                {data?.regions?.map((data: any) => (
+                                                    <option key={data.id} value={data.id}>
+                                                        {data.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
 
-                                            <div className=" mb-3">
-                                                <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                                    District *
-                                                </label>
-                                                <select
-                                                    className="form-control"
-                                                    aria-label="Default select example"
-                                                    onChange={async (e: any) => {
-                                                        setDistrictId(e.target.value);
-                                                    }}
-                                                    value={districtId}
-                                                >
-                                                    <option >Select district * </option>
-                                                    {districts?.map((data: any) => (
-                                                        <option key={data.id} value={data.id}>
-                                                            {data.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div></div> : <></>
-                                    }
+                                        <div className=" mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                District *
+                                            </label>
+                                            <select
+                                                className="form-control"
+                                                aria-label="Default select example"
+                                                onChange={async (e: any) => {
+                                                    setDistrictId(e.target.value);
+                                                }}
+                                                value={districtId}
+                                            >
+                                                <option >Select district * </option>
+                                                {districts?.map((data: any) => (
+                                                    <option key={data.id} value={data.id}>
+                                                        {data.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div></div> : <></>
+                                }
                                 <div className=" mb-3">
                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                         Electoral Area *
@@ -574,7 +576,7 @@ export default function Community({ data }: any) {
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="input-group mb-3">
-                                              <input type="text" className="form-control" placeholder='Enter search term'
+                                            <input type="text" className="form-control" placeholder='Enter search term'
                                                 id="searchText"
                                                 value={searchText}
                                                 onChange={(e: any) => {
@@ -675,7 +677,7 @@ export default function Community({ data }: any) {
                                                                             onClick={(e) => {
                                                                                 e.preventDefault();
 
-                                                                                // _delete(guide.id);
+                                                                                deleteCommunity(data.id);
                                                                             }}
                                                                         >
                                                                             Delete

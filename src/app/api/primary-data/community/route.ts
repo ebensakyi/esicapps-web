@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
-  //try {
+  try {
   const res = await request.json();
 
   const data = {
@@ -17,11 +17,11 @@ export async function POST(request: Request) {
   const response = await prisma.community.create({ data });
 
   return NextResponse.json(response);
-  // } catch (error: any) {
-  //   console.log(error);
+  } catch (error: any) {
+    console.log(error);
 
-  //   return NextResponse.json(error, { status: 500 });
-  // }
+    return NextResponse.json(error, { status: 500 });
+  }
 }
 
 export async function GET(request: Request) {
@@ -411,5 +411,24 @@ export async function PUT(request: Request) {
   } catch (error: any) {
     console.error(error);
     return NextResponse.json(error);
+  }
+}
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+
+    const id = Number(searchParams.get("id"));
+
+  const data = {
+  deleted:1
+  };
+
+  const response = await prisma.community.update({ where: { id }, data });
+
+  return NextResponse.json(response);
+  } catch (error: any) {
+    console.log(error);
+
+    return NextResponse.json(error, { status: 500 });
   }
 }
