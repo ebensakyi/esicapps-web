@@ -37,6 +37,8 @@ export async function GET(request: Request) {
 
     let region = userRegion || selectedRegion;
 
+    
+
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
@@ -61,7 +63,12 @@ export async function GET(request: Request) {
       if (get_all == 1) {
         
         query = {
-          where: { deleted: 0},
+          where: { deleted: 0, regionId:
+            Number(region) == 0 ||
+            Number(region) == undefined ||
+            Number.isNaN(Number(region))
+              ? undefined
+              : Number(region),},
 
           include: { Region: true },
           orderBy: {

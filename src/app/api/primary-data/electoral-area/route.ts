@@ -10,8 +10,6 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-
-    console.log(res);
     
     const data = {
       name: res.electoralAreaName,
@@ -55,7 +53,6 @@ export async function GET(request: Request) {
 
     let district = userDistrict || selectedDistrict;
 
-    // console.log("searchParams===> ",searchParams);
 
     // console.log("userLevel===> ",userLevel);
 

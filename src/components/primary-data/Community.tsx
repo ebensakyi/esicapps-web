@@ -386,6 +386,8 @@ export default function Community({ data }: any) {
                                                 aria-label="Default select example"
                                                 onChange={async (e: any) => {
                                                     setDistrictId(e.target.value);
+                                                    getElectoralAreasByDistrict(e.target.value);
+
                                                 }}
                                                 value={districtId}
                                             >
@@ -513,6 +515,8 @@ export default function Community({ data }: any) {
                                                     aria-label="Default select example"
                                                     onChange={async (e: any) => {
                                                         setDistrictId(e.target.value);
+
+                                                        getElectoralAreasByDistrict(e.target.value);
                                                     }}
                                                     value={districtId}
                                                 >

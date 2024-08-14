@@ -53,7 +53,6 @@ export default function ElectoralArea({ data }: any) {
                 `/api/primary-data/district?regionId= ${regionId}&get_all=1`
             );
 
-
             setDistricts(response.data.response);
         } catch (error) {
             console.log(error);
