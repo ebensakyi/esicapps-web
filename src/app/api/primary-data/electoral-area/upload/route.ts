@@ -6,6 +6,7 @@ import formidable from "formidable";
 import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
+import { Prisma } from "@prisma/client";
 
 // export const config = {
 //     api: {
@@ -37,6 +38,8 @@ export async function POST(request: Request) {
     return NextResponse.json({});
     // });
   } catch (error: any) {
+    console.log("==>", error);
+
     return NextResponse.json(error);
   }
 }
@@ -82,7 +85,10 @@ const formatData = async (data: any, districtId: any) => {
 
 const insertData = async (data: any, filePath: any) => {
   try {
-    let x = await prisma.electoralArea.createMany({
+    console.log(data);
+
+    // Attempt to insert data
+    let result = await prisma.electoralArea.createMany({
       data: data,
     });
 
@@ -92,12 +98,34 @@ const insertData = async (data: any, filePath: any) => {
         return;
       }
     });
+
+    return result;
   } catch (error) {
-    console.log(`>>>>ERROR<<<<< ${error}`);
+    // Check if it's a known request error
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2002') {
+        // P2002 indicates a unique constraint violation
+        console.error(`Unique constraint failed on: ${error.meta?.target}`);
+
+        // Find the conflicting name by querying existing records
+        for (const entry of data) {
+          const existing = await prisma.electoralArea.findUnique({
+            where: { name: entry.name },
+          });
+
+          if (existing) {
+            console.log(`Conflict on entry: ${entry.name}`);
+            break;
+          }
+        }
+      }
+    } else {
+      console.log(`>>>>insertData ERROR<<<<< ${error}`);
+    }
 
     return NextResponse.json(
-      { message: "Name of electoral isn't unique" },
+      { message: "Name of electoral area isn't unique" },
       { status: 500 }
     );
   }
-};
+}
