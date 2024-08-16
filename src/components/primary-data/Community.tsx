@@ -80,7 +80,7 @@ export default function Community({ data }: any) {
         try {
 
             const response = await axios.get(
-                `/api/primary-data/electoral-area?districtId=${districtId}&get_all=1`
+                `/api/primary-data/electoral-area?districtId=${districtId}&get_all=1`,
             );
 
 

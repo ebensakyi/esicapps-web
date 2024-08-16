@@ -219,11 +219,12 @@ export default function ElectoralArea({ data }: any) {
             setRegionId("");
 
 
-            if (response.status == 200) {
+            if (response.data == 0) {
                 router.refresh()
 
-                return toast.success("Electoral areas uploaded");
+                return toast.error("Electoral areas not uploaded.\nCheck list for duplicates and slash signs");
             }
+            return toast.success("Electoral areas uploaded");
 
         } catch (error: any) {
             console.log(error);

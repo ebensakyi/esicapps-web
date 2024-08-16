@@ -475,7 +475,7 @@ model ElectoralArea {
   User               User[]
   FollowUpInspection FollowUpInspection[]
 
-  @@unique([name, districtId], name: "electoralarea_un", map: "electoralarea_un")
+  // @@unique([name, districtId], name: "electoralarea_un")
 }
 
 model ContainerVolume {

@@ -34,8 +34,10 @@ export async function POST(request: Request) {
     await writeFile(path, buffer);
 
     let response = await readCSV(path, districtId);
+    console.log("rexxxxx", response);
+    
 
-    return NextResponse.json({});
+    return NextResponse.json(response);
     // });
   } catch (error: any) {
     console.log("==>", error);
@@ -101,6 +103,8 @@ const insertData = async (data: any, filePath: any) => {
 
     return result;
   } catch (error) {
+    console.log(error);
+    
     // Check if it's a known request error
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
