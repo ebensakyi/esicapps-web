@@ -536,8 +536,8 @@ export default function ElectoralArea({ data }: any) {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
-                                                    <td>{data?.District.name}</td>
-                                                    <td>{data?.District.Region.name}</td>
+                                                    <td>{data?.District?.name}</td>
+                                                    <td>{data?.District?.Region?.name}</td>
                                                     <td>  {moment(data?.createdAt).format(
                                                         "MMM Do YYYY, h:mm:ss a"
                                                     )}</td>
