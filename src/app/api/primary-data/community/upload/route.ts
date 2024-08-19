@@ -29,6 +29,7 @@ export async function POST(request: Request) {
 
     let response = await readCSV(path, electoralAreaId, districtId);
 
+
     // if (response == 0) {
     //   return NextResponse.json(
     //     { message: "Data exist", data: "existingRecord" },
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
     //   );
     // }
 
-   return NextResponse.json({});
+    return NextResponse.json({});
   } catch (error: any) {
     console.error(error);
     return NextResponse.json(error, { status: 500 });
@@ -51,11 +52,12 @@ const readCSV = async (
   try {
     let data: any = [];
 
+    let insertRowCount: any = 0;
+
     //Read file
     createReadStream(filePath)
       .pipe(parse({ headers: true }))
       .on("error", (error) => {
-
         throw error.message;
       })
       .on("data", (row) => {
@@ -64,14 +66,18 @@ const readCSV = async (
       .on("end", async () => {
         let newData = await formatData(data, electoralAreaId, districtId);
 
-        data = newData
+        data = newData;
 
-       
-            await prisma.community.createMany({
-              data: newData,
-            });
-         // }
-        // }
+        let res = await prisma.community.createMany({
+          data: newData,
+        });
+
+
+
+
+        insertRowCount = res.count;
+      
+
         fs.unlink(filePath, (err) => {
           if (err) {
             console.error("Error deleting CSV file:", err);
@@ -81,13 +87,11 @@ const readCSV = async (
       });
 
     /// await fs.unlinkSync(filePath);
-    return data.length;
+    return insertRowCount;
   } catch (error) {
     console.log("csvUploader ==>", error);
   }
 };
-
-
 
 const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
   try {
@@ -106,7 +110,7 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
           name: trimmedName,
         });
       } else {
-      //  console.log(`Duplicate or empty name found: "${trimmedName}"`);
+        //  console.log(`Duplicate or empty name found: "${trimmedName}"`);
 
         return newData;
         // You can add more specific handling or return a message as needed
@@ -118,4 +122,3 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
     console.log(error);
   }
 };
-

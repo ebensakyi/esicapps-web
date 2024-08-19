@@ -626,7 +626,7 @@ export default function Community({ data }: any) {
                                                     <td>{data?.name}</td>
                                                     <td>{data?.ElectoralArea?.name}</td>
                                                     <td>{data?.District?.name}</td>
-                                                    <td>{data?.ElectoralArea.District?.Region?.name}</td>
+                                                    <td>{data?.ElectoralArea?.District?.Region?.name}</td>
                                                     <td>  {moment(data?.createdAt).format(
                                                         "MMM Do YYYY, h:mm:ss a"
                                                     )}</td>
