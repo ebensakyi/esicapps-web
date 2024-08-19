@@ -6,17 +6,17 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
   try {
-  const res = await request.json();
+    const res = await request.json();
 
-  const data = {
-    name: res.communityName,
-    districtId: Number(res.districtId),
-    electoralAreaId: Number(res.electoralAreaId),
-  };
+    const data = {
+      name: res.communityName,
+      districtId: Number(res.districtId),
+      electoralAreaId: Number(res.electoralAreaId),
+    };
 
-  const response = await prisma.community.create({ data });
+    const response = await prisma.community.create({ data });
 
-  return NextResponse.json(response);
+    return NextResponse.json(response);
   } catch (error: any) {
     console.log(error);
 
@@ -32,12 +32,11 @@ export async function GET(request: Request) {
     const electoralAreaId = Number(searchParams.get("electoralAreaId"));
     const get_all = Number(searchParams.get("get_all"));
 
-
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
-    let  response
-    let count
+    let response;
+    let count;
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
@@ -67,96 +66,8 @@ export async function GET(request: Request) {
         response,
       });
     }
-    if (userLevel == 1) {   response = await prisma.community.findMany({
-      where:
-        searchText != ""
-          ? {
-              OR: [
-                {
-                  name: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  ElectoralArea: {
-                    name: { contains: searchText, mode: "insensitive" },
-                  },
-                },
-                {
-                  ElectoralArea: {
-                    District: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  District: {
-                    Region: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-              ],
-              deleted: 0,
-            }
-          : { deleted: 0 },
-
-      include: {
-        District: true,
-        ElectoralArea: {
-          include: {
-            District: {
-              include: {
-                Region: true,
-              },
-            },
-          },
-        },
-      },
-      orderBy: {
-        name: "asc",
-      },
-      skip: skip,
-      take: perPage,
-    });
-    count = await prisma.community.count({
-      where:
-        searchText != ""
-          ? {
-              OR: [
-                {
-                  name: {
-                    contains: searchText,
-                    mode: "insensitive",
-                  },
-                },
-                {
-                  ElectoralArea: {
-                    name: { contains: searchText, mode: "insensitive" },
-                  },
-                },
-                {
-                  ElectoralArea: {
-                    District: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-                {
-                  District: {
-                    Region: {
-                      name: { contains: searchText, mode: "insensitive" },
-                    },
-                  },
-                },
-              ],
-              deleted: 0,
-            }
-          : { deleted: 0 },
-    });
-    }else if (userLevel == 2) {
-       response = await prisma.community.findMany({
+    if (userLevel == 1) {
+      response = await prisma.community.findMany({
         where:
           searchText != ""
             ? {
@@ -187,10 +98,10 @@ export async function GET(request: Request) {
                     },
                   },
                 ],
-               deleted: 0, 
+                deleted: 0,
               }
-            : { deleted: 0,  },
-  
+            : { deleted: 0 },
+
         include: {
           District: true,
           ElectoralArea: {
@@ -244,8 +155,8 @@ export async function GET(request: Request) {
               }
             : { deleted: 0 },
       });
-    }else if (userLevel == 3) {
-       response = await prisma.community.findMany({
+    } else if (userLevel == 2) {
+      response = await prisma.community.findMany({
         where:
           searchText != ""
             ? {
@@ -277,10 +188,99 @@ export async function GET(request: Request) {
                   },
                 ],
                 deleted: 0,
-                districtId: Number(userDistrict)
+              }
+            : { deleted: 0 },
+
+        include: {
+          District: true,
+          ElectoralArea: {
+            include: {
+              District: {
+                include: {
+                  Region: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          name: "asc",
+        },
+        skip: skip,
+        take: perPage,
+      });
+      count = await prisma.community.count({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+                deleted: 0,
+              }
+            : { deleted: 0 },
+      });
+    } else if (userLevel == 3) {
+      response = await prisma.community.findMany({
+        where:
+          searchText != ""
+            ? {
+                OR: [
+                  {
+                    name: {
+                      contains: searchText,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      name: { contains: searchText, mode: "insensitive" },
+                    },
+                  },
+                  {
+                    ElectoralArea: {
+                      District: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                  {
+                    District: {
+                      Region: {
+                        name: { contains: searchText, mode: "insensitive" },
+                      },
+                    },
+                  },
+                ],
+                deleted: 0,
+                districtId: Number(userDistrict),
               }
             : { deleted: 0, districtId: Number(userDistrict) },
-  
+
         include: {
           District: true,
           ElectoralArea: {
@@ -334,7 +334,7 @@ export async function GET(request: Request) {
               }
             : { deleted: 0 },
       });
-    }else{
+    } else {
       count = await prisma.community.count({
         where:
           searchText != ""
@@ -372,11 +372,15 @@ export async function GET(request: Request) {
       });
     }
 
-  
+    let totalCount = await prisma.community.count({
+      where: {
+        deleted: 0,
+      },
+    });
 
-  
     return NextResponse.json({
       response,
+      totalCount,
       curPage: curPage,
       maxPage: Math.ceil(count / perPage),
     });
@@ -419,13 +423,13 @@ export async function DELETE(request: Request) {
 
     const id = Number(searchParams.get("id"));
 
-  const data = {
-  deleted:1
-  };
+    const data = {
+      deleted: 1,
+    };
 
-  const response = await prisma.community.update({ where: { id }, data });
+    const response = await prisma.community.update({ where: { id }, data });
 
-  return NextResponse.json(response);
+    return NextResponse.json(response);
   } catch (error: any) {
     console.log(error);
 

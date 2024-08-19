@@ -34,7 +34,6 @@ export async function POST(request: Request) {
     await writeFile(path, buffer);
 
     let response = await readCSV(path, districtId);
-    console.log("rexxxxx", response);
     
 
     return NextResponse.json(response);
@@ -87,7 +86,6 @@ const formatData = async (data: any, districtId: any) => {
 
 const insertData = async (data: any, filePath: any) => {
   try {
-    console.log(data);
 
     // Attempt to insert data
     let result = await prisma.electoralArea.createMany({

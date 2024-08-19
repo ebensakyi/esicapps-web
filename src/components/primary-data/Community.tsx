@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
+import Link from "next/link";
 
 
 
@@ -44,7 +45,7 @@ export default function Community({ data }: any) {
     const [communityFile, setCommunityFile] = useState("");
 
 
-    const page = searchParams.get('page');
+    let page = searchParams.get('page');
 
     const pathname = usePathname()
 
@@ -58,7 +59,7 @@ export default function Community({ data }: any) {
 
         getDistrictsByRegion(loggedInUserRegion);
         getElectoralAreasByDistrict(loggedInUserDistrict);
-
+page = "1";
         const url = `${pathname}/?searchText=${searchText}&page=${page}`;
         router.push(url);
 
@@ -250,8 +251,8 @@ export default function Community({ data }: any) {
             if (response.status == 200) {
                 setCommunityName("");
                 setElectoralAreaId("");
-                setDistrictId("");
-                setRegionId("");
+                // setDistrictId("");
+                // setRegionId("");
                 router.refresh()
 
                 return toast.success("Communities uploaded");
@@ -326,7 +327,7 @@ export default function Community({ data }: any) {
     return (
         <main id="main" className="main">
             <div className="pagetitle">
-                <h1>COMMUNITY</h1>
+                <h1>COMMUNITY ({data?.communities?.totalCount})</h1>
                 {/* <nav>
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -471,8 +472,8 @@ export default function Community({ data }: any) {
                     <div className="col-lg-6">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Upload Bulk</h5>
-                                <form ref={formRef}>
+                            <h5 className="card-title">Upload Bulk</h5> <Link style={{color:"red"}} href={"https://esicapps-files.s3.eu-west-2.amazonaws.com/Community1+Template.csv"}>Click to Download Template</Link>
+                            <form ref={formRef}>
                                     <div className=" mb-3">
                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
                                             File *
@@ -584,6 +585,7 @@ export default function Community({ data }: any) {
                                                 id="searchText"
                                                 value={searchText}
                                                 onChange={(e: any) => {
+                                                    
                                                     setSearchText(e.target.value);
                                                 }} />
                                         </div>

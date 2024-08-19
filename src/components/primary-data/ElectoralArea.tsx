@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
+import Link from "next/link";
 
 
 
@@ -410,7 +411,7 @@ export default function ElectoralArea({ data }: any) {
                     <div className="col-lg-6">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Upload Bulk</h5>
+                                <h5 className="card-title">Upload Bulk</h5> <Link style={{color:"red"}} href={"https://esicapps-files.s3.eu-west-2.amazonaws.com/ElectoralArea+Template.csv"}>Click to Download Template</Link>
                                 <form ref={formRef}>
                                     <div className=" mb-3">
                                         <label htmlFor="inputText" className="col-sm-12 col-form-label">
