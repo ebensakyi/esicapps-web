@@ -223,7 +223,7 @@ export default function ElectoralArea({ data }: any) {
             if (response.data == 0) {
                 router.refresh()
 
-                return toast.error("Electoral areas not uploaded.\nCheck list for duplicates and slash signs");
+                return toast.error("Electoral areas not uploaded.");
             }
             return toast.success("Electoral areas uploaded");
 

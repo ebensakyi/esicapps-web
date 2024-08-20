@@ -73,6 +73,7 @@ const readCSV = async (
         });
 
 
+console.log("RES COUNT===> " + res.count);
 
 
         insertRowCount = res.count;
@@ -99,26 +100,61 @@ const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
     const processedNames = new Set<string>();
 
     data.forEach((row: any) => {
-      const trimmedName = row.name.trim();
+      // Convert the name to uppercase, trim whitespace, and replace both slashes with spaces
+      let trimmedName = row.name?.trim().toLowerCase();
+      
+      if (trimmedName) {
+        // Replace both forward slashes (/) and backslashes (\) with spaces
+        trimmedName = trimmedName.replace(/[\/\\]/g, ' ');
+      }
 
-      if (trimmedName !== "" && !processedNames.has(trimmedName)) {
+      // Skip if the name is empty or a duplicate
+      if (trimmedName && !processedNames.has(trimmedName)) {
         processedNames.add(trimmedName);
 
         newData.push({
           electoralAreaId: Number(electoralAreaId),
           districtId: Number(districtId),
-          name: trimmedName,
+          name: trimmedName.toUpperCase(),
         });
-      } else {
-        //  console.log(`Duplicate or empty name found: "${trimmedName}"`);
-
-        return newData;
-        // You can add more specific handling or return a message as needed
       }
     });
 
     return newData;
   } catch (error) {
-    console.log(error);
+    console.error("Error formatting data:", error);
+    return [];
   }
 };
+
+
+
+// const formatData = async (data: any, electoralAreaId: any, districtId: any) => {
+//   try {
+//     const newData: any = [];
+//     const processedNames = new Set<string>();
+
+//     data.forEach((row: any) => {
+//       const trimmedName = row.name.trim();
+
+//       if (trimmedName !== "" && !processedNames.has(trimmedName)) {
+//         processedNames.add(trimmedName);
+
+//         newData.push({
+//           electoralAreaId: Number(electoralAreaId),
+//           districtId: Number(districtId),
+//           name: trimmedName,
+//         });
+//       } else {
+//         //  console.log(`Duplicate or empty name found: "${trimmedName}"`);
+
+//         return newData;
+//         // You can add more specific handling or return a message as needed
+//       }
+//     });
+
+//     return newData;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
