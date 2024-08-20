@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, usePathname, redirect, useSearchParams } from 'next/navigation';
 import axios from 'axios';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
 import ReactPaginate from "react-paginate";
@@ -30,7 +30,8 @@ export default function District({ data }: any) {
     const [districtName, setDistrictName] = useState("")
     const [abbrv, setAbbrv] = useState("")
 
-    const searchTextRef: any = useRef("");
+    const [searchText, setSearchText] = useState("");
+
 
     const page = searchParams.get('page');
 
@@ -159,22 +160,16 @@ export default function District({ data }: any) {
             console.log("error==> ", error);
         }
     };
+ 
+    
+    useEffect(() => {
+        // setDistrictId(loggedInUserDistrict);
+        // setRegionId(loggedInUserRegion);
 
-    const handleSearch = () => {
-        try {
-            let _searchText: any = searchTextRef?.current?.value
+        const url = `${pathname}/?searchText=${searchText}&page=${page}`;
+        router.push(url);
 
-
-            router.push(
-                `${pathname}?searchText=${_searchText}&page=${page}`
-
-            );
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
+    }, [searchText]);
 
     return (
         <main id="main" className="main">
@@ -292,11 +287,14 @@ export default function District({ data }: any) {
                                 <h5 className="card-title">Districts</h5>
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <div className="input-group mb-3">
-                                            <input type="text" className="form-control" placeholder='Enter search term' ref={searchTextRef}
+                                    <div className="input-group mb-3">
+                                            <input type="text" className="form-control" placeholder='Enter search term'
                                                 id="searchText"
-                                                name="searchText" />
-                                            <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span>
+                                                value={searchText}
+                                                onChange={(e: any) => {
+                                                    
+                                                    setSearchText(e.target.value);
+                                                }} />
                                         </div>
 
                                     </div>
@@ -317,6 +315,9 @@ export default function District({ data }: any) {
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
+                                            <th scope="col"># Electoral Areas</th>
+                                            <th scope="col"># Communities</th>
+
                                             <th scope="col">Abbrv.</th>
 
                                             <th scope="col">Region</th>
@@ -329,6 +330,9 @@ export default function District({ data }: any) {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.name}</td>
+                                                    <td>{data?._count?.ElectoralArea}</td>
+                                                    <td>{data?._count?.Community}</td>
+
                                                     <td>{data?.abbrv}</td>
                                                     <td>{data?.Region?.name}</td>
 

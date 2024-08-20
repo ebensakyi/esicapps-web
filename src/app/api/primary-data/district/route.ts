@@ -37,8 +37,6 @@ export async function GET(request: Request) {
 
     let region = userRegion || selectedRegion;
 
-    
-
     const searchText =
       searchParams.get("searchText")?.toString() == "undefined"
         ? ""
@@ -58,192 +56,107 @@ export async function GET(request: Request) {
 
     let count = 0;
 
+    const getRegionId = (region: any) =>
+      Number(region) == 0 ||
+      Number(region) == undefined ||
+      Number.isNaN(Number(region))
+        ? undefined
+        : Number(region);
+
+    const getSearchCondition = (searchText: any) => ({
+      OR: [
+        { name: { contains: searchText, mode: "insensitive" } },
+        { abbrv: { contains: searchText, mode: "insensitive" } },
+        { Region: { name: { contains: searchText, mode: "insensitive" } } },
+      ],
+    });
+
+    const baseQuery = {
+      where: { deleted: 0 },
+      include: {
+        Region: true,
+        _count: {
+          
+          select: { ElectoralArea: true ,Community:true}, // Count ElectoralArea for each district
+        },
+      },
+      orderBy: { name: "asc" },
+    };
 
     if (userLevel == 1) {
-      if (get_all == 1) {
-        
-        query = {
-          where: { deleted: 0, regionId:
-            Number(region) == 0 ||
-            Number(region) == undefined ||
-            Number.isNaN(Number(region))
-              ? undefined
-              : Number(region),},
+      const regionId = getRegionId(region);
 
-          include: { Region: true },
-          orderBy: {
-            name: "asc",
-          },
+      if (get_all == 1) {
+        query = {
+          ...baseQuery,
+          where: { ...baseQuery.where, regionId },
         };
       } else {
         query = {
-          where:
-            searchText != ""
-              ? {
-                  OR: [
-                    {
-                      name: {
-                        contains: searchText,
-                        mode: "insensitive",
-                      },
-                    },
-                    {
-                      abbrv: { contains: searchText, mode: "insensitive" },
-                    },
-
-                    {
-                      Region: {
-                        name: { contains: searchText, mode: "insensitive" },
-                      },
-                    },
-                  ],
-                  deleted: 0,
-                  regionId:
-                    Number(region) == 0 ||
-                    Number(region) == undefined ||
-                    Number.isNaN(Number(region))
-                      ? undefined
-                      : Number(region),
-                }
-              : {
-                  deleted: 0,
-                  regionId:
-                    Number(region) == 0 ||
-                    Number(region) == undefined ||
-                    Number.isNaN(Number(region))
-                      ? undefined
-                      : Number(region),
-                },
-
-          skip: skip,
-          take: perPage,
-          include: { Region: true },
-          orderBy: {
-            name: "asc",
+          ...baseQuery,
+          where: {
+            ...baseQuery.where,
+            ...(searchText ? getSearchCondition(searchText) : {}),
+            regionId,
           },
+          skip,
+          take: perPage,
         };
 
         count = await prisma.district.count({
-          where: {
-            deleted: 0,
-            regionId:
-              Number(region) == 0 ||
-              Number(region) == undefined ||
-              Number.isNaN(Number(region))
-                ? undefined
-                : Number(region),
-          },
+          where: { ...baseQuery.where, regionId },
         });
       }
     } else if (userLevel == 2) {
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, regionId: Number(region) },
-
-          include: { Region: true },
-          orderBy: {
-            name: "asc",
-          },
+          ...baseQuery,
+          where: { ...baseQuery.where, regionId: Number(region) },
         };
       } else {
         query = {
-          where:
-            searchText != ""
-              ? {
-                  OR: [
-                    {
-                      name: {
-                        contains: searchText,
-                        mode: "insensitive",
-                      },
-                    },
-                    {
-                      abbrv: { contains: searchText, mode: "insensitive" },
-                    },
-
-                    {
-                      Region: {
-                        name: { contains: searchText, mode: "insensitive" },
-                      },
-                    },
-                  ],
-                  deleted: 0,
-                  regionId: Number(userRegion),
-                }
-              : { deleted: 0, regionId: Number(userRegion) },
-
-          skip: skip,
-          take: perPage,
-          include: { Region: true },
-          orderBy: {
-            name: "asc",
+          ...baseQuery,
+          where: {
+            ...baseQuery.where,
+            ...(searchText ? getSearchCondition(searchText) : {}),
+            regionId: Number(userRegion),
           },
+          skip,
+          take: perPage,
         };
 
         count = await prisma.district.count({
-          where: { deleted: 0, regionId: Number(userRegion) },
+          where: { ...baseQuery.where, regionId: Number(userRegion) },
         });
       }
     } else if (userLevel == 3) {
       if (get_all == 1) {
         query = {
-          where: { deleted: 0, regionId: region },
-
-          include: { Region: true },
-          orderBy: {
-            name: "asc",
-          },
+          ...baseQuery,
+          where: { ...baseQuery.where, regionId: region },
         };
       } else {
         query = {
-          where:
-            searchText != ""
-              ? {
-                  OR: [
-                    {
-                      name: {
-                        contains: searchText,
-                        mode: "insensitive",
-                      },
-                    },
-                    {
-                      abbrv: { contains: searchText, mode: "insensitive" },
-                    },
-
-                    {
-                      Region: {
-                        name: { contains: searchText, mode: "insensitive" },
-                      },
-                    },
-                  ],
-                  deleted: 0,
-                  id: Number(userDistrict),
-                }
-              : { deleted: 0, id: Number(userDistrict) },
-
-          skip: skip,
-          take: perPage,
-          include: { Region: true },
-          orderBy: {
-            name: "asc",
+          ...baseQuery,
+          where: {
+            ...baseQuery.where,
+            ...(searchText ? getSearchCondition(searchText) : {}),
+            id: Number(userDistrict),
           },
+          skip,
+          take: perPage,
         };
+
         count = await prisma.district.count({
-          where: { deleted: 0, id: Number(userDistrict) },
+          where: { ...baseQuery.where, id: Number(userDistrict) },
         });
       }
     } else {
       query = {
-        where: { deleted: 0, id: Number(userDistrict) },
-        include: { Region: true },
-        orderBy: {
-          name: "asc",
-        },
+        ...baseQuery,
+        where: { ...baseQuery.where, id: Number(userDistrict) },
       };
     }
-
-  
-    
 
     const response = await prisma.district.findMany(query);
 
