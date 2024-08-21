@@ -444,6 +444,39 @@ model CleaningFrequency {
   updatedAt                 DateTime                    @updatedAt
   MarketPremisesInfoSection MarketPremisesInfoSection[]
 }
+model Region {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  abbrv              String               @unique @db.VarChar(10)
+  code               String               @unique @db.VarChar(2)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  District           District[]
+  Inspection         Inspection[]
+  Messaging          Messaging[]
+  User               User[]
+  SanitationReport   SanitationReport[]
+  FollowUpInspection FollowUpInspection[]
+}
+
+model District {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  abbrv              String?              @unique @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  regionId           Int
+  Community          Community[]
+  Region             Region               @relation(fields: [regionId], references: [id])
+  ElectoralArea      ElectoralArea[]
+  Inspection         Inspection[]
+  Messaging          Messaging[]
+  User               User[]
+  SanitationReport   SanitationReport[]
+  FollowUpInspection FollowUpInspection[]
+}
 
 model Community {
   id                 Int                  @id @default(autoincrement())
@@ -624,39 +657,6 @@ model PestSign {
   PremisesPestSigns PremisesPestSigns[]
 }
 
-model Region {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  abbrv              String               @unique @db.VarChar(10)
-  code               String               @unique @db.VarChar(2)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  District           District[]
-  Inspection         Inspection[]
-  Messaging          Messaging[]
-  User               User[]
-  SanitationReport   SanitationReport[]
-  FollowUpInspection FollowUpInspection[]
-}
-
-model District {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  abbrv              String?              @unique @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  regionId           Int
-  Community          Community[]
-  Region             Region               @relation(fields: [regionId], references: [id])
-  ElectoralArea      ElectoralArea[]
-  Inspection         Inspection[]
-  Messaging          Messaging[]
-  User               User[]
-  SanitationReport   SanitationReport[]
-  FollowUpInspection FollowUpInspection[]
-}
 
 model RespondentDesignation {
   id               Int                @id @default(autoincrement())
