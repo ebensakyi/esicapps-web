@@ -3,7 +3,7 @@ export const toiletPitPosition = [
     name: "Direct",
   },
   {
-    name: "Offsite",
+    name: "Offset",
   },
   {
     name: "NA",

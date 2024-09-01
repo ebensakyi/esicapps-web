@@ -2010,7 +2010,7 @@ export default function DataEdit({ data }: any) {
                                                                 >
                                                                     <option value="">Select</option>
                                                                     <option value={1}>Direct</option>
-                                                                    <option value={2}>Offsite</option>
+                                                                    <option value={2}>Offset</option>
                                                                     <option value={3}>NA</option>
                                                                 </select>
                                                                 {/* <input
@@ -2052,7 +2052,7 @@ export default function DataEdit({ data }: any) {
                                                                 >
                                                                     <option value="">Select</option>
                                                                     <option value={1}>Direct</option>
-                                                                    <option value={2}>Offsite</option>
+                                                                    <option value={2}>Offset</option>
                                                                     <option value={3}>NA</option>
                                                                 </select>
                                                             </div>

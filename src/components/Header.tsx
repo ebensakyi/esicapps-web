@@ -361,13 +361,21 @@ export default function Header() {
                                         <i className="bi bi-circle" />
                                         <span>General</span>
                                     </Link>
-                                </li> : <></>}
+                                </li>  : <></>}
 
                                 {session?.user?.privileges?.includes(5) ?
                                 <li>
                                     <Link href="/report/user-submissions">
                                         <i className="bi bi-circle" />
                                         <span>User submissions</span>
+                                    </Link>
+                                </li> : <></>}
+
+                                {session?.user?.privileges?.includes(5) ?
+                                <li>
+                                    <Link href="/report/league-table">
+                                        <i className="bi bi-circle" />
+                                        <span>League Table</span>
                                     </Link>
                                 </li> : <></>}
                                 {/* {session?.user?.privileges?.includes(6)?  <li>

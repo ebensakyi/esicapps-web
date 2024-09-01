@@ -86,6 +86,72 @@ model Inspection {
   SolidWasteSection                  SolidWasteSection?
   WaterSection                       WaterSection?
 }
+model Region {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  abbrv              String               @unique @db.VarChar(10)
+  code               String               @unique @db.VarChar(2)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  District           District[]
+  Inspection         Inspection[]
+  Messaging          Messaging[]
+  User               User[]
+  SanitationReport   SanitationReport[]
+  FollowUpInspection FollowUpInspection[]
+}
+
+model District {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  abbrv              String?              @unique @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  regionId           Int
+  Community          Community[]
+  Region             Region               @relation(fields: [regionId], references: [id])
+  ElectoralArea      ElectoralArea[]
+  Inspection         Inspection[]
+  Messaging          Messaging[]
+  User               User[]
+  SanitationReport   SanitationReport[]
+  FollowUpInspection FollowUpInspection[]
+}
+
+model Community {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  electoralAreaId    Int?
+  districtId         Int?
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  BasicInfoSection   BasicInfoSection[]
+  District           District?            @relation(fields: [districtId], references: [id])
+  ElectoralArea      ElectoralArea?       @relation(fields: [electoralAreaId], references: [id])
+  Inspection         Inspection[]
+  FollowUpInspection FollowUpInspection[]
+
+  @@unique([electoralAreaId, name], name: "electoralAreaIdIdentifier")
+}
+
+model ElectoralArea {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @unique @db.VarChar(255)
+  deleted            Int?                 @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  districtId         Int
+  Community          Community[]
+  District           District             @relation(fields: [districtId], references: [id])
+  Inspection         Inspection[]
+  User               User[]
+  FollowUpInspection FollowUpInspection[]
+
+  // @@unique([name, districtId], name: "electoralarea_un")
+}
 
 model InspectionHistory {
   historyId                                 Int                                         @id @default(autoincrement())
@@ -443,72 +509,6 @@ model CleaningFrequency {
   createdAt                 DateTime                    @default(now())
   updatedAt                 DateTime                    @updatedAt
   MarketPremisesInfoSection MarketPremisesInfoSection[]
-}
-model Region {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  abbrv              String               @unique @db.VarChar(10)
-  code               String               @unique @db.VarChar(2)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  District           District[]
-  Inspection         Inspection[]
-  Messaging          Messaging[]
-  User               User[]
-  SanitationReport   SanitationReport[]
-  FollowUpInspection FollowUpInspection[]
-}
-
-model District {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  abbrv              String?              @unique @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  regionId           Int
-  Community          Community[]
-  Region             Region               @relation(fields: [regionId], references: [id])
-  ElectoralArea      ElectoralArea[]
-  Inspection         Inspection[]
-  Messaging          Messaging[]
-  User               User[]
-  SanitationReport   SanitationReport[]
-  FollowUpInspection FollowUpInspection[]
-}
-
-model Community {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(255)
-  electoralAreaId    Int?
-  districtId         Int?
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  BasicInfoSection   BasicInfoSection[]
-  District           District?            @relation(fields: [districtId], references: [id])
-  ElectoralArea      ElectoralArea?       @relation(fields: [electoralAreaId], references: [id])
-  Inspection         Inspection[]
-  FollowUpInspection FollowUpInspection[]
-
-  @@unique([electoralAreaId, name], name: "electoralAreaIdIdentifier")
-}
-
-model ElectoralArea {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @unique @db.VarChar(255)
-  deleted            Int?                 @default(0)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  districtId         Int
-  Community          Community[]
-  District           District             @relation(fields: [districtId], references: [id])
-  Inspection         Inspection[]
-  User               User[]
-  FollowUpInspection FollowUpInspection[]
-
-  // @@unique([name, districtId], name: "electoralarea_un")
 }
 
 model ContainerVolume {

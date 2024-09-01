@@ -1,4 +1,3 @@
-import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 import { createReadStream } from "fs";
 import { parse } from "fast-csv";
@@ -6,6 +5,7 @@ import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
 import { logActivity } from '../../../../../../utils/log';
+import { prisma } from "../../../../../../prisma/db";
 
 export async function POST(request: Request) {
   try {
@@ -33,6 +33,12 @@ export async function POST(request: Request) {
     let response = await readCSV(path, electoralAreaId, districtId);
 
 
+    // if (response == 0) {
+    //   return NextResponse.json(
+    //     { message: "Data exist", data: "existingRecord" },
+    //     { status: 202 }
+    //   );
+    // }
 
     return NextResponse.json({});
   } catch (error: any) {

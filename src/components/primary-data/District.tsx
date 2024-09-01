@@ -163,8 +163,7 @@ export default function District({ data }: any) {
  
     
     useEffect(() => {
-        // setDistrictId(loggedInUserDistrict);
-        // setRegionId(loggedInUserRegion);
+       
 
         const url = `${pathname}/?searchText=${searchText}&page=${page}`;
         router.push(url);

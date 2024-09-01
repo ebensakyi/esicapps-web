@@ -2,21 +2,13 @@ import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 import { createReadStream } from "fs";
 import { parse } from "fast-csv";
-import formidable from "formidable";
 import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
-import { Prisma } from "@prisma/client";
 
-// export const config = {
-//     api: {
-//       bodyParser: false,
-//     },
-//   };
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-
     const file: File | null = data.get("csvFile") as unknown as File;
     const districtId = Number(data?.get("districtId"));
 
@@ -27,120 +19,91 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    let fileName = nanoid() + file.name;
+    const dirPath = './public/temp/';
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
 
-    const path = `./public/temp/${fileName}`;
+    let fileName = nanoid() + file.name;
+    const path = `${dirPath}${fileName}`;
 
     await writeFile(path, buffer);
 
-    let response = await readCSV(path, districtId);
-    
+    if (fs.existsSync(path)) {
+      let response = await readCSV(path, districtId);
+      return NextResponse.json(response);
+    } else {
+      throw new Error('File was not created successfully.');
+    }
 
-    return NextResponse.json(response);
-    // });
   } catch (error: any) {
     console.log("==>", error);
-
     return NextResponse.json(error);
   }
 }
 
-const readCSV = async (filePath: any, districtId: any) => {
+const readCSV = async (filePath: string, districtId: number) => {
   try {
     let data: any = [];
-    let insertRowCount: any = 0;
+    let insertRowCount = 0;
 
-    //Read file
+    console.log("new filePath", filePath);
+
     createReadStream(filePath)
-      .pipe(parse({ headers: true }))
+      .pipe(parse({ headers: true, trim: true })) // Use the `trim: true` option to automatically trim all data, including headers.
       .on("error", (error) => {
         throw error.message;
       })
       .on("data", (row) => {
+        console.log("data row", row);
+
+        // Optionally trim and sanitize each field in the row
+        Object.keys(row).forEach((key) => {
+          const trimmedKey = key.trim(); // Ensure the header is trimmed
+          row[trimmedKey] = row[trimmedKey]?.trim(); // Trim the value
+        });
+
         data.push(row);
       })
       .on("end", async () => {
         let newData = await formatData(data, districtId);
+        insertRowCount = await insertData(newData, filePath);
 
-     insertRowCount =   await insertData(newData, filePath);
+        console.log("new data", newData);
+        
+        // fs.unlink(filePath, (err) => {
+        //   if (err) {
+        //     console.error("Error deleting CSV file:", err);
+        //     return;
+        //   }
+        // });
       });
 
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting CSV file:", err);
-          return;
-        }
-      });
-    
-    return insertRowCount
+    return insertRowCount;
+
   } catch (error) {
     console.log("csvUploader ==>", error);
   }
 };
 
-// const formatData = async (data: any, districtId: any) => {
-//   try {
-//     let newData = data.map((row: any) => ({
-//       districtId: Number(districtId),
-//       name: row.name,
-//     }));
 
-//     return newData;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-
-// const formatData = async (data: any, districtId: any) => {
-//   try {
-//     console.log("UNPRO DATA ",data);
-    
-//     const newData: any = [];
-//     const processedNames = new Set<string>();
-
-//     data.forEach((row: any) => {
-//       // Convert the name to lowercase
-//       const trimmedName = row.name.trim().toLowerCase();
-
-//       // Ensure the name is not empty and hasn't been processed already
-//       if (trimmedName !== "" && !processedNames.has(trimmedName)) {
-//         processedNames.add(trimmedName);
-
-//         newData.push({
-//           districtId: Number(districtId),
-//           name: trimmedName,
-//         });
-//       } else {
-//         // Handle duplicates or empty names as needed
-//       }
-//     });
-//     console.log("PRO DATA ",newData);
-
-//     return newData;
-//   } catch (error) {
-//     console.log("formatData error ",error);
-//   }
-// };
-
-const formatData = async (data: any,  districtId: any) => {
+const formatData = async (data: any, districtId: number) => {
   try {
     const newData: any = [];
     const processedNames = new Set<string>();
+    console.log("==> formatted data ",data);
 
     data.forEach((row: any) => {
-      // Convert the name to uppercase, trim whitespace, and replace both slashes with spaces
       let trimmedName = row.name?.trim().toLowerCase();
-      
+      console.log("==> trimmedName ",trimmedName);
+
       if (trimmedName) {
-        // Replace both forward slashes (/) and backslashes (\) with spaces
         trimmedName = trimmedName.replace(/[\/\\]/g, ' ');
       }
 
-      // Skip if the name is empty or a duplicate
       if (trimmedName && !processedNames.has(trimmedName)) {
         processedNames.add(trimmedName);
-
+        
         newData.push({
           districtId: Number(districtId),
           name: trimmedName.toUpperCase(),
@@ -155,53 +118,18 @@ const formatData = async (data: any,  districtId: any) => {
   }
 };
 
-
-const insertData = async (data: any, filePath: any) => {
+const insertData = async (data: any, filePath: string) => {
   try {
-
-    // Attempt to insert data
-    let result = await prisma.electoralArea.createMany({
-      data: data,
-    });
-
+    let result = await prisma.electoralArea.createMany({ data });
     fs.unlink(filePath, (err) => {
       if (err) {
         console.error("Error deleting CSV file:", err);
         return;
       }
     });
-
     return result.count;
   } catch (error) {
-  //   console.log(`>>>>insertData ERROR 1<<<<< ${error}`);
-
-  //   // Check if it's a known request error
-  //   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-  //     if (error.code === 'P2002') {
-  //       // P2002 indicates a unique constraint violation
-  //       console.error(`Unique constraint failed on: ${error.meta?.target}`);
-
-  //       // Find the conflicting name by querying existing records
-  //       for (const entry of data) {
-  //         const existing = await prisma.electoralArea.findUnique({
-  //           where: { name: entry.name },
-  //         });
-
-  //         if (existing) {
-  //           console.log(`Conflict on entry: ${entry.name}`);
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   } else {
-  //     console.log(`>>>>insertData ERROR<<<<< ${error}`);
-  //   }
-
-  //   return NextResponse.json(
-  //     { message: "Name of electoral area isn't unique" },
-  //     { status: 500 }
-  //   );
-  return 0
-   }
-  return 0
-}
+    console.error("Error inserting data:", error);
+    return 0;
+  }
+};

@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 
 'use client'
 import Link from 'next/link'
@@ -7,10 +7,11 @@ import moment from "moment";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useSession } from 'next-auth/react';
-import { useRef, useState,useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { LOGIN_URL } from '@/config';
 import { toast } from 'react-toastify';
 import Modal from "react-modal";
+import { handleExcelName, handleTitle } from '@/utils/data-page-utils';
 
 
 export default function Data({ data }: any) {
@@ -71,37 +72,32 @@ export default function Data({ data }: any) {
 
     const [isPublished, setIsPublished] = useState("");
     const [selectedInspections, setSelectedInspections] = useState([]);
+    const [dataType, setDataType] = useState("");
 
-    var dateString = moment().format("DD-MM-yyyy-HH-mm-ss-a");
 
 
     const [searchValue, setSearchValue] = useState('');
 
 
     useEffect(() => {
-       // `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
+        // `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
 
-      const url = `${pathname}?formId=${formId}&published=${published}&searchText=${searchValue}&fileName=${handleExcelName()}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`;
-      router.push(url);
+        const url = `${pathname}?formId=${formId}&published=${published}&searchText=${searchValue}&fileName=${handleExcelName(formId)}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}`;
+        router.push(url);
     }, [searchValue]);
 
 
 
 
 
-    // const handlePagination = (page: { selected: number; }) => {
-    //     router.push(
-    //         `${pathname}?published=${published}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`,
-    //     );
 
-    // };
 
     const handleExportAll = async () => {
         try {
             let searchText = searchParams.get('searchText')
 
             const response = await axios.get(
-                `/api/submitted-data/export?formId=${formId}&published=${published}&searchText=${searchValue}&fileName=${handleExcelName()}`,
+                `/api/submitted-data/export?formId=${formId}&published=${published}&searchText=${searchValue}&fileName=${handleExcelName(formId)}`,
 
             );
 
@@ -125,6 +121,8 @@ export default function Data({ data }: any) {
         );
     };
 
+
+
     const handleRating = (rating: number) => {
         try {
             if (rating >= 4) {
@@ -138,75 +136,6 @@ export default function Data({ data }: any) {
             }
         } catch (error) { }
     };
-
-    const handleExcelName = () => {
-        try {
-            if (formId == 1) {
-                return `RESIDENTIAL PREMISES-${dateString}.xlsx`;
-            } else if (formId == 2) {
-                return `EATING & DRINKING PREMISES-${dateString}.xlsx`;
-            } else if (formId == 3) {
-                return `HEALTH PREMISES-${dateString}.xlsx`;
-            } else if (formId == 4) {
-                return `HOSPITALITY PREMISES-${dateString}.xlsx`;
-            } else if (formId == 5) {
-                return `INSTITUTION PREMISES-${dateString}.xlsx`;
-            } else if (formId == 6) {
-                return `INDUSTRY PREMISES-${dateString}.xlsx`;
-            } else if (formId == 7) {
-                return `MARKETS & LORRY PARK PREMISES-${dateString}.xlsx`;
-            } else if (formId == 8) {
-                return `SANITARY FACILITY PREMISES-${dateString}.xlsx`;
-            }
-        } catch (error) { }
-    };
-
-    const handleTitle = () => {
-        try {
-            if (formId == 1) {
-                return <h5 className="card-title mb-0">RESIDENTIAL PREMISES</h5>;
-            } else if (formId == 2) {
-                return <h5 className="card-title mb-0">EATING & DRINKING PREMISES</h5>;
-            } else if (formId == 3) {
-                return <h5 className="card-title mb-0">HEALTH PREMISES</h5>;
-            } else if (formId == 4) {
-                return <h5 className="card-title mb-0">HOSPITALITY PREMISES</h5>;
-            } else if (formId == 5) {
-                return <h5 className="card-title mb-0">INSTITUTION PREMISES</h5>;
-            } else if (formId == 6) {
-                return <h5 className="card-title mb-0">INDUSTRY PREMISES</h5>;
-            } else if (formId == 7) {
-                return (
-                    <h5 className="card-title mb-0">MARKETS & LORRY PARK PREMISES</h5>
-                );
-            } else if (formId == 8) {
-                return <h5 className="card-title mb-0">SANITARY FACILITY PREMISES</h5>;
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
-    // const handleSearch = () => {
-    //     try {
-    //         let _searchText: any = searchTextRef?.current?.value
-    //         let _publishingStatus: any = filterRef?.current?.value
-
-    //         let _deleted: any = filterRef?.current?.value
-
-
-    //         router.push(
-    //             `${pathname}?formId=${formId}&published=${_publishingStatus}&deleted=${_deleted}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${_searchText}`
-
-    //         );
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-
 
     const returnFilterValue = async (filterBy: any) => {
         if (filterBy == "regionId") {
@@ -268,21 +197,21 @@ export default function Data({ data }: any) {
 
 
             if (filterBy == "national") {
-                return router.push("/");
+                return router.push(pathname);
             }
             if (filterBy == "" || filterBy == null) {
                 return toast.error("Please select a filter");
             }
-            if (filterBy == "communityId" && community == null) {
+            if (filterBy == "communityId" && community == "") {
                 return toast.error("Please select community");
             }
-            if (filterBy == "electoralAreaId" && electoralArea == null) {
+            if (filterBy == "electoralAreaId" && electoralArea == "") {
                 return toast.error("Please select electoral area");
             }
-            if (filterBy == "districtId" && district == null || district == "") {
+            if (filterBy == "districtId" && district == "") {
                 return toast.error("Please select district");
             }
-            if (filterBy == "regionId" && region == null) {
+            if (filterBy == "regionId" && region == "") {
                 return toast.error("Please select region");
             }
 
@@ -309,10 +238,10 @@ export default function Data({ data }: any) {
 
     };
     const handleFilterReset = () => {
-        setRegion(null)
-        setDistrict(null)
-        setElectoralArea(null)
-        setCommunity(null)
+        setRegion("")
+        setDistrict("")
+        setElectoralArea("")
+        setCommunity("")
 
         router.push(
             `${pathname}`
@@ -321,7 +250,7 @@ export default function Data({ data }: any) {
     }
 
 
-    const filterByPublishing = async (isPublished) => {
+    const filterByPublishing = async (isPublished: number) => {
         setLoading(true);
 
         router.push(
@@ -331,7 +260,15 @@ export default function Data({ data }: any) {
     }
 
 
-    const handleInspectionSelected = (value) => {
+
+    const filterByDataType = async (dataType: number) => {
+        setLoading(true);
+
+        router.push(`${pathname}?dataType=${dataType}&formId=${formId}`);
+        setLoading(false);
+    }
+
+    const handleInspectionSelected = (value: number) => {
         if (selectedInspections.includes(value)) {
             // If inspection is already selected, remove it
             setSelectedInspections(selectedInspections.filter(item => item !== value));
@@ -348,7 +285,7 @@ export default function Data({ data }: any) {
             setLoading(true);
             const response = await axios.post(`/api/submitted-data`, {
                 selectedInspections,
-                publishStatus:1
+                publishStatus: 1
             });
             setLoading(false)
             setSelectedInspections([])
@@ -369,7 +306,7 @@ export default function Data({ data }: any) {
             setLoading(true);
             const response = await axios.post(`/api/submitted-data`, {
                 selectedInspections,
-                publishStatus:0
+                publishStatus: 0
             });
             setLoading(false)
             setSelectedInspections([])
@@ -426,8 +363,7 @@ export default function Data({ data }: any) {
     };
 
     function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        // subtitle.style.color = "#f00";
+
     }
     return (
         <main id="main" className="main">
@@ -449,34 +385,34 @@ export default function Data({ data }: any) {
                                 <div className=" mb-3">
 
                                     <div className="col-sm-12">
-                                        <p>Are you sure you want to delete the selected inspection(s)?<br/> Deleted inspections cannot be restored</p>
+                                        <p>Are you sure you want to delete the selected inspection(s)?<br /> Deleted inspections cannot be restored</p>
 
                                     </div>
                                 </div>
                                 <div className="row">
-    <div className="col">
-        <button
-            type="button"
-            className="btn btn-sm btn-danger btn-label waves-effect right waves-light"
-            onClick={handleDeleteInspectionSelected}
-        >
-            <i className="bi bi-trash label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-            Yes 
-        </button>
-    </div>
-    <div className="col">
-        <button
-            type="button"
-            className="btn btn-sm btn-primary btn-label waves-effect right waves-light"
-            onClick={() => {
-                setIsOpen(false)
-            }}
-        >
-            <i className="bi bi-cancel label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
-            No Cancel
-        </button>
-    </div>
-</div>
+                                    <div className="col">
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-danger btn-label waves-effect right waves-light"
+                                            onClick={handleDeleteInspectionSelected}
+                                        >
+                                            <i className="bi bi-trash label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                            Yes
+                                        </button>
+                                    </div>
+                                    <div className="col">
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-primary btn-label waves-effect right waves-light"
+                                            onClick={() => {
+                                                setIsOpen(false)
+                                            }}
+                                        >
+                                            <i className="bi bi-cancel label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
+                                            No Cancel
+                                        </button>
+                                    </div>
+                                </div>
 
 
 
@@ -491,7 +427,7 @@ export default function Data({ data }: any) {
 
             </Modal>
             <div className="pagetitle">
-                <h1>{handleTitle()} </h1>
+                <h1><h5 className="card-title mb-0">{handleTitle(formId)}</h5> </h1>
                 <br />
 
 
@@ -510,36 +446,60 @@ export default function Data({ data }: any) {
                             </button>
                         </div>
                     </div>
+                    <div className="row">
 
-                    <div className="col-md-2">
-                        <div className="input-group mb-3">
-                            {/* <label className="form-label mb-0">Publishing status</label> */}
 
-                            <select ref={filterRef}
-                                id="filterRef"
-                                name="filterRef" className="form-select input-group" onChange={(e: any) => {
+                        <div className="col-md-2">
+                            <div className="input-group mb-3">
+                                {/* <label className="form-label mb-0">Publishing status</label> */}
+
+                                <select
+                                    className="form-select input-group" onChange={async (e: any) => {
+
+
+                                        e.preventDefault();
+                                        setDataType(e.target.value)
+                                        await filterByDataType(e.target.value);
+                                    }} value={dataType}>
+                                    <option value="" >
+                                        Show all data
+                                    </option>
+                                    <option value="1">
+                                        Actual
+                                    </option>
+                                    <option value="2">
+                                        Demo
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-md-2">
+                            <div className="input-group mb-3">
+                                {/* <label className="form-label mb-0">Publishing status</label> */}
+
+                                <select className="form-select input-group" onChange={(e: any) => {
 
                                     e.preventDefault();
                                     setIsPublished(e.target.value)
                                     filterByPublishing(e.target.value);
                                 }}>
-                                <option value="undefined" >
-                                    Show all
-                                </option>
-                                <option value="1">
-                                    Published
-                                </option>
-                                <option value="0">
-                                    Unpublished
-                                </option>
-                                {/* <option value="1">
+                                    <option value="" >
+                                        Show all
+                                    </option>
+                                    <option value="1">
+                                        Published
+                                    </option>
+                                    <option value="0">
+                                        Unpublished
+                                    </option>
+                                    {/* <option value="1">
                                                         Deleted
                                                     </option> */}
-                            </select>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
 
 
@@ -562,11 +522,11 @@ export default function Data({ data }: any) {
                                                 <label className="form-label mb-0">.</label>
 
                                                 <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder='Enter search term'   value={searchValue}
-                                onChange={(e:any) => {
-                                  setSearchValue(e.target.value);
-                                 // autoHandleSearch(e.target.value)
-                                }} />
+                                                    <input type="text" className="form-control" placeholder='Enter search term' value={searchValue}
+                                                        onChange={(e: any) => {
+                                                            setSearchValue(e.target.value);
+                                                            // autoHandleSearch(e.target.value)
+                                                        }} />
                                                     {/* <span className="input-group-text" id="basic-addon2">  <button type="button" onClick={handleSearch} className="btn btn-sm btn-primary btn-label waves-effect right waves-light form-control"><i className="bi bi-search"></i></button></span> */}
                                                 </div>
 
@@ -582,10 +542,10 @@ export default function Data({ data }: any) {
                                                     aria-label="Default select example"
                                                     onChange={(e: any) => {
                                                         setFilterBy(e.target.value);
-                                                        setRegion(null)
-                                                        setDistrict(null)
-                                                        setElectoralArea(null)
-                                                        setCommunity(null)
+                                                        setRegion("")
+                                                        setDistrict("")
+                                                        setElectoralArea("")
+                                                        setCommunity("")
 
                                                         if (regionalUser) {
                                                             getDistrictsByRegion(region);
@@ -925,7 +885,7 @@ export default function Data({ data }: any) {
                                                 <button
                                                     type="submit"
                                                     className="form-control btn btn-danger"
-                                                    onClick={(e: any) => handleFilterReset(e)}
+                                                    onClick={(e: any) => handleFilterReset()}
                                                 >
                                                     Reset
                                                 </button>
@@ -963,7 +923,7 @@ export default function Data({ data }: any) {
                                                     <button
                                                         type="button"
                                                         className="btn btn-sm btn-danger btn-label waves-effect right waves-light "
-                                                        onClick={setIsOpen}
+                                                        onClick={() => setIsOpen}
                                                     >
                                                         <i className="bi bi-trash label-icon align-middle rounded-pill fs-16 ms-2"></i>{" "}
                                                         Delete selected
@@ -1015,12 +975,12 @@ export default function Data({ data }: any) {
                                                     {
                                                         data?.submittedData?.response?.map((dt: any) => (
                                                             <tr key={dt.id}>
-                                                                 <td><input type="checkbox" onChange={(e) => {
+                                                                <td><input type="checkbox" onChange={(e) => {
                                                                     // e.preventDefault()
                                                                     handleInspectionSelected(dt.Inspection.id)
 
 
-                                                                }}  /></td>
+                                                                }} /></td>
                                                                 {/* <td><input type="checkbox" onChange={(e) => {
                                                                     // e.preventDefault()
                                                                     handleInspectionSelected(dt.Inspection.id)
@@ -1028,10 +988,10 @@ export default function Data({ data }: any) {
 
                                                                 }} disabled={dt?.Inspection?.isPublished} /></td> */}
                                                                 <td>  {dt?.Inspection?.inspectionKind == 2 ? (
-                                                                        <span className="badge bg-danger">Demo</span>
-                                                                    ) : (
-                                                                        <span className="badge bg-primary">Actual</span>
-                                                                    )}{" "}</td>
+                                                                    <span className="badge bg-danger">Demo</span>
+                                                                ) : (
+                                                                    <span className="badge bg-primary">Actual</span>
+                                                                )}{" "}</td>
                                                                 <td>{dt?.Inspection?.InspectionForm?.name}</td>
                                                                 <td>{handleRating(dt?.Inspection?.totalRating)}</td>
                                                                 <td>

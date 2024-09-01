@@ -16,11 +16,12 @@ async function getSubmittedData(searchParams: any) {
   let { to } = searchParams
   let { searchText } = searchParams
   let { page } = searchParams
+  let { dataType } = searchParams
 
 
 
 
-  const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?published=${published}&deleted=${deleted}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`, { cache: 'no-store', headers: headers() })
+  const res = await fetch(`${SERVER_BASE_URL}/api/submitted-data?dataType=${dataType}&published=${published}&deleted=${deleted}&formId=${formId}&page=${page}&filterBy=${filterBy}&filterValue=${filterValue}&from=${from}&to=${to}&searchText=${searchText}`, { cache: 'no-store', headers: headers() })
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -70,9 +71,8 @@ export default async function Page({ searchParams }: any) {
   let data = { submittedData: submittedData, regions }
 
 
-  return <Suspense fallback={<Loading />}>
-    <Data data={data} />
-  </Suspense>
+  return <Data data={data} />
+ 
 
 
 }

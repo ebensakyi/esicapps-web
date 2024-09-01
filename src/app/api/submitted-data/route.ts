@@ -30,6 +30,9 @@ export async function GET(request: Request) {
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
 
+    let dataType: any = (searchParams.get("dataType") === "" || searchParams.get("dataType") === "undefined" || searchParams.get("dataType") === null) ? undefined : Number(searchParams.get("dataType"));
+
+
     if ((userLevel == 1 && filterBy == "undefined") || filterBy == "") {
       filterBy = "undefined";
       filterValue = "undefined";
@@ -127,6 +130,7 @@ export async function GET(request: Request) {
             isPublished: published,
             inspectionFormId: formId,
             deleted: 0,
+            inspectionKind: dataType,
             [filterBy]:
               filterValue == "undefined" || filterValue == ""
                 ? undefined
@@ -210,6 +214,7 @@ export async function GET(request: Request) {
           isPublished: published,
           inspectionFormId: formId,
           deleted: 0,
+          inspectionKind: dataType,
 
           [filterBy]:
             filterValue == "undefined" || filterValue == ""
