@@ -28,6 +28,7 @@ export async function POST(request: Request) {
     let hashedPassword = bcrypt.hashSync(password, salt);
 
     let regionId = res.region;
+    let accessibleDistricts = res.accessibleDistricts;
 
     if (regionId == null) {
       const district = await prisma.district.findFirst({
@@ -69,6 +70,24 @@ export async function POST(request: Request) {
         res.phoneNumber,
         `The temporal password for ESICApps App is ${password}`
       );
+    }
+
+
+    if(accessibleDistricts){
+      let districts = await accessibleDistricts.map((d: any) => {
+        return {
+          districtId: d.value,
+          userId: user.id,
+        };
+      });
+  
+      // console.log(pages);
+  
+      const allowedDistricts = await prisma.allowedDistricts.createMany({
+        data: districts,
+
+      });
+  
     }
 
     return NextResponse.json(user);

@@ -10,8 +10,10 @@ import { useSession } from 'next-auth/react';
 import ReactPaginate from 'react-paginate';
 import AvatarImage from '../AvatarImage';
 import Modal from "react-modal";
+import Multiselect from 'multiselect-react-dropdown';
 
 export default function User({ data }: any) {
+
     const searchParams = useSearchParams();
     const router = useRouter();
     const { data: session }: any = useSession()
@@ -43,6 +45,7 @@ export default function User({ data }: any) {
     const [designation, setDesignation] = useState("");
     const [selectedRegion, setSelectedRegion] = useState("");
     const [selectedDistrict, setSelectedDistrict] = useState("");
+    const [selectedDistricts, setSelectedDistricts] = useState([]);
 
     const [districts, setDistricts] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -53,7 +56,7 @@ export default function User({ data }: any) {
     const [showOtp, setShowOtp] = useState(false);
     const [sendSMS, setSendSMS] = useState(false);
 
- const [searchText, setSearchText] = useState("");
+    const [searchText, setSearchText] = useState("");
 
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal(e: any) {
@@ -75,7 +78,7 @@ export default function User({ data }: any) {
     useEffect(() => {
         const url = `${pathname}/?searchText=${searchText}&page=${page}`;
         router.push(url);
-      }, [searchText]);
+    }, [searchText]);
 
 
     const getDistrictsByRegion = async (regionId: number) => {
@@ -208,6 +211,7 @@ export default function User({ data }: any) {
                         designation,
                         region: Number(selectedRegion),
                         district: null,
+                        accessibleDistricts:selectedDistricts
                     };
                 }
                 if (selectedUserLevel == "3") {
@@ -223,6 +227,8 @@ export default function User({ data }: any) {
                         designation,
                         region: null,
                         district: Number(selectedDistrict),
+                        accessibleDistricts:selectedDistricts
+
                     };
                 }
             }
@@ -248,7 +254,7 @@ export default function User({ data }: any) {
                         userLevelId: Number(selectedUserLevel),
                         surname,
                         otherNames,
-                         sendSMS,
+                        sendSMS,
 
                         email,
                         phoneNumber,
@@ -265,7 +271,7 @@ export default function User({ data }: any) {
                     userLevelId: Number(loggedInUserLevel),
                     surname,
                     otherNames,
-                     sendSMS,
+                    sendSMS,
 
                     email,
                     phoneNumber,
@@ -532,6 +538,24 @@ export default function User({ data }: any) {
         },
     };
 
+
+
+    const newDistricts = data?.districts?.response?.map((d: any) => {
+        return {
+            value: d.id,
+            label: d.name,
+        };
+    });
+
+    const onRemove = (selected: any) => {
+        // setSelectedPages([selected.length - 1].value);
+        setSelectedDistricts(selected);
+
+    };
+    const onSelect = (selected: any) => {
+        // setSelectedPages(selected[selected.length - 1].value);
+        setSelectedDistricts(selected);
+    };
     return (
         <>
             <Modal
@@ -674,7 +698,7 @@ export default function User({ data }: any) {
                                                     >
 
                                                         <option >Select user role</option>
-                                                        {data.roles.map((role: any) => {
+                                                        {data?.roles?.map((role: any) => {
                                                             if (loggedInUserLevel == 3) {
                                                                 if ((role.id == 7)) {
                                                                     return (
@@ -693,6 +717,22 @@ export default function User({ data }: any) {
                                                     </select>
                                                 </div>
                                             </div>
+                                            {loggedInUserLevel==1 && userRole == "8" ?
+                                               <div className="col-sm-3  mb-3">
+                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                        Accessible Districts
+                                                    </label>
+                                                    <div className="col-sm-12">
+                                                        <Multiselect
+                                                            options={newDistricts}
+                                                            selectedValues={selectedDistricts}
+                                                            onSelect={onSelect}
+                                                            onRemove={onRemove}
+                                                            displayValue="label"
+                                                        />
+                                                        {/* <input type="text" className="form-control" placeholder='Select page(s)' /> */}
+                                                    </div>
+                                                </div> : <></>}
                                             {!loggedInUserDistrict ?
                                                 <div className="col-sm-3  mb-3">
                                                     <label className="col-sm-12 col-form-label">Select user level</label>
@@ -772,7 +812,7 @@ export default function User({ data }: any) {
                                                             value={selectedRegion}
                                                         >
                                                             <option >Select region</option>
-                                                            {data.regions.map((rg: any) => {
+                                                            {data?.regions?.map((rg: any) => {
                                                                 return (
                                                                     <option key={rg.id} value={rg.id}>{rg.name}</option>
                                                                 )
@@ -877,6 +917,7 @@ export default function User({ data }: any) {
                                             ) : (
                                                 <></>
                                             )}</div>
+
                                         <div className="form-check mb-3">
                                             <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
                                                 setSendSMS(!sendSMS)
@@ -947,10 +988,10 @@ export default function User({ data }: any) {
                                                         type="text"
                                                         className="form-control"
                                                         placeholder="Enter search term"
-                                                        
+
                                                         value={searchText}
                                                         onChange={(e: any) => {
-                                                          setSearchText(e.target.value);
+                                                            setSearchText(e.target.value);
                                                         }}
                                                     />
                                                     {/* <span className="input-group-text" id="basic-addon2">
@@ -1171,7 +1212,7 @@ export default function User({ data }: any) {
                                                                         Delete
                                                                     </button>
 
-                                                                </li> 
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div></td>
