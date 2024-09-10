@@ -555,6 +555,12 @@ export default function Header() {
                                         <span>Other data</span>
                                     </Link>
                                 </li> : <></>}
+                                {session?.user?.privileges?.includes(19) ? <li>
+                                    <Link href="/primary-data/premises-forms">
+                                        <i className="bi bi-circle" />
+                                        <span>Forms & Premises</span>
+                                    </Link>
+                                </li> : <></>}
                             </ul>
                         </li>
                         {session?.user?.privileges?.includes(14) ?

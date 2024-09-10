@@ -236,6 +236,7 @@ model InspectionForm {
   PremisesType              PremisesType[]
   RespondentDesignation     RespondentDesignation[]
   Service                   Service[]
+  PremisesAndForms          PremisesAndForms[]
 }
 
 model PasswordResetRequest {
@@ -3231,4 +3232,14 @@ model AllowedDistricts {
   District   District @relation(fields: [districtId], references: [id])
   User       User     @relation(fields: [userId], references: [id])
   districtId Int
+}
+
+model PremisesAndForms {
+  id               Int            @id @default(autoincrement())
+  premisesName         String
+  InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
+  deleted          Int?           @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  inspectionFormId Int
 }
