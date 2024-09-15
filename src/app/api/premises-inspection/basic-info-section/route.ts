@@ -26,7 +26,8 @@ export async function POST(request: Request) {
       inspectionId: res.inspectionId,
       userId: Number(res.userId),
       geom: point,
-      //coords: point,
+      districtId: res.districtId == "null" ? null : Number(res.districtId),
+
       communityId: res.communityId == "null" ? null : Number(res.communityId),
       community: res.community == "null" ? null : res.community,
       electoralAreaId:
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
       accuracy: res.accuracy,
       respondentName: res.respondentName,
       respondentPhoneNumber: res.respondentPhoneNumber,
+      ownerPhoneNumber: res.ownerPhoneNumber,
       respondentDesignationId: Number(res.respondentDesignationId),
     };
 

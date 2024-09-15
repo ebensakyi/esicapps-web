@@ -1,1 +1,1 @@
-Data view work on it
+Work on rating interpretation on web. Ceil all rating values and use mobile app interpretations on web.

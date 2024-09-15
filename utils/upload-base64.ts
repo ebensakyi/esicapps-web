@@ -81,3 +81,31 @@ export const uploadBase64Image = async (
     throw error;
   }
 };
+export const uploadBase64ImageV2 = async (
+  fileName: string,
+  base64String: string,
+  bucketName: any
+) => {
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  });
+  var s3 = new AWS.S3();
+  const buffer = Buffer.from(base64String, "base64");
+  const params = {
+    Bucket: bucketName,
+    Key: fileName,
+    Body: buffer,
+    ContentEncoding: "base64", // required for base64
+    ContentType: "image/jpeg", // adjust if your image is a different type
+  };
+
+  try {
+    const data = await s3.upload(params).promise();
+
+    return fileName; 
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
+  }
+};

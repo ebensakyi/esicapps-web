@@ -479,6 +479,21 @@ export default function DataView({ data }: any) {
 
                                                                                 </div>
                                                                                 <div className="col-lg-3 col-sm-6">
+                                                                                    <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                                                        Owner phone number
+                                                                                    </label>
+                                                                                    <div className="col-sm-12"> <input
+                                                                                        type="text"
+                                                                                        className="form-control bg-light border-0"
+                                                                                        id="invoicenoInput"
+                                                                                        value={
+                                                                                            data?.submittedData?.BasicInfoSection?.ownerPhoneNumber
+                                                                                        }
+                                                                                        readOnly={true}
+                                                                                    /></div>
+
+                                                                                </div>
+                                                                                <div className="col-lg-3 col-sm-6">
                                                                                     <label htmlFor="inputText" className="col-sm-12 col-form-label">Latitude</label>
                                                                                     <input
                                                                                         type="number"

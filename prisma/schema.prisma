@@ -1116,20 +1116,24 @@ model Logs {
 }
 
 model BasicInfoSection {
-  id                      String                @id @db.VarChar(255)
-  inspectionId            String                @unique @db.VarChar(255)
-  userId                  Int
-  communityId             Int?
-  community               String?               @db.VarChar(255)
-  electoralAreaId         Int?
-  electoralArea           String?               @db.VarChar(255)
-  ghanaPostGps            String?               @db.VarChar(255)
-  latitude                Decimal               @db.Decimal(11, 8)
-  longitude               Decimal               @db.Decimal(11, 8)
-  accuracy                String?               @db.VarChar(255)
-  geom                    Json?
-  respondentName          String                @db.VarChar(255)
-  respondentPhoneNumber   String                @db.VarChar(255)
+  id              String  @id @db.VarChar(255)
+  inspectionId    String  @unique @db.VarChar(255)
+  userId          Int
+  communityId     Int?
+  community       String? @db.VarChar(255)
+  electoralAreaId Int?
+  districtId      Int?
+
+  electoralArea         String? @db.VarChar(255)
+  ghanaPostGps          String? @db.VarChar(255)
+  latitude              Decimal @db.Decimal(11, 8)
+  longitude             Decimal @db.Decimal(11, 8)
+  accuracy              String? @db.VarChar(255)
+  geom                  Json?
+  respondentName        String  @db.VarChar(255)
+  respondentPhoneNumber String? @db.VarChar(255)
+  ownerPhoneNumber      String? @db.VarChar(255)
+
   respondentDesignationId Int
   deleted                 Int?                  @default(0)
   isCompleted             Int?                  @default(1)
@@ -3236,7 +3240,7 @@ model AllowedDistricts {
 
 model PremisesAndForms {
   id               Int            @id @default(autoincrement())
-  premisesName         String
+  premisesName     String
   InspectionForm   InspectionForm @relation(fields: [inspectionFormId], references: [id])
   deleted          Int?           @default(0)
   createdAt        DateTime       @default(now())
