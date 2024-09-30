@@ -4,7 +4,6 @@ import { logActivity } from "@/utils/log";
 import { uploadBase64Image } from "@/utils/upload-base64";
 import { AWS_S3_ESICAPPS_IMAGES } from "@/config";
 import { logger } from "@/logger";
-import { String } from "aws-sdk/clients/batch";
 // import { AWS_S3_ESICAPPS_IMAGES } from "@/config";
 
 export async function POST(request: Request) {
@@ -41,7 +40,6 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     let inspectionId: any = searchParams.get("inspectionId");
 
-    console.log(inspectionId);
 
 
     const response = await prisma.inspectionPictures.findMany({

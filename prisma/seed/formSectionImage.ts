@@ -26,4 +26,24 @@ export const formSectionImage = [
   {
     name: "Follow Solid Waste Section Image",
   },
+  {
+    name: "Other Water Waste Section Image1",
+  },
+  {
+    name: "Other Water Waste Section Image2",
+  },
+ {
+    name: "Other Liquid Waste Section Image1",
+  },
+  {
+    name: "Other Liquid Waste Section Image2",
+  },
+  {
+    name: "Other Solid Waste Section Image1",
+  },
+  {
+    name: "Other Solid Waste Section Image2",
+  },
+
+ 
 ];

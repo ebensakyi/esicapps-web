@@ -41,89 +41,109 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("fileName")?.toString();
 
+    const fromDate =
+    searchParams.get("fromDate")?.toString() == "undefined"
+      ? ""
+      : searchParams.get("fromDate")?.toString();
+
+    const toDate =
+    searchParams.get("toDate")?.toString() == "undefined"
+      ? ""
+      : searchParams.get("toDate")?.toString();
+
     const userLevel = session?.user?.userLevelId;
     const userDistrict = session?.user?.districtId;
     const userRegion = session?.user?.regionId;
 
+
+    
+
     if (userLevel == 1) {
       let response = await prisma.basicInfoSection.findMany({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    Inspection: {
-                      premisesCode: {
-                        contains: searchText,
-                        mode: "insensitive",
-                      },
-                    },
-                  },
-                  {
-                    Inspection: {
-                      Region: {
-                        name: { contains: searchText, mode: "insensitive" },
-                      },
-                    },
-                  },
-                  {
-                    Inspection: {
-                      District: {
-                        name: { contains: searchText, mode: "insensitive" },
-                      },
-                    },
-                  },
-                  {
-                    Inspection: {
-                      User: {
-                        surname: { contains: searchText, mode: "insensitive" },
-                      },
-                    },
-                  },
-                  {
-                    Inspection: {
-                      User: {
-                        otherNames: {
+        where: {
+          AND: [
+            searchText != ""
+              ? {
+                  OR: [
+                    {
+                      Inspection: {
+                        premisesCode: {
                           contains: searchText,
                           mode: "insensitive",
                         },
                       },
                     },
-                  },
-                  {
-                    Inspection: {
-                      Community: {
-                        name: { contains: searchText, mode: "insensitive" },
+                    {
+                      Inspection: {
+                        Region: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
                       },
                     },
-                  },
-                  {
-                    Inspection: {
-                      ElectoralArea: {
-                        name: { contains: searchText, mode: "insensitive" },
+                    {
+                      Inspection: {
+                        District: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
                       },
                     },
-                  },
-
-                  // {
-                  //   Community: {
-                  //     name: { contains: searchText, mode: "insensitive" },
-                  //   },
-                  // },
-                ],
-
-                Inspection: {
-                  isPublished: published,
-                  inspectionFormId: formId,
-                },
-              }
-            : {
-                deleted: 0,
-                Inspection: {
-                  isPublished: published,
-                  inspectionFormId: formId,
-                },
+                    {
+                      Inspection: {
+                        User: {
+                          surname: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        User: {
+                          otherNames: {
+                            contains: searchText,
+                            mode: "insensitive",
+                          },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        Community: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                    {
+                      Inspection: {
+                        ElectoralArea: {
+                          name: { contains: searchText, mode: "insensitive" },
+                        },
+                      },
+                    },
+                  ],
+                }
+              : {},
+      
+            // Ensure the deleted flag is checked
+            {
+              deleted: 0,
+              Inspection: {
+                isPublished: published,
+                inspectionFormId: formId,
               },
+            },
+      
+            // Date range filter
+            fromDate && toDate
+              ? {
+                  Inspection: {
+                    createdAt: {
+                      gte: new Date(fromDate), // From date
+                      lte: new Date(toDate),   // To date
+                    },
+                  },
+                }
+              : {},
+          ],
+        },
 
         include: {
           RespondentDesignation: true,

@@ -165,7 +165,7 @@ export default function Dashboard({ data }: any) {
 
 
 
-     let val = await returnFilterValue(filterBy);
+      let val = await returnFilterValue(filterBy);
 
       setLoading(true)
 
@@ -207,8 +207,8 @@ export default function Dashboard({ data }: any) {
       {
         label: "# of baseline submissions",
         data: data?.dashboardData?.baselineSummary?.map((x: any) => x.value),
-        backgroundColor:   "#22BFAC",
-        
+        backgroundColor: "#22BFAC",
+
         // [
         //   "#C15C76",
         //   "#6876B6",
@@ -225,7 +225,7 @@ export default function Dashboard({ data }: any) {
       {
         label: "# of reinspection submissions",
         data: data?.dashboardData?.reinspectionSummary?.map((x: any) => x.value),
-        backgroundColor:  "#A33E57",
+        backgroundColor: "#A33E57",
         // [
         //   "#A33E57",
         //   "#3C477C",
@@ -242,7 +242,7 @@ export default function Dashboard({ data }: any) {
       {
         label: "# of followup submissions",
         data: data?.dashboardData?.followupSummary?.map((x: any) => x.value),
-        backgroundColor:   "#045676",
+        backgroundColor: "#045676",
         // [
         //   "#762D3F",
         //   "#2E3760",
@@ -867,24 +867,24 @@ export default function Dashboard({ data }: any) {
         )}
 
         <div className="col-md-12">
-              <label className="form-label mb-0">Start Date</label>
-              <input
-                type="date"
-                className="form-control"
-                onChange={(e) => setFrom(e.target.value)}
-                value={from}
-              />
-            </div>
-            <div className="col-md-12">
-              <label className="form-label mb-0">End Date</label>
+          <label className="form-label mb-0">Start Date</label>
+          <input
+            type="date"
+            className="form-control"
+            onChange={(e) => setFrom(e.target.value)}
+            value={from}
+          />
+        </div>
+        <div className="col-md-12">
+          <label className="form-label mb-0">End Date</label>
 
-              <input
-                type="date"
-                className="form-control"
-                onChange={(e) => setTo(e.target.value)}
-                value={to}
-              />
-            </div>
+          <input
+            type="date"
+            className="form-control"
+            onChange={(e) => setTo(e.target.value)}
+            value={to}
+          />
+        </div>
 
         <div className="col-12">
           <label className="form-label mb-0">.</label>
@@ -912,40 +912,40 @@ export default function Dashboard({ data }: any) {
       <section className="section dashboard" >
         <div className="row">
           {/* Left side columns */}
-          <div className="col-lg-12"> 
-           <LoadingOverlay
-            active={loading}
-            spinner={true}
-            text="Loading. Please wait..."
-          >
-            <div className="row">
-              {/* Sales Card */}
+          <div className="col-lg-12">
+            <LoadingOverlay
+              active={loading}
+              spinner={true}
+              text="Loading. Please wait..."
+            >
+              <div className="row">
+                {/* Sales Card */}
 
 
-              <div className="col-xxl-3 col-md-4">
-                <div className="card info-card revenue-card">
-                  <div className="filter">
+                <div className="col-xxl-3 col-md-4">
+                  <div className="card info-card revenue-card">
+                    <div className="filter">
 
 
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-down-left-square" />
-                      </div>
-                      <div className="ps-3">
-                        <h6>{data?.dashboardData?.baselineCount}  </h6>
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-down-left-square" />
+                        </div>
+                        <div className="ps-3">
+                          <h6>{data?.dashboardData?.baselineCount}  </h6>
 
-                        <span className="text-muted small pt-2 ps-1">BASELINE</span>
+                          <span className="text-muted small pt-2 ps-1">BASELINE</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* <div className="col-xxl-3 col-md-4">
+                {/* <div className="col-xxl-3 col-md-4">
               <div className="card info-card sales-card">
                
                 <div className="card-body">
@@ -967,80 +967,80 @@ export default function Dashboard({ data }: any) {
                 </div>
               </div>
             </div> */}
-              <div className="col-xxl-3 col-md-4">
-                <div className="card info-card customers-card">
+                <div className="col-xxl-3 col-md-4">
+                  <div className="card info-card customers-card">
 
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-counterclockwise
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-counterclockwise
 " />
-                      </div>
-                      <div className="ps-3">
-                        <h6> {data?.dashboardData?.reInspectionCount}
-                        </h6>
+                        </div>
+                        <div className="ps-3">
+                          <h6> {data?.dashboardData?.reInspectionCount}
+                          </h6>
 
-                        <span className="text-muted small pt-2 ps-1">REINSPECTION</span>
+                          <span className="text-muted small pt-2 ps-1">REINSPECTION</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xxl-3 col-md-4">
+                  <div className="card info-card sales-card">
+                    <div className="filter">
+
+
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-arrow-left-right
+" />
+                        </div>
+                        <div className="ps-3">
+                          <h6> {data?.dashboardData?.followUpCount}
+                          </h6>
+
+                          <span className="text-muted small pt-2 ps-1">FOLLOW-UP</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xxl-3 col-md-5">
+                  <div className="card info-card danger-card">
+                    <div className="filter">
+
+
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {/* Sales <span>| Today</span> */}
+                      </h5>
+                      <div className="d-flex align-items-center">
+                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i className="bi bi-trash
+" />
+                        </div>
+                        <div className="ps-3">
+                          <h6>{data?.dashboardData?.sanitationReportsCount}
+                          </h6>
+
+                          <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-xxl-3 col-md-4">
-                <div className="card info-card sales-card">
-                  <div className="filter">
-
-
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-arrow-left-right
-" />
-                      </div>
-                      <div className="ps-3">
-                        <h6> {data?.dashboardData?.followUpCount}
-                        </h6>
-
-                        <span className="text-muted small pt-2 ps-1">FOLLOW-UP</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xxl-3 col-md-5">
-                <div className="card info-card danger-card">
-                  <div className="filter">
-
-
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {/* Sales <span>| Today</span> */}
-                    </h5>
-                    <div className="d-flex align-items-center">
-                      <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-trash
-" />
-                      </div>
-                      <div className="ps-3">
-                        <h6>{data?.dashboardData?.sanitationReportsCount}
-                        </h6>
-
-                        <span className="text-muted small pt-2 ps-1">SANITATION REPORTS</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </LoadingOverlay>
+            </LoadingOverlay>
 
 
             {/* end row */}
