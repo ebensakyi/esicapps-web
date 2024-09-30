@@ -16,6 +16,6 @@ interface BarChartProps {
   };
 }
 
-export const BarChart = ({ data }: BarChartProps) => {    
+export const BarChart = ({ data }: any) => {    
   return <Bar data={data} options={{ responsive: true, plugins: { legend: { position: 'top' }, title: { display: true, text: 'Inspections by District' } } }} />;
 };
