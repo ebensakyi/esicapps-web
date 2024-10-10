@@ -21,7 +21,7 @@ export default function LeagueTable({ data }: any) {
     const searchParams = useSearchParams();
 
     const [exporting, setExporting] = useState(false);
-    const [region, setRegion] = useState("all"); // Set default to "all" to show all regions initially
+    const [region, setRegion] = useState("all"); 
     const [filteredData, setFilteredData] = useState(data.leagueTable);
 
     const [chartData, setChartData] = useState({
@@ -35,12 +35,12 @@ export default function LeagueTable({ data }: any) {
         ],
     });
 
-    // Step 1: Populate chart and table initially
+    // Populate chart and table initially
     useEffect(() => {
         updateChartData(filteredData);
     }, [filteredData]);
 
-    // Step 2: Handle region change
+    // Handle region change
     const handleFilter = (region: string) => {
         setRegion(region); // Update region state
         if (region === "all") {
@@ -53,7 +53,7 @@ export default function LeagueTable({ data }: any) {
         }
     };
 
-    // Step 3: Update chart data based on filtered data
+    // Update chart data based on filtered data
     const updateChartData = (tableData: any) => {
         const labels = tableData.map((district: any) => `${district.Region.name} - ${district.name}`);
         const inspectionCounts = tableData.map((district: any) => district._count.Inspection);

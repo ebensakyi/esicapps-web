@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 'use client'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -86,7 +88,7 @@ export default function SanitationReport({ data }: any) {
         );
     };
 
-   
+
 
     const handleExportAll = useCallback(async () => {
         try {
@@ -186,11 +188,7 @@ export default function SanitationReport({ data }: any) {
                 style={customStyles}
                 contentLabel="Confirm deletion"
             >
-                <>
-
-
-
-
+                <div>
                     <div className="alert alert-outline-danger alert-p" role="alert">
                         <span className="alert-content">
                             You are about to delete this report.<br /> Deleted report cannot be recovered.
@@ -219,7 +217,7 @@ export default function SanitationReport({ data }: any) {
                             </div>
                         </div>
                     </div>
-                </>
+                </div>
             </Modal>
             <div className="pagetitle">
                 <h1>REPORTS</h1>
@@ -381,7 +379,7 @@ export default function SanitationReport({ data }: any) {
                                             <button
                                                 type="button"
                                                 className="btn btn-sm btn-success  "
-                                                onClick={ handleExportAll}
+                                                onClick={handleExportAll}
                                             >
                                                 <i className="ri-file-excel-2-line label-icon align-middle rounded-pill fs-16 ms-2"></i>
                                                 Export as excel
