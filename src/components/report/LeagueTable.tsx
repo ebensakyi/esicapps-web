@@ -9,6 +9,7 @@ import { nanoid } from 'nanoid';
 import { BarChart } from '../charts/BarChart';
 
 export default function LeagueTable({ data }: any) {
+    
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
@@ -22,7 +23,7 @@ export default function LeagueTable({ data }: any) {
 
     const [exporting, setExporting] = useState(false);
     const [region, setRegion] = useState("all"); 
-    const [filteredData, setFilteredData] = useState(data.leagueTable);
+    const [filteredData, setFilteredData] = useState(data?.leagueTable);
 
     const [chartData, setChartData] = useState({
         labels: [],
@@ -44,10 +45,10 @@ export default function LeagueTable({ data }: any) {
     const handleFilter = (region: string) => {
         setRegion(region); // Update region state
         if (region === "all") {
-            setFilteredData(data.leagueTable); // Show all data if "all" is selected
+            setFilteredData(data?.leagueTable); 
         } else {
-            const filtered = data.leagueTable.filter(
-                (district: any) => district.Region.id === parseInt(region)
+            const filtered = data?.leagueTable?.filter(
+                (district: any) => district?.Region?.id === parseInt(region)
             );
             setFilteredData(filtered);
         }
@@ -55,8 +56,8 @@ export default function LeagueTable({ data }: any) {
 
     // Update chart data based on filtered data
     const updateChartData = (tableData: any) => {
-        const labels = tableData.map((district: any) => `${district.Region.name} - ${district.name}`);
-        const inspectionCounts = tableData.map((district: any) => district._count.Inspection);
+        const labels = tableData?.map((district: any) => `${district?.Region?.name} - ${district?.name}`);
+        const inspectionCounts = tableData?.map((district: any) => district?._count?.Inspection);
 
         setChartData({
             labels,
@@ -81,7 +82,7 @@ export default function LeagueTable({ data }: any) {
             setExporting(false);
 
             if (response.status == 200) {
-                router.replace(response.data);
+                router.replace(response?.data);
             }
         } catch (error) {
             setExporting(false);
@@ -120,7 +121,7 @@ export default function LeagueTable({ data }: any) {
                                         >
                                             <option value="all">All Regions</option> {/* Add an option to reset the filter */}
                                             {data.regions.map((rg: any) => (
-                                                <option key={rg.id} value={rg.id}> {rg.name}</option>
+                                                <option key={rg?.id} value={rg?.id}> {rg?.name}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -144,11 +145,11 @@ export default function LeagueTable({ data }: any) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredData?.map((lt: any) => (
+                                    {data?.filteredData?.map((lt: any) => (
                                         <tr key={nanoid()}>
-                                            <td>{lt.name}</td>
-                                            <td>{lt.Region?.name}</td>
-                                            <td>{lt._count?.Inspection}</td>
+                                            <td>{lt?.name}</td>
+                                            <td>{lt?.Region?.name}</td>
+                                            <td>{lt?._count?.Inspection}</td>
                                         </tr>
                                     ))}
                                 </tbody>

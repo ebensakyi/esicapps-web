@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { prisma } from "@/prisma/db";
 import { NextResponse } from "next/server";
 
@@ -7,7 +9,7 @@ export async function GET(request: Request) {
     // const url = new URL(request.url);
     // const regionId = url.searchParams.get("region");
 
-    let { searchParams } = new URL(request.url);
+    // let { searchParams } = new URL(request.url);
 
 
     let regionId: any = undefined // searchParams.get("region")
@@ -32,7 +34,7 @@ export async function GET(request: Request) {
           select: {
             Inspection: {
               where: {
-                deleted: 0, // Filter inspections where deleted = 0
+                deleted: 0, 
               },
             },
           },
@@ -49,6 +51,7 @@ export async function GET(request: Request) {
     filteredInspections.sort(
       (a, b) => b._count.Inspection - a._count.Inspection
     );
+// console.log(filteredInspections);
 
     // Return the sorted data
     return NextResponse.json(filteredInspections);

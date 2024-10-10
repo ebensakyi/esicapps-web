@@ -18,7 +18,7 @@ export default function Error({
           <a className="btn" href="/">
             Back to home
           </a> */}
-            <h2>Something went wrong!</h2>
+            <h2>Something went wrong!{error.digest}</h2>
       <button onClick={() => reset()}>Try again</button>
           <img
             src="../../assets/img/error.svg"
