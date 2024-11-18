@@ -51,7 +51,6 @@ export async function GET(request: Request) {
     filteredInspections.sort(
       (a, b) => b._count.Inspection - a._count.Inspection
     );
-// console.log(filteredInspections);
 
     // Return the sorted data
     return NextResponse.json(filteredInspections);

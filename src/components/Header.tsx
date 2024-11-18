@@ -473,6 +473,18 @@ export default function Header() {
                                         <span>Map</span>
                                     </Link>
                                 </li>
+                                {/* <li>
+                                    <Link href="/sanitation-report/map">
+                                        <i className="bi bi-circle" />
+                                        <span>Configure reports</span>
+                                    </Link>
+                                </li> */}
+                                <li>
+                                    <Link href="/sanitation-report/report-category">
+                                        <i className="bi bi-circle" />
+                                        <span>Configure report types</span>
+                                    </Link>
+                                </li>
                                 {/* : <></>} */}
 
                             </ul>

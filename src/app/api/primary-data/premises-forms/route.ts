@@ -44,7 +44,6 @@ export async function DELETE(request: Request) {
   try {
     const res = await request.json();
 
-    console.log(res);
     
 
     let id = Number(res);

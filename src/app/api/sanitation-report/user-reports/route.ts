@@ -3,13 +3,11 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 import { sendSMS } from "@/utils/send-hubtel-sms";
-import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-    
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;
     const sanitationReportUserId = data?.get("userId");
@@ -85,112 +83,78 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const session: any = await getServerSession(authOptions);
 
-    const loginUserUserId = session?.user?.id;
-    const loginUserDistrictId = session?.user?.districtId;
-    const loginUserRegionId = session?.user?.regionId;
-    const loginUserLevel = session?.user?.userLevelId;
+    const userId = searchParams.get("userId");
 
-    const districtIdFromParams = Number(searchParams.get("districtId"));
-    const userIdFromParams = searchParams.get("userId");
-
-    if (userIdFromParams) {
+    if (userId) {
       // Query by userId if provided
       const response = await prisma.sanitationReport.findMany({
         where: {
-          sanitationReportUserId: Number(userIdFromParams),
+          sanitationReportUserId: Number(userId),
           deleted: 0,
         },
+        include: {
+          ReportCategory: { select: { name: true } }, // Select report category name
+          District: { select: { name: true } }, // Select district name
+        },
         orderBy: {
-          createdAt: "desc",
+          createdAt: "desc", // Order by creation date
         },
       });
-      return NextResponse.json(response);
+
+      // Map the response to extract only the required fields
+      const sanitizedResponse = response.map((report) => ({
+        id: report.id,
+        image: report.image,
+        districtName: report?.District?.name,
+        reportCategoryName: report?.ReportCategory?.name,
+        description: report?.description,
+        latitude: report?.latitude,
+        longitude: report?.longitude,
+        status:
+          report.status === 0
+            ? "Pending"
+            : report.status === 2
+            ? "In Progress"
+            : "Resolved",
+        createdAt: report.createdAt,
+        community: report.community,
+      }));
+
+      // Aggregate counts for pending and completed statuses
+      const pendingCount = await prisma.sanitationReport.count({
+        where: {
+          sanitationReportUserId: Number(userId),
+          deleted: 0,
+          status: 0,
+        },
+      });
+      const inProgressCount = await prisma.sanitationReport.count({
+        where: {
+          sanitationReportUserId: Number(userId),
+          deleted: 0,
+          status: 2,
+        },
+      });
+      const completedCount = await prisma.sanitationReport.count({
+        where: {
+          sanitationReportUserId: Number(userId),
+          deleted: 0,
+          status: 1,
+        },
+      });
+
+      
+
+      return NextResponse.json({
+        reports: sanitizedResponse,
+        pendingCount: pendingCount,
+        inProgressCount: inProgressCount,
+        completedCount: completedCount,
+      });
     }
 
-    let searchText =
-      searchParams.get("searchText") == "undefined"
-        ? ""
-        : searchParams.get("searchText");
-
-        let _status:any= searchParams.get("status")
-    let status :any =
-      ["2", "1", "0"].includes(_status)
-        ? Number(searchParams.get("status"))
-        : undefined;
-
-    let curPage = Number.isNaN(Number(searchParams.get("page")))
-      ? 1
-      : Number(searchParams.get("page"));
-
-    let perPage = 10;
-    // let skip =
-    //   Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
-    let skip = Math.max(0, (curPage - 1) * perPage);
-
-    let whereConditions;
-
-    if (loginUserLevel === 3 && loginUserDistrictId) {
-      // User level 3 (district level): Query based on the user's district
-      whereConditions = {
-        District: {
-          id: loginUserDistrictId,
-        },
-        deleted: 0,
-        status,
-      };
-    } else if (loginUserLevel === 2 && loginUserRegionId) {
-      // User level 2 (region level): Query based on the user's region
-      whereConditions = {
-        District: {
-          Region: {
-            id: loginUserRegionId,
-          },
-        },
-        deleted: 0,
-        status,
-      };
-    } else {
-      // User has no region or district specified: Query without filters
-      whereConditions = {
-        deleted: 0,
-        status,
-      };
-    }
-
-    const response = await prisma.sanitationReport.findMany({
-      where: searchText
-        ? {
-            OR: [
-              { District: { name: { contains: searchText, mode: "insensitive" } } },
-              { description: { contains: searchText, mode: "insensitive" } },
-              { community: { contains: searchText, mode: "insensitive" } },
-            ],
-            ...whereConditions,
-          }
-        : whereConditions,
-      include: {
-        District: true,
-        SanitationReportUser: true,
-        ReportCategory: true,
-      },
-      skip,
-      take: perPage,
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    const count = await prisma.sanitationReport.count({
-      where: whereConditions,
-    });
-
-    return NextResponse.json({
-      response,
-      curPage,
-      maxPage: Math.ceil(count / perPage),
-    });
+    return NextResponse.json({});
   } catch (error) {
     console.log(error);
     return NextResponse.json(error, { status: 500 });

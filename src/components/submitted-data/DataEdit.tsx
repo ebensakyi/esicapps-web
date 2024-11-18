@@ -25,7 +25,6 @@ import { toiletAvailability } from '../../controller/liquid-waste-query';
 
 export default function DataEdit({ data }: any) {
 
-    console.log(data);
 
 
     const { data: session } = useSession({

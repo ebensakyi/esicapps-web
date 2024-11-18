@@ -7,22 +7,34 @@ import { LOGIN_URL } from '@/config';
 
 import { nanoid } from 'nanoid';
 import { BarChart } from '../charts/BarChart';
+import { userLevel } from '@/prisma/seed/userLevel';
 
 export default function LeagueTable({ data }: any) {
-    
+
+
     const { data: session } = useSession({
         required: true,
         onUnauthenticated() {
             redirect(LOGIN_URL);
         }
     });
+    let userSession: any = session;
+
+    let nationalUser: any = userSession?.user?.userLevelId == 1;
+    let regionalUser: any = userSession?.user?.userLevelId == 2;
+    let districtUser: any = userSession?.user?.userLevelId == 3;
+
+    let regionId: any = userSession?.user?.regionId;
+    console.log("userSession?.user? =>", regionId);
+
+
 
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
     const [exporting, setExporting] = useState(false);
-    const [region, setRegion] = useState("all"); 
+    const [region, setRegion] = useState("all");
     const [filteredData, setFilteredData] = useState(data?.leagueTable);
 
     const [chartData, setChartData] = useState({
@@ -38,14 +50,19 @@ export default function LeagueTable({ data }: any) {
 
     // Populate chart and table initially
     useEffect(() => {
+        if(!nationalUser){
+            console.log("REG ",regionId);
+            setRegion(regionId);
+            handleFilter(regionId);
+        }
         updateChartData(filteredData);
-    }, [filteredData]);
+    }, [filteredData,regionId]);
 
     // Handle region change
     const handleFilter = (region: string) => {
         setRegion(region); // Update region state
         if (region === "all") {
-            setFilteredData(data?.leagueTable); 
+            setFilteredData(data?.leagueTable);
         } else {
             const filtered = data?.leagueTable?.filter(
                 (district: any) => district?.Region?.id === parseInt(region)
@@ -109,7 +126,7 @@ export default function LeagueTable({ data }: any) {
                     <div className="card">
                         <div className="card-body table-responsive">
                             <h5 className="card-title">LEAGUE TABLE</h5>
-                            <div className="mb-6 position-relative col-lg-6 col-md-12">
+                            {nationalUser ? <div className="mb-6 position-relative col-lg-6 col-md-12">
                                 <div className="col-lg-6 mb-3">
                                     <label className="col-sm-12 col-form-label">Select region</label>
                                     <div className="col-sm-12">
@@ -126,7 +143,8 @@ export default function LeagueTable({ data }: any) {
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> : <></>}
+
                             <div className="col-lg-12">
                                 <BarChart data={chartData} />
                             </div>
@@ -145,7 +163,7 @@ export default function LeagueTable({ data }: any) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data?.filteredData?.map((lt: any) => (
+                                    {filteredData?.map((lt: any) => (
                                         <tr key={nanoid()}>
                                             <td>{lt?.name}</td>
                                             <td>{lt?.Region?.name}</td>

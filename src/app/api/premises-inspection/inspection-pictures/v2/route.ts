@@ -48,7 +48,6 @@ export async function GET(request: Request) {
       where: { inspectionId: "fe23af00-c93e-113e-8989-731b33ea58e6" },
     });
 
-    console.log("getting images");
     
     return NextResponse.json(response, {
       status: 200,

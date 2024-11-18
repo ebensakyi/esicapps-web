@@ -87,7 +87,6 @@ export async function GET(request: Request) {
     //   .get("inspectionFormId")
     //   ?.toString();
 
-    console.log(">>>>>>>>searchParams<<<<<<<<", searchParams);
     logger.info(inspectionId);
 
     await logActivity(`Visited dataview page for ${inspectionId}`, userId);

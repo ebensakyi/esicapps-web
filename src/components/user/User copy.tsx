@@ -593,7 +593,6 @@ export default function User({ data }: any) {
                                                             }
 
                                                             if (selectedUserLevel == "3") {
-                                                                console.log("selectedUserLevel...", selectedUserLevel);
 
                                                                 // getDistrictsByRegion(loggedInUserRegion);
 

@@ -103,7 +103,6 @@ export async function GET(request: Request) {
     const session: any = await getServerSession(authOptions);
 
     let userId = session?.user?.id;
-    // let surname = session?.user?.surname;
     let loginUserDistrictId = session?.user?.districtId;
     let loginUserRegionId = session?.user?.regionId;
     let loginUserLevel = session?.user?.userLevelId;
@@ -116,6 +115,7 @@ export async function GET(request: Request) {
 
     const districtId = searchParams.get("districtId") || undefined;
     let exportFile = searchParams.get("exportFile");
+    let getAll = searchParams.get("get_all");
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
@@ -133,15 +133,6 @@ export async function GET(request: Request) {
         response,
       });
     }
-
-    if (exportFile) {
-      skip = 0;
-    }
-
-    // let userLevel = loggedInUserData?.userLevelId;
-    // let region = loggedInUserData?.regionId;
-    // let district = loggedInUserData?.districtId;
-    // let users;
 
     const whereConditions: any =
       searchText !== ""
@@ -161,100 +152,41 @@ export async function GET(request: Request) {
           }
         : { deleted: 0 };
 
+    // Apply filters for districtId and loginUserLevel
     if (districtId) {
+      whereConditions.districtId = Number(districtId);
+    }
+
+    if (loginUserLevel == 2) {
+      whereConditions.regionId = Number(loginUserRegionId);
+    }
+
+    if (loginUserLevel == 3) {
+      whereConditions.districtId = Number(loginUserDistrictId);
+    }
+
+    // Fetch all users without pagination when getAll is true
+    if (getAll) {
       const response = await prisma.user.findMany({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    surname: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    otherNames: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    phoneNumber: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    email: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-                districtId: Number(districtId),
-                deleted: 0,
-              }
-            : { districtId: Number(districtId), deleted: 0 },
+        where: whereConditions,
         include: {
           Region: true,
           District: true,
           UserRole: true,
           UserLevel: true,
         },
-        orderBy: {
-          id: "desc",
-        },
+        orderBy: { id: "desc" },
       });
-
-      const count = await prisma.user.count({
-        where:
-          searchText != ""
-            ? {
-                OR: [
-                  {
-                    surname: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    otherNames: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    phoneNumber: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    email: {
-                      contains: searchText,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-                districtId: Number(districtId),
-                deleted: 0,
-              }
-            : { districtId: Number(districtId), deleted: 0 },
-      });
-
-      if (exportFile) {
-        let url = await export2Excel(response);
-
-        return NextResponse.json(url);
-      }
 
       return NextResponse.json({
         response,
-        curPage: curPage,
-        maxPage: Math.ceil(count / perPage),
       });
     }
+
+    if (exportFile) {
+      skip = 0;
+    }
+
     if (loginUserLevel == 1) {
       const count = await prisma.user.count({ where: whereConditions });
 
@@ -353,10 +285,7 @@ export async function GET(request: Request) {
 
       if (exportFile) {
         const exportResponse = await prisma.user.findMany({
-          where: {
-            ...whereConditions,
-            districtId: Number(loginUserDistrictId),
-          },
+          where: { ...whereConditions, districtId: Number(loginUserDistrictId) },
           include: {
             Region: true,
             District: true,
@@ -375,117 +304,11 @@ export async function GET(request: Request) {
         maxPage: Math.ceil(count / perPage),
       });
     }
-
-    // const response = await prisma.user.findMany({
-    //   where:
-    //     searchText != ""
-    //       ? {
-    //           OR: [
-    //             {
-    //               surname: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               otherNames: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               phoneNumber: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               email: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               District: {
-    //                 name: { contains: searchText, mode: "insensitive" },
-    //               },
-    //             },
-    //           ],
-    //           deleted: 0,
-    //         }
-    //       : { deleted: 0 },
-    //   include: {
-    //     Region: true,
-    //     District: true,
-    //     UserRole: true,
-    //     UserLevel: true,
-    //   },
-    //   orderBy: {
-    //     id: "desc",
-    //   },
-    //   skip: skip,
-    //   take: perPage,
-    // });
-
-    // const count = await prisma.user.count({
-    //   where:
-    //     searchText != ""
-    //       ? {
-    //           OR: [
-    //             {
-    //               surname: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               otherNames: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               phoneNumber: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               email: {
-    //                 contains: searchText,
-    //                 mode: "insensitive",
-    //               },
-    //             },
-    //             {
-    //               District: {
-    //                 name: { contains: searchText, mode: "insensitive" },
-    //               },
-    //             },
-    //           ],
-    //           deleted: 0,
-    //         }
-    //       : { deleted: 0 },
-
-    //   orderBy: {
-    //     id: "desc",
-    //   },
-    // });
-
-    // if (exportFile) {
-    //   let url = await export2Excel(response);
-
-    //   return NextResponse.json(url);
-    // }
-
-    // return NextResponse.json({
-    //   response,
-    //   curPage: curPage,
-    //   maxPage: Math.ceil(count / perPage),
-    // });
   } catch (error) {
     return NextResponse.json(error);
   }
 }
+
 
 export async function PUT(request: Request) {
   try {

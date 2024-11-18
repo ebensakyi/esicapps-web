@@ -10,7 +10,7 @@ async function getSanitationReports(searchParams: any) {
         let { page } = searchParams
         let { status } = searchParams
 
-        
+
         let response = await fetch(`${SERVER_BASE_URL}/api/sanitation-report?page=${page}&searchText=${searchText}&status=${status}`, { cache: 'no-store', headers: headers() });
 
         if (!response.ok) {
@@ -23,15 +23,31 @@ async function getSanitationReports(searchParams: any) {
 
 
 }
+async function getUsers() {
+    try {
+     
+        let response = await fetch(`${SERVER_BASE_URL}/api/user?get_all=true`, { cache: 'no-store', headers: headers() });
+        if (!response.ok) {
+            throw new Error('Failed to fetch data')
+        }
+        return await response.json();
+    } catch (error) {
+
+    }
+
+
+
+}
 
 export default async function Page({ searchParams }: any) {
 
 
     const reports = await getSanitationReports(searchParams)
 
+    const users = await getUsers()
 
 
-    let data = { reports }
+    let data = { reports,users }
 
     return <SanitationReportList data={data} />
 

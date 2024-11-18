@@ -20,10 +20,9 @@ export async function POST(request: Request) {
     }
 
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const buffer:any = Buffer.from(bytes);
 
     let fileName = nanoid() + file.name;
-    console.log("fileName==>", fileName);
     
 
     const path = `./public/temp/${fileName}`;

@@ -22,7 +22,6 @@ export async function POST(request: Request) {
           ? null
           : Number(res.hazardousWasteDisposalId),
     };
-    console.log("hazardousWasteDisposalMethodId===> ",data);
 
     const response = await prisma.premisesHazardousWasteDisposal.create({
       data,

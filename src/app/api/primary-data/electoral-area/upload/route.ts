@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     }
 
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const buffer :any = Buffer.from(bytes);
 
     const dirPath = './public/temp/';
     if (!fs.existsSync(dirPath)) {
@@ -47,7 +47,6 @@ const readCSV = async (filePath: string, districtId: number) => {
     let data: any = [];
     let insertRowCount = 0;
 
-    console.log("new filePath", filePath);
 
     createReadStream(filePath)
       .pipe(parse({ headers: true, trim: true })) // Use the `trim: true` option to automatically trim all data, including headers.

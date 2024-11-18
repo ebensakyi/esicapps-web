@@ -123,12 +123,10 @@ export default function FollowUp({ data }: any) {
                 return toast.error("Please select community");
             }
             if (filterBy == "electoralAreaId" && electoralArea == "") {
-                console.log("filterBy == electoralAreaId");
 
                 return toast.error("Please select electoral area");
             }
             if (filterBy == "districtId" && district == "") {
-                console.log("filterBy == districtId");
 
                 return toast.error("Please select districtt");
             }
@@ -777,6 +775,8 @@ export default function FollowUp({ data }: any) {
                                                 <th scope="col">Form </th>
 
                                                     <th scope="col">Premises Code </th>
+                                                    <th scope="col">Region </th>
+
                                                     <th scope="col">Community </th>
                                                     <th scope="col">Electoral Area</th>
                                                     <th scope="col">Respondent</th>
@@ -795,6 +795,7 @@ export default function FollowUp({ data }: any) {
                                                             <td>{dt?.InspectionForm?.name}</td>
 
                                                             <td>{dt?.premisesCode}</td>
+                                                            <td>{dt?.Community?.ElectoralArea?.District?.Region?.name}</td>
                                                             <td>{dt?.community}</td>
 
                                                             <td>{dt?.electoralArea}</td>

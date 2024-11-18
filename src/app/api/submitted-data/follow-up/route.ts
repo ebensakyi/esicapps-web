@@ -7,8 +7,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 
-
-
 export async function GET(request: Request) {
   try {
     //  const res = await request.json();
@@ -25,21 +23,12 @@ export async function GET(request: Request) {
     let regionId = session?.user?.regionId;
     let userLevel = session?.user?.userLevelId;
 
-
     let { searchParams } = new URL(request.url);
-
 
     await logActivity("Visited follow-up page", userId);
 
-
     let filterBy: any = searchParams.get("filterBy")?.toString();
     let filterValue: any = searchParams.get("filterValue")?.toString();
-
-
-
-
- 
-
 
     if ((userLevel == 1 && filterBy == "undefined") || filterBy == "") {
       filterBy = "undefined";
@@ -51,10 +40,9 @@ export async function GET(request: Request) {
     }
     if ((userLevel == 3 && filterBy == "undefined") || filterBy == "") {
       filterBy = "districtId";
-      filterValue = districtId;      
+      filterValue = districtId;
     }
-//?formId=1&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from=&to=&searchText=undefined
-
+    //?formId=1&published=undefined&deleted=0&page=1&filterBy=&filterValue=&from=&to=&searchText=undefined
 
     await logActivity("Visited submitted data list", session?.user?.id);
 
@@ -79,67 +67,57 @@ export async function GET(request: Request) {
         ? ""
         : searchParams.get("searchText")?.toString();
 
-    
-
     let count = await prisma.followUpInspection.count({
       // where: getSearchParams(req, searchText).where,
       where:
         // searchText != ""
         //   ?
         {
-         OR: [
+          OR: [
             {
               accuracy: {
                 contains: searchText,
                 mode: "insensitive",
               },
             },
-           {
-                Region: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              
+            {
+              Region: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
             },
             {
-                District: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              
+              District: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
             },
             {
-           
-                User: {
-                  surname: { contains: searchText, mode: "insensitive" },
-                },
-              
+              User: {
+                surname: { contains: searchText, mode: "insensitive" },
+              },
             },
             {
-                User: {
-                  otherNames: { contains: searchText, mode: "insensitive" },
-                },
-              
+              User: {
+                otherNames: { contains: searchText, mode: "insensitive" },
+              },
             },
             {
-                Community: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              
+              Community: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
             },
             {
-                ElectoralArea: {
-                  name: { contains: searchText, mode: "insensitive" },
-                },
-              
+              ElectoralArea: {
+                name: { contains: searchText, mode: "insensitive" },
+              },
             },
-         ],
+          ],
 
-            inspectionFormId: formId,
-            deleted: 0,
-            [filterBy]:
-              filterValue == "undefined" || filterValue == ""
-                ? undefined
-                : Number(filterValue),
-          
+          inspectionFormId: formId,
+          deleted: 0,
+          [filterBy]:
+            filterValue == "undefined" || filterValue == ""
+              ? undefined
+              : Number(filterValue),
         },
       // : {
       //     Inspection: {
@@ -150,12 +128,6 @@ export async function GET(request: Request) {
       //     },
       //   },
     });
-
-    console.log("FORM ID=====> " + formId);
-    
-    console.log("filterValue=====> " + filterValue);
-    console.log("filterBy=====> " + filterBy);
-
 
     // console.log(( searchText != ""  && searchText != "undefined"));
 
@@ -169,63 +141,54 @@ export async function GET(request: Request) {
             },
           },
           {
-              premisesCode: {
-                contains: searchText,
-                mode: "insensitive",
-              },
-            
-          },
-          {
-              Region: {
-                name: { contains: searchText, mode: "insensitive" },
-              },
-       
-          },
-          {
-          
-              District: {
-                name: { contains: searchText, mode: "insensitive" },
-              },
-          
-          },
-          {
-              ElectoralArea: {
-                name: { contains: searchText, mode: "insensitive" },
-              },
-       
-          },
-          {
-              Community: {
-                name: { contains: searchText, mode: "insensitive" },
-      
+            premisesCode: {
+              contains: searchText,
+              mode: "insensitive",
             },
           },
           {
-              User: {
-                surname: { contains: searchText, mode: "insensitive" },
-       
+            Region: {
+              name: { contains: searchText, mode: "insensitive" },
             },
           },
           {
-    
-              User: {
-                otherNames: { contains: searchText, mode: "insensitive" },
-              },
-
+            District: {
+              name: { contains: searchText, mode: "insensitive" },
+            },
+          },
+          {
+            ElectoralArea: {
+              name: { contains: searchText, mode: "insensitive" },
+            },
+          },
+          {
+            Community: {
+              name: { contains: searchText, mode: "insensitive" },
+            },
+          },
+          {
+            User: {
+              surname: { contains: searchText, mode: "insensitive" },
+            },
+          },
+          {
+            User: {
+              otherNames: { contains: searchText, mode: "insensitive" },
+            },
           },
         ],
 
- 
-          //isPublished: published,
-          inspectionFormId: formId,
-          deleted: 0,
+        //isPublished: published,
+        inspectionFormId: formId,
+        deleted: 0,
 
-          [filterBy]:
-            filterValue == "undefined" || filterValue == ""
-              ? undefined
-              : Number(filterValue),
-          // districtId:  filterValue!="undefined"? Number(filterValue):"undefined",
-     
+        // [filterBy]:
+        //   filterValue == "undefined" || filterValue == ""
+        //     ? undefined
+        //     : Number(filterValue),
+
+        [filterBy]:
+          Number(filterValue),
       },
 
       skip: skip,
@@ -234,13 +197,8 @@ export async function GET(request: Request) {
         createdAt: "desc",
       },
       include: {
-        InspectionForm:true,
-        // Inspection: {
-        //   include: {
-        //     InspectionType: true,
-        //     Region: true,
-        //   },
-        // },
+        InspectionForm: true,
+      
 
         Community: {
           include: {
@@ -258,7 +216,6 @@ export async function GET(request: Request) {
         User: true,
       },
     });
-
     return NextResponse.json({
       response,
       curPage: curPage,

@@ -1,11 +1,11 @@
-//@ts-nocheck
+////@ts-nocheck
 
 'use client'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, usePathname, redirect, useSearchParams } from 'next/navigation';
 import axios from 'axios';
-import { useRef, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 
 import { useSession } from "next-auth/react";
 import { LOGIN_URL } from "@/config";
@@ -15,6 +15,7 @@ import moment from "moment";
 import Link from "next/link";
 import Modal from "react-modal";
 import { useCallback } from 'react';
+import { reportCategory } from '../../../prisma/seed/reportCategory';
 
 
 
@@ -22,6 +23,7 @@ import { useCallback } from 'react';
 
 export default function SanitationReport({ data }: any) {
 
+console.log(data);
 
     const { data: session } = useSession({
         required: true,
@@ -39,14 +41,16 @@ export default function SanitationReport({ data }: any) {
     const [reportId, setReportId] = useState(null);
     const [description, setDescription] = useState("");
     const [reportStatus, setReportStatus] = useState("");
+    const [reportCategory, setReportCategory] = useState("");
 
     const [statusMessage, setStatusMessage] = useState("");
-    const [showForm, setShowForm] = useState(false);
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [imagePath, setImagePath] = useState("");
 
     const [sendSMS, setSendSMS] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("")
-
+    const [showAssignForm, setShowAssignForm] = useState(false);
+    const [officer, setOfficer] = useState("");
     const searchTextRef: any = useRef(null);
     const filterRef: any = useRef(null);
 
@@ -141,7 +145,8 @@ export default function SanitationReport({ data }: any) {
             });
 
             if (response.status == 200) {
-                setShowForm(false)
+                setShowUpdateForm(false)
+                setShowAssignForm(false)
                 router.refresh()
 
                 // router.push(
@@ -179,6 +184,30 @@ export default function SanitationReport({ data }: any) {
             transform: "translate(-50%, -50%)",
         },
     };
+    const handleTaskAssignment = async (e: any) => {
+        try {
+            if (officer == "") {
+                return toast.error("Officer cannot be empty");
+            }
+
+            const response = await axios.post(`/api/sanitation-report/assign-task`, {
+                reportId: Number(reportId),
+                officer,
+                sendSMS,
+            });
+
+            if (response.status == 200) {
+                setShowUpdateForm(false)
+                setShowAssignForm(false)
+                router.refresh()
+
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <main id="main" className="main">
             <Modal
@@ -221,8 +250,110 @@ export default function SanitationReport({ data }: any) {
             </Modal>
             <div className="pagetitle">
                 <h1>REPORTS</h1>
-                {showForm ?
+                {showAssignForm ?
                     <div className="row">
+                        <div className="col-lg-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <Image
+                                        className="gallery-img img-fluid mx-auto"
+                                        src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
+                                        alt=""
+                                        height="256"
+                                        width="256"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-7">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Assign Task</h5>
+                                    <div className=" mb-3">
+
+                                        <div className="col-sm-12">
+
+                                            <div className="alert alert-warning  fade show" role="alert">
+                                                <h4 className="alert-heading">Report</h4>
+                                                <p> {reportCategory}</p>
+                                                <p> {description}</p>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div className=" mb-3">
+                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                            Officer  *
+                                        </label>
+                                        <select
+                                            className="form-control"
+                                            aria-label="Default select example"
+                                            onChange={(e: any) => {
+                                                setOfficer(e.target.value);
+                                            }}
+                                            value={officer}
+                                        >
+                                            <option >Select officer * </option>
+                                            {data?.users?.response?.map((officer: any) => (
+                                                <option key={officer.id} value={officer.id}>
+                                                    {officer.otherNames} {officer.surname}
+                                                </option>
+                                            ))}
+
+
+                                        </select>
+                                    </div>
+
+
+
+                                    <div className="form-check mb-3">
+                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
+                                            setSendSMS(!sendSMS)
+
+
+                                        }} />
+                                        <label className="form-check-label" htmlFor="gridCheck1">
+                                            Send SMS alert to officer
+                                        </label>
+                                    </div>
+                                    <div className=" mb-3">
+                                        <div className="col-sm-10">
+
+
+                                            <div className=" mb-3">
+                                                <div className="col-sm-10">
+
+
+                                                    <button type="submit" className="btn btn-success" onClick={(e) => handleTaskAssignment(e)}>
+                                                        Submit
+                                                    </button>   <button
+                                                        className="btn btn-danger"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+
+                                                            setShowAssignForm(false);
+
+
+
+
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>:
+
+                    showUpdateForm?
+                     <div className="row">
                         <div className="col-lg-3">
                             <div className="card">
                                 <div className="card-body">
@@ -246,6 +377,8 @@ export default function SanitationReport({ data }: any) {
 
                                             <div className="alert alert-warning  fade show" role="alert">
                                                 <h4 className="alert-heading">Report</h4>
+                                                <p> {reportCategory}</p>
+
                                                 <p> {description}</p>
 
                                             </div>
@@ -310,7 +443,8 @@ export default function SanitationReport({ data }: any) {
                                                         onClick={(e) => {
                                                             e.preventDefault();
 
-                                                            setShowForm(false);
+                                                            setShowUpdateForm(false)
+                                                            setShowAssignForm(false)
 
 
 
@@ -328,8 +462,7 @@ export default function SanitationReport({ data }: any) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    : <></>
+                    </div>:<></>
                 }
             </div>
             {/* End Page Title */}
@@ -410,10 +543,10 @@ export default function SanitationReport({ data }: any) {
                                             return (
                                                 <tr key={data?.id}>
                                                     <td>{data?.SanitationReportUser.phoneNumber}</td>
-                                                    <td>{data?.District.name}</td>
+                                                    <td>{data?.District?.name}</td>
                                                     <td>{data?.community}</td>
                                                     {/* <td>{data?.description}</td> */}
-                                                    <td>{data?.status == 0 ? <span className="badge bg-danger">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completd</span> : <span className="badge bg-warning">In progress</span>}</td>
+                                                    <td>{data?.status == 0 ? <span className="badge bg-danger">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completed</span> : <span className="badge bg-warning">In progress</span>}</td>
                                                     <td>   {moment(data?.createdAt).format(
                                                         "MMM Do YYYY, h:mm:ss a"
                                                     )}</td>
@@ -437,7 +570,28 @@ export default function SanitationReport({ data }: any) {
                                                                 <ul
                                                                     className="dropdown-menu"
                                                                     aria-labelledby="btnGroupDrop1"
-                                                                >
+                                                                ><li>
+
+                                                                        <button
+                                                                            className="dropdown-item btn btn-sm "
+                                                                            onClick={(e) => {
+                                                                                e.preventDefault();
+                                                                                setDescription(data?.description)
+                                                                                setReportCategory(data?.ReportCategory?.name)
+                                                                                setImagePath(data?.image)
+
+                                                                                setReportId(data.id);
+                                                                                setPhoneNumber(data?.SanitationReportUser?.phoneNumber)
+                                                                                setShowUpdateForm(false)
+                                                                                setShowAssignForm(true)
+
+
+
+                                                                            }}
+                                                                        >
+                                                                            Assign
+                                                                        </button>
+                                                                    </li>
                                                                     <li>
 
                                                                         <button
@@ -446,16 +600,17 @@ export default function SanitationReport({ data }: any) {
                                                                                 e.preventDefault();
                                                                                 setDescription(data?.description)
                                                                                 setImagePath(data?.image)
+                                                                                setReportCategory(data?.ReportCategory?.name)
 
                                                                                 setReportId(data.id);
                                                                                 setPhoneNumber(data?.SanitationReportUser?.phoneNumber)
-                                                                                setShowForm(true)
-
+                                                                                setShowUpdateForm(true)
+                                                                                setShowAssignForm(false)
 
 
                                                                             }}
                                                                         >
-                                                                            View & Update status
+                                                                            Update status
                                                                         </button>
                                                                     </li>
                                                                     <li>
