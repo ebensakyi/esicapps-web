@@ -92,30 +92,35 @@ export async function GET(request: Request) {
     const loginUserRegionId = session?.user?.regionId;
     const loginUserLevel = session?.user?.userLevelId;
 
-    const districtIdFromParams = Number(searchParams.get("districtId"));
-    const userIdFromParams = searchParams.get("userId");
+    // const districtIdFromParams = Number(searchParams.get("districtId"));
+    // const userIdFromParams = searchParams.get("userId");
 
-    if (userIdFromParams) {
-      // Query by userId if provided
+   // console.log("userIdFromParams ", userIdFromParams);
+    console.log("loginUserUserId ", loginUserUserId);
+    console.log("loginUserLevel ", loginUserLevel);
+
+    // Query by userId if provided and district filter is ignored for level 1
+    if (loginUserLevel === 1 ) {
       const response = await prisma.sanitationReport.findMany({
         where: {
-          sanitationReportUserId: Number(userIdFromParams),
           deleted: 0,
         },
         orderBy: {
           createdAt: "desc",
         },
       });
+      console.log(response);
+      
       return NextResponse.json(response);
     }
 
     let searchText =
-      searchParams.get("searchText") == "undefined"
+      searchParams.get("searchText") === "undefined"
         ? ""
         : searchParams.get("searchText");
 
-        let _status:any= searchParams.get("status")
-    let status :any =
+    let _status: any = searchParams.get("status");
+    let status: any =
       ["2", "1", "0"].includes(_status)
         ? Number(searchParams.get("status"))
         : undefined;
@@ -125,14 +130,12 @@ export async function GET(request: Request) {
       : Number(searchParams.get("page"));
 
     let perPage = 10;
-    // let skip =
-    //   Number((curPage - 1) * perPage) < 0 ? 0 : Number((curPage - 1) * perPage);
     let skip = Math.max(0, (curPage - 1) * perPage);
 
     let whereConditions;
 
+    // Filtering logic
     if (loginUserLevel === 3 && loginUserDistrictId) {
-      // User level 3 (district level): Query based on the user's district
       whereConditions = {
         District: {
           id: loginUserDistrictId,
@@ -141,7 +144,6 @@ export async function GET(request: Request) {
         status,
       };
     } else if (loginUserLevel === 2 && loginUserRegionId) {
-      // User level 2 (region level): Query based on the user's region
       whereConditions = {
         District: {
           Region: {
@@ -151,8 +153,13 @@ export async function GET(request: Request) {
         deleted: 0,
         status,
       };
+    } else if (loginUserLevel === 1) {
+      // Ignore district filtering for level 1
+      whereConditions = {
+        deleted: 0,
+        status,
+      };
     } else {
-      // User has no region or district specified: Query without filters
       whereConditions = {
         deleted: 0,
         status,
@@ -203,7 +210,7 @@ export async function PUT(request: Request) {
 
     let statuses = ["pending", "resolved", "in progress"];
 
-    let sendSMSReporter = res?.sendSMS;
+    let sendSMSReporter = res?.sendsms;
     let phoneNumber = res?.phoneNumber;
     let statusMessage = res?.statusMessage;
     await prisma.sanitationReport.update({

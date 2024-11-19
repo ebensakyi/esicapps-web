@@ -23,7 +23,6 @@ import { reportCategory } from '../../../prisma/seed/reportCategory';
 
 export default function SanitationReport({ data }: any) {
 
-console.log(data);
 
     const { data: session } = useSession({
         required: true,
@@ -47,7 +46,7 @@ console.log(data);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [imagePath, setImagePath] = useState("");
 
-    const [sendSMS, setSendSMS] = useState(false);
+    const [sendsms, setSendsms] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("")
     const [showAssignForm, setShowAssignForm] = useState(false);
     const [officer, setOfficer] = useState("");
@@ -140,7 +139,7 @@ console.log(data);
                 reportId: Number(reportId),
                 reportStatus,
                 statusMessage,
-                sendSMS,
+                sendsms,
                 phoneNumber
             });
 
@@ -192,8 +191,8 @@ console.log(data);
 
             const response = await axios.post(`/api/sanitation-report/assign-task`, {
                 reportId: Number(reportId),
-                officer,
-                sendSMS,
+                officerId:officer,
+                sendsms,
             });
 
             if (response.status == 200) {
@@ -308,8 +307,8 @@ console.log(data);
 
 
                                     <div className="form-check mb-3">
-                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
-                                            setSendSMS(!sendSMS)
+                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendsms} onChange={(e) => {
+                                            setSendsms(!sendsms)
 
 
                                         }} />
@@ -419,8 +418,8 @@ console.log(data);
                                         </div>
                                     </div>
                                     <div className="form-check mb-3">
-                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendSMS} onChange={(e) => {
-                                            setSendSMS(!sendSMS)
+                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendsms} onChange={(e) => {
+                                            setSendsms(!sendsms)
 
 
                                         }} />

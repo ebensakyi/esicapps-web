@@ -31,7 +31,6 @@ export async function POST(request: Request) {
       where: { id: user.id },
     });
 
-console.log("user==> ",user);
 
     return NextResponse.json(user,{ status: 200 });
   } catch (error: any) {

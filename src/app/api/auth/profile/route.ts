@@ -325,7 +325,6 @@ export async function GET(request: Request) {
       imagePath: _user?.UserImage?.imagePath
     };
 
-    console.log(user);
     
 
     return NextResponse.json(user, { status: 200 });

@@ -9,7 +9,6 @@ export async function DELETE(
 
     const id = params.id;
 
-    console.log("ID==> ",id);
     
 
     await prisma.sanitationReport.update({

@@ -69,7 +69,6 @@ const readCSV = async (
         });
 
 
-console.log("RES COUNT===> " + res.count);
 
 
         insertRowCount = res.count;

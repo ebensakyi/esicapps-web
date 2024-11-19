@@ -328,6 +328,7 @@ model User {
   Fcm                                Fcm?
   UserImage                          UserImage?
   AllowedDistricts                   AllowedDistricts[]
+  SanitationReport                   SanitationReport[]
 }
 
 model UserImage {
@@ -3226,6 +3227,8 @@ model SanitationReport {
   District               District?             @relation(fields: [districtId], references: [id])
   SanitationReportUser   SanitationReportUser? @relation(fields: [sanitationReportUserId], references: [id])
   Region                 Region?               @relation(fields: [regionId], references: [id])
+  User                   User   ?              @relation(fields: [assignedTo], references: [id])
+  assignedTo             Int?
 }
 
 model SanitationReportUser {
