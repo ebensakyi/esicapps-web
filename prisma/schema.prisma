@@ -328,7 +328,8 @@ model User {
   Fcm                                Fcm?
   UserImage                          UserImage?
   AllowedDistricts                   AllowedDistricts[]
-  SanitationReport                   SanitationReport[]
+  AssignedTo                         SanitationReport[]                   @relation("AssignedTo")
+  AssignedBy                         SanitationReport[]                   @relation("AssignedBy")
 }
 
 model UserImage {
@@ -3227,8 +3228,13 @@ model SanitationReport {
   District               District?             @relation(fields: [districtId], references: [id])
   SanitationReportUser   SanitationReportUser? @relation(fields: [sanitationReportUserId], references: [id])
   Region                 Region?               @relation(fields: [regionId], references: [id])
-  User                   User   ?              @relation(fields: [assignedTo], references: [id])
-  assignedTo             Int?
+  AssignedToUser         User?                 @relation("AssignedTo", fields: [assignedTo], references: [id])
+  AssignedByUser         User?                 @relation("AssignedBy", fields: [assignedBy], references: [id]) // New relation
+
+  assignedTo Int?
+  assignedBy Int?
+  assignedAt DateTime?  
+  completedAt DateTime?   
 }
 
 model SanitationReportUser {

@@ -9,7 +9,6 @@ import { getServerSession } from "next-auth";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-    
 
     const file: File | null = data.get("nuisancePicture") as unknown as File;
     const sanitationReportUserId = data?.get("userId");
@@ -92,38 +91,16 @@ export async function GET(request: Request) {
     const loginUserRegionId = session?.user?.regionId;
     const loginUserLevel = session?.user?.userLevelId;
 
-    // const districtIdFromParams = Number(searchParams.get("districtId"));
-    // const userIdFromParams = searchParams.get("userId");
-
-   // console.log("userIdFromParams ", userIdFromParams);
-    console.log("loginUserUserId ", loginUserUserId);
-    console.log("loginUserLevel ", loginUserLevel);
-
-    // Query by userId if provided and district filter is ignored for level 1
-    if (loginUserLevel === 1 ) {
-      const response = await prisma.sanitationReport.findMany({
-        where: {
-          deleted: 0,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      });
-      console.log(response);
-      
-      return NextResponse.json(response);
-    }
-
+    // Default query parameters
     let searchText =
       searchParams.get("searchText") === "undefined"
         ? ""
         : searchParams.get("searchText");
 
     let _status: any = searchParams.get("status");
-    let status: any =
-      ["2", "1", "0"].includes(_status)
-        ? Number(searchParams.get("status"))
-        : undefined;
+    let status: any = ["2", "1", "0"].includes(_status)
+      ? Number(searchParams.get("status"))
+      : undefined;
 
     let curPage = Number.isNaN(Number(searchParams.get("page")))
       ? 1
@@ -132,45 +109,42 @@ export async function GET(request: Request) {
     let perPage = 10;
     let skip = Math.max(0, (curPage - 1) * perPage);
 
-    let whereConditions;
+    // Construct where conditions based on user level
+    let whereConditions: any = { deleted: 0, status };
 
-    // Filtering logic
     if (loginUserLevel === 3 && loginUserDistrictId) {
+      // User level 3: Filter by district
       whereConditions = {
+        ...whereConditions,
         District: {
           id: loginUserDistrictId,
         },
-        deleted: 0,
-        status,
       };
     } else if (loginUserLevel === 2 && loginUserRegionId) {
+      // User level 2: Filter by region
       whereConditions = {
+        ...whereConditions,
         District: {
           Region: {
             id: loginUserRegionId,
           },
         },
-        deleted: 0,
-        status,
       };
     } else if (loginUserLevel === 1) {
-      // Ignore district filtering for level 1
-      whereConditions = {
-        deleted: 0,
-        status,
-      };
-    } else {
-      whereConditions = {
-        deleted: 0,
-        status,
-      };
+      // User level 1: No additional filters
+      whereConditions = { deleted: 0, status };
     }
 
+    // Fetch sanitation reports
     const response = await prisma.sanitationReport.findMany({
       where: searchText
         ? {
             OR: [
-              { District: { name: { contains: searchText, mode: "insensitive" } } },
+              {
+                District: {
+                  name: { contains: searchText, mode: "insensitive" },
+                },
+              },
               { description: { contains: searchText, mode: "insensitive" } },
               { community: { contains: searchText, mode: "insensitive" } },
             ],
@@ -181,6 +155,8 @@ export async function GET(request: Request) {
         District: true,
         SanitationReportUser: true,
         ReportCategory: true,
+        AssignedByUser: true,
+        AssignedToUser: true,
       },
       skip,
       take: perPage,
@@ -189,10 +165,12 @@ export async function GET(request: Request) {
       },
     });
 
+    // Count total records
     const count = await prisma.sanitationReport.count({
       where: whereConditions,
     });
 
+    // Return paginated response
     return NextResponse.json({
       response,
       curPage,
@@ -213,6 +191,7 @@ export async function PUT(request: Request) {
     let sendSMSReporter = res?.sendsms;
     let phoneNumber = res?.phoneNumber;
     let statusMessage = res?.statusMessage;
+    const now = new Date();
     await prisma.sanitationReport.update({
       where: {
         id: Number(res?.reportId),
@@ -220,6 +199,7 @@ export async function PUT(request: Request) {
       data: {
         status: Number(res?.reportStatus),
         statusMessage: statusMessage,
+        completedAt: now.toISOString(),
       },
     });
 

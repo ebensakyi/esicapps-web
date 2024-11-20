@@ -191,7 +191,7 @@ export default function SanitationReport({ data }: any) {
 
             const response = await axios.post(`/api/sanitation-report/assign-task`, {
                 reportId: Number(reportId),
-                officerId:officer,
+                officerId: officer,
                 sendsms,
             });
 
@@ -349,119 +349,119 @@ export default function SanitationReport({ data }: any) {
                                 </div>
                             </div>
                         </div>
-                    </div>:
+                    </div> :
 
-                    showUpdateForm?
-                     <div className="row">
-                        <div className="col-lg-3">
-                            <div className="card">
-                                <div className="card-body">
-                                    <Image
-                                        className="gallery-img img-fluid mx-auto"
-                                        src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
-                                        alt=""
-                                        height="256"
-                                        width="256"
-                                    />
+                    showUpdateForm ?
+                        <div className="row">
+                            <div className="col-lg-3">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <Image
+                                            className="gallery-img img-fluid mx-auto"
+                                            src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
+                                            alt=""
+                                            height="256"
+                                            width="256"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-7">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">Update Report</h5>
-                                    <div className=" mb-3">
+                            <div className="col-lg-7">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Update Report</h5>
+                                        <div className=" mb-3">
 
-                                        <div className="col-sm-12">
+                                            <div className="col-sm-12">
 
-                                            <div className="alert alert-warning  fade show" role="alert">
-                                                <h4 className="alert-heading">Report</h4>
-                                                <p> {reportCategory}</p>
+                                                <div className="alert alert-warning  fade show" role="alert">
+                                                    <h4 className="alert-heading">Report</h4>
+                                                    <p> {reportCategory}</p>
 
-                                                <p> {description}</p>
+                                                    <p> {description}</p>
+
+                                                </div>
 
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <div className=" mb-3">
-                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                            Update status *
-                                        </label>
-                                        <select
-                                            className="form-control"
-                                            aria-label="Default select example"
-                                            onChange={(e: any) => {
-                                                setReportStatus(e.target.value);
-                                            }}
-                                            value={reportStatus}
-                                        >
-                                            <option >Select status * </option>
-                                            <option key={1} value={1}>
-                                                Completed
-                                            </option>
-                                            <option key={2} value={2}>
-                                                In progress
-                                            </option>
-                                        </select>
-                                    </div>
-
-
-                                    <div className=" mb-3">
-                                        <label htmlFor="inputText" className="col-sm-12 col-form-label">
-                                            Status Message
-                                        </label>
-                                        <div className="col-sm-12">
-                                            <textarea className="form-control" style={{ height: 100 }} value={statusMessage} onChange={(e: any) => {
-                                                setStatusMessage(e.target.value);
-                                            }}></textarea>
+                                        <div className=" mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                Update status *
+                                            </label>
+                                            <select
+                                                className="form-control"
+                                                aria-label="Default select example"
+                                                onChange={(e: any) => {
+                                                    setReportStatus(e.target.value);
+                                                }}
+                                                value={reportStatus}
+                                            >
+                                                <option >Select status * </option>
+                                                <option key={1} value={1}>
+                                                    Completed
+                                                </option>
+                                                <option key={2} value={2}>
+                                                    In progress
+                                                </option>
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div className="form-check mb-3">
-                                        <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendsms} onChange={(e) => {
-                                            setSendsms(!sendsms)
 
 
-                                        }} />
-                                        <label className="form-check-label" htmlFor="gridCheck1">
-                                            Send SMS to reporter
-                                        </label>
-                                    </div>
-                                    <div className=" mb-3">
-                                        <div className="col-sm-10">
+                                        <div className=" mb-3">
+                                            <label htmlFor="inputText" className="col-sm-12 col-form-label">
+                                                Status Message
+                                            </label>
+                                            <div className="col-sm-12">
+                                                <textarea className="form-control" style={{ height: 100 }} value={statusMessage} onChange={(e: any) => {
+                                                    setStatusMessage(e.target.value);
+                                                }}></textarea>
+                                            </div>
+                                        </div>
+                                        <div className="form-check mb-3">
+                                            <input className="form-check-input" type="checkbox" id="gridCheck1" defaultChecked={sendsms} onChange={(e) => {
+                                                setSendsms(!sendsms)
 
 
-                                            <div className=" mb-3">
-                                                <div className="col-sm-10">
+                                            }} />
+                                            <label className="form-check-label" htmlFor="gridCheck1">
+                                                Send SMS to reporter
+                                            </label>
+                                        </div>
+                                        <div className=" mb-3">
+                                            <div className="col-sm-10">
 
 
-                                                    <button type="submit" className="btn btn-success" onClick={(e) => handleStatusUpdate(e)}>
-                                                        Update
-                                                    </button>   <button
-                                                        className="btn btn-danger"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-
-                                                            setShowUpdateForm(false)
-                                                            setShowAssignForm(false)
+                                                <div className=" mb-3">
+                                                    <div className="col-sm-10">
 
 
+                                                        <button type="submit" className="btn btn-success" onClick={(e) => handleStatusUpdate(e)}>
+                                                            Update
+                                                        </button>   <button
+                                                            className="btn btn-danger"
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+
+                                                                setShowUpdateForm(false)
+                                                                setShowAssignForm(false)
 
 
-                                                        }}
-                                                    >
-                                                        Cancel
-                                                    </button>
 
+
+                                                            }}
+                                                        >
+                                                            Cancel
+                                                        </button>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>:<></>
+                        </div> : <></>
                 }
             </div>
             {/* End Page Title */}
@@ -530,8 +530,11 @@ export default function SanitationReport({ data }: any) {
                                             <th scope="col">District</th>
 
                                             <th scope="col">Location</th>
-                                            <th scope="col">Status</th>
                                             <th scope="col">Reported at</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Assigned To</th>
+                                            <th scope="col">Assigned At</th>
+                                            <th scope="col">Completed At</th>
 
                                             <th scope="col">Action</th>
 
@@ -545,11 +548,22 @@ export default function SanitationReport({ data }: any) {
                                                     <td>{data?.District?.name}</td>
                                                     <td>{data?.community}</td>
                                                     {/* <td>{data?.description}</td> */}
-                                                    <td>{data?.status == 0 ? <span className="badge bg-danger">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completed</span> : <span className="badge bg-warning">In progress</span>}</td>
                                                     <td>   {moment(data?.createdAt).format(
                                                         "MMM Do YYYY, h:mm:ss a"
                                                     )}</td>
+                                                    <td>{data?.status == 0 ? <span className="badge bg-danger">Pending</span> : data?.status == 1 ? <span className="badge bg-success">Completed</span> : <span className="badge bg-warning">In progress</span>}</td>
+                                                    <td>{data?.AssignedToUser?.otherNames} {data?.AssignedToUser?.surname}</td>
 
+                                                    <td>
+                                                        {data?.assignedAt
+                                                            ? moment(data.assignedAt).format("MMM Do YYYY, h:mm:ss a")
+                                                            : ""}
+                                                    </td>
+                                                    <td>
+                                                        {data?.completedAt
+                                                            ? moment(data.completedAt).format("MMM Do YYYY, h:mm:ss a")
+                                                            : ""}
+                                                    </td>
                                                     <td>
                                                         <div
                                                             className="btn-group"

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
+import { authOptions } from "../../auth/[...nextauth]/options";
+import { getServerSession } from "next-auth";
 
 // export async function GET(request: Request) {
 //   try {
@@ -17,11 +19,20 @@ import { prisma } from "@/prisma/db";
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    const { reportId, officerId, sendsms } = res;
+    const session: any = await getServerSession(authOptions);
 
+    const { reportId, officerId, sendsms } = res;
+    let userId = session?.user?.id;
+    const now = new Date();
+    
     const response = await prisma.sanitationReport.update({
       where: { id: Number(reportId) },
-      data: { assignedTo: Number(officerId) },
+      data: {
+        assignedTo: Number(officerId),
+        status: 2,
+        assignedBy: Number(userId),
+        assignedAt:  now.toISOString(),
+      },
     });
 
     return NextResponse.json(response);
