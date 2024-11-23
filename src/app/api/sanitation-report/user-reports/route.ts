@@ -8,8 +8,8 @@ import { getServerSession } from "next-auth";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
+console.log(data);
 
-    const file: File | null = data.get("nuisancePicture") as unknown as File;
     const sanitationReportUserId = data?.get("userId");
 
     const description = data?.get("description");
@@ -22,12 +22,25 @@ export async function POST(request: Request) {
     const longitude = data?.get("longitude");
     const communityLandmark = data?.get("communityLandmark");
     const address = data?.get("address");
+    const mediaType = data?.get("mediaType");
+    let file: any;
+
+    console.log("mediaType======> ",mediaType);
+
+    if (mediaType == "1") {
+      file = data.get("nuisancePicture") as unknown as File;
+    } else if (mediaType == "2") {
+      file = data.get("nuisanceVideo") as unknown as File;
+    }
 
     let district = await prisma.district.findFirst({
       where: {
         id: Number(districtId),
       },
     });
+
+    console.log("file======> ",file);
+    
 
     let region = Number(district?.regionId);
 

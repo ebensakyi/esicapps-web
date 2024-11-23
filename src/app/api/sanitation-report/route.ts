@@ -6,80 +6,93 @@ import { sendSMS } from "@/utils/send-hubtel-sms";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 
-export async function POST(request: Request) {
-  try {
-    const data = await request.formData();
+// export async function POST(request: Request) {
+//   try {
+//     const data = await request.formData();
+// console.log(data);
 
-    const file: File | null = data.get("nuisancePicture") as unknown as File;
-    const sanitationReportUserId = data?.get("userId");
+//     const sanitationReportUserId = data?.get("userId");
 
-    const description = data?.get("description");
+//     const description = data?.get("description");
 
-    const reportType = Number(data?.get("reportType"));
-    const districtId = Number(data?.get("districtId"));
-    const reportCategoryId = Number(data?.get("reportCategoryId"));
+//     const reportType = Number(data?.get("reportType"));
+//     const districtId = Number(data?.get("districtId"));
+//     const reportCategoryId = Number(data?.get("reportCategoryId"));
 
-    const latitude = data?.get("latitude");
-    const longitude = data?.get("longitude");
-    const communityLandmark = data?.get("communityLandmark");
-    const address = data?.get("address");
+//     const latitude = data?.get("latitude");
+//     const longitude = data?.get("longitude");
+//     const communityLandmark = data?.get("communityLandmark");
+//     const address = data?.get("address");
+//     const mediaType = data?.get("mediaType");
+//     let file: any;
 
-    let district = await prisma.district.findFirst({
-      where: {
-        id: Number(districtId),
-      },
-    });
+//     console.log("mediaType======> ",mediaType);
 
-    let region = Number(district?.regionId);
+//     if (mediaType == "1") {
+//       file = data.get("nuisancePicture") as unknown as File;
+//     } else if (mediaType == "2") {
+//       file = data.get("nuisanceVideo") as unknown as File;
+//     }
 
-    let fileName = await saveFileOnDisk(file);
+//     let district = await prisma.district.findFirst({
+//       where: {
+//         id: Number(districtId),
+//       },
+//     });
 
-    if (fileName != "0") {
-      const data = {
-        image: fileName,
-        description: description,
-        reportTypeId: reportType,
-        reportCategoryId: reportCategoryId,
-        latitude: latitude,
-        longitude: longitude,
-        districtId: districtId == 0 ? null : districtId,
-        regionId: region,
-        community: communityLandmark,
-        address: address,
-        sanitationReportUserId:
-          sanitationReportUserId == "null"
-            ? null
-            : Number(sanitationReportUserId),
-      };
+//     console.log("file======> ",file);
+    
 
-      let reportCount = await prisma.sanitationReport.count({
-        where: {
-          image: fileName,
-          description: description,
-          reportTypeId: reportType,
-          reportCategoryId: reportCategoryId,
-          latitude: latitude,
-          longitude: longitude,
-        },
-      } as any);
-      if (reportCount != 0) {
-        return NextResponse.json({});
-      }
+//     let region = Number(district?.regionId);
 
-      const ip = await prisma.sanitationReport.create({ data } as any);
+//     let fileName = await saveFileOnDisk(file);
 
-      await upload2S3(fileName, "esicapps-images");
+//     if (fileName != "0") {
+//       const data = {
+//         image: fileName,
+//         description: description,
+//         reportTypeId: reportType,
+//         reportCategoryId: reportCategoryId,
+//         latitude: latitude,
+//         longitude: longitude,
+//         districtId: districtId == 0 ? null : districtId,
+//         regionId: region,
+//         community: communityLandmark,
+//         address: address,
+//         sanitationReportUserId:
+//           sanitationReportUserId == "null"
+//             ? null
+//             : Number(sanitationReportUserId),
+//       };
 
-      return NextResponse.json({ data: fileName }, { status: 200 });
-    }
+//       let reportCount = await prisma.sanitationReport.count({
+//         where: {
+//           image: fileName,
+//           description: description,
+//           reportTypeId: reportType,
+//           reportCategoryId: reportCategoryId,
+//           latitude: latitude,
+//           longitude: longitude,
+//         },
+//       } as any);
+//       if (reportCount != 0) {
+//         return NextResponse.json({});
+//       }
 
-    return NextResponse.json({ message: "An error occurred" }, { status: 500 });
-  } catch (error) {
-    console.log("error===>", error);
+//       const ip = await prisma.sanitationReport.create({ data } as any);
 
-    return NextResponse.json(error, { status: 500 });
-  }
-}
+//       await upload2S3(fileName, "esicapps-images");
+
+//       return NextResponse.json({ data: fileName }, { status: 200 });
+//     }
+
+//     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
+//   } catch (error) {
+//     console.log("error===>", error);
+
+//     return NextResponse.json(error, { status: 500 });
+//   }
+// }
 
 export async function GET(request: Request) {
   try {
