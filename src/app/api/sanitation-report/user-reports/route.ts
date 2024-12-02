@@ -80,7 +80,7 @@ console.log(data);
 
       const ip = await prisma.sanitationReport.create({ data } as any);
 
-      await upload2S3(fileName, "esicapps-images");
+      await upload2S3(fileName, "sanitation-reporter-images");
 
       return NextResponse.json({ data: fileName }, { status: 200 });
     }
@@ -156,6 +156,7 @@ export async function GET(request: Request) {
           status: 1,
         },
       });
+
 
       
 

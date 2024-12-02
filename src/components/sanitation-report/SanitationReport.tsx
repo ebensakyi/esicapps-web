@@ -256,7 +256,7 @@ export default function SanitationReport({ data }: any) {
                                 <div className="card-body">
                                     <Image
                                         className="gallery-img img-fluid mx-auto"
-                                        src={`https://esicapps-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
+                                        src={`https://sanitation-reporter-images.s3.eu-west-2.amazonaws.com/${imagePath}`}
                                         alt=""
                                         height="256"
                                         width="256"
