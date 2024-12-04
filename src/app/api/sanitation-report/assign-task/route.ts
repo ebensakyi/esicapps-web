@@ -2,19 +2,37 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/db";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { MyConstants } from "@/src/constants";
 
-// export async function GET(request: Request) {
-//   try {
-//     const response = await prisma.reportCategory.findMany({
-//       where: { deleted: 0 },
-//     });
+export async function GET(request: Request) {
+  try {
+    const reports = await prisma.sanitationReport.findMany({
+      where: { deleted: 0 },
+      include:{
+        SanitationReportUser: true,
+        ReportCategory: true,
+      }
+    });
 
-//     return NextResponse.json(response);
-//   } catch (error) {
-//     console.log(error);
-//     return NextResponse.json(error);
-//   }
-// }
+    const response = reports.map((report) => ({
+      id: report.id,
+      image: report.image,
+      description: report.description,
+      category: report.ReportCategory?.name,
+      lat: report.latitude,
+      lng: report.longitude,
+      phoneNumber: report?.SanitationReportUser?.phoneNumber,
+      assignedAt: report.assignedAt==null?report.createdAt:report.assignedAt,
+      status: `${MyConstants.statuses[Number(report.status)]}`
+    }));
+    
+
+    return NextResponse.json(response);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error);
+  }
+}
 
 export async function POST(request: Request) {
   try {

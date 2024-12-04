@@ -4,6 +4,7 @@ import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 import { sendSMS } from "@/utils/send-hubtel-sms";
 import { getServerSession } from "next-auth";
+import { MyConstants } from "@/src/constants";
 
 export async function POST(request: Request) {
   try {
@@ -25,7 +26,6 @@ console.log(data);
     const mediaType = data?.get("mediaType");
     let file: any;
 
-    console.log("mediaType======> ",mediaType);
 
     if (mediaType == "1") {
       file = data.get("nuisancePicture") as unknown as File;
@@ -39,7 +39,6 @@ console.log(data);
       },
     });
 
-    console.log("file======> ",file);
     
 
     let region = Number(district?.regionId);
@@ -179,7 +178,6 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-    let statuses = ["pending", "resolved", "in progress"];
 
     let sendSMSReporter = res?.sendSMS;
     let phoneNumber = res?.phoneNumber;
@@ -197,7 +195,7 @@ export async function PUT(request: Request) {
     if (sendSMSReporter) {
       await sendSMS(
         phoneNumber,
-        `Your reported nuisance is ${statuses[Number(res?.reportStatus)]}`
+        `Your reported nuisance is ${MyConstants. statuses[Number(res?.reportStatus)]}`
       );
     }
 

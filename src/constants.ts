@@ -162,4 +162,9 @@ export const MyConstants = {
     id: 42,
     path: "water-treatment-type",
   },
+
+   statuses : ["pending", "resolved", "in progress"]
+
 };
+
+
