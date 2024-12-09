@@ -15,7 +15,6 @@ import moment from "moment";
 import Link from "next/link";
 import Modal from "react-modal";
 import { useCallback } from 'react';
-import { reportCategory } from '../../../prisma/seed/reportCategory';
 
 
 

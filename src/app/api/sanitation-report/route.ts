@@ -5,6 +5,7 @@ import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 import { sendSMS } from "@/utils/send-hubtel-sms";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { MyConstants } from "@/src/constants";
 
 // export async function POST(request: Request) {
 //   try {
@@ -199,7 +200,6 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-    let statuses = ["pending", "resolved", "in progress"];
 
     let sendSMSReporter = res?.sendsms;
     let phoneNumber = res?.phoneNumber;
@@ -219,7 +219,7 @@ export async function PUT(request: Request) {
     if (sendSMSReporter) {
       await sendSMS(
         phoneNumber,
-        `Your reported nuisance is ${statuses[Number(res?.reportStatus)]}`
+        `Your reported nuisance is ${MyConstants.statuses[Number(res?.reportStatus)]}`
       );
     }
 

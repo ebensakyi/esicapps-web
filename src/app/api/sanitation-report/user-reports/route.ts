@@ -117,7 +117,7 @@ export async function GET(request: Request) {
       // Map the response to extract only the required fields
       const sanitizedResponse = response.map((report) => ({
         id: report.id,
-        image: report.image,
+        image: report.reporterImage,
         districtName: report?.District?.name,
         reportCategoryName: report?.ReportCategory?.name,
         description: report?.description,
@@ -126,7 +126,7 @@ export async function GET(request: Request) {
         status:
           report.status === 0
             ? "Pending"
-            : report.status === 2
+            : report.status === 1
             ? "In Progress"
             : "Resolved",
         createdAt: report.createdAt,
@@ -195,7 +195,7 @@ export async function PUT(request: Request) {
     if (sendSMSReporter) {
       await sendSMS(
         phoneNumber,
-        `Your reported nuisance is ${MyConstants. statuses[Number(res?.reportStatus)]}`
+        `Your reported nuisance is ${MyConstants.statuses[Number(res?.reportStatus)]}`
       );
     }
 
