@@ -3208,12 +3208,12 @@ model SanitationReport {
   id        Int     @id @default(autoincrement())
   community String? @db.VarChar(255)
 
-  reporterImage      String? @db.VarChar(255)
-  confirmationImage  String? @db.VarChar(255)
-  officerObservation String? @db.VarChar(255)
-  actionTaken        String? @db.VarChar(255)
-  offendersName      String? @db.VarChar(255)
-  offendersPhoneNumber     String? @db.VarChar(50)
+  reporterImage        String? @db.VarChar(255)
+  confirmationImage    String? @db.VarChar(255)
+  officerObservation   String? @db.VarChar(255)
+  actionTaken          String? @db.VarChar(255)
+  offendersName        String? @db.VarChar(255)
+  offendersPhoneNumber String? @db.VarChar(50)
 
   districtId Int?
   regionId   Int?
@@ -3236,7 +3236,7 @@ model SanitationReport {
   SanitationReportUser   SanitationReportUser? @relation(fields: [sanitationReportUserId], references: [id])
   Region                 Region?               @relation(fields: [regionId], references: [id])
   AssignedToUser         User?                 @relation("AssignedTo", fields: [assignedTo], references: [id])
-  AssignedByUser         User?                 @relation("AssignedBy", fields: [assignedBy], references: [id]) 
+  AssignedByUser         User?                 @relation("AssignedBy", fields: [assignedBy], references: [id])
 
   assignedTo  Int?
   assignedBy  Int?
