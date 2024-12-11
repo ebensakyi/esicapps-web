@@ -34,6 +34,8 @@ import { wasteCollectionType } from "./wasteCollectionType";
 import { nuisance } from "./nuisance";
 
 import { action } from "./action";
+import { status } from "./status";
+
 import { pestSign } from "./pestSign";
 import { structureType } from "./structureType";
 import { toiletPitPosition } from "./toiletPitPosition";
@@ -313,6 +315,10 @@ async function main() {
 
   await prisma.reportCategory.createMany({
     data: reportCategory,
+  })
+
+  await prisma.status.createMany({
+    data: status,
   })
 }
 

@@ -60,6 +60,10 @@ export async function POST(request: Request) {
     const res = await request.json();
     const session: any = await getServerSession(authOptions);
 
+
+    console.log(">>", res);
+    
+
     const { reportId, officerId, sendsms } = res;
     let userId = session?.user?.id;
     const now = new Date();

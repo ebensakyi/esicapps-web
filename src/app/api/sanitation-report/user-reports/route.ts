@@ -3,13 +3,10 @@ import { prisma } from "@/prisma/db";
 import { logActivity } from "@/utils/log";
 import { upload2S3, saveFileOnDisk } from "@/utils/upload";
 import { sendSMS } from "@/utils/send-hubtel-sms";
-import { getServerSession } from "next-auth";
-import { MyConstants } from "@/src/constants";
 
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
-console.log(data);
 
     const sanitationReportUserId = data?.get("userId");
 
@@ -26,7 +23,6 @@ console.log(data);
     const mediaType = data?.get("mediaType");
     let file: any;
 
-
     if (mediaType == "1") {
       file = data.get("nuisancePicture") as unknown as File;
     } else if (mediaType == "2") {
@@ -38,8 +34,6 @@ console.log(data);
         id: Number(districtId),
       },
     });
-
-    
 
     let region = Number(district?.regionId);
 
@@ -107,7 +101,8 @@ export async function GET(request: Request) {
         },
         include: {
           ReportCategory: { select: { name: true } }, // Select report category name
-          District: { select: { name: true } }, // Select district name
+          District: { select: { name: true } },
+          Status: true,
         },
         orderBy: {
           createdAt: "desc", // Order by creation date
@@ -123,45 +118,44 @@ export async function GET(request: Request) {
         description: report?.description,
         latitude: report?.latitude,
         longitude: report?.longitude,
-        status:
-          report.status === 0
-            ? "Pending"
-            : report.status === 1
-            ? "In Progress"
-            : "Resolved",
+        status: report.Status.name,
         createdAt: report.createdAt,
         community: report.community,
       }));
 
       // Aggregate counts for pending and completed statuses
-      const pendingCount = await prisma.sanitationReport.count({
+      const notAssignedCount = await prisma.sanitationReport.count({
         where: {
           sanitationReportUserId: Number(userId),
           deleted: 0,
-          status: 0,
+          statusId: 1,
+        },
+      });
+      const assignedCount = await prisma.sanitationReport.count({
+        where: {
+          sanitationReportUserId: Number(userId),
+          deleted: 0,
+          statusId: 2,
         },
       });
       const inProgressCount = await prisma.sanitationReport.count({
         where: {
           sanitationReportUserId: Number(userId),
           deleted: 0,
-          status: 2,
+          statusId: 3,
         },
       });
       const completedCount = await prisma.sanitationReport.count({
         where: {
           sanitationReportUserId: Number(userId),
           deleted: 0,
-          status: 1,
+          statusId: 4,
         },
       });
-
-
-      
-
       return NextResponse.json({
         reports: sanitizedResponse,
-        pendingCount: pendingCount,
+        notAssignedCount:notAssignedCount,
+        assignedCount: assignedCount,
         inProgressCount: inProgressCount,
         completedCount: completedCount,
       });
@@ -178,7 +172,6 @@ export async function PUT(request: Request) {
   try {
     const res = await request.json();
 
-
     let sendSMSReporter = res?.sendSMS;
     let phoneNumber = res?.phoneNumber;
     let statusMessage = res?.statusMessage;
@@ -187,15 +180,20 @@ export async function PUT(request: Request) {
         id: Number(res?.reportId),
       },
       data: {
-        status: Number(res?.reportStatus),
+        statusId: Number(res?.reportStatus),
         statusMessage: statusMessage,
       },
     });
-
+    let sanitationReport = await prisma.sanitationReport.findFirst({
+      where: {
+        id: Number(res?.reportId),
+      },
+      include: { Status: true },
+    });
     if (sendSMSReporter) {
       await sendSMS(
         phoneNumber,
-        `Your reported nuisance is ${MyConstants.statuses[Number(res?.reportStatus)]}`
+        `Your reported nuisance is ${sanitationReport?.Status.name}`
       );
     }
 

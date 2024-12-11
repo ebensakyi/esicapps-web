@@ -482,6 +482,16 @@ model Action {
   PremisesActionTaken         PremisesActionTaken[]
 }
 
+model Status {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  deleted   Int?     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  SanitationReport SanitationReport[]
+}
+
 model Animal {
   id             Int              @id @default(autoincrement())
   name           String           @db.VarChar(255)
@@ -3223,7 +3233,6 @@ model SanitationReport {
   latitude               Decimal               @db.Decimal(11, 8)
   longitude              Decimal               @db.Decimal(11, 8)
   accuracy               String?               @db.VarChar
-  status                 Int                   @default(0)
   sanitationReportUserId Int?
   deleted                Int?                  @default(0)
   createdAt              DateTime              @default(now())
@@ -3242,6 +3251,8 @@ model SanitationReport {
   assignedBy  Int?
   assignedAt  DateTime?
   completedAt DateTime?
+  Status      Status    @relation(fields: [statusId], references: [id])
+  statusId    Int
 }
 
 model SanitationReportUser {
