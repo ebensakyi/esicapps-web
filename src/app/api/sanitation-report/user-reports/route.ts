@@ -7,6 +7,7 @@ import { sendSMS } from "@/utils/send-hubtel-sms";
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
+    
 
     const sanitationReportUserId = data?.get("userId");
 
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
 
     if (fileName != "0") {
       const data = {
-        image: fileName,
+        reporterImage: fileName,
         description: description,
         reportTypeId: reportType,
         reportCategoryId: reportCategoryId,
@@ -55,11 +56,12 @@ export async function POST(request: Request) {
           sanitationReportUserId == "null"
             ? null
             : Number(sanitationReportUserId),
+            statusId:1
       };
 
       let reportCount = await prisma.sanitationReport.count({
         where: {
-          image: fileName,
+          reporterImage: fileName,
           description: description,
           reportTypeId: reportType,
           reportCategoryId: reportCategoryId,
@@ -113,12 +115,13 @@ export async function GET(request: Request) {
       const sanitizedResponse = response.map((report) => ({
         id: report.id,
         image: report.reporterImage,
-        districtName: report?.District?.name,
+        districtName: report?.District?.name==undefined ?"": report.District?.name,
         reportCategoryName: report?.ReportCategory?.name,
         description: report?.description,
         latitude: report?.latitude,
         longitude: report?.longitude,
         status: report.Status.name,
+        // statusId: report.statusId,
         createdAt: report.createdAt,
         community: report.community,
       }));
@@ -152,11 +155,14 @@ export async function GET(request: Request) {
           statusId: 4,
         },
       });
+
+     
+      
       return NextResponse.json({
         reports: sanitizedResponse,
         notAssignedCount:notAssignedCount,
         assignedCount: assignedCount,
-        inProgressCount: inProgressCount,
+        inProgressCount: inProgressCount + assignedCount,
         completedCount: completedCount,
       });
     }

@@ -3252,7 +3252,7 @@ model SanitationReport {
   assignedAt  DateTime?
   completedAt DateTime?
   Status      Status    @relation(fields: [statusId], references: [id])
-  statusId    Int
+  statusId    Int  @default(1)
 }
 
 model SanitationReportUser {
