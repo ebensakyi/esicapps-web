@@ -40,7 +40,7 @@ export async function GET(request: Request) {
       const data = await prisma.sanitationReport.findMany({
         where: {
           deleted: 0,
-          status: status,
+          statusId: Number(status),
           districtId: Number(loginUserDistrictId),
         },
         include: {
@@ -56,7 +56,7 @@ export async function GET(request: Request) {
       const data = await prisma.sanitationReport.findMany({
         where: {
           deleted: 0,
-          status: status,
+          statusId: Number(status),
           regionId: Number(loginUserRegionId),
         },
         include: {
@@ -70,7 +70,7 @@ export async function GET(request: Request) {
       const data = await prisma.sanitationReport.findMany({
         where: {
           deleted: 0,
-          status: status,
+          statusId: Number(status),
         },
         include: {
           District: true,

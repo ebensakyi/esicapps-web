@@ -1,4 +1,4 @@
-import { AWS_S3_PROFILE_IMAGES_URL, AWS_S3_URL } from '@/config';
+import { AWS_S3_PROFILE_IMAGES_URL } from '@/config';
 import Image from 'next/image';
 
 interface AvatarImageProps {
