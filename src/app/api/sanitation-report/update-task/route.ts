@@ -15,16 +15,7 @@ export async function GET(request: Request) {
       },
     });
 
-//     2 =
-// "confirmationImage" -> null
-// 3 =
-// "officerObservation" -> null
-// 4 =
-// "actionTaken" -> null
-// 5 =
-// "offendersName" -> null
-// 6 =
-// "offendersPhoneNumber" -> null
+
     
 
     const response = reports.map((report) => ({

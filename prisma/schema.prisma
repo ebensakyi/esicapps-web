@@ -480,6 +480,7 @@ model Action {
   updatedAt                   DateTime                      @updatedAt
   FollowupPremisesActionTaken FollowupPremisesActionTaken[]
   PremisesActionTaken         PremisesActionTaken[]
+  SanitationReport            SanitationReport[]
 }
 
 model Status {
@@ -3218,12 +3219,14 @@ model SanitationReport {
   id        Int     @id @default(autoincrement())
   community String? @db.VarChar(255)
 
-  reporterImage        String? @db.VarChar(255)
-  confirmationImage    String? @db.VarChar(255)
-  officerObservation   String? @db.VarChar(255)
-  actionTaken          String? @db.VarChar(255)
-  offendersName        String? @db.VarChar(255)
-  offendersPhoneNumber String? @db.VarChar(50)
+  reporterImage         String? @db.VarChar(255)
+  confirmationImage     String? @db.VarChar(255)
+  officerObservation    String? @db.VarChar(255)
+  offendersName         String? @db.VarChar(255)
+  offendersPhoneNumber  String? @db.VarChar(50)
+  confirmationLatitude  Decimal @db.Decimal(11, 8)
+  confirmationLongitude Decimal @db.Decimal(11, 8)
+  Action                Action  @relation(fields: [actionTakenId], references: [id])
 
   districtId Int?
   regionId   Int?
@@ -3252,7 +3255,8 @@ model SanitationReport {
   assignedAt  DateTime?
   completedAt DateTime?
   Status      Status    @relation(fields: [statusId], references: [id])
-  statusId    Int  @default(1)
+  statusId    Int       @default(1)
+  actionTakenId    Int
 }
 
 model SanitationReportUser {
