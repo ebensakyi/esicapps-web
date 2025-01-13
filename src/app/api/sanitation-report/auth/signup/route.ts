@@ -32,7 +32,7 @@ export async function POST(request: Request) {
           where: { id: user.id },
         });
 
-      //  await sendSMS(phoneNumber, `Your OTP is: ${otp}`);
+       await sendSMS(phoneNumber, `Your OTP is: ${otp}`);
         return NextResponse.json(user);
       }
     } else {
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
         },
       });
 
-      //  await sendSMS(phoneNumber, `Your OTP is: ${otp}`);
+       await sendSMS(phoneNumber, `Your OTP is: ${otp}`);
 
       return NextResponse.json(user);
     }
