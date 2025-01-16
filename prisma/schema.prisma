@@ -2,7 +2,7 @@ generator client {
   provider        = "prisma-client-js"
   // previewFeatures = ["fullTextSearch", "postgresqlExtensions", "views"]
   // previewFeatures = ["postgresqlExtensions","views"]  
-  // binaryTargets   = ["native", "darwin-arm64"]
+ // binaryTargets   = ["native", "darwin-arm64"]
 }
 
 datasource db {
