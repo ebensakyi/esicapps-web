@@ -61,31 +61,39 @@ export const saveFileOnDisk = async (file: File): Promise<string> => {
 //   }
 // };
 
-export const upload2S3 = async (fileName:any,bucketName:any) => {
-    try {
-        AWS.config.update({
-          accessKeyId: process.env.AWS_ACCESS_KEY,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        });
-    
-        var s3 = new AWS.S3();
-    
-        var filePath = `./public/temp/${fileName}`;
-    
-        var params = {
-          Bucket: bucketName,
-          Body: fs.createReadStream(filePath),
-          // Key: prefix + "/" + fileName,
-          Key: fileName,
-        };
-    
-        let stored = await s3.upload(params).promise();
-    
-        return stored.Location;
-      } catch (error) {
-        console.log("UploadFile Error ", error);
-        return error;
-      }
 
-}
+export const upload2S3 = async (fileName: any, bucketName: any) => {
+  try {
+    AWS.config.update({
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    });
+
+    const s3 = new AWS.S3();
+    const filePath = `./public/temp/${fileName}`;
+
+    const params = {
+      Bucket: bucketName,
+      Body: fs.createReadStream(filePath),
+      Key: fileName,
+    };
+
+    // Upload file to S3
+    const stored = await s3.upload(params).promise();
+
+    // Delete the local file after successful upload
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(`Error deleting file ${filePath}:`, err);
+      } else {
+        console.log(`File ${filePath} deleted successfully.`);
+      }
+    });
+
+    return stored.Location;
+  } catch (error) {
+    console.error("UploadFile Error:", error);
+    return error;
+  }
+};
 
