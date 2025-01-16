@@ -9,7 +9,6 @@ export async function POST(request: Request) {
     const otp = await generateCode(4); // Generate a 4-digit OTP
     const { phoneNumber, fullName } = res;
 
-    console.log("OTP :", otp);
 
     // Check if the user already exists and is not deleted
     let user = await prisma.sanitationReportUser.findFirst({

@@ -3219,14 +3219,14 @@ model SanitationReport {
   id        Int     @id @default(autoincrement())
   community String? @db.VarChar(255)
 
-  reporterImage         String? @db.VarChar(255)
-  confirmationImage     String? @db.VarChar(255)
-  officerObservation    String? @db.VarChar(255)
-  offendersName         String? @db.VarChar(255)
-  offendersPhoneNumber  String? @db.VarChar(50)
-  confirmationLatitude  Decimal @db.Decimal(11, 8)
-  confirmationLongitude Decimal @db.Decimal(11, 8)
-  Action                Action  @relation(fields: [actionTakenId], references: [id])
+  reporterImage         String?  @db.VarChar(255)
+  confirmationImage     String?  @db.VarChar(255)
+  officerObservation    String?  @db.VarChar(255)
+  offendersName         String?  @db.VarChar(255)
+  offendersPhoneNumber  String?  @db.VarChar(50)
+  confirmationLatitude  Decimal? @db.Decimal(11, 8)
+  confirmationLongitude Decimal? @db.Decimal(11, 8)
+  Action                Action?  @relation(fields: [actionTakenId], references: [id])
 
   districtId Int?
   regionId   Int?
@@ -3250,13 +3250,13 @@ model SanitationReport {
   AssignedToUser         User?                 @relation("AssignedTo", fields: [assignedTo], references: [id])
   AssignedByUser         User?                 @relation("AssignedBy", fields: [assignedBy], references: [id])
 
-  assignedTo  Int?
-  assignedBy  Int?
-  assignedAt  DateTime?
-  completedAt DateTime?
-  Status      Status    @relation(fields: [statusId], references: [id])
-  statusId    Int       @default(1)
-  actionTakenId    Int
+  assignedTo    Int?
+  assignedBy    Int?
+  assignedAt    DateTime?
+  completedAt   DateTime?
+  Status        Status    @relation(fields: [statusId], references: [id])
+  statusId      Int       @default(1)
+  actionTakenId Int?
 }
 
 model SanitationReportUser {
