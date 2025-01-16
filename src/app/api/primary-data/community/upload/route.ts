@@ -5,7 +5,6 @@ import { parse } from "fast-csv";
 import fs from "fs";
 import { nanoid } from "nanoid";
 import { writeFile } from "fs/promises";
-import { logActivity } from '../../../../../../utils/log';
 
 export async function POST(request: Request) {
   try {
