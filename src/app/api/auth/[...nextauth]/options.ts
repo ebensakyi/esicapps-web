@@ -4,7 +4,7 @@ import { randomBytes, randomUUID } from "crypto";
 import { SERVER_BASE_URL } from "@/config";
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
+  // secret: process.env.NEXTAUTH_SECRET,
   providers: [
 
     CredentialsProvider({
