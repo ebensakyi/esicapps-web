@@ -39,7 +39,9 @@ export async function GET(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
 
-    // console.log("Session ", session);
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     let userId = session?.user?.id;
     // let surname = session?.user?.surname;
     let districtId = session?.user?.districtId;

@@ -9,13 +9,12 @@ import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function GET(request: Request) {
   try {
-    //  const res = await request.json();
-
-    // let userLevelId = Number(userData?.userLevelId);
-    // let userRegion = Number(userData?.regionId);
-    // let userDistrict = Number(userData?.districtId);
-    // let userId = userData?.id;
+  
     const session: any = await getServerSession(authOptions);
+
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
 
     let userId = session?.user?.id;
     // let surname = session?.user?.surname;
@@ -315,6 +314,8 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     let userId = session?.user?.id;
 
@@ -344,7 +345,3 @@ export async function DELETE(request: Request) {
     console.log(error);
   }
 }
-// GANMA0101-240331-2X7J5NB8TB
-// GANMA0101-240331-G6HXAYUABE
-// GANMA0101-240331-XYS53YNY2D	Opoku Richard	GPS	4.4	Greater Accra Region	Ga North	ABENSU	Abensu Tigopole	Mar 31st 2024, 1:38:26 pm	Unpublished
-// GANMA0101-240331-E76QFTNTPB	Opoku Richard

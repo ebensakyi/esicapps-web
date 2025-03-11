@@ -74,20 +74,14 @@ export async function PUT(request: Request) {
 export async function GET(request: Request) {
   try {
     const session: any = await getServerSession(authOptions);
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     let userId = session?.user?.id;
 
     let { searchParams } = new URL(request.url);
     let inspectionId: any = searchParams.get("id")?.toString();
-    // let published: string | undefined = searchParams
-    //   .get("published")
-    //   ?.toString();
 
-    // let inspectionFormId: string | undefined = searchParams
-    //   .get("inspectionFormId")
-    //   ?.toString();
-
-    logger.info(inspectionId);
 
     await logActivity(`Visited dataview page for ${inspectionId}`, userId);
 
