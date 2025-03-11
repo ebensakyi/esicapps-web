@@ -1,7 +1,8 @@
-//export const SERVER_BASE_URL = 'http://localhost:3000'
 // export const SERVER_BASE_URL = '/'
 
 const dev = process.env.NODE_ENV !== 'production';
+//export const SERVER_BASE_URL = 'http://localhost:3000'
+
 export const SERVER_BASE_URL =  'https://dashboard.esicapps.org'
 export const LOGIN_URL =  "https://dashboard.esicapps.org/auth/login"
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
+import { SERVER_BASE_URL } from "@/config";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,8 +25,8 @@ export default function Login() {
       }
       let result = await signIn("credentials", {
         phoneNumber, password,
-        callbackUrl: "/"
-        //callbackUrl:SERVER_BASE_URL
+        // callbackUrl: "/"
+        callbackUrl:SERVER_BASE_URL
         // callbackUrl: `${window.location.origin}/` 
       });
       

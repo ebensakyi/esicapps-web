@@ -62,5 +62,5 @@ export const authOptions: NextAuthOptions = {
 		},
 	},
 
-  pages: { signIn: `https://dashboard.esicapps.org/auth/login` },
+  pages: { signIn: `${SERVER_BASE_URL}/auth/login` },
 };
